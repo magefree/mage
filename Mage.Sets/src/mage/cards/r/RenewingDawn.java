@@ -36,6 +36,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetOpponent;
@@ -49,7 +50,7 @@ public class RenewingDawn extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Mountain");
     
     static {
-        filter.add(new SubtypePredicate("Mountain"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public RenewingDawn(UUID ownerId, CardSetInfo setInfo) {

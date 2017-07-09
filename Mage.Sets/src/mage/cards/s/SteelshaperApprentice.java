@@ -32,6 +32,7 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -56,7 +57,7 @@ public class SteelshaperApprentice extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     public SteelshaperApprentice(UUID ownerId, CardSetInfo setInfo) {

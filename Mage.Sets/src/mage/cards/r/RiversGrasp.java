@@ -41,9 +41,7 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -59,7 +57,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
 public class RiversGrasp extends CardImpl {
 
     public RiversGrasp(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U/B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U/B}");
 
         // If {U} was spent to cast River's Grasp, return up to one target creature to its owner's hand. If {B} was spent to cast River's Grasp, target player reveals his or her hand, you choose a nonland card from it, then that player discards that card.
         Target targetCreature = new TargetCreaturePermanent(0, 1);
@@ -90,12 +88,6 @@ public class RiversGrasp extends CardImpl {
 
 class RiversGraspEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("a nonland card");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-    }
-
     public RiversGraspEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player reveals his or her hand, you choose a card from it, then that player discards that card.";
@@ -117,7 +109,7 @@ class RiversGraspEffect extends OneShotEffect {
             player.revealCards("River's Grasp", player.getHand(), game);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                TargetCard target = new TargetCard(Zone.HAND, filter);
+                TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
                 if (controller.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {

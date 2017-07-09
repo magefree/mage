@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -53,8 +54,8 @@ public class HowlpackResurgence extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control that's a Wolf or a Werewolf");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Wolf"),
-                new SubtypePredicate("Werewolf")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.WOLF),
+                new SubtypePredicate(SubType.WEREWOLF)));
     }
 
     public HowlpackResurgence(UUID ownerId, CardSetInfo setInfo) {

@@ -53,7 +53,7 @@ public class CloakAndDagger extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a Rogue creature");
     static {
-        filter.add(new SubtypePredicate("Rogue"));
+        filter.add(new SubtypePredicate(SubType.ROGUE));
     }
 
     public CloakAndDagger(UUID ownerId, CardSetInfo setInfo) {

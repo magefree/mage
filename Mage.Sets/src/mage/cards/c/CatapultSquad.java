@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.common.FilterControlledPermanent;
@@ -56,7 +57,7 @@ public class CatapultSquad extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new SubtypePredicate("Soldier"));
+        filter.add(new SubtypePredicate(SubType.SOLDIER));
     }
 
     public CatapultSquad(UUID ownerId, CardSetInfo setInfo) {

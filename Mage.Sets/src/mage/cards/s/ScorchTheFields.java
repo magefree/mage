@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetLandPermanent;
@@ -46,7 +47,7 @@ public class ScorchTheFields extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creature");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public ScorchTheFields(UUID ownerId, CardSetInfo setInfo) {

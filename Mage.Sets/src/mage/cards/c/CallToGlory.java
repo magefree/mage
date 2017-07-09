@@ -36,6 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -53,7 +54,7 @@ public class CallToGlory extends CardImpl {
 private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai");
 
     static {
-        filter.add(new SubtypePredicate("Samurai"));
+        filter.add(new SubtypePredicate(SubType.SAMURAI));
     }
 
         public CallToGlory(UUID ownerId, CardSetInfo setInfo) {

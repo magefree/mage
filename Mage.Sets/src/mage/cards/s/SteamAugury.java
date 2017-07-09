@@ -57,12 +57,10 @@ import mage.util.GameLog;
 public class SteamAugury extends CardImpl {
 
     public SteamAugury(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{R}");
 
         // Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.
         this.getSpellAbility().addEffect(new SteamAuguryEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent());
-
     }
 
     public SteamAugury(final SteamAugury card) {

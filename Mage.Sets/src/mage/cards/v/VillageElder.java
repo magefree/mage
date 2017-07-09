@@ -38,6 +38,7 @@ import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,7 +53,7 @@ public class VillageElder extends CardImpl {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a Forest");
     static{
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public VillageElder(UUID ownerId, CardSetInfo setInfo) {

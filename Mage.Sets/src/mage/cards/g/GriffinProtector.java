@@ -36,22 +36,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author Loki
  */
 public class GriffinProtector extends CardImpl {
-
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
 
     public GriffinProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -64,7 +57,8 @@ public class GriffinProtector extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever another creature enters the battlefield under your control, Griffin Protector gets +1/+1 until end of turn.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter, false, null, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, null, true));
 
     }
 

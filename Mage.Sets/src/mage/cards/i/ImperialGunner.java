@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,7 +52,7 @@ public class ImperialGunner extends CardImpl {
     private static final FilterCreatureOrPlayer filter = new FilterCreatureOrPlayer("target player or Starship creature");
 
     static {
-        filter.getCreatureFilter().add(new SubtypePredicate("Starship"));
+        filter.getCreatureFilter().add(new SubtypePredicate(SubType.STARSHIP));
     }
 
     public ImperialGunner(UUID ownerId, CardSetInfo setInfo) {

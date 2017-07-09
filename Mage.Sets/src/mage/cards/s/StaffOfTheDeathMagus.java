@@ -35,6 +35,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterLandPermanent;
@@ -52,7 +53,7 @@ public class StaffOfTheDeathMagus extends CardImpl {
     
     static {
         filterSpell.add(new ColorPredicate(ObjectColor.BLACK));
-        filterLand.add(new SubtypePredicate("Swamp"));
+        filterLand.add(new SubtypePredicate(SubType.SWAMP));
     }
     
     public StaffOfTheDeathMagus(UUID ownerId, CardSetInfo setInfo) {

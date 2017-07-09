@@ -35,6 +35,7 @@ import mage.abilities.keyword.MountainwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -48,7 +49,7 @@ public class GoblinsOfTheFlarg extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Dwarf");
 
     static {
-        filter.add(new SubtypePredicate("Dwarf"));
+        filter.add(new SubtypePredicate(SubType.DWARF));
     }
 
     public GoblinsOfTheFlarg(UUID ownerId, CardSetInfo setInfo) {

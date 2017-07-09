@@ -37,6 +37,7 @@ import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,7 +51,7 @@ public class NagaoBoundByHonor extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai creatures");
 
     static {
-        filter.add(new SubtypePredicate("Samurai"));
+        filter.add(new SubtypePredicate(SubType.SAMURAI));
     }
 
     public NagaoBoundByHonor(UUID ownerId, CardSetInfo setInfo) {

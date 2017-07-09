@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
@@ -49,7 +50,7 @@ public class GiantsIre extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Giant");
 
     static {
-        filter.add(new SubtypePredicate("Giant"));
+        filter.add(new SubtypePredicate(SubType.GIANT));
     }
 
     public GiantsIre(UUID ownerId, CardSetInfo setInfo) {

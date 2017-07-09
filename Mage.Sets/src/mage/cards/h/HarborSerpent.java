@@ -30,6 +30,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -75,7 +76,7 @@ public class HarborSerpent extends CardImpl {
 
 class HarborSerpentEffect extends RestrictionEffect {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Island", "Island");
+    private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.ISLAND, "Island");
 
     public HarborSerpentEffect() {
         super(Duration.WhileOnBattlefield);

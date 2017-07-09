@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,8 +57,8 @@ public class UktabiWildcats extends CardImpl {
     private static final FilterControlledPermanent sacrificeFilter = new FilterControlledPermanent("a Forest");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
-        sacrificeFilter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
+        sacrificeFilter.add(new SubtypePredicate(SubType.FOREST));
     }
     
     public UktabiWildcats(UUID ownerId, CardSetInfo setInfo) {

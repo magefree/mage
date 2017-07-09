@@ -48,13 +48,9 @@ public enum EvokedCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            for (Ability ability: card.getAbilities()) {
-                if (ability instanceof EvokeAbility) {
-                    if(((EvokeAbility) ability).isActivated(source, game)) {
-                        return true;
-                    }
-                }
-            }
+            return card.getAbilities().stream()
+                    .filter(ab -> ab instanceof EvokeAbility)
+                    .anyMatch(evoke -> ((EvokeAbility) evoke).isActivated(source, game));
         }
         return false;
     }

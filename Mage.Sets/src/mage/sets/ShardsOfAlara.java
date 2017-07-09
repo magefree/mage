@@ -46,7 +46,8 @@ public class ShardsOfAlara extends ExpansionSet {
     }
 
     private ShardsOfAlara() {
-        super("Shards of Alara", "ALA", ExpansionSet.buildDate(2008, 8, 27), SetType.EXPANSION);
+        // release date of Shards of Alara was October 3rd, 2008. Was previously entered as August 27.
+        super("Shards of Alara", "ALA", ExpansionSet.buildDate(2008, 10, 3), SetType.EXPANSION);
         this.blockName = "Shards of Alara";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

@@ -37,10 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -85,7 +82,7 @@ class MundaAmbushLeaderEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("Ally cards to reveal and put on top of your library");
 
     static {
-        filter.add(new SubtypePredicate("Ally"));
+        filter.add(new SubtypePredicate(SubType.ALLY));
     }
 
     public MundaAmbushLeaderEffect() {

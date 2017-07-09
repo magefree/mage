@@ -34,6 +34,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -52,7 +53,7 @@ public class AncestorsProphet extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Clerics you control");
     
     static {
-        filter.add(new SubtypePredicate("Cleric"));
+        filter.add(new SubtypePredicate(SubType.CLERIC));
         filter.add(Predicates.not(new TappedPredicate()));
     }    
     

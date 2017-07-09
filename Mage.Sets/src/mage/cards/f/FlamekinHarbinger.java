@@ -33,6 +33,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -48,7 +49,7 @@ public class FlamekinHarbinger extends CardImpl {
     private static final FilterCard filter = new FilterCard("Elemental card");
 
     static {
-        filter.add(new SubtypePredicate("Elemental"));
+        filter.add(new SubtypePredicate(SubType.ELEMENTAL));
     }
 
     public FlamekinHarbinger(UUID ownerId, CardSetInfo setInfo) {

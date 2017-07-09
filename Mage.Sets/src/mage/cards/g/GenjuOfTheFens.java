@@ -39,10 +39,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
@@ -57,7 +54,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAttachedWithActiv
  */
 public class GenjuOfTheFens extends CardImpl {
 
-    private static final FilterLandPermanent FILTER = new FilterLandPermanent("Swamp", "Swamp");
+    private static final FilterLandPermanent FILTER = new FilterLandPermanent(SubType.SWAMP, "Swamp");
 
     public GenjuOfTheFens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");

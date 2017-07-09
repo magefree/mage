@@ -32,7 +32,9 @@ import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
+import java.util.EnumSet;
 import java.util.UUID;
 
 /**
@@ -47,7 +49,7 @@ public class BadRiver extends CardImpl {
         // Bad River enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}, Sacrifice Bad River: Search your library for an Island or Swamp card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(false, new String[]{"Island", "Swamp"}));
+        this.addAbility(new FetchLandActivatedAbility(false, EnumSet.of(SubType.ISLAND, SubType.SWAMP)));
 
     }
 

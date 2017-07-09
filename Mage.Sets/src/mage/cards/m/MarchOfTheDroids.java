@@ -39,6 +39,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -59,7 +60,7 @@ public class MarchOfTheDroids extends CardImpl {
         this.getSpellAbility().addEffect(new MarchOfTheDroidsEffect());
 
         // Create 1/1 colorles Droid artifact creature token for each Droid you control.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new DroidToken(), new PermanentsOnBattlefieldCount(new FilterPermanent("Droid", "Droid you control"))));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new DroidToken(), new PermanentsOnBattlefieldCount(new FilterPermanent(SubType.DROID, "Droid you control"))));
     }
 
     public MarchOfTheDroids(final MarchOfTheDroids card) {

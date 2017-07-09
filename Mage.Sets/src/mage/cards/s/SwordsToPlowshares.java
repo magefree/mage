@@ -27,7 +27,7 @@
  */
 package mage.cards.s;
 
-import mage.abilities.effects.common.SwordsToPlowsharesEffect;
+import mage.abilities.effects.common.ExileAndGainLifeEqualPowerTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -46,7 +46,7 @@ public class SwordsToPlowshares extends CardImpl {
 
         // Exile target creature. Its controller gains life equal to its power.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new SwordsToPlowsharesEffect());
+        this.getSpellAbility().addEffect(new ExileAndGainLifeEqualPowerTargetEffect());
 
     }
 

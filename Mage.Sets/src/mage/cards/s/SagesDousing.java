@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
@@ -49,7 +50,7 @@ public class SagesDousing extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Wizard");
 
     static {
-        filter.add(new SubtypePredicate("Wizard"));
+        filter.add(new SubtypePredicate(SubType.WIZARD));
     }
 
     public SagesDousing(UUID ownerId, CardSetInfo setInfo) {

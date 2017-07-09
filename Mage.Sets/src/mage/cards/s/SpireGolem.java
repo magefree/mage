@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -49,7 +50,7 @@ public class SpireGolem extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Affinity for Islands
-        this.addAbility(new AffinityForLandTypeAbility("Island", "Islands"));
+        this.addAbility(new AffinityForLandTypeAbility(SubType.ISLAND, "Islands"));
         // Flying
         this.addAbility(FlyingAbility.getInstance());
     }

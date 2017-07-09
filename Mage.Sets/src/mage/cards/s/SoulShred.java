@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SoulShred extends CardImpl {
     
-    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));

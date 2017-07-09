@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -203,14 +204,14 @@ class CrypticGatewayEffect extends OneShotEffect {
 
                 for (String subtype : creature.getSubtype(game)) {
                     if (creature2.getSubtype(game).contains(subtype) || changeling2) {
-                        subtypes.add(new SubtypePredicate(subtype));
+                        subtypes.add(new SubtypePredicate(SubType.byDescription(subtype)));
                         commonSubType = true;
                     }
                 }
 
                 for (String subtype : creature2.getSubtype(game)) {
                     if (creature.getSubtype(game).contains(subtype) || changeling) {
-                        subtypes.add(new SubtypePredicate(subtype));
+                        subtypes.add(new SubtypePredicate(SubType.byDescription(subtype)));
                         commonSubType = true;
                     }
                 }

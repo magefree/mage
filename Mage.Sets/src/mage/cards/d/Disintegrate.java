@@ -30,16 +30,15 @@ package mage.cards.d;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.watchers.common.DamagedByWatcher;
 
 import java.util.UUID;
+import mage.abilities.effects.common.ExileTargetIfDiesEffect;
 
 /**
  *
@@ -48,17 +47,15 @@ import java.util.UUID;
 public class Disintegrate extends CardImpl {
 
     public Disintegrate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
         // Disintegrate deals X damage to target creature or player. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addEffect(new CantRegenerateTargetEffect(Duration.EndOfTurn, "That creature"));
-        Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
+        Effect effect = new ExileTargetIfDiesEffect();
         effect.setText("If the creature would die this turn, exile it instead");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
     }
 
     public Disintegrate(final Disintegrate card) {

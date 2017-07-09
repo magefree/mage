@@ -35,6 +35,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,7 +52,7 @@ public class AliBaba extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Wall");
 
     static {
-        filter.add(new SubtypePredicate("Wall"));
+        filter.add(new SubtypePredicate(SubType.WALL));
     }
 
     public AliBaba(UUID ownerId, CardSetInfo setInfo) {

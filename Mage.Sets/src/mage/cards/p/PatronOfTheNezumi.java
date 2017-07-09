@@ -36,6 +36,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -61,7 +62,7 @@ public class PatronOfTheNezumi extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Rat offering (You may cast this card any time you could cast an instant by sacrificing a Rat and paying the difference in mana costs between this and the sacrificed Rat. Mana cost includes color.)
-        this.addAbility(new OfferingAbility("Rat"));
+        this.addAbility(new OfferingAbility(SubType.RAT));
 
         // Whenever a permanent is put into an opponent's graveyard, that player loses 1 life.
         this.addAbility(new PatronOfTheNezumiTriggeredAbility(new LoseLifeTargetEffect(1)));

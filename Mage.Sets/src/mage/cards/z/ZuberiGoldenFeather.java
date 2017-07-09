@@ -33,10 +33,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 
 import java.util.UUID;
@@ -47,7 +44,7 @@ import java.util.UUID;
  */
 public class ZuberiGoldenFeather extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Griffin", "Griffin creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.GRIFFIN, "Griffin creatures");
 
     public ZuberiGoldenFeather(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

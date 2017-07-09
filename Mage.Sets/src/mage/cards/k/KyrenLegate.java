@@ -38,6 +38,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -51,8 +52,8 @@ public class KyrenLegate extends CardImpl {
     private static final FilterPermanent filterMountain = new FilterPermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate(("Plains")));
-        filterMountain.add(new SubtypePredicate(("Mountain")));
+        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
+        filterMountain.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public KyrenLegate(UUID ownerId, CardSetInfo setInfo) {

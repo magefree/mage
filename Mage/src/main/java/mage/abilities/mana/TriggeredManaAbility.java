@@ -96,7 +96,7 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
      * @return
      */
     @Override
-    public boolean definesMana() {
+    public boolean definesMana(Game game) {
         return !netMana.isEmpty();
     }
 }

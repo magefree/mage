@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.AttachEffect;
@@ -46,8 +47,6 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
  *
  * @author BetaSteward
@@ -55,10 +54,9 @@ import java.util.UUID;
 public class CurseOfOblivion extends CardImpl {
 
     public CurseOfOblivion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         this.subtype.add("Aura");
         this.subtype.add("Curse");
-
 
         // Enchant player
         TargetPlayer target = new TargetPlayer();

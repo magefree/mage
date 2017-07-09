@@ -34,6 +34,7 @@ import mage.abilities.keyword.OfferingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 import java.util.UUID;
@@ -52,7 +53,7 @@ public class PatronOfTheKitsune extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Fox offering (You may cast this card any time you could cast an instant by sacrificing a Fox and paying the difference in mana costs between this and the sacrificed Fox. Mana cost includes color.)
-        this.addAbility(new OfferingAbility("Fox"));
+        this.addAbility(new OfferingAbility(SubType.FOX));
 
         // Whenever a creature attacks, you may gain 1 life.
         this.addAbility(new AttacksAllTriggeredAbility(new GainLifeEffect(1), true));

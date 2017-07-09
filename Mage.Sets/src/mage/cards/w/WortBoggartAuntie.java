@@ -35,6 +35,7 @@ import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
@@ -52,7 +53,7 @@ public class WortBoggartAuntie extends CardImpl {
     private static final FilterCard filter = new FilterCard("Goblin card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public WortBoggartAuntie(UUID ownerId, CardSetInfo setInfo) {

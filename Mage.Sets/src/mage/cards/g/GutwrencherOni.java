@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -53,7 +54,7 @@ public class GutwrencherOni extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("Ogre");
 
     static {
-        filter.add(new SubtypePredicate("Ogre"));
+        filter.add(new SubtypePredicate(SubType.OGRE));
     }
 
     public GutwrencherOni(UUID ownerId, CardSetInfo setInfo) {

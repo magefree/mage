@@ -58,8 +58,8 @@ public class ThelonOfHavenwood extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("a Fungus card from a graveyard");
     private static final FilterPermanent filterPermanent = new FilterPermanent("Fungus on the battlefield");
     static {
-        filterCard.add(new SubtypePredicate("Fungus"));
-        filterPermanent.add(new SubtypePredicate("Fungus"));
+        filterCard.add(new SubtypePredicate(SubType.FUNGUS));
+        filterPermanent.add(new SubtypePredicate(SubType.FUNGUS));
     }
 
     public ThelonOfHavenwood(UUID ownerId, CardSetInfo setInfo) {
@@ -93,7 +93,7 @@ class ThelonOfHavenwoodBoostEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Fungus creature");
     static {
-        filter.add(new SubtypePredicate("Fungus"));
+        filter.add(new SubtypePredicate(SubType.FUNGUS));
     }
 
     ThelonOfHavenwoodBoostEffect() {

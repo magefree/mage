@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
@@ -48,7 +49,7 @@ public class GoblinMasons extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Wall");
 
     static {
-        filter.add(new SubtypePredicate("Wall"));
+        filter.add(new SubtypePredicate(SubType.WALL));
     }
 
     

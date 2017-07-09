@@ -29,6 +29,7 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -54,8 +55,8 @@ public class KrosanWarchief extends CardImpl {
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("Beast");
 
     static {
-        filter.add(new SubtypePredicate("Beast"));
-        filterTarget.add(new SubtypePredicate("Beast"));
+        filter.add(new SubtypePredicate(SubType.BEAST));
+        filterTarget.add(new SubtypePredicate(SubType.BEAST));
     }
 
     public KrosanWarchief(UUID ownerId, CardSetInfo setInfo) {

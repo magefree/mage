@@ -35,6 +35,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,7 +48,7 @@ public class RiptideBiologist extends CardImpl {
     private static final FilterCard filter = new FilterCard("Beasts");
 
     static {
-        filter.add(new SubtypePredicate("Beast"));
+        filter.add(new SubtypePredicate(SubType.BEAST));
     }
 
     public RiptideBiologist(UUID ownerId, CardSetInfo setInfo) {

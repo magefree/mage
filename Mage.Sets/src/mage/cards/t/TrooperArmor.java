@@ -37,12 +37,7 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 
 /**
@@ -63,7 +58,7 @@ public class TrooperArmor extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AttachEffect(Outcome.BoostCreature, "attach {this} to it"),
-                new FilterPermanent("Trooper", "Trooper"),
+                new FilterPermanent(SubType.TROOPER, "Trooper"),
                 true,
                 SetTargetPointer.PERMANENT,
                 null));

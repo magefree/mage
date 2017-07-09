@@ -133,6 +133,7 @@ public enum MagicCardsImageSource implements CardImageSource {
             put("V16", "from-the-vault-lore");
             put("VMA", "vintage-masters");
             put("W16", "welcome-deck-2016");
+            put("W17", "welcome-deck-2017");
             put("WMCQ", "world-magic-cup-qualifier");
             put("WWK", "worldwake");
             put("ZEN", "zendikar");

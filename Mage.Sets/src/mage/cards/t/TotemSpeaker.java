@@ -34,6 +34,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,7 +48,7 @@ public class TotemSpeaker extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("a Beast");
 
     static {
-        filter.add(new SubtypePredicate("Beast"));
+        filter.add(new SubtypePredicate(SubType.BEAST));
     }    
     
     public TotemSpeaker(UUID ownerId, CardSetInfo setInfo) {

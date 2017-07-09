@@ -33,6 +33,7 @@ import mage.constants.CardType;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -48,7 +49,7 @@ public class PsychicSpear extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Spirit or Arcane card to discard");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Spirit"),new SubtypePredicate("Arcane")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.SPIRIT),new SubtypePredicate(SubType.ARCANE)));
     }
 
     public PsychicSpear(UUID ownerId, CardSetInfo setInfo) {

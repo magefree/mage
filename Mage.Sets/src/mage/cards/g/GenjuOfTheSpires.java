@@ -37,10 +37,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
@@ -55,7 +52,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAttachedWithActiv
  */
 public class GenjuOfTheSpires extends CardImpl {
 
-    private static final FilterLandPermanent FILTER = new FilterLandPermanent("Mountain", "Mountain");
+    private static final FilterLandPermanent FILTER = new FilterLandPermanent(SubType.MOUNTAIN, "Mountain");
 
     public GenjuOfTheSpires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");

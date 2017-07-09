@@ -29,16 +29,13 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.constants.ComparisonType;
+import mage.constants.*;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -62,7 +59,7 @@ public class Stenchskipper extends CardImpl {
                 new SacrificeSourceEffect(),
                 TargetController.ANY,
                 new PermanentsOnTheBattlefieldCondition(
-                        new FilterControlledCreaturePermanent("Goblin", "if you control no Goblins"),
+                        new FilterControlledCreaturePermanent(SubType.GOBLIN, "if you control no Goblins"),
                         ComparisonType.FEWER_THAN,
                         1),
                 false));

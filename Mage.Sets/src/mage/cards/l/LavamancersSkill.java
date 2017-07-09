@@ -41,11 +41,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -77,7 +73,7 @@ public class LavamancersSkill extends CardImpl {
         Ability pingTwoAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         pingTwoAbility.addTarget(new TargetCreaturePermanent());
         ContinuousEffect isWizardEffect = new GainAbilityAttachedEffect(pingTwoAbility, AttachmentType.AURA);
-        SimpleStaticAbility ifWizardAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(isWizardEffect, new EnchantedCreatureSubtypeCondition("Wizard"), 
+        SimpleStaticAbility ifWizardAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(isWizardEffect, new EnchantedCreatureSubtypeCondition(SubType.WIZARD),
                 "As long as enchanted creature is a Wizard, it has \"{T}: This creature deals 2 damage to target creature.\""));
         
         this.addAbility(ifWizardAbility);

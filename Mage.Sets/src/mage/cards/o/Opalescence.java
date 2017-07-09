@@ -38,13 +38,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -83,7 +77,7 @@ class OpalescenceEffect extends ContinuousEffectImpl {
     private static final EnumSet checkDependencyTypes;
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Aura")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.AURA)));
         filter.add(new AnotherPredicate());
         checkDependencyTypes = EnumSet.of(DependencyType.AuraAddingRemoving, DependencyType.EnchantmentAddingRemoving);
     }

@@ -30,7 +30,7 @@ package mage.cards.r;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
+import mage.constants.*;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.GainLifeOpponentCost;
 import mage.abilities.effects.ContinuousEffect;
@@ -39,9 +39,6 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -84,7 +81,7 @@ class RoarOfJukaiEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filterBlocked = new FilterCreaturePermanent("blocked creature");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
         filterBlocked.add(new BlockedPredicate());
     }
 

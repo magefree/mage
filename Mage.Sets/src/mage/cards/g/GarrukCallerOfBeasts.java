@@ -28,31 +28,24 @@
 package mage.cards.g;
 
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.command.Emblem;
-import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
+import mage.game.command.emblems.GarrukCallerOfBeastsEmblem;
 
 /**
  *
- * @author LevelX2
+ * @author LevelX2 import mage.game.command.emblems.GarrukCallerOfBeastsEmblem;
  */
 public class GarrukCallerOfBeasts extends CardImpl {
 
@@ -86,19 +79,5 @@ public class GarrukCallerOfBeasts extends CardImpl {
     @Override
     public GarrukCallerOfBeasts copy() {
         return new GarrukCallerOfBeasts(this);
-    }
-}
-
-/**
- * Emblem: "Whenever you cast a creature spell, you may search your library for
- * a creature card, put it onto the battlefield, then shuffle your library."
- */
-class GarrukCallerOfBeastsEmblem extends Emblem {
-
-    public GarrukCallerOfBeastsEmblem() {
-        this.setName("Emblem Garruk");
-        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterCreatureCard("creature card")), false, true, Outcome.PutCreatureInPlay);
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, StaticFilters.FILTER_SPELL_A_CREATURE, true, false);
-        this.getAbilities().add(ability);
     }
 }

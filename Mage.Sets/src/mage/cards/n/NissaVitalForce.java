@@ -29,11 +29,8 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -44,15 +41,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.command.Emblem;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetLandPermanent;
+import mage.game.command.emblems.NissaVitalForceEmblem;
 
 /**
  *
@@ -107,16 +102,5 @@ class NissaVitalForceToken extends Token {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(HasteAbility.getInstance());
-    }
-}
-
-class NissaVitalForceEmblem extends Emblem {
-
-    //  You get an emblem with "Whenever a land enters the battlefield under your control, you may draw a card."
-    public NissaVitalForceEmblem() {
-        this.setName("Emblem Nissa");
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.COMMAND, new DrawCardSourceControllerEffect(1), new FilterControlledLandPermanent("a land"),
-                true, null, true);
-        getAbilities().add(ability);
     }
 }

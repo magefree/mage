@@ -49,7 +49,6 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public class GontisMachinations extends CardImpl {
@@ -132,10 +131,8 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {
             case LOST_LIFE:
-                int timesLifeLost = 0;
-                if (playersLostLife.containsKey(event.getTargetId())) {
-                    timesLifeLost = playersLostLife.get(event.getTargetId());
-                }
+                int timesLifeLost = playersLostLife.getOrDefault(event.getTargetId(), 0);
+                timesLifeLost++;
                 playersLostLife.put(event.getTargetId(), timesLifeLost);
         }
     }

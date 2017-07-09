@@ -56,7 +56,7 @@ public class EchoBaseCommando extends CardImpl {
     private static final Filter filter = new FilterPermanent("Beasts");
 
     static {
-        filter.add(new SubtypePredicate("Beast"));
+        filter.add(new SubtypePredicate(SubType.BEAST));
     }
 
     public EchoBaseCommando(UUID ownerId, CardSetInfo setInfo) {

@@ -27,12 +27,15 @@
  */
 package mage.cards.r;
 
+import java.util.EnumMap;
+import java.util.EnumSet;
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,7 +49,7 @@ public class RockyTarPit extends CardImpl {
         // Rocky Tar Pit enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}, Sacrifice Rocky Tar Pit: Search your library for a Swamp or Mountain card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(false, new String[]{"Swamp", "Mountain"}));
+        this.addAbility(new FetchLandActivatedAbility(false, EnumSet.of(SubType.SWAMP, SubType.MOUNTAIN)));
     }
 
     public RockyTarPit(final RockyTarPit card) {

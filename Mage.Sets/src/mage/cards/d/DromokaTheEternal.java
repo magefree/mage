@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -56,7 +57,7 @@ public class DromokaTheEternal extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever a Dragon you control attacks, bolster 2.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(
-                new BolsterEffect(2), false, new FilterControlledCreaturePermanent("Dragon", "Dragon you control")));
+                new BolsterEffect(2), false, new FilterControlledCreaturePermanent(SubType.DRAGON, "Dragon you control")));
     }
 
     public DromokaTheEternal(final DromokaTheEternal card) {

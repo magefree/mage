@@ -24,41 +24,41 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.target.common;
-
-import mage.abilities.Ability;
-import mage.constants.AbilityType;
-import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.FilterAbility;
-import mage.game.Game;
-import mage.game.stack.StackObject;
-import mage.target.TargetObject;
 
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
-/**
- * @author LevelX2
- */
-
+import mage.abilities.Ability;
+import mage.constants.AbilityType;
+import mage.constants.Zone;
+import mage.filter.Filter;
+import mage.filter.FilterStackObject;
+import mage.game.Game;
+import mage.game.stack.StackObject;
+import mage.target.TargetObject;
 
 public class TargetActivatedOrTriggeredAbility extends TargetObject {
 
+    protected final FilterStackObject filter;
+
     public TargetActivatedOrTriggeredAbility() {
+        this(new FilterStackObject());
+    }
+
+    public TargetActivatedOrTriggeredAbility(FilterStackObject filter) {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
         this.zone = Zone.STACK;
-        this.targetName = "target activated or triggered ability";
+        this.targetName = filter.getMessage();
+        this.filter = filter;
     }
 
     public TargetActivatedOrTriggeredAbility(final TargetActivatedOrTriggeredAbility target) {
         super(target);
+        this.filter = target.filter.copy();
     }
-
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
@@ -68,12 +68,18 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
         }
 
         StackObject stackObject = game.getStack().getStackObject(id);
-        return isActivatedOrTriggeredAbility(stackObject);
+        return isActivatedOrTriggeredAbility(stackObject) && filter.match(stackObject, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return canChoose(sourceControllerId, game);
+        for (StackObject stackObject : game.getStack()) {
+            if (isActivatedOrTriggeredAbility(stackObject)
+                    && filter.match(stackObject, sourceId, sourceControllerId, game)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -103,7 +109,7 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
 
     @Override
     public Filter getFilter() {
-        return new FilterAbility();
+        return filter;
     }
 
     static boolean isActivatedOrTriggeredAbility(StackObject stackObject) {

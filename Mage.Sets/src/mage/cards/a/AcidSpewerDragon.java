@@ -37,6 +37,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,7 +55,7 @@ public class AcidSpewerDragon extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
     }
 
     public AcidSpewerDragon(UUID ownerId, CardSetInfo setInfo) {

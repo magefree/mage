@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -48,7 +49,7 @@ public class MightSliver extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All Sliver creatures");
 
     static {
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public MightSliver(UUID ownerId, CardSetInfo setInfo) {

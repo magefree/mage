@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,7 +52,7 @@ public class AkoumBattlesinger extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("have Ally creatures");
 
     static {
-        filter.add(new SubtypePredicate("Ally"));
+        filter.add(new SubtypePredicate(SubType.ALLY));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

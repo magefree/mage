@@ -34,6 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -68,8 +69,8 @@ class OpenTheArmoryTarget extends TargetCardInLibrary {
     private static final FilterCard filter = new FilterCard("Aura or Equipment card");
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Equipment"), 
-                new SubtypePredicate("Aura")));
+                new SubtypePredicate(SubType.EQUIPMENT),
+                new SubtypePredicate(SubType.AURA)));
     }
 
     public OpenTheArmoryTarget() {

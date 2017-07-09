@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -35,21 +36,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-
-import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  * @author Loki
  */
 public class GoldnightCommander extends CardImpl {
-
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
 
     public GoldnightCommander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -61,7 +53,8 @@ public class GoldnightCommander extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever another creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn), filter, false, null, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
+                new BoostControlledEffect(1, 1, Duration.EndOfTurn), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, null, true));
     }
 
     public GoldnightCommander(final GoldnightCommander card) {

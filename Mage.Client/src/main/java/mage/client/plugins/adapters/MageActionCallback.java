@@ -514,17 +514,21 @@ public class MageActionCallback implements ActionCallback {
     }
 
     public void hideEnlargedCard() {
-        if (enlargedWindowState != EnlargedWindowState.CLOSED) {
-            enlargedWindowState = EnlargedWindowState.CLOSED;
-            try {
-                Component cardPreviewContainer = MageFrame.getUI().getComponent(MageComponents.CARD_PREVIEW_CONTAINER);
+        enlargedWindowState = EnlargedWindowState.CLOSED;
+        try {
+            Component cardPreviewContainer = MageFrame.getUI().getComponent(MageComponents.CARD_PREVIEW_CONTAINER);
+            if (cardPreviewContainer.isVisible()) {
                 cardPreviewContainer.setVisible(false);
-                cardPreviewContainer = MageFrame.getUI().getComponent(MageComponents.CARD_PREVIEW_CONTAINER_ROTATED);
-                cardPreviewContainer.setVisible(false);
-
-            } catch (InterruptedException e) {
-                LOGGER.warn("Can't hide enlarged card", e);
+                cardPreviewContainer.repaint();
             }
+            cardPreviewContainer = MageFrame.getUI().getComponent(MageComponents.CARD_PREVIEW_CONTAINER_ROTATED);
+            if (cardPreviewContainer.isVisible()) {
+                cardPreviewContainer.setVisible(false);
+                cardPreviewContainer.repaint();
+            }
+
+        } catch (InterruptedException e) {
+            LOGGER.warn("Can't hide enlarged card", e);
         }
     }
 

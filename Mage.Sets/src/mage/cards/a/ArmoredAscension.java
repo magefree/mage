@@ -54,7 +54,7 @@ public class ArmoredAscension extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Plains you control");
 
     static {
-        filter.add(new SubtypePredicate("Plains"));
+        filter.add(new SubtypePredicate(SubType.PLAINS));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

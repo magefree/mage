@@ -44,7 +44,7 @@ public class SoldierToken extends Token {
 
     static {
         tokenImageSets.addAll(Arrays.asList("10E", "M15", "C14", "ORI", "ALA", "DDF", "THS", "M12", "M13", "MM2", "MMA", "RTR",
-                "SOM", "DDO", "M10", "ORI", "EMN", "EMA", "CN2", "C16", "MM3"));
+                "SOM", "DDO", "M10", "ORI", "EMN", "EMA", "CN2", "C16", "MM3", "E01"));
     }
 
     public SoldierToken() {

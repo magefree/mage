@@ -35,6 +35,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
@@ -51,7 +52,7 @@ public class HondenOfNightsReach extends CardImpl {
     final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 
     static {
-        filter.add(new SubtypePredicate("Shrine"));
+        filter.add(new SubtypePredicate(SubType.SHRINE));
     }
 
     public HondenOfNightsReach(UUID ownerId, CardSetInfo setInfo) {

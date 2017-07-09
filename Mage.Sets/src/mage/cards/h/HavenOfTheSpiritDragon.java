@@ -140,7 +140,7 @@ class DragonCreatureCardPredicate implements Predicate<Card> {
     @Override
     public boolean apply(Card input, Game game) {
         return input.isCreature()
-                && input.getSubtype(game).contains("Dragon");
+                && input.hasSubtype("Dragon", game);
     }
 
     @Override

@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -54,7 +55,7 @@ public class RamosianRally extends CardImpl {
     private static final FilterControlledCreaturePermanent creatureFilter = new FilterControlledCreaturePermanent("an untapped creature you control");
 
     static {
-        plainsFilter.add(new SubtypePredicate("Plains"));
+        plainsFilter.add(new SubtypePredicate(SubType.PLAINS));
         creatureFilter.add(Predicates.not(new TappedPredicate()));
     }
 

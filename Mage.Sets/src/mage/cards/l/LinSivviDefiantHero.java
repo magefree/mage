@@ -62,7 +62,7 @@ public class LinSivviDefiantHero extends CardImpl {
 
     static {
         filter.add(new OwnerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Rebel"));
+        filter.add(new SubtypePredicate(SubType.REBEL));
     }
 
     static final String rule = "Put target Rebel card from your graveyard on the bottom of your library";
@@ -125,7 +125,7 @@ class LinSivviDefiantHeroEffect extends OneShotEffect {
 
         FilterPermanentCard filter = new FilterPermanentCard(new StringBuilder("Rebel permanent card with converted mana cost ").append(xCost).append(" or less").toString());
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xCost + 1));
-        filter.add(new SubtypePredicate("Rebel"));
+        filter.add(new SubtypePredicate(SubType.REBEL));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
         if (controller.searchLibrary(target, game)) {

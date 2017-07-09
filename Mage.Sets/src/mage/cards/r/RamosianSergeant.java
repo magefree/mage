@@ -38,6 +38,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -47,7 +48,6 @@ import mage.target.common.TargetCardInLibrary;
 import java.util.UUID;
 
 /**
- *
  * @author Backfir3
  */
 public class RamosianSergeant extends CardImpl {
@@ -55,12 +55,12 @@ public class RamosianSergeant extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 2 or less");
 
     static {
-        filter.add(new SubtypePredicate("Rebel"));
-	filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new SubtypePredicate(SubType.REBEL));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public RamosianSergeant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add("Human");
         this.subtype.add("Rebel");
 

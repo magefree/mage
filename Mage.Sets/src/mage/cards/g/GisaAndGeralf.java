@@ -86,7 +86,7 @@ class GisaAndGeralfContinuousEffect extends ContinuousEffectImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Zombie creature card");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     GisaAndGeralfContinuousEffect() {
@@ -168,7 +168,7 @@ class GisaAndGeralfWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
          if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell.isCreature() && spell.getSubtype(game).contains("Zombie")) {
+            if (spell.isCreature() && spell.hasSubtype("Zombie", game)) {
                abilityUsed = true;
             }
         }

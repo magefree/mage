@@ -36,6 +36,7 @@ import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -49,7 +50,7 @@ public class HeroOfIroas extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Aura spells");
     static {
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
     }
 
     public HeroOfIroas(UUID ownerId, CardSetInfo setInfo) {

@@ -109,13 +109,13 @@ public abstract class GameImpl implements Game, Serializable {
 
     static {
         FILTER_AURA.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        FILTER_AURA.add(new SubtypePredicate("Aura"));
+        FILTER_AURA.add(new SubtypePredicate(SubType.AURA));
 
         FILTER_EQUIPMENT.add(new CardTypePredicate(CardType.ARTIFACT));
-        FILTER_EQUIPMENT.add(new SubtypePredicate("Equipment"));
+        FILTER_EQUIPMENT.add(new SubtypePredicate(SubType.EQUIPMENT));
 
         FILTER_FORTIFICATION.add(new CardTypePredicate(CardType.ARTIFACT));
-        FILTER_FORTIFICATION.add(new SubtypePredicate("Fortification"));
+        FILTER_FORTIFICATION.add(new SubtypePredicate(SubType.FORTIFICATION));
 
         FILTER_LEGENDARY.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
@@ -176,6 +176,9 @@ public abstract class GameImpl implements Game, Serializable {
     private final int startLife;
     protected PlayerList playerList;
 
+    private int infiniteLoopCounter; // used to check if the game is in an infinite loop
+    private int lastNumberOfAbilitiesOnTheStack; // used to check how long no new ability was put to stack
+    private final LinkedList<UUID> stackObjectsCheck = new LinkedList<>(); // used to check if different sources used the stack
     // used to set the counters a permanent adds the battlefield (if no replacement effect is used e.g. Persist)
     protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
 
@@ -980,6 +983,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
         getState().setChoosingPlayerId(null);
+        state.getWatchers().reset(); // watcher objects from cards are reused during match so reset all card watchers already added
         Watchers watchers = state.getWatchers();
         // add default watchers
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
@@ -1233,6 +1237,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
         int errorContinueCounter = 0;
+        infiniteLoopCounter = 0;
         int bookmark = 0;
         clearAllBookmarks();
         try {
@@ -1341,6 +1346,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (top != null) {
                 state.getStack().remove(top); // seems partly redundant because move card from stack to grave is already done and the stack removed
                 rememberLKI(top.getSourceId(), Zone.STACK, top);
+                checkInfiniteLoop(top.getSourceId());
                 if (!getTurn().isEndTurnRequested()) {
                     while (state.hasSimultaneousEvents()) {
                         state.handleSimultaneousEvent(this);
@@ -1348,6 +1354,48 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
+    }
+
+    /**
+     * This checks if the stack gets filled iterated, without ever getting empty
+     * If the defined number of iterations with not more than 4 different
+     * sourceIds for the removed stack Objects is reached, the players in range
+     * of the stackObject get asked to confirm a draw. If they do, all
+     * confirming players get set to a draw.
+     *
+     * @param removedStackObjectSourceId
+     */
+    protected void checkInfiniteLoop(UUID removedStackObjectSourceId) {
+        if (stackObjectsCheck.contains(removedStackObjectSourceId)
+                && getStack().size() >= lastNumberOfAbilitiesOnTheStack) {
+            infiniteLoopCounter++;
+            if (infiniteLoopCounter > 15) {
+                Player controller = getPlayer(getControllerId(removedStackObjectSourceId));
+                if (controller != null) {
+                    for (UUID playerId : getState().getPlayersInRange(controller.getId(), this)) {
+                        Player player = getPlayer(playerId);
+                        if (!player.chooseUse(Outcome.Detriment, "Draw game because of infinite looping?", null, this)) {
+                            informPlayers(controller.getLogName() + " has NOT confirmed that the game is a draw because of infinite looping.");
+                            infiniteLoopCounter = 0;
+                            return;
+                        }
+                        informPlayers(controller.getLogName() + " has confirmed that the game is a draw because of infinite looping.");
+                    }
+                    for (UUID playerId : getState().getPlayersInRange(controller.getId(), this)) {
+                        Player player = getPlayer(playerId);
+                        if (player != null) {
+                            player.drew(this);
+                        }
+                    }
+                }
+            }
+        } else {
+            stackObjectsCheck.add(removedStackObjectSourceId);
+            if (stackObjectsCheck.size() > 4) {
+                stackObjectsCheck.removeFirst();
+            }
+        }
+        lastNumberOfAbilitiesOnTheStack = getStack().size();
     }
 
     protected boolean allPassed() {
@@ -1903,7 +1951,7 @@ public abstract class GameImpl implements Game, Serializable {
             for (Permanent planeswalker : planeswalkers) {
                 for (String planeswalkertype : planeswalker.getSubtype(this)) {
                     FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
-                    filterPlaneswalker.add(new SubtypePredicate(planeswalkertype));
+                    filterPlaneswalker.add(new SubtypePredicate(SubType.byDescription(planeswalkertype)));
                     filterPlaneswalker.add(new ControllerIdPredicate(planeswalker.getControllerId()));
                     if (getBattlefield().contains(filterPlaneswalker, planeswalker.getControllerId(), this, 2)) {
                         Player controller = this.getPlayer(planeswalker.getControllerId());
@@ -2575,6 +2623,8 @@ public abstract class GameImpl implements Game, Serializable {
     public void resetLKI() {
         lki.clear();
         lkiExtended.clear();
+        infiniteLoopCounter = 0;
+        stackObjectsCheck.clear();
     }
 
     @Override

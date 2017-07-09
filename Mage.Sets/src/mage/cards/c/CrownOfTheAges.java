@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -62,7 +63,7 @@ public class CrownOfTheAges extends CardImpl {
 
     static {
         filter.add(new AttachmentAttachedToCardTypePredicate(CardType.CREATURE));
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
     }
 
     public CrownOfTheAges(UUID ownerId, CardSetInfo setInfo) {

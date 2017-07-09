@@ -27,6 +27,9 @@
  */
 
 package mage.game.permanent.token;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -37,13 +40,27 @@ import mage.ObjectColor;
  */
 public class TitaniaProtectorOfArgothElementalToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("C14", "CMA"));
+    }
+
     public TitaniaProtectorOfArgothElementalToken() {
+        this(null, 0);
+    }
+
+    public TitaniaProtectorOfArgothElementalToken(String setCode) {
+        this(setCode, 0);
+    }
+
+    public TitaniaProtectorOfArgothElementalToken(String setCode, int tokenType) {
         super("Elemental", "5/3 green Elemental creature token");
-        this.setOriginalExpansionSetCode("C14");
+        availableImageSetCodes = tokenImageSets;
+        this.setOriginalExpansionSetCode(setCode);
         this.cardType.add(CardType.CREATURE);
         this.color = ObjectColor.GREEN;
         this.subtype.add("Elemental");
-
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
     }

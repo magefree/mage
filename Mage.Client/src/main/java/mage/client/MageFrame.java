@@ -34,7 +34,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
 import java.util.*;
-import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -43,6 +42,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+import mage.cards.action.ActionCallback;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -60,6 +60,7 @@ import mage.client.draft.DraftPane;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePane;
 import mage.client.game.GamePanel;
+import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.preference.MagePreferences;
 import mage.client.remote.CallbackClientImpl;
@@ -133,7 +134,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private final BalloonTip balloonTip;
 
-    private List<CardInfo> missingCards;
+    private java.util.List<CardInfo> missingCards;
 
     /**
      * @return the session
@@ -526,17 +527,21 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-//    public void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
-//        List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
-//        DownloadPictures.startDownload(null, cards);
-//    }
-//    public void btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {
-//        UserRequestMessage message = new UserRequestMessage("Download additional resources", "Do you want to download game symbols and additional image files?");
-//        message.setButton1("No", null);
-//        message.setButton2("Yes", PlayerAction.CLIENT_DOWNLOAD_SYMBOLS);
-//        showUserRequestDialog(message);
-//    }
     public static void setActive(MagePane frame) {
+        // Always hide not hidden popup window or enlarged card view if a frame is set to active
+        try {
+            ActionCallback callback = Plugins.instance.getActionCallback();
+            if (callback != null && callback instanceof MageActionCallback) {
+                ((MageActionCallback) callback).hideEnlargedCard();
+            }
+            Component container = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
+            if (container.isVisible()) {
+                container.setVisible(false);
+                container.repaint();
+            }
+        } catch (InterruptedException e) {
+
+        }
         // Nothing to do
         if (activeFrame == frame) {
             return;
@@ -973,7 +978,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnImagesActionPerformed
 
     public void downloadImages() {
-        List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
+        java.util.List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
         DownloadPictures.startDownload(null, cards);
     }
 

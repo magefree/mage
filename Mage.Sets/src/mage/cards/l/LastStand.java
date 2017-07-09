@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -77,11 +78,11 @@ class LastStandEffect extends OneShotEffect {
     private static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent();
     private static final FilterControlledLandPermanent filterIsland = new FilterControlledLandPermanent();
     static {
-        filterSwamp.add(new SubtypePredicate("Swamp"));
-        filterMountain.add(new SubtypePredicate("Mountain"));
-        filterPlains.add(new SubtypePredicate("Plains"));
-        filterForest.add(new SubtypePredicate("Forest"));
-        filterIsland.add(new SubtypePredicate("Island"));
+        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
+        filterMountain.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
+        filterIsland.add(new SubtypePredicate(SubType.ISLAND));
     }
 
     public LastStandEffect() {

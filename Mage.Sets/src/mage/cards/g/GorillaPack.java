@@ -36,6 +36,7 @@ import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPer
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 
@@ -54,11 +55,11 @@ public class GorillaPack extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Gorilla Pack can't attack unless defending player controls a Forest.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Forest", "a Forest"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.FOREST, "a Forest"))));
 
         // When you control no Forests, sacrifice Gorilla Pack.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Forest", "no Forests"), ComparisonType.EQUAL_TO, 0,
+                new FilterLandPermanent(SubType.FOREST, "no Forests"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

@@ -91,6 +91,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Cone of Flame", 95, Rarity.UNCOMMON, mage.cards.c.ConeOfFlame.class));
         cards.add(new SetCardInfo("Debt of Loyalty", 127, Rarity.RARE, mage.cards.d.DebtOfLoyalty.class));
         cards.add(new SetCardInfo("Dense Foliage", 66, Rarity.RARE, mage.cards.d.DenseFoliage.class));
+        cards.add(new SetCardInfo("Dingus Staff", 149, Rarity.UNCOMMON, mage.cards.d.DingusStaff.class));
         cards.add(new SetCardInfo("Disrupt", 37, Rarity.COMMON, mage.cards.d.Disrupt.class));
         cards.add(new SetCardInfo("Doomsday", 8, Rarity.RARE, mage.cards.d.Doomsday.class));
         cards.add(new SetCardInfo("Downdraft", 67, Rarity.UNCOMMON, mage.cards.d.Downdraft.class));
@@ -189,6 +190,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Veteran Explorer", 86, Rarity.UNCOMMON, mage.cards.v.VeteranExplorer.class));
         cards.add(new SetCardInfo("Vitalize", 87, Rarity.COMMON, mage.cards.v.Vitalize.class));
         cards.add(new SetCardInfo("Vodalian Illusionist", 58, Rarity.UNCOMMON, mage.cards.v.VodalianIllusionist.class));
+        cards.add(new SetCardInfo("Well of Knowledge", 162, Rarity.RARE, mage.cards.w.WellOfKnowledge.class));
         cards.add(new SetCardInfo("Winding Canyons", 167, Rarity.RARE, mage.cards.w.WindingCanyons.class));
         cards.add(new SetCardInfo("Xanthic Statue", 163, Rarity.RARE, mage.cards.x.XanthicStatue.class));
         cards.add(new SetCardInfo("Zombie Scavengers", 29, Rarity.COMMON, mage.cards.z.ZombieScavengers.class));

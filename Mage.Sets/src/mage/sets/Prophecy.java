@@ -104,6 +104,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Living Terrain", 117, Rarity.UNCOMMON, mage.cards.l.LivingTerrain.class));
         cards.add(new SetCardInfo("Mageta's Boon", 14, Rarity.COMMON, mage.cards.m.MagetasBoon.class));
         cards.add(new SetCardInfo("Mageta the Lion", 13, Rarity.RARE, mage.cards.m.MagetaTheLion.class));
+        cards.add(new SetCardInfo("Mana Vapors", 38, Rarity.UNCOMMON, mage.cards.m.ManaVapors.class));
         cards.add(new SetCardInfo("Marsh Boa", 118, Rarity.COMMON, mage.cards.m.MarshBoa.class));
         cards.add(new SetCardInfo("Mercenary Informer", 15, Rarity.RARE, mage.cards.m.MercenaryInformer.class));
         cards.add(new SetCardInfo("Mine Bearer", 16, Rarity.COMMON, mage.cards.m.MineBearer.class));

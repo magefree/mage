@@ -39,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,7 +53,7 @@ public class HanaKami extends CardImpl {
     private static final FilterCard filter = new FilterCard("Arcane card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate("Arcane"));
+        filter.add(new SubtypePredicate(SubType.ARCANE));
     }
 
     public HanaKami(UUID ownerId, CardSetInfo setInfo) {

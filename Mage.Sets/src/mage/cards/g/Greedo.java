@@ -35,10 +35,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -58,7 +55,7 @@ public class Greedo extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("Hunter or Rogue card");
 
     static {
-        filterCard.add(Predicates.or(new SubtypePredicate("Rogue"), new SubtypePredicate("Hunter")));
+        filterCard.add(Predicates.or(new SubtypePredicate(SubType.ROGUE), new SubtypePredicate(SubType.HUNTER)));
 
     }
 

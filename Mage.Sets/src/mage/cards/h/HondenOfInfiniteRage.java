@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
@@ -52,7 +53,7 @@ public class HondenOfInfiniteRage extends CardImpl {
     final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 
         static {
-            filter.add(new SubtypePredicate("Shrine"));
+            filter.add(new SubtypePredicate(SubType.SHRINE));
         }
 
         public HondenOfInfiniteRage (UUID ownerId, CardSetInfo setInfo) {

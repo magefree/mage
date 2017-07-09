@@ -71,6 +71,32 @@ public class AusHighlander extends Constructed {
             valid = false;
         }
 
+        banned.add("Advantageous Proclamation");
+        banned.add("Amulet of Quoz");
+        banned.add("Backup Plan");
+        banned.add("Brago's Favor");
+        banned.add("Bronze Tablet");
+        banned.add("Chaos Orb");
+        banned.add("Contract from Below");
+        banned.add("Darkpact");
+        banned.add("Demonic Attorney");
+        banned.add("Double Stroke");
+        banned.add("Falling Star");
+        banned.add("Immediate Action");
+        banned.add("Iterative Analysis");
+        banned.add("Jeweled Bird");
+        banned.add("Muzzio's Preparations");
+        banned.add("Power Play");
+        banned.add("Rebirth");
+        banned.add("Secret Summoning");
+        banned.add("Secrets of Paradise");
+        banned.add("Sentinel Dispatch");
+        banned.add("Shahrazad");
+        banned.add("Tempest Efreet");
+        banned.add("Timmerian Fiends");
+        banned.add("Unexpected Potential");
+        banned.add("Worldknit");
+
         List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes",
                 "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
         Map<String, Integer> counts = new HashMap<>();
@@ -89,14 +115,13 @@ public class AusHighlander extends Constructed {
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             String cn = entry.getKey();
 
-            if (cn.equals("Balance")
+            if (cn.equals("Back to Basics")
+                    || cn.equals("Balance")
                     || cn.equals("Birthing Pod")
                     || cn.equals("Crop Rotation")
                     || cn.equals("Dark Petition")
-                    || cn.equals("Dig Through Time")
                     || cn.equals("Enlightened Tutor")
                     || cn.equals("Fastbond")
-                    || cn.equals("Flash")
                     || cn.equals("Force of Will")
                     || cn.equals("Gifts Ungiven")
                     || cn.equals("Green Sun's Zenith")
@@ -109,12 +134,11 @@ public class AusHighlander extends Constructed {
                     || cn.equals("Mana Vault")
                     || cn.equals("Memory Jar")
                     || cn.equals("Merchant Scroll")
+                    || cn.equals("Mind Twist")
                     || cn.equals("Mishra's Workshop")
-                    || cn.equals("Muddle the Mixture")
                     || cn.equals("Natural Order")
                     || cn.equals("Oath of Druids")
                     || cn.equals("Personal Tutor")
-                    || cn.equals("Protean Hulk")
                     || cn.equals("Snapcaster Mage")
                     || cn.equals("Steelshaper's Gift")
                     || cn.equals("Stoneforge Mystic")
@@ -134,15 +158,16 @@ public class AusHighlander extends Constructed {
             }
 
             if (cn.equals("Channel")
+                    || cn.equals("Dig Through Time")
                     || cn.equals("Library of Alexandria")
                     || cn.equals("Mana Crypt")
-                    || cn.equals("Mind Twist")
                     || cn.equals("Mox Emerald")
                     || cn.equals("Mox Jet")
                     || cn.equals("Mox Pearl")
                     || cn.equals("Mox Ruby")
                     || cn.equals("Mox Sapphire")
                     || cn.equals("Mystical Tutor")
+                    || cn.equals("Protean Hulk")
                     || cn.equals("Skullclamp")
                     || cn.equals("Strip Mine")
                     || cn.equals("Tolarian Academy")) {
@@ -153,7 +178,6 @@ public class AusHighlander extends Constructed {
             if (cn.equals("Demonic Tutor")
                     || cn.equals("Imperial Seal")
                     || cn.equals("Sol Ring")
-                    || cn.equals("Time Vault")
                     || cn.equals("Time Walk")
                     || cn.equals("Tinker")
                     || cn.equals("Vampiric Tutor")
@@ -163,7 +187,8 @@ public class AusHighlander extends Constructed {
             }
 
             if (cn.equals("Ancestral Recall")
-                    || cn.equals("Black Lotus")) {
+                    || cn.equals("Black Lotus")
+                    || cn.equals("Time Vault")) {
                 totalPoints += 4;
                 invalid.put(cn, "4 points");
             }

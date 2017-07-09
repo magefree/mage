@@ -215,10 +215,10 @@ class NagaVitalistEffect extends ManaEffect {
         List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         Mana types = new Mana();
         for (Permanent land : lands) {
-            Abilities<Ability> manaAbilities = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
+            Abilities<Ability> manaAbilities = land.getAbilities(game).getManaAbilities(Zone.BATTLEFIELD);
             for (Ability basicAbility : manaAbilities) {
                 ManaAbility ability = (ManaAbility) basicAbility;
-                if (!ability.equals(source) && ability.definesMana()) {
+                if (!ability.equals(source) && ability.definesMana(game)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         types.add(netMana);
                         if (netMana.getAny() > 0) {

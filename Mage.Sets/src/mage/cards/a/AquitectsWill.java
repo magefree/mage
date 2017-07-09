@@ -35,10 +35,7 @@ import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,7 +54,7 @@ public class AquitectsWill extends CardImpl {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk");
 
     static {
-        filter.add(new SubtypePredicate("Merfolk"));
+        filter.add(new SubtypePredicate(SubType.MERFOLK));
     }
 
     public AquitectsWill(UUID ownerId, CardSetInfo setInfo) {

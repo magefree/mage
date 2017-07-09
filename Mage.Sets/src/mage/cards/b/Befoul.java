@@ -48,7 +48,7 @@ import java.util.UUID;
  */
 public class Befoul extends CardImpl {
 
-    public static final FilterPermanent filter = new FilterPermanent("land or nonblack creature");
+    static final FilterPermanent filter = new FilterPermanent("land or nonblack creature");
 
     static {
         filter.add(Predicates.or(

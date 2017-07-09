@@ -31,7 +31,6 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Abilities;
@@ -119,6 +118,10 @@ public class TestPlayer implements Player {
 
     private String[] groupsForTargetHandling = null;
 
+    // Tracks the initial turns (turn 0s) both players are given at the start of the game.
+    // Before actual turns start. Needed for checking attacker/blocker legality in the tests
+    private static int initialTurns = 0;
+
     public TestPlayer(ComputerPlayer computerPlayer) {
         this.computerPlayer = computerPlayer;
         AIPlayer = false;
@@ -157,40 +160,54 @@ public class TestPlayer implements Player {
         actions.add(new PlayerAction(turnNum, step, action));
     }
 
+    public List<PlayerAction> getActions() {
+        return actions;
+    }
+
     /**
      * @param maxCallsWithoutAction max number of priority passes a player may
-     *                              have for this test (default = 100)
+     * have for this test (default = 100)
      */
     public void setMaxCallsWithoutAction(int maxCallsWithoutAction) {
         this.maxCallsWithoutAction = maxCallsWithoutAction;
     }
 
+    public void setInitialTurns(int turns) {
+        initialTurns = turns;
+    }
 
     private Permanent findPermanent(FilterPermanent filter, String name, UUID controllerID, Game game) {
         return findPermanent(filter, name, controllerID, game, true);
     }
 
     /**
-     * Finds a permanent based on a general filter an their name and possible index.
+     * Finds a permanent based on a general filter an their name and possible
+     * index.
      *
-     * An index is permitted after the permanent's name to denote their index on the battlefield
-     * Either use name="<permanent>" which will get the first permanent with that name on the battlefield
-     * that meets the filter criteria or name="<permanent>:<index>" to get the named permanent with that index on
-     * the battlefield.
+     * An index is permitted after the permanent's name to denote their index on
+     * the battlefield Either use name="<permanent>" which will get the first
+     * permanent with that name on the battlefield that meets the filter
+     * criteria or name="<permanent>:<index>" to get the named permanent with
+     * that index on the battlefield.
      *
-     * Permanents are zero indexed in the order they entered the battlefield for each controller:
+     * Permanents are zero indexed in the order they entered the battlefield for
+     * each controller:
      *
-     * findPermanent(new AttackingCreatureFilter(), "Human", <controllerID>, <game>)
-     * Will find the first "Human" creature that entered the battlefield under this controller and is attacking.
+     * findPermanent(new AttackingCreatureFilter(), "Human", <controllerID>,
+     * <game>) Will find the first "Human" creature that entered the battlefield
+     * under this controller and is attacking.
      *
-     * findPermanent(new FilterControllerPermanent(), "Fabled Hero:3", <controllerID>, <game>)
-     * Will find the 4th permanent named "Fabled Hero" that entered the battlefield under this controller
+     * findPermanent(new FilterControllerPermanent(), "Fabled Hero:3",
+     * <controllerID>, <game>) Will find the 4th permanent named "Fabled Hero"
+     * that entered the battlefield under this controller
      *
-     * An exception will be thrown if no permanents match the criteria or the index is larger than the number
-     * of permanents found with that name.
+     * An exception will be thrown if no permanents match the criteria or the
+     * index is larger than the number of permanents found with that name.
      *
-     * failOnNotFound boolean controls if this function returns null for a permanent not found on the battlefield. Currently
-     * used only as a workaround for attackers  in selectAttackers() being able to attack multiple times each combat. See issue #3038
+     * failOnNotFound boolean controls if this function returns null for a
+     * permanent not found on the battlefield. Currently used only as a
+     * workaround for attackers in selectAttackers() being able to attack
+     * multiple times each combat. See issue #3038
      */
     private Permanent findPermanent(FilterPermanent filter, String name, UUID controllerID, Game game, boolean failOnNotFound) {
         String filteredName = name;
@@ -204,12 +221,14 @@ public class TestPlayer implements Player {
         filter.add(new NamePredicate(filteredName));
         List<Permanent> allPermanents = game.getBattlefield().getAllActivePermanents(filter, controllerID, game);
         if (allPermanents.isEmpty()) {
-            if (failOnNotFound)
-                throw new UnsupportedOperationException("No permanents found called " + filteredName + " that match the filter criteria \"" + filter.getMessage() + "\"");
+            if (failOnNotFound) {
+                throw new AssertionError("No permanents found called " + filteredName + " that match the filter criteria \"" + filter.getMessage() + "\"");
+            }
             return null;
         } else if (allPermanents.size() - 1 < index) {
-            if (failOnNotFound)
-                throw new UnsupportedOperationException("Cannot find " + filteredName + ":" + index + " that match the filter criteria \"" + filter.getMessage() + "\"" + ".\n Only " + allPermanents.size() + " called " + filteredName + " found for this controller(zero indexed).");
+            if (failOnNotFound) {
+                throw new AssertionError("Cannot find " + filteredName + ":" + index + " that match the filter criteria \"" + filter.getMessage() + "\"" + ".\nOnly " + allPermanents.size() + " called " + filteredName + " found for this controller(zero indexed).");
+            }
             return null;
         }
         return allPermanents.get(index);
@@ -522,6 +541,10 @@ public class TestPlayer implements Player {
                                 return true;
                             }
                         }
+                        if (groups[0].equals("Concede")) {
+                            game.concede(getId());
+                            actions.remove(action);
+                        }
                     }
                 }
             }
@@ -543,12 +566,50 @@ public class TestPlayer implements Player {
         return false;
     }
 
+    /*
+    *  Iterates through each player on the current turn and asserts if they can attack or block legally this turn
+     */
+    private void checkLegalMovesThisTurn(Game game) {
+        // Each player is given priority before actual turns start for e.g. leylines and pre-game initialisation
+        if (initialTurns < game.getPlayers().size()) {
+            initialTurns++;
+            return;
+        }
+        // Check actions for next turn are going to be valid
+        int turnNum = game.getTurnNum();
+        // Loop through all game players and check if they are allowed to attack/block this turn
+        for (UUID playerID : game.getPlayers().keySet()) {
+            Player player = game.getPlayer(playerID);
+            // Has to be a TestPlayer to get a list of actions
+            if (player instanceof TestPlayer) {
+                // Check each player trying to attack or block on this turn
+                for (PlayerAction playerAction : ((TestPlayer) player).getActions()) {
+                    String action = playerAction.getAction();
+                    boolean currentPlayersTurn = playerID.equals(getId());
+                    String playerName = player.getName();
+                    int actionTurnNum = playerAction.getTurnNum();
+                    // If the action is performed on this turn...
+                    if (turnNum == actionTurnNum) {
+                        // Attacking and it's not their turn is illegal
+                        if (action.startsWith("attack:") && !currentPlayersTurn) {
+                            throw new UnsupportedOperationException(playerName + " can't attack on turn " + turnNum + " as it is not their turn");
+                        }
+                        // Blocking and it is their turn is illegal
+                        if (action.startsWith("block:") && currentPlayersTurn) {
+                            throw new UnsupportedOperationException(playerName + " can't block on turn " + turnNum + " as it is their turn");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
+        // Loop through players and validate can attack/block this turn
         UUID defenderId = null;
         for (PlayerAction action : actions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
-
                 String command = action.getAction();
                 command = command.substring(command.indexOf("attack:") + 7);
                 String[] groups = command.split("\\$");
@@ -580,11 +641,15 @@ public class TestPlayer implements Player {
                         }
                     }
                 }
-                FilterCreatureForCombat filter = new FilterCreatureForCombat();
-                filter.add(Predicates.not(new AttackingPredicate()));
-                filter.add(Predicates.not(new SummoningSicknessPredicate()));
+                // First check to see if this controller actually owns the creature
+                FilterControlledPermanent firstFilter = new FilterControlledPermanent();
+                findPermanent(firstFilter, groups[0], computerPlayer.getId(), game);
+                // Second check to filter creature for combat - less strict to workaround issue in #3038
+                FilterCreatureForCombat secondFilter = new FilterCreatureForCombat();
+                secondFilter.add(Predicates.not(new AttackingPredicate()));
+                secondFilter.add(Predicates.not(new SummoningSicknessPredicate()));
                 // TODO: Cannot enforce legal attackers multiple times per combat. See issue #3038
-                Permanent attacker = findPermanent(filter, groups[0], computerPlayer.getId(), game, false);
+                Permanent attacker = findPermanent(secondFilter, groups[0], computerPlayer.getId(), game, false);
                 if (attacker != null && attacker.canAttack(defenderId, game)) {
                     computerPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
                 }
@@ -592,9 +657,9 @@ public class TestPlayer implements Player {
         }
     }
 
-
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
+
         UUID opponentId = game.getOpponents(computerPlayer.getId()).iterator().next();
         // Map of Blocker reference -> list of creatures blocked
         Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature = new HashMap<>();
@@ -1024,7 +1089,6 @@ public class TestPlayer implements Player {
         return computerPlayer.chooseTarget(outcome, target, source, game);
     }
 
-
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         if (!targets.isEmpty()) {
@@ -1168,11 +1232,13 @@ public class TestPlayer implements Player {
 
     @Override
     public void init(Game game) {
+        initialTurns = 0;
         computerPlayer.init(game);
     }
 
     @Override
     public void init(Game game, boolean testMode) {
+        initialTurns = 0;
         computerPlayer.init(game, testMode);
     }
 
@@ -1193,6 +1259,7 @@ public class TestPlayer implements Player {
 
     @Override
     public void beginTurn(Game game) {
+        checkLegalMovesThisTurn(game);
         computerPlayer.beginTurn(game);
     }
 

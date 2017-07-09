@@ -34,6 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,7 +50,7 @@ public class Sanctimony extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(new SubtypePredicate("Mountain"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public Sanctimony(UUID ownerId, CardSetInfo setInfo) {

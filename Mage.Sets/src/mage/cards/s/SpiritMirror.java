@@ -38,12 +38,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.ReflectionToken;
 import mage.target.TargetPermanent;
@@ -53,11 +50,13 @@ import mage.target.TargetPermanent;
  */
 public class SpiritMirror extends CardImpl {
 
+    private static final FilterPermanent filterToken = new FilterPermanent(SubType.REFLECTION, "Reflection token");
     private static final FilterPermanent filter = new FilterPermanent("Reflection");
 
     static {
-        filter.add(new NamePredicate("Reflection"));
-        filter.add(new TokenPredicate());
+        filterToken.add(new SubtypePredicate(SubType.REFLECTION));
+        filterToken.add(new TokenPredicate());
+        filter.add(new SubtypePredicate(SubType.REFLECTION));
     }
 
     public SpiritMirror(UUID ownerId, CardSetInfo setInfo) {
@@ -66,7 +65,7 @@ public class SpiritMirror extends CardImpl {
         // At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, create a 2/2 white Reflection creature token.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new ReflectionToken()), TargetController.YOU, false),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0, false),
+                new PermanentsOnTheBattlefieldCondition(filterToken, ComparisonType.EQUAL_TO, 0, false),
                 "At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, create a 2/2 white Reflection creature token"));
 
         // {0}: Destroy target Reflection.

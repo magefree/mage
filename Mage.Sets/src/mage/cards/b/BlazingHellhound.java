@@ -37,28 +37,20 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author fireshoes
  */
 public class BlazingHellhound extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
 
     public BlazingHellhound(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Hound");
         this.power = new MageInt(4);
@@ -66,7 +58,7 @@ public class BlazingHellhound extends CardImpl {
 
         // {1}, Sacrifice another creature: Blazing Hellhound deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

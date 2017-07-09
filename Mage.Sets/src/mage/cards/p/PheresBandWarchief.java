@@ -38,10 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -55,7 +52,7 @@ public class PheresBandWarchief extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Centaur creatures you control");
 
     static {
-        filter.add(new SubtypePredicate("Centaur"));
+        filter.add(new SubtypePredicate(SubType.CENTAUR));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

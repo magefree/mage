@@ -38,6 +38,7 @@ import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -56,7 +57,7 @@ public class HavengulRunebinder extends CardImpl {
     private static final FilterControlledCreaturePermanent filterPermanent = new FilterControlledCreaturePermanent("Zombie creature you control");
 
     static {
-        filterPermanent.add(new SubtypePredicate("Zombie"));
+        filterPermanent.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public HavengulRunebinder(UUID ownerId, CardSetInfo setInfo) {

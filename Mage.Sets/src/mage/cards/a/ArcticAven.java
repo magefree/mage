@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,7 +55,7 @@ public class ArcticAven extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Plains");
 
     static {
-        filter.add(new SubtypePredicate("Plains"));
+        filter.add(new SubtypePredicate(SubType.PLAINS));
     }
 
     public ArcticAven(UUID ownerId, CardSetInfo setInfo) {

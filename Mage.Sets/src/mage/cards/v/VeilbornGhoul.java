@@ -29,6 +29,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
@@ -48,7 +49,7 @@ public class VeilbornGhoul extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledLandPermanent("a Swamp");
     static {
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public VeilbornGhoul(UUID ownerId, CardSetInfo setInfo) {

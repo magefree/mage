@@ -141,6 +141,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Pontiff", 124, Rarity.RARE, mage.cards.o.OrzhovPontiff.class));
         cards.add(new SetCardInfo("Orzhov Signet", 155, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Ostiary Thrull", 55, Rarity.COMMON, mage.cards.o.OstiaryThrull.class));
+        cards.add(new SetCardInfo("Parallectric Feedback", 71, Rarity.RARE, mage.cards.p.ParallectricFeedback.class));
         cards.add(new SetCardInfo("Petrahydrox", 148, Rarity.COMMON, mage.cards.p.Petrahydrox.class));
         cards.add(new SetCardInfo("Pillory of the Sleepless", 125, Rarity.COMMON, mage.cards.p.PilloryOfTheSleepless.class));
         cards.add(new SetCardInfo("Plagued Rusalka", 56, Rarity.UNCOMMON, mage.cards.p.PlaguedRusalka.class));
@@ -169,6 +170,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Skarrgan Skybreaker", 130, Rarity.UNCOMMON, mage.cards.s.SkarrganSkybreaker.class));
         cards.add(new SetCardInfo("Skarrg, the Rage Pits", 163, Rarity.UNCOMMON, mage.cards.s.SkarrgTheRagePits.class));
         cards.add(new SetCardInfo("Skeletal Vampire", 62, Rarity.RARE, mage.cards.s.SkeletalVampire.class));
+        cards.add(new SetCardInfo("Sky Swallower", 34, Rarity.RARE, mage.cards.s.SkySwallower.class));
         cards.add(new SetCardInfo("Skyrider Trainee", 17, Rarity.COMMON, mage.cards.s.SkyriderTrainee.class));
         cards.add(new SetCardInfo("Smogsteed Rider", 63, Rarity.UNCOMMON, mage.cards.s.SmogsteedRider.class));
         cards.add(new SetCardInfo("Souls of the Faultless", 131, Rarity.UNCOMMON, mage.cards.s.SoulsOfTheFaultless.class));

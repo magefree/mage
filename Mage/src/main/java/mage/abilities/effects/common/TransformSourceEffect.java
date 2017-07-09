@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -71,33 +72,32 @@ public class TransformSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (permanent.canTransform(source, game)) {
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game); // Transform only if it's the same object as the effect was put on the stack
+        if (sourceObject != null && sourceObject instanceof Permanent) {
+            Permanent sourcePermanent = (Permanent) sourceObject;
+            if (sourcePermanent.canTransform(source, game)) {
                 // check not to transform twice the same side
-                if (permanent.isTransformed() != fromDayToNight) {
+                if (sourcePermanent.isTransformed() != fromDayToNight) {
                     if (withoutTrigger) {
-                        permanent.setTransformed(fromDayToNight);
+                        sourcePermanent.setTransformed(fromDayToNight);
                     } else {
-                        permanent.transform(game);
+                        sourcePermanent.transform(game);
                     }
                     if (!game.isSimulation()) {
                         if (fromDayToNight) {
-                            if (permanent.getSecondCardFace() != null) {
-                                if (permanent instanceof PermanentCard) {
-                                    game.informPlayers(((PermanentCard) permanent).getCard().getLogName() + " transforms into " + permanent.getSecondCardFace().getLogName());
+                            if (sourcePermanent.getSecondCardFace() != null) {
+                                if (sourcePermanent instanceof PermanentCard) {
+                                    game.informPlayers(((PermanentCard) sourcePermanent).getCard().getLogName() + " transforms into " + sourcePermanent.getSecondCardFace().getLogName());
                                 }
                             }
                         } else {
-                            game.informPlayers(permanent.getSecondCardFace().getLogName() + " transforms into " + permanent.getLogName());
+                            game.informPlayers(sourcePermanent.getSecondCardFace().getLogName() + " transforms into " + sourcePermanent.getLogName());
                         }
                     }
                 }
             }
-
-            return true;
         }
-        return false;
+        return true;
     }
 
 }

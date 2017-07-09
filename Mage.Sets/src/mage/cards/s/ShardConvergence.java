@@ -38,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -101,7 +102,7 @@ class ShardConvergenceEffect extends OneShotEffect {
 
     private void searchLand(Player player, Ability source, Game game, Cards cards, String subtype) {
         FilterLandCard filter = new FilterLandCard(subtype);
-        filter.add(new SubtypePredicate(subtype));
+        filter.add(new SubtypePredicate(SubType.byDescription(subtype)));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {
             Card card = player.getLibrary().remove(target.getFirstTarget(), game);

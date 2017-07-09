@@ -43,8 +43,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -91,12 +90,6 @@ public class HeartPiercerManticore extends CardImpl {
 
 class HeartPiercerManticoreSacrificeEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public HeartPiercerManticoreSacrificeEffect() {
         super(Outcome.Damage);
         this.staticText = "you may sacrifice another creature";
@@ -115,7 +108,7 @@ class HeartPiercerManticoreSacrificeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
+            Target target = new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true);
             if (controller.choose(outcome, target, source.getSourceId(), game)) {
                 Permanent toSacrifice = game.getPermanent(target.getFirstTarget());
                 if (toSacrifice != null) {

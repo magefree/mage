@@ -421,12 +421,16 @@ public class TableController {
     }
 
     public void updateDeck(UUID userId, DeckCardLists deckList) throws MageException {
+        boolean validDeck;
         UUID playerId = userPlayerMap.get(userId);
         if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
             return;
         }
         Deck deck = Deck.load(deckList, false, false);
-        updateDeck(userId, playerId, deck);
+        validDeck = updateDeck(userId, playerId, deck);
+        if (!validDeck) {
+            logger.warn(" userId: " + userId + " - Modified deck card list!");
+        }
     }
 
     private void submitDeck(UUID userId, UUID playerId, Deck deck) {
@@ -439,18 +443,20 @@ public class TableController {
         }
     }
 
-    private void updateDeck(UUID userId, UUID playerId, Deck deck) {
+    private boolean updateDeck(UUID userId, UUID playerId, Deck deck) {
+        boolean validDeck = true;
         if (table.isTournament()) {
             if (tournament != null) {
-                TournamentManager.instance.updateDeck(tournament.getId(), playerId, deck);
+                validDeck = TournamentManager.instance.updateDeck(tournament.getId(), playerId, deck);
             } else {
                 logger.fatal("Tournament == null  table: " + table.getId() + " userId: " + userId);
             }
         } else if (TableState.SIDEBOARDING == table.getState()) {
-            match.updateDeck(playerId, deck);
+            validDeck = match.updateDeck(playerId, deck);
         } else {
             // deck was meanwhile submitted so the autoupdate can be ignored
         }
+        return validDeck;
     }
 
     public boolean watchTable(UUID userId) {
@@ -472,13 +478,6 @@ public class TableController {
         }
     }
 
-    //    public boolean replayTable(UUID userId) {
-//        if (table.getState() != TableState.FINISHED) {
-//            return false;
-//        }
-//        ReplayManager.instance.replayGame(table.getId(), userId);
-//        return true;
-//    }
     private Optional<Player> createPlayer(String name, PlayerType playerType, int skill) {
         Optional<Player> playerOpt;
         if (options == null) {
@@ -605,6 +604,7 @@ public class TableController {
             table.initGame();
             GameOptions gameOptions = new GameOptions();
             gameOptions.rollbackTurnsAllowed = match.getOptions().isRollbackTurnsAllowed();
+            gameOptions.bannedUsers = match.getOptions().getBannedUsers();
             match.getGame().setGameOptions(gameOptions);
             GameManager.instance.createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId, gameOptions);
             String creator = null;

@@ -27,6 +27,7 @@
  */
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -39,6 +40,7 @@ import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -46,8 +48,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -57,13 +57,14 @@ public class HigureTheStillWind extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Ninja card");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Ninja creature");
+
     static {
-        filter.add(new SubtypePredicate("Ninja"));
-        filterCreature.add((new SubtypePredicate("Ninja")));
+        filter.add(new SubtypePredicate(SubType.NINJA));
+        filterCreature.add((new SubtypePredicate(SubType.NINJA)));
     }
 
     public HigureTheStillWind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Ninja");
         addSuperType(SuperType.LEGENDARY);
@@ -75,13 +76,12 @@ public class HigureTheStillWind extends CardImpl {
         this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{2}{U}{U}")));
 
         // Whenever Higure, the Still Wind deals combat damage to a player, you may search your library for a Ninja card, reveal it, and put it into your hand. If you do, shuffle your library.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)), true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, false), true));
 
         // {2}: Target Ninja creature can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new GenericManaCost(2));
         ability.addTarget(new TargetCreaturePermanent(filterCreature));
         this.addAbility(ability);
-
 
     }
 

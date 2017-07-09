@@ -33,6 +33,7 @@ import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -48,7 +49,7 @@ public class MiresToll extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("the number of Swamps you control");
 
     static {
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
     

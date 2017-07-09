@@ -409,11 +409,18 @@ public abstract class MatchImpl implements Match {
     }
 
     @Override
-    public void updateDeck(UUID playerId, Deck deck) {
+    public boolean updateDeck(UUID playerId, Deck deck) {
+        boolean validDeck = true;
         MatchPlayer player = getPlayer(playerId);
         if (player != null) {
+            // Check if the cards included in the deck are the same as in the original deck
+            validDeck = (player.getDeck().getDeckCompleteHashCode() == deck.getDeckCompleteHashCode());
+            if (validDeck == false) {
+                deck.getCards().clear(); // Clear the deck so the player cheating looses the game
+            }
             player.updateDeck(deck);
         }
+        return validDeck;
     }
 
     protected String createGameStartMessage() {
@@ -502,10 +509,10 @@ public abstract class MatchImpl implements Match {
                 .setMatchOptions(this.getOptions().toProto())
                 .setEndTimeMs((this.getEndTime() != null ? this.getEndTime() : new Date()).getTime());
         for (MatchPlayer matchPlayer : this.getPlayers()) {
-            MatchQuitStatus status = !matchPlayer.hasQuit() ? MatchQuitStatus.NO_MATCH_QUIT :
-                    matchPlayer.getPlayer().hasTimerTimeout() ? MatchQuitStatus.TIMER_TIMEOUT :
-                    matchPlayer.getPlayer().hasIdleTimeout() ? MatchQuitStatus.IDLE_TIMEOUT :
-                    MatchQuitStatus.QUIT;
+            MatchQuitStatus status = !matchPlayer.hasQuit() ? MatchQuitStatus.NO_MATCH_QUIT
+                    : matchPlayer.getPlayer().hasTimerTimeout() ? MatchQuitStatus.TIMER_TIMEOUT
+                    : matchPlayer.getPlayer().hasIdleTimeout() ? MatchQuitStatus.IDLE_TIMEOUT
+                    : MatchQuitStatus.QUIT;
             builder.addPlayersBuilder()
                     .setName(matchPlayer.getName())
                     .setHuman(matchPlayer.getPlayer().isHuman())

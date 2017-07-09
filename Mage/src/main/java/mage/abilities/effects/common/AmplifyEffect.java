@@ -14,6 +14,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
@@ -101,7 +102,7 @@ public class AmplifyEffect extends ReplacementEffectImpl {
             FilterCreatureCard filter = new FilterCreatureCard("creatures cards to reveal");
             List<SubtypePredicate> filterSubtypes = new ArrayList<>();
             for (String subtype : sourceCreature.getSubtype(game)) {
-                filterSubtypes.add(new SubtypePredicate((subtype)));
+                filterSubtypes.add(new SubtypePredicate(SubType.byDescription(subtype)));
             }
             if (filterSubtypes.size() > 1) {
                 filter.add(Predicates.or(filterSubtypes));

@@ -36,10 +36,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -56,7 +53,7 @@ public class LandoCalrissian extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Starship you control");
 
     static {
-        filter.add(new SubtypePredicate("Starship"));
+        filter.add(new SubtypePredicate(SubType.STARSHIP));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

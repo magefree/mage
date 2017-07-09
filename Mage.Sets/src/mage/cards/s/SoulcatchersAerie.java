@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -53,8 +54,8 @@ public class SoulcatchersAerie extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Bird creatures");
 
     static {
-        filter.add(new SubtypePredicate("Bird"));
-        filter2.add(new SubtypePredicate("Bird"));
+        filter.add(new SubtypePredicate(SubType.BIRD));
+        filter2.add(new SubtypePredicate(SubType.BIRD));
     }
 
     public SoulcatchersAerie(UUID ownerId, CardSetInfo setInfo) {

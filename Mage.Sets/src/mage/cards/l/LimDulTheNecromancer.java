@@ -64,7 +64,7 @@ public class LimDulTheNecromancer extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter2.add(new SubtypePredicate("Zombie"));
+        filter2.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public LimDulTheNecromancer(UUID ownerId, CardSetInfo setInfo) {

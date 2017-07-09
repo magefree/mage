@@ -27,21 +27,16 @@
  */
 package mage.cards.c;
 
+import mage.abilities.effects.common.ReturnCreaturesFromExileEffect;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
-import mage.game.ExileZone;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -60,7 +55,8 @@ public class ColdStorage extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
         // Sacrifice Cold Storage: Return each creature card exiled with Cold Storage to the battlefield under your control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromExileEffect(this.getId()),  new SacrificeSourceCost());
+        ReturnCreaturesFromExileEffect returnFromExileEffect = new ReturnCreaturesFromExileEffect(this.getId(), false, "Return each creature card exiled with {this} to the battlefield under your control");
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, returnFromExileEffect,  new SacrificeSourceCost());
         this.addAbility(ability);
     }
 
@@ -72,40 +68,4 @@ public class ColdStorage extends CardImpl {
     public ColdStorage copy() {
         return new ColdStorage(this);
     }
-}
-
-
-class ReturnFromExileEffect extends OneShotEffect {
-
-    private UUID exileId;
-
-    public ReturnFromExileEffect(UUID exileId) {
-        super(Outcome.PutCardInPlay);
-        this.exileId = exileId;
-        this.setText("Return each creature card exiled with {this} to the battlefield under your control");
-    }
-
-
-    public ReturnFromExileEffect(final ReturnFromExileEffect effect) {
-        super(effect);
-        this.exileId = effect.exileId;
-    }
-
-    @Override
-    public ReturnFromExileEffect copy() {
-        return new ReturnFromExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ExileZone exile = game.getExile().getExileZone(exileId);
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && exile != null) {
-            controller.moveCards(exile.getCards(new FilterCreatureCard(), game), Zone.BATTLEFIELD, source, game, false, false, true, null);
-            return true;
-        }
-        return false;
-    }
-
-    
 }

@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,7 +56,7 @@ public class DrogskolCavalry extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new SubtypePredicate("Spirit"));
+        filter.add(new SubtypePredicate(SubType.SPIRIT));
     }
 
     public DrogskolCavalry(UUID ownerId, CardSetInfo setInfo) {

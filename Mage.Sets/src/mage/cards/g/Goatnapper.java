@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
@@ -53,7 +54,7 @@ public class Goatnapper extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Goat");
 
     static {
-        filter.add(new SubtypePredicate("Goat"));
+        filter.add(new SubtypePredicate(SubType.GOAT));
     }
 
     public Goatnapper(UUID ownerId, CardSetInfo setInfo) {

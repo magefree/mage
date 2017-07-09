@@ -37,6 +37,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -54,7 +55,7 @@ public class RamosianRevivalist extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 5 or less from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate("Rebel"));
+        filter.add(new SubtypePredicate(SubType.REBEL));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 6));
     }
 

@@ -35,6 +35,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,8 +52,8 @@ public class GameTrail extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Mountain or Forest card from your hand");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Mountain"),
-                new SubtypePredicate("Forest")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.MOUNTAIN),
+                new SubtypePredicate(SubType.FOREST)));
     }
 
     public GameTrail(UUID ownerId, CardSetInfo setInfo) {

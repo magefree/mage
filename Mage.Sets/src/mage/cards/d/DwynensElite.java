@@ -37,6 +37,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -54,7 +55,7 @@ public class DwynensElite extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public DwynensElite(UUID ownerId, CardSetInfo setInfo) {

@@ -39,6 +39,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,7 +56,7 @@ public class MarkovCrusader extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new SubtypePredicate("Vampire"));
+        filter.add(new SubtypePredicate(SubType.VAMPIRE));
     }
 
     public MarkovCrusader(UUID ownerId, CardSetInfo setInfo) {

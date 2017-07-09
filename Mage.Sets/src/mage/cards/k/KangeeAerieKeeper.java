@@ -45,10 +45,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -64,7 +61,7 @@ public class KangeeAerieKeeper extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Bird creatures");
     
     static {
-        filter.add(new SubtypePredicate("Bird"));
+        filter.add(new SubtypePredicate(SubType.BIRD));
         filter.add(new AnotherPredicate());
     }
 

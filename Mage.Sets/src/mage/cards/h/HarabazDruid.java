@@ -36,6 +36,7 @@ import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,7 +48,7 @@ public class HarabazDruid extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Allies you control");
 
     static {
-        filter.add(new SubtypePredicate("Ally"));
+        filter.add(new SubtypePredicate(SubType.ALLY));
     }
 
     public HarabazDruid(UUID ownerId, CardSetInfo setInfo) {

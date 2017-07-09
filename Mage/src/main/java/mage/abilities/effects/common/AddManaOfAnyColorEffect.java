@@ -51,7 +51,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
         this.staticText = new StringBuilder("add ")
                 .append(CardUtil.numberToText(amount))
                 .append(" mana of any ")
-                .append(amount > 1 ?"one ":"")
+                .append(amount > 1 ? "one " : "")
                 .append("color to your mana pool").toString();
     }
 
@@ -78,7 +78,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
                 Mana createdMana = choice.getMana(amount);
                 if (createdMana != null) {
                     checkToFirePossibleEvents(createdMana, game, source);
-                    controller.getManaPool().addMana(createdMana, game, source);                    
+                    controller.getManaPool().addMana(createdMana, game, source);
                 }
                 return true;
             }
@@ -94,5 +94,5 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
     public Mana getMana() {
         return new Mana(0, 0, 0, 0, 0, 0, amount, 0);
     }
-    
+
 }

@@ -36,6 +36,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
@@ -48,7 +49,7 @@ public class WrensRunVanquisher extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Elf card from your hand");
     static {
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public WrensRunVanquisher(UUID ownerId, CardSetInfo setInfo) {

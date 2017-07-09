@@ -57,7 +57,7 @@ public class GreatbowDoyen extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Archer"));
+        filter.add(new SubtypePredicate(SubType.ARCHER));
     }
 
     public GreatbowDoyen(UUID ownerId, CardSetInfo setInfo) {

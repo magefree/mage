@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -53,7 +54,7 @@ public class GrasslandCrusader extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf or Soldier creature");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Elf"), new SubtypePredicate("Soldier")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.ELF), new SubtypePredicate(SubType.SOLDIER)));
     }
 
     public GrasslandCrusader(UUID ownerId, CardSetInfo setInfo) {

@@ -975,8 +975,9 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public void setRuleAtTheTop(boolean ruleAtTheTop) {
+    public Ability setRuleAtTheTop(boolean ruleAtTheTop) {
         this.ruleAtTheTop = ruleAtTheTop;
+        return this;
     }
 
     @Override

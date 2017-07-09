@@ -43,7 +43,7 @@ import java.util.UUID;
  */
 public class DejaVu extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("sorcery card from your graveyard");
+    static final FilterCard filter = new FilterCard("sorcery card from your graveyard");
 
     static {
         filter.add(new CardTypePredicate(CardType.SORCERY));

@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -46,7 +47,7 @@ public class SupremeExemplar extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elemental");
 
     static {
-        filter.add(new SubtypePredicate("Elemental"));
+        filter.add(new SubtypePredicate(SubType.ELEMENTAL));
     }
 
     public SupremeExemplar(UUID ownerId, CardSetInfo setInfo) {
@@ -59,7 +60,7 @@ public class SupremeExemplar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Champion an Elemental
-        this.addAbility(new ChampionAbility(this, "Elemental", false));
+        this.addAbility(new ChampionAbility(this, SubType.ELEMENTAL, false));
     }
 
     public SupremeExemplar(final SupremeExemplar card) {

@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -88,7 +89,7 @@ class RavingOniSlaveEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (game.getBattlefield().count(new FilterCreaturePermanent("Demon", "Demon"), source.getSourceId(), source.getControllerId(), game) < 1) {
+            if (game.getBattlefield().count(new FilterCreaturePermanent(SubType.DEMON, "Demon"), source.getSourceId(), source.getControllerId(), game) < 1) {
                 controller.loseLife(3, game, false);
             }
             return true;

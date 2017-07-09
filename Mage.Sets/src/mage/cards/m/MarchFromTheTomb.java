@@ -37,6 +37,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,7 +58,7 @@ public class MarchFromTheTomb extends CardImpl {
         effect.setText("Return any number of target Ally creature cards with total converted mana cost of 8 or less from your graveyard to the battlefield");
         this.getSpellAbility().addEffect(effect);
         FilterCard filter = new FilterCreatureCard();
-        filter.add(new SubtypePredicate("Ally"));
+        filter.add(new SubtypePredicate(SubType.ALLY));
         this.getSpellAbility().addTarget(new MarchFromTheTombTarget(0, Integer.MAX_VALUE, filter));
     }
 

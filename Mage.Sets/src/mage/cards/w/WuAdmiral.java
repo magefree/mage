@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 
@@ -46,7 +47,7 @@ import mage.filter.FilterPermanent;
  */
 public class WuAdmiral extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Island", "Island");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ISLAND, "Island");
 
     public WuAdmiral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

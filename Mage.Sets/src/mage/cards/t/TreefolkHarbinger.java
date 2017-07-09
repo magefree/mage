@@ -34,6 +34,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,7 +48,7 @@ public class TreefolkHarbinger extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Treefolk or Forest card");
     static {
-       filter.add(Predicates.or(new SubtypePredicate("Treefolk"), new SubtypePredicate("Forest")));
+       filter.add(Predicates.or(new SubtypePredicate(SubType.TREEFOLK), new SubtypePredicate(SubType.FOREST)));
     }
     
     public TreefolkHarbinger(UUID ownerId, CardSetInfo setInfo) {

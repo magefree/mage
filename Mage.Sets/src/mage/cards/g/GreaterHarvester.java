@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public class GreaterHarvester extends CardImpl {
 
-    public static final FilterPermanent filter = new FilterPermanent("a permanent");
+    static final FilterPermanent filter = new FilterPermanent("a permanent");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),

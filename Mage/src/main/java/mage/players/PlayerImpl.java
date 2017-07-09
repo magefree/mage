@@ -129,8 +129,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean passedUntilEndOfTurn; // F5
     protected boolean passedUntilNextMain; // F7
     protected boolean passedUntilStackResolved; // F10
-    protected boolean passedUntilEndStepBeforeMyTurn; // F11
     protected Date dateLastAddedToStack; // F10
+    protected boolean passedUntilEndStepBeforeMyTurn; // F11
     protected boolean skippedAtLeastOnce; // used to track if passed started in specific phase
     /**
      * This indicates that player passed all turns until his own turn starts
@@ -274,16 +274,16 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.isGameUnderControl = player.isGameUnderControl;
 
         this.turnController = player.turnController;
-        this.passed = player.passed;
 
+        this.passed = player.passed;
         this.passedTurn = player.passedTurn;
         this.passedTurnSkipStack = player.passedTurnSkipStack;
         this.passedUntilEndOfTurn = player.passedUntilEndOfTurn;
         this.passedUntilNextMain = player.passedUntilNextMain;
-        this.skippedAtLeastOnce = player.skippedAtLeastOnce;
         this.passedUntilStackResolved = player.passedUntilStackResolved;
-        this.passedUntilEndStepBeforeMyTurn = player.passedUntilEndStepBeforeMyTurn;
         this.dateLastAddedToStack = player.dateLastAddedToStack;
+        this.passedUntilEndStepBeforeMyTurn = player.passedUntilEndStepBeforeMyTurn;
+        this.skippedAtLeastOnce = player.skippedAtLeastOnce;
         this.passedAllTurns = player.passedAllTurns;
         this.justActivatedType = player.justActivatedType;
 
@@ -405,16 +405,19 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.isGameUnderControl = true;
         this.turnController = this.getId();
         this.playersUnderYourControl.clear();
+
         this.passed = false;
         this.passedTurn = false;
         this.passedTurnSkipStack = false;
         this.passedUntilEndOfTurn = false;
         this.passedUntilNextMain = false;
-        this.skippedAtLeastOnce = false;
         this.passedUntilStackResolved = false;
+        this.dateLastAddedToStack = null;
         this.passedUntilEndStepBeforeMyTurn = false;
+        this.skippedAtLeastOnce = false;
         this.passedAllTurns = false;
         this.justActivatedType = null;
+
         this.canGainLife = true;
         this.canLoseLife = true;
         this.topCardRevealed = false;
@@ -1967,8 +1970,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passedUntilEndOfTurn = false;
         this.passedUntilNextMain = false;
         this.passedUntilStackResolved = false;
-        this.passedUntilEndStepBeforeMyTurn = false;
         this.dateLastAddedToStack = null;
+        this.passedUntilEndStepBeforeMyTurn = false;
         this.skippedAtLeastOnce = false;
         this.passedAllTurns = false;
         this.justActivatedType = null;
@@ -2009,86 +2012,45 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void sendPlayerAction(PlayerAction playerAction, Game game, Object data) {
         switch (playerAction) {
             case PASS_PRIORITY_UNTIL_MY_NEXT_TURN: // F9
-                passedUntilNextMain = false;
-                passedUntilEndOfTurn = false;
-                passedTurn = false;
-                passedTurnSkipStack = false;
+                resetPlayerPassedActions();
                 passedAllTurns = true;
-                passedUntilStackResolved = false;
-                passedUntilEndStepBeforeMyTurn = false;
                 this.skip();
                 break;
             case PASS_PRIORITY_UNTIL_TURN_END_STEP: // F5
-                passedUntilNextMain = false;
-                passedTurn = false;
-                passedTurnSkipStack = false;
-                passedAllTurns = false;
+                resetPlayerPassedActions();
                 passedUntilEndOfTurn = true;
-                passedUntilStackResolved = false;
-                passedUntilEndStepBeforeMyTurn = false;
                 skippedAtLeastOnce = PhaseStep.END_TURN != game.getTurn().getStepType();
                 this.skip();
                 break;
             case PASS_PRIORITY_UNTIL_NEXT_TURN: // F4
-                passedUntilNextMain = false;
-                passedAllTurns = false;
-                passedUntilEndOfTurn = false;
-                passedUntilStackResolved = false;
-                passedUntilEndStepBeforeMyTurn = false;
+                resetPlayerPassedActions();
                 passedTurn = true;
-                passedTurnSkipStack = false;
                 this.skip();
                 break;
             case PASS_PRIORITY_UNTIL_NEXT_TURN_SKIP_STACK: // F6
-                passedUntilNextMain = false;
-                passedAllTurns = false;
-                passedUntilEndOfTurn = false;
-                passedUntilStackResolved = false;
-                passedUntilEndStepBeforeMyTurn = false;
-                passedTurn = false;
+                resetPlayerPassedActions();
                 passedTurnSkipStack = true;
                 this.skip();
                 break;
             case PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE: //F7
-                passedAllTurns = false;
-                passedTurn = false;
-                passedTurnSkipStack = false;
-                passedUntilEndOfTurn = false;
+                resetPlayerPassedActions();
                 passedUntilNextMain = true;
-                passedUntilStackResolved = false;
-                passedUntilEndStepBeforeMyTurn = false;
                 skippedAtLeastOnce = !(game.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN || game.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN);
                 this.skip();
                 break;
             case PASS_PRIORITY_UNTIL_STACK_RESOLVED: //F8
-                passedAllTurns = false;
-                passedTurn = false;
-                passedTurnSkipStack = false;
-                passedUntilEndOfTurn = false;
-                passedUntilNextMain = false;
+                resetPlayerPassedActions();
                 passedUntilStackResolved = true;
-                passedUntilEndStepBeforeMyTurn = false;
                 dateLastAddedToStack = game.getStack().getDateLastAdded();
                 this.skip();
                 break;
             case PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN: //F11
-                passedAllTurns = false;
-                passedTurn = false;
-                passedTurnSkipStack = false;
-                passedUntilEndOfTurn = false;
-                passedUntilNextMain = false;
-                passedUntilStackResolved = false;
+                resetPlayerPassedActions();
                 passedUntilEndStepBeforeMyTurn = true;
                 this.skip();
                 break;
             case PASS_PRIORITY_CANCEL_ALL_ACTIONS:
-                passedAllTurns = false;
-                passedTurn = false;
-                passedTurnSkipStack = false;
-                passedUntilEndOfTurn = false;
-                passedUntilNextMain = false;
-                passedUntilStackResolved = false;
-                passedUntilEndStepBeforeMyTurn = false;
+                resetPlayerPassedActions();
                 break;
             case PERMISSION_REQUESTS_ALLOWED_OFF:
                 userData.setAllowRequestShowHandCards(false);
@@ -2714,6 +2676,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
+            // Check to play revealed cards
             for (Cards cards : game.getState().getRevealed().values()) {
                 for (Card card : cards.getCards(game)) {
                     if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this.getId(), game)) {
@@ -2729,7 +2692,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
                 Player player = game.getPlayer(playerInRangeId);
                 if (player != null) {
-                    if (player.isTopCardRevealed() && player.getLibrary().hasCards()) {
+                    if (/*player.isTopCardRevealed() &&*/player.getLibrary().hasCards()) {
                         Card card = player.getLibrary().getFromTop(game);
                         if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, getId(), game)) {
                             for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
@@ -3410,9 +3373,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (basicCard != null) {
                         card = basicCard;
                     }
+                } else if (card instanceof Spell) {
+                    final Spell spell = (Spell) card;
+                    if (spell.isCopiedSpell()) {
+                        // Copied spell, only remove from stack
+                        game.getStack().remove(spell);
+                    }
                 }
                 game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
                         + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' ' : "") + "to the exile zone");
+
             }
             result = true;
         }

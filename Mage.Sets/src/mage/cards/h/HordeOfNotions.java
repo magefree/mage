@@ -38,10 +38,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -59,7 +56,7 @@ public class HordeOfNotions extends CardImpl {
     private final static FilterCard filter = new FilterCard("Elemental card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate("Elemental"));
+        filter.add(new SubtypePredicate(SubType.ELEMENTAL));
     }
 
     public HordeOfNotions(UUID ownerId, CardSetInfo setInfo) {

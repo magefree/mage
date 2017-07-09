@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlankingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,7 +54,7 @@ public class ZhalfirinCommander extends CardImpl {
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight creature");
     
     static{
-        filter.add(new SubtypePredicate("Knight"));
+        filter.add(new SubtypePredicate(SubType.KNIGHT));
     }
     
     public ZhalfirinCommander(UUID ownerId, CardSetInfo setInfo) {

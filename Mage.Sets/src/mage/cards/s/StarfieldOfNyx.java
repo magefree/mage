@@ -107,7 +107,7 @@ class StarfieldOfNyxEffect extends ContinuousEffectImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Each other non-Aura enchantment you control");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Aura")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.AURA)));
         filter.add(new AnotherPredicate());
         filter.add(new OwnerPredicate(TargetController.YOU));
     }

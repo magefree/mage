@@ -42,6 +42,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.other.FaceDownPredicate;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,7 +57,7 @@ import mage.target.common.TargetOpponent;
 public class OblivionSower extends CardImpl {
 
     public OblivionSower(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(5);
         this.toughness = new MageInt(8);
@@ -104,6 +106,7 @@ class OblivionSowerEffect extends OneShotEffect {
         if (controller != null && targetPlayer != null) {
             FilterLandCard filter = new FilterLandCard();
             filter.add(new OwnerIdPredicate(targetPlayer.getId()));
+            filter.add(Predicates.not(new FaceDownPredicate()));
             Cards exiledCards = new CardsImpl();
             exiledCards.addAll(game.getExile().getAllCards(game));
             Cards exiledLands = new CardsImpl();

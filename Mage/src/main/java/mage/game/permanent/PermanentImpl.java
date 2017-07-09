@@ -27,6 +27,7 @@
  */
 package mage.game.permanent;
 
+import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -55,12 +56,20 @@ import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 
-import java.util.*;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class PermanentImpl extends CardImpl implements Permanent {
+
+    public class MarkedDamageInfo {
+
+        public MarkedDamageInfo(Counter counter, MageObject sourceObject) {
+            this.counter = counter;
+            this.sourceObject = sourceObject;
+        }
+        Counter counter;
+        MageObject sourceObject;
+    }
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(300);
 
@@ -96,7 +105,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int attachedToZoneChangeCounter;
     protected MageObjectReference pairedPermanent;
     protected Counters counters;
-    protected List<Counter> markedDamage;
+    protected List<MarkedDamageInfo> markedDamage;
     protected int timesLoyaltyUsed = 0;
     protected Map<String, String> info;
     protected int createOrder;
@@ -141,8 +150,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         if (permanent.markedDamage != null) {
             markedDamage = new ArrayList<>();
-            for (Counter counter : permanent.markedDamage) {
-                markedDamage.add(counter.copy());
+            for (MarkedDamageInfo mdi : permanent.markedDamage) {
+                markedDamage.add(new MarkedDamageInfo(mdi.counter.copy(), mdi.sourceObject));
             }
         }
         if (permanent.info != null) {
@@ -768,8 +777,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (markedDamage == null) {
             return 0;
         }
-        for (Counter counter : markedDamage) {
-            addCounters(counter, null, game);
+        for (MarkedDamageInfo mdi : markedDamage) {
+            Ability source = null;
+            if (mdi.sourceObject instanceof Permanent) {
+                source = ((Permanent) mdi.sourceObject).getSpellAbility();
+            }
+            addCounters(mdi.counter, source, game);
         }
         markedDamage.clear();
         return 0;
@@ -811,10 +824,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         || source.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
                     if (markDamage) {
                         // mark damage only
-                        markDamage(CounterType.M1M1.createInstance(actualDamage));
+                        markDamage(CounterType.M1M1.createInstance(actualDamage), source);
                     } else {
+                        Ability damageSourceAbility = null;
+                        if (source instanceof Permanent) {
+                            damageSourceAbility = ((Permanent) source).getSpellAbility();
+                        }
                         // deal damage immediately
-                        addCounters(CounterType.M1M1.createInstance(actualDamage), null, game);
+                        addCounters(CounterType.M1M1.createInstance(actualDamage), damageSourceAbility, game);
                     }
                 } else {
                     this.damage += actualDamage;
@@ -840,11 +857,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return event.getAmount();
     }
 
-    private void markDamage(Counter counter) {
+    private void markDamage(Counter counter, MageObject source) {
         if (markedDamage == null) {
             markedDamage = new ArrayList<>();
         }
-        markedDamage.add(counter);
+        markedDamage.add(new MarkedDamageInfo(counter, source));
     }
 
     @Override

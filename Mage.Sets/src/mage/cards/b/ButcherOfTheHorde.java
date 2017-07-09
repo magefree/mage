@@ -47,8 +47,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -56,6 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -63,14 +62,8 @@ import java.util.UUID;
  */
 public class ButcherOfTheHorde extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public ButcherOfTheHorde(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(5);
@@ -80,7 +73,8 @@ public class ButcherOfTheHorde extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Sacrifice another creature: Butcher of the Horde gains your choice of vigilance, lifelink, or haste until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new ButcherOfTheHordeEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter, false))));
+                new ButcherOfTheHordeEffect(), new SacrificeTargetCost(
+                        new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false))));
     }
 
     public ButcherOfTheHorde(final ButcherOfTheHorde card) {
@@ -94,6 +88,7 @@ public class ButcherOfTheHorde extends CardImpl {
 }
 
 class ButcherOfTheHordeEffect extends OneShotEffect {
+
     ButcherOfTheHordeEffect() {
         super(Outcome.AddAbility);
         staticText = "{this} gains your choice of vigilance, lifelink, or haste until end of turn";

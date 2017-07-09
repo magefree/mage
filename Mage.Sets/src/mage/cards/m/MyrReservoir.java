@@ -42,6 +42,7 @@ import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,7 +57,7 @@ public class MyrReservoir extends CardImpl {
     private static final FilterCard myrCardFilter = new FilterCard("Myr card from your graveyard");
 
     static {
-        myrCardFilter.add(new SubtypePredicate("Myr"));
+        myrCardFilter.add(new SubtypePredicate(SubType.MYR));
     }
 
     public MyrReservoir(UUID ownerId, CardSetInfo setInfo) {

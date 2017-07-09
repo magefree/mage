@@ -33,6 +33,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,7 +48,7 @@ public class Lifetap extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("a Forest an opponent controls");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

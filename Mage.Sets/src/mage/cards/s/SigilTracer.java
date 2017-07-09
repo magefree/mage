@@ -37,6 +37,7 @@ import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -57,7 +58,7 @@ public class SigilTracer extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new SubtypePredicate("Wizard"));
+        filter.add(new SubtypePredicate(SubType.WIZARD));
         filterInstorSorc.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)));

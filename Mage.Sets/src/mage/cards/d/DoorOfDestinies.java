@@ -106,7 +106,7 @@ class AddCounterAbility extends TriggeredAbilityImpl {
             if (subtype != null) {
                 FilterSpell filter = new FilterSpell();
                 filter.add(new ControllerPredicate(TargetController.YOU));
-                filter.add(new SubtypePredicate(subtype));
+                filter.add(new SubtypePredicate(SubType.byDescription(subtype)));
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
                     return true;

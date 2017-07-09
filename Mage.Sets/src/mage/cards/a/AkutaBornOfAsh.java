@@ -38,10 +38,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -56,7 +53,7 @@ public class AkutaBornOfAsh extends CardImpl {
 
     private static final FilterControlledPermanent filterSwamp = new FilterControlledPermanent("a Swamp");
     static {
-        filterSwamp.add(new SubtypePredicate("Swamp"));
+        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public AkutaBornOfAsh(UUID ownerId, CardSetInfo setInfo) {

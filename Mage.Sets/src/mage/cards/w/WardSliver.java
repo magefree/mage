@@ -27,7 +27,6 @@
  */
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -38,18 +37,15 @@ import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -91,7 +87,7 @@ class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Slivers");
 
     static {
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     protected FilterPermanent protectionFilter;
@@ -124,7 +120,7 @@ class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
             }
         }
         if (protectionFilter != null) {
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, game)) {
                 perm.addAbility(new ProtectionAbility(protectionFilter), source.getSourceId(), game);
             }
             return true;

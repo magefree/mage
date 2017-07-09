@@ -31,6 +31,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -45,7 +46,7 @@ public class Boil extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("islands");
 
     static {
-        filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate(SubType.ISLAND));
     }
 
     public Boil(UUID ownerId, CardSetInfo setInfo) {

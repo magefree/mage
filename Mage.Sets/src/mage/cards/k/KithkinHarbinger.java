@@ -34,6 +34,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -44,10 +45,10 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class KithkinHarbinger extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("Kithkin card");
+    static final FilterCard filter = new FilterCard("Kithkin card");
 
     static {
-        filter.add(new SubtypePredicate("Kithkin"));
+        filter.add(new SubtypePredicate(SubType.KITHKIN));
     }
 
     public KithkinHarbinger(UUID ownerId, CardSetInfo setInfo) {

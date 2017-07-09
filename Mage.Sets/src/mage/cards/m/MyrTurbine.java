@@ -29,6 +29,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -54,8 +55,8 @@ public class MyrTurbine extends CardImpl {
     private static final FilterControlledPermanent filterMyr = new FilterControlledPermanent("Myr you control");
 
     static {
-        filterCard.add(new SubtypePredicate("Myr"));
-        filterMyr.add(new SubtypePredicate("Myr"));
+        filterCard.add(new SubtypePredicate(SubType.MYR));
+        filterMyr.add(new SubtypePredicate(SubType.MYR));
 
     }
 

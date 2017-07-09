@@ -59,8 +59,8 @@ public class CaptivatingVampire extends CardImpl {
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Vampires you control");
 
     static {
-        filter1.add(new SubtypePredicate("Vampire"));
-        filter2.add(new SubtypePredicate("Vampire"));
+        filter1.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter2.add(new SubtypePredicate(SubType.VAMPIRE));
         filter2.add(Predicates.not(new TappedPredicate()));
     }
 
@@ -119,7 +119,7 @@ class CaptivatingVampireEffect extends ContinuousEffectImpl {
                     break;
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        if (!permanent.getSubtype(game).contains("Vampire")) {
+                        if (!permanent.hasSubtype("Vampire", game)) {
                             permanent.getSubtype(game).add("Vampire");
                         }
                     }

@@ -39,10 +39,7 @@ import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GoblinRogueToken;
@@ -57,7 +54,7 @@ public class MarshFlitter extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Goblin");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     public MarshFlitter(UUID ownerId, CardSetInfo setInfo) {

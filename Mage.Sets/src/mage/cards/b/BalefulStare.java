@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -77,7 +78,7 @@ class BalefulStareEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("Mountain or red card");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Mountain"),
+        filter.add(Predicates.or(new SubtypePredicate(SubType.MOUNTAIN),
             new ColorPredicate(ObjectColor.RED)));
     }
 

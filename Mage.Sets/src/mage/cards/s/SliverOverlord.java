@@ -35,10 +35,7 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,7 +54,7 @@ public class SliverOverlord extends CardImpl {
     private static final FilterCard filter = new FilterCard("Sliver card");
     
     static{
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public SliverOverlord(UUID ownerId, CardSetInfo setInfo) {
@@ -74,7 +71,7 @@ public class SliverOverlord extends CardImpl {
         
         // {3}: Gain control of target Sliver.
         Ability ability = (new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.EndOfGame), new ManaCostsImpl("{3}")));
-        Target target = new TargetPermanent(new FilterCreaturePermanent("Sliver","Sliver"));
+        Target target = new TargetPermanent(new FilterCreaturePermanent(SubType.SLIVER,"Sliver"));
         ability.addTarget(target);
         this.addAbility(ability);
     }

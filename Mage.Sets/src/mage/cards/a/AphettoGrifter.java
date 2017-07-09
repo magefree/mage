@@ -35,6 +35,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -55,7 +56,7 @@ public class AphettoGrifter extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new SubtypePredicate("Wizard"));
+        filter.add(new SubtypePredicate(SubType.WIZARD));
     }
 
     public AphettoGrifter(UUID ownerId, CardSetInfo setInfo) {

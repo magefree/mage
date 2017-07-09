@@ -12,7 +12,6 @@ Aether Revolt|AER|
 Amonkhet|AKH|
 Shards of Alara|ALA|
 Alliances|ALL|
-Archenemy: Nicol Bolas|ANB|
 Asia Pacific Land Program|APAC|
 Apocalypse|APC|
 Alara Reborn|ARB|
@@ -63,15 +62,19 @@ Duel Decks: Zendikar vs. Eldrazi|DDP|
 Duel Decks: Blessed vs. Cursed|DDQ|
 Duel Decks: Nissa vs. Ob Nixilis|DDR|
 Duel Decks: Mind vs. Might|DDS|
+Duel Decks: Merfolk vs. Goblins|DDT|
 Duels of the Planeswalkers|DPA|
 Dragon's Maze|DGM|
 Dissension|DIS|
 Dark Ascension|DKA|
 Deckmasters|DKM|
+Dominaria|DOM|
 From the Vault: Dragons|DRB|
 The Dark|DRK|
 Darksteel|DST|
 Dragons of Tarkir|DTK|
+Archenemy: Nicol Bolas|E01|
+Explorers of Ixalan|E02|
 Eternal Masters|EMA|
 Eldritch Moon|EMN|
 European Land Program|EURO|
@@ -112,6 +115,8 @@ Magic 2012|M12|
 Magic 2013|M13|
 Magic 2014|M14|
 Magic 2015|M15|
+Core 2019|M19|
+Masters 25|M25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
@@ -150,6 +155,7 @@ Portal|POR|
 Prerelease Events|PTC|
 Portal Three Kingdoms|PTK|
 Ravnica: City of Guilds|RAV|
+Rivals of Ixalan|RIX|
 Rise of the Eldrazi|ROE|
 Return to Ravnica|RTR|
 Starter 2000|S00|
@@ -173,6 +179,7 @@ Unglued|UGL|
 Urza's Legacy|ULG|
 Unhinged|UNH|
 Urza's Saga|USG|
+Unstable|UST|
 From the Vault: Exiled|V09|
 From the Vault: Relics|V10|
 From the Vault: Legends|V11|
@@ -181,6 +188,7 @@ From the Vault: Twenty|V13|
 From the Vault: Annihilation|V14|
 From the Vault: Angels|V15|
 From the Vault: Lore|V16|
+From the Vault: Transform|V17|
 Vanguard Set 1|VG1|
 Vanguard Set 2|VG2|
 Vanguard Set 3|VG3|
@@ -189,7 +197,9 @@ MTGO Vanguard|VGO|
 Visions|VIS|
 Vintage Masters|VMA|
 Welcome Deck 2016|W16|
+Welcome Deck 2017|W17|
 World Magic Cup Qualifier|WMCQ|
 Weatherlight|WTH|
 Worldwake|WWK|
+Ixalan|XLN|
 Zendikar|ZEN|

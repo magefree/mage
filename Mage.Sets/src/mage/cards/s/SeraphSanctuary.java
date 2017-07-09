@@ -35,6 +35,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,7 +48,7 @@ public class SeraphSanctuary extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("an Angel");
     static {
-        filter.add(new SubtypePredicate("Angel"));
+        filter.add(new SubtypePredicate(SubType.ANGEL));
     }
     public SeraphSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

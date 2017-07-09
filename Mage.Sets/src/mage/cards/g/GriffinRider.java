@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,7 +57,7 @@ public class GriffinRider extends CardImpl {
     private static final FilterPermanent filterGriffinCard = new FilterCreaturePermanent();
 
     static {
-        filterGriffinCard.add(new SubtypePredicate("Griffin"));
+        filterGriffinCard.add(new SubtypePredicate(SubType.GRIFFIN));
     }
 
     public GriffinRider(UUID ownerId, CardSetInfo setInfo) {

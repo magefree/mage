@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -55,7 +56,7 @@ public class SnuffOut extends CardImpl {
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-        filterSwamp.add(new SubtypePredicate("Swamp"));
+        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public SnuffOut(UUID ownerId, CardSetInfo setInfo) {

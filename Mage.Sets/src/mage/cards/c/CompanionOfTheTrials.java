@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,7 +53,7 @@ public class CompanionOfTheTrials extends CardImpl {
 
     private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("you control a Gideon planeswalker");
     static {
-        filter.add(new SubtypePredicate("Gideon"));
+        filter.add(new SubtypePredicate(SubType.GIDEON));
     }
 
     public CompanionOfTheTrials(UUID ownerId, CardSetInfo setInfo) {

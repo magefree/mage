@@ -31,19 +31,17 @@ import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.effects.common.continuous.ActivateAbilitiesAnyTimeYouCouldCastInstantEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.game.command.Emblem;
+import mage.game.command.emblems.TeferiTemporalArchmageEmblem;
 import mage.target.TargetPermanent;
 
 /**
@@ -82,14 +80,5 @@ public class TeferiTemporalArchmage extends CardImpl {
     @Override
     public TeferiTemporalArchmage copy() {
         return new TeferiTemporalArchmage(this);
-    }
-}
-
-class TeferiTemporalArchmageEmblem extends Emblem {
-
-    // "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant."
-    public TeferiTemporalArchmageEmblem() {
-        this.setName("Emblem Teferi");
-        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(LoyaltyAbility.class, "loyalty abilities of planeswalkers you control on any player's turn")));
     }
 }

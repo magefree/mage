@@ -37,6 +37,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,7 +52,7 @@ public class SummitApes extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Mountain");
 
     static {
-        filter.add(new SubtypePredicate("Mountain"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public SummitApes(UUID ownerId, CardSetInfo setInfo) {

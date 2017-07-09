@@ -44,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -65,7 +66,7 @@ public class InameAsOne extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Spirit permanent card");
 
     static {
-        filter.add(new SubtypePredicate("Spirit"));
+        filter.add(new SubtypePredicate(SubType.SPIRIT));
     }
 
     public InameAsOne(UUID ownerId, CardSetInfo setInfo) {

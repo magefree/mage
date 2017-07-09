@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
@@ -59,7 +60,7 @@ public class BenalishCommander extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Soldiers you control");
 
     static {
-        filter.add(new SubtypePredicate("Soldier"));
+        filter.add(new SubtypePredicate(SubType.SOLDIER));
     }
 
     public BenalishCommander(UUID ownerId, CardSetInfo setInfo) {

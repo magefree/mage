@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,8 +60,8 @@ public class WardenOfTheFirstTree extends CardImpl {
     private static final FilterCreaturePermanent FILTER2 = new FilterCreaturePermanent();
 
     static {
-        FILTER.add(new SubtypePredicate("Warrior"));
-        FILTER2.add(new SubtypePredicate("Spirit"));
+        FILTER.add(new SubtypePredicate(SubType.WARRIOR));
+        FILTER2.add(new SubtypePredicate(SubType.SPIRIT));
     }
 
     public WardenOfTheFirstTree(UUID ownerId, CardSetInfo setInfo) {

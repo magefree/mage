@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,7 +57,7 @@ public class AetherCharge extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Beast you control");
 
     static {
-        filter.add(new SubtypePredicate("Beast"));
+        filter.add(new SubtypePredicate(SubType.BEAST));
     }
 
     public AetherCharge(UUID ownerId, CardSetInfo setInfo) {
@@ -96,7 +97,7 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent.isCreature() && permanent.getSubtype(game).contains("Beast")
+        if (permanent.isCreature() && permanent.hasSubtype("Beast", game)
                 && permanent.getControllerId().equals(this.controllerId)) {
             Effect effect = this.getEffects().get(0);
             effect.setValue("damageSource", event.getTargetId());

@@ -37,6 +37,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -52,7 +53,7 @@ public class LandGrant extends CardImpl {
     private static final FilterLandCard filter = new FilterLandCard("Forest card");
     
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
     
     public LandGrant(UUID ownerId, CardSetInfo setInfo) {

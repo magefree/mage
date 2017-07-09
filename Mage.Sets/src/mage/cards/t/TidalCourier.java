@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
@@ -52,7 +53,7 @@ public class TidalCourier extends CardImpl {
     private static final FilterCard filter = new FilterCard("Merfolk cards");
 
     static {
-        filter.add(new SubtypePredicate("Merfolk"));
+        filter.add(new SubtypePredicate(SubType.MERFOLK));
     }
 
     public TidalCourier(UUID ownerId, CardSetInfo setInfo) {

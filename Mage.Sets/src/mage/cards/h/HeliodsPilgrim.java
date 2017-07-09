@@ -34,6 +34,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,7 +50,7 @@ public class HeliodsPilgrim extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
     }
 
     public HeliodsPilgrim(UUID ownerId, CardSetInfo setInfo) {

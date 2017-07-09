@@ -35,6 +35,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -50,7 +51,7 @@ public class Lithophage extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a Mountain");
     
     static {
-        filter.add(new SubtypePredicate("Mountain"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
     
     public Lithophage(UUID ownerId, CardSetInfo setInfo) {

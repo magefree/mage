@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -62,8 +63,8 @@ public class SpiritBonds extends CardImpl {
     private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Spirit")));
-        filterSpirit.add(new SubtypePredicate("Spirit"));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.SPIRIT)));
+        filterSpirit.add(new SubtypePredicate(SubType.SPIRIT));
         filterNontoken.add(Predicates.not(new TokenPredicate()));
     }
 

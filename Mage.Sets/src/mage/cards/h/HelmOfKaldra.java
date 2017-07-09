@@ -57,9 +57,9 @@ import mage.game.permanent.token.KaldraToken;
  */
 public class HelmOfKaldra extends CardImpl {
 
-    public static final FilterControlledArtifactPermanent filterHelm = new FilterControlledArtifactPermanent();
-    public static final FilterControlledArtifactPermanent filterShield = new FilterControlledArtifactPermanent();
-    public static final FilterControlledArtifactPermanent filterSword = new FilterControlledArtifactPermanent();
+    static final FilterControlledArtifactPermanent filterHelm = new FilterControlledArtifactPermanent();
+    static final FilterControlledArtifactPermanent filterShield = new FilterControlledArtifactPermanent();
+    static final FilterControlledArtifactPermanent filterSword = new FilterControlledArtifactPermanent();
 
     static {
         filterHelm.add(new NamePredicate("Helm of Kaldra"));

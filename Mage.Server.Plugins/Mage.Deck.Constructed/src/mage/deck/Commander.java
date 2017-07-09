@@ -221,6 +221,7 @@ public class Commander extends Constructed {
             boolean buyback = false;
             boolean cascade = false;
             boolean cantBe = false;
+            boolean cantUntap = false;
             boolean copy = false;
             boolean costLessEach = false;
             boolean createToken = false;
@@ -270,12 +271,15 @@ public class Commander extends Constructed {
             boolean whenCounterThatSpell = false;
             boolean xCost = false;
             boolean youControlTarget = false;
+            boolean yourOpponentsControl = false;
+            boolean whenYouCast = false;
 
             for (String str : card.getRules()) {
                 String s = str.toLowerCase();
                 annihilator |= s.contains("annihilator");
                 anyNumberOfTarget |= s.contains("any number");
                 buyback |= s.contains("buyback");
+                cantUntap |= s.contains("can't untap") || s.contains("don't untap");
                 cantBe |= s.contains("can't be");
                 cascade |= s.contains("cascade");
                 copy |= s.contains("copy");
@@ -327,6 +331,8 @@ public class Commander extends Constructed {
                 whenCounterThatSpell |= s.contains("when") && s.contains("counter that spell");
                 wheneverEnters |= s.contains("when") && s.contains("another") && s.contains("enters");
                 youControlTarget |= s.contains("you control target");
+                yourOpponentsControl |= s.contains("your opponents control");
+                whenYouCast |= s.contains("when you cast") || s.contains("whenever you cast");
             }
 
             for (ManaCost cost : card.getManaCost()) {
@@ -352,6 +358,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 6);
             }
             if (annihilator) {
+                thisMaxPower = Math.max(thisMaxPower, 5);
+            }
+            if (cantUntap) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
             }
             if (costLessEach) {
@@ -411,6 +420,9 @@ public class Commander extends Constructed {
             if (returnFromYourGY) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
+            if (sacrifice) {
+                thisMaxPower = Math.max(thisMaxPower, 2);
+            }
             if (skip) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
@@ -430,6 +442,12 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (youControlTarget) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (yourOpponentsControl) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (whenYouCast) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (anyNumberOfTarget) {
@@ -472,9 +490,6 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
             if (sliver) {
-                thisMaxPower = Math.max(thisMaxPower, 2);
-            }
-            if (sacrifice) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
             if (untapTarget) {
@@ -619,13 +634,13 @@ public class Commander extends Constructed {
                     || cn.equals("grave titan") || cn.equals("great whale")
                     || cn.equals("grim monolith") || cn.equals("gush")
                     || cn.equals("hellkite charger") || cn.equals("intruder alarm")
+                    || cn.equals("helm of obedience")
                     || cn.equals("hermit druid")
                     || cn.equals("humility")
                     || cn.equals("iona, shield of emeria")
                     || cn.equals("karn, silver golem") || cn.equals("kiki-jiki, mirror breaker")
                     || cn.equals("krark-clan ironworks") || cn.equals("krenko, mob boss")
                     || cn.equals("krosan restorer") || cn.equals("laboratory maniac")
-                    || cn.equals("leovold, emissary of trest")
                     || cn.equals("leonin relic-warder") || cn.equals("leyline of the void")
                     || cn.equals("memnarch") || cn.equals("memnarch")
                     || cn.equals("meren of clan nel toth") || cn.equals("mikaeus, the unhallowed")
@@ -739,16 +754,16 @@ public class Commander extends Constructed {
         }
 
         edhPowerLevel += numberInfinitePieces * 12;
-        edhPowerLevel = (int) Math.round(edhPowerLevel / 4.5);
-        if (edhPowerLevel > 100) {
-            edhPowerLevel = 100;
+        edhPowerLevel = (int) Math.round(edhPowerLevel / 10);
+        if (edhPowerLevel >= 100) {
+            edhPowerLevel = 99;
         }
         if (color != null) {
             edhPowerLevel += (color.isWhite() ? 10000000 : 0);
-            edhPowerLevel += (color.isBlue()  ?  1000000 : 0);
-            edhPowerLevel += (color.isBlack() ?   100000 : 0);
-            edhPowerLevel += (color.isRed()   ?    10000 : 0);
-            edhPowerLevel += (color.isGreen() ?     1000 : 0);            
+            edhPowerLevel += (color.isBlue() ? 1000000 : 0);
+            edhPowerLevel += (color.isBlack() ? 100000 : 0);
+            edhPowerLevel += (color.isRed() ? 10000 : 0);
+            edhPowerLevel += (color.isGreen() ? 1000 : 0);
         }
         return edhPowerLevel;
     }

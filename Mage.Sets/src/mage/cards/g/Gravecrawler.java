@@ -78,7 +78,7 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("zombie");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public GravecrawlerPlayEffect() {

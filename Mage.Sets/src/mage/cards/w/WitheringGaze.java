@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -76,7 +77,7 @@ class WitheringGazeEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("Forest or green card");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Forest"),
+        filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST),
             new ColorPredicate(ObjectColor.GREEN)));
     }
 

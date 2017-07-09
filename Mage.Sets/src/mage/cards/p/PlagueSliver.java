@@ -36,10 +36,7 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -52,7 +49,7 @@ public class PlagueSliver extends CardImpl {
     private static final FilterCreaturePermanent filterSliver = new FilterCreaturePermanent();
 
     static {
-        filterSliver.add(new SubtypePredicate("Sliver"));
+        filterSliver.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public PlagueSliver(UUID ownerId, CardSetInfo setInfo) {

@@ -1,3 +1,4 @@
+Afflict|number|
 Annihilator|number|
 Basic landcycling|cost|
 Battle cry|new|
@@ -24,6 +25,7 @@ Echo|manaString|
 Embalm|cost, card|
 Enchant|type|
 Entwine|manaString|
+Eternalize|cost, card|
 Evoke|card, manaString|
 Evolve|new|
 Exalted|new|

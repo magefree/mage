@@ -32,6 +32,7 @@ import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -53,6 +54,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
     protected boolean mayShuffleAfter = false;
     protected boolean putOnTop = true; // if false on put rest back on bottom of library
     protected Zone targetZoneLookedCards; // GRAVEYARD, LIBRARY
+    protected boolean backInRandomOrder = false;
 
     public LookLibraryControllerEffect() {
         this(1);
@@ -93,6 +95,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         this.mayShuffleAfter = effect.mayShuffleAfter;
         this.targetZoneLookedCards = effect.targetZoneLookedCards;
         this.putOnTop = effect.putOnTop;
+        this.backInRandomOrder = effect.backInRandomOrder;
     }
 
     @Override
@@ -147,6 +150,15 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         return true;
     }
 
+    public boolean isBackInRandomOrder() {
+        return backInRandomOrder;
+    }
+
+    public Effect setBackInRandomOrder(boolean backInRandomOrder) {
+        this.backInRandomOrder = backInRandomOrder;
+        return this;
+    }
+
     protected void cardLooked(Card card, Game game, Ability source) {
     }
 
@@ -167,6 +179,15 @@ public class LookLibraryControllerEffect extends OneShotEffect {
                 if (putOnTop) {
                     player.putCardsOnTopOfLibrary(cards, game, source, true);
                 } else {
+                    if (backInRandomOrder) {
+                        Cards newOrder = new CardsImpl();
+                        while (!cards.isEmpty()) {
+                            Card card = cards.getRandom(game);
+                            newOrder.add(card);
+                            cards.remove(card);
+                        }
+                        cards = newOrder;
+                    }
                     player.putCardsOnBottomOfLibrary(cards, game, source, true);
                 }
                 break;
@@ -182,6 +203,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
      * Check to shuffle library if allowed
      *
      * @param player
+     * @param source
      * @param game
      */
     protected void mayShuffle(Player player, Ability source, Game game) {
@@ -229,7 +251,11 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         if (!middleText.isEmpty()) {
             sb.append(middleText);
         } else if (numberLook > 1) {
-            sb.append(", then put them back in any order");
+            if (backInRandomOrder) {
+                sb.append(". Put the rest on the bottom of your library in a random order");
+            } else {
+                sb.append(", then put them back in any order");
+            }
         }
         if (this.mayShuffleAfter) {
             sb.append(". You may shuffle your library");

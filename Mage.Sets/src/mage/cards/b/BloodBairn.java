@@ -36,11 +36,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -48,13 +47,8 @@ import java.util.UUID;
  */
 public class BloodBairn extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public BloodBairn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(2);
@@ -63,8 +57,8 @@ public class BloodBairn extends CardImpl {
         // Sacrifice another creature: Blood Bairn gets +2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new BoostSourceEffect(2,2, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter, true))));
+                new BoostSourceEffect(2, 2, Duration.EndOfTurn),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true))));
 
     }
 

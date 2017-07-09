@@ -29,6 +29,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -51,7 +52,7 @@ public class Moggcatcher extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Goblin permanent card");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public Moggcatcher(UUID ownerId, CardSetInfo setInfo) {

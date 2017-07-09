@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -54,7 +55,7 @@ public class YukoraThePrisoner extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Ogre creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Ogre")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.OGRE)));
     }
 
     public YukoraThePrisoner(UUID ownerId, CardSetInfo setInfo) {
@@ -86,7 +87,7 @@ class YukoraThePrisonerEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Ogre creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Ogre")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.OGRE)));
     }
 
     public YukoraThePrisonerEffect() {

@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -53,7 +54,7 @@ public class ToxinSliver extends CardImpl {
         // Whenever a Sliver deals combat damage to a creature, destroy that creature. It can't be regenerated.
         this.addAbility(new DealsDamageToACreatureAllTriggeredAbility(
                 new DestroyTargetEffect(true), false, 
-                new FilterCreaturePermanent("Sliver","a Sliver"), 
+                new FilterCreaturePermanent(SubType.SLIVER,"a Sliver"),
                 SetTargetPointer.PERMANENT, true));
 
     }

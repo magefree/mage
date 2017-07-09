@@ -35,6 +35,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -56,7 +57,7 @@ public class Lifespinner extends CardImpl {
 
     static {
         filter.add(new SupertypePredicate(SuperType.LEGENDARY));
-        filter.add(new SubtypePredicate("Spirit"));
+        filter.add(new SubtypePredicate(SubType.SPIRIT));
     }
 
     public Lifespinner(UUID ownerId, CardSetInfo setInfo) {
@@ -70,7 +71,7 @@ public class Lifespinner extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledCreaturePermanent("Spirit", "three Spirits"), false)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledCreaturePermanent(SubType.SPIRIT, "three Spirits"), false)));
         this.addAbility(ability);
     }
 

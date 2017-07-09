@@ -34,10 +34,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,7 +53,7 @@ public class ArtificersHex extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Equipment");
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     public ArtificersHex(UUID ownerId, CardSetInfo setInfo) {

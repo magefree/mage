@@ -44,19 +44,18 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import java.util.UUID;
 
 /**
- *
  * @author cbt33
  */
 public class Cognivore extends CardImpl {
-    
-        public static final FilterCard filter = new FilterCard("instant cards");
-    
+
+    static final FilterCard filter = new FilterCard("instant cards");
+
     static {
         filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
     public Cognivore(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
         this.subtype.add("Lhurgoyf");
 
         this.power = new MageInt(0);
@@ -66,7 +65,7 @@ public class Cognivore extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Cognivore's power and toughness are each equal to the number of instant cards in all graveyards.
         DynamicValue value = (new CardsInAllGraveyardsCount(filter));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Duration.EndOfGame))); 
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Duration.EndOfGame)));
     }
 
     public Cognivore(final Cognivore card) {

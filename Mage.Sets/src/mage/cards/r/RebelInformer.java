@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
@@ -62,7 +63,7 @@ public class RebelInformer extends CardImpl {
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
         filterRebel.add(Predicates.not(new TokenPredicate()));
-        filterRebel.add(new SubtypePredicate("Rebel"));
+        filterRebel.add(new SubtypePredicate(SubType.REBEL));
     }
 
     public RebelInformer(UUID ownerId, CardSetInfo setInfo) {

@@ -39,10 +39,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.MasterOfWavesElementalToken;
@@ -56,7 +53,7 @@ public class MasterOfWaves extends CardImpl {
 
     private static final FilterCreaturePermanent filterBoost = new FilterCreaturePermanent("Elemental creatures");
     static {
-        filterBoost.add(new SubtypePredicate("Elemental"));
+        filterBoost.add(new SubtypePredicate(SubType.ELEMENTAL));
     }
 
     public MasterOfWaves(UUID ownerId, CardSetInfo setInfo) {

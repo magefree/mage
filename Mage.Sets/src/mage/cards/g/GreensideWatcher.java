@@ -35,6 +35,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,7 +51,7 @@ public class GreensideWatcher extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Gate");
     static {
-        filter.add(new SubtypePredicate("Gate"));
+        filter.add(new SubtypePredicate(SubType.GATE));
     }
     
     public GreensideWatcher(UUID ownerId, CardSetInfo setInfo) {

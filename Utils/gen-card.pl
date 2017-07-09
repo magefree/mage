@@ -90,7 +90,7 @@ $raritiesConversion{'Bonus'} = 'BONUS';
 
 # Get card name
 my $cardName = $ARGV[0];
-if(!$cardName) {
+if (!$cardName) {
     print 'Enter a card name: ';
     $cardName = <STDIN>;
     chomp $cardName;
@@ -107,6 +107,20 @@ if (!exists $cards{$cardName}) {
     die "Card name doesn't exist: $cardName\n";
 }
 
+my $cardTemplate = 'cardClass.tmpl';
+my $splitDelimiter = '//';
+my $empty = '';
+my $splitSpell = 'false';
+my $originalName = $cardName;
+
+# Remove the // from name of split cards
+if (index($cardName, $splitDelimiter) != -1) {
+    $cardName  =~ s/$splitDelimiter/$empty/g;
+    $cardTemplate = 'cardSplitClass.tmpl';
+    $splitSpell = 'true';
+}
+
+
 # Check if card is already implemented
 my $fileName = "../Mage.Sets/src/mage/cards/".lc(substr($cardName, 0, 1))."/".toCamelCase($cardName).".java";
 if(-e $fileName) {
@@ -119,11 +133,10 @@ $vars{'className'} = toCamelCase($cardName);
 $vars{'cardNameFirstLetter'} = lc substr($cardName, 0, 1);
 my @card;
 
-foreach my $setName (keys %{$cards{$cardName}}) {
+foreach my $setName (keys %{$cards{$originalName}}) {
   my $setFileName = "../Mage.Sets/src/mage/sets/".$knownSets{$setName}.".java";
-  @card = @{${cards{$cardName}{$setName}}}; 
-  my $line = "        cards.add(new SetCardInfo(\"".$card[0]."\", ".$card[2].", Rarity.".$raritiesConversion{$card[3]}.", mage.cards.".$vars{'cardNameFirstLetter'}.".".$vars{'className'}.".class));\n";  
-  
+  @card = @{${cards{$originalName}{$setName}}};
+  my $line = "        cards.add(new SetCardInfo(\"".$card[0]."\", ".$card[2].", Rarity.".$raritiesConversion{$card[3]}.", mage.cards.".$vars{'cardNameFirstLetter'}.".".$vars{'className'}.".class));\n";
   @ARGV = ($setFileName);
   $^I = '.bak';
   my $last;
@@ -162,20 +175,26 @@ foreach my $setName (keys %{$cards{$cardName}}) {
   print "$setFileName\n";
 }
 
-# Generate the the card
+# Generate the card
 my $result;
-my $template = Text::Template->new(TYPE => 'FILE', SOURCE => 'cardClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
+my $template = Text::Template->new(TYPE => 'FILE', SOURCE => $cardTemplate, DELIMITERS => [ '[=', '=]' ]);
 $vars{'author'} = $author;
 $vars{'manaCost'} = fixCost($card[4]);
 $vars{'power'} = $card[6];
 $vars{'toughness'} = $card[7];
 
 my @types;
+$vars{'planeswalker'} = 'false';
 $vars{'subType'} = '';
+my $cardAbilities = $card[8];
 my $type = $card[5];
 while ($type =~ m/([a-zA-Z]+)( )*/g) {
     if (exists($cardTypes{$1})) {
-        push(@types, $cardTypes{$1});
+        push(@types, $cardTypes{$1}); 
+        if ($cardTypes{$1} eq $cardTypes{'Planeswalker'}) {
+            $vars{'planeswalker'} = 'true';
+            $cardAbilities = $card[7];
+        }
     } else {
         if (@types) {
             $vars{'subType'} .= "\n        this.subtype.add(\"$1\");";
@@ -190,7 +209,12 @@ $vars{'type'} = join(', ', @types);
 $vars{'abilitiesImports'} = '';
 $vars{'abilities'} = '';
 
-my @abilities = split('\$', $card[8]);
+my $strong = "<strong>";
+$cardAbilities  =~ s/$strong/$empty/g;
+$strong = "</strong>";
+$cardAbilities  =~ s/$strong/$empty/g;
+
+my @abilities = split('\$', $cardAbilities);
 foreach my $ability (@abilities) {
     $ability =~ s/ <i>.+?<\/i>//g;
 
@@ -206,6 +230,7 @@ foreach my $ability (@abilities) {
                         $kw = $kk;
                     }
                 }
+
                 if ($keywords{$kw}) {
                     $vars{'abilities'} .= "\n        // " . ucfirst($kwUnchanged);
                     if ($keywords{$kw} eq 'instance') {

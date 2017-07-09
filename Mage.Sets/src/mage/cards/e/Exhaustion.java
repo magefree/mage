@@ -30,7 +30,7 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DontUntapInOpponentsNextUntapStepAllEffect;
+import mage.abilities.effects.common.DontUntapInPlayersNextUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -96,7 +96,7 @@ class ExhaustionEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
    
         if (player != null) {
-            ContinuousEffect effect = new DontUntapInOpponentsNextUntapStepAllEffect(filter);
+            ContinuousEffect effect = new DontUntapInPlayersNextUntapStepAllEffect(filter);
             effect.setTargetPointer(new FixedTarget(player.getId()));
             game.addEffect(effect, source);                      
             return true;

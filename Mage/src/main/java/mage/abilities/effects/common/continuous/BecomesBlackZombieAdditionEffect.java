@@ -66,7 +66,7 @@ public class BecomesBlackZombieAdditionEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        if (!creature.getSubtype(game).contains("Zombie")) {
+                        if (!creature.hasSubtype("Zombie", game)) {
                             creature.getSubtype(game).add("Zombie");
                         }
                     }

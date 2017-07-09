@@ -38,12 +38,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -87,7 +82,7 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human creatures you control");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     protected FilterPermanent protectionFilter;
@@ -115,7 +110,7 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
                 String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
                 if (subtype != null) {
                     protectionFilter = new FilterPermanent(subtype + 's');
-                    protectionFilter.add(new SubtypePredicate(subtype));
+                    protectionFilter.add(new SubtypePredicate(SubType.byDescription(subtype)));
                 }
             }
         }

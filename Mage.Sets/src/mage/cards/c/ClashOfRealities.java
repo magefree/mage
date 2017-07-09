@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -55,8 +56,8 @@ public class ClashOfRealities extends CardImpl {
     private static final FilterCreaturePermanent filterNotSpirit = new FilterCreaturePermanent("non-Spirit creature");
 
     static {
-        filterSpirit.add(new SubtypePredicate("Spirit"));
-        filterNotSpirit.add(Predicates.not(new SubtypePredicate("Spirit")));
+        filterSpirit.add(new SubtypePredicate(SubType.SPIRIT));
+        filterNotSpirit.add(Predicates.not(new SubtypePredicate(SubType.SPIRIT)));
     }
 
     public ClashOfRealities(UUID ownerId, CardSetInfo setInfo) {

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,7 +48,7 @@ public class TrialOfKnowledge extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Cartouche");
 
     static {
-        filter.add(new SubtypePredicate("Cartouche"));
+        filter.add(new SubtypePredicate(SubType.CARTOUCHE));
     }
 
     public TrialOfKnowledge(UUID ownerId, CardSetInfo setInfo) {

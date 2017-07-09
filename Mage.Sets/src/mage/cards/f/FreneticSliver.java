@@ -38,10 +38,7 @@ import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourc
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,7 +52,7 @@ import java.util.UUID;
  */
 public class FreneticSliver extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Sliver", "All Slivers");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 
     public FreneticSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");

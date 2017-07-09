@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,8 +54,8 @@ public class GoblinWarchief extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblins");
 
     static {
-        filterSpells.add(new SubtypePredicate("Goblin"));
-        filter.add(new SubtypePredicate("Goblin"));
+        filterSpells.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public GoblinWarchief(UUID ownerId, CardSetInfo setInfo) {

@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 
@@ -60,7 +61,7 @@ public class BoggartSpriteChaser extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as you control a Faerie, Boggart Sprite-Chaser gets +1/+1 and has flying.
-        FilterPermanent filter = new FilterPermanent("Faerie", "Faerie");
+        FilterPermanent filter = new FilterPermanent(SubType.FAERIE, "Faerie");
         Effect effect = new BoostSourceWhileControlsEffect(filter, 1, 1);
         effect.setText("As long as you control a Faerie, {this} gets +1/+1");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);

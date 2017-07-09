@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -52,7 +53,7 @@ public class HeronsGraceChampion extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other Humans");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public HeronsGraceChampion(UUID ownerId, CardSetInfo setInfo) {

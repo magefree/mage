@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -56,15 +57,15 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class NomadMythmaker extends CardImpl {
 
-    private static final FilterCard FILTER = new FilterCard("Aura card");
+    private static final FilterCard FILTER = new FilterCard("Aura card from a graveyard");
 
     static {
         FILTER.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        FILTER.add(new SubtypePredicate("Aura"));
+        FILTER.add(new SubtypePredicate(SubType.AURA));
     }
 
     public NomadMythmaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Nomad");
         this.subtype.add("Cleric");
@@ -113,16 +114,15 @@ class NomadMythmakerEffect extends OneShotEffect {
                 || aura == null) {
             return false;
         }
-        FilterControlledCreaturePermanent FILTER = new FilterControlledCreaturePermanent("Aura card in a graveyard");
+        FilterControlledCreaturePermanent FILTER = new FilterControlledCreaturePermanent("Choose a creature you control");
         TargetControlledPermanent target = new TargetControlledPermanent(FILTER);
         target.setNotTarget(true);
-        if (target.canChoose(source.getControllerId(), game)
-                && controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+        if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null
                     && !permanent.cantBeAttachedBy(aura, game)) {
                 game.getState().setValue("attachTo:" + aura.getId(), permanent);
-                controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
+                aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controller.getId());
                 return permanent.addAttachment(aura.getId(), game);
             }
         }

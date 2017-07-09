@@ -28,15 +28,12 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
+import mage.abilities.effects.common.ExileTargetIfDiesEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
@@ -45,16 +42,14 @@ import mage.watchers.common.DamagedByWatcher;
 public class ReduceToAshes extends CardImpl {
 
     public ReduceToAshes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");
 
         // Reduce to Ashes deals 5 damage to target creature. If that creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // If that creature would die this turn, exile it instead.
-        Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
-        effect.setText("If that creature would die this turn, exile it instead");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
+        this.getSpellAbility().addEffect(new ExileTargetIfDiesEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+
     }
 
     public ReduceToAshes(final ReduceToAshes card) {

@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SquirrelWrangler extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Squirrel", "Squirrel creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SQUIRREL, "Squirrel creatures");
 
     public SquirrelWrangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

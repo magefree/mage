@@ -46,6 +46,7 @@ import mage.game.Table;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
+import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.interfaces.Action;
 import mage.players.Player;
@@ -65,7 +66,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.*;
 import java.util.zip.GZIPOutputStream;
-import mage.game.match.MatchPlayer;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -108,12 +108,7 @@ public class GameController implements GameCallback {
         this.tableId = tableId;
         this.choosingPlayerId = choosingPlayerId;
         this.gameOptions = gameOptions;
-        for (Player player : game.getPlayers().values()) {
-            if (!player.isHuman()) {
-                useTimeout = false; // no timeout for AI players because of beeing idle
-                break;
-            }
-        }
+        useTimeout = game.getPlayers().values().stream().allMatch(Player::isHuman);
         init();
 
     }
@@ -391,14 +386,22 @@ public class GameController implements GameCallback {
         return true;
     }
 
-    public void watch(UUID userId) {
+    public boolean watch(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
             // You can't watch a game if you already a player in it
-            return;
+            return false;
         }
         if (watchers.containsKey(userId)) {
             // You can't watch a game if you already watch it
-            return;
+            return false;
+        }
+        if (!isAllowedToWatch(userId)) {
+            // Dont want people on our ignore list to stalk us
+            UserManager.instance.getUser(userId).ifPresent(user -> {
+                user.showUserMessage("Not allowed", "You are banned from watching this game");
+                ChatManager.instance.broadcast(chatId, user.getName(), " tried to join, but is banned", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
+            });
+            return false;
         }
         UserManager.instance.getUser(userId).ifPresent(user -> {
             GameSessionWatcher gameWatcher = new GameSessionWatcher(userId, game, false);
@@ -407,6 +410,7 @@ public class GameController implements GameCallback {
             user.addGameWatchInfo(game.getId());
             ChatManager.instance.broadcast(chatId, user.getName(), " has started watching", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
         });
+        return true;
     }
 
     public void stopWatching(UUID userId) {
@@ -823,13 +827,8 @@ public class GameController implements GameCallback {
         }
         final String message = new StringBuilder(game.getStep().getType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
         for (final Entry<UUID, GameSessionPlayer> entry : gameSessions.entrySet()) {
-            boolean skip = false;
-            for (UUID uuid : players) {
-                if (entry.getKey().equals(uuid)) {
-                    skip = true;
-                    break;
-                }
-            }
+            boolean skip = players.stream().anyMatch(playerId -> entry.getKey().equals(playerId));
+
             if (!skip) {
                 entry.getValue().inform(message);
             }
@@ -961,7 +960,7 @@ public class GameController implements GameCallback {
         }
     }
 
-    private synchronized void setupTimeout(final UUID playerId) {
+    private void setupTimeout(final UUID playerId) {
         if (!useTimeout) {
             return;
         }
@@ -973,9 +972,12 @@ public class GameController implements GameCallback {
         );
     }
 
-    private synchronized void cancelTimeout() {
+    private void cancelTimeout() {
+        logger.debug("cancelTimeout");
         if (futureTimeout != null) {
-            futureTimeout.cancel(false);
+            synchronized (futureTimeout) {
+                futureTimeout.cancel(false);
+            }
         }
     }
 
@@ -1008,4 +1010,13 @@ public class GameController implements GameCallback {
         }
         return sb.append(']').toString();
     }
+
+    public boolean isAllowedToWatch(UUID userId) {
+        Optional<User> user = UserManager.instance.getUser(userId);
+        if (user.isPresent()) {
+            return !gameOptions.bannedUsers.contains(user.get().getName());
+        }
+        return false;
+    }
+
 }

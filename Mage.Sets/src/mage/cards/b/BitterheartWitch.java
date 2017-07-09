@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -85,7 +86,7 @@ class BitterheartWitchEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("Curse card in your library");
 
     static {
-        filter.add(new SubtypePredicate("Curse"));
+        filter.add(new SubtypePredicate(SubType.CURSE));
     }
 
     public BitterheartWitchEffect() {

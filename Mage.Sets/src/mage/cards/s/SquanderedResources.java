@@ -201,7 +201,7 @@ class SquanderedResourcesEffect extends ManaEffect {
                 if (land != null) {
                     Abilities<ActivatedManaAbilityImpl> manaAbilities = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
                     for (ActivatedManaAbilityImpl ability : manaAbilities) {
-                        if (!ability.equals(source) && ability.definesMana()) {
+                        if (!ability.equals(source) && ability.definesMana(game)) {
                             for (Mana netMana : ability.getNetMana(game)) {
                                 types.add(netMana);
                             }

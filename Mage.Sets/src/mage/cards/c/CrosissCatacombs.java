@@ -36,6 +36,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,7 +52,7 @@ public class CrosissCatacombs extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("non-Lair land");
     static{
-        filter.add(Predicates.not(new SubtypePredicate("Lair")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.LAIR)));
     }
     
     public CrosissCatacombs(UUID ownerId, CardSetInfo setInfo) {

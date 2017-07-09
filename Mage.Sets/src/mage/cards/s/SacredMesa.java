@@ -37,6 +37,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -52,7 +53,7 @@ public class SacredMesa extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Pegasus");
     static {
-        filter.add(new SubtypePredicate("Pegasus"));
+        filter.add(new SubtypePredicate(SubType.PEGASUS));
     }
 
     public SacredMesa(UUID ownerId, CardSetInfo setInfo) {

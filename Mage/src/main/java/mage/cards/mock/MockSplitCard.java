@@ -5,6 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.cards.SplitCardHalf;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
@@ -52,11 +53,13 @@ public class MockSplitCard extends SplitCard {
         CardInfo leftHalf = CardRepository.instance.findCard(getLeftHalfName(card));
         if (leftHalf != null) {
             this.leftHalfCard = new MockSplitCardHalf(leftHalf);
+            ((SplitCardHalf)this.leftHalfCard).setParentCard(this);
         }
 
         CardInfo rightHalf = CardRepository.instance.findCard(getRightHalfName(card));
         if (rightHalf != null) {
             this.rightHalfCard = new MockSplitCardHalf(rightHalf);
+            ((SplitCardHalf)this.rightHalfCard).setParentCard(this);
         }
     }
 

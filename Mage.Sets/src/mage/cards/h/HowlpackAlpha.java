@@ -62,7 +62,7 @@ public class HowlpackAlpha extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf and Wolf creatures");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Werewolf"), new SubtypePredicate("Wolf")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.WEREWOLF), new SubtypePredicate(SubType.WOLF)));
     }
 
     public HowlpackAlpha(UUID ownerId, CardSetInfo setInfo) {

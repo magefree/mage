@@ -33,6 +33,7 @@ import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,7 +48,7 @@ public class GoblinLackey extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("a Goblin permanent card");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public GoblinLackey(UUID ownerId, CardSetInfo setInfo) {

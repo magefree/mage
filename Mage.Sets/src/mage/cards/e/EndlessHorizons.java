@@ -35,10 +35,7 @@ import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -83,7 +80,7 @@ class EndlessHorizonsEffect extends SearchEffect {
     private static final FilterLandCard filter = new FilterLandCard("Plains card");
 
     static {
-        filter.add(new SubtypePredicate("Plains"));
+        filter.add(new SubtypePredicate(SubType.PLAINS));
     }
 
     public EndlessHorizonsEffect() {

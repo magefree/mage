@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -62,7 +63,7 @@ public class MagmaSliver extends CardImpl {
 
         // All Slivers have "{tap}: Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS), new StaticValue(0), Duration.EndOfTurn), new TapSourceCost());
-        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("Sliver", "Sliver creature"));
+        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.SLIVER, "Sliver creature"));
         ability.addTarget(target);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }

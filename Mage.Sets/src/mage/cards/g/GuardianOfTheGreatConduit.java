@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,7 +58,7 @@ public class GuardianOfTheGreatConduit extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.PLANESWALKER));
-        filter.add(new SubtypePredicate("Nissa"));
+        filter.add(new SubtypePredicate(SubType.NISSA));
     }
 
     public GuardianOfTheGreatConduit(UUID ownerId, CardSetInfo setInfo) {

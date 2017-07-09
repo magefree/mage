@@ -30,16 +30,12 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.AttackedByCreatureTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GetEmblemTargetPlayerEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -47,12 +43,12 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
-import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GarrukApexPredatorBeastToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.game.command.emblems.GarrukApexPredatorEmblem;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -132,23 +128,5 @@ class GarrukApexPredatorEffect3 extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-/**
- * Emblem with "Whenever a creature attacks you, it gets +5/+5 and gains trample
- * until end of turn."
- */
-class GarrukApexPredatorEmblem extends Emblem {
-
-    public GarrukApexPredatorEmblem() {
-        setName("Emblem Garruk");
-        Effect effect = new BoostTargetEffect(5, 5, Duration.EndOfTurn);
-        effect.setText("it gets +5/+5");
-        Ability ability = new AttackedByCreatureTriggeredAbility(Zone.COMMAND, effect, false, SetTargetPointer.PERMANENT);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn,
-                "and gains trample until end of turn");
-        ability.addEffect(effect);
-        this.getAbilities().add(ability);
     }
 }

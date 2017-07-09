@@ -34,6 +34,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -50,7 +51,7 @@ public class JudgeOfCurrents extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a Merfolk you control becomes tapped, you may gain 1 life.
-        this.addAbility(new BecomesTappedTriggeredAbility(new GainLifeEffect(1), true, new FilterControlledCreaturePermanent("Merfolk", "a Merfolk you control")));
+        this.addAbility(new BecomesTappedTriggeredAbility(new GainLifeEffect(1), true, new FilterControlledCreaturePermanent(SubType.MERFOLK, "a Merfolk you control")));
     }
 
     public JudgeOfCurrents(final JudgeOfCurrents card) {

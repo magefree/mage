@@ -29,6 +29,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -51,7 +52,7 @@ public class RequiemAngel extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another non-Spirit creature you control");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Spirit")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.SPIRIT)));
         filter.add(new AnotherPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }

@@ -42,6 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.command.CommandObject;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -100,6 +101,7 @@ class SwansOfBrynArgollEffect extends PreventionEffectImpl {
             if (sourceOfDamage != null) {
                 Spell spell = game.getStack().getSpell(sourceOfDamage.getId());
                 Permanent permanent = game.getPermanentOrLKIBattlefield(sourceOfDamage.getId());
+                CommandObject emblem = (CommandObject)game.getEmblem(sourceOfDamage.getId());
                 if (spell != null) {
                     Player controllerOfSpell = game.getPlayer(spell.getControllerId());
                     controllerOfSpell.drawCards(preventionEffectData.getPreventedDamage(), game);
@@ -108,6 +110,11 @@ class SwansOfBrynArgollEffect extends PreventionEffectImpl {
                 if (permanent != null) {
                     Player controllerOfPermanent = game.getPlayer(permanent.getControllerId());
                     controllerOfPermanent.drawCards(preventionEffectData.getPreventedDamage(), game);
+                    passed = true;
+                }
+                if (emblem != null) {
+                    Player controllerOfEmblem = game.getPlayer(emblem.getControllerId());
+                    controllerOfEmblem.drawCards(preventionEffectData.getPreventedDamage(), game);
                     passed = true;
                 }
                 if (!passed) {

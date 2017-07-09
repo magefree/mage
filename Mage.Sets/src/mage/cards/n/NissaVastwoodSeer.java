@@ -40,6 +40,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
@@ -58,7 +59,7 @@ public class NissaVastwoodSeer extends CardImpl {
     private static final FilterCard filter = new FilterCard("basic Forest card");
     static {
         filter.add(new SupertypePredicate(SuperType.BASIC));
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public NissaVastwoodSeer(UUID ownerId, CardSetInfo setInfo) {

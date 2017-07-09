@@ -32,6 +32,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -45,7 +46,7 @@ public class SarkhansTriumph extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Dragon creature card");
     
     static {
-        filter.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
     }
 
     public SarkhansTriumph(UUID ownerId, CardSetInfo setInfo) {

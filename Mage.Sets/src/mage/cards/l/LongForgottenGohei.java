@@ -33,6 +33,7 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -54,8 +55,8 @@ public class LongForgottenGohei extends CardImpl {
     private static final FilterCreaturePermanent spiritFilter = new FilterCreaturePermanent("Spirit creatures");
 
     static {
-        arcaneFilter.add(new SubtypePredicate("Arcane"));
-        spiritFilter.add(new SubtypePredicate("Spirit"));
+        arcaneFilter.add(new SubtypePredicate(SubType.ARCANE));
+        spiritFilter.add(new SubtypePredicate(SubType.SPIRIT));
     }
 
     public LongForgottenGohei(UUID ownerId, CardSetInfo setInfo) {

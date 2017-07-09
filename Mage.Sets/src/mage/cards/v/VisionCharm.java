@@ -45,11 +45,7 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceBasicLandType;
 import mage.choices.ChoiceLandType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -128,7 +124,7 @@ class VisionCharmEffect extends ContinuousEffectImpl {
             this.discard();
         }
         FilterPermanent filter = new FilterLandPermanent();
-        filter.add(new SubtypePredicate(targetLandType));
+        filter.add(new SubtypePredicate(SubType.byDescription(targetLandType)));
         if (this.affectedObjectsSet) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                 affectedObjectList.add(new MageObjectReference(permanent, game));

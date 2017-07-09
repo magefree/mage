@@ -30,6 +30,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -51,7 +52,7 @@ public class KorSpiritdancer extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an Aura spell");
 
     static {
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
     }
 
     public KorSpiritdancer(UUID ownerId, CardSetInfo setInfo) {

@@ -29,10 +29,8 @@
 package mage.cards.k;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -56,7 +54,7 @@ public class KnightExemplar extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight creatures");
 
     static {
-        filter.add(new SubtypePredicate("Knight"));
+        filter.add(new SubtypePredicate(SubType.KNIGHT));
     }
 
     public KnightExemplar(UUID ownerId, CardSetInfo setInfo) {

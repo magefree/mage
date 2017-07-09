@@ -30,6 +30,8 @@ package mage.filter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import mage.constants.SubType;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -59,7 +61,7 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         super(name);
     }
 
-    public FilterPermanent(String subtype, String name) {
+    public FilterPermanent(SubType subtype, String name) {
         super(name);
         this.add(new SubtypePredicate(subtype));
     }

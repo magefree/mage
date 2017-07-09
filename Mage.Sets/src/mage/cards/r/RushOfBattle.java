@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,7 +48,7 @@ public class RushOfBattle extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     static {
-        filter.add(new SubtypePredicate("Warrior"));
+        filter.add(new SubtypePredicate(SubType.WARRIOR));
     }
     
     public RushOfBattle(UUID ownerId, CardSetInfo setInfo) {

@@ -38,10 +38,7 @@ import mage.abilities.keyword.OfferingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -62,7 +59,7 @@ public class PatronOfTheMoon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Moonfolk offering (You may cast this card any time you could cast an instant by sacrificing a Moonfolk and paying the difference in mana costs between this and the sacrificed Moonfolk. Mana cost includes color.)
-        this.addAbility(new OfferingAbility("Moonfolk"));
+        this.addAbility(new OfferingAbility(SubType.MOONFOLK));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

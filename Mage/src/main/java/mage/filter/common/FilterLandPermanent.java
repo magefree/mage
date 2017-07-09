@@ -29,6 +29,7 @@
 package mage.filter.common;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -50,7 +51,7 @@ public class FilterLandPermanent extends FilterPermanent {
         this.add(new CardTypePredicate(CardType.LAND));
     }
 
-    public FilterLandPermanent(String subtype, String name) {
+    public FilterLandPermanent(SubType subtype, String name) {
         super(name);
         this.add(new CardTypePredicate(CardType.LAND));
         this.add(new SubtypePredicate(subtype));

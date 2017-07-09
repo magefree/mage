@@ -46,8 +46,8 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -57,14 +57,8 @@ import mage.game.permanent.Permanent;
  */
 public class LukeSkywalker extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public LukeSkywalker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Jedi");
@@ -78,7 +72,8 @@ public class LukeSkywalker extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever another creature enters the battlefield under your conrol, put a +1/+1 counter on Luke Skywalker.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new FilterControlledCreaturePermanent(filter)));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                new FilterControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
 
         // Remove all +1/+1 counters from Luke Skywalker: Luke gains hexproof until end of turn. Activate this ability only if at least one +1/+1 counter is removed this way.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn), new LukeSkywalkerCost()));

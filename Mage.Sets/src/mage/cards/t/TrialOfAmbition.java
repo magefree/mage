@@ -36,6 +36,7 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,14 +51,14 @@ public class TrialOfAmbition extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Cartouche");
 
     static {
-        filter.add(new SubtypePredicate("Cartouche"));
+        filter.add(new SubtypePredicate(SubType.CARTOUCHE));
     }
 
     public TrialOfAmbition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // When Trial of Ambition enters the battlefield, target opponent sacrifices a creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target opponent"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent(), 1, "target opponent"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 

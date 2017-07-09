@@ -30,7 +30,7 @@ package mage.cards.a;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
-import mage.abilities.effects.common.SwordsToPlowsharesEffect;
+import mage.abilities.effects.common.ExileAndGainLifeEqualPowerTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -73,7 +73,7 @@ public class AjaniUnyielding extends CardImpl {
         this.addAbility(new LoyaltyAbility(new RevealLibraryPutIntoHandEffect(3, nonlandPermanentFilter, Zone.LIBRARY), 2));
 
         // -2: Exile target creature. Its controller gains life equal to its power.
-        LoyaltyAbility ajaniAbility2 = new LoyaltyAbility(new SwordsToPlowsharesEffect(), -2);
+        LoyaltyAbility ajaniAbility2 = new LoyaltyAbility(new ExileAndGainLifeEqualPowerTargetEffect(), -2);
         ajaniAbility2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ajaniAbility2);
 

@@ -35,8 +35,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -44,6 +42,7 @@ import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -52,7 +51,7 @@ import java.util.UUID;
 public class DiscipleOfBolas extends CardImpl {
 
     public DiscipleOfBolas(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
@@ -90,12 +89,10 @@ class DiscipleOfBolasEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {        
+    public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-            filter.add(new AnotherPredicate());
-            Target target = new TargetControlledCreaturePermanent(1,1, filter, true);
+            Target target = new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true);
             target.setRequired(true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                 controller.chooseTarget(outcome, target, source, game);
@@ -112,5 +109,3 @@ class DiscipleOfBolasEffect extends OneShotEffect {
         return false;
     }
 }
-
-

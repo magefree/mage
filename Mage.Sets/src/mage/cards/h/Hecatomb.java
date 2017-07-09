@@ -38,6 +38,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,7 +57,7 @@ public class Hecatomb extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an untapped Swamp you control");
     
     static {
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
         filter.add(Predicates.not(new TappedPredicate()));
     }
     

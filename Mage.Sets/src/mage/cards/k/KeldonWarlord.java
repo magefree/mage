@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.abilities.common.SimpleStaticAbility;
@@ -50,7 +51,7 @@ public class KeldonWarlord extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Wall creatures you control.");
      static {
-    filter.add(Predicates.not(new SubtypePredicate("Wall")));
+    filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
             }
 
     public KeldonWarlord(UUID ownerId, CardSetInfo setInfo) {

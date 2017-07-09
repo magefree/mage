@@ -118,10 +118,10 @@ class BlockedOrWasBlockedByAZombieWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            if (game.getPermanent(event.getTargetId()).getSubtype(game).contains("Zombie")) {
+            if (game.getPermanent(event.getTargetId()).hasSubtype("Zombie", game)) {
                 this.blockedOrWasBlockedByAZombieWatcher.add(new MageObjectReference(event.getSourceId(), game));
             }
-            if (game.getPermanent(event.getSourceId()).getSubtype(game).contains("Zombie")) {
+            if (game.getPermanent(event.getSourceId()).hasSubtype( "Zombie", game)) {
                 this.blockedOrWasBlockedByAZombieWatcher.add(new MageObjectReference(event.getTargetId(), game));
             }
         }

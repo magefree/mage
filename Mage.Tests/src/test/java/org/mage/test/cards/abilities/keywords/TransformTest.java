@@ -27,7 +27,6 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
-import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -323,8 +322,9 @@ public class TransformTest extends CardTestPlayerBase {
     }
 
     /**
-     * Cards that transform if no spells cast last turn should not transform if the cards were added on turn 1.
-     * This would happen with tests and cheat testing.
+     * Cards that transform if no spells cast last turn should not transform if
+     * the cards were added on turn 1. This would happen with tests and cheat
+     * testing.
      */
     @Test
     public void testNoSpellsCastLastTurnTransformDoesNotTriggerTurn1() {
@@ -337,4 +337,55 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Hinterland Logger", 1);
     }
+
+    /**
+     * I had Huntmaster of the Fells in play. Opponent had Eldrazi Displacer.
+     * Huntmaster triggered to transform during my opponent's upkeep. While this
+     * was on stack, my opponent used Displacer's ability targeting Huntmaster.
+     * That ability resolved and Huntmaster still transformed like it never left
+     * the battlefield.
+     *
+     * http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=20014&p=210533#p210513
+     *
+     * The transform effect on the stack should fizzle. The card brought back
+     * from Exile should be a new object unless I am interpreting the rules
+     * incorrectly. The returned permanent uses the same GUID.
+     */
+    @Test
+    public void testHuntmaster() {
+        // Whenever this creature enters the battlefield or transforms into Huntmaster of the Fells, create a 2/2 green Wolf creature token and you gain 2 life.
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
+        // Ravager of the Fells
+        // Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.
+        addCard(Zone.HAND, playerA, "Huntmaster of the Fells"); // Creature {2}{R}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        // Devoid
+        // {2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control.
+        addCard(Zone.HAND, playerB, "Eldrazi Displacer", 1); // Creature {2}{W}
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Wastes", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Eldrazi Displacer");
+
+        activateAbility(4, PhaseStep.UPKEEP, playerB, "{2}{C}", "Huntmaster of the Fells", "At the beginning of each upkeep");
+
+        setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 24);
+        assertPermanentCount(playerA, "Wolf", 2);
+
+        assertPermanentCount(playerB, "Eldrazi Displacer", 1);
+
+        assertPermanentCount(playerA, "Ravager of the Fells", 0);
+        assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
+        assertTappedCount("Plains", true, 2);
+        assertTappedCount("Wastes", true, 1);
+
+    }
+
 }

@@ -38,10 +38,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -60,7 +57,7 @@ public class AerialModification extends CardImpl {
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
-                new SubtypePredicate("Vehicle")));
+                new SubtypePredicate(SubType.VEHICLE)));
     }
 
     public AerialModification(UUID ownerId, CardSetInfo setInfo) {

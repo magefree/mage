@@ -32,6 +32,7 @@ import mage.constants.CardType;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -46,7 +47,7 @@ public class SafewrightQuest extends CardImpl {
     private static final FilterCard filter = new FilterCard("Forest or Plains card");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Forest"), new SubtypePredicate("Plains")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST), new SubtypePredicate(SubType.PLAINS)));
     }
 
     public SafewrightQuest(UUID ownerId, CardSetInfo setInfo) {

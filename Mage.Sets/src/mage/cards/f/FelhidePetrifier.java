@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -59,7 +60,7 @@ public class FelhidePetrifier extends CardImpl {
         // Other Minotaur creatures you control have deathtouch.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
                 DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield,
-                new FilterCreaturePermanent("Minotaur","Minotaur creatures"),
+                new FilterCreaturePermanent(SubType.MINOTAUR,"Minotaur creatures"),
                 true)
         ));
     }

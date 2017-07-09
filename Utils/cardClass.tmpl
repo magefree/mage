@@ -29,7 +29,11 @@ package mage.cards.[=$cardNameFirstLetter=];
 
 import java.util.UUID;[=
 if ($power || $power eq 0) {
-    $OUT .= "\nimport mage.MageInt;"
+    if ($planeswalker eq 'true') {
+        $OUT .= "\nimport mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;"
+    }else {
+        $OUT .= "\nimport mage.MageInt;"
+    }
 }
 =][=$abilitiesImports=]
 import mage.cards.CardImpl;
@@ -46,8 +50,12 @@ public class [=$className=] extends CardImpl {
         super(ownerId, setInfo, new CardType[]{[=$type=]}, "[=$manaCost=]");
         [=$subType=][=$colors=][=
 if ($power || $power eq 0) {
-    $OUT .= "\n        this.power = new MageInt($power);";
-    $OUT .= "\n        this.toughness = new MageInt($toughness);";
+    if ($planeswalker eq 'true') {
+        $OUT .= "\n        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility($power));";
+    } else {
+        $OUT .= "\n        this.power = new MageInt($power);";
+        $OUT .= "\n        this.toughness = new MageInt($toughness);";
+    }
 }
 =][=$abilities=]
     }

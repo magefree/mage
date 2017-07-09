@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DynamicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,7 +48,7 @@ public class BrightstoneRitual extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Goblin on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public BrightstoneRitual(UUID ownerId, CardSetInfo setInfo) {

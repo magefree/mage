@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -60,7 +61,7 @@ static final FilterControlledCreaturePermanent filter1 = new FilterControlledCre
 static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures without flying");
 
 static {
-    filter1.add(new SubtypePredicate("Cephalid"));
+    filter1.add(new SubtypePredicate(SubType.CEPHALID));
     filter2.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
 }
 

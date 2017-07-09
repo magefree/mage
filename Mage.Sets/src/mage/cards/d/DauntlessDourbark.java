@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +60,9 @@ public class DauntlessDourbark extends CardImpl {
     final static private FilterControlledPermanent filter2 = new FilterControlledPermanent();
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Forest"),
-                new SubtypePredicate("Treefolk")));
-        filter2.add(new SubtypePredicate("Treefolk"));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST),
+                new SubtypePredicate(SubType.TREEFOLK)));
+        filter2.add(new SubtypePredicate(SubType.TREEFOLK));
         filter2.add(new AnotherPredicate());
     }
     

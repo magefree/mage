@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 public class NarsetEnlightenedMaster extends CardImpl {
 
     public NarsetEnlightenedMaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Monk");
@@ -146,7 +146,7 @@ class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
             if (card != null) {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
-                    player.setCastSourceIdWithAlternateMana(objectId, null, null);
+                    player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
                     return true;
                 }
             }

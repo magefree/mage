@@ -27,6 +27,8 @@
  */
 package mage.game;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
@@ -57,9 +59,6 @@ import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  *

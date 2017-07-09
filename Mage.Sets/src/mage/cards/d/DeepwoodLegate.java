@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,8 +57,8 @@ public class DeepwoodLegate extends CardImpl {
     private static final FilterPermanent filterSwamp = new FilterPermanent();
 
     static {
-        filterForest.add(new SubtypePredicate(("Forest")));
-        filterSwamp.add(new SubtypePredicate(("Swamp")));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
+        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public DeepwoodLegate(UUID ownerId, CardSetInfo setInfo) {

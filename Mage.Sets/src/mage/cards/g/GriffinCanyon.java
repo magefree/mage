@@ -35,10 +35,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -53,7 +50,7 @@ import java.util.UUID;
  */
 public class GriffinCanyon extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("Griffin", "target Griffin");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.GRIFFIN, "target Griffin");
             
     public GriffinCanyon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

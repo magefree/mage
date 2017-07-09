@@ -37,6 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -75,7 +76,7 @@ class BubblingMuckTriggeredAbility extends DelayedTriggeredManaAbility {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
 
     static {
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public BubblingMuckTriggeredAbility() {

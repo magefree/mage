@@ -43,7 +43,7 @@ import mage.filter.common.FilterBlockingCreature;
  */
 public class Piety extends CardImpl {
 
-    public static final FilterBlockingCreature filter = new FilterBlockingCreature();
+    static final FilterBlockingCreature filter = new FilterBlockingCreature();
     
     public Piety(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

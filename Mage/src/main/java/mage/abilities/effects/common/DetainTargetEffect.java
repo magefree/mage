@@ -114,7 +114,7 @@ public class DetainTargetEffect extends OneShotEffect {
         }
         sb.append(" can't attack or block and ");
         sb.append(target.getMaxNumberOfTargets() == 1 ? "its" : "their");
-        sb.append(" activated abilities can't be activated)</i>");
+        sb.append(" activated abilities can't be activated.)</i>");
         return sb.toString();
     }
 }

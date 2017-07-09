@@ -30,6 +30,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -49,7 +50,7 @@ public class PrimalBellow extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest you control");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
         filter.add(new ControllerPredicate(TargetController.YOU));
 
     }

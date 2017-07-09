@@ -38,11 +38,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SquirrelToken;
@@ -56,7 +52,7 @@ public class NutCollector extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("squirrel");
 
     static {
-        filter.add(new SubtypePredicate("Squirrel"));
+        filter.add(new SubtypePredicate(SubType.SQUIRREL));
     }
 
     public NutCollector(UUID ownerId, CardSetInfo setInfo) {

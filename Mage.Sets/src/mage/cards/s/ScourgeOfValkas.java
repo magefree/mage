@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -58,8 +59,8 @@ public class ScourgeOfValkas extends CardImpl {
     private final static FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Dragons you control");
 
     static {
-        filter.add(new SubtypePredicate("Dragon"));       
-        filter2.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter2.add(new SubtypePredicate(SubType.DRAGON));
     }
     
     private static final String rule = "Whenever {this} or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.";

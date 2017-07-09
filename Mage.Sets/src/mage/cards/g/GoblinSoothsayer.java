@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,7 +60,7 @@ public class GoblinSoothsayer extends CardImpl {
     
     static    {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter2.add(new SubtypePredicate("Goblin"));
+        filter2.add(new SubtypePredicate(SubType.GOBLIN));
     }
     
     public GoblinSoothsayer(UUID ownerId, CardSetInfo setInfo) {

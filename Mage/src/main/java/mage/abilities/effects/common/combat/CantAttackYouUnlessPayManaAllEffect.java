@@ -30,7 +30,6 @@ package mage.abilities.effects.common.combat;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
@@ -67,7 +66,7 @@ public class CantAttackYouUnlessPayManaAllEffect extends PayCostToAttackBlockEff
                 + " for each creature he or she controls that's attacking you";
     }
 
-    public CantAttackYouUnlessPayManaAllEffect(CantAttackYouUnlessPayManaAllEffect effect) {
+    public CantAttackYouUnlessPayManaAllEffect(final CantAttackYouUnlessPayManaAllEffect effect) {
         super(effect);
         this.payAlsoForAttackingPlaneswalker = effect.payAlsoForAttackingPlaneswalker;
         this.filterCreaturePermanent = effect.filterCreaturePermanent;

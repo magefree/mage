@@ -42,6 +42,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -60,7 +61,7 @@ public class ThopterSquadron extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new SubtypePredicate("Thopter"));
+        filter.add(new SubtypePredicate(SubType.THOPTER));
     }
 
     public ThopterSquadron(UUID ownerId, CardSetInfo setInfo) {

@@ -45,43 +45,45 @@
 #|Generate|TOK:PTC|Wolf||
 #|Generate|TOK:PTC|Wurm||
 #|Generate|TOK:WMCQ|Angel||
-|Generate|EMBLEM!:AKH|Emblem Gideon||
-|Generate|EMBLEM!:BFZ|Emblem Gideon||
-|Generate|EMBLEM!:BFZ|Emblem Kiora||
-|Generate|EMBLEM!:BFZ|Emblem Nixilis||
-|Generate|EMBLEM!:C14|Emblem Daretti|
-|Generate|EMBLEM!:C14|Emblem Nixilis|
-|Generate|EMBLEM!:C14|Emblem Teferi|
-|Generate|EMBLEM!:C16|Emblem Daretti||
-|Generate|EMBLEM!:CNS|Emblem Dack Fayden||Emblem Dack|
-|Generate|EMBLEM!:DTK|Emblem Narset||
-|Generate|EMBLEM!:EMA|Emblem Dack||
-|Generate|EMBLEM!:EMN|Emblem Liliana||
-|Generate|EMBLEM!:EMN|Emblem Tamiyo||
-|Generate|EMBLEM!:KLD|Emblem Chandra||
-|Generate|EMBLEM!:KLD|Emblem Dovin||
-|Generate|EMBLEM!:KLD|Emblem Nissa||
-|Generate|EMBLEM!:KTK|Emblem Sarkhan||
-|Generate|EMBLEM!:KTK|Emblem Sorin||
-|Generate|EMBLEM!:M15|Emblem Ajani||
-|Generate|EMBLEM!:M15|Emblem Garruk||
-|Generate|EMBLEM!:MM3|Emblem Domri||
-|Generate|EMBLEM!:ORI|Emblem Chandra||
-|Generate|EMBLEM!:ORI|Emblem Jace||
-|Generate|EMBLEM!:ORI|Emblem Liliana||
-|Generate|EMBLEM!:SOI|Emblem Arlinn||
-|Generate|EMBLEM!:SOI|Emblem Jace||
-|Generate|EMBLEM-:M13|Liliana of the Dark Realms||Emblem Liliana|
-|Generate|EMBLEM-:THS|Elspeth, Suns Champion||Emblem Elspeth|
-|Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||Emblem Tamiyo|
-|Generate|EMBLEM:BNG|Kiora, the Crashing Wave||Emblem Kiora|
-|Generate|EMBLEM:DDI|Koth of the Hammer||Emblem Koth|
-|Generate|EMBLEM:DDI|Venser, the Sojourner||Emblem Venser|
-|Generate|EMBLEM:DKA|Sorin, Lord of Innistrad||Emblem Sorin|
-|Generate|EMBLEM:GTC|Domri Rade||Emblem Domri|
-|Generate|EMBLEM:M14|Garruk, Caller of Beasts||Emblem Garruk|
-|Generate|EMBLEM:M14|Liliana of the Dark Realms||Emblem Liliana|
-|Generate|EMBLEM:MMA|Elspeth, Knight Errant||Emblem Elspeth|
+|Generate|EMBLEM!:AKH|Emblem Gideon|||GideonOfTheTrialsEmblem|
+|Generate|EMBLEM!:BFZ|Emblem Gideon|||GideonAllyOfZendikarEmblem|
+|Generate|EMBLEM!:BFZ|Emblem Kiora|||KioraMasterOfTheDepthsEmblem|
+|Generate|EMBLEM!:BFZ|Emblem Nixilis|||ObNixilisReignitedEmblem|
+|Generate|EMBLEM!:C14|Emblem Daretti|||DarettiScrapSavantEmblem|
+|Generate|EMBLEM!:C14|Emblem Daretti||Emblem Daretti|DarettiScrapSavantEmblem|
+|Generate|EMBLEM!:C14|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
+|Generate|EMBLEM!:C14|Emblem Teferi|||TeferiTemporalArchmageEmblem|
+|Generate|EMBLEM!:C16|Emblem Daretti|||DarettiScrapSavantEmblem|
+|Generate|EMBLEM!:CNS|Emblem Dack Fayden||Emblem Dack|DackFaydenEmblem|
+|Generate|EMBLEM!:DTK|Emblem Narset|||NarsetTranscendentEmblem|
+|Generate|EMBLEM!:EMA|Emblem Dack Fayden||Emblem Dack|DackFaydenEmblem|
+|Generate|EMBLEM!:EMN|Emblem Liliana|||LilianaTheLastHopeEmblem|
+|Generate|EMBLEM!:EMN|Emblem Tamiyo|||TamiyoFieldResearcherEmblem|
+|Generate|EMBLEM!:KLD|Emblem Chandra|||ChandraTorchOfDefianceEmblem|
+|Generate|EMBLEM!:KLD|Emblem Dovin|||DovinBaanEmblem|
+|Generate|EMBLEM!:KLD|Emblem Nissa|||NissaVitalForceEmblem|
+|Generate|EMBLEM!:KLD|Emblem Tezzeret|||TezzeretTheSchemerEmblem|
+|Generate|EMBLEM!:KTK|Emblem Sarkhan|||SarkhanTheDragonspeakerEmblem|
+|Generate|EMBLEM!:KTK|Emblem Sorin|||SorinSolemnVisitorEmblem|
+|Generate|EMBLEM!:M15|Emblem Ajani|||AjaniSteadfastEmblem|
+|Generate|EMBLEM!:M15|Emblem Garruk|||GarrukApexPredatorEmblem|
+|Generate|EMBLEM!:MM3|Emblem Domri|||DomriRadeEmblem|
+|Generate|EMBLEM!:ORI|Emblem Chandra|||ChandraRoaringFlameEmblem|
+|Generate|EMBLEM!:ORI|Emblem Jace|||JaceTelepathUnboundEmblem|
+|Generate|EMBLEM!:ORI|Emblem Liliana|||LilianaDefiantNecromancerEmblem|
+|Generate|EMBLEM!:SOI|Emblem Arlinn|||ArlinnEmbracedByTheMoonEmblem|
+|Generate|EMBLEM!:SOI|Emblem Jace|||JaceUnravelerOfSecretsEmblem|
+|Generate|EMBLEM-:THS|Elspeth, Suns Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
+|Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||Emblem Tamiyo|TamiyoTheMoonSageEmblem|
+|Generate|EMBLEM:BNG|Kiora, the Crashing Wave||Emblem Kiora|KioraEmblem|
+|Generate|EMBLEM:DDI|Koth of the Hammer||Emblem Koth|KothOfTheHammerEmblem|
+|Generate|EMBLEM:DDI|Venser, the Sojourner||Emblem Venser|VenserTheSojournerEmblem|
+|Generate|EMBLEM:DKA|Sorin, Lord of Innistrad||Emblem Sorin|SorinLordOfInnistradEmblem|
+|Generate|EMBLEM:GTC|Domri Rade||Emblem Domri|DomriRadeEmblem|
+|Generate|EMBLEM:M13|Liliana of the Dark Realms||Emblem Liliana|LilianaOfTheDarkRealmsEmblem|
+|Generate|EMBLEM:M14|Garruk, Caller of Beasts||Emblem Garruk|GarrukCallerOfBeastsEmblem|
+|Generate|EMBLEM:M14|Liliana of the Dark Realms||Emblem Liliana|LilianaOfTheDarkRealmsEmblem|
+|Generate|EMBLEM:MMA|Elspeth, Knight Errant||Emblem Elspeth|ElspethKnightErrantEmblem|
 |Generate|TOK:10E|Ape|||PongifyApeToken|
 |Generate|TOK:10E|Dragon|||DragonToken2|
 |Generate|TOK:10E|Goblin|||GoblinToken|
@@ -242,7 +244,6 @@
 |Generate|TOK:C13|Thopter|||ThopterToken|
 |Generate|TOK:C13|Thrull|||ThrullToken|
 |Generate|TOK:C13|Zombie|||ZombieToken|
-|Generate|TOK:C13|Faerie|||CloudSpriteToken|
 |Generate|TOK:C14|Angel|||AngelToken|
 |Generate|TOK:C14|Ape|||PongifyApeToken|
 |Generate|TOK:C14|Beast|1||BeastToken|
@@ -303,7 +304,6 @@
 |Generate|TOK:C15|Spirit|2||TeysaEnvoyOfGhostsToken|
 |Generate|TOK:C15|Wolf|||WolfToken|
 |Generate|TOK:C15|Zombie|||ZombieToken|
-|Generate|TOK:C15|Land Mine|||LandMineToken|
 |Generate|TOK:C16|Beast||
 |Generate|TOK:C16|Bird|1|
 |Generate|TOK:C16|Bird|2|
@@ -331,6 +331,23 @@
 |Generate|TOK:CHK|Snake|||SnakeToken|
 |Generate|TOK:CHK|Spirit|||SpiritToken|
 |Generate|TOK:CHR|Snake|||SerpentGeneratorSnakeToken|
+|Generate|TOK:CMA|Beast|1||BeastToken|
+|Generate|TOK:CMA|Beast|2||BeastToken2|
+|Generate|TOK:CMA|Dragon|||DragonToken2|
+|Generate|TOK:CMA|Drake|||LeafdrakeRoostDrakeToken|
+|Generate|TOK:CMA|Elemental|||TitaniaProtectorOfArgothElementalToken|
+|Generate|TOK:CMA|Elephant|||ElephantToken|
+|Generate|TOK:C14|Elf Druid|||FreyaliseLlanowarsFuryToken|
+|Generate|TOK:C14|Elf Druid|||LlanowarElvesToken|
+|Generate|TOK:CMA|Elf Warrior||
+|Generate|TOK:CMA|Gargoyle|||GargoyleToken|
+|Generate|TOK:CMA|Kithkin Soldier|||KithkinToken|
+|Generate|TOK:CMA|Knight|||KnightToken|
+|Generate|TOK:CMA|Saproling|||SaprolingToken|
+|Generate|TOK:CMA|Spirit|||SpiritWhiteToken|
+|Generate|TOK:CMA|Treefolk|||SylvanOfferingTreefolkToken|
+|Generate|TOK:CMA|Wolf|||WolfToken|
+|Generate|TOK:CMA|Zombie|||ZombieToken|
 |Generate|TOK:CMD|Beast|||BeastToken2|
 |Generate|TOK:CMD|Beast|||BeastToken|
 |Generate|TOK:CMD|Dragon|||DragonToken2|
@@ -367,7 +384,6 @@
 |Generate|TOK:CNS|Ogre||
 |Generate|TOK:CNS|Spirit|||SpiritWhiteToken|
 |Generate|TOK:CNS|Squirrel|||SquirrelToken|
-|Generate|TOK:CNS|Wall|||WallToken|
 |Generate|TOK:CNS|Wolf|||WolfToken|
 |Generate|TOK:CNS|Zombie|||ZombieToken|
 |Generate|TOK:CON|Angel|||AngelToken|
@@ -480,6 +496,11 @@
 |Generate|TOK:DTK|Warrior|||WarriorToken|
 |Generate|TOK:DTK|Zombie Horror|||CorpseweftZombieToken|
 |Generate|TOK:DTK|Zombie|||ZombieToken|
+|Generate|TOK:E01|Beast|1||BeastToken|
+|Generate|TOK:E01|Beast|2||BeastToken2|
+|Generate|TOK:E01|Soldier|||SoldierToken|
+|Generate|TOK:E01|Spirit|||SpiritWhiteToken|
+|Generate|TOK:E01|Zombie|||ZombieToken|
 |Generate|TOK:EMA|Assembly-Worker|||AssemblyWorkerToken|
 |Generate|TOK:EMA|Beast|||CarnivoreToken|
 |Generate|TOK:EMA|Carnivore||
@@ -574,6 +595,19 @@
 |Generate|TOK:HOP|Pentavite|||PentaviteToken|
 |Generate|TOK:HOP|Pest|||PestToken|
 |Generate|TOK:HOP|Saproling|||SaprolingToken|
+|Generate|TOK:HOU|Adorned Pouncer||||
+|Generate|TOK:HOU|Champion of Wits||||
+|Generate|TOK:HOU|Dreamstealer||||
+|Generate|TOK:HOU|Earthshaker Khenra||||
+|Generate|TOK:HOU|Horse|||CrestedSunmareToken|
+|Generate|TOK:HOU|Insect|||TheLocustGodInsectToken|
+|Generate|TOK:HOU|Proven Combatant||||
+|Generate|TOK:HOU|Resilient Khenra||||
+|Generate|TOK:HOU|Sinuous Striker||||
+|Generate|TOK:HOU|Snake|||RhonassLastStandToken|
+|Generate|TOK:HOU|Steadfast Sentinel||||
+|Generate|TOK:HOU|Sunscourge Champion||||
+|Generate|TOK:HOU|Zombie||
 |Generate|TOK:ICE|Caribou|||CaribouToken|
 |Generate|TOK:INV|Bird|||OwlToken|
 |Generate|TOK:INV|Elephant|||ElephantToken|

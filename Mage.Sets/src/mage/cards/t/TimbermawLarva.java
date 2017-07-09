@@ -30,6 +30,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -50,7 +51,7 @@ public class TimbermawLarva extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest you control");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
         filter.add(new ControllerPredicate(TargetController.YOU));
 
     }

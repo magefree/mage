@@ -40,10 +40,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -61,7 +58,7 @@ public class FullMoonsRise extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf creatures");
 
     static {
-        filter.add(new SubtypePredicate("Werewolf"));
+        filter.add(new SubtypePredicate(SubType.WEREWOLF));
     }
 
     public FullMoonsRise(UUID ownerId, CardSetInfo setInfo) {

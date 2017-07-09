@@ -66,7 +66,7 @@ public class BalthorTheDefiled extends CardImpl {
 
         // Minion creatures get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield,
-                new FilterCreaturePermanent("Minion", "Minion creatures"), false)));
+                new FilterCreaturePermanent(SubType.MINION, "Minion creatures"), false)));
 
         // {B}{B}{B}, Exile Balthor the Defiled: Each player returns all black and all red creature cards from his or her graveyard to the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalthorTheDefiledEffect(), new ManaCostsImpl("{B}{B}{B}"));

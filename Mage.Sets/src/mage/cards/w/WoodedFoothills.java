@@ -27,12 +27,14 @@
  */
 package mage.cards.w;
 
+import java.util.EnumSet;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,7 +47,7 @@ public class WoodedFoothills extends CardImpl {
         this.frameColor = new ObjectColor("RG");
 
         // {tap}, Pay 1 life, Sacrifice Wooded Foothills: Search your library for a Mountain or Forest card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(new String[]{"Mountain", "Forest"}));
+        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.MOUNTAIN, SubType.FOREST)));
     }
 
     public WoodedFoothills(final WoodedFoothills card) {

@@ -42,6 +42,7 @@ import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,7 +58,7 @@ public class SpringjackPasture extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goats");
 
     static {
-        filter.add(new SubtypePredicate("Goat"));
+        filter.add(new SubtypePredicate(SubType.GOAT));
     }
 
     public SpringjackPasture(UUID ownerId, CardSetInfo setInfo) {

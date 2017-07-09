@@ -8,16 +8,18 @@ my $addedCards;
 my $GIT_CMD = "C:\\Program Files (x86)\\Git\\bin\\git.exe";
 
 my $text = `\"$GIT_CMD\" tag`;
+print "Assuming the tag command is on: \"$GIT_CMD\" tag\n";
 my @lines = split /\n/, $text;
 my %order_of_tags;
 
 my $tag;
 foreach $tag (@lines)
 {
+    my $orig_num = $tag;
     my $num = $tag;
     if ($num =~ m/(\d+)\.(\d+).(\d+)v(\d+)/img)
     {
-        $num = $1 * 2000 + $2 * 100 + $3 * 20 + $1;
+        $num = $1 * 2000 + $2 * 100 + $3 * 20 + $4;
         $order_of_tags {$num} = $tag;
     }
 }

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,7 +48,7 @@ public class Ragemonger extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Minotaur spells");
     static {
-        filter.add(new SubtypePredicate("Minotaur"));
+        filter.add(new SubtypePredicate(SubType.MINOTAUR));
     }
 
     public Ragemonger(UUID ownerId, CardSetInfo setInfo) {

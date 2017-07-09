@@ -82,6 +82,7 @@ public class PopulateEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Target target = new TargetPermanent(filter);
+            target.setNotTarget(true);
             if (target.canChoose(source.getControllerId(), game)) {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent tokenToCopy = game.getPermanent(target.getFirstTarget());

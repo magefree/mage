@@ -30,6 +30,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
@@ -52,7 +53,7 @@ public class HarmonicSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filterSliver = new FilterCreaturePermanent();
     static {
-        filterSliver.add(new SubtypePredicate("Sliver"));
+        filterSliver.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public HarmonicSliver(UUID ownerId, CardSetInfo setInfo) {

@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -90,9 +91,9 @@ public class VedalkenShackles extends CardImpl {
 
 class PowerIslandPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
 
-    public static final FilterLandPermanent filter = new FilterLandPermanent("Island");
+    static final FilterLandPermanent filter = new FilterLandPermanent("Island");
     static {
-        filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate(SubType.ISLAND));
     }
 
     @Override

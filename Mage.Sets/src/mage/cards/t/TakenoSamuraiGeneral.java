@@ -78,7 +78,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate("Samurai"));
+        filter.add(new SubtypePredicate(SubType.SAMURAI));
     }
 
     public TakenoSamuraiGeneralEffect() {

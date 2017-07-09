@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -54,7 +55,7 @@ public class LilianaDeathsMajesty extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Zombie")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));
     }
 
     public LilianaDeathsMajesty(UUID ownerId, CardSetInfo setInfo) {

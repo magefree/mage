@@ -34,14 +34,12 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.AdjustingSourceCosts;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.util.CardUtil;
 import mage.watchers.common.MorbidWatcher;
@@ -54,7 +52,7 @@ public class BonePicker extends CardImpl {
 
     public BonePicker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        
+
         this.subtype.add("Bird");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
@@ -106,6 +104,6 @@ class BonePickerCostAdjustmentAbility extends SimpleStaticAbility implements Adj
             if (MorbidCondition.instance.apply(game, ability)) {
                 CardUtil.adjustCost((SpellAbility) ability, 3);
             }
-         }
+        }
     }
 }

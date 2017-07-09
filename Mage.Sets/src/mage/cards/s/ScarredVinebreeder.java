@@ -29,6 +29,7 @@ package mage.cards.s;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -52,7 +53,7 @@ public class ScarredVinebreeder extends CardImpl {
     private static final FilterCard filter = new FilterCard("Elf card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public ScarredVinebreeder(UUID ownerId, CardSetInfo setInfo) {

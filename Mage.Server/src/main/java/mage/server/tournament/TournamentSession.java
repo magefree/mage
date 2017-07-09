@@ -24,10 +24,14 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.server.tournament;
 
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
 import mage.interfaces.callback.ClientCallback;
@@ -38,16 +42,11 @@ import mage.server.util.ThreadExecutor;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
-import java.util.Optional;
-import java.util.UUID;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentSession {
+
     protected final static Logger logger = Logger.getLogger(TournamentSession.class);
 
     protected final UUID userId;
@@ -79,16 +78,16 @@ public class TournamentSession {
 
     public void update() {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user ->
-                    user.fireCallback(new ClientCallback(ClientCallbackMethod.TOURNAMENT_UPDATE, tournament.getId(), getTournamentView())));
+            UserManager.instance.getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback(ClientCallbackMethod.TOURNAMENT_UPDATE, tournament.getId(), getTournamentView())));
 
         }
     }
 
     public void gameOver(final String message) {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user ->
-                    user.fireCallback(new ClientCallback(ClientCallbackMethod.TOURNAMENT_OVER, tournament.getId(), message)));
+            UserManager.instance.getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback(ClientCallbackMethod.TOURNAMENT_OVER, tournament.getId(), message)));
 
         }
     }
@@ -108,8 +107,8 @@ public class TournamentSession {
         tournament.submitDeck(playerId, deck);
     }
 
-    public void updateDeck(Deck deck) {
-        tournament.updateDeck(playerId, deck);
+    public boolean updateDeck(Deck deck) {
+        return tournament.updateDeck(playerId, deck);
     }
 
     public void setKilled() {
@@ -171,9 +170,8 @@ public class TournamentSession {
     }
 
     private void removeTournamentForUser() {
-        UserManager.instance.getUser(userId).ifPresent(user ->
-                user.removeTournament(playerId));
-
+        UserManager.instance.getUser(userId).ifPresent(user
+                -> user.removeTournament(playerId));
 
     }
 

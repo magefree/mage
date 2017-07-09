@@ -37,10 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -114,7 +111,7 @@ class OreskosExplorerEffect extends OneShotEffect {
         if (landsToSearch > 0) {
             FilterBasicLandCard filterPlains = new FilterBasicLandCard("up to " + landsToSearch + " Plains cards");
             filterPlains.add(new ControllerPredicate(TargetController.YOU));
-            filterPlains.add(new SubtypePredicate("Plains"));
+            filterPlains.add(new SubtypePredicate(SubType.PLAINS));
             TargetCardInLibrary target = new TargetCardInLibrary(0, landsToSearch, filterPlains);
             if (controller.searchLibrary(target, game)) {
                 Cards cards = new CardsImpl(target.getTargets());

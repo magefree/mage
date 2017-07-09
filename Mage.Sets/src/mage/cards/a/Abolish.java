@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,7 +51,7 @@ public class Abolish extends CardImpl {
     private static final FilterCard filterCost = new FilterCard("Plains card");
 
     static {
-        filterCost.add(new SubtypePredicate("Plains"));
+        filterCost.add(new SubtypePredicate(SubType.PLAINS));
     }
 
     public Abolish(UUID ownerId, CardSetInfo setInfo) {

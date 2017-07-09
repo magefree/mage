@@ -141,7 +141,8 @@ public class DeckImportFromClipboardDialog extends JDialog {
                 txtDeckList.setMinimumSize(new Dimension(250, 400));
                 txtDeckList.setPreferredSize(new Dimension(550, 400));
                 txtDeckList.setText("// Example:\n//1 Library of Congress\n//1 Cryptic Gateway\n//1 Azami, Lady of Scrolls\n// NB: This is slow as, and will lock your screen :)");
-                panel3.add(txtDeckList, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0,
+                JScrollPane txtScrollableDeckList = new JScrollPane(txtDeckList);
+                panel3.add(txtScrollableDeckList, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                         new Insets(0, 0, 0, 0), 0, 0));
             }

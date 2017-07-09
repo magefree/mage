@@ -1,13 +1,5 @@
 package mage.server.util;
 
-import mage.cards.Card;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
-import mage.util.RandomUtil;
-
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.text.DateFormat;
@@ -16,7 +8,13 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.Card;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
+import mage.util.RandomUtil;
 
 /**
  * @author nantuko
@@ -73,7 +71,7 @@ public final class SystemUtil {
 
                     Optional<Player> playerOptional = findPlayer(game, nickname);
                     if (!playerOptional.isPresent()) {
-                        logger.warn("Was skipped: " + line);
+                        logger.warn("Was skipped because no player with that name: " + line);
                         continue;
                     }
                     Player player = playerOptional.get();
@@ -89,6 +87,8 @@ public final class SystemUtil {
                         gameZone = Zone.LIBRARY;
                     } else if ("token".equalsIgnoreCase(zone)) {
                         gameZone = Zone.BATTLEFIELD;
+                    } else if ("emblem".equalsIgnoreCase(zone)) {
+                        gameZone = Zone.COMMAND;
                     } else {
                         continue; // go parse next line
                     }
@@ -105,6 +105,17 @@ public final class SystemUtil {
                             Object token = cons.newInstance();
                             if (token != null && token instanceof mage.game.permanent.token.Token) {
                                 ((mage.game.permanent.token.Token) token).putOntoBattlefield(amount, game, null, player.getId(), false, false);
+                                continue;
+                            }
+                        } else if ("emblem".equalsIgnoreCase(zone)) {
+                            // eg: emblem:Human:ElspethSunsChampionEmblem:1
+                            Class<?> c = Class.forName("mage.game.command.emblems." + cardName);
+                            Constructor<?> cons = c.getConstructor();
+                            Object emblem = cons.newInstance();
+                            if (emblem != null && emblem instanceof mage.game.command.Emblem) {
+                                ((mage.game.command.Emblem) emblem).setControllerId(player.getId());
+                                game.addEmblem((mage.game.command.Emblem) emblem, null, player.getId());
+                                continue;
                             }
                         }
                         logger.warn("Couldn't find a card: " + cardName);
@@ -181,8 +192,8 @@ public final class SystemUtil {
     /**
      * Get a diff between two dates
      *
-     * @param date1    the oldest date
-     * @param date2    the newest date
+     * @param date1 the oldest date
+     * @param date2 the newest date
      * @param timeUnit the unit in which you want the diff
      * @return the diff value, in the provided unit
      */

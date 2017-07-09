@@ -27,20 +27,23 @@
  */
 package mage.abilities.costs.mana;
 
+import java.util.*;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.Outcome;
 import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Targets;
 import mage.util.ManaUtil;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -158,12 +161,37 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     @Override
     public boolean payOrRollback(Ability ability, Game game, UUID sourceId, UUID payingPlayerId) {
         int bookmark = game.bookmarkState();
+        handlePhyrexianManaCosts(payingPlayerId, ability, game);
         if (pay(ability, game, sourceId, payingPlayerId, false, null)) {
             game.removeBookmark(bookmark);
             return true;
         }
         game.restoreState(bookmark, ability.getRule());
         return false;
+    }
+
+    private void handlePhyrexianManaCosts(UUID payingPlayerId, Ability source, Game game) {
+        Player player = game.getPlayer(payingPlayerId);
+        if (this == null || player == null) {
+            return; // nothing to be done without any mana costs. prevents NRE from occurring here
+        }
+        Iterator<T> manaCostIterator = this.iterator();
+        Costs<PayLifeCost> tempCosts = new CostsImpl<>();
+
+        while (manaCostIterator.hasNext()) {
+            ManaCost manaCost = manaCostIterator.next();
+            if (manaCost instanceof PhyrexianManaCost) {
+                PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) manaCost;
+                PayLifeCost payLifeCost = new PayLifeCost(2);
+                if (payLifeCost.canPay(source, source.getSourceId(), player.getId(), game)
+                        && player.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', source, game)) {
+                    manaCostIterator.remove();
+                    tempCosts.add(payLifeCost);
+                }
+            }
+        }
+
+        tempCosts.pay(source, game, source.getSourceId(), player.getId(), false, null);
     }
 
     @Override

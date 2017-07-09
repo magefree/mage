@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,7 +58,7 @@ public class ScaleguardSentinels extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Dragon card from your hand (you don't have to)");
 
     static {
-        filter.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
     }
 
     public ScaleguardSentinels(UUID ownerId, CardSetInfo setInfo) {
