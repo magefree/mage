@@ -36,12 +36,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.UntapEnchantedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -58,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class InstillEnergy extends CardImpl {
 
     public InstillEnergy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.subtype.add("Aura");
 
         // Enchant creature
@@ -68,9 +66,7 @@ public class InstillEnergy extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature can attack as though it had haste.
-        Ability asThough = new SimpleStaticAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItHadHasteEnchantedEffect(Duration.WhileOnBattlefield));
-        Ability haste = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(asThough, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted creature can attack as though it had haste."));
-        this.addAbility(haste);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItHadHasteEnchantedEffect(Duration.WhileOnBattlefield)));
         // {0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new GenericManaCost(0), 1, MyTurnCondition.instance));
     }
@@ -88,7 +84,7 @@ public class InstillEnergy extends CardImpl {
 class CanAttackAsThoughItHadHasteEnchantedEffect extends AsThoughEffectImpl {
 
     public CanAttackAsThoughItHadHasteEnchantedEffect(Duration duration) {
-        super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
+        super(AsThoughEffectType.ATTACK_AS_HASTE, duration, Outcome.Benefit);
         staticText = "Enchanted creature can attack as though it had haste";
     }
 

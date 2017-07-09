@@ -7,6 +7,7 @@ package mage.constants;
 public enum AsThoughEffectType {
 
     ATTACK,
+    ATTACK_AS_HASTE,
     ACTIVATE_HASTE,
     BLOCK_TAPPED,
     BLOCK_SHADOW,
