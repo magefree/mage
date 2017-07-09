@@ -35,7 +35,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -80,7 +80,7 @@ public class TheScarabGod extends CardImpl {
         ability.addTarget(new TargetCardInGraveyard(1, 1, new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);
 
-        // When The Scarab God dies, return it to its owner's hand at the beginning of the next upkeep.
+        // When The Scarab God dies, return it to its owner's hand at the beginning of the next end step.
         this.addAbility(new DiesTriggeredAbility(new TheScarabGodEffect3()));
     }
 
@@ -190,7 +190,7 @@ class TheScarabGodEffect3 extends OneShotEffect {
         // Create delayed triggered ability
         Effect effect = new ReturnToHandSourceEffect(false, true);
         effect.setText(staticText);
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(effect);
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }
