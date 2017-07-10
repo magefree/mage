@@ -56,7 +56,7 @@ import mage.cards.CardSetInfo;
 
 /**
  *
- * @author anonymous
+ * @author ciaccona007
  */
 public class FesteringWound extends CardImpl {
 
