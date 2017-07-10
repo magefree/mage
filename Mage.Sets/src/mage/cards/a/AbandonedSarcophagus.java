@@ -174,12 +174,14 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         cardWasCycledThisTurn = false;
         cardHasCycling = false;
-        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
+        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
+                && !game.isSimulation()) {
             Player controller = game.getPlayer(source.getControllerId());
             AbandonedSarcophagusWatcher watcher = (AbandonedSarcophagusWatcher) game.getState().getWatchers().get(AbandonedSarcophagusWatcher.class.getSimpleName());
             Card card = game.getCard(event.getTargetId());
             if (card != null
-                    && watcher != null) {
+                    && watcher != null
+                    && card.getOwnerId() == controller.getId()) {
                 for (Ability ability : card.getAbilities()) {
                     if (ability instanceof CyclingAbility) {
                         cardHasCycling = true;
@@ -217,9 +219,13 @@ class AbandonedSarcophagusWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.CYCLE_CARD) {
+        if (event.getType() == GameEvent.EventType.CYCLE_CARD
+                && !game.isSimulation()) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null) {
+            Player controller = game.getPlayer(event.getPlayerId());
+            if (card != null
+                   && controller != null
+                   && card.getOwnerId() == controller.getId()) {
                 Cards c = getCardsCycledThisTurn(event.getPlayerId());
                 c.add(card);
                 cycledCardsThisTurn.put(event.getPlayerId(), c);
