@@ -28,28 +28,26 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public class JadeIdol extends CardImpl {
 
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-
     public JadeIdol(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BecomesCreatureSourceEffect(new JadeIdolToken(), "", Duration.EndOfTurn), filter, false));
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BecomesCreatureSourceEffect(new JadeIdolToken(), "", Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
     public JadeIdol(final JadeIdol card) {

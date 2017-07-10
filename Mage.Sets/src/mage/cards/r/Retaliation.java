@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -37,7 +36,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public class Retaliation extends CardImpl {
         // Creatures you control have "Whenever this creature becomes blocked by a creature, this creature gets +1/+1 until end of turn."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new GainAbilityControlledEffect(new BecomesBlockedByCreatureTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false), 
-                        Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 
     public Retaliation(final Retaliation card) {

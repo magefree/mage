@@ -28,26 +28,25 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public class Soilshaper extends CardImpl {
 
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public Soilshaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
@@ -57,7 +56,7 @@ public class Soilshaper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a Spirit or Arcane spell, target land becomes a 3/3 creature until end of turn. It's still a land.
-        Ability ability = new SpellCastControllerTriggeredAbility(new BecomesCreatureTargetEffect(new SoilshaperToken(), false, true, Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new BecomesCreatureTargetEffect(new SoilshaperToken(), false, true, Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

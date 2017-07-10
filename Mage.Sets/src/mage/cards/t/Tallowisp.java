@@ -27,8 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Abilities;
@@ -38,15 +36,17 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +55,6 @@ import mage.target.common.TargetCardInLibrary;
 public class Tallowisp extends CardImpl {
 
     private static final FilterCard filterAura = new FilterCard("Aura card");
-    private static final FilterSpell filterTrigger = new FilterSpiritOrArcaneCard();
 
     static {
         filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
@@ -71,7 +70,7 @@ public class Tallowisp extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a Spirit or Arcane spell, you may search your library for an Aura card with enchant creature, reveal it, and put it into your hand. If you do, shuffle your library.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterAura), true, true), filterTrigger, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterAura), true, true), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
     public Tallowisp(final Tallowisp card) {

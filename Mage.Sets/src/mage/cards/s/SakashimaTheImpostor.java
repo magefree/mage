@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -44,10 +43,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.functions.ApplyToPermanent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -63,7 +64,7 @@ public class SakashimaTheImpostor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // You may have Sakashima the Impostor enter the battlefield as a copy of any creature on the battlefield, except its name is still Sakashima the Impostor, it's legendary in addition to its other types, and it gains "{2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step."
-        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), new SakashimaTheImpostorApplier());
+        Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new SakashimaTheImpostorApplier());
         effect.setText("as a copy of any creature on the battlefield, except its name is still Sakashima the Impostor, it's legendary in addition to its other types, and it gains \"{2}{U}{U}: Return {this} to its owner's hand at the beginning of the next end step.\"");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }

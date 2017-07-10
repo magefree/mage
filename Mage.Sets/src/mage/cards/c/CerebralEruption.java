@@ -34,8 +34,7 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -69,7 +68,6 @@ public class CerebralEruption extends CardImpl {
 
 class CerebralEruptionEffect extends OneShotEffect {
 
-    private static FilterPermanent filter = new FilterCreaturePermanent();
 
     CerebralEruptionEffect() {
         super(Outcome.Damage);
@@ -91,7 +89,7 @@ class CerebralEruptionEffect extends OneShotEffect {
             game.getState().setValue(source.getSourceId().toString(), card);
             int damage = card.getConvertedManaCost();
             player.damage(damage, source.getSourceId(), game, false, true);
-            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
+            for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, player.getId(), game)) {
                 perm.damage(damage, source.getSourceId(), game, false, true);
             }
             if (card.isLand()) {

@@ -29,7 +29,6 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -39,8 +38,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -71,7 +70,7 @@ public class SkyfireKirin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's converted mana cost until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new SkyfireKirinEffect(), new FilterSpiritOrArcaneCard(), true, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new SkyfireKirinEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, true, true);
         ability.addTarget(new TargetCreaturePermanent());
         originalId = ability.getOriginalId();
         this.addAbility(ability);

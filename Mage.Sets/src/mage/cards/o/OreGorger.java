@@ -28,24 +28,22 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetNonBasicLandPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public class OreGorger extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public OreGorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
@@ -53,7 +51,7 @@ public class OreGorger extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
-        Ability ability = new SpellCastControllerTriggeredAbility(new DestroyTargetEffect(), filter, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(new DestroyTargetEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, true);
         ability.addTarget(new TargetNonBasicLandPermanent());
         this.addAbility(ability);
     }

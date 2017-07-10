@@ -17,7 +17,7 @@ class JsonCard {
     public String text;
     public String power;
     public String toughness;
-    public int loyalty;
+    public String loyalty;
     public String imageName;
     public boolean starter; // only available in boxed sets and not in boosters
     public int hand; // vanguard

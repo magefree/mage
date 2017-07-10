@@ -28,11 +28,6 @@
 
 package mage.cards.w;
 
-import java.util.List;
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,21 +39,24 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2
  */
 public class WaxmaneBaku extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public WaxmaneBaku(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
@@ -68,7 +66,7 @@ public class WaxmaneBaku extends CardImpl {
         this.toughness = new MageInt(2);
         
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Waxmane Baku.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
 
         // {1}, Remove X ki counters from Waxmane Baku: Tap X target creatures.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WaxmaneBakuTapEffect(), new GenericManaCost(1));

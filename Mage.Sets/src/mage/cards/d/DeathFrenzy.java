@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -69,7 +70,6 @@ public class DeathFrenzy extends CardImpl {
 
 class DeathFrenzyDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    protected FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public DeathFrenzyDelayedTriggeredAbility() {
         super(new GainLifeEffect(1), Duration.EndOfTurn, false);
@@ -87,7 +87,7 @@ class DeathFrenzyDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent() && zEvent.getTarget() != null && filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
+        if (zEvent.isDiesEvent() && zEvent.getTarget() != null && StaticFilters.FILTER_PERMANENT_CREATURES.match(zEvent.getTarget(), sourceId, controllerId, game)) {
             return true;
         }
         return false;

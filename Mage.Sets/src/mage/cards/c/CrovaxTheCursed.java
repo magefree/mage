@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -105,9 +105,9 @@ class CrovaxTheCursedEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
-            int creatures = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game);
+            int creatures = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), game);
             if (creatures > 0 && controller.chooseUse(outcome, "Sacrifice a creature?", source, game)) {
-                if (new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, "").apply(game, source)) {
+                if (new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES, 1, "").apply(game, source)) {
                     if (sourceObject != null) {
                         sourceObject.getCounters(game).addCounter(CounterType.P1P1.createInstance());
                         game.informPlayers(controller.getLogName() + " puts a +1/+1 counter on " + sourceObject.getName());

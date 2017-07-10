@@ -42,7 +42,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -72,7 +72,7 @@ public class PhenaxGodOfDeception extends CardImpl {
         effect.setText("Target player puts the top X cards of his or her library into his or her graveyard, where X is this creature's toughness");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addTarget(new TargetPlayer());
-        effect = new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"),false);
+        effect = new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES,false);
         effect.setText("Creatures you control have \"{T}: Target player puts the top X cards of his or her library into his or her graveyard, where X is this creature's toughness.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

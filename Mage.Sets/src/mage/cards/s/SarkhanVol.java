@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effects;
@@ -42,9 +41,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.DragonToken;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +64,7 @@ public class SarkhanVol extends CardImpl {
         // +1: Creatures you control get +1/+1 and gain haste until end of turn.
         Effects effects1 = new Effects();
         effects1.add(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
-        effects1.add(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
+        effects1.add(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
         this.addAbility(new LoyaltyAbility(effects1, 1));
 
         // -2: Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
