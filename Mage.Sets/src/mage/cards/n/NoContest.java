@@ -34,6 +34,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
@@ -84,7 +85,7 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int maxPower = Integer.MIN_VALUE; // get the most poerful controlled creature that can be targeted
         Card sourceCard = game.getCard(sourceId);
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, sourceControllerId, game)) {
             if (permanent.getPower().getValue() > maxPower && permanent.canBeTargetedBy(sourceCard, sourceControllerId, game)) {
                 maxPower = permanent.getPower().getValue();
             }

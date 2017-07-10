@@ -7,15 +7,7 @@ package mage.filter;
 
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterArtifactCreaturePermanent;
-import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterCreatureSpell;
-import mage.filter.common.FilterNonlandCard;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -27,6 +19,9 @@ import mage.filter.predicate.permanent.TokenPredicate;
  * @author LevelX2
  */
 public final class StaticFilters {
+
+
+    public static final FilterSpiritOrArcaneCard SPIRIT_OR_ARCANE_CARD = new FilterSpiritOrArcaneCard();
 
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT = new FilterArtifactCard();
     public static final FilterNonlandCard FILTER_CARD_NON_LAND = new FilterNonlandCard();

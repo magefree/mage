@@ -27,9 +27,7 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -40,21 +38,19 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetE
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
  * @author HCrescent
  */
 public class Lifeline extends CardImpl {
-    
-private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature");
+
 
     public Lifeline(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
@@ -62,8 +58,8 @@ private static final FilterCreaturePermanent filter = new FilterCreaturePermanen
 
         // Whenever a creature dies, if another creature is on the battlefield, return the first card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new ConditionalTriggeredAbility(
-                            new DiesCreatureTriggeredAbility( Zone.BATTLEFIELD, new LifelineEffect(), false, filter, true),
-                            new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, false),
+                            new DiesCreatureTriggeredAbility( Zone.BATTLEFIELD, new LifelineEffect(), false, StaticFilters.FILTER_PERMANENT_CREATURE, true),
+                            new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_PERMANENT_CREATURE, ComparisonType.MORE_THAN, 0, false),
                             "Whenever a creature dies, if another creature is on the battlefield, return the first card to the battlefield under its owner's control at the beginning of the next end step.");
         this.addAbility(ability);
     }

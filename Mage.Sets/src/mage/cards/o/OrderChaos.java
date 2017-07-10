@@ -27,7 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.cards.CardSetInfo;
@@ -35,9 +34,11 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.common.TargetAttackingCreature;
+
+import java.util.UUID;
 
 public class OrderChaos extends SplitCard {
 
@@ -52,7 +53,7 @@ public class OrderChaos extends SplitCard {
 
         // Chaos
         // Creatures can't block this turn.
-        getRightHalfCard().getSpellAbility().addEffect(new CantBlockAllEffect(new FilterCreaturePermanent("Creatures"), Duration.EndOfTurn));
+        getRightHalfCard().getSpellAbility().addEffect(new CantBlockAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn));
 
     }
 

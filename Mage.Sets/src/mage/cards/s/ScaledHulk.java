@@ -27,24 +27,22 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
  * @author Loki
  */
 public class ScaledHulk extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public ScaledHulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
@@ -53,7 +51,7 @@ public class ScaledHulk extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         // Whenever you cast a Spirit or Arcane spell, Scaled Hulk gets +2/+2 until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
     public ScaledHulk(final ScaledHulk card) {

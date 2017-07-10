@@ -27,7 +27,6 @@
  */
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -37,9 +36,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,6 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class YokeOfTheDamned extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
     public YokeOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
@@ -62,7 +62,7 @@ public class YokeOfTheDamned extends CardImpl {
         this.addAbility(ability);
 
         // When a creature dies, destroy enchanted creature.
-        this.addAbility(new DiesCreatureTriggeredAbility(new DestroyAttachedToEffect("enchanted creature"), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new DestroyAttachedToEffect("enchanted creature"), false, StaticFilters.FILTER_PERMANENT_A_CREATURE));
 
     }
 

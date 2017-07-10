@@ -45,7 +45,7 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.filter.StaticFilters;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetSpell;
@@ -58,8 +58,6 @@ import java.util.UUID;
  */
 public class CallowJushi extends CardImpl {
 
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-
     public CallowJushi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add("Human");
@@ -71,7 +69,7 @@ public class CallowJushi extends CardImpl {
         this.flipCardName = "Jaraku the Interloper";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Callow Jushi.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
 
         // At the beginning of the end step, if there are two or more ki counters on Callow Jushi, you may flip it.
         this.addAbility(new ConditionalTriggeredAbility(

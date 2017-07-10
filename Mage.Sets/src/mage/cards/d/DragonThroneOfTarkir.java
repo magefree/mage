@@ -44,7 +44,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -61,11 +61,11 @@ public class DragonThroneOfTarkir extends CardImpl {
 
         // Equipped creature has defender and "{2}, {T}: Other creatures you control gain trample and get +X/+X until end of turn, where X is this creature's power."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DefenderAbility.getInstance(), AttachmentType.EQUIPMENT));
-        Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), true);
+        Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, true);
         effect.setText("Other creatures you control gain trample");
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         DynamicValue xValue = new SourcePermanentPowerCount();
-        effect = new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent(), true, true);
+        effect = new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true, true);
         effect.setText("and get +X/+X until end of turn, where X is this creature's power");
         gainedAbility.addEffect(effect);
         gainedAbility.addCost(new TapSourceCost());

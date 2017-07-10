@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -35,8 +34,10 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public class PredatoryNightstalker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Predatory Nightstalker enters the battlefield, you may have target opponent sacrifice a creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent("creature"), 1, "target opponent"), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "target opponent"), true);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

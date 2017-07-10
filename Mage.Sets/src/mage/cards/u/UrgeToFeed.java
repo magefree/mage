@@ -27,7 +27,6 @@
  */
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -44,20 +43,21 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
  */
 public class UrgeToFeed extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public UrgeToFeed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
         // Target creature gets -3/-3 until end of turn. You may tap any number of untapped Vampire creatures you control. If you do, put a +1/+1 counter on each of those Vampires.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new UrgeToFeedEffect());
     }
 

@@ -28,9 +28,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -39,16 +36,17 @@ import mage.abilities.keyword.FearAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public class KamiOfTheWaningMoon extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public KamiOfTheWaningMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
@@ -57,7 +55,7 @@ public class KamiOfTheWaningMoon extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SpellCastControllerTriggeredAbility(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

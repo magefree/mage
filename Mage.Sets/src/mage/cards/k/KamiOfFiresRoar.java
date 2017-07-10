@@ -28,25 +28,23 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public class KamiOfFiresRoar extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public KamiOfFiresRoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
@@ -56,7 +54,7 @@ public class KamiOfFiresRoar extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a Spirit or Arcane spell, target creature can't block this turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

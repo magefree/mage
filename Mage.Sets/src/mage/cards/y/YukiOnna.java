@@ -27,8 +27,6 @@
  */
 package mage.cards.y;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,8 +35,11 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -57,7 +58,7 @@ public class YukiOnna extends CardImpl {
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Yuki-Onna to its owner's hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), new FilterSpiritOrArcaneCard(), true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
     public YukiOnna(final YukiOnna card) {

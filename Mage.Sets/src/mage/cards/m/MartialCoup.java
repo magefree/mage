@@ -27,18 +27,19 @@
  */
 package mage.cards.m;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -87,7 +88,7 @@ class MartialCoupEffect extends OneShotEffect {
         token.putOntoBattlefield(amount, game, source.getSourceId(), source.getControllerId());
         List<UUID> tokens = token.getLastAddedTokenIds();
         if (amount > 4) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), game)) {
                 if (!tokens.contains(permanent.getId())) {
                     permanent.destroy(source.getSourceId(), game, false);
                 }

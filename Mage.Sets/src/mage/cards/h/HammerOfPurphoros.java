@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,10 +42,12 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.HammerOfPurphorosGolemToken;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ public class HammerOfPurphoros extends CardImpl {
 
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
+                new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
 
         // {2}{R}, {tap}, Sacrifice a land: Create a 3/3 colorless Golem enchantment artifact creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HammerOfPurphorosGolemToken()), new ManaCostsImpl("{2}{R}"));

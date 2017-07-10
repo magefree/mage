@@ -33,7 +33,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -43,8 +43,6 @@ import java.util.UUID;
  */
 public class FiddleheadKami extends CardImpl {
 
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-
     public FiddleheadKami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Spirit");
@@ -53,7 +51,7 @@ public class FiddleheadKami extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a Spirit or Arcane spell, regenerate Fiddlehead Kami.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new RegenerateSourceEffect(), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new RegenerateSourceEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
     public FiddleheadKami(final FiddleheadKami card) {

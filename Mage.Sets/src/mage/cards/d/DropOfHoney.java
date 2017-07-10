@@ -39,6 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
@@ -56,8 +57,6 @@ import java.util.UUID;
  */
 public class DropOfHoney extends CardImpl {
 
-    static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    
     public DropOfHoney(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
@@ -101,7 +100,7 @@ class DropOfHoneyEffect extends OneShotEffect {
             int leastPower = Integer.MAX_VALUE;
             boolean multipleExist = false;
             Permanent permanentToDestroy = null;
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(DropOfHoney.filter, source.getControllerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), game)) {
                 if (permanent.getPower().getValue() < leastPower) {
                     permanentToDestroy = permanent;
                     leastPower = permanent.getPower().getValue();
@@ -151,7 +150,7 @@ class DropOfHoneyStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().count(DropOfHoney.filter, this.getSourceId(), this.getControllerId(), game) == 0;
+        return game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURES, this.getSourceId(), this.getControllerId(), game) == 0;
     }
 
     @Override

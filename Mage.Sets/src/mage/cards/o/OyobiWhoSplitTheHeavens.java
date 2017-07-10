@@ -27,7 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -36,15 +35,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.AnotherSpiritToken;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public class OyobiWhoSplitTheHeavens extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public OyobiWhoSplitTheHeavens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{W}");
@@ -55,7 +54,7 @@ public class OyobiWhoSplitTheHeavens extends CardImpl {
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, create a 3/3 white Spirit creature token with flying.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new AnotherSpiritToken()), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new AnotherSpiritToken()), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
     public OyobiWhoSplitTheHeavens(final OyobiWhoSplitTheHeavens card) {
