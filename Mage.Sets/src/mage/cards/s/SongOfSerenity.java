@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantAttackBlockAllEffect;
 import mage.cards.CardImpl;
@@ -36,10 +34,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.EnchantedPredicate;
+
+import java.util.UUID;
 
 /**
  *
