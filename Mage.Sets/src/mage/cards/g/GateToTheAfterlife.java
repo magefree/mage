@@ -87,7 +87,6 @@ public class GateToTheAfterlife extends CardImpl {
                 new GateToTheAfterlifeEffect(), new GenericManaCost(2), new CardsInControllerGraveCondition(6, new FilterCreatureCard()));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
