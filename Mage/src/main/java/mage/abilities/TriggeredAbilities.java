@@ -28,14 +28,6 @@
  */
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import mage.MageObject;
 import mage.constants.Zone;
 import mage.designations.Designation;
@@ -44,6 +36,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -181,9 +176,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     }
 
     public void removeAllGainedAbilities() {
-        for (String key : sources.keySet()) {
-            this.remove(key);
-        }
+        this.keySet().removeAll(sources.keySet());
         sources.clear();
     }
 
@@ -201,9 +194,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                 keysToRemove.add(entry.getKey());
             }
         }
-        for (String key : keysToRemove) {
-            remove(key);
-        }
+        this.keySet().removeAll(keysToRemove);
     }
 
     public TriggeredAbilities copy() {

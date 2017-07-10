@@ -141,11 +141,14 @@
         <deckType name="Constructed - Freeform" jar="mage-deck-constructed.jar" className="mage.deck.Freeform"/>
         <deckType name="Constructed - Old School 93/94" jar="mage-deck-constructed.jar" className="mage.deck.OldSchool9394"/>
         <deckType name="Constructed - Australian Highlander" jar="mage-deck-constructed.jar" className="mage.deck.AusHighlander"/>
+        <deckType name="Constructed - Canadian Highlander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.CanadianHighlander"/>
+        <deckType name="Constructed - Freeform" jar="mage-deck-constructed.jar" className="mage.deck.Freeform"/>
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed.jar" className="mage.deck.DuelCommander"/>
+        <deckType name="Variant Magic - MTGO 1v1 Commander" jar="mage-deck-constructed.jar" className="mage.deck.MTGO1v1Commander"/>
         <deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed.jar" className="mage.deck.TinyLeaders"/>
-        <deckType name="Variant Magic - Canadian Highlander" jar="mage-deck-constructed.jar" className="mage.deck.CanadianHighlander"/>
         <deckType name="Variant Magic - Momir Basic" jar="mage-deck-constructed.jar" className="mage.deck.Momir"/>
+        <deckType name="Block Constructed - Amonkhet" jar="mage-deck-constructed.jar" className="mage.deck.AmonkhetBlock"/>
         <deckType name="Block Constructed - Battle for Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.BattleForZendikarBlock"/>
         <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed.jar" className="mage.deck.InnistradBlock"/>
         <deckType name="Block Constructed - Kaladesh" jar="mage-deck-constructed.jar" className="mage.deck.KaladeshBlock"/>

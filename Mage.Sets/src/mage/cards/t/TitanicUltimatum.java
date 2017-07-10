@@ -27,9 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -37,24 +34,27 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
  * @author North, Eugen
  */
 public class TitanicUltimatum extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
 
     public TitanicUltimatum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}{G}{G}{G}{W}{W}");
 
 
         // Until end of turn, creatures you control get +5/+5 and gain first strike, lifelink, and trample.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(5, 5, Duration.EndOfTurn, filter));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, filter));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(5, 5, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     public TitanicUltimatum(final TitanicUltimatum card) {

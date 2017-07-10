@@ -58,7 +58,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 51;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 83;
+    private static final long CARD_CONTENT_VERSION = 84;
     private final TreeSet<String> landTypes = new TreeSet<>();
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;

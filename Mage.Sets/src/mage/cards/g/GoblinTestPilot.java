@@ -51,6 +51,7 @@ public class GoblinTestPilot extends CardImpl {
     public GoblinTestPilot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
         this.subtype.add("Goblin");
+        this.subtype.add("Pilot");
         this.subtype.add("Wizard");
 
         this.power = new MageInt(0);

@@ -34,7 +34,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -79,7 +79,6 @@ public class DoranTheSiegeTower extends CardImpl {
 
 class DoranTheSiegeTowerCombatDamageRuleEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public DoranTheSiegeTowerCombatDamageRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -99,7 +98,7 @@ class DoranTheSiegeTowerCombatDamageRuleEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         // Change the rule
         game.getCombat().setUseToughnessForDamage(true);
-        game.getCombat().addUseToughnessForDamageFilter(filter);
+        game.getCombat().addUseToughnessForDamageFilter(StaticFilters.FILTER_PERMANENT_CREATURES);
         return true;
     }
 

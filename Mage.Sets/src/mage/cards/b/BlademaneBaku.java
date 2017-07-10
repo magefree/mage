@@ -29,33 +29,31 @@
 package mage.cards.b;
 
  import mage.MageInt;
- import mage.abilities.Ability;
- import mage.abilities.common.SimpleActivatedAbility;
- import mage.abilities.common.SpellCastControllerTriggeredAbility;
- import mage.abilities.costs.Cost;
- import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
- import mage.abilities.costs.mana.GenericManaCost;
- import mage.abilities.effects.OneShotEffect;
- import mage.abilities.effects.common.continuous.BoostSourceEffect;
- import mage.abilities.effects.common.counter.AddCountersSourceEffect;
- import mage.cards.CardImpl;
- import mage.cards.CardSetInfo;
- import mage.constants.CardType;
- import mage.constants.Duration;
- import mage.constants.Outcome;
- import mage.constants.Zone;
- import mage.counters.CounterType;
- import mage.filter.common.FilterSpiritOrArcaneCard;
- import mage.game.Game;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.StaticFilters;
+import mage.game.Game;
 
- import java.util.UUID;
+import java.util.UUID;
 
 /**
  * @author LevelX2
  */
 public class BlademaneBaku extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public BlademaneBaku(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
@@ -65,7 +63,7 @@ public class BlademaneBaku extends CardImpl {
         this.toughness = new MageInt(1);
         
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Skullmane Baku.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
 
         // {1}, Remove X ki counters from Blademane Baku: For each counter removed, Blademane Baku gets +2/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlademaneBakuBoostEffect(), new GenericManaCost(1));

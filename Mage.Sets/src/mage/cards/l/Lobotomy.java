@@ -27,6 +27,7 @@
  */
 package mage.cards.l;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -46,8 +47,6 @@ import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.UUID;
-
 /**
  *
  * @author jeffwadsworth
@@ -55,7 +54,7 @@ import java.util.UUID;
 public class Lobotomy extends CardImpl {
 
     public Lobotomy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
 
         // Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new LobotomyEffect());
@@ -110,12 +109,12 @@ class LobotomyEffect extends OneShotEffect {
             // Exile all cards with the same name
             // Building a card filter with the name
             FilterCard filterNamedCards = new FilterCard();
+            String nameToSearch = "---";// so no card matches
             if (chosenCard != null) {
-                filterNamedCards.add(new NamePredicate(chosenCard.getName()));
+                nameToSearch = chosenCard.isSplitCard() ? ((SplitCard) chosenCard).getLeftHalfCard().getName() : chosenCard.getName();
                 filterNamedCards.setMessage("cards named " + chosenCard.getName());
-            } else {
-                filterNamedCards.add(new NamePredicate("----")); // so no card matches
             }
+            filterNamedCards.add(new NamePredicate(nameToSearch));
             Cards cardsToExile = new CardsImpl();
             // The cards you're searching for must be found and exiled if they're in the graveyard because it's a public zone.
             // Finding those cards in the hand and library is optional, because those zones are hidden (even if the hand is temporarily revealed).

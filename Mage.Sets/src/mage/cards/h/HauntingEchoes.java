@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,31 +20,30 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.h;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.List;
-import java.util.UUID;
-import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  *
@@ -53,7 +52,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 public class HauntingEchoes extends CardImpl {
 
     public HauntingEchoes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new HauntingEchoesEffect());
@@ -87,18 +86,19 @@ class HauntingEchoesEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
-            for (Card card: targetPlayer.getGraveyard().getCards(game)) {
+            for (Card card : targetPlayer.getGraveyard().getCards(game)) {
                 if (!filter.match(card, game)) {
                     card.moveToExile(null, "", source.getSourceId(), game);
 
                     FilterCard filterCard = new FilterCard("cards named " + card.getName());
-                    filterCard.add(new NamePredicate(card.getName()));
+                    String nameToSearch = card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName();
+                    filterCard.add(new NamePredicate(nameToSearch));
                     int count = targetPlayer.getLibrary().count(filterCard, game);
                     TargetCardInLibrary target = new TargetCardInLibrary(count, count, filterCard);
 
                     player.searchLibrary(target, game, targetPlayer.getId());
                     List<UUID> targets = target.getTargets();
-                    for(UUID cardId : targets){
+                    for (UUID cardId : targets) {
                         Card libraryCard = game.getCard(cardId);
                         if (libraryCard != null) {
                             libraryCard.moveToExile(null, "", source.getSourceId(), game);

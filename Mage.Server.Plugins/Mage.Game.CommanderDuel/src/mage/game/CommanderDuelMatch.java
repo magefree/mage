@@ -51,6 +51,10 @@ public class CommanderDuelMatch extends MatchImpl {
             alsoHand = true;  // commander going to hand allowed to go to command zone effective July 17, 2015
             checkCommanderDamage = false; // since nov 16 duel commander uses no longer commander damage rule
         }
+        if (options.getDeckType().equals("Variant Magic - MTGO 1v1 Commander")) {
+            startLife = 30;
+            alsoHand = true;  // commander going to hand allowed to go to command zone effective July 17, 2015
+        }
         CommanderDuel game = new CommanderDuel(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
         game.setCheckCommanderDamage(checkCommanderDamage);
         game.setStartMessage(this.createGameStartMessage());

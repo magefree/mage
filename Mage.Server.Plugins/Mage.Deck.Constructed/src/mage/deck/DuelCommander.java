@@ -34,7 +34,6 @@ package mage.deck;
 public class DuelCommander extends Commander {
 
     public DuelCommander() {
-        super("Duel Commander");
         banned.add("Ancestral Recall");
         banned.add("Ancient Tomb");
         banned.add("Back to Basics");
@@ -67,7 +66,7 @@ public class DuelCommander extends Commander {
         banned.add("Mox Sapphire");
         banned.add("Mystical Tutor");
         banned.add("Natural Order");
-        banned.add("Necrotic Oooze");
+        banned.add("Necrotic Ooze");
         banned.add("Oath of Druids");
         banned.add("Protean Hulk");
         banned.add("Sensei's Divining Top");

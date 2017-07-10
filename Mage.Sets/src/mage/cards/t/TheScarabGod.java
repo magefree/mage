@@ -174,7 +174,7 @@ class TheScarabGodEffect2 extends OneShotEffect {
 
 class TheScarabGodEffect3 extends OneShotEffect {
 
-    private static final String effectText = "return it to its owner's hand at the beginning of the next upkeep.";
+    private static final String effectText = "return it to its owner's hand at the beginning of the next end step";
 
     TheScarabGodEffect3() {
         super(Outcome.Benefit);
@@ -189,7 +189,7 @@ class TheScarabGodEffect3 extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         // Create delayed triggered ability
         Effect effect = new ReturnToHandSourceEffect(false, true);
-        effect.setText(staticText);
+        effect.setText("return {this} to its owner's hand");
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;

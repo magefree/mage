@@ -27,6 +27,7 @@
  */
 package mage.cards.u;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.AuraAttachedCount;
@@ -39,8 +40,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 
-import java.util.UUID;
-
 /**
  *
  * @author jeffwadsworth
@@ -48,23 +47,20 @@ import java.util.UUID;
 public class UrilTheMiststalker extends CardImpl {
 
     public UrilTheMiststalker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Beast");
-
-
-
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
-        
+
         // Uril, the Miststalker gets +2/+2 for each Aura attached to it.
         AuraAttachedCount count = new AuraAttachedCount(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
-        
+
     }
 
     public UrilTheMiststalker(final UrilTheMiststalker card) {

@@ -141,7 +141,7 @@ class TheScorpionGodTriggeredAbility extends TriggeredAbilityImpl {
 
 class TheScorpionGodEffect extends OneShotEffect {
 
-    private static final String effectText = "return it to its owner's hand";
+    private static final String effectText = "return it to its owner's hand at the beginning of the next end step";
 
     TheScorpionGodEffect() {
         super(Outcome.Benefit);
@@ -156,7 +156,7 @@ class TheScorpionGodEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         // Create delayed triggered ability
         Effect effect = new ReturnToHandSourceEffect(false, true);
-        effect.setText(staticText);
+        effect.setText("return {this} to its owner's hand");
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;

@@ -51,12 +51,12 @@ public class PortTown extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Plains or Island card from your hand");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.ISLAND),
+        filter.add(Predicates.or(new SubtypePredicate(SubType.PLAINS),
                 new SubtypePredicate(SubType.ISLAND)));
     }
 
     public PortTown(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // As Port Town enters the battlefield, you may reveal a Plains or Island card from your hand. If you don't, Port Town enters the battlefield tapped.
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))),

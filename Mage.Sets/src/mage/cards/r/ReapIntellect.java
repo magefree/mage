@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -58,8 +59,7 @@ import mage.target.common.TargetOpponent;
 public class ReapIntellect extends CardImpl {
 
     public ReapIntellect(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{2}{U}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{2}{U}{B}");
 
         // Target opponent reveals his or her hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new ReapIntellectEffect());
@@ -100,10 +100,10 @@ class ReapIntellectEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (targetPlayer != null && sourceObject != null && controller != null) {
-            
-            // reveal hand of target player 
+
+            // reveal hand of target player
             targetPlayer.revealCards(sourceObject.getName(), targetPlayer.getHand(), game);
-            
+
             // Chose cards to exile from hand
             Cards exiledCards = new CardsImpl();
             int xCost = Math.min(source.getManaCostsToPay().getX(), targetPlayer.getHand().size());
@@ -115,7 +115,7 @@ class ReapIntellectEffect extends OneShotEffect {
                 if (chosenCard != null) {
                     controller.moveCardToExileWithInfo(chosenCard, null, "", source.getSourceId(), game, Zone.HAND, true);
                     exiledCards.add(chosenCard);
-                }                        
+                }
             }
             // Exile other cards with the same name
             // 4/15/2013  If you don't exile any cards from the player's hand, you don't search that player's library
@@ -124,41 +124,41 @@ class ReapIntellectEffect extends OneShotEffect {
                 // Building a card filter with all names
                 ArrayList<NamePredicate> names = new ArrayList<>();
                 FilterCard filterNamedCards = new FilterCard();
-                for (Card card: exiledCards.getCards(game)) {
+                for (Card card : exiledCards.getCards(game)) {
                     if (exiledCards.size() == 1) {
-                        filterNamedCards.add(new NamePredicate(card.getName()));
+                        filterNamedCards.add(new NamePredicate(card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
                     } else {
-                        names.add(new NamePredicate(card.getName()));                            
+                        names.add(new NamePredicate(card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
                     }
                 }
                 if (exiledCards.size() > 1) {
                     filterNamedCards.add(Predicates.or(names));
                 }
-                
+
                 // search cards in graveyard
                 TargetCardInGraveyard targetCardsGraveyard = new TargetCardInGraveyard(0, Integer.MAX_VALUE, filterNamedCards);
                 controller.chooseTarget(outcome, targetPlayer.getGraveyard(), targetCardsGraveyard, source, game);
-                for(UUID cardId:  targetCardsGraveyard.getTargets()) {
+                for (UUID cardId : targetCardsGraveyard.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                     }
                 }
-                
+
                 // search cards in hand
                 TargetCardInHand targetCardsHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCards);
                 controller.chooseTarget(outcome, targetPlayer.getGraveyard(), targetCardsHand, source, game);
-                for(UUID cardId:  targetCardsHand.getTargets()) {
+                for (UUID cardId : targetCardsHand.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND, true);
                     }
                 }
-                
+
                 // search cards in Library
                 TargetCardInLibrary targetCardsLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCards);
                 controller.searchLibrary(targetCardsLibrary, game, targetPlayer.getId());
-                for(UUID cardId:  targetCardsLibrary.getTargets()) {
+                for (UUID cardId : targetCardsLibrary.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);

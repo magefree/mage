@@ -27,17 +27,14 @@
  */
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -45,6 +42,10 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.watchers.common.LandfallWatcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -114,7 +115,7 @@ class SearingBlazeEffect extends OneShotEffect {
 class SearingBlazeTarget extends TargetPermanent {
 
     public SearingBlazeTarget() {
-        super(1, 1, new FilterCreaturePermanent(), false);
+        super(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false);
     }
 
     public SearingBlazeTarget(final SearingBlazeTarget target) {

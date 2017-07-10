@@ -50,7 +50,7 @@ import mage.players.Player;
 public class RavingDead extends CardImpl {
 
     public RavingDead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(2);
@@ -78,7 +78,7 @@ class RavingDeadDamageEffect extends OneShotEffect {
 
     public RavingDeadDamageEffect() {
         super(Outcome.Damage);
-        this.staticText = "that player loses half his or her life, rounded up";
+        this.staticText = "that player loses half his or her life, rounded down";
     }
 
     public RavingDeadDamageEffect(final RavingDeadDamageEffect effect) {
@@ -94,7 +94,7 @@ class RavingDeadDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            Integer amount = (int) Math.ceil(player.getLife() / 2f);
+            Integer amount = player.getLife() / 2;
             if (amount > 0) {
                 player.loseLife(amount, game, false);
             }

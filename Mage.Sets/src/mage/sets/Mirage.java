@@ -37,6 +37,7 @@ import mage.constants.SetType;
  * @author North
  */
 public class Mirage extends ExpansionSet {
+
     private static final Mirage instance = new Mirage();
 
     public static Mirage getInstance() {
@@ -256,6 +257,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Stone Rain", 194, Rarity.COMMON, mage.cards.s.StoneRain.class));
         cards.add(new SetCardInfo("Stupor", 45, Rarity.UNCOMMON, mage.cards.s.Stupor.class));
         cards.add(new SetCardInfo("Sunweb", 246, Rarity.RARE, mage.cards.s.Sunweb.class));
+        cards.add(new SetCardInfo("Suq'Ata Firewalker", 94, Rarity.UNCOMMON, mage.cards.s.SuqAtaFirewalker.class));
         cards.add(new SetCardInfo("Swamp", 311, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Swamp", 312, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Swamp", 313, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
