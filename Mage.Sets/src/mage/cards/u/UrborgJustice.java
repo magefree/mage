@@ -27,8 +27,6 @@
  */
 package mage.cards.u;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -36,10 +34,12 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.CreaturesDiedWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +52,7 @@ public class UrborgJustice extends CardImpl {
 
         // Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn.
         this.getSpellAbility().addWatcher(new CreaturesDiedWatcher());
-        SacrificeEffect sacrificeEffect = new SacrificeEffect(new FilterCreaturePermanent(), new UrborgJusticeDynamicValue(), "");
+        SacrificeEffect sacrificeEffect = new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new UrborgJusticeDynamicValue(), "");
         sacrificeEffect.setText("Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn");
 
         this.getSpellAbility().addEffect(sacrificeEffect);

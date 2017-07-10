@@ -29,8 +29,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -38,22 +36,22 @@ import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Ludwig
  */
 
 public class TellerOfTales extends CardImpl {
 
-     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-
-   // Outcome.Benefit, "tap or untap target creature"
+    // Outcome.Benefit, "tap or untap target creature"
 
     public TellerOfTales(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);
@@ -61,7 +59,7 @@ public class TellerOfTales extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may tap or untap target creature.
-        Ability ability = new SpellCastControllerTriggeredAbility(new MayTapOrUntapTargetEffect(),filter, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(new MayTapOrUntapTargetEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
@@ -35,7 +34,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,6 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class MyrSuperion extends CardImpl {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public MyrSuperion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
@@ -54,8 +54,8 @@ public class MyrSuperion extends CardImpl {
 
         // Spend only mana produced by creatures to cast Myr Superion.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Spend only mana produced by creatures to cast {this}")));
-        this.getSpellAbility().getManaCostsToPay().setSourceFilter(filter);
-        this.getSpellAbility().getManaCosts().setSourceFilter(filter);
+        this.getSpellAbility().getManaCostsToPay().setSourceFilter(StaticFilters.FILTER_PERMANENT_CREATURES);
+        this.getSpellAbility().getManaCosts().setSourceFilter(StaticFilters.FILTER_PERMANENT_CREATURES);
     }
 
     public MyrSuperion(final MyrSuperion card) {

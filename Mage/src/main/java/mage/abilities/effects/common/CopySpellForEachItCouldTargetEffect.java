@@ -46,8 +46,8 @@ import mage.util.TargetAddress;
 import java.util.*;
 
 /**
- * @author duncant
  * @param <T>
+ * @author duncant
  */
 public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> extends OneShotEffect {
 
@@ -191,10 +191,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                                     madeACopy = true;
                                 }
                             }
-
-                            for (UUID idToDelete : toDelete) {
-                                targetCopyMap.remove(idToDelete);
-                            }
+                            targetCopyMap.keySet().removeAll((toDelete));
                         }
                     }
                 }

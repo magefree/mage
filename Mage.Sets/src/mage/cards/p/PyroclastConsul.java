@@ -27,14 +27,15 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.abilityword.KinshipAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public class PyroclastConsul extends CardImpl {
 
         // Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Pyroclast Consul, you may reveal it. 
         // If you do, Pyroclast Consul deals 2 damage to each creature.        
-        this.addAbility(new KinshipAbility(new DamageAllEffect(2, new FilterCreaturePermanent())));
+        this.addAbility(new KinshipAbility(new DamageAllEffect(2, StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     public PyroclastConsul(final PyroclastConsul card) {
