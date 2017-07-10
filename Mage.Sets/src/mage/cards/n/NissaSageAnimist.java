@@ -27,7 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -41,12 +40,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.NissaSageAnimistToken;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +72,7 @@ public class NissaSageAnimist extends CardImpl {
 
         // -7: Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), -7);
-        ability.addTarget(new TargetLandPermanent(0, 6, new FilterLandPermanent("lands"), false));
+        ability.addTarget(new TargetLandPermanent(0, 6, StaticFilters.FILTER_LANDS, false));
         ability.addEffect(new NissaSageAnimistMinusSevenEffect());
         this.addAbility(ability);
     }

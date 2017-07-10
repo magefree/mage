@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -82,7 +82,7 @@ class LiegeOfTheTangleTriggeredAbility extends TriggeredAbilityImpl {
     LiegeOfTheTangleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.AWAKENING.createInstance()));
         this.addEffect(new LiegeOfTheTangleEffect());
-        Target target = new TargetLandPermanent(0, Integer.MAX_VALUE, new FilterLandPermanent(), true);
+        Target target = new TargetLandPermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_LANDS, true);
         this.addTarget(target);
     }
 

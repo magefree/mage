@@ -27,12 +27,13 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,7 @@ public class Sunder extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
 
         // Return all lands to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterLandPermanent("lands")));
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(StaticFilters.FILTER_LANDS));
     }
 
     public Sunder(final Sunder card) {

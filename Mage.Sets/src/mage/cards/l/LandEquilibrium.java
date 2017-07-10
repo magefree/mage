@@ -27,18 +27,19 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,10 +66,8 @@ public class LandEquilibrium extends CardImpl {
 
 class LandEquilibriumAbility extends TriggeredAbilityImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("land");
-
     public LandEquilibriumAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterLandPermanent(), 1, ""), false);
+        super(Zone.BATTLEFIELD, new SacrificeEffect(StaticFilters.FILTER_LAND, 1, ""), false);
     }
 
     public LandEquilibriumAbility(final LandEquilibriumAbility ability) {
@@ -87,8 +86,8 @@ class LandEquilibriumAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        int numMyLands = game.getBattlefield().countAll(filter, this.getControllerId(), game);
-        int theirLands = game.getBattlefield().countAll(filter, event.getPlayerId(), game);
+        int numMyLands = game.getBattlefield().countAll(StaticFilters.FILTER_LAND, this.getControllerId(), game);
+        int theirLands = game.getBattlefield().countAll(StaticFilters.FILTER_LAND, event.getPlayerId(), game);
         if (numMyLands < theirLands) {
             this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
             return true;

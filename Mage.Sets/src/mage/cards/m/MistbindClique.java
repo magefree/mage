@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
@@ -39,11 +38,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -84,7 +85,7 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
 
     public MistbindCliqueAbility() {
         // ability has to trigger independant where the source object is now
-        super(Zone.ALL, Zone.BATTLEFIELD, Zone.EXILED, new TapAllTargetPlayerControlsEffect(new FilterLandPermanent("lands")), "When a Faerie is championed with {this}, ", false);
+        super(Zone.ALL, Zone.BATTLEFIELD, Zone.EXILED, new TapAllTargetPlayerControlsEffect(StaticFilters.FILTER_LANDS), "When a Faerie is championed with {this}, ", false);
         this.addTarget(new TargetPlayer());
     }
 

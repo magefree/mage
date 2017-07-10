@@ -47,7 +47,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.watchers.common.CastFromHandWatcher;
 
 import java.util.UUID;
@@ -56,8 +56,6 @@ import java.util.UUID;
  * @author LevelX
  */
 public class MyojinOfInfiniteRage extends CardImpl {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("lands");
 
     public MyojinOfInfiniteRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{R}{R}{R}");
@@ -75,7 +73,7 @@ public class MyojinOfInfiniteRage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                 new SourceHasCounterCondition(CounterType.DIVINITY), "{this} is indestructible as long as it has a divinity counter on it")));
         // Remove a divinity counter from Myojin of Infinite Rage: Destroy all lands.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance())));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(StaticFilters.FILTER_LANDS), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance())));
     }
 
     public MyojinOfInfiniteRage(final MyojinOfInfiniteRage card) {

@@ -35,7 +35,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -61,7 +61,7 @@ public class GiftOfEstates extends CardImpl {
         // If an opponent controls more lands than you, search your library for up to three Plains cards, reveal them, and put them into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, filter), true),
-                new OpponentControlsMoreCondition(new FilterLandPermanent("lands"))));
+                new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS)));
     }
 
     public GiftOfEstates(final GiftOfEstates card) {
