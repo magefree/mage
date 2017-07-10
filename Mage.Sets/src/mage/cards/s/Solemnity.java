@@ -38,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -146,6 +147,9 @@ class SolemnityEffect2 extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getTargetId());
         Permanent permanent = game.getPermanentEntering(event.getSourceId());
+        Permanent permanent2 = game.getPermanent(event.getTargetId());
+        Permanent permanent3 = game.getPermanentEntering(event.getTargetId());
+
         if (object != null && object instanceof Permanent) {
             if (filter.match((Permanent) object, game)) {
                 return true;
@@ -154,7 +158,16 @@ class SolemnityEffect2 extends ReplacementEffectImpl {
             if (filter.match(permanent, game)) {
                 return true;
             }
+        } else if (permanent2 != null) {
+            if (filter.match(permanent2, game)) {
+                return true;
+            }
+        } else if (permanent3 != null) {
+            if (filter.match(permanent3, game)) {
+                return true;
+            }
         }
+
         return false;
     }
 }
