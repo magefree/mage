@@ -234,6 +234,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Rampart Crawler", 156, Rarity.COMMON, mage.cards.r.RampartCrawler.class));
         cards.add(new SetCardInfo("Rappelling Scouts", 41, Rarity.RARE, mage.cards.r.RappellingScouts.class));
         cards.add(new SetCardInfo("Remote Farm", 323, Rarity.COMMON, mage.cards.r.RemoteFarm.class));
+        cards.add(new SetCardInfo("Reverent Mantra", 44, Rarity.RARE, mage.cards.r.ReverentMantra.class));
         cards.add(new SetCardInfo("Revive", 262, Rarity.UNCOMMON, mage.cards.r.Revive.class));
         cards.add(new SetCardInfo("Righteous Aura", 45, Rarity.UNCOMMON, mage.cards.r.RighteousAura.class));
         cards.add(new SetCardInfo("Rishadan Airship", 91, Rarity.COMMON, mage.cards.r.RishadanAirship.class));
