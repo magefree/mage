@@ -51,6 +51,10 @@ public final class StaticFilters {
     public static final FilterSpell FILTER_SPELL_NON_CREATURE
             = (FilterSpell) new FilterSpell("noncreature spell").add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
 
+    public static final FilterSpell FILTER_SPELL = new FilterSpell();
+
+    public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELL = new FilterSpell("instant or sorcery spell");
+
     public static final FilterPermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
 
     public static final FilterPermanent FILTER_ATTACKING_CREATURES = new FilterCreaturePermanent("attacking creatures");
@@ -86,6 +90,11 @@ public final class StaticFilters {
         FILTER_CARD_ARTIFACT_OR_CREATURE.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE)
+        ));
+
+        FILTER_INSTANT_OR_SORCERY_SPELL.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)
         ));
     }
 

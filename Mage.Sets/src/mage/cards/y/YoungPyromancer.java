@@ -27,31 +27,22 @@
  */
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.YoungPyromancerElementalToken;
+
+import java.util.UUID;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class YoungPyromancer extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
 
     public YoungPyromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -62,7 +53,7 @@ public class YoungPyromancer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new YoungPyromancerElementalToken()), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new YoungPyromancerElementalToken()), StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, false));
 
     }
 

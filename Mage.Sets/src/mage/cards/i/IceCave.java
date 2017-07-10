@@ -29,6 +29,8 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,13 +38,11 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 
 import java.util.UUID;
 
@@ -57,7 +57,7 @@ public class IceCave extends CardImpl {
 
 
         // Whenever a player casts a spell, any other player may pay that spell's mana cost. If a player does, counter the spell. (Mana cost includes color.)
-        this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new IceCaveEffect(), new FilterSpell(), false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new IceCaveEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.SPELL));
     }
 
     public IceCave(final IceCave card) {
