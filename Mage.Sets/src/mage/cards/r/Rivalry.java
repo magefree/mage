@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -35,12 +34,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,10 +68,6 @@ public class Rivalry extends CardImpl {
 }
 
 class RivalryTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterPermanent filter = new FilterLandPermanent();
-
-
 
     public RivalryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
@@ -104,10 +100,10 @@ class RivalryTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         UUID player = game.getActivePlayerId();
-        int land = game.getBattlefield().countAll(filter, player, game);
+        int land = game.getBattlefield().countAll(StaticFilters.FILTER_LAND, player, game);
         if(player != null){
             for(UUID opponent : game.getOpponents(player)){
-                if(land <= game.getBattlefield().countAll(filter, opponent, game)){
+                if(land <= game.getBattlefield().countAll(StaticFilters.FILTER_LAND, opponent, game)){
                     return false;
                 }
             }

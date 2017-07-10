@@ -27,16 +27,17 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.constants.CardType;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterSpell;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public class PunishIgnorance extends CardImpl {
 
 
         // Counter target spell. Its controller loses 3 life and you gain 3 life.
-        this.getSpellAbility().addTarget(new TargetSpell(new FilterSpell()));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(3));
         Effect effect = new GainLifeEffect(3);

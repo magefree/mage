@@ -38,6 +38,9 @@ public final class StaticFilters {
     public static final FilterControlledPermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_ANOTHER_CREATURE = new FilterControlledCreaturePermanent("another creature");
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_NON_LAND = new FilterControlledPermanent("nonland permanent");
+    public static final FilterLandPermanent FILTER_LAND = new FilterLandPermanent();
+    public static final FilterLandPermanent FILTER_LANDS = new FilterLandPermanent("lands");
+    public static final FilterLandPermanent FILTER_BASIC_LAND = new FilterLandPermanent();
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE = new FilterCreaturePermanent();
     public static final FilterCreaturePermanent FILTER_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature");
@@ -51,6 +54,10 @@ public final class StaticFilters {
     public static final FilterSpell FILTER_SPELL_NON_CREATURE
             = (FilterSpell) new FilterSpell("noncreature spell").add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
 
+    public static final FilterSpell FILTER_SPELL = new FilterSpell();
+
+    public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELL = new FilterSpell("instant or sorcery spell");
+
     public static final FilterPermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
 
     public static final FilterPermanent FILTER_ATTACKING_CREATURES = new FilterCreaturePermanent("attacking creatures");
@@ -58,6 +65,8 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_PERMANENT_NON_LAND.add(
                 Predicates.not(new CardTypePredicate(CardType.LAND)));
+
+
         FILTER_CREATURE_TOKENS.add(new TokenPredicate());
 
         FILTER_ATTACKING_CREATURES.add(new AttackingPredicate());
@@ -86,6 +95,11 @@ public final class StaticFilters {
         FILTER_CARD_ARTIFACT_OR_CREATURE.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE)
+        ));
+
+        FILTER_INSTANT_OR_SORCERY_SPELL.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)
         ));
     }
 

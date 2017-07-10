@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -48,13 +48,12 @@ import java.util.UUID;
 public class BurningSands extends CardImpl {
 
     private final UUID originalId;
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     public BurningSands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
 
         // Whenever a creature dies, that creature's controller sacrifices a land.
-        Ability ability = new DiesCreatureTriggeredAbility(new SacrificeEffect(filter, 1, "that creature's controller"), false, false, true);
+        Ability ability = new DiesCreatureTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_LAND, 1, "that creature's controller"), false, false, true);
         originalId = ability.getOriginalId();
         this.addAbility(ability);
     }

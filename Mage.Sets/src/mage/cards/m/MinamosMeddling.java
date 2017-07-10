@@ -31,15 +31,11 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -59,7 +55,7 @@ public class MinamosMeddling extends CardImpl {
 
 
         // Counter target spell. That spell's controller reveals his or her hand, then discards each card with the same name as a card spliced onto that spell.
-        this.getSpellAbility().addTarget(new TargetSpell(new FilterSpell()));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL));
         this.getSpellAbility().addEffect(new MinamosMeddlingCounterTargetEffect());
     }
 

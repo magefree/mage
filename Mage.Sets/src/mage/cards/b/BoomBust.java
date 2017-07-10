@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -36,9 +35,12 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 public class BoomBust extends SplitCard {
 
@@ -63,7 +65,7 @@ public class BoomBust extends SplitCard {
 
         // Bust
         // Destroy all lands.
-        getRightHalfCard().getSpellAbility().addEffect(new DestroyAllEffect(new FilterLandPermanent()));
+        getRightHalfCard().getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_LANDS));
 
     }
 

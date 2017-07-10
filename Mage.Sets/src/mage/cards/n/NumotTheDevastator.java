@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;
@@ -65,7 +65,7 @@ public class NumotTheDevastator extends CardImpl {
         effect.setText("destroy up to two target lands");
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DoIfCostPaid(effect, new ManaCostsImpl("{2}{R}")), false);
-        ability.addTarget(new TargetLandPermanent(0,2, new FilterLandPermanent("lands"), false));
+        ability.addTarget(new TargetLandPermanent(0,2, StaticFilters.FILTER_LANDS, false));
         this.addAbility(ability);        
     }
 

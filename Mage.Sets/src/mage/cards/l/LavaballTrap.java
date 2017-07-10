@@ -27,8 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -38,12 +36,15 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -61,7 +62,7 @@ public class LavaballTrap extends CardImpl {
         // Destroy two target lands. Lavaball Trap deals 4 damage to each creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new DamageAllEffect(4, new FilterCreaturePermanent()));
-        this.getSpellAbility().addTarget(new TargetLandPermanent(2, 2, new FilterLandPermanent("lands"), false));
+        this.getSpellAbility().addTarget(new TargetLandPermanent(2, 2, StaticFilters.FILTER_LANDS, false));
 
     }
 

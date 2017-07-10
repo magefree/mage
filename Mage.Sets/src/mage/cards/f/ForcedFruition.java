@@ -34,7 +34,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -50,7 +50,7 @@ public class ForcedFruition extends CardImpl {
 
         // Whenever an opponent casts a spell, that player draws seven cards.
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(7),
-                new FilterSpell(), false, SetTargetPointer.PLAYER));
+                StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER));
     }
 
     public ForcedFruition(final ForcedFruition card) {

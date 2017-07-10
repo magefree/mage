@@ -30,6 +30,7 @@ package mage.target;
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -49,7 +50,7 @@ public class TargetSpell extends TargetObject {
     private final Set<UUID> sourceIds = new HashSet<>();
 
     public TargetSpell() {
-        this(1, 1, new FilterSpell());
+        this(1, 1, StaticFilters.FILTER_SPELL);
     }
 
     public TargetSpell(FilterSpell filter) {
