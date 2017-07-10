@@ -46,18 +46,21 @@ import mage.util.ManaUtil;
 public abstract class ManaCostImpl extends CostImpl implements ManaCost {
 
     protected Mana payment;
+    protected Mana usedManaToPay;
     protected Mana cost;
     protected ManaOptions options;
     protected Filter sourceFilter;
 
     public ManaCostImpl() {
         payment = new Mana();
+        usedManaToPay = new Mana();
         options = new ManaOptions();
     }
 
     public ManaCostImpl(final ManaCostImpl manaCost) {
         super(manaCost);
         this.payment = manaCost.payment.copy();
+        this.usedManaToPay = manaCost.usedManaToPay.copy();
         this.cost = manaCost.cost.copy();
         this.options = manaCost.options.copy();
         if (manaCost.sourceFilter != null) {
@@ -68,6 +71,11 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     @Override
     public Mana getPayment() {
         return payment;
+    }
+
+    @Override
+    public Mana getUsedManaToPay() {
+        return usedManaToPay;
     }
 
     @Override
@@ -118,31 +126,31 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         // first check special mana
         switch (mana) {
             case B:
-                if (pool.pay(ManaType.BLACK, ability, sourceFilter, game, costToPay)) {
+                if (pool.pay(ManaType.BLACK, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                     this.payment.increaseBlack();
                     return true;
                 }
                 break;
             case U:
-                if (pool.pay(ManaType.BLUE, ability, sourceFilter, game, costToPay)) {
+                if (pool.pay(ManaType.BLUE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                     this.payment.increaseBlue();
                     return true;
                 }
                 break;
             case W:
-                if (pool.pay(ManaType.WHITE, ability, sourceFilter, game, costToPay)) {
+                if (pool.pay(ManaType.WHITE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                     this.payment.increaseWhite();
                     return true;
                 }
                 break;
             case G:
-                if (pool.pay(ManaType.GREEN, ability, sourceFilter, game, costToPay)) {
+                if (pool.pay(ManaType.GREEN, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                     this.payment.increaseGreen();
                     return true;
                 }
                 break;
             case R:
-                if (pool.pay(ManaType.RED, ability, sourceFilter, game, costToPay)) {
+                if (pool.pay(ManaType.RED, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                     this.payment.increaseRed();
                     return true;
                 }
@@ -154,7 +162,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     protected void assignColorless(Ability ability, Game game, ManaPool pool, int mana, Cost costToPay) {
         int conditionalCount = pool.getConditionalCount(ability, game, null, costToPay);
         while (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)) {
-            if (pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay)) {
+            if (pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseColorless();
             }
             break;
@@ -164,27 +172,27 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     protected boolean assignGeneric(Ability ability, Game game, ManaPool pool, int mana, Cost costToPay) {
         int conditionalCount = pool.getConditionalCount(ability, game, null, costToPay);
         while (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)) {
-            if (pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay)) {
+            if (pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseColorless();
                 continue;
             }
-            if (pool.pay(ManaType.BLACK, ability, sourceFilter, game, costToPay)) {
+            if (pool.pay(ManaType.BLACK, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseBlack();
                 continue;
             }
-            if (pool.pay(ManaType.BLUE, ability, sourceFilter, game, costToPay)) {
+            if (pool.pay(ManaType.BLUE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseBlue();
                 continue;
             }
-            if (pool.pay(ManaType.WHITE, ability, sourceFilter, game, costToPay)) {
+            if (pool.pay(ManaType.WHITE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseWhite();
                 continue;
             }
-            if (pool.pay(ManaType.GREEN, ability, sourceFilter, game, costToPay)) {
+            if (pool.pay(ManaType.GREEN, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseGreen();
                 continue;
             }
-            if (pool.pay(ManaType.RED, ability, sourceFilter, game, costToPay)) {
+            if (pool.pay(ManaType.RED, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseRed();
                 continue;
             }

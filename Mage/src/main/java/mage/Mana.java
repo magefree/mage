@@ -238,6 +238,38 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
+     * Increases the given mana by one.
+     *
+     * @param manaType
+     */
+    public void increase(ManaType manaType) {
+        switch (manaType) {
+            case BLACK:
+                black++;
+                break;
+            case BLUE:
+                blue++;
+                break;
+            case COLORLESS:
+                colorless++;
+                break;
+            case GENERIC:
+                generic++;
+                break;
+            case GREEN:
+                green++;
+                break;
+            case RED:
+                red++;
+                break;
+            case WHITE:
+                white++;
+                break;
+        }
+
+    }
+
+    /**
      * Increases the Red mana by one.
      */
     public void increaseRed() {
@@ -815,11 +847,12 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Returns if this objects mana contains any coloured mana the same as the passed in
-     * {@link Mana}'s mana.
+     * Returns if this objects mana contains any coloured mana the same as the
+     * passed in {@link Mana}'s mana.
      *
      * @param mana the mana to check for
-     * @return true if this contains any of the same type of coloured mana that this has
+     * @return true if this contains any of the same type of coloured mana that
+     * this has
      */
     public boolean containsAny(final Mana mana) {
         if (mana.black > 0 && this.black > 0) {
@@ -832,7 +865,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             return true;
         } else if (mana.green > 0 && this.green > 0) {
             return true;
-        } 
+        }
 
         return false;
     }

@@ -110,9 +110,10 @@ public class ManaPool implements Serializable {
      * @param filter
      * @param game
      * @param costToPay complete costs to pay (needed to check conditional mana)
+     * @param usedManaToPay the information about what mana was paid
      * @return
      */
-    public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay) {
+    public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay, Mana usedManaToPay) {
         if (!autoPayment && manaType != unlockedManaType) {
             // if manual payment and the needed mana type was not unlocked, nothing will be paid
             return false;
@@ -149,6 +150,7 @@ public class ManaPool implements Serializable {
                 GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAID, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag());
                 event.setData(mana.getOriginalId().toString());
                 game.fireEvent(event);
+                usedManaToPay.increase(mana.getFirstAvailable());
                 mana.remove(usableManaType);
                 if (mana.count() == 0) { // so no items with count 0 stay in list
                     manaItems.remove(mana);
@@ -479,7 +481,7 @@ public class ManaPool implements Serializable {
         return false;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return count() == 0;
     }
 }
