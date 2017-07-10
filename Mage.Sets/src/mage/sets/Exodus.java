@@ -139,6 +139,7 @@ public class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Skyshroud Elite", 123, Rarity.UNCOMMON, mage.cards.s.SkyshroudElite.class));
         cards.add(new SetCardInfo("Slaughter", 74, Rarity.UNCOMMON, mage.cards.s.Slaughter.class));
         cards.add(new SetCardInfo("Soltari Visionary", 20, Rarity.COMMON, mage.cards.s.SoltariVisionary.class));
+        cards.add(new SetCardInfo("Song of Serenity", 125, Rarity.UNCOMMON, mage.cards.s.SongOfSerenity.class));
         cards.add(new SetCardInfo("Sonic Burst", 103, Rarity.COMMON, mage.cards.s.SonicBurst.class));
         cards.add(new SetCardInfo("Soul Warden", 21, Rarity.COMMON, mage.cards.s.SoulWarden.class));
         cards.add(new SetCardInfo("Spellbook", 138, Rarity.UNCOMMON, mage.cards.s.Spellbook.class));
