@@ -121,6 +121,15 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
+    public Mana getUsedManaToPay() {
+        Mana manaTotal = new Mana();
+        for (ManaCost cost : this) {
+            manaTotal.add(cost.getUsedManaToPay());
+        }
+        return manaTotal;
+    }
+
+    @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         return pay(ability, game, sourceId, controllerId, noMana, this);
     }
