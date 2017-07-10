@@ -33,6 +33,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -89,7 +90,7 @@ class DoOrDieEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (player != null && targetPlayer != null) {
-            int count = game.getBattlefield().countAll(new FilterCreaturePermanent(), targetPlayer.getId(), game);
+            int count = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURES, targetPlayer.getId(), game);
             TargetCreaturePermanent creatures = new TargetCreaturePermanent(0, count, new FilterCreaturePermanent("creatures to put in the first pile"), true);
             List<Permanent> pile1 = new ArrayList<>();
             creatures.setRequired(false);

@@ -27,7 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -40,13 +39,9 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEf
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.VenserTheSojournerEmblem;
@@ -55,6 +50,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -80,7 +77,7 @@ public class VenserTheSojourner extends CardImpl {
         this.addAbility(ability1);
 
         // -1: Creatures can't be blocked this turn.
-        this.addAbility(new LoyaltyAbility(new CantBeBlockedAllEffect(new FilterCreaturePermanent("Creatures"), Duration.EndOfTurn), -1));
+        this.addAbility(new LoyaltyAbility(new CantBeBlockedAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn), -1));
 
         // -8: You get an emblem with "Whenever you cast a spell, exile target permanent."
         LoyaltyAbility ability2 = new LoyaltyAbility(new GetEmblemEffect(new VenserTheSojournerEmblem()), -8);

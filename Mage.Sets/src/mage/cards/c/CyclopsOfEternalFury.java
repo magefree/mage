@@ -36,7 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -46,7 +46,6 @@ import java.util.UUID;
  */
 public class CyclopsOfEternalFury extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
     
     public CyclopsOfEternalFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{4}{R}{R}");
@@ -56,7 +55,7 @@ public class CyclopsOfEternalFury extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 
     public CyclopsOfEternalFury(final CyclopsOfEternalFury card) {

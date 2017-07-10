@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -45,8 +45,6 @@ import java.util.UUID;
  * @author Loki
  */
 public class HikariTwilightGuardian extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public HikariTwilightGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
@@ -61,7 +59,7 @@ public class HikariTwilightGuardian extends CardImpl {
         // Whenever you cast a Spirit or Arcane spell, you may exile Hikari, Twilight Guardian. If you do, return it to the battlefield under its owner's control at the beginning of the next end step.
         Effect effect = new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true);
         effect.setText("you may exile {this}. If you do, return it to the battlefield under its owner's control at the beginning of the next end step");
-        this.addAbility(new SpellCastControllerTriggeredAbility(effect, filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(effect, StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
     public HikariTwilightGuardian(final HikariTwilightGuardian card) {

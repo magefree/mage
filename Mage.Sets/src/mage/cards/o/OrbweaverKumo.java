@@ -28,9 +28,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -38,15 +35,16 @@ import mage.abilities.keyword.ForestwalkAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public class OrbweaverKumo extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public OrbweaverKumo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
@@ -55,7 +53,7 @@ public class OrbweaverKumo extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(ReachAbility.getInstance());
-        this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
     public OrbweaverKumo(final OrbweaverKumo card) {

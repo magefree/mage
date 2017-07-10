@@ -28,23 +28,21 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public class SireOfTheStorm extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public SireOfTheStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
@@ -54,7 +52,7 @@ public class SireOfTheStorm extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
     public SireOfTheStorm(final SireOfTheStorm card) {

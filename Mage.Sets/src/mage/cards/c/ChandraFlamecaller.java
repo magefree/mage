@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.ElementalToken;
 import mage.players.Player;
@@ -69,7 +69,7 @@ public class ChandraFlamecaller extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ChandraDrawEffect(), 0));
 
         // -X: Chandra, Flamecaller deals X damage to each creature.
-        this.addAbility(new LoyaltyAbility(new DamageAllEffect(ChandraXValue.getDefault(), new FilterCreaturePermanent("creature"))));
+        this.addAbility(new LoyaltyAbility(new DamageAllEffect(ChandraXValue.getDefault(), StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     public ChandraFlamecaller(final ChandraFlamecaller card) {

@@ -27,8 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,16 +35,17 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
  * @author Loki
  */
 public class KiriOnna extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public KiriOnna(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
@@ -60,7 +59,7 @@ public class KiriOnna extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Kiri-Onna to its owner's hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
     public KiriOnna(final KiriOnna card) {

@@ -36,7 +36,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -52,7 +52,7 @@ public class ConcordantCrossroads extends CardImpl {
 
         // All creatures have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
+                new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 
     public ConcordantCrossroads(final ConcordantCrossroads card) {
