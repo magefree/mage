@@ -141,9 +141,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
             for (UUID playerId : noLandPlayers) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    if (player.chooseUse(outcome.DrawCard, "Draw a card?", source, game)) {
-                        player.drawCards(1, game);
-                    }
+                    player.drawCards(1, game);
                 }
             }
             return true;
