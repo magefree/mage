@@ -39,8 +39,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -108,7 +108,7 @@ class GainControlAllLandsEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer != null && targetPlayer.isInGame()) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), targetPointer.getFirst(game, source), game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LANDS, targetPointer.getFirst(game, source), game)) {
                 if (permanent != null) {
                     permanent.changeControllerId(source.getControllerId(), game);
                 }

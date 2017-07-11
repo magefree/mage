@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,13 +37,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -125,8 +126,6 @@ class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
 
 class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterSpell FILTER_SPELL = new FilterSpell();
-
     public TephradermSpellDamageTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
     }
@@ -147,7 +146,7 @@ class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         StackObject sourceSpell = game.getStack().getStackObject(event.getSourceId());
-        if (sourceSpell != null && FILTER_SPELL.match(sourceSpell, getSourceId(), getControllerId(), game)) {
+        if (sourceSpell != null && StaticFilters.FILTER_SPELL.match(sourceSpell, getSourceId(), getControllerId(), game)) {
             for (Effect effect : getEffects()) {
                 if (effect instanceof DamageTargetEffect) {
                     effect.setTargetPointer(new FixedTarget(sourceSpell.getControllerId()));

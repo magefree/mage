@@ -33,7 +33,7 @@ import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -50,7 +50,7 @@ public class GoblinFirebug extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Goblin Firebug leaves the battlefield, sacrifice a land.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterLandPermanent(), 1, ""), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_LAND, 1, ""), false));
     }
 
     public GoblinFirebug(final GoblinFirebug card) {

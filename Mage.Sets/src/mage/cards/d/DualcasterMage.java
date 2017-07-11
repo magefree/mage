@@ -35,9 +35,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -47,14 +45,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public class DualcasterMage extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
 
     public DualcasterMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
@@ -69,7 +59,7 @@ public class DualcasterMage extends CardImpl {
         
         // When Dualcaster Mage enters the battlefield, copy target instant or sorcery spell. You may choose new targets for the copy.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CopyTargetSpellEffect(), false);
-        ability.addTarget(new TargetSpell(filter));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
         this.addAbility(ability);
 
     }

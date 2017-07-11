@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,9 +38,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  * @author duncant
@@ -72,7 +73,7 @@ public class MagusOfTheCandelabra extends CardImpl {
         if (ability.getOriginalId().equals(originalId)){
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
-            ability.addTarget(new TargetLandPermanent(xValue, xValue, new FilterLandPermanent(), false));
+            ability.addTarget(new TargetLandPermanent(xValue, xValue, StaticFilters.FILTER_LANDS, false));
         }
     }
 

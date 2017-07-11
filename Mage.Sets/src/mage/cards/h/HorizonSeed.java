@@ -28,24 +28,22 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public class HorizonSeed extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public HorizonSeed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
@@ -53,7 +51,7 @@ public class HorizonSeed extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new SpellCastControllerTriggeredAbility(new RegenerateTargetEffect(), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new RegenerateTargetEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

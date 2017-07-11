@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -35,22 +34,15 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
 public class PrescientChimera extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
 
     public PrescientChimera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
@@ -62,7 +54,7 @@ public class PrescientChimera extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast an instant or sorcery spell, scry 1.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ScryEffect(1), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ScryEffect(1), StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, false));
     }
 
     public PrescientChimera(final PrescientChimera card) {

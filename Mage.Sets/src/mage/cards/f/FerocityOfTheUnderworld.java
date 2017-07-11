@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -35,10 +34,9 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
+import mage.constants.ComparisonType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -53,11 +51,9 @@ import java.util.UUID;
 public class FerocityOfTheUnderworld extends CardImpl {
 
     private static final FilterNonlandPermanent filterMode1 = new FilterNonlandPermanent("nonland permanent with converted mana cost 3 or less");
-    private static final FilterSpell filterMode2 = new FilterSpell("instant or sorcery spell");
 
     static {
         filterMode1.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
-        filterMode2.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
     }
 
     public FerocityOfTheUnderworld(UUID ownerId, CardSetInfo setInfo) {
@@ -70,7 +66,7 @@ public class FerocityOfTheUnderworld extends CardImpl {
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
         Mode mode = new Mode();
         mode.getEffects().add(new CopyTargetSpellEffect());
-        mode.getTargets().add(new TargetSpell(filterMode2));
+        mode.getTargets().add(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
         this.getSpellAbility().addMode(mode);
 
         // Return target card from your graveyard to your hand.

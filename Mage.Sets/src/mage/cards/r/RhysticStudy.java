@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -40,9 +39,11 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +55,7 @@ public class RhysticStudy extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new RhysticStudyDrawEffect(), new FilterSpell(), false, SetTargetPointer.PLAYER));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new RhysticStudyDrawEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER));
     }
 
     public RhysticStudy(final RhysticStudy card) {

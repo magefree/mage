@@ -27,8 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -36,15 +34,16 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
  * @author Loki
  */
 public class HaruOnna extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public HaruOnna(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
@@ -56,7 +55,7 @@ public class HaruOnna extends CardImpl {
         // When Haru-Onna enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         // Whenever you cast a Spirit or Arcane spell, you may return Haru-Onna to its owner's hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
     public HaruOnna(final HaruOnna card) {

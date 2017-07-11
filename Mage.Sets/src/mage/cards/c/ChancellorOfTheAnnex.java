@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -69,7 +69,7 @@ public class ChancellorOfTheAnnex extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever an opponent casts a spell, counter it unless that player pays {1}.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(1)), new FilterSpell(), false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(1)), StaticFilters.FILTER_SPELL, false, SetTargetPointer.SPELL));
     }
 
     public ChancellorOfTheAnnex(final ChancellorOfTheAnnex card) {

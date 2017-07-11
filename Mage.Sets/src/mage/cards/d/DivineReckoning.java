@@ -37,8 +37,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -105,7 +105,7 @@ class DivineReckoningEffect extends OneShotEffect {
                 }
             }
 
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), source.getSourceId(), game)) {
                 if (!chosen.contains(permanent)) {
                     permanent.destroy(source.getSourceId(), game, false);
                 }

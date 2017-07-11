@@ -62,7 +62,7 @@ public class RalZarek extends CardImpl {
     }
 
     public RalZarek(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{R}");
         this.subtype.add("Ral");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

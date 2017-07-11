@@ -46,7 +46,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.filter.StaticFilters;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
@@ -59,8 +59,6 @@ import java.util.UUID;
  */
 public class BudokaPupil extends CardImpl {
 
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-
     public BudokaPupil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Human");
@@ -72,7 +70,7 @@ public class BudokaPupil extends CardImpl {
         this.flipCardName = "Ichiga, Who Topples Oaks";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Budoka Pupil.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
 
         // At the beginning of the end step, if there are two or more ki counters on Budoka Pupil, you may flip it.
         this.addAbility(new ConditionalTriggeredAbility(

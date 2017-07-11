@@ -38,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -63,7 +64,7 @@ public class ArchetypeOfCourage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Creatures you control have first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
         // Creatures your opponents control lose first strike and can't have or gain first strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreaturesCantGetOrHaveAbilityEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }

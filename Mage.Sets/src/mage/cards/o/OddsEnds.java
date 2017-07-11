@@ -27,7 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
@@ -37,24 +36,16 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 public class OddsEnds extends SplitCard {
-
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
 
     public OddsEnds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{R}", "{3}{R}{W}", SpellAbilityType.SPLIT);
@@ -62,7 +53,7 @@ public class OddsEnds extends SplitCard {
         // Odds
         // Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy.
         getLeftHalfCard().getSpellAbility().addEffect(new OddsEffect());
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetSpell(filter));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
 
         // Ends
         // Target player sacrifices two attacking creatures.

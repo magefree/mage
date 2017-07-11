@@ -56,6 +56,7 @@ public class UntapTargetEffect extends OneShotEffect {
 
     public UntapTargetEffect(final UntapTargetEffect effect) {
         super(effect);
+        this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
     }
 
     @Override

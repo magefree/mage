@@ -25,58 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.r;
 
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.MorphAbility;
+import mage.ObjectColor;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.common.ExileFromHandCost;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
-import mage.target.TargetSpell;
+import mage.constants.Duration;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterOwnedCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
 
 /**
  *
- * @author jeffwadsworth
+ * @author ciaccona007
  */
-public class StratusDancer extends CardImpl {
+public class ReverentMantra extends CardImpl {
 
-    public StratusDancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Djinn");
-        this.subtype.add("Monk");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+    public ReverentMantra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        
-        // Megamorph {1}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}"), true));
-        
-        // When Stratus Dancer is turned face up, counter target instant or sorcery spell
-        Effect effect = new CounterTargetEffect();
-        effect.setText("counter target instant or sorcery spell");
-        Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect, false);
-        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
-        this.addAbility(ability);
-        
+        // You may exile a white card from your hand rather than pay Reverent Mantra's mana cost.
+        FilterOwnedCard filter = new FilterOwnedCard("a white card from your hand");
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filter.add(Predicates.not(new CardIdPredicate(this.getId())));
+
+        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));
+
+        // Choose a color. All creatures gain protection from the chosen color until end of turn.
+        this.getSpellAbility().addEffect(new GainProtectionFromColorAllEffect(Duration.EndOfTurn, new FilterCreaturePermanent()));
     }
 
-    public StratusDancer(final StratusDancer card) {
+    public ReverentMantra(final ReverentMantra card) {
         super(card);
     }
 
     @Override
-    public StratusDancer copy() {
-        return new StratusDancer(this);
+    public ReverentMantra copy() {
+        return new ReverentMantra(this);
     }
 }

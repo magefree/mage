@@ -33,9 +33,7 @@ import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -46,18 +44,12 @@ import java.util.UUID;
  */
 public class Flusterstorm extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
-    }
-
     public Flusterstorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Counter target instant or sorcery spell unless its controller pays {1}.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new ManaCostsImpl("{1}")));
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
         // Storm
         this.addAbility(new StormAbility());
     }

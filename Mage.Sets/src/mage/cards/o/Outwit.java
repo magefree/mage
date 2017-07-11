@@ -35,6 +35,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -79,7 +80,7 @@ public class Outwit extends CardImpl {
         protected FilterSpell filter;
 
         public CustomTargetSpell() {
-            this(1, 1, new FilterSpell());
+            this(1, 1, StaticFilters.FILTER_SPELL);
         }
 
         public CustomTargetSpell(FilterSpell filter) {

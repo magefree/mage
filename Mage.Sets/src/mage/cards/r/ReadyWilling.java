@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -40,8 +39,10 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -61,8 +62,8 @@ public class ReadyWilling extends SplitCard {
 
         // Willing
         // Creatures you control gain deathtouch and lifelink until end of turn.
-        getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("Creatures")));
-        effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("Creatures"));
+        getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
+        effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("Creatures you control gain lifelink until end of turn");
         getRightHalfCard().getSpellAbility().addEffect(effect);
 

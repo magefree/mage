@@ -29,19 +29,15 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -66,7 +62,7 @@ public class CelestialKirin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's converted mana cost.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new CelestialKirinEffect(), new FilterSpiritOrArcaneCard(), false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new CelestialKirinEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, false, true));
     }
 
     public CelestialKirin(final CelestialKirin card) {

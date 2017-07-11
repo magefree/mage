@@ -38,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -63,7 +64,7 @@ public class ArchetypeOfEndurance extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Creatures you control have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
 
         // Creatures your opponents control lose hexproof and can't have or gain hexproof.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreaturesCantGetOrHaveAbilityEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter)));

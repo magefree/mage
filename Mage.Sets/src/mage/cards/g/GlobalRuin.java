@@ -35,8 +35,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SubTypeSet;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -104,7 +104,7 @@ class GlobalRuinDestroyLandEffect extends OneShotEffect {
                 }
             }
         }
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LAND, game)) {
             if (!lands.contains(permanent.getId())) {
                 permanent.sacrifice(permanent.getId(), game);
             }

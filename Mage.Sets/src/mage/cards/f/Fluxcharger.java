@@ -35,9 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -46,13 +44,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public class Fluxcharger extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
 
     public Fluxcharger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");
@@ -64,7 +55,7 @@ public class Fluxcharger extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast an instant or sorcery spell, you may switch Fluxcharger's power and toughness until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, true));
 
     }
 

@@ -27,19 +27,20 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterSpell;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public class PsychicStrike extends CardImpl {
 
 
         // Counter target spell. Its controller puts the top two cards of his or her library into his or her graveyard.
-        this.getSpellAbility().addTarget(new TargetSpell(new FilterSpell()));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL));
         this.getSpellAbility().addEffect(new PsychicStrikeEffect());
     }
 

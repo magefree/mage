@@ -36,7 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -103,7 +103,7 @@ class DeclarationInStoneEffect extends OneShotEffect {
                             && !(targetPermanent instanceof PermanentToken)) {
                         nonTokenCount++;
                     }
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), targetPermanent.getControllerId(), game)) {
+                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, targetPermanent.getControllerId(), game)) {
                         if (!permanent.getId().equals(targetPermanent.getId())
                                 && permanent.getName().equals(targetPermanent.getName())) {
                             cardsToExile.add(permanent);

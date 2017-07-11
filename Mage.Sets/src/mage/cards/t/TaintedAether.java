@@ -27,18 +27,19 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.constants.SetTargetPointer;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +59,7 @@ public class TaintedAether extends CardImpl {
 
         // Whenever a creature enters the battlefield, its controller sacrifices a creature or land.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SacrificeEffect(filter, 1, ""),
-            new FilterCreaturePermanent(), false, SetTargetPointer.PLAYER,
+                StaticFilters.FILTER_PERMANENT_CREATURES, false, SetTargetPointer.PLAYER,
             "Whenever a creature enters the battlefield, its controller sacrifices a creature or land"));
     }
 
