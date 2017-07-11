@@ -53,4 +53,9 @@ public class ActivateAsSorceryManaAbility extends SimpleManaAbility {
     public ActivateAsSorceryManaAbility copy() {
         return new ActivateAsSorceryManaAbility(this);
     }
+    
+    @Override
+    public String getRule() {
+        return super.getRule() + " Activate this ability only any time you could cast a sorcery.";
+    }
 }

@@ -35,6 +35,8 @@ import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.constants.AbilityType;
+import mage.constants.AsThoughEffectType;
+import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -70,7 +72,12 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
         if (!controlsAbility(playerId, game)) {
             return false;
         }
-        // check if player is in the process of playing spell costs and he is no longer allowed to use activated mana abilities (e.g. becaus he started to use improvise)
+        if (timing == TimingRule.SORCERY 
+                && !game.canPlaySorcery(playerId)
+                && !game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_AS_INSTANT, this, controllerId, game)) {
+            return false;
+        }
+        // check if player is in the process of playing spell costs and he is no longer allowed to use activated mana abilities (e.g. because he started to use improvise)
         //20091005 - 605.3a
         return costs.canPay(this, sourceId, controllerId, game);
 
