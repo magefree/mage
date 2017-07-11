@@ -133,7 +133,8 @@ class NettlevineBlightEffect extends OneShotEffect {
                     if (chosenPermanent != null) {
                         Card nettlevineBlightCard = game.getCard(source.getSourceId());
                         if (nettlevineBlightCard != null) {
-                            nettlevineBlightCard.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), newController.getId());
+                            Zone zone = game.getState().getZone(nettlevineBlightCard.getId());
+                            nettlevineBlightCard.putOntoBattlefield(game, zone, source.getSourceId(), newController.getId());
                             game.getState().setValue("attachTo:" + nettlevineBlight.getId(), chosenPermanent);
                             chosenPermanent.addAttachment(nettlevineBlight.getId(), game);
                             return true;
