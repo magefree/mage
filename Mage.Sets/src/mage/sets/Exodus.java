@@ -98,6 +98,7 @@ public class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Mana Breach", 38, Rarity.UNCOMMON, mage.cards.m.ManaBreach.class));
         cards.add(new SetCardInfo("Maniacal Rage", 87, Rarity.COMMON, mage.cards.m.ManiacalRage.class));
         cards.add(new SetCardInfo("Medicine Bag", 133, Rarity.UNCOMMON, mage.cards.m.MedicineBag.class));
+        cards.add(new SetCardInfo("Memory Crystal", 134, Rarity.RARE, mage.cards.m.MemoryCrystal.class));
         cards.add(new SetCardInfo("Merfolk Looter", 39, Rarity.COMMON, mage.cards.m.MerfolkLooter.class));
         cards.add(new SetCardInfo("Mindless Automaton", 135, Rarity.RARE, mage.cards.m.MindlessAutomaton.class));
         cards.add(new SetCardInfo("Mind Over Matter", 40, Rarity.RARE, mage.cards.m.MindOverMatter.class));
