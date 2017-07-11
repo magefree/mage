@@ -322,6 +322,7 @@ public enum SubType {
     GIDEON("Gideon", SubTypeSet.PlaneswalkerType, false),
     JACE("Jace", SubTypeSet.PlaneswalkerType, false),
     KARN("Karn", SubTypeSet.PlaneswalkerType, false),
+    KAYA("Kaya", SubTypeSet.PlaneswalkerType, false),
     KIORA("Kiora", SubTypeSet.PlaneswalkerType, false),
     KOTH("Koth", SubTypeSet.PlaneswalkerType, false),
     LILIANA("Liliana", SubTypeSet.PlaneswalkerType, false),
