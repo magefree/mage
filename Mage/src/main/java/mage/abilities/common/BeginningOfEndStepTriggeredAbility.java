@@ -149,7 +149,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
             case ANY:
                 return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each end step, ").toString();
             case CONTROLLER_ATTACHED_TO:
-                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of the end step of enchanted creature's controller, ").toString();
+                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of the end step of enchanted permanent's controller, ").toString();
         }
         return "";
     }
