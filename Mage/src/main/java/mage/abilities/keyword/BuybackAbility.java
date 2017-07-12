@@ -28,7 +28,6 @@
 package mage.abilities.keyword;
 
 import java.util.Iterator;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -38,7 +37,6 @@ import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.costs.OptionalAdditionalCostImpl;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -98,8 +96,8 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
         if (buybackCost != null) {
             ((Costs) buybackCost).add(cost);
         }
-    }    
-    
+    }
+
     public void resetReduceCost() {
         amountToReduceBy = 0;
     }
@@ -107,24 +105,29 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
     // Called by Memory Crystal to reduce mana costs.
     public int reduceCost(int genericManaToReduce) {
         int amountToReduce = genericManaToReduce;
+        boolean foundCostToReduce = false;
         if (buybackCost != null) {
             for (Object cost : ((Costs) buybackCost)) {
-                if (cost instanceof ManaCostsImpl) {                                        
+                if (cost instanceof ManaCostsImpl) {
                     for (Object c : (ManaCostsImpl) cost) {
-                        if (c instanceof GenericManaCost) {                            
+                        if (c instanceof GenericManaCost) {
                             int newCostCMC = ((GenericManaCost) c).convertedManaCost() - amountToReduceBy - genericManaToReduce;
+                            foundCostToReduce = true;
                             if (newCostCMC > 0) {
                                 amountToReduceBy += genericManaToReduce;
                             } else {
                                 amountToReduce = ((GenericManaCost) c).convertedManaCost() - amountToReduceBy;
                                 amountToReduceBy = ((GenericManaCost) c).convertedManaCost();
-                            }             
+                            }
                         }
                     }
                 }
             }
         }
-        return amountToReduce;
+        if (foundCostToReduce) {
+            return amountToReduce;
+        }
+        return 0;
     }
 
     @Override
