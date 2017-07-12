@@ -52,7 +52,7 @@ import mage.players.Player;
 public class BreathstealersCrypt extends CardImpl {
 
     public BreathstealersCrypt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{B}");
 
         // If a player would draw a card, instead he or she draws a card and reveals it. If it's a creature card, that player discards it unless he or she pays 3 life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BreathstealersCryptEffect()));
