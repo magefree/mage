@@ -138,6 +138,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     public boolean activate(Game game, boolean noMana) {
+        setDoneActivatingManaAbilities(false); // Used for e.g. improvise
         if (!spellAbilities.get(0).activate(game, noMana)) {
             return false;
         }
@@ -157,7 +158,7 @@ public class Spell extends StackObjImpl implements Card {
                 }
             }
         }
-        setDoneActivatingManaAbilities(false); // can be activated again maybe during the resolution of the spell (e.g. Metallic Rebuke)
+        setDoneActivatingManaAbilities(true); // can be activated again maybe during the resolution of the spell (e.g. Metallic Rebuke)
         return true;
     }
 

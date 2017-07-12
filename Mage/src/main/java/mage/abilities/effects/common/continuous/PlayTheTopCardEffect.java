@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
