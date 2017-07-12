@@ -33,6 +33,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.BuybackCondition;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.keyword.BuybackAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -80,7 +82,18 @@ class MemoryCrystalSpellsCostReductionEffect extends CostModificationEffectImpl 
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, 2);
+
+        Card card = game.getCard(abilityToModify.getSourceId());
+        if (card != null) {
+            for (Ability ability : card.getAbilities()) {
+                if (ability instanceof BuybackAbility) {
+                    if (((BuybackAbility) ability).isActivated()) {
+                        int amountToReduce = ((BuybackAbility) ability).reduceCost(2);
+                        CardUtil.reduceCost(abilityToModify, amountToReduce);
+                    }
+                }
+            }
+        }
         return true;
     }
 
@@ -90,7 +103,9 @@ class MemoryCrystalSpellsCostReductionEffect extends CostModificationEffectImpl 
             if (abilityToModify.getControllerId().equals(source.getControllerId())) {
                 Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
                 if (spell != null) {
-                    return BuybackCondition.instance.apply(game, abilityToModify);
+                    if (BuybackCondition.instance.apply(game, abilityToModify)) {
+                        return true;
+                    }
                 }
             }
         }

@@ -28,6 +28,7 @@
 package mage.abilities.keyword;
 
 import java.util.Iterator;
+import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -36,6 +37,8 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.costs.OptionalAdditionalCostImpl;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -66,6 +69,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
     private static final String reminderTextCost = "You may {cost} in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.";
     private static final String reminderTextMana = "You may pay an additional {cost} as you cast this spell. If you do, put this card into your hand as it resolves.";
     protected OptionalAdditionalCost buybackCost;
+    private int amountToReduceBy = 0;
 
     public BuybackAbility(String manaString) {
         super(Zone.STACK, new BuybackEffect());
@@ -94,6 +98,33 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
         if (buybackCost != null) {
             ((Costs) buybackCost).add(cost);
         }
+    }    
+    
+    public void resetReduceCost() {
+        amountToReduceBy = 0;
+    }
+
+    // Called by Memory Crystal to reduce mana costs.
+    public int reduceCost(int genericManaToReduce) {
+        int amountToReduce = genericManaToReduce;
+        if (buybackCost != null) {
+            for (Object cost : ((Costs) buybackCost)) {
+                if (cost instanceof ManaCostsImpl) {                                        
+                    for (Object c : (ManaCostsImpl) cost) {
+                        if (c instanceof GenericManaCost) {                            
+                            int newCostCMC = ((GenericManaCost) c).convertedManaCost() - amountToReduceBy - genericManaToReduce;
+                            if (newCostCMC > 0) {
+                                amountToReduceBy += genericManaToReduce;
+                            } else {
+                                amountToReduce = ((GenericManaCost) c).convertedManaCost() - amountToReduceBy;
+                                amountToReduceBy = ((GenericManaCost) c).convertedManaCost();
+                            }             
+                        }
+                    }
+                }
+            }
+        }
+        return amountToReduce;
     }
 
     @Override
@@ -101,12 +132,14 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
         if (buybackCost != null) {
             return buybackCost.isActivated();
         }
+        resetReduceCost();
         return false;
     }
 
     public void resetBuyback() {
         if (buybackCost != null) {
             buybackCost.reset();
+            resetReduceCost();
         }
     }
 
