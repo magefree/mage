@@ -31,7 +31,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
@@ -45,6 +44,7 @@ import mage.players.Player;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -92,7 +92,7 @@ class CoordinatedBarrageEffect extends OneShotEffect {
         if (controller != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose a creature type");
-            choice.setChoices(SubType.getCreatureTypes(false));
+            choice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toSet()));
             if (controller.choose(Outcome.Damage, choice, game)) {
                 String chosenType = choice.getChoice();
                 FilterControlledPermanent filter = new FilterControlledPermanent();

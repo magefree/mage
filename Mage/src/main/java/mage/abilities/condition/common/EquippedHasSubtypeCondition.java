@@ -29,9 +29,11 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.SubTypeList;
 
 /**
  * Describes condition when equipped permanent has subType
@@ -40,16 +42,18 @@ import mage.game.permanent.Permanent;
  */
 public class EquippedHasSubtypeCondition implements Condition {
 
-    private String subType;
-    private String[] subTypes; // scope = Any
+    private SubTypeList subTypes; // scope = Any
 
-    public EquippedHasSubtypeCondition(String subType) {
-        this.subType = subType;
+    public EquippedHasSubtypeCondition(SubTypeList subType) {
+        this.subTypes = subType;
     }
 
-    public EquippedHasSubtypeCondition(String... subTypes) {
-        this.subTypes = subTypes;
+
+    public EquippedHasSubtypeCondition(SubType subType){
+        subTypes = new SubTypeList();
+        subTypes.add(subType);
     }
+
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -60,17 +64,13 @@ public class EquippedHasSubtypeCondition implements Condition {
                 attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
             }
             if (attachedTo != null) {
-                if (subType != null) {
-                    if (attachedTo.hasSubtype(this.subType, game)) {
+
+                for (SubType s : subTypes) {
+                    if (attachedTo.hasSubtype(s, game)) {
                         return true;
                     }
-                } else {
-                    for (String s : subTypes) {
-                        if (attachedTo.hasSubtype(s, game)) {
-                            return true;
-                        }
-                    }
                 }
+
             }
         }
         return false;

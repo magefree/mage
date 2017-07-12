@@ -27,17 +27,19 @@
  */
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -58,7 +60,7 @@ public class EquipAbility extends ActivatedAbilityImpl {
     public boolean canActivate(UUID playerId, Game game) {
         if (super.canActivate(playerId, game)) {
             Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && permanent.hasSubtype("Equipment", game)) {
+            if (permanent != null && permanent.hasSubtype(SubType.EQUIPMENT, game)) {
                 return true;
             }
         }

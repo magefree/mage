@@ -11,6 +11,8 @@ import mage.cards.FrameStyle;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
+import mage.constants.SubType;
+import mage.util.SubTypeList;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
@@ -1024,8 +1026,8 @@ public class ModernCardRenderer extends CardRenderer {
 
     // Determine which background paint to use from a set of colors
     // and the current card.
-    protected static Paint getBackgroundPaint(ObjectColor colors, Collection<CardType> types, Collection<String> subTypes) {
-        if (subTypes.contains("Vehicle")) {
+    protected static Paint getBackgroundPaint(ObjectColor colors, Collection<CardType> types, SubTypeList subTypes) {
+        if (subTypes.contains(SubType.VEHICLE)) {
             return BG_TEXTURE_VEHICLE;
         } else if (types.contains(CardType.LAND)) {
             return BG_TEXTURE_LAND;

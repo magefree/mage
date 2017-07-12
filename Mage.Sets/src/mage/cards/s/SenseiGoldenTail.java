@@ -39,10 +39,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -71,7 +68,7 @@ public class SenseiGoldenTail extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         // That creature gains bushido 1 and becomes a Samurai in addition to its other creature types. Activate this ability only any time you could cast a sorcery.
         ability.addEffect(new GainAbilityTargetEffect(new BushidoAbility(1),Duration.Custom));
-        ability.addEffect(new AddCardSubTypeTargetEffect("Samurai",Duration.Custom));
+        ability.addEffect(new AddCardSubTypeTargetEffect(SubType.SAMURAI,Duration.Custom));
         this.addAbility(ability);
     }
 

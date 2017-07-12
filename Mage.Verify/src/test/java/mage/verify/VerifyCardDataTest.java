@@ -152,20 +152,20 @@ public class VerifyCardDataTest {
         Collection<String> expected = ref.subtypes;
         if (expected != null && expected.contains("Urza’s")) {
             expected = new ArrayList<>(expected);
-            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext();) {
+            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext(); ) {
                 if (it.next().equals("Urza’s")) {
                     it.set("Urza's");
                 }
             }
         }
-        if (!eqSet(card.getSubtype(null), expected)) {
+        if (!eqSet(card.getSubtype(null).stream().map(p -> p.toString()).collect(Collectors.toSet()), expected)) {
             fail(card, "subtypes", card.getSubtype(null) + " != " + expected);
         }
     }
 
     private void checkSupertypes(Card card, JsonCard ref) {
         Collection<String> expected = ref.supertypes;
-        if (!eqSet(card.getSuperType().stream().map(s->s.toString()).collect(Collectors.toList()), expected)) {
+        if (!eqSet(card.getSuperType().stream().map(s -> s.toString()).collect(Collectors.toList()), expected)) {
             fail(card, "supertypes", card.getSuperType() + " != " + expected);
         }
     }

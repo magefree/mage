@@ -27,9 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -43,6 +40,7 @@ import mage.abilities.keyword.EmbalmAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,6 +48,10 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -102,8 +104,8 @@ class VizierOfManyFacesApplyToPermanent extends ApplyToPermanent {
                     for (MageObjectReference mor : watcher.getEmbalmedThisTurnCards()) {
                         if (mor.getSourceId().equals(originalCardId) && game.getState().getZoneChangeCounter(originalCardId) == mor.getZoneChangeCounter()) {
                             permanent.getManaCost().clear();
-                            if (!permanent.hasSubtype("Zombie", game)) {
-                                permanent.getSubtype(game).add("Zombie");
+                            if (!permanent.hasSubtype(SubType.ZOMBIE, game)) {
+                                permanent.getSubtype(game).add(SubType.ZOMBIE);
                             }
                             permanent.getColor(game).setColor(ObjectColor.WHITE);
 

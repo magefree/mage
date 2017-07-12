@@ -9,6 +9,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.audio.AudioManager;
 import mage.constants.CardType;
 import mage.constants.EnlargeMode;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.view.AbilityView;
 import mage.view.CardView;
@@ -681,7 +682,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
         if (!card.getSubTypes().isEmpty()) {
             sbType.append("- ");
-            for (String subType : card.getSubTypes()) {
+            for (SubType subType : card.getSubTypes()) {
                 sbType.append(subType).append(' ');
             }
         }

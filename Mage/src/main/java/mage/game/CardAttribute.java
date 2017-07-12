@@ -7,10 +7,9 @@ package mage.game;
 
 import mage.ObjectColor;
 import mage.cards.Card;
+import mage.util.SubTypeList;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class saves changed attributes of cards (e.g. in graveyard, exile or player hands or libraries).
@@ -20,11 +19,11 @@ import java.util.List;
 public class CardAttribute  implements Serializable {
     
     protected ObjectColor color;
-    protected List<String> subtype;
+    protected SubTypeList subtype;
 
     public CardAttribute(Card card) {
         color = card.getColor(null).copy();
-        subtype = new ArrayList<>(card.getSubtype(null));
+        subtype = card.getSubtype(null);
     }
 
     public CardAttribute(CardAttribute cardAttribute) {
@@ -40,7 +39,7 @@ public class CardAttribute  implements Serializable {
        return color;
     }
     
-    public List<String> getSubtype() {
+    public SubTypeList getSubtype() {
         return subtype;
     }
     

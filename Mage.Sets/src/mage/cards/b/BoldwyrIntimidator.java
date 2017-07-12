@@ -39,13 +39,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -65,14 +64,14 @@ public class BoldwyrIntimidator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoldwyrIntimidatorEffect()));
         
         // {R}: Target creature becomes a Coward until end of turn.
-        Effect effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, new ArrayList<>(Collections.singletonList("Coward")), true);
+        Effect effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.COWARD);
         effect.setText("Target creature becomes a Coward until end of turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
         // {2}{R}: Target creature becomes a Warrior until end of turn.
-        effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, new ArrayList<>(Collections.singletonList("Warrior")), true);
+        effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.WARRIOR);
         effect.setText("Target creature becomes a Warrior until end of turn");
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{R}"));
         ability.addTarget(new TargetCreaturePermanent());

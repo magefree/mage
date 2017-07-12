@@ -27,19 +27,21 @@
  */
 package mage.cards.t;
 
-import java.util.Set;
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -90,7 +92,7 @@ class TrapfindersTrickEffect extends OneShotEffect {
             player.revealCards("Trapfinder's Trick", hand, game);
             Set<Card> cards = hand.getCards(game);
             for (Card card : cards) {
-                if (card != null && card.hasSubtype("Trap", game)) {
+                if (card != null && card.hasSubtype(SubType.TRAP, game)) {
                     player.discard(card, source, game);
                 }
             }

@@ -36,7 +36,6 @@ import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.repository.CardRepository;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -44,6 +43,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.SubTypeList;
 
 import java.util.Iterator;
 import java.util.List;
@@ -94,32 +94,33 @@ class ConspiracyEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         String choice = (String) game.getState().getValue(source.getSourceId().toString() + "_type");
+        SubType chosenSubtype = SubType.byDescription(choice);
         if (controller != null && choice != null) {
             // Creature cards you own that aren't on the battlefield
             // in graveyard
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
                 if (card.isCreature()) {
-                    setCreatureSubtype(card, choice, game);
+                    setCreatureSubtype(card, chosenSubtype, game);
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
                 if (card.isCreature()) {
-                    setCreatureSubtype(card, choice, game);
+                    setCreatureSubtype(card, chosenSubtype, game);
                 }
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
                 if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
-                    setCreatureSubtype(card, choice, game);
+                    setCreatureSubtype(card, chosenSubtype, game);
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
                 if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
-                    setCreatureSubtype(card, choice, game);
+                    setCreatureSubtype(card, chosenSubtype, game);
                 }
             }
             // commander in command zone
@@ -127,7 +128,7 @@ class ConspiracyEffect extends ContinuousEffectImpl {
                 if (game.getState().getZone(commanderId) == Zone.COMMAND) {
                     Card card = game.getCard(commanderId);
                     if (card.isCreature()) {
-                        setCreatureSubtype(card, choice, game);
+                        setCreatureSubtype(card, chosenSubtype, game);
                     }
                 }
             }
@@ -138,21 +139,21 @@ class ConspiracyEffect extends ContinuousEffectImpl {
                         stackObject.getControllerId().equals(source.getControllerId()) &&
                         stackObject.isCreature()) {
                     Card card = ((Spell) stackObject).getCard();
-                    setCreatureSubtype(card, choice, game);
+                    setCreatureSubtype(card, chosenSubtype, game);
                 }
             }
             // creatures you control
             List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(
                     new FilterControlledCreaturePermanent(), source.getControllerId(), game);
             for (Permanent creature : creatures) {
-                setCreatureSubtype(creature, choice, game);
+                setCreatureSubtype(creature, chosenSubtype, game);
             }
             return true;
         }
         return false;
     }
 
-    private void setCreatureSubtype(MageObject object, String subtype, Game game) {
+    private void setCreatureSubtype(MageObject object, SubType subtype, Game game) {
         if (object != null) {
             if (object instanceof Card) {
                 Card card = (Card) object;
@@ -165,9 +166,9 @@ class ConspiracyEffect extends ContinuousEffectImpl {
         }
     }
 
-    private void setChosenSubtype(List<String> subtype, String choice) {
+    private void setChosenSubtype(SubTypeList subtype, SubType choice) {
         if (subtype.size() != 1 ||  !subtype.contains(choice)) {
-            subtype.removeAll(CardRepository.instance.getCreatureTypes());
+            subtype.removeAll(SubType.getCreatureTypes(false));
             subtype.add(choice);
         }
     }

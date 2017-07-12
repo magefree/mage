@@ -46,6 +46,7 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.CardType;
 import mage.constants.EnlargeMode;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.view.*;
 import org.apache.log4j.Logger;
@@ -277,7 +278,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
         if (!card.getSubTypes().isEmpty()) {
             sbType.append("- ");
-            for (String subType : card.getSubTypes()) {
+            for (SubType subType : card.getSubTypes()) {
                 sbType.append(subType).append(' ');
             }
         }

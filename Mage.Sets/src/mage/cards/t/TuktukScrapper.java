@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -45,6 +44,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -103,7 +104,7 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl {
             if (permanent.getId().equals(this.getSourceId())) {
                 return true;
             }
-            if (permanent.hasSubtype("Ally", game)
+            if (permanent.hasSubtype(SubType.ALLY, game)
                     && permanent.getControllerId().equals(this.getControllerId())) {
                 return true;
             }

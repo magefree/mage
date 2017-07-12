@@ -27,8 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -50,6 +48,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -111,8 +112,8 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
             FilterCreaturePermanent FILTER = new FilterCreaturePermanent();
             StringBuilder sb = new StringBuilder("creature that shares a creature type with the formerly attached creature: ");
             ArrayList<Predicate<MageObject>> subtypes = new ArrayList<>();
-            for (String subtype : lastStateCreature.getSubtype(game)) {
-                subtypes.add(new SubtypePredicate(SubType.byDescription(subtype)));
+            for (SubType subtype : lastStateCreature.getSubtype(game)) {
+                subtypes.add(new SubtypePredicate(subtype));
                 sb.append(subtype).append(", ");
             }
             FILTER.add(Predicates.or(subtypes));

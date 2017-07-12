@@ -3,6 +3,7 @@ package org.mage.card.arcane;
 import com.google.common.collect.MapMaker;
 import mage.cards.action.ActionCallback;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.view.CardView;
 import mage.view.CounterView;
@@ -161,7 +162,7 @@ public class CardPanelRenderImpl extends CardPanel {
             for (SuperType s : this.view.getSuperTypes()) {
                 sb.append(s);
             }
-            for (String s : this.view.getSubTypes()) {
+            for (SubType s : this.view.getSubTypes()) {
                 sb.append(s);
             }
             for (String s : this.view.getManaCost()) {

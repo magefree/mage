@@ -27,10 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.ObjectColor;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -41,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -50,6 +47,9 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.SubTypeList;
+
+import java.util.UUID;
 
 /**
  *
@@ -105,8 +105,8 @@ class OozeGardenCreateTokenEffect extends OneShotEffect {
                 value = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
             }
         }
-        ArrayList<String> list = new ArrayList<>();
-        list.add("Ooze");
+        SubTypeList list = new SubTypeList();
+        list.add(SubType.OOZE);
         Token token = new Token("Ooze", "X/X green Ooze creature token, where X is the sacrificed creature's power", ObjectColor.GREEN, list, value, value, new AbilitiesImpl<>()) {
            
       

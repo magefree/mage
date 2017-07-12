@@ -27,7 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -41,12 +40,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -97,7 +99,7 @@ class NecromancersStockpileDiscardTargetCost extends CostImpl {
                 if (card == null) {
                     return false;
                 }
-                isZombieCard = card.hasSubtype("Zombie", game);
+                isZombieCard = card.hasSubtype(SubType.ZOMBIE, game);
                 paid |= player.discard(card, null, game);
 
             }

@@ -80,7 +80,7 @@ public class TransformAbility extends SimpleStaticAbility {
             permanent.addCardType(type);
         }
         permanent.getSubtype(game).clear();
-        for (String type : sourceCard.getSubtype(game)) {
+        for (SubType type : sourceCard.getSubtype(game)) {
             permanent.getSubtype(game).add(type);
         }
         permanent.getSuperType().clear();

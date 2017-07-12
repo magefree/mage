@@ -30,7 +30,6 @@ package mage.abilities.effects.common.continuous;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.repository.CardRepository;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -117,10 +116,10 @@ public class BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect extends Co
                                     case ALL:
                                     case ALL_BUT_COLOR:
                                     case ABILITIES_SUBTYPE_AND_PT:
-                                        permanentAttachedTo.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
+                                        permanentAttachedTo.getSubtype(game).retainAll(SubType.getLandTypes(false));
                                         break;
                                 }
-                                for (String subType : token.getSubtype(game)) {
+                                for (SubType subType : token.getSubtype(game)) {
                                     if (!permanentAttachedTo.getSubtype(game).contains(subType)) {
                                         permanentAttachedTo.getSubtype(game).add(subType);
                                     }

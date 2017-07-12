@@ -30,12 +30,7 @@ package mage.abilities.effects.common.continuous;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -85,7 +80,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().remove(CardType.CREATURE);
-                        permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
+                        permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
                         if (permanent.isAttacking() || permanent.getBlocking() > 0) {
                             permanent.removeFromCombat(game);
                         }

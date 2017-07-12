@@ -107,23 +107,23 @@ class ExcavatorEffect extends ContinuousEffectImpl implements SourceEffect {
             if(cost instanceof SacrificeTargetCost) {
                 SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
                 for(Permanent permanent : sacrificeCost.getPermanents()) {
-                    if(permanent.hasSubtype("Forest", game))
+                    if(permanent.hasSubtype(SubType.FOREST, game))
                     {
                         abilities.add(new ForestwalkAbility());
                     }
-                    if(permanent.hasSubtype("Plains", game))
+                    if(permanent.hasSubtype(SubType.PLAINS, game))
                     {
                         abilities.add(new PlainswalkAbility());
                     }
-                    if(permanent.hasSubtype("Island", game))
+                    if(permanent.hasSubtype(SubType.ISLAND, game))
                     {
                         abilities.add(new IslandwalkAbility());
                     }
-                    if(permanent.hasSubtype("Mountain", game))
+                    if(permanent.hasSubtype(SubType.MOUNTAIN, game))
                     {
                         abilities.add(new MountainwalkAbility());
                     }
-                    if(permanent.hasSubtype("Swamp", game))
+                    if(permanent.hasSubtype(SubType.SWAMP, game))
                     {
                         abilities.add(new SwampwalkAbility());
                     }

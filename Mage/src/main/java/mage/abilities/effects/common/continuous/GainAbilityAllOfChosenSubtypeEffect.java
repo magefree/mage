@@ -7,6 +7,7 @@ package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -17,7 +18,7 @@ import mage.game.permanent.Permanent;
  */
 public class GainAbilityAllOfChosenSubtypeEffect extends GainAbilityAllEffect {
 
-    String subtype = null;
+    SubType subtype = null;
 
     public GainAbilityAllOfChosenSubtypeEffect(Ability ability, Duration duration, FilterPermanent filter) {
         super(ability, duration, filter);
@@ -43,7 +44,8 @@ public class GainAbilityAllOfChosenSubtypeEffect extends GainAbilityAllEffect {
 
     @Override
     protected void setRuntimeData(Ability source, Game game) {
-        subtype = (String) game.getState().getValue(source.getSourceId() + "_type");
+      String s = (String) game.getState().getValue(source.getSourceId() + "_type");
+      subtype = SubType.byDescription(s);
     }
 
 }

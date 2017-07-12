@@ -29,10 +29,7 @@ package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -66,8 +63,8 @@ public class BecomesBlackZombieAdditionEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        if (!creature.hasSubtype("Zombie", game)) {
-                            creature.getSubtype(game).add("Zombie");
+                        if (!creature.hasSubtype(SubType.ZOMBIE, game)) {
+                            creature.getSubtype(game).add(SubType.ZOMBIE);
                         }
                     }
                     break;

@@ -27,19 +27,13 @@
  */
 package mage.abilities.effects;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -49,6 +43,8 @@ import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.UUID;
 
 /**
  * Cards with the Aura subtype don't change the zone they are in, if there is no
@@ -208,12 +204,12 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
                 && (((ZoneChangeEvent) event).getFromZone() != Zone.STACK)) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && (card.isEnchantment() && card.hasSubtype("Aura", game)
+            if (card != null && (card.isEnchantment() && card.hasSubtype(SubType.AURA, game)
                     || // in case of transformable enchantments
                     (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null
                             && card.getSecondCardFace() != null
                             && card.getSecondCardFace().isEnchantment()
-                            && card.getSecondCardFace().hasSubtype("Aura", game)))) {
+                            && card.getSecondCardFace().hasSubtype(SubType.AURA, game)))) {
                 return true;
             }
         }

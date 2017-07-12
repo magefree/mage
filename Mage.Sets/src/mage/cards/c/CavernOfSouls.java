@@ -87,13 +87,13 @@ public class CavernOfSouls extends CardImpl {
 
 class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
 
-    String creatureType;
+    SubType creatureType;
 
     @Override
     public ConditionalManaBuilder setMana(Mana mana, Ability source, Game game) {
         Object value = game.getState().getValue(source.getSourceId() + "_type");
         if (value != null && value instanceof String) {
-            creatureType = (String) value;
+            creatureType = SubType.byDescription((String) value);
         }
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
@@ -117,7 +117,7 @@ class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
 
 class CavernOfSoulsConditionalMana extends ConditionalMana {
 
-    public CavernOfSoulsConditionalMana(Mana mana, String creatureType) {
+    public CavernOfSoulsConditionalMana(Mana mana, SubType creatureType) {
         super(mana);
         staticText = "Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered";
         addCondition(new CavernOfSoulsManaCondition(creatureType));
@@ -126,9 +126,9 @@ class CavernOfSoulsConditionalMana extends ConditionalMana {
 
 class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
 
-    String creatureType;
+    SubType creatureType;
 
-    CavernOfSoulsManaCondition(String creatureType) {
+    CavernOfSoulsManaCondition(SubType creatureType) {
         this.creatureType = creatureType;
     }
 

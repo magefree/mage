@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -44,6 +43,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,7 +99,7 @@ class GideonsDefeatEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             controller.moveCards(permanent, Zone.EXILED, source, game);
             game.applyEffects();
-            if (permanent.isPlaneswalker() && permanent.hasSubtype(SubType.GIDEON.getDescription(), game)) {
+            if (permanent.isPlaneswalker() && permanent.hasSubtype(SubType.GIDEON, game)) {
                 controller.gainLife(5, game);
             }
             return true;

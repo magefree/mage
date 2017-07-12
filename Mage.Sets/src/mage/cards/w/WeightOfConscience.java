@@ -141,9 +141,9 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
             // Choosing first target
             if (this.getTargets().isEmpty()) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, game)) {
-                    for (String subtype : permanent.getSubtype(game)) {
-                        if (!CardUtil.isNonCreatureSubtype(subtype)) {
-                            if (game.getBattlefield().contains(new FilterControlledCreaturePermanent(SubType.byDescription(subtype), subtype), sourceControllerId, game, 2)) {
+                    for (SubType subtype : permanent.getSubtype(game)) {
+                        if (!CardUtil.isNonCreatureSubtype(subtype.toString())) {
+                            if (game.getBattlefield().contains(new FilterControlledCreaturePermanent(subtype, subtype.toString()), sourceControllerId, game, 2)) {
                                 possibleTargets.add(permanent.getId());
                             }
                         }
@@ -185,9 +185,9 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
             if (targetPermanent != null) {
                 if (this.getTargets().isEmpty()) {
                     for (Permanent permanent : game.getBattlefield().getActivePermanents(filterUntapped, source.getControllerId(), game)) {
-                        for (String subtype : permanent.getSubtype(game)) {
-                            if (!CardUtil.isNonCreatureSubtype(subtype)) {
-                                if (game.getBattlefield().contains(new FilterControlledCreaturePermanent(SubType.byDescription(subtype), subtype), source.getControllerId(), game, 2)) {
+                        for (SubType subtype : permanent.getSubtype(game)) {
+                            if (!CardUtil.isNonCreatureSubtype(subtype.toString())) {
+                                if (game.getBattlefield().contains(new FilterControlledCreaturePermanent(subtype, subtype.toString()), source.getControllerId(), game, 2)) {
                                     return true;
                                 }
                             }

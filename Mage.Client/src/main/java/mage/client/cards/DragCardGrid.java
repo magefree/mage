@@ -1,15 +1,5 @@
 package mage.client.cards;
 
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import javax.swing.*;
 import mage.cards.Card;
 import mage.cards.MageCard;
 import mage.cards.decks.DeckCardInfo;
@@ -23,12 +13,24 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.util.RandomUtil;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardRenderer;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Created by StravantUser on 2016-09-20.
@@ -1273,8 +1275,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                             for (SuperType str : card.getSuperTypes()) {
                                 s |= str.toString().toLowerCase().contains(searchStr);
                             }
-                            for (String str : card.getSubTypes()) {
-                                s |= str.toLowerCase().contains(searchStr);
+                            for (SubType str : card.getSubTypes()) {
+                                s |= str.toString().toLowerCase().contains(searchStr);
                             }
                         }
                         // Rarity
@@ -1349,8 +1351,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     for (SuperType type : card.getSuperTypes()) {
                         t += ' ' + type.toString().toLowerCase();
                     }
-                    for (String str : card.getSubTypes()) {
-                        t += ' ' + str.toLowerCase();
+                    for (SubType str : card.getSubTypes()) {
+                        t += " " + str.toString().toLowerCase();
                     }
 
                     for (String qty : qtys.keySet()) {

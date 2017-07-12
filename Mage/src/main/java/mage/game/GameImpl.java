@@ -27,10 +27,6 @@
  */
 package mage.game;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 import mage.MageException;
 import mage.MageObject;
 import mage.abilities.*;
@@ -95,6 +91,11 @@ import mage.util.functions.ApplyToPermanent;
 import mage.watchers.Watchers;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -1949,9 +1950,9 @@ public abstract class GameImpl implements Game, Serializable {
         // This is called the "planeswalker uniqueness rule."
         if (planeswalkers.size() > 1) {  //don't bother checking if less than 2 planeswalkers in play
             for (Permanent planeswalker : planeswalkers) {
-                for (String planeswalkertype : planeswalker.getSubtype(this)) {
+                for (SubType planeswalkertype : planeswalker.getSubtype(this)) {
                     FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
-                    filterPlaneswalker.add(new SubtypePredicate(SubType.byDescription(planeswalkertype)));
+                    filterPlaneswalker.add(new SubtypePredicate(planeswalkertype));
                     filterPlaneswalker.add(new ControllerIdPredicate(planeswalker.getControllerId()));
                     if (getBattlefield().contains(filterPlaneswalker, planeswalker.getControllerId(), this, 2)) {
                         Player controller = this.getPlayer(planeswalker.getControllerId());

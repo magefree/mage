@@ -27,10 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -39,6 +35,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -47,6 +44,9 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -100,7 +100,7 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
             filter.add(Predicates.not(new PermanentIdPredicate(this.targetPointer.getFirst(game, source))));
             filter.add(new AttackingPredicate());
             boolean allCreatureTypes = false;
-            if (permanent.getSubtype(game).contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
+            if (permanent.isAllCreatureTypes()) {
                 allCreatureTypes = true;
             } else {
                 for(Ability ability : permanent.getAbilities()){
@@ -111,8 +111,8 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
             }
             if(!allCreatureTypes){
                 ArrayList<Predicate<MageObject>> predicateList = new ArrayList<>();
-                for(String subtype : permanent.getSubtype(game)){
-                    predicateList.add(new SubtypePredicate(SubType.byDescription(subtype)));
+                for(SubType subtype : permanent.getSubtype(game)){
+                    predicateList.add(new SubtypePredicate(subtype));
                 }
                 filter.add(Predicates.or(predicateList));
             }

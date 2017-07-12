@@ -5,17 +5,14 @@
  */
 package mage.abilities.effects.common.continuous;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.repository.CardRepository;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.SubTypeList;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,26 +20,30 @@ import mage.game.permanent.Permanent;
  */
 public class BecomesCreatureTypeTargetEffect extends ContinuousEffectImpl {
 
-    protected ArrayList<String> subtypes = new ArrayList();
+    protected SubTypeList subtypes = new SubTypeList();
     protected boolean loseOther;  // loses other creature types
 
-    public BecomesCreatureTypeTargetEffect(Duration duration, String subtype) {
+    public BecomesCreatureTypeTargetEffect(Duration duration, SubType subtype) {
         this(duration, createArrayList(subtype));
     }
 
-    public BecomesCreatureTypeTargetEffect(Duration duration, ArrayList<String> subtypes) {
+    public BecomesCreatureTypeTargetEffect(Duration duration, SubType subtype, boolean loseOther) {
+        this(duration, createArrayList(subtype), loseOther);
+    }
+
+    public BecomesCreatureTypeTargetEffect(Duration duration, SubTypeList subtypes) {
         this(duration, subtypes, true);
     }
 
-    public BecomesCreatureTypeTargetEffect(Duration duration, ArrayList<String> subtypes, boolean loseOther) {
+    public BecomesCreatureTypeTargetEffect(Duration duration, SubTypeList subtypes, boolean loseOther) {
         super(duration, Outcome.Detriment);
         this.subtypes = subtypes;
         this.staticText = setText();
         this.loseOther = loseOther;
     }
 
-    private static ArrayList<String> createArrayList(String subtype) {
-        ArrayList<String> subtypes = new ArrayList<>();
+    private static SubTypeList createArrayList(SubType subtype) {
+        SubTypeList subtypes = new SubTypeList();
         subtypes.add(subtype);
         return subtypes;
     }
@@ -72,10 +73,10 @@ public class BecomesCreatureTypeTargetEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (loseOther) {
-                            permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
+                            permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
                             permanent.getSubtype(game).addAll(subtypes);
                         } else {
-                            for (String subtype : subtypes) {
+                            for (SubType subtype : subtypes) {
                                 if (!permanent.getSubtype(game).contains(subtype)) {
                                     permanent.getSubtype(game).add(subtype);
                                 }

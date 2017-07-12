@@ -28,17 +28,18 @@
 
 package mage.choices;
 
-import mage.cards.repository.CardRepository;
+import mage.constants.SubType;
+
+import java.util.stream.Collectors;
 
 /**
- *
  * @author tre3qwerty
  */
 public class ChoiceLandType extends ChoiceImpl {
 
     public ChoiceLandType() {
         super(true);
-        this.setChoices(CardRepository.instance.getLandTypes());
+        this.setChoices(SubType.getLandTypes(false).stream().map(SubType::toString).collect(Collectors.toSet()));
         this.message = "Choose a land type";
     }
 

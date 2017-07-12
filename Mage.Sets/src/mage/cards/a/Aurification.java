@@ -39,10 +39,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
@@ -50,8 +47,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.SubTypeList;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -76,8 +73,8 @@ public class Aurification extends CardImpl {
         this.addAbility(new AddGoldCountersAbility());
 
         // Each creature with a gold counter on it is a Wall in addition to its other creature types and has defender.
-        ArrayList<String> subtypes = new ArrayList<>(1);
-        subtypes.add("Wall");
+        SubTypeList subtypes = new SubTypeList();
+        subtypes.add(SubType.WALL);
 
         BecomesSubtypeAllEffect becomesSubtypeAllEffect = new BecomesSubtypeAllEffect(Duration.WhileOnBattlefield, subtypes, filter, false);
         becomesSubtypeAllEffect.setText("");

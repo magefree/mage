@@ -124,8 +124,8 @@ class CallToTheKindredEffect extends OneShotEffect {
         if (!creature.getAbilities().contains(ChangelingAbility.getInstance())) {
             StringBuilder sb = new StringBuilder("creature card with at least one subtype from: ");
             ArrayList<Predicate<MageObject>> subtypes = new ArrayList<>();
-            for (String subtype : creature.getSubtype(game)) {
-                subtypes.add(new SubtypePredicate(SubType.byDescription(subtype)));
+            for (SubType subtype : creature.getSubtype(game)) {
+                subtypes.add(new SubtypePredicate(subtype));
                 sb.append(subtype).append(", ");
             }
             filter.add(Predicates.or(subtypes));
