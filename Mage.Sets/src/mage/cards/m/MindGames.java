@@ -57,7 +57,7 @@ public class MindGames extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Buyback {2}{U}
-        this.addAbility(new BuybackAbility("{3}"));
+        this.addAbility(new BuybackAbility("{2}{U}"));
         
         // Tap target artifact, creature, or land.
         this.getSpellAbility().addEffect(new TapTargetEffect());
