@@ -596,4 +596,6 @@ public class StackAbility extends StackObjImpl implements Ability {
     public boolean isAllCreatureTypes(){
         return false;
     }
+
+    public void setIsAllCreatureTypes(boolean value){}
 }

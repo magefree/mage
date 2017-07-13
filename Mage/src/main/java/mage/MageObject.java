@@ -193,6 +193,8 @@ public interface MageObject extends MageItem, Serializable {
 
     boolean isAllCreatureTypes();
 
+    void setIsAllCreatureTypes(boolean value);
+
     default void addCardTypes(EnumSet<CardType> cardType){
         getCardType().addAll(cardType);
     }

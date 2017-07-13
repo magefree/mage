@@ -115,6 +115,7 @@ public class Token extends MageObjectImpl {
         this.expansionSetCodeChecked = token.expansionSetCodeChecked;
         this.copySourceCard = token.copySourceCard; // will never be changed
         this.availableImageSetCodes = token.availableImageSetCodes;
+        this.isAllCreatureTypes = token.isAllCreatureTypes;
     }
 
     private void setTokenDescriptor() {

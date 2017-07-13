@@ -270,4 +270,6 @@ public class Emblem implements CommandObject {
 
     public boolean isAllCreatureTypes(){ return false;}
 
+    public void setIsAllCreatureTypes(boolean value){}
+
 }

@@ -39,10 +39,10 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.SubTypeSet;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
@@ -269,7 +269,7 @@ public abstract class MageObjectImpl implements MageObject {
             // checking for Changeling
             // first make sure input parameter is a creature subtype
             // if not, then ChangelingAbility doesn't matter
-            if (CardUtil.isNonCreatureSubtype(value.toString())) {
+            if (value.getSubTypeSet() != SubTypeSet.CreatureType) {
                 return false;
             }
             // as it is creature subtype, then check the existence of Changeling
@@ -307,6 +307,7 @@ public abstract class MageObjectImpl implements MageObject {
         return isAllCreatureTypes;
     }
 
+    @Override
     public void setIsAllCreatureTypes(boolean value){
         isAllCreatureTypes = value;
     }

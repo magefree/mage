@@ -68,6 +68,11 @@ public class Monarch extends Designation {
     public boolean isAllCreatureTypes() {
         return false;
     }
+
+    @Override
+    public void setIsAllCreatureTypes(boolean value) {
+
+    }
 }
 
 // At the beginning of the monarch’s end step, that player draws a card
@@ -153,5 +158,6 @@ class MonarchDealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     public String getRule() {
         return "Whenever a creature deals combat damage to the monarch, its controller becomes the monarch.";
     }
+
 
 }

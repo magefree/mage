@@ -37,7 +37,6 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
 import mage.util.SubTypeList;
 
 import java.util.List;
@@ -96,13 +95,13 @@ class CoatOfArmsEffect extends ContinuousEffectImpl {
     private int getAmount(List<Permanent> permanents, Permanent target, Game game) {
         int amount = 0;
         SubTypeList targetSubtype = target.getSubtype(game);
-        if (target.getAbilities().contains(ChangelingAbility.getInstance())) {
+        if (target.getAbilities().contains(ChangelingAbility.getInstance()) || target.isAllCreatureTypes()) {
             return permanents.size() - 1;
         }
         for (Permanent permanent : permanents) {
             if (!permanent.getId().equals(target.getId())) {
                 for (SubType subtype : targetSubtype) {
-                    if (!CardUtil.isNonCreatureSubtype(subtype.getDescription())) {
+                    if (subtype.getSubTypeSet() == SubTypeSet.CreatureType) {
                         if (permanent.hasSubtype(subtype, game)) {
                             amount++;
                             break;

@@ -116,6 +116,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         if (!token.getSubtype(game).isEmpty()) {
                             permanent.getSubtype(game).addAll(token.getSubtype(game));
                         }
+                        permanent.setIsAllCreatureTypes(token.isAllCreatureTypes());
                     }
                     break;
                 case ColorChangingEffects_5:

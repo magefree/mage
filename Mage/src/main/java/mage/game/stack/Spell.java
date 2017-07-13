@@ -926,4 +926,6 @@ public class Spell extends StackObjImpl implements Card {
     public boolean isAllCreatureTypes(){
         return false;
     }
+
+    public void setIsAllCreatureTypes(boolean value){}
 }
