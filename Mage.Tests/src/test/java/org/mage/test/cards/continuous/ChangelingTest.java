@@ -53,6 +53,6 @@ public class ChangelingTest extends CardTestPlayerBase {
         unreal:  +1
         coat of arms: +5
          */
-        assertPowerToughness(playerA, mutavault, 10, 10);
+        assertPowerToughness(playerA, mutavault, 9, 9);
     }
 }
