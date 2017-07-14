@@ -95,18 +95,10 @@ class DaruSpiritualistAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent creature = game.getPermanent(event.getTargetId());
-        game.informPlayers("name:" + creature.getName());
-        List<String> list = creature.getSubtype(game);
-        for(String s : list) {
-            game.informPlayers(s);
-        }
-        game.informPlayers("has cleric: " + creature.hasSubtype("Cleric", game));
-        game.informPlayers("ids match: " + (creature.getControllerId() == this.getControllerId()));
         if (creature != null && creature.isCreature() && creature.hasSubtype("Cleric", game) && creature.getControllerId() == this.getControllerId()) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
             return true;
         }
-        game.informPlayers("returning false");
         return false;
     }
 
