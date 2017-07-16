@@ -81,7 +81,7 @@ public class JaceTest extends CardTestPlayerBase {
 
         // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard,
         // exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
-        addCard(Zone.BATTLEFIELD, playerA, "Jace, Vryn's Prodigy", 1); // {2}{R} - 3/2
+        addCard(Zone.BATTLEFIELD, playerA, "Jace, Vryn's Prodigy", 1); // {U}{1} - 0/2
         addCard(Zone.HAND, playerA, "Pillarfield Ox", 1);
 
         // Flash
@@ -97,7 +97,41 @@ public class JaceTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Pillarfield Ox", 1);
         assertExileCount("Jace, Vryn's Prodigy", 0);
         assertPermanentCount(playerA, "Jace, Telepath Unbound", 1);
-
+    }
+    
+    @Test
+    public void vrynCannotCastAncestralVisions() {
+                
+        // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard,
+        // exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
+        String jVryn = "Jace, Vryn's Prodigy"; // {U}{1} 0/2
+        
+        //−3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.        
+        String jTelepath = "Jace, Telepath Unbound"; // 5 loyalty
+        
+        // Sorcery, Suspend 4 {U}. Target player draws three cards.
+        String ancestralVision = "Ancestral Vision"; 
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Jace, Vryn's Prodigy", 1); // {U}{1} - 0/2
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.GRAVEYARD, playerA, "Island", 4);
+        addCard(Zone.GRAVEYARD, playerA, ancestralVision);
+        addCard(Zone.HAND, playerA, "Swamp", 1);
+        
+        activateAbility(3, PhaseStep.BEGIN_COMBAT, playerA, "{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard");
+        setChoice(playerA, "Swamp");
+        activateAbility(3, PhaseStep.BEGIN_COMBAT, playerA, "-3:");
+        addTarget(playerA, ancestralVision);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, ancestralVision);
+        
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertPermanentCount(playerA, jTelepath, 1);
+        assertGraveyardCount(playerA, "Swamp", 1);
+        assertGraveyardCount(playerA, ancestralVision, 1);
+        assertHandCount(playerA, 2); // 1 draw step + jace draw card
+        assertCounterCount(playerA, jTelepath, CounterType.LOYALTY, 5); // never changes since invalid target ?
     }
 
     /**
