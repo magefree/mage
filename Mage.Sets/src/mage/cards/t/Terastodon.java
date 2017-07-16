@@ -60,7 +60,7 @@ public class Terastodon extends CardImpl {
     }
 
     public Terastodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
         this.subtype.add("Elephant");
 
         this.power = new MageInt(9);
@@ -112,6 +112,7 @@ class TerastodonEffect extends OneShotEffect {
                 }
             }
         }
+        game.applyEffects();
         ElephantToken elephantToken = new ElephantToken();
         for (Entry<UUID, Integer> entry : destroyedPermanents.entrySet()) {
             elephantToken.putOntoBattlefield(entry.getValue(), game, source.getSourceId(), entry.getKey());
