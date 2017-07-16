@@ -115,6 +115,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Tutor", 46, Rarity.RARE, mage.cards.i.InfernalTutor.class));
         cards.add(new SetCardInfo("Isperia the Inscrutable", 114, Rarity.RARE, mage.cards.i.IsperiaTheInscrutable.class));
         cards.add(new SetCardInfo("Kill-Suit Cultist", 65, Rarity.COMMON, mage.cards.k.KillSuitCultist.class));
+        cards.add(new SetCardInfo("Kindle the Carnage", 66, Rarity.UNCOMMON, mage.cards.k.KindleTheCarnage.class));
         cards.add(new SetCardInfo("Leafdrake Roost", 116, Rarity.UNCOMMON, mage.cards.l.LeafdrakeRoost.class));
         cards.add(new SetCardInfo("Loaming Shaman", 87, Rarity.RARE, mage.cards.l.LoamingShaman.class));
         cards.add(new SetCardInfo("Lyzolda, the Blood Witch", 117, Rarity.RARE, mage.cards.l.LyzoldaTheBloodWitch.class));
