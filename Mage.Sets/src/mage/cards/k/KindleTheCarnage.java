@@ -27,25 +27,23 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
-import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
- * @author anonymous
+ * @author ciaccona007
  */
 public class KindleTheCarnage extends CardImpl {
 
