@@ -61,7 +61,9 @@ public class CardsCycledOrDiscardedThisTurnWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DISCARDED_CARD && event.getPlayerId() != null) {
+        if (event.getType() == GameEvent.EventType.DISCARDED_CARD 
+                || event.getType() == GameEvent.EventType.CYCLED_CARD
+                && event.getPlayerId() != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
                 Cards c = getCardsCycledOrDiscardedThisTurn(event.getPlayerId());
