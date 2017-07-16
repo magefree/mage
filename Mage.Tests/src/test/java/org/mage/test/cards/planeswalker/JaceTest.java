@@ -131,7 +131,7 @@ public class JaceTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Swamp", 1);
         assertGraveyardCount(playerA, ancestralVision, 1);
         assertHandCount(playerA, 2); // 1 draw step + jace draw card
-        assertCounterCount(playerA, jTelepath, CounterType.LOYALTY, 2); // never changes since invalid target ?
+        assertCounterCount(playerA, jTelepath, CounterType.LOYALTY, 2);
     }
 
     /**
