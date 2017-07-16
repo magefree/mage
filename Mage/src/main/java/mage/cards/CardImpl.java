@@ -27,6 +27,11 @@
  */
 package mage.cards;
 
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -46,12 +51,6 @@ import mage.game.stack.StackObject;
 import mage.util.GameLog;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
-
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -281,6 +280,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     /**
      * Public in order to support adding abilities to SplitCardHalf's
+     *
      * @param ability
      */
     public void addAbility(Ability ability) {
@@ -624,7 +624,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects) {
         boolean returnCode = true;
-        UUID sourceId = (source == null ? null : source.getSourceId());
+        UUID sourceId = (source == null ? getId() : source.getSourceId());
         GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, sourceId, getControllerOrOwner(), counter.getName(), counter.getCount());
         countersEvent.setAppliedEffects(appliedEffects);
         if (!game.replaceEvent(countersEvent)) {
