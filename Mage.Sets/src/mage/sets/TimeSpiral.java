@@ -68,6 +68,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Coral Trickster", 54, Rarity.COMMON, mage.cards.c.CoralTrickster.class));
         cards.add(new SetCardInfo("Corpulent Corpse", 98, Rarity.COMMON, mage.cards.c.CorpulentCorpse.class));
         cards.add(new SetCardInfo("Crookclaw Transmuter", 55, Rarity.COMMON, mage.cards.c.CrookclawTransmuter.class));
+        cards.add(new SetCardInfo("Curse of the Cabal", 99, Rarity.RARE, mage.cards.c.CurseOfTheCabal.class));
         cards.add(new SetCardInfo("Dark Withering", 101, Rarity.COMMON, mage.cards.d.DarkWithering.class));
         cards.add(new SetCardInfo("D'Avenant Healer", 11, Rarity.COMMON, mage.cards.d.DAvenantHealer.class));
         cards.add(new SetCardInfo("Deathspore Thallid", 102, Rarity.COMMON, mage.cards.d.DeathsporeThallid.class));
