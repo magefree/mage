@@ -118,9 +118,9 @@ public class JaceTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, ancestralVision);
         addCard(Zone.HAND, playerA, "Swamp", 1);
         
-        activateAbility(3, PhaseStep.BEGIN_COMBAT, playerA, "{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard");
         setChoice(playerA, "Swamp");
-        activateAbility(3, PhaseStep.BEGIN_COMBAT, playerA, "-3:");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-3:");
         addTarget(playerA, ancestralVision);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, ancestralVision);
         
@@ -131,7 +131,7 @@ public class JaceTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Swamp", 1);
         assertGraveyardCount(playerA, ancestralVision, 1);
         assertHandCount(playerA, 2); // 1 draw step + jace draw card
-        assertCounterCount(playerA, jTelepath, CounterType.LOYALTY, 5); // never changes since invalid target ?
+        assertCounterCount(playerA, jTelepath, CounterType.LOYALTY, 2); // never changes since invalid target ?
     }
 
     /**
