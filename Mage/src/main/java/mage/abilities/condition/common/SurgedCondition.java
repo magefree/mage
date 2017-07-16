@@ -27,12 +27,14 @@
  */
 package mage.abilities.condition.common;
 
-import java.util.ArrayList;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.keyword.SurgeAbility;
 import mage.constants.AbilityType;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -46,7 +48,7 @@ public enum SurgedCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         if (source.getAbilityType() == AbilityType.TRIGGERED) {
             @SuppressWarnings("unchecked")
-            ArrayList<Integer> surgeActivations = (ArrayList) game.getState().getValue(SurgeAbility.SURGE_ACTIVATION_VALUE_KEY + source.getSourceId());
+            List<Integer> surgeActivations = (ArrayList) game.getState().getValue(SurgeAbility.SURGE_ACTIVATION_VALUE_KEY + source.getSourceId());
             if (surgeActivations != null) {
                 return surgeActivations.contains(game.getState().getZoneChangeCounter(source.getSourceId()) - 1);
             }

@@ -36,10 +36,7 @@ import mage.view.ChatMessage.SoundToPlay;
 import org.apache.log4j.Logger;
 
 import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -119,7 +116,7 @@ public class ChatSession {
 
     public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         if (!message.isEmpty()) {
-            HashSet<UUID> clientsToRemove = new HashSet<>();
+            Set<UUID> clientsToRemove = new HashSet<>();
             ClientCallback clientCallback = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, new ChatMessage(userName, message, (withTime ? timeFormatter.format(new Date()) : ""), color, messageType, soundToPlay));
             for (UUID userId : clients.keySet()) {
                 Optional<User> user = UserManager.instance.getUser(userId);

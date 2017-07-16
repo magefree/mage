@@ -27,19 +27,13 @@
  */
 package mage.abilities.effects;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.constants.Duration;
 import mage.game.Game;
 import org.apache.log4j.Logger;
+
+import java.util.*;
 
 /**
  * @param <T>
@@ -50,7 +44,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     private static final Logger logger = Logger.getLogger(ContinuousEffectsList.class);
 
     // the effectAbilityMap holds for each effect all abilities that are connected (used) with this effect
-    private final Map<UUID, HashSet<Ability>> effectAbilityMap = new HashMap<>();
+    private final Map<UUID, Set<Ability>> effectAbilityMap = new HashMap<>();
 
     public ContinuousEffectsList() {
     }
@@ -60,8 +54,8 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         for (ContinuousEffect cost : effects) {
             this.add((T) cost.copy());
         }
-        for (Map.Entry<UUID, HashSet<Ability>> entry : effects.effectAbilityMap.entrySet()) {
-            HashSet<Ability> newSet = new HashSet<>();
+        for (Map.Entry<UUID, Set<Ability>> entry : effects.effectAbilityMap.entrySet()) {
+            Set<Ability> newSet = new HashSet<>();
             for (Ability ability : entry.getValue()) {
                 newSet.add(ability.copy());
             }
@@ -104,7 +98,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     }
 
     private boolean isInactive(T effect, Game game) {
-        HashSet<Ability> set = effectAbilityMap.get(effect.getId());
+        Set<Ability> set = effectAbilityMap.get(effect.getId());
         if (set == null) {
             logger.debug("No abilities for effect found: " + effect.toString());
             return false;
@@ -153,7 +147,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
      */
     public void addEffect(T effect, Ability source) {
         if (effectAbilityMap.containsKey(effect.getId())) {
-            HashSet<Ability> set = effectAbilityMap.get(effect.getId());
+            Set<Ability> set = effectAbilityMap.get(effect.getId());
             for (Ability ability : set) {
                 if (ability.getId().equals(source.getId()) && ability.getSourceId().equals(source.getSourceId())) {
                     return;
@@ -162,18 +156,18 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             set.add(source);
             return;
         }
-        HashSet<Ability> set = new HashSet<>();
+        Set<Ability> set = new HashSet<>();
         set.add(source);
         this.effectAbilityMap.put(effect.getId(), set);
         this.add(effect);
     }
 
-    public HashSet<Ability> getAbility(UUID effectId) {
+    public Set<Ability> getAbility(UUID effectId) {
         return effectAbilityMap.getOrDefault(effectId, new HashSet<>());
     }
 
     public void removeEffects(UUID effectIdToRemove, Set<Ability> abilitiesToRemove) {
-        HashSet<Ability> abilities = effectAbilityMap.get(effectIdToRemove);
+        Set<Ability> abilities = effectAbilityMap.get(effectIdToRemove);
         if (abilitiesToRemove != null && abilities != null) {
             abilities.removeAll(abilitiesToRemove);
         }

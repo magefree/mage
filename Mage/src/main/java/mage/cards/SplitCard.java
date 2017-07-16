@@ -27,9 +27,6 @@
  */
 package mage.cards;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -38,6 +35,10 @@ import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -91,7 +92,7 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects) {
         if (super.moveToZone(toZone, sourceId, game, flag, appliedEffects)) {
             game.getState().setZone(getLeftHalfCard().getId(), toZone);
             game.getState().setZone(getRightHalfCard().getId(), toZone);
@@ -101,7 +102,7 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
         if (super.moveToExile(exileId, name, sourceId, game, appliedEffects)) {
             Zone currentZone = game.getState().getZone(getId());
             game.getState().setZone(getLeftHalfCard().getId(), currentZone);

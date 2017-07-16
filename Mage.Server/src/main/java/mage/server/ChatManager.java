@@ -27,10 +27,6 @@
  */
 package mage.server;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.server.exceptions.UserNotFoundException;
@@ -39,6 +35,11 @@ import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -290,7 +291,7 @@ public enum ChatManager {
         }
     }
 
-    public ArrayList<ChatSession> getChatSessions() {
+    public List<ChatSession> getChatSessions() {
         return new ArrayList<>(chatSessions.values());
     }
 

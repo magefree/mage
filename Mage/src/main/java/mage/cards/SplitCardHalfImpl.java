@@ -5,12 +5,14 @@
  */
 package mage.cards;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -51,12 +53,12 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects) {
         return splitCardParent.moveToZone(toZone, sourceId, game, flag, appliedEffects);
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
         return splitCardParent.moveToExile(exileId, name, sourceId, game, appliedEffects);
     }
 
