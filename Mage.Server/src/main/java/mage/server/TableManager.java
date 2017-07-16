@@ -369,7 +369,7 @@ public enum TableManager {
                     + " | " + sessionState
                     + " | " + user.getName() + " (" + user.getUserState().toString() + " - " + user.getPingInfo() + ')');
         }
-        ArrayList<ChatSession> chatSessions = ChatManager.instance.getChatSessions();
+        List<ChatSession> chatSessions = ChatManager.instance.getChatSessions();
         logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");
         for (ChatSession chatSession : chatSessions) {
             logger.debug(chatSession.getChatId() + " " + formatter.format(chatSession.getCreateTime()) + ' ' + chatSession.getInfo() + ' ' + chatSession.getClients().values().toString());
@@ -387,7 +387,7 @@ public enum TableManager {
             debugServerState();
         }
         logger.debug("TABLE HEALTH CHECK");
-        ArrayList<Table> tableCopy = new ArrayList<>(tables.values());
+        List<Table> tableCopy = new ArrayList<>(tables.values());
         for (Table table : tableCopy) {
             try {
                 if (table.getState() != TableState.FINISHED) {

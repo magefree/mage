@@ -27,10 +27,6 @@
  */
 package mage.game.permanent;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -40,6 +36,10 @@ import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
+
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public interface Permanent extends Card, Controllable {
 
@@ -129,7 +129,7 @@ public interface Permanent extends Card, Controllable {
 
     int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable);
 
-    int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable, ArrayList<UUID> appliedEffects);
+    int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable, List<UUID> appliedEffects);
 
     /**
      * used in combat only to deal damage at the same time
@@ -267,7 +267,7 @@ public interface Permanent extends Card, Controllable {
      *
      * @return
      */
-    HashSet<MageObjectReference> getDealtDamageByThisTurn();
+    Set<MageObjectReference> getDealtDamageByThisTurn();
 
     /**
      * Imprint some other card to this one.

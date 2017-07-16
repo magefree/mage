@@ -28,9 +28,6 @@
 
 package mage.abilities.common;
 
-import java.util.ArrayList;
-import java.util.Set;
-
 import mage.MageObject;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.PayLifeCost;
@@ -47,6 +44,10 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -67,7 +68,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
         addCost(new SacrificeSourceCost());
         FilterCard filter = new FilterCard(subTypeNames(subtypes));
         filter.add(new CardTypePredicate(CardType.LAND));
-        ArrayList<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
+        List<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
         for (SubType subtype : subtypes) {
             subtypePredicates.add(new SubtypePredicate(subtype));
         }

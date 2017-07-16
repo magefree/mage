@@ -27,19 +27,9 @@
  */
 package org.mage.test.player;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.MageObject;
 import mage.MageObjectReference;
-import mage.abilities.Abilities;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -52,13 +42,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
-import mage.constants.AbilityType;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.Filter;
@@ -83,21 +67,14 @@ import mage.players.Library;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.players.net.UserData;
-import mage.target.Target;
-import mage.target.TargetAmount;
-import mage.target.TargetCard;
-import mage.target.TargetPermanent;
-import mage.target.TargetPlayer;
-import mage.target.TargetSource;
-import mage.target.TargetSpell;
-import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetCardInOpponentsGraveyard;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetCreatureOrPlayer;
-import mage.target.common.TargetCreaturePermanentAmount;
-import mage.target.common.TargetPermanentOrPlayer;
+import mage.target.*;
+import mage.target.common.*;
 import org.junit.Ignore;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1329,7 +1306,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int drawCards(int num, Game game, ArrayList<UUID> appliedEffects) {
+    public int drawCards(int num, Game game, List<UUID> appliedEffects) {
         return computerPlayer.drawCards(num, game, appliedEffects);
     }
 
@@ -1619,7 +1596,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, ArrayList<UUID> appliedEffects) {
+    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
         return computerPlayer.damage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
     }
 
@@ -2284,7 +2261,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
+    public boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
         return computerPlayer.moveCards(card, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
     }
 
@@ -2299,7 +2276,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
+    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
         return computerPlayer.moveCards(cards, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
     }
 

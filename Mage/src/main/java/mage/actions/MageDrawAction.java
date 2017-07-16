@@ -1,8 +1,5 @@
 package mage.actions;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.actions.impl.MageAction;
 import mage.actions.score.ArtificialScoringSystem;
 import mage.cards.Card;
@@ -11,6 +8,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Action for drawing cards.
@@ -21,12 +22,12 @@ public class MageDrawAction extends MageAction {
 
     private final Player player;
     private final int amount;
-    private final ArrayList<UUID> appliedEffects;
+    private final List<UUID> appliedEffects;
     private final List<Card> drawnCards;
 
     private static final int NEGATIVE_VALUE = -1000000;
 
-    public MageDrawAction(Player player, int amount, ArrayList<UUID> appliedEffects) {
+    public MageDrawAction(Player player, int amount, List<UUID> appliedEffects) {
         this.player = player;
         this.amount = amount;
         this.appliedEffects = appliedEffects;
