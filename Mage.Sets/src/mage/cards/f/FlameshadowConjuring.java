@@ -27,12 +27,14 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
@@ -48,8 +50,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
  *
  * @author fireshoes
@@ -63,12 +63,14 @@ public class FlameshadowConjuring extends CardImpl {
     }
 
     public FlameshadowConjuring(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FlameshadowConjuringEffect(), filterNontoken, false, SetTargetPointer.PERMANENT,
-                "Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step");
-        ability.addCost(new ManaCostsImpl("{R}"));
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(
+                new FlameshadowConjuringEffect(), new ManaCostsImpl("{R}"), "Pay {R} to create a token that's a copy of that creature that entered the battlefield?"), filterNontoken, false, SetTargetPointer.PERMANENT,
+                "Whenever a nontoken creature enters the battlefield under your control, "
+                + "you may pay {R}. If you do, create a token that's a copy of that creature. "
+                + "That token gains haste. Exile it at the beginning of the next end step");
         this.addAbility(ability);
     }
 
