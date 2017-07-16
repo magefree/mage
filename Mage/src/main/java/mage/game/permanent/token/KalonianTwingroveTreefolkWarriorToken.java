@@ -33,14 +33,22 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.game.permanent.token.DokaiWeaverofLifeToken.filterLands;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author spjspj
  */
 public class KalonianTwingroveTreefolkWarriorToken extends Token {
+    
+    final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
+
+    static {
+        filterLands.add(new SubtypePredicate(SubType.FOREST));
+    }
 
     public KalonianTwingroveTreefolkWarriorToken() {
         super("Treefolk Warrior", "green Treefolk Warrior creature token with \"This creature's power and toughness are each equal to the number of Forests you control.\"");

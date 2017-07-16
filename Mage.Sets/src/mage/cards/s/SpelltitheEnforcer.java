@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -39,9 +38,11 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ public class SpelltitheEnforcer extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new SpelltitheEnforcerEffect(),
-                new FilterSpell(),
+                StaticFilters.FILTER_SPELL,
                 false, 
                 SetTargetPointer.PLAYER
         ));

@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -71,7 +71,7 @@ public class PardicDragon extends CardImpl {
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{R}{R}"), this, true));
         // Whenever an opponent casts a spell, if Pardic Dragon is suspended, that player may put a time counter on Pardic Dragon.
         this.addAbility(new ConditionalTriggeredAbility(
-                new SpellCastOpponentTriggeredAbility(Zone.EXILED, new PardicDragonEffect(), new FilterSpell(), false, SetTargetPointer.PLAYER),
+                new SpellCastOpponentTriggeredAbility(Zone.EXILED, new PardicDragonEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER),
                 SuspendedCondition.instance,
                 "Whenever an opponent casts a spell, if {this} is suspended, that player may put a time counter on {this}."
                 ));

@@ -39,10 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;
 
@@ -53,14 +51,6 @@ import java.util.UUID;
  * @author Loki
  */
 public class UyoSilentProphet extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
 
     public UyoSilentProphet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
@@ -76,7 +66,7 @@ public class UyoSilentProphet extends CardImpl {
         // {2}, Return two lands you control to their owner's hand: Copy target instant or sorcery spell. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new GenericManaCost(2));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), false)));
-        ability.addTarget(new TargetSpell(filter));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
         this.addAbility(ability);
     }
 

@@ -32,7 +32,7 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -53,7 +53,7 @@ public class DoubleNegative extends CardImpl {
         Effect effect = new CounterTargetEffect();
         effect.setText("Counter up to two target spells");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetSpell(0, 2, new FilterSpell()));
+        this.getSpellAbility().addTarget(new TargetSpell(0, 2, StaticFilters.FILTER_SPELL));
     }
 
     public DoubleNegative(final DoubleNegative card) {

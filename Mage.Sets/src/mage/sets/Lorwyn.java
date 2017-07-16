@@ -87,6 +87,7 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Broken Ambitions", 54, Rarity.COMMON, mage.cards.b.BrokenAmbitions.class));
         cards.add(new SetCardInfo("Burrenton Forge-Tender", 7, Rarity.UNCOMMON, mage.cards.b.BurrentonForgeTender.class));
         cards.add(new SetCardInfo("Cairn Wanderer", 105, Rarity.RARE, mage.cards.c.CairnWanderer.class));
+        cards.add(new SetCardInfo("Captivating Glance", 55, Rarity.UNCOMMON, mage.cards.c.CaptivatingGlance.class));
         cards.add(new SetCardInfo("Caterwauling Boggart", 157, Rarity.COMMON, mage.cards.c.CaterwaulingBoggart.class));
         cards.add(new SetCardInfo("Ceaseless Searblades", 158, Rarity.UNCOMMON, mage.cards.c.CeaselessSearblades.class));
         cards.add(new SetCardInfo("Cenn's Heir", 8, Rarity.COMMON, mage.cards.c.CennsHeir.class));
@@ -179,6 +180,7 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Hornet Harasser", 118, Rarity.COMMON, mage.cards.h.HornetHarasser.class));
         cards.add(new SetCardInfo("Hostility", 176, Rarity.RARE, mage.cards.h.Hostility.class));
         cards.add(new SetCardInfo("Howltooth Hollow", 269, Rarity.RARE, mage.cards.h.HowltoothHollow.class));
+        cards.add(new SetCardInfo("Hunt Down", 218, Rarity.COMMON, mage.cards.h.HuntDown.class));
         cards.add(new SetCardInfo("Hunter of Eyeblights", 119, Rarity.UNCOMMON, mage.cards.h.HunterOfEyeblights.class));
         cards.add(new SetCardInfo("Hurly-Burly", 177, Rarity.COMMON, mage.cards.h.HurlyBurly.class));
         cards.add(new SetCardInfo("Immaculate Magistrate", 219, Rarity.RARE, mage.cards.i.ImmaculateMagistrate.class));
@@ -243,6 +245,7 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Neck Snap", 32, Rarity.COMMON, mage.cards.n.NeckSnap.class));
         cards.add(new SetCardInfo("Nectar Faerie", 130, Rarity.UNCOMMON, mage.cards.n.NectarFaerie.class));
         cards.add(new SetCardInfo("Needle Drop", 186, Rarity.COMMON, mage.cards.n.NeedleDrop.class));
+        cards.add(new SetCardInfo("Nettlevine Blight", 131, Rarity.RARE, mage.cards.n.NettlevineBlight.class));
         cards.add(new SetCardInfo("Nightshade Stinger", 132, Rarity.COMMON, mage.cards.n.NightshadeStinger.class));
         cards.add(new SetCardInfo("Nova Chaser", 187, Rarity.RARE, mage.cards.n.NovaChaser.class));
         cards.add(new SetCardInfo("Oaken Brawler", 33, Rarity.COMMON, mage.cards.o.OakenBrawler.class));
@@ -323,6 +326,7 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Treefolk Harbinger", 239, Rarity.UNCOMMON, mage.cards.t.TreefolkHarbinger.class));
         cards.add(new SetCardInfo("Triclopean Sight", 45, Rarity.COMMON, mage.cards.t.TriclopeanSight.class));
         cards.add(new SetCardInfo("Turtleshell Changeling", 94, Rarity.UNCOMMON, mage.cards.t.TurtleshellChangeling.class));
+        cards.add(new SetCardInfo("Twinning Glass", 264, Rarity.RARE, mage.cards.t.TwinningGlass.class));
         cards.add(new SetCardInfo("Veteran of the Depths", 46, Rarity.UNCOMMON, mage.cards.v.VeteranOfTheDepths.class));
         cards.add(new SetCardInfo("Vigor", 240, Rarity.RARE, mage.cards.v.Vigor.class));
         cards.add(new SetCardInfo("Vivid Crag", 275, Rarity.UNCOMMON, mage.cards.v.VividCrag.class));

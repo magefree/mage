@@ -27,15 +27,14 @@
  */
 package mage.cards.q;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.CounterTargetAndSearchGraveyardHandLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,21 +42,13 @@ import mage.target.TargetSpell;
  */
 public class Quash extends CardImpl {
     
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-
-    static {
-        Predicates.or(
-                new CardTypePredicate(CardType.INSTANT), 
-                new CardTypePredicate(CardType.SORCERY));
-    }
-    
     public Quash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
 
         // Counter target instant or sorcery spell. 
         // Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles his or her library.
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
         this.getSpellAbility().addEffect(new CounterTargetAndSearchGraveyardHandLibraryEffect());
     }
 

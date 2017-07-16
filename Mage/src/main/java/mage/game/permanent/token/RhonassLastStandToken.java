@@ -44,6 +44,5 @@ public class RhonassLastStandToken extends Token {
         subtype.add("Snake");
         power = new MageInt(5);
         toughness = new MageInt(4);
-        addAbility(TrampleAbility.getInstance());
     }
 }

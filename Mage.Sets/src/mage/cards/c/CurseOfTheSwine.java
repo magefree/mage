@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.CurseOfTheSwineBoarToken;
@@ -94,7 +95,7 @@ class CurseOfTheSwineEffect extends OneShotEffect {
         for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent creature = game.getPermanent(targetId);
             if (creature != null) {
-                if (creature.moveToExile(null, null, source.getSourceId(), game)) {
+                if (creature.moveToExile(null, null, source.getSourceId(), game) || creature.moveToZone(Zone.COMMAND, source.getSourceId(), game, false)) {
                     CurseOfTheSwineBoarToken swineToken = new CurseOfTheSwineBoarToken();
                     swineToken.putOntoBattlefield(1, game, source.getSourceId(), creature.getControllerId());
                 }

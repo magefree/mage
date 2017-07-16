@@ -27,15 +27,16 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public class StructuralCollapse extends CardImpl {
 
         // Target player sacrifices an artifact and a land. Structural Collapse deals 2 damage to that player.
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterArtifactPermanent(), 1, "Target player"));
-        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterLandPermanent(), 1, "Target player"));
+        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_LANDS, 1, "Target player"));
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

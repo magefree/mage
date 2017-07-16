@@ -43,9 +43,7 @@ import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
@@ -57,14 +55,6 @@ import java.util.UUID;
  * @author North
  */
 public class EchoMage extends LevelerCard {
-
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
 
     public EchoMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
@@ -82,7 +72,7 @@ public class EchoMage extends LevelerCard {
         // {U}{U}, {tap}: Copy target instant or sorcery spell. You may choose new targets for the copy.
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl("{U}{U}"));
-        ability.addTarget(new TargetSpell(filter));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
         ability.addCost(new TapSourceCost());
         abilities1.add(ability);
         // LEVEL 4+
@@ -90,7 +80,7 @@ public class EchoMage extends LevelerCard {
         // {U}{U}, {tap}: Copy target instant or sorcery spell twice. You may choose new targets for the copies.
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EchoMageEffect(), new ManaCostsImpl("{U}{U}"));
-        ability.addTarget(new TargetSpell(filter));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
         ability.addCost(new TapSourceCost());
         abilities2.add(ability);
 

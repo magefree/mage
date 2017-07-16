@@ -28,9 +28,7 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.costs.Cost;
@@ -43,10 +41,14 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetNonBasicLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -87,7 +89,6 @@ public class TectonicEdge extends CardImpl {
 
 class TectonicEdgeCost extends CostImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     public TectonicEdgeCost() {
         this.text = "Activate this ability only if an opponent controls four or more lands";
@@ -105,7 +106,7 @@ class TectonicEdgeCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         for (UUID opponentId: game.getOpponents(controllerId)) {
-            if (game.getBattlefield().countAll(filter, opponentId, game) > 3) {
+            if (game.getBattlefield().countAll(StaticFilters.FILTER_LANDS, opponentId, game) > 3) {
                 return true;
             }
         }

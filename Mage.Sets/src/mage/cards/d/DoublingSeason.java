@@ -53,7 +53,7 @@ public class DoublingSeason extends CardImpl {
 
         // If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreateTwiceThatManyTokensEffect()));
- 
+
         // If an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DoublingSeasonCounterEffect()));
 
@@ -70,6 +70,8 @@ public class DoublingSeason extends CardImpl {
 }
 
 class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
+
+    boolean landPlayed = false; // a played land is not an effect
 
     DoublingSeasonCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
@@ -96,8 +98,12 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
+            landPlayed = (permanent != null
+                    && permanent.isLand());  // a played land is not an effect
         }
-        return permanent != null && permanent.getControllerId().equals(source.getControllerId());
+        return permanent != null
+                && permanent.getControllerId().equals(source.getControllerId())
+                && !landPlayed;  // example: gemstone mine being played as a land drop
     }
 
     @Override

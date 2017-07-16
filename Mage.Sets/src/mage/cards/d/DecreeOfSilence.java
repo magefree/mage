@@ -44,7 +44,7 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -61,7 +61,7 @@ public class DecreeOfSilence extends CardImpl {
         // Whenever an opponent casts a spell, counter that spell and put a depletion counter on Decree of Silence. If there are three or more depletion counters on Decree of Silence, sacrifice it.
         Effect effect = new CounterTargetEffect();
         effect.setText("counter that spell");
-        Ability ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, effect, new FilterSpell(),
+        Ability ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_SPELL,
             false, SetTargetPointer.SPELL);
         effect = new AddCountersSourceEffect(CounterType.DEPLETION.createInstance());
         effect.setText("and put a depletion counter on {this}.");

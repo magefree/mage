@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.DiscardSourceCost;
+import mage.abilities.costs.common.CyclingDiscardCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.CyclingAbility;
@@ -99,7 +99,7 @@ class NewPerspectivesCostModificationEffect extends CostModificationEffectImpl {
             if ((abilityToModify instanceof ActivatedAbility && ((ActivatedAbility) abilityToModify).isCheckPlayableMode()) || controller.chooseUse(Outcome.PlayForFree, "Pay {0} to cycle?", source, game)) {
                 abilityToModify.getCosts().clear();
                 abilityToModify.getManaCostsToPay().clear();
-                abilityToModify.getCosts().add(new DiscardSourceCost());
+                abilityToModify.getCosts().add(new CyclingDiscardCost());
             }
             return true;
         }

@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.StateTriggeredAbility;
@@ -43,8 +42,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -52,13 +51,13 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
  */
 public class ManaVortex extends CardImpl {
-    
-    static final FilterLandPermanent filter = new FilterLandPermanent();
 
     public ManaVortex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
@@ -67,7 +66,7 @@ public class ManaVortex extends CardImpl {
         this.addAbility(new CastSourceTriggeredAbility(new CounterSourceEffect()));
         
         // At the beginning of each player's upkeep, that player sacrifices a land.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(new FilterLandPermanent(), 1, "that player"),
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_LAND, 1, "that player"),
             TargetController.ANY, false));
         
         // When there are no lands on the battlefield, sacrifice Mana Vortex.
@@ -151,7 +150,7 @@ class ManaVortexStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().count(ManaVortex.filter, this.getSourceId(), this.getControllerId(), game) == 0;
+        return game.getBattlefield().count(StaticFilters.FILTER_LANDS, this.getSourceId(), this.getControllerId(), game) == 0;
     }
 
     @Override

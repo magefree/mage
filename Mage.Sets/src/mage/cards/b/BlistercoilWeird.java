@@ -36,9 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -47,14 +45,6 @@ import java.util.UUID;
  */
 public class BlistercoilWeird extends CardImpl {
     
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
-
     public BlistercoilWeird(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/R}");
         this.subtype.add("Weird");
@@ -65,7 +55,7 @@ public class BlistercoilWeird extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast an instant or sorcery spell, Blistercoil Weird gets +1/+1 until end of turn. Untap it.
-        Ability ability = new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, false);
         ability.addEffect(new UntapSourceEffect());
         this.addAbility(ability);
 

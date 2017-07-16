@@ -27,13 +27,14 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public class PlowUnder extends CardImpl {
 
         // Put two target lands on top of their owners' libraries.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetLandPermanent(2,2, new FilterLandPermanent("lands"), false));
+        this.getSpellAbility().addTarget(new TargetLandPermanent(2,2, StaticFilters.FILTER_LANDS, false));
     }
 
     public PlowUnder(final PlowUnder card) {

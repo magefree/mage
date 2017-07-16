@@ -33,9 +33,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -47,19 +45,11 @@ import java.util.UUID;
  */
 public class Disrupt extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
-
     public Disrupt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Counter target instant or sorcery spell unless its controller pays {1}.
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

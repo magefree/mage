@@ -3,7 +3,6 @@ package mage.watchers.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -16,7 +15,8 @@ import mage.watchers.Watcher;
  */
 public class LandfallWatcher extends Watcher {
 
-    final Set<UUID> playerPlayedLand = new HashSet<>();
+    final Set<UUID> playerPlayedLand = new HashSet<>(); // player that played land
+    final Set<UUID> landPlayed = new HashSet<>(); // land played
 
     public LandfallWatcher() {
         super(LandfallWatcher.class.getSimpleName(), WatcherScope.GAME);
@@ -25,6 +25,7 @@ public class LandfallWatcher extends Watcher {
     public LandfallWatcher(final LandfallWatcher watcher) {
         super(watcher);
         playerPlayedLand.addAll(watcher.playerPlayedLand);
+        landPlayed.addAll(watcher.landPlayed);
     }
 
     @Override
@@ -34,10 +35,13 @@ public class LandfallWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+        if (event.getType() == GameEvent.EventType.LAND_PLAYED) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (permanent != null && permanent.isLand() && !playerPlayedLand.contains(event.getPlayerId())) {
+            if (permanent != null
+                    && permanent.isLand()
+                    && !playerPlayedLand.contains(event.getPlayerId())) {
                 playerPlayedLand.add(event.getPlayerId());
+                landPlayed.add(event.getTargetId());
             }
         }
     }
@@ -45,10 +49,15 @@ public class LandfallWatcher extends Watcher {
     @Override
     public void reset() {
         playerPlayedLand.clear();
+        landPlayed.clear();
         super.reset();
     }
 
     public boolean landPlayed(UUID playerId) {
         return playerPlayedLand.contains(playerId);
+    }
+
+    public boolean wasLandPlayed(UUID landId) {
+        return landPlayed.contains(landId);
     }
 }

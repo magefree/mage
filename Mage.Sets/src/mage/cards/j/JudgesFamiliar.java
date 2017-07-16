@@ -27,9 +27,6 @@
  */
 package mage.cards.j;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -38,25 +35,18 @@ import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
 public class JudgesFamiliar extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
 
     public JudgesFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/U}");
@@ -73,7 +63,7 @@ public class JudgesFamiliar extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CounterUnlessPaysEffect(new GenericManaCost(1)),
                 new SacrificeSourceCost());
-        ability.addTarget(new TargetSpell(filter));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
         this.addAbility(ability);
     }
 
