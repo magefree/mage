@@ -27,9 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -48,6 +45,10 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
+
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -113,7 +114,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
                 return false;
             }
             // check blocker restrictions
-            for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry: game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).entrySet()) {
+            for (Map.Entry<RestrictionEffect, Set<Ability>> entry: game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).entrySet()) {
                 for (Ability ability : entry.getValue()) {
                     if (!entry.getKey().canBlock(attacker, permanent, ability, game)) {
                         return false;
@@ -121,7 +122,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
                 }
             }
             // check also attacker's restriction effects
-            for (Map.Entry<RestrictionEffect, HashSet<Ability>> restrictionEntry: game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
+            for (Map.Entry<RestrictionEffect, Set<Ability>> restrictionEntry: game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
                 for (Ability ability : restrictionEntry.getValue()) {                    
                     if (!(restrictionEntry.getKey() instanceof CantBeBlockedUnlessAllEffect) 
                             && !restrictionEntry.getKey().canBeBlocked(attacker, permanent, ability, game)) {

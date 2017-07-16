@@ -5,8 +5,12 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
 import java.nio.file.AccessDeniedException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -103,7 +107,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         p0.add(jLabel1);
         p0.add(Box.createVerticalStrut(5));
         ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[]{
-            "magiccards.info",
+            //    "magiccards.info",
             "wizards.com",
             "mythicspoiler.com",
             "tokens.mtg.onl", //"mtgimage.com (HQ)",
@@ -111,8 +115,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             "alternative.mtg.onl",
             "GrabBag",
             "magidex.com",
-            "scryfall.com",
-        //"mtgathering.ru HQ",
+            "scryfall.com", //"mtgathering.ru HQ",
         //"mtgathering.ru MQ",
         //"mtgathering.ru LQ",
         });

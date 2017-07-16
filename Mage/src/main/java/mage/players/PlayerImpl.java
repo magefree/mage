@@ -27,10 +27,6 @@
  */
 package mage.players;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Map.Entry;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -90,6 +86,11 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
@@ -621,7 +622,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public int drawCards(int num, Game game, ArrayList<UUID> appliedEffects) {
+    public int drawCards(int num, Game game, List<UUID> appliedEffects) {
         return game.doAction(new MageDrawAction(this, num, appliedEffects));
     }
 
@@ -1472,8 +1473,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void untap(Game game) {
         // create list of all "notMoreThan" effects to track which one are consumed
-        HashMap<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> notMoreThanEffectsUsage = new HashMap<>();
-        for (Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>> restrictionEffect : game.getContinuousEffects().getApplicableRestrictionUntapNotMoreThanEffects(this, game).entrySet()) {
+        HashMap<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffectsUsage = new HashMap<>();
+        for (Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>> restrictionEffect : game.getContinuousEffects().getApplicableRestrictionUntapNotMoreThanEffects(this, game).entrySet()) {
             notMoreThanEffectsUsage.put(restrictionEffect, restrictionEffect.getKey().getNumber());
         }
 
@@ -1497,7 +1498,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             do {
                 playerCanceledSelection = false;
                 // select permanents to untap to consume the "notMoreThan" effects
-                for (Map.Entry<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> handledEntry : notMoreThanEffectsUsage.entrySet()) {
+                for (Map.Entry<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> handledEntry : notMoreThanEffectsUsage.entrySet()) {
                     // select a permanent to untap for this entry
                     int numberToUntap = handledEntry.getValue();
                     if (numberToUntap > 0) {
@@ -1535,7 +1536,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                     // don't allow to select same permanent twice
                                     filter.add(Predicates.not(new PermanentIdPredicate(selectedPermanent.getId())));
                                     // reduce available untap numbers from other "UntapNotMoreThan" effects if selected permanent applies to their filter too
-                                    for (Entry<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> notMoreThanEffect : notMoreThanEffectsUsage.entrySet()) {
+                                    for (Entry<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffect : notMoreThanEffectsUsage.entrySet()) {
                                         if (notMoreThanEffect.getValue() > 0 && notMoreThanEffect.getKey().getKey().getFilter().match(selectedPermanent, game)) {
                                             notMoreThanEffect.setValue(notMoreThanEffect.getValue() - 1);
                                         }
@@ -1574,7 +1575,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 boolean doUntap = true;
                 if (!selectedToUntap.contains(permanent)) {
                     // if the permanent is covered by one of the restriction effects, don't untap it
-                    for (Entry<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> notMoreThanEffect : notMoreThanEffectsUsage.entrySet()) {
+                    for (Entry<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffect : notMoreThanEffectsUsage.entrySet()) {
                         if (notMoreThanEffect.getKey().getKey().getFilter().match(permanent, game)) {
                             doUntap = false;
                             break;
@@ -1601,14 +1602,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
-    private List<Permanent> getPermanentsThatCanBeUntapped(Game game, List<Permanent> canBeUntapped, RestrictionUntapNotMoreThanEffect handledEffect, HashMap<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> notMoreThanEffectsUsage) {
+    private List<Permanent> getPermanentsThatCanBeUntapped(Game game, List<Permanent> canBeUntapped, RestrictionUntapNotMoreThanEffect handledEffect, Map<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffectsUsage) {
         List<Permanent> leftForUntap = new ArrayList<>();
         // select permanents that can still be untapped
         for (Permanent permanent : canBeUntapped) {
             if (handledEffect.getFilter().match(permanent, game)) { // matches the restricted permanents of handled entry
                 boolean canBeSelected = true;
                 // check if the permanent is restriced by another restriction that has left no permanent
-                for (Entry<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> notMoreThanEffect : notMoreThanEffectsUsage.entrySet()) {
+                for (Entry<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffect : notMoreThanEffectsUsage.entrySet()) {
                     if (notMoreThanEffect.getKey().getKey().getFilter().match(permanent, game) && notMoreThanEffect.getValue() == 0) {
                         canBeSelected = false;
                         break;
@@ -1763,12 +1764,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, ArrayList<UUID> appliedEffects) {
+    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
         return doDamage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
     }
 
     @SuppressWarnings({"null", "ConstantConditions"})
-    private int doDamage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, ArrayList<UUID> appliedEffects) {
+    private int doDamage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
         if (damage > 0 && canDamage(game.getObject(sourceId), game)) {
             GameEvent event = new DamagePlayerEvent(playerId, sourceId, playerId, damage, preventable, combatDamage);
             event.setAppliedEffects(appliedEffects);
@@ -3093,7 +3094,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
+    public boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
         Set<Card> cardList = new HashSet<>();
         if (card != null) {
             cardList.add(card);
@@ -3112,7 +3113,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
+    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
         if (cards.isEmpty()) {
             return true;
         }

@@ -68,7 +68,7 @@ public class SandStrangler extends CardImpl {
 
         // When Sand Strangler enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, you may have Sand Strangler deal 3 damage to target creature.
         Ability ability = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3)),
+                new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), true),
                 new OrCondition(
                         new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(filterDesertPermanent)),
                         new CardsInControllerGraveCondition(1, filterDesertCard)),

@@ -27,10 +27,12 @@
  */
 package mage.game.events;
 
+import mage.constants.Zone;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
-import mage.constants.Zone;
 
 /**
  *
@@ -46,7 +48,7 @@ public class GameEvent implements Serializable {
     protected boolean flag;
     protected String data;
     protected Zone zone;
-    protected ArrayList<UUID> appliedEffects = new ArrayList<>();
+    protected List<UUID> appliedEffects = new ArrayList<>();
     protected UUID customEventType = null;
 
     public enum EventType {
@@ -460,7 +462,7 @@ public class GameEvent implements Serializable {
      *
      * @return
      */
-    public ArrayList<UUID> getAppliedEffects() {
+    public List<UUID> getAppliedEffects() {
         return appliedEffects;
     }
 
@@ -468,13 +470,13 @@ public class GameEvent implements Serializable {
         return type == EventType.CUSTOM_EVENT && this.customEventType.equals(customEventType);
     }
 
-    public void addAppliedEffects(ArrayList<UUID> appliedEffects) {
+    public void addAppliedEffects(List<UUID> appliedEffects) {
         if (appliedEffects != null) {
             this.appliedEffects.addAll(appliedEffects);
         }
     }
 
-    public void setAppliedEffects(ArrayList<UUID> appliedEffects) {
+    public void setAppliedEffects(List<UUID> appliedEffects) {
         if (appliedEffects != null) {
             if (this.appliedEffects.isEmpty()) {
                 this.appliedEffects = appliedEffects; // Use object refecence to handle that an replacement effect can only be once applied to an event

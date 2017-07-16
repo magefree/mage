@@ -73,7 +73,7 @@ public class User {
     private final String host;
     private final Date connectionTime;
     private final Map<UUID, Table> tables;
-    private final ArrayList<UUID> tablesToDelete;
+    private final List<UUID> tablesToDelete;
     private final Map<UUID, GameSessionPlayer> gameSessions;
     private final Map<UUID, DraftSession> draftSessions;
     private final Map<UUID, UUID> userTournaments; // playerId, tournamentId

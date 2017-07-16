@@ -88,8 +88,8 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     private void update() {
         List<Table> allTables = new ArrayList<>(tables.values());
         allTables.sort(new TableListSorter());
-        ArrayList<MatchView> matchList = new ArrayList<>();
-        ArrayList<TableView> tableList = new ArrayList<>();
+        List<MatchView> matchList = new ArrayList<>();
+        List<TableView> tableList = new ArrayList<>();
         for (Table table : allTables) {
             if (table.getState() != TableState.FINISHED) {
                 tableList.add(new TableView(table));

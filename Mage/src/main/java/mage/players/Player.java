@@ -124,7 +124,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 
-    int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, ArrayList<UUID> appliedEffects);
+    int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
 
     // to handle rule changing effects (613.10)
     boolean isCanLoseLife();
@@ -350,7 +350,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     int drawCards(int num, Game game);
 
-    int drawCards(int num, Game game, ArrayList<UUID> appliedEffects);
+    int drawCards(int num, Game game, List<UUID> appliedEffects);
 
     boolean cast(SpellAbility ability, Game game, boolean noMana);
 
@@ -674,7 +674,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean moveCards(Card card, Zone toZone, Ability source, Game game);
 
-    boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);
+    boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects);
 
     boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game);
 
@@ -694,7 +694,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param appliedEffects
      * @return
      */
-    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);
+    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects);
 
     boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 

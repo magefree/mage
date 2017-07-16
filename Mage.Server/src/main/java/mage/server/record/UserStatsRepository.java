@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public enum UserStatsRepository {
 
@@ -107,7 +108,7 @@ public enum UserStatsRepository {
     // updateUserStats reads tables finished after the last DB update and reflects it to the DB.
     // It returns the list of user names that are upated.
     public List<String> updateUserStats() {
-        HashSet<String> updatedUsers = new HashSet<>();
+        Set<String> updatedUsers = new HashSet<>();
         // Lock the DB so that no other updateUserStats runs at the same time.
         synchronized(this) {
             long latestEndTimeMs = this.getLatestEndTimeMs();

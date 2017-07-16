@@ -27,8 +27,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.Choice;
@@ -38,13 +36,17 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author LevelX2
  */
 public class ChooseModeEffect extends OneShotEffect {
 
-    protected final ArrayList<String> modes = new ArrayList();
+    protected final List<String> modes = new ArrayList();
     protected final String choiceMessage;
 
     public ChooseModeEffect(String choiceMessage, String... modes) {

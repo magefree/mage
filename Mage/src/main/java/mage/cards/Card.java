@@ -27,16 +27,12 @@
  */
 package mage.cards;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
@@ -45,6 +41,9 @@ import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 public interface Card extends MageObject {
 
@@ -127,7 +126,7 @@ public interface Card extends MageObject {
      */
     boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
 
-    boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects);
+    boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects);
 
     /**
      * Moves the card to an exile zone
@@ -140,7 +139,7 @@ public interface Card extends MageObject {
      */
     boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
 
-    boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects);
+    boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects);
 
     boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
 
@@ -152,7 +151,7 @@ public interface Card extends MageObject {
 
     boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown);
 
-    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects);
+    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, List<UUID> appliedEffects);
 
     void setZone(Zone zone, Game game);
 
@@ -170,7 +169,7 @@ public interface Card extends MageObject {
 
     boolean addCounters(Counter counter, Ability source, Game game);
 
-    boolean addCounters(Counter counter, Ability source, Game game, ArrayList<UUID> appliedEffects);
+    boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects);
 
     void removeCounters(String name, int amount, Game game);
 

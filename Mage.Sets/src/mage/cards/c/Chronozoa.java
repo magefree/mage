@@ -27,8 +27,10 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.LastTimeCounterRemovedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -42,9 +44,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-
-import java.util.UUID;
-import mage.abilities.common.DiesTriggeredAbility;
 
 /**
  *
@@ -61,14 +60,14 @@ public class Chronozoa extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
-        // Vanishing 3
+
+        // Vanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)));
         ability.setRuleVisible(false);
         this.addAbility(ability);
         this.addAbility(new VanishingUpkeepAbility(3));
         this.addAbility(new VanishingSacrificeAbility());
-        
+
         // When Chronozoa is put into a graveyard from play, if it had no time counters on it, create two tokens that are copies of it.
         Effect effect = new PutTokenOntoBattlefieldCopySourceEffect(2);
         effect.setText("create two tokens that are copies of it");

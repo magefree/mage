@@ -1,16 +1,14 @@
 package mage.util.trace;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.ContinuousEffectsList;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.IntimidateAbility;
+import mage.abilities.keyword.ReachAbility;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.Combat;
@@ -18,9 +16,7 @@ import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import org.apache.log4j.Logger;
 
-import java.util.UUID;
-import mage.abilities.keyword.IntimidateAbility;
-import mage.constants.CardType;
+import java.util.*;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -146,8 +142,8 @@ public final class TraceUtil {
 
         log.error(prefix+"Restriction effects:");
         log.error(prefix+"  Applied to ATTACKER:");
-        HashMap<RestrictionEffect, HashSet<Ability>> attackerResEffects = game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game);
-        for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : attackerResEffects.entrySet()) {
+        Map<RestrictionEffect, Set<Ability>> attackerResEffects = game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game);
+        for (Map.Entry<RestrictionEffect, Set<Ability>> entry : attackerResEffects.entrySet()) {
             log.error(prefix+"    " + entry.getKey());
             log.error(prefix+"        id=" + entry.getKey().getId());
             for (Ability ability: entry.getValue()) {
@@ -156,8 +152,8 @@ public final class TraceUtil {
         }
         log.error(prefix+"  Applied to BLOCKER:");
         if (blocker != null) {
-            HashMap<RestrictionEffect, HashSet<Ability>> blockerResEffects = game.getContinuousEffects().getApplicableRestrictionEffects(blocker, game);
-            for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : blockerResEffects.entrySet()) {
+            Map<RestrictionEffect, Set<Ability>> blockerResEffects = game.getContinuousEffects().getApplicableRestrictionEffects(blocker, game);
+            for (Map.Entry<RestrictionEffect, Set<Ability>> entry : blockerResEffects.entrySet()) {
                 log.error(prefix+"    " + entry.getKey());
                 log.error(prefix+"        id=" + entry.getKey().getId());
                 for (Ability ability: entry.getValue()) {

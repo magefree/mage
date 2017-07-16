@@ -27,7 +27,6 @@
  */
 package mage.abilities.effects.common.continuous;
 
-import java.util.HashSet;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.choices.ChoiceImpl;
@@ -36,6 +35,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -71,7 +73,7 @@ public class LoseAbilityOrAnotherAbilityTargetEffect extends LoseAbilityTargetEf
             ChoiceImpl chooseAbility = new ChoiceImpl();
             chooseAbility.setMessage("What ability do you wish to remove?");
 
-            HashSet<String> choice = new HashSet<>();
+            Set<String> choice = new HashSet<>();
 
             if (permanent.getAbilities().contains(ability)) {
                 choice.add(ability.getRule());

@@ -27,15 +27,6 @@
  */
 package mage.game.combat;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
@@ -58,6 +49,9 @@ import mage.util.CardUtil;
 import mage.util.Copyable;
 import mage.util.trace.TraceUtil;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -308,7 +302,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (Permanent creature : player.getAvailableAttackers(game)) {
             boolean mustAttack = false;
             Set<UUID> defendersForcedToAttack = new HashSet<>();
-            for (Map.Entry<RequirementEffect, HashSet<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
+            for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
                 RequirementEffect effect = entry.getKey();
                 if (effect.mustAttack(game)) {
                     mustAttack = true;
@@ -395,7 +389,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
             for (UUID attackingCreatureId : this.getAttackers()) {
                 Permanent attackingCreature = game.getPermanent(attackingCreatureId);
-                for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(attackingCreature, game).entrySet()) {
+                for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(attackingCreature, game).entrySet()) {
                     RestrictionEffect effect = entry.getKey();
                     for (Ability ability : entry.getValue()) {
                         if (!effect.canAttackCheckAfter(numberAttackers, ability, game)) {
@@ -581,7 +575,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             return;
         }
         for (Permanent possibleBlocker : game.getBattlefield().getActivePermanents(filterBlockers, attackingPlayer.getId(), game)) {
-            for (Map.Entry<RequirementEffect, HashSet<Ability>> requirementEntry : game.getContinuousEffects().getApplicableRequirementEffects(possibleBlocker, game).entrySet()) {
+            for (Map.Entry<RequirementEffect, Set<Ability>> requirementEntry : game.getContinuousEffects().getApplicableRequirementEffects(possibleBlocker, game).entrySet()) {
                 if (requirementEntry.getKey().mustBlock(game)) {
                     for (Ability ability : requirementEntry.getValue()) {
                         UUID attackingCreatureId = requirementEntry.getKey().mustBlockAttacker(ability, game);
@@ -658,7 +652,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 // Creature is already blocking but not forced to do so
                 if (creature.getBlocking() > 0) {
                     // get all requirement effects that apply to the creature (e.g. is able to block attacker)
-                    for (Map.Entry<RequirementEffect, HashSet<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
+                    for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
                         RequirementEffect effect = entry.getKey();
                         // get possible mustBeBlockedByAtLeastOne blocker
                         for (Ability ability : entry.getValue()) {
@@ -680,7 +674,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 // Creature is not blocking yet
                 if (creature.getBlocking() == 0) {
                     // get all requirement effects that apply to the creature
-                    for (Map.Entry<RequirementEffect, HashSet<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
+                    for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
                         RequirementEffect effect = entry.getKey();
                         // get possible mustBeBlockedByAtLeastOne blocker
                         for (Ability ability : entry.getValue()) {
@@ -980,7 +974,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (UUID blockingCreatureId : this.getBlockers()) {
             Permanent blockingCreature = game.getPermanent(blockingCreatureId);
             if (blockingCreature != null) {
-                for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(blockingCreature, game).entrySet()) {
+                for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(blockingCreature, game).entrySet()) {
                     RestrictionEffect effect = entry.getKey();
                     for (Ability ability : entry.getValue()) {
                         if (!effect.canBlockCheckAfter(ability, game)) {
@@ -1000,7 +994,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (UUID attackingCreatureId : this.getAttackers()) {
             Permanent attackingCreature = game.getPermanent(attackingCreatureId);
             if (attackingCreature != null) {
-                for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(attackingCreature, game).entrySet()) {
+                for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(attackingCreature, game).entrySet()) {
                     RestrictionEffect effect = entry.getKey();
                     for (Ability ability : entry.getValue()) {
                         if (!effect.canBeBlockedCheckAfter(attackingCreature, ability, game)) {

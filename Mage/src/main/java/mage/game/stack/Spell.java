@@ -27,10 +27,6 @@
  */
 package mage.game.stack;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -61,6 +57,11 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.util.GameLog;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -732,7 +733,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
+    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects) {
         // 706.10a If a copy of a spell is in a zone other than the stack, it ceases to exist.
         // If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
         // These are state-based actions. See rule 704.
@@ -748,7 +749,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
         return this.card.moveToExile(exileId, name, sourceId, game, appliedEffects);
     }
 
@@ -768,7 +769,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects) {
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, List<UUID> appliedEffects) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -865,7 +866,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, ArrayList<UUID> appliedEffects) {
+    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects) {
         return card.addCounters(counter, source, game, appliedEffects);
     }
 
