@@ -27,17 +27,10 @@
  */
 package mage.game.stack;
 
-import java.util.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
-import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
@@ -56,7 +49,13 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.util.GameLog;
+import mage.util.SubTypeList;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -157,12 +156,12 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public List<String> getSubtype(Game game) {
-        return emptyString;
+    public SubTypeList getSubtype(Game game) {
+        return new SubTypeList();
     }
 
     @Override
-    public boolean hasSubtype(String subtype, Game game) {
+    public boolean hasSubtype(SubType subtype, Game game) {
         return false;
     }
 
@@ -593,4 +592,10 @@ public class StackAbility extends StackObjImpl implements Ability {
         game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, newStackAbility.getId(), this.getId(), newControllerId));
         return newStackAbility;
     }
+
+    public boolean isAllCreatureTypes(){
+        return false;
+    }
+
+    public void setIsAllCreatureTypes(boolean value){}
 }

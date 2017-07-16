@@ -1,7 +1,5 @@
 package mage.cards.h;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
@@ -11,6 +9,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.util.SubTypeList;
+
+import java.util.UUID;
 
 /**
  * Created by Alexsandr0x.
@@ -27,8 +28,8 @@ public class Hivestone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Creatures you control are Slivers in addition to their other creature types.
-        ArrayList<String> subTypes = new ArrayList<>();
-        subTypes.add("Sliver");
+        SubTypeList subTypes = new SubTypeList();
+        subTypes.add(SubType.SLIVER);
         Effect effect = new BecomesSubtypeAllEffect(Duration.WhileOnBattlefield, subTypes, filter, false);
         effect.setText("Creatures you control are Slivers in addition to their other creature types");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

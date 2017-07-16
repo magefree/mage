@@ -42,6 +42,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.SubTypeList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -113,7 +114,7 @@ public class DevourEffect extends ReplacementEffectImpl {
             if (controller.chooseUse(Outcome.Detriment, "Devour creatures?", source, game)) {
                 controller.chooseTarget(Outcome.Detriment, target, source, game);
                 if (!target.getTargets().isEmpty()) {
-                    List<ArrayList<String>> cardSubtypes = new ArrayList<>();
+                    List<SubTypeList> cardSubtypes = new ArrayList<>();
                     int devouredCreatures = target.getTargets().size();
                     if (!game.isSimulation()) {
                         game.informPlayers(creature.getLogName() + " devours " + devouredCreatures + " creatures");
@@ -121,7 +122,7 @@ public class DevourEffect extends ReplacementEffectImpl {
                     for (UUID targetId : target.getTargets()) {
                         Permanent targetCreature = game.getPermanent(targetId);
                         if (targetCreature != null) {
-                            cardSubtypes.add((ArrayList<String>) targetCreature.getSubtype(game));
+                            cardSubtypes.add(targetCreature.getSubtype(game));
                         }
                         if (targetCreature == null || !targetCreature.sacrifice(source.getSourceId(), game)) {
                             return false;

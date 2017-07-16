@@ -29,6 +29,7 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -39,9 +40,9 @@ import mage.game.permanent.Permanent;
 
 public class TargetHasSubtypeCondition implements Condition {
 
-    private final String subtype;
+    private final SubType subtype;
 
-    public TargetHasSubtypeCondition(String subtype) {
+    public TargetHasSubtypeCondition(SubType subtype) {
         this.subtype = subtype;
     }
 

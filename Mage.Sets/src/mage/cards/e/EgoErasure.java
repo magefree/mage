@@ -34,7 +34,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.repository.CardRepository;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -106,7 +105,7 @@ class EgoErasureLoseEffect extends ContinuousEffectImpl {
         for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {              
-                permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
+                permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
             } else {
                 it.remove();
             }

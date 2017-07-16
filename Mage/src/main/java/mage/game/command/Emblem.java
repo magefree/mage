@@ -39,10 +39,12 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
+import mage.util.SubTypeList;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -157,12 +159,12 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public List<String> getSubtype(Game game) {
-        return emptyList;
+    public SubTypeList getSubtype(Game game) {
+        return new SubTypeList();
     }
 
     @Override
-    public boolean hasSubtype(String subtype, Game game) {
+    public boolean hasSubtype(SubType subtype, Game game) {
         return false;
     }
 
@@ -265,5 +267,9 @@ public class Emblem implements CommandObject {
     public void setZoneChangeCounter(int value, Game game) {
         throw new UnsupportedOperationException("Unsupported operation");
     }
+
+    public boolean isAllCreatureTypes(){ return false;}
+
+    public void setIsAllCreatureTypes(boolean value){}
 
 }

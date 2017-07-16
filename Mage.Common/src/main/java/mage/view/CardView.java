@@ -27,8 +27,6 @@
  */
 package mage.view;
 
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -51,6 +49,10 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.util.SubTypeList;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -68,7 +70,7 @@ public class CardView extends SimpleCardView {
     protected String loyalty = "";
     protected String startingLoyalty;
     protected EnumSet<CardType> cardTypes;
-    protected List<String> subTypes;
+    protected SubTypeList subTypes;
     protected EnumSet<SuperType> superTypes;
     protected ObjectColor color;
     protected ObjectColor frameColor;
@@ -238,7 +240,7 @@ public class CardView extends SimpleCardView {
         }
         if (!card.getSubtype(game).isEmpty()) {
             sbType.append("- ");
-            for (String subType : card.getSubtype(game)) {
+            for (SubType subType : card.getSubtype(game)) {
                 sbType.append(subType).append(' ');
             }
         }
@@ -573,7 +575,7 @@ public class CardView extends SimpleCardView {
         this.loyalty = "";
         this.startingLoyalty = "";
         this.cardTypes = EnumSet.noneOf(CardType.class);
-        this.subTypes = new ArrayList<>();
+        this.subTypes = new SubTypeList();
         this.superTypes = EnumSet.noneOf(SuperType.class);
         this.color = new ObjectColor();
         this.frameColor = new ObjectColor();
@@ -697,7 +699,7 @@ public class CardView extends SimpleCardView {
         return cardTypes;
     }
 
-    public List<String> getSubTypes() {
+    public SubTypeList getSubTypes() {
         return subTypes;
     }
 
@@ -985,7 +987,7 @@ public class CardView extends SimpleCardView {
         }
         if (!getSubTypes().isEmpty()) {
             type.append(" - ");
-            type.append(String.join(" ", getSubTypes()));
+            type.append(String.join(" ", getSubTypes().stream().map(p->p.toString()).collect(Collectors.toSet())));
         }
         return type.toString();
     }

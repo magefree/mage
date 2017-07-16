@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -97,7 +98,7 @@ class GoblinAssassinTriggeredAbiliy extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if ((targetId.equals(this.getSourceId())) || (permanent.hasSubtype("Goblin", game) && !targetId.equals(this.getSourceId()))) {
+        if ((targetId.equals(this.getSourceId())) || (permanent.hasSubtype(SubType.GOBLIN, game) && !targetId.equals(this.getSourceId()))) {
             return true;
         }
         return false;

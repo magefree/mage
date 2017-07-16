@@ -27,13 +27,11 @@
  */
 package mage.designations;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.BecomesMonarchTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -41,6 +39,8 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,6 +64,15 @@ public class Monarch extends Designation {
 
     }
 
+    @Override
+    public boolean isAllCreatureTypes() {
+        return false;
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(boolean value) {
+
+    }
 }
 
 // At the beginning of the monarch’s end step, that player draws a card
@@ -149,4 +158,6 @@ class MonarchDealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     public String getRule() {
         return "Whenever a creature deals combat damage to the monarch, its controller becomes the monarch.";
     }
+
+
 }

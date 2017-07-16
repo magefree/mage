@@ -66,7 +66,7 @@ public class NuteGunray extends CardImpl {
     public NuteGunray(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Neimidian");
+        this.subtype.add("Neimoidian");
         this.subtype.add("Advisor");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

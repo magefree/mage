@@ -5,8 +5,6 @@
  */
 package mage.designations;
 
-import java.util.*;
-
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -18,10 +16,17 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
+import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -124,12 +129,12 @@ public abstract class Designation implements MageObject {
     }
 
     @Override
-    public List<String> getSubtype(Game game) {
-        return emptyList;
+    public SubTypeList getSubtype(Game game) {
+        return new SubTypeList();
     }
 
     @Override
-    public boolean hasSubtype(String subtype, Game game) {
+    public boolean hasSubtype(SubType subtype, Game game) {
         return false;
     }
 

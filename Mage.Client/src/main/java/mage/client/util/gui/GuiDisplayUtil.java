@@ -357,8 +357,8 @@ public final class GuiDisplayUtil {
         if (!card.getSubTypes().isEmpty()) {
             types += "- ";
         }
-        for (String subType : card.getSubTypes()) {
-            types += subType + ' ';
+        for (SubType subType : card.getSubTypes()) {
+            types += subType + " ";
         }
         return types.trim();
     }

@@ -109,7 +109,7 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
                 && event.getSourceId().equals(getSourceId())
                 && !event.getSourceId().equals(event.getTargetId())) {
             Permanent sacrificed = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (sacrificed != null && sacrificed.hasSubtype("Faerie", game)) {
+            if (sacrificed != null && sacrificed.hasSubtype(SubType.FAERIE, game)) {
                 return true;
             }
         }

@@ -1,6 +1,7 @@
 package mage.watchers.common;
 
 import mage.MageObject;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -33,7 +34,7 @@ public class ZuberasDiedWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && card.hasSubtype("Zubera", game)) {
+            if (card != null && card.hasSubtype(SubType.ZUBERA, game)) {
                 zuberasDiedThisTurn++;
             }
         }

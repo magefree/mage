@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -45,6 +44,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -107,7 +108,7 @@ class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent ally = game.getPermanent(event.getTargetId());
         if (ally != null) {
-            if (ally.hasSubtype("Ally", game)
+            if (ally.hasSubtype(SubType.ALLY, game)
                     && ally.getControllerId().equals(this.getControllerId())) {
                 if (event.getTargetId().equals(this.getSourceId())
                         || event.getTargetId().equals(ally.getId())) {

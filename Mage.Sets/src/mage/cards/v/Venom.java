@@ -27,8 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
@@ -41,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,6 +48,9 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * @author Backfir3
@@ -112,13 +114,13 @@ class VenomTriggeredAbility extends TriggeredAbilityImpl {
             Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
             if (enchantedCreature != null) {
                 if (blocker != null && !Objects.equals(blocker, enchantedCreature)
-                        && !blocker.hasSubtype("Wall", game)
+                        && !blocker.hasSubtype(SubType.WALL, game)
                         && Objects.equals(blocked, enchantedCreature)) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getId()));
                     return true;
                 }
                 if (blocker != null && Objects.equals(blocker, enchantedCreature)
-                        && !blocked.hasSubtype("Wall", game)) {
+                        && !blocked.hasSubtype(SubType.WALL, game)) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(blocked.getId()));
                     return true;
                 }

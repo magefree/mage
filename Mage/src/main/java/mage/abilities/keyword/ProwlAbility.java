@@ -42,6 +42,7 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -123,7 +124,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
                 throw new IllegalArgumentException("Params can't be null");
             }
             boolean canProwl = false;
-            for (String subtype : card.getSubtype(game)) {
+            for (SubType subtype : card.getSubtype(game)) {
                 if (prowlWatcher.hasSubtypeMadeCombatDamage(ability.getControllerId(), subtype)) {
                     canProwl = true;
                     break;

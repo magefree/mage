@@ -27,28 +27,19 @@
  */
 package mage.abilities.effects.common.continuous;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.repository.CardRepository;
+import mage.abilities.mana.*;
 import mage.choices.Choice;
 import mage.choices.ChoiceBasicLandType;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * http://mtgsalvation.gamepedia.com/Land_changers
@@ -152,7 +143,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                             // So the ability removing has to be done before Layer 6
                             land.removeAllAbilities(source.getSourceId(), game);
                             // 305.7
-                            land.getSubtype(game).removeAll(CardRepository.instance.getLandTypes());
+                            land.getSubtype(game).removeAll(SubType.getLandTypes(false));
                             land.getSubtype(game).addAll(landTypes);
                         } else {
                             landTypesToAdd.clear();

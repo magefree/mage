@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -130,7 +131,7 @@ class BladeOfTheBloodchiefEffect extends OneShotEffect {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
-                if (creature.hasSubtype("Vampire", game)) {
+                if (creature.hasSubtype(SubType.VAMPIRE, game)) {
                     creature.addCounters(CounterType.P1P1.createInstance(2), source, game);
                 } else {
                     creature.addCounters(CounterType.P1P1.createInstance(), source, game);

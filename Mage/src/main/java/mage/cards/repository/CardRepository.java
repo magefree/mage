@@ -37,14 +37,15 @@ import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
-import java.io.File;
-import java.sql.SQLException;
-import java.util.*;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
+
+import java.io.File;
+import java.sql.SQLException;
+import java.util.*;
 
 /**
  * @author North
@@ -273,68 +274,9 @@ public enum CardRepository {
         return names;
     }
 
-    public Set<String> getCreatureTypes() {
-        TreeSet<String> subtypes = new TreeSet<>();
-        try {
-            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("subtypes");
-            qb.where().like("types", new SelectArg('%' + CardType.CREATURE.name() + '%'));
-            List<CardInfo> results = cardDao.query(qb.prepare());
-            for (CardInfo card : results) {
-                subtypes.addAll(card.getSubTypes());
-            }
-            // Removing Forest because of Dryad Arbor
-            subtypes.remove("Forest");
-            // Some creature types are not directly included in card types and are added here manually
-            subtypes.add("Blinkmoth");
-            subtypes.add("Camarid");
-            subtypes.add("Caribou");
-            subtypes.add("Citizen");
-            subtypes.add("Coward");
-            subtypes.add("Deserter");
-            subtypes.add("Germ");
-            subtypes.add("Graveborn");
-            subtypes.add("Orb");
-            subtypes.add("Pentavite");
-            subtypes.add("Pincher");
-            subtypes.add("Prism");
-            subtypes.add("Reflection");
-            subtypes.add("Sand");
-            subtypes.add("Saproling");
-            subtypes.add("Scion");
-            subtypes.add("Serf");
-            subtypes.add("Servo");
-            subtypes.add("Splinter");
-            subtypes.add("Survivor");
-            subtypes.add("Tetravite");
-            subtypes.add("Triskelavite");
 
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting creaturetypes from DB : " + ex);
 
-        }
-        return subtypes;
-    }
 
-    public Set<String> getLandTypes() {
-        if (landTypes.isEmpty()) {
-            try {
-                QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-                qb.distinct().selectColumns("subtypes");
-                qb.where().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
-                List<CardInfo> results = cardDao.query(qb.prepare());
-                for (CardInfo card : results) {
-                    landTypes.addAll(card.getSubTypes());
-                }
-                // Removing Dryad because of Dryad Arbor
-                landTypes.remove("Dryad");
-
-            } catch (SQLException ex) {
-                Logger.getLogger(CardRepository.class).error("Error getting landtypes from DB : " + ex);
-            }
-        }
-        return landTypes;
-    }
 
     public CardInfo findCard(String setCode, String cardNumber) {
         try {

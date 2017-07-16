@@ -27,9 +27,6 @@
  */
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.ObjectColor;
@@ -46,6 +43,11 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.RandomUtil;
+import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class Token extends MageObjectImpl {
 
@@ -89,7 +91,7 @@ public class Token extends MageObjectImpl {
         this.toughness.modifyBaseValue(toughness);
     }
 
-    public Token(String name, String description, ObjectColor color, List<String> subtype, int power, int toughness, Abilities<Ability> abilities) {
+    public Token(String name, String description, ObjectColor color, SubTypeList subtype, int power, int toughness, Abilities<Ability> abilities) {
         this(name, description);
         this.cardType.add(CardType.CREATURE);
         this.color = color.copy();
@@ -113,6 +115,7 @@ public class Token extends MageObjectImpl {
         this.expansionSetCodeChecked = token.expansionSetCodeChecked;
         this.copySourceCard = token.copySourceCard; // will never be changed
         this.availableImageSetCodes = token.availableImageSetCodes;
+        this.isAllCreatureTypes = token.isAllCreatureTypes;
     }
 
     private void setTokenDescriptor() {
@@ -307,4 +310,8 @@ public class Token extends MageObjectImpl {
         this.setExpansionSetCodeForImage(setCode);
         return true;
     }
+
+
+
+
 }

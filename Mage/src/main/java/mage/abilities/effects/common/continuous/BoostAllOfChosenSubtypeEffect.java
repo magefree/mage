@@ -7,6 +7,7 @@ package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -17,7 +18,7 @@ import mage.game.permanent.Permanent;
  */
 public class BoostAllOfChosenSubtypeEffect extends BoostAllEffect {
 
-    String subtype = null;
+    SubType subtype = null;
 
     public BoostAllOfChosenSubtypeEffect(int power, int toughness, Duration duration, boolean excludeSource) {
         super(power, toughness, duration, new FilterCreaturePermanent("All creatures of the chosen type"), excludeSource);
@@ -47,7 +48,8 @@ public class BoostAllOfChosenSubtypeEffect extends BoostAllEffect {
 
     @Override
     protected void setRuntimeData(Ability source, Game game) {
-        subtype = (String) game.getState().getValue(source.getSourceId() + "_type");
+        String s = (String) game.getState().getValue(source.getSourceId() + "_type");
+        subtype = SubType.byDescription(s);
     }
 
 }

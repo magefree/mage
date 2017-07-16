@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -35,19 +34,18 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.repository.CardRepository;
+import mage.cards.*;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -101,7 +99,7 @@ class RiptideShapeshifterEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose a creature type:");
-            choice.setChoices(CardRepository.instance.getCreatureTypes());
+            choice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toSet()));
             while (!controller.choose(Outcome.BoostCreature, choice, game)) {
                 if (!controller.canRespond()) {
                     return false;

@@ -27,17 +27,11 @@
  */
 package mage.cards.p;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
@@ -50,6 +44,9 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author duncant
@@ -99,7 +96,7 @@ class PatriarchsBiddingEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 Choice typeChoice = new ChoiceImpl(true);
                 typeChoice.setMessage("Choose a creature type");
-                typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
+                typeChoice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toSet()));
                 while (!player.choose(Outcome.PutCreatureInPlay, typeChoice, game)) {
                     if (!player.canRespond()) {
                         break;

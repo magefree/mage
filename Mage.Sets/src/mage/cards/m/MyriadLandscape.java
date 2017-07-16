@@ -27,9 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,11 +41,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.SubTypeList;
+
+import java.util.Iterator;
+import java.util.UUID;
 
 /**
  *
@@ -103,12 +105,11 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
         if (super.canTarget(id, cards, game)) {
             if (!getTargets().isEmpty()) {
                 // check if new target shares a Land Type
-                HashSet<String> landTypes = null;
+                SubTypeList landTypes = new SubTypeList();
                 for (UUID landId: getTargets()) {
                     Card landCard = game.getCard(landId);
                     if (landCard != null) {
-                        if (landTypes == null) {
-                            landTypes = new HashSet<>();
+                        if (landTypes.isEmpty()) {
                             landTypes.addAll(landCard.getSubtype(game));
                         } else {
                             landTypes.removeIf(next -> !landCard.getSubtype(game).contains(next));
@@ -116,9 +117,9 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
                     }
                 }
                 Card card = game.getCard(id);
-                if (card != null && landTypes != null) {
-                    for (Iterator<String> iterator = landTypes.iterator(); iterator.hasNext();) {
-                        String next = iterator.next();
+                if (card != null && !landTypes.isEmpty()) {
+                    for (Iterator<SubType> iterator = landTypes.iterator(); iterator.hasNext();) {
+                        SubType next = iterator.next();
                         if (card.getSubtype(game).contains(next)) {
                             return true;
                         }

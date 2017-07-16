@@ -44,6 +44,7 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -115,7 +116,7 @@ class CrucibleOfTheSpiritDragonManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        if (object != null && object.hasSubtype("Dragon", game)) {
+        if (object != null && object.hasSubtype(SubType.DRAGON, game)) {
             return true;
         }
         return false;

@@ -27,21 +27,23 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.Ability;
-import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.constants.Zone;
-import mage.abilities.effects.OneShotEffect;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.game.permanent.Permanent;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -90,7 +92,7 @@ class HolyJusticiarEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature != null) {
-            if (creature.hasSubtype("Zombie", game)) {
+            if (creature.hasSubtype(SubType.ZOMBIE, game)) {
                 creature.tap(game);
                 creature.moveToExile(source.getSourceId(), creature.getName(), source.getSourceId(), game);
             } else {

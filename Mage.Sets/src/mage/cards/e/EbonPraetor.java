@@ -111,7 +111,7 @@ class EbonPraetorEffect extends OneShotEffect {
             if (cost instanceof SacrificeTargetCost) {
                 Permanent sacrificedCreature = ((SacrificeTargetCost) cost).getPermanents().get(0);
                 Permanent sourceCreature = game.getPermanent(source.getSourceId());
-                if (sacrificedCreature.hasSubtype("Thrull", game) && sourceCreature != null) {
+                if (sacrificedCreature.hasSubtype(SubType.THRULL, game) && sourceCreature != null) {
                     sourceCreature.addCounters(CounterType.P1P0.createInstance(), source, game);
                     return true;
                 }

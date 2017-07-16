@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.StaticAbility;
@@ -44,6 +43,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -51,6 +51,8 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.TetraviteToken;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -105,7 +107,7 @@ class CantBeEnchantedAbility extends StaticAbility {
 
     public boolean canTarget(MageObject source, Game game) {
         if (source.isEnchantment()
-                && source.hasSubtype("Aura", game)) {
+                && source.hasSubtype(SubType.AURA, game)) {
             return false;
         }
         return true;

@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
@@ -37,23 +35,24 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceCreatureType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author EvilGeek
  */
 public class Standardize extends CardImpl {
 
     public Standardize(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{U}");
 
         // Choose a creature type other than Wall. Each creature becomes that type until end of turn.
         this.getSpellAbility().addEffect(new StandardizeEffect());
@@ -87,11 +86,9 @@ class StandardizeEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         String chosenType = "";
         if (player != null && sourceObject != null) {
-            Choice typeChoice = new ChoiceImpl(true);
+            Choice typeChoice = new ChoiceCreatureType();
             typeChoice.setMessage("Choose a creature type other than Wall");
-            Set<String> types = CardRepository.instance.getCreatureTypes();
-            types.remove("Wall");
-            typeChoice.setChoices(types);
+            typeChoice.getChoices().remove("Wall");
             while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;
@@ -101,7 +98,7 @@ class StandardizeEffect extends OneShotEffect {
             chosenType = typeChoice.getChoice();
             if (chosenType != null && !chosenType.isEmpty()) {
                 // ADD TYPE TO TARGET
-                ContinuousEffect effect = new BecomesSubtypeAllEffect(Duration.EndOfTurn, chosenType);
+                ContinuousEffect effect = new BecomesSubtypeAllEffect(Duration.EndOfTurn, SubType.byDescription(chosenType));
                 game.addEffect(effect, source);
                 return true;
             }

@@ -27,8 +27,6 @@
  */
 package mage;
 
-import java.util.*;
-
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -40,11 +38,17 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SubTypeSet;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.CardUtil;
 import mage.util.GameLog;
+import mage.util.SubTypeList;
+
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 public abstract class MageObjectImpl implements MageObject {
 
@@ -56,7 +60,8 @@ public abstract class MageObjectImpl implements MageObject {
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
     protected EnumSet<CardType> cardType = EnumSet.noneOf(CardType.class);
-    protected List<String> subtype = new ArrayList<>();
+    protected SubTypeList subtype = new SubTypeList();
+    protected boolean isAllCreatureTypes;
     protected EnumSet<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
     protected String text;
@@ -132,7 +137,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public List<String> getSubtype(Game game) {
+    public SubTypeList getSubtype(Game game) {
         return subtype;
     }
 
@@ -253,22 +258,22 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public boolean hasSubtype(String value, Game game) {
+    public boolean hasSubtype(SubType value, Game game) {
         if (value == null) {
             return false;
         }
-        List<String> subtypes = this.getSubtype(game);
+        SubTypeList subtypes = this.getSubtype(game);
         if (subtypes.contains(value)) {
             return true;
         } else {
             // checking for Changeling
             // first make sure input parameter is a creature subtype
             // if not, then ChangelingAbility doesn't matter
-            if (CardUtil.isNonCreatureSubtype(value)) {
+            if (value.getSubTypeSet() != SubTypeSet.CreatureType) {
                 return false;
             }
             // as it is creature subtype, then check the existence of Changeling
-            return abilities.contains(ChangelingAbility.getInstance()) || subtypes.contains(ChangelingAbility.ALL_CREATURE_TYPE);
+            return abilities.contains(ChangelingAbility.getInstance()) || isAllCreatureTypes();
         }
     }
 
@@ -295,6 +300,16 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public void setZoneChangeCounter(int value, Game game) {
         game.getState().setZoneChangeCounter(objectId, value);
+    }
+
+    @Override
+    public boolean isAllCreatureTypes(){
+        return isAllCreatureTypes;
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(boolean value){
+        isAllCreatureTypes = value;
     }
 
 }

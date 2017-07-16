@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,17 +42,13 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -207,7 +202,7 @@ class ShurikenControlEffect extends OneShotEffect {
         if (equipment != null) {
             Permanent creature = game.getPermanent(source.getSourceId());
             if (creature != null) {
-                if (!creature.hasSubtype("Ninja", game)) {
+                if (!creature.hasSubtype(SubType.NINJA, game)) {
                     Permanent damagedCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                     if (damagedCreature == null) {
                         damagedCreature = (Permanent) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
