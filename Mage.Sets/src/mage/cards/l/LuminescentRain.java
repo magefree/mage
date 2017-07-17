@@ -44,6 +44,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -90,7 +91,7 @@ class LuminescentRainEffect  extends OneShotEffect {
         if (player != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(SubType.getCreatureTypes(false));
+            typeChoice.setChoices(SubType.getCreatureTypes(false).stream().map(p->p.toString()).collect(Collectors.toSet()));
             while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;

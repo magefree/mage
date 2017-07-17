@@ -27,11 +27,6 @@
  */
 package mage.cards;
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -49,8 +44,15 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.util.GameLog;
+import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -74,6 +76,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean usesVariousArt = false;
     protected boolean splitCard;
     protected boolean morphCard;
+    protected boolean allCreatureTypes;
 
     public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         this(ownerId, setInfo, cardTypes, costs, SpellAbilityType.BASE);
@@ -705,7 +708,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public List<String> getSubtype(Game game) {
+    public SubTypeList getSubtype(Game game) {
         if (game != null) {
             CardAttribute cardAttribute = game.getState().getCardAttribute(getId());
             if (cardAttribute != null) {
@@ -713,5 +716,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         }
         return super.getSubtype(game);
+    }
+
+    public boolean isAllCreatureTypes() {
+        return allCreatureTypes;
+    }
+
+    public void setIsAllCreatureTypes(boolean value) {
+        allCreatureTypes = value;
     }
 }

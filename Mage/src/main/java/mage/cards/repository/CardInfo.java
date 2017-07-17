@@ -30,23 +30,19 @@ package mage.cards.repository;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import java.util.*;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.cards.Card;
-import mage.cards.CardGraphicInfo;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.FrameStyle;
+import mage.cards.*;
 import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.SpellAbilityType;
-import mage.constants.SuperType;
+import mage.constants.*;
+import mage.util.SubTypeList;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author North
@@ -156,7 +152,7 @@ public class CardInfo {
         this.white = card.getColor(null).isWhite();
 
         this.setTypes(card.getCardType());
-        this.setSubtypes(card.getSubtype(null));
+        this.setSubtypes(card.getSubtype(null).stream().map(SubType::toString).collect(Collectors.toList()));
         this.setSuperTypes(card.getSuperType());
         this.setManaCosts(card.getManaCost().getSymbols());
 
@@ -308,8 +304,15 @@ public class CardInfo {
         this.rules = joinList(rules);
     }
 
-    public final List<String> getSubTypes() {
-        return parseList(subtypes);
+    public final SubTypeList getSubTypes() {
+        SubTypeList sl = new SubTypeList();
+        if(subtypes.trim().isEmpty()){
+            return sl;
+        }
+        for (String s : subtypes.split(SEPARATOR)) {
+            sl.add(s);
+        }
+        return sl;
     }
 
     public final void setSubtypes(List<String> subtypes) {

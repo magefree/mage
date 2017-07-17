@@ -27,10 +27,12 @@
  */
 package mage.filter.predicate.mageobject;
 
-import java.util.UUID;
 import mage.MageObject;
+import mage.constants.SubType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +49,7 @@ public class ChosenSubtypePredicate implements Predicate<MageObject> {
     @Override
     public boolean apply(MageObject input, Game game) {
         String subtype = (String) game.getState().getValue(cardID + "_type");
-        return input.hasSubtype(subtype, game);
+        return input.hasSubtype(SubType.byDescription(subtype), game);
     }
 
     @Override

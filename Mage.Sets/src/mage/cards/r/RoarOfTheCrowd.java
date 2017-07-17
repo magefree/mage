@@ -27,16 +27,14 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceCreatureType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -46,14 +44,15 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author michael.napoleon@gmail.com
  */
 public class RoarOfTheCrowd extends CardImpl {
 
     public RoarOfTheCrowd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Choose a creature type. Roar of the Crowd deals damage to target creature or player equal to the number of permanents you control of the chosen type.
         TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
@@ -72,27 +71,26 @@ public class RoarOfTheCrowd extends CardImpl {
 }
 
 class RoarOfTheCrowdEffect extends OneShotEffect {
-  
-  RoarOfTheCrowdEffect() {
-    super(Outcome.LoseLife);
-    this.staticText = "Choose a creature type. {this} deals damage to target creature or player equal to the number of permanents you control of the chosen type.";
-  }
 
-  RoarOfTheCrowdEffect(final RoarOfTheCrowdEffect effect) {
-    super(effect);
-  }
-  
-  @Override
-  public RoarOfTheCrowdEffect copy() {
-    return new RoarOfTheCrowdEffect(this);
-  }
-  
-  @Override public boolean apply(Game game, Ability source) {
-    Player player = game.getPlayer(source.getControllerId());
+    RoarOfTheCrowdEffect() {
+        super(Outcome.LoseLife);
+        this.staticText = "Choose a creature type. {this} deals damage to target creature or player equal to the number of permanents you control of the chosen type.";
+    }
+
+    RoarOfTheCrowdEffect(final RoarOfTheCrowdEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public RoarOfTheCrowdEffect copy() {
+        return new RoarOfTheCrowdEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(SubType.getCreatureTypes(false));
+            Choice typeChoice = new ChoiceCreatureType();
             while (!player.choose(Outcome.LoseLife, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;
@@ -103,5 +101,5 @@ class RoarOfTheCrowdEffect extends OneShotEffect {
             return new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)).apply(game, source);
         }
         return false;
-  }
+    }
 }

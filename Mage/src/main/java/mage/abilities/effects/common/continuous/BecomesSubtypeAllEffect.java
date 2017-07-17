@@ -5,38 +5,33 @@
  */
 package mage.abilities.effects.common.continuous;
 
-import java.util.ArrayList;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.repository.CardRepository;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.SubTypeList;
 
 /**
- *
  * @author LevelX2
  */
 public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
 
-    protected ArrayList<String> subtypes = new ArrayList();
+    protected SubTypeList subtypes = new SubTypeList();
     protected boolean loseOther; // loses other subtypes
     protected FilterCreaturePermanent filter;
 
-    public BecomesSubtypeAllEffect(Duration duration, String subtype) {
+    public BecomesSubtypeAllEffect(Duration duration, SubType subtype) {
         this(duration, createArrayList(subtype));
     }
 
-    public BecomesSubtypeAllEffect(Duration duration, ArrayList<String> subtypes) {
+    public BecomesSubtypeAllEffect(Duration duration, SubTypeList subtypes) {
         this(duration, subtypes, new FilterCreaturePermanent("All creatures"), true);
     }
 
     public BecomesSubtypeAllEffect(Duration duration,
-            ArrayList<String> subtypes, FilterCreaturePermanent filter, boolean loseOther) {
+                                   SubTypeList subtypes, FilterCreaturePermanent filter, boolean loseOther) {
         super(duration, Outcome.Detriment);
         this.subtypes = subtypes;
         this.staticText = setText();
@@ -44,8 +39,8 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
         this.filter = filter;
     }
 
-    private static ArrayList<String> createArrayList(String subtype) {
-        ArrayList<String> subtypes = new ArrayList<>();
+    private static SubTypeList createArrayList(SubType subtype) {
+        SubTypeList subtypes = new SubTypeList();
         subtypes.add(subtype);
         return subtypes;
     }
@@ -69,16 +64,16 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source,
-            Game game) {
+                         Game game) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             if (permanent != null) {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (loseOther) {
-                            permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
+                            permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
                             permanent.getSubtype(game).addAll(subtypes);
                         } else {
-                            for (String subtype : subtypes) {
+                            for (SubType subtype : subtypes) {
                                 if (!permanent.getSubtype(game).contains(subtype)) {
                                     permanent.getSubtype(game).add(subtype);
                                 }

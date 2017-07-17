@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -36,7 +35,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
@@ -48,14 +46,16 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author anonymous
  */
 public class TribalUnity extends CardImpl {
 
     public TribalUnity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{2}{G}");
 
         // Creatures of the creature type of your choice get +X/+X until end of turn.
         this.getSpellAbility().addEffect(new TribalUnityEffect(new ManacostVariableValue()));
@@ -70,7 +70,6 @@ public class TribalUnity extends CardImpl {
         return new TribalUnity(this);
     }
 }
-
 
 
 class TribalUnityEffect extends OneShotEffect {
@@ -95,7 +94,7 @@ class TribalUnityEffect extends OneShotEffect {
         if (player != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(SubType.getCreatureTypes(false));
+            typeChoice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toSet()));
             while (!player.choose(outcome, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;

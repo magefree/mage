@@ -37,10 +37,8 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.util.SubTypeList;
 
 import java.util.UUID;
 
@@ -57,12 +55,14 @@ public class BladedBracers extends CardImpl {
 
         // Equipped creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
-
+        SubTypeList subTypes = new SubTypeList();
+        subTypes.add(SubType.HUMAN);
+        subTypes.add(SubType.ANGEL);
         // As long as equipped creature is a Human or an Angel, it has vigilance.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT),
-                            new EquippedHasSubtypeCondition("Human", "Angel"), ruleText)));
+                            new EquippedHasSubtypeCondition(subTypes), ruleText)));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));

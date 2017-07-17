@@ -5,8 +5,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -25,6 +23,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Effect for the AmplifyAbility
@@ -101,8 +102,8 @@ public class AmplifyEffect extends ReplacementEffectImpl {
         if (controller != null && sourceCreature != null) {
             FilterCreatureCard filter = new FilterCreatureCard("creatures cards to reveal");
             List<SubtypePredicate> filterSubtypes = new ArrayList<>();
-            for (String subtype : sourceCreature.getSubtype(game)) {
-                filterSubtypes.add(new SubtypePredicate(SubType.byDescription(subtype)));
+            for (SubType subtype : sourceCreature.getSubtype(game)) {
+                filterSubtypes.add(new SubtypePredicate(subtype));
             }
             if (filterSubtypes.size() > 1) {
                 filter.add(Predicates.or(filterSubtypes));

@@ -27,21 +27,17 @@
  */
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -88,11 +84,11 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
                             if (loseAllAbilities) {
-                                permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
+                                permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
                                 permanent.getSubtype(game).addAll(token.getSubtype(game));
                             } else {
                                 if (!token.getSubtype(game).isEmpty()) {
-                                    for (String subtype : token.getSubtype(game)) {
+                                    for (SubType subtype : token.getSubtype(game)) {
                                         if (!permanent.getSubtype(game).contains(subtype)) {
                                             permanent.getSubtype(game).add(subtype);
                                         }

@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.StaticAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -71,7 +72,7 @@ class CantBeEnchantedAbility extends StaticAbility {
 
     public boolean canTarget(MageObject source, Game game) {
         if (source.isEnchantment()
-                && source.hasSubtype("Aura", game)) {
+                && source.hasSubtype(SubType.AURA, game)) {
             return false;
         }
         return true;

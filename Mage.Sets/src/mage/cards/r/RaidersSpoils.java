@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
@@ -38,11 +37,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +97,7 @@ class RaidersSpoilsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent permanent = game.getPermanent(event.getSourceId());
-        if (damageEvent.isCombatDamage() && permanent != null && permanent.hasSubtype("Warrior", game) && permanent.getControllerId().equals(controllerId)) {
+        if (damageEvent.isCombatDamage() && permanent != null && permanent.hasSubtype(SubType.WARRIOR, game) && permanent.getControllerId().equals(controllerId)) {
             return true;
         }
         return false;

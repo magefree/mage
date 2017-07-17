@@ -28,6 +28,7 @@
 package mage.filter.predicate.other;
 
 import mage.cards.Card;
+import mage.constants.SubType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
@@ -66,8 +67,8 @@ public class CardTextPredicate implements Predicate<Card> {
                     }
                 }
 
-                for (String subType : input.getSubtype(game)) {
-                    if (subType.equalsIgnoreCase(token)) {
+                for (SubType subType : input.getSubtype(game)) {
+                    if (subType.toString().equalsIgnoreCase(token)) {
                         found = true;
                         break;
                     }

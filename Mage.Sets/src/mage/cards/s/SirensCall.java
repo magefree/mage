@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
@@ -43,10 +42,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.AttackedThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -141,7 +143,7 @@ class SirensCallDestroyEffect extends OneShotEffect {
                 }
 
                 // Walls are safe.
-                if (permanent.hasSubtype("Wall", game)) {
+                if (permanent.hasSubtype(SubType.WALL, game)) {
                     continue;
                 }
                 // Creatures that attacked are safe.

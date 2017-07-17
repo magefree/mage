@@ -34,6 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
@@ -99,7 +100,7 @@ class EatenBySpidersEffect extends OneShotEffect {
 
             for (UUID attachmentId : attachments) {
                 Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment.hasSubtype("Equipment", game)) {
+                if (attachment.hasSubtype(SubType.EQUIPMENT, game)) {
                     attachment.destroy(source.getSourceId(), game, false);
                 }
             }

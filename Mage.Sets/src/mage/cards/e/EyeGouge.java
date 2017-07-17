@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -53,7 +54,7 @@ public class EyeGouge extends CardImpl {
         // Target creature gets -1/-1 until end of turn. If it's a Cyclops, destroy it.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1,-1, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new ConditionalOneShotEffect(new DestroyTargetEffect(), new TargetHasSubtypeCondition("Cyclops"), 
+        Effect effect = new ConditionalOneShotEffect(new DestroyTargetEffect(), new TargetHasSubtypeCondition(SubType.CYCLOPS),
                 "If it's a Cyclops, destroy it");
         this.getSpellAbility().addEffect(effect);
     }

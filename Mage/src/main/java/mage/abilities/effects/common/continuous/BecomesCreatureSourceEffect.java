@@ -31,12 +31,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -116,11 +111,12 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                             permanent.addCardType(t);
                         }
                         if (type != null && type.isEmpty() || type == null && permanent.isLand()) {
-                            permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
+                            permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
                         }
                         if (!token.getSubtype(game).isEmpty()) {
                             permanent.getSubtype(game).addAll(token.getSubtype(game));
                         }
+                        permanent.setIsAllCreatureTypes(token.isAllCreatureTypes());
                     }
                     break;
                 case ColorChangingEffects_5:

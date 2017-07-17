@@ -9,6 +9,7 @@ import mage.cards.ArtRect;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.view.CardView;
 import mage.view.CounterView;
@@ -428,7 +429,7 @@ public abstract class CardRenderer {
             }
             if (!cardView.getSubTypes().isEmpty()) {
                 sbType.append("- ");
-                for (String subType : cardView.getSubTypes()) {
+                for (SubType subType : cardView.getSubTypes()) {
                     sbType.append(subType).append(' ');
                 }
             }

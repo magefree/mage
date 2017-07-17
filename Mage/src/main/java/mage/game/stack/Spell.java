@@ -57,6 +57,12 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.util.GameLog;
+import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -472,10 +478,9 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public List<String> getSubtype(Game game) {
+    public SubTypeList getSubtype(Game game) {
         if (this.getSpellAbility() instanceof BestowAbility) {
-            List<String> subtypes = new ArrayList<>();
-            subtypes.addAll(card.getSubtype(game));
+            SubTypeList subtypes  = card.getSubtype(game);
             subtypes.add("Aura");
             return subtypes;
         }
@@ -483,10 +488,9 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean hasSubtype(String subtype, Game game) {
+    public boolean hasSubtype(SubType subtype, Game game) {
         if (this.getSpellAbility() instanceof BestowAbility) { // workaround for Bestow (don't like it)
-            List<String> subtypes = new ArrayList<>();
-            subtypes.addAll(card.getSubtype(game));
+            SubTypeList subtypes = card.getSubtype(game);
             subtypes.add("Aura");
             if (subtypes.contains(subtype)) {
                 return true;
@@ -918,4 +922,10 @@ public class Spell extends StackObjImpl implements Card {
         game.fireEvent(new GameEvent(EventType.COPIED_STACKOBJECT, copy.getId(), this.getId(), newControllerId));
         return copy;
     }
+
+    public boolean isAllCreatureTypes(){
+        return false;
+    }
+
+    public void setIsAllCreatureTypes(boolean value){}
 }

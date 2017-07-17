@@ -27,8 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -41,6 +39,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.util.SubTypeList;
+
+import java.util.UUID;
 
 /**
  *
@@ -92,7 +93,7 @@ class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
             }
         }
 
-        ArrayList<String> list = new ArrayList<>();
+        SubTypeList list = new SubTypeList();
         list.add("Spirit");
         list.add("Warrior");
         ObjectColor objectColor = new ObjectColor();

@@ -27,15 +27,9 @@
  */
 package mage.abilities.effects.common.continuous;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.mana.*;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -43,25 +37,13 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
 
     protected final static ArrayList<String> allLandTypes = new ArrayList<>();
 
-    static { // 205.3i
-        allLandTypes.add("Forest");
-        allLandTypes.add("Swamp");
-        allLandTypes.add("Plains");
-        allLandTypes.add("Mountain");
-        allLandTypes.add("Island");
-        allLandTypes.add("Urza's");
-        allLandTypes.add("Mine");
-        allLandTypes.add("Power-Plant");
-        allLandTypes.add("Tower");
-        allLandTypes.add("Desert");
-        allLandTypes.add("Gate");
-        allLandTypes.add("Lair");
-        allLandTypes.add("Locus");
-    }
 
     protected ArrayList<String> landTypes = new ArrayList<>();
 

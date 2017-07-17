@@ -27,10 +27,6 @@
  */
 package mage.player.ai;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
@@ -80,6 +76,11 @@ import mage.util.RandomUtil;
 import mage.util.TournamentUtil;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  *
@@ -1340,8 +1341,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 if (game.getOpponents(this.getId()).contains(permanent.getControllerId())
                         && permanent.getCardType().contains(CardType.CREATURE)
                         && !permanent.getSubtype(game).isEmpty()) {
-                    if (choice.getChoices().contains(permanent.getSubtype(game).get(0))) {
-                        choice.setChoice(permanent.getSubtype(game).get(0));
+                    if (choice.getChoices().contains(permanent.getSubtype(game).get(0).toString())) {
+                        choice.setChoice(permanent.getSubtype(game).get(0).toString());
                         break;
                     }
                 }
@@ -1352,8 +1353,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     Player opponent = game.getPlayer(opponentId);
                     for (Card card : opponent.getGraveyard().getCards(game)) {
                         if (card != null && card.getCardType().contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
-                            if (choice.getChoices().contains(card.getSubtype(game).get(0))) {
-                                choice.setChoice(card.getSubtype(game).get(0));
+                            if (choice.getChoices().contains(card.getSubtype(game).get(0).toString())) {
+                                choice.setChoice(card.getSubtype(game).get(0).toString());
                                 break;
                             }
                         }
@@ -1368,8 +1369,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             for (UUID cardId : this.getHand()) {
                 Card card = game.getCard(cardId);
                 if (card != null && card.getCardType().contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
-                    if (choice.getChoices().contains(card.getSubtype(game).get(0))) {
-                        choice.setChoice(card.getSubtype(game).get(0));
+                    if (choice.getChoices().contains(card.getSubtype(game).get(0).toString())) {
+                        choice.setChoice(card.getSubtype(game).get(0).toString());
                         break;
                     }
                 }
@@ -1378,8 +1379,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (UUID cardId : this.getLibrary().getCardList()) {
                     Card card = game.getCard(cardId);
                     if (card != null && card.getCardType().contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
-                        if (choice.getChoices().contains(card.getSubtype(game).get(0))) {
-                            choice.setChoice(card.getSubtype(game).get(0));
+                        if (choice.getChoices().contains(card.getSubtype(game).get(0).toString())) {
+                            choice.setChoice(card.getSubtype(game).get(0).toString());
                             break;
                         }
                     }

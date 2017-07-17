@@ -55,8 +55,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -130,7 +128,7 @@ class ChainerDementiaMasterEffect extends OneShotEffect {
                 ContinuousEffectImpl effect = new BecomesColorTargetEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield);
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
-                effect = new BecomesCreatureTypeTargetEffect(Duration.WhileOnBattlefield, new ArrayList<>(Collections.singletonList("Nightmare")), false);
+                effect = new BecomesCreatureTypeTargetEffect(Duration.WhileOnBattlefield, SubType.NIGHTMARE, false);
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
             }

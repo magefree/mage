@@ -34,9 +34,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceCreatureType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -97,9 +96,8 @@ class GraveSifterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Choice typeChoice = new ChoiceImpl(true);
+        Choice typeChoice = new ChoiceCreatureType();
         typeChoice.setMessage("Choose creature type to return cards from your graveyard");
-        typeChoice.setChoices(SubType.getCreatureTypes(false));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
