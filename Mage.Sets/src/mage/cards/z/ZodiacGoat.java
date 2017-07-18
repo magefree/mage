@@ -27,12 +27,14 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.MountainwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +44,7 @@ public class ZodiacGoat extends CardImpl {
 
     public ZodiacGoat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Goat");
+        this.subtype.add(SubType.GOAT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

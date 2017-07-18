@@ -27,7 +27,6 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -35,11 +34,14 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,8 +51,7 @@ public class ZhurTaaDruid extends CardImpl {
 
     public ZhurTaaDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.HUMAN, SubType.DRUID);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

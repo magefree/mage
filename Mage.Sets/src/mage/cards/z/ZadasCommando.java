@@ -27,7 +27,6 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -48,6 +47,8 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -63,9 +64,10 @@ public class ZadasCommando extends CardImpl {
 
     public ZadasCommando(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Archer");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.GOBLIN, SubType.ARCHER, SubType.ALLY);
+        //this.subtype.add("Goblin");
+        //this.subtype.add("Archer");
+        //this.subtype.add("Ally");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

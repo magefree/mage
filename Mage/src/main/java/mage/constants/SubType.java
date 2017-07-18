@@ -73,7 +73,7 @@ public enum SubType {
     BIRD("Bird", SubTypeSet.CreatureType, false),
     BITH("Bith", SubTypeSet.CreatureType, true),  // Star Wars
     BLINKMOTH("Blinkmoth", SubTypeSet.CreatureType, false),
-    BOARD("Boar", SubTypeSet.CreatureType, false),
+    BOAR("Boar", SubTypeSet.CreatureType, false),
     BRINGER("Bringer", SubTypeSet.CreatureType, false),
     BRUSHWAGG("Brushwagg", SubTypeSet.CreatureType, false),
 

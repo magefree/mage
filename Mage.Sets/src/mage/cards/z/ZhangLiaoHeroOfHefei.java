@@ -33,6 +33,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 import java.util.UUID;
@@ -46,8 +47,7 @@ public class ZhangLiaoHeroOfHefei extends CardImpl {
     public ZhangLiaoHeroOfHefei(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

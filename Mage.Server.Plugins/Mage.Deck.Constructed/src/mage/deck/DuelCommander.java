@@ -35,14 +35,13 @@ public class DuelCommander extends Commander {
 
     public DuelCommander() {
         banned.add("Ancestral Recall");
-        banned.add("Ancient Tomb");
         banned.add("Back to Basics");
         banned.add("Black Lotus");
         banned.add("Channel");
         banned.add("Chrome Mox");
         banned.add("Dig Through Time");
+        banned.add("Emrakul, the Aeons Torn");
         banned.add("Entomb");
-        banned.add("Fastbond");
         banned.add("Food Chain");
         banned.add("Gaea's Cradle");
         banned.add("Gifts Ungiven");
@@ -56,7 +55,6 @@ public class DuelCommander extends Commander {
         banned.add("Mana Crypt");
         banned.add("Mana Drain");
         banned.add("Mana Vault");
-        banned.add("Mind Twist");
         banned.add("Mishra's Workshop");
         banned.add("Mox Diamond");
         banned.add("Mox Emerald");
@@ -68,6 +66,7 @@ public class DuelCommander extends Commander {
         banned.add("Natural Order");
         banned.add("Necrotic Ooze");
         banned.add("Oath of Druids");
+        banned.add("Polymorph");
         banned.add("Protean Hulk");
         banned.add("Sensei's Divining Top");
         banned.add("Shahrazad");
@@ -82,9 +81,12 @@ public class DuelCommander extends Commander {
         banned.add("Vampiric Tutor");
 
         bannedCommander.add("Breya, Etherium Shaper");
+        bannedCommander.add("Bruse Tarl, Boorish Herder");
         bannedCommander.add("Derevi, Empyrial Tactician");
         bannedCommander.add("Edric, Spymaster of Trest");
         bannedCommander.add("Erayo, Soratami Ascendant");
+        bannedCommander.add("Geist of Saint Traft");
+        bannedCommander.add("Jace, Vryn's Prodigy");
         bannedCommander.add("Marath, Will of the Wild");
         bannedCommander.add("Oloro, Ageless Ascetic");
         bannedCommander.add("Rofellos, Llanowar Emissary");

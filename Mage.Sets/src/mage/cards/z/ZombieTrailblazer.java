@@ -27,7 +27,6 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -49,6 +48,8 @@ import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -64,8 +65,7 @@ public class ZombieTrailblazer extends CardImpl {
 
     public ZombieTrailblazer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.ZOMBIE, SubType.SCOUT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

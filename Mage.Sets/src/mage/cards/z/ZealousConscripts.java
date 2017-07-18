@@ -27,9 +27,6 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,8 +36,12 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,8 +51,7 @@ public class ZealousConscripts extends CardImpl {
 
     public ZealousConscripts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

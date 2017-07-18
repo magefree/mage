@@ -27,9 +27,6 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,12 +35,15 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.FlankingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,8 +59,7 @@ public class ZhalfirinCommander extends CardImpl {
     
     public ZhalfirinCommander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.HUMAN, SubType.KNIGHT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

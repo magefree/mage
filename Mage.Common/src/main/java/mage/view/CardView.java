@@ -987,7 +987,7 @@ public class CardView extends SimpleCardView {
         }
         if (!getSubTypes().isEmpty()) {
             type.append(" - ");
-            type.append(String.join(" ", getSubTypes().stream().map(p->p.toString()).collect(Collectors.toSet())));
+            type.append(String.join(" ", getSubTypes().stream().map(SubType::toString).collect(Collectors.toList())));
         }
         return type.toString();
     }
