@@ -3,6 +3,7 @@ package mage.util;
 import mage.constants.SubType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,10 @@ public class SubTypeList extends ArrayList<SubType> {
 
     public boolean add(SubType s) {
        return super.add(s);
+    }
+
+    public boolean add(SubType... subTypes) {
+        return Collections.addAll(this, subTypes);
     }
 
     public boolean add(String s) {

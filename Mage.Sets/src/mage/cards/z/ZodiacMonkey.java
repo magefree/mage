@@ -32,6 +32,7 @@ import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -43,7 +44,7 @@ public class ZodiacMonkey extends CardImpl {
 
     public ZodiacMonkey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Monkey");
+        this.subtype.add(SubType.MONKEY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

@@ -28,12 +28,13 @@
 
 package mage.cards.z;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -42,8 +43,7 @@ public class ZombieGoliath extends CardImpl {
 
     public ZombieGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.ZOMBIE, SubType.GIANT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

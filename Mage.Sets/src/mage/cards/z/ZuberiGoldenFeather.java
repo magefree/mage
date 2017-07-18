@@ -49,7 +49,7 @@ public class ZuberiGoldenFeather extends CardImpl {
     public ZuberiGoldenFeather(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Griffin");
+        this.subtype.add(SubType.GRIFFIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

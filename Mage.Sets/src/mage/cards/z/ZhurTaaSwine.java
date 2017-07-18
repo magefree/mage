@@ -27,14 +27,16 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +46,7 @@ public class ZhurTaaSwine extends CardImpl {
 
     public ZhurTaaSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
-        this.subtype.add("Boar");
+        this.subtype.add(SubType.BOAR);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

@@ -27,7 +27,6 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -47,6 +46,8 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
  *
  * @author andyfries
@@ -56,8 +57,7 @@ public class ZedruuTheGreathearted extends CardImpl {
     public ZedruuTheGreathearted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Minotaur");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.MINOTAUR, SubType.MONK);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

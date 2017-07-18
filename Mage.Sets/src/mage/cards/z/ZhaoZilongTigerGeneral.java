@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 import java.util.UUID;
@@ -48,9 +49,7 @@ public class ZhaoZilongTigerGeneral extends CardImpl {
     public ZhaoZilongTigerGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN, SubType.SOLDIER, SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
