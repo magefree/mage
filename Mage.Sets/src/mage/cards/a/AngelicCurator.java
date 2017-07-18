@@ -33,6 +33,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterArtifactCard;
 
 import java.util.UUID;
@@ -45,8 +46,8 @@ public class AngelicCurator extends CardImpl {
 
     public AngelicCurator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Angel");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.ANGEL);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -47,7 +48,7 @@ public class AssembledAlphas extends CardImpl {
 
     public AssembledAlphas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.WOLF);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

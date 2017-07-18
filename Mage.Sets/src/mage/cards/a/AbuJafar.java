@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
@@ -48,7 +49,7 @@ public class AbuJafar extends CardImpl {
 
     public AbuJafar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Human");
+        this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

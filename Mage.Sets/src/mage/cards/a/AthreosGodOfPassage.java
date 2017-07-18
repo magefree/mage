@@ -70,7 +70,7 @@ public class AthreosGodOfPassage extends CardImpl {
     public AthreosGodOfPassage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{W}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("God");
+        this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

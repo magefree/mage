@@ -59,7 +59,7 @@ public class AquitectsWill extends CardImpl {
 
     public AquitectsWill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{U}");
-        this.subtype.add("Merfolk");
+        this.subtype.add(SubType.MERFOLK);
 
         // Put a flood counter on target land.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.FLOOD.createInstance()));

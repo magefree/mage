@@ -59,7 +59,7 @@ public class Atogatog extends CardImpl {
     public Atogatog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Atog");
+        this.subtype.add(SubType.ATOG);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

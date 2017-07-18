@@ -61,7 +61,7 @@ public class AirdropCondor extends CardImpl {
 
     public AirdropCondor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add("Bird");
+        this.subtype.add(SubType.BIRD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -37,9 +36,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetAttackingCreature;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +59,7 @@ public class AerialGuide extends CardImpl {
         
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         
-        this.subtype.add("Drake");
+        this.subtype.add(SubType.DRAKE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

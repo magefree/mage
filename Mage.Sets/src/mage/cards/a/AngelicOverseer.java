@@ -62,7 +62,7 @@ public class AngelicOverseer extends CardImpl {
 
     public AngelicOverseer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
 
         this.color.setWhite(true);
         this.power = new MageInt(5);

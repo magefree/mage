@@ -52,8 +52,8 @@ public class AwokenHorror extends CardImpl {
 
     public AwokenHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Kraken");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.KRAKEN);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(8);
         this.color.setBlue(true);

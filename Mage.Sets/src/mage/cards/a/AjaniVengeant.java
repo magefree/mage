@@ -37,6 +37,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
@@ -59,7 +60,7 @@ public class AjaniVengeant extends CardImpl {
 
     public AjaniVengeant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{W}");
-        this.subtype.add("Ajani");
+        this.subtype.add(SubType.AJANI);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

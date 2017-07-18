@@ -54,7 +54,7 @@ public class AwakenTheAncient extends CardImpl {
 
     public AwakenTheAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}{R}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant Mountain
@@ -85,7 +85,7 @@ public class AwakenTheAncient extends CardImpl {
             super("Giant", "7/7 red Giant creature with haste");
             cardType.add(CardType.CREATURE);
             color.setRed(true);
-            subtype.add("Giant");
+            subtype.add(SubType.GIANT);
             power = new MageInt(7);
             toughness = new MageInt(7);
             this.addAbility(HasteAbility.getInstance());

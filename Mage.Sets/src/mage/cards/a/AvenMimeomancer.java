@@ -52,8 +52,8 @@ public class AvenMimeomancer extends CardImpl {
 
     public AvenMimeomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
-        this.subtype.add("Bird");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.WIZARD);
 
 
 

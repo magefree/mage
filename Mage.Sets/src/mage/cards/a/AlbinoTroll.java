@@ -36,6 +36,7 @@ import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -48,7 +49,7 @@ public class AlbinoTroll extends CardImpl {
 
     public AlbinoTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Troll");
+        this.subtype.add(SubType.TROLL);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

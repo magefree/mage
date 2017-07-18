@@ -34,6 +34,7 @@ import mage.abilities.keyword.ModularAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -56,7 +57,7 @@ public class ArcboundOverseer extends CardImpl {
 
     public ArcboundOverseer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{8}");
-        this.subtype.add("Golem");
+        this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

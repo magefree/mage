@@ -32,6 +32,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -43,8 +44,8 @@ public class AjanisSunstriker extends CardImpl {
 
     public AjanisSunstriker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
-        this.subtype.add("Cat");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

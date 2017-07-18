@@ -35,6 +35,7 @@ import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -65,7 +66,7 @@ public class AjaniUnyielding extends CardImpl {
 
     public AjaniUnyielding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{W}");
-        this.subtype.add("Ajani");
+        this.subtype.add(SubType.AJANI);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 

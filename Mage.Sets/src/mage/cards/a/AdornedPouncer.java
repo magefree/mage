@@ -34,6 +34,7 @@ import mage.abilities.keyword.EternalizeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -42,7 +43,7 @@ public class AdornedPouncer extends CardImpl {
     public AdornedPouncer(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        subtype.add("Cat");
+        subtype.add(SubType.CAT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

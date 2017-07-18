@@ -33,6 +33,7 @@ import mage.abilities.keyword.ModularAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class ArcboundHybrid extends CardImpl {
 
     public ArcboundHybrid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

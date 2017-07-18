@@ -34,6 +34,7 @@ import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourc
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
@@ -48,8 +49,8 @@ public class AnuridBrushhopper extends CardImpl {
 
     public AnuridBrushhopper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
-        this.subtype.add("Frog");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.FROG);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

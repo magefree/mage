@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,7 +50,7 @@ public class ArgothianTreefolk extends CardImpl {
 
     public ArgothianTreefolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Treefolk");
+        this.subtype.add(SubType.TREEFOLK);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

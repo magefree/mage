@@ -31,6 +31,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -42,7 +43,7 @@ public class AlphaMyr extends CardImpl {
 
     public AlphaMyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
-        this.subtype.add("Myr");
+        this.subtype.add(SubType.MYR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

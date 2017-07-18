@@ -38,6 +38,7 @@ import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -51,8 +52,8 @@ public class AethergeodeMiner extends CardImpl {
     public AethergeodeMiner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.subtype.add("Dwarf");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

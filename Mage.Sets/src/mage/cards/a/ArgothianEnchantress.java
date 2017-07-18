@@ -34,6 +34,7 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -53,8 +54,8 @@ public class ArgothianEnchantress extends CardImpl {
 
     public ArgothianEnchantress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

@@ -33,6 +33,7 @@ import mage.abilities.keyword.ModularAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -43,7 +44,7 @@ public class ArcboundWorker extends CardImpl {
 
     public ArcboundWorker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -40,6 +40,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,8 +56,8 @@ public class AAT1 extends CardImpl {
 
     public AAT1(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}{U}{B}");
-        this.subtype.add("Droid");
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.DROID);
+        this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

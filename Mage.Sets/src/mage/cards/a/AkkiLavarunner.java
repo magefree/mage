@@ -29,8 +29,8 @@ public class AkkiLavarunner extends CardImpl {
 
     public AkkiLavarunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -91,8 +91,8 @@ class TokTokVolcanoBorn extends Token {
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Goblin");
-        subtype.add("Shaman");
+        subtype.add(SubType.GOBLIN);
+        subtype.add(SubType.SHAMAN);
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));

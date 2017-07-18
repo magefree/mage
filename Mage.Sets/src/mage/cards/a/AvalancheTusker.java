@@ -34,6 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -51,8 +52,8 @@ public class AvalancheTusker extends CardImpl {
 
     public AvalancheTusker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}{R}");
-        this.subtype.add("Elephant");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ELEPHANT);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);

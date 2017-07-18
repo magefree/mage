@@ -36,6 +36,7 @@ import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -49,7 +50,7 @@ public class ArtisanOfKozilek extends CardImpl {
 
     public ArtisanOfKozilek (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(10);
         this.toughness = new MageInt(9);
         // When you cast Artisan of Kozilek, you may return target creature card from your graveyard to the battlefield.

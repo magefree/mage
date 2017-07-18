@@ -34,6 +34,7 @@ import mage.abilities.keyword.HauntAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetEnchantmentPermanent;
 
 import java.util.UUID;
@@ -46,8 +47,8 @@ public class AbsolverThrull extends CardImpl {
 
     public AbsolverThrull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Thrull");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.THRULL);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

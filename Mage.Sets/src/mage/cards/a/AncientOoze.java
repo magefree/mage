@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -53,7 +54,7 @@ public class AncientOoze extends CardImpl {
 
     public AncientOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
-        this.subtype.add("Ooze");
+        this.subtype.add(SubType.OOZE);
 
         this.color.setGreen(true); 
         this.power = new MageInt(0);

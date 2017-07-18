@@ -35,10 +35,7 @@ import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -58,7 +55,7 @@ public class ArbiterOfTheIdeal extends CardImpl {
 
     public ArbiterOfTheIdeal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
-        this.subtype.add("Sphinx");
+        this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

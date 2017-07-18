@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 
@@ -50,7 +51,7 @@ public class ArcanisTheOmnipotent extends CardImpl {
     public ArcanisTheOmnipotent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

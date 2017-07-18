@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -59,7 +60,7 @@ public class AvatarOfTheResolute extends CardImpl {
 
     public AvatarOfTheResolute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

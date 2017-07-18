@@ -34,6 +34,7 @@ import mage.abilities.keyword.ModularAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -46,7 +47,7 @@ public class ArcboundSlith extends CardImpl {
 
     public ArcboundSlith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
-        this.subtype.add("Slith");
+        this.subtype.add(SubType.SLITH);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

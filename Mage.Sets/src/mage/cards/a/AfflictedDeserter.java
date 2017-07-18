@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.w.WerewolfRansacker;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 import java.util.UUID;
@@ -50,8 +51,8 @@ public class AfflictedDeserter extends CardImpl {
 
     public AfflictedDeserter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WEREWOLF);
 
         this.transformable = true;
         this.secondSideCardClazz = WerewolfRansacker.class;

@@ -65,7 +65,7 @@ public class AngelOfJubilation extends CardImpl {
 
     public AngelOfJubilation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}{W}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

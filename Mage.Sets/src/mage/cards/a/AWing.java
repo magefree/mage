@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,8 +54,8 @@ public class AWing extends CardImpl {
 
     public AWing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Rebel");
-        this.subtype.add("Starship");
+        this.subtype.add(SubType.REBEL);
+        this.subtype.add(SubType.STARSHIP);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

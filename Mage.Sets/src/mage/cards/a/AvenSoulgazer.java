@@ -40,6 +40,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.FaceDownPredicate;
@@ -64,8 +65,8 @@ public class AvenSoulgazer extends CardImpl {
 
     public AvenSoulgazer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.subtype.add("Bird");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

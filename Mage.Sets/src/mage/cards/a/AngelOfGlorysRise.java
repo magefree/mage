@@ -56,7 +56,7 @@ public class AngelOfGlorysRise extends CardImpl {
 
     public AngelOfGlorysRise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);

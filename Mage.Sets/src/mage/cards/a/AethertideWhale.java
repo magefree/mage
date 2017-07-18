@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -50,7 +51,7 @@ public class AethertideWhale extends CardImpl {
     public AethertideWhale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
 
-        this.subtype.add("Whale");
+        this.subtype.add(SubType.WHALE);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 

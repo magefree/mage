@@ -60,8 +60,8 @@ public class AnabaAncestor extends CardImpl {
 
     public AnabaAncestor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

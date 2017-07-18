@@ -53,7 +53,7 @@ public class ArcaneTeachings extends CardImpl {
 
     public ArcaneTeachings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

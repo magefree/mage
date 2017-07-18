@@ -56,7 +56,7 @@ public class AcidWebSpider extends CardImpl {
 
     public AcidWebSpider (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Spider");
+        this.subtype.add(SubType.SPIDER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);

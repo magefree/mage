@@ -33,6 +33,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class AradaraExpress extends CardImpl {
 
     public AradaraExpress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
-        this.subtype.add("Vehicle");
+        this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(8);
         this.toughness = new MageInt(6);
 

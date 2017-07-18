@@ -47,8 +47,8 @@ public class ArmoredGalleon extends CardImpl {
 
     public ArmoredGalleon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Pirate");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

@@ -55,8 +55,8 @@ public class AnabaSpiritCrafter extends CardImpl {
 
     public AnabaSpiritCrafter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

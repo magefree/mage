@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.Token;
@@ -53,7 +54,7 @@ public class AbhorrentOverlord extends CardImpl {
 
     public AbhorrentOverlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -84,7 +85,7 @@ class AbhorrentOverlordHarpyToken extends Token {
         super("Harpy", "1/1 black Harpy creature tokens with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Harpy");
+        subtype.add(SubType.HARPY);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

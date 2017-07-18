@@ -58,8 +58,8 @@ public class AvenBrigadier extends CardImpl {
 
     public AvenBrigadier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}{W}");
-        this.subtype.add("Bird");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

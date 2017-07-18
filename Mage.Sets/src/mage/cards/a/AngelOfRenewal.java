@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -47,8 +48,8 @@ public class AngelOfRenewal extends CardImpl {
 
     public AngelOfRenewal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
-        this.subtype.add("Angel");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.ANGEL);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

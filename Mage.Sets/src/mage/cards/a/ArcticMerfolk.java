@@ -36,6 +36,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -50,7 +51,7 @@ public class ArcticMerfolk extends CardImpl {
 
     public ArcticMerfolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Merfolk");
+        this.subtype.add(SubType.MERFOLK);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

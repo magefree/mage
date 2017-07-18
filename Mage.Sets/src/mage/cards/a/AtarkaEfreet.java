@@ -37,6 +37,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
@@ -49,8 +50,8 @@ public class AtarkaEfreet extends CardImpl {
 
     public AtarkaEfreet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Efreet");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.EFREET);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);
 

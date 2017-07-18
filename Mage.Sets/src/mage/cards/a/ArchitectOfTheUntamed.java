@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,9 +36,12 @@ import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.ArchitectOfTheUntamedBeastToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,9 +51,9 @@ public class ArchitectOfTheUntamed extends CardImpl {
 
     public ArchitectOfTheUntamed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Artificer");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ARTIFICER);
+        this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
@@ -56,8 +57,8 @@ public class AsajjVentress extends CardImpl {
     public AsajjVentress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dathomirian");
-        this.subtype.add("Sith");
+        this.subtype.add(SubType.DATHOMIRIAN);
+        this.subtype.add(SubType.SITH);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
