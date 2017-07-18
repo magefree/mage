@@ -27,8 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -45,6 +43,8 @@ import mage.target.Target;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
  *
  * @author ciaccona007
@@ -53,7 +53,6 @@ public class RitesOfRefusal extends CardImpl {
 
     public RitesOfRefusal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        
 
         // Discard any number of cards. Counter target spell unless its controller pays {3} for each card discarded this way.
         this.getSpellAbility().addTarget(new TargetSpell());
