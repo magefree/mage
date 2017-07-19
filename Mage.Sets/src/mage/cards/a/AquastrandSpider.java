@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,8 +60,8 @@ public class AquastrandSpider extends CardImpl {
 
     public AquastrandSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Spider");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.SPIDER);
+        this.subtype.add(SubType.MUTANT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

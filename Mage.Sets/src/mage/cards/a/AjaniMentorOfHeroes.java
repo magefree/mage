@@ -69,7 +69,7 @@ public class AjaniMentorOfHeroes extends CardImpl {
 
     public AjaniMentorOfHeroes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}{W}");
-        this.subtype.add("Ajani");
+        this.subtype.add(SubType.AJANI);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 

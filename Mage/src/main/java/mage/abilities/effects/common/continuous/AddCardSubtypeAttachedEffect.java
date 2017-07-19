@@ -38,10 +38,10 @@ import mage.game.permanent.Permanent;
  * @author nantuko
  */
 public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl {
-    private String addedSubtype;
+    private SubType addedSubtype;
     private AttachmentType attachmentType;
 
-    public AddCardSubtypeAttachedEffect(String addedSubtype, Duration duration, AttachmentType attachmentType) {
+    public AddCardSubtypeAttachedEffect(SubType addedSubtype, Duration duration, AttachmentType attachmentType) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedSubtype = addedSubtype;
         this.attachmentType = attachmentType;

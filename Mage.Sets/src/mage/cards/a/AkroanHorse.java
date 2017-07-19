@@ -58,7 +58,7 @@ public class AkroanHorse extends CardImpl {
 
     public AkroanHorse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-        this.subtype.add("Horse");
+        this.subtype.add(SubType.HORSE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

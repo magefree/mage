@@ -37,6 +37,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -65,8 +66,8 @@ public class AlexiZephyrMage extends CardImpl {
     public AlexiZephyrMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

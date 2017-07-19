@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -61,7 +62,7 @@ public class AurraSingBaneOfJedi extends CardImpl {
 
     public AurraSingBaneOfJedi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{R}");
-        this.subtype.add("Aurra");
+        this.subtype.add(SubType.AURRA);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -48,8 +49,8 @@ public class AnuridSwarmsnapper extends CardImpl {
 
     public AnuridSwarmsnapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Frog");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.FROG);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

@@ -58,7 +58,7 @@ public class AnimarSoulOfElements extends CardImpl {
     public AnimarSoulOfElements(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

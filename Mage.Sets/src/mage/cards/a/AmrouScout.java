@@ -59,9 +59,9 @@ public class AmrouScout extends CardImpl {
 
     public AmrouScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Rebel");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.KITHKIN);
+        this.subtype.add(SubType.REBEL);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

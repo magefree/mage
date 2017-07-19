@@ -56,8 +56,8 @@ public class ArmamentMaster extends CardImpl {
 
     public ArmamentMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

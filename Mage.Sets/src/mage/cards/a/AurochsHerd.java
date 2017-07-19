@@ -65,7 +65,7 @@ public class AurochsHerd extends CardImpl {
 
     public AurochsHerd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
-        this.subtype.add("Aurochs");
+        this.subtype.add(SubType.AUROCHS);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

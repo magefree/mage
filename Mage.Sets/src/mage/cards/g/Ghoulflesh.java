@@ -60,7 +60,7 @@ public class Ghoulflesh extends CardImpl {
 
         // Enchanted creature gets -1/-1 and is a black Zombie in addition to its other colors and types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardSubtypeAttachedEffect("Zombie", Duration.WhileOnBattlefield, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardSubtypeAttachedEffect(SubType.ZOMBIE, Duration.WhileOnBattlefield, AttachmentType.AURA)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardColorAttachedEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield, AttachmentType.AURA)));
     }
 

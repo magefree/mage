@@ -27,8 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -39,6 +37,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.mageobject.AnotherCardPredicate;
@@ -46,6 +45,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ public class ArsenalThresher extends CardImpl {
 
     public ArsenalThresher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W/B}{U}");
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.CONSTRUCT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

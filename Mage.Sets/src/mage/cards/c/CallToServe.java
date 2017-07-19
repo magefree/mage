@@ -76,7 +76,7 @@ public class CallToServe extends CardImpl {
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText(", has flying");
         ability.addEffect(effect);
-        effect = new AddCardSubtypeAttachedEffect("Angel", Duration.WhileOnBattlefield, AttachmentType.AURA);
+        effect = new AddCardSubtypeAttachedEffect(SubType.ANGEL, Duration.WhileOnBattlefield, AttachmentType.AURA);
         effect.setText(", and is an Angel in addition to its other types");
         ability.addEffect(effect);
         this.addAbility(ability);

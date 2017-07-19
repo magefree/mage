@@ -35,6 +35,7 @@ import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.Target;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -48,7 +49,7 @@ public class Aethersnipe extends CardImpl {
 
     public Aethersnipe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

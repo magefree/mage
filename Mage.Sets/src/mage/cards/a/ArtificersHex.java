@@ -58,7 +58,7 @@ public class ArtificersHex extends CardImpl {
 
     public ArtificersHex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant Equipment

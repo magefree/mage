@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanentAmount;
@@ -48,7 +49,7 @@ public class ArrowVolleyTrap extends CardImpl {
 
     public ArrowVolleyTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
-        this.subtype.add("Trap");
+        this.subtype.add(SubType.TRAP);
 
         // If four or more creatures are attacking, you may pay {1}{W} rather than pay Arrow Volley Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{1}{W}"), ArrowVolleyTrapCondition.instance));

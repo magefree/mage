@@ -71,7 +71,7 @@ public class ArachnusSpinner extends CardImpl {
 
     public ArachnusSpinner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
-        this.subtype.add("Spider");
+        this.subtype.add(SubType.SPIDER);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);

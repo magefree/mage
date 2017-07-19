@@ -60,7 +60,7 @@ public class AshiokNightmareWeaver extends CardImpl {
 
     public AshiokNightmareWeaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{U}{B}");
-        this.subtype.add("Ashiok");
+        this.subtype.add(SubType.ASHIOK);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

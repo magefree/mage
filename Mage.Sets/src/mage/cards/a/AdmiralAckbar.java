@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
@@ -46,6 +45,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.RebelStarshipToken;
 
+import java.util.UUID;
+
 /**
  *
  * @author Styxo
@@ -61,8 +62,8 @@ public class AdmiralAckbar extends CardImpl {
     public AdmiralAckbar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Calamari");
-        this.subtype.add("Rebel");
+        this.subtype.add(SubType.CALAMARI);
+        this.subtype.add(SubType.REBEL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

@@ -37,6 +37,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 
@@ -52,8 +53,8 @@ public class AtraxaPraetorsVoice extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}{B}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Angel");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ANGEL);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

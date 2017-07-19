@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -10,15 +9,18 @@ import mage.abilities.keyword.AfflictAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 public class AmmitEternal extends CardImpl {
 
     public AmmitEternal(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        subtype.add("Zombie");
-        subtype.add("Crocodile");
-        subtype.add("Demon");
+        subtype.add(SubType.ZOMBIE);
+        subtype.add(SubType.CROCODILE);
+        subtype.add(SubType.DEMON);
         power = new MageInt(5);
         toughness = new MageInt(5);
 

@@ -33,6 +33,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterEnchantmentCard;
 
 import java.util.UUID;
@@ -46,7 +47,7 @@ public class AzoriusFirstWing extends CardImpl {
 
     public AzoriusFirstWing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
-        this.subtype.add("Griffin");
+        this.subtype.add(SubType.GRIFFIN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -36,6 +36,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -49,8 +50,8 @@ public class AinokArtillerist extends CardImpl {
 
     public AinokArtillerist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Hound");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.ARCHER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 

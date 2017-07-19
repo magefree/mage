@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.players.PlayerList;
@@ -50,8 +51,8 @@ public class ArbiterOfKnollridge extends CardImpl {
 
     public ArbiterOfKnollridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}");
-        this.subtype.add("Giant");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

@@ -65,7 +65,7 @@ public class ArchdemonOfGreed extends CardImpl {
 
     public ArchdemonOfGreed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
         this.color.setBlack(true);
 
         this.nightCard = true;

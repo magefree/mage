@@ -34,10 +34,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -58,7 +55,7 @@ public class ArchetypeOfEndurance extends CardImpl {
 
     public ArchetypeOfEndurance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{6}{G}{G}");
-        this.subtype.add("Boar");
+        this.subtype.add(SubType.BOAR);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);

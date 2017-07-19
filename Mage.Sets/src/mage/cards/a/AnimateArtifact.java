@@ -60,7 +60,7 @@ public class AnimateArtifact extends CardImpl {
 
     public AnimateArtifact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant artifact
         TargetPermanent auraTarget = new TargetArtifactPermanent();

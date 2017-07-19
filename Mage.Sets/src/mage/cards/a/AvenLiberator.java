@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -50,8 +51,8 @@ public class AvenLiberator extends CardImpl {
 
     public AvenLiberator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
-        this.subtype.add("Bird");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

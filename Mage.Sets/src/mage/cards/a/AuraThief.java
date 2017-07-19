@@ -17,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -33,7 +34,7 @@ public class AuraThief extends CardImpl {
     
     public AuraThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         

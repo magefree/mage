@@ -34,6 +34,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -45,8 +46,8 @@ public class AdroitHateflayer extends CardImpl {
 
     public AdroitHateflayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");
-        this.subtype.add("Nautolan");
-        this.subtype.add("Sith");
+        this.subtype.add(SubType.NAUTOLAN);
+        this.subtype.add(SubType.SITH);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

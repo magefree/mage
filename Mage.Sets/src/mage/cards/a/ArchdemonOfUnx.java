@@ -60,7 +60,7 @@ public class ArchdemonOfUnx extends CardImpl {
 
     public ArchdemonOfUnx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

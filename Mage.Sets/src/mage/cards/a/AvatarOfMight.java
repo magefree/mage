@@ -51,7 +51,7 @@ public class AvatarOfMight extends CardImpl {
 
     public AvatarOfMight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

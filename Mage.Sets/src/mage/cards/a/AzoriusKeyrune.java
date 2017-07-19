@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -75,7 +76,7 @@ public class AzoriusKeyrune extends CardImpl {
             cardType.add(CardType.CREATURE);
             color.setWhite(true);
             color.setBlue(true);
-            this.subtype.add("Bird");
+            this.subtype.add(SubType.BIRD);
             power = new MageInt(2);
             toughness = new MageInt(2);
             this.addAbility(FlyingAbility.getInstance());

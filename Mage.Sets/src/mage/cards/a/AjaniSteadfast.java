@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -66,7 +67,7 @@ public class AjaniSteadfast extends CardImpl {
 
     public AjaniSteadfast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}");
-        this.subtype.add("Ajani");
+        this.subtype.add(SubType.AJANI);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 

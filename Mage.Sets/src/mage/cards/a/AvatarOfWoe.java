@@ -55,7 +55,7 @@ public class AvatarOfWoe extends CardImpl {
 
     public AvatarOfWoe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

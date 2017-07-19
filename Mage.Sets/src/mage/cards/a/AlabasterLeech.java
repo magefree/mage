@@ -35,6 +35,7 @@ import mage.abilities.effects.common.cost.SpellsCostIncreasementControllerEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,7 +56,7 @@ public class AlabasterLeech extends CardImpl {
 
     public AlabasterLeech(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Leech");
+        this.subtype.add(SubType.LEECH);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

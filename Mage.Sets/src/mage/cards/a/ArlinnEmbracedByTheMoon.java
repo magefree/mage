@@ -40,10 +40,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.command.emblems.ArlinnEmbracedByTheMoonEmblem;
 import mage.target.common.TargetCreatureOrPlayer;
 
-import mage.game.command.emblems.ArlinnEmbracedByTheMoonEmblem;
 import java.util.UUID;
 
 /**
@@ -56,7 +57,7 @@ public class ArlinnEmbracedByTheMoon extends CardImpl {
 
     public ArlinnEmbracedByTheMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.subtype.add("Arlinn");
+        this.subtype.add(SubType.ARLINN);
         this.color.setRed(true);
         this.color.setGreen(true);
 

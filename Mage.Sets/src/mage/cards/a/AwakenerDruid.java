@@ -55,8 +55,8 @@ public class AwakenerDruid extends CardImpl {
     public AwakenerDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.DRUID);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -113,7 +113,7 @@ class AwakenerDruidToken extends Token {
     public AwakenerDruidToken() {
         super("", "4/5 green Treefolk creature as long as {this} is on the battlefield");
         cardType.add(CardType.CREATURE);
-        subtype.add("Treefolk");
+        subtype.add(SubType.TREEFOLK);
         color.setGreen(true);
         power = new MageInt(4);
         toughness = new MageInt(5);

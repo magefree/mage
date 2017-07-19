@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -49,7 +50,7 @@ public class AdvancedHoverguard extends CardImpl {
 
     public AdvancedHoverguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Drone");
+        this.subtype.add(SubType.DRONE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

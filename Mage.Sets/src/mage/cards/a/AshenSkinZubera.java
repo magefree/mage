@@ -36,6 +36,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.ZuberasDiedWatcher;
 
@@ -48,8 +49,8 @@ public class AshenSkinZubera extends CardImpl {
 
     public AshenSkinZubera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Zubera");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.ZUBERA);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

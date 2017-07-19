@@ -29,7 +29,6 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,6 +40,8 @@ import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 import java.util.UUID;
@@ -53,8 +54,8 @@ public class AsylumVisitor extends CardImpl {
 
     public AsylumVisitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

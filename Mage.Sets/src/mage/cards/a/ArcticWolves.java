@@ -35,6 +35,7 @@ import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -46,7 +47,7 @@ public class ArcticWolves extends CardImpl {
 
     public ArcticWolves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.WOLF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

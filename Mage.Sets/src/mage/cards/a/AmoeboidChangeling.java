@@ -49,7 +49,7 @@ public class AmoeboidChangeling extends CardImpl {
 
     public AmoeboidChangeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
