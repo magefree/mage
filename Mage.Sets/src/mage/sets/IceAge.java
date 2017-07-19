@@ -161,6 +161,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Jester's Cap", 299, Rarity.RARE, mage.cards.j.JestersCap.class));
         cards.add(new SetCardInfo("Jester's Mask", 300, Rarity.RARE, mage.cards.j.JestersMask.class));
+        cards.add(new SetCardInfo("Jeweled Amulet", 301, Rarity.UNCOMMON, mage.cards.j.JeweledAmulet.class));
         cards.add(new SetCardInfo("Johtull Wurm", 138, Rarity.UNCOMMON, mage.cards.j.JohtullWurm.class));
         cards.add(new SetCardInfo("Jokulhaups", 195, Rarity.RARE, mage.cards.j.Jokulhaups.class));
         cards.add(new SetCardInfo("Juniper Order Druid", 139, Rarity.COMMON, mage.cards.j.JuniperOrderDruid.class));
