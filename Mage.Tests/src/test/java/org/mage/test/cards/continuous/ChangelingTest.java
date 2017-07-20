@@ -48,11 +48,32 @@ public class ChangelingTest extends CardTestPlayerBase {
          */
         assertPowerToughness(playerA, lordOfAtlantis, 6, 6);
          /*
-        mutavault token; +3
+        mutavault token; +2
         atlantis +1
         unreal:  +1
         coat of arms: +5
          */
         assertPowerToughness(playerA, mutavault, 9, 9);
+    }
+
+    @Test
+    public void testMetallicMimicChangelingTrigger(){
+        // all creatures with the chosen subtype come into play with a +1/+1 counter
+        final String mimic = "Metallic Mimic";
+
+        addCard(Zone.HAND, playerA, mimic, 1);
+        addCard(Zone.HAND, playerA, woodlandChangeling, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 10);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mimic);
+        setChoice(playerA, "Sliver");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, woodlandChangeling);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        // 2/2 + +1/+1 counter
+        assertPowerToughness(playerA, woodlandChangeling, 3, 3);
     }
 }
