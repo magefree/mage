@@ -204,6 +204,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Venarian Glimmer", 52, Rarity.UNCOMMON, mage.cards.v.VenarianGlimmer.class));
         cards.add(new SetCardInfo("Vitaspore Thallid", 143, Rarity.COMMON, mage.cards.v.VitasporeThallid.class));
         cards.add(new SetCardInfo("Voidstone Gargoyle", 21, Rarity.RARE, mage.cards.v.VoidstoneGargoyle.class));
+        cards.add(new SetCardInfo("Volcano Hellion", 111, Rarity.RARE, mage.cards.v.VolcanoHellion.class));
         cards.add(new SetCardInfo("Vorosh, the Hunter", 164, Rarity.RARE, mage.cards.v.VoroshTheHunter.class));
         cards.add(new SetCardInfo("Waning Wurm", 83, Rarity.UNCOMMON, mage.cards.w.WaningWurm.class));
         cards.add(new SetCardInfo("Whitemane Lion", 22, Rarity.COMMON, mage.cards.w.WhitemaneLion.class));
