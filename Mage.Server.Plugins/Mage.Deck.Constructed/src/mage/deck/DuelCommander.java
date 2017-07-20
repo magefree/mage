@@ -34,6 +34,7 @@ package mage.deck;
 public class DuelCommander extends Commander {
 
     public DuelCommander() {
+        super("Duel Commander");
         banned.add("Ancestral Recall");
         banned.add("Back to Basics");
         banned.add("Black Lotus");
