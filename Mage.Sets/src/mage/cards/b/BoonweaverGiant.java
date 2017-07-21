@@ -58,8 +58,7 @@ public class BoonweaverGiant extends CardImpl {
 
     public BoonweaverGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}");
-        this.subtype.add("Giant");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.GIANT, SubType.MONK);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

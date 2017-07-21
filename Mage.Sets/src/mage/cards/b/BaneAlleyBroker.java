@@ -89,8 +89,7 @@ public class BaneAlleyBroker extends CardImpl {
 
     public BaneAlleyBroker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.HUMAN, SubType.ROGUE);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

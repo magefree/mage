@@ -37,6 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -59,7 +60,7 @@ public class BazaarKrovod extends CardImpl {
 
     public BazaarKrovod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);

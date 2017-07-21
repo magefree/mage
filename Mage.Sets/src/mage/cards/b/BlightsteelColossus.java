@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -47,7 +48,7 @@ public class BlightsteelColossus extends CardImpl {
 
     public BlightsteelColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{12}");
-        this.subtype.add("Golem");
+        this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(11);
         this.toughness = new MageInt(11);
         

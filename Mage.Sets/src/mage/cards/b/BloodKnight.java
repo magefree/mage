@@ -34,6 +34,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -45,8 +46,7 @@ public class BloodKnight extends CardImpl {
 
     public BloodKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.HUMAN, SubType.KNIGHT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

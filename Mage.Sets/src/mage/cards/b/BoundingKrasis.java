@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -47,8 +48,7 @@ public class BoundingKrasis extends CardImpl {
 
     public BoundingKrasis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
-        this.subtype.add("Fish");
-        this.subtype.add("Lizard");
+        this.subtype.add(SubType.FISH, SubType.LIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

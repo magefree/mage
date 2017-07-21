@@ -59,8 +59,7 @@ public class BrighthearthBanneret extends CardImpl {
 
     public BrighthearthBanneret(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ELEMENTAL, SubType.WARRIOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

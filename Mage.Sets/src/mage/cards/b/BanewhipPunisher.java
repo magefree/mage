@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -12,12 +11,15 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 public class BanewhipPunisher extends CardImpl {
     
@@ -29,8 +31,7 @@ public class BanewhipPunisher extends CardImpl {
 
     public BanewhipPunisher(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        subtype.add("Human");
-        subtype.add("Warrior");
+        subtype.add(SubType.HUMAN, SubType.WARRIOR);
         power = new MageInt(2);
         toughness = new MageInt(2);
         

@@ -60,8 +60,7 @@ public class BramblewoodParagon extends CardImpl {
 
     public BramblewoodParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ELF, SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

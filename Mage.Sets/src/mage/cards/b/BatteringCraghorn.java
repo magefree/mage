@@ -34,6 +34,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ public class BatteringCraghorn extends CardImpl {
 
     public BatteringCraghorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Goat");
+        this.subtype.add(SubType.GOAT, SubType.BEAST);
         this.subtype.add("Beast");
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

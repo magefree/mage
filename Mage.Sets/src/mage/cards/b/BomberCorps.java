@@ -34,6 +34,7 @@ import mage.abilities.keyword.BattalionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
@@ -46,8 +47,7 @@ public class BomberCorps extends CardImpl {
 
     public BomberCorps(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

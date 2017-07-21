@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -54,8 +55,7 @@ public class BarrentonCragtreads extends CardImpl {
 
     public BarrentonCragtreads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W/U}{W/U}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.KITHKIN, SubType.SCOUT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

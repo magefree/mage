@@ -38,6 +38,7 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -58,8 +59,7 @@ public class BallynockTrapper extends CardImpl {
 
     public BallynockTrapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.KITHKIN, SubType.SOLDIER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

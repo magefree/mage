@@ -35,10 +35,7 @@ import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -56,7 +53,7 @@ public class BloodsporeThrinax extends CardImpl {
 
     public BloodsporeThrinax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Lizard");
+        this.subtype.add(SubType.LIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

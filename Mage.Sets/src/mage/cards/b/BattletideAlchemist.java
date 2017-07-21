@@ -51,8 +51,7 @@ public class BattletideAlchemist extends CardImpl {
 
     public BattletideAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.KITHKIN, SubType.CLERIC);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

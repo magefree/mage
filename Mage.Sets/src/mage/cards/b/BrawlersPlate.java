@@ -36,10 +36,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 
 import java.util.UUID;
 
@@ -51,7 +48,7 @@ public class BrawlersPlate extends CardImpl {
 
     public BrawlersPlate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2
         Effect effect = new BoostEquippedEffect(2, 2);

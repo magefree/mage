@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
@@ -52,7 +53,7 @@ public class BearerOfSilence extends CardImpl {
 
     public BearerOfSilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

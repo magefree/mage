@@ -59,8 +59,7 @@ public class BlasterMage extends CardImpl {
 
     public BlasterMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.HUMAN, SubType.SPELLSHAPER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

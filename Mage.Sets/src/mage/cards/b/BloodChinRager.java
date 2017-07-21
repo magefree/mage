@@ -56,8 +56,7 @@ public class BloodChinRager extends CardImpl {
 
     public BloodChinRager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

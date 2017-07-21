@@ -43,10 +43,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -54,7 +52,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.filter.StaticFilters;
 
 /**
  *
@@ -64,7 +61,7 @@ public class ButcherOfTheHorde extends CardImpl {
 
     public ButcherOfTheHorde(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

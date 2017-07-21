@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -58,8 +59,7 @@ public class BoartuskLiege extends CardImpl {
 
     public BoartuskLiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R/G}{R/G}{R/G}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.GOBLIN, SubType.KNIGHT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

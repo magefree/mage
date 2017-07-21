@@ -34,6 +34,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
@@ -54,8 +55,7 @@ public class BorderlandExplorer extends CardImpl {
     public BorderlandExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.ELF, SubType.SCOUT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

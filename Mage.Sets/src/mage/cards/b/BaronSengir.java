@@ -65,7 +65,7 @@ public class BaronSengir extends CardImpl {
     public BaronSengir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

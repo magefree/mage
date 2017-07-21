@@ -37,6 +37,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.SoldierToken;
 
 import java.util.UUID;
@@ -49,11 +50,7 @@ public class BantSojourners extends CardImpl {
 
     public BantSojourners(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-
-
-
+        this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

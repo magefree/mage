@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -53,8 +54,7 @@ public class Bloodghast extends CardImpl {
 
     public Bloodghast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.VAMPIRE, SubType.SPIRIT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

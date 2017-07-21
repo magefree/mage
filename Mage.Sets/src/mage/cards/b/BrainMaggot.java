@@ -37,10 +37,7 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.ExileZone;
@@ -63,7 +60,7 @@ public class BrainMaggot extends CardImpl {
 
     public BrainMaggot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

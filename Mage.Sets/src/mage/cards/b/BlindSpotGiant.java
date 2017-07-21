@@ -53,8 +53,7 @@ public class BlindSpotGiant extends CardImpl {
 
     public BlindSpotGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Giant");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GIANT, SubType.WARRIOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

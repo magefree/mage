@@ -55,7 +55,7 @@ public class Bloodcurdler extends CardImpl {
 
     public Bloodcurdler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetLandPermanent;
 
@@ -50,8 +51,7 @@ public class BarbarianRiftcutter extends CardImpl {
 
     public BarbarianRiftcutter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Barbarian");
+        this.subtype.add(SubType.HUMAN, SubType.BARBARIAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

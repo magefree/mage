@@ -50,8 +50,7 @@ public class BedlamReveler extends CardImpl {
 
     public BedlamReveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
-        this.subtype.add("Devil");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.DEVIL, SubType.HORROR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

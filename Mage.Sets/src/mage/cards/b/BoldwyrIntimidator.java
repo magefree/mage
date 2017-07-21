@@ -55,8 +55,7 @@ public class BoldwyrIntimidator extends CardImpl {
 
     public BoldwyrIntimidator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
-        this.subtype.add("Giant");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GIANT, SubType.WARRIOR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

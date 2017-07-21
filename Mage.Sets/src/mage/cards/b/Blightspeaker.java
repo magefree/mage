@@ -63,9 +63,7 @@ public class Blightspeaker extends CardImpl {
 
     public Blightspeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rebel");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.HUMAN, SubType.REBEL, SubType.CLERIC);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

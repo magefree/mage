@@ -39,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -54,8 +55,7 @@ public class BalustradeSpy extends CardImpl {
 
     public BalustradeSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.VAMPIRE, SubType.ROGUE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

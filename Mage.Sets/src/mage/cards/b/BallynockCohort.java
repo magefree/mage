@@ -29,7 +29,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.constants.ComparisonType;
+import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -39,9 +39,6 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -65,8 +62,7 @@ public class BallynockCohort extends CardImpl {
 
     public BallynockCohort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.KITHKIN, SubType.SOLDIER);
 
         this.color.setWhite(true);
         this.power = new MageInt(2);

@@ -32,6 +32,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 import java.util.UUID;
@@ -45,8 +46,7 @@ public class BorealDruid extends CardImpl {
     public BorealDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         addSuperType(SuperType.SNOW);
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.ELF, SubType.DRUID);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

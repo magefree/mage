@@ -56,7 +56,7 @@ public class BatteringSliver extends CardImpl {
 
     public BatteringSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

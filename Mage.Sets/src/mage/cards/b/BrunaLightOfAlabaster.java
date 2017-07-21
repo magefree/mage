@@ -27,9 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
@@ -55,6 +52,10 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  * @author noxx
  */
@@ -63,7 +64,7 @@ public class BrunaLightOfAlabaster extends CardImpl {
     public BrunaLightOfAlabaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

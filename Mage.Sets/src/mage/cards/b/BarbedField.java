@@ -38,10 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetLandPermanent;
@@ -56,7 +53,7 @@ public class BarbedField extends CardImpl {
 
     public BarbedField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

@@ -27,14 +27,16 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.BearsCompanionBearToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,8 +46,7 @@ public class BearsCompanion extends CardImpl {
 
     public BearsCompanion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

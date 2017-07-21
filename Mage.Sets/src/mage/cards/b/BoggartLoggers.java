@@ -62,8 +62,7 @@ public class BoggartLoggers extends CardImpl {
 
     public BoggartLoggers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.GOBLIN, SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

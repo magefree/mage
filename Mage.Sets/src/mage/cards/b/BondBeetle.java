@@ -34,6 +34,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,7 +48,7 @@ public class BondBeetle extends CardImpl {
 
     public BondBeetle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -48,7 +49,7 @@ public class BondedFetch extends CardImpl {
 
     public BondedFetch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Homunculus");
+        this.subtype.add(SubType.HOMUNCULUS);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -54,7 +55,7 @@ public class BrainGorgers extends CardImpl {
 
     public BrainGorgers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,8 +54,7 @@ public class BurningTreeShaman extends CardImpl {
 
     public BurningTreeShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
-        this.subtype.add("Centaur");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.CENTAUR, SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

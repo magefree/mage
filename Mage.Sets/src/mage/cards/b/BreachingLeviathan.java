@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -60,7 +61,7 @@ public class BreachingLeviathan extends CardImpl {
 
     public BreachingLeviathan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}{U}");
-        this.subtype.add("Leviathan");
+        this.subtype.add(SubType.LEVIATHAN);
 
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);

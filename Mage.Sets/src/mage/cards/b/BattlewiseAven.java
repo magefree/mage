@@ -38,10 +38,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 
 import java.util.UUID;
 
@@ -53,8 +50,7 @@ public class BattlewiseAven extends CardImpl {
 
     public BattlewiseAven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Bird");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.BIRD, SubType.SOLDIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

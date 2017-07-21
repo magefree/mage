@@ -54,7 +54,7 @@ public class BogRats extends CardImpl {
 
     public BogRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Rat");
+        this.subtype.add(SubType.RAT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

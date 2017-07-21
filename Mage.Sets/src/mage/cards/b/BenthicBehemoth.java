@@ -32,6 +32,7 @@ import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -43,7 +44,7 @@ public class BenthicBehemoth extends CardImpl {
 
     public BenthicBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}{U}");
-        this.subtype.add("Serpent");
+        this.subtype.add(SubType.SERPENT);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);

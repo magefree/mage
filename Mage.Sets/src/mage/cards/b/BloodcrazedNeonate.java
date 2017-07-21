@@ -34,6 +34,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -46,7 +47,7 @@ public class BloodcrazedNeonate extends CardImpl {
 
     public BloodcrazedNeonate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

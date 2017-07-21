@@ -61,8 +61,7 @@ public class BladeSplicer extends CardImpl {
 
     public BladeSplicer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.HUMAN, SubType.ARTIFICER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

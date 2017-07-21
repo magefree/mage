@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -49,7 +50,7 @@ public class BladedSentinel extends CardImpl {
 
     public BladedSentinel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));

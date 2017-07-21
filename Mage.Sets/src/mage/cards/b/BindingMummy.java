@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -37,11 +36,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE;
 
 /**
  *
@@ -59,7 +61,7 @@ public class BindingMummy extends CardImpl {
     public BindingMummy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

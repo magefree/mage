@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -50,7 +51,7 @@ public class BloodfireKavu extends CardImpl {
 
     public BloodfireKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Kavu");
+        this.subtype.add(SubType.KAVU);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

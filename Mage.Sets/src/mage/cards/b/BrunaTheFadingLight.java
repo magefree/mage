@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -49,6 +48,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -66,8 +67,7 @@ public class BrunaTheFadingLight extends CardImpl {
     public BrunaTheFadingLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Angel");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ANGEL, SubType.HORROR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 

@@ -38,10 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -66,8 +63,7 @@ public class BrionStoutarm extends CardImpl {
     public BrionStoutarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Giant");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GIANT, SubType.WARRIOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

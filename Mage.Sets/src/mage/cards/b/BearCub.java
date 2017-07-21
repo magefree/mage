@@ -31,6 +31,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -42,7 +43,7 @@ public class BearCub extends CardImpl {
 
     public BearCub(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Bear");
+        this.subtype.add(SubType.BEAR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

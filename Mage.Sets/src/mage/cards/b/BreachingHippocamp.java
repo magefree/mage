@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -54,8 +55,7 @@ public class BreachingHippocamp extends CardImpl {
 
     public BreachingHippocamp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Horse");
-        this.subtype.add("Fish");
+        this.subtype.add(SubType.HORSE, SubType.FISH);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

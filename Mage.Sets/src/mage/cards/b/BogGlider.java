@@ -66,8 +66,7 @@ public class BogGlider extends CardImpl {
 
     public BogGlider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Mercenary");
+        this.subtype.add(SubType.HUMAN, SubType.MERCENARY);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

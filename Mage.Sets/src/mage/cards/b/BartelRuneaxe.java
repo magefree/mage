@@ -51,8 +51,7 @@ public class BartelRuneaxe extends CardImpl {
     public BartelRuneaxe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Giant");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GIANT, SubType.WARRIOR);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

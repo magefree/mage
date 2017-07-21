@@ -57,8 +57,7 @@ public class BattlefieldThaumaturge extends CardImpl {
 
     public BattlefieldThaumaturge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.HUMAN, SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

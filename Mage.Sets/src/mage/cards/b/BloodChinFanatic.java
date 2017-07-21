@@ -64,8 +64,7 @@ public class BloodChinFanatic extends CardImpl {
 
     public BloodChinFanatic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Orc");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ORC, SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

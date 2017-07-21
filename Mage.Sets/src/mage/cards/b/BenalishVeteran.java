@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -45,8 +46,7 @@ public class BenalishVeteran extends CardImpl {
 
     public BenalishVeteran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

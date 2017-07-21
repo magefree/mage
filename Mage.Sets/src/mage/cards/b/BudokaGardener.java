@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,6 +46,8 @@ import mage.game.permanent.token.DokaiWeaverofLifeToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  * @author Loki
  */
@@ -54,8 +55,7 @@ public class BudokaGardener extends CardImpl {
 
     public BudokaGardener(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.HUMAN, SubType.MONK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

@@ -41,6 +41,7 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -54,8 +55,7 @@ public class BrimstoneMage extends LevelerCard {
 
     public BrimstoneMage (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.HUMAN, SubType.SHAMAN);
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
