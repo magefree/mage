@@ -57,8 +57,7 @@ public class BattlewandOak extends CardImpl {
 
     public BattlewandOak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.TREEFOLK, SubType.WARRIOR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

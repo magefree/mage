@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -51,6 +50,8 @@ import mage.game.Game;
 import mage.game.permanent.token.BaruFistOfKrosaToken;
 import mage.game.permanent.token.Token;
 
+import java.util.UUID;
+
 /**
  *
  * @author emerald000
@@ -69,8 +70,7 @@ public class BaruFistOfKrosa extends CardImpl {
     public BaruFistOfKrosa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.HUMAN, SubType.DRUID);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

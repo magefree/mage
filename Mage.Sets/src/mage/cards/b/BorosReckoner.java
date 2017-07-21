@@ -37,10 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -56,8 +53,7 @@ public class BorosReckoner extends CardImpl {
 
     public BorosReckoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}{R/W}{R/W}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.MINOTAUR, SubType.WIZARD);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

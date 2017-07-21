@@ -62,8 +62,7 @@ public class BalthorTheStout extends CardImpl {
     public BalthorTheStout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dwarf");
-        this.subtype.add("Barbarian");
+        this.subtype.add(SubType.DWARF, SubType.BARBARIAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

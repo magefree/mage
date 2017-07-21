@@ -38,6 +38,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 import java.util.UUID;
@@ -49,7 +50,7 @@ public class BaneOfHanweir extends CardImpl {
 
     public BaneOfHanweir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.WEREWOLF);
         this.color.setRed(true);
 
         // this card is the second face of double-faced card

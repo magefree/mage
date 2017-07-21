@@ -57,9 +57,7 @@ public class BloodlineShaman extends CardImpl {
     public BloodlineShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.subtype.add("Elf");
-        this.subtype.add("Wizard");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ELF, SubType.WIZARD, SubType.SHAMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

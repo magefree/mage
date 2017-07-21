@@ -54,8 +54,7 @@ public class BoggartSpriteChaser extends CardImpl {
 
     public BoggartSpriteChaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GOBLIN, SubType.WARRIOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

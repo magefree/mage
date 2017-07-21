@@ -94,7 +94,7 @@ class BlinkmothNexusToken extends Token {
         super("Blinkmoth", "1/1 Blinkmoth artifact creature with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Blinkmoth");
+        this.subtype.add(SubType.BLINKMOTH);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

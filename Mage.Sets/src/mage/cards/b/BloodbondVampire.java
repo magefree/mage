@@ -33,6 +33,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -45,9 +46,7 @@ public class BloodbondVampire extends CardImpl {
 
     public BloodbondVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Shaman");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.VAMPIRE, SubType.SHAMAN, SubType.ALLY);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

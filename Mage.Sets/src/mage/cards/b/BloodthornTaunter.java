@@ -28,16 +28,13 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.constants.ComparisonType;
+import mage.constants.*;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -58,8 +55,7 @@ public class BloodthornTaunter extends CardImpl {
 
     public BloodthornTaunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.HUMAN, SubType.SCOUT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

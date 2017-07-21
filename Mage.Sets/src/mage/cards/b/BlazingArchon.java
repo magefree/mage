@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -47,7 +48,7 @@ public class BlazingArchon extends CardImpl {
 
     public BlazingArchon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}{W}{W}");
-        this.subtype.add("Archon");
+        this.subtype.add(SubType.ARCHON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

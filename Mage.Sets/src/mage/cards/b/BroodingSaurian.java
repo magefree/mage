@@ -55,7 +55,7 @@ public class BroodingSaurian extends CardImpl {
 
     public BroodingSaurian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Lizard");
+    this.subtype.add(SubType.LIZARD);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

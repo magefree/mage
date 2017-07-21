@@ -55,9 +55,7 @@ public class BalaGedThief extends CardImpl {
 
     public BalaGedThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.HUMAN, SubType.ROGUE, SubType.ALLY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

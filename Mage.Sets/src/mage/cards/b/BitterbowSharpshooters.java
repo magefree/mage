@@ -27,13 +27,15 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.ReachAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,8 +46,8 @@ public class BitterbowSharpshooters extends CardImpl {
     public BitterbowSharpshooters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         
-        this.subtype.add("Jackal");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.JACKAL);
+        this.subtype.add(SubType.ARCHER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

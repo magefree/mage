@@ -59,8 +59,7 @@ public class BloodlordOfVaasgoth extends CardImpl {
 
     public BloodlordOfVaasgoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.VAMPIRE, SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

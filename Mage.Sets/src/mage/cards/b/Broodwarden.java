@@ -56,8 +56,7 @@ public class Broodwarden extends CardImpl {
 
     public Broodwarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Drone");
+        this.subtype.add(SubType.ELDRAZI, SubType.DRONE);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

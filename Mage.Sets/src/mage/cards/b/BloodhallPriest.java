@@ -38,6 +38,7 @@ import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
@@ -50,8 +51,7 @@ public class BloodhallPriest extends CardImpl {
 
     public BloodhallPriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.VAMPIRE, SubType.CLERIC);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

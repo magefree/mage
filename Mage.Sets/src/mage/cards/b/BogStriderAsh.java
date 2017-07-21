@@ -56,8 +56,7 @@ public class BogStriderAsh extends CardImpl {
 	
     public BogStriderAsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.TREEFOLK, SubType.SHAMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

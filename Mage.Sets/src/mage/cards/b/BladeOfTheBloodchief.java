@@ -55,7 +55,7 @@ public class BladeOfTheBloodchief extends CardImpl {
 
     public BladeOfTheBloodchief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.getSubtype(null).add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
         this.addAbility(new BladeOfTheBloodChiefTriggeredAbility());

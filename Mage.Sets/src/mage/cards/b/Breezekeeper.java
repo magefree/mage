@@ -33,6 +33,7 @@ import mage.abilities.keyword.PhasingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class Breezekeeper extends CardImpl {
 
     public Breezekeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Djinn");
+        this.subtype.add(SubType.DJINN);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -48,7 +49,7 @@ public class BoonSatyr extends CardImpl {
 
     public BoonSatyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Satyr");
+        this.subtype.add(SubType.SATYR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

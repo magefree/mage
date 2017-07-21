@@ -55,9 +55,7 @@ public class BarbarianOutcast extends CardImpl {
 
     public BarbarianOutcast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Barbarian");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.HUMAN, SubType.BARBARIAN, SubType.BEAST);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

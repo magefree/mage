@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesExertSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -39,6 +38,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,8 +51,7 @@ public class BitterbladeWarrior extends CardImpl {
     public BitterbladeWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.subtype.add("Jackal");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.JACKAL, SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

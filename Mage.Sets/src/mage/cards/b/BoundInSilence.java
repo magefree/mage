@@ -34,10 +34,7 @@ import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -51,8 +48,7 @@ public class BoundInSilence extends CardImpl {
 
     public BoundInSilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{2}{W}");
-        this.subtype.add("Rebel");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.REBEL, SubType.AURA);
 
 
         // Enchant creature

@@ -32,6 +32,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -43,8 +44,7 @@ public class Bayou extends CardImpl {
 
     public Bayou(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Swamp");
-        this.subtype.add("Forest");
+        this.subtype.add(SubType.SWAMP, SubType.FOREST);
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());
     }

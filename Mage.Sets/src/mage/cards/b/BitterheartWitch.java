@@ -56,8 +56,7 @@ public class BitterheartWitch extends CardImpl {
 
     public BitterheartWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.HUMAN, SubType.SHAMAN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

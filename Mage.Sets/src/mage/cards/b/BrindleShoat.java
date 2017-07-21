@@ -27,14 +27,16 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.BoarToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +46,7 @@ public class BrindleShoat extends CardImpl {
 
     public BrindleShoat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.subtype.add("Boar");
+        this.subtype.add(SubType.BOAR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -37,6 +37,7 @@ import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,9 +58,7 @@ public class BigGameHunter extends CardImpl {
 
     public BigGameHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rebel");
-        this.subtype.add("Assassin");
+        this.subtype.add(SubType.HUMAN, SubType.REBEL, SubType.ASSASSIN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

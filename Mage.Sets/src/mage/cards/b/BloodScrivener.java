@@ -34,10 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -54,8 +51,7 @@ public class BloodScrivener  extends CardImpl {
 
     public BloodScrivener (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.ZOMBIE, SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

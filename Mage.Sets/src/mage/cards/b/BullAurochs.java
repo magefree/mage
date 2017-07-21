@@ -59,7 +59,7 @@ public class BullAurochs extends CardImpl {
 
     public BullAurochs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Aurochs");
+        this.subtype.add(SubType.AUROCHS);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

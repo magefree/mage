@@ -34,6 +34,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -45,8 +46,7 @@ public class BurningTreeEmissary extends CardImpl {
 
     public BurningTreeEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}{R/G}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.HUMAN, SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

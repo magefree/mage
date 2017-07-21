@@ -34,6 +34,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -46,7 +47,7 @@ public class BrutalNightstalker extends CardImpl {
 
     public BrutalNightstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Nightstalker");
+        this.subtype.add(SubType.NIGHTSTALKER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

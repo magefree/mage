@@ -32,6 +32,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -43,8 +44,7 @@ public class BorderPatrol extends CardImpl {
 
     public BorderPatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Nomad");
+        this.subtype.add(SubType.HUMAN, SubType.NOMAD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(6);
