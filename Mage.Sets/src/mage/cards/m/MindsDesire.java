@@ -55,7 +55,6 @@ public class MindsDesire extends CardImpl {
     public MindsDesire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
 
-
         // Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost.
         this.getSpellAbility().addEffect(new MindsDesireEffect());
         
@@ -135,13 +134,10 @@ class MindsDesireCastFromExileEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         UUID targetId = getTargetPointer().getFirst(game, source);
         Player player = game.getPlayer(affectedControllerId);
-        if (targetId != null 
-                && targetId.equals(sourceId)
-                && player != null) {
+        if (targetId != null && sourceId != null && targetId.equals(sourceId) && player != null) {
             if (affectedControllerId.equals(source.getControllerId())) {
                 Card card = game.getCard(sourceId);
-                if (card != null 
-                        && game.getState().getZone(sourceId) == Zone.EXILED) {
+                if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
                     player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
                     return true;
                 }
