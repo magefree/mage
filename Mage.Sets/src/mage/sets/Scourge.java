@@ -77,6 +77,7 @@ public class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Clutch of Undeath", 61, Rarity.COMMON, mage.cards.c.ClutchOfUndeath.class));
         cards.add(new SetCardInfo("Coast Watcher", 30, Rarity.COMMON, mage.cards.c.CoastWatcher.class));
         cards.add(new SetCardInfo("Consumptive Goo", 62, Rarity.RARE, mage.cards.c.ConsumptiveGoo.class));
+        cards.add(new SetCardInfo("Daru Spiritualist", 5, Rarity.COMMON, mage.cards.d.DaruSpiritualist.class));
         cards.add(new SetCardInfo("Daru Warchief", 6, Rarity.UNCOMMON, mage.cards.d.DaruWarchief.class));
         cards.add(new SetCardInfo("Dawn Elemental", 7, Rarity.RARE, mage.cards.d.DawnElemental.class));
         cards.add(new SetCardInfo("Day of the Dragons", 31, Rarity.RARE, mage.cards.d.DayOfTheDragons.class));
