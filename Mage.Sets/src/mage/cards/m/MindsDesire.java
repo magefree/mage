@@ -53,11 +53,11 @@ import mage.target.targetpointer.FixedTarget;
 public class MindsDesire extends CardImpl {
 
     public MindsDesire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
         // Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost.
         this.getSpellAbility().addEffect(new MindsDesireEffect());
-        
+
         // Storm
         this.addAbility(new StormAbility());
     }
@@ -73,21 +73,21 @@ public class MindsDesire extends CardImpl {
 }
 
 class MindsDesireEffect extends OneShotEffect {
-    
+
     MindsDesireEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost.";
+        this.staticText = "Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost";
     }
-    
+
     MindsDesireEffect(final MindsDesireEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public MindsDesireEffect copy() {
         return new MindsDesireEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -131,14 +131,17 @@ class MindsDesireCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        UUID targetId = getTargetPointer().getFirst(game, source);
-        Player player = game.getPlayer(affectedControllerId);
-        if (targetId != null && sourceId != null && targetId.equals(sourceId) && player != null) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (objectId != null && objectId.equals(getTargetPointer().getFirst(game, source))) {
             if (affectedControllerId.equals(source.getControllerId())) {
-                Card card = game.getCard(sourceId);
-                if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
-                    player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
+                Card card = game.getCard(objectId);
+                if (card != null && game.getState().getZone(objectId) == Zone.EXILED) {
+                    if (!card.isLand() && card.getSpellAbility().getCosts() != null) {
+                        Player player = game.getPlayer(affectedControllerId);
+                        if (player != null) {
+                            player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
+                        }
+                    }
                     return true;
                 }
             }

@@ -920,10 +920,10 @@ public class SessionImpl implements Session {
     public boolean leaveChat(UUID chatId) {
 //        lock.readLock().lock();
         try {
-            if (isConnected()) {
+            if (isConnected() && chatId != null) {
                 server.leaveChat(chatId, sessionId);
-                return true;
             }
+            return true;
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
