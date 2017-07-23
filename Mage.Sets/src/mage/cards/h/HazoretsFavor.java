@@ -98,15 +98,14 @@ public class HazoretsFavor extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent creature = game.getPermanent(source.getFirstTarget());
+            Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (creature != null) {
-                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice boosted " + creature.getName(), source.getControllerId());
+                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("Sacrifice boosted " + creature.getName(), source.getControllerId());
                 sacrificeEffect.setTargetPointer(new FixedTarget(creature, game));
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
                 game.addDelayedTriggeredAbility(delayedAbility, source);
-                return true;
             }
-            return false;
+            return true;
         }
     }
 }

@@ -119,17 +119,16 @@ class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
-        }
-        if (permanent != null
-                && filter2.match(permanent, game)) {
-            Player permanentController = game.getPlayer(permanent.getControllerId());
-            if (permanentController.chooseUse(Outcome.DrawCard, "Would you like to draw a card?", source, game)) {
-                permanentController.drawCards(1, game);
-                return true;
+        Permanent permanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
+        if (permanent != null) {
+            if (filter2.match(permanent, game)) {
+                Player permanentController = game.getPlayer(permanent.getControllerId());
+                if (permanentController != null
+                        && permanentController.chooseUse(Outcome.DrawCard, "Would you like to draw a card?", source, game)) {
+                    permanentController.drawCards(1, game);
+                }
             }
+            return true;
         }
         return false;
     }

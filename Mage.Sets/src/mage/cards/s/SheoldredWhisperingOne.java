@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,11 +39,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 /**
  *
@@ -51,8 +49,8 @@ import java.util.UUID;
  */
 public class SheoldredWhisperingOne extends CardImpl {
 
-    public SheoldredWhisperingOne (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
+    public SheoldredWhisperingOne(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Praetor");
 
@@ -68,11 +66,11 @@ public class SheoldredWhisperingOne extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of each opponent's upkeep, that player sacrifices a creature.
-        ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent(), 1, "that player "), TargetController.OPPONENT, false);
-        this.addAbility(ability);
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"), TargetController.OPPONENT, false));
     }
 
-    public SheoldredWhisperingOne (final SheoldredWhisperingOne card) {
+    public SheoldredWhisperingOne(final SheoldredWhisperingOne card) {
         super(card);
     }
 
