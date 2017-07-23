@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 20 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -80,6 +80,7 @@ public class AnyColorLandsProduceManaAbility extends ActivatedManaAbilityImpl {
 class AnyColorLandsProduceManaEffect extends ManaEffect {
 
     private final FilterPermanent filter;
+    private boolean inManaTypeCalculation = false;
 
     public AnyColorLandsProduceManaEffect(TargetController targetController) {
         super();
@@ -161,9 +162,16 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
     }
 
     private Mana getManaTypes(Game game, Ability source) {
+        Mana types = new Mana();
+        if (game == null || game.getPhase() == null) {
+            return types;
+        }
+        if (inManaTypeCalculation) {
+            return types;
+        }
+        inManaTypeCalculation = true;
         // Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "needed to identify endless loop causing cards: {0}", source.getSourceObject(game).getName());
         List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-        Mana types = new Mana();
         for (Permanent land : lands) {
             Abilities<ActivatedManaAbilityImpl> mana = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
             for (ActivatedManaAbilityImpl ability : mana) {
@@ -174,6 +182,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
                 }
             }
         }
+        inManaTypeCalculation = false;
         return types;
     }
 
