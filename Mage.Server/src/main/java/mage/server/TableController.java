@@ -150,7 +150,7 @@ public class TableController {
         }
         Optional<User> _user = UserManager.instance.getUser(userId);
         if (!_user.isPresent()) {
-            logger.fatal(new StringBuilder("couldn't get user ").append(name).append(" for join tournament userId = ").append(userId).toString());
+            logger.fatal("couldn't get user " + name + " for join tournament userId = " + userId);
             return false;
         }
         User user = _user.get();

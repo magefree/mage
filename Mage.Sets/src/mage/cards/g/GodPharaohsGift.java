@@ -28,6 +28,7 @@
 package mage.cards.g;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -79,7 +80,7 @@ public class GodPharaohsGift extends CardImpl {
 class GodPharaohsGiftEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
-    private UUID exileId = UUID.randomUUID();
+    private final UUID exileId = UUID.randomUUID();
 
     public GodPharaohsGiftEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -98,31 +99,33 @@ class GodPharaohsGiftEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-        target.setNotTarget(true);
-        if (controller != null
-                && !controller.getGraveyard().getCards(filter, game).isEmpty()
-                && controller.choose(Outcome.PutCreatureInPlay, target, source.getId(), game)) {
-            Card cardChosen = game.getCard(target.getFirstTarget());
-            if (cardChosen != null
-                    && cardChosen.moveToExile(exileId, "God-Pharaoh's Gift", source.getId(), game)) {
-                EmptyToken token = new EmptyToken();
-                CardUtil.copyTo(token).from(cardChosen);
-                token.getPower().modifyBaseValue(4);
-                token.getToughness().modifyBaseValue(4);
-                token.getColor(game).setColor(ObjectColor.BLACK);
-                token.getSubtype(game).clear();
-                token.getSubtype(game).add("Zombie");
-                if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
-                    Permanent tokenPermanent = game.getPermanent(token.getLastAddedToken());
-                    if (tokenPermanent != null) {
-                        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                        effect.setTargetPointer(new FixedTarget(tokenPermanent.getId()));
-                        game.addEffect(effect, source);
-                        return true;
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
+            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
+            target.setNotTarget(true);
+            if (!controller.getGraveyard().getCards(filter, game).isEmpty()
+                    && controller.choose(Outcome.PutCreatureInPlay, target, source.getId(), game)) {
+                Card cardChosen = game.getCard(target.getFirstTarget());
+                if (cardChosen != null
+                        && cardChosen.moveToExile(exileId, sourceObject.getIdName(), source.getSourceId(), game)) {
+                    EmptyToken token = new EmptyToken();
+                    CardUtil.copyTo(token).from(cardChosen);
+                    token.getPower().modifyBaseValue(4);
+                    token.getToughness().modifyBaseValue(4);
+                    token.getColor(game).setColor(ObjectColor.BLACK);
+                    token.getSubtype(game).clear();
+                    token.getSubtype(game).add("Zombie");
+                    if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
+                        Permanent tokenPermanent = game.getPermanent(token.getLastAddedToken());
+                        if (tokenPermanent != null) {
+                            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+                            effect.setTargetPointer(new FixedTarget(tokenPermanent.getId()));
+                            game.addEffect(effect, source);
+                        }
                     }
                 }
             }
+            return true;
         }
         return false;
     }
