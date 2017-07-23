@@ -43,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -69,7 +69,7 @@ public class WojekApothecary extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         ability.setAbilityWord(AbilityWord.RADIANCE);
         this.addAbility(ability);
-        
+
     }
 
     public WojekApothecary(final WojekApothecary card) {

@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
@@ -40,7 +41,6 @@ import mage.constants.*;
 import mage.game.command.emblems.DackFaydenEmblem;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetArtifactPermanent;
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
@@ -38,8 +39,6 @@ import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetNonlandPermanent;
-
-import java.util.UUID;
 
 /**
  *

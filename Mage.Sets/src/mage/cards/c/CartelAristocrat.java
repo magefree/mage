@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -36,10 +37,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 import mage.filter.StaticFilters;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  * Gatecrash FAQ (01.2013) You choose the color when the ability resolves.

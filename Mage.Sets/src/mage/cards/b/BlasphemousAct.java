@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,13 +36,11 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.UUID;
-
 
 /**
  * @author nantuko
@@ -49,13 +48,13 @@ import java.util.UUID;
 public class BlasphemousAct extends CardImpl {
 
     public BlasphemousAct(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{R}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{8}{R}");
+
         // Blasphemous Act costs {1} less to cast for each creature on the battlefield.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new BlasphemousCostReductionEffect());
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
-        
+
         // Blasphemous Act deals 13 damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(13, new FilterCreaturePermanent()));
     }
@@ -105,4 +104,3 @@ class BlasphemousCostReductionEffect extends CostModificationEffectImpl {
         return new BlasphemousCostReductionEffect(this);
     }
 }
-

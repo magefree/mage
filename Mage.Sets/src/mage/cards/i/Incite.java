@@ -29,14 +29,13 @@
 package mage.cards.i;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.ObjectColor;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

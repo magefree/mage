@@ -28,13 +28,13 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
-import mage.cards.Card;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

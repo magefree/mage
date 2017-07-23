@@ -28,8 +28,8 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ClashWinReturnToHandSpellEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

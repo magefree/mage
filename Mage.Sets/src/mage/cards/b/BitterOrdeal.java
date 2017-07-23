@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.GravestormAbility;
@@ -41,8 +42,6 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.common.GravestormWatcher;
-
-import java.util.UUID;
 
 /**
  *

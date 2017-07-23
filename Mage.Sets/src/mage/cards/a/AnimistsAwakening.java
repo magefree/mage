@@ -27,6 +27,9 @@
  */
 package mage.cards.a;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SpellMasteryCondition;
@@ -39,10 +42,6 @@ import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

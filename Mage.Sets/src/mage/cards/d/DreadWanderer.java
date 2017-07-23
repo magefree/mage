@@ -27,8 +27,10 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.condition.common.HeckbentCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
@@ -37,9 +39,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
-
-import java.util.UUID;
-import mage.abilities.condition.common.HeckbentCondition;
 
 /**
  *

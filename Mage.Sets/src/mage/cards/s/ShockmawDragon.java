@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,14 +50,14 @@ import mage.players.Player;
 public class ShockmawDragon extends CardImpl {
 
     public ShockmawDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.subtype.add("Dragon");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever Shockmaw Dragon deals combat damage to a player, it deals 1 damage to each creature that player controls.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ShockmawDragonEffect(), false, true));
     }

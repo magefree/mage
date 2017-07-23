@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.GainControlAllEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -37,8 +38,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.other.OwnerPredicate;
-
-import java.util.UUID;
 
 /**
  *

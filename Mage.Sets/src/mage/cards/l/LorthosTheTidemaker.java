@@ -27,6 +27,7 @@
  */
 package mage.cards.l;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -40,8 +41,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,8 @@
  */
 package mage.cards.l;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -42,9 +44,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

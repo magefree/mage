@@ -27,6 +27,7 @@
 */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -38,8 +39,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.permanent.token.SoldierTokenWithHaste;
-
-import java.util.UUID;
 
 /**
 *

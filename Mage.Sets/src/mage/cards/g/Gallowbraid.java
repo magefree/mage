@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -35,8 +36,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-
-import java.util.UUID;
 
 /**
  *

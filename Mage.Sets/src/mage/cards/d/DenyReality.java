@@ -28,14 +28,13 @@
 
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  *

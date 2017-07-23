@@ -27,6 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.Objects;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.AttacksAllTriggeredAbility;
@@ -42,16 +44,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPlayer;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  *
@@ -62,7 +61,7 @@ public class CrownOfDoom extends CardImpl {
     private UUID abilityId;
 
     public CrownOfDoom(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a creature attacks you or a planeswalker you control, it gets +2/+0 until end of turn.
         Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);

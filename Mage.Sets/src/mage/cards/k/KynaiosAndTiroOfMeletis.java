@@ -27,6 +27,9 @@
  */
 package mage.cards.k;
 
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -38,16 +41,10 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author spjspj

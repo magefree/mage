@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.abilityword.GrandeurAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
@@ -38,8 +39,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-
-import java.util.UUID;
 
 /**
  *

@@ -28,8 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -37,9 +35,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,7 +51,7 @@ import mage.target.TargetPlayer;
 public class Meadowboon extends CardImpl {
 
     public Meadowboon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(3);
@@ -77,6 +76,7 @@ public class Meadowboon extends CardImpl {
 }
 
 class MeadowboonEffect extends OneShotEffect {
+
     MeadowboonEffect() {
         super(Outcome.UnboostCreature);
         staticText = "put a +1/+1 counter on each creature target player controls";

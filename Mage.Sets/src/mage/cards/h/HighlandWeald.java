@@ -28,7 +28,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;

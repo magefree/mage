@@ -28,6 +28,7 @@
 
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -42,8 +43,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

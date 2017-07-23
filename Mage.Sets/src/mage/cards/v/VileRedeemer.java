@@ -29,7 +29,6 @@ package mage.cards.v;
 
 import java.util.HashMap;
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;

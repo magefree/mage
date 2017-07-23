@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,8 +46,6 @@ import mage.game.Game;
 import mage.game.permanent.token.DokaiWeaverofLifeToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author Loki

@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
@@ -39,8 +40,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *

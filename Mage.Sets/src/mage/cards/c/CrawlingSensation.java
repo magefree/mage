@@ -28,6 +28,8 @@
  */
 package mage.cards.c;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -41,9 +43,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.token.InsectToken;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

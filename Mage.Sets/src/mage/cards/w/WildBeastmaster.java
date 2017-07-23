@@ -28,8 +28,6 @@
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
@@ -37,7 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -45,10 +45,10 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class WildBeastmaster extends CardImpl {
 
-    private static final String EFFECT_TEXT ="each other creature you control gets +X/+X until end of turn, where X is {this}'s power";
+    private static final String EFFECT_TEXT = "each other creature you control gets +X/+X until end of turn, where X is {this}'s power";
 
     public WildBeastmaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
         this.color.setGreen(true);
@@ -57,7 +57,7 @@ public class WildBeastmaster extends CardImpl {
 
         // Whenever Wild Beastmaster attacks, each other creature you control gets +X/+X until end of turn, where X is Wild Beastmaster's power.
         SourcePermanentPowerCount creaturePower = new SourcePermanentPowerCount();
-        Effect effect = new BoostControlledEffect(creaturePower, creaturePower, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE,true, true);
+        Effect effect = new BoostControlledEffect(creaturePower, creaturePower, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true, true);
         effect.setText(EFFECT_TEXT);
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }

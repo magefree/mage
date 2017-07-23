@@ -27,6 +27,9 @@
  */
 package mage.cards.o;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
@@ -42,10 +45,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetObject;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 
 

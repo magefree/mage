@@ -27,6 +27,9 @@
  */
 package mage.cards.b;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -44,10 +47,6 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.Target;
 import mage.util.CardUtil;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

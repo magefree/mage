@@ -29,27 +29,27 @@ package mage.cards.h;
 
 import java.util.Objects;
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.players.Player;
-import mage.game.permanent.Permanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterNonlandCard;
-import mage.target.common.TargetCardInExile;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
 
 /**

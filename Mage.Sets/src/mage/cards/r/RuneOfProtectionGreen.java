@@ -28,16 +28,15 @@
 package mage.cards.r;
 
 import java.util.UUID;
-
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToYouEffect;
-import mage.constants.*;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToYouEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
 

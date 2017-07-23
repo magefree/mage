@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -43,8 +44,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
-
-import java.util.*;
 
 /**
  *

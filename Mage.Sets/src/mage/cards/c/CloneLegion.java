@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
@@ -34,14 +35,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -50,7 +49,7 @@ import java.util.UUID;
 public class CloneLegion extends CardImpl {
 
     public CloneLegion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{U}{U}");
 
         // For each creature target player controls, create a token that's a copy of that creature.
         this.getSpellAbility().addEffect(new CloneLegionEffect());

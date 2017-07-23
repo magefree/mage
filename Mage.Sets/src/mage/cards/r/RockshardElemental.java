@@ -29,8 +29,8 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

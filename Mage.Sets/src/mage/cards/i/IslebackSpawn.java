@@ -27,8 +27,8 @@
  */
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInAnyLibraryCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -37,10 +37,9 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  *

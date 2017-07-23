@@ -37,8 +37,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -47,14 +47,14 @@ import mage.filter.common.FilterCreaturePermanent;
 public class Tenacity extends CardImpl {
 
     public Tenacity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
         // Creatures you control get +1/+1 and gain lifelink until end of turn. Untap those creatures.
         Effect boost = new BoostControlledEffect(1, 1, Duration.EndOfTurn);
         boost.setText("Creatures you control get +1/+1");
         this.getSpellAbility().addEffect(boost);
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), " and gain lifelink until end of turn"));
-        this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE,"Untap those creatures"));
+        this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, "Untap those creatures"));
     }
 
     public Tenacity(final Tenacity card) {

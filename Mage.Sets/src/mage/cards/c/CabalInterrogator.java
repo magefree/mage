@@ -27,6 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -43,9 +45,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

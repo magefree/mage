@@ -37,7 +37,7 @@ import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.util.functions.AddSubtypeApplier;
 
 /**
@@ -47,7 +47,7 @@ import mage.util.functions.AddSubtypeApplier;
 public class SakashimasStudent extends CardImpl {
 
     public SakashimasStudent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Ninja");
 

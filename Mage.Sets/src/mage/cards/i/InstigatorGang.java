@@ -27,24 +27,23 @@
  */
 package mage.cards.i;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
+import mage.abilities.condition.common.TransformedCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.w.WildbloodPack;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.w.WildbloodPack;
+import mage.constants.*;
 import mage.filter.common.FilterAttackingCreature;
-
-import java.util.UUID;
-import mage.abilities.condition.common.TransformedCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 
 /**
  * @author nantuko

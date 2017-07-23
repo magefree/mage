@@ -27,6 +27,7 @@
  */
 package mage.cards.v;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,10 +38,9 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-
-import java.util.UUID;
 
 /**
  *
@@ -50,12 +50,13 @@ public class VelaTheNightClad extends CardImpl {
 
     private final static String rule = "Whenever {this} or another creature you control leaves the battlefield, ";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public VelaTheNightClad(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
@@ -71,7 +72,7 @@ public class VelaTheNightClad extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(IntimidateAbility.getInstance(),
-                    Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, true )));
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, true)));
         // Whenever Vela the Night-Clad or another creature you control leaves the battlefield, each opponent loses 1 life.
         Ability ability = new ZoneChangeAllTriggeredAbility(
                 Zone.BATTLEFIELD,

@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,8 +42,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterSpellOrPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetSpellOrPermanent;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,9 @@
  */
 package mage.cards.e;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -34,15 +37,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.watchers.common.SourceDidDamageWatcher;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -51,11 +50,10 @@ import java.util.UUID;
 public class ExecutionersSwing extends CardImpl {
 
     public ExecutionersSwing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}{B}");
 
         // Target creature that dealt damage this turn gets -5/-5 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(-5,-5, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanentThatDealtDamageThisTurn());
 
         this.getSpellAbility().addWatcher(new SourceDidDamageWatcher());
@@ -103,7 +101,7 @@ class TargetCreaturePermanentThatDealtDamageThisTurn extends TargetPermanent {
         MageObject targetSource = game.getObject(sourceId);
         SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get(SourceDidDamageWatcher.class.getSimpleName());
         if (watcher != null) {
-            for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                 if (!targets.containsKey(permanent.getId()) && watcher.damageSources.contains(permanent.getId())) {
                     if (!notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                         count++;

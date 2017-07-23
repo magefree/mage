@@ -27,10 +27,12 @@
  */
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.condition.common.TransformedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -39,15 +41,12 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.h.HowlpackAlpha;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.h.HowlpackAlpha;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-
-import java.util.UUID;
-import mage.abilities.condition.InvertCondition;
 
 /**
  *

@@ -28,7 +28,6 @@
 package mage.cards.o;
 
 import java.util.UUID;
-
 import mage.abilities.common.TapForManaAllTriggeredAbility;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;

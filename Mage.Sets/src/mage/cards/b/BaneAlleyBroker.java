@@ -27,6 +27,9 @@
  */
 package mage.cards.b;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -49,10 +52,6 @@ import mage.target.Target;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * Gatecrash FAQ (01.2013)

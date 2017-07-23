@@ -27,6 +27,7 @@
  */
 package mage.cards.k;
 
+import java.util.*;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -43,8 +44,6 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
-
-import java.util.*;
 
 /**
  *

@@ -28,7 +28,6 @@
 package mage.cards.n;
 
 import java.util.UUID;
-
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;

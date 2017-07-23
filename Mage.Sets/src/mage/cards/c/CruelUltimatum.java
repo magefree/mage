@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -40,14 +41,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *
@@ -56,7 +55,7 @@ import java.util.UUID;
 public class CruelUltimatum extends CardImpl {
 
     public CruelUltimatum(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}{B}{B}{B}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}{B}{B}{B}{R}{R}");
 
         // Target opponent sacrifices a creature, discards three cards, then loses 5 life.
         // You return a creature card from your graveyard to your hand, draw three cards, then gain 5 life.

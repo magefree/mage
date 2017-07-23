@@ -27,6 +27,7 @@
  */
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -36,8 +37,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

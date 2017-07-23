@@ -36,9 +36,9 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.m.MoonriseIntruder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.m.MoonriseIntruder;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 

@@ -27,9 +27,10 @@
  */
 package mage.cards.p;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.CreatureCountCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -39,10 +40,9 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import java.util.UUID;
-import mage.abilities.condition.common.CreatureCountCondition;
 
 /**
  * @author noxx

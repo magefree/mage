@@ -27,6 +27,8 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
@@ -34,14 +36,12 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.command.emblems.GideonAllyOfZendikarEmblem;
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.game.permanent.token.KnightAllyToken;
 import mage.game.permanent.token.Token;
 

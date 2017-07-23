@@ -25,9 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.e;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -35,14 +37,10 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -51,7 +49,7 @@ import java.util.UUID;
 public class EgoErasure extends CardImpl {
 
     public EgoErasure(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{U}");
         this.subtype.add("Shapeshifter");
 
         // Changeling
@@ -104,7 +102,7 @@ class EgoErasureLoseEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
             Permanent permanent = it.next().getPermanent(game);
-            if (permanent != null) {              
+            if (permanent != null) {
                 permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
             } else {
                 it.remove();
@@ -154,4 +152,3 @@ class EgoErasureBoostEffect extends ContinuousEffectImpl {
         return true;
     }
 }
-

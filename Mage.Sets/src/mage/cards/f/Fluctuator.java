@@ -27,6 +27,9 @@
  */
 package mage.cards.f;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -40,10 +43,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

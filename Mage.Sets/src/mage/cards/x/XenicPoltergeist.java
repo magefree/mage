@@ -27,12 +27,11 @@
  */
 package mage.cards.x;
 
-import mage.MageInt;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.constants.PhaseStep;
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,6 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;

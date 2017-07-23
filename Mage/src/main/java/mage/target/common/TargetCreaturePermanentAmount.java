@@ -27,21 +27,20 @@
  */
 package mage.target.common;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Zone;
 import mage.filter.Filter;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetAmount;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 
 /**
  *
@@ -99,7 +98,7 @@ public class TargetCreaturePermanentAmount extends TargetAmount {
         }
         return false;
     }
-    
+
     @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         return canTarget(id, source, game);

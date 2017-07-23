@@ -29,13 +29,13 @@ package mage.cards.w;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,8 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class WretchedBanquet extends CardImpl {
 
     public WretchedBanquet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // Destroy target creature if it has the least power or is tied for least power among creatures on the battlefield.
         this.getSpellAbility().addEffect(new WretchedBanquetEffect());

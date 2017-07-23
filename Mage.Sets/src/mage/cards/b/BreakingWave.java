@@ -27,6 +27,8 @@
  */
 package mage.cards.b;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.PayMoreToCastAsThoughtItHadFlashAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -36,22 +38,19 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class BreakingWave extends CardImpl {
 
     public BreakingWave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
 
         Effect effect = new BreakingWaveEffect();
         // You may cast Breaking Wave as though it had flash if you pay {2} more to cast it.
@@ -91,12 +90,11 @@ class BreakingWaveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> creatures = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE,
-            source.getControllerId(), source.getSourceId(), game);
-        for(Permanent creature: creatures) {
-            if(creature.isTapped()) {
+                source.getControllerId(), source.getSourceId(), game);
+        for (Permanent creature : creatures) {
+            if (creature.isTapped()) {
                 creature.untap(game);
-            }
-            else {
+            } else {
                 creature.tap(game);
             }
         }

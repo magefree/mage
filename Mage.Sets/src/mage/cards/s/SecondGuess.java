@@ -27,19 +27,18 @@
  */
 package mage.cards.s;
 
-import mage.constants.CardType;
+import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.filter.predicate.Predicate;
 import mage.target.TargetSpell;
 import mage.watchers.common.CastSpellLastTurnWatcher;
-
-import java.util.UUID;
-import mage.MageObjectReference;
 
 /**
  *

@@ -1,6 +1,6 @@
 package mage.cards.k;
 
-import mage.abilities.Ability;
+import java.util.UUID;
 import mage.abilities.costs.common.DiscardHandCost;
 import mage.abilities.costs.common.SacrificeAllCost;
 import mage.abilities.effects.Effect;
@@ -9,8 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
-
-import java.util.UUID;
 
 public class KaerveksSpite extends CardImpl {
 

@@ -27,6 +27,10 @@
  */
 package mage.cards.d;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -40,11 +44,6 @@ import mage.game.Game;
 import mage.game.permanent.token.AngelToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  *

@@ -42,7 +42,7 @@ import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -65,7 +65,7 @@ public class SlumberingDragon extends CardImpl {
         // Slumbering Dragon can't attack or block unless it has five or more +1/+1 counters on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SlumberingDragonEffect()));
 
-        // Whenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on Slumbering Dragon.               
+        // Whenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on Slumbering Dragon.
         this.addAbility(new AttacksAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PERMANENT, true));
     }
 

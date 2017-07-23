@@ -29,8 +29,6 @@ package mage.cards.k;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,7 +37,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 public class KitsunePalliator extends CardImpl {
 
     public KitsunePalliator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Fox");
         this.subtype.add("Cleric");
 
@@ -94,11 +93,11 @@ class KitsunePalliatorEffect extends OneShotEffect {
         PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, 1);
 
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
-        for (Permanent permanent: permanents) {
+        for (Permanent permanent : permanents) {
             effect.setTargetPointer(new FixedTarget(permanent.getId()));
             game.addEffect(effect, source);
         }
-        for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 effect.setTargetPointer(new FixedTarget(player.getId()));

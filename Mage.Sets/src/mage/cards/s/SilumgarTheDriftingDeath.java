@@ -27,6 +27,8 @@
  */
 package mage.cards.s;
 
+import java.util.Iterator;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -37,14 +39,12 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.Iterator;
-import java.util.UUID;
 
 /**
  *
@@ -60,7 +60,7 @@ public class SilumgarTheDriftingDeath extends CardImpl {
     }
 
     public SilumgarTheDriftingDeath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dragon");
         this.power = new MageInt(3);
@@ -73,8 +73,8 @@ public class SilumgarTheDriftingDeath extends CardImpl {
         // Whenever a Dragon you control attacks, creatures defending player controls get -1/-1 until end of turn.
         this.addAbility(
                 new AttacksAllTriggeredAbility(
-                    new UnboostCreaturesTargetPlayerEffect(-1, -1),
-                    false, filter, SetTargetPointer.PLAYER, false));
+                        new UnboostCreaturesTargetPlayerEffect(-1, -1),
+                        false, filter, SetTargetPointer.PLAYER, false));
     }
 
     public SilumgarTheDriftingDeath(final SilumgarTheDriftingDeath card) {
@@ -86,7 +86,6 @@ public class SilumgarTheDriftingDeath extends CardImpl {
         return new SilumgarTheDriftingDeath(this);
     }
 }
-
 
 class UnboostCreaturesTargetPlayerEffect extends ContinuousEffectImpl {
 

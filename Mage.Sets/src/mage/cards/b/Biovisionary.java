@@ -27,17 +27,16 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.constants.*;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-
-import java.util.UUID;
 
 /**
  *

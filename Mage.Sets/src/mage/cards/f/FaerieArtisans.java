@@ -27,6 +27,8 @@
  */
 package mage.cards.f;
 
+import java.util.StringTokenizer;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -46,9 +48,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.StringTokenizer;
-import java.util.UUID;
 
 /**
  *

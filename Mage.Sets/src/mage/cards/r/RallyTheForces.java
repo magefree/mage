@@ -30,13 +30,12 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-
-import mage.constants.CardType;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterAttackingCreature;
 

@@ -27,6 +27,8 @@
  */
 package mage.cards.d;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -46,9 +48,6 @@ import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

@@ -28,11 +28,11 @@
 package mage.cards.h;
 
 import java.util.UUID;
+import mage.abilities.effects.common.ReplaceOpponentCardsInHandWithSelectedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetOpponent;
-import mage.abilities.effects.common.ReplaceOpponentCardsInHandWithSelectedEffect;
 
 /**
  *

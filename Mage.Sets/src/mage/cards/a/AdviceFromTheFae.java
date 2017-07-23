@@ -27,6 +27,9 @@
  */
 package mage.cards.a;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -41,10 +44,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

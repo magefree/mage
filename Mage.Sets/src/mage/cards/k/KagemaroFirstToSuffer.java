@@ -27,6 +27,7 @@
  */
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,9 +45,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-
-import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -55,7 +54,7 @@ import java.util.UUID;
 public class KagemaroFirstToSuffer extends CardImpl {
 
     public KagemaroFirstToSuffer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Demon");
         this.subtype.add("Spirit");
@@ -63,7 +62,7 @@ public class KagemaroFirstToSuffer extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-         DynamicValue xValue= new CardsInControllerHandCount();
+        DynamicValue xValue = new CardsInControllerHandCount();
         // Kagemaro, First to Suffer's power and toughness are each equal to the number of cards in your hand.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
         // {B}, Sacrifice Kagemaro: All creatures get -X/-X until end of turn, where X is the number of cards in your hand.

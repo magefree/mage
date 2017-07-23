@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.MeldCondition;
@@ -38,8 +39,6 @@ import mage.cards.c.ChitteringHost;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-
-import java.util.UUID;
 
 /**
  *

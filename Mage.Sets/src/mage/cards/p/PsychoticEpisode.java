@@ -28,7 +28,6 @@
 package mage.cards.p;
 
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;

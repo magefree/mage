@@ -27,16 +27,15 @@
  */
 package mage.cards.n;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

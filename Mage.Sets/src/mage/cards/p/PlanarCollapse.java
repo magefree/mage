@@ -27,6 +27,7 @@
  */
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,10 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-
-import java.util.UUID;
 
 /**
  *
@@ -50,15 +49,14 @@ import java.util.UUID;
 public class PlanarCollapse extends CardImpl {
 
     public PlanarCollapse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // At the beginning of your upkeep, if there are four or more creatures on the battlefield, sacrifice Planar Collapse and destroy all creatures. They can't be regenerated.
-        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE, true));
         PlanarCollapseCondition contition = new PlanarCollapseCondition();
         this.addAbility(new ConditionalTriggeredAbility(ability, contition, "At the beginning of your upkeep, if there are four or more creatures on the battlefield, sacrifice {this} and destroy all creatures. They can't be regenerated"));
-        
+
     }
 
     public PlanarCollapse(final PlanarCollapse card) {
@@ -69,7 +67,7 @@ public class PlanarCollapse extends CardImpl {
     public PlanarCollapse copy() {
         return new PlanarCollapse(this);
     }
-    
+
     static class PlanarCollapseCondition implements mage.abilities.condition.Condition {
 
         @Override

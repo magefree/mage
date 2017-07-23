@@ -35,10 +35,10 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.u.UnhallowedCathar;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.u.UnhallowedCathar;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;

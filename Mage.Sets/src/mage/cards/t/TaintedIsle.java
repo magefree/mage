@@ -28,11 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-
-import mage.constants.ComparisonType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -41,6 +36,10 @@ import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 

@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
@@ -35,8 +36,6 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *

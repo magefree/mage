@@ -27,6 +27,8 @@
  */
 package mage.cards.p;
 
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -44,9 +46,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author duncant

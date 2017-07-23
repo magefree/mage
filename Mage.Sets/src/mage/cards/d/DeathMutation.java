@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -39,8 +40,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  *

@@ -28,7 +28,6 @@
 package mage.cards.p;
 
 import java.util.UUID;
-
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;

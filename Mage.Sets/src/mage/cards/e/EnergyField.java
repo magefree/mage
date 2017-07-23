@@ -27,6 +27,8 @@
  */
 package mage.cards.e;
 
+import java.util.Objects;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,9 +42,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author Plopman

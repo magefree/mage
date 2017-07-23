@@ -28,6 +28,8 @@
 
 package mage.cards.l;
 
+import java.util.Iterator;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -48,9 +50,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
-
-import java.util.Iterator;
-import java.util.UUID;
 
 /**
  *

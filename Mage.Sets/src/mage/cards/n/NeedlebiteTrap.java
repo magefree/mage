@@ -28,7 +28,6 @@
 package mage.cards.n;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;

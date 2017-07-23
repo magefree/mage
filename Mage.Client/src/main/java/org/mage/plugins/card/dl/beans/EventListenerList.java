@@ -9,9 +9,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import java.util.*;
-
 import static java.util.Arrays.asList;
 
 /**
@@ -30,6 +28,10 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
      * are in the reverse order of registering. A listener contained multiple
      * times (for a single or multiple classes) is only returned the first time
      * it occurs.
+     *
+     * @param <T>
+     * @param listenerClass
+     * @return
      */
     public <T extends EventListener> Iterable<T> getIterable(final Class<? extends T>... listenerClass) {
         //transform class -> iterable

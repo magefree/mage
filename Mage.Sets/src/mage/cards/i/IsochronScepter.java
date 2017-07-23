@@ -27,8 +27,8 @@
  */
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,6 +38,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -49,8 +50,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
-
-import java.util.UUID;
 
 /**
  *

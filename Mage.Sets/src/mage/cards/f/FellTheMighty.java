@@ -27,19 +27,18 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -48,8 +47,7 @@ import java.util.UUID;
 public class FellTheMighty extends CardImpl {
 
     public FellTheMighty(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}");
 
         // Destroy all creatures with power greater than target creature's power.
         this.getSpellAbility().addEffect(new FellTheMightyEffect());
@@ -88,7 +86,7 @@ class FellTheMightyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetCreature = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
         if (controller != null && targetCreature != null) {
-            for(Permanent permanent: game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), source.getSourceId(), game)) {
                 if (permanent.getPower().getValue() > targetCreature.getPower().getValue()) {
                     permanent.destroy(source.getSourceId(), game, false);
                 }

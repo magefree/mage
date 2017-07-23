@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AuraAttachedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -36,8 +37,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.permanent.token.BroodKeeperDragonToken;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -46,8 +47,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *

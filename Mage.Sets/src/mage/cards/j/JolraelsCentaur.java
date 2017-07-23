@@ -28,12 +28,12 @@
 package mage.cards.j;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.FlankingAbility;
+import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 /**
  *

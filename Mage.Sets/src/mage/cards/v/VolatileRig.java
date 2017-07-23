@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -56,7 +56,7 @@ import mage.players.Player;
 public class VolatileRig extends CardImpl {
 
     public VolatileRig(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
         this.subtype.add("Construct");
 
         this.power = new MageInt(4);
@@ -73,7 +73,6 @@ public class VolatileRig extends CardImpl {
 
         // When Volatile Rig dies, flip a coin. If you lose the flip, it deals 4 damage to each creature and each player.
         this.addAbility(new DiesTriggeredAbility(new VolatileRigEffect2()));
-
 
     }
 
@@ -114,7 +113,7 @@ class VolatileRigTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         /*
-         * If Volatile Rig is dealt damage by multiple sources at the same time 
+         * If Volatile Rig is dealt damage by multiple sources at the same time
          * (for example, multiple blocking creatures), its first triggered ability
          * will trigger only once.
          */
@@ -140,7 +139,6 @@ class VolatileRigTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever {this} is dealt damage, " + super.getRule();
     }
 }
-
 
 class VolatileRigEffect extends OneShotEffect {
 
@@ -191,10 +189,10 @@ class VolatileRigEffect2 extends OneShotEffect {
             if (!player.flipCoin(game)) {
 
                 List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
-                for (Permanent permanent: permanents) {
+                for (Permanent permanent : permanents) {
                     permanent.damage(4, source.getSourceId(), game, false, true);
                 }
-                for (UUID playerId: game.getState().getPlayersInRange(player.getId(), game)) {
+                for (UUID playerId : game.getState().getPlayersInRange(player.getId(), game)) {
                     Player damageToPlayer = game.getPlayer(playerId);
                     if (damageToPlayer != null) {
                         damageToPlayer.damage(4, source.getSourceId(), game, false, true);

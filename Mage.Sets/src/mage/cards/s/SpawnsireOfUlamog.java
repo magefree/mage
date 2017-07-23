@@ -27,7 +27,7 @@
  */
 package mage.cards.s;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -36,13 +36,12 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.EldraziSpawnToken;
-
-import java.util.UUID;
 
 /**
  * @author magenoxx_at_gmail.com

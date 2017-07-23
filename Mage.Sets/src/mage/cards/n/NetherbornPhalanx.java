@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -48,7 +48,7 @@ import mage.players.Player;
 public class NetherbornPhalanx extends CardImpl {
 
     public NetherbornPhalanx(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.subtype.add("Horror");
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
@@ -56,7 +56,7 @@ public class NetherbornPhalanx extends CardImpl {
         // When Netherborn Phalanx enters the battlefield, each opponent loses 1 life for each creature he or she controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new NetherbornPhalanxEffect());
         this.addAbility(ability);
-        
+
         // Transmute {1}{B}{B}
         this.addAbility(new TransmuteAbility("{1}{B}{B}"));
     }
@@ -97,7 +97,7 @@ class NetherbornPhalanxEffect extends OneShotEffect {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
                         opponent.loseLife(count, game, false);
-                    return true;
+                        return true;
                     }
                 }
             }

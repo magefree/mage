@@ -29,18 +29,18 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.events.GameEvent.EventType;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**

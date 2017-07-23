@@ -27,14 +27,13 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,16 +27,15 @@
  */
 package mage.cards.g;
 
-import mage.constants.ComparisonType;
+import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-
-import java.util.UUID;
 
 /**
  *

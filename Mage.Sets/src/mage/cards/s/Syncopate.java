@@ -27,24 +27,23 @@
  */
 package mage.cards.s;
 
-import mage.constants.CardType;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.target.TargetSpell;
-
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.target.TargetSpell;
 
 /**
  * @author LevelX2

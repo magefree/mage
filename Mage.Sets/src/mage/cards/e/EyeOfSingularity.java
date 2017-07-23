@@ -27,6 +27,9 @@
  */
 package mage.cards.e;
 
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -45,10 +48,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  *

@@ -28,8 +28,6 @@
 package mage.cards.k;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,9 +36,11 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.t.TerrorOfKruinPass;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.t.TerrorOfKruinPass;
+import mage.constants.CardType;
+import mage.constants.TargetController;
 
 /**
  *

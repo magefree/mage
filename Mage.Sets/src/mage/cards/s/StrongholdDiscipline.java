@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -45,7 +45,7 @@ import mage.players.Player;
 public class StrongholdDiscipline extends CardImpl {
 
     public StrongholdDiscipline(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // Each player loses 1 life for each creature he or she controls.
         this.getSpellAbility().addEffect(new StrongholdDisciplineEffect());

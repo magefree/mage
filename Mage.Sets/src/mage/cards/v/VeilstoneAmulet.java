@@ -28,19 +28,19 @@
 package mage.cards.v;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.filter.FilterSpell;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.FilterSpell;
 import mage.game.Game;
-import mage.abilities.Ability;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 
 /**
  * @author duncant

@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.condition.common.BeforeBlockersAreDeclaredCondition;
@@ -41,8 +42,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

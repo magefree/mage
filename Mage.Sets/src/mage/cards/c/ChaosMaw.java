@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -8,8 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-
-import java.util.UUID;
 
 public class ChaosMaw extends CardImpl {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature");

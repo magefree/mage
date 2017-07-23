@@ -27,19 +27,18 @@
  */
 package mage.cards.a;
 
-import mage.constants.ComparisonType;
+import java.util.UUID;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.permanent.token.AngelToken;
 import mage.watchers.common.PlayerGainedLifeWatcher;
-
-import java.util.UUID;
 
 /**
  *

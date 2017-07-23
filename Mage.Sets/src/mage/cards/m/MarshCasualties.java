@@ -27,6 +27,8 @@
  */
 package mage.cards.m;
 
+import java.util.Iterator;
+import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.LockedInCondition;
@@ -41,9 +43,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
-
-import java.util.Iterator;
-import java.util.UUID;
 
 /**
  *

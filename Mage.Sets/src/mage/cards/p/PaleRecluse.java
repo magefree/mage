@@ -28,14 +28,14 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.keyword.ReachAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ForestcyclingAbility;
 import mage.abilities.keyword.PlainscyclingAbility;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 /**
  *

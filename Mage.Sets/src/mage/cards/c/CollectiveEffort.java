@@ -27,8 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapTargetCost;
@@ -39,9 +39,11 @@ import mage.abilities.keyword.EscalateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPlayer;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -55,8 +57,6 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -75,7 +75,7 @@ public class CollectiveEffort extends CardImpl {
     }
 
     public CollectiveEffort(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
 
         // Escalate &mdash; Tap an untapped creature you control.
         Cost cost = new TapTargetCost(new TargetControlledCreaturePermanent(filterUntapped));
@@ -118,6 +118,7 @@ public class CollectiveEffort extends CardImpl {
 }
 
 class CollectiveEffortEffect extends OneShotEffect {
+
     CollectiveEffortEffect() {
         super(Outcome.UnboostCreature);
         staticText = "Put a +1/+1 counter on each creature target player controls";

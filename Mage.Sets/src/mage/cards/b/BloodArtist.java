@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
@@ -38,8 +39,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.Target;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *

@@ -30,7 +30,7 @@ package org.mage.test.cards.copy;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import org.junit.Assert;

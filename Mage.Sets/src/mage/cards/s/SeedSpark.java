@@ -30,6 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +39,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.TargetPermanent;
-import mage.abilities.effects.common.CreateTokenEffect;
 
 /**
  *

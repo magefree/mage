@@ -29,8 +29,6 @@
 package mage.cards.v;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,6 +36,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 /**
  * @author Loki

@@ -28,7 +28,6 @@
 package mage.cards.w;
 
 import java.util.UUID;
-
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;

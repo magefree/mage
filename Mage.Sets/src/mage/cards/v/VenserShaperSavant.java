@@ -27,6 +27,7 @@
  */
 package mage.cards.v;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,8 +39,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.target.Target;
 import mage.target.common.TargetSpellOrPermanent;
-
-import java.util.UUID;
 
 /**
  *

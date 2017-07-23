@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -46,12 +47,10 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.command.emblems.ChandraTorchOfDefianceEmblem;
 import mage.players.Library;
 import mage.players.Player;
-import mage.game.command.emblems.ChandraTorchOfDefianceEmblem;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author fireshoes

@@ -42,7 +42,7 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.SubLayer;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;

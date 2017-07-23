@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.CouncilsDilemmaVoteEffect;
 import mage.cards.*;
@@ -37,8 +38,6 @@ import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-
-import java.util.UUID;
 
 /**
  *

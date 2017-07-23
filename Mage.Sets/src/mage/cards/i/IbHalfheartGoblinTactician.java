@@ -27,6 +27,9 @@
  */
 package mage.cards.i;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
@@ -47,10 +50,6 @@ import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

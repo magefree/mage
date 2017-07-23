@@ -27,15 +27,14 @@
  */
 package mage.cards.r;
 
-import mage.abilities.effects.common.cost.CastWithoutPayingManaCostEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.cost.CastWithoutPayingManaCostEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 /**
  * @author fireshoes

@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
@@ -41,8 +42,6 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.token.TuskenRaiderToken;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *

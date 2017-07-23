@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,17 +42,14 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-
-import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
 public class SurrakDragonclaw extends CardImpl {
-
 
     private static final FilterSpell filterTarget = new FilterSpell("Creature spells you control");
 
@@ -60,7 +58,7 @@ public class SurrakDragonclaw extends CardImpl {
     }
 
     public SurrakDragonclaw(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Warrior");
@@ -70,10 +68,10 @@ public class SurrakDragonclaw extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        
+
         // Surrak Dragonclaw can't be countered.
         this.addAbility(new CantBeCounteredAbility());
-        
+
         // Creature spells you control can't be countered.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filterTarget, null, Duration.WhileOnBattlefield)));
 

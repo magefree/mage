@@ -29,8 +29,8 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

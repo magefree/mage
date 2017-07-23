@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,14 +38,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -53,7 +52,7 @@ import java.util.UUID;
 public class CabalExecutioner extends CardImpl {
 
     public CabalExecutioner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);
@@ -61,7 +60,7 @@ public class CabalExecutioner extends CardImpl {
 
         // Whenever Cabal Executioner deals combat damage to a player, that player sacrifices a creature.
         this.addAbility(new CabalExecutionerAbility());
-        
+
         // Morph {3}{B}{B}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{B}{B}")));
     }
@@ -96,7 +95,6 @@ class CabalExecutionerAbility extends TriggeredAbilityImpl {
         return event.getType() == EventType.DAMAGED_PLAYER;
     }
 
-    
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;

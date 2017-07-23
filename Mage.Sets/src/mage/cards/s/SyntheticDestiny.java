@@ -43,7 +43,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -54,7 +54,7 @@ import mage.players.Player;
 public class SyntheticDestiny extends CardImpl {
 
     public SyntheticDestiny(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
 
         // Exile all creatures you control. At the beginning of the next end step, reveal cards from the top of your library until you reveal that many creature cards, put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library.
         getSpellAbility().addEffect(new SyntheticDestinyEffect());

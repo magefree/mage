@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
 public class OverwhelmingForces extends CardImpl {
 
     public OverwhelmingForces(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{B}{B}");
 
         // Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
         this.getSpellAbility().addEffect(new OverwhelmingForcesEffect());

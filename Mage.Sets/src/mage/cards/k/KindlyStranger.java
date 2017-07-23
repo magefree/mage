@@ -34,9 +34,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.d.DemonPossessedWitch;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.d.DemonPossessedWitch;
 import mage.constants.CardType;
 import mage.constants.Zone;
 

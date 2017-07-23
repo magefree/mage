@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -40,8 +41,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *

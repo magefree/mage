@@ -27,10 +27,11 @@
  */
 package mage.cards.d;
 
+import java.util.Objects;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -50,9 +51,6 @@ import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  *

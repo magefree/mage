@@ -27,6 +27,8 @@
  */
 package mage.cards.b;
 
+import java.util.Iterator;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -43,9 +45,6 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.Iterator;
-import java.util.UUID;
 
 /**
  *

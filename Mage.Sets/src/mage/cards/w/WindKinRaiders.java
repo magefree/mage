@@ -29,8 +29,8 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.ImproviseAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ImproviseAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

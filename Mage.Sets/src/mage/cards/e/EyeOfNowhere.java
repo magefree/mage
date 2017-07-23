@@ -28,13 +28,12 @@
 
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  *

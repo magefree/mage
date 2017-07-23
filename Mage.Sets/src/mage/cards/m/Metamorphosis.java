@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AddConditionalManaOfAnyColorEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastConditionalMana;
 import mage.cards.CardImpl;
@@ -41,7 +42,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.abilities.effects.common.AddConditionalManaOfAnyColorEffect;
 
 
 /**

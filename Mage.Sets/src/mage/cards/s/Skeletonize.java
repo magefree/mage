@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -44,8 +45,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.SkeletonToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.DamagedByWatcher;
-
-import java.util.UUID;
 
 /**
  *

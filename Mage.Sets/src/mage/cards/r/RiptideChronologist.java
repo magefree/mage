@@ -27,6 +27,8 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -47,9 +49,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author fireshoes

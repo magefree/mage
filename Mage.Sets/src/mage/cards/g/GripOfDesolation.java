@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -37,8 +38,6 @@ import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.SecondTargetPointer;
-
-import java.util.UUID;
 
 /**
  *

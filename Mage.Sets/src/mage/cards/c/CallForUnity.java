@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,10 +43,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.watchers.common.RevoltWatcher;
-
-import java.util.UUID;
 
 /**
  *
@@ -65,7 +64,7 @@ public class CallForUnity extends CardImpl {
 
         // Creatures you control get +1/+1 for each unity counter on Call for Unity.
         Effect effect = new BoostControlledEffect(new CountersSourceCount(CounterType.UNITY), new CountersSourceCount(CounterType.UNITY), Duration.WhileOnBattlefield,
-                        StaticFilters.FILTER_PERMANENT_CREATURE, false);
+                StaticFilters.FILTER_PERMANENT_CREATURE, false);
         effect.setText("Creatures you control get +1/+1 for each unity counter on {this}");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

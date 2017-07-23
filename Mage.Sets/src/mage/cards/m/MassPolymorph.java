@@ -43,7 +43,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -55,7 +55,7 @@ import mage.players.Player;
 public class MassPolymorph extends CardImpl {
 
     public MassPolymorph(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}");
 
         // Exile all creatures you control, then reveal cards from the top of your library until you reveal that many creature cards.
         // Put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library.

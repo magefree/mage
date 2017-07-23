@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.HateCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -39,8 +40,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetSpell;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
-
-import java.util.UUID;
 
 /**
  *

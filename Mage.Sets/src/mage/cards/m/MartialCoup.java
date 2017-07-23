@@ -27,6 +27,8 @@
  */
 package mage.cards.m;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -37,9 +39,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

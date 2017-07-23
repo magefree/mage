@@ -27,6 +27,8 @@
  */
 package mage.cards.s;
 
+import java.util.ArrayList;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -44,9 +46,6 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  *

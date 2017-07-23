@@ -40,7 +40,7 @@ import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,15 +50,15 @@ import mage.game.permanent.Permanent;
  * @author jeffwadsworth
  */
 public class SpreadingPlague extends CardImpl {
-    
+
     private static final String RULE = "Whenever a creature enters the battlefield, destroy all other creatures that share a color with it. They can't be regenerated.";
 
     public SpreadingPlague(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
 
         // Whenever a creature enters the battlefield, destroy all other creatures that share a color with it. They can't be regenerated.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SpreadingPlagueEffect(), StaticFilters.FILTER_PERMANENT_CREATURE, false, SetTargetPointer.PERMANENT, RULE));
-        
+
     }
 
     public SpreadingPlague(final SpreadingPlague card) {
@@ -72,6 +72,7 @@ public class SpreadingPlague extends CardImpl {
 }
 
 class SpreadingPlagueEffect extends OneShotEffect {
+
     static final FilterPermanent FILTER = new FilterPermanent("creature");
 
     static {

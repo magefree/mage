@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,13 +41,11 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *
@@ -55,8 +53,8 @@ import java.util.UUID;
  */
 public class ContagionEngine extends CardImpl {
 
-    public ContagionEngine (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+    public ContagionEngine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // When Contagion Engine enters the battlefield, put a -1/-1 counter on each creature target player controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ContagionEngineEffect());
@@ -70,7 +68,7 @@ public class ContagionEngine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ContagionEngine (final ContagionEngine card) {
+    public ContagionEngine(final ContagionEngine card) {
         super(card);
     }
 
@@ -82,6 +80,7 @@ public class ContagionEngine extends CardImpl {
 }
 
 class ContagionEngineEffect extends OneShotEffect {
+
     ContagionEngineEffect() {
         super(Outcome.UnboostCreature);
         staticText = "put a -1/-1 counter on each creature target player controls";

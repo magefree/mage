@@ -27,10 +27,11 @@
  */
 package mage.cards.s;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -41,6 +42,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -52,9 +54,6 @@ import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

@@ -28,9 +28,7 @@
 
 package mage.cards.o;
 
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
@@ -38,9 +36,10 @@ import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
-
-import java.util.UUID;
 
 /**
  *

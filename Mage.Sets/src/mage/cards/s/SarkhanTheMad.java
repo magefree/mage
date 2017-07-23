@@ -27,6 +27,8 @@
  */
 package mage.cards.s;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -51,9 +53,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

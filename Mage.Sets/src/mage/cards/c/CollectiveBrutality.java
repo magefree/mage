@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -49,8 +50,6 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.other.PlayerPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

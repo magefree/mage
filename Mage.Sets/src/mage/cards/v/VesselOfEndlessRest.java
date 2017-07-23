@@ -27,16 +27,15 @@
  */
 package mage.cards.v;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetCardInGraveyard;
-
-import java.util.UUID;
 
 /**
  * @author noxx

@@ -29,7 +29,6 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.ConditionalMana;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
@@ -37,6 +36,7 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastConditionalMana;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 
 /**

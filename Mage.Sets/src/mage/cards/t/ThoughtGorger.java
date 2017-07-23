@@ -27,22 +27,22 @@
  */
 package mage.cards.t;
 
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.players.Player;
 import java.util.UUID;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *

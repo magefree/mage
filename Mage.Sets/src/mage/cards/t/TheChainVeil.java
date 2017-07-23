@@ -27,6 +27,9 @@
  */
 package mage.cards.t;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -44,10 +47,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.watchers.Watcher;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

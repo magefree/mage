@@ -29,7 +29,6 @@ package mage.cards.r;
 
 import java.util.List;
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;

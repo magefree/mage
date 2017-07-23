@@ -28,7 +28,7 @@
 
 package mage.cards.h;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -38,9 +38,8 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.events.GameEvent.EventType;
-
-import java.util.UUID;
 
 
 /**

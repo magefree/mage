@@ -29,9 +29,11 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
@@ -39,12 +41,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-
-import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

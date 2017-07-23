@@ -28,7 +28,6 @@
 package mage.cards.l;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;

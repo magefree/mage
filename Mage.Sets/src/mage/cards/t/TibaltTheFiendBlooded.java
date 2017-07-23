@@ -50,7 +50,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -64,7 +64,7 @@ import mage.target.targetpointer.FixedTarget;
 public class TibaltTheFiendBlooded extends CardImpl {
 
     public TibaltTheFiendBlooded(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{R}{R}");
         this.subtype.add("Tibalt");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(2));
@@ -188,4 +188,3 @@ class TibaltTheFiendBloodedControlEffect extends ContinuousEffectImpl {
         return false;
     }
 }
-

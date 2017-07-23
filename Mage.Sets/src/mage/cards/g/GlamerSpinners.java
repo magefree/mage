@@ -27,6 +27,8 @@
  */
 package mage.cards.g;
 
+import java.util.LinkedList;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -47,9 +49,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-
-import java.util.LinkedList;
-import java.util.UUID;
 
 /**
  *

@@ -32,7 +32,7 @@ import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -41,8 +41,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class Vitalize extends CardImpl {
 
     public Vitalize(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Untap all creatures you control.
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, "Untap all creatures you control"));

@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -36,13 +37,11 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanentSameController;
-
-import java.util.UUID;
 
 /**
  *
@@ -51,11 +50,11 @@ import java.util.UUID;
 public class Cannibalize extends CardImpl {
 
     public Cannibalize(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Choose two target creatures controlled by the same player. Exile one of the creatures and put two +1/+1 counters on the other.
         this.getSpellAbility().addEffect(new CannibalizeEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(2,2,StaticFilters.FILTER_PERMANENT_CREATURE,false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(2, 2, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
     public Cannibalize(final Cannibalize card) {
@@ -69,21 +68,21 @@ public class Cannibalize extends CardImpl {
 }
 
 class CannibalizeEffect extends OneShotEffect {
-    
+
     public CannibalizeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose two target creatures controlled by the same player. Exile one of the creatures and put two +1/+1 counters on the other";
     }
-    
+
     public CannibalizeEffect(final CannibalizeEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public CannibalizeEffect copy() {
         return new CannibalizeEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -91,8 +90,8 @@ class CannibalizeEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             boolean exileDone = false;
             int count = 0;
-            for(UUID targetId: getTargetPointer().getTargets(game, source)) {
-                Permanent creature = game.getPermanent(targetId);                
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+                Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {
                     if ((count == 0 && controller.chooseUse(Outcome.Exile, "Exile " + creature.getLogName() + '?', source, game))
                             || (count == 1 && !exileDone)) {

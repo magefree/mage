@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -35,11 +36,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -48,8 +47,7 @@ import java.util.UUID;
 public class GrixisCharm extends CardImpl {
 
     public GrixisCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{B}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{B}{R}");
 
         // Choose one - Return target permanent to its owner's hand;
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

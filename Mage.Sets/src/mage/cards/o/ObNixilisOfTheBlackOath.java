@@ -41,9 +41,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.command.emblems.ObNixilisOfTheBlackOathEmblem;
 import mage.game.permanent.token.DemonToken;
 import mage.players.Player;
-import mage.game.command.emblems.ObNixilisOfTheBlackOathEmblem;
 
 /**
  *

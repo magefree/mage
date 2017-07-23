@@ -27,9 +27,11 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -39,11 +41,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.target.TargetPlayer;
-
-import java.util.UUID;
-import mage.abilities.costs.common.DiscardTargetCost;
 import mage.filter.FilterCard;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 
 /**

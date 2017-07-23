@@ -27,6 +27,8 @@
  */
 package mage.cards.d;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,13 +37,11 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -50,14 +50,13 @@ import java.util.UUID;
 public class DeathPitOffering extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    
-    static{
+
+    static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
-    
-    public DeathPitOffering(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
+    public DeathPitOffering(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
         // When Death Pit Offering enters the battlefield, sacrifice all creatures you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DeathPitOfferingEffect()));

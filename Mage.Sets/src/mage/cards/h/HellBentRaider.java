@@ -29,19 +29,19 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.constants.Zone;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.constants.Duration;
-import mage.abilities.keyword.ProtectionAbility;
+import mage.constants.Zone;
 
 /**
  *

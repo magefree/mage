@@ -27,6 +27,9 @@
  */
 package mage.cards.c;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -43,10 +46,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SnakeToken;
 import mage.game.stack.StackObject;
 import mage.watchers.Watcher;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author Rafbill

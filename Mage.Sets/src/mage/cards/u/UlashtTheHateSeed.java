@@ -27,6 +27,7 @@
  */
 package mage.cards.u;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -54,8 +55,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SaprolingToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

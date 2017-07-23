@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.LoseHalfLifeEffect;
 import mage.abilities.effects.common.WishEffect;
@@ -34,8 +35,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-
-import java.util.UUID;
 
 /**
  *
