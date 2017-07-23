@@ -4,6 +4,7 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.Objects;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -18,8 +19,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-
-import java.util.Objects;
 
 /**
  *
@@ -36,7 +35,7 @@ import java.util.Objects;
  */
 public class EpicEffect extends OneShotEffect {
 
-    static final String rule = "<br>Epic <i>(For the rest of the game, you can't cast spells.  At the beginning of each of your upkeeps for the rest of the game, copy this spell except for its epic ability.  If the spell has targets, you may choose new targets for the copy)";
+    static final String rule = "<br>Epic <i>(For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps for the rest of the game, copy this spell except for its epic ability. If the spell has targets, you may choose new targets for the copy)";
 
     public EpicEffect() {
         super(Outcome.Benefit);
@@ -53,6 +52,9 @@ public class EpicEffect extends OneShotEffect {
         if (controller != null) {
             StackObject stackObject = game.getStack().getStackObject(source.getId());
             Spell spell = (Spell) stackObject;
+            if (spell == null) {
+                return false;
+            }
             spell = spell.copySpell(source.getControllerId());
             // Remove Epic effect from the spell
             Effect epicEffect = null;
