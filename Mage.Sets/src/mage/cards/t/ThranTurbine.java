@@ -27,6 +27,8 @@
  */
 package mage.cards.t;
 
+import java.util.HashSet;
+import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -47,11 +49,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-
-import java.util.HashSet;
-import java.util.UUID;
 import mage.game.stack.Spell;
+import mage.players.Player;
 
 /**
  *

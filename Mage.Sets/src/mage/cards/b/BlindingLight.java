@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
@@ -35,8 +36,6 @@ import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-
-import java.util.UUID;
 
 /**
  *

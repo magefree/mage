@@ -27,6 +27,7 @@
  */
 package mage.cards.j;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,13 +40,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
-import mage.filter.StaticFilters;
 
 /**
  *

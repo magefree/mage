@@ -27,6 +27,9 @@
  */
 package mage.cards.b;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -45,10 +48,6 @@ import mage.game.stack.Spell;
 import mage.target.Target;
 import mage.util.CardUtil;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -57,8 +56,7 @@ public class BattlefieldThaumaturge extends CardImpl {
 
     public BattlefieldThaumaturge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.HUMAN, SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

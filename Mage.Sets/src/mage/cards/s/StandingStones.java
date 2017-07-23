@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.GenericManaCost;

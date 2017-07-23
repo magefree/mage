@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.counter.ProliferateEffect;
@@ -40,8 +41,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-
-import java.util.UUID;
 
 /**
  *

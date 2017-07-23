@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TurnedFaceUpAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -36,8 +37,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-
-import java.util.UUID;
 
 /**
  *

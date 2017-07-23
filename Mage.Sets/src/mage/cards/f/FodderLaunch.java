@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -38,8 +39,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author BursegSardaukar

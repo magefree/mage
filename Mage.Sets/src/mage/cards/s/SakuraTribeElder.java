@@ -28,6 +28,7 @@ package mage.cards.s;
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -39,8 +40,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 /**
  * @author Loki

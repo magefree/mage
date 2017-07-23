@@ -27,6 +27,7 @@
  */
 package mage.cards.n;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -47,8 +48,6 @@ import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-
-import java.util.UUID;
 
 /**
  * @author noxx

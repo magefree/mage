@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -44,8 +45,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.watchers.common.DamagedByWatcher;
-
-import java.util.UUID;
 
 /**
  *

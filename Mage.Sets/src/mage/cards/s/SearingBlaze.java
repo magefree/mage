@@ -27,6 +27,9 @@
  */
 package mage.cards.s;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -42,10 +45,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.watchers.common.LandfallWatcher;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

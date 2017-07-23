@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,9 +37,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  *
@@ -48,7 +48,7 @@ public class BrassSecretary extends CardImpl {
 
     public BrassSecretary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

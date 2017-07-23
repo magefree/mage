@@ -27,6 +27,7 @@
  */
 package mage.cards.q;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAloneTriggeredAbility;
@@ -45,8 +46,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.target.common.TargetCardInGraveyard;
-
-import java.util.UUID;
 
 /**
  *

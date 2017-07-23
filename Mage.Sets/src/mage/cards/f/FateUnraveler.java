@@ -27,14 +27,13 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DrawCardOpponentTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
 
 /**
  *

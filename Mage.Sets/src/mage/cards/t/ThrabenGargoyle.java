@@ -34,9 +34,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.s.StonewingAntagonizer;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.s.StonewingAntagonizer;
 import mage.constants.CardType;
 import mage.constants.Zone;
 

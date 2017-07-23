@@ -27,14 +27,13 @@
  */
 package mage.cards.o;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-
-import java.util.UUID;
+import mage.constants.CardType;
 
 /**
  *

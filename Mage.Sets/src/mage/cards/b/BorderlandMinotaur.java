@@ -27,12 +27,12 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +42,7 @@ public class BorderlandMinotaur extends CardImpl {
 
     public BorderlandMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.MINOTAUR, SubType.WARRIOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

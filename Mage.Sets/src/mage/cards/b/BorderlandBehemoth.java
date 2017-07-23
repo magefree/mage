@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -43,8 +44,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 
-import java.util.UUID;
-
 /**
  *
  * @author fireshoes
@@ -53,8 +52,7 @@ public class BorderlandBehemoth extends CardImpl {
 
     public BorderlandBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
-        this.subtype.add("Giant");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GIANT, SubType.WARRIOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

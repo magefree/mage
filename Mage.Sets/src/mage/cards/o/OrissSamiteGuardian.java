@@ -27,6 +27,7 @@
  */
 package mage.cards.o;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.GrandeurAbility;
@@ -48,8 +49,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

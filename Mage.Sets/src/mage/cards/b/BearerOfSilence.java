@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
@@ -39,10 +40,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *
@@ -51,8 +51,8 @@ import java.util.UUID;
 public class BearerOfSilence extends CardImpl {
 
     public BearerOfSilence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Eldrazi");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
@@ -60,7 +60,7 @@ public class BearerOfSilence extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // When you cast Bearer of Silence, you may pay {1}{C}. If you do, target opponent sacrifices a creature.
-        Ability ability = new CastSourceTriggeredAbility(new DoIfCostPaid(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target opponent"), new ManaCostsImpl("{1}{C}")));
+        Ability ability = new CastSourceTriggeredAbility(new DoIfCostPaid(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target opponent"), new ManaCostsImpl("{1}{C}")));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 

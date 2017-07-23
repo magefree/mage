@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,8 +46,6 @@ import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author Markedagain
@@ -62,7 +61,7 @@ public class BeastmastersMagemark extends CardImpl {
 
     public BeastmastersMagemark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

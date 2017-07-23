@@ -27,14 +27,13 @@
  */
 package mage.cards.j;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.CantBlockAloneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
 
 /**
  * @author magenoxx_at_gmail.com

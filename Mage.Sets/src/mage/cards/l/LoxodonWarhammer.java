@@ -29,8 +29,6 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-
-import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -41,6 +39,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 
 /**
  *

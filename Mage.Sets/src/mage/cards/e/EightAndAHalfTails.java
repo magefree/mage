@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -44,8 +45,6 @@ import mage.constants.Zone;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSpellOrPermanent;
-
-import java.util.UUID;
 
 /**
  *

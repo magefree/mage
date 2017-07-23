@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,8 +48,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.NamePredicate;
-
-import java.util.UUID;
 
 /**
  *

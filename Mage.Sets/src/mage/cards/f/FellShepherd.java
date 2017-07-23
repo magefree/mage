@@ -27,6 +27,9 @@
  */
 package mage.cards.f;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -40,6 +43,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -47,11 +51,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import mage.filter.StaticFilters;
 
 /**
  *

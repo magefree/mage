@@ -28,18 +28,17 @@
 package mage.cards.l;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
+import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.abilities.costs.common.RevealTargetFromHandCost;
 
 /**
  *

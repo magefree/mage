@@ -39,7 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -56,18 +56,17 @@ public class JeskaiAscendancy extends CardImpl {
     }
 
     public JeskaiAscendancy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{R}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{R}{W}");
 
         // Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn. Untap those creatures.
-        Effect effect = new BoostControlledEffect(1,1,Duration.EndOfTurn);
+        Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn);
         Ability ability = new SpellCastControllerTriggeredAbility(effect, filterNonCreature, false);
-        effect = new UntapAllControllerEffect(new FilterCreaturePermanent(),"Untap those creatures");
+        effect = new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, "Untap those creatures");
         ability.addEffect(effect);
         this.addAbility(ability);
 
         // Whenever you cast a noncreature spell, you may draw a card. If you do, discard a card.
-        effect = new DrawDiscardControllerEffect(1,1);
+        effect = new DrawDiscardControllerEffect(1, 1);
         effect.setText("you may draw a card. If you do, discard a card");
         ability = new SpellCastControllerTriggeredAbility(effect, filterNonCreature, true);
         this.addAbility(ability);

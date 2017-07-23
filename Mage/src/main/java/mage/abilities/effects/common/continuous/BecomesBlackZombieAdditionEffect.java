@@ -34,8 +34,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * @author JRHerlehy
- *         Created on 4/8/17.
+ * @author JRHerlehy Created on 4/8/17.
  */
 public class BecomesBlackZombieAdditionEffect extends ContinuousEffectImpl {
 
@@ -55,9 +54,14 @@ public class BecomesBlackZombieAdditionEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent creature = game.getPermanent(source.getTargets().getFirstTarget());
-        if (creature == null) {
-            creature = game.getPermanentEntering(source.getTargets().getFirstTarget());
+        Permanent creature;
+        if (source.getTargets().getFirstTarget() == null) {
+            creature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        } else {
+            creature = game.getPermanent(source.getTargets().getFirstTarget());
+            if (creature == null) {
+                creature = game.getPermanentEntering(source.getTargets().getFirstTarget());
+            }
         }
         if (creature != null) {
             switch (layer) {

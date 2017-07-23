@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -42,8 +43,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *

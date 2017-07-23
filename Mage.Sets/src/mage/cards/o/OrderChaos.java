@@ -27,6 +27,7 @@
  */
 package mage.cards.o;
 
+import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.cards.CardSetInfo;
@@ -37,8 +38,6 @@ import mage.constants.SpellAbilityType;
 import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.common.TargetAttackingCreature;
-
-import java.util.UUID;
 
 public class OrderChaos extends SplitCard {
 

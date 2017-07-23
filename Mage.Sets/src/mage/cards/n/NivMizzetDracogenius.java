@@ -27,6 +27,7 @@
  */
 package mage.cards.n;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
@@ -41,8 +42,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.UUID;
 
 /**
  *

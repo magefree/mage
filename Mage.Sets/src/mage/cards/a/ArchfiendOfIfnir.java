@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CycleOrDiscardControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,8 +40,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

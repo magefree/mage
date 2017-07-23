@@ -27,6 +27,7 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,8 +44,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *

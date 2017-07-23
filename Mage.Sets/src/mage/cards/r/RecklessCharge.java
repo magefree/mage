@@ -28,8 +28,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -37,6 +35,7 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;

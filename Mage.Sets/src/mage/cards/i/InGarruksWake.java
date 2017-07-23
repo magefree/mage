@@ -27,6 +27,7 @@
  */
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,8 +36,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-
-import java.util.UUID;
 
 /**
  * @author noxx

@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,8 +39,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

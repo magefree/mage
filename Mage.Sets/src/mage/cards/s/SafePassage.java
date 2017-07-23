@@ -29,12 +29,12 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.predicate.other.PlayerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;

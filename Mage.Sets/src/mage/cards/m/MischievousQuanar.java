@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,8 +44,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *

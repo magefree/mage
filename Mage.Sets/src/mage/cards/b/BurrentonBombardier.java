@@ -28,6 +28,7 @@
 
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FlyingAbility;
@@ -35,8 +36,7 @@ import mage.abilities.keyword.ReinforceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +46,7 @@ public class BurrentonBombardier extends CardImpl {
 
     public BurrentonBombardier (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.KITHKIN, SubType.SOLDIER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

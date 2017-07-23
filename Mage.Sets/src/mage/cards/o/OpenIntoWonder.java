@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,7 +56,7 @@ public class OpenIntoWonder extends CardImpl {
         Effect effect = new CantBeBlockedTargetEffect(Duration.EndOfTurn);
         effect.setText("X target creatures can't be blocked this turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false));
         Ability abilityToGain = new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(abilityToGain, Duration.EndOfTurn,
                 "Until end of turn, those creatures gain \"Whenever this creature deals combat damage to a player, draw a card.\""));
@@ -71,7 +71,7 @@ public class OpenIntoWonder extends CardImpl {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             int numberOfTargets = ability.getManaCostsToPay().getX();
-            numberOfTargets = Math.min(game.getBattlefield().count(new FilterCreaturePermanent(), ability.getSourceId(), ability.getControllerId(), game), numberOfTargets);
+            numberOfTargets = Math.min(game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, ability.getSourceId(), ability.getControllerId(), game), numberOfTargets);
             ability.addTarget(new TargetCreaturePermanent(numberOfTargets));
         }
     }

@@ -156,6 +156,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("New Benalia", 172, Rarity.UNCOMMON, mage.cards.n.NewBenalia.class));
         cards.add(new SetCardInfo("Nihilith", 72, Rarity.RARE, mage.cards.n.Nihilith.class));
         cards.add(new SetCardInfo("Nimbus Maze", 178, Rarity.RARE, mage.cards.n.NimbusMaze.class));
+        cards.add(new SetCardInfo("Nix", 55, Rarity.RARE, mage.cards.n.Nix.class));
         cards.add(new SetCardInfo("Oblivion Crown", 73, Rarity.COMMON, mage.cards.o.OblivionCrown.class));
         cards.add(new SetCardInfo("Oriss, Samite Guardian", 28, Rarity.RARE, mage.cards.o.OrissSamiteGuardian.class));
         cards.add(new SetCardInfo("Pact of Negation", 42, Rarity.RARE, mage.cards.p.PactOfNegation.class));

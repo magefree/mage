@@ -28,7 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.condition.common.CreatureCountCondition;

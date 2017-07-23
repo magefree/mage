@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -37,11 +38,9 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -50,7 +49,7 @@ import java.util.UUID;
 public class AvatarOfMight extends CardImpl {
 
     public AvatarOfMight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -102,10 +101,10 @@ class AvatarOfMightCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify.getSourceId().equals(source.getSourceId()) && (abilityToModify instanceof SpellAbility)) {
-            int creatures = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game);
+            int creatures = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
             for (UUID playerId : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(playerId);
-                if (opponent != null && game.getBattlefield().countAll(new FilterCreaturePermanent(), opponent.getId(), game) >= creatures + 4) {
+                if (opponent != null && game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, opponent.getId(), game) >= creatures + 4) {
                     return true;
                 }
             }

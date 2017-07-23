@@ -27,9 +27,9 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.Cost;
@@ -50,8 +50,6 @@ import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -59,7 +57,7 @@ import java.util.UUID;
 public class AshiokNightmareWeaver extends CardImpl {
 
     public AshiokNightmareWeaver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{B}");
         this.subtype.add(SubType.ASHIOK);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -166,11 +164,10 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
                         effect.setTargetPointer(new FixedTarget(permanent, game));
                         game.addEffect(effect, source);
                     }
-                    return true;
                 }
             }
         }
-        return false;
+        return true;
     }
 }
 

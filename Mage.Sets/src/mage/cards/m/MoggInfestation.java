@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GoblinToken;
@@ -89,7 +89,7 @@ class MoggInfestationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && getTargetPointer().getFirst(game, source) != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), getTargetPointer().getFirst(game, source), game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getTargetPointer().getFirst(game, source), game)) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
                     if (game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) { // If a commander is replaced to command zone, the creature does not die
                         Effect effect = new CreateTokenTargetEffect(new GoblinToken(), 2);

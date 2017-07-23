@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
@@ -43,8 +44,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *

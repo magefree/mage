@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -38,8 +39,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -49,8 +49,7 @@ public class BeastbreakerOfBalaGed extends LevelerCard {
 
     public BeastbreakerOfBalaGed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
 
         this.color.setGreen(true);
         this.power = new MageInt(2);

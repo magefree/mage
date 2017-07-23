@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,8 +40,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-
-import java.util.UUID;
 
 /**
  *
@@ -56,8 +55,7 @@ public class BogStriderAsh extends CardImpl {
 	
     public BogStriderAsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.TREEFOLK, SubType.SHAMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

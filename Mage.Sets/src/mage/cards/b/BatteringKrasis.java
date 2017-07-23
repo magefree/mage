@@ -28,14 +28,14 @@
 
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.EvolveAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -47,7 +47,7 @@ public class BatteringKrasis extends CardImpl {
 
     public BatteringKrasis (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Fish");
+        this.subtype.add(SubType.FISH, SubType.BEAST);
         this.subtype.add("Beast");
 
         this.power = new MageInt(2);

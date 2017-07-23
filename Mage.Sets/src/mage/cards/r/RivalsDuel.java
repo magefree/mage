@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanentWithDifferentTypes;
@@ -50,7 +50,7 @@ public class RivalsDuel extends CardImpl {
 
         // Choose two target creatures that share no creature types. Those creatures fight each other.
         this.getSpellAbility().addEffect(new RivalsDuelFightTargetsEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentWithDifferentTypes(2, 2, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentWithDifferentTypes(2, 2, StaticFilters.FILTER_PERMANENT_CREATURE, false));
 
     }
 

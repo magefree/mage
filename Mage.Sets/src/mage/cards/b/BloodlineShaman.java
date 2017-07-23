@@ -27,6 +27,8 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -45,9 +47,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 /**
  *
  * @author fireshoes
@@ -57,9 +56,7 @@ public class BloodlineShaman extends CardImpl {
     public BloodlineShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.subtype.add("Elf");
-        this.subtype.add("Wizard");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ELF, SubType.WIZARD, SubType.SHAMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

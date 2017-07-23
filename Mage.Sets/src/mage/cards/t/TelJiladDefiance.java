@@ -28,16 +28,15 @@
 
 package mage.cards.t;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainProtectionFromTypeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author ayratn

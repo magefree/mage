@@ -27,6 +27,7 @@
  */
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -40,12 +41,10 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.watchers.common.CreaturesDiedWatcher;
-
-import java.util.UUID;
 
 /**
  *
@@ -54,7 +53,7 @@ import java.util.UUID;
 public class KuonOgreAscendant extends CardImpl {
 
     public KuonOgreAscendant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Ogre");
         this.subtype.add("Monk");
@@ -86,7 +85,6 @@ public class KuonOgreAscendant extends CardImpl {
 
 class KuonsEssenceToken extends Token {
 
-
     KuonsEssenceToken() {
         super("Kuon's Essence", "");
         addSuperType(SuperType.LEGENDARY);
@@ -97,7 +95,7 @@ class KuonsEssenceToken extends Token {
         // At the beginning of each player's upkeep, that player sacrifices a creature..
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new SacrificeEffect(new FilterCreaturePermanent(),1,"that player"),
+                new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"),
                 TargetController.ANY, false, true));
     }
 }
@@ -105,7 +103,6 @@ class KuonsEssenceToken extends Token {
 enum KuonOgreAscendantCondition implements Condition {
 
     instance;
-
 
     @Override
     public boolean apply(Game game, Ability source) {

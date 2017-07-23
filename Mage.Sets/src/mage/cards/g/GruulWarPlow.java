@@ -27,7 +27,8 @@
  */
 package mage.cards.g;
 
- import mage.MageInt;
+ import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,8 +42,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  * @author Loki

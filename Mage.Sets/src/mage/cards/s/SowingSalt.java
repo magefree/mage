@@ -28,10 +28,10 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.ExileTargetAndSearchGraveyardHandLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetNonBasicLandPermanent;
 
 /**

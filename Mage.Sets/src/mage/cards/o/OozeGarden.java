@@ -27,6 +27,7 @@
  */
 package mage.cards.o;
 
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -48,8 +49,6 @@ import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.SubTypeList;
-
-import java.util.UUID;
 
 /**
  *

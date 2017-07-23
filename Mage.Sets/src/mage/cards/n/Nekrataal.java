@@ -28,7 +28,6 @@
 package mage.cards.n;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;

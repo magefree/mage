@@ -27,14 +27,14 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +44,7 @@ public class BlightedAgent extends CardImpl {
 
     public BlightedAgent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.HUMAN, SubType.ROGUE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

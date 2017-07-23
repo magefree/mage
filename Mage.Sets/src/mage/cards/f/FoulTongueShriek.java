@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.AttackingFilterCreatureCount;
 import mage.abilities.effects.OneShotEffect;
@@ -40,8 +41,6 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *

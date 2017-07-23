@@ -27,6 +27,7 @@
  */
 package mage.cards.w;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -50,8 +51,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
-
-import java.util.UUID;
 
 /**
  *

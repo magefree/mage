@@ -29,12 +29,12 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.constants.CardType;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;

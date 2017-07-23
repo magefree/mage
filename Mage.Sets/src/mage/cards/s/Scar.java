@@ -28,10 +28,10 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 

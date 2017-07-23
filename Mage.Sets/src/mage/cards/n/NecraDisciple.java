@@ -28,8 +28,6 @@
 package mage.cards.n;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +37,7 @@ import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**

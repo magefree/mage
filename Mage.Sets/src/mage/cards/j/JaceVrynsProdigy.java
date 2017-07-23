@@ -27,6 +27,7 @@
  */
 package mage.cards.j;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Gender;
@@ -43,8 +44,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  *

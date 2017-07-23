@@ -28,13 +28,13 @@
 
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,8 +45,7 @@ public class BerserkersOfBloodRidge  extends CardImpl {
     public BerserkersOfBloodRidge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.HUMAN, SubType.BERSERKER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(new AttacksEachTurnStaticAbility());

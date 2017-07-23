@@ -28,8 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -38,6 +36,8 @@ import mage.abilities.effects.common.DevourEffect.DevourFactor;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.permanent.token.SaprolingToken;
 

@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DefenderAbility;
@@ -36,6 +35,7 @@ import mage.abilities.keyword.IslandcyclingAbility;
 import mage.abilities.keyword.PlainscyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 /**
  *

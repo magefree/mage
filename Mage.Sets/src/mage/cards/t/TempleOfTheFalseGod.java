@@ -29,7 +29,6 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.Mana;
-import mage.constants.ComparisonType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.BasicManaEffect;
@@ -37,6 +36,7 @@ import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 

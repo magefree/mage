@@ -31,10 +31,10 @@ package mage.cards.s;
 import java.util.EnumSet;
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.constants.CardType;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**

@@ -27,6 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -39,9 +41,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

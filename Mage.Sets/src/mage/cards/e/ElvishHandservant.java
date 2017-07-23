@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -37,8 +38,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-
-import java.util.UUID;
 
 /**
  *

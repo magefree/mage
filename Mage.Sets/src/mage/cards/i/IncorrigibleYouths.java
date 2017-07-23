@@ -29,8 +29,8 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.HasteAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

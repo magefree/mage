@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
@@ -36,9 +37,8 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.watchers.common.PlayerAttackedWatcher;
-
-import java.util.UUID;
 
 /**
  *
@@ -48,7 +48,7 @@ public class BellowingSaddlebrute extends CardImpl {
 
     public BellowingSaddlebrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Orc");
+        this.subtype.add(SubType.ORC, SubType.WARRIOR);
         this.subtype.add("Warrior");
 
         this.power = new MageInt(4);

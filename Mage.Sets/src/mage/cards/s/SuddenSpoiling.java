@@ -39,7 +39,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,8 +52,7 @@ import mage.target.TargetPlayer;
 public class SuddenSpoiling extends CardImpl {
 
     public SuddenSpoiling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
 
         // Split second
         this.addAbility(new SplitSecondAbility());
@@ -94,7 +93,7 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
         super.init(source, game);
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
-            for (Permanent perm: game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
+            for (Permanent perm : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
             }
         }
@@ -104,7 +103,7 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
-            for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
+            for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
                 if (affectedObjectList.contains(new MageObjectReference(permanent, game))) {
                     switch (layer) {
                         case AbilityAddingRemovingEffects_6:
@@ -112,8 +111,8 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
                             break;
                         case PTChangingEffects_7:
                             if (sublayer == SubLayer.SetPT_7b) {
-                                    permanent.getPower().setValue(0);
-                                    permanent.getToughness().setValue(2);
+                                permanent.getPower().setValue(0);
+                                permanent.getToughness().setValue(2);
                             }
                     }
                 }

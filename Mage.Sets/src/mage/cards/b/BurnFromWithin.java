@@ -27,10 +27,13 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
+import mage.abilities.effects.common.replacement.DiesReplacementEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,10 +45,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
-import mage.MageObjectReference;
-import mage.abilities.effects.common.replacement.DiesReplacementEffect;
 
 /**
  *

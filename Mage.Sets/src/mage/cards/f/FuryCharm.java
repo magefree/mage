@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
@@ -51,8 +52,6 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPermanentOrSuspendedCard;
-
-import java.util.UUID;
 
 /**
  *

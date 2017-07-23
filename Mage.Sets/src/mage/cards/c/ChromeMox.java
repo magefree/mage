@@ -27,6 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
@@ -53,9 +55,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

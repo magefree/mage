@@ -27,7 +27,9 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.Mana;
+import mage.abilities.condition.common.PlayLandCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalManaEffect;
 import mage.abilities.effects.common.BasicManaEffect;
@@ -36,9 +38,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-
-import java.util.UUID;
-import mage.abilities.condition.common.PlayLandCondition;
 import mage.watchers.common.PlayLandWatcher;
 
 /**

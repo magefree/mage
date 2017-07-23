@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -43,8 +44,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
-import java.util.UUID;
-
 /**
  * @author nantuko
  */
@@ -59,8 +58,7 @@ public class BloodlordOfVaasgoth extends CardImpl {
 
     public BloodlordOfVaasgoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.VAMPIRE, SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

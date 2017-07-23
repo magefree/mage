@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,9 +37,8 @@ import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  *
@@ -48,8 +48,7 @@ public class BloodfireMentor extends CardImpl {
 
     public BloodfireMentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Efreet");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.EFREET, SubType.SHAMAN);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);

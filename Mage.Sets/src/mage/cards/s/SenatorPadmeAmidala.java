@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -34,8 +35,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-
-import java.util.UUID;
 
 /**
  *

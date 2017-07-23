@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -49,8 +50,7 @@ public class BlightedBat extends CardImpl {
     public BlightedBat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.subtype.add("Zombie");
-        this.subtype.add("Bat");
+        this.subtype.add(SubType.ZOMBIE, SubType.BAT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

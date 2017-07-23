@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -48,14 +48,14 @@ import mage.filter.common.FilterCreaturePermanent;
 public class KjeldoranDead extends CardImpl {
 
     public KjeldoranDead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add("Skeleton");
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
         // When Kjeldoran Dead enters the battlefield, sacrifice a creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, null));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null));
         this.addAbility(ability);
         // {B}: Regenerate Kjeldoran Dead.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));

@@ -27,6 +27,7 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleEvasionAbility;
@@ -46,8 +47,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

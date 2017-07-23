@@ -27,6 +27,7 @@
  */
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -49,8 +50,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  *

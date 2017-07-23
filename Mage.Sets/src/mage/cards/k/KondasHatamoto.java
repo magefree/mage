@@ -27,6 +27,7 @@
  */
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -41,8 +42,6 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DelveAbility;
@@ -34,8 +35,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.ZombieToken;
-
-import java.util.UUID;
 
 /**
  *

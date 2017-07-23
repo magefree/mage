@@ -27,8 +27,9 @@
  */
 package mage.cards.m;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -43,9 +44,6 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

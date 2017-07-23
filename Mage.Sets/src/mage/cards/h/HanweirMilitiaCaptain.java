@@ -29,16 +29,16 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.w.WestvaleCultLeader;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.w.WestvaleCultLeader;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 

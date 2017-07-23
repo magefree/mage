@@ -42,8 +42,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -55,7 +55,7 @@ import mage.players.Player;
 public class LivingEnd extends CardImpl {
 
     public LivingEnd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "");
 
         this.color.setBlack(true);
 
@@ -111,7 +111,7 @@ class LivingEndEffect extends OneShotEffect {
                 }
             }
             // sacrifice all creatures
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
             // put exiled cards to battlefield

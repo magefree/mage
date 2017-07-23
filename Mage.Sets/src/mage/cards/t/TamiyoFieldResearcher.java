@@ -27,6 +27,9 @@
  */
 package mage.cards.t;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -54,10 +57,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

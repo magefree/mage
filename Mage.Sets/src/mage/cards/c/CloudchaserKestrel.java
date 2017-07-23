@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -43,8 +44,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
-
-import java.util.UUID;
 
 /**
  *

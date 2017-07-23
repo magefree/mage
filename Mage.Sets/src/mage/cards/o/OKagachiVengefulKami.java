@@ -34,6 +34,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -42,16 +43,15 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.watchers.common.PlayersAttackedLastTurnWatcher;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.target.TargetPermanent;
+import mage.watchers.common.PlayersAttackedLastTurnWatcher;
 
 /**
  *

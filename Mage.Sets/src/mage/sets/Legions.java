@@ -133,6 +133,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Noxious Ghoul", 77, Rarity.UNCOMMON, mage.cards.n.NoxiousGhoul.class));
         cards.add(new SetCardInfo("Patron of the Wild", 134, Rarity.COMMON, mage.cards.p.PatronOfTheWild.class));
         cards.add(new SetCardInfo("Phage the Untouchable", 78, Rarity.RARE, mage.cards.p.PhageTheUntouchable.class));
+        cards.add(new SetCardInfo("Planar Guide", 18, Rarity.RARE, mage.cards.p.PlanarGuide.class));
         cards.add(new SetCardInfo("Plated Sliver", 19, Rarity.COMMON, mage.cards.p.PlatedSliver.class));
         cards.add(new SetCardInfo("Primal Whisperer", 135, Rarity.RARE, mage.cards.p.PrimalWhisperer.class));
         cards.add(new SetCardInfo("Primoc Escapee", 49, Rarity.UNCOMMON, mage.cards.p.PrimocEscapee.class));

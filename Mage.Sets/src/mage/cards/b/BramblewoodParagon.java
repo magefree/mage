@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,8 +45,6 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author emerald000
@@ -60,8 +59,7 @@ public class BramblewoodParagon extends CardImpl {
 
     public BramblewoodParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ELF, SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

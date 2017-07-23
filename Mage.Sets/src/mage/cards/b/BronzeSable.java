@@ -27,12 +27,12 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +42,7 @@ public class BronzeSable extends CardImpl {
 
     public BronzeSable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
-        this.subtype.add("Sable");
+        this.subtype.add(SubType.SABLE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

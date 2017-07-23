@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -34,25 +35,23 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
-import mage.filter.common.FilterCreaturePermanent;
-
-import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class Caltrops extends CardImpl {
 
     public Caltrops(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a creature attacks, Caltrops deals 1 damage to it.
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to it");
-        this.addAbility(new AttacksAllTriggeredAbility(effect, false, new FilterCreaturePermanent(),
-            SetTargetPointer.PERMANENT, false));
+        this.addAbility(new AttacksAllTriggeredAbility(effect, false, StaticFilters.FILTER_PERMANENT_CREATURE,
+                SetTargetPointer.PERMANENT, false));
     }
 
     public Caltrops(final Caltrops card) {

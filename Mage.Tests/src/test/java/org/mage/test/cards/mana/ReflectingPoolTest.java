@@ -150,4 +150,39 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         Assert.assertEquals("Player should be able to create 2 red mana", "{G}{G}", options.get(0).toString());
 
     }
+
+    /**
+     * Reflecting Pool does not see Gaea's Cradle or Serra's Sanctum as
+     * producing mana
+     */
+    @Test
+    public void testWithDifferentLands() {
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+
+        // {T}: Add to your mana pool one mana of any type that a land you control could produce.
+        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
+        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        addCard(Zone.BATTLEFIELD, playerA, "Exotic Orchard", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        addCard(Zone.BATTLEFIELD, playerB, "Exotic Orchard", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        ManaOptions options = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("Player A should be able to create the ", "{G}{G}{G}", options.get(0).toString());
+        Assert.assertEquals("Player A should be able to create the ", "{G}{G}{W}", options.get(1).toString());
+        Assert.assertEquals("Player A should be able to create the ", "{G}{G}{W}", options.get(2).toString()); // ManaOption type optimzing seems not optimal yet
+        Assert.assertEquals("Player A should be able to create the ", "{G}{W}{W}", options.get(3).toString());
+        Assert.assertEquals("Player A should be able to create only 3 different mana options", 4, options.size());
+
+        options = playerB.getAvailableManaTest(currentGame);
+        Assert.assertEquals("Player B should be able to create the ", "{G}{W}", options.get(0).toString());
+        Assert.assertEquals("Player B should be able to create the ", "{W}{W}", options.get(1).toString());
+        Assert.assertEquals("Player B should be able to create only 3 different mana options", 2, options.size());
+
+    }
 }

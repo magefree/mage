@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -38,8 +39,6 @@ import mage.constants.CardType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 /**
  *

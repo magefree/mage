@@ -27,6 +27,7 @@
  */
 package mage.cards.j;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -49,8 +50,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.DamagedByWatcher;
-
-import java.util.UUID;
 
 /**
  *

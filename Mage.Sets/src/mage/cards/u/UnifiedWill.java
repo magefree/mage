@@ -28,18 +28,17 @@
 
 package mage.cards.u;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.filter.StaticFilters;
 
 /**
  *

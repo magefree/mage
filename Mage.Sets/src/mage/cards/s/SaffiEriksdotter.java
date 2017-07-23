@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -46,8 +47,6 @@ import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
  *
  * @author Plopman
@@ -55,7 +54,7 @@ import java.util.UUID;
 public class SaffiEriksdotter extends CardImpl {
 
     public SaffiEriksdotter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Scout");
@@ -100,7 +99,7 @@ class SaffiEriksdotterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         DelayedTriggeredAbility delayedAbility = new SaffiEriksdotterDelayedTriggeredAbility(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
         game.addDelayedTriggeredAbility(delayedAbility, source);
-        return false;
+        return true;
     }
 }
 

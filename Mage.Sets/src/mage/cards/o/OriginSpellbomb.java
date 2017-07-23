@@ -29,8 +29,6 @@
 package mage.cards.o;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +41,8 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.game.permanent.token.MyrToken;
 
 /**

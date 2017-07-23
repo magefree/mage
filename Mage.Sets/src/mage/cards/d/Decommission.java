@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -37,8 +38,6 @@ import mage.constants.CardType;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 import mage.watchers.common.RevoltWatcher;
-
-import java.util.UUID;
 
 /**
  *

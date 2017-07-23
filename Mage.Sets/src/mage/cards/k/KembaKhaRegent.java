@@ -27,6 +27,7 @@
  */
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
@@ -37,8 +38,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.game.permanent.token.CatToken;
-
-import java.util.UUID;
 
 /**
  *

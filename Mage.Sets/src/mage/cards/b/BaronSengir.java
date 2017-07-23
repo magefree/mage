@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
@@ -47,8 +48,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author fireshoes
@@ -65,7 +64,7 @@ public class BaronSengir extends CardImpl {
     public BaronSengir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

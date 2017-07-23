@@ -27,6 +27,7 @@
  */
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -49,8 +50,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
  *
  * @author emerald000
@@ -60,7 +59,7 @@ public class KaronaFalseGod extends CardImpl {
     public KaronaFalseGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

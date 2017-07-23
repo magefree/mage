@@ -28,6 +28,7 @@
 
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,8 +43,6 @@ import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  *

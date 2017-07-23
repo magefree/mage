@@ -45,9 +45,9 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.command.emblems.KothOfTheHammerEmblem;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.command.emblems.KothOfTheHammerEmblem;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 

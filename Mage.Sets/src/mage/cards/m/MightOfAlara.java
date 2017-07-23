@@ -28,12 +28,11 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 

@@ -28,13 +28,13 @@
 
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +44,7 @@ public class BullHippo extends CardImpl {
 
     public BullHippo (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Hippo");
+        this.subtype.add(SubType.HIPPO);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

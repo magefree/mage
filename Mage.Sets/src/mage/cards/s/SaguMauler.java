@@ -29,10 +29,10 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

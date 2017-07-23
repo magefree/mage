@@ -27,6 +27,10 @@
  */
 package mage.server;
 
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
 import mage.constants.ManaType;
 import mage.constants.TableState;
@@ -50,11 +54,6 @@ import mage.server.util.ServerMessagesUtil;
 import mage.server.util.SystemUtil;
 import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
-
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -242,8 +241,8 @@ public class User {
 
     public void fireCallback(final ClientCallback call) {
         if (isConnected()) {
-            SessionManager.instance.getSession(sessionId).ifPresent(session ->
-                session.fireCallback(call)
+            SessionManager.instance.getSession(sessionId).ifPresent(session
+                    -> session.fireCallback(call)
             );
         }
     }
@@ -378,11 +377,10 @@ public class User {
         }
         for (Entry<UUID, Deck> entry : sideboarding.entrySet()) {
             Optional<TableController> controller = TableManager.instance.getController(entry.getKey());
-            if(controller.isPresent()) {
+            if (controller.isPresent()) {
                 ccSideboard(entry.getValue(), entry.getKey(), controller.get().getRemainingTime(), controller.get().getOptions().isLimited());
-            }
-            else{
-                logger.error("sideboarding id not found : "+entry.getKey());
+            } else {
+                logger.error("sideboarding id not found : " + entry.getKey());
             }
         }
         ServerMessagesUtil.instance.incReconnects();
@@ -458,7 +456,8 @@ public class User {
         }
         gameSessions.clear();
         logger.trace("REMOVE " + userName + " watched Games " + watchedGames.size());
-        for (UUID gameId : watchedGames) {
+        for (Iterator<UUID> it = watchedGames.iterator(); it.hasNext();) { // Iterator to prevent ConcurrentModificationException
+            UUID gameId = it.next();
             GameManager.instance.stopWatching(gameId, userId);
         }
         watchedGames.clear();
@@ -789,10 +788,9 @@ public class User {
                 number++;
             } else {
                 Optional<TableController> tableController = TableManager.instance.getController(table.getId());
-                if(!tableController.isPresent()){
-                    logger.error("table not found : "+table.getId());
-                }
-                else if (tableController.get().isUserStillActive(userId)) {
+                if (!tableController.isPresent()) {
+                    logger.error("table not found : " + table.getId());
+                } else if (tableController.get().isUserStillActive(userId)) {
                     number++;
                 }
             }

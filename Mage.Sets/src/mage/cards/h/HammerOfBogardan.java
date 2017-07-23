@@ -28,7 +28,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;

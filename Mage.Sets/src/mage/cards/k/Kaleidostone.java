@@ -28,8 +28,6 @@
 package mage.cards.k;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,6 +38,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *

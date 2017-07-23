@@ -27,6 +27,8 @@
  */
 package mage.cards.b;
 
+import java.util.HashMap;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -34,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
@@ -41,9 +44,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
-
-import java.util.HashMap;
-import java.util.UUID;
 
 /**
  *
@@ -54,8 +54,7 @@ public class BorderlandExplorer extends CardImpl {
     public BorderlandExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.ELF, SubType.SCOUT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

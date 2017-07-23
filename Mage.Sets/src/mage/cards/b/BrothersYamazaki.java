@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -46,8 +47,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -63,8 +62,7 @@ public class BrothersYamazaki extends CardImpl {
     public BrothersYamazaki(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Samurai");
+        this.subtype.add(SubType.HUMAN, SubType.SAMURAI);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

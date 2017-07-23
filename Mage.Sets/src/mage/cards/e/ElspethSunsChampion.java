@@ -27,7 +27,7 @@
  */
 package mage.cards.e;
 
-import mage.constants.ComparisonType;
+import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -36,12 +36,11 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.command.emblems.ElspethSunsChampionEmblem;
 import mage.game.permanent.token.SoldierToken;
-
-import java.util.UUID;
 
 /**
  *

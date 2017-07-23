@@ -27,6 +27,7 @@
  */
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -48,8 +49,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SpiderToken;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *

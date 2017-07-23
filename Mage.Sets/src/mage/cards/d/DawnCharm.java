@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
@@ -43,8 +44,6 @@ import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

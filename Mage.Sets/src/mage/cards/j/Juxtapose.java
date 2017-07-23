@@ -49,8 +49,8 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -64,13 +64,12 @@ import mage.target.TargetPlayer;
 public class Juxtapose extends CardImpl {
 
     public Juxtapose(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // You and target player exchange control of the creature you each control with the highest converted mana cost. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them.
-        this.getSpellAbility().addEffect(new JuxtaposeEffect(new FilterCreaturePermanent(), "You and target player exchange control of the creature you each control with the highest converted mana cost."));
+        this.getSpellAbility().addEffect(new JuxtaposeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, "You and target player exchange control of the creature you each control with the highest converted mana cost."));
         this.getSpellAbility().addEffect(new JuxtaposeEffect(new FilterArtifactPermanent(), "Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them."));
-        this.getSpellAbility().addTarget(new TargetPlayer() );
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public Juxtapose(final Juxtapose card) {
@@ -87,19 +86,19 @@ public class Juxtapose extends CardImpl {
 class JuxtaposeEffect extends ContinuousEffectImpl {
 
     private final FilterPermanent filter;
-    
+
     private final Map<UUID, Integer> zoneChangeCounter;
     private final Map<UUID, UUID> lockedControllers;
-    
+
     public JuxtaposeEffect(FilterPermanent filter, String text) {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.staticText = text;
         this.filter = filter;
-        
+
         this.zoneChangeCounter = new HashMap<>();
         this.lockedControllers = new HashMap<>();
     }
-    
+
     public JuxtaposeEffect(final JuxtaposeEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
@@ -116,8 +115,8 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         Player you = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject =game.getCard(source.getSourceId());
-        
+        MageObject sourceObject = game.getCard(source.getSourceId());
+
         if (you != null && targetPlayer != null) {
             Permanent permanent1 = chooseOnePermanentsWithTheHighestCMC(game, you, filter);
             Permanent permanent2 = chooseOnePermanentsWithTheHighestCMC(game, targetPlayer, filter);
@@ -133,7 +132,7 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
                 this.zoneChangeCounter.put(permanent1.getId(), permanent1.getZoneChangeCounter(game));
                 this.lockedControllers.put(permanent2.getId(), permanent1.getControllerId());
                 this.zoneChangeCounter.put(permanent2.getId(), permanent2.getZoneChangeCounter(game));
-                
+
                 permanent1.changeControllerId(targetPlayer.getId(), game);
                 permanent2.changeControllerId(you.getId(), game);
                 game.informPlayers(new StringBuilder(sourceObject != null ? sourceObject.getLogName() : "").append(": ").append(you.getLogName())
@@ -169,12 +168,12 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
         }
         return true;
     }
-    
+
     private Permanent chooseOnePermanentsWithTheHighestCMC(Game game, Player player, FilterPermanent filter) {
         List<Permanent> permanents = getPermanentsWithTheHighestCMC(game, player.getId(), filter);
         return chooseOnePermanent(game, player, permanents);
     }
-    
+
     private List<Permanent> getPermanentsWithTheHighestCMC(Game game, UUID playerId, FilterPermanent filter) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
         int highestCMC = -1;
@@ -209,5 +208,5 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
         }
         return permanent;
     }
-    
+
 }

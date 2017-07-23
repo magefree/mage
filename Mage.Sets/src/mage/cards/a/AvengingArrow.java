@@ -27,20 +27,19 @@
  */
 package mage.cards.a;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.watchers.common.SourceDidDamageWatcher;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -49,8 +48,7 @@ import java.util.UUID;
 public class AvengingArrow extends CardImpl {
 
     public AvengingArrow(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
         // Destroy target creature that dealt damage this turn.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -71,7 +69,7 @@ public class AvengingArrow extends CardImpl {
 class AvengingArrowTarget extends TargetPermanent {
 
     public AvengingArrowTarget() {
-        super(1, 1, new FilterCreaturePermanent(), false);
+        super(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false);
         targetName = "creature that dealt damage this turn";
     }
 

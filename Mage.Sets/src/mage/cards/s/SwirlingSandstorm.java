@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;

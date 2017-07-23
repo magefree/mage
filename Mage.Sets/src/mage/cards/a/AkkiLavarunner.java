@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -19,8 +20,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  * @author Loki

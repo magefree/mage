@@ -27,6 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -50,9 +52,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetDiscard;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

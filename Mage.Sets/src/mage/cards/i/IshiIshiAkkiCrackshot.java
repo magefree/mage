@@ -27,6 +27,7 @@
  */
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -35,8 +36,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.filter.predicate.permanent.ControllerPredicate;
-
-import java.util.UUID;
 
 /**
  *

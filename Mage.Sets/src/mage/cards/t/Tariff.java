@@ -32,8 +32,6 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCostImpl;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -51,7 +49,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.TargetCard;
-import mage.util.CardUtil;
 
 /**
  *

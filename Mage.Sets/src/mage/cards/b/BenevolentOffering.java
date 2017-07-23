@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -36,15 +37,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.SpiritWhiteToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -53,8 +52,7 @@ import java.util.UUID;
 public class BenevolentOffering extends CardImpl {
 
     public BenevolentOffering(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
         // Choose an opponent. You and that player each create three 1/1 white Spirit creature tokens with flying.
         this.getSpellAbility().addEffect(new BenevolentOfferingEffect1());
@@ -132,9 +130,9 @@ class BenevolentOfferingEffect2 extends OneShotEffect {
             target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), game);
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {
-                int count = game.getBattlefield().countAll(new FilterCreaturePermanent(), controller.getId(), game) * 2;
+                int count = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game) * 2;
                 controller.gainLife(count, game);
-                count = game.getBattlefield().countAll(new FilterCreaturePermanent(), opponent.getId(), game) * 2;
+                count = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, opponent.getId(), game) * 2;
                 opponent.gainLife(count, game);
                 return true;
             }

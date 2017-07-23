@@ -1,5 +1,6 @@
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -7,8 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 public class RazakethsRite extends CardImpl {
 

@@ -27,18 +27,17 @@
  */
 package mage.cards.s;
 
-import mage.constants.CardType;
+import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
-import mage.abilities.effects.Effect;
 
 /**
  * @author nantuko

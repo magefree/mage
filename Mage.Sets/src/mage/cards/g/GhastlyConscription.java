@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.*;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
@@ -45,8 +46,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-
-import java.util.*;
 
 /**
  *

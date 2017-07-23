@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -36,8 +37,6 @@ import mage.constants.CardType;
 import mage.constants.TimingRule;
 import mage.target.Target;
 import mage.target.common.TargetArtifactPermanent;
-
-import java.util.UUID;
 
 /**
  *

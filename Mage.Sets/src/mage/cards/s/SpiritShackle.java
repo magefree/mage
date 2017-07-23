@@ -28,19 +28,18 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
-import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
-import mage.counters.BoostCounter;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
+import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.counters.BoostCounter;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

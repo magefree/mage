@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.BattalionAbility;
@@ -36,8 +37,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-
-import java.util.UUID;
 
 /**
  *

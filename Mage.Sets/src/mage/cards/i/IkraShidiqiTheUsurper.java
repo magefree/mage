@@ -27,6 +27,7 @@
  */
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -42,8 +43,6 @@ import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *

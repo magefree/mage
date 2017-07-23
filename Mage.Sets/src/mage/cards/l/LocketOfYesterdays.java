@@ -28,8 +28,6 @@
 package mage.cards.l;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -39,6 +37,7 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.util.CardUtil;
 

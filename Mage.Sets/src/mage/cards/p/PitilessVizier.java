@@ -34,7 +34,6 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.i.Indestructibility;
 import mage.constants.CardType;
 import mage.constants.Duration;
 

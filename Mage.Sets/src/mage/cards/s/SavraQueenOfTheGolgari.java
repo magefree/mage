@@ -27,6 +27,9 @@
  */
 package mage.cards.s;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -47,10 +50,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

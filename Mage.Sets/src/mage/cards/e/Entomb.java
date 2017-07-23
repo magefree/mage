@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.CardImpl;
@@ -38,8 +39,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 /**
  *

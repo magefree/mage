@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,10 +39,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  *
@@ -51,7 +51,7 @@ public class BrassGnat extends CardImpl {
 
     public BrassGnat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

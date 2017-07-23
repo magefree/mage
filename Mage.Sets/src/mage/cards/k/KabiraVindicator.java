@@ -27,6 +27,7 @@
  */
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -41,9 +42,7 @@ import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-
-import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -52,7 +51,7 @@ import java.util.UUID;
 public class KabiraVindicator extends LevelerCard {
 
     public KabiraVindicator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 
@@ -63,10 +62,10 @@ public class KabiraVindicator extends LevelerCard {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{W}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
-        abilities1.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true)));
+        abilities1.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, true)));
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
-        abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true)));
+        abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, true)));
 
         this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(2, 4, abilities1, 3, 6),

@@ -27,8 +27,8 @@
  */
 package mage.cards.l;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.Cost;
@@ -44,11 +44,9 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.game.command.emblems.LilianaDefiantNecromancerEmblem;
 import mage.game.Game;
+import mage.game.command.emblems.LilianaDefiantNecromancerEmblem;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 /**
  *

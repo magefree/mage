@@ -27,6 +27,8 @@
  */
 package mage.cards.a;
 
+import java.util.Objects;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -46,9 +48,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
-
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  *

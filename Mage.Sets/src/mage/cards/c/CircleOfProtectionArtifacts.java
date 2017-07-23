@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -38,8 +39,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-
-import java.util.UUID;
 
 /**
  *

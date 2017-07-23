@@ -27,6 +27,7 @@
  */
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -37,8 +38,6 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
-
-import java.util.UUID;
 
 /**
  *

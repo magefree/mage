@@ -29,10 +29,10 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.EmbalmAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

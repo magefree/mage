@@ -27,14 +27,13 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInOpponentsGraveyard;
-
-import java.util.UUID;
 
 /**
  *

@@ -305,6 +305,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Wail of the Nim", 81, Rarity.COMMON, mage.cards.w.WailOfTheNim.class));
         cards.add(new SetCardInfo("Wall of Blood", 82, Rarity.UNCOMMON, mage.cards.w.WallOfBlood.class));
         cards.add(new SetCardInfo("Wanderguard Sentry", 56, Rarity.COMMON, mage.cards.w.WanderguardSentry.class));
+        cards.add(new SetCardInfo("War Elemental", 112, Rarity.RARE, mage.cards.w.WarElemental.class));
         cards.add(new SetCardInfo("Welding Jar", 274, Rarity.COMMON, mage.cards.w.WeldingJar.class));
         cards.add(new SetCardInfo("Wizard Replica", 275, Rarity.COMMON, mage.cards.w.WizardReplica.class));
         cards.add(new SetCardInfo("Woebearer", 83, Rarity.UNCOMMON, mage.cards.w.Woebearer.class));

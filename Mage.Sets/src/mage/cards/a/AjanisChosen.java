@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -40,8 +41,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.CatToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *

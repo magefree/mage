@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -42,8 +43,6 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.token.SaprolingToken;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *

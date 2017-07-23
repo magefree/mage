@@ -27,6 +27,7 @@
  */
 package mage.cards.j;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,8 +40,6 @@ import mage.constants.Duration;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  *

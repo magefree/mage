@@ -28,14 +28,14 @@
 
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,7 +45,7 @@ public class Blightwidow extends CardImpl {
 
     public Blightwidow (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Spider");
+        this.subtype.add(SubType.SPIDER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

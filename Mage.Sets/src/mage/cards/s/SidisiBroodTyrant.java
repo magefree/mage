@@ -27,6 +27,8 @@
  */
 package mage.cards.s;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
@@ -42,9 +44,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.token.ZombieToken;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

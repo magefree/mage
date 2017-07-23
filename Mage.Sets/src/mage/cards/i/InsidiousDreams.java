@@ -30,7 +30,6 @@ package mage.cards.i;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;

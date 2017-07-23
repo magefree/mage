@@ -27,8 +27,8 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -42,8 +42,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * 10/4/2004 	The mana cost of the creatures being cast is still the stated cost on the card, 

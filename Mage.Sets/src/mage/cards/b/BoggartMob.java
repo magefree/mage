@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -39,8 +40,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GoblinRogueToken;
-
-import java.util.UUID;
 
 /**
  *
@@ -56,8 +55,7 @@ public class BoggartMob extends CardImpl {
 
     public BoggartMob(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GOBLIN, SubType.WARRIOR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

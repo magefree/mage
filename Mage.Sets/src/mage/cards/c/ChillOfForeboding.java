@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -39,8 +40,6 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *

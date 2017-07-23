@@ -27,6 +27,7 @@
  */
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -42,8 +43,6 @@ import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.permanent.token.ElephantToken;
-
-import java.util.UUID;
 
 /**
  * @author North, noxx

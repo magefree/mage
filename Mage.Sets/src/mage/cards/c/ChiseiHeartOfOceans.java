@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.RemoveCounterCost;
@@ -42,8 +43,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  *

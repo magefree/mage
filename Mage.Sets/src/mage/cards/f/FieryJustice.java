@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
@@ -36,8 +37,6 @@ import mage.constants.CardType;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.SecondTargetPointer;
-
-import java.util.UUID;
 
 /**
  *

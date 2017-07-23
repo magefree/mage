@@ -27,6 +27,7 @@
  */
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
@@ -36,8 +37,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *

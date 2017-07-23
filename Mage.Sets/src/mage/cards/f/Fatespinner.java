@@ -27,6 +27,8 @@
  */
 package mage.cards.f;
 
+import java.util.HashSet;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -41,9 +43,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-
-import java.util.HashSet;
-import java.util.UUID;
 
 /**
  *

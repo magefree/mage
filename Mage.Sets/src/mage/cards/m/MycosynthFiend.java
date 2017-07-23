@@ -28,16 +28,16 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.OpponentsPoisonCountersCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.abilities.dynamicvalue.common.OpponentsPoisonCountersCount;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *

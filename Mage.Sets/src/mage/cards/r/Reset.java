@@ -28,7 +28,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.common.AfterUpkeepStepCondtion;

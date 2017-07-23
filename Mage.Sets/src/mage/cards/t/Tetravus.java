@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.StaticAbility;
@@ -51,8 +52,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.TetraviteToken;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  *

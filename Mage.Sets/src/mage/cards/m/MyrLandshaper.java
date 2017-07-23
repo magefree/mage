@@ -38,8 +38,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetLandPermanent;
 import mage.target.Target;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *

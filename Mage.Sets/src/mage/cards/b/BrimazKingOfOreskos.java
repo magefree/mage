@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -38,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -45,8 +47,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.CatSoldierCreatureToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -57,8 +57,7 @@ public class BrimazKingOfOreskos extends CardImpl {
     public BrimazKingOfOreskos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Cat");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.CAT, SubType.SOLDIER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

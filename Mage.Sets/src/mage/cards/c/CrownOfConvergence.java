@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,13 +44,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author jeffwadsworth
@@ -89,7 +88,7 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
     private static final String effectText = "creatures you control that share a color with that card get +1/+1";
 
     CrownOfConvergenceColorBoostEffect() {
-        super(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+        super(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false);
         staticText = effectText;
     }
 

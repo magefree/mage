@@ -27,7 +27,7 @@
  */
 package mage.cards.w;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -40,9 +40,8 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterAttackingCreature;
-
-import java.util.UUID;
 
 /**
  * @author nantuko

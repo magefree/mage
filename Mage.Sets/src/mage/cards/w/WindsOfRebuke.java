@@ -28,7 +28,6 @@
 package mage.cards.w;
 
 import java.util.UUID;
-
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;

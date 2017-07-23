@@ -28,7 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;

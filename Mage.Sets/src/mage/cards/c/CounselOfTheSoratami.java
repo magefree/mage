@@ -28,12 +28,11 @@
 
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
 
 /**
  *

@@ -28,7 +28,6 @@
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.game.events.GameEvent;
 

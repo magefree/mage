@@ -27,6 +27,9 @@
  */
 package mage.cards.s;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
@@ -38,10 +41,6 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

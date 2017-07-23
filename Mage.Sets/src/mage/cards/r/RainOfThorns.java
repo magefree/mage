@@ -27,16 +27,15 @@
  */
 package mage.cards.r;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 import mage.target.common.TargetLandPermanent;
-
-import java.util.UUID;
 
 /**
  *

@@ -28,13 +28,13 @@
 package mage.cards.i;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

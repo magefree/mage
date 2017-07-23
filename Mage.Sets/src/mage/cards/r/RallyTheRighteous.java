@@ -40,7 +40,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -91,7 +91,7 @@ class RallyTheRighteousUntapEffect extends OneShotEffect {
         if (target != null) {
             ObjectColor color = target.getColor(game);
             target.untap(game);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                 if (permanent.getColor(game).shares(color) && !permanent.getId().equals(target.getId())) {
                     permanent.untap(game);
                 }
@@ -120,7 +120,7 @@ class RallyTheRighteousBoostEffect extends ContinuousEffectImpl {
         if (target != null) {
             affectedObjectList.add(new MageObjectReference(target, game));
             ObjectColor color = target.getColor(game);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                 if (!permanent.getId().equals(target.getId()) && permanent.getColor(game).shares(color)) {
                     affectedObjectList.add(new MageObjectReference(permanent, game));
                 }

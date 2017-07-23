@@ -27,8 +27,8 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -39,11 +39,10 @@ import mage.abilities.keyword.IngestAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-
-import java.util.UUID;
 
 /**
  *

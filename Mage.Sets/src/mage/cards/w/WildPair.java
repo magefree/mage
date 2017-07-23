@@ -27,9 +27,9 @@
  */
 package mage.cards.w;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -48,8 +48,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.common.CastFromHandWatcher;
-
-import java.util.UUID;
 
 /**
  *

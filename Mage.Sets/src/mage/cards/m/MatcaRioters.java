@@ -28,7 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;

@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -41,8 +42,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *

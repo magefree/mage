@@ -28,9 +28,6 @@
 package mage.cards.i;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -39,6 +36,8 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

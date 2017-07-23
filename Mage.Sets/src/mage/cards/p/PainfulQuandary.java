@@ -27,6 +27,7 @@
  */
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -42,8 +43,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-
-import java.util.UUID;
 
 /**
  *

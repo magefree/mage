@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -39,8 +40,6 @@ import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.Watcher;
 import mage.watchers.common.MorbidWatcher;
-
-import java.util.UUID;
 
 /**
  * @author nantuko

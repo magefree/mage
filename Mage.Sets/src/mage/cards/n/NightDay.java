@@ -42,7 +42,7 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.SubLayer;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
@@ -99,7 +99,7 @@ class DayEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget(), game);
+            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getFirstTarget(), game);
             for (Permanent creature : creatures) {
                 affectedObjectList.add(new MageObjectReference(creature, game));
             }

@@ -28,6 +28,7 @@
 
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -35,9 +36,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.DragonToken;
-
-import java.util.UUID;
 
 /**
  *
@@ -49,7 +49,7 @@ public class BroodmateDragon extends CardImpl {
 
     public BroodmateDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}{G}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
 
 
         this.power = new MageInt(4);

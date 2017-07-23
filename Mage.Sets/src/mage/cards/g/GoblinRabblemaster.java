@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -46,8 +47,6 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.GoblinTokenWithHaste;
 import mage.watchers.common.AttackedThisTurnWatcher;
-
-import java.util.UUID;
 
 /**
  *

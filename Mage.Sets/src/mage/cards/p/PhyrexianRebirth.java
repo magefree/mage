@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.PhyrexianRebirthHorrorToken;
@@ -75,7 +75,7 @@ public class PhyrexianRebirth extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             int count = 0;
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 count += permanent.destroy(source.getSourceId(), game, false) ? 1 : 0;
             }
             PhyrexianRebirthHorrorToken horrorToken = new PhyrexianRebirthHorrorToken();

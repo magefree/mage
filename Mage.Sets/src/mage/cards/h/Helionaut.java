@@ -28,7 +28,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
@@ -37,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 /**
  *

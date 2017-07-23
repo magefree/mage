@@ -27,12 +27,12 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +43,7 @@ public class BastionEnforcer extends CardImpl {
     public BastionEnforcer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         
-        this.subtype.add("Dwarf");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.DWARF, SubType.SOLDIER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
     }

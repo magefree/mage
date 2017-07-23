@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -43,8 +44,6 @@ import mage.constants.TimingRule;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.common.TargetCreatureOrPlayerAmount;
-
-import java.util.UUID;
 
 /**
  *

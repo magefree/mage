@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
@@ -38,8 +39,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  *

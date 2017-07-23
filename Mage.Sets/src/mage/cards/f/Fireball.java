@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -39,8 +40,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
-import java.util.*;
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -48,7 +47,7 @@ import java.util.*;
 public class Fireball extends CardImpl {
 
     public Fireball(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
         // Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.
         // Fireball costs 1 more to cast for each target beyond the first.
@@ -58,7 +57,7 @@ public class Fireball extends CardImpl {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        int numTargets = ability.getTargets().get(0).getTargets().size();
+        int numTargets = ability.getTargets().isEmpty() ? 0 : ability.getTargets().get(0).getTargets().size();
         if (numTargets > 1) {
             ability.getManaCostsToPay().add(new GenericManaCost(numTargets - 1));
         }

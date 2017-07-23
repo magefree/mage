@@ -27,19 +27,18 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-
-import java.util.UUID;
 
 /**
  *
@@ -55,9 +54,7 @@ public class BarbarianOutcast extends CardImpl {
 
     public BarbarianOutcast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Barbarian");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.HUMAN, SubType.BARBARIAN, SubType.BEAST);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

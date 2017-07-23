@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -42,8 +43,6 @@ import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.RevoltWatcher;
-
-import java.util.UUID;
 
 /**
  *

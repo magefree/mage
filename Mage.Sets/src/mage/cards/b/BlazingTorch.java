@@ -27,6 +27,8 @@
  */
 package mage.cards.b;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,9 +47,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

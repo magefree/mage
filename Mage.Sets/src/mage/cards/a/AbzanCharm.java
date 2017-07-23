@@ -27,7 +27,7 @@
  */
 package mage.cards.a;
 
-import mage.constants.ComparisonType;
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -36,13 +36,12 @@ import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetCreaturePermanentAmount;
-
-import java.util.UUID;
 
 /**
  *

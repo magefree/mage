@@ -27,12 +27,13 @@
  */
 package mage.cards.v;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -43,8 +44,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  *

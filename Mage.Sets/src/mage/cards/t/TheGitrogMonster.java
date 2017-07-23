@@ -27,6 +27,8 @@
  */
 package mage.cards.t;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -45,9 +47,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

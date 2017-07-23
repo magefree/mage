@@ -27,6 +27,9 @@
  */
 package mage.cards.c;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -49,10 +52,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

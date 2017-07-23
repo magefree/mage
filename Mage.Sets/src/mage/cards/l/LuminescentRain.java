@@ -27,6 +27,8 @@
  */
 package mage.cards.l;
 
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
@@ -42,9 +44,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  *

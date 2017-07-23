@@ -27,8 +27,8 @@
  */
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.constants.*;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,9 +40,8 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
-
-import java.util.UUID;
 
 /**
  *

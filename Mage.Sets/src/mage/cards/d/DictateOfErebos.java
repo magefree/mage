@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -37,8 +38,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-
-import java.util.UUID;
 
 /**
  *

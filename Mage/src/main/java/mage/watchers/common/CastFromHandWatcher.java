@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -43,7 +42,9 @@ public class CastFromHandWatcher extends Watcher {
                 step = game.getTurn().getStep();
             }
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            spellsCastFromHand.add(spell.getSourceId());
+            if (spell != null) {
+                spellsCastFromHand.add(spell.getSourceId());
+            }
         }
     }
 

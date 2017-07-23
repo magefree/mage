@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -41,8 +42,6 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

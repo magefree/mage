@@ -28,9 +28,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -42,6 +39,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;

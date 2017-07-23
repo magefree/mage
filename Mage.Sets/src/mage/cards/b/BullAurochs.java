@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -41,8 +42,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-
-import java.util.UUID;
 
 /**
  *
@@ -59,7 +58,7 @@ public class BullAurochs extends CardImpl {
 
     public BullAurochs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Aurochs");
+        this.subtype.add(SubType.AUROCHS);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

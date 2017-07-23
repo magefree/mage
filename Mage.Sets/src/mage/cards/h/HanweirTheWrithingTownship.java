@@ -27,6 +27,7 @@
  */
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -37,8 +38,6 @@ import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.game.permanent.token.EldraziHorrorToken;
-
-import java.util.UUID;
 
 /**
  *

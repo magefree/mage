@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCounteredControllerTriggeredAbility;
@@ -35,13 +36,12 @@ import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-
-import java.util.UUID;
 
 /**
  *
@@ -62,7 +62,7 @@ public class BaralChiefOfCompliance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
        addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
+        this.subtype.add(SubType.HUMAN, SubType.WIZARD);
         this.subtype.add("Wizard");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

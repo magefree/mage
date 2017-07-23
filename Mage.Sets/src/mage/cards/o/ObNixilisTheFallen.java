@@ -27,6 +27,7 @@
  */
 package mage.cards.o;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -38,8 +39,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *

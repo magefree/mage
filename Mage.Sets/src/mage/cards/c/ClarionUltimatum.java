@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -42,8 +43,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.*;
 
 /**
  *

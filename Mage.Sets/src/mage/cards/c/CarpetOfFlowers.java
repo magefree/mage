@@ -27,6 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.LinkedHashSet;
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -47,9 +49,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-
-import java.util.LinkedHashSet;
-import java.util.UUID;
 
 /**
  *

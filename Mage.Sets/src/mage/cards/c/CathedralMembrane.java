@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
@@ -39,8 +40,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
-
-import java.util.*;
 
 /**
  * @author BetaSteward

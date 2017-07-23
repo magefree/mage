@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -37,8 +38,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.LandfallWatcher;
-
-import java.util.UUID;
 
 /**
  *

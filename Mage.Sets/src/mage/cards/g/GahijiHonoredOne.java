@@ -27,6 +27,8 @@
  */
 package mage.cards.g;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -43,9 +45,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

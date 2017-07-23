@@ -28,12 +28,12 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 /**
  * @author LevelX2

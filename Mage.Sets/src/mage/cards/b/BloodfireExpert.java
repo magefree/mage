@@ -27,13 +27,13 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +43,7 @@ public class BloodfireExpert extends CardImpl {
 
     public BloodfireExpert(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Efreet");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.EFREET, SubType.MONK);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

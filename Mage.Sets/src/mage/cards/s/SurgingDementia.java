@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.RippleAbility;
 import mage.cards.CardImpl;

@@ -28,6 +28,7 @@
 
 package mage.cards.j;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,8 +43,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *

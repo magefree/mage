@@ -30,7 +30,6 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -38,22 +37,15 @@ import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.game.command.Emblem;
-import mage.game.permanent.token.EtheriumCellToken;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
-
 import mage.game.command.emblems.TezzeretTheSchemerEmblem;
+import mage.game.permanent.token.EtheriumCellToken;
+import mage.target.common.TargetCreaturePermanent;
 /**
  * @author JRHerlehy
  */

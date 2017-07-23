@@ -28,16 +28,16 @@
 
 package mage.cards.d;
 
+import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.CycleTriggeredAbility;
-import mage.abilities.keyword.CyclingAbility;
 
 
 /**

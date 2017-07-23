@@ -27,6 +27,7 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
@@ -35,8 +36,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetPlayer;
 import mage.watchers.common.LandfallWatcher;
-
-import java.util.UUID;
 
 /**
  *

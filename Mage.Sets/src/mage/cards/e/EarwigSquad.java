@@ -27,6 +27,8 @@
  */
 package mage.cards.e;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -45,9 +47,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

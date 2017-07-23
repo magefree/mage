@@ -28,12 +28,11 @@
 package mage.cards.h;
 
 import java.util.UUID;
-
-import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
-import mage.constants.CardType;
 import mage.ObjectColor;
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 

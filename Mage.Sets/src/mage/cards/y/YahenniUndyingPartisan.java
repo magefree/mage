@@ -27,6 +27,7 @@
  */
 package mage.cards.y;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,11 +43,9 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
-import mage.filter.StaticFilters;
 
 /**
  *

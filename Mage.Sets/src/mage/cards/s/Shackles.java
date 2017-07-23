@@ -28,17 +28,16 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;

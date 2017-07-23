@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
@@ -12,8 +13,6 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
-import java.util.UUID;
-
 public class BullElephant extends CardImpl {
 
     private static FilterControlledLandPermanent controlledForest = new FilterControlledLandPermanent("two forests you control");
@@ -25,7 +24,7 @@ public class BullElephant extends CardImpl {
 
     public BullElephant(UUID cardId, CardSetInfo cardSetInfo) {
         super(cardId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.subtype.add("Elephant");
+        this.subtype.add(SubType.ELEPHANT);
         power = new MageInt(4);
         toughness = new MageInt(4);
 //When Bull Elephant enters the battlefield, sacrifice it unless you return two Forests you control to their owner's hand.

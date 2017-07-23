@@ -27,9 +27,9 @@
  */
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.ExploitCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ExploitAbility;
@@ -44,8 +44,6 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2

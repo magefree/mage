@@ -27,6 +27,8 @@
  */
 package mage.cards.l;
 
+import java.util.Objects;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -40,9 +42,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.watchers.common.PlayerLostLifeWatcher;
-
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  *

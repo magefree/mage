@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -49,8 +50,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.watchers.common.CastFromHandWatcher;
-
-import java.util.UUID;
 
 /**
  * @author LevelX

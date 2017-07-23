@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -36,8 +37,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledLandPermanent;
-
-import java.util.UUID;
 
 /**
  *

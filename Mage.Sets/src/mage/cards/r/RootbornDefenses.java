@@ -28,14 +28,14 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**

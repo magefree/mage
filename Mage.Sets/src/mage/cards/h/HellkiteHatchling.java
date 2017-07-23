@@ -27,8 +27,8 @@
  */
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DevouredCreaturesCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -40,9 +40,8 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  *

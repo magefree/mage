@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
@@ -36,8 +37,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 /**
  *

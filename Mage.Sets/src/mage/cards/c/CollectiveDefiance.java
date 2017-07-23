@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -48,8 +49,6 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author fireshoes
@@ -65,7 +64,7 @@ public class CollectiveDefiance extends CardImpl {
     }
 
     public CollectiveDefiance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
         // Escalate {1}
         this.addAbility(new EscalateAbility(new GenericManaCost(1)));
@@ -124,14 +123,14 @@ class CollectiveDefianceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-            if (targetPlayer != null) {
-                int count = targetPlayer.getHand().size();
-                for (Card card : targetPlayer.getHand().getCards(game)) {
-                    targetPlayer.discard(card, source, game);
-                }
-                targetPlayer.drawCards(count, game);
-                return false;
+        if (targetPlayer != null) {
+            int count = targetPlayer.getHand().size();
+            for (Card card : targetPlayer.getHand().getCards(game)) {
+                targetPlayer.discard(card, source, game);
             }
-        return true;
+            targetPlayer.drawCards(count, game);
+            return true;
+        }
+        return false;
     }
 }

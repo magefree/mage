@@ -28,8 +28,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedHasSubtypeCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -38,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;

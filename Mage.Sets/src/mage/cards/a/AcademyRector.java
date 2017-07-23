@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
@@ -38,8 +39,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterEnchantmentCard;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 /**
  *

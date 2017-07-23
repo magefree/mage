@@ -27,8 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -37,12 +37,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

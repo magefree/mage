@@ -28,6 +28,7 @@
 
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -46,8 +47,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -63,8 +62,7 @@ public class BloodSpeaker extends CardImpl {
 
     public BloodSpeaker (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.OGRE, SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

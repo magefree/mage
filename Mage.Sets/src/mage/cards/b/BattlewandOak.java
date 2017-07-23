@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -39,8 +40,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-
-import java.util.UUID;
 
 /**
  *
@@ -57,8 +56,7 @@ public class BattlewandOak extends CardImpl {
 
     public BattlewandOak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.TREEFOLK, SubType.WARRIOR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

@@ -30,10 +30,10 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.RippleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.abilities.keyword.RippleAbility;
 
 /**
  *

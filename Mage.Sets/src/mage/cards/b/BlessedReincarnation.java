@@ -27,6 +27,8 @@
  */
 package mage.cards.b;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -43,9 +45,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

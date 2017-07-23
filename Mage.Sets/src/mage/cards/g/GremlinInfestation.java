@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -43,8 +44,6 @@ import mage.constants.TargetController;
 import mage.game.permanent.token.GremlinToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
-
-import java.util.UUID;
 
 /**
  *

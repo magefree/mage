@@ -28,6 +28,7 @@
 
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -39,8 +40,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-
-import java.util.UUID;
 
 /**
  *

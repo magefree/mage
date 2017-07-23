@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -44,8 +45,6 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author duncant

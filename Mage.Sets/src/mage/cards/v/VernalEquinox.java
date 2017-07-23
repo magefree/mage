@@ -28,7 +28,6 @@
 package mage.cards.v;
 
 import java.util.UUID;
-
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.cards.CardImpl;

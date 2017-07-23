@@ -28,8 +28,6 @@
 package mage.cards.o;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -39,6 +37,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;

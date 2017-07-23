@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -34,8 +35,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,7 @@
  */
 package mage.cards.j;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -39,8 +40,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *

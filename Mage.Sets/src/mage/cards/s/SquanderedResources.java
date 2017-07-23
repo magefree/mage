@@ -27,6 +27,9 @@
  */
 package mage.cards.s;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -34,6 +37,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
@@ -49,11 +53,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.abilities.mana.SimpleManaAbility;
 
 /**
  *

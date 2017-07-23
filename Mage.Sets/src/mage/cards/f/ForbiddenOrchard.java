@@ -29,6 +29,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
@@ -40,8 +41,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.SpiritToken;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *

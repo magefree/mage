@@ -27,22 +27,21 @@
  */
 package mage.cards.t;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetOpponent;
 
 /**
  * @author noxx

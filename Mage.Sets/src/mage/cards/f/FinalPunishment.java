@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -37,8 +38,6 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.watchers.common.AmountOfDamageAPlayerReceivedThisTurnWatcher;
-
-import java.util.UUID;
 
 /**
  *

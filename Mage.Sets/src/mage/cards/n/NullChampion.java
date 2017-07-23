@@ -28,6 +28,7 @@
 
 package mage.cards.n;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -41,8 +42,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  *

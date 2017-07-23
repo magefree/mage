@@ -27,6 +27,8 @@
  */
 package mage.cards.g;
 
+import java.util.Objects;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -51,9 +53,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
-
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  *

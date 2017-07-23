@@ -27,10 +27,10 @@
  */
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -194,6 +194,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 341, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 342, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain Goat", 203, Rarity.COMMON, mage.cards.m.MountainGoat.class));
+        cards.add(new SetCardInfo("Mudslide", 204, Rarity.RARE, mage.cards.m.Mudslide.class));
         cards.add(new SetCardInfo("Mystic Might", 86, Rarity.RARE, mage.cards.m.MysticMight.class));
         cards.add(new SetCardInfo("Mystic Remora", 87, Rarity.COMMON, mage.cards.m.MysticRemora.class));
         cards.add(new SetCardInfo("Nacre Talisman", 304, Rarity.UNCOMMON, mage.cards.n.NacreTalisman.class));

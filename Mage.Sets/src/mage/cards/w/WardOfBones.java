@@ -39,8 +39,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -55,7 +55,7 @@ import mage.players.Player;
 public class WardOfBones extends CardImpl {
 
     public WardOfBones(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // Each opponent who controls more creatures than you can't play creature cards. The same is true for artifacts, enchantments, and lands.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WardOfBonesEffect()));
@@ -101,13 +101,13 @@ class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
         }
         return null;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.PLAY_LAND || event.getType() == GameEvent.EventType.CAST_SPELL;
-                
+
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
@@ -117,18 +117,18 @@ class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
                 return false;
             }
             if (card.isCreature()
-                    && game.getBattlefield().countAll(new FilterCreaturePermanent(), opponent.getId(), game) 
-                        > game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+                    && game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, opponent.getId(), game)
+                    > game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 return true;
             }
             if (card.isArtifact()
-                    && game.getBattlefield().countAll(new FilterArtifactPermanent(), opponent.getId(), game) 
-                        > game.getBattlefield().countAll(new FilterArtifactPermanent(), source.getControllerId(), game)) {
+                    && game.getBattlefield().countAll(new FilterArtifactPermanent(), opponent.getId(), game)
+                    > game.getBattlefield().countAll(new FilterArtifactPermanent(), source.getControllerId(), game)) {
                 return true;
             }
             if (card.isEnchantment()
-                    && game.getBattlefield().countAll(new FilterEnchantmentPermanent(), opponent.getId(), game) 
-                        > game.getBattlefield().countAll(new FilterEnchantmentPermanent(), source.getControllerId(), game)) {
+                    && game.getBattlefield().countAll(new FilterEnchantmentPermanent(), opponent.getId(), game)
+                    > game.getBattlefield().countAll(new FilterEnchantmentPermanent(), source.getControllerId(), game)) {
                 return true;
             }
             final int yourLands = game.getBattlefield().countAll(new FilterLandPermanent(), source.getControllerId(), game);

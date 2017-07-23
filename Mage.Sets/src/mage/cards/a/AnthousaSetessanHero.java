@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -40,8 +41,6 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  *

@@ -41,12 +41,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.constants.SetTargetPointer;
 
 /**
  *

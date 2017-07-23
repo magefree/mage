@@ -48,6 +48,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -79,7 +80,7 @@ public class VesuvanShapeshifter extends CardImpl {
         this.addAbility(ability);
 
         // As Vesuvan Shapeshifter etbs, you may choose another creature. If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
-        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), new VesuvanShapeShifterFaceUpApplier());
+        Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new VesuvanShapeShifterFaceUpApplier());
         effect.setText(effectText);
         ability = new EntersBattlefieldAbility(effect, true);
         ability.setWorksFaceDown(false);

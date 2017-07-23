@@ -27,6 +27,8 @@
  */
 package mage.cards.m;
 
+import java.util.Iterator;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -48,9 +50,6 @@ import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.SubTypeList;
-
-import java.util.Iterator;
-import java.util.UUID;
 
 /**
  *

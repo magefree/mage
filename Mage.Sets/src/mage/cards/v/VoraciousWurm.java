@@ -28,7 +28,6 @@
 package mage.cards.v;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;

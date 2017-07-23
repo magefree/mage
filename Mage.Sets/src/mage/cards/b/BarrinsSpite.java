@@ -36,7 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,7 +53,7 @@ public class BarrinsSpite extends CardImpl {
 
         // Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand.
         this.getSpellAbility().addEffect(new BarrinsSpiteEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(2, 2, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(2, 2, StaticFilters.FILTER_PERMANENT_CREATURE, false));
 
     }
 
@@ -95,7 +95,7 @@ class BarrinsSpiteEffect extends OneShotEffect {
                     Player controllerOfCreature = game.getPlayer(creature.getControllerId());
                     if ((count == 0
                             && controllerOfCreature.chooseUse(Outcome.Sacrifice, "Sacrifice " + creature.getLogName() + '?', source, game))
-                            || (count == 1 
+                            || (count == 1
                             && !sacrificeDone)) {
                         creature.sacrifice(source.getId(), game);
                         sacrificeDone = true;

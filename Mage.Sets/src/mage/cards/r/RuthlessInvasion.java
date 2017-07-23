@@ -29,12 +29,11 @@
 package mage.cards.r;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

@@ -27,6 +27,7 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
@@ -42,8 +43,6 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *
@@ -97,7 +96,7 @@ class RefuseEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Spell spell = game.getStack().getSpell(source.getFirstTarget());
+            Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
             if (spell != null) {
                 Player spellController = game.getPlayer(spell.getControllerId());
                 if (spellController != null) {

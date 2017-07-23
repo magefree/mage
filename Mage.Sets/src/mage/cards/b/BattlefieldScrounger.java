@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
@@ -43,8 +44,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.UUID;
-
 /**
  *
  * @author emerald000
@@ -54,7 +53,7 @@ public class BattlefieldScrounger extends CardImpl {
     public BattlefieldScrounger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 
-        this.subtype.add("Centaur");
+        this.subtype.add(SubType.CENTAUR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

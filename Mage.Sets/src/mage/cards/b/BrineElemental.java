@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -38,11 +39,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -52,7 +52,7 @@ public class BrineElemental extends CardImpl {
 
     public BrineElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

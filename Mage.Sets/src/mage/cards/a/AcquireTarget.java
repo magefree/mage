@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -38,8 +39,6 @@ import mage.counters.CounterType;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
-
-import java.util.UUID;
 
 /**
  *

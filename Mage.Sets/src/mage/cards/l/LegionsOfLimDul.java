@@ -27,6 +27,7 @@
  */
 package mage.cards.l;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.LandwalkAbility;
 import mage.cards.CardImpl;
@@ -37,8 +38,6 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
-
-import java.util.UUID;
 
 /**
  *

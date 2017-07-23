@@ -27,8 +27,8 @@
  */
 package mage.cards.w;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.condition.common.RaidCondition;
@@ -37,13 +37,12 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.watchers.common.PlayerAttackedWatcher;
-
-import java.util.UUID;
 
 /**
  *

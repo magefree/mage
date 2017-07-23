@@ -27,6 +27,8 @@
  */
 package mage.cards.r;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -45,9 +47,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.common.SpellsCastWatcher;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

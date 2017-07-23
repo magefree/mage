@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesWithLessPowerEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.h.HowlingChorus;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.h.HowlingChorus;
 import mage.constants.CardType;
 import mage.constants.Zone;
 

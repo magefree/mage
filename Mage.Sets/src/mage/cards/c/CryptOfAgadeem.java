@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -40,8 +41,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-
-import java.util.UUID;
 
 /**
  *

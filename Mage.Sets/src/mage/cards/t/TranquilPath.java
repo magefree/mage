@@ -28,12 +28,11 @@
 package mage.cards.t;
 
 import java.util.UUID;
-
 import mage.abilities.effects.common.DestroyAllEffect;
-import mage.constants.CardType;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.common.FilterEnchantmentPermanent;
 
 /**

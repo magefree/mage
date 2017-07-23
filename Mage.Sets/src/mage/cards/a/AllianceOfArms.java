@@ -27,6 +27,8 @@
  */
 package mage.cards.a;
 
+import java.util.Objects;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -41,9 +43,6 @@ import mage.game.Game;
 import mage.game.permanent.token.SoldierToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  *

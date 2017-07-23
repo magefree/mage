@@ -29,7 +29,6 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -40,6 +39,7 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 

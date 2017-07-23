@@ -28,7 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;

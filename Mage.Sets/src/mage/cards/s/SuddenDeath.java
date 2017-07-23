@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;

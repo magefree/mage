@@ -34,9 +34,8 @@ import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
-
 import mage.constants.SubType;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;

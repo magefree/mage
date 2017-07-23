@@ -32,7 +32,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;

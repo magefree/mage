@@ -34,7 +34,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,7 +50,7 @@ public class FarAway extends SplitCard {
 
         // Away
         // Target player sacrifices a creature.
-        getRightHalfCard().getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
+        getRightHalfCard().getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target player"));
         getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 
     }

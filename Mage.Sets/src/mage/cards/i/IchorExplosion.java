@@ -27,6 +27,7 @@
  */
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -38,12 +39,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -52,14 +51,13 @@ import java.util.UUID;
 public class IchorExplosion extends CardImpl {
 
     public IchorExplosion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
 
         // As an additional cost to cast Ichor Explosion, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         // All creatures get -X/-X until end of turn, where X is the sacrificed creature's power.
         DynamicValue xValue = new IchorExplosionDynamicValue();
-        this.getSpellAbility().addEffect(new BoostAllEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent(), false, null, true));
+        this.getSpellAbility().addEffect(new BoostAllEffect(xValue, xValue, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false, null, true));
 
     }
 
@@ -74,11 +72,12 @@ public class IchorExplosion extends CardImpl {
 }
 
 class IchorExplosionDynamicValue implements DynamicValue {
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Card sourceCard = game.getCard(sourceAbility.getSourceId());
         if (sourceCard != null) {
-            for (Object cost: sourceAbility.getCosts()) {
+            for (Object cost : sourceAbility.getCosts()) {
                 if (cost instanceof SacrificeTargetCost) {
                     Permanent p = (Permanent) game.getLastKnownInformation(((SacrificeTargetCost) cost).getPermanents().get(0).getId(), Zone.BATTLEFIELD);
                     return -1 * p.getPower().getValue();

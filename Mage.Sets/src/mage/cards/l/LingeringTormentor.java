@@ -28,12 +28,12 @@
 package mage.cards.l;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.FearAbility;
 import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 /**
  *

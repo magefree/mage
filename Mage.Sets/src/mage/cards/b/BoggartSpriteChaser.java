@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,8 +45,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author BursegSardaukar
@@ -54,8 +53,7 @@ public class BoggartSpriteChaser extends CardImpl {
 
     public BoggartSpriteChaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GOBLIN, SubType.WARRIOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

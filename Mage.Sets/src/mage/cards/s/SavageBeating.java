@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -40,10 +41,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TurnPhase;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -52,14 +51,14 @@ import java.util.UUID;
 public class SavageBeating extends CardImpl {
 
     public SavageBeating(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
 
         // Cast Savage Beating only during your turn and only during combat.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, null, MyTurnCondition.instance,
                 "Cast {this} only during your turn and only during combat"));
 
         // Choose one - Creatures you control gain double strike until end of turn;
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
 
         // or untap all creatures you control and after this phase, there is an additional combat phase.
         Mode mode = new Mode();

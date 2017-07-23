@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,8 +42,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -62,8 +61,7 @@ public class BalthorTheStout extends CardImpl {
     public BalthorTheStout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dwarf");
-        this.subtype.add("Barbarian");
+        this.subtype.add(SubType.DWARF, SubType.BARBARIAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

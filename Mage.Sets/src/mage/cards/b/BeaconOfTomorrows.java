@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
@@ -37,8 +38,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *

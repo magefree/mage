@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -36,8 +37,6 @@ import mage.constants.CardType;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 /**
  *

@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -14,8 +15,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 public class AngelOfFlightAlabaster extends CardImpl {
     private static final FilterCard filter = new FilterCard("Spirit card from your graveyard");

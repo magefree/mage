@@ -28,12 +28,11 @@
 package mage.cards.o;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.TargetPlayer;
 
 /**

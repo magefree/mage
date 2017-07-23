@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.HellbentCondition;
@@ -44,8 +45,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.DamagedByWatcher;
-
-import java.util.UUID;
 
 /**
  *

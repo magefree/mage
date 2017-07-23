@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
@@ -37,8 +38,6 @@ import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-
-import java.util.UUID;
 
 /**
  *

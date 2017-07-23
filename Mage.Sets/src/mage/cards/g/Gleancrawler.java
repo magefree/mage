@@ -27,6 +27,8 @@
  */
 package mage.cards.g;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -43,9 +45,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

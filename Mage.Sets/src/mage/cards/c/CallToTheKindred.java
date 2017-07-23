@@ -27,6 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.ArrayList;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -50,9 +52,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  *

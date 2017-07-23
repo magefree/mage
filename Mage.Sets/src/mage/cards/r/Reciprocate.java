@@ -27,21 +27,20 @@
  */
 package mage.cards.r;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -49,7 +48,7 @@ import java.util.UUID;
 public class Reciprocate extends CardImpl {
 
     public Reciprocate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Exile target creature that dealt damage to you this turn.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
@@ -70,7 +69,7 @@ public class Reciprocate extends CardImpl {
 class ReciprocateTarget extends TargetPermanent {
 
     public ReciprocateTarget() {
-        super(1, 1, new FilterCreaturePermanent(), false);
+        super(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false);
         targetName = "creature that dealt damage to you this turn";
     }
 

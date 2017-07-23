@@ -29,10 +29,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,6 +37,9 @@ import mage.abilities.keyword.ExaltedAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *

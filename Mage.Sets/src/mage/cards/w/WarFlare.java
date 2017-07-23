@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -43,11 +43,11 @@ import mage.filter.common.FilterCreaturePermanent;
 public class WarFlare extends CardImpl {
 
     public WarFlare(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}{W}");
 
         // Creatures you control get +2/+1 until end of turn.  Untap those creatures.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterCreaturePermanent(),"Untap those creatures"));
+        this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, "Untap those creatures"));
     }
 
     public WarFlare(final WarFlare card) {

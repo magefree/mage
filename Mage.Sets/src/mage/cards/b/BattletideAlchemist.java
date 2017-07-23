@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,8 +42,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
  *
  * @author emerald000
@@ -51,8 +50,7 @@ public class BattletideAlchemist extends CardImpl {
 
     public BattletideAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.KITHKIN, SubType.CLERIC);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

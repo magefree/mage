@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -52,8 +53,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  * @author nantuko

@@ -27,6 +27,9 @@
  */
 package mage.sets;
 
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
 import mage.cards.Card;
 import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
@@ -36,10 +39,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
-
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
 
 /**
  *

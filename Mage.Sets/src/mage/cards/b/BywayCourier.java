@@ -27,14 +27,14 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +44,7 @@ public class BywayCourier extends CardImpl {
 
     public BywayCourier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.HUMAN, SubType.SCOUT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

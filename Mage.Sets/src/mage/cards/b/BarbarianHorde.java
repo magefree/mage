@@ -27,12 +27,12 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,9 +42,7 @@ public class BarbarianHorde extends CardImpl {
 
     public BarbarianHorde(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Barbarian");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.HUMAN, SubType.BARBARIAN, SubType.SOLDIER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

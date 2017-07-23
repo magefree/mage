@@ -28,8 +28,6 @@
 package mage.cards.p;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +38,7 @@ import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.events.GameEvent;

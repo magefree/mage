@@ -28,7 +28,6 @@
 package mage.cards.g;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;

@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class SeasonsPast extends CardImpl {
 
     public SeasonsPast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
         // Return any number of cards with different converted mana costs from your graveyard to your hand. Put Seasons Past on the bottom of its owner's library.
         this.getSpellAbility().addEffect(new SeasonsPastEffect());
@@ -92,6 +92,7 @@ class SeasonsPastEffect extends OneShotEffect {
             SeasonsPastTarget target = new SeasonsPastTarget();
             controller.choose(outcome, target, source.getSourceId(), game);
             controller.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
+            return true;
         }
         return false;
     }

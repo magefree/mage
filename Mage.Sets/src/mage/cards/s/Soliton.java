@@ -28,16 +28,15 @@
 
 package mage.cards.s;
 
-import mage.constants.CardType;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-
-import java.util.UUID;
+import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *

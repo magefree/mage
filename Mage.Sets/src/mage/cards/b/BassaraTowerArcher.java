@@ -27,14 +27,14 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +44,7 @@ public class BassaraTowerArcher extends CardImpl {
 
     public BassaraTowerArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.HUMAN, SubType.ARCHER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -51,8 +52,6 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 
-import java.util.UUID;
-
 /**
  *
  * @author jeffwadsworth
@@ -60,7 +59,7 @@ import java.util.UUID;
 public class DragonlordSilumgar extends CardImpl {
 
     public DragonlordSilumgar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elder");
         this.subtype.add("Dragon");
@@ -111,19 +110,21 @@ class DragonlordSilumgarEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller != null && sourcePermanent != null) {
+            if (target != null && controller.getId().equals(sourcePermanent.getControllerId())) {
+                SourceHasRemainedInSameZoneCondition condition = new SourceHasRemainedInSameZoneCondition(sourcePermanent.getId());
 
-        if (controller != null && sourcePermanent != null && target != null && controller.getId().equals(sourcePermanent.getControllerId())) {
-            SourceHasRemainedInSameZoneCondition condition = new SourceHasRemainedInSameZoneCondition(sourcePermanent.getId());
-
-            game.addEffect(new ConditionalContinuousEffect(
-                    new GainControlTargetEffect(Duration.Custom),
-                    new CompoundCondition(new SourceOnBattlefieldControlUnchangedCondition(), condition),
-                    null),
-                    source);
-            if (!game.isSimulation()) {
-                game.informPlayers(sourcePermanent.getLogName() + ": " + controller.getLogName() + " gained control of " + target.getLogName());
+                game.addEffect(new ConditionalContinuousEffect(
+                        new GainControlTargetEffect(Duration.Custom),
+                        new CompoundCondition(new SourceOnBattlefieldControlUnchangedCondition(), condition),
+                        null),
+                        source);
+                if (!game.isSimulation()) {
+                    game.informPlayers(sourcePermanent.getLogName() + ": " + controller.getLogName() + " gained control of " + target.getLogName());
+                }
+                sourcePermanent.addInfo("gained control of", CardUtil.addToolTipMarkTags("Gained control of: " + GameLog.getColoredObjectIdNameForTooltip(target)), game);
             }
-            sourcePermanent.addInfo("gained control of", CardUtil.addToolTipMarkTags("Gained control of: " + GameLog.getColoredObjectIdNameForTooltip(target)), game);
+            return true;
         }
         return false;
     }

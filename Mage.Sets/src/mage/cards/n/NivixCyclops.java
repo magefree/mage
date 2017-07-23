@@ -28,10 +28,6 @@
 package mage.cards.n;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -40,6 +36,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;

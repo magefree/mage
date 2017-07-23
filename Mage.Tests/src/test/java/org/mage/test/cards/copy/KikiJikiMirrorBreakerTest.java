@@ -30,7 +30,7 @@ package org.mage.test.cards.copy;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import org.junit.Assert;
@@ -173,7 +173,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 2); // one from Body Double and one from Kiki
 
         Permanent kikiCopy = null;
-        for (Permanent permanent : currentGame.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), currentGame)) {
+        for (Permanent permanent : currentGame.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, currentGame)) {
             if (permanent.getName().equals("Silvercoat Lion") && (permanent instanceof PermanentToken)) {
                 kikiCopy = permanent;
                 break;

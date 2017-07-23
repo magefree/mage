@@ -34,7 +34,6 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.c.CivilizedScholar;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;

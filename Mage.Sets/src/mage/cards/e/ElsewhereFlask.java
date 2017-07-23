@@ -27,6 +27,8 @@
  */
 package mage.cards.e;
 
+import java.util.Iterator;
+import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -46,9 +48,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.Iterator;
-import java.util.UUID;
 
 /**
  *

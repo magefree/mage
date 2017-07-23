@@ -27,16 +27,16 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 /**
  *
@@ -48,8 +48,7 @@ public class BorderlandRanger extends CardImpl {
 
     public BorderlandRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.HUMAN, SubType.SCOUT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -27,14 +27,13 @@
  */
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.GoblinToken;
-
-import java.util.UUID;
 
 /**
  *

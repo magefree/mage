@@ -35,7 +35,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -47,12 +47,11 @@ import mage.players.Player;
 public class HallowedBurial extends CardImpl {
 
     public HallowedBurial(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
 
         // Put all creatures on the bottom of their owners' libraries.
         this.getSpellAbility().addEffect(new HallowedBurialEffect());
-        
+
     }
 
     public HallowedBurial(final HallowedBurial card) {
@@ -85,7 +84,7 @@ class HallowedBurialEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), controller.getId(), source.getSourceId(), game)) {
+            for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), source.getSourceId(), game)) {
                 controller.moveCardToLibraryWithInfo(creature, source.getSourceId(), game, Zone.BATTLEFIELD, false, true);
             }
             return true;

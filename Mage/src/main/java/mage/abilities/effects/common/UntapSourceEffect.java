@@ -24,13 +24,12 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -41,22 +40,21 @@ import mage.game.permanent.Permanent;
 public class UntapSourceEffect extends OneShotEffect {
 
     public UntapSourceEffect() {
-    super(Outcome.Untap);
-     staticText = "untap {this}";
-   }
+        super(Outcome.Untap);
+        staticText = "untap {this}";
+    }
 
     public UntapSourceEffect(final UntapSourceEffect effect) {
-    super(effect);
+        super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-                permanent.untap(game);
-                return true;
+            permanent.untap(game);
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -64,4 +62,4 @@ public class UntapSourceEffect extends OneShotEffect {
         return new UntapSourceEffect(this);
     }
 
- }
+}

@@ -27,6 +27,7 @@
  */
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -37,10 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterCreaturePermanent;
-
-import java.util.UUID;
-
+import mage.filter.StaticFilters;
 
 /**
  * @author LevelX2
@@ -48,7 +46,7 @@ import java.util.UUID;
 public class PatronOfTheAkki extends CardImpl {
 
     public PatronOfTheAkki(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
@@ -59,7 +57,7 @@ public class PatronOfTheAkki extends CardImpl {
         this.addAbility(new OfferingAbility(SubType.GOBLIN));
 
         // Whenever Patron of the Akki attacks, creatures you control get +2/+0 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(2, 0, Duration.EndOfTurn, new FilterCreaturePermanent(), false), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false), false));
     }
 
     public PatronOfTheAkki(final PatronOfTheAkki card) {

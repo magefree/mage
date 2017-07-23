@@ -45,6 +45,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -59,7 +60,7 @@ import mage.game.permanent.Permanent;
 public class KusariGama extends CardImpl {
 
     public KusariGama(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add("Equipment");
 
         // Equipped creature has "{2}: This creature gets +1/+0 until end of turn."
@@ -150,7 +151,7 @@ class KusariGamaDamageEffect extends OneShotEffect {
                 creature = (Permanent) game.getLastKnownInformation(damagedCreatureId, Zone.BATTLEFIELD);
             }
             if (creature != null) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), creature.getControllerId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, creature.getControllerId(), game)) {
                     if (!permanent.getId().equals(damagedCreatureId)) {
                         permanent.damage(damage, source.getSourceId(), game, false, true);
                     }

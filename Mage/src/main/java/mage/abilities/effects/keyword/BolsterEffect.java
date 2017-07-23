@@ -28,17 +28,17 @@
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,29 +52,29 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 public class BolsterEffect extends OneShotEffect {
-    
+
     private final DynamicValue amount;
-    
+
     public BolsterEffect(int amount) {
-        this(new StaticValue(amount));        
+        this(new StaticValue(amount));
     }
-    
+
     public BolsterEffect(DynamicValue amount) {
         super(Outcome.BoostCreature);
         this.amount = amount;
         this.staticText = setText();
     }
-    
+
     public BolsterEffect(final BolsterEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
-    
+
     @Override
     public BolsterEffect copy() {
         return new BolsterEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -84,7 +84,7 @@ public class BolsterEffect extends OneShotEffect {
             }
             int leastToughness = Integer.MAX_VALUE;
             Permanent selectedCreature = null;
-            for(Permanent permanent: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controller.getId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                 if (leastToughness > permanent.getToughness().getValue()) {
                     leastToughness = permanent.getToughness().getValue();
                     selectedCreature = permanent;
@@ -97,7 +97,7 @@ public class BolsterEffect extends OneShotEffect {
                 if (selectedCreature == null) {
                     FilterPermanent filter = new FilterControlledCreaturePermanent("creature you control with toughness " + leastToughness);
                     filter.add(new ToughnessPredicate(ComparisonType.EQUAL_TO, leastToughness));
-                    Target target = new TargetPermanent(1,1, filter, true);
+                    Target target = new TargetPermanent(1, 1, filter, true);
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         selectedCreature = game.getPermanent(target.getFirstTarget());
                     }
@@ -106,7 +106,7 @@ public class BolsterEffect extends OneShotEffect {
                     Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(amount.calculate(game, source, this)));
                     effect.setTargetPointer(new FixedTarget(selectedCreature.getId()));
                     return effect.apply(game, source);
-                }                
+                }
             }
             return true;
         }

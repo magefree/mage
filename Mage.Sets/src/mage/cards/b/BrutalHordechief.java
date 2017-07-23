@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -47,8 +48,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -63,8 +62,7 @@ public class BrutalHordechief extends CardImpl {
 
     public BrutalHordechief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Orc");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ORC, SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

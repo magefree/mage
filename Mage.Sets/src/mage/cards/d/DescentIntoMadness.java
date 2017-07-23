@@ -27,6 +27,10 @@
  */
 package mage.cards.d;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -50,11 +54,6 @@ import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * 5/1/2012 	For each despair counter on Descent into Madness, you'll exile a permanent 

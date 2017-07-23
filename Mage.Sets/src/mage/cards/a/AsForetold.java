@@ -28,7 +28,6 @@
 package mage.cards.a;
 
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;

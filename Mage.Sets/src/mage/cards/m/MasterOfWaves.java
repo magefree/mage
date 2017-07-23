@@ -43,7 +43,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.MasterOfWavesElementalToken;
-import mage.game.permanent.token.Token;
 
 /**
  *

@@ -28,14 +28,13 @@
 package mage.cards.t;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

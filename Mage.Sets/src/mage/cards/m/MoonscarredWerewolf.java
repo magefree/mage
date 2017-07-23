@@ -28,9 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.TriggeredAbility;
@@ -44,6 +41,9 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 
 /**
  *

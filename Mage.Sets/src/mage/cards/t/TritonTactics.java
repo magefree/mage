@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -41,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -51,8 +52,6 @@ import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
-import java.util.*;
-
 /**
  *
  * @author LevelX2
@@ -60,7 +59,7 @@ import java.util.*;
 public class TritonTactics extends CardImpl {
 
     public TritonTactics(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Up to two target creatures each get +0/+3 until end of turn. Untap those creatures.
         // At this turn's next end of combat, tap each creature that was blocked by one of those
@@ -186,7 +185,7 @@ class TritonTacticsEndOfCombatEffect extends OneShotEffect {
             attackerMap = (Map<Integer, Set<String>>) object;
             for (Set<String> attackerSet : attackerMap.values()) {
                 List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
-                for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+                for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                     if (attackerSet.contains(CardUtil.getCardZoneString(null, creature.getId(), game))) {
                         // tap creature and add the not untap effect
                         creature.tap(game);

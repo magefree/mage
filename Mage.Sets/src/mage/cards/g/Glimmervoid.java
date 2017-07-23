@@ -27,7 +27,7 @@
  */
 package mage.cards.g;
 
-import mage.constants.ComparisonType;
+import java.util.UUID;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -37,10 +37,9 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.events.GameEvent;
-
-import java.util.UUID;
 
 /**
  *

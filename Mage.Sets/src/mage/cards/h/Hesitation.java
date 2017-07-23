@@ -28,7 +28,9 @@
 package mage.cards.h;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
@@ -36,8 +38,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
-import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 
 /**
  *

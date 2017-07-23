@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,8 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -52,8 +52,7 @@ public class BladeTribeBerserkers extends CardImpl {
 
     public BladeTribeBerserkers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.HUMAN, SubType.BERSERKER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

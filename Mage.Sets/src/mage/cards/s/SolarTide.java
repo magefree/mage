@@ -27,7 +27,7 @@
  */
 package mage.cards.s;
 
-import mage.constants.ComparisonType;
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -35,12 +35,11 @@ import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  *

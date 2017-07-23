@@ -27,8 +27,8 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.CardsInAnyLibraryCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,9 +39,8 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,8 @@
  */
 package mage.cards.o;
 
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -47,9 +49,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author fireshoes

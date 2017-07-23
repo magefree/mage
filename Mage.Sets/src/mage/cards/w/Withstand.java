@@ -28,12 +28,11 @@
 package mage.cards.w;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreatureOrPlayer;
 

@@ -27,18 +27,14 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-
-import java.util.UUID;
+import mage.constants.*;
 
 /**
  *
@@ -49,8 +45,7 @@ public class BorealCentaur extends CardImpl {
     public BorealCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         addSuperType(SuperType.SNOW);
-        this.subtype.add("Centaur");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.CENTAUR, SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

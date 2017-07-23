@@ -28,7 +28,6 @@
 package mage.cards.u;
 
 import java.util.UUID;
-
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;

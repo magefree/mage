@@ -27,6 +27,10 @@
  */
 package mage.cards.d;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -39,11 +43,6 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 
 /**
  * @author jeffwadsworth

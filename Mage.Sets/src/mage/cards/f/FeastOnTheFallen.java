@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -41,8 +42,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.common.PlayerLostLifeWatcher;
-
-import java.util.UUID;
 
 /**
  *

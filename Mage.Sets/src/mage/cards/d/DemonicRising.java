@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.condition.common.CreatureCountCondition;
@@ -37,8 +38,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.game.permanent.token.DemonToken;
-
-import java.util.UUID;
 
 /**
  * @author noxx

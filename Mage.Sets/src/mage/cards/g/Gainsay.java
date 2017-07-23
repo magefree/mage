@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
@@ -36,8 +37,6 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.Target;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,9 +27,9 @@
  */
 package mage.cards.j;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -47,8 +47,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *

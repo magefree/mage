@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -35,9 +36,8 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.EldraziScionToken;
-
-import java.util.UUID;
 
 /**
  *
@@ -47,8 +47,7 @@ public class BroodMonitor extends CardImpl {
 
     public BroodMonitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Drone");
+        this.subtype.add(SubType.ELDRAZI, SubType.DRONE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

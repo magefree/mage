@@ -27,6 +27,8 @@
  */
 package mage.cards.e;
 
+import java.util.Objects;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -45,9 +47,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  *

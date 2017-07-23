@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,11 +37,10 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
-
-import java.util.UUID;
 
 /**
  *
@@ -56,8 +56,7 @@ public class BurrentonForgeTender extends CardImpl {
 
     public BurrentonForgeTender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.KITHKIN, SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

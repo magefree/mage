@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
@@ -39,14 +40,12 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -99,7 +98,7 @@ class BatheInLightEffect extends OneShotEffect {
                 ObjectColor protectColor = (ObjectColor) game.getState().getValue(target.getId() + "_color");
                 if (protectColor != null) {
                     ObjectColor color = target.getColor(game);
-                    for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+                    for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                         if (permanent.getColor(game).shares(color)) {
                             ContinuousEffect effect = new GainProtectionFromColorTargetEffect(Duration.EndOfTurn, protectColor);
                             effect.setTargetPointer(new FixedTarget(permanent, game));

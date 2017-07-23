@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -37,8 +38,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAttackingCreature;
-
-import java.util.UUID;
 
 /**
  *

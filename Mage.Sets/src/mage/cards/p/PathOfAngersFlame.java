@@ -28,13 +28,12 @@
 package mage.cards.p;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -43,12 +42,11 @@ import mage.filter.common.FilterCreaturePermanent;
 public class PathOfAngersFlame extends CardImpl {
 
     public PathOfAngersFlame(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.subtype.add("Arcane");
 
-
         // Creatures you control get +2/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
     public PathOfAngersFlame(final PathOfAngersFlame card) {

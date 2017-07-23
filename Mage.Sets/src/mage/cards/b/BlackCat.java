@@ -29,6 +29,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -36,9 +37,8 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *
@@ -48,8 +48,7 @@ public class BlackCat extends CardImpl {
 
     public BlackCat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.ZOMBIE, SubType.CAT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

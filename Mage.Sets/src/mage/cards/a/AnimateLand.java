@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
@@ -35,8 +36,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
-
-import java.util.UUID;
 
 /**
  *

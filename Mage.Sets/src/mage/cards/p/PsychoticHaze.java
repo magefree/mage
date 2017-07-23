@@ -27,14 +27,13 @@
  */
 package mage.cards.p;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-
-import java.util.UUID;
+import mage.constants.CardType;
 
 /**
  *

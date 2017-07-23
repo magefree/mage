@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.CompoundAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,8 +40,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author Loki, noxx

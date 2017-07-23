@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -40,8 +41,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-
-import java.util.UUID;
 
 /**
  *
@@ -59,8 +58,7 @@ public class BrighthearthBanneret extends CardImpl {
 
     public BrighthearthBanneret(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ELEMENTAL, SubType.WARRIOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

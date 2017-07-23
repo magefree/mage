@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -37,9 +38,8 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
-
-import java.util.UUID;
 
 /**
  *
@@ -49,7 +49,7 @@ public class BrandedHowler extends CardImpl {
 
     public BrandedHowler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.color.setRed(true);

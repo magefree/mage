@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourceCondition;
@@ -40,8 +41,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.watchers.common.CastFromHandWatcher;
-
-import java.util.UUID;
 
 /**
  *

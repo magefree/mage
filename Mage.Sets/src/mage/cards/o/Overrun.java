@@ -30,13 +30,13 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**

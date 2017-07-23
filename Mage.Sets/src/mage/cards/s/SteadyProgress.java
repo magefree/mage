@@ -30,11 +30,11 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.constants.CardType;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 /**
  *

@@ -28,14 +28,14 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.players.Players;
