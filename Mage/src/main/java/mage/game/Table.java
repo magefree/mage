@@ -27,6 +27,8 @@
  */
 package mage.game;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.cards.decks.DeckValidator;
 import mage.constants.TableState;
 import mage.game.events.Listener;
@@ -37,9 +39,6 @@ import mage.game.result.ResultProtos.TableProto;
 import mage.game.tournament.Tournament;
 import mage.players.Player;
 import mage.players.PlayerType;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -65,6 +64,7 @@ public class Table implements Serializable {
 
     @FunctionalInterface
     public interface TableRecorder {
+
         void record(Table table);
     }
 
