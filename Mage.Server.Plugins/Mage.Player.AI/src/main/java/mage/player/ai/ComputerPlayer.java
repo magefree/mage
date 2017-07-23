@@ -27,6 +27,10 @@
  */
 package mage.player.ai;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
@@ -49,6 +53,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.*;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -76,11 +81,6 @@ import mage.util.RandomUtil;
 import mage.util.TournamentUtil;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  *
