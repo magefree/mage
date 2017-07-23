@@ -50,7 +50,7 @@ public class NagaVitalist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Add to your mana pool one mana of any type that a land you control could produce.
-        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.YOU));
+        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.YOU, false));
     }
 
     public NagaVitalist(final NagaVitalist card) {

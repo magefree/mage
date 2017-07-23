@@ -44,7 +44,7 @@ public class ReflectingPool extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add to your mana pool one mana of any type that a land you control could produce.
-        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.YOU));
+        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.YOU, false));
     }
 
     public ReflectingPool(final ReflectingPool card) {

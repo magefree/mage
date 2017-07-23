@@ -53,7 +53,11 @@ import mage.players.Player;
 public class AnyColorLandsProduceManaAbility extends ActivatedManaAbilityImpl {
 
     public AnyColorLandsProduceManaAbility(TargetController targetController) {
-        super(Zone.BATTLEFIELD, new AnyColorLandsProduceManaEffect(targetController), new TapSourceCost());
+        this(targetController, true);
+    }
+
+    public AnyColorLandsProduceManaAbility(TargetController targetController, boolean onlyColors) {
+        super(Zone.BATTLEFIELD, new AnyColorLandsProduceManaEffect(targetController, onlyColors), new TapSourceCost());
     }
 
     public AnyColorLandsProduceManaAbility(final AnyColorLandsProduceManaAbility ability) {
@@ -80,19 +84,23 @@ public class AnyColorLandsProduceManaAbility extends ActivatedManaAbilityImpl {
 class AnyColorLandsProduceManaEffect extends ManaEffect {
 
     private final FilterPermanent filter;
+    private final boolean onlyColors; // false if mana types can be produced (also Colorless mana), if false only colors can be produced (no Colorless mana).
+
     private boolean inManaTypeCalculation = false;
 
-    public AnyColorLandsProduceManaEffect(TargetController targetController) {
+    public AnyColorLandsProduceManaEffect(TargetController targetController, boolean onlyColors) {
         super();
         filter = new FilterLandPermanent();
+        this.onlyColors = onlyColors;
         filter.add(new ControllerPredicate(targetController));
         String text = targetController == TargetController.OPPONENT ? "an opponent controls" : "you control";
-        staticText = "Add to your mana pool one mana of any color that a land " + text + " could produce";
+        staticText = "Add to your mana pool one mana of any " + (this.onlyColors ? "color" : "type") + " that a land " + text + " could produce";
     }
 
     public AnyColorLandsProduceManaEffect(final AnyColorLandsProduceManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
+        this.onlyColors = effect.onlyColors;
     }
 
     @Override
@@ -116,12 +124,19 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
         if (types.getWhite() > 0) {
             choice.getChoices().add("White");
         }
+        if (!onlyColors && types.getColorless() > 0) {
+            choice.getChoices().add("Colorless");
+        }
         if (types.getAny() > 0) {
             choice.getChoices().add("Black");
             choice.getChoices().add("Red");
             choice.getChoices().add("Blue");
             choice.getChoices().add("Green");
             choice.getChoices().add("White");
+            if (!onlyColors) {
+                choice.getChoices().add("Colorless");
+            }
+
         }
         if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
@@ -147,6 +162,9 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
                         break;
                     case "White":
                         mana.setWhite(1);
+                        break;
+                    case "Colorless":
+                        mana.setColorless(1);
                         break;
                 }
                 checkToFirePossibleEvents(mana, game, source);
