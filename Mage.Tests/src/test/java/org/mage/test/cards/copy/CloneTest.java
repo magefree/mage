@@ -187,7 +187,7 @@ public class CloneTest extends CardTestPlayerBase {
 
         boolean whiteLion = false;
         boolean blueLion = false;
-        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), playerA.getId(), currentGame)) {
+        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerA.getId(), currentGame)) {
             if (permanent.getColor(currentGame).isWhite()) {
                 whiteLion = true;
             }

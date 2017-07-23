@@ -166,7 +166,7 @@ class MossbridgeTrollCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         int sumPower = 0;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controllerId, game)) {
             if (!permanent.getId().equals(sourceId)) {
                 sumPower += permanent.getPower().getValue();
             }

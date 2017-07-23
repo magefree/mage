@@ -89,7 +89,7 @@ class HumilityEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(new FilterCreaturePermanent(), player.getId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), source.getSourceId(), game)) {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
                         permanent.removeAllAbilities(source.getSourceId(), game);

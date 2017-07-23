@@ -87,7 +87,7 @@ class ShockmawDragonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game);
+            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game);
             for (Permanent creature : creatures) {
                 if (creature != null) {
                     creature.damage(1, source.getSourceId(), game, false, true);

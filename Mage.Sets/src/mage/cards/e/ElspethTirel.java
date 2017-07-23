@@ -85,7 +85,7 @@ class ElspethTirelFirstEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game);
+        int amount = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.gainLife(amount, game);

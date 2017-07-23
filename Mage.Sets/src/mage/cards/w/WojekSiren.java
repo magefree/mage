@@ -89,7 +89,7 @@ class WojekSirenBoostEffect extends ContinuousEffectImpl {
         if (target != null) {
             affectedObjectList.add(new MageObjectReference(target, game));
             ObjectColor color = target.getColor(game);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                 if (!permanent.getId().equals(target.getId()) && permanent.getColor(game).shares(color)) {
                     affectedObjectList.add(new MageObjectReference(permanent, game));
                 }

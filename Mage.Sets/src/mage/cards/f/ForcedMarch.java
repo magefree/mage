@@ -60,7 +60,7 @@ class ForcedMarchEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         
        // for(Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), 
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, 
                                                                                 source.getControllerId(), 
                                                                                 source.getSourceId(), 
                                                                                 game)) {

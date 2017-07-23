@@ -62,7 +62,7 @@ public class Festercreep extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1))));
         
         // {1}{B}, Remove a +1/+1 counter from Festercreep: All other creatures get -1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.EndOfTurn, new FilterCreaturePermanent(), true), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         this.addAbility(ability);
     }

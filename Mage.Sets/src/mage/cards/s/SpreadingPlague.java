@@ -57,7 +57,7 @@ public class SpreadingPlague extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");
 
         // Whenever a creature enters the battlefield, destroy all other creatures that share a color with it. They can't be regenerated.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SpreadingPlagueEffect(), new FilterCreaturePermanent(), false, SetTargetPointer.PERMANENT, RULE));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SpreadingPlagueEffect(), StaticFilters.FILTER_PERMANENT_CREATURE, false, SetTargetPointer.PERMANENT, RULE));
         
     }
 

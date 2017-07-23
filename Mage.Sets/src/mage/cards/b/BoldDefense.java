@@ -58,7 +58,7 @@ public class BoldDefense extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn),
                 new BoostTargetEffect(1, 1, Duration.EndOfTurn), new LockedInCondition(KickedCondition.instance),
                 "Creatures you control get +1/+1 until end of turn. If {this} was kicked, instead creatures you control get +2/+2"));
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false),
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false),
                 null, new LockedInCondition(KickedCondition.instance),
                 "and gain first strike until end of turn"));
     }

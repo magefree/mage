@@ -102,7 +102,7 @@ class CracklingDoomEffect extends OneShotEffect {
                         int greatestPower = Integer.MIN_VALUE;
                         int numberOfCreatures = 0;
                         Permanent permanentToSacrifice = null;
-                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), playerId, game)) {
+                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)) {
                             if (permanent.getPower().getValue() > greatestPower) {
                                 greatestPower = permanent.getPower().getValue();
                                 numberOfCreatures = 1;

@@ -145,7 +145,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
                 for(UUID blockerId :combatGroup.getBlockers()) {
                     Permanent blockingCreature = game.getPermanent(blockerId);
                     if (blockingCreature != null) {
-                        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), blockingCreature.getControllerId(), game)) {
+                        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, blockingCreature.getControllerId(), game)) {
                             if (!combatGroup.getBlockers().contains(permanent.getId())) {
                                 // not all creatures block Tromokratis
                                 return false;

@@ -87,7 +87,7 @@ public class PhantasmalImage extends CardImpl {
         // You may have Phantasmal Image enter the battlefield as a copy of any creature
         // on the battlefield, except it's an Illusion in addition to its other types and
         // it gains "When this creature becomes the target of a spell or ability, sacrifice it."
-        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), phantasmalImageApplier);
+        Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, phantasmalImageApplier);
         effect.setText(effectText);
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }

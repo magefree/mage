@@ -102,7 +102,7 @@ class FavorOfTheMightyEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         int maxCMC = Integer.MIN_VALUE;
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
             if (permanent != null && permanent.getConvertedManaCost() > maxCMC) {
                 maxCMC = permanent.getConvertedManaCost();
             }

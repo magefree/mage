@@ -179,7 +179,7 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
             if (usedTarget == null) {
                 return false;
             }
-            for (Permanent creature : game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent creature : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 if (!creature.getId().equals(source.getSourceId()) && usedTarget.canTarget(source.getControllerId(), creature.getId(), source, game)) {
                     Spell copy = spell.copySpell(source.getControllerId());
                     game.getStack().push(copy);

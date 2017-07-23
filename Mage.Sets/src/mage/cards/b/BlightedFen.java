@@ -57,7 +57,7 @@ public class BlightedFen extends CardImpl {
 
         // {4}{B}, {T}, Sacrifice Blighted Fen: Target opponent sacrifices a creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target opponent"),
+                new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target opponent"),
                 new ManaCostsImpl<>("{4}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

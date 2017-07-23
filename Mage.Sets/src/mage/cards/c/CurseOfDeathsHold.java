@@ -91,7 +91,7 @@ class CurseOfDeathsHoldEffect extends ContinuousEffectImpl {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Player player = game.getPlayer(enchantment.getAttachedTo());
             if (player != null) {
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
+                for (Permanent perm: game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
                     perm.addPower(-1);
                     perm.addToughness(-1);
                 }

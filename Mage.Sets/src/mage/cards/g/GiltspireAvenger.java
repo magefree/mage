@@ -86,7 +86,7 @@ public class GiltspireAvenger extends CardImpl {
 class GiltspireAvengerTarget extends TargetPermanent {
 
     public GiltspireAvengerTarget() {
-        super(1, 1, new FilterCreaturePermanent(), false);
+        super(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false);
         targetName = "creature that dealt damage to you this turn";
     }
 

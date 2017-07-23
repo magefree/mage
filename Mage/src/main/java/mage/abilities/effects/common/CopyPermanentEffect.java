@@ -57,7 +57,7 @@ public class CopyPermanentEffect extends OneShotEffect {
     }
 
     public CopyPermanentEffect(ApplyToPermanent applier) {
-        this(new FilterCreaturePermanent(), applier);
+        this(StaticFilters.FILTER_PERMANENT_CREATURE, applier);
     }
 
     public CopyPermanentEffect(FilterPermanent filter) {

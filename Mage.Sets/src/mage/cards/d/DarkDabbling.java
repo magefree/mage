@@ -90,7 +90,7 @@ class DarkDabblingEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (SpellMasteryCondition.instance.apply(game, source)) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 if (!permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
                     RegenerateTargetEffect regenEffect = new RegenerateTargetEffect();
                     regenEffect.setTargetPointer(new FixedTarget(permanent.getId()));

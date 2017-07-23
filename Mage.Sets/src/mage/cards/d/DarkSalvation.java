@@ -65,7 +65,7 @@ public class DarkSalvation extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         DynamicValue value = new ZombiesControlledByTargetPlayerCount();
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false));
         effect = new BoostTargetEffect(value, value, Duration.EndOfTurn, true);
         effect.setTargetPointer(new SecondTargetPointer());
         effect.setText(", then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls");

@@ -54,7 +54,7 @@ public class MeishinTheMindCage extends CardImpl {
 
 
         // All creatures get -X/-0, where X is the number of cards in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new SignInversionDynamicValue(new CardsInControllerHandCount()), new StaticValue(0), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false, "All creatures get -X/-0, where X is the number of cards in your hand")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new SignInversionDynamicValue(new CardsInControllerHandCount()), new StaticValue(0), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false, "All creatures get -X/-0, where X is the number of cards in your hand")));
     }
 
     public MeishinTheMindCage(final MeishinTheMindCage card) {

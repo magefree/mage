@@ -47,7 +47,7 @@ public class WarFlare extends CardImpl {
 
         // Creatures you control get +2/+1 until end of turn.  Untap those creatures.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterCreaturePermanent(),"Untap those creatures"));
+        this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE,"Untap those creatures"));
     }
 
     public WarFlare(final WarFlare card) {

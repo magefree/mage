@@ -84,7 +84,7 @@ class AbolisherOfBloodlinesAbility extends TriggeredAbilityImpl {
     static final String RULE_TEXT = "When this creature transforms into Abolisher of Bloodlines, target opponent sacrifices three creatures";
 
     public AbolisherOfBloodlinesAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterCreaturePermanent(), 3, "Target opponent"), false);
+        super(Zone.BATTLEFIELD, new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 3, "Target opponent"), false);
         Target target = new TargetOpponent();
         this.addTarget(target);
     }

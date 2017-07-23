@@ -53,7 +53,7 @@ public class SeaKingsBlessing extends CardImpl {
         Effect effect = new BecomesColorTargetEffect(ObjectColor.BLUE, Duration.EndOfTurn);
         effect.setText("Any number of target creatures become blue until end of turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_CREATURE, false));
 
     }
 

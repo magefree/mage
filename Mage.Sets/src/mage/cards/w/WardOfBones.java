@@ -117,8 +117,8 @@ class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
                 return false;
             }
             if (card.isCreature()
-                    && game.getBattlefield().countAll(new FilterCreaturePermanent(), opponent.getId(), game) 
-                        > game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+                    && game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, opponent.getId(), game) 
+                        > game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 return true;
             }
             if (card.isArtifact()

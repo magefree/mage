@@ -781,9 +781,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             List<Permanent> targets;
             if (outcome.isGood()) {
-                targets = threats(playerId, source.getSourceId(), new FilterCreaturePermanent(), game, target.getTargets());
+                targets = threats(playerId, source.getSourceId(), StaticFilters.FILTER_PERMANENT_CREATURE, game, target.getTargets());
             } else {
-                targets = threats(opponentId, source.getSourceId(), new FilterCreaturePermanent(), game, target.getTargets());
+                targets = threats(opponentId, source.getSourceId(), StaticFilters.FILTER_PERMANENT_CREATURE, game, target.getTargets());
             }
             for (Permanent permanent : targets) {
                 if (target.canTarget(getId(), permanent.getId(), source, game)) {

@@ -46,7 +46,7 @@ public class DiabolicEdict extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
         // Target player sacrifices a creature.
-        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
+        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target player"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

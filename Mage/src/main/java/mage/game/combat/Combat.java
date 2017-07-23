@@ -1212,7 +1212,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
         }
         // reset the removeFromCombat flag on all creatures on the battlefield
-        for (Permanent creaturePermanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game)) {
+        for (Permanent creaturePermanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
             creaturePermanent.setRemovedFromCombat(false);
         }
         clear();

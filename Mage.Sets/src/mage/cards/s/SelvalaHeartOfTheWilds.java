@@ -142,7 +142,7 @@ class GreatestPowerPredicate implements Predicate<Permanent> {
         for (UUID playerId : game.getPlayerList()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), playerId, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)) {
                     if (permanent.getPower().getValue() >= power && !permanent.equals(input)) {
                         return false; //we found something with equal/more power
                     }

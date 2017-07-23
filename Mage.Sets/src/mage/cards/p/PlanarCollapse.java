@@ -55,7 +55,7 @@ public class PlanarCollapse extends CardImpl {
 
         // At the beginning of your upkeep, if there are four or more creatures on the battlefield, sacrifice Planar Collapse and destroy all creatures. They can't be regenerated.
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
-        ability.addEffect(new DestroyAllEffect(new FilterCreaturePermanent(), true));
+        ability.addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE, true));
         PlanarCollapseCondition contition = new PlanarCollapseCondition();
         this.addAbility(new ConditionalTriggeredAbility(ability, contition, "At the beginning of your upkeep, if there are four or more creatures on the battlefield, sacrifice {this} and destroy all creatures. They can't be regenerated"));
         
@@ -74,7 +74,7 @@ public class PlanarCollapse extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            return game.getBattlefield().count(new FilterCreaturePermanent(), source.getSourceId(), source.getControllerId(), game) >= 4;
+            return game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, source.getSourceId(), source.getControllerId(), game) >= 4;
         }
     }
 }

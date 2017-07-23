@@ -94,7 +94,7 @@ class ShieldsOfVelisVelGainEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget(), game);
+            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getFirstTarget(), game);
             for (Permanent creature : creatures) {
                 affectedObjectList.add(new MageObjectReference(creature, game));
             }

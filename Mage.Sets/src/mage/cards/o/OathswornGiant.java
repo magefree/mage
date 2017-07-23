@@ -58,8 +58,8 @@ public class OathswornGiant extends CardImpl {
 
         this.addAbility(VigilanceAbility.getInstance());
         // Other creatures you control get +0/+2 and have vigilance.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true));
-        ability.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, true));
+        ability.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, true));
         this.addAbility(ability);
     }
 

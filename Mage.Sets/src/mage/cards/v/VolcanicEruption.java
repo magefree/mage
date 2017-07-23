@@ -112,7 +112,7 @@ class VolcanicEruptionEffect extends OneShotEffect {
         }
         
         if (destroyedCount > 0) {
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
+            List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
             for (Permanent permanent: permanents) {
                 permanent.damage(destroyedCount, source.getSourceId(), game, false, true);
             }

@@ -171,7 +171,7 @@ class RavagerOfTheFellsEffect extends OneShotEffect {
 class RavagerOfTheFellsTarget extends TargetPermanent {
 
     public RavagerOfTheFellsTarget() {
-        super(0, 1, new FilterCreaturePermanent(), false);
+        super(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false);
     }
 
     public RavagerOfTheFellsTarget(final RavagerOfTheFellsTarget target) {

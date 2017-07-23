@@ -82,7 +82,7 @@ class StrongholdDisciplineEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                final int count = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), playerId, game).size();
+                final int count = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game).size();
                 if (count > 0) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {

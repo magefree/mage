@@ -58,7 +58,7 @@ public class ZhangHeWeiGeneral extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
         // Whenever Zhang He, Wei General attacks, each other creature you control gets +1/+0 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn,
-            new FilterCreaturePermanent(), true), false));
+            StaticFilters.FILTER_PERMANENT_CREATURE, true), false));
     }
 
     public ZhangHeWeiGeneral(final ZhangHeWeiGeneral card) {

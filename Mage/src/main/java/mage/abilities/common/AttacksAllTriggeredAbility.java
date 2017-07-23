@@ -51,11 +51,11 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
     protected boolean controller;
 
     public AttacksAllTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, new FilterCreaturePermanent(), SetTargetPointer.NONE, false);
+        this(effect, optional, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.NONE, false);
     }
 
     public AttacksAllTriggeredAbility(Effect effect, boolean optional, boolean attacksYouOrYourPlaneswalker) {
-        this(effect, optional, new FilterCreaturePermanent(), SetTargetPointer.NONE, attacksYouOrYourPlaneswalker);
+        this(effect, optional, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.NONE, attacksYouOrYourPlaneswalker);
     }
 
     public AttacksAllTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, SetTargetPointer setTargetPointer, boolean attacksYouOrYourPlaneswalker) {

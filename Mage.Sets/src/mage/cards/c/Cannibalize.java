@@ -55,7 +55,7 @@ public class Cannibalize extends CardImpl {
 
         // Choose two target creatures controlled by the same player. Exile one of the creatures and put two +1/+1 counters on the other.
         this.getSpellAbility().addEffect(new CannibalizeEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(2,2,new FilterCreaturePermanent(),false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(2,2,StaticFilters.FILTER_PERMANENT_CREATURE,false));
     }
 
     public Cannibalize(final Cannibalize card) {

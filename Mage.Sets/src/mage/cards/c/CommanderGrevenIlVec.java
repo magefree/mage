@@ -58,7 +58,7 @@ public class CommanderGrevenIlVec extends CardImpl {
         this.addAbility(FearAbility.getInstance());
 
         // When Commander Greven il-Vec enters the battlefield, sacrifice a creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, ""), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""), false));
     }
 
     public CommanderGrevenIlVec(final CommanderGrevenIlVec card) {

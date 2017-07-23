@@ -90,7 +90,7 @@ class ManaEchoesEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (controller != null && permanent != null) {
             int foundCreatures = 0;
-            for (Permanent perm : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 if (permanent.shareSubtypes(perm, game)) {
                     foundCreatures++;
                 }

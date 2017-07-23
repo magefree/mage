@@ -65,7 +65,7 @@ public class BlindWorship extends CardImpl {
 
         // Enchanted creature has "Whenever this creature attacks, each other creature you control gets +X/+X until end of turn, where X is this creature's power."
         DynamicValue xValue = new SourcePermanentPowerCount();
-        Ability attachedAbility = new AttacksTriggeredAbility(new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent(), true), false);
+        Ability attachedAbility = new AttacksTriggeredAbility(new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true), false);
         Effect gainAbilityEffect = new GainAbilityAttachedEffect(attachedAbility, AttachmentType.AURA);
         gainAbilityEffect.setText("Enchanted creature has \"Whenever this creature attacks, each other creature you control gets +X/+X until end of turn, where X is this creature's power\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, gainAbilityEffect));

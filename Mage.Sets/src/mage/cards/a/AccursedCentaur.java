@@ -52,7 +52,7 @@ public class AccursedCentaur extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Accursed Centaur enters the battlefield, sacrifice a creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, null)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null)));
     }
 
     public AccursedCentaur(final AccursedCentaur card) {

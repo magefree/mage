@@ -90,7 +90,7 @@ class CatastropheEffect extends OneShotEffect {
                     permanent.destroy(source.getSourceId(), game, permanent.isCreature());
                 }
             } else {
-                for (Permanent permanent:  game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), controller.getId(), source.getSourceId(), game)) {
+                for (Permanent permanent:  game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), source.getSourceId(), game)) {
                     permanent.destroy(source.getSourceId(), game, true);
                 }
             }

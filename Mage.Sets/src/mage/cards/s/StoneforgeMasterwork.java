@@ -83,7 +83,7 @@ class StoneforgeMasterworkDynamicValue implements DynamicValue {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(equipment.getAttachedTo());
             if (equipped != null) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), sourceAbility.getControllerId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceAbility.getControllerId(), game)) {
                     if (!permanent.getId().equals(equipped.getId())) {
                         if (equipped.shareSubtypes(permanent, game)) {
                             xValue++;

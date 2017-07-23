@@ -186,7 +186,7 @@ class TritonTacticsEndOfCombatEffect extends OneShotEffect {
             attackerMap = (Map<Integer, Set<String>>) object;
             for (Set<String> attackerSet : attackerMap.values()) {
                 List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
-                for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+                for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                     if (attackerSet.contains(CardUtil.getCardZoneString(null, creature.getId(), game))) {
                         // tap creature and add the not untap effect
                         creature.tap(game);

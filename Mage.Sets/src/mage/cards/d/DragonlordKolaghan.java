@@ -73,7 +73,7 @@ public class DragonlordKolaghan extends CardImpl {
         
         // Other creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true)));
+                new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, true)));
         
         // Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, that player loses 10 life.
         Effect effect = new LoseLifeTargetEffect(10);

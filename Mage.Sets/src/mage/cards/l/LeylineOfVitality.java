@@ -51,7 +51,7 @@ public class LeylineOfVitality extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
 
         this.addAbility(LeylineAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false)));
 
         this.addAbility(new CreatureEntersBattlefieldTriggeredAbility(new GainLifeEffect(1), true));
     }

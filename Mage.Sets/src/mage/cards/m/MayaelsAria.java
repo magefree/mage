@@ -97,7 +97,7 @@ class MayaelsAriaEffect extends OneShotEffect {
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
         if (game.getState().getBattlefield().countAll(filter, controller.getId(), game) > 0) {
-            for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 creature.addCounters(CounterType.P1P1.createInstance(), source, game);
             }
         }

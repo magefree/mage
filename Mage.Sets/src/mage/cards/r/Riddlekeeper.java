@@ -54,7 +54,7 @@ public class Riddlekeeper extends CardImpl {
         // Whenever a creature attacks you or a planeswalker you control, that creature's controller puts the top two cards of his or her library into his or her graveyard.
         Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(2);
         effect.setText("that creature's controller puts the top two cards of his or her library into his or her graveyard");
-        this.addAbility(new AttacksAllTriggeredAbility(effect, false, new FilterCreaturePermanent(), SetTargetPointer.PLAYER, true, true));
+        this.addAbility(new AttacksAllTriggeredAbility(effect, false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PLAYER, true, true));
     }
 
     public Riddlekeeper(final Riddlekeeper card) {

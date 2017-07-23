@@ -61,7 +61,7 @@ public class VindictiveMob extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When Vindictive Mob enters the battlefield, sacrifice a creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, null)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null)));
 
         // Vindictive Mob can't be blocked by Saprolings.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));

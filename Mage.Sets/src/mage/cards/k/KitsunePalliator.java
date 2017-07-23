@@ -93,7 +93,7 @@ class KitsunePalliatorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, 1);
 
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
         for (Permanent permanent: permanents) {
             effect.setTargetPointer(new FixedTarget(permanent.getId()));
             game.addEffect(effect, source);

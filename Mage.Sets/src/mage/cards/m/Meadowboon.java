@@ -90,7 +90,7 @@ class MeadowboonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player target = game.getPlayer(source.getFirstTarget());
         if (target != null) {
-            for (Permanent p : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), target.getId(), game)) {
+            for (Permanent p : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, target.getId(), game)) {
                 p.addCounters(CounterType.P1P1.createInstance(), source, game);
             }
             return true;

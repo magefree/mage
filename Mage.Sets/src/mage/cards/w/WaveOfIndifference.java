@@ -53,7 +53,7 @@ public class WaveOfIndifference extends CardImpl {
         Effect effect = new CantBlockTargetEffect(Duration.EndOfTurn);
         effect.setText("X target creatures can't block this turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
     public WaveOfIndifference(final WaveOfIndifference card) {

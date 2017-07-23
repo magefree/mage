@@ -81,7 +81,7 @@ public class MinionsMurmurs extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                int creaturesControlled = game.getBattlefield().countAll(new FilterCreaturePermanent(), controller.getId(), game);
+                int creaturesControlled = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game);
                 controller.drawCards(creaturesControlled, game);
                 controller.loseLife(creaturesControlled, game, false);
                 return true;

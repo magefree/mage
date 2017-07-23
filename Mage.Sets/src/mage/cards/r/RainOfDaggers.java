@@ -86,7 +86,7 @@ class RainOfDaggersEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && getTargetPointer().getFirst(game, source) != null) {
             int destroyedCreature = 0;
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), getTargetPointer().getFirst(game, source), game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getTargetPointer().getFirst(game, source), game)) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
                     destroyedCreature++;
                 }

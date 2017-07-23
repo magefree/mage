@@ -111,7 +111,7 @@ class LivingEndEffect extends OneShotEffect {
                 }
             }
             // sacrifice all creatures
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
             // put exiled cards to battlefield

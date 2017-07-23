@@ -54,7 +54,7 @@ public class Tenacity extends CardImpl {
         boost.setText("Creatures you control get +1/+1");
         this.getSpellAbility().addEffect(boost);
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), " and gain lifelink until end of turn"));
-        this.getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterCreaturePermanent(),"Untap those creatures"));
+        this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE,"Untap those creatures"));
     }
 
     public Tenacity(final Tenacity card) {

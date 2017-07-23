@@ -45,7 +45,7 @@ public class WarriorsHonor extends CardImpl {
     public WarriorsHonor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
     public WarriorsHonor(final WarriorsHonor card) {

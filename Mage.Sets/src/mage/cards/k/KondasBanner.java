@@ -95,7 +95,7 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect {
     private static final String effectText = "Creatures that share a creature type with equipped creature get +1/+1";
 
     KondasBannerTypeBoostEffect() {
-        super(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+        super(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false);
         staticText = effectText;
     }
 
@@ -135,7 +135,7 @@ class KondasBannerColorBoostEffect extends BoostAllEffect {
     private static final String effectText = "Creatures that share a color with equipped creature get +1/+1.";
 
     KondasBannerColorBoostEffect() {
-        super(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+        super(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false);
         staticText = effectText;
     }
 

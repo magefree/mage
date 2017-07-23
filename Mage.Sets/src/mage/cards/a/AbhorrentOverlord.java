@@ -66,7 +66,7 @@ public class AbhorrentOverlord extends CardImpl {
         effect.setText("create a number of 1/1 black Harpy creature tokens with flying equal to your devotion to black. <i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i>");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
         // At the beginning of your upkeep, sacrifice a creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, null), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null), TargetController.YOU, false));
     }
 
     public AbhorrentOverlord(final AbhorrentOverlord card) {

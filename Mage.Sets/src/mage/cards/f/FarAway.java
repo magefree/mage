@@ -50,7 +50,7 @@ public class FarAway extends SplitCard {
 
         // Away
         // Target player sacrifices a creature.
-        getRightHalfCard().getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
+        getRightHalfCard().getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target player"));
         getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 
     }

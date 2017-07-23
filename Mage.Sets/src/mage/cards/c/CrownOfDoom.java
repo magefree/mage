@@ -67,7 +67,7 @@ public class CrownOfDoom extends CardImpl {
         // Whenever a creature attacks you or a planeswalker you control, it gets +2/+0 until end of turn.
         Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
         effect.setText("it gets +2/+0 until end of turn");
-        this.addAbility(new AttacksAllTriggeredAbility(effect, false, new FilterCreaturePermanent(), SetTargetPointer.PERMANENT, true));
+        this.addAbility(new AttacksAllTriggeredAbility(effect, false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PERMANENT, true));
 
         // {2}: Target player other than Crown of Doom's owner gains control of it. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new CrownOfDoomEffect(), new ManaCostsImpl("{2}"), MyTurnCondition.instance);

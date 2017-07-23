@@ -90,7 +90,7 @@ class MassPolymorphEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             int count;
             // Cards creatures = new CardsImpl();
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
+            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
             Set<Card> creaturesToExile = new HashSet<>();
             creaturesToExile.addAll(creatures);
             count = creatures.size();

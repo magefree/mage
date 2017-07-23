@@ -62,7 +62,7 @@ public class JeskaiAscendancy extends CardImpl {
         // Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn. Untap those creatures.
         Effect effect = new BoostControlledEffect(1,1,Duration.EndOfTurn);
         Ability ability = new SpellCastControllerTriggeredAbility(effect, filterNonCreature, false);
-        effect = new UntapAllControllerEffect(new FilterCreaturePermanent(),"Untap those creatures");
+        effect = new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE,"Untap those creatures");
         ability.addEffect(effect);
         this.addAbility(ability);
 

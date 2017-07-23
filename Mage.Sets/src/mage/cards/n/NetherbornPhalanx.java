@@ -92,7 +92,7 @@ class NetherbornPhalanxEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             for (UUID playerId : game.getOpponents(source.getControllerId())) {
-                final int count = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), playerId, game).size();
+                final int count = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game).size();
                 if (count > 0) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {

@@ -67,7 +67,7 @@ public class GlaringSpotlight extends CardImpl {
 
         // {3}, Sacrifice Glaring Spotlight: Creatures you control gain hexproof until end of turn and can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(),false),
+                Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE,false),
                 new GenericManaCost(3));
         ability.addEffect(new CantBeBlockedAllEffect(new FilterControlledCreaturePermanent(), Duration.EndOfTurn));
         ability.addCost(new SacrificeSourceCost());

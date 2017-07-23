@@ -65,7 +65,7 @@ public class CallForUnity extends CardImpl {
 
         // Creatures you control get +1/+1 for each unity counter on Call for Unity.
         Effect effect = new BoostControlledEffect(new CountersSourceCount(CounterType.UNITY), new CountersSourceCount(CounterType.UNITY), Duration.WhileOnBattlefield,
-                        new FilterCreaturePermanent(), false);
+                        StaticFilters.FILTER_PERMANENT_CREATURE, false);
         effect.setText("Creatures you control get +1/+1 for each unity counter on {this}");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

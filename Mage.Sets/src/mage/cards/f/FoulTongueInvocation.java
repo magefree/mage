@@ -70,7 +70,7 @@ public class FoulTongueInvocation extends CardImpl {
 
         // Target player sacrifices a creature. If you revealed a Dragon card or controlled a Dragon as you cast Foul-Tongue Invocation, you gain 4 life.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "target player"));
+        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "target player"));
         this.getSpellAbility().addEffect(new FoulTongueInvocationEffect());
         this.getSpellAbility().addWatcher(new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
     }

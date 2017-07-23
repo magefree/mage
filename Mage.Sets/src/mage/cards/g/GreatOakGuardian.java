@@ -103,7 +103,7 @@ class GreatOakGuardianEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget(), game);
+            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getFirstTarget(), game);
             for (Permanent creature : creatures) {
                 affectedObjectList.add(new MageObjectReference(creature, game));
             }
@@ -145,7 +145,7 @@ class GreatOakGuardianUntapEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getControllerId());
         if (targetPlayer != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), targetPlayer.getId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, targetPlayer.getId(), game)) {
                 permanent.untap(game);
             }
             return true;

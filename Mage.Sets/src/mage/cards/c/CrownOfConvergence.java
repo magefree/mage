@@ -89,7 +89,7 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
     private static final String effectText = "creatures you control that share a color with that card get +1/+1";
 
     CrownOfConvergenceColorBoostEffect() {
-        super(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+        super(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false);
         staticText = effectText;
     }
 

@@ -68,7 +68,7 @@ public class NyleaGodOfTheHunt extends CardImpl {
         effect.setText("As long as your devotion to green is less than five, Nylea isn't a creature.<i>(Each {G} in the mana costs of permanents you control counts towards your devotion to green.)</i>");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Other creatures you control have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, true)));
         // {3}{G}: Target creature gets +2/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2,2, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}"));
         ability.addTarget(new TargetCreaturePermanent());

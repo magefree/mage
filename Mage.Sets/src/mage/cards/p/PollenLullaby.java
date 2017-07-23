@@ -87,7 +87,7 @@ class PollenLullabyEffect extends OneShotEffect {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
-            for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
+            for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
                 doNotUntapNextUntapStep.add(creature);
             }
             if (!doNotUntapNextUntapStep.isEmpty()) {

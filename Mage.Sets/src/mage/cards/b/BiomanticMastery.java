@@ -90,7 +90,7 @@ class BiomanticMasteryEffect extends OneShotEffect {
             for(UUID playerId: getTargetPointer().getTargets(game, source)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    int creatures = game.getBattlefield().countAll(new FilterCreaturePermanent(), playerId, game);
+                    int creatures = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game);
                     controller.drawCards(creatures, game);
                 }
             }

@@ -71,7 +71,7 @@ public class KioraMasterOfTheDepths extends CardImpl {
 
         // +1: Untap up to one target creature and up to one target land.
         LoyaltyAbility ability1 = new LoyaltyAbility(new KioraUntapEffect(), 1);
-        ability1.addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent(), false));
+        ability1.addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false));
         ability1.addTarget(new TargetLandPermanent(0, 1, new FilterLandPermanent(), false));
         this.addAbility(ability1);
 

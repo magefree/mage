@@ -57,7 +57,7 @@ public class ToTheSlaughter extends CardImpl {
 
         // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, instead that player sacrifices a creature and a planeswalker.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"),
+                new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target player"),
                 DeliriumCondition.instance,
                 "<br><i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, instead that player sacrifices a creature"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

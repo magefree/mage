@@ -55,7 +55,7 @@ public class KjeldoranDead extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Kjeldoran Dead enters the battlefield, sacrifice a creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, null));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null));
         this.addAbility(ability);
         // {B}: Regenerate Kjeldoran Dead.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));

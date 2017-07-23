@@ -84,7 +84,7 @@ public class BolsterEffect extends OneShotEffect {
             }
             int leastToughness = Integer.MAX_VALUE;
             Permanent selectedCreature = null;
-            for(Permanent permanent: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controller.getId(), game)) {
+            for(Permanent permanent: game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                 if (leastToughness > permanent.getToughness().getValue()) {
                     leastToughness = permanent.getToughness().getValue();
                     selectedCreature = permanent;

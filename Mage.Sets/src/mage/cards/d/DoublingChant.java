@@ -95,7 +95,7 @@ class DoublingChantEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
+        List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
         for (Permanent creature : creatures) {
             final String creatureName = creature.getName();
             if (!namesFiltered.contains(creatureName)) {

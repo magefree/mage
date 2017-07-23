@@ -159,7 +159,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
                 }
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+        for (Permanent permanent: game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -228,7 +228,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
                 possibleTargets.add(playerId);
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+        for (Permanent permanent: game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game)) {
             if (filter.match(permanent, null, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }

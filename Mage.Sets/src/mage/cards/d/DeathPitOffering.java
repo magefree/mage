@@ -93,7 +93,7 @@ class DeathPitOfferingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             permanent.sacrifice(source.getSourceId(), game);
         }

@@ -55,7 +55,7 @@ public class Pandemonium extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to target creature or player of his or her choice.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PandemoniumEffect(), new FilterCreaturePermanent(), false, SetTargetPointer.PERMANENT, "");
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PandemoniumEffect(), StaticFilters.FILTER_PERMANENT_CREATURE, false, SetTargetPointer.PERMANENT, "");
         ability.addTarget(new TargetCreatureOrPlayer());
         originalId = ability.getOriginalId();
         this.addAbility(ability);

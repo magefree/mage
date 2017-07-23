@@ -79,7 +79,7 @@ public class CabalExecutioner extends CardImpl {
 class CabalExecutionerAbility extends TriggeredAbilityImpl {
 
     public CabalExecutionerAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterCreaturePermanent(), 1, ""));
+        super(Zone.BATTLEFIELD, new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""));
     }
 
     public CabalExecutionerAbility(final CabalExecutionerAbility ability) {

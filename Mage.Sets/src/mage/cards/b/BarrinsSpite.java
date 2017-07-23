@@ -53,7 +53,7 @@ public class BarrinsSpite extends CardImpl {
 
         // Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand.
         this.getSpellAbility().addEffect(new BarrinsSpiteEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(2, 2, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(2, 2, StaticFilters.FILTER_PERMANENT_CREATURE, false));
 
     }
 

@@ -150,7 +150,7 @@ class KusariGamaDamageEffect extends OneShotEffect {
                 creature = (Permanent) game.getLastKnownInformation(damagedCreatureId, Zone.BATTLEFIELD);
             }
             if (creature != null) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), creature.getControllerId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, creature.getControllerId(), game)) {
                     if (!permanent.getId().equals(damagedCreatureId)) {
                         permanent.damage(damage, source.getSourceId(), game, false, true);
                     }

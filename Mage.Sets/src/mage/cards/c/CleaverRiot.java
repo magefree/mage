@@ -48,7 +48,7 @@ public class CleaverRiot extends CardImpl {
 
 
         // Creatures you control gain double strike until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
     public CleaverRiot(final CleaverRiot card) {

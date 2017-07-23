@@ -51,7 +51,7 @@ public class Fervor extends CardImpl {
 
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
+                HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false)));
     }
 
     public Fervor(final Fervor card) {

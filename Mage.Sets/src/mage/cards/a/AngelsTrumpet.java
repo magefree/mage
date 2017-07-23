@@ -91,7 +91,7 @@ class AngelsTrumpetTapEffect extends OneShotEffect {
         Player player = game.getPlayer(game.getActivePlayerId());
         int count = 0;
         if (player != null) {
-            for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
+            for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
                 // Untapped creatures are safe.
                 if (creature.isTapped()) {
                     continue;

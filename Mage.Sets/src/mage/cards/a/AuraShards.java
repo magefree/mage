@@ -49,7 +49,7 @@ public class AuraShards extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{W}");
 
         // Whenever a creature enters the battlefield under your control, you may destroy target artifact or enchantment.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new FilterCreaturePermanent(), true, "Whenever a creature enters the battlefield under your control, you may destroy target artifact or enchantment");
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), StaticFilters.FILTER_PERMANENT_CREATURE, true, "Whenever a creature enters the battlefield under your control, you may destroy target artifact or enchantment");
         ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.addAbility(ability);
     }

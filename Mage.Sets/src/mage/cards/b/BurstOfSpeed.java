@@ -46,7 +46,7 @@ public class BurstOfSpeed extends CardImpl {
     public BurstOfSpeed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
     public BurstOfSpeed(final BurstOfSpeed card) {

@@ -101,7 +101,7 @@ class OviyaPashiriSageLifecrafterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int creatures = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game);
+            int creatures = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
             return new CreateTokenEffect(new OviyaPashiriSageLifecrafterToken(creatures)).apply(game, source);
         }
         return false;

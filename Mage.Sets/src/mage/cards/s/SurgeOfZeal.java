@@ -95,7 +95,7 @@ class SurgeOfZealEffect extends OneShotEffect {
             Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (target != null) {
                 ObjectColor color = target.getColor(game);
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                     if (permanent.getColor(game).shares(color)) {
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(permanent, game));

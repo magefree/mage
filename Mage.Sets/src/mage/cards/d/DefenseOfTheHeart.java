@@ -82,7 +82,7 @@ public class DefenseOfTheHeart extends CardImpl {
             Set<UUID> opponents = game.getOpponents(source.getControllerId());
             for(UUID uuid : opponents)
             {
-                if(game.getBattlefield().countAll(new FilterCreaturePermanent(), uuid, game) >= 3)
+                if(game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, uuid, game) >= 3)
                 {
                     return true;
                 }

@@ -51,7 +51,7 @@ public class SwayOfIllusion extends CardImpl {
         Effect effect = new BecomesColorTargetEffect(Duration.EndOfTurn);
         effect.setText("Any number of target creatures become the color of your choice until end of turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_CREATURE, false));
         
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

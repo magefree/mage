@@ -59,7 +59,7 @@ public class PatronOfTheAkki extends CardImpl {
         this.addAbility(new OfferingAbility(SubType.GOBLIN));
 
         // Whenever Patron of the Akki attacks, creatures you control get +2/+0 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(2, 0, Duration.EndOfTurn, new FilterCreaturePermanent(), false), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false), false));
     }
 
     public PatronOfTheAkki(final PatronOfTheAkki card) {

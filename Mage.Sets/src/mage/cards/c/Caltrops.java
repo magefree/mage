@@ -51,7 +51,7 @@ public class Caltrops extends CardImpl {
         // Whenever a creature attacks, Caltrops deals 1 damage to it.
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to it");
-        this.addAbility(new AttacksAllTriggeredAbility(effect, false, new FilterCreaturePermanent(),
+        this.addAbility(new AttacksAllTriggeredAbility(effect, false, StaticFilters.FILTER_PERMANENT_CREATURE,
             SetTargetPointer.PERMANENT, false));
     }
 

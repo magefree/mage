@@ -66,7 +66,7 @@ public class SlumberingDragon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SlumberingDragonEffect()));
 
         // Whenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on Slumbering Dragon.               
-        this.addAbility(new AttacksAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, new FilterCreaturePermanent(), SetTargetPointer.PERMANENT, true));
+        this.addAbility(new AttacksAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PERMANENT, true));
     }
 
     public SlumberingDragon(final SlumberingDragon card) {

@@ -87,7 +87,7 @@ class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int value = Integer.MIN_VALUE;
-        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
             if (value < permanent.getToughness().getValue()) {
                 value = permanent.getToughness().getValue();
             }

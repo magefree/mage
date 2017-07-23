@@ -98,7 +98,7 @@ class ShowOfDominanceEffect extends OneShotEffect {
         if (controller != null) {
             int highestPower = Integer.MIN_VALUE;
             Permanent selectedCreature = null;
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), controller.getId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                 if (highestPower < permanent.getPower().getValue()) {
                     highestPower = permanent.getPower().getValue();
                     selectedCreature = permanent;

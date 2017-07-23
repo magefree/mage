@@ -54,7 +54,7 @@ public class DesecrationElemental extends CardImpl {
         // Fear
         this.addAbility(FearAbility.getInstance());
         // Whenever a player casts a spell, sacrifice a creature.
-        this.addAbility(new SpellCastAllTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, ""), false));
+        this.addAbility(new SpellCastAllTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""), false));
     }
 
     public DesecrationElemental(final DesecrationElemental card) {

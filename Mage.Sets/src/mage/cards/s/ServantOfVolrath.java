@@ -49,7 +49,7 @@ public class ServantOfVolrath extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Servant of Volrath leaves the battlefield, sacrifice a creature.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, ""), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""), false));
     }
 
     public ServantOfVolrath(final ServantOfVolrath card) {

@@ -46,9 +46,9 @@ public class FinalRevels extends CardImpl {
     public FinalRevels(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
-        this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostAllEffect(0, -2, Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+        mode.getEffects().add(new BoostAllEffect(0, -2, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -57,7 +57,7 @@ public class SpareFromEvil extends CardImpl {
 
 
         // Creatures you control gain protection from non-Human creatures until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(new ProtectionAbility(filterNonHuman), Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(new ProtectionAbility(filterNonHuman), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
     public SpareFromEvil(final SpareFromEvil card) {

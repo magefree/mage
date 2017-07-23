@@ -57,7 +57,7 @@ public class DeathMatch extends CardImpl {
         // Whenever a creature enters the battlefield, that creature's controller may have target creature of his or her choice get -3/-3 until end of turn.
         // NOTE: The ability being optional is implemented in the subclass to give the choice to correct player.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new DeathMatchEffect(),
-            new FilterCreaturePermanent(), false, SetTargetPointer.PLAYER, "");
+            StaticFilters.FILTER_PERMANENT_CREATURE, false, SetTargetPointer.PLAYER, "");
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         originalId = ability.getOriginalId();

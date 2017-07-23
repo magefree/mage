@@ -84,7 +84,7 @@ class LethalStingCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controllerId, game)) {
             return permanent != null;
         }
         return false;

@@ -90,7 +90,7 @@ class BreakingWaveEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> creatures = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(),
+        List<Permanent> creatures = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE,
             source.getControllerId(), source.getSourceId(), game);
         for(Permanent creature: creatures) {
             if(creature.isTapped()) {
