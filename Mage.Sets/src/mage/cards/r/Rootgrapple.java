@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -35,13 +34,14 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +67,7 @@ public class Rootgrapple extends CardImpl {
         
         // If you control a Treefolk, draw a card.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1),
-                new PermanentsOnTheBattlefieldCondition(filterTreefolk, ComparisonType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(filterTreefolk),
                 "If you control a Treefolk, draw a card"));
     }
 

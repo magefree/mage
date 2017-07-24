@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -39,12 +38,13 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,7 +70,7 @@ public class DesiccatedNaga extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new LoseLifeTargetEffect(2),
                 new ManaCostsImpl("{3}{B}"),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0));
+                new PermanentsOnTheBattlefieldCondition(filter));
         ability.addTarget(new TargetOpponent());
         Effect effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");

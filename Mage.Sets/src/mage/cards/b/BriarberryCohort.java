@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,10 +38,15 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +75,7 @@ public class BriarberryCohort extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Briarberry Cohort gets +1/+1 as long as you control another blue creature.
-        Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0);
+        Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
         Effect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         
