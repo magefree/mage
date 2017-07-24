@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCosts;
@@ -37,9 +36,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +80,7 @@ class SphereOfSafetyPayManaToAttackAllEffect extends CantAttackYouUnlessPayManaA
 
     @Override
     public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
-        int enchantments = game.getBattlefield().countAll(new FilterEnchantmentPermanent(), source.getControllerId(), game);
+        int enchantments = game.getBattlefield().countAll(StaticFilters.FILTER_ENCHANTMENT_PERMANENT, source.getControllerId(), game);
         if (enchantments > 0) {
             return new ManaCostsImpl<>("{" + enchantments + '}');
         }
