@@ -134,6 +134,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Helm of Obedience", 210, Rarity.RARE, mage.cards.h.HelmOfObedience.class));
         cards.add(new SetCardInfo("Icatian Javelineers", 15, Rarity.COMMON, IcatianJavelineers.class));
         cards.add(new SetCardInfo("Icatian Scout", 17, Rarity.COMMON, IcatianScout.class));
+        cards.add(new SetCardInfo("Iceberg", 49, Rarity.UNCOMMON, mage.cards.i.Iceberg.class));
         cards.add(new SetCardInfo("Icequake", 94, Rarity.COMMON, mage.cards.i.Icequake.class));
         cards.add(new SetCardInfo("Icy Prison", 50, Rarity.COMMON, mage.cards.i.IcyPrison.class));
         cards.add(new SetCardInfo("Ihsan's Shade", 95, Rarity.RARE, mage.cards.i.IhsansShade.class));
