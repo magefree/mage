@@ -124,6 +124,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Fungal Bloom", 165, Rarity.RARE, mage.cards.f.FungalBloom.class));
         cards.add(new SetCardInfo("Gangrenous Zombies", 92, Rarity.COMMON, mage.cards.g.GangrenousZombies.class));
         cards.add(new SetCardInfo("Giant Growth", 167, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
+        cards.add(new SetCardInfo("Giant Trap Door Spider", 195, Rarity.UNCOMMON, mage.cards.g.GiantTrapDoorSpider.class));
         cards.add(new SetCardInfo("Glacial Chasm", 229, Rarity.RARE, mage.cards.g.GlacialChasm.class));
         cards.add(new SetCardInfo("Glacial Crevasses", 127, Rarity.RARE, mage.cards.g.GlacialCrevasses.class));
         cards.add(new SetCardInfo("Gorilla Shaman", 129, Rarity.UNCOMMON, GorillaShaman.class));
