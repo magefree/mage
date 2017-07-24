@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -35,9 +34,11 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.watchers.common.RevoltWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ public class Decommission extends CardImpl {
 
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
 
         // <i>Revolt</i> &mdash; If a permanent you controlled left the battlefield this turn, you gain 3 life.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new GainLifeEffect(3), RevoltCondition.instance, "<br><i>Revolt</i> &mdash; If a permanent you controlled left the battlefield this turn, you gain 3 life."));

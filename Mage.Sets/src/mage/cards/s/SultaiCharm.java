@@ -27,18 +27,19 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +65,7 @@ public class SultaiCharm extends CardImpl {
         // <strong>*</strong> Destroy target artifact or enchantment.
         Mode mode = new Mode();
         mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        mode.getTargets().add(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
         this.getSpellAbility().addMode(mode);
         
         // <strong>*</strong> Draw two cards, then discard a card.

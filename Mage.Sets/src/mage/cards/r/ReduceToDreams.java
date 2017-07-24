@@ -27,12 +27,13 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,7 @@ public class ReduceToDreams extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Return all artifacts and enchantments to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterArtifactOrEnchantmentPermanent()));
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
     }
 
     public ReduceToDreams(final ReduceToDreams card) {

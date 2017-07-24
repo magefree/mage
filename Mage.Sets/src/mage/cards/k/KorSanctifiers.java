@@ -27,7 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -37,8 +36,10 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +60,7 @@ public class KorSanctifiers extends CardImpl {
 
         // When Kor Sanctifiers enters the battlefield, if it was kicked, destroy target artifact or enchantment.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        ability.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
         this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, destroy target artifact or enchantment."));
     }
 

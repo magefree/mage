@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
@@ -35,9 +34,11 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,10 +64,10 @@ public class ReturnToDust extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             if (game.getActivePlayerId().equals(ability.getControllerId()) && game.isMainPhase()) {
-                ability.addTarget(new TargetPermanent(1, 2, new FilterArtifactOrEnchantmentPermanent(), false));
+                ability.addTarget(new TargetPermanent(1, 2, StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT, false));
             }
             else {
-                ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+                ability.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
             }
         }
     }

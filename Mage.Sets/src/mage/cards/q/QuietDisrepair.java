@@ -27,7 +27,6 @@
  */
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -40,8 +39,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ public class QuietDisrepair extends CardImpl {
 
 
         // Enchant artifact or enchantment
-        TargetPermanent auraTarget = new TargetPermanent(new FilterArtifactOrEnchantmentPermanent());
+        TargetPermanent auraTarget = new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
