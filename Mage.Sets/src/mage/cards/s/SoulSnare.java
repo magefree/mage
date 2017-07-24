@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,24 +39,22 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class SoulSnare extends CardImpl {
 
     public SoulSnare(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
         // {W}, Sacrifice Soul Snare: Exile target creature that's attacking you or a planeswalker you control.
-        Effect effect = new ExileTargetEffect();
-        effect.setText("Exile target creature that's attacking you or a planeswalker you control.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new ExileTargetEffect(), new ManaCostsImpl("{W}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new SoulSnareFilter()));
         this.addAbility(ability);
@@ -79,7 +76,6 @@ class SoulSnareFilter extends FilterAttackingCreature {
         super("creature that's attacking you or a planeswalker you control");
     }
 
-
     public SoulSnareFilter(final SoulSnareFilter filter) {
         super(filter);
     }
@@ -91,28 +87,7 @@ class SoulSnareFilter extends FilterAttackingCreature {
 
     @Override
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if(!super.match(permanent, sourceId, playerId, game)) {
-            return false;
-        }
-
-        for(CombatGroup group : game.getCombat().getGroups()) {
-            for(UUID attacker : group.getAttackers()) {
-                if(attacker.equals(permanent.getId())) {
-                    UUID defenderId = group.getDefenderId();
-                    if(defenderId.equals(playerId)) {
-                        return true;
-                    }
-                    else {
-                        Permanent planeswalker = game.getPermanent(defenderId);
-                        if(planeswalker != null && planeswalker.isPlaneswalker()
-                            && planeswalker.getControllerId().equals(playerId)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-
-        return false;
+        return super.match(permanent, sourceId, playerId, game)
+                && playerId.equals(game.getCombat().getDefendingPlayerId(permanent.getId(), game));
     }
 }
