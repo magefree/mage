@@ -27,7 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,10 +40,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.other.TargetsPermanentPredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ public class VigilantMartyr extends CardImpl {
     private final static FilterSpell filter = new FilterSpell("spell that targets an enchantment");
 
     static {
-        filter.add(new TargetsPermanentPredicate(new FilterEnchantmentPermanent()));
+        filter.add(new TargetsPermanentPredicate(StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
     }
 
     public VigilantMartyr(UUID ownerId, CardSetInfo setInfo) {

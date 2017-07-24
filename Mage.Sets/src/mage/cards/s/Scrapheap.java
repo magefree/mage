@@ -27,19 +27,20 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -90,7 +91,7 @@ class ScrapheapTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null && permanent.getOwnerId().equals(this.getControllerId())) {
-                if (new FilterArtifactOrEnchantmentPermanent().match(permanent, sourceId, controllerId, game)) {
+                if (StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT.match(permanent, sourceId, controllerId, game)) {
                     return true;
                 }
             }

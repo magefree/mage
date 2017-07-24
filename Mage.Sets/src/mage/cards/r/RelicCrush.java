@@ -27,15 +27,15 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,12 +47,11 @@ public class RelicCrush extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}");
 
         // Destroy target artifact or enchantment and up to one other target artifact or enchantment.
-        FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent();
         Effect effect = new DestroyTargetEffect(false, true);
         effect.setText("Destroy target artifact or enchantment and up to one other target artifact or enchantment");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter, false));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT, false));
     }
 
     public RelicCrush(final RelicCrush card) {

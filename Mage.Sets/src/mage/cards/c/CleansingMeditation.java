@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
@@ -39,10 +38,12 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -97,7 +98,7 @@ class CleansingMeditationEffect extends OneShotEffect {
 
         Player controller = game.getPlayer(source.getControllerId());
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterEnchantmentPermanent(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_ENCHANTMENT_PERMANENT, source.getControllerId(), source.getSourceId(), game)) {
             if (permanent != null && permanent.destroy(source.getSourceId(), game, false)) {
                 if (threshold && controller != null && permanent.getOwnerId().equals(controller.getId())) {
                     cardsToBattlefield.add(permanent);

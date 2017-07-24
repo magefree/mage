@@ -95,7 +95,7 @@ public class DjeruWithEyesOpen extends CardImpl {
 class DjeruWithEyesOpenPreventEffect extends PreventionEffectImpl {
 
     public DjeruWithEyesOpenPreventEffect() {
-        super(Duration.EndOfGame, 1, false, false);
+        super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "If a source would deal damage to a planeswalker you control, prevent 1 of that damage";
     }
 

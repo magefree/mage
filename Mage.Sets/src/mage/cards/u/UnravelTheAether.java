@@ -27,13 +27,14 @@
  */
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.abilities.effects.common.ShuffleIntoLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public class UnravelTheAether extends CardImpl {
 
         // Choose target artifact or enchantment. Its owner shuffles it into his or her library.
         this.getSpellAbility().addEffect(new ShuffleIntoLibraryTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
     }
 
     public UnravelTheAether(final UnravelTheAether card) {

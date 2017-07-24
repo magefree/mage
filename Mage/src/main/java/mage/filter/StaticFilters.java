@@ -22,6 +22,8 @@ public final class StaticFilters {
 
 
     public static final FilterSpiritOrArcaneCard SPIRIT_OR_ARCANE_CARD = new FilterSpiritOrArcaneCard();
+    public static final FilterArtifactOrEnchantmentPermanent ARTIFACT_OR_ENCHANTMENT_PERMANENT = new FilterArtifactOrEnchantmentPermanent();
+    public static final FilterEnchantmentPermanent FILTER_ENCHANTMENT_PERMANENT = new FilterEnchantmentPermanent();
 
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT = new FilterArtifactCard();
     public static final FilterNonlandCard FILTER_CARD_NON_LAND = new FilterNonlandCard();

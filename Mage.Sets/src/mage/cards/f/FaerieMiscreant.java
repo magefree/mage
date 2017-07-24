@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,12 +37,13 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,7 +72,7 @@ public class FaerieMiscreant extends CardImpl {
         // When Faerie Miscreant enters the battlefield, if you control another creature named Faerie Miscreant, draw a card.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 "When Faerie Miscreant enters the battlefield, if you control another creature named Faerie Miscreant, draw a card");
         this.addAbility(ability);
     }

@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,10 +37,15 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +71,7 @@ public class GangrenousZombies extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(
                 new DamageEverythingEffect(2),
                 new DamageEverythingEffect(1),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 "{this} deals 1 damage to each creature and each player. If you control a snow Swamp, {this} deals 2 damage to each creature and each player instead"),
                 new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

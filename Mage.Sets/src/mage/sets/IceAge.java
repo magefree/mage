@@ -232,6 +232,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Red Scarab", 273, Rarity.UNCOMMON, mage.cards.r.RedScarab.class));
         cards.add(new SetCardInfo("Regeneration", 147, Rarity.COMMON, mage.cards.r.Regeneration.class));
         cards.add(new SetCardInfo("Rime Dryad", 148, Rarity.COMMON, mage.cards.r.RimeDryad.class));
+        cards.add(new SetCardInfo("Ritual of Subdual", 149, Rarity.RARE, mage.cards.r.RitualOfSubdual.class));
         cards.add(new SetCardInfo("River Delta", 346, Rarity.RARE, mage.cards.r.RiverDelta.class));
         cards.add(new SetCardInfo("Sabretooth Tiger", 215, Rarity.COMMON, mage.cards.s.SabretoothTiger.class));
         cards.add(new SetCardInfo("Scaled Wurm", 150, Rarity.COMMON, mage.cards.s.ScaledWurm.class));
