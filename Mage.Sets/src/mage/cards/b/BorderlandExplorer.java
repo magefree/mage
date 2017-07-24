@@ -27,8 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,12 +36,15 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  *
@@ -130,7 +131,7 @@ class BorderlandExplorerEffect extends OneShotEffect {
                 if (player != null) {
                     Cards cardsPlayer = cardsToDiscard.get(playerId);
                     if (cardsPlayer != null) {
-                        TargetCardInLibrary target = new TargetCardInLibrary(0, 1, new FilterBasicLandCard());
+                        TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD);
                         if (player.searchLibrary(target, game)) {
                             if (!target.getTargets().isEmpty()) {
                                 Cards cards = new CardsImpl(target.getTargets());

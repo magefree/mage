@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -39,10 +37,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -102,7 +103,7 @@ class CollectiveVoyageEffect extends OneShotEffect {
             for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    TargetCardInLibrary target = new TargetCardInLibrary(0, xSum, new FilterBasicLandCard());
+                    TargetCardInLibrary target = new TargetCardInLibrary(0, xSum, StaticFilters.FILTER_BASIC_LAND_CARD);
                     if (player.searchLibrary(target, game)) {
                         for (UUID cardId : target.getTargets()) {
                             Card card = player.getLibrary().getCard(cardId, game);
