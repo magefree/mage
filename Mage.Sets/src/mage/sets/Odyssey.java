@@ -281,6 +281,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Repentant Vampire", 157, Rarity.RARE, mage.cards.r.RepentantVampire.class));
         cards.add(new SetCardInfo("Resilient Wanderer", 43, Rarity.UNCOMMON, mage.cards.r.ResilientWanderer.class));
         cards.add(new SetCardInfo("Rites of Initiation", 217, Rarity.COMMON, mage.cards.r.RitesOfInitiation.class));
+        cards.add(new SetCardInfo("Rites of Refusal", 99, Rarity.COMMON, mage.cards.r.RitesOfRefusal.class));
         cards.add(new SetCardInfo("Roar of the Wurm", 266, Rarity.UNCOMMON, mage.cards.r.RoarOfTheWurm.class));
         cards.add(new SetCardInfo("Rotting Giant", 158, Rarity.UNCOMMON, mage.cards.r.RottingGiant.class));
         cards.add(new SetCardInfo("Sacred Rites", 44, Rarity.COMMON, mage.cards.s.SacredRites.class));
