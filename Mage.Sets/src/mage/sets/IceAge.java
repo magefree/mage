@@ -127,6 +127,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Game of Chaos", 186, Rarity.RARE, mage.cards.g.GameOfChaos.class));
         cards.add(new SetCardInfo("Gangrenous Zombies", 15, Rarity.COMMON, mage.cards.g.GangrenousZombies.class));
         cards.add(new SetCardInfo("Giant Growth", 134, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
+        cards.add(new SetCardInfo("Giant Trap Door Spider", 371, Rarity.UNCOMMON, mage.cards.g.GiantTrapDoorSpider.class));
         cards.add(new SetCardInfo("Glacial Chasm", 331, Rarity.UNCOMMON, mage.cards.g.GlacialChasm.class));
         cards.add(new SetCardInfo("Glacial Crevasses", 187, Rarity.RARE, mage.cards.g.GlacialCrevasses.class));
         cards.add(new SetCardInfo("Glacial Wall", 71, Rarity.UNCOMMON, mage.cards.g.GlacialWall.class));
@@ -146,6 +147,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Hyalopterous Lemure", 21, Rarity.UNCOMMON, mage.cards.h.HyalopterousLemure.class));
         cards.add(new SetCardInfo("Hydroblast", 72, Rarity.COMMON, mage.cards.h.Hydroblast.class));
         cards.add(new SetCardInfo("Hymn of Rebirth", 373, Rarity.UNCOMMON, mage.cards.h.HymnOfRebirth.class));
+        cards.add(new SetCardInfo("Iceberg", 73, Rarity.UNCOMMON, mage.cards.i.Iceberg.class));
         cards.add(new SetCardInfo("Icequake", 22, Rarity.UNCOMMON, mage.cards.i.Icequake.class));
         cards.add(new SetCardInfo("Icy Manipulator", 297, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("Icy Prison", 74, Rarity.RARE, mage.cards.i.IcyPrison.class));
