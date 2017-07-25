@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -42,6 +41,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward
@@ -50,8 +51,7 @@ public class CurseOfDeathsHold extends CardImpl {
 
     public CurseOfDeathsHold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-        this.subtype.add("Aura");
-        this.subtype.add("Curse");
+        this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
