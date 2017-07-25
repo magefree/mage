@@ -105,7 +105,7 @@ class BomatCourierExileEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
+                UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), 0);
                 card.setFaceDown(true, game);
                 controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName());
                 card.setFaceDown(true, game);
@@ -136,7 +136,7 @@ class BomatCourierReturnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId(), true));
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), 0));
             if (exileZone != null) {
                 controller.moveCards(exileZone, Zone.HAND, source, game);
             }
