@@ -38,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -97,7 +98,7 @@ class HarvestSeasonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(0, new PermanentsOnBattlefieldCount(filter).calculate(game, source, this), new FilterBasicLandCard());
+            TargetCardInLibrary target = new TargetCardInLibrary(0, new PermanentsOnBattlefieldCount(filter).calculate(game, source, this), StaticFilters.FILTER_BASIC_LAND_CARD);
             if (controller.searchLibrary(target, game)) {
                 controller.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
             }

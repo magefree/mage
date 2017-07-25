@@ -27,7 +27,6 @@
  */
 package mage.cards.w;
 
-import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -39,7 +38,7 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -47,6 +46,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.*;
 
 /**
  *
@@ -126,7 +127,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
             for (Map.Entry<Player, Integer> entry : sacrificedLands.entrySet()) {
                 if (entry.getKey().chooseUse(Outcome.PutLandInPlay, "Search your library for up to " + entry.getValue() + " basic lands?", source, game)) {
 
-                    TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), new FilterBasicLandCard());
+                    TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), StaticFilters.FILTER_BASIC_LAND_CARD);
                     if (entry.getKey().searchLibrary(target, game)) {
                         if (!target.getTargets().isEmpty()) {
                             toBattlefield.addAll(target.getTargets());

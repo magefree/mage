@@ -28,11 +28,13 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +44,7 @@ public class ReachThroughMists extends CardImpl {
 
     public ReachThroughMists (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }

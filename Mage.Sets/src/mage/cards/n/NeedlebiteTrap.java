@@ -27,7 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -37,9 +36,12 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.watchers.common.PlayerGainedLifeWatcher;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -48,7 +50,7 @@ public class NeedlebiteTrap extends CardImpl {
 
     public NeedlebiteTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{B}{B}");
-        this.subtype.add("Trap");
+        this.subtype.add(SubType.TRAP);
 
         // If an opponent gained life this turn, you may pay {B} rather than pay Needlebite Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{B}"), NeedlebiteTrapCondition.instance), new PlayerGainedLifeWatcher());

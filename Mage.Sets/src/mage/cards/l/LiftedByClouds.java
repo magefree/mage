@@ -27,7 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
@@ -35,7 +34,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +47,7 @@ public class LiftedByClouds extends CardImpl {
 
     public LiftedByClouds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // Target creature gains flying until end of turn.

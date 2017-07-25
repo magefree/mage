@@ -27,7 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -36,11 +35,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class VerdantConfluence extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
         
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
         mode = new Mode();
         mode.getEffects().add(new SearchLibraryPutInPlayEffect(target, true));
         this.getSpellAbility().getModes().addMode(mode);

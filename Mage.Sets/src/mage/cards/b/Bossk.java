@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
@@ -69,7 +70,7 @@ public class Bossk extends CardImpl {
         this.addAbility(new BosskTriggeredAbility());
 
         // <i>Bounty</i> &mdash; Whenever a creature an opponent controls with a bounty counter on it dies, you may search your library for a basic land card, reveal it, and put it in to your hand. If you do, shuffle your library.
-        this.addAbility(new BountyAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, true), true));
+        this.addAbility(new BountyAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, true), true));
     }
 
     public Bossk(final Bossk card) {

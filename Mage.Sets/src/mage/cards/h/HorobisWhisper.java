@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.ExileFromGraveCost;
@@ -47,6 +46,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -63,7 +64,7 @@ public class HorobisWhisper extends CardImpl {
 
     public HorobisWhisper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{B}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
 

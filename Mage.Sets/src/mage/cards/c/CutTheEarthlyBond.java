@@ -27,15 +27,17 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +52,7 @@ public class CutTheEarthlyBond extends CardImpl {
 
     public CutTheEarthlyBond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // Return target enchanted permanent to its owner's hand.

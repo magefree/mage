@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -40,12 +39,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ public class PureIntentions extends CardImpl {
 
     public PureIntentions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Whenever a spell or ability an opponent controls causes you to discard cards this turn, return those cards from your graveyard to your hand.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PureIntentionsAllTriggeredAbility()));

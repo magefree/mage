@@ -27,7 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
@@ -36,9 +35,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +50,7 @@ public class Overblaze extends CardImpl {
 
     public Overblaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // Each time target permanent would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.

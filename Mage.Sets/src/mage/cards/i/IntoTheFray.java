@@ -27,14 +27,16 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +46,7 @@ public class IntoTheFray extends CardImpl {
 
     public IntoTheFray(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // Target creature attacks this turn if able.

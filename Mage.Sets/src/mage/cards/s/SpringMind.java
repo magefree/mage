@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.AftermathAbility;
@@ -36,8 +35,10 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ public class SpringMind extends SplitCard {
 
         // Spring
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        getLeftHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true));
+        getLeftHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true));
 
         // Mind
         // Aftermath

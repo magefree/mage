@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
@@ -43,6 +42,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Plopman
@@ -56,7 +57,7 @@ public class DarigaazsCaldera extends CardImpl {
     
     public DarigaazsCaldera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Lair");
+        this.subtype.add(SubType.LAIR);
 
         // When Darigaaz's Caldera enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)))));

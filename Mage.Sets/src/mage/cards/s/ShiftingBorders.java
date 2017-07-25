@@ -27,14 +27,16 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +46,7 @@ public class ShiftingBorders extends CardImpl {
 
     public ShiftingBorders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Exchange control of two target lands.
         this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, "Exchange control of two target lands"));

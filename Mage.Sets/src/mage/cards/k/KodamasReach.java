@@ -27,24 +27,22 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +52,7 @@ public class KodamasReach extends CardImpl {
 
     public KodamasReach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new KodamasReachEffect());
@@ -95,7 +93,7 @@ class KodamasReachEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD);
         if (controller.searchLibrary(target, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards revealed = new CardsImpl();

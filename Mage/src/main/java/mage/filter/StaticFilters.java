@@ -42,7 +42,7 @@ public final class StaticFilters {
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_NON_LAND = new FilterControlledPermanent("nonland permanent");
     public static final FilterLandPermanent FILTER_LAND = new FilterLandPermanent();
     public static final FilterLandPermanent FILTER_LANDS = new FilterLandPermanent("lands");
-    public static final FilterLandPermanent FILTER_BASIC_LAND = new FilterLandPermanent();
+    public static final FilterBasicLandCard FILTER_BASIC_LAND_CARD = new FilterBasicLandCard();
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE = new FilterCreaturePermanent();
     public static final FilterCreaturePermanent FILTER_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature");
