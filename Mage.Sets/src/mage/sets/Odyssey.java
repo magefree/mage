@@ -100,7 +100,6 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Cantivore", 13, Rarity.RARE, mage.cards.c.Cantivore.class));
         cards.add(new SetCardInfo("Careful Study", 70, Rarity.COMMON, mage.cards.c.CarefulStudy.class));
         cards.add(new SetCardInfo("Cartographer", 232, Rarity.COMMON, mage.cards.c.Cartographer.class));
-        cards.add(new SetCardInfo("Catalyst Stone", 297, Rarity.RARE, mage.cards.c.CatalystStone.class));
         cards.add(new SetCardInfo("Caustic Tar", 122, Rarity.UNCOMMON, mage.cards.c.CausticTar.class));
         cards.add(new SetCardInfo("Cease-Fire", 14, Rarity.COMMON, mage.cards.c.CeaseFire.class));
         cards.add(new SetCardInfo("Centaur Garden", 316, Rarity.UNCOMMON, mage.cards.c.CentaurGarden.class));
