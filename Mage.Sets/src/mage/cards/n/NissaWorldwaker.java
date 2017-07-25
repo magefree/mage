@@ -27,7 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -42,7 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,6 +50,8 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -112,7 +113,7 @@ class NissaWorldwakerSearchEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, new FilterBasicLandCard());
+        TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, StaticFilters.FILTER_BASIC_LAND_CARD);
         if (controller.searchLibrary(target, game)) {
             if (!target.getTargets().isEmpty()) {
                 for (UUID cardId : target.getTargets()) {

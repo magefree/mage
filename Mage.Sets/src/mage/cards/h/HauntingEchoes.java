@@ -27,8 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -38,12 +36,15 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -70,8 +71,6 @@ public class HauntingEchoes extends CardImpl {
 
 class HauntingEchoesEffect extends OneShotEffect {
 
-    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
-
     public HauntingEchoesEffect() {
         super(Outcome.Detriment);
         staticText = "Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles his or her library";
@@ -87,7 +86,7 @@ class HauntingEchoesEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
             for (Card card : targetPlayer.getGraveyard().getCards(game)) {
-                if (!filter.match(card, game)) {
+                if (!StaticFilters.FILTER_BASIC_LAND_CARD.match(card, game)) {
                     card.moveToExile(null, "", source.getSourceId(), game);
 
                     FilterCard filterCard = new FilterCard("cards named " + card.getName());

@@ -28,7 +28,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -43,6 +42,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
@@ -51,7 +52,7 @@ public class Glimmerpost extends CardImpl {
 
     public Glimmerpost (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.subtype.add("Locus");
+        this.subtype.add(SubType.LOCUS);
         
         // When Glimmerpost enters the battlefield, you gain 1 life for each Locus on the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GlimmerpostEffect()));

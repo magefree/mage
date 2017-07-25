@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -36,12 +34,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +53,7 @@ public class StreamOfConsciousness extends CardImpl {
 
     public StreamOfConsciousness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Target player shuffles up to four target cards from his or her graveyard into his or her library.
         this.getSpellAbility().addEffect(new StreamOfConsciousnessEffect());

@@ -33,6 +33,7 @@ import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -49,7 +50,7 @@ public class NissasExpedition extends CardImpl {
         // Convoke
         this.addAbility(new ConvokeAbility());
         // Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2,new FilterBasicLandCard()), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_BASIC_LAND_CARD), true, true));
     }
 
     public NissasExpedition(final NissasExpedition card) {

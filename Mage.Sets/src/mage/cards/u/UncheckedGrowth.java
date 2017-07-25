@@ -27,7 +27,6 @@
  */
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -39,6 +38,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -47,7 +48,7 @@ public class UncheckedGrowth extends CardImpl {
 
     public UncheckedGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         
         // Target creature gets +4/+4 until end of turn. 

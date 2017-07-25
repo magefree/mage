@@ -58,7 +58,7 @@ public class RoarOfJukai extends CardImpl {
 
     public RoarOfJukai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // If you control a Forest, each blocked creature gets +2/+2 until end of turn.

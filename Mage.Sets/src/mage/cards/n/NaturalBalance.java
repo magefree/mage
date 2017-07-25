@@ -27,9 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -38,7 +35,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -47,6 +44,10 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -116,7 +117,7 @@ public class NaturalBalance extends CardImpl {
                         int amount = 5 - landCount;
                         if (landCount < 5 && player.chooseUse(outcome, "Search your library for up to " + amount + " basic land cards and put them onto the battlefield?", source, game)) {
                             // Select lands and put them onto battlefield
-                            TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterBasicLandCard());
+                            TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_BASIC_LAND_CARD);
                             if (player.searchLibrary(target, game)) {
                                 player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game);
                             }

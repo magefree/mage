@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.ReturnToHandFromGraveyardCost;
@@ -35,8 +34,10 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public class HarvestWurm extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Harvest Wurm enters the battlefield, sacrifice it unless you return a basic land card from your graveyard to your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandFromGraveyardCost(new TargetCardInYourGraveyard(new FilterBasicLandCard())))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandFromGraveyardCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_BASIC_LAND_CARD)))));
     }
 
     public HarvestWurm(final HarvestWurm card) {
