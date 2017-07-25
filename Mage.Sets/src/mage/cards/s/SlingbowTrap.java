@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -37,11 +36,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAttackingCreature;
+
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth
@@ -56,7 +58,7 @@ public class SlingbowTrap extends CardImpl {
 
     public SlingbowTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.subtype.add("Trap");
+        this.subtype.add(SubType.TRAP);
 
         // If a black creature with flying is attacking, you may pay {G} rather than pay Slingbow Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{G}"), SlingbowTrapCondition.instance));
