@@ -107,6 +107,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Basin", 164, Rarity.UNCOMMON, mage.cards.j.JungleBasin.class));
         cards.add(new SetCardInfo("Kaervek's Spite", 13, Rarity.RARE, mage.cards.k.KaerveksSpite.class));
         cards.add(new SetCardInfo("Karoo", 165, Rarity.UNCOMMON, mage.cards.k.Karoo.class));
+        cards.add(new SetCardInfo("Katabatic Winds", 59, Rarity.RARE, mage.cards.k.KatabaticWinds.class));
         cards.add(new SetCardInfo("Keeper of Kookus", 85, Rarity.COMMON, mage.cards.k.KeeperOfKookus.class));
         cards.add(new SetCardInfo("King Cheetah", 60, Rarity.COMMON, mage.cards.k.KingCheetah.class));
         cards.add(new SetCardInfo("Knight of Valor", 111, Rarity.COMMON, mage.cards.k.KnightOfValor.class));
