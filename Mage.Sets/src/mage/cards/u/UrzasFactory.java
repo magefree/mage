@@ -27,7 +27,6 @@
  */
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -37,8 +36,11 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.AssemblyWorkerToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +50,7 @@ public class UrzasFactory extends CardImpl {
 
     public UrzasFactory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.subtype.add("Urza's");
+        this.subtype.add(SubType.URZAS);
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
