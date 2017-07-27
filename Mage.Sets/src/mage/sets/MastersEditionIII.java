@@ -126,7 +126,6 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Guan Yu's 1,000-Li March", 13, Rarity.RARE, mage.cards.g.GuanYus1000LiMarch.class));
         cards.add(new SetCardInfo("Guan Yu, Sainted Warrior", 12, Rarity.UNCOMMON, mage.cards.g.GuanYuSaintedWarrior.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 149, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));
-        cards.add(new SetCardInfo("Halfdane", 150, Rarity.RARE, mage.cards.h.Halfdane.class));
         cards.add(new SetCardInfo("Hazezon Tamar", 151, Rarity.RARE, mage.cards.h.HazezonTamar.class));
         cards.add(new SetCardInfo("Heal", 14, Rarity.COMMON, mage.cards.h.Heal.class));
         cards.add(new SetCardInfo("Hellfire", 70, Rarity.RARE, mage.cards.h.Hellfire.class));
