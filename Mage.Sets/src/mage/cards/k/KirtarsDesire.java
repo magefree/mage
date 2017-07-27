@@ -25,62 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
-
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.permanent.token.WarriorVigilantToken;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+package mage.cards.k;
 
 import java.util.UUID;
+import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.CantAttackAttachedEffect;
+import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class CartoucheOfSolidarity extends CardImpl {
+public class KirtarsDesire extends CardImpl {
 
-    public CartoucheOfSolidarity(UUID ownerId, CardSetInfo setInfo) {
+    public KirtarsDesire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
-        this.subtype.add(SubType.AURA, SubType.CARTOUCHE);
+        this.subtype.add("Aura");
 
-        // Enchant creature you control
-        TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When Cartouche of Solidarity enters the battlefield, create a 1/1 white Warrior creature token with vigilance.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WarriorVigilantToken())));
+        // Enchanted creature can't attack.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
 
-        // Enchanted creature gets +1/+1 and has first strike.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
-        Effect effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has first strike");
-        ability.addEffect(effect);
+        // Threshold - Enchanted creature can't block as long as seven or more cards are in your graveyard.
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new CantAttackBlockAttachedEffect(AttachmentType.AURA), new CardsInControllerGraveCondition(7),
+                "Enchanted creature can't block as long as seven or more cards are in your graveyard"));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
+
     }
 
-    public CartoucheOfSolidarity(final CartoucheOfSolidarity card) {
+    public KirtarsDesire(final KirtarsDesire card) {
         super(card);
     }
 
     @Override
-    public CartoucheOfSolidarity copy() {
-        return new CartoucheOfSolidarity(this);
+    public KirtarsDesire copy() {
+        return new KirtarsDesire(this);
     }
 }

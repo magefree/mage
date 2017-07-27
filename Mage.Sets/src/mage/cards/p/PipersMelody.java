@@ -25,69 +25,71 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.cards.p;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
- * @author noxx
+ *
+ * @author TheElk801
  */
-public class LoseLifeDefendingPlayerEffect extends OneShotEffect {
+public class PipersMelody extends CardImpl {
 
-    private DynamicValue amount;
-    private boolean attackerIsSource;
+    public PipersMelody(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
+        
 
-    /**
-     *
-     * @param amount
-     * @param attackerIsSource true if the source.getSourceId() contains the
-     * attacker false if attacker has to be taken from targetPointer
-     */
-    public LoseLifeDefendingPlayerEffect(int amount, boolean attackerIsSource) {
-        this(new StaticValue(amount), attackerIsSource);
+        // Shuffle any number of target creature cards from your graveyard into your library.
+        this.getSpellAbility().addEffect(new PipersMelodyShuffleEffect());
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
-    public LoseLifeDefendingPlayerEffect(DynamicValue amount, boolean attackerIsSource) {
-        super(Outcome.Damage);
-        this.amount = amount;
-        this.attackerIsSource = attackerIsSource;
-    }
-
-    public LoseLifeDefendingPlayerEffect(final LoseLifeDefendingPlayerEffect effect) {
-        super(effect);
-        this.amount = effect.amount.copy();
-        this.attackerIsSource = effect.attackerIsSource;
+    public PipersMelody(final PipersMelody card) {
+        super(card);
     }
 
     @Override
-    public LoseLifeDefendingPlayerEffect copy() {
-        return new LoseLifeDefendingPlayerEffect(this);
+    public PipersMelody copy() {
+        return new PipersMelody(this);
+    }
+}
+class PipersMelodyShuffleEffect extends OneShotEffect {
+
+    PipersMelodyShuffleEffect() {
+        super(Outcome.Neutral);
+        this.staticText = "Shuffle any number of target cards from your graveyard into your library";
+    }
+
+    PipersMelodyShuffleEffect(final PipersMelodyShuffleEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public PipersMelodyShuffleEffect copy() {
+        return new PipersMelodyShuffleEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player defender;
-        if (attackerIsSource) {
-            defender = game.getPlayer(game.getCombat().getDefendingPlayerId(source.getSourceId(), game));
-        } else {
-            defender = game.getPlayer(getTargetPointer().getFirst(game, source));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.moveCards(new CardsImpl(this.getTargetPointer().getTargets(game, source)), Zone.LIBRARY, source, game);
+            controller.shuffleLibrary(source, game);
+            return true;
         }
-        if (defender != null) {
-            defender.loseLife(amount.calculate(game, source, this), game, false);
-        }
-        return true;
+        return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "defending player loses " + amount + " life";
-    }
-
 }

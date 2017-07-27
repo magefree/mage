@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects;
 
 import java.util.ArrayList;
@@ -34,6 +33,7 @@ import java.util.List;
 import java.util.Set;
 import mage.abilities.Mode;
 import mage.constants.Outcome;
+import mage.target.targetpointer.TargetPointer;
 
 /**
  *
@@ -41,10 +41,11 @@ import mage.constants.Outcome;
  */
 public class Effects extends ArrayList<Effect> {
 
-    public Effects() {}
+    public Effects() {
+    }
 
     public Effects(final Effects effects) {
-        for (Effect effect: effects) {
+        for (Effect effect : effects) {
             this.add(effect.copy());
         }
     }
@@ -64,7 +65,7 @@ public class Effects extends ArrayList<Effect> {
     public String getText(Mode mode) {
         StringBuilder sbText = new StringBuilder();
         String lastRule = null;
-        for (Effect effect: this) {
+        for (Effect effect : this) {
             String endString = "";
             String nextRule = effect.getText(mode);
             if (nextRule != null) {
@@ -72,7 +73,7 @@ public class Effects extends ArrayList<Effect> {
                     endString = " ";
                 } else if (nextRule.startsWith(",") || nextRule.startsWith(" ")) {
                     endString = "";
-                } else if (lastRule != null && lastRule.length()> 3) {
+                } else if (lastRule != null && lastRule.length() > 3) {
                     if (!lastRule.endsWith(".") && !lastRule.endsWith("<br>")) {
                         endString = ". ";
                     }
@@ -84,19 +85,19 @@ public class Effects extends ArrayList<Effect> {
             }
             lastRule = nextRule;
         }
-        if (lastRule != null && lastRule.length()> 3 &&
-                !lastRule.endsWith(".") &&
-                !lastRule.endsWith("\"") &&
-                !lastRule.startsWith("<b>Level ") &&
-                !lastRule.endsWith(".)") &&
-                !lastRule.endsWith("</i>") ) {
+        if (lastRule != null && lastRule.length() > 3
+                && !lastRule.endsWith(".")
+                && !lastRule.endsWith("\"")
+                && !lastRule.startsWith("<b>Level ")
+                && !lastRule.endsWith(".)")
+                && !lastRule.endsWith("</i>")) {
             sbText.append('.');
         }
         return sbText.toString();
     }
 
     public boolean hasOutcome(Outcome outcome) {
-        for (Effect effect: this) {
+        for (Effect effect : this) {
             if (effect.getOutcome() == outcome) {
                 return true;
             }
@@ -106,7 +107,7 @@ public class Effects extends ArrayList<Effect> {
 
     public List<Outcome> getOutcomes() {
         Set<Outcome> outcomes = new HashSet<>();
-        for (Effect effect: this) {
+        for (Effect effect : this) {
             outcomes.add(effect.getOutcome());
         }
         return new ArrayList<>(outcomes);
@@ -114,11 +115,10 @@ public class Effects extends ArrayList<Effect> {
 
     public int getOutcomeTotal() {
         int total = 0;
-        for (Effect effect: this) {
+        for (Effect effect : this) {
             if (effect.getOutcome().isGood()) {
                 total++;
-            }
-            else {
+            } else {
                 total--;
             }
         }
@@ -126,8 +126,18 @@ public class Effects extends ArrayList<Effect> {
     }
 
     public void newId() {
-        for (Effect effect: this) {
+        for (Effect effect : this) {
             effect.newId();
         }
     }
+
+    public void setTargetPointer(TargetPointer targetPointer) {
+        if (targetPointer == null) {
+            return;
+        }
+        for (Effect effect : this) {
+            effect.setTargetPointer(targetPointer.copy());
+        }
+    }
+
 }

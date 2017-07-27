@@ -25,40 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.i;
+package org.mage.test.cards.control;
 
-import mage.MageInt;
-import mage.abilities.keyword.CrewAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-
-import java.util.UUID;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author Styxo
+ * @author LevelX
  */
-public class IrontreadCrusher extends CardImpl {
+public class BronzeBombshellTest extends CardTestPlayerBase {
 
-    public IrontreadCrusher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        
-        this.subtype.add(SubType.VEHICLE);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+    @Test
+    public void testEndlessWhispers() {
+        // When a player other than Bronze Bombshell's owner controls it, that player sacrifices it.
+        // If the player does, Bronze Bombshell deals 7 damage to him or her.
+        addCard(Zone.BATTLEFIELD, playerA, "Bronze Bombshell", 1);
 
-        // Crew 3
-        this.addAbility(new CrewAbility(3));
+        // Each creature has "When this creature dies, choose target opponent.
+        // That player puts this card from its owner's graveyard onto the battlefield
+        // under his or her control at the beginning of the next end step."
+        addCard(Zone.BATTLEFIELD, playerA, "Endless Whispers", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        // Destroy target creature or planeswalker..
+        addCard(Zone.HAND, playerA, "Hero's Downfall"); // {1}{B}{B}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hero's Downfall", "Bronze Bombshell");
+        addTarget(playerA, playerB);
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertGraveyardCount(playerA, "Hero's Downfall", 1);
+        assertGraveyardCount(playerA, "Bronze Bombshell", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 13);
+
     }
 
-    public IrontreadCrusher(final IrontreadCrusher card) {
-        super(card);
-    }
-
-    @Override
-    public IrontreadCrusher copy() {
-        return new IrontreadCrusher(this);
-    }
 }

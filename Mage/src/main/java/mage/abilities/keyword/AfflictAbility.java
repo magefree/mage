@@ -1,11 +1,15 @@
 package mage.abilities.keyword;
 
+import java.util.UUID;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeDefendingPlayerEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.target.targetpointer.FixedTarget;
 
 public class AfflictAbility extends BecomesBlockedTriggeredAbility {
 
-    private int lifeLoss;
+    private final int lifeLoss;
 
     @Override
     public AfflictAbility copy() {
@@ -13,9 +17,21 @@ public class AfflictAbility extends BecomesBlockedTriggeredAbility {
     }
 
     public AfflictAbility(int amount) {
-        super(new LoseLifeDefendingPlayerEffect(amount, true)
+        super(new LoseLifeTargetEffect(amount)
                 .setText("Afflict " + amount + " <i>(Whenever this creature becomes blocked, defending player loses " + amount + " life.)</i>"), false);
         lifeLoss = amount;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (super.checkTrigger(event, game)) {
+            UUID defenderId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
+            if (defenderId != null) {
+                this.getEffects().setTargetPointer(new FixedTarget(defenderId));
+                return true;
+            }
+        }
+        return false;
     }
 
     public AfflictAbility(final AfflictAbility afflictAbility) {

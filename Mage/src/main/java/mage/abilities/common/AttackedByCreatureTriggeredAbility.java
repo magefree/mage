@@ -74,21 +74,16 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        UUID playerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
+        UUID defendingPlayer = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
         Permanent attackingCreature = game.getPermanent(event.getSourceId());
-        if (getControllerId().equals(playerId) && attackingCreature != null) {
-            if (setTargetPointer != SetTargetPointer.NONE) {
-                for (Effect effect : this.getEffects()) {
-                    switch (setTargetPointer) {
-                        case PERMANENT:
-                            effect.setTargetPointer(new FixedTarget(attackingCreature.getId()));
-                            break;
-                        case PLAYER:
-                            effect.setTargetPointer(new FixedTarget(attackingCreature.getControllerId()));
-                            break;
-                    }
-
-                }
+        if (getControllerId().equals(defendingPlayer) && attackingCreature != null) {
+            switch (setTargetPointer) {
+                case PERMANENT:
+                    this.getEffects().setTargetPointer(new FixedTarget(attackingCreature, game));
+                    break;
+                case PLAYER:
+                    this.getEffects().setTargetPointer(new FixedTarget(attackingCreature.getControllerId()));
+                    break;
             }
             return true;
         }

@@ -25,62 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
-
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.permanent.token.WarriorVigilantToken;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+package mage.cards.d;
 
 import java.util.UUID;
+import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.SacrificeEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class CartoucheOfSolidarity extends CardImpl {
+public class DestructiveUrge extends CardImpl {
 
-    public CartoucheOfSolidarity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+    public DestructiveUrge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
 
-        this.subtype.add(SubType.AURA, SubType.CARTOUCHE);
+        this.subtype.add("Aura");
 
-        // Enchant creature you control
-        TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When Cartouche of Solidarity enters the battlefield, create a 1/1 white Warrior creature token with vigilance.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WarriorVigilantToken())));
-
-        // Enchanted creature gets +1/+1 and has first strike.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
-        Effect effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has first strike");
-        ability.addEffect(effect);
+        // Whenever enchanted creature deals combat damage to a player, that player sacrifices a land.
+        ability = new DealsDamageToAPlayerAttachedTriggeredAbility(new SacrificeEffect(new FilterLandPermanent(), 1, "that player"), "enchanted", false, true);
         this.addAbility(ability);
     }
 
-    public CartoucheOfSolidarity(final CartoucheOfSolidarity card) {
+    public DestructiveUrge(final DestructiveUrge card) {
         super(card);
     }
 
     @Override
-    public CartoucheOfSolidarity copy() {
-        return new CartoucheOfSolidarity(this);
+    public DestructiveUrge copy() {
+        return new DestructiveUrge(this);
     }
 }

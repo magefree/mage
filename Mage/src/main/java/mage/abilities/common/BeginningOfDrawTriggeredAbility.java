@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,14 +37,16 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
+
     private TargetController targetController;
 
     /**
-     * The Ability sets if no target is defined the target pointer to the active player of the current draw phase
-     * 
+     * The Ability sets if no target is defined the target pointer to the active
+     * player of the current draw phase
+     *
      * @param effect
      * @param targetController
-     * @param isOptional 
+     * @param isOptional
      */
     public BeginningOfDrawTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
         this(Zone.BATTLEFIELD, effect, targetController, isOptional);
@@ -78,18 +79,14 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
                 boolean yours = event.getPlayerId().equals(this.controllerId);
                 if (yours) {
                     if (getTargets().isEmpty()) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
+                        this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
                 }
                 return yours;
             case OPPONENT:
                 if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
                     if (getTargets().isEmpty()) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
+                        this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
                     return true;
                 }
@@ -97,9 +94,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
             case NOT_YOU:
                 if (!this.controllerId.equals(event.getPlayerId())) {
                     if (getTargets().isEmpty()) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
+                        this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
                     return true;
                 }
@@ -110,9 +105,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
                     Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
                     if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
                         if (getTargets().isEmpty()) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
+                            this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
                         return true;
                     }
@@ -120,9 +113,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
                 break;
             case ANY:
                 if (getTargets().isEmpty()) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    }
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return true;
         }

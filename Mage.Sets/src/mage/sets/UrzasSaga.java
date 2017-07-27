@@ -120,6 +120,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Hatchling", 126, Rarity.RARE, mage.cards.d.DarkHatchling.class));
         cards.add(new SetCardInfo("Dark Ritual", 127, Rarity.COMMON, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Despondency", 129, Rarity.COMMON, mage.cards.d.Despondency.class));
+        cards.add(new SetCardInfo("Destructive Urge", 180, Rarity.UNCOMMON, mage.cards.d.DestructiveUrge.class));
         cards.add(new SetCardInfo("Diabolic Servitude", 130, Rarity.UNCOMMON, mage.cards.d.DiabolicServitude.class));
         cards.add(new SetCardInfo("Disciple of Grace", 10, Rarity.COMMON, mage.cards.d.DiscipleOfGrace.class));
         cards.add(new SetCardInfo("Disciple of Law", 11, Rarity.COMMON, mage.cards.d.DiscipleOfLaw.class));

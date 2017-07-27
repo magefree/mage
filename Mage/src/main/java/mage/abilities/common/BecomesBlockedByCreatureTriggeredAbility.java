@@ -68,9 +68,7 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
         if (event.getTargetId().equals(this.getSourceId())) {
             Permanent blocker = game.getPermanent(event.getSourceId());
             if (filter.match(blocker, game)) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                }
+                this.getEffects().setTargetPointer(new FixedTarget(blocker, game));
                 return true;
             }
         }
