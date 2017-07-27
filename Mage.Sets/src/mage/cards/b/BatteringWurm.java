@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesWithLessPowerEffect;
@@ -34,9 +35,8 @@ import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  *
@@ -46,7 +46,7 @@ public class BatteringWurm extends CardImpl {
 
     public BatteringWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}");
-        this.subtype.add("Wurm");
+        this.subtype.add(SubType.WURM);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

@@ -27,9 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -42,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -52,6 +50,9 @@ import mage.target.TargetSource;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.SpellsCastWatcher;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
  * @author jeffwadsworth
  */
@@ -59,7 +60,7 @@ public class RefractionTrap extends CardImpl {
 
     public RefractionTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.subtype.add("Trap");
+        this.subtype.add(SubType.TRAP);
 
         // If an opponent cast a red instant or sorcery spell this turn, you may pay {W} rather than pay Refraction Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{W}"), RefractionTrapCondition.instance), new SpellsCastWatcher());

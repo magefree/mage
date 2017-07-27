@@ -27,14 +27,13 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.DevilToken;
-
-import java.util.UUID;
 
 /**
  *

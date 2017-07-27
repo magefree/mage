@@ -35,7 +35,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,9 +50,8 @@ import java.util.UUID;
 public class CurseOfDeathsHold extends CardImpl {
 
     public CurseOfDeathsHold(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
-        this.subtype.add("Aura");
-        this.subtype.add("Curse");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
+        this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
@@ -91,7 +90,7 @@ class CurseOfDeathsHoldEffect extends ContinuousEffectImpl {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Player player = game.getPlayer(enchantment.getAttachedTo());
             if (player != null) {
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
+                for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
                     perm.addPower(-1);
                     perm.addToughness(-1);
                 }

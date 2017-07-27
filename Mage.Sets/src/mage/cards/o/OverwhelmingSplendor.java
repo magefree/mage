@@ -27,8 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -40,20 +38,16 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
-import static mage.constants.Layer.PTChangingEffects_7;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  *
@@ -64,8 +58,7 @@ public class OverwhelmingSplendor extends CardImpl {
     public OverwhelmingSplendor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{6}{W}{W}");
 
-        this.subtype.add("Aura");
-        this.subtype.add("Curse");
+        this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
@@ -115,7 +108,7 @@ class OverwhelmingSplendorLoseAbilitiesEffect extends ContinuousEffectImpl {
         }
         Player player = game.getPlayer(enchantment.getAttachedTo());
         if (player != null) {
-            for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
+            for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
                         permanent.removeAllAbilities(source.getSourceId(), game);

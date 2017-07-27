@@ -27,10 +27,10 @@
  */
 package mage.sets;
 
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -157,6 +157,7 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Holy Day", 20, Rarity.COMMON, mage.cards.h.HolyDay.class));
         cards.add(new SetCardInfo("Hooded Kavu", 147, Rarity.COMMON, mage.cards.h.HoodedKavu.class));
         cards.add(new SetCardInfo("Horned Cheetah", 251, Rarity.UNCOMMON, mage.cards.h.HornedCheetah.class));
+        cards.add(new SetCardInfo("Hunting Kavu", 252, Rarity.UNCOMMON, mage.cards.h.HuntingKavu.class));
         cards.add(new SetCardInfo("Hypnotic Cloud", 109, Rarity.COMMON, mage.cards.h.HypnoticCloud.class));
         cards.add(new SetCardInfo("Irrigation Ditch", 324, Rarity.COMMON, mage.cards.i.IrrigationDitch.class));
         cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));

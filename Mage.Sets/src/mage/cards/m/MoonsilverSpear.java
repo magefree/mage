@@ -28,8 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -39,6 +37,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.permanent.token.AngelToken;
 
 /**

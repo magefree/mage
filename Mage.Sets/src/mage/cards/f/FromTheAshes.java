@@ -27,6 +27,9 @@
  */
 package mage.cards.f;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -35,16 +38,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  *
@@ -107,7 +107,7 @@ class FromTheAshesEffect extends OneShotEffect {
             for(Map.Entry<UUID, Integer> entry : playerAmount.entrySet()) {
                 Player player = game.getPlayer(entry.getKey());
                 if (player != null) {
-                    TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), new FilterBasicLandCard());
+                    TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), StaticFilters.FILTER_BASIC_LAND_CARD);
                     if (player.searchLibrary(target, game)) {
                         if (!target.getTargets().isEmpty()) {
                             for (UUID cardId: target.getTargets()) {

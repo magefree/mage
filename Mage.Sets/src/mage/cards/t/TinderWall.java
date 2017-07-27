@@ -27,7 +27,9 @@
  */
 package mage.cards.t;
 
-import mage.constants.CardType;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -39,18 +41,15 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.permanent.BlockedByIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.filter.predicate.permanent.BlockedByIdPredicate;
 
 /**
  *

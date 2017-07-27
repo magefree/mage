@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class SoltariChampion extends CardImpl {
 
     public SoltariChampion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Soltari");
         this.subtype.add("Soldier");
 
@@ -55,7 +55,7 @@ public class SoltariChampion extends CardImpl {
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
         // Whenever Soltari Champion attacks, other creatures you control get +1/+1 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterCreaturePermanent(), true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true), false));
     }
 
     public SoltariChampion(final SoltariChampion card) {

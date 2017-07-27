@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,8 +51,6 @@ import java.util.UUID;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class DrakeFamiliar extends CardImpl {
-    
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
 
     public DrakeFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
@@ -79,7 +77,6 @@ public class DrakeFamiliar extends CardImpl {
 
 class DrakeFamiliarEffect extends OneShotEffect {
 
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
     private static final String effectText = "sacrifice it unless you return an enchantment to its owner's hand.";
 
     DrakeFamiliarEffect () {
@@ -96,7 +93,7 @@ class DrakeFamiliarEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             boolean targetChosen = false;
-            TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+            TargetPermanent target = new TargetPermanent(1, 1, StaticFilters.FILTER_ENCHANTMENT_PERMANENT, true);
             if (target.canChoose(controller.getId(), game) && controller.chooseUse(outcome, "Return an enchantment to its owner's hand?", source, game)) {
                 controller.chooseTarget(Outcome.Sacrifice, target, source, game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());

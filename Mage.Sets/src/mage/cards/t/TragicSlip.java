@@ -29,13 +29,13 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

@@ -27,14 +27,15 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -42,13 +43,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -57,7 +58,7 @@ import java.util.UUID;
 public class GraveBetrayal extends CardImpl {
 
     public GraveBetrayal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}{B}");
 
         // Whenever a creature you don't control dies, return it to the battlefield under
         // your control with an additional +1/+1 counter on it at the beginning of the
@@ -138,19 +139,62 @@ class GraveBetrayalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (card != null) {
-            Zone currentZone = game.getState().getZone(card.getId());
-            if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
-                Permanent creature = game.getPermanent(card.getId());
-                creature.addCounters(CounterType.P1P1.createInstance(), source, game);
-                ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
-                effect.setTargetPointer(new FixedTarget(creature.getId()));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(targetPointer.getFirst(game, source));
+            if (card != null) {
+                ContinuousEffect effect = new GraveBetrayalReplacementEffect();
+                effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);
-                return true;
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
+            return true;
         }
         return false;
     }
 
+}
+
+class GraveBetrayalReplacementEffect extends ReplacementEffectImpl {
+
+    GraveBetrayalReplacementEffect() {
+        super(Duration.EndOfStep, Outcome.BoostCreature);
+    }
+
+    GraveBetrayalReplacementEffect(GraveBetrayalReplacementEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
+        if (creature != null) {
+            creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
+            ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
+            effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game) + 1));
+            game.addEffect(effect, source);
+            discard();
+        }
+        return false;
+    }
+
+    @Override
+    public GraveBetrayalReplacementEffect copy() {
+        return new GraveBetrayalReplacementEffect(this);
+    }
 }

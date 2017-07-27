@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.m.MuscleBurst;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -58,7 +58,7 @@ public class DiligentFarmhand extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{G}, Sacrifice Diligent Farmhand: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         // If Diligent Farmhand is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst.

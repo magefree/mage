@@ -28,7 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;

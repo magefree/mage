@@ -30,7 +30,6 @@ package mage.cards.t;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;

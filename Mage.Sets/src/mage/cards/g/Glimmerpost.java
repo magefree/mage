@@ -52,7 +52,7 @@ public class Glimmerpost extends CardImpl {
 
     public Glimmerpost (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.subtype.add("Locus");
+        this.subtype.add(SubType.LOCUS);
         
         // When Glimmerpost enters the battlefield, you gain 1 life for each Locus on the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GlimmerpostEffect()));

@@ -27,6 +27,9 @@
  */
 package mage.cards.s;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
@@ -36,10 +39,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetSpell;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

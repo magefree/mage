@@ -30,7 +30,6 @@ package mage.abilities.keyword;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -79,9 +78,9 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
             UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(sourceId, game);
             if (defendingPlayerId != null) {
                 // the id has to be set here because the source can be leave battlefield
-                for (Effect effect : getEffects()) {
+                getEffects().forEach((effect) -> {
                     effect.setValue("defendingPlayerId", defendingPlayerId);
-                }
+                });
                 return true;
             }
         }
@@ -125,19 +124,23 @@ class AnnihilatorEffect extends OneShotEffect {
         }
         if (player != null) {
             int amount = Math.min(count, game.getBattlefield().countAll(FILTER, player.getId(), game));
-            Target target = new TargetControlledPermanent(amount, amount, FILTER, true);
-            if (target.canChoose(player.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(player.getId(), game) && player.canRespond()) {
-                    player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-                }
-                for (int idx = 0; idx < target.getTargets().size(); idx++) {
-                    Permanent permanent = game.getPermanent(target.getTargets().get(idx));
-                    if (permanent != null) {
-                        permanent.sacrifice(source.getSourceId(), game);
+            if (amount > 0) {
+                Target target = new TargetControlledPermanent(amount, amount, FILTER, true);
+                if (target.canChoose(player.getId(), game)) {
+                    while (player.canRespond()
+                            && target.canChoose(player.getId(), game)
+                            && !target.isChosen()) {
+                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                    }
+                    for (int idx = 0; idx < target.getTargets().size(); idx++) {
+                        Permanent permanent = game.getPermanent(target.getTargets().get(idx));
+                        if (permanent != null) {
+                            permanent.sacrifice(source.getSourceId(), game);
+                        }
                     }
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }

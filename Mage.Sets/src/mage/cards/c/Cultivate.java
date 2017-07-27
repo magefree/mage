@@ -35,7 +35,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -93,7 +93,7 @@ class CultivateEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD);
         if (controller.searchLibrary(target, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards revealed = new CardsImpl();

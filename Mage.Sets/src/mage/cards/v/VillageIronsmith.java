@@ -27,7 +27,7 @@
  */
 package mage.cards.v;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -36,12 +36,11 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.i.Ironfang;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.i.Ironfang;
+import mage.constants.CardType;
 import mage.constants.TargetController;
-
-import java.util.UUID;
 
 /**
  * @author nantuko

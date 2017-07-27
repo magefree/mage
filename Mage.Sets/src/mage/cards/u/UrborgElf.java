@@ -28,7 +28,6 @@
 package mage.cards.u;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;

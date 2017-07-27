@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -47,8 +47,6 @@ import java.util.UUID;
  */
 public class SakuraTribeElder extends CardImpl {
 
-    final static FilterBasicLandCard filterLands = new FilterBasicLandCard();
-
     public SakuraTribeElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Snake");
@@ -56,7 +54,7 @@ public class SakuraTribeElder extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        TargetCardInLibrary target = new TargetCardInLibrary(filterLands);
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay), new SacrificeSourceCost()));
     }
 

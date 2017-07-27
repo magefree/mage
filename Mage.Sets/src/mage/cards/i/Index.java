@@ -28,12 +28,11 @@
 
 package mage.cards.i;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-
-import java.util.UUID;
+import mage.constants.CardType;
 
 /**
  * @author LevelX

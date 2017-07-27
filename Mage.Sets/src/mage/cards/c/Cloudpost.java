@@ -54,7 +54,7 @@ public class Cloudpost extends CardImpl {
 
     public Cloudpost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Locus");
+        this.subtype.add(SubType.LOCUS);
 
         // Cloudpost enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

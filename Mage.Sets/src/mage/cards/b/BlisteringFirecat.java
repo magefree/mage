@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,9 +38,8 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.events.GameEvent;
-
-import java.util.UUID;
 
 /**
  *
@@ -49,8 +49,7 @@ public class BlisteringFirecat extends CardImpl {
 
     public BlisteringFirecat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.ELEMENTAL, SubType.CAT);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(1);

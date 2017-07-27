@@ -28,6 +28,7 @@
 
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -38,8 +39,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.watchers.common.RevoltWatcher;
-
-import java.util.UUID;
 
 /**
  * @author JRHerlehy

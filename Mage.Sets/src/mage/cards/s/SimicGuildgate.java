@@ -27,13 +27,15 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +45,7 @@ public class SimicGuildgate extends CardImpl {
 
     public SimicGuildgate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Gate");
+        this.subtype.add(SubType.GATE);
 
         // Simic Guildgate enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

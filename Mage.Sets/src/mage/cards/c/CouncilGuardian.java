@@ -27,6 +27,9 @@
  */
 package mage.cards.c;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -42,10 +45,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  *

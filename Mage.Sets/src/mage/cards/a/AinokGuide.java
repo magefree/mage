@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -62,7 +62,7 @@ public class AinokGuide extends CardImpl {
 
         // * Search your library for a basic land card, reveal it, then shuffle your library and put that card on top of it.
         Mode mode = new Mode();
-        mode.getEffects().add(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, true));
+        mode.getEffects().add(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, true));
         ability.addMode(mode);
         this.addAbility(ability);
 

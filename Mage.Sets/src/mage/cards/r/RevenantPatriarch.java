@@ -34,13 +34,13 @@ import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.SkipNextCombatEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.target.TargetPlayer;
 import mage.watchers.common.ManaSpentToCastWatcher;
-import mage.abilities.effects.common.SkipNextCombatEffect;
 
 /**
  *

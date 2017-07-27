@@ -27,6 +27,8 @@
  */
 package mage.cards.b;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -37,15 +39,13 @@ import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.PermanentsSacrificedWatcher;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -54,8 +54,7 @@ public class BriarbridgePatrol extends CardImpl {
 
     public BriarbridgePatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

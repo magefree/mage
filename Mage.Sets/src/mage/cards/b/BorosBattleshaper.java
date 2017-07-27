@@ -28,6 +28,7 @@
 
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -49,8 +50,6 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -61,8 +60,7 @@ public class BorosBattleshaper extends CardImpl {
 
     public BorosBattleshaper (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{W}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.MINOTAUR, SubType.SOLDIER);
 
 
         this.power = new MageInt(5);

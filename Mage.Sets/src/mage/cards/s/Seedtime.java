@@ -27,41 +27,40 @@
  */
 package mage.cards.s;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.common.SpellsCastWatcher;
 
-import java.util.List;
-import java.util.UUID;
-
 /**
  *
- * @author ciaccona007
+ * @author jeffwadsworth
  */
 public class Seedtime extends CardImpl {
 
+    private final static String rule = "Cast {this} only during your turn.";
+    private final static String rule2 = "Take an extra turn after this one if an opponent cast a blue spell this turn.";
+
     public Seedtime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        
 
         // Cast Seedtime only during your turn.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyDuringYourTurnEffect()));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, MyTurnCondition.instance, rule));
 
         // Take an extra turn after this one if an opponent cast a blue spell this turn.
-        this.getSpellAbility().addEffect(new SeedtimeEffect());
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new AddExtraTurnControllerEffect(), OpponentCastBlueSpellThisTurnCondition.instance, rule2));
         this.getSpellAbility().addWatcher(new SpellsCastWatcher());
+
     }
 
     public Seedtime(final Seedtime card) {
@@ -74,72 +73,28 @@ public class Seedtime extends CardImpl {
     }
 }
 
-class SeedtimeEffect extends OneShotEffect {
+enum OpponentCastBlueSpellThisTurnCondition implements Condition {
 
-    public SeedtimeEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Take an extra turn after this one if an opponent cast a blue spell this turn.";
-    }
-
-    public SeedtimeEffect(final SeedtimeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SeedtimeEffect copy() {
-        return new SeedtimeEffect(this);
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean condition = false;
         SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                List<Spell> spells = watcher.getSpellsCastThisTurn(opponentId);
-                if (spells != null) {
-                    for (Spell spell : spells) {
-                        if (spell.getColor(game).isBlue()) {
-                            condition = true;
+                if (opponentId != null) {
+                    List<Spell> spells = watcher.getSpellsCastThisTurn(opponentId);
+                    if (spells != null) {
+                        for (Spell spell : spells) {
+                            if (spell != null
+                                    && spell.getColor(game).isBlue()) {
+                                return true;
+                            }
                         }
                     }
                 }
             }
         }
-        if(condition && game.getPlayer(source.getControllerId()) != null) {
-            return new AddExtraTurnControllerEffect().apply(game, source);
-        }
         return false;
-    }
-}
-class CastOnlyDuringYourTurnEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public CastOnlyDuringYourTurnEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "cast {this} only during your turn";
-    }
-
-    private CastOnlyDuringYourTurnEffect(final CastOnlyDuringYourTurnEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        // has to return true, if the spell cannot be cast in the current phase / step
-        UUID activePlayerId = game.getActivePlayerId();
-        if(activePlayerId != null && event.getSourceId().equals(source.getSourceId()) && !event.getPlayerId().equals(activePlayerId)) {
-                return true;
-        }
-        return false; // cast not prevented by this effect
-    }
-
-    @Override
-    public CastOnlyDuringYourTurnEffect copy() {
-        return new CastOnlyDuringYourTurnEffect(this);
     }
 }

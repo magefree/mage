@@ -27,6 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.Iterator;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -43,9 +45,6 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-
-import java.util.Iterator;
-import java.util.UUID;
 
 
 /**

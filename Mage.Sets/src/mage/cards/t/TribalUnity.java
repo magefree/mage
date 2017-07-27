@@ -27,6 +27,8 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -45,9 +47,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author anonymous

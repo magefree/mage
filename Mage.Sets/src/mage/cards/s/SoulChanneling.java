@@ -28,18 +28,17 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.RegenerateAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.effects.common.RegenerateAttachedEffect;
-import mage.constants.*;
 
 /**
  *

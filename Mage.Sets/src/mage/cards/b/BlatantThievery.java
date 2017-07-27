@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -43,8 +44,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.*;
 
 /**
  *

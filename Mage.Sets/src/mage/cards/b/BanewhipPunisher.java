@@ -12,6 +12,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -29,8 +30,7 @@ public class BanewhipPunisher extends CardImpl {
 
     public BanewhipPunisher(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        subtype.add("Human");
-        subtype.add("Warrior");
+        subtype.add(SubType.HUMAN, SubType.WARRIOR);
         power = new MageInt(2);
         toughness = new MageInt(2);
         

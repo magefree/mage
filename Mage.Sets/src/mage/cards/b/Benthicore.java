@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -49,8 +50,6 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.MerfolkWizardToken;
 import mage.target.common.TargetControlledPermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author Loki
@@ -66,7 +65,7 @@ public class Benthicore extends CardImpl {
 
     public Benthicore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         

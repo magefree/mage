@@ -28,13 +28,14 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterBasicLandCard;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public class RampantGrowth extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true));
     }
 
     public RampantGrowth(final RampantGrowth card) {

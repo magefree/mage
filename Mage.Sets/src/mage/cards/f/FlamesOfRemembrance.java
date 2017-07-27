@@ -27,6 +27,9 @@
  */
 package mage.cards.f;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -46,10 +49,6 @@ import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,7 @@
  */
 package mage.cards.z;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -47,8 +48,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

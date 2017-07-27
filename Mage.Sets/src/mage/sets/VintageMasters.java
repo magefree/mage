@@ -28,6 +28,7 @@
 
 package mage.sets;
 
+import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.h.HighTide;
 import mage.cards.h.HymnToTourach;
@@ -36,8 +37,6 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-
-import java.util.List;
 
 /**
  *

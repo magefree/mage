@@ -27,6 +27,10 @@
  */
 package mage.cards.e;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -41,11 +45,6 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 import mage.util.GameLog;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

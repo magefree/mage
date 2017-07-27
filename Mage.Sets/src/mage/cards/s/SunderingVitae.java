@@ -27,14 +27,15 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public class SunderingVitae extends CardImpl {
         // Convoke
         this.addAbility(new ConvokeAbility());
         // Destroy target artifact or enchantment.
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -8,8 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInASingleGraveyard;
-
-import java.util.UUID;
 
 /**
  * @author Stravant

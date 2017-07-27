@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,12 +37,11 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.UUID;
-import mage.filter.StaticFilters;
 
 /**
  *
@@ -51,8 +51,7 @@ public class BlazingHellhound extends CardImpl {
 
     public BlazingHellhound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.ELEMENTAL, SubType.HOUND);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

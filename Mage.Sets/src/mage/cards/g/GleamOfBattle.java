@@ -27,14 +27,13 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-
-import java.util.UUID;
 
 /**
  *

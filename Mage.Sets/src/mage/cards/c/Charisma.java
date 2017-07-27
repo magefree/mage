@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureAttachedTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -42,8 +43,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

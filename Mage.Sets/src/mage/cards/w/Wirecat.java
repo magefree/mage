@@ -36,7 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -96,8 +96,7 @@ public class Wirecat extends CardImpl {
         @Override
         public boolean applies(Permanent permanent, Ability source, Game game) {
             if (permanent.getId().equals(source.getSourceId())) {
-                FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
-                return game.getBattlefield().contains(filter, 1, game);
+                return game.getBattlefield().contains(StaticFilters.FILTER_ENCHANTMENT_PERMANENT, 1, game);
             }
             return false;
         }

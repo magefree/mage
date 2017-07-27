@@ -28,7 +28,6 @@
 package mage.cards.n;
 
 import java.util.UUID;
-
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.effects.Effect;

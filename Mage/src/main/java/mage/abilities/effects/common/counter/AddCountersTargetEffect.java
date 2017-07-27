@@ -123,7 +123,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
                     return true;
                 }
             }
-            return affectedTargets > 0;
+            return true;
         }
         return false;
     }

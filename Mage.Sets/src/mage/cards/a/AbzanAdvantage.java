@@ -32,7 +32,7 @@ import mage.abilities.effects.keyword.BolsterEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -47,7 +47,7 @@ public class AbzanAdvantage extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Target player sacrifices an enchantment. Bolster 1.
-        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterEnchantmentPermanent(), 1, "Target player"));
+        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_ENCHANTMENT_PERMANENT, 1, "Target player"));
         this.getSpellAbility().addEffect(new BolsterEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

@@ -33,7 +33,8 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterBasicLandCard;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -44,18 +45,15 @@ import java.util.UUID;
  */
 public class BorderlandRanger extends CardImpl {
 
-    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
-
     public BorderlandRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.HUMAN, SubType.SCOUT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // When Borderland Ranger enters the battlefield, you may search your library for a basic land card, reveal it, and put it into your hand. If you do, shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, true), true));
     }
 
     public BorderlandRanger(final BorderlandRanger card) {

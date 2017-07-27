@@ -27,8 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -37,10 +35,13 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.target.TargetSpell;
 import mage.watchers.common.CastSpellLastTurnWatcher;
+
+import java.util.UUID;
 
 /**
  * @author Rafbill
@@ -51,7 +52,7 @@ public class MindbreakTrap extends CardImpl {
 
     public MindbreakTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.subtype.add("Trap");
+        this.subtype.add(SubType.TRAP);
 
         // If an opponent cast three or more spells this turn, you may pay {0} rather than pay Mindbreak Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new GenericManaCost(0), MindbreakTrapCondition.instance));

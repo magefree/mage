@@ -29,11 +29,11 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.game.permanent.token.FrogToken;
 import mage.target.common.TargetCreaturePermanent;
 

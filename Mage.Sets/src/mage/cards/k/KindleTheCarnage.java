@@ -27,32 +27,32 @@
  */
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
  *
- * @author ciaccona007
+ * @author jeffwadsworth
  */
 public class KindleTheCarnage extends CardImpl {
 
     public KindleTheCarnage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        
 
         // Discard a card at random. If you do, Kindle the Carnage deals damage equal to that card's converted mana cost to each creature. You may repeat this process any number of times.
         this.getSpellAbility().addEffect(new KindleTheCarnageEffect());
+
     }
 
     public KindleTheCarnage(final KindleTheCarnage card) {
@@ -64,11 +64,12 @@ public class KindleTheCarnage extends CardImpl {
         return new KindleTheCarnage(this);
     }
 }
+
 class KindleTheCarnageEffect extends OneShotEffect {
 
     public KindleTheCarnageEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "discard a card at random. {this} deals damage equal to that card's converted mana cost to each creature. You may repeat this process any number of times";
+        super(Outcome.AIDontUseIt);
+        this.staticText = "Discard a card at random. If you do, {this} deals damage equal to that card's converted mana cost to each creature. You may repeat this process any number of times";
     }
 
     public KindleTheCarnageEffect(final KindleTheCarnageEffect effect) {
@@ -83,22 +84,19 @@ class KindleTheCarnageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        String message = "Discard another card at random to deal damage to each creature?";
-        boolean cont = true;
-        while(cont) {
-            if(controller != null) {
+        if (controller != null) {
+            Cards hand = controller.getHand();
+            while (hand != null
+                    && hand.size() > 0
+                    && controller.isInGame()
+                    && controller.chooseUse(Outcome.AIDontUseIt, "Discard a card randomly from your hand?", source, game)) {
                 Card discardedCard = controller.discardOne(true, source, game);
                 if (discardedCard != null) {
-                    int damage = discardedCard.getConvertedManaCost();
-                    boolean damaged = new DamageAllEffect(damage, StaticFilters.FILTER_PERMANENT_CREATURE).apply(game, source);
-                    if (!damaged)
-                        return false;
+                    new DamageAllEffect(discardedCard.getConvertedManaCost(), new FilterCreaturePermanent()).apply(game, source);
                 }
-                cont = controller.getHand().size() > 0 && controller.chooseUse(outcome, message, source, game);
-            } else {
-                return false;
             }
+            return true;
         }
-        return true;
+        return false;
     }
 }

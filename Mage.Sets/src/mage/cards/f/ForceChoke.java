@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
@@ -42,8 +43,6 @@ import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *

@@ -28,11 +28,10 @@
 package mage.cards.p;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;

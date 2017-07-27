@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -34,10 +35,9 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 /**
  *
@@ -47,8 +47,7 @@ public class BalothNull extends CardImpl {
 
     public BalothNull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{G}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.ZOMBIE, SubType.BEAST);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

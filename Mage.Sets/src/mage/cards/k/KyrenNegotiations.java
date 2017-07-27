@@ -1,5 +1,6 @@
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
@@ -13,8 +14,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
 
 
 /**

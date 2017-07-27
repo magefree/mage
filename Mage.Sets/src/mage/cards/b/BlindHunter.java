@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -36,9 +37,8 @@ import mage.abilities.keyword.HauntAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *
@@ -48,7 +48,7 @@ public class BlindHunter extends CardImpl {
 
     public BlindHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{B}");
-        this.subtype.add("Bat");
+        this.subtype.add(SubType.BAT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

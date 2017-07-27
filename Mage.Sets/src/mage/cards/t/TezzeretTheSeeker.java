@@ -27,8 +27,9 @@
  */
 package mage.cards.t;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.Cost;
@@ -48,9 +49,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

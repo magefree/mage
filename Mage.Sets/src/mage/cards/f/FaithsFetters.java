@@ -27,6 +27,8 @@
  */
 package mage.cards.f;
 
+import java.util.Optional;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,9 +45,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-
-import java.util.Optional;
-import java.util.UUID;
 
 /**
  * @author LevelX2

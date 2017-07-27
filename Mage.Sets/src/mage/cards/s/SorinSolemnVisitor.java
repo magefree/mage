@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
@@ -42,8 +43,6 @@ import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.game.command.emblems.SorinSolemnVisitorEmblem;
 import mage.game.permanent.token.SorinSolemnVisitorVampireToken;
-
-import java.util.UUID;
 
 /**
  *

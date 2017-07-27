@@ -28,6 +28,7 @@
 
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -36,8 +37,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.EldraziSpawnToken;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,8 @@
  */
 package mage.cards.f;
 
+import java.util.HashSet;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,9 +47,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.HashSet;
-import java.util.UUID;
 
 /**
  *

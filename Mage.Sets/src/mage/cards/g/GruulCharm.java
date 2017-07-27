@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
@@ -42,8 +43,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.other.OwnerPredicate;
-
-import java.util.UUID;
 
 /**
  *

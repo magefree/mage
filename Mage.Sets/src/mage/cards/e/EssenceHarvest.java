@@ -27,20 +27,19 @@
  */
 package mage.cards.e;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -49,8 +48,7 @@ import java.util.UUID;
 public class EssenceHarvest extends CardImpl {
 
     public EssenceHarvest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Target player loses X life and you gain X life, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new EssenceHarvestEffect());
@@ -88,7 +86,7 @@ class EssenceHarvestEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (player != null && targetPlayer != null) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game);
+            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game);
             int amount = 0;
             for (Permanent creature : creatures) {
                 int power = creature.getPower().getValue();

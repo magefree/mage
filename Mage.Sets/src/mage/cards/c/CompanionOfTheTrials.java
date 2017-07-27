@@ -27,10 +27,8 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -44,6 +42,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +71,7 @@ public class CompanionOfTheTrials extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new UntapTargetEffect(),
                 new ManaCostsImpl("{1}{W}"),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0));
+                new PermanentsOnTheBattlefieldCondition(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

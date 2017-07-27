@@ -27,13 +27,14 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterEnchantmentPermanent;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public class PeaceAndQuiet extends CardImpl {
 
         // Destroy two target enchantments.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(2, new FilterEnchantmentPermanent()));
+        this.getSpellAbility().addTarget(new TargetPermanent(2, StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
     }
 
     public PeaceAndQuiet(final PeaceAndQuiet card) {

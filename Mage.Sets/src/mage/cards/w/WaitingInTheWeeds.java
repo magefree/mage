@@ -40,8 +40,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.WaitingInTheWeedsCatToken;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WaitingInTheWeedsCatToken;
 import mage.players.Player;
 
 /**

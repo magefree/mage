@@ -25,8 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+ 
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -35,31 +37,33 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
- * @author ciaccona007
+ * @author L_J
  */
 public class DaruSpiritualist extends CardImpl {
 
     public DaruSpiritualist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Whenever a Cleric creature you control becomes the target of a spell or ability, it gets +0/+2 until end of turn.
-        this.addAbility(new DaruSpiritualistAbility(new BoostTargetEffect(0,2, Duration.EndOfTurn)));
+        this.addAbility(new DaruSpiritualistTriggeredAbility(new BoostTargetEffect(0, 2, Duration.EndOfTurn)));
     }
 
     public DaruSpiritualist(final DaruSpiritualist card) {
@@ -72,31 +76,40 @@ public class DaruSpiritualist extends CardImpl {
     }
 }
 
-class DaruSpiritualistAbility extends TriggeredAbilityImpl {
+class DaruSpiritualistTriggeredAbility extends TriggeredAbilityImpl {
 
-    public DaruSpiritualistAbility(Effect effect) {
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Cleric creature you control");
+
+    static {
+        filter.add(new SubtypePredicate(SubType.CLERIC));
+    }
+
+    public DaruSpiritualistTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public DaruSpiritualistAbility(final DaruSpiritualistAbility ability) {
+    public DaruSpiritualistTriggeredAbility(final DaruSpiritualistTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public DaruSpiritualistAbility copy() {
-        return new DaruSpiritualistAbility(this);
+    public DaruSpiritualistTriggeredAbility copy() {
+        return new DaruSpiritualistTriggeredAbility(this);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
+        return event.getType() == EventType.TARGETED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        UUID targetId = event.getTargetId();
         Permanent creature = game.getPermanent(event.getTargetId());
-        if (creature != null && creature.isCreature() && creature.hasSubtype("Cleric", game) && creature.getControllerId() == this.getControllerId()) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+        if (creature != null && filter.match(creature, getSourceId(), getControllerId(), game)) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+            }
             return true;
         }
         return false;

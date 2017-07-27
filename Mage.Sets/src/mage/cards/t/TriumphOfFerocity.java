@@ -27,7 +27,7 @@
  */
 package mage.cards.t;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.ControlsCreatureGreatestPowerCondition;
@@ -35,9 +35,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.TargetController;
-
-import java.util.UUID;
 
 /**
  * @author noxx

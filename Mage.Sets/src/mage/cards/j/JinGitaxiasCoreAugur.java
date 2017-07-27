@@ -28,8 +28,6 @@
 package mage.cards.j;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +37,7 @@ import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 
 /**
  *

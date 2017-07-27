@@ -27,6 +27,9 @@
  */
 package mage.cards.a;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -37,10 +40,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

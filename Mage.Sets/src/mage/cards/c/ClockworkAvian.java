@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
@@ -52,8 +53,6 @@ import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.game.Game;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
-
-import java.util.UUID;
 
 /**
  *

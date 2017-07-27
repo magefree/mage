@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
@@ -43,8 +44,6 @@ import mage.filter.common.FilterSpellOrPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.target.common.TargetSpellOrPermanent;
 import mage.watchers.common.DamagedByWatcher;
-
-import java.util.UUID;
 
 /**
  *

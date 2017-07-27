@@ -27,6 +27,7 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
@@ -41,8 +42,6 @@ import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.game.Game;
-
-import java.util.UUID;
 
 /**
  *

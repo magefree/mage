@@ -27,6 +27,7 @@
  */
 package mage.cards.j;
 
+import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.SourceHasSubtypeCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -40,8 +41,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.SubTypeList;
-
-import java.util.UUID;
 
 /**
  *

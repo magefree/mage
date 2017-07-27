@@ -28,23 +28,22 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterBasicLandCard;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class SylvanRanger extends CardImpl {
-
-    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
     public SylvanRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
@@ -55,7 +54,7 @@ public class SylvanRanger extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Sylvan Ranger enters the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(filter);
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true)));
     }
 

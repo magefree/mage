@@ -27,15 +27,14 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
-
-import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -44,11 +43,10 @@ import java.util.UUID;
 public class CleaverRiot extends CardImpl {
 
     public CleaverRiot(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");
 
         // Creatures you control gain double strike until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
     public CleaverRiot(final CleaverRiot card) {

@@ -27,6 +27,7 @@
  */
 package mage.cards.z;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
@@ -37,8 +38,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-
-import java.util.UUID;
 
 /**
  *

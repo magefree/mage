@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,8 +44,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author LoneFox
@@ -59,8 +58,7 @@ public class BlasterMage extends CardImpl {
 
     public BlasterMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.HUMAN, SubType.SPELLSHAPER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

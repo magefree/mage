@@ -28,24 +28,23 @@
 
 package mage.cards.t;
 
-import mage.constants.CardType;
-import mage.constants.Zone;
+import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
-
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.costs.mana.GenericManaCost;
 
 /**
  * @author nantuko

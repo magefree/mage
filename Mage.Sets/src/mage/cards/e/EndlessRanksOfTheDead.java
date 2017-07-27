@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -41,8 +42,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.ZombieToken;
-
-import java.util.UUID;
 
 /**
  *

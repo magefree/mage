@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
@@ -43,8 +44,6 @@ import mage.constants.Duration;
 import mage.game.command.emblems.GideonOfTheTrialsEmblem;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -39,13 +40,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -66,8 +66,7 @@ public class BalefireLiege extends CardImpl {
 
     public BalefireLiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/W}{R/W}{R/W}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.SPIRIT, SubType.HORROR);
 
 
         this.power = new MageInt(2);

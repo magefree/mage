@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -45,8 +46,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
-import java.util.UUID;
-
 /**
  *
  * @author Backfir3
@@ -64,7 +63,7 @@ public class Brawn extends CardImpl {
 
     public Brawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Incarnation");
+        this.subtype.add(SubType.INCARNATION);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -27,6 +27,7 @@
  */
 package mage.game.permanent;
 
+import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -54,8 +55,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -990,8 +989,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 game.informPlayers(player.getLogName() + " sacrificed " + this.getLogName());
             }
             game.fireEvent(GameEvent.getEvent(EventType.SACRIFICED_PERMANENT, objectId, sourceId, controllerId));
-            game.checkStateAndTriggered();
-            game.applyEffects();
             return true;
         }
         return false;

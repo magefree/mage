@@ -28,7 +28,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.MountainwalkAbility;
@@ -64,7 +63,7 @@ public class GoblinsOfTheFlarg extends CardImpl {
 
         // When you control a Dwarf, sacrifice Goblins of the Flarg.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                filter, ComparisonType.MORE_THAN, 0,
+                filter,
                 new SacrificeSourceEffect()));
     }
 

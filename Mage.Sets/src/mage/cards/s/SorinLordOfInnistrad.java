@@ -44,11 +44,11 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.SorinLordOfInnistradVampireToken;
 import mage.game.command.emblems.SorinLordOfInnistradEmblem;
-import mage.target.TargetPermanent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.SorinLordOfInnistradVampireToken;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 
 /**
  *

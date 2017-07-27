@@ -607,7 +607,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 } else {
                     cardImageSource.doPause(url.getPath());
                     httpConn = url.openConnection(p);
-                    setUpConnection(httpConn);
                     httpConn.connect();
                     responseCode = ((HttpURLConnection) httpConn).getResponseCode();
                 }
@@ -681,33 +680,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             }
             synchronized (sync) {
                 update(cardIndex + 1, count);
-            }
-        }
-
-        private void setUpConnection(URLConnection httpConn) {
-            // images download from magiccards.info may not work with default 'User-Agent: Java/1.x.x' request header
-            switch (RandomUtil.nextInt(3)) {
-                // chrome
-                case 0:
-                    httpConn.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-                    httpConn.setRequestProperty("Accept-Encoding", "gzip, deflate, sdch");
-                    httpConn.setRequestProperty("Accept-Language", "en-US,en;q=0.8");
-                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
-                    break;
-                // ff
-                case 1:
-                    httpConn.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-                    httpConn.setRequestProperty("Accept-Encoding", "gzip, deflate");
-                    httpConn.setRequestProperty("Accept-Language", "en-US;q=0.5,en;q=0.3");
-                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:50.0) Gecko/20100101 Firefox/50.0");
-                    break;
-                // ie
-                case 2:
-                    httpConn.setRequestProperty("Accept", "text/html, application/xhtml+xml, */*");
-                    httpConn.setRequestProperty("Accept-Encoding", "gzip, deflate");
-                    httpConn.setRequestProperty("Accept-Language", "en-US");
-                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko");
-                    break;
             }
         }
 

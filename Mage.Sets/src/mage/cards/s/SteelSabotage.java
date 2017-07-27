@@ -28,15 +28,15 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.filter.common.FilterArtifactSpell;
 import mage.target.TargetSpell;
 import mage.target.common.TargetArtifactPermanent;
-import mage.filter.common.FilterArtifactSpell;
 
 /**
  *

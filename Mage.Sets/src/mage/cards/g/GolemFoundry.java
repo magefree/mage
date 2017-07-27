@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -39,8 +40,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactSpell;
 import mage.game.permanent.token.GolemToken;
-
-import java.util.UUID;
 
 /**
  *

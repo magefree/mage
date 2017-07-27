@@ -29,7 +29,6 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SourceCostReductionForEachCardInGraveyardEffect;
 import mage.cards.CardImpl;

@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -56,7 +56,7 @@ public class EvolutionCharm extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Choose one - Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library;
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterBasicLandCard()), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true, true));
         
         // or return target creature card from your graveyard to your hand; 
         Mode mode = new Mode();

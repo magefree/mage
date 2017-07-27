@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -43,8 +44,6 @@ import mage.game.permanent.token.WolfToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  *

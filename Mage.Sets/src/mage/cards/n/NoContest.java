@@ -27,13 +27,15 @@
  */
 package mage.cards.n;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -42,9 +44,6 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author Styxo

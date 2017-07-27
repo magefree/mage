@@ -40,7 +40,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -100,7 +100,7 @@ class FertileThicketEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             cards.addAll(controller.getLibrary().getTopCards(game, 5));
             controller.lookAtCards(sourceObject.getIdName(), cards, game);
-            TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, new FilterBasicLandCard());
+            TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, StaticFilters.FILTER_BASIC_LAND_CARD);
             controller.chooseTarget(outcome, cards, target, source, game);
             Cards cardsRevealed = new CardsImpl(target.getTargets());
             if (!cardsRevealed.isEmpty()) {

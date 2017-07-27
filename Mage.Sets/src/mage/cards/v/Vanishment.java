@@ -27,15 +27,14 @@
  */
 package mage.cards.v;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetNonlandPermanent;
-
-import java.util.UUID;
 
 /**
  *

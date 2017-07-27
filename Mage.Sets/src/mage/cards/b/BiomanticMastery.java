@@ -27,18 +27,17 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *
@@ -47,8 +46,7 @@ import java.util.UUID;
 public class BiomanticMastery extends CardImpl {
 
     public BiomanticMastery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G/U}{G/U}{G/U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G/U}{G/U}{G/U}");
 
         // <i>({GU} can be paid with either {G} or {U}.)</i>
         // Draw a card for each creature target player controls, then draw a card for each creature another target player controls.
@@ -87,10 +85,10 @@ class BiomanticMasteryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for(UUID playerId: getTargetPointer().getTargets(game, source)) {
+            for (UUID playerId : getTargetPointer().getTargets(game, source)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    int creatures = game.getBattlefield().countAll(new FilterCreaturePermanent(), playerId, game);
+                    int creatures = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game);
                     controller.drawCards(creatures, game);
                 }
             }

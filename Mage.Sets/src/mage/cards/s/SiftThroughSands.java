@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -47,6 +47,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.Watcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +65,7 @@ public class SiftThroughSands extends CardImpl {
 
     public SiftThroughSands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Draw two cards, then discard a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

@@ -36,8 +36,9 @@ import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -49,7 +50,7 @@ public class BubblingBeebles extends CardImpl {
 
     public BubblingBeebles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Beeble");
+        this.subtype.add(SubType.BEEBLE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -57,7 +58,7 @@ public class BubblingBeebles extends CardImpl {
         // Bubbling Beebles can't be blocked as long as defending player controls an enchantment.
         Effect effect = new ConditionalRestrictionEffect(
                 new CantBeBlockedSourceEffect(),
-                new DefendingPlayerControlsCondition(new FilterEnchantmentPermanent()));
+                new DefendingPlayerControlsCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
         effect.setText("{this} can't be blocked as long as defending player controls an enchantment");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

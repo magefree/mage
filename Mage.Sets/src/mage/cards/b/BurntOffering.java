@@ -30,7 +30,6 @@ package mage.cards.b;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;

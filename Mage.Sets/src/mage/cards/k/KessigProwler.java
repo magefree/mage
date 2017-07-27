@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.s.SinuousPredator;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.s.SinuousPredator;
 import mage.constants.CardType;
 import mage.constants.Zone;
 

@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -34,30 +35,28 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FirstTargetPointer;
 
-import java.util.UUID;
-
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class DeathMatch extends CardImpl {
 
     private final UUID originalId;
 
     public DeathMatch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
         // Whenever a creature enters the battlefield, that creature's controller may have target creature of his or her choice get -3/-3 until end of turn.
         // NOTE: The ability being optional is implemented in the subclass to give the choice to correct player.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new DeathMatchEffect(),
-            new FilterCreaturePermanent(), false, SetTargetPointer.PLAYER, "");
+                StaticFilters.FILTER_PERMANENT_CREATURE, false, SetTargetPointer.PLAYER, "");
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         originalId = ability.getOriginalId();
@@ -65,9 +64,9 @@ public class DeathMatch extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if(ability.getOriginalId().equals(originalId)) {
+        if (ability.getOriginalId().equals(originalId)) {
             UUID controllerId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
-            if(controllerId != null) {
+            if (controllerId != null) {
                 ability.getTargets().get(0).setTargetController(controllerId);
                 ability.getEffects().get(0).setTargetPointer(new FirstTargetPointer());
             }
@@ -89,13 +88,13 @@ class DeathMatchEffect extends OneShotEffect {
 
     public DeathMatchEffect() {
         super(Outcome.UnboostCreature);
-        staticText="that creature's controller may have target creature of his or her choice get -3/-3 until end of turn.";
+        staticText = "that creature's controller may have target creature of his or her choice get -3/-3 until end of turn.";
     }
 
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getTargets().get(0).getTargetController());
-        if(player != null) {
-            if(player.chooseUse(outcome, "Give targeted creature -3/-3 ?", source, game)) {
+        if (player != null) {
+            if (player.chooseUse(outcome, "Give targeted creature -3/-3 ?", source, game)) {
                 game.addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn), source);
             }
             return true;

@@ -74,14 +74,10 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getState().getZone(source.getSourceId()) != Zone.GRAVEYARD) {
-            return false;
-        }
         Card card = game.getCard(source.getSourceId());
         if (card == null) {
             return false;
         }
-
         Player player;
         if (ownerControl) {
             player = game.getPlayer(card.getOwnerId());
@@ -91,7 +87,10 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
         if (player == null) {
             return false;
         }
-        return player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, true, null);
+        if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
+            player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, true, null);
+        }
+        return true;
     }
 
     private void setText() {

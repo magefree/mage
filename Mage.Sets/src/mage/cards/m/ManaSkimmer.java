@@ -28,7 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;

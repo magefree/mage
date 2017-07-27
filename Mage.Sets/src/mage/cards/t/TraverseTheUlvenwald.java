@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -36,10 +35,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +59,7 @@ public class TraverseTheUlvenwald extends CardImpl {
 
         // Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, new FilterBasicLandCard()), true),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true),
                 new InvertCondition(DeliriumCondition.instance),
                 "Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library."));
 

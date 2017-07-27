@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -40,16 +41,11 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  *
@@ -59,7 +55,7 @@ public class BomatCourier extends CardImpl {
 
     public BomatCourier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -109,7 +105,7 @@ class BomatCourierExileEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
+                UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), 0);
                 card.setFaceDown(true, game);
                 controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName());
                 card.setFaceDown(true, game);
@@ -140,7 +136,7 @@ class BomatCourierReturnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId(), true));
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), 0));
             if (exileZone != null) {
                 controller.moveCards(exileZone, Zone.HAND, source, game);
             }

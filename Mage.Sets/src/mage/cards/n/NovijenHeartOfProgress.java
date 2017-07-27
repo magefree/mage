@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,16 +53,16 @@ import mage.players.Player;
 public class NovijenHeartOfProgress extends CardImpl {
 
     public NovijenHeartOfProgress(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {T}: Add {C} to your mana pool.        
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        
-	// {G}{U}, {T}: Put a +1/+1 counter on each creature that entered the battlefield this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NovijenHeartOfProgressEffect(), new ManaCostsImpl<>("{G}{U}"));        
+
+        // {G}{U}, {T}: Put a +1/+1 counter on each creature that entered the battlefield this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NovijenHeartOfProgressEffect(), new ManaCostsImpl<>("{G}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-    }   
+    }
 
     public NovijenHeartOfProgress(final NovijenHeartOfProgress card) {
         super(card);
@@ -95,10 +95,10 @@ class NovijenHeartOfProgressEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 if (permanent.getTurnsOnBattlefield() == 0) {
                     permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
-                    game.informPlayers(sourceObject.getLogName()+ ": " + controller.getLogName() + " puts a +1/+1 counter on " + permanent.getLogName());
+                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts a +1/+1 counter on " + permanent.getLogName());
                 }
             }
             return true;

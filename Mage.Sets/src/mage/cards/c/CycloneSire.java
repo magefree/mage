@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -42,8 +43,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.WallOfResurgenceToken;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  *

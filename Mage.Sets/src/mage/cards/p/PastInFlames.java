@@ -29,12 +29,6 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageObjectReference;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TimingRule;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -42,6 +36,12 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -95,12 +95,9 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
         if (this.affectedObjectsSet) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                for (UUID cardId: player.getGraveyard()) {
-                    Card card = game.getCard(cardId);
-                    if (card.isInstant() || card.isSorcery()) {
-                        affectedObjectList.add(new MageObjectReference(card, game));
-                    }
-                }
+                player.getGraveyard().stream().map((cardId) -> game.getCard(cardId)).filter((card) -> (card.isInstant() || card.isSorcery())).forEachOrdered((card) -> {
+                    affectedObjectList.add(new MageObjectReference(card, game));
+                });
              }
         }
     }
@@ -109,23 +106,21 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (UUID cardId: player.getGraveyard()) {
-                if (affectedObjectList.contains(new MageObjectReference(cardId, game))) {
-                    Card card = game.getCard(cardId);
-                    FlashbackAbility ability = null;
-                    if (card.isInstant()) {
-                        ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
-                    }
-                    else if (card.isSorcery()) {
-                        ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
-                    }
-                    if (ability != null) {
-                        ability.setSourceId(cardId);
-                        ability.setControllerId(card.getOwnerId());
-                        game.getState().addOtherAbility(card, ability);
-                    }
+            player.getGraveyard().stream().filter((cardId) -> (affectedObjectList.contains(new MageObjectReference(cardId, game)))).forEachOrdered((cardId) -> {
+                Card card = game.getCard(cardId);
+                FlashbackAbility ability = null;
+                if (card.isInstant()) {
+                    ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
                 }
-            }
+                else if (card.isSorcery()) {
+                    ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
+                }
+                if (ability != null) {
+                    ability.setSourceId(cardId);
+                    ability.setControllerId(card.getOwnerId());
+                    game.getState().addOtherAbility(card, ability);
+                }
+            });
             return true;
         }
         return false;

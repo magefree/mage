@@ -120,6 +120,7 @@ class BoundEffect extends OneShotEffect {
                     Permanent toSacrifice = game.getPermanent(target.getFirstTarget());
                     if (toSacrifice != null) {
                         toSacrifice.sacrifice(source.getSourceId(), game);
+                        game.applyEffects();
                         int colors = toSacrifice.getColor(game).getColorCount();
                         if (colors > 0) {
                             TargetCardInYourGraveyard targetCard = new TargetCardInYourGraveyard(0, colors,

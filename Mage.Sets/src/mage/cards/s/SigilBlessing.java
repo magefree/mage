@@ -39,7 +39,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class SigilBlessing extends CardImpl {
 
     public SigilBlessing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{W}");
 
         // Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
@@ -87,7 +87,7 @@ class SigilBlessingBoostControlledEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        for (Permanent perm : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
             affectedObjectList.add(new MageObjectReference(perm, game));
         }
     }

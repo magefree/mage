@@ -27,6 +27,9 @@
  */
 package mage.cards.g;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -47,10 +50,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author BursegSardaukar

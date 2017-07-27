@@ -37,7 +37,7 @@ import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.util.functions.AddSubtypeApplier;
 
 /**
@@ -47,7 +47,7 @@ import mage.util.functions.AddSubtypeApplier;
 public class SakashimasStudent extends CardImpl {
 
     public SakashimasStudent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Ninja");
 
@@ -58,7 +58,7 @@ public class SakashimasStudent extends CardImpl {
         this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{1}{U}")));
 
         // You may have Sakashima's Student enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types.
-        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), new AddSubtypeApplier("Ninja"));
+        Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new AddSubtypeApplier("Ninja"));
         effect.setText("as a copy of any creature on the battlefield, except it's a Ninja in addition to its other creature types");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
 

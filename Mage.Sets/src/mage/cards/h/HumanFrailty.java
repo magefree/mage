@@ -27,16 +27,15 @@
  */
 package mage.cards.h;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  * @author noxx

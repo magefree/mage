@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -55,7 +56,6 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetDiscard;
 import mage.target.targetpointer.FixedTarget;
-import java.util.UUID;
 
 /**
  *

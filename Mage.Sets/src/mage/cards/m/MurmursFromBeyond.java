@@ -27,18 +27,13 @@
  */
 package mage.cards.m;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -46,6 +41,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +53,7 @@ public class MurmursFromBeyond extends CardImpl {
 
     public MurmursFromBeyond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Reveal the top three cards of your library. An opponent chooses one of them. Put that card into your graveyard and the rest into your hand.
         this.getSpellAbility().addEffect(new MurmursFromBeyondEffect());

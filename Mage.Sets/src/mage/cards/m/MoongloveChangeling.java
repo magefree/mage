@@ -28,8 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
@@ -38,6 +36,7 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 
 /**
  *

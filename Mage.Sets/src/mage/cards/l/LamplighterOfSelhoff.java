@@ -27,9 +27,7 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -42,6 +40,8 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +67,7 @@ public class LamplighterOfSelhoff extends CardImpl {
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1,1,true));
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 "When {this} enters the battlefield, if you control another Zombie, you may a draw card. If you do, discard a card."));
     }
 

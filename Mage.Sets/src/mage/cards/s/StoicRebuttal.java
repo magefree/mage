@@ -28,19 +28,18 @@
 
 package mage.cards.s;
 
-import mage.constants.CardType;
-import mage.abilities.condition.common.MetalcraftCondition;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.target.TargetSpell;
-
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.MetalcraftCondition;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
+import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.target.TargetSpell;
 
 /**
  * @author ayrat

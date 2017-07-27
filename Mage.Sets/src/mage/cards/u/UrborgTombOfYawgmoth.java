@@ -28,16 +28,15 @@
 package mage.cards.u;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
-import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
 
 /**
  *

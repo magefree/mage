@@ -27,6 +27,8 @@
  */
 package mage.cards.b;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
@@ -44,9 +46,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
-import java.util.List;
-import java.util.UUID;
-
 /**
  *
  * @author jeffwadsworth
@@ -55,9 +54,7 @@ public class BalaGedThief extends CardImpl {
 
     public BalaGedThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.HUMAN, SubType.ROGUE, SubType.ALLY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

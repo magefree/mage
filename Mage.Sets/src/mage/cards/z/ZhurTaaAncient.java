@@ -27,6 +27,7 @@
  */
 package mage.cards.z;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
@@ -36,8 +37,6 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
-
-import java.util.UUID;
 
 /**
  *

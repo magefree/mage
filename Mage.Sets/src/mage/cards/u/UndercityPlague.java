@@ -28,13 +28,13 @@
 package mage.cards.u;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.CipherEffect;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPlayer;
 

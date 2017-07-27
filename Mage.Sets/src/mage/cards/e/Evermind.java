@@ -35,6 +35,7 @@ import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -47,7 +48,7 @@ public class Evermind extends CardImpl {
 
     public Evermind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         this.color.setBlue(true);
 

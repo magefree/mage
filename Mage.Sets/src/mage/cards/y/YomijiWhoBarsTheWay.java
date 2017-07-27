@@ -27,6 +27,7 @@
  */
 package mage.cards.y;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -38,8 +39,6 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-
-import java.util.UUID;
 
 /**
  *

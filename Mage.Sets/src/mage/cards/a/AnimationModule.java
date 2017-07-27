@@ -27,6 +27,9 @@
  */
 package mage.cards.a;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -51,10 +54,6 @@ import mage.game.permanent.token.ServoToken;
 import mage.players.Player;
 import mage.target.common.TargetPermanentOrPlayer;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  *
  * @author emerald000
@@ -62,7 +61,7 @@ import java.util.UUID;
 public class AnimationModule extends CardImpl {
 
     public AnimationModule(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Whenever one or more +1/+1 counters are placed on a permanent you control, you may pay {1}. If you do, create a 1/1 colorless Servo artifact creature token.
         this.addAbility(new AnimationModuleTriggeredAbility());
@@ -150,8 +149,7 @@ class AnimationModuleEffect extends OneShotEffect {
                             Counter newCounter = new Counter(counter.getName());
                             permanent.addCounters(newCounter, source, game);
                         }
-                    }
-                    else {
+                    } else {
                         Choice choice = new ChoiceImpl(true);
                         Set<String> choices = new HashSet<>(permanent.getCounters(game).size());
                         for (Counter counter : permanent.getCounters(game).values()) {
@@ -169,8 +167,7 @@ class AnimationModuleEffect extends OneShotEffect {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                 if (player != null) {
                     if (!player.getCounters().isEmpty()) {
@@ -179,8 +176,7 @@ class AnimationModuleEffect extends OneShotEffect {
                                 Counter newCounter = new Counter(counter.getName());
                                 player.addCounters(newCounter, game);
                             }
-                        }
-                        else {
+                        } else {
                             Choice choice = new ChoiceImpl(true);
                             Set<String> choices = new HashSet<>(player.getCounters().size());
                             for (Counter counter : player.getCounters().values()) {
@@ -200,6 +196,7 @@ class AnimationModuleEffect extends OneShotEffect {
                     }
                 }
             }
+            return true;
         }
         return false;
     }

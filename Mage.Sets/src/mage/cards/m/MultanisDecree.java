@@ -27,17 +27,18 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterEnchantmentPermanent;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +83,7 @@ class MultanisDecreeDestroyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
 		int enchantmentsDestoyed = 0;
-        for (Permanent permanent: game.getState().getBattlefield().getActivePermanents(new FilterEnchantmentPermanent(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent: game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_ENCHANTMENT_PERMANENT,  source.getControllerId(), source.getSourceId(), game)) {
             if (permanent.destroy(source.getSourceId(), game, false)) {
                 enchantmentsDestoyed++;
             }

@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -49,8 +50,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX
@@ -65,9 +64,7 @@ public class BloodthirstyOgre extends CardImpl {
 
     public BloodthirstyOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Warrior");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.OGRE, SubType.WARRIOR, SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,9 +39,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.n.NeckBreaker;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
-
-import java.util.UUID;
 
 /**
  *
@@ -50,9 +50,7 @@ public class BreakneckRider extends CardImpl {
 
     public BreakneckRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.HUMAN, SubType.SCOUT, SubType.WEREWOLF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         

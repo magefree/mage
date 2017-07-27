@@ -28,7 +28,6 @@
 package mage.cards.i;
 
 import java.util.UUID;
-
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;

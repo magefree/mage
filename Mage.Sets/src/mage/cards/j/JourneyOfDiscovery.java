@@ -27,7 +27,6 @@
  */
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -36,8 +35,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public class JourneyOfDiscovery extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // Choose one - Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle your library; 
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, new FilterBasicLandCard())));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD)));
         
         // or you may play up to two additional lands this turn.
         Mode mode = new Mode();

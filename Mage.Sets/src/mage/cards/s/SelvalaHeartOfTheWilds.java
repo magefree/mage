@@ -43,6 +43,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
@@ -119,17 +120,16 @@ class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
-        }
-        if (permanent != null
-                && filter2.match(permanent, game)) {
-            Player permanentController = game.getPlayer(permanent.getControllerId());
-            if (permanentController.chooseUse(Outcome.DrawCard, "Would you like to draw a card?", source, game)) {
-                permanentController.drawCards(1, game);
-                return true;
+        Permanent permanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
+        if (permanent != null) {
+            if (filter2.match(permanent, game)) {
+                Player permanentController = game.getPlayer(permanent.getControllerId());
+                if (permanentController != null
+                        && permanentController.chooseUse(Outcome.DrawCard, "Would you like to draw a card?", source, game)) {
+                    permanentController.drawCards(1, game);
+                }
             }
+            return true;
         }
         return false;
     }
@@ -143,7 +143,7 @@ class GreatestPowerPredicate implements Predicate<Permanent> {
         for (UUID playerId : game.getPlayerList()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), playerId, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)) {
                     if (permanent.getPower().getValue() >= power && !permanent.equals(input)) {
                         return false; //we found something with equal/more power
                     }

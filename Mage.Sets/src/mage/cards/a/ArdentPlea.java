@@ -27,13 +27,12 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.keyword.CascadeAbility;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
 
 /**
  *

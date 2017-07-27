@@ -27,13 +27,15 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.SpiritToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +45,7 @@ public class SpiritualVisit extends CardImpl {
 
     public SpiritualVisit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Create a 1/1 colorless Spirit creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritToken()));

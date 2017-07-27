@@ -34,8 +34,8 @@ import mage.abilities.keyword.HeroicAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.permanent.token.CatSoldierCreatureToken;
 import mage.constants.CardType;
+import mage.game.permanent.token.CatSoldierCreatureToken;
 
 /**
  *

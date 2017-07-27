@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -39,11 +40,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -52,7 +51,7 @@ import java.util.UUID;
 public class StoneforgeMasterwork extends CardImpl {
 
     public StoneforgeMasterwork(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+1 for each other creature you control that shares a creature type with it.
@@ -83,7 +82,7 @@ class StoneforgeMasterworkDynamicValue implements DynamicValue {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(equipment.getAttachedTo());
             if (equipped != null) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), sourceAbility.getControllerId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceAbility.getControllerId(), game)) {
                     if (!permanent.getId().equals(equipped.getId())) {
                         if (equipped.shareSubtypes(permanent, game)) {
                             xValue++;

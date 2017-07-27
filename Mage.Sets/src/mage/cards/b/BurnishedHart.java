@@ -36,8 +36,9 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -50,7 +51,7 @@ public class BurnishedHart extends CardImpl {
 
     public BurnishedHart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Elk");
+        this.subtype.add(SubType.ELK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -58,7 +59,7 @@ public class BurnishedHart extends CardImpl {
         // {3}, Sacrifice Burnished Hart: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2,new FilterBasicLandCard()), true, true),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_BASIC_LAND_CARD), true, true),
                 new GenericManaCost(3));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

@@ -33,7 +33,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -48,7 +48,7 @@ public class AttuneWithAether extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
         // Search you library for a basic land card, reveal it, put it into your hand, then shuffle your library. You get {E}{E}.
-        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, new FilterBasicLandCard()), true);
+        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true);
         effect.setText("Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));

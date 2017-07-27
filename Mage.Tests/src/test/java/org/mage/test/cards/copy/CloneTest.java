@@ -6,7 +6,7 @@ import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.permanent.Permanent;
 import org.apache.log4j.Logger;
@@ -187,7 +187,7 @@ public class CloneTest extends CardTestPlayerBase {
 
         boolean whiteLion = false;
         boolean blueLion = false;
-        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), playerA.getId(), currentGame)) {
+        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerA.getId(), currentGame)) {
             if (permanent.getColor(currentGame).isWhite()) {
                 whiteLion = true;
             }

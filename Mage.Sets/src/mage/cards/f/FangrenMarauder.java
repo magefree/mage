@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ZoneChangeAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -35,8 +36,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
-
-import java.util.UUID;
 
 /**
  *

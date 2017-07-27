@@ -28,12 +28,12 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.TargetSpell;
 
 /**

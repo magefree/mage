@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesAuraAttachToManifestSourceEffect;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,8 +42,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  *

@@ -29,18 +29,17 @@
 package mage.abilities.keyword;
 
 import mage.abilities.costs.mana.ManaCosts;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author Loki
  */
 public class BasicLandcyclingAbility extends CyclingAbility{
-    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
     private static final String text = "Basic landcycling";
 
     public BasicLandcyclingAbility(ManaCosts costs) {
-        super(costs, filter, text);
+        super(costs, StaticFilters.FILTER_BASIC_LAND_CARD, text);
     }
 
     public BasicLandcyclingAbility(final BasicLandcyclingAbility ability) {

@@ -34,8 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -54,8 +55,7 @@ public class BorderlandExplorer extends CardImpl {
     public BorderlandExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.ELF, SubType.SCOUT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
@@ -131,7 +131,7 @@ class BorderlandExplorerEffect extends OneShotEffect {
                 if (player != null) {
                     Cards cardsPlayer = cardsToDiscard.get(playerId);
                     if (cardsPlayer != null) {
-                        TargetCardInLibrary target = new TargetCardInLibrary(0, 1, new FilterBasicLandCard());
+                        TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD);
                         if (player.searchLibrary(target, game)) {
                             if (!target.getTargets().isEmpty()) {
                                 Cards cards = new CardsImpl(target.getTargets());

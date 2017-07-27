@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -56,7 +57,7 @@ public class FootstepsOfTheGoryo extends CardImpl {
 
     public FootstepsOfTheGoryo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Return target creature card from your graveyard to the battlefield. Sacrifice that creature at the beginning of the next end step.
         this.getSpellAbility().addEffect(new FootstepsOfTheGoryoEffect());

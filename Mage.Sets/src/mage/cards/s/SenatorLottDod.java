@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -42,8 +43,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
 
-import java.util.UUID;
-
 /**
  *
  * @author Styxo
@@ -51,7 +50,7 @@ import java.util.UUID;
 public class SenatorLottDod extends CardImpl {
 
     public SenatorLottDod(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Neimoidian");
         this.subtype.add("Advisor");

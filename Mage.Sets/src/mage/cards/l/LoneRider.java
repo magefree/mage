@@ -27,8 +27,8 @@
  */
 package mage.cards.l;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
@@ -41,10 +41,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.i.ItThatRidesAsOne;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.game.events.GameEvent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
-
-import java.util.UUID;
 
 /**
  *

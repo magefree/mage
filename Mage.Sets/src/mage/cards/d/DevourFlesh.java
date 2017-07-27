@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -41,16 +42,14 @@ import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
  */
 public class DevourFlesh extends CardImpl {
 
-    public DevourFlesh (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
+    public DevourFlesh(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Target player sacrifices a creature, then gains life equal to that creature's toughness.
         this.getSpellAbility().addEffect(new DevourFleshSacrificeEffect());
@@ -62,7 +61,7 @@ public class DevourFlesh extends CardImpl {
     }
 
     @Override
-    public DevourFlesh  copy() {
+    public DevourFlesh copy() {
         return new DevourFlesh(this);
     }
 }
@@ -100,8 +99,9 @@ class DevourFleshSacrificeEffect extends OneShotEffect {
             if (permanent != null) {
                 int gainLife = permanent.getToughness().getValue();
                 permanent.sacrifice(source.getSourceId(), game);
+                game.applyEffects();
                 player.gainLife(gainLife, game);
-            } else{
+            } else {
                 return false;
             }
         }

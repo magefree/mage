@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,8 +40,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.i.InsidiousMist;
 import mage.constants.CardType;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  *

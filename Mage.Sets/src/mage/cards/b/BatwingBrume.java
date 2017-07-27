@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
@@ -46,8 +47,6 @@ import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.ManaSpentToCastWatcher;
-
-import java.util.UUID;
 
 /**
  *

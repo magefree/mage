@@ -29,8 +29,8 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.DethroneAbility;
+import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

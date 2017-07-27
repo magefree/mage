@@ -46,7 +46,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.BatToken;
 import mage.target.common.TargetControlledCreaturePermanent;
-import org.omg.CORBA.BAD_TYPECODE;
 
 /**
  *

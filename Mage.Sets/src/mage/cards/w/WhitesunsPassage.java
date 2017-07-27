@@ -28,12 +28,11 @@
 
 package mage.cards.w;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-
-import java.util.UUID;
+import mage.constants.CardType;
 
 /**
  *

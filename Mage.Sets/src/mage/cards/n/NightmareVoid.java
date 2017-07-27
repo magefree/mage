@@ -28,11 +28,11 @@
 package mage.cards.n;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.abilities.keyword.DredgeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 

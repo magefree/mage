@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -45,8 +46,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 
-import java.util.UUID;
-
 /**
  *
  * @author cbt33, plopman (Immortal Coil)
@@ -55,7 +54,7 @@ public class Bloodcurdler extends CardImpl {
 
     public Bloodcurdler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

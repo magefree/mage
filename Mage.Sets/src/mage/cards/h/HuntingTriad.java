@@ -28,12 +28,12 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ReinforceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.permanent.token.ElfToken;
 
 /**

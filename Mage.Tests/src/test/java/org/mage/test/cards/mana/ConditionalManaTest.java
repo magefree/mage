@@ -90,11 +90,15 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     @Test
     public void testWorkingWithReflectingPool2() {
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1); // can create white mana without restriction from the Hive
+        // {T}: Add {C} to your mana pool.
+        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a Sliver spell.
+        // {5}, {T}: Create a 1/1 colorless Sliver creature token. Activate this ability only if you control a Sliver.
         addCard(Zone.BATTLEFIELD, playerA, "Sliver Hive", 1);
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C} to your mana pool");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add to your mana pool one mana of any type");
+
         setChoice(playerA, "White");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");

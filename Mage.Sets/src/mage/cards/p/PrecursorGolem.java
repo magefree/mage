@@ -27,6 +27,7 @@
  */
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -49,8 +50,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.TargetAddress;
-
-import java.util.UUID;
 
 /**
  * @author duncant

@@ -27,6 +27,9 @@
  */
 package mage.cards.m;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -53,10 +56,6 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 import mage.util.CardUtil;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

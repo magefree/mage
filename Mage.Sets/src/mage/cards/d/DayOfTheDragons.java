@@ -27,6 +27,9 @@
  */
 package mage.cards.d;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -47,10 +50,6 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.DragonToken2;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

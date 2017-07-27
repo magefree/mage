@@ -33,6 +33,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,7 +50,7 @@ public class ToilsOfNightAndDay extends CardImpl {
 
     public ToilsOfNightAndDay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // You may tap or untap target permanent, then you may tap or untap another target permanent.
         this.getSpellAbility().addEffect(new ToilsOfNightAndDayEffect());

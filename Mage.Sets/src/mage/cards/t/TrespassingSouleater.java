@@ -28,16 +28,16 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *

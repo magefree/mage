@@ -27,12 +27,6 @@
  */
 package mage.cards.i;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -42,12 +36,15 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  * @author jeffwadsworth
@@ -56,7 +53,7 @@ public class InfernoTrap extends CardImpl {
 
     public InfernoTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.subtype.add("Trap");
+        this.subtype.add(SubType.TRAP);
 
         // If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay Inferno Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), InfernoTrapCondition.instance), new InfernoTrapWatcher());

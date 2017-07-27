@@ -27,12 +27,15 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+
+import java.util.UUID;
+
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
@@ -43,7 +46,7 @@ public class EtherealHaze extends CardImpl {
 
     public EtherealHaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Prevent all damage that would be dealt by creatures this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(FILTER_PERMANENT_CREATURES, Duration.EndOfTurn, false));

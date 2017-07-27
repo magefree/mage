@@ -28,22 +28,21 @@
 package mage.cards.h;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.common.UnattachCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.abilities.costs.common.UnattachCost;
 import mage.constants.*;
 import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DestroyTargetEffect;
 
 /**
  *

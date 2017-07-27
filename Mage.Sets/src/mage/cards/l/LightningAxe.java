@@ -28,13 +28,13 @@
 package mage.cards.l;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

@@ -28,7 +28,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

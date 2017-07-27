@@ -28,6 +28,7 @@
 
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -38,8 +39,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.ZuberasDiedWatcher;
-
-import java.util.UUID;
 
 /**
  *

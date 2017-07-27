@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,8 +39,6 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  *

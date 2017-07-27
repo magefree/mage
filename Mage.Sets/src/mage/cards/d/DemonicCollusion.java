@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.BuybackAbility;
@@ -36,8 +37,6 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,9 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.ComparisonType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -43,6 +40,8 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.HumanSoldierToken;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +62,7 @@ public class StrengthOfArms extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new HumanSoldierToken()),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 "If you control an Equipment, create a 1/1 white Human Soldier creature token."));
     }
 

@@ -30,19 +30,19 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ScreamsFromWithin extends CardImpl {
 
     public ScreamsFromWithin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.subtype.add("Aura");
 
         // Enchant creature
@@ -100,7 +100,7 @@ class ScreamsFromWithinEffect extends OneShotEffect {
         Card aura = game.getCard(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
         if (aura != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD && player != null && player.getGraveyard().contains(source.getSourceId())) {
-            for (Permanent creaturePermanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game)) {
+            for (Permanent creaturePermanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
                 for (Target target : aura.getSpellAbility().getTargets()) {
                     if (target.canTarget(creaturePermanent.getId(), game)) {
                         return player.moveCards(aura, Zone.BATTLEFIELD, source, game);

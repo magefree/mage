@@ -27,6 +27,10 @@
  */
 package org.mage.test.player;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -50,7 +54,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.SummoningSicknessPredicate;
 import mage.game.Game;
 import mage.game.Graveyard;
@@ -70,11 +73,6 @@ import mage.players.net.UserData;
 import mage.target.*;
 import mage.target.common.*;
 import org.junit.Ignore;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -585,7 +583,9 @@ public class TestPlayer implements Player {
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         // Loop through players and validate can attack/block this turn
         UUID defenderId = null;
-        for (PlayerAction action : actions) {
+        //List<PlayerAction>
+        for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext();) {
+            PlayerAction action = it.next();
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
                 String command = action.getAction();
                 command = command.substring(command.indexOf("attack:") + 7);
@@ -623,14 +623,16 @@ public class TestPlayer implements Player {
                 findPermanent(firstFilter, groups[0], computerPlayer.getId(), game);
                 // Second check to filter creature for combat - less strict to workaround issue in #3038
                 FilterCreatureForCombat secondFilter = new FilterCreatureForCombat();
-                secondFilter.add(Predicates.not(new AttackingPredicate()));
+                // secondFilter.add(Predicates.not(new AttackingPredicate()));
                 secondFilter.add(Predicates.not(new SummoningSicknessPredicate()));
                 // TODO: Cannot enforce legal attackers multiple times per combat. See issue #3038
                 Permanent attacker = findPermanent(secondFilter, groups[0], computerPlayer.getId(), game, false);
                 if (attacker != null && attacker.canAttack(defenderId, game)) {
                     computerPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
+                    it.remove();
                 }
             }
+
         }
     }
 

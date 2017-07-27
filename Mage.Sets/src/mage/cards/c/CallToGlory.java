@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -37,28 +37,26 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
  * @author Loki
  */
 public class CallToGlory extends CardImpl {
 
-
-private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai");
 
     static {
         filter.add(new SubtypePredicate(SubType.SAMURAI));
     }
 
-        public CallToGlory(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
+    public CallToGlory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         this.getSpellAbility().addEffect(new CalltoGloryFirstEffect());
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, false));
@@ -75,7 +73,6 @@ private static final FilterCreaturePermanent filter = new FilterCreaturePermanen
 
 }
 
-
 class CalltoGloryFirstEffect extends OneShotEffect {
 
     public CalltoGloryFirstEffect() {
@@ -91,7 +88,7 @@ class CalltoGloryFirstEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
+            for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
                 creature.untap(game);
             }
             return true;

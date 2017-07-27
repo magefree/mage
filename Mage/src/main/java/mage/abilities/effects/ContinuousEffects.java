@@ -27,8 +27,13 @@
  */
 package mage.abilities.effects;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.*;
+import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -48,11 +53,6 @@ import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -84,7 +84,6 @@ public class ContinuousEffects implements Serializable {
 
     // note all effect/abilities that were only added temporary
     private final Map<ContinuousEffect, Set<Ability>> temporaryEffects = new HashMap<>();
-
 
     public ContinuousEffects() {
         applyCounters = new ApplyCountersEffect();
@@ -241,7 +240,7 @@ public class ContinuousEffects implements Serializable {
     }
 
     private List<ContinuousEffect> filterLayeredEffects(List<ContinuousEffect> effects, Layer layer) {
-        return effects.stream().filter(effect->effect.hasLayer(layer)).collect(Collectors.toList());
+        return effects.stream().filter(effect -> effect.hasLayer(layer)).collect(Collectors.toList());
     }
 
     public Map<RequirementEffect, Set<Ability>> getApplicableRequirementEffects(Permanent permanent, Game game) {
@@ -1254,7 +1253,9 @@ public class ContinuousEffects implements Serializable {
                         }
                     }
                 } else {
-                    logger.warn("Ability without sourceId:" + ability.getRule());
+                    if (!(effect instanceof CommanderReplacementEffect)) {
+                        logger.warn("Ability without sourceId:" + ability.getRule());
+                    }
                 }
             }
         }

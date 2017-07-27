@@ -28,6 +28,7 @@
 
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -40,8 +41,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SpiritToken;
-
-import java.util.UUID;
 
 /**
  * @author Loki

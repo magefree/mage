@@ -27,6 +27,9 @@
  */
 package mage.cards.d;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -40,10 +43,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -104,7 +103,7 @@ class DoOrDieEffect extends OneShotEffect {
                 }
             }
             List<Permanent> pile2 = new ArrayList<>();
-            for (Permanent p : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), targetPlayer.getId(), game)) {
+            for (Permanent p : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, targetPlayer.getId(), game)) {
                 if (!pile1.contains(p)) {
                     pile2.add(p);
                 }

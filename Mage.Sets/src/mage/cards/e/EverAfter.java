@@ -27,22 +27,16 @@
  */
 package mage.cards.e;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
+import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.ReturnToLibrarySpellEffect;
 import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

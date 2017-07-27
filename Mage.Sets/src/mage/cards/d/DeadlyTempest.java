@@ -27,19 +27,18 @@
  */
 package mage.cards.d;
 
+import java.util.HashMap;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.HashMap;
-import java.util.UUID;
 
 /**
  *
@@ -48,7 +47,7 @@ import java.util.UUID;
 public class DeadlyTempest extends CardImpl {
 
     public DeadlyTempest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
 
         // Destroy all creatures. Each player loses life equal to the number of creatures he or she controlled that were destroyed this way.
         getSpellAbility().addEffect(new DeadlyTempestEffect());
@@ -85,7 +84,7 @@ class DeadlyTempestEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             HashMap<UUID, Integer> destroyedCreatures = new HashMap<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
                     int count = destroyedCreatures.containsKey(permanent.getControllerId()) ? destroyedCreatures.get(permanent.getControllerId()) : 0;
                     destroyedCreatures.put(permanent.getControllerId(), count + 1);

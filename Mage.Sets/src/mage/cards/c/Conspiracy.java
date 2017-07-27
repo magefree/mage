@@ -27,6 +27,9 @@
  */
 package mage.cards.c;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -44,10 +47,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.SubTypeList;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

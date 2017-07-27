@@ -28,7 +28,6 @@
 package mage.cards.p;
 
 import java.util.UUID;
-
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;

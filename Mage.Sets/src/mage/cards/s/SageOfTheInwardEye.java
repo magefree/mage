@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -55,7 +55,7 @@ public class SageOfTheInwardEye extends CardImpl {
     }
 
     public SageOfTheInwardEye(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
         this.subtype.add("Djinn");
         this.subtype.add("Wizard");
 
@@ -66,7 +66,7 @@ public class SageOfTheInwardEye extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a noncreature spell, creatures you control gain lifelink until end of turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false),
+                new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false),
                 filterNonCreature, false));
 
     }

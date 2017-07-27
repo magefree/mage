@@ -28,8 +28,6 @@
 package mage.cards.v;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +37,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**

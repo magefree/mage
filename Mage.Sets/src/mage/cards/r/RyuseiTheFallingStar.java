@@ -28,6 +28,7 @@ package mage.cards.r;
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -39,8 +40,6 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-
-import java.util.UUID;
 
 /**
  * @author Loki

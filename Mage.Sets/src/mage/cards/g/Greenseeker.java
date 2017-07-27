@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -58,7 +58,7 @@ public class Greenseeker extends CardImpl {
 
         // {G}, {tap}, Discard a card: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterBasicLandCard()), true, true),
+            new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true, true),
             new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

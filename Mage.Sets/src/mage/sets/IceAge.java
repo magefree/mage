@@ -27,10 +27,10 @@
  */
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -127,6 +127,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Game of Chaos", 186, Rarity.RARE, mage.cards.g.GameOfChaos.class));
         cards.add(new SetCardInfo("Gangrenous Zombies", 15, Rarity.COMMON, mage.cards.g.GangrenousZombies.class));
         cards.add(new SetCardInfo("Giant Growth", 134, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
+        cards.add(new SetCardInfo("Giant Trap Door Spider", 371, Rarity.UNCOMMON, mage.cards.g.GiantTrapDoorSpider.class));
         cards.add(new SetCardInfo("Glacial Chasm", 331, Rarity.UNCOMMON, mage.cards.g.GlacialChasm.class));
         cards.add(new SetCardInfo("Glacial Crevasses", 187, Rarity.RARE, mage.cards.g.GlacialCrevasses.class));
         cards.add(new SetCardInfo("Glacial Wall", 71, Rarity.UNCOMMON, mage.cards.g.GlacialWall.class));
@@ -146,6 +147,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Hyalopterous Lemure", 21, Rarity.UNCOMMON, mage.cards.h.HyalopterousLemure.class));
         cards.add(new SetCardInfo("Hydroblast", 72, Rarity.COMMON, mage.cards.h.Hydroblast.class));
         cards.add(new SetCardInfo("Hymn of Rebirth", 373, Rarity.UNCOMMON, mage.cards.h.HymnOfRebirth.class));
+        cards.add(new SetCardInfo("Iceberg", 73, Rarity.UNCOMMON, mage.cards.i.Iceberg.class));
         cards.add(new SetCardInfo("Icequake", 22, Rarity.UNCOMMON, mage.cards.i.Icequake.class));
         cards.add(new SetCardInfo("Icy Manipulator", 297, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("Icy Prison", 74, Rarity.RARE, mage.cards.i.IcyPrison.class));
@@ -161,6 +163,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Jester's Cap", 299, Rarity.RARE, mage.cards.j.JestersCap.class));
         cards.add(new SetCardInfo("Jester's Mask", 300, Rarity.RARE, mage.cards.j.JestersMask.class));
+        cards.add(new SetCardInfo("Jeweled Amulet", 301, Rarity.UNCOMMON, mage.cards.j.JeweledAmulet.class));
         cards.add(new SetCardInfo("Johtull Wurm", 138, Rarity.UNCOMMON, mage.cards.j.JohtullWurm.class));
         cards.add(new SetCardInfo("Jokulhaups", 195, Rarity.RARE, mage.cards.j.Jokulhaups.class));
         cards.add(new SetCardInfo("Juniper Order Druid", 139, Rarity.COMMON, mage.cards.j.JuniperOrderDruid.class));
@@ -193,6 +196,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 341, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 342, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain Goat", 203, Rarity.COMMON, mage.cards.m.MountainGoat.class));
+        cards.add(new SetCardInfo("Mudslide", 204, Rarity.RARE, mage.cards.m.Mudslide.class));
         cards.add(new SetCardInfo("Mystic Might", 86, Rarity.RARE, mage.cards.m.MysticMight.class));
         cards.add(new SetCardInfo("Mystic Remora", 87, Rarity.COMMON, mage.cards.m.MysticRemora.class));
         cards.add(new SetCardInfo("Nacre Talisman", 304, Rarity.UNCOMMON, mage.cards.n.NacreTalisman.class));
@@ -228,6 +232,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Red Scarab", 273, Rarity.UNCOMMON, mage.cards.r.RedScarab.class));
         cards.add(new SetCardInfo("Regeneration", 147, Rarity.COMMON, mage.cards.r.Regeneration.class));
         cards.add(new SetCardInfo("Rime Dryad", 148, Rarity.COMMON, mage.cards.r.RimeDryad.class));
+        cards.add(new SetCardInfo("Ritual of Subdual", 149, Rarity.RARE, mage.cards.r.RitualOfSubdual.class));
         cards.add(new SetCardInfo("River Delta", 346, Rarity.RARE, mage.cards.r.RiverDelta.class));
         cards.add(new SetCardInfo("Sabretooth Tiger", 215, Rarity.COMMON, mage.cards.s.SabretoothTiger.class));
         cards.add(new SetCardInfo("Scaled Wurm", 150, Rarity.COMMON, mage.cards.s.ScaledWurm.class));

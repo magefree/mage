@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -54,7 +54,7 @@ public class FemerefEnchantress extends CardImpl {
 
         // Whenever an enchantment is put into a graveyard from the battlefield, draw a card.
         this.addAbility(new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD,
-                new DrawCardSourceControllerEffect(1), new FilterEnchantmentPermanent(),
+                new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_ENCHANTMENT_PERMANENT,
                 "Whenever an enchantment is put into a graveyard from the battlefield, ", false));
     }
 

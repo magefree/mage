@@ -44,7 +44,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.SubTypeList;
@@ -58,8 +58,6 @@ import java.util.UUID;
  */
 public class MyriadLandscape extends CardImpl {
 
-    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
-
     public MyriadLandscape(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
@@ -70,7 +68,7 @@ public class MyriadLandscape extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {tap}, Sacrifice Myriad Landscape: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle your library.
-        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrarySharingLandType(0, 2, filter), true);
+        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrarySharingLandType(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD), true);
         effect.setText("Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle your library");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         ability.addCost(new TapSourceCost());

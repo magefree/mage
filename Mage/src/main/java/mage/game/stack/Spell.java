@@ -27,6 +27,10 @@
  */
 package mage.game.stack;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -59,16 +63,6 @@ import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -90,6 +84,7 @@ public class Spell extends StackObjImpl implements Card {
     private boolean copiedSpell;
     private boolean faceDown;
     private boolean countered;
+    private boolean resolving = false;
 
     private boolean doneActivatingManaAbilities; // if this is true, the player is no longer allowed to pay the spell costs with activating of mana abilies
 
@@ -196,6 +191,7 @@ public class Spell extends StackObjImpl implements Card {
         if (controller == null) {
             return false;
         }
+        this.resolving = true;
         if (this.isInstant() || this.isSorcery()) {
             int index = 0;
             result = false;
@@ -262,7 +258,7 @@ public class Spell extends StackObjImpl implements Card {
                         if (permanent != null && permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
                             card.addCardType(CardType.CREATURE);
-                            card.getSubtype(game).remove("Aura");
+                            card.getSubtype(game).remove(SubType.AURA);
                         }
                     }
                     return ability.resolve(game);
@@ -279,7 +275,7 @@ public class Spell extends StackObjImpl implements Card {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null && permanent instanceof PermanentCard) {
                         ((PermanentCard) permanent).getCard().addCardType(CardType.CREATURE);
-                        ((PermanentCard) permanent).getCard().getSubtype(game).remove("Aura");
+                        ((PermanentCard) permanent).getCard().getSubtype(game).remove(SubType.AURA);
                         return true;
                     }
                 }
@@ -480,7 +476,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public SubTypeList getSubtype(Game game) {
         if (this.getSpellAbility() instanceof BestowAbility) {
-            SubTypeList subtypes  = card.getSubtype(game);
+            SubTypeList subtypes = card.getSubtype(game);
             subtypes.add("Aura");
             return subtypes;
         }
@@ -907,6 +903,10 @@ public class Spell extends StackObjImpl implements Card {
         return countered;
     }
 
+    public boolean isResolving() {
+        return resolving;
+    }
+
     @Override
     public void checkForCountersToAdd(Permanent permanent, Game game) {
         card.checkForCountersToAdd(permanent, game);
@@ -923,9 +923,10 @@ public class Spell extends StackObjImpl implements Card {
         return copy;
     }
 
-    public boolean isAllCreatureTypes(){
+    public boolean isAllCreatureTypes() {
         return false;
     }
 
-    public void setIsAllCreatureTypes(boolean value){}
+    public void setIsAllCreatureTypes(boolean value) {
+    }
 }

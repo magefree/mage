@@ -28,7 +28,6 @@
 package mage.cards.p;
 
 import java.util.UUID;
-
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;

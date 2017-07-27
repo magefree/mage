@@ -27,6 +27,9 @@
  */
 package mage.cards.g;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -46,10 +49,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

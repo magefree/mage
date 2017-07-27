@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,8 +41,6 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.watchers.common.SpellsCastWatcher;
-
-import java.util.UUID;
 
 /**
  *

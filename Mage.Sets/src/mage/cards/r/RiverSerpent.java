@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -43,8 +42,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.watchers.common.SpellsCastWatcher;
 
 /**
  *

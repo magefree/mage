@@ -27,19 +27,18 @@
  */
 package mage.cards.m;
 
-import mage.constants.CardType;
-import mage.MageInt;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.target.common.TargetCreaturePermanent;
-
 import java.util.UUID;
-import mage.constants.Duration;
+import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author nantuko

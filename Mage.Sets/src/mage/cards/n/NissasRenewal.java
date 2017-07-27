@@ -27,14 +27,15 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public class NissasRenewal extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}");
 
         // Search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library. You gain 7 life.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 3, new FilterBasicLandCard()), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_BASIC_LAND_CARD), true));
         this.getSpellAbility().addEffect(new GainLifeEffect(7));
     }
 

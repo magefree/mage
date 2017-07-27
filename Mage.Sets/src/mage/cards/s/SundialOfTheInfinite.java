@@ -28,18 +28,16 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
-import mage.constants.Zone;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.EndTurnEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.abilities.effects.common.EndTurnEffect;
+import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *

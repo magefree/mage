@@ -27,13 +27,12 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterArtifactPermanent;
-
-import java.util.UUID;
 
 /**
  *

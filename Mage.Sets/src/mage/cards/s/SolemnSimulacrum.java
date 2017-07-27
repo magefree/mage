@@ -27,32 +27,30 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterBasicLandCard;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
  * @author Loki
  */
 public class SolemnSimulacrum extends CardImpl {
-
-    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
-
     public SolemnSimulacrum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
         this.subtype.add("Golem");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true), true));
         this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 

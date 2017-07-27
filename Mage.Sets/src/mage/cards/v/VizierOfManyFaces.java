@@ -27,6 +27,9 @@
  */
 package mage.cards.v;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -48,10 +51,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.Watcher;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

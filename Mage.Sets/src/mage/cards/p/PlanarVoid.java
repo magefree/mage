@@ -27,10 +27,8 @@
  */
 package mage.cards.p;
 
-import java.util.EnumSet;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;

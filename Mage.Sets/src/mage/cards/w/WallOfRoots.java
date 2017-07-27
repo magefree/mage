@@ -28,17 +28,16 @@
 package mage.cards.w;
 
 import java.util.UUID;
-
-import mage.abilities.costs.common.PutCountersSourceCost;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
+import mage.abilities.costs.common.PutCountersSourceCost;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.ActivateOncePerTurnManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.counters.BoostCounter;
 
 /**

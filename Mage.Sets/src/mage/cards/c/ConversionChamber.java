@@ -28,6 +28,7 @@
 
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -44,8 +45,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.permanent.token.GolemToken;
 import mage.target.common.TargetCardInGraveyard;
-
-import java.util.UUID;
 
 /**
  *

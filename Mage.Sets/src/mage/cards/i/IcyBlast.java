@@ -39,7 +39,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,13 +50,12 @@ import mage.target.common.TargetCreaturePermanent;
 public class IcyBlast extends CardImpl {
 
     public IcyBlast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
         // Tap X target creatures.
         this.getSpellAbility().addEffect(new TapTargetEffect("X target creatures"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent(), false));
-        
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false));
+
         // <i>Ferocious</i> - If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps.
         Effect effect = new ConditionalContinuousRuleModifyingEffect(
                 new DontUntapInControllersNextUntapStepTargetEffect(),
@@ -68,13 +67,13 @@ public class IcyBlast extends CardImpl {
     public IcyBlast(final IcyBlast card) {
         super(card);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             int numberToTap = ability.getManaCostsToPay().getX();
-            numberToTap = Math.min(game.getBattlefield().count(new FilterCreaturePermanent(), ability.getSourceId(), ability.getControllerId(), game), numberToTap);
+            numberToTap = Math.min(game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, ability.getSourceId(), ability.getControllerId(), game), numberToTap);
             ability.addTarget(new TargetCreaturePermanent(numberToTap));
         }
     }

@@ -28,7 +28,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-
 import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;

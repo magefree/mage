@@ -1,5 +1,6 @@
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
@@ -10,8 +11,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.util.SubTypeList;
-
-import java.util.UUID;
 
 /**
  * Created by Alexsandr0x.

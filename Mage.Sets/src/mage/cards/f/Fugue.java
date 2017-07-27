@@ -27,13 +27,12 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *

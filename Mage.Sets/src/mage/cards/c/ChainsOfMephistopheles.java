@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -40,8 +41,6 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
-
-import java.util.UUID;
 
 /**
  *

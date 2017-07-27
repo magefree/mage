@@ -28,7 +28,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-
 import mage.abilities.condition.common.MyMainPhaseCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;

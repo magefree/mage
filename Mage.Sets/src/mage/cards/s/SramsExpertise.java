@@ -28,14 +28,13 @@
 
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.cost.CastWithoutPayingManaCostEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.ServoToken;
-
-import java.util.UUID;
 
 /**
  * @author fireshoes

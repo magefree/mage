@@ -27,6 +27,7 @@
  */
 package mage.cards.l;
 
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -39,8 +40,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-
-import java.util.UUID;
 
 /**
  * @author JRHerlehy

@@ -27,6 +27,8 @@
  */
 package mage.cards.g;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -42,9 +44,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author North

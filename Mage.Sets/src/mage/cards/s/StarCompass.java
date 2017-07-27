@@ -27,6 +27,9 @@
  */
 package mage.cards.s;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -48,10 +51,6 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

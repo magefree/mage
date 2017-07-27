@@ -27,6 +27,8 @@
  */
 package mage.cards.m;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -47,9 +49,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

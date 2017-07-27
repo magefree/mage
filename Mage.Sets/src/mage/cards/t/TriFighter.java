@@ -29,8 +29,8 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.SpaceflightAbility;
 import mage.abilities.keyword.RepairAbility;
+import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

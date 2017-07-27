@@ -27,6 +27,9 @@
  */
 package mage.cards.c;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -47,10 +50,6 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
 
 
 /**

@@ -27,6 +27,7 @@
  */
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -40,11 +41,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -97,7 +96,7 @@ class CountersOnDefendingPlayerCreaturesCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
         UUID defender = game.getCombat().getDefendingPlayerId(sourceAbility.getSourceId(), game);
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), defender, game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, defender, game)) {
             count += permanent.getCounters(game).getCount(counterType);
         }
         return count;

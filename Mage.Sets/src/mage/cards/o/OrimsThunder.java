@@ -27,9 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -39,12 +36,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ public class OrimsThunder extends CardImpl {
 
         // Destroy target artifact or enchantment. If Orim's Thunder was kicked, it deals damage equal to that permanent's converted mana cost to target creature.
         this.getSpellAbility().addEffect(new OrimsThunderEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new OrimsThunderEffect2(),
                 KickedCondition.instance,

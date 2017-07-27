@@ -33,6 +33,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class DimirGuildgate extends CardImpl {
 
     public DimirGuildgate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Gate");
+        this.subtype.add(SubType.GATE);
 
         // Dimir Guildgate enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

@@ -27,6 +27,7 @@
  */
 package mage.cards.n;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -46,8 +47,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.NissaSageAnimistToken;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -54,8 +55,6 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-
-import java.util.*;
 
 /**
  *

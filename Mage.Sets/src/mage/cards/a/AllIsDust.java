@@ -27,6 +27,8 @@
  */
 package mage.cards.a;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -36,9 +38,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Loki

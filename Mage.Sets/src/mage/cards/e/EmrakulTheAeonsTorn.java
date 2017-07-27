@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
@@ -43,8 +44,6 @@ import mage.constants.SuperType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-
-import java.util.UUID;
 
 /**
  * @author Loki

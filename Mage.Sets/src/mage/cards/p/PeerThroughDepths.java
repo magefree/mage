@@ -28,15 +28,17 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +56,7 @@ public class PeerThroughDepths extends CardImpl {
 
     public PeerThroughDepths (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // Look at the top five cards of your library. You may reveal an instant or sorcery card from among them and put it into your hand. 

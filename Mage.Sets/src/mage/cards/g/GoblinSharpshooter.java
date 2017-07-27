@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -42,8 +43,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
-import java.util.UUID;
-
 /**
  *
  * @author jonubuu
@@ -51,7 +50,7 @@ import java.util.UUID;
 public class GoblinSharpshooter extends CardImpl {
 
     public GoblinSharpshooter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add("Goblin");
 
         this.power = new MageInt(1);
@@ -61,7 +60,7 @@ public class GoblinSharpshooter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
         // Whenever a creature dies, untap Goblin Sharpshooter.
         this.addAbility(new DiesCreatureTriggeredAbility(new UntapSourceEffect(), false));
-        // {tap}: Goblin Sharpshooter deals 1 damage to target creature or player.
+        // {T}: Goblin Sharpshooter deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);

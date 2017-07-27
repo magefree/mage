@@ -27,7 +27,7 @@
  */
 package mage.cards.w;
 
-import mage.constants.ComparisonType;
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -45,8 +46,6 @@ import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.permanent.token.EldraziScionToken;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
@@ -43,8 +44,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
  *
  * @author markedagain
@@ -52,13 +51,13 @@ import java.util.UUID;
 public class BlackMarket extends CardImpl {
 
     public BlackMarket(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
 
         // Whenever a creature dies, put a charge counter on Black Market.
-        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),false ));
+        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), false));
         // At the beginning of your precombat main phase, add {B} to your mana pool for each charge counter on Black Market.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new BlackMarketEffect(), TargetController.YOU, false));
-        
+
     }
 
     public BlackMarket(final BlackMarket card) {
@@ -70,6 +69,7 @@ public class BlackMarket extends CardImpl {
         return new BlackMarket(this);
     }
 }
+
 class BlackMarketEffect extends OneShotEffect {
 
     public BlackMarketEffect() {
@@ -92,10 +92,10 @@ class BlackMarketEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (sourcePermanent != null && player != null) {
             int chargeCounters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE);
-            if (chargeCounters > 0){
+            if (chargeCounters > 0) {
                 player.getManaPool().addMana(Mana.BlackMana(chargeCounters), game, source);
-                return true;
             }
+            return true;
         }
         return false;
     }

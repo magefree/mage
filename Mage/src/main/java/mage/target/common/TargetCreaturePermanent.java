@@ -27,6 +27,7 @@
  */
 package mage.target.common;
 
+import mage.filter.StaticFilters;
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
@@ -46,11 +47,11 @@ public class TargetCreaturePermanent extends TargetPermanent {
     }
 
     public TargetCreaturePermanent(int numTargets) {
-        this(numTargets, numTargets, new FilterCreaturePermanent(), false);
+        this(numTargets, numTargets, StaticFilters.FILTER_PERMANENT_CREATURE, false);
     }
 
     public TargetCreaturePermanent(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, new FilterCreaturePermanent(), false);
+        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_PERMANENT_CREATURE, false);
     }
 
     public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {

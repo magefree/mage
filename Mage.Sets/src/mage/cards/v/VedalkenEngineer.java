@@ -29,7 +29,6 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.ConditionalMana;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -43,6 +42,7 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;

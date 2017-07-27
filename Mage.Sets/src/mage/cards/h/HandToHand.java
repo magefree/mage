@@ -27,6 +27,8 @@
  */
 package mage.cards.h;
 
+import java.util.Optional;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,9 +39,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-
-import java.util.Optional;
-import java.util.UUID;
 
 /**
  *

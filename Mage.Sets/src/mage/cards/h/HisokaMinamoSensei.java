@@ -29,9 +29,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +39,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -50,7 +49,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
-import mage.util.CardUtil;
 
 /**
  * @author LevelX

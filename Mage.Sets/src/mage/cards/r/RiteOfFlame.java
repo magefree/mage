@@ -28,12 +28,12 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -46,8 +46,7 @@ import mage.players.Player;
 public class RiteOfFlame extends CardImpl {
 
     public RiteOfFlame(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // Add {R}{R} to your mana pool, then add {R} to your mana pool for each card named Rite of Flame in each graveyard.
         this.getSpellAbility().addEffect(new RiteOfFlameManaEffect());
@@ -64,6 +63,7 @@ public class RiteOfFlame extends CardImpl {
 }
 
 class RiteOfFlameManaEffect extends ManaEffect {
+
     private static final FilterCard filter = new FilterCard();
 
     static {
@@ -82,14 +82,15 @@ class RiteOfFlameManaEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null){
+        if (controller != null) {
             int count = 0;
-            for(Player player : game.getPlayers().values()){
-                if(player != null){
+            for (Player player : game.getPlayers().values()) {
+                if (player != null) {
                     count += player.getGraveyard().count(filter, game);
                 }
             }
             controller.getManaPool().addMana(Mana.RedMana(count + 2), game, source);
+            return true;
         }
         return false;
     }

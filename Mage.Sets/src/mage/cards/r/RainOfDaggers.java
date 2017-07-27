@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
 public class RainOfDaggers extends CardImpl {
 
     public RainOfDaggers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
 
         // Destroy all creatures target opponent controls. You lose 2 life for each creature destroyed this way.
         this.getSpellAbility().addEffect(new RainOfDaggersEffect());
@@ -86,7 +86,7 @@ class RainOfDaggersEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && getTargetPointer().getFirst(game, source) != null) {
             int destroyedCreature = 0;
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), getTargetPointer().getFirst(game, source), game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getTargetPointer().getFirst(game, source), game)) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
                     destroyedCreature++;
                 }

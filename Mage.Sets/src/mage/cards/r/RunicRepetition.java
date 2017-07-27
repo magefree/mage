@@ -28,12 +28,12 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.other.OwnerPredicate;

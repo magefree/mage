@@ -28,8 +28,8 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

@@ -27,6 +27,10 @@
  */
 package mage.player.ai;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
@@ -49,6 +53,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.*;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -76,11 +81,6 @@ import mage.util.RandomUtil;
 import mage.util.TournamentUtil;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  *
@@ -352,7 +352,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard) {
+        if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard
+                || target.getOriginalTarget() instanceof TargetCardInASingleGraveyard) {
             List<UUID> alreadyTargetted = target.getTargets();
             List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getGraveyard().getCards(game));
             while (!cards.isEmpty()) {
@@ -781,9 +782,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             List<Permanent> targets;
             if (outcome.isGood()) {
-                targets = threats(playerId, source.getSourceId(), new FilterCreaturePermanent(), game, target.getTargets());
+                targets = threats(playerId, source.getSourceId(), StaticFilters.FILTER_PERMANENT_CREATURE, game, target.getTargets());
             } else {
-                targets = threats(opponentId, source.getSourceId(), new FilterCreaturePermanent(), game, target.getTargets());
+                targets = threats(opponentId, source.getSourceId(), StaticFilters.FILTER_PERMANENT_CREATURE, game, target.getTargets());
             }
             for (Permanent permanent : targets) {
                 if (target.canTarget(getId(), permanent.getId(), source, game)) {

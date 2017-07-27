@@ -33,7 +33,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,7 +53,7 @@ public class DestructiveRevelry extends CardImpl {
 
         // Destroy target artifact or enchantment. Destructive Revelry deals 2 damage to that permanent's controller.
         this.getSpellAbility().addEffect(new DestructiveRevelryEffect());
-        Target target = new TargetPermanent(new FilterArtifactOrEnchantmentPermanent());
+        Target target = new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT);
         this.getSpellAbility().addTarget(target);
     }
 

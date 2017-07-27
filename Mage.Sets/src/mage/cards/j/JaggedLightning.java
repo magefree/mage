@@ -32,7 +32,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,11 +42,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class JaggedLightning extends CardImpl {
 
     public JaggedLightning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // Jagged Lightning deals 3 damage to each of two target creatures.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3, true, "each of two target creatures"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
     public JaggedLightning(final JaggedLightning card) {

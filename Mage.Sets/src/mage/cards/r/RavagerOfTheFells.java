@@ -48,7 +48,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -65,7 +65,7 @@ import mage.target.common.TargetOpponent;
 public class RavagerOfTheFells extends CardImpl {
 
     public RavagerOfTheFells(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add("Werewolf");
         this.color.setRed(true);
         this.color.setGreen(true);
@@ -171,7 +171,7 @@ class RavagerOfTheFellsEffect extends OneShotEffect {
 class RavagerOfTheFellsTarget extends TargetPermanent {
 
     public RavagerOfTheFellsTarget() {
-        super(0, 1, new FilterCreaturePermanent(), false);
+        super(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false);
     }
 
     public RavagerOfTheFellsTarget(final RavagerOfTheFellsTarget target) {

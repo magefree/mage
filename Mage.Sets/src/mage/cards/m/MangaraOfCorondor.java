@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,8 +41,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author Plopman
@@ -49,7 +48,7 @@ import java.util.UUID;
 public class MangaraOfCorondor extends CardImpl {
 
     public MangaraOfCorondor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
@@ -57,7 +56,7 @@ public class MangaraOfCorondor extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Exile Mangara of Corondor and target permanent.
+        // {T}: Exile Mangara of Corondor and target permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(), new TapSourceCost());
         ability.addEffect(new ExileTargetEffect());
         ability.addTarget(new TargetPermanent());

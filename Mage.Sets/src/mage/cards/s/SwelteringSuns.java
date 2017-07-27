@@ -27,18 +27,14 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageAllEffect;
-import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.watchers.common.DamagedByWatcher;
-
-import java.util.UUID;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.CyclingAbility;
 
 /**
  *

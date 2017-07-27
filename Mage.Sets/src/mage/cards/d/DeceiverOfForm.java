@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -35,13 +36,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.cards.*;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -100,7 +99,7 @@ class DeceiverOfFormEffect extends OneShotEffect {
                 if (copyFromCard.isCreature()) {
                     if (controller.chooseUse(outcome, "Let creatures you control other than "
                             + sourceObject.getLogName() + " becomes copies of " + copyFromCard.getLogName() + " until end of turn?", source, game)) {
-                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controller.getId(), game)) {
+                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                             if (!permanent.getId().equals(sourceObject.getId())) {
                                 Permanent newBluePrint = null;
                                 newBluePrint = new PermanentCard((Card) copyFromCard, source.getControllerId(), game);

@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -36,8 +37,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.PlayerAttackedWatcher;
-
-import java.util.UUID;
 
 /**
  *

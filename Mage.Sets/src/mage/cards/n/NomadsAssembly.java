@@ -28,12 +28,12 @@
 package mage.cards.n;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.KorSoldierToken;
 

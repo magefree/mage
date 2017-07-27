@@ -39,7 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,8 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 public class TwistAllegiance extends CardImpl {
 
     public TwistAllegiance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{R}");
 
         // You and target opponent each gain control of all creatures the other controls until end of turn. Untap those creatures. Those creatures gain haste until end of turn.
         this.getSpellAbility().addEffect(new TwistAllegianceEffect());
@@ -92,7 +91,7 @@ class TwistAllegianceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null) {
-            for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                 // only creatures of controller & target opponent
                 if (permanent.getControllerId().equals(source.getControllerId()) || permanent.getControllerId().equals(targetOpponent.getId())) {
                     UUID newController = permanent.getControllerId().equals(source.getControllerId()) ? targetOpponent.getId() : source.getControllerId();

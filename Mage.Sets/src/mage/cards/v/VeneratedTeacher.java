@@ -30,18 +30,18 @@ package mage.cards.v;
 import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.constants.Outcome;
-import mage.counters.CounterType;
-import mage.constants.CardType;
-import mage.abilities.Ability;
+import mage.abilities.keyword.LevelUpAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.abilities.keyword.LevelUpAbility;
 
 /**
  *

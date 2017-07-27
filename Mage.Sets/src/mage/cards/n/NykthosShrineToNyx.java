@@ -27,6 +27,8 @@
  */
 package mage.cards.n;
 
+import java.util.List;
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
@@ -44,9 +46,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

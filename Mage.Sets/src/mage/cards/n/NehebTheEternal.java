@@ -95,8 +95,8 @@ class NehebTheEternalManaEffect extends ManaEffect {
             int amount = dynamicValue.calculate(game, source, this);
             if (amount > 0) {
                 controller.getManaPool().addMana(Mana.RedMana(amount), game, source);
-                return true;
             }
+            return true;
         }
         return false;
     }

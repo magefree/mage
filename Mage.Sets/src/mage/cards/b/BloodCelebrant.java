@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.PayLifeCost;
@@ -36,8 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-
-import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  *
@@ -47,8 +47,7 @@ public class BloodCelebrant extends CardImpl {
 
     public BloodCelebrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.HUMAN, SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

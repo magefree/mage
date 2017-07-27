@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -45,8 +46,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author mamaurer, nantuko
@@ -55,7 +54,7 @@ public class BladeOfTheBloodchief extends CardImpl {
 
     public BladeOfTheBloodchief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.getSubtype(null).add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
         this.addAbility(new BladeOfTheBloodChiefTriggeredAbility());

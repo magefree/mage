@@ -27,18 +27,17 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.ExileTargetIfDiesEffect;
 import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.UUID;
-import mage.abilities.effects.common.ExileTargetIfDiesEffect;
 
 /**
  *

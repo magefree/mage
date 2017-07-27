@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.cards.CardImpl;
@@ -36,8 +37,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.SnakeToken;
-
-import java.util.UUID;
 
 /**
  *

@@ -44,6 +44,7 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
@@ -74,7 +75,7 @@ public class OrdealOfNylea extends CardImpl {
         this.addAbility(ability);
         // When you sacrifice Ordeal of Nylea, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
         ability = new SacrificeSourceTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, new FilterBasicLandCard()),true, true),false);
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_BASIC_LAND_CARD),true, true),false);
         this.addAbility(ability);
     }
 

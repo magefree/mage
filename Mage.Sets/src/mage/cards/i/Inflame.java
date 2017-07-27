@@ -28,7 +28,6 @@
 package mage.cards.i;
 
 import java.util.UUID;
-
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

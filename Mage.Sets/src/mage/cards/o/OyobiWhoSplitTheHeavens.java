@@ -27,6 +27,7 @@
  */
 package mage.cards.o;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -37,8 +38,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.AnotherSpiritToken;
-
-import java.util.UUID;
 
 /**
  * @author Loki

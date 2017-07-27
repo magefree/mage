@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -52,13 +53,13 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-import java.util.UUID;
 /**
  * @author duncant
  */
 public class BreathOfFury extends CardImpl {
+
     public BreathOfFury(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
         this.subtype.add("Aura");
 
         // Enchant creature you control
@@ -104,11 +105,11 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;            
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent enchantment = game.getPermanent(getSourceId());
-        if (damageEvent.isCombatDamage() && 
-                enchantment != null && 
-                enchantment.getAttachedTo().equals(event.getSourceId())) {
+        if (damageEvent.isCombatDamage()
+                && enchantment != null
+                && enchantment.getAttachedTo().equals(event.getSourceId())) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
                 for (Effect effect : getEffects()) {
@@ -130,7 +131,7 @@ class BreathOfFuryEffect extends OneShotEffect {
 
     public BreathOfFuryEffect() {
         super(Outcome.Benefit);
-        staticText = "sacrifice enchanted creature and attach {this} to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase.";
+        staticText = "sacrifice enchanted creature and attach {this} to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase";
     }
 
     public BreathOfFuryEffect(final BreathOfFuryEffect effect) {
@@ -143,7 +144,7 @@ class BreathOfFuryEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source){
+    public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment == null) {
             return false;
@@ -157,8 +158,8 @@ class BreathOfFuryEffect extends OneShotEffect {
         // It's important to check that the creature was successfully sacrificed here. Effects that prevent sacrifice will also prevent Breath of Fury's effect from working.
         // Commanders going to the command zone and Rest in Peace style replacement effects don't make Permanent.sacrifice return false.
         if (enchantedCreature != null && controller != null
-            && enchantedCreature.sacrifice(source.getSourceId(), game)
-            && target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                && enchantedCreature.sacrifice(source.getSourceId(), game)
+                && target.canChoose(source.getSourceId(), controller.getId(), game)) {
             controller.choose(outcome, target, source.getSourceId(), game);
             Permanent newCreature = game.getPermanent(target.getFirstTarget());
             boolean success = false;
@@ -169,7 +170,7 @@ class BreathOfFuryEffect extends OneShotEffect {
                         success = true;
                     } else {
                         if (oldCreature.removeAttachment(enchantment.getId(), game)
-                            && newCreature.addAttachment(enchantment.getId(), game)) {
+                                && newCreature.addAttachment(enchantment.getId(), game)) {
                             game.informPlayers(enchantment.getLogName() + " was unattached from " + oldCreature.getLogName() + " and attached to " + newCreature.getLogName());
                             success = true;
                         }

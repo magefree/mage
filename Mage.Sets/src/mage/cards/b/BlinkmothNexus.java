@@ -28,6 +28,7 @@
 
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,8 +48,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -94,7 +93,7 @@ class BlinkmothNexusToken extends Token {
         super("Blinkmoth", "1/1 Blinkmoth artifact creature with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Blinkmoth");
+        this.subtype.add(SubType.BLINKMOTH);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

@@ -27,9 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,11 +36,15 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.targetpointer.SecondTargetPointer;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class NullmageAdvocate extends CardImpl {
         effect.setTargetPointer(new SecondTargetPointer());
         ability.addEffect(effect);
         ability.addTarget(new TargetCardInOpponentsGraveyard(2,2, new FilterCard("two target cards from an opponent's graveyard"), true));
-        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        ability.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
         this.addAbility(ability);
     }
 

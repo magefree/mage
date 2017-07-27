@@ -28,7 +28,6 @@
 package mage.cards.v;
 
 import java.util.UUID;
-
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;

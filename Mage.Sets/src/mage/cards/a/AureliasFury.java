@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -51,8 +52,6 @@ import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
-
-import java.util.*;
 
 /**
  * GATECRASH FAQ 11.01.2013

@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+    import java.util.UUID;
     import mage.abilities.dynamicvalue.DynamicValue;
     import mage.abilities.dynamicvalue.common.SweepNumber;
     import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -36,8 +37,6 @@ package mage.cards.c;
     import mage.constants.CardType;
     import mage.constants.Duration;
     import mage.constants.SubType;
-
-    import java.util.UUID;
 
 /**
  *

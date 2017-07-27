@@ -28,6 +28,7 @@
 
 package mage.cards.j;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
@@ -37,8 +38,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  * @author Loki

@@ -28,6 +28,7 @@
  */
 package mage.cards.g;
 
+    import java.util.UUID;
     import mage.MageInt;
     import mage.Mana;
     import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -37,8 +38,6 @@ package mage.cards.g;
     import mage.cards.CardSetInfo;
     import mage.constants.CardType;
     import mage.counters.CounterType;
-
-    import java.util.UUID;
 
 /**
  *

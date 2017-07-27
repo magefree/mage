@@ -27,18 +27,17 @@
  */
 package mage.cards.w;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -47,8 +46,7 @@ import java.util.UUID;
 public class WarReport extends CardImpl {
 
     public WarReport(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
         this.getSpellAbility().addEffect(new WarReportEffect());
     }
@@ -83,7 +81,7 @@ class WarReportEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int lifeToGain = game.getBattlefield().count(new FilterCreaturePermanent(), source.getSourceId(), source.getControllerId(), game);
+            int lifeToGain = game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, source.getSourceId(), source.getControllerId(), game);
             lifeToGain += game.getBattlefield().count(new FilterArtifactPermanent(), source.getSourceId(), source.getControllerId(), game);
             player.gainLife(lifeToGain, game);
         }

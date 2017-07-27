@@ -34,8 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -45,12 +44,13 @@ import java.util.UUID;
  * @author emerald000
  */
 public class AuraShards extends CardImpl {
+
     public AuraShards(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{W}");
 
         // Whenever a creature enters the battlefield under your control, you may destroy target artifact or enchantment.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new FilterCreaturePermanent(), true, "Whenever a creature enters the battlefield under your control, you may destroy target artifact or enchantment");
-        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), StaticFilters.FILTER_PERMANENT_CREATURE, true, "Whenever a creature enters the battlefield under your control, you may destroy target artifact or enchantment");
+        ability.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
         this.addAbility(ability);
     }
 

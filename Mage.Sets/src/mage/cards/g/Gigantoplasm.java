@@ -45,7 +45,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.functions.ApplyToPermanent;
@@ -63,7 +63,7 @@ public class Gigantoplasm extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Gigantoplasm enter the battlefield as a copy of any creature on the battlefield except it gains "{X}: This creature has base power and toughness X/X."
-        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), new GigantoplasmApplyToPermanent());
+        Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new GigantoplasmApplyToPermanent());
         effect.setText("a copy of any creature on the battlefield except it gains \"{X}: This creature has base power and toughness X/X.\"");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }

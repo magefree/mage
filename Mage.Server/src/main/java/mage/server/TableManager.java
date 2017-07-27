@@ -24,10 +24,17 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.server;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
@@ -47,15 +54,6 @@ import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -64,7 +62,6 @@ public enum TableManager {
     protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
     // protected static ScheduledExecutorService expireExecutor = ThreadExecutor.getInstance().getExpireExecutor();
-
     private final Logger logger = Logger.getLogger(TableManager.class);
     private static final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 
@@ -77,7 +74,6 @@ public enum TableManager {
      * In minutes.
      */
     private static final int EXPIRE_CHECK_PERIOD = 10;
-
 
     TableManager() {
         expireExecutor.scheduleAtFixedRate(() -> {
@@ -227,7 +223,7 @@ public enum TableManager {
     /**
      * Starts the Match from a non tournament table
      *
-     * @param userId  table owner
+     * @param userId table owner
      * @param roomId
      * @param tableId
      */
@@ -277,7 +273,6 @@ public enum TableManager {
 //        }
 //        return false;
 //    }
-
     public void endGame(UUID tableId) {
         if (controllers.containsKey(tableId)) {
             if (controllers.get(tableId).endGameAndStartNextGame()) {
@@ -326,7 +321,7 @@ public enum TableManager {
         TableController tableController = controllers.get(tableId);
         if (tableController != null) {
             controllers.remove(tableId);
-            tableController.cleanUp();  // deletes the table chat and references to users           
+            tableController.cleanUp();  // deletes the table chat and references to users
 
             Table table = tables.get(tableId);
             tables.remove(tableId);
@@ -390,12 +385,13 @@ public enum TableManager {
         List<Table> tableCopy = new ArrayList<>(tables.values());
         for (Table table : tableCopy) {
             try {
-                if (table.getState() != TableState.FINISHED) {
+                if (table.getState() != TableState.FINISHED
+                        && ((System.currentTimeMillis() - table.getStartTime().getTime()) / 1000) > 30) { // remove only if table started longer than 30 seconds ago
                     // remove tables and games not valid anymore
                     logger.debug(table.getId() + " [" + table.getName() + "] " + formatter.format(table.getStartTime() == null ? table.getCreateTime() : table.getCreateTime()) + " (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament" : ""));
                     getController(table.getId()).ifPresent(tableController -> {
-                        if ((table.isTournament() && !tableController.isTournamentStillValid()) ||
-                                (!table.isTournament() && !tableController.isMatchTableStillValid())) {
+                        if ((table.isTournament() && !tableController.isTournamentStillValid())
+                                || (!table.isTournament() && !tableController.isMatchTableStillValid())) {
                             try {
                                 logger.warn("Removing unhealthy tableId " + table.getId());
                                 removeTable(table.getId());

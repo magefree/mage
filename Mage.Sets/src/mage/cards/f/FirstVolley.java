@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -45,7 +46,7 @@ public class FirstVolley extends CardImpl {
 
     public FirstVolley(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // First Volley deals 1 damage to target creature and 1 damage to that creature's controller.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

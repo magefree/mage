@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -52,7 +52,7 @@ public class MagusOfTheTabernacle extends CardImpl {
     static private final String rule = "All creatures have \"At the beginning of your upkeep, sacrifice this creature unless you pay {1}\"";
 
     public MagusOfTheTabernacle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
@@ -62,7 +62,7 @@ public class MagusOfTheTabernacle extends CardImpl {
 
         // All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay {1}."
         Ability abilityToGain = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1)), TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(abilityToGain, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(abilityToGain, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, rule)));
     }
 
     public MagusOfTheTabernacle(final MagusOfTheTabernacle card) {

@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.OviyaPashiriSageLifecrafterToken;
 import mage.game.permanent.token.ServoToken;
@@ -101,7 +101,7 @@ class OviyaPashiriSageLifecrafterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int creatures = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game);
+            int creatures = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
             return new CreateTokenEffect(new OviyaPashiriSageLifecrafterToken(creatures)).apply(game, source);
         }
         return false;

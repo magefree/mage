@@ -27,9 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
-
-import mage.constants.ComparisonType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -40,6 +37,8 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +53,7 @@ public class ResourcefulReturn extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), ComparisonType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()),
                 "If you control an artifact, draw a card"));
 
     }

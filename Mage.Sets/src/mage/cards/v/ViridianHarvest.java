@@ -28,8 +28,6 @@
 package mage.cards.v;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -37,6 +35,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;

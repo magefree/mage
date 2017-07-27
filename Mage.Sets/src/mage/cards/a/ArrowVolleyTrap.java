@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -39,8 +40,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanentAmount;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2

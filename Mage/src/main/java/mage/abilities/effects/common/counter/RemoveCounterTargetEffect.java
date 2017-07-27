@@ -76,20 +76,19 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
                     game.informPlayers("Removed " + toRemove.getCount() + ' ' + toRemove.getName()
                             + " counter from " + p.getName());
                 }
-                return true;
+            }
+        } else {
+            Card c = game.getCard(targetPointer.getFirst(game, source));
+            if (c != null && counter != null && c.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
+                c.removeCounters(counter.getName(), counter.getCount(), game);
+                if (!game.isSimulation()) {
+                    game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(' ').append(counter.getName())
+                            .append(" counter from ").append(c.getName())
+                            .append(" (").append(c.getCounters(game).getCount(counter.getName())).append(" left)").toString());
+                }
             }
         }
-        Card c = game.getCard(targetPointer.getFirst(game, source));
-        if (c != null && counter != null && c.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
-            c.removeCounters(counter.getName(), counter.getCount(), game);
-            if (!game.isSimulation()) {
-                game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(' ').append(counter.getName())
-                        .append(" counter from ").append(c.getName())
-                        .append(" (").append(c.getCounters(game).getCount(counter.getName())).append(" left)").toString());
-            }
-            return true;
-        }
-        return false;
+        return true;
     }
 
     private Counter selectCounterType(Game game, Ability source, Permanent permanent) {

@@ -27,9 +27,7 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -40,6 +38,8 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.WarriorVigilantToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +62,7 @@ public class SupplyCaravan extends CardImpl {
 
         // When Supply Caravan enters the battlefield, if you control a tapped creature, create a 1/1 white Warrior creature token with vigilance.
         this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WarriorVigilantToken())),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 "When {this} enters the battlefield, if you control a tapped creature, create a 1/1 white Warrior creature token with vigilance."));
     }
 

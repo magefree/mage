@@ -47,6 +47,10 @@ public class ControlsPermanentsControllerTriggeredAbility extends StateTriggered
     protected final ComparisonType type;
     protected final int value;
 
+    public ControlsPermanentsControllerTriggeredAbility(FilterPermanent filter, Effect effect){
+        this(filter, ComparisonType.MORE_THAN, 0, effect);
+    }
+
     public ControlsPermanentsControllerTriggeredAbility(FilterPermanent filter, ComparisonType type, int value, Effect effect) {
         super(Zone.BATTLEFIELD, effect);
         this.filter = filter;

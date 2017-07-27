@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -54,7 +54,7 @@ public class MarchesasDecree extends CardImpl {
         // Whenever a creature attacks you or a planeswalker you control, the controller of that creature loses 1 life.
         Effect effect = new LoseLifeTargetEffect(1);
         effect.setText("that creature's controller loses 1 life");
-        this.addAbility(new AttacksAllTriggeredAbility(effect, false, new FilterCreaturePermanent(), SetTargetPointer.PLAYER, true, true));
+        this.addAbility(new AttacksAllTriggeredAbility(effect, false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PLAYER, true, true));
     }
 
     public MarchesasDecree(final MarchesasDecree card) {

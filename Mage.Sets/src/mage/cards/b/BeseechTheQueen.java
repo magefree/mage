@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -37,8 +38,6 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,8 +46,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  *

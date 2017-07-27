@@ -36,6 +36,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -48,8 +49,7 @@ public class BalefulAmmit extends CardImpl {
     public BalefulAmmit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.subtype.add("Crocodile");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.CROCODILE, SubType.DEMON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

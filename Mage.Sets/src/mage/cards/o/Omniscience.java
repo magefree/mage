@@ -28,29 +28,12 @@
 package mage.cards.o;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.CompoundCondition;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.SourceIsSpellCondition;
-import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.CastFromHandWithoutPayingManaCostEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.SplitCardHalf;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.filter.common.FilterNonlandCard;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.players.Player;
 
 /**
  *

@@ -27,27 +27,23 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CounterUnlessPaysEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetSpell;
-import mage.target.common.TargetCardInHand;
-
-import java.util.UUID;
 
 /**
  *
- * @author ciaccona007
+ * @author jeffwadsworth
  */
 public class RitesOfRefusal extends CardImpl {
 
@@ -55,8 +51,9 @@ public class RitesOfRefusal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Discard any number of cards. Counter target spell unless its controller pays {3} for each card discarded this way.
-        this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new RitesOfRefusalEffect());
+        this.getSpellAbility().addTarget(new TargetSpell());
+
     }
 
     public RitesOfRefusal(final RitesOfRefusal card) {
@@ -71,12 +68,12 @@ public class RitesOfRefusal extends CardImpl {
 
 class RitesOfRefusalEffect extends OneShotEffect {
 
-    public RitesOfRefusalEffect() {
-        super(Outcome.Benefit);
+    RitesOfRefusalEffect() {
+        super(Outcome.AIDontUseIt);
         this.staticText = "Discard any number of cards. Counter target spell unless its controller pays {3} for each card discarded this way";
     }
 
-    public RitesOfRefusalEffect(final RitesOfRefusalEffect effect) {
+    RitesOfRefusalEffect(final RitesOfRefusalEffect effect) {
         super(effect);
     }
 
@@ -87,22 +84,23 @@ class RitesOfRefusalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Target target = new TargetCardInHand(0, Integer.MAX_VALUE, new FilterCard("cards to discard"));
-            while (player.canRespond() && !target.isChosen()) {
-                target.choose(Outcome.BoostCreature, player.getId(), source.getSourceId(), game);
-            }
-            int numDiscarded = 0;
-            for (UUID targetId : target.getTargets()) {
-                Card card = player.getHand().get(targetId, game);
-                if (player.discard(card, source, game)) {
-                    numDiscarded++;
+        Player controller = game.getPlayer(source.getControllerId());
+        Spell targetSpell = game.getStack().getSpell(source.getFirstTarget());
+        if (targetSpell != null) {
+            Player controllerOfTargetedSpell = game.getPlayer(targetSpell.getControllerId());
+            if (controller != null
+                    && controllerOfTargetedSpell != null) {
+                int numToDiscard = controller.getAmount(0, controller.getHand().size(), "How many cards do you want to discard?", game);
+                Cards discardedCards = controller.discard(numToDiscard, false, source, game);
+                int actualNumberDiscarded = discardedCards.size();
+                GenericManaCost cost = new GenericManaCost(actualNumberDiscarded * 3);
+                if (controllerOfTargetedSpell.chooseUse(Outcome.AIDontUseIt, "Do you want to pay " + cost.convertedManaCost() + " to prevent " + targetSpell.getName() + " from gettting countered?", source, game)
+                        && cost.pay(source, game, source.getSourceId(), controllerOfTargetedSpell.getId(), false)) {
+                    return true;
+                } else {
+                    targetSpell.counter(source.getSourceId(), game);
+                    return true;
                 }
-            }
-            for (int i = 0; i < numDiscarded; i++) {
-                if(!new CounterUnlessPaysEffect(new GenericManaCost(3)).apply(game, source))
-                    return false;
             }
         }
         return false;

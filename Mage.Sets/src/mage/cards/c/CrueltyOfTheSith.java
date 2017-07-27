@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -36,13 +37,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *
@@ -57,7 +56,7 @@ public class CrueltyOfTheSith extends CardImpl {
     }
 
     public CrueltyOfTheSith(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{B}{R}");
 
         // Choose one - Counter target noncreature spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
@@ -65,7 +64,7 @@ public class CrueltyOfTheSith extends CardImpl {
 
         // Target player sacrifices a creture.
         Mode mode = new Mode();
-        mode.getEffects().add(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
+        mode.getEffects().add(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target player"));
         mode.getTargets().add(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
 
