@@ -47,17 +47,18 @@ public class AdornedPouncer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        //double strike
+        // Double strike
         addAbility(DoubleStrikeAbility.getInstance());
 
-        //eternalize 3WW
+        // Eternalize 3WW
         addAbility(new EternalizeAbility(new ManaCostsImpl("{3}{W}{W}"), this));
     }
 
-    public AdornedPouncer(AdornedPouncer adornedPouncer) {
-        super(adornedPouncer);
+    public AdornedPouncer(final AdornedPouncer card) {
+        super(card);
     }
 
+    @Override
     public AdornedPouncer copy() {
         return new AdornedPouncer(this);
     }
