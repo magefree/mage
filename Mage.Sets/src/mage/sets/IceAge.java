@@ -110,6 +110,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Covenant", 367, Rarity.UNCOMMON, mage.cards.f.FireCovenant.class));
         cards.add(new SetCardInfo("Flame Spirit", 184, Rarity.UNCOMMON, mage.cards.f.FlameSpirit.class));
         cards.add(new SetCardInfo("Flare", 185, Rarity.COMMON, mage.cards.f.Flare.class));
+        cards.add(new SetCardInfo("Flooded Woodlands", 368, Rarity.RARE, mage.cards.f.FloodedWoodlands.class));
         cards.add(new SetCardInfo("Flow of Maggots", 13, Rarity.RARE, mage.cards.f.FlowOfMaggots.class));
         cards.add(new SetCardInfo("Folk of the Pines", 123, Rarity.COMMON, mage.cards.f.FolkOfThePines.class));
         cards.add(new SetCardInfo("Forbidden Lore", 124, Rarity.RARE, mage.cards.f.ForbiddenLore.class));
@@ -229,6 +230,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Rally", 272, Rarity.COMMON, mage.cards.r.Rally.class));
         cards.add(new SetCardInfo("Ray of Command", 92, Rarity.COMMON, mage.cards.r.RayOfCommand.class));
         cards.add(new SetCardInfo("Ray of Erasure", 93, Rarity.COMMON, mage.cards.r.RayOfErasure.class));
+        cards.add(new SetCardInfo("Reclamation", 378, Rarity.RARE, mage.cards.r.Reclamation.class));
         cards.add(new SetCardInfo("Red Scarab", 273, Rarity.UNCOMMON, mage.cards.r.RedScarab.class));
         cards.add(new SetCardInfo("Regeneration", 147, Rarity.COMMON, mage.cards.r.Regeneration.class));
         cards.add(new SetCardInfo("Rime Dryad", 148, Rarity.COMMON, mage.cards.r.RimeDryad.class));
