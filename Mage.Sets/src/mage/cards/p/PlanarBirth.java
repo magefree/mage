@@ -37,6 +37,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -88,7 +89,7 @@ class PlanarBirthEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    toBattlefield.addAll(player.getGraveyard().getCards(new FilterBasicLandCard(), source.getSourceId(), controller.getId(), game));
+                    toBattlefield.addAll(player.getGraveyard().getCards(StaticFilters.FILTER_BASIC_LAND_CARD, source.getSourceId(), controller.getId(), game));
                 }
             }
             controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);

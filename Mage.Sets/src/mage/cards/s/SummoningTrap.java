@@ -27,23 +27,13 @@
  */
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,6 +44,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author Rafbill
@@ -62,7 +56,7 @@ public class SummoningTrap extends CardImpl {
 
     public SummoningTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}{G}");
-        this.subtype.add("Trap");
+        this.subtype.add(SubType.TRAP);
 
         // If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Summoning Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), SummoningTrapCondition.instance), new SummoningTrapWatcher());

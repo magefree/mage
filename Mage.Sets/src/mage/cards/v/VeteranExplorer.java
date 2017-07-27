@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -114,7 +115,7 @@ class VeteranExplorerEffect extends OneShotEffect {
     private void chooseAndSearchLibrary(List<Player> usingPlayers, Player player, Ability source, Game game) {
         if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up to two basic land cards and put them onto the battlefield?", source, game)) {
             usingPlayers.add(player);
-            TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
+            TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD);
             if (player.searchLibrary(target, game)) {
                 if (!target.getTargets().isEmpty()) {
                     for (UUID cardId: (List<UUID>)target.getTargets()) {

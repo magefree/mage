@@ -89,7 +89,8 @@ class LoseControlTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return (event.getType() == GameEvent.EventType.LOST_CONTROL);
+        return event.getType() == GameEvent.EventType.LOST_CONTROL
+                || event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override

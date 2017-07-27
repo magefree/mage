@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -37,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -48,6 +48,8 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -57,8 +59,7 @@ public class TormentOfScarabs extends CardImpl {
     public TormentOfScarabs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
-        this.subtype.add("Aura");
-        this.subtype.add("Curse");
+        this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();

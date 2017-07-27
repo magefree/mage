@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -41,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -50,6 +50,8 @@ import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -58,7 +60,7 @@ public class DisruptingShoal extends CardImpl {
 
     public DisruptingShoal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // You may exile a blue card with converted mana cost X from your hand rather than pay Disrupting Shoal's mana cost.
         FilterOwnedCard filter = new FilterOwnedCard("a blue card with converted mana cost X from your hand");

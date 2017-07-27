@@ -27,7 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -39,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPlayer;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -48,6 +47,8 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -118,7 +119,7 @@ class OathOfLiegesEffect extends OneShotEffect {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
         if (activePlayer != null) {
             if (activePlayer.chooseUse(outcome, "Search your library for a basic land card, put that card onto the battlefield, then shuffle your library?", source, game)) {
-                Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(new FilterBasicLandCard()), false, true, Outcome.PutLandInPlay, true);
+                Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), false, true, Outcome.PutLandInPlay, true);
                 effect.setTargetPointer(new FixedTarget(game.getActivePlayerId()));
                 return effect.apply(game, source);
             }

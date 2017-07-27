@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -84,9 +83,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
         if (sourcePermanent != null && filter.match(sourcePermanent, sourceId, controllerId, game)) {
             if (setTargetPointer) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                }
+                this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId()));
             }
             return true;
         }

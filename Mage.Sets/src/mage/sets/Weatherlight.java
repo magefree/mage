@@ -145,6 +145,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Nature's Kiss", 78, Rarity.COMMON, mage.cards.n.NaturesKiss.class));
         cards.add(new SetCardInfo("Nature's Resurgence", 79, Rarity.RARE, mage.cards.n.NaturesResurgence.class));
         cards.add(new SetCardInfo("Necratog", 18, Rarity.UNCOMMON, mage.cards.n.Necratog.class));
+        cards.add(new SetCardInfo("Noble Benefactor", 44, Rarity.UNCOMMON, mage.cards.n.NobleBenefactor.class));
         cards.add(new SetCardInfo("Null Rod", 154, Rarity.RARE, mage.cards.n.NullRod.class));
         cards.add(new SetCardInfo("Odylic Wraith", 19, Rarity.UNCOMMON, mage.cards.o.OdylicWraith.class));
         cards.add(new SetCardInfo("Ophidian", 45, Rarity.COMMON, mage.cards.o.Ophidian.class));

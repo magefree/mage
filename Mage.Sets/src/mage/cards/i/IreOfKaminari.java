@@ -27,7 +27,6 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -37,6 +36,8 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public class IreOfKaminari extends CardImpl {
 
     public IreOfKaminari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Ire of Kaminari deals damage to target creature or player equal to the number of Arcane cards in your graveyard.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter)));

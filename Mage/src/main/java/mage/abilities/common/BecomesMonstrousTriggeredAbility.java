@@ -8,7 +8,6 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -19,8 +18,6 @@ import mage.target.targetpointer.FixedTarget;
  * @author Styxo
  */
 public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
-
-    protected FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public BecomesMonstrousTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
@@ -43,11 +40,9 @@ public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (filter.match(permanent, sourceId, controllerId, game)
-                && (permanent.getControllerId().equals(this.controllerId))) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-            }
+        if (permanent != null && permanent.isCreature()
+                && (permanent.getControllerId().equals(getControllerId()))) {
+            this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
             return true;
         }
         return false;
@@ -55,6 +50,6 @@ public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever " + filter.getMessage() + " becomes monstrous, " + super.getRule();
+        return "Whenever a creature you control becomes monstrous, " + super.getRule();
     }
 }

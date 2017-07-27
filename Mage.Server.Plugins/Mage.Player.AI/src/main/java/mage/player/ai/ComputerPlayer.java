@@ -352,7 +352,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard) {
+        if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard
+                || target.getOriginalTarget() instanceof TargetCardInASingleGraveyard) {
             List<UUID> alreadyTargetted = target.getTargets();
             List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getGraveyard().getCards(game));
             while (!cards.isEmpty()) {

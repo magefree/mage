@@ -108,6 +108,7 @@ public class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Null Brooch", 136, Rarity.RARE, mage.cards.n.NullBrooch.class));
         cards.add(new SetCardInfo("Oath of Druids", 115, Rarity.RARE, mage.cards.o.OathOfDruids.class));
         cards.add(new SetCardInfo("Oath of Lieges", 11, Rarity.RARE, mage.cards.o.OathOfLieges.class));
+        cards.add(new SetCardInfo("Oath of Scholars", 42, Rarity.RARE, mage.cards.o.OathOfScholars.class));
         cards.add(new SetCardInfo("Ogre Shaman", 91, Rarity.RARE, mage.cards.o.OgreShaman.class));
         cards.add(new SetCardInfo("Onslaught", 92, Rarity.COMMON, mage.cards.o.Onslaught.class));
         cards.add(new SetCardInfo("Paladin en-Vec", 12, Rarity.RARE, mage.cards.p.PaladinEnVec.class));
@@ -140,6 +141,7 @@ public class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Skyshroud Elite", 123, Rarity.UNCOMMON, mage.cards.s.SkyshroudElite.class));
         cards.add(new SetCardInfo("Slaughter", 74, Rarity.UNCOMMON, mage.cards.s.Slaughter.class));
         cards.add(new SetCardInfo("Soltari Visionary", 20, Rarity.COMMON, mage.cards.s.SoltariVisionary.class));
+        cards.add(new SetCardInfo("Song of Serenity", 125, Rarity.UNCOMMON, mage.cards.s.SongOfSerenity.class));
         cards.add(new SetCardInfo("Sonic Burst", 103, Rarity.COMMON, mage.cards.s.SonicBurst.class));
         cards.add(new SetCardInfo("Soul Warden", 21, Rarity.COMMON, mage.cards.s.SoulWarden.class));
         cards.add(new SetCardInfo("Spellbook", 138, Rarity.UNCOMMON, mage.cards.s.Spellbook.class));

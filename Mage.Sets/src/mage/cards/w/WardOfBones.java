@@ -27,7 +27,6 @@
  */
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,11 +40,12 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -127,8 +127,8 @@ class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
                 return true;
             }
             if (card.isEnchantment()
-                    && game.getBattlefield().countAll(new FilterEnchantmentPermanent(), opponent.getId(), game)
-                    > game.getBattlefield().countAll(new FilterEnchantmentPermanent(), source.getControllerId(), game)) {
+                    && game.getBattlefield().countAll(StaticFilters.FILTER_ENCHANTMENT_PERMANENT, opponent.getId(), game)
+                    > game.getBattlefield().countAll(StaticFilters.FILTER_ENCHANTMENT_PERMANENT, source.getControllerId(), game)) {
                 return true;
             }
             final int yourLands = game.getBattlefield().countAll(new FilterLandPermanent(), source.getControllerId(), game);

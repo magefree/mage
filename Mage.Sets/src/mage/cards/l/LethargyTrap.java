@@ -27,7 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -37,9 +36,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ public class LethargyTrap extends CardImpl {
 
     public LethargyTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
-        this.subtype.add("Trap");
+        this.subtype.add(SubType.TRAP);
 
         // If three or more creatures are attacking, you may pay {U} rather than pay Lethargy Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), LethargyTrapCondition.instance));

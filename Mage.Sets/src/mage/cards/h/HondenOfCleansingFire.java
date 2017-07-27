@@ -28,7 +28,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -40,6 +39,8 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -55,7 +56,7 @@ public class HondenOfCleansingFire extends CardImpl {
     public HondenOfCleansingFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Shrine");
+        this.subtype.add(SubType.SHRINE);
 
 
         // At the beginning of your upkeep, you gain 2 life for each Shrine you control.

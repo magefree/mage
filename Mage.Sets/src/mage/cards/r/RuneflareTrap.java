@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -38,10 +37,13 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +53,7 @@ public class RuneflareTrap extends CardImpl {
 
     public RuneflareTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}{R}");
-        this.subtype.add("Trap");
+        this.subtype.add(SubType.TRAP);
 
         // If an opponent drew three or more cards this turn, you may pay {R} rather than pay Runeflare Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RuneflareTrapCondition.instance), new CardsAmountDrawnThisTurnWatcher());

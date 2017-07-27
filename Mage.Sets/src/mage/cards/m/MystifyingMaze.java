@@ -104,7 +104,7 @@ class MystifyingMazeEffect extends OneShotEffect {
         if (permanent != null && sourceObject != null) {
             if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game)) {
                 //create delayed triggered ability
-                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true);
                 effect.setText("At the beginning of the next end step, return it to the battlefield tapped under its owner's control");
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
                 game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);

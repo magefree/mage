@@ -27,7 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.OpponentControlsMoreCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -37,8 +36,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +51,7 @@ public class LandTax extends CardImpl {
 
         // At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for up to three basic land cards, reveal them, and put them into your hand. If you do, shuffle your library.
         this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, new FilterBasicLandCard()), true), TargetController.YOU, true),
+                new BeginningOfUpkeepTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_BASIC_LAND_CARD), true), TargetController.YOU, true),
                 new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS),
                 "At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for up to three basic land cards, reveal them, and put them into your hand. If you do, shuffle your library"
         ));

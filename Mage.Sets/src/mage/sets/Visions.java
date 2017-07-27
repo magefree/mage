@@ -70,6 +70,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Creeping Mold", 53, Rarity.UNCOMMON, mage.cards.c.CreepingMold.class));
         cards.add(new SetCardInfo("Crypt Rats", 5, Rarity.COMMON, mage.cards.c.CryptRats.class));
         cards.add(new SetCardInfo("Daraja Griffin", 102, Rarity.UNCOMMON, mage.cards.d.DarajaGriffin.class));
+        cards.add(new SetCardInfo("Dark Privilege", 6, Rarity.COMMON, mage.cards.d.DarkPrivilege.class));
         cards.add(new SetCardInfo("Death Watch", 7, Rarity.COMMON, mage.cards.d.DeathWatch.class));
         cards.add(new SetCardInfo("Desertion", 30, Rarity.RARE, mage.cards.d.Desertion.class));
         cards.add(new SetCardInfo("Diamond Kaleidoscope", 143, Rarity.RARE, mage.cards.d.DiamondKaleidoscope.class));
@@ -106,6 +107,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Basin", 164, Rarity.UNCOMMON, mage.cards.j.JungleBasin.class));
         cards.add(new SetCardInfo("Kaervek's Spite", 13, Rarity.RARE, mage.cards.k.KaerveksSpite.class));
         cards.add(new SetCardInfo("Karoo", 165, Rarity.UNCOMMON, mage.cards.k.Karoo.class));
+        cards.add(new SetCardInfo("Katabatic Winds", 59, Rarity.RARE, mage.cards.k.KatabaticWinds.class));
         cards.add(new SetCardInfo("Keeper of Kookus", 85, Rarity.COMMON, mage.cards.k.KeeperOfKookus.class));
         cards.add(new SetCardInfo("King Cheetah", 60, Rarity.COMMON, mage.cards.k.KingCheetah.class));
         cards.add(new SetCardInfo("Knight of Valor", 111, Rarity.COMMON, mage.cards.k.KnightOfValor.class));

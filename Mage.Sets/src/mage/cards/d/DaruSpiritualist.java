@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
- 
 package mage.cards.d;
 
 import java.util.UUID;
@@ -47,7 +46,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-
 /**
  *
  * @author L_J
@@ -55,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 public class DaruSpiritualist extends CardImpl {
 
     public DaruSpiritualist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 
@@ -104,12 +102,9 @@ class DaruSpiritualistTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        UUID targetId = event.getTargetId();
         Permanent creature = game.getPermanent(event.getTargetId());
         if (creature != null && filter.match(creature, getSourceId(), getControllerId(), game)) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-            }
+            this.getEffects().setTargetPointer(new FixedTarget(creature, game));
             return true;
         }
         return false;

@@ -55,7 +55,6 @@ public class DarettiScrapSavantEmblem extends Emblem {
         setName("Emblem Daretti");
         this.setExpansionSetCodeForImage("C14");
 
-
         this.getAbilities().add(new DarettiScrapSavantTriggeredAbility());
     }
 }
@@ -87,9 +86,7 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
                 && zEvent.getFromZone() == Zone.BATTLEFIELD
                 && zEvent.getTarget().isArtifact()
                 && zEvent.getTarget().getOwnerId().equals(this.controllerId)) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(zEvent.getTargetId()));
-            }
+            this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId()));
             return true;
         }
         return false;

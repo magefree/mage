@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -36,7 +35,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
@@ -45,6 +43,8 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -100,7 +100,7 @@ class ChroniclerOfHeroesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0).apply(game, source)) {
+            if (new PermanentsOnTheBattlefieldCondition(filter).apply(game, source)) {
                 controller.drawCards(1, game);
             }
             return true;

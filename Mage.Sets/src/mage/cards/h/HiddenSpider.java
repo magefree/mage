@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -40,10 +39,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureSpell;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +65,7 @@ public class HiddenSpider extends CardImpl {
         // When an opponent casts a creature spell with flying, if Hidden Spider is an enchantment, Hidden Spider becomes a 3/5 Spider creature with reach.
         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenSpiderToken(), "", Duration.WhileOnBattlefield, true, false),
                 filter, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(new FilterEnchantmentPermanent()),
+        this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT),
                 "When an opponent casts a creature spell with flying, if {this} is an enchantment, {this} becomes a 3/5 Spider creature with reach."));
     }
 

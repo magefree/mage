@@ -194,6 +194,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Kamahl, Pit Fighter", 198, Rarity.RARE, mage.cards.k.KamahlPitFighter.class));
         cards.add(new SetCardInfo("Kamahl's Desire", 199, Rarity.COMMON, mage.cards.k.KamahlsDesire.class));
         cards.add(new SetCardInfo("Karmic Justice", 26, Rarity.RARE, mage.cards.k.KarmicJustice.class));
+        cards.add(new SetCardInfo("Kirtar's Desire", 27, Rarity.COMMON, mage.cards.k.KirtarsDesire.class));
         cards.add(new SetCardInfo("Kirtar's Wrath", 28, Rarity.RARE, mage.cards.k.KirtarsWrath.class));
         cards.add(new SetCardInfo("Krosan Archer", 246, Rarity.COMMON, mage.cards.k.KrosanArcher.class));
         cards.add(new SetCardInfo("Krosan Avenger", 247, Rarity.COMMON, mage.cards.k.KrosanAvenger.class));
@@ -260,6 +261,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Pianna, Nomad Captain", 39, Rarity.RARE, mage.cards.p.PiannaNomadCaptain.class));
         cards.add(new SetCardInfo("Pilgrim of Justice", 40, Rarity.COMMON, mage.cards.p.PilgrimOfJustice.class));
         cards.add(new SetCardInfo("Pilgrim of Virtue", 41, Rarity.COMMON, mage.cards.p.PilgrimOfVirtue.class));
+        cards.add(new SetCardInfo("Piper's Melody", 261, Rarity.UNCOMMON, mage.cards.p.PipersMelody.class));
         cards.add(new SetCardInfo("Plains", 331, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
@@ -281,6 +283,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Repentant Vampire", 157, Rarity.RARE, mage.cards.r.RepentantVampire.class));
         cards.add(new SetCardInfo("Resilient Wanderer", 43, Rarity.UNCOMMON, mage.cards.r.ResilientWanderer.class));
         cards.add(new SetCardInfo("Rites of Initiation", 217, Rarity.COMMON, mage.cards.r.RitesOfInitiation.class));
+        cards.add(new SetCardInfo("Rites of Refusal", 99, Rarity.COMMON, mage.cards.r.RitesOfRefusal.class));
         cards.add(new SetCardInfo("Roar of the Wurm", 266, Rarity.UNCOMMON, mage.cards.r.RoarOfTheWurm.class));
         cards.add(new SetCardInfo("Rotting Giant", 158, Rarity.UNCOMMON, mage.cards.r.RottingGiant.class));
         cards.add(new SetCardInfo("Sacred Rites", 44, Rarity.COMMON, mage.cards.s.SacredRites.class));

@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,16 +35,14 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.StoneTrapIdolToken;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +52,7 @@ public class StoneIdolTrap extends CardImpl {
 
     public StoneIdolTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{R}");
-        this.subtype.add("Trap");
+        this.subtype.add(SubType.TRAP);
 
         // Stone Idol Trap costs {1} less to cast for each attacking creature.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new StoneIdolTrapCostReductionEffect());

@@ -28,7 +28,6 @@ package mage.cards.s;
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -38,15 +37,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public class SakuraTribeElder extends CardImpl {
-
-    final static FilterBasicLandCard filterLands = new FilterBasicLandCard();
 
     public SakuraTribeElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
@@ -55,7 +54,7 @@ public class SakuraTribeElder extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        TargetCardInLibrary target = new TargetCardInLibrary(filterLands);
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay), new SacrificeSourceCost()));
     }
 

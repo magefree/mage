@@ -27,15 +27,16 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.EldraziSpawnToken;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,13 +44,11 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class GrowthSpasm extends CardImpl {
 
-    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
-
     public GrowthSpasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
 
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken()));
     }
 

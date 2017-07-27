@@ -28,7 +28,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -37,7 +36,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +49,7 @@ public class DanceOfShadows extends CardImpl {
 
     public DanceOfShadows (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         
         // Creatures you control get +1/+0 and gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)

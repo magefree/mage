@@ -27,8 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -37,12 +35,16 @@ import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 import mage.watchers.common.SpellsCastWatcher;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth
@@ -57,7 +59,7 @@ public class RicochetTrap extends CardImpl {
 
     public RicochetTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.subtype.add("Trap");
+        this.subtype.add(SubType.TRAP);
 
         // If an opponent cast a blue spell this turn, you may pay {R} rather than pay Ricochet Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RicochetTrapCondition.instance));

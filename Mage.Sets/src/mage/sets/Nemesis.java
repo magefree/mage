@@ -103,6 +103,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Oracle's Attendants", 16, Rarity.RARE, mage.cards.o.OraclesAttendants.class));
         cards.add(new SetCardInfo("Oraxid", 35, Rarity.COMMON, mage.cards.o.Oraxid.class));
         cards.add(new SetCardInfo("Overlaid Terrain", 108, Rarity.RARE, mage.cards.o.OverlaidTerrain.class));
+        cards.add(new SetCardInfo("Pack Hunt", 109, Rarity.RARE, mage.cards.p.PackHunt.class));
         cards.add(new SetCardInfo("Parallax Dementia", 62, Rarity.COMMON, mage.cards.p.ParallaxDementia.class));
         cards.add(new SetCardInfo("Parallax Inhibitor", 134, Rarity.RARE, mage.cards.p.ParallaxInhibitor.class));
         cards.add(new SetCardInfo("Parallax Nexus", 63, Rarity.RARE, mage.cards.p.ParallaxNexus.class));

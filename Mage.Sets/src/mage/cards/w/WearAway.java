@@ -27,15 +27,17 @@
  */
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,11 +47,11 @@ public class WearAway extends CardImpl {
 
     public WearAway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{G}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Target target = new TargetPermanent(new FilterArtifactOrEnchantmentPermanent());
+        Target target = new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT);
         this.getSpellAbility().addTarget(target);
         // Splice onto Arcane {3}{G}
         this.addAbility(new SpliceOntoArcaneAbility("{3}{G}"));

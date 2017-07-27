@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,11 +39,12 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -74,12 +74,12 @@ public class MinotaurTactician extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         
         // Minotaur Tactician gets +1/+1 as long as you control a white creature.
-        Condition conditionWhite = new PermanentsOnTheBattlefieldCondition(filterWhite, ComparisonType.MORE_THAN, 0);
+        Condition conditionWhite = new PermanentsOnTheBattlefieldCondition(filterWhite);
         Effect effectWhite = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), conditionWhite, ruleWhite);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectWhite));
         
         // Minotaur Tactician gets +1/+1 as long as you control a blue creature.
-        Condition conditionBlue = new PermanentsOnTheBattlefieldCondition(filterBlue, ComparisonType.MORE_THAN, 0);
+        Condition conditionBlue = new PermanentsOnTheBattlefieldCondition(filterBlue);
         Effect effectBlue = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), conditionBlue, ruleBlue);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectBlue));
     }

@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileSourceCost;
@@ -39,11 +38,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -101,7 +102,7 @@ class SurveyorsScopeEffect extends OneShotEffect {
             }
             game.informPlayers(new StringBuilder("Surveyor's Scope: X = ").append(numberOfLands).toString());
             if (numberOfLands > 0) {
-                return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, numberOfLands, new FilterBasicLandCard())).apply(game, source);
+                return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, numberOfLands, StaticFilters.FILTER_BASIC_LAND_CARD)).apply(game, source);
             }
             return true;
         }

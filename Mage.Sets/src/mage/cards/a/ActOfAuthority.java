@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,11 +38,13 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,11 +58,11 @@ public class ActOfAuthority extends CardImpl {
 
         // When Act of Authority enters the battlefield, you may exile target artifact or enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(), true);
-        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        ability.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
         this.addAbility(ability);
         // At the beginning of your upkeep, you may exile target artifact or enchantment. If you do, its controller gains control of Act of Authority.
         ability = new BeginningOfUpkeepTriggeredAbility(new ActOfAuthorityEffect(), TargetController.YOU, true);
-        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        ability.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
         this.addAbility(ability);
     }
 

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -43,7 +44,6 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class OnduGiant extends CardImpl {
 
-    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
     public OnduGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
@@ -53,7 +53,7 @@ public class OnduGiant extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true), true));
     }
 
     public OnduGiant(final OnduGiant card) {

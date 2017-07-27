@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -39,11 +38,13 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.FreyaliseLlanowarsFuryToken;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class FreyaliseLlanowarsFury extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new FreyaliseLlanowarsFuryToken()), 2));
         // -2: Destroy target artifact or enchantment.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new DestroyTargetEffect(), -2);
-        loyaltyAbility.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        loyaltyAbility.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
         this.addAbility(loyaltyAbility);
         // -6: Draw a card for each green creature you control.
         this.addAbility(new LoyaltyAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filterGreen)), -6));

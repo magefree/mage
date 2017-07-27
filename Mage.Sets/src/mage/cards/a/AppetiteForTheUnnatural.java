@@ -27,28 +27,28 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public class AppetiteForTheUnnatural extends CardImpl {
 
     public AppetiteForTheUnnatural(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Destroy target artifact or enchantment. You gain 2 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
     }
 
     public AppetiteForTheUnnatural(final AppetiteForTheUnnatural card) {

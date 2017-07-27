@@ -27,8 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -37,11 +35,15 @@ import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEf
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +53,7 @@ public class PermafrostTrap extends CardImpl {
 
     public PermafrostTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
-        this.subtype.add("Trap");
+        this.subtype.add(SubType.TRAP);
 
         // If an opponent had a green creature enter the battlefield under his or her control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), PermafrostTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());

@@ -27,15 +27,16 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ public class LoamLarva extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Loam Larva enters the battlefield, you may search your library for a basic land card, reveal it, then shuffle your library and put that card on top of it.
-        TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true, true), true));
     }
 

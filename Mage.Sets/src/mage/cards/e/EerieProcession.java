@@ -28,7 +28,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,6 +36,8 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -51,7 +52,7 @@ public class EerieProcession extends CardImpl {
 
     public EerieProcession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // Search your library for an Arcane card, reveal that card, and put it into your hand. Then shuffle your library.
