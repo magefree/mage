@@ -312,6 +312,8 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Wirewood Savage", 304, Rarity.COMMON, mage.cards.w.WirewoodSavage.class));
         cards.add(new SetCardInfo("Wooded Foothills", 330, Rarity.RARE, mage.cards.w.WoodedFoothills.class, new CardGraphicInfo(new ObjectColor("RG"), null, false)));
         cards.add(new SetCardInfo("Words of War", 244, Rarity.RARE, mage.cards.w.WordsOfWar.class));
+        cards.add(new SetCardInfo("Words of Waste", 182, Rarity.RARE, mage.cards.w.WordsOfWaste.class));
+        cards.add(new SetCardInfo("Words of Wilding", 305, Rarity.RARE, mage.cards.w.WordsOfWilding.class));
         cards.add(new SetCardInfo("Words of Wind", 122, Rarity.RARE, mage.cards.w.WordsOfWind.class));
         cards.add(new SetCardInfo("Words of Worship", 61, Rarity.RARE, mage.cards.w.WordsOfWorship.class));
         cards.add(new SetCardInfo("Wretched Anurid", 183, Rarity.COMMON, mage.cards.w.WretchedAnurid.class));
