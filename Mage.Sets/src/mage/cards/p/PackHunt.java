@@ -25,78 +25,69 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.k;
+package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageAllEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
-import mage.players.Player;
+import mage.game.permanent.Permanent;
+import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
- * @author jeffwadsworth
+ * @author ciaccona007
  */
-public class KindleTheCarnage extends CardImpl {
+public class PackHunt extends CardImpl {
 
-    public KindleTheCarnage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
+    public PackHunt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
-        // Discard a card at random. If you do, Kindle the Carnage deals damage equal to that card's converted mana cost to each creature. You may repeat this process any number of times.
-        this.getSpellAbility().addEffect(new KindleTheCarnageEffect());
-
+        // Search your library for up to three cards with the same name as target creature, reveal them, and put them into your hand. Then shuffle your library.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new PackHuntEffect());
     }
 
-    public KindleTheCarnage(final KindleTheCarnage card) {
+    public PackHunt(final PackHunt card) {
         super(card);
     }
 
     @Override
-    public KindleTheCarnage copy() {
-        return new KindleTheCarnage(this);
+    public PackHunt copy() {
+        return new PackHunt(this);
     }
 }
+class PackHuntEffect extends OneShotEffect {
 
-class KindleTheCarnageEffect extends OneShotEffect {
-
-    public KindleTheCarnageEffect() {
-        super(Outcome.AIDontUseIt);
-        this.staticText = "Discard a card at random. If you do, {this} deals damage equal to that card's converted mana cost to each creature. You may repeat this process any number of times";
+    public PackHuntEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Search your library for up to three cards with the same name as target creature, reveal them, and put them into your hand. Then shuffle your library";
     }
 
-    public KindleTheCarnageEffect(final KindleTheCarnageEffect effect) {
+    public PackHuntEffect(final PackHuntEffect effect) {
         super(effect);
     }
 
     @Override
-    public KindleTheCarnageEffect copy() {
-        return new KindleTheCarnageEffect(this);
+    public PackHuntEffect copy() {
+        return new PackHuntEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Cards hand = controller.getHand();
-            while (hand != null
-                    && hand.size() > 0
-                    && controller.isInGame()
-                    && controller.chooseUse(Outcome.AIDontUseIt, "Discard a card randomly from your hand?", source, game)) {
-                Card discardedCard = controller.discardOne(true, source, game);
-                if (discardedCard != null) {
-                    new DamageAllEffect(discardedCard.getConvertedManaCost(), new FilterCreaturePermanent()).apply(game, source);
-                }
-            }
-            return true;
-        }
-        return false;
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        FilterCard filter = new FilterPermanentCard();
+        filter.add(new NamePredicate(permanent.getName()));
+        return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0,3, filter), true).apply(game, source);
     }
 }
