@@ -191,6 +191,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Ophidian Eye", 70, Rarity.COMMON, mage.cards.o.OphidianEye.class));
         cards.add(new SetCardInfo("Orcish Cannonade", 172, Rarity.COMMON, mage.cards.o.OrcishCannonade.class));
         cards.add(new SetCardInfo("Outrider en-Kor", 31, Rarity.UNCOMMON, mage.cards.o.OutriderEnKor.class));
+        cards.add(new SetCardInfo("Paradise Plume", 260, Rarity.UNCOMMON, mage.cards.p.ParadisePlume.class));
         cards.add(new SetCardInfo("Paradox Haze", 71, Rarity.UNCOMMON, mage.cards.p.ParadoxHaze.class));
         cards.add(new SetCardInfo("Pardic Dragon", 173, Rarity.RARE, mage.cards.p.PardicDragon.class));
         cards.add(new SetCardInfo("Pendelhaven Elder", 209, Rarity.UNCOMMON, mage.cards.p.PendelhavenElder.class));
