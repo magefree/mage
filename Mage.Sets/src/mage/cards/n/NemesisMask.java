@@ -28,16 +28,15 @@
 package mage.cards.n;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByAllAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 
@@ -48,12 +47,12 @@ import mage.constants.Zone;
 public class NemesisMask extends CardImpl {
 
     public NemesisMask(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add("Equipment");
 
         // All creatures able to block equipped creature do so.
-        Ability gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new MustBeBlockedByAllAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT)));
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
