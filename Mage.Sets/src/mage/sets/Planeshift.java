@@ -138,6 +138,7 @@ public class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Planeswalker's Favor", 86, Rarity.RARE, mage.cards.p.PlaneswalkersFavor.class));
         cards.add(new SetCardInfo("Planeswalker's Fury", 70, Rarity.RARE, mage.cards.p.PlaneswalkersFury.class));
         cards.add(new SetCardInfo("Planeswalker's Mirth", 12, Rarity.RARE, mage.cards.p.PlaneswalkersMirth.class));
+        cards.add(new SetCardInfo("Planeswalker's Mischief", 29, Rarity.RARE, mage.cards.p.PlaneswalkersMischief.class));
         cards.add(new SetCardInfo("Planeswalker's Scorn", 52, Rarity.RARE, mage.cards.p.PlaneswalkersScorn.class));
         cards.add(new SetCardInfo("Pollen Remedy", 13, Rarity.COMMON, mage.cards.p.PollenRemedy.class));
         cards.add(new SetCardInfo("Primal Growth", 87, Rarity.COMMON, mage.cards.p.PrimalGrowth.class));
