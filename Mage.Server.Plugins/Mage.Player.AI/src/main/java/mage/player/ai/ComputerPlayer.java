@@ -1122,6 +1122,18 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     }
                 }
             }
+            // pay snow covered mana
+            for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
+                if (cost instanceof SnowManaCost) {
+                    for (Mana netMana : manaAbility.getNetMana(game)) {
+                        if (cost.testPay(netMana) || spendAnyMana) {
+                            if (activateAbility(manaAbility, game)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
             // then pay hybrid
             for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof HybridManaCost) {

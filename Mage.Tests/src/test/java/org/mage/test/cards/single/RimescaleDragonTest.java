@@ -3,28 +3,25 @@ package org.mage.test.cards.single;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author JRHerlehy
- *         Created on 7/27/17.
+ * @author JRHerlehy Created on 7/27/17.
  */
 public class RimescaleDragonTest extends CardTestPlayerBase {
 
+    // Flying
+    // {2}{S}: Tap target creature and put an ice counter on it.
+    // Creatures with ice counters on them don't untap during their controllers' untap steps.
     private final String dragon = "Rimescale Dragon";
     private final String snowMountain = "Snow-Covered Mountain";
-
     private final String thopter = "Ornithopter";
     private final String terror = "Terror";
 
     private final String ability = "{2}{S}: Tap target";
 
-    //TODO: Remove ignore flags once snow mana payment is implemented for testing framework.
-
     @Test
-    @Ignore
     public void testActivatedAbility() {
         this.setupTest();
 
@@ -36,7 +33,6 @@ public class RimescaleDragonTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
     public void testStaticAbility() {
         this.setupTest();
 
@@ -48,7 +44,6 @@ public class RimescaleDragonTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
     public void testStaticAbilityEnded() {
         this.setupTest();
 
