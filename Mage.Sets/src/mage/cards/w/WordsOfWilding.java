@@ -27,13 +27,12 @@
  */
 package mage.cards.w;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,11 +41,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.game.permanent.token.BearToken;
-import mage.constants.TargetController;
-import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.players.Player;
 
 /**
  *
@@ -55,8 +51,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 public class WordsOfWilding extends CardImpl {
 
     public WordsOfWilding(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // {1}: The next time you would draw a card this turn, create a 2/2 green Bear creature token instead.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWildingEffect(), new ManaCostsImpl("{1}")));
@@ -75,8 +70,8 @@ public class WordsOfWilding extends CardImpl {
 class WordsOfWildingEffect extends ReplacementEffectImpl {
 
     public WordsOfWildingEffect() {
-        super(Duration.EndOfTurn, Outcome.Discard);
-        staticText = "The next time you would draw a card this turn, create a 2/2 green Bear creature token instead.";
+        super(Duration.EndOfTurn, Outcome.PutCreatureInPlay);
+        staticText = "The next time you would draw a card this turn, create a 2/2 green Bear creature token instead";
     }
 
     public WordsOfWildingEffect(final WordsOfWildingEffect effect) {
@@ -88,29 +83,24 @@ class WordsOfWildingEffect extends ReplacementEffectImpl {
         return new WordsOfWildingEffect(this);
     }
 
-    
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) { 
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-			new CreateTokenEffect(new BearToken()).apply(game, source);
-			this.used = true;
-			discard();
-			return true;
+            new CreateTokenEffect(new BearToken()).apply(game, source);
+            discard();
+            return true;
         }
         return false;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
-    }   
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used) {
-			return source.getControllerId().equals(event.getPlayerId());
-        }
-        return false;
+        return source.getControllerId().equals(event.getPlayerId());
     }
 }

@@ -267,6 +267,7 @@ class FlashbackReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
+                discard();
                 return controller.moveCards(
                         card, Zone.EXILED, source, game, false, false, false, event.getAppliedEffects());
             }
@@ -284,7 +285,7 @@ class FlashbackReplacementEffect extends ReplacementEffectImpl {
         if (event.getTargetId().equals(source.getSourceId())
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.STACK
                 && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-            discard();
+
             int zcc = game.getState().getZoneChangeCounter(source.getSourceId());
             if (((FixedTarget) getTargetPointer()).getZoneChangeCounter() == zcc) {
                 return true;

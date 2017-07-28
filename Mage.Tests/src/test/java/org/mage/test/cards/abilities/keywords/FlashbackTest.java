@@ -381,8 +381,9 @@ public class FlashbackTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Snapcaster Mage", 1);
         assertGraveyardCount(playerA, "Whispers of the Muse", 0);
-        assertHandCount(playerA, 1);
         assertExileCount("Whispers of the Muse", 1);
+        assertHandCount(playerA, 1);
+
     }
 
     /**
@@ -418,7 +419,7 @@ public class FlashbackTest extends CardTestPlayerBase {
          Sorcery
         Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step.
         Flashback—{R}{R}, Sacrifice X Mountains.
-        */
+         */
         String fCatBlitz = "Firecat Blitz";
         String mountain = "Mountain";
 
@@ -434,7 +435,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         execute();
 
         assertExileCount(playerA, fCatBlitz, 1);
-        assertPermanentCount(playerA, "Elemental Cat", 1);        
+        assertPermanentCount(playerA, "Elemental Cat", 1);
         assertGraveyardCount(playerA, mountain, 1);
     }
 
@@ -506,7 +507,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, eVanguard, 1);
-        assertGraveyardCount(playerA,yOx, 1);
+        assertGraveyardCount(playerA, yOx, 1);
         assertGraveyardCount(playerA, memnite, 1);
         assertExileCount(playerA, dReturn, 1);
         assertPermanentCount(playerA, bSable, 1);

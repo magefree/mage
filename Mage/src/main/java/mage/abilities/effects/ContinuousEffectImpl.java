@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -165,6 +164,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
      */
     @Override
     public void discard() {
+        this.used = true; // to prevent further usage before effect is removed
         this.discarded = true;
     }
 
