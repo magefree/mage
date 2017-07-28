@@ -1,5 +1,6 @@
 package mage.abilities.decorator;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -10,6 +11,7 @@ import mage.abilities.condition.FixedCondition;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
@@ -135,6 +137,14 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
     @Override
     public ConditionalContinuousEffect copy() {
         return new ConditionalContinuousEffect(this);
+    }
+
+    @Override
+    public EnumSet<DependencyType> getDependencyTypes() {
+        if (effect != null) {
+            return effect.getDependencyTypes();
+        }
+        return super.getDependencyTypes();
     }
 
     @Override

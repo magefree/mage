@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -74,11 +75,13 @@ public interface ContinuousEffect extends Effect {
 
     Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer);
 
-    Set<DependencyType> getDependencyTypes();
+    EnumSet<DependencyType> getDependencyTypes();
 
     void addDependencyType(DependencyType dependencyType);
 
     void setDependedToType(DependencyType dependencyType);
+
+    void addDependedToType(DependencyType dependencyType);
 
     @Override
     void newId();

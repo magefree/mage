@@ -49,8 +49,7 @@ import mage.game.permanent.Permanent;
 public class MarchOfTheMachines extends CardImpl {
 
     public MarchOfTheMachines(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MarchOfTheMachinesEffect()));
@@ -69,13 +68,15 @@ public class MarchOfTheMachines extends CardImpl {
 class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent();
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
+
     public MarchOfTheMachinesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
         staticText = "Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost";
-        dependendToType = DependencyType.ArtifactAddingRemoving;
+        dependendToTypes.add(DependencyType.ArtifactAddingRemoving);
     }
 
     public MarchOfTheMachinesEffect(final MarchOfTheMachinesEffect effect) {
@@ -93,8 +94,8 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
                     affectedObjectList.clear();
-                    for(Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)){
-                        if(permanent != null){
+                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                        if (permanent != null) {
                             affectedObjectList.add(new MageObjectReference(permanent, game));
                             permanent.addCardType(CardType.CREATURE);
                         }
@@ -106,7 +107,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
                 if (sublayer == SubLayer.SetPT_7b) {
                     for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
                         Permanent permanent = it.next().getPermanent(game);
-                        if (permanent != null){
+                        if (permanent != null) {
                             int manaCost = permanent.getConvertedManaCost();
                             permanent.getPower().setValue(manaCost);
                             permanent.getToughness().setValue(manaCost);
@@ -121,7 +122,6 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         return false;
     }
-
 
     @Override
     public boolean hasLayer(Layer layer) {
