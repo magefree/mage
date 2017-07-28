@@ -27,10 +27,12 @@
  */
 package mage.cards.w;
 
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,75 +42,60 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
+import mage.constants.TargetController;
+import mage.abilities.dynamicvalue.common.StaticValue;
 
 /**
  *
- * @author emerald000
+ * @author L_J
  */
-public class WordsOfWar extends CardImpl {
+public class WordsOfWaste extends CardImpl {
 
-    public WordsOfWar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+    public WordsOfWaste(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
 
-        // {1}: The next time you would draw a card this turn, Words of War deals 2 damage to target creature or player instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWarEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+        // {1}: The next time you would draw a card this turn, each opponent discards a card instead.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWasteEffect(), new ManaCostsImpl("{1}")));
     }
 
-    public WordsOfWar(final WordsOfWar card) {
+    public WordsOfWaste(final WordsOfWaste card) {
         super(card);
     }
 
     @Override
-    public WordsOfWar copy() {
-        return new WordsOfWar(this);
+    public WordsOfWaste copy() {
+        return new WordsOfWaste(this);
     }
 }
 
-class WordsOfWarEffect extends ReplacementEffectImpl {
-    
-    WordsOfWarEffect() {
-        super(Duration.EndOfTurn, Outcome.Damage);
-        staticText = "The next time you would draw a card this turn, {this} deals 2 damage to target creature or player instead.";
+class WordsOfWasteEffect extends ReplacementEffectImpl {
+
+    public WordsOfWasteEffect() {
+        super(Duration.EndOfTurn, Outcome.Discard);
+        staticText = "The next time you would draw a card this turn, each opponent discards a card instead.";
     }
-    
-    WordsOfWarEffect(final WordsOfWarEffect effect) {
+
+    public WordsOfWasteEffect(final WordsOfWasteEffect effect) {
         super(effect);
     }
-    
+
     @Override
-    public WordsOfWarEffect copy() {
-        return new WordsOfWarEffect(this);
+    public WordsOfWasteEffect copy() {
+        return new WordsOfWasteEffect(this);
     }
+
     
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-    
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) { 
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Player player = game.getPlayer(targetPointer.getFirst(game, source));
-            if (player != null) {
-                player.damage(2, source.getSourceId(), game, false, true);
-				this.used = true;
-                discard();
-                return true;
-            }
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-            if (permanent != null) {
-                permanent.damage(2, source.getSourceId(), game, false, true);
-				this.used = true;
-                discard();
-                return true;
-            }
+			new DiscardEachPlayerEffect(new StaticValue(1), false, TargetController.OPPONENT).apply(game, source);
+			this.used = true;
+			discard();
+			return true;
         }
         return false;
     }
@@ -116,8 +103,8 @@ class WordsOfWarEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
-    }
-    
+    }   
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used) {
