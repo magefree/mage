@@ -54,7 +54,7 @@ public class StormWorld extends CardImpl {
         addSuperType(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, Storm World deals X damage to that player, where X is 4 minus the number of cards in his or her hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new StormWorldEffect(), TargetController.ANY, false, true));
 
     }
 
