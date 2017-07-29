@@ -81,7 +81,7 @@ class WildfireEternalCastEffect extends OneShotEffect {
 
     public WildfireEternalCastEffect() {
         super(Outcome.Benefit);
-        this.staticText = " you may cast an instant or sorcery card from your hand without paying its mana cost.";
+        this.staticText = "you may cast an instant or sorcery card from your hand without paying its mana cost";
     }
 
     public WildfireEternalCastEffect(final WildfireEternalCastEffect effect) {

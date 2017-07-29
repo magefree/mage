@@ -27,6 +27,11 @@
  */
 package mage.server.game;
 
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.*;
+import java.util.zip.GZIPOutputStream;
 import mage.MageException;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -60,12 +65,6 @@ import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import org.apache.log4j.Logger;
-
-import java.io.*;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.*;
-import java.util.zip.GZIPOutputStream;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -271,8 +270,8 @@ public class GameController implements GameCallback {
         };
 
         PriorityTimer timer = new PriorityTimer(count, delayMs, executeOnNoTimeLeft);
-        timers.put(playerId, timer);
         timer.init(game.getId());
+        timers.put(playerId, timer);
         return timer;
     }
 
@@ -983,6 +982,7 @@ public class GameController implements GameCallback {
 
     @FunctionalInterface
     interface Command {
+
         void execute(UUID player);
     }
 
