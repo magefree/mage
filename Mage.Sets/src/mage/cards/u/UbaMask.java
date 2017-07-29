@@ -27,10 +27,6 @@
  */
 package mage.cards.u;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -40,16 +36,13 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  *
@@ -162,7 +155,7 @@ class UbaMaskPlayEffect extends AsThoughEffectImpl {
 
 class UbaMaskExiledCardsWatcher extends Watcher {
 
-    private final HashMap<UUID, List<MageObjectReference>> exiledCards = new HashMap<>();
+    private final Map<UUID, List<MageObjectReference>> exiledCards = new HashMap<>();
 
     public UbaMaskExiledCardsWatcher() {
         super(UbaMaskExiledCardsWatcher.class.getSimpleName(), WatcherScope.GAME);

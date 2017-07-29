@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -43,6 +41,10 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +73,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
 
     private int turn;
     private boolean applies;
-    private static final HashSet<String> choice = new HashSet<>();
+    private static final Set<String> choice = new HashSet<>();
 
     static {
         choice.add(CardType.ARTIFACT.toString());

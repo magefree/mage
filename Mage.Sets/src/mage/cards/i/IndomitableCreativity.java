@@ -27,19 +27,11 @@
  */
 package mage.cards.i;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -51,6 +43,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+
+import java.util.*;
 
 /**
  *
@@ -112,7 +106,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            ArrayList<Permanent> destroyedPermanents = new ArrayList<>();
+            List<Permanent> destroyedPermanents = new ArrayList<>();
             for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Permanent target = game.getPermanent(targetId);
                 if (target != null) {
@@ -121,7 +115,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
                     }
                 }
             }
-            HashMap<Player, Cards> cardsToReveal = new HashMap<>();
+            Map<Player, Cards> cardsToReveal = new HashMap<>();
 
             for (Permanent permanent : destroyedPermanents) {
                 Player controllerOfDestroyedCreature = game.getPlayer(permanent.getControllerId());

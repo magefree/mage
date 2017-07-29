@@ -27,8 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -39,6 +37,10 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -83,15 +85,15 @@ class DeadlyTempestEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            HashMap<UUID, Integer> destroyedCreatures = new HashMap<>();
+            Map<UUID, Integer> destroyedCreatures = new HashMap<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
-                    int count = destroyedCreatures.containsKey(permanent.getControllerId()) ? destroyedCreatures.get(permanent.getControllerId()) : 0;
+                    int count = destroyedCreatures.getOrDefault(permanent.getControllerId(), 0);
                     destroyedCreatures.put(permanent.getControllerId(), count + 1);
                 }
             }
             for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
-                int count = destroyedCreatures.containsKey(playerId) ? destroyedCreatures.get(playerId) : 0;
+                int count = destroyedCreatures.getOrDefault(playerId, 0);
                 if (count > 0) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {

@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -46,6 +44,10 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -109,7 +111,7 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
                 }   
             }
             if(!allCreatureTypes){
-                ArrayList<Predicate<MageObject>> predicateList = new ArrayList<>();
+                List<Predicate<MageObject>> predicateList = new ArrayList<>();
                 for(SubType subtype : permanent.getSubtype(game)){
                     predicateList.add(new SubtypePredicate(subtype));
                 }

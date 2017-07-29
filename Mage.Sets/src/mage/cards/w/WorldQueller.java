@@ -27,11 +27,6 @@
  */
 package mage.cards.w;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -51,6 +46,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.*;
 
 /**
  *
@@ -82,7 +79,7 @@ public class WorldQueller extends CardImpl {
 
 class WorldQuellerEffect extends OneShotEffect {
 
-    private static final HashSet<String> choice = new LinkedHashSet<>();
+    private static final Set<String> choice = new LinkedHashSet<>();
 
     static {
         choice.add(CardType.ARTIFACT.toString());

@@ -27,8 +27,6 @@
  */
 package mage.cards.j;
 
-import java.util.HashSet;
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -44,15 +42,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -83,7 +80,7 @@ public class JodahsAvenger extends CardImpl {
 
 class JodahsAvengerEffect extends ContinuousEffectImpl {
 
-    private static final HashSet<String> choices = new HashSet<>();
+    private static final Set<String> choices = new HashSet<>();
     private Ability gainedAbility;
 
     static {

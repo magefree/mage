@@ -27,9 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
@@ -50,6 +47,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -101,7 +103,7 @@ class RallyTheAncestorsEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
             Set<Card> cards = player.getGraveyard().getCards(filter, game);
             player.moveCards(cards, Zone.BATTLEFIELD, source, game);
-            ArrayList<Permanent> toExile = new ArrayList<>(cards.size());
+            List<Permanent> toExile = new ArrayList<>(cards.size());
             for (Card card : cards) {
                 if (card != null) {
                     Permanent permanent = game.getPermanent(card.getId());

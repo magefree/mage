@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -41,17 +39,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -101,21 +97,21 @@ class ShapeshifterEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Player Controller = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
             mageObject = game.getPermanent(source.getSourceId());
         }
-        if (Controller != null) {           
+        if (controller != null) {
             Choice numberChoice = new ChoiceImpl();
             numberChoice.setMessage("Choose a number beween 0 and 7");
-            HashSet<String> numbers = new HashSet<>();
+            Set<String> numbers = new HashSet<>();
             for (int i = 0; i <= 7; i++) {
                 numbers.add(Integer.toString(i));
             }
             numberChoice.setChoices(numbers);
-            while (!Controller.choose(Outcome.Neutral, numberChoice, game)) {
-                if (!Controller.canRespond()) {
+            while (!controller.choose(Outcome.Neutral, numberChoice, game)) {
+                if (!controller.canRespond()) {
                     return false;
                 }
             }

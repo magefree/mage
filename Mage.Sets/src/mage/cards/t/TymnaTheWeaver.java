@@ -27,10 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
@@ -48,6 +44,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  *
@@ -122,7 +120,7 @@ class TymnaTheWeaverEffect extends OneShotEffect {
 class TymnaTheWeaverWatcher extends Watcher {
 
     // private final Set<UUID> players = new HashSet<>();
-    private final HashMap<UUID, Set<UUID>> players = new HashMap<>();
+    private final Map<UUID, Set<UUID>> players = new HashMap<>();
 
     public TymnaTheWeaverWatcher() {
         super(TymnaTheWeaverWatcher.class.getSimpleName(), WatcherScope.GAME);
@@ -131,7 +129,7 @@ class TymnaTheWeaverWatcher extends Watcher {
     public TymnaTheWeaverWatcher(final TymnaTheWeaverWatcher watcher) {
         super(watcher);
         for (UUID playerId : watcher.players.keySet()) {
-            HashSet<UUID> opponents = new HashSet<>();
+            Set<UUID> opponents = new HashSet<>();
             opponents.addAll(watcher.players.get(playerId));
             players.put(playerId, opponents);
         }

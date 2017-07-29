@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -44,6 +42,10 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -105,7 +107,7 @@ class CustodiSquireVoteEffect extends OneShotEffect {
             Cards possibleCards = new CardsImpl();
             possibleCards.addAll(controller.getGraveyard().getCards(filter, game));
             if (!possibleCards.isEmpty()) {
-                HashMap<UUID, Integer> cardCounter = new HashMap<>();
+                Map<UUID, Integer> cardCounter = new HashMap<>();
                 TargetCard target = new TargetCard(1, 1, Zone.GRAVEYARD, filter);
                 int maxCount = 1;
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {

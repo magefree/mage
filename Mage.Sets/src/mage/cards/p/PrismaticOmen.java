@@ -27,30 +27,21 @@
  */
 package mage.cards.p;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -77,11 +68,11 @@ public class PrismaticOmen extends CardImpl {
 
 class BecomesBasicLandTypeAllEffect extends ContinuousEffectImpl {
 
-    protected ArrayList<String> landTypes = new ArrayList<>();
+    protected List<SubType> landTypes = new ArrayList<>();
 
     public BecomesBasicLandTypeAllEffect(String... landNames) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        landTypes.addAll(Arrays.asList(landNames));
+        landTypes.addAll(SubType.getBasicLands(false));
         this.staticText = "Lands you control are every basic land type in addition to their other types";
     }
 
@@ -114,24 +105,24 @@ class BecomesBasicLandTypeAllEffect extends ContinuousEffectImpl {
                                 }
                             }
                         }
-                        if (mana.getGreen() == 0 && landTypes.contains("Forest")) {
+                        if (mana.getGreen() == 0 && landTypes.contains(SubType.FOREST)) {
                             land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                         }
-                        if (mana.getRed() == 0 && landTypes.contains("Mountain")) {
+                        if (mana.getRed() == 0 && landTypes.contains(SubType.MOUNTAIN)) {
                             land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                         }
-                        if (mana.getBlue() == 0 && landTypes.contains("Island")) {
+                        if (mana.getBlue() == 0 && landTypes.contains(SubType.ISLAND)) {
                             land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                         }
-                        if (mana.getWhite() == 0 && landTypes.contains("Plains")) {
+                        if (mana.getWhite() == 0 && landTypes.contains(SubType.PLAINS)) {
                             land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                         }
-                        if (mana.getBlack() == 0 && landTypes.contains("Swamp")) {
+                        if (mana.getBlack() == 0 && landTypes.contains(SubType.SWAMP)) {
                             land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                         }
                         break;
                     case TypeChangingEffects_4:
-                        for (String subtype : landTypes) {
+                        for (SubType subtype : landTypes) {
                             if (!land.getSubtype(game).contains(subtype)) {
                                 land.getSubtype(game).add(subtype);
                             }

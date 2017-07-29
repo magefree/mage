@@ -27,8 +27,6 @@
  */
 package mage.cards.u;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeAllTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -45,6 +43,10 @@ import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +97,7 @@ class UrzasMiterDoIfCostPaid extends DoIfCostPaid {
 
 class UrzasMiterWatcher extends Watcher {
 
-    ArrayList<UUID> cards;
+    List<UUID> cards;
 
     public UrzasMiterWatcher() {
         super(UrzasMiterWatcher.class.getSimpleName(), WatcherScope.PLAYER);

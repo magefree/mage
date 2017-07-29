@@ -27,8 +27,6 @@
  */
 package mage.cards.w;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,6 +41,10 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -86,7 +88,7 @@ class WitchbaneOrbEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ArrayList<Permanent> toDestroy = new ArrayList<>();
+            List<Permanent> toDestroy = new ArrayList<>();
             for (UUID attachmentId : controller.getAttachments()) {
                 Permanent attachment = game.getPermanent(attachmentId);
                 if (attachment != null && attachment.getSubtype(game).contains("Curse")) {

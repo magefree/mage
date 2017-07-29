@@ -27,9 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -50,6 +47,11 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -100,8 +102,8 @@ class OrzhovAdvokistEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ArrayList<UUID> players = new ArrayList<>();
-            ArrayList<UUID> creatures = new ArrayList<>();
+            List<UUID> players = new ArrayList<>();
+            List<UUID> creatures = new ArrayList<>();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

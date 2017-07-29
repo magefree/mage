@@ -27,9 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrLeavesSourceTriggeredAbility;
@@ -46,6 +43,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -96,9 +97,9 @@ class SunderingTitanDestroyLandEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Set<UUID> lands = new HashSet<>();
         if (controller != null && sourcePermanent != null) {
-            for (String landName : SubType.getBasicLands(false)) {
+            for (SubType landName : SubType.getBasicLands(false)) {
                 FilterLandPermanent filter = new FilterLandPermanent(landName + " to destroy");
-                filter.add(new SubtypePredicate(SubType.byDescription(landName)));
+                filter.add(new SubtypePredicate(landName));
                 Target target = new TargetLandPermanent(1, 1, filter, true);
                 if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                     controller.chooseTarget(outcome, target, source, game);

@@ -27,8 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -41,6 +39,10 @@ import mage.game.permanent.token.DragonToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth
@@ -86,7 +88,7 @@ class DescentOfTheDragonsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            HashMap<UUID, Integer> playersWithTargets = new HashMap<>();
+            Map<UUID, Integer> playersWithTargets = new HashMap<>();
             for (Target target : source.getTargets()) {
                 for (UUID permanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(permanentId);
