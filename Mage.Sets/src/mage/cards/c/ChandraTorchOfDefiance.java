@@ -93,7 +93,7 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
 
     public ChandraTorchOfDefianceEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Exile the top card of your library. You may cast that card. If you don't, Chandra, Torch of Defiance deals 2 damage to each opponent";
+        this.staticText = "Exile the top card of your library. You may cast that card. If you don't, {this} deals 2 damage to each opponent";
     }
 
     public ChandraTorchOfDefianceEffect(final ChandraTorchOfDefianceEffect effect) {
@@ -111,17 +111,12 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null && controller.getLibrary().hasCards()) {
             Library library = controller.getLibrary();
-            Card card = library.removeFromTop(game);
+            Card card = library.getFromTop(game);
             if (card != null) {
                 boolean exiledCardWasCast = false;
                 controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                 if (!card.getManaCost().isEmpty()) {
                     if (controller.chooseUse(Outcome.Benefit, "Cast the card? (You still pay the costs)", source, game) && !card.isLand()) {
-//                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = controller.getUseableActivatedAbilities(card, Zone.EXILED, game);
-//                    for (ActivatedAbility ability : useableAbilities.values()) {
-//
-//                    }
-//                    controller.activateAbility(useableAbilities, game);
                         exiledCardWasCast = controller.cast(card.getSpellAbility(), game, false);
                     }
                 }

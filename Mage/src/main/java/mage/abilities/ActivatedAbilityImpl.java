@@ -28,6 +28,7 @@
 package mage.abilities;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCosts;
@@ -42,6 +43,7 @@ import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 
 /**
@@ -215,9 +217,13 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         if (this.controllerId != null && this.controllerId.equals(playerId)) {
             return true;
         } else {
-            Card card = (Card) game.getObject(this.sourceId);
-            if (card != null && game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
-                return card.getOwnerId().equals(playerId);
+            MageObject mageObject = game.getObject(this.sourceId);
+            if (mageObject instanceof Emblem) {
+                return ((Emblem) mageObject).getControllerId().equals(playerId);
+            } else {
+                if (game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
+                    return ((Card) mageObject).getOwnerId().equals(playerId);
+                }
             }
         }
         return false;

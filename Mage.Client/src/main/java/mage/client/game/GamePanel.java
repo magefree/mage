@@ -1838,7 +1838,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 .addGroup(gl_pnlShortCuts.createSequentialGroup()
                         .addComponent(txtHoldPriority)
                         .addComponent(txtSpellsCast)
-                        /* .addComponent(btnToggleMacro)*/
+                        /*.addComponent(btnToggleMacro)*/
                         .addComponent(btnSwitchHands)
                         .addComponent(btnCancelSkip)
                         .addComponent(btnConcede)
@@ -1871,7 +1871,7 @@ public final class GamePanel extends javax.swing.JPanel {
                                 .addComponent(btnSkipToEndStepBeforeYourTurn)
                         )
                         .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnToggleMacro)
+                                /*.addComponent(btnToggleMacro)*/
                                 .addComponent(txtHoldPriority)
                                 .addComponent(txtSpellsCast)
                                 .addComponent(btnSwitchHands)

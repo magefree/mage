@@ -55,7 +55,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class BlazingTorch extends CardImpl {
 
     public BlazingTorch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.subtype.add("Equipment");
 
         // Equipped creature can't be blocked by Vampires or Zombies. (!this is a static ability of the equipment)
@@ -95,7 +95,7 @@ class BlazingTorchEvasionEffect extends RestrictionEffect {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(equipment.getAttachedTo());
-            if (permanent.getId().equals(equipped.getId())) {
+            if (equipped != null && permanent.getId().equals(equipped.getId())) {
                 return true;
             }
         }

@@ -109,9 +109,8 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
                 this.discard();
             }
             return true;
-        } else {
-            throw new UnsupportedOperationException("No color set");
         }
+        return false;
     }
 
     @Override
