@@ -20,6 +20,7 @@ public class KalitasBloodchiefOfGhetTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, 5);
+        assertPermanentCount(playerA, "Vampire", 0);
         assertPermanentCount(playerB, 0);
     }
 }
