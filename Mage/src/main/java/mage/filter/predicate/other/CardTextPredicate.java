@@ -28,7 +28,9 @@
 package mage.filter.predicate.other;
 
 import mage.cards.Card;
+import mage.cards.SplitCard;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
@@ -39,9 +41,15 @@ import mage.game.Game;
 public class CardTextPredicate implements Predicate<Card> {
 
     private final String text;
+    private final boolean inNames;
+    private final boolean inTypes;
+    private final boolean inRules;
 
-    public CardTextPredicate(String text) {
+    public CardTextPredicate(String text, boolean inNames, boolean inTypes, boolean inRules) {
         this.text = text;
+        this.inNames = inNames;
+        this.inTypes = inTypes;
+        this.inRules = inRules;
     }
 
     @Override
@@ -50,7 +58,7 @@ public class CardTextPredicate implements Predicate<Card> {
             return true;
         }
         // first check in card name
-        if (input.getName().toLowerCase().contains(text.toLowerCase())) {
+        if (inNames && input.getName().toLowerCase().contains(text.toLowerCase())) {
             return true;
         }
 
@@ -60,17 +68,40 @@ public class CardTextPredicate implements Predicate<Card> {
             boolean found = false;
             if (!token.isEmpty()) {
                 // then try to find in rules
-                for (String rule : input.getRules(game)) {
-                    if (rule.toLowerCase().contains(token)) {
-                        found = true;
-                        break;
+                if (inRules) {
+                    if (input.isSplitCard()) {
+                        for (String rule : ((SplitCard) input).getLeftHalfCard().getRules(game)) {
+                            if (rule.toLowerCase().contains(token)) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        for (String rule : ((SplitCard) input).getRightHalfCard().getRules(game)) {
+                            if (rule.toLowerCase().contains(token)) {
+                                found = true;
+                                break;
+                            }
+                        }
+                    }
+                    for (String rule : input.getRules(game)) {
+                        if (rule.toLowerCase().contains(token)) {
+                            found = true;
+                            break;
+                        }
                     }
                 }
-
-                for (SubType subType : input.getSubtype(game)) {
-                    if (subType.toString().equalsIgnoreCase(token)) {
-                        found = true;
-                        break;
+                if (inTypes) {
+                    for (SubType subType : input.getSubtype(game)) {
+                        if (subType.toString().equalsIgnoreCase(token)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    for (SuperType superType : input.getSuperType()) {
+                        if (superType.toString().equalsIgnoreCase(token)) {
+                            found = true;
+                            break;
+                        }
                     }
                 }
             }
