@@ -7,7 +7,6 @@ import mage.cards.decks.DeckCardLayout;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.client.MageFrame;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
@@ -1410,38 +1409,36 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             }
         }
 
-        String finalInfo = "Found the following quantity of mana costs, mana sources and land types:<br><font size=-1><ul>";
-        for (String qty : qtys.keySet()) {
-            int value = qtys.get(qty);
-            if (value > 0) {
-                finalInfo += "<li>" + qty + " = " + value;
-            }
-        }
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
-        for (String source : sourcePips.keySet()) {
-            int value = sourcePips.get(source);
-            if (value > 0) {
-                finalInfo += "<li>" + "Mana source " + source + " = " + value;
-            }
-        }
+        JPanel panel2 = new JPanel();
+        panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
+        ManaPieChart chart = new ManaPieChart(pips.get("#w}"), pips.get("#u}"), pips.get("#b}"), pips.get("#r}"), pips.get("#g}"), pips.get("#c}"));
+        chart.setMinimumSize(new Dimension(200, 200));
+        panel2.add(new JLabel("Casting Costs found:"));
+        panel2.add(chart);
 
-        for (String pip : pips.keySet()) {
-            int value = pips.get(pip);
-            if (value > 0) {
-                finalInfo += "<li>" + pip.toUpperCase() + " mana pip/s = " + value;
-            }
-        }
+        JPanel panel3 = new JPanel();
+        panel3.setLayout(new BoxLayout(panel3, BoxLayout.Y_AXIS));
+        ManaPieChart chart2 = new ManaPieChart(qtys.get("plains"), qtys.get("island"), qtys.get("swamp"), qtys.get("mountain"), qtys.get("forest"), qtys.get("wastes"));
+        chart2.setMinimumSize(new Dimension(200, 200));
+        panel3.add(new JLabel("Basic Land types found:"));
+        panel3.add(chart2);
 
-        for (String mana : manaCounts.keySet()) {
-            int value = manaCounts.get(mana);
-            if (value > 0) {
-                finalInfo += "<li>" + mana.toUpperCase() + " mana sources = " + value;
-            }
-        }
-        finalInfo = finalInfo.replaceAll("#", "\\{");
-        finalInfo += "</ul>";
+        JPanel panel4 = new JPanel();
+        panel4.setLayout(new BoxLayout(panel4, BoxLayout.Y_AXIS));
+        ManaPieChart chart3 = new ManaPieChart(manaCounts.get("{W}"), manaCounts.get("{U}"), manaCounts.get("{B}"), manaCounts.get("{R}"), manaCounts.get("{G}"), manaCounts.get("{C}"));
+        chart3.setMinimumSize(new Dimension(200, 200));
+        panel4.add(new JLabel("Mana sources found:"));
+        panel4.add(chart3);
 
-        MageFrame.getInstance().showMessage(finalInfo);
+        panel.add(panel2);
+        panel.add(panel3);
+        panel.add(panel4);
+
+        JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
+        JOptionPane.showMessageDialog(frame, panel, "This is the distribution of colors found", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void blingDeck() {
