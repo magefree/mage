@@ -27,9 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -57,6 +54,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -123,7 +124,7 @@ class TamiyoFieldResearcherEffect1 extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ArrayList<MageObjectReference> creatures = new ArrayList<>();
+            List<MageObjectReference> creatures = new ArrayList<>();
             for (UUID uuid : getTargetPointer().getTargets(game, source)) {
                 creatures.add(new MageObjectReference(uuid, game));
             }

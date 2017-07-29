@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -52,6 +50,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -122,7 +124,7 @@ class CallToTheKindredEffect extends OneShotEffect {
 
         if (!creature.getAbilities().contains(ChangelingAbility.getInstance())) {
             StringBuilder sb = new StringBuilder("creature card with at least one subtype from: ");
-            ArrayList<Predicate<MageObject>> subtypes = new ArrayList<>();
+            List<Predicate<MageObject>> subtypes = new ArrayList<>();
             for (SubType subtype : creature.getSubtype(game)) {
                 subtypes.add(new SubtypePredicate(subtype));
                 sb.append(subtype).append(", ");

@@ -27,9 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -43,6 +40,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.*;
 
 /**
  *
@@ -91,7 +90,7 @@ class RiteOfRuinEffect extends OneShotEffect {
             return false;
         }
 
-        HashSet<String> choices = new HashSet<>();
+        Set<String> choices = new HashSet<>();
         choices.add("Artifacts");
         choices.add("Creatures");
         choices.add("Lands");
@@ -106,7 +105,7 @@ class RiteOfRuinEffect extends OneShotEffect {
         }
         order.add(getCardType(choices.iterator().next()));
 
-        LinkedList<UUID> sacrifices = new LinkedList<>();
+        List<UUID> sacrifices = new LinkedList<>();
         int count = 1;
         for (CardType cardType : order) {
             FilterControlledPermanent filter = new FilterControlledPermanent(cardType + " permanent you control");

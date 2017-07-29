@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -44,6 +42,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -101,7 +103,7 @@ class CapriciousEfreetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ArrayList<Permanent> targetPermanents = new ArrayList<>();
+        List<Permanent> targetPermanents = new ArrayList<>();
         Permanent permanent = game.getPermanent(source.getTargets().get(0).getFirstTarget());
         if (permanent != null) {
             targetPermanents.add(permanent);

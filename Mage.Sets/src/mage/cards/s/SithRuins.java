@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -45,6 +43,10 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -84,7 +86,7 @@ public class SithRuins extends CardImpl {
             addCost(new SacrificeSourceCost());
             FilterCard filter = new FilterCard("basic Island, Swamp or Mountain");
             filter.add(new CardTypePredicate(CardType.LAND));
-            ArrayList<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
+            List<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
             subtypePredicates.add(new SubtypePredicate(SubType.SWAMP));
             subtypePredicates.add(new SubtypePredicate(SubType.MOUNTAIN));
             subtypePredicates.add(new SubtypePredicate(SubType.ISLAND));

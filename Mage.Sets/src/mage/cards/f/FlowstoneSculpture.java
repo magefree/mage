@@ -27,8 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.HashSet;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -51,6 +49,10 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +84,7 @@ public class FlowstoneSculpture extends CardImpl {
 
 class FlowstoneSculptureEffect extends OneShotEffect {
 
-    private static final HashSet<String> choices = new HashSet<>();
+    private static final Set<String> choices = new HashSet<>();
 
     static {
         choices.add("+1/+1 counter");

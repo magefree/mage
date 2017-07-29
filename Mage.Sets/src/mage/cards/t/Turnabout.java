@@ -27,8 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -45,6 +43,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -73,7 +75,7 @@ public class Turnabout extends CardImpl {
 
 class TurnaboutEffect extends OneShotEffect {
 
-    private static final HashSet<String> choice = new HashSet<>();
+    private static final Set<String> choice = new HashSet<>();
 
     static {
         choice.add(CardType.ARTIFACT.toString());
@@ -81,7 +83,7 @@ class TurnaboutEffect extends OneShotEffect {
         choice.add(CardType.LAND.toString());
     }
 
-    private static final HashSet<String> choice2 = new HashSet<>();
+    private static final Set<String> choice2 = new HashSet<>();
 
     static {
         choice2.add("Untap");

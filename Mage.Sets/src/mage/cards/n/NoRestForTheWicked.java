@@ -27,17 +27,11 @@
  */
 package mage.cards.n;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
@@ -47,6 +41,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -115,7 +113,7 @@ class NoRestForTheWickedEffect extends OneShotEffect {
 
 class NoRestForTheWickedWatcher extends Watcher {
 
-    ArrayList<UUID> cards;
+    List<UUID> cards;
 
     public NoRestForTheWickedWatcher() {
         super(NoRestForTheWickedWatcher.class.getSimpleName(), WatcherScope.GAME);

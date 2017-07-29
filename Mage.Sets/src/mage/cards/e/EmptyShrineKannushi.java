@@ -27,8 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -44,6 +42,10 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -113,7 +115,7 @@ class EmptyShrineKannushiProtectionAbility extends ProtectionAbility {
             }
         }
 
-        ArrayList<Predicate<MageObject>> colorPredicates = new ArrayList<>();
+        List<Predicate<MageObject>> colorPredicates = new ArrayList<>();
         if (color.isBlack()) {
             colorPredicates.add(new ColorPredicate(ObjectColor.BLACK));
         }

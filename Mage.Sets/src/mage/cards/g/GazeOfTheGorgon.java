@@ -27,8 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -44,6 +42,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.BlockedAttackerWatcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -96,7 +98,7 @@ class GazeOfTheGorgonEffect extends OneShotEffect {
         if (controller != null && targetCreature != null) {
             BlockedAttackerWatcher watcher = (BlockedAttackerWatcher) game.getState().getWatchers().get(BlockedAttackerWatcher.class.getSimpleName());
             if (watcher != null) {
-                ArrayList<Permanent> toDestroy = new ArrayList<>();
+                List<Permanent> toDestroy = new ArrayList<>();
                 for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                     if (!creature.getId().equals(targetCreature.getId())) {
                         if (watcher.creatureHasBlockedAttacker(creature, targetCreature, game) || watcher.creatureHasBlockedAttacker(targetCreature, creature, game)) {

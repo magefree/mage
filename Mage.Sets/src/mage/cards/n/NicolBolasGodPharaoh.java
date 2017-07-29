@@ -27,8 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -38,17 +36,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileAllEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
@@ -61,6 +50,10 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -126,7 +119,7 @@ class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // Store for each player the cards to exile, that's important because all exile shall happen at the same time
-        HashMap<UUID, Cards> cardsToExile = new HashMap<>();
+        Map<UUID, Cards> cardsToExile = new HashMap<>();
         // Each player chooses 2 cards to discard
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);

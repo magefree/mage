@@ -27,8 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -40,6 +38,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -89,7 +91,7 @@ class DestroyAllAttachedEquipmentEffect extends OneShotEffect {
         if (controller != null) {
             Permanent target = game.getPermanent(source.getFirstTarget());
             if (target != null) {
-                ArrayList<UUID> attachments = new ArrayList<>(target.getAttachments());
+                List<UUID> attachments = new ArrayList<>(target.getAttachments());
                 for (UUID attachmentId : attachments) {
                     Permanent attachment = game.getPermanent(attachmentId);
                     if (attachment != null && attachment.getSubtype(game).contains("Equipment")) {

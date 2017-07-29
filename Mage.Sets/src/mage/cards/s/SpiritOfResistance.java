@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,6 +42,10 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author Quercitron
@@ -79,7 +81,7 @@ enum SpiritOfResistanceCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            HashSet<ObjectColor> colors = new HashSet<>();
+            Set<ObjectColor> colors = new HashSet<>();
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
                 if (permanent.getColor(game).isBlack()) {
                     colors.add(ObjectColor.BLACK);

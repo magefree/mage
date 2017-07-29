@@ -27,8 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -37,14 +35,13 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.EnumSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +92,7 @@ class TarmogoyfEffect extends ContinuousEffectImpl {
         if (controller != null) {
             MageObject target = game.getObject(source.getSourceId());
             if (target != null) {
-                HashSet<CardType> foundCardTypes = new HashSet<>();
+                Set<CardType> foundCardTypes = EnumSet.noneOf(CardType.class);
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {

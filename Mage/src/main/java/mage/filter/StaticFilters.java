@@ -7,9 +7,12 @@ package mage.filter;
 
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -63,6 +66,26 @@ public final class StaticFilters {
     public static final FilterPermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
 
     public static final FilterPermanent FILTER_ATTACKING_CREATURES = new FilterCreaturePermanent("attacking creatures");
+
+
+
+    public static final FilterPermanent FILTER_AURA = new FilterPermanent();
+    public static final FilterPermanent FILTER_EQUIPMENT = new FilterPermanent();
+    public static final FilterPermanent FILTER_FORTIFICATION = new FilterPermanent();
+    public static final FilterPermanent FILTER_LEGENDARY = new FilterPermanent();
+
+    static {
+        FILTER_AURA.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        FILTER_AURA.add(new SubtypePredicate(SubType.AURA));
+
+        FILTER_EQUIPMENT.add(new CardTypePredicate(CardType.ARTIFACT));
+        FILTER_EQUIPMENT.add(new SubtypePredicate(SubType.EQUIPMENT));
+
+        FILTER_FORTIFICATION.add(new CardTypePredicate(CardType.ARTIFACT));
+        FILTER_FORTIFICATION.add(new SubtypePredicate(SubType.FORTIFICATION));
+
+        FILTER_LEGENDARY.add(new SupertypePredicate(SuperType.LEGENDARY));
+    }
 
     static {
         FILTER_CONTROLLED_PERMANENT_NON_LAND.add(
