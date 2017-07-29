@@ -63,7 +63,7 @@ public class FailureComply extends SplitCard {
         // to
         // Comply
         // Choose a card name.  Until your next turn, your opponents can't cast spells with the chosen name
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         Effect effect = new NameACardEffect(NameACardEffect.TypeOfName.ALL);
         effect.setText("Choose a card name");
         getRightHalfCard().getSpellAbility().addEffect(effect);

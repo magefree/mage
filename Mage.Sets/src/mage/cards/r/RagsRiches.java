@@ -32,7 +32,7 @@ public class RagsRiches extends SplitCard {
         // to
         // Riches
         // Each opponent chooses a creature he or she controls. You gain control of each of those creatures.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new RichesEffect());
     }
 

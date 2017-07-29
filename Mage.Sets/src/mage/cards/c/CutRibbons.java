@@ -23,12 +23,12 @@ public class CutRibbons extends SplitCard {
         // Cut
         // Cut deals 4 damage to target creature.
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-        getLeftHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(4));
+        getLeftHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(4).setText("Cut deals 4 damage to target creature"));
 
         // to
         // Ribbons
         // Each opponent loses X life.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new LoseLifeOpponentsEffect(new ManacostVariableValue()));
 
     }
