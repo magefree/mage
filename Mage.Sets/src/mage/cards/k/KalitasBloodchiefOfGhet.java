@@ -96,7 +96,12 @@ class KalitasDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent != null && permanent.destroy(source.getSourceId(), game, false)) { // if not destroyed or moved to other zone (replacement effect) it returns false
+        if (permanent != null && permanent.destroy(source.getSourceId(), game, false)) { // if not destroyed it returns false
+            if (permanent.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(permanent.getId())
+                    && !game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) {
+                // A replacement effect has moved the card to another zone as grvayard
+                return true;
+            }
             new CreateTokenEffect(new KalitasVampireToken(permanent.getPower().getValue(), permanent.getToughness().getValue())).apply(game, source);
         }
         return true;
