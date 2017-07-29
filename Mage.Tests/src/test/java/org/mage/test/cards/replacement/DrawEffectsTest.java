@@ -110,4 +110,24 @@ public class DrawEffectsTest extends CardTestPlayerBase {
         assertHandCount(playerA, 14);
         assertHandCount(playerB, 0);
     }
+
+    @Test
+    public void WordsOfWilding() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        // {1}: The next time you would draw a card this turn, create a 2/2 green Bear creature token instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Words of Wilding", 1);
+
+        // Draw two cards.
+        addCard(Zone.HAND, playerA, "Counsel of the Soratami", 1); // Sorcery {2}{U}
+
+        activateAbility(1, PhaseStep.UPKEEP, playerA, "{1}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Counsel of the Soratami");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Counsel of the Soratami", 1);
+        assertPermanentCount(playerA, "Bear", 1);
+        assertHandCount(playerA, 1);
+    }
 }

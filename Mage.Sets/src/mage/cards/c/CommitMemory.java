@@ -72,7 +72,7 @@ public class CommitMemory extends SplitCard {
         // Memory
         // Aftermath
         // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new MemoryEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");

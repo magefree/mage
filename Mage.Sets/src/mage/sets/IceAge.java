@@ -73,6 +73,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Blinking Spirit", 232, Rarity.RARE, mage.cards.b.BlinkingSpirit.class));
         cards.add(new SetCardInfo("Blue Scarab", 233, Rarity.UNCOMMON, mage.cards.b.BlueScarab.class));
         cards.add(new SetCardInfo("Brainstorm", 61, Rarity.COMMON, mage.cards.b.Brainstorm.class));
+        cards.add(new SetCardInfo("Brand of Ill Omen", 177, Rarity.RARE, mage.cards.b.BrandOfIllOmen.class));
         cards.add(new SetCardInfo("Brushland", 327, Rarity.RARE, mage.cards.b.Brushland.class));
         cards.add(new SetCardInfo("Burnt Offering", 4, Rarity.COMMON, mage.cards.b.BurntOffering.class));
         cards.add(new SetCardInfo("Caribou Range", 235, Rarity.RARE, mage.cards.c.CaribouRange.class));
@@ -110,6 +111,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Covenant", 367, Rarity.UNCOMMON, mage.cards.f.FireCovenant.class));
         cards.add(new SetCardInfo("Flame Spirit", 184, Rarity.UNCOMMON, mage.cards.f.FlameSpirit.class));
         cards.add(new SetCardInfo("Flare", 185, Rarity.COMMON, mage.cards.f.Flare.class));
+        cards.add(new SetCardInfo("Flooded Woodlands", 368, Rarity.RARE, mage.cards.f.FloodedWoodlands.class));
         cards.add(new SetCardInfo("Flow of Maggots", 13, Rarity.RARE, mage.cards.f.FlowOfMaggots.class));
         cards.add(new SetCardInfo("Folk of the Pines", 123, Rarity.COMMON, mage.cards.f.FolkOfThePines.class));
         cards.add(new SetCardInfo("Forbidden Lore", 124, Rarity.RARE, mage.cards.f.ForbiddenLore.class));
@@ -229,6 +231,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Rally", 272, Rarity.COMMON, mage.cards.r.Rally.class));
         cards.add(new SetCardInfo("Ray of Command", 92, Rarity.COMMON, mage.cards.r.RayOfCommand.class));
         cards.add(new SetCardInfo("Ray of Erasure", 93, Rarity.COMMON, mage.cards.r.RayOfErasure.class));
+        cards.add(new SetCardInfo("Reclamation", 378, Rarity.RARE, mage.cards.r.Reclamation.class));
         cards.add(new SetCardInfo("Red Scarab", 273, Rarity.UNCOMMON, mage.cards.r.RedScarab.class));
         cards.add(new SetCardInfo("Regeneration", 147, Rarity.COMMON, mage.cards.r.Regeneration.class));
         cards.add(new SetCardInfo("Rime Dryad", 148, Rarity.COMMON, mage.cards.r.RimeDryad.class));

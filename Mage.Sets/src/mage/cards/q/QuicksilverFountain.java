@@ -33,6 +33,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
@@ -104,7 +105,9 @@ class QuicksilverFountainEffect extends OneShotEffect {
             if (player.choose(Outcome.Neutral, targetNonIslandLand, source.getId(), game)) {
                 Permanent landChosen = game.getPermanent(targetNonIslandLand.getFirstTarget());
                 landChosen.addCounters(CounterType.FLOOD.createInstance(), source, game);
-                ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BecomesBasicLandTargetEffect(Duration.OneUse, "Island"), new LandHasFloodCounterCondition(this), staticText);
+                ContinuousEffect becomesBasicLandTargetEffect = new BecomesBasicLandTargetEffect(Duration.OneUse, "Island");
+                becomesBasicLandTargetEffect.addDependencyType(DependencyType.BecomeIsland);
+                ConditionalContinuousEffect effect = new ConditionalContinuousEffect(becomesBasicLandTargetEffect, new LandHasFloodCounterCondition(this), staticText);
                 this.setTargetPointer(new FixedTarget(landChosen, game));
                 effect.setTargetPointer(new FixedTarget(landChosen, game));
                 game.addEffect(effect, source);
@@ -160,7 +163,7 @@ class AllLandsAreSubtypeCondition implements Condition {
         int landCount = game.getBattlefield().getAllActivePermanents(CardType.LAND).size();
         return game.getBattlefield().getAllActivePermanents(filterLand, game).size() == landCount;
     }
-    
+
     @Override
     public String toString() {
         return "if all lands on the battlefield are " + subtype + "s";
@@ -178,7 +181,7 @@ class LandHasFloodCounterCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(effect.getTargetPointer().getFirst(game, source));
-       return permanent != null
-            && permanent.getCounters(game).getCount(CounterType.FLOOD) > 0;
+        return permanent != null
+                && permanent.getCounters(game).getCount(CounterType.FLOOD) > 0;
     }
 }

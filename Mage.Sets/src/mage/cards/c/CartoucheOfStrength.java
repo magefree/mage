@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -48,6 +47,8 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author stravant
@@ -57,8 +58,7 @@ public class CartoucheOfStrength extends CardImpl {
     public CartoucheOfStrength(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         
-        this.subtype.add("Aura");
-        this.subtype.add("Cartouche");
+        this.subtype.add(SubType.AURA, SubType.CARTOUCHE);
 
         // Enchant creature you control
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();

@@ -45,8 +45,8 @@ public class ZurTheEnchanterTest extends CardTestPlayerBase {
      * shroud (Lightning Greaves, Diplomatic Immunity, Greater Auramancy + an
      * aura on him, etc.) and when his ability triggers searching for an aura
      * (in this case, Empyrial Armor) and trying to attach it to Zur himself.
-     * The game won't allow you to attach it him, even though it should, since
-     * the enchantment is put onto the battlefield and not cast, hence, no
+     * The game won't allow you to attach it to him, even though it should,
+     * since the enchantment is put onto the battlefield and not cast, hence, no
      * targeting is done. The rulings page for Zur itself say it so on Gatherer:
      *
      * Shroud shouldn't stop Empyrial Armor from attaching to Zur, only
@@ -55,7 +55,8 @@ public class ZurTheEnchanterTest extends CardTestPlayerBase {
     @Test
     public void testAuraToBattlefieldDoesNotTarget() {
         // Flying
-        // Whenever Zur the Enchanter attacks, you may search your library for an enchantment card with converted mana cost 3 or less and put it onto the battlefield. If you do, shuffle your library.
+        // Whenever Zur the Enchanter attacks, you may search your library for an enchantment card
+        // with converted mana cost 3 or less and put it onto the battlefield. If you do, shuffle your library.
         addCard(Zone.BATTLEFIELD, playerB, "Zur the Enchanter"); // 1/4
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);

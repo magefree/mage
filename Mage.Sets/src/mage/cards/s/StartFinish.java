@@ -62,7 +62,7 @@ public class StartFinish extends SplitCard {
         // Finish
         // Aftermath
         // As an additional cost to cast Finish, sacrifice a creature. Destroy target creature.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (to destoy)")));
         getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target creature"));

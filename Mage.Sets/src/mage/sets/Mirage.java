@@ -155,6 +155,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Harmattan Efreet", 69, Rarity.UNCOMMON, mage.cards.h.HarmattanEfreet.class));
         cards.add(new SetCardInfo("Hazerider Drake", 328, Rarity.UNCOMMON, mage.cards.h.HazeriderDrake.class));
         cards.add(new SetCardInfo("Healing Salve", 224, Rarity.COMMON, mage.cards.h.HealingSalve.class));
+        cards.add(new SetCardInfo("Hivis of the Scale", 182, Rarity.RARE, mage.cards.h.HivisOfTheScale.class));
         cards.add(new SetCardInfo("Horrible Hordes", 269, Rarity.UNCOMMON, mage.cards.h.HorribleHordes.class));
         cards.add(new SetCardInfo("Igneous Golem", 270, Rarity.UNCOMMON, mage.cards.i.IgneousGolem.class));
         cards.add(new SetCardInfo("Illicit Auction", 183, Rarity.RARE, mage.cards.i.IllicitAuction.class));

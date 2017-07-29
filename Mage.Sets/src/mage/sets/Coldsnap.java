@@ -97,7 +97,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Gutless Ghoul", 60, Rarity.COMMON, mage.cards.g.GutlessGhoul.class));
         cards.add(new SetCardInfo("Haakon, Stromgald Scourge", 61, Rarity.RARE, mage.cards.h.HaakonStromgaldScourge.class));
         cards.add(new SetCardInfo("Heidar, Rimewind Master", 36, Rarity.RARE, mage.cards.h.HeidarRimewindMaster.class));
-	cards.add(new SetCardInfo("Herald of Leshrac", 62, Rarity.RARE, mage.cards.h.HeraldOfLeshrac.class));
+	    cards.add(new SetCardInfo("Herald of Leshrac", 62, Rarity.RARE, mage.cards.h.HeraldOfLeshrac.class));
         cards.add(new SetCardInfo("Hibernation's End", 110, Rarity.RARE, mage.cards.h.HibernationsEnd.class));
         cards.add(new SetCardInfo("Highland Weald", 147, Rarity.UNCOMMON, mage.cards.h.HighlandWeald.class));
         cards.add(new SetCardInfo("Icefall", 85, Rarity.COMMON, mage.cards.i.Icefall.class));
@@ -136,6 +136,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Resize", 117, Rarity.UNCOMMON, mage.cards.r.Resize.class));
         cards.add(new SetCardInfo("Rimebound Dead", 69, Rarity.COMMON, mage.cards.r.RimeboundDead.class));
         cards.add(new SetCardInfo("Rime Transfusion", 68, Rarity.UNCOMMON, mage.cards.r.RimeTransfusion.class));
+        cards.add(new SetCardInfo("Rimescale Dragon", 95, Rarity.RARE, mage.cards.r.RimescaleDragon.class));
         cards.add(new SetCardInfo("Rimewind Cryomancer", 43, Rarity.UNCOMMON, mage.cards.r.RimewindCryomancer.class));
         cards.add(new SetCardInfo("Rimewind Taskmage", 44, Rarity.COMMON, mage.cards.r.RimewindTaskmage.class));
         cards.add(new SetCardInfo("Rite of Flame", 96, Rarity.COMMON, mage.cards.r.RiteOfFlame.class));
@@ -164,7 +165,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Surging Might", 125, Rarity.COMMON, mage.cards.s.SurgingMight.class));
         cards.add(new SetCardInfo("Surging Sentinels", 20, Rarity.COMMON, mage.cards.s.SurgingSentinels.class));
         cards.add(new SetCardInfo("Swift Maneuver", 21, Rarity.COMMON, mage.cards.s.SwiftManeuver.class));
-	cards.add(new SetCardInfo("Tamanoa", 132, Rarity.RARE, mage.cards.t.Tamanoa.class));
+	    cards.add(new SetCardInfo("Tamanoa", 132, Rarity.RARE, mage.cards.t.Tamanoa.class));
         cards.add(new SetCardInfo("Thermopod", 100, Rarity.COMMON, mage.cards.t.Thermopod.class));
         cards.add(new SetCardInfo("Thrumming Stone", 142, Rarity.RARE, mage.cards.t.ThrummingStone.class));
         cards.add(new SetCardInfo("Tresserhorn Sinks", 150, Rarity.UNCOMMON, mage.cards.t.TresserhornSinks.class));

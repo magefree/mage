@@ -305,7 +305,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.players.clear();
         this.playersWhoLeft.clear();
 
-        if (jLayeredPane!= null) {
+        if (jLayeredPane != null) {
             jLayeredPane.remove(abilityPicker);
             jLayeredPane.remove(DialogManager.getManager(gameId));
         }
@@ -1439,8 +1439,7 @@ public final class GamePanel extends javax.swing.JPanel {
         bigCard.setBorder(new LineBorder(Color.black, 1, true));
 
         int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
-        
-        
+
         btnToggleMacro.setContentAreaFilled(false);
         btnToggleMacro.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnToggleMacro.setIcon(new ImageIcon(ImageManagerImpl.instance.getToggleRecordMacroButtonImage()));
@@ -1804,24 +1803,24 @@ public final class GamePanel extends javax.swing.JPanel {
         pnlReplay.setLayout(gl_pnlReplay);
         gl_pnlReplay.setHorizontalGroup(
                 gl_pnlReplay.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(gl_pnlReplay.createSequentialGroup()
-                        .addComponent(btnPreviousPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnStopReplay, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNextPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSkipForward, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(gl_pnlReplay.createSequentialGroup()
+                                .addComponent(btnPreviousPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnStopReplay, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnNextPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSkipForward, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         gl_pnlReplay.setVerticalGroup(
                 gl_pnlReplay.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(btnSkipForward, 0, 0, Short.MAX_VALUE)
-                .addComponent(btnNextPlay, 0, 0, Short.MAX_VALUE)
-                .addComponent(btnStopReplay, 0, 0, Short.MAX_VALUE)
-                .addComponent(btnPlay, 0, 0, Short.MAX_VALUE)
-                .addComponent(btnPreviousPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)
+                        .addComponent(btnSkipForward, 0, 0, Short.MAX_VALUE)
+                        .addComponent(btnNextPlay, 0, 0, Short.MAX_VALUE)
+                        .addComponent(btnStopReplay, 0, 0, Short.MAX_VALUE)
+                        .addComponent(btnPlay, 0, 0, Short.MAX_VALUE)
+                        .addComponent(btnPreviousPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)
         );
 
         // Game info panel (buttons on the right panel)
@@ -1837,9 +1836,9 @@ public final class GamePanel extends javax.swing.JPanel {
                         .addComponent(btnSkipToEndStepBeforeYourTurn)
                 )
                 .addGroup(gl_pnlShortCuts.createSequentialGroup()
-                        .addComponent(btnToggleMacro)
                         .addComponent(txtHoldPriority)
                         .addComponent(txtSpellsCast)
+                        /* .addComponent(btnToggleMacro)*/
                         .addComponent(btnSwitchHands)
                         .addComponent(btnCancelSkip)
                         .addComponent(btnConcede)
@@ -1935,46 +1934,46 @@ public final class GamePanel extends javax.swing.JPanel {
         javax.swing.GroupLayout gl_helperHandButtonsStackArea = new javax.swing.GroupLayout(pnlHelperHandButtonsStackArea);
         gl_helperHandButtonsStackArea.setHorizontalGroup(
                 gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
-                        //                        .addGap(0)
-                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
-                                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                                                .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+                                //                        .addGap(0)
+                                .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+                                                .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+                                                        .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                )
+                                                .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+                                                        .addComponent(pnlShortCuts, 410, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(stackObjects, 410, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+                                                )
                                         )
-                                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                                                .addComponent(pnlShortCuts, 410, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-                                                .addComponent(stackObjects, 410, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-                                        )
-                                )
-                                .addGap(0)
-                                //.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
-                                        .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                        .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                )))
+                                        .addGap(0)
+                                        //.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+                                                .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                                .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        )))
         );
         gl_helperHandButtonsStackArea.setVerticalGroup(
                 gl_helperHandButtonsStackArea.createParallelGroup(Alignment.TRAILING)
-                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
-                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                                .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        )
-                        //.addPreferredGap(ComponentPlacement.RELATED)
-                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
-                                        .addGap(2)
-                                        .addComponent(pnlShortCuts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(stackObjects, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+                                .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                        .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 )
-                                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
-                                        .addComponent(helper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                //.addPreferredGap(ComponentPlacement.RELATED)
+                                .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+                                                .addGap(2)
+                                                .addComponent(pnlShortCuts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(stackObjects, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        )
+                                        .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+                                                .addComponent(helper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        )
                                 )
                         )
-                )
         );
         pnlHelperHandButtonsStackArea.setLayout(gl_helperHandButtonsStackArea);
 
@@ -2007,11 +2006,11 @@ public final class GamePanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jSplitPane0, javax.swing.GroupLayout.DEFAULT_SIZE, 1078, Short.MAX_VALUE)
+                        .addComponent(jSplitPane0, javax.swing.GroupLayout.DEFAULT_SIZE, 1078, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jSplitPane0, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
+                        .addComponent(jSplitPane0, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
         );
     }
 
@@ -2103,7 +2102,7 @@ public final class GamePanel extends javax.swing.JPanel {
         message.setGameId(gameId);
         MageFrame.getInstance().showUserRequestDialog(message);
     }
-    
+
     private void btnToggleMacroActionPerformed(java.awt.event.ActionEvent evt) {
         SessionHandler.sendPlayerAction(PlayerAction.TOGGLE_RECORD_MACRO, gameId, null);
         AudioManager.playOnSkipButton();

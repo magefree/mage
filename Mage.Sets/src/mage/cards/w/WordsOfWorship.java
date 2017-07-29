@@ -92,6 +92,7 @@ class WordsOfWorshipEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.gainLife(5, game);
+			this.used = true;
             discard();
             return true;
         }
@@ -105,6 +106,9 @@ class WordsOfWorshipEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.getControllerId().equals(event.getPlayerId());
+        if (!this.used) {
+			return source.getControllerId().equals(event.getPlayerId());
+        }
+        return false;
     }
 }

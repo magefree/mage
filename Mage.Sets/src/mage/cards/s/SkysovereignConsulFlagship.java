@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
@@ -37,11 +36,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  * @author emerald000
@@ -57,7 +59,7 @@ public class SkysovereignConsulFlagship extends CardImpl {
     public SkysovereignConsulFlagship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Vehicle");
+        this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 
