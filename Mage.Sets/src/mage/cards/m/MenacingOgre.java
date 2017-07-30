@@ -27,8 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -43,6 +41,10 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -100,7 +102,7 @@ class MenacingOgreEffect extends OneShotEffect {
         int number = 0;
         Permanent menacingOgre = game.getPermanent(source.getSourceId());
         String message = "Choose a number.";
-        HashMap<Player, Integer> numberChosen = new HashMap<>();
+        Map<Player, Integer> numberChosen = new HashMap<>();
 
         //players choose numbers
         for (Player player : game.getPlayers().values()) {

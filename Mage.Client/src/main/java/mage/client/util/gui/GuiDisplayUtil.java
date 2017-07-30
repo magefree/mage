@@ -1,5 +1,8 @@
 package mage.client.util.gui;
 
+import java.awt.*;
+import java.util.ArrayList;
+import javax.swing.*;
 import mage.client.MageFrame;
 import mage.client.util.GUISizeHelper;
 import mage.constants.*;
@@ -9,10 +12,6 @@ import mage.view.PermanentView;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
 
 public final class GuiDisplayUtil {
 

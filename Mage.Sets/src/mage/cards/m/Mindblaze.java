@@ -27,8 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -45,6 +43,10 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +97,7 @@ class MindblazeEffect extends OneShotEffect {
             cardChoice.clearChoice();
             Choice numberChoice = new ChoiceImpl();
             numberChoice.setMessage("Choose a number greater than 0");
-            HashSet<String> numbers = new HashSet<>();
+            Set<String> numbers = new HashSet<>();
             for (int i = 1; i <= 4; i++) {
                 numbers.add(Integer.toString(i));
             }

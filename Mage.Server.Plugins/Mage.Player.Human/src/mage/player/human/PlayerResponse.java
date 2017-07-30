@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.player.human;
 
 import java.io.Serializable;
@@ -44,29 +43,25 @@ public class PlayerResponse implements Serializable {
     private Integer responseInteger;
     private ManaType responseManaType;
     private UUID responseManaTypePlayerId;
-    
+
     public PlayerResponse() {
         clear();
     }
-    
+
+    @Override
     public String toString() {
-        return new StringBuilder((responseString == null) ? "null" : responseString)
-                .append(',')
-                .append(responseUUID)
-                .append(',')
-                .append(responseBoolean)
-                .append(',')
-                .append(responseInteger)
-                .append(',')
-                .append(responseManaType)
-                .append(',')
-                .append(responseManaTypePlayerId).toString();
+        return ((responseString == null) ? "null" : responseString)
+                + ',' + responseUUID
+                + ',' + responseBoolean
+                + ',' + responseInteger
+                + ',' + responseManaType
+                + ',' + responseManaTypePlayerId;
     }
-    
+
     public PlayerResponse(PlayerResponse other) {
         copy(other);
     }
-    
+
     public void copy(PlayerResponse other) {
         responseString = other.responseString;
         responseUUID = other.responseUUID;

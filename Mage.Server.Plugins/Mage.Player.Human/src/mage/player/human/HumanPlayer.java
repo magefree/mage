@@ -87,7 +87,6 @@ public class HumanPlayer extends PlayerImpl {
     protected static FilterAttackingCreature filterAttack = new FilterAttackingCreature();
     protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
     protected final Choice replacementEffectChoice;
-
     private static final Logger logger = Logger.getLogger(HumanPlayer.class);
 
     protected HashSet<String> autoSelectReplacementEffects = new HashSet<>();
@@ -119,9 +118,26 @@ public class HumanPlayer extends PlayerImpl {
 
     public HumanPlayer(final HumanPlayer player) {
         super(player);
+        this.replacementEffectChoice = player.replacementEffectChoice;
         this.autoSelectReplacementEffects.addAll(autoSelectReplacementEffects);
         this.currentlyUnpaidMana = player.currentlyUnpaidMana;
-        this.replacementEffectChoice = player.replacementEffectChoice;
+
+        this.triggerAutoOrderAbilityFirst.addAll(player.triggerAutoOrderAbilityFirst);
+        this.triggerAutoOrderAbilityLast.addAll(player.triggerAutoOrderAbilityLast);
+        this.triggerAutoOrderNameFirst.addAll(player.triggerAutoOrderNameFirst);
+        this.triggerAutoOrderNameLast.addAll(player.triggerAutoOrderNameLast);
+
+        this.requestAutoAnswerId.putAll(player.requestAutoAnswerId);
+        this.requestAutoAnswerText.putAll(player.requestAutoAnswerText);
+
+        this.holdingPriority = player.holdingPriority;
+
+        this.actionQueue.addAll(player.actionQueue);
+        this.actionQueueSaved.addAll(player.actionQueueSaved);
+        this.actionIterations = player.actionIterations;
+        this.recordingMacro = player.recordingMacro;
+        this.macroTriggeredSelectionFlag = player.macroTriggeredSelectionFlag;
+        this.activatingMacro = player.activatingMacro;
     }
 
     protected boolean isExecutingMacro() {
@@ -134,6 +150,7 @@ public class HumanPlayer extends PlayerImpl {
         if (actionQueue.isEmpty() && actionIterations > 0 && !actionQueueSaved.isEmpty()) {
             actionQueue = new LinkedList(actionQueueSaved);
             actionIterations--;
+//            logger.info("MACRO iteration: " + actionIterations);
         }
         PlayerResponse action = actionQueue.poll();
         if (action != null) {
@@ -158,6 +175,11 @@ public class HumanPlayer extends PlayerImpl {
     protected void waitForResponse(Game game) {
         if (isExecutingMacro()) {
             pullResponseFromQueue(game);
+//            logger.info("MACRO pull from queue: " + response.toString());
+//            try {
+//                TimeUnit.MILLISECONDS.sleep(1000);
+//            } catch (InterruptedException e) {
+//            }
             return;
         }
         response.clear();
@@ -166,7 +188,7 @@ public class HumanPlayer extends PlayerImpl {
         synchronized (response) {
             try {
                 response.wait();
-                logger.debug("Got response from player: " + getId());
+                logger.info("Got response from player: " + response.toString());
             } catch (InterruptedException ex) {
                 logger.error("Response error for player " + getName() + " gameId: " + game.getId(), ex);
             } finally {
@@ -174,7 +196,7 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
         if (recordingMacro && !macroTriggeredSelectionFlag) {
-            logger.debug("Adding an action " + response);
+//            logger.info("Adding an action " + response);
             actionQueueSaved.add(new PlayerResponse(response));
         }
     }

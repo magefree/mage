@@ -27,8 +27,6 @@
  */
 package mage.cards.w;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
@@ -52,6 +50,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTargets;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -111,7 +113,7 @@ class WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEff
         if (controller != null) {
             Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
             controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
-            ArrayList<Permanent> toSacrifice = new ArrayList<>(cards.size());
+            List<Permanent> toSacrifice = new ArrayList<>(cards.size());
             for (UUID targetId : cards) {
                 Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {

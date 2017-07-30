@@ -46,6 +46,10 @@ public class DuskDawnTest extends CardTestPlayerBase {
 
     @Test
     public void testCastDawnFromGraveyard() {
+        // Dusk
+        // Destroy all creatures with power 3 or greater.
+        // Dawn
+        // Return all creature cards with power less than or equal to 2 from your graveyard to your hand.
         addCard(Zone.GRAVEYARD, playerA, "Dusk // Dawn");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.GRAVEYARD, playerA, "Devoted Hero");
@@ -84,6 +88,5 @@ public class DuskDawnTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Dusk // Dawn", 1);
         assertGraveyardCount(playerA, "Devoted Hero", 1);
     }
-
 
 }

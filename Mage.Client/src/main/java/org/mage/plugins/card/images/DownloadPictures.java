@@ -26,7 +26,6 @@ import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
-import mage.util.RandomUtil;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
@@ -107,7 +106,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         p0.add(jLabel1);
         p0.add(Box.createVerticalStrut(5));
         ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[]{
-            //    "magiccards.info",
+            // "magiccards.info",
             "wizards.com",
             "mythicspoiler.com",
             "tokens.mtg.onl", //"mtgimage.com (HQ)",
@@ -127,7 +126,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         jComboBox1.setAlignmentX(Component.LEFT_ALIGNMENT);
         jComboBox1.addActionListener(e -> {
             JComboBox cb = (JComboBox) e.getSource();
-            switch (cb.getSelectedIndex()) {
+            switch (cb.getSelectedIndex() + 1) {
                 case 0:
                     cardImageSource = MagicCardsImageSource.instance;
                     break;

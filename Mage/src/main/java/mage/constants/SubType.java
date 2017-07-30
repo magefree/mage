@@ -1,9 +1,10 @@
 package mage.constants;
 
+import mage.util.SubTypeList;
+
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
-import mage.util.SubTypeList;
 
 public enum SubType {
 
@@ -427,8 +428,8 @@ public enum SubType {
         return subTypes;
     }
 
-    public static Set<String> getBasicLands(boolean customSet) {
-        return Arrays.stream(values()).filter(s -> s.customSet == customSet).filter(p -> p.getSubTypeSet() == SubTypeSet.BasicLandType).map(SubType::getDescription).collect(Collectors.toSet());
+    public static Set<SubType> getBasicLands(boolean customSet) {
+        return Arrays.stream(values()).filter(s -> s.customSet == customSet).filter(p -> p.getSubTypeSet() == SubTypeSet.BasicLandType).collect(Collectors.toSet());
     }
 
     public static SubTypeList getLandTypes(boolean customSet) {

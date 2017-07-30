@@ -37,15 +37,14 @@ import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
+import java.io.File;
+import java.sql.SQLException;
+import java.util.*;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
-
-import java.io.File;
-import java.sql.SQLException;
-import java.util.*;
 
 /**
  * @author North
@@ -59,7 +58,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 51;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 85;
+    private static final long CARD_CONTENT_VERSION = 86;
     private final TreeSet<String> landTypes = new TreeSet<>();
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
@@ -273,10 +272,6 @@ public enum CardRepository {
         }
         return names;
     }
-
-
-
-
 
     public CardInfo findCard(String setCode, String cardNumber) {
         try {

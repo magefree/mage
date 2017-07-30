@@ -27,8 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -42,6 +40,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -101,7 +103,7 @@ class FaithsRewardEffect extends OneShotEffect {
 }
 
 class FaithsRewardWatcher extends Watcher {
-    ArrayList<UUID> cards = new ArrayList<>();
+    List<UUID> cards = new ArrayList<>();
 
     public FaithsRewardWatcher() {
         super(FaithsRewardWatcher.class.getSimpleName(), WatcherScope.GAME);

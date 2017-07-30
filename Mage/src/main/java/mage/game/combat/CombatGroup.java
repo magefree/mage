@@ -282,20 +282,22 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             if (blocked) {
                 for (UUID blockerId : blockerOrder) {
                     Permanent blocker = game.getPermanent(blockerId);
-                    int lethalDamage;
-                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
-                        lethalDamage = 1;
-                    } else {
-                        lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
+                    if (blocker != null) {
+                        int lethalDamage;
+                        if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
+                            lethalDamage = 1;
+                        } else {
+                            lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
+                        }
+                        if (lethalDamage >= damage) {
+                            assigned.put(blockerId, damage);
+                            damage = 0;
+                            break;
+                        }
+                        int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
+                        assigned.put(blockerId, damageAssigned);
+                        damage -= damageAssigned;
                     }
-                    if (lethalDamage >= damage) {
-                        assigned.put(blockerId, damage);
-                        damage = 0;
-                        break;
-                    }
-                    int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
-                    assigned.put(blockerId, damageAssigned);
-                    damage -= damageAssigned;
                 }
                 if (damage > 0 && hasTrample(attacker)) {
                     defenderDamage(attacker, damage, game);

@@ -68,12 +68,8 @@ public class AftermathAbility extends SimpleStaticAbility {
     }
 
     @Override
-    public String getRule(boolean all) {
-        if (all) {
-            return "Aftermath <i>(Cast this card only from your graveyard. Exile it afterwards.)</i>";
-        } else {
-            return "Aftermath";
-        }
+    public String getRule() {
+        return "Aftermath <i>(Cast this spell only from your graveyard. Then exile it.)</i>";
     }
 }
 
@@ -81,7 +77,6 @@ class AftermathCastFromGraveyard extends AsThoughEffectImpl {
 
     public AftermathCastFromGraveyard() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "Cast {this} from your graveyard";
     }
 
     public AftermathCastFromGraveyard(final AftermathCastFromGraveyard effect) {
@@ -96,10 +91,6 @@ class AftermathCastFromGraveyard extends AsThoughEffectImpl {
     @Override
     public AftermathCastFromGraveyard copy() {
         return new AftermathCastFromGraveyard(this);
-    }
-
-    private static String msb(UUID id) {
-        return Integer.toUnsignedString((int) id.getMostSignificantBits(), 16);
     }
 
     @Override

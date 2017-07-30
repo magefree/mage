@@ -33,12 +33,28 @@
  */
 package mage.client.table;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyVetoException;
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageComponents;
 import mage.client.dialog.*;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_ORDER;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH;
+import static mage.client.table.TablesPanel.PASSWORDED;
 import mage.client.util.ButtonColumn;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.IgnoreList;
@@ -54,25 +70,6 @@ import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.beans.PropertyVetoException;
-import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.List;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_ORDER;
-import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH;
-import static mage.client.table.TablesPanel.PASSWORDED;
 
 /**
  *
@@ -94,7 +91,7 @@ public class TablesPanel extends javax.swing.JPanel {
     private NewTableDialog newTableDialog;
     private NewTournamentDialog newTournamentDialog;
     private final GameChooser gameChooser;
-    private List<String> messages;
+    private java.util.List<String> messages;
     private int currentMessage;
     private final MageTableRowSorter activeTablesSorter;
 
@@ -231,7 +228,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 String action = (String) matchesModel.getValueAt(modelRow, MatchesTableModel.ACTION_COLUMN);
                 switch (action) {
                     case "Replay":
-                        List<UUID> gameList = matchesModel.getListofGames(modelRow);
+                        java.util.List<UUID> gameList = matchesModel.getListofGames(modelRow);
                         if (gameList != null && !gameList.isEmpty()) {
                             if (gameList.size() == 1) {
                                 SessionHandler.replayGame(gameList.get(0));
@@ -486,7 +483,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     protected void reloadMessages() {
         // reload server messages
-        List<String> serverMessages = SessionHandler.getServerMessages();
+        java.util.List<String> serverMessages = SessionHandler.getServerMessages();
         synchronized (this) {
             this.messages = serverMessages;
             this.currentMessage = 0;
@@ -525,7 +522,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     public void setTableFilter() {
         // state
-        List<RowFilter<Object, Object>> stateFilterList = new ArrayList<>();
+        java.util.List<RowFilter<Object, Object>> stateFilterList = new ArrayList<>();
         if (btnStateWaiting.isSelected()) {
             stateFilterList.add(RowFilter.regexFilter("Waiting", TableTableModel.COLUMN_STATUS));
         }
@@ -534,7 +531,7 @@ public class TablesPanel extends javax.swing.JPanel {
         }
 
         // type
-        List<RowFilter<Object, Object>> typeFilterList = new ArrayList<>();
+        java.util.List<RowFilter<Object, Object>> typeFilterList = new ArrayList<>();
         if (btnTypeMatch.isSelected()) {
             typeFilterList.add(RowFilter.regexFilter("Two|Commander|Free|Tiny|Momir", TableTableModel.COLUMN_GAME_TYPE));
         }
@@ -546,7 +543,7 @@ public class TablesPanel extends javax.swing.JPanel {
         }
 
         // format
-        List<RowFilter<Object, Object>> formatFilterList = new ArrayList<>();
+        java.util.List<RowFilter<Object, Object>> formatFilterList = new ArrayList<>();
         if (btnFormatBlock.isSelected()) {
             formatFilterList.add(RowFilter.regexFilter("^Constructed.*Block", TableTableModel.COLUMN_DECK_TYPE));
         }
@@ -575,7 +572,7 @@ public class TablesPanel extends javax.swing.JPanel {
             formatFilterList.add(RowFilter.regexFilter("^Momir Basic|^Constructed - Pauper|^Constructed - Frontier|^Constructed - Extended|^Constructed - Eternal|^Constructed - Historical|^Constructed - Super|^Constructed - Freeform|^Australian Highlander|^Canadian Highlander|^Constructed - Old", TableTableModel.COLUMN_DECK_TYPE));
         }
 
-        List<RowFilter<Object, Object>> skillFilterList = new ArrayList<>();
+        java.util.List<RowFilter<Object, Object>> skillFilterList = new ArrayList<>();
         if (btnSkillBeginner.isSelected()) {
             skillFilterList.add(RowFilter.regexFilter(SkillLevel.BEGINNER.toString(), TableTableModel.COLUMN_SKILL));
         }
@@ -586,7 +583,7 @@ public class TablesPanel extends javax.swing.JPanel {
             skillFilterList.add(RowFilter.regexFilter(SkillLevel.SERIOUS.toString(), TableTableModel.COLUMN_SKILL));
         }
 
-        List<RowFilter<Object, Object>> ratingFilterList = new ArrayList<>();
+        java.util.List<RowFilter<Object, Object>> ratingFilterList = new ArrayList<>();
         if (btnRated.isSelected()) {
             ratingFilterList.add(RowFilter.regexFilter("^Rated", TableTableModel.COLUMN_RATING));
         }
@@ -595,7 +592,7 @@ public class TablesPanel extends javax.swing.JPanel {
         }
 
         // Password
-        List<RowFilter<Object, Object>> passwordFilterList = new ArrayList<>();
+        java.util.List<RowFilter<Object, Object>> passwordFilterList = new ArrayList<>();
         if (btnOpen.isSelected()) {
             passwordFilterList.add(RowFilter.regexFilter("^$", TableTableModel.COLUMN_PASSWORD));
         }
@@ -604,7 +601,7 @@ public class TablesPanel extends javax.swing.JPanel {
         }
 
         // Hide games of ignored players
-        List<RowFilter<Object, Object>> ignoreListFilterList = new ArrayList<>();
+        java.util.List<RowFilter<Object, Object>> ignoreListFilterList = new ArrayList<>();
         String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
         final Set<String> ignoreListCopy = IgnoreList.ignoreList(serverAddress);
         if (!ignoreListCopy.isEmpty()) {
@@ -622,7 +619,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 || passwordFilterList.isEmpty()) { // no selection
             activeTablesSorter.setRowFilter(RowFilter.regexFilter("Nothing", TableTableModel.COLUMN_SKILL));
         } else {
-            List<RowFilter<Object, Object>> filterList = new ArrayList<>();
+            java.util.List<RowFilter<Object, Object>> filterList = new ArrayList<>();
 
             if (stateFilterList.size() > 1) {
                 filterList.add(RowFilter.orFilter(stateFilterList));
@@ -1418,7 +1415,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             Collection<TableView> tables = SessionHandler.getTables(roomId);
-            if (!tables.isEmpty()) {
+            if (tables != null) {
                 this.publish(tables);
             }
             TimeUnit.SECONDS.sleep(3);
@@ -1427,7 +1424,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     }
 
     @Override
-    protected void process(List<Collection<TableView>> view) {
+    protected void process(java.util.List<Collection<TableView>> view) {
         panel.updateTables(view.get(0));
         count++;
         if (count > 60) {
@@ -1471,7 +1468,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
     }
 
     @Override
-    protected void process(List<Collection<RoomUsersView>> roomUserInfo) {
+    protected void process(java.util.List<Collection<RoomUsersView>> roomUserInfo) {
         chat.setRoomUserInfo(roomUserInfo);
     }
 
@@ -1549,7 +1546,7 @@ class MatchesTableModel extends AbstractTableModel {
         return "";
     }
 
-    public List<UUID> getListofGames(int row) {
+    public java.util.List<UUID> getListofGames(int row) {
         return matches[row].getGames();
     }
 
@@ -1613,7 +1610,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     }
 
     @Override
-    protected void process(List<Collection<MatchView>> view) {
+    protected void process(java.util.List<Collection<MatchView>> view) {
         panel.updateMatches(view.get(0));
     }
 
@@ -1635,7 +1632,7 @@ class GameChooser extends JPopupMenu {
 
     }
 
-    public void show(List<UUID> games, Point p) {
+    public void show(java.util.List<UUID> games, Point p) {
         if (p == null) {
             return;
         }

@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -13,6 +11,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class CryptOfTheEternals extends CardImpl {
 
@@ -26,7 +28,7 @@ public class CryptOfTheEternals extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}: Add {U}, {B}, or {R} to your mana pool.
-        ArrayList<Mana> list = new ArrayList<Mana>() {{
+        List<Mana> list = new ArrayList<Mana>() {{
             add(Mana.BlueMana(1));
             add(Mana.BlackMana(1));
             add(Mana.RedMana(1));

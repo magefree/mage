@@ -27,8 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -45,6 +43,10 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -76,7 +78,7 @@ class TeferisRealmEffect extends OneShotEffect {
     private static final String CREATURE = "Creature";
     private static final String LAND = "Land";
     private static final String NON_AURA_ENCHANTMENT = "Non-Aura enchantment";
-    private static final HashSet<String> choices = new HashSet<>();
+    private static final Set<String> choices = new HashSet<>();
 
     static {
         choices.add(ARTIFACT);

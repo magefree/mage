@@ -57,7 +57,7 @@ public class NeverReturn extends SplitCard {
 
         // Return
         // Exile target card from a graveyard. Create a 2/2 black Zombie creature token.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new ExileTargetEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetCardInGraveyard());
         getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));

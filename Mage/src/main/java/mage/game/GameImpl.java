@@ -54,9 +54,9 @@ import mage.designations.Monarch;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -102,24 +102,6 @@ public abstract class GameImpl implements Game, Serializable {
     private static final int ROLLBACK_TURNS_MAX = 4;
 
     private static final Logger logger = Logger.getLogger(GameImpl.class);
-
-    private static final FilterPermanent FILTER_AURA = new FilterPermanent();
-    private static final FilterPermanent FILTER_EQUIPMENT = new FilterPermanent();
-    private static final FilterPermanent FILTER_FORTIFICATION = new FilterPermanent();
-    private static final FilterPermanent FILTER_LEGENDARY = new FilterPermanent();
-
-    static {
-        FILTER_AURA.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        FILTER_AURA.add(new SubtypePredicate(SubType.AURA));
-
-        FILTER_EQUIPMENT.add(new CardTypePredicate(CardType.ARTIFACT));
-        FILTER_EQUIPMENT.add(new SubtypePredicate(SubType.EQUIPMENT));
-
-        FILTER_FORTIFICATION.add(new CardTypePredicate(CardType.ARTIFACT));
-        FILTER_FORTIFICATION.add(new SubtypePredicate(SubType.FORTIFICATION));
-
-        FILTER_LEGENDARY.add(new SupertypePredicate(SuperType.LEGENDARY));
-    }
 
     private transient Object customData;
     protected boolean simulation = false;
@@ -1784,7 +1766,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (perm.isWorld()) {
                 worldEnchantment.add(perm);
             }
-            if (FILTER_AURA.match(perm, this)) {
+            if (StaticFilters.FILTER_AURA.match(perm, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
                     Card card = this.getCard(perm.getId());
@@ -1862,10 +1844,10 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            if (this.getState().isLegendaryRuleActive() && FILTER_LEGENDARY.match(perm, this)) {
+            if (this.getState().isLegendaryRuleActive() && StaticFilters.FILTER_LEGENDARY.match(perm, this)) {
                 legendary.add(perm);
             }
-            if (FILTER_EQUIPMENT.match(perm, this)) {
+            if (StaticFilters.FILTER_EQUIPMENT.match(perm, this)) {
                 //20091005 - 704.5p, 702.14d
                 if (perm.getAttachedTo() != null) {
                     Permanent attachedTo = getPermanent(perm.getAttachedTo());
@@ -1890,7 +1872,7 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            if (FILTER_FORTIFICATION.match(perm, this)) {
+            if (StaticFilters.FILTER_FORTIFICATION.match(perm, this)) {
                 if (perm.getAttachedTo() != null) {
                     Permanent land = getPermanent(perm.getAttachedTo());
                     if (land == null || !land.getAttachments().contains(perm.getId())) {

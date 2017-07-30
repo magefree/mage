@@ -27,9 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -48,6 +45,11 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -101,8 +103,8 @@ class EyeOfSingularityETBEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        HashMap<String, UUID> cardNames = new HashMap<>();
-        HashMap<UUID, Integer> toDestroy = new HashMap<>();
+        Map<String, UUID> cardNames = new HashMap<>();
+        Map<UUID, Integer> toDestroy = new HashMap<>();
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             String cardName = permanent.getName();
@@ -183,7 +185,7 @@ class EyeOfSingularityTriggeredEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        HashMap<UUID, Integer> toDestroy = new HashMap<>();
+        Map<UUID, Integer> toDestroy = new HashMap<>();
         Permanent etbPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
 
         if (etbPermanent == null) {

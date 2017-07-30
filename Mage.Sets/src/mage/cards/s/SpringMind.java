@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.AftermathAbility;
@@ -37,8 +38,6 @@ import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 /**
  *
@@ -56,7 +55,7 @@ public class SpringMind extends SplitCard {
         // Mind
         // Aftermath
         // Draw two cards.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 

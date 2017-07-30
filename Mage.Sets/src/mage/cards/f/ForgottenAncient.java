@@ -27,8 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -50,6 +48,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -116,7 +118,7 @@ public class ForgottenAncient extends CardImpl {
             }
             
             int numCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
-            ArrayList<CounterMovement> counterMovements = new ArrayList<>();
+            List<CounterMovement> counterMovements = new ArrayList<>();
             
             do {
                 Target target = new TargetCreaturePermanent(1, 1, filter, true);

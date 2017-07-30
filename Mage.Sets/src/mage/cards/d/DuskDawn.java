@@ -69,7 +69,7 @@ public class DuskDawn extends SplitCard {
 
         // Dawn
         // Return all creature cards with power less than or equal to 2 from your graveyard to your hand.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new DawnEffect());
 
     }
