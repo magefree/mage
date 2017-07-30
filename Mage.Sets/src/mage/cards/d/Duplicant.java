@@ -29,6 +29,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -101,13 +102,13 @@ class DuplicantExileTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        Permanent sourcePermananent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (sourcePermananent != null) {
-                sourcePermananent.imprint(permanent.getId(), game);
-                sourcePermananent.addInfo("imprint", new StringBuilder("[Imprinted card - ").append(permanent.getName()).append(']').toString(), game);
+        MageObject sourceObject = source.getSourceObject(game);
+        if (permanent != null && sourceObject instanceof Permanent) {
+            if (permanent.moveToExile(null, null, source.getSourceId(), game)) {
+                ((Permanent) sourceObject).imprint(permanent.getId(), game);
+                ((Permanent) sourceObject).addInfo("imprint", "[Imprinted card - " + permanent.getName() + ']', game);
             }
-            return permanent.moveToExile(null, null, source.getSourceId(), game);
+            return true;
         }
 
         return false;

@@ -188,7 +188,6 @@ public class HumanPlayer extends PlayerImpl {
         synchronized (response) {
             try {
                 response.wait();
-                logger.info("Got response from player: " + response.toString());
             } catch (InterruptedException ex) {
                 logger.error("Response error for player " + getName() + " gameId: " + game.getId(), ex);
             } finally {

@@ -122,8 +122,8 @@ class OathOfNissaEffect extends OneShotEffect {
                             topCards.remove(card);
                         }
                     }
-                    controller.putCardsOnBottomOfLibrary(topCards, game, source, true);
                 }
+                controller.putCardsOnBottomOfLibrary(topCards, game, source, true);
             }
             return true;
         }

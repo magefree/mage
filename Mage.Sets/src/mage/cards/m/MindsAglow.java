@@ -47,8 +47,7 @@ import mage.players.Player;
 public class MindsAglow extends CardImpl {
 
     public MindsAglow(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
         // Join forces - Starting with you, each player may pay any amount of mana. Each player draws X cards, where X is the total amount of mana paid this way.
         this.getSpellAbility().addEffect(new MindsAglowEffect());
@@ -66,44 +65,44 @@ public class MindsAglow extends CardImpl {
 }
 
 class MindsAglowEffect extends OneShotEffect {
-    
+
     public MindsAglowEffect() {
         super(Outcome.Detriment);
         this.staticText = "<i>Join forces</i> - Starting with you, each player may pay any amount of mana. Each player draws X cards, where X is the total amount of mana paid this way";
     }
-    
+
     public MindsAglowEffect(final MindsAglowEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public MindsAglowEffect copy() {
         return new MindsAglowEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int xSum = 0;
             xSum += playerPaysXGenericMana(controller, source, game);
-            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (!Objects.equals(playerId, controller.getId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         xSum += playerPaysXGenericMana(player, source, game);
-                        
+
                     }
                 }
             }
             if (xSum > 0) {
-                for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         player.drawCards(xSum, game);
                     }
                 }
-                
+
             }
             // prevent undo
             controller.resetStoredBookmark(game);
@@ -120,6 +119,9 @@ class MindsAglowEffect extends OneShotEffect {
             if (xValue > 0) {
                 Cost cost = new GenericManaCost(xValue);
                 payed = cost.pay(source, game, source.getSourceId(), player.getId(), false, null);
+                if (!payed) {
+                    game.undo(player.getId());
+                }
             } else {
                 payed = true;
             }
