@@ -27,9 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -50,6 +47,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -143,7 +144,7 @@ class MartyrsBondEffect extends OneShotEffect {
                 String message = "permanent with type (";
                 boolean firstType = true;
 
-                ArrayList<CardTypePredicate> cardTypes = new ArrayList<>();
+                List<CardTypePredicate> cardTypes = new ArrayList<>();
 
                 for (CardType type : saccedPermanent.getCardType()) {
                     cardTypes.add(new CardTypePredicate(type));

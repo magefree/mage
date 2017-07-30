@@ -27,8 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -50,6 +48,10 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.EldraziScionToken;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -117,7 +119,7 @@ class VileRedeemerEffect extends OneShotEffect {
 
 class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
 
-    private final HashMap<UUID, Integer> amountOfCreaturesThatDied = new HashMap<>();
+    private final Map<UUID, Integer> amountOfCreaturesThatDied = new HashMap<>();
 
     public VileRedeemerNonTokenCreaturesDiedWatcher() {
         super(VileRedeemerNonTokenCreaturesDiedWatcher.class.getSimpleName(), WatcherScope.GAME);

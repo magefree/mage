@@ -27,7 +27,6 @@
  */
 package mage.game.permanent;
 
-import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -55,6 +54,8 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -953,8 +954,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen ? 1 : 0))) {
-            // this means destroy was successfull, if object movement to graveyard will be replaced (e.g. commander to command zone) does not count for
-            // successfull destroying.
+            // this means destroy was successful, if object movement to graveyard will be replaced (e.g. commander to command zone) does not count for
+            // successful destroying.
             if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
                 if (!game.isSimulation()) {
                     String logName;
@@ -971,8 +972,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     }
                 }
                 game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
+                return true;
             }
-            return true; //
         }
         return false;
     }

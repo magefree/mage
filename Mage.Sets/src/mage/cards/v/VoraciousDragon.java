@@ -27,8 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -45,6 +43,9 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -93,7 +94,7 @@ class TwiceDevouredGoblins implements DynamicValue {
                         if (abilityEffect instanceof DevourEffect) {
                             DevourEffect devourEffect = (DevourEffect) abilityEffect;
                             int amountGoblins = 0;
-                            for (ArrayList<String> subtypesItem :devourEffect.getSubtypes(game, sourcePermanent.getId())) {
+                            for (List<String> subtypesItem :devourEffect.getSubtypes(game, sourcePermanent.getId())) {
                                 if (subtypesItem.contains("Goblin")) {
                                     ++amountGoblins;
                                 }

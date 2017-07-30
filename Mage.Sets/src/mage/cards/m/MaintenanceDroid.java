@@ -27,8 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -50,6 +48,10 @@ import mage.filter.predicate.other.CounterCardPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -90,7 +92,7 @@ public class MaintenanceDroid extends CardImpl {
 
 class MaintenanceDroidEffect extends OneShotEffect {
 
-    private static final HashSet<String> choices = new HashSet<>();
+    private static final Set<String> choices = new HashSet<>();
 
     static {
         choices.add("Remove a repair counter");

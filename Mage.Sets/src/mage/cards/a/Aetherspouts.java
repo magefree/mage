@@ -27,8 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -43,6 +41,10 @@ import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.TargetCard;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -102,8 +104,8 @@ class AetherspoutsEffect extends OneShotEffect {
             Player player = game.getPlayer(game.getActivePlayerId());
             Player activePlayer = player;
             do {
-                ArrayList<Permanent> permanentsToTop = new ArrayList<>();
-                ArrayList<Permanent> permanentsToBottom = new ArrayList<>();
+                List<Permanent> permanentsToTop = new ArrayList<>();
+                List<Permanent> permanentsToBottom = new ArrayList<>();
                 for (Permanent permanent:game.getState().getBattlefield().getActivePermanents(new FilterAttackingCreature(), player.getId(), source.getSourceId(), game)) {
                     if (permanent.getOwnerId().equals(player.getId())) {
                         if (player.chooseUse(outcome, "Put " + permanent.getLogName() + " to the top? (else it goes to bottom)", source, game)) {
@@ -117,7 +119,7 @@ class AetherspoutsEffect extends OneShotEffect {
                 }
                 // cards to top
                 Cards cards = new CardsImpl();
-                ArrayList<Permanent> toLibrary = new ArrayList<>();
+                List<Permanent> toLibrary = new ArrayList<>();
                 for (Permanent permanent: permanentsToTop) {
                     if (permanent instanceof PermanentToken) {
                         toLibrary.add(permanent);

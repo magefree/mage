@@ -27,19 +27,13 @@
  */
 package mage.cards.n;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -55,6 +49,10 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -110,7 +108,7 @@ class NecromanticSelectionEffect extends OneShotEffect {
                 }
             }
             FilterCard filter = new FilterCreatureCard("creature card put into a graveyard with " + sourceObject.getLogName());
-            ArrayList<Predicate<MageObject>> cardIdPredicates = new ArrayList<>();
+            List<Predicate<MageObject>> cardIdPredicates = new ArrayList<>();
             for (UUID cardId : cards) {
                 cardIdPredicates.add(new CardIdPredicate(cardId));
             }

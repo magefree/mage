@@ -27,8 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -41,6 +39,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ThatcherHumanToken;
 import mage.target.targetpointer.FixedTargets;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -85,7 +87,7 @@ class ThatcherRevoltEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ThatcherHumanToken token = new ThatcherHumanToken();
         token.putOntoBattlefield(3, game, source.getSourceId(), source.getControllerId());
-        ArrayList<Permanent> toSacrifice = new ArrayList<>();
+        List<Permanent> toSacrifice = new ArrayList<>();
         for (UUID tokenId : token.getLastAddedTokenIds()) {
             Permanent tokenPermanent = game.getPermanent(tokenId);
             if (tokenPermanent != null) {

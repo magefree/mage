@@ -42,10 +42,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  *
@@ -94,7 +91,7 @@ class HarmonicConvergenceEffect extends OneShotEffect {
                 source.getSourceId(),
                 game);
 
-        HashMap<UUID, List<Permanent>> moveList = new HashMap<>();
+        Map<UUID, List<Permanent>> moveList = new HashMap<>();
         for (Permanent permanent : enchantments) {
             List<Permanent> list = moveList.computeIfAbsent(permanent.getControllerId(), k -> new ArrayList<>());
             list.add(permanent);

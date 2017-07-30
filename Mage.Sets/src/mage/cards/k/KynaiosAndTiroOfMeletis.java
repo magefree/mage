@@ -27,9 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -45,6 +42,11 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * @author spjspj
@@ -104,7 +106,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
             Player currentPlayer = game.getPlayer(playerList.get());
             UUID firstInactivePlayer = null;
             Target target = new TargetCardInHand(filter);
-            ArrayList<UUID> noLandPlayers = new ArrayList<>();
+            List<UUID> noLandPlayers = new ArrayList<>();
 
             while (controller.canRespond()) {
                 if (currentPlayer != null && currentPlayer.canRespond() && game.getState().getPlayersInRange(controller.getId(), game).contains(currentPlayer.getId())) {

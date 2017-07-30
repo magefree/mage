@@ -25,87 +25,73 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.c;
 
+import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
-import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
  *
- * @author BetaSteward
+ * @author ciaccona007
  */
-public class WitchbaneOrb extends CardImpl {
+public class CinderCloud extends CardImpl {
 
-    public WitchbaneOrb(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
+    public CinderCloud(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
+        
 
-        // When Witchbane Orb enters the battlefield, destroy all Curses attached to you.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new WitchbaneOrbEffect()));
-
-        // You have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance())));
-
+        // Destroy target creature. If a white creature dies this way, Cinder Cloud deals damage to that creature's controller equal to the creature's power.
+        this.getSpellAbility().addEffect(new CinderCloudEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WitchbaneOrb(final WitchbaneOrb card) {
+    public CinderCloud(final CinderCloud card) {
         super(card);
     }
 
     @Override
-    public WitchbaneOrb copy() {
-        return new WitchbaneOrb(this);
+    public CinderCloud copy() {
+        return new CinderCloud(this);
     }
 }
 
-class WitchbaneOrbEffect extends OneShotEffect {
+class CinderCloudEffect extends OneShotEffect {
 
-    public WitchbaneOrbEffect() {
-        super(Outcome.Protect);
-        staticText = "destroy all Curses attached to you";
+    public CinderCloudEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Destroy target creature. If a white creature dies this way, {this} deals damage to that creature's controller equal to the creature's power";
     }
 
-    public WitchbaneOrbEffect(final WitchbaneOrbEffect effect) {
+    public CinderCloudEffect(final CinderCloudEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            List<Permanent> toDestroy = new ArrayList<>();
-            for (UUID attachmentId : controller.getAttachments()) {
-                Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getSubtype(game).contains("Curse")) {
-                    toDestroy.add(attachment);
-                }
-            }
-            for (Permanent curse : toDestroy) {
-                curse.destroy(source.getSourceId(), game, false);
-            }
-            return true;
-        }
-        return false;
+    public CinderCloudEffect copy() {
+        return new CinderCloudEffect(this);
     }
 
     @Override
-    public WitchbaneOrbEffect copy() {
-        return new WitchbaneOrbEffect(this);
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if(permanent != null && permanent.destroy(source.getSourceId(), game, false) && permanent.getColor(game).equals(ObjectColor.WHITE)) {
+            int damage = permanent.getPower().getValue();
+            Player player = game.getPlayer(permanent.getControllerId());
+            if(player != null) {
+                player.damage(damage, source.getSourceId(), game, false, true);
+            }
+        }
+        return false;
     }
-
 }

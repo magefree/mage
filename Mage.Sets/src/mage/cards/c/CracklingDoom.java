@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -46,6 +44,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -92,7 +94,7 @@ class CracklingDoomEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ArrayList<Permanent> toSacrifice = new ArrayList<>();
+            List<Permanent> toSacrifice = new ArrayList<>();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (controller.hasOpponent(playerId, game)) {
                     Player opponent = game.getPlayer(playerId);

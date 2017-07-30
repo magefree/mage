@@ -27,12 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredAbility;
@@ -42,11 +36,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.command.Commander;
@@ -56,6 +46,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  *
@@ -200,7 +193,7 @@ class SavageSummoningWatcher extends Watcher {
 
     public boolean isSpellCastWithThisSavageSummoning(UUID spellId, UUID cardId, int zoneChangeCounter) {
         String cardKey = new StringBuilder(cardId.toString()).append('_').append(zoneChangeCounter).toString();
-        HashSet<String> savageSpells = (HashSet<String>) spellsCastWithSavageSummoning.get(spellId);
+        Set<String> savageSpells = spellsCastWithSavageSummoning.get(spellId);
         return savageSpells != null && savageSpells.contains(cardKey);
     }
 
@@ -208,7 +201,7 @@ class SavageSummoningWatcher extends Watcher {
         String creatureCardKey = card.getId().toString() + '_' + (card.getZoneChangeCounter(game));
         // add one because card is now gone to battlefield as creature
         String cardKey = cardId.toString() + '_' + zoneChangeCounter;
-        HashSet<String> savageSpells = (HashSet<String>) cardsCastWithSavageSummoning.get(creatureCardKey);
+        Set<String> savageSpells =  cardsCastWithSavageSummoning.get(creatureCardKey);
         return savageSpells != null && savageSpells.contains(cardKey);
     }
 

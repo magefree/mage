@@ -27,8 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.keyword.InvestigateEffect;
@@ -42,6 +40,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -106,7 +108,7 @@ class ErdwalIlluminatorTriggeredAbility extends TriggeredAbilityImpl {
 
 class InvestigatedWatcher extends Watcher {
 
-    private final HashMap<UUID, Integer> timesInvestigated = new HashMap<>();
+    private final Map<UUID, Integer> timesInvestigated = new HashMap<>();
 
     public InvestigatedWatcher() {
         super(InvestigatedWatcher.class.getSimpleName(), WatcherScope.GAME);

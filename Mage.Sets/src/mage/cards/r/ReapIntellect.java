@@ -27,17 +27,10 @@
  */
 package mage.cards.r;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -51,6 +44,10 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -122,7 +119,7 @@ class ReapIntellectEffect extends OneShotEffect {
             if (!exiledCards.isEmpty()) {
 
                 // Building a card filter with all names
-                ArrayList<NamePredicate> names = new ArrayList<>();
+                List<NamePredicate> names = new ArrayList<>();
                 FilterCard filterNamedCards = new FilterCard();
                 for (Card card : exiledCards.getCards(game)) {
                     if (exiledCards.size() == 1) {

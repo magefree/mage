@@ -27,8 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -42,6 +40,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -156,7 +158,7 @@ class BalanceEffect extends OneShotEffect {
 
             //Cards in hand
             int minCard = Integer.MAX_VALUE;
-            HashMap<UUID, Cards> cardsToDiscard = new HashMap<>(2);
+            Map<UUID, Cards> cardsToDiscard = new HashMap<>(2);
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -41,6 +39,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 
 
@@ -95,7 +97,7 @@ class SilenceTheBelieversExileEffect extends OneShotEffect {
             for (UUID targetId: this.getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {
-                    ArrayList<UUID> attachments = new ArrayList<>(creature.getAttachments());
+                    List<UUID> attachments = new ArrayList<>(creature.getAttachments());
                     for (UUID attachmentId: attachments) {
                         Permanent attachment = game.getPermanent(attachmentId);
                         if (attachment != null && attachment.getSubtype(game).contains("Aura")) {

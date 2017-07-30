@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +37,10 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 
 /**
@@ -71,7 +73,7 @@ public class SpiritOfTheLabyrinth extends CardImpl {
 
 class SpiritOfTheLabyrinthWatcher extends Watcher {
 
-    private final HashSet<UUID> playersThatDrewCard;
+    private final Set<UUID> playersThatDrewCard;
     
     public SpiritOfTheLabyrinthWatcher() {
         super(SpiritOfTheLabyrinthWatcher.class.getSimpleName(), WatcherScope.GAME);
