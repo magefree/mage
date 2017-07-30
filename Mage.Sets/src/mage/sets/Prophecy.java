@@ -149,6 +149,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Verdant Field", 130, Rarity.UNCOMMON, mage.cards.v.VerdantField.class));
         cards.add(new SetCardInfo("Vintara Elephant", 131, Rarity.COMMON, mage.cards.v.VintaraElephant.class));
         cards.add(new SetCardInfo("Vintara Snapper", 132, Rarity.UNCOMMON, mage.cards.v.VintaraSnapper.class));
+        cards.add(new SetCardInfo("Vitalizing Wind", 133, Rarity.RARE, mage.cards.v.VitalizingWind.class));
         cards.add(new SetCardInfo("Well of Discovery", 140, Rarity.RARE, mage.cards.w.WellOfDiscovery.class));
         cards.add(new SetCardInfo("Well of Life", 141, Rarity.UNCOMMON, mage.cards.w.WellOfLife.class));
         cards.add(new SetCardInfo("Whip Sergeant", 107, Rarity.UNCOMMON, mage.cards.w.WhipSergeant.class));
