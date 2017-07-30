@@ -27,6 +27,7 @@
  */
 package mage.game.permanent;
 
+import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -54,8 +55,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -972,8 +971,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     }
                 }
                 game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
-                return true;
             }
+            return true;
         }
         return false;
     }
