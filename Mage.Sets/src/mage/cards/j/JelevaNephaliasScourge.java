@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -43,6 +44,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -61,7 +63,7 @@ import mage.watchers.Watcher;
 public class JelevaNephaliasScourge extends CardImpl {
 
     public JelevaNephaliasScourge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Vampire");
         this.subtype.add("Wizard");
@@ -107,27 +109,19 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (controller != null && sourceCard != null) {
-            JelevaNephaliasWatcher watcher = (JelevaNephaliasWatcher) game.getState().getWatchers().get(JelevaNephaliasWatcher.class.getSimpleName(), source.getSourceId());
-            if (watcher != null) {
-                int xValue = watcher.getManaSpentToCastLastTime(sourceCard.getZoneChangeCounter(game) - 1);
-                if (xValue > 0) {
-                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                        Player player = game.getPlayer(playerId);
-                        if (player != null) {
-                            int cardsToExile = Math.min(player.getLibrary().size(), xValue);
-                            for (int i = 0; i < cardsToExile; i++) {
-                                Card card = player.getLibrary().removeFromTop(game);
-                                if (card != null) {
-                                    card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourceCard.getIdName(), source.getSourceId(), game);
-                                }
-                            }
-                        }
+        MageObject sourceObject = source.getSourceObject(game);
+        JelevaNephaliasWatcher watcher = (JelevaNephaliasWatcher) game.getState().getWatchers().get(JelevaNephaliasWatcher.class.getSimpleName(), source.getSourceId());
+        if (controller != null && sourceObject != null && watcher != null) {
+            int xValue = watcher.getManaSpentToCastLastTime(sourceObject.getZoneChangeCounter(game) - 1);
+            if (xValue > 0) {
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        player.moveCards(player.getLibrary().getTopCards(game, xValue), Zone.EXILED, source, game);
                     }
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }
