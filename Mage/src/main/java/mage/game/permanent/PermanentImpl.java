@@ -974,6 +974,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
                 return true;
             }
+            if(game.getState().getZone(objectId) == Zone.COMMAND) {
+                return true;
+            }
         }
         return false;
     }
