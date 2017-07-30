@@ -110,9 +110,9 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        JelevaNephaliasWatcher watcher = (JelevaNephaliasWatcher) game.getState().getWatchers().get(JelevaNephaliasWatcher.class.getSimpleName(), source.getSourceId());
+        JelevaNephaliasWatcher watcher = (JelevaNephaliasWatcher) game.getState().getWatchers().get(JelevaNephaliasWatcher.class.getSimpleName());
         if (controller != null && sourceObject != null && watcher != null) {
-            int xValue = watcher.getManaSpentToCastLastTime(sourceObject.getZoneChangeCounter(game) - 1);
+            int xValue = watcher.getManaSpentToCastLastTime(sourceObject.getId(), sourceObject.getZoneChangeCounter(game) - 1);
             if (xValue > 0) {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
@@ -167,10 +167,10 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
 
 class JelevaNephaliasWatcher extends Watcher {
 
-    private final Map<Integer, Integer> manaSpendToCast = new HashMap<>(); // cast
+    private final Map<String, Integer> manaSpendToCast = new HashMap<>(); // cast
 
     public JelevaNephaliasWatcher() {
-        super(JelevaNephaliasWatcher.class.getSimpleName(), WatcherScope.CARD);
+        super(JelevaNephaliasWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public JelevaNephaliasWatcher(final JelevaNephaliasWatcher watcher) {
@@ -184,22 +184,22 @@ class JelevaNephaliasWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getSourceId().equals(sourceId)) {
+        // Watcher saves all casts becaus of possible Clone cards that copy Jeleva
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             if (!game.getStack().isEmpty()) {
                 for (StackObject stackObject : game.getStack()) {
-                    if (stackObject instanceof Spell && ((Spell) stackObject).getSourceId().equals(sourceId)) {
-                        Card card = game.getCard(sourceId);
-                        if (!manaSpendToCast.containsValue(card.getZoneChangeCounter(game))) {
-                            manaSpendToCast.put(card.getZoneChangeCounter(game), ((Spell) stackObject).getSpellAbility().getManaCostsToPay().convertedManaCost());
-                        }
+                    if (stackObject instanceof Spell) {
+                        Spell spell = (Spell) stackObject;
+                        manaSpendToCast.putIfAbsent(spell.getSourceId().toString() + spell.getCard().getZoneChangeCounter(game),
+                                spell.getSpellAbility().getManaCostsToPay().convertedManaCost());
                     }
                 }
             }
         }
     }
 
-    public int getManaSpentToCastLastTime(int zoneChangeCounter) {
-        return manaSpendToCast.getOrDefault(zoneChangeCounter, 0);
+    public int getManaSpentToCastLastTime(UUID sourceId, int zoneChangeCounter) {
+        return manaSpendToCast.getOrDefault(sourceId.toString() + zoneChangeCounter, 0);
     }
 
     @Override
