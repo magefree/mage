@@ -1281,7 +1281,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 hideTables();
                 SessionHandler.disconnect(false);
                 if (errorCall) {
-                    UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect to " + currentConnection.getHost() + '?');
+                    UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect?");
                     message.setButton1("No", null);
                     message.setButton2("Yes", PlayerAction.CLIENT_RECONNECT);
                     showUserRequestDialog(message);
