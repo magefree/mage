@@ -69,8 +69,8 @@ import mage.util.SubTypeList;
  */
 public class Spell extends StackObjImpl implements Card {
 
-    private final List<Card> spellCards = new ArrayList<>();
     private final List<SpellAbility> spellAbilities = new ArrayList<>();
+    private final List<Card> spellCards = new ArrayList<>();
 
     private final Card card;
     private final ObjectColor color;
@@ -108,7 +108,6 @@ public class Spell extends StackObjImpl implements Card {
         this.controllerId = controllerId;
         this.fromZone = fromZone;
         this.countered = false;
-        this.doneActivatingManaAbilities = false;
     }
 
     public Spell(final Spell spell) {
@@ -129,13 +128,18 @@ public class Spell extends StackObjImpl implements Card {
         } else {
             this.card = spell.card.copy();
         }
-        this.controllerId = spell.controllerId;
+
         this.fromZone = spell.fromZone;
-        this.copiedSpell = spell.copiedSpell;
-        this.faceDown = spell.faceDown;
         this.color = spell.color.copy();
         this.frameColor = spell.color.copy();
         this.frameStyle = spell.frameStyle;
+
+        this.controllerId = spell.controllerId;
+        this.copiedSpell = spell.copiedSpell;
+        this.faceDown = spell.faceDown;
+        this.countered = spell.countered;
+        this.resolving = spell.resolving;
+
         this.doneActivatingManaAbilities = spell.doneActivatingManaAbilities;
     }
 
