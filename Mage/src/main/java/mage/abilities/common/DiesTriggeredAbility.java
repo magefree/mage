@@ -64,7 +64,7 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
             return false;
         }
         // check now it is in graveyard
-        if (before.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(source.getId())) {
+        if (before.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(sourceId)) {
             Zone after = game.getState().getZone(sourceId);
             return after != null && Zone.GRAVEYARD.match(after);
         } else {
