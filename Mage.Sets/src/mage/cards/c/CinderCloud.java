@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -34,12 +35,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -49,7 +49,6 @@ public class CinderCloud extends CardImpl {
 
     public CinderCloud(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        
 
         // Destroy target creature. If a white creature dies this way, Cinder Cloud deals damage to that creature's controller equal to the creature's power.
         this.getSpellAbility().addEffect(new CinderCloudEffect());
@@ -85,13 +84,19 @@ class CinderCloudEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if(permanent != null && permanent.destroy(source.getSourceId(), game, false) && permanent.getColor(game).equals(ObjectColor.WHITE)) {
-            int damage = permanent.getPower().getValue();
-            Player player = game.getPlayer(permanent.getControllerId());
-            if(player != null) {
-                player.damage(damage, source.getSourceId(), game, false, true);
+        if (permanent != null && permanent.destroy(source.getSourceId(), game, false) && permanent.getColor(game).equals(ObjectColor.WHITE)) {
+            game.applyEffects();
+            if (permanent.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(permanent.getId())
+                    && !game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) {
+                // A replacement effect has moved the card to another zone as grvayard
+                return true;
+            }
+            Player permanentController = game.getPlayer(permanent.getControllerId());
+            if (permanentController != null) {
+                int damage = permanent.getPower().getValue();
+                permanentController.damage(damage, source.getSourceId(), game, false, true);
             }
         }
-        return false;
+        return true;
     }
 }

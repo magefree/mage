@@ -953,8 +953,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen ? 1 : 0))) {
-            // this means destroy was successful, if object movement to graveyard will be replaced (e.g. commander to command zone) does not count for
-            // successful destroying.
+            // this means destroy was successful, if object movement to graveyard will be replaced (e.g. commander to command zone) its still
+            // is handled as successful destroying (but not as sucessful "dies this way" for destroying).
             if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
                 if (!game.isSimulation()) {
                     String logName;

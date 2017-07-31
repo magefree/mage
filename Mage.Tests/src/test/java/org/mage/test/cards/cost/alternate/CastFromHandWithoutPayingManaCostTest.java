@@ -327,20 +327,20 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
     }
-    
+
     @Test
     public void testJelevaCastingSavageBeatingFromExile() {
-        
+
         /*
         Jeleva, Nephalia's Scourge {1}{U}{B}{R}
         Legendary Creature - Vampire Wizard 1/3
         Flying
         When Jeleva, Nephalia's Scourge enters the battlefield, each player exiles the top X cards of his or her library, where X is the amount of mana spent to cast Jeleva.
         Whenever Jeleva attacks, you may cast an instant or sorcery card exiled with it without paying its mana cost.
-        */
+         */
         String jeleva = "Jeleva, Nephalia's Scourge";
-        
-        /*        
+
+        /*
         Savage Beating {3}{R}{R}
         Instant
         Cast Savage Beating only during your turn and only during combat.
@@ -348,30 +348,31 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         - Creatures you control gain double strike until end of turn.
         - Untap all creatures you control. After this phase, there is an additional combat phase.
         Entwine {1}{R} (Choose both if you pay the entwine cost.)
-        */
+         */
         String savageBeating = "Savage Beating";
-        
+
         skipInitShuffling();
-        addCard(Zone.LIBRARY, playerA, savageBeating);
+        addCard(Zone.LIBRARY, playerA, savageBeating, 2);
         addCard(Zone.HAND, playerA, jeleva);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, jeleva);
-        
+
         attack(3, playerA, jeleva);
         setChoice(playerA, "Yes"); // opt to use Jeleva ability
         setChoice(playerA, savageBeating); // choose to cast Savage Beating for free
         setChoice(playerA, "No"); // opt not to pay entwine cost
         setModeChoice(playerA, "1"); // use first mode of Savage Beating granting double strike
-        
+
         setStopAt(3, PhaseStep.END_COMBAT);
         execute();
-        
+
+        assertGraveyardCount(playerA, savageBeating, 1);
         assertTapped(jeleva, true);
         assertLife(playerB, 18);
         assertAbility(playerA, jeleva, DoubleStrikeAbility.getInstance(), true);
-        assertGraveyardCount(playerA, savageBeating, 1);
+
     }
 }
