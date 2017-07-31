@@ -211,6 +211,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Spirit Shackle", 74, Rarity.COMMON, mage.cards.s.SpiritShackle.class));
         cards.add(new SetCardInfo("Spoils of Victory", 134, Rarity.COMMON, mage.cards.s.SpoilsOfVictory.class));
         cards.add(new SetCardInfo("Stolen Grain", 75, Rarity.UNCOMMON, mage.cards.s.StolenGrain.class));
+        cards.add(new SetCardInfo("Storm World", 111, Rarity.RARE, mage.cards.s.StormWorld.class));
         cards.add(new SetCardInfo("Strategic Planning", 51, Rarity.COMMON, mage.cards.s.StrategicPlanning.class));
         cards.add(new SetCardInfo("Sunastian Falconer", 178, Rarity.UNCOMMON, mage.cards.s.SunastianFalconer.class));
         cards.add(new SetCardInfo("Sun Ce, Young Conquerer", 52, Rarity.UNCOMMON, mage.cards.s.SunCeYoungConquerer.class));

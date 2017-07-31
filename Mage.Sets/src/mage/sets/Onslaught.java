@@ -64,6 +64,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Catapult Master", 10, Rarity.RARE, mage.cards.c.CatapultMaster.class));
         cards.add(new SetCardInfo("Catapult Squad", 11, Rarity.UNCOMMON, mage.cards.c.CatapultSquad.class));
         cards.add(new SetCardInfo("Centaur Glade", 251, Rarity.UNCOMMON, mage.cards.c.CentaurGlade.class));
+        cards.add(new SetCardInfo("Chain of Plasma", 193, Rarity.UNCOMMON, mage.cards.c.ChainOfPlasma.class));
         cards.add(new SetCardInfo("Chain of Vapor", 73, Rarity.UNCOMMON, mage.cards.c.ChainOfVapor.class));
         cards.add(new SetCardInfo("Charging Slateback", 194, Rarity.COMMON, mage.cards.c.ChargingSlateback.class));
         cards.add(new SetCardInfo("Choking Tethers", 74, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
