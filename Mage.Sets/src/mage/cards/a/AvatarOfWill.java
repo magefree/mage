@@ -48,7 +48,7 @@ import mage.players.Player;
 public class AvatarOfWill extends CardImpl {
 
     public AvatarOfWill(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
@@ -99,10 +99,12 @@ class AvatarOfWillCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            Player opponent = game.getPlayer(playerId);
-            if (opponent != null && opponent.getHand().isEmpty()) {
-                return true;
+        if (abilityToModify.getSourceId().equals(source.getSourceId())) {
+            for (UUID playerId : game.getOpponents(source.getControllerId())) {
+                Player opponent = game.getPlayer(playerId);
+                if (opponent != null && opponent.getHand().isEmpty()) {
+                    return true;
+                }
             }
         }
         return false;
