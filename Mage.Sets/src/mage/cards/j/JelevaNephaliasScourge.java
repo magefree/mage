@@ -44,7 +44,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -117,7 +116,8 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.moveCards(player.getLibrary().getTopCards(game, xValue), Zone.EXILED, source, game);
+                        //
+                        player.moveCardsToExile(player.getLibrary().getTopCards(game, xValue), source, game, true, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName());
                     }
                 }
             }
