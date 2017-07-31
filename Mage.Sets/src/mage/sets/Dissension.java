@@ -209,5 +209,6 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Windreaver", 138, Rarity.RARE, mage.cards.w.Windreaver.class));
         cards.add(new SetCardInfo("Wit's End", 58, Rarity.RARE, mage.cards.w.WitsEnd.class));
         cards.add(new SetCardInfo("Wrecking Ball", 139, Rarity.COMMON, mage.cards.w.WreckingBall.class));
+        cards.add(new SetCardInfo("Writ of Passage", 37, Rarity.COMMON, mage.cards.w.WritOfPassage.class));
     }
 }
