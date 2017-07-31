@@ -85,6 +85,7 @@ public class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Compulsion", 34, Rarity.UNCOMMON, mage.cards.c.Compulsion.class));
         cards.add(new SetCardInfo("Coral Net", 35, Rarity.COMMON, mage.cards.c.CoralNet.class));
         cards.add(new SetCardInfo("Crackling Club", 93, Rarity.COMMON, mage.cards.c.CracklingClub.class));
+        cards.add(new SetCardInfo("Crazed Firecat", 94, Rarity.UNCOMMON, mage.cards.c.CrazedFirecat.class));
         cards.add(new SetCardInfo("Crippling Fatigue", 58, Rarity.COMMON, mage.cards.c.CripplingFatigue.class));
         cards.add(new SetCardInfo("Dawn of the Dead", 59, Rarity.RARE, mage.cards.d.DawnOfTheDead.class));
         cards.add(new SetCardInfo("Deep Analysis", 36, Rarity.COMMON, mage.cards.d.DeepAnalysis.class));
