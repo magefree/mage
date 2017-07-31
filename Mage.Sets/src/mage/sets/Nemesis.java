@@ -57,6 +57,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Accumulated Knowledge", 26, Rarity.COMMON, mage.cards.a.AccumulatedKnowledge.class));
         cards.add(new SetCardInfo("Aether Barrier", 27, Rarity.RARE, mage.cards.a.AetherBarrier.class));
         cards.add(new SetCardInfo("Ancient Hydra", 76, Rarity.UNCOMMON, mage.cards.a.AncientHydra.class));
+        cards.add(new SetCardInfo("Angelic Favor", 1, Rarity.UNCOMMON, mage.cards.a.AngelicFavor.class));
         cards.add(new SetCardInfo("Animate Land", 101, Rarity.UNCOMMON, mage.cards.a.AnimateLand.class));
         cards.add(new SetCardInfo("Arc Mage", 77, Rarity.UNCOMMON, mage.cards.a.ArcMage.class));
         cards.add(new SetCardInfo("Ascendant Evincar", 51, Rarity.RARE, mage.cards.a.AscendantEvincar.class));
