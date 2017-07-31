@@ -289,6 +289,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Bauble", 318, Rarity.UNCOMMON, mage.cards.u.UrzasBauble.class));
         cards.add(new SetCardInfo("Veldt", 358, Rarity.RARE, mage.cards.v.Veldt.class));
         cards.add(new SetCardInfo("Vertigo", 222, Rarity.UNCOMMON, mage.cards.v.Vertigo.class));
+        cards.add(new SetCardInfo("Vibrating Sphere", 320, Rarity.RARE, mage.cards.v.VibratingSphere.class));
         cards.add(new SetCardInfo("Walking Wall", 321, Rarity.UNCOMMON, mage.cards.w.WalkingWall.class));
         cards.add(new SetCardInfo("Wall of Lava", 223, Rarity.UNCOMMON, mage.cards.w.WallOfLava.class));
         cards.add(new SetCardInfo("Wall of Pine Needles", 162, Rarity.UNCOMMON, mage.cards.w.WallOfPineNeedles.class));
