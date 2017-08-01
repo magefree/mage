@@ -111,6 +111,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Hellhole Rats", 113, Rarity.UNCOMMON, mage.cards.h.HellholeRats.class));
         cards.add(new SetCardInfo("Hide // Seek", 151, Rarity.UNCOMMON, mage.cards.h.HideSeek.class));
         cards.add(new SetCardInfo("Hit // Run", 152, Rarity.UNCOMMON, mage.cards.h.HitRun.class));
+        cards.add(new SetCardInfo("Ignorant Bliss", 64, Rarity.UNCOMMON, mage.cards.i.IgnorantBliss.class));
         cards.add(new SetCardInfo("Indrik Stomphowler", 86, Rarity.UNCOMMON, mage.cards.i.IndrikStomphowler.class));
         cards.add(new SetCardInfo("Infernal Tutor", 46, Rarity.RARE, mage.cards.i.InfernalTutor.class));
         cards.add(new SetCardInfo("Isperia the Inscrutable", 114, Rarity.RARE, mage.cards.i.IsperiaTheInscrutable.class));

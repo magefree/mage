@@ -73,6 +73,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Bribery", 62, Rarity.RARE, mage.cards.b.Bribery.class));
         cards.add(new SetCardInfo("Buoyancy", 63, Rarity.COMMON, mage.cards.b.Buoyancy.class));
         cards.add(new SetCardInfo("Cackling Witch", 119, Rarity.UNCOMMON, mage.cards.c.CacklingWitch.class));
+        cards.add(new SetCardInfo("Caller of the Hunt", 233, Rarity.RARE, mage.cards.c.CallerOfTheHunt.class));
         cards.add(new SetCardInfo("Cateran Brute", 120, Rarity.COMMON, mage.cards.c.CateranBrute.class));
         cards.add(new SetCardInfo("Cateran Enforcer", 121, Rarity.UNCOMMON, mage.cards.c.CateranEnforcer.class));
         cards.add(new SetCardInfo("Cateran Kidnappers", 122, Rarity.UNCOMMON, mage.cards.c.CateranKidnappers.class));

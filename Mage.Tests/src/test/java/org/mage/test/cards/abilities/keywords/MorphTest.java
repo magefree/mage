@@ -778,4 +778,42 @@ public class MorphTest extends CardTestPlayerBase {
 
         Assert.assertTrue("Skip next turn has to be added to TurnMods", currentGame.getState().getTurnMods().size() == 1);
     }
+
+    /**
+     * Permanents that have been morphed have wrongly the converted mana cost of
+     * their face up side, which makes cards such as Fatal Push of Smother
+     * unable to destroy them if their cmc is greater than the one specified on
+     * said cards. Face-down permanents should have a cmc of 0 as per rule
+     * 707.2.
+     */
+    @Test
+    public void testCMCofFaceDownCreature() {
+        /*
+         Pine Walker
+         Creature - Elemental
+         5/5
+         Morph {4}{G} (You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)
+         Whenever Pine Walker or another creature you control is turned face up, untap that creature.
+         */
+        addCard(Zone.HAND, playerA, "Pine Walker");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        // Destroy target creature if it has converted mana cost 2 or less.
+        // Revolt - Destroy that creature if it has converted mana cost 4 or less instead if a permanent you controlled left the battlefield this turn.
+        addCard(Zone.HAND, playerB, "Fatal Push"); // Instant {B}
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Fatal Push");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Fatal Push", 1);
+        assertGraveyardCount(playerA, "Pine Walker", 1);
+        assertPermanentCount(playerA, "", 0);
+
+    }
 }
