@@ -78,6 +78,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Crude Rampart", 17, Rarity.UNCOMMON, mage.cards.c.CrudeRampart.class));
         cards.add(new SetCardInfo("Cruel Revival", 135, Rarity.COMMON, mage.cards.c.CruelRevival.class));
         cards.add(new SetCardInfo("Cryptic Gateway", 306, Rarity.RARE, mage.cards.c.CrypticGateway.class));
+        cards.add(new SetCardInfo("Custody Battle", 197, Rarity.UNCOMMON, mage.cards.c.CustodyBattle.class));
         cards.add(new SetCardInfo("Daru Cavalier", 18, Rarity.COMMON, mage.cards.d.DaruCavalier.class));
         cards.add(new SetCardInfo("Daru Encampment", 315, Rarity.UNCOMMON, mage.cards.d.DaruEncampment.class));
         cards.add(new SetCardInfo("Daru Lancer", 20, Rarity.COMMON, mage.cards.d.DaruLancer.class));
