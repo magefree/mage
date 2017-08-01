@@ -33,17 +33,17 @@ import mage.constants.SetType;
 
 /**
  *
- * @author fireshoes
+ * @author Saga
  */
-public class Unstable extends ExpansionSet {
-    private static final Unstable instance = new Unstable();
+public class HasconPromo2017 extends ExpansionSet {
+    private static final HasconPromo2017 instance = new HasconPromo2017();
 
-    public static Unstable getInstance() {
+    public static HasconPromo2017 getInstance() {
         return instance;
     }
 
-    private Unstable() {
-        super("Unstable", "UST", ExpansionSet.buildDate(2017, 12, 8), SetType.JOKESET);
-        cards.add(new SetCardInfo("Sword of Dungeons and Dragons", 1, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsAndDragons.class));
+    private HasconPromo2017() {
+        super("HASCON Promo 2017", "H17", ExpansionSet.buildDate(2017, 9, 8), SetType.JOKESET);
+        cards.add(new ExpansionSet.SetCardInfo("Sword of Dungeons & Dragons", 3, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsAndDragons.class));
     }
 }
