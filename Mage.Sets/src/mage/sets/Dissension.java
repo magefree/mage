@@ -96,6 +96,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Entropic Eidolon", 45, Rarity.COMMON, mage.cards.e.EntropicEidolon.class));
         cards.add(new SetCardInfo("Evolution Vat", 161, Rarity.RARE, mage.cards.e.EvolutionVat.class));
         cards.add(new SetCardInfo("Experiment Kraj", 110, Rarity.RARE, mage.cards.e.ExperimentKraj.class));
+        cards.add(new SetCardInfo("Flame-Kin War Scout", 61, Rarity.UNCOMMON, mage.cards.f.FlameKinWarScout.class));
         cards.add(new SetCardInfo("Flaring Flame-Kin", 62, Rarity.UNCOMMON, mage.cards.f.FlaringFlameKin.class));
         cards.add(new SetCardInfo("Freewind Equenaut", 9, Rarity.COMMON, mage.cards.f.FreewindEquenaut.class));
         cards.add(new SetCardInfo("Ghost Quarter", 173, Rarity.UNCOMMON, mage.cards.g.GhostQuarter.class));
@@ -182,6 +183,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Spell Snare", 33, Rarity.UNCOMMON, mage.cards.s.SpellSnare.class));
         cards.add(new SetCardInfo("Sporeback Troll", 94, Rarity.COMMON, mage.cards.s.SporebackTroll.class));
         cards.add(new SetCardInfo("Sprouting Phytohydra", 95, Rarity.RARE, mage.cards.s.SproutingPhytohydra.class));
+        cards.add(new SetCardInfo("Squealing Devil", 72, Rarity.UNCOMMON, mage.cards.s.SquealingDevil.class));
         cards.add(new SetCardInfo("Stalking Vengeance", 73, Rarity.RARE, mage.cards.s.StalkingVengeance.class));
         cards.add(new SetCardInfo("Steeling Stance", 18, Rarity.COMMON, mage.cards.s.SteelingStance.class));
         cards.add(new SetCardInfo("Stoic Ephemera", 19, Rarity.UNCOMMON, mage.cards.s.StoicEphemera.class));
