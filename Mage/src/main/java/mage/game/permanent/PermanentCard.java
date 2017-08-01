@@ -209,6 +209,9 @@ public class PermanentCard extends PermanentImpl {
             // is itself a double-faced card), the converted mana cost of that permanent is 0.
             return getCard().getConvertedManaCost();
         }
+        if (faceDown) { // game not neccessary
+            return getManaCost().convertedManaCost();
+        }
         return super.getConvertedManaCost();
 
     }
