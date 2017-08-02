@@ -3,6 +3,7 @@ package mage.constants;
 import mage.util.SubTypeList;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -418,10 +419,10 @@ public enum SubType {
         return subTypeSet;
     }
 
-    public static SubTypeList getCreatureTypes(boolean customSet) {
-        SubTypeList subTypes = new SubTypeList();
+    public static Set<SubType> getCreatureTypes(boolean customSet) {
+        Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
         for (SubType s : values()) {
-            if (!s.customSet) {
+            if (s.customSet == customSet && s.getSubTypeSet() == SubTypeSet.CreatureType) {
                 subTypes.add(s);
             }
         }

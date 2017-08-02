@@ -6,16 +6,13 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceCreatureType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.SubTypeList;
-
-import java.util.stream.Collectors;
 
 public class BecomesChosenCreatureTypeTargetEffect extends OneShotEffect {
 
@@ -48,17 +45,15 @@ public class BecomesChosenCreatureTypeTargetEffect extends OneShotEffect {
         Card card = game.getCard(source.getSourceId());
         String chosenType = "";
         if (player != null && card != null) {
-            Choice typeChoice = new ChoiceImpl(true);
+            Choice typeChoice = new ChoiceCreatureType();
             String msg = "Choose a creature type";
             if(nonWall) {
                 msg += " other than Wall";
             }
             typeChoice.setMessage(msg);
-            SubTypeList types = SubType.getCreatureTypes(false);
             if(nonWall) {
-                types.remove(SubType.WALL);
+                typeChoice.getChoices().remove(SubType.WALL.getDescription());
             }
-            typeChoice.setChoices(types.stream().map(SubType::toString).collect(Collectors.toSet()));
             while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;

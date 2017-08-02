@@ -27,8 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -38,7 +36,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceCreatureType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -47,6 +45,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author anonymous
@@ -91,9 +91,7 @@ class TribalUnityEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         int boost = amount.calculate(game, source, this);
         if (player != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toSet()));
+            Choice typeChoice = new ChoiceCreatureType();
             while (!player.choose(outcome, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;
