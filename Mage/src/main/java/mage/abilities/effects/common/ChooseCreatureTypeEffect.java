@@ -39,6 +39,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
 /**
@@ -65,7 +66,7 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
         if (controller != null && mageObject != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose creature type");
-            typeChoice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toSet()));
+            typeChoice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toCollection(LinkedHashSet::new)));
             while (!controller.choose(outcome, typeChoice, game)) {
                 if (!controller.canRespond()) {
                     return false;
