@@ -225,6 +225,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Righteous Cause", 51, Rarity.UNCOMMON, mage.cards.r.RighteousCause.class));
         cards.add(new SetCardInfo("Riptide Biologist", 106, Rarity.COMMON, mage.cards.r.RiptideBiologist.class));
         cards.add(new SetCardInfo("Riptide Chronologist", 107, Rarity.UNCOMMON, mage.cards.r.RiptideChronologist.class));
+        cards.add(new SetCardInfo("Riptide Entrancer", 108, Rarity.RARE, mage.cards.r.RiptideEntrancer.class));
         cards.add(new SetCardInfo("Riptide Laboratory", 322, Rarity.RARE, mage.cards.r.RiptideLaboratory.class));
         cards.add(new SetCardInfo("Riptide Replicator", 309, Rarity.RARE, mage.cards.r.RiptideReplicator.class));
         cards.add(new SetCardInfo("Riptide Shapeshifter", 109, Rarity.UNCOMMON, mage.cards.r.RiptideShapeshifter.class));
