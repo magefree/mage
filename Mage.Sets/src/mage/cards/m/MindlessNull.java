@@ -34,15 +34,21 @@ import mage.abilities.effects.common.combat.CantBlockUnlessYouControlSourceEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author North
  */
 public class MindlessNull extends CardImpl {
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Vampire");
 
+    static {
+        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+    }
     public MindlessNull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Zombie");
@@ -50,7 +56,7 @@ public class MindlessNull extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockUnlessYouControlSourceEffect(new FilterControlledPermanent("Vampire"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockUnlessYouControlSourceEffect(filter)));
     }
 
     public MindlessNull(final MindlessNull card) {

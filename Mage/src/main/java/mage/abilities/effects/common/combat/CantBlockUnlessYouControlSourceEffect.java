@@ -45,7 +45,7 @@ public class CantBlockUnlessYouControlSourceEffect extends RestrictionEffect {
     public CantBlockUnlessYouControlSourceEffect(FilterControlledPermanent filter) {
         super(Duration.WhileOnBattlefield);
         this.filter = filter;
-        staticText = "{this} can't block unless you control" + filter.getMessage();
+        staticText = "{this} can't block unless you control " + filter.getMessage();
     }
 
     public CantBlockUnlessYouControlSourceEffect(final CantBlockUnlessYouControlSourceEffect effect) {
