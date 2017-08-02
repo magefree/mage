@@ -27,8 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffect;
@@ -37,7 +35,7 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceCreatureType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -49,6 +47,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -93,9 +93,7 @@ class PeerPressureEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Choose creature type");
-            choice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::getDescription).collect(Collectors.toSet()));
+            Choice choice = new ChoiceCreatureType();
             while (!controller.choose(Outcome.GainControl, choice, game)) {
                 if (!controller.canRespond()) {
                     return false;
