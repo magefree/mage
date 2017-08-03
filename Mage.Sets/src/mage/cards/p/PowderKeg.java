@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -51,13 +52,14 @@ import mage.game.permanent.Permanent;
 public class PowderKeg extends CardImpl {
 
     public PowderKeg(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // At the beginning of your upkeep, you may put a fuse counter on Powder Keg.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.FUSE.createInstance(), true), TargetController.YOU, true));
-        
+
         // {T}, Sacrifice Powder Keg: Destroy each artifact and creature with converted mana cost equal to the number of fuse counters on Powder Keg.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PowderKegEffect(), new SacrificeSourceCost());
+        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
@@ -73,39 +75,39 @@ public class PowderKeg extends CardImpl {
 
 class PowderKegEffect extends OneShotEffect {
 
-        public PowderKegEffect() {
-            super(Outcome.DestroyPermanent);
-            staticText = "Destroy each artifact and creature with converted mana cost equal to the number of fuse counters on Powder Keg {this}";
-        }
-
-        public PowderKegEffect(final PowderKegEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent p = game.getBattlefield().getPermanent(source.getSourceId());
-            if (p == null) {
-                p = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-                if (p == null) {
-                    return false;
-                }
-            }
-
-            int count = p.getCounters(game).getCount(CounterType.FUSE);
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents()) {
-                if (perm.getConvertedManaCost() == count && ((perm.isArtifact())
-                        || (perm.isCreature()))) {
-                    perm.destroy(source.getSourceId(), game, false);
-                }
-            }
-
-            return true;
-        }
-
-        @Override
-        public PowderKegEffect copy() {
-            return new PowderKegEffect(this);
-        }
-
+    public PowderKegEffect() {
+        super(Outcome.DestroyPermanent);
+        staticText = "Destroy each artifact and creature with converted mana cost equal to the number of fuse counters on Powder Keg {this}";
     }
+
+    public PowderKegEffect(final PowderKegEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent p = game.getBattlefield().getPermanent(source.getSourceId());
+        if (p == null) {
+            p = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+            if (p == null) {
+                return false;
+            }
+        }
+
+        int count = p.getCounters(game).getCount(CounterType.FUSE);
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
+            if (perm.getConvertedManaCost() == count && ((perm.isArtifact())
+                    || (perm.isCreature()))) {
+                perm.destroy(source.getSourceId(), game, false);
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public PowderKegEffect copy() {
+        return new PowderKegEffect(this);
+    }
+
+}
