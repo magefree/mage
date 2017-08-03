@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,6 +42,8 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class DesertNomads extends CardImpl {
         this.addAbility(new LandwalkAbility(filter));        
         
         // Prevent all damage that would be dealt to Desert Nomads by Deserts.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceBySubtypeEffect("Desert")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceBySubtypeEffect(SubType.DESERT)));
     }
 
     public DesertNomads(final DesertNomads card) {
@@ -82,13 +83,9 @@ public class DesertNomads extends CardImpl {
 
 class PreventDamageToSourceBySubtypeEffect extends PreventAllDamageToSourceEffect {
     
-    private String subtype;
-      
-    public PreventDamageToSourceBySubtypeEffect(){
-        this("a");
-    }
+    private SubType subtype;
 
-    public PreventDamageToSourceBySubtypeEffect(String sub){
+    public PreventDamageToSourceBySubtypeEffect(SubType sub){
         super(Duration.WhileOnBattlefield);
         subtype = sub;
     }

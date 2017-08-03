@@ -36,10 +36,6 @@ public interface MageObject extends MageItem, Serializable {
 
     boolean hasSubtype(SubType subtype, Game game);
 
-    default boolean hasSubtype(String subtype, Game game){
-        return hasSubtype(SubType.byDescription(subtype), game);
-    }
-
     EnumSet<SuperType> getSuperType();
 
     Abilities<Ability> getAbilities();

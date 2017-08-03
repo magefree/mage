@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -39,10 +38,13 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.functions.ApplyToPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,8 +57,8 @@ public class PhantasmalImage extends CardImpl {
     ApplyToPermanent phantasmalImageApplier = new ApplyToPermanent() {
         @Override
         public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-            if (!permanent.hasSubtype("Illusion", game)) {
-                permanent.getSubtype(game).add("Illusion");
+            if (!permanent.hasSubtype(SubType.ILLUSION, game)) {
+                permanent.getSubtype(game).add(SubType.ILLUSION);
             }
             // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
             permanent.getAbilities().add(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
@@ -66,8 +68,8 @@ public class PhantasmalImage extends CardImpl {
 
         @Override
         public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-            if (!mageObject.hasSubtype("Illusion", game)) {
-                mageObject.getSubtype(game).add("Illusion");
+            if (!mageObject.hasSubtype(SubType.ILLUSION, game)) {
+                mageObject.getSubtype(game).add(SubType.ILLUSION);
             }
             // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
             mageObject.getAbilities().add(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));

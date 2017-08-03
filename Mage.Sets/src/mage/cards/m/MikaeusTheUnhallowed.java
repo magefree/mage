@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -46,6 +45,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -111,7 +112,7 @@ class MikaeusTheUnhallowedAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.controllerId)) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.hasSubtype("Human", game)) {
+            if (permanent != null && permanent.hasSubtype(SubType.HUMAN, game)) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
                 return true;
             }

@@ -28,7 +28,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,6 +43,8 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -103,7 +104,7 @@ class SeshiroTheAnointedAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
         Permanent p = game.getPermanent(event.getSourceId());
-        if (damageEvent.isCombatDamage() && p != null && p.hasSubtype("Snake", game) && p.getControllerId().equals(controllerId)) {
+        if (damageEvent.isCombatDamage() && p != null && p.hasSubtype(SubType.SNAKE, game) && p.getControllerId().equals(controllerId)) {
             return true;
         }
         return false;
