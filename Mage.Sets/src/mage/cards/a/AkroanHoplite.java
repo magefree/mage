@@ -50,13 +50,14 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 public class AkroanHoplite extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures you control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new AttackingPredicate());
     }
 
     public AkroanHoplite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
@@ -64,7 +65,7 @@ public class AkroanHoplite extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Akroan Hoplite attacks, it gets +X/+0 until end of turn, where X is the number of attacking creatures you control.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.EndOfTurn), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.EndOfTurn, true), false));
     }
 
     public AkroanHoplite(final AkroanHoplite card) {

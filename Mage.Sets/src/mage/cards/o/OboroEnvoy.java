@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class OboroEnvoy extends CardImpl {
 
     public OboroEnvoy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add("Moonfolk");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);
@@ -64,7 +64,7 @@ public class OboroEnvoy extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {2}, Return a land you control to its owner's hand: Target creature gets -X/-0 until end of turn, where X is the number of cards in your hand.
-        Effect effect = new BoostTargetEffect(new SignInversionDynamicValue(new CardsInControllerHandCount()), new StaticValue(-0), Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(new SignInversionDynamicValue(new CardsInControllerHandCount()), new StaticValue(-0), Duration.EndOfTurn, true);
         effect.setText("Target creature gets -X/-0 until end of turn, where X is the number of cards in your hand");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));

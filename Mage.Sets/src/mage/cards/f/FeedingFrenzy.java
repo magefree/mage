@@ -58,7 +58,7 @@ public class FeedingFrenzy extends CardImpl {
 
         // Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.
         DynamicValue x = new PermanentsOnBattlefieldCount(filter, -1);
-        Effect effect = new BoostTargetEffect(x, x, Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(x, x, Duration.EndOfTurn, true);
         effect.setText("Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

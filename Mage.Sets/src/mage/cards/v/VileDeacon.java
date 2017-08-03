@@ -54,7 +54,7 @@ public class VileDeacon extends CardImpl {
     }
 
     public VileDeacon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);
@@ -62,7 +62,7 @@ public class VileDeacon extends CardImpl {
 
         // Whenever Vile Deacon attacks, it gets +X/+X until end of turn, where X is the number of Clerics on the battlefield.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter);
-        Effect effect = new BoostSourceEffect(amount, amount, Duration.EndOfTurn);
+        Effect effect = new BoostSourceEffect(amount, amount, Duration.EndOfTurn, true);
         effect.setText("it gets +X/+X until end of turn, where X is the number of Clerics on the battlefield");
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }

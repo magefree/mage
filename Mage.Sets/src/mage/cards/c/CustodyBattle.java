@@ -145,7 +145,7 @@ class CustodyBattleUnlessPaysEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             String message = "sacrifice a land?";
             message = CardUtil.replaceSourceName(message, sourcePermanent.getLogName());

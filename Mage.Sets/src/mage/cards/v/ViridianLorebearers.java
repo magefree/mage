@@ -53,11 +53,13 @@ import mage.target.common.TargetCreaturePermanent;
 public class ViridianLorebearers extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts your opponents control");
-    static{
+
+    static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
+
     public ViridianLorebearers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 
@@ -65,7 +67,7 @@ public class ViridianLorebearers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {3}{G}, {tap}: Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
-        Effect effect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.EndOfTurn, true);
         effect.setText("Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{G}"));
         ability.addTarget(new TargetCreaturePermanent());

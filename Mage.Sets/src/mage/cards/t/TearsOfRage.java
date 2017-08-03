@@ -55,14 +55,16 @@ import mage.target.targetpointer.FixedTargets;
 public class TearsOfRage extends CardImpl {
 
     public TearsOfRage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
 
         // Cast Tears of Rage only during the declare attackers step.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_ATTACKERS));
 
         // Attacking creatures you control get +X/+0 until end of turn, where X is the number of attacking creatures. Sacrifice those creatures at the beginning of the next end step.
-        getSpellAbility().addEffect(new BoostControlledEffect(new AttackingCreatureCount("the number of attacking creatures"), new StaticValue(0),
-                Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false));
+        BoostControlledEffect effect = new BoostControlledEffect(new AttackingCreatureCount("the number of attacking creatures"), new StaticValue(0),
+                Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
+        effect.setLockedIn(true);
+        getSpellAbility().addEffect(effect);
         getSpellAbility().addEffect(new TearsOfRageEffect());
     }
 
