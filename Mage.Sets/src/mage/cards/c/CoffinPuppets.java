@@ -25,55 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.CompoundCondition;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.IsStepCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author cbt33
+ * @author TheElk801
  */
-public class MagmaSliver extends CardImpl {
+public class CoffinPuppets extends CardImpl {
 
-    public MagmaSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.subtype.add("Sliver");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Swamp");
 
+    static {
+        filter.add(new SubtypePredicate(SubType.SWAMP));
+    }
+
+    public CoffinPuppets(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+
+        this.subtype.add("Zombie");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // All Slivers have "{tap}: Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS), new StaticValue(0), Duration.EndOfTurn, true), new TapSourceCost());
-        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.SLIVER, "Sliver creature"));
-        ability.addTarget(target);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
+        // Sacrifice two lands: Return Coffin Puppets from your graveyard to the battlefield. Activate this ability only during your upkeep and only if you control a Swamp.
+        Condition condition = new CompoundCondition("during your upkeep and only if you control a Swamp",new PermanentsOnTheBattlefieldCondition(filter), new IsStepCondition(PhaseStep.UPKEEP));
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true)),
+                condition);
+        this.addAbility(ability);
     }
 
-    public MagmaSliver(final MagmaSliver card) {
+    public CoffinPuppets(final CoffinPuppets card) {
         super(card);
     }
 
     @Override
-    public MagmaSliver copy() {
-        return new MagmaSliver(this);
+    public CoffinPuppets copy() {
+        return new CoffinPuppets(this);
     }
 }

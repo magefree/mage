@@ -25,55 +25,67 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.c;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author cbt33
+ * @author TheElk801
  */
-public class MagmaSliver extends CardImpl {
+public class CommonCause extends CardImpl {
 
-    public MagmaSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.subtype.add("Sliver");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonartifact creatures");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // All Slivers have "{tap}: Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS), new StaticValue(0), Duration.EndOfTurn, true), new TapSourceCost());
-        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.SLIVER, "Sliver creature"));
-        ability.addTarget(target);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
     }
 
-    public MagmaSliver(final MagmaSliver card) {
+    public CommonCause(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+
+        // Nonartifact creatures get +2/+2 as long as they all share a color.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false),
+                new AllColorCondition(),
+                "nonartifact creatures get +2/+2 as long as they all share a color.")));
+    }
+
+    public CommonCause(final CommonCause card) {
         super(card);
     }
 
     @Override
-    public MagmaSliver copy() {
-        return new MagmaSliver(this);
+    public CommonCause copy() {
+        return new CommonCause(this);
+    }
+}
+
+class AllColorCondition implements Condition {
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonartifact creatures");
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        ObjectColor allColor = new ObjectColor("WUBRG");
+        for (Permanent thing : game.getBattlefield().getAllActivePermanents(filter, game)) {
+             allColor = allColor.intersection(thing.getColor(game));
+        }
+        return !allColor.isColorless();
     }
 }

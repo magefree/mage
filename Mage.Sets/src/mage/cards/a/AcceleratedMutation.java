@@ -44,11 +44,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class AcceleratedMutation extends CardImpl {
 
     public AcceleratedMutation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
 
         // Target creature gets +X/+X until end of turn, where X is the highest converted mana cost among permanents you control.
         DynamicValue amount = new HighestConvertedManaCostValue();
-        this.getSpellAbility().addEffect(new BoostTargetEffect(amount, amount, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(amount, amount, Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

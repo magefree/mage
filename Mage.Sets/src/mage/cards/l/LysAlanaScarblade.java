@@ -63,7 +63,7 @@ public class LysAlanaScarblade extends CardImpl {
     }
 
     public LysAlanaScarblade(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Elf");
         this.subtype.add("Assassin");
         this.power = new MageInt(1);
@@ -71,7 +71,7 @@ public class LysAlanaScarblade extends CardImpl {
 
         // {tap}, Discard an Elf card: Target creature gets -X/-X until end of turn, where X is the number of Elves you control.
         SignInversionDynamicValue count = new SignInversionDynamicValue(new PermanentsOnBattlefieldCount(filter1));
-        Effect effect = new BoostTargetEffect(count, count, Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(count, count, Duration.EndOfTurn, true);
         effect.setText("target creature gets -X/-X until end of turn, where X is the number of Elves you control");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addCost(new DiscardCardCost(filter2));

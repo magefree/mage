@@ -97,6 +97,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud Sprite", 67, Rarity.COMMON, mage.cards.c.CloudSprite.class));
         cards.add(new SetCardInfo("Coastal Piracy", 68, Rarity.UNCOMMON, mage.cards.c.CoastalPiracy.class));
         cards.add(new SetCardInfo("Collective Unconscious", 236, Rarity.RARE, mage.cards.c.CollectiveUnconscious.class));
+        cards.add(new SetCardInfo("Common Cause", 13, Rarity.RARE, mage.cards.c.CommonCause.class));
         cards.add(new SetCardInfo("Conspiracy", 127, Rarity.RARE, mage.cards.c.Conspiracy.class));
         cards.add(new SetCardInfo("Corrupt Official", 128, Rarity.RARE, mage.cards.c.CorruptOfficial.class));
         cards.add(new SetCardInfo("Counterspell", 69, Rarity.COMMON, mage.cards.c.Counterspell.class));

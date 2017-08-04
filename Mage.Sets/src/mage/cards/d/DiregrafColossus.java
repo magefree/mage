@@ -40,8 +40,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -87,7 +87,7 @@ public class DiregrafColossus extends CardImpl {
 
 class DiregrafColossusEffect extends OneShotEffect {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
+    private static final FilterCard filter = new FilterCard();
 
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -53,12 +52,13 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 public class HellkiteIgniter extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact you control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public HellkiteIgniter (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
+    public HellkiteIgniter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(5);
@@ -72,11 +72,12 @@ public class HellkiteIgniter extends CardImpl {
                 new BoostSourceEffect(
                         new PermanentsOnBattlefieldCount(filter),
                         new StaticValue(0),
-                        Duration.EndOfTurn),
+                        Duration.EndOfTurn,
+                        true),
                 new ManaCostsImpl("{1}{R}")));
     }
 
-    public HellkiteIgniter (final HellkiteIgniter card) {
+    public HellkiteIgniter(final HellkiteIgniter card) {
         super(card);
     }
 

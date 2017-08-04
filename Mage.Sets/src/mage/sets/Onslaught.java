@@ -78,6 +78,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Crude Rampart", 17, Rarity.UNCOMMON, mage.cards.c.CrudeRampart.class));
         cards.add(new SetCardInfo("Cruel Revival", 135, Rarity.COMMON, mage.cards.c.CruelRevival.class));
         cards.add(new SetCardInfo("Cryptic Gateway", 306, Rarity.RARE, mage.cards.c.CrypticGateway.class));
+        cards.add(new SetCardInfo("Custody Battle", 197, Rarity.UNCOMMON, mage.cards.c.CustodyBattle.class));
         cards.add(new SetCardInfo("Daru Cavalier", 18, Rarity.COMMON, mage.cards.d.DaruCavalier.class));
         cards.add(new SetCardInfo("Daru Encampment", 315, Rarity.UNCOMMON, mage.cards.d.DaruEncampment.class));
         cards.add(new SetCardInfo("Daru Lancer", 20, Rarity.COMMON, mage.cards.d.DaruLancer.class));
@@ -224,6 +225,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Righteous Cause", 51, Rarity.UNCOMMON, mage.cards.r.RighteousCause.class));
         cards.add(new SetCardInfo("Riptide Biologist", 106, Rarity.COMMON, mage.cards.r.RiptideBiologist.class));
         cards.add(new SetCardInfo("Riptide Chronologist", 107, Rarity.UNCOMMON, mage.cards.r.RiptideChronologist.class));
+        cards.add(new SetCardInfo("Riptide Entrancer", 108, Rarity.RARE, mage.cards.r.RiptideEntrancer.class));
         cards.add(new SetCardInfo("Riptide Laboratory", 322, Rarity.RARE, mage.cards.r.RiptideLaboratory.class));
         cards.add(new SetCardInfo("Riptide Replicator", 309, Rarity.RARE, mage.cards.r.RiptideReplicator.class));
         cards.add(new SetCardInfo("Riptide Shapeshifter", 109, Rarity.UNCOMMON, mage.cards.r.RiptideShapeshifter.class));
