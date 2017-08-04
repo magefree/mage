@@ -82,7 +82,6 @@ class AllColorCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonartifact creatures");
         filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-//        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
         ObjectColor allColor = new ObjectColor("WUBRG");
         for (Permanent thing : game.getBattlefield().getAllActivePermanents(filter, game)) {
              allColor = allColor.intersection(thing.getColor(game));
