@@ -587,6 +587,7 @@
 |Generate|TOK:GTC|Soldier|2||SoldierTokenWithHaste|
 |Generate|TOK:GTC|Spirit|||TeysaEnvoyOfGhostsToken|
 |Generate|TOK:H09|Sliver|||SliversmithToken|
+|Generate|TOK:H17|Dragon|||DragonTokenGold|
 |Generate|TOK:HML|Plant Wall|||KelpToken|
 |Generate|TOK:HML|Serf|||SerfToken|
 |Generate|TOK:HML|Skeleton|||SkeletonToken|
@@ -1060,6 +1061,7 @@
 |Generate|TOK:USG|Goblin|||GoblinToken|
 |Generate|TOK:USG|Minion|||MinionToken|
 |Generate|TOK:USG|Saproling|||SaprolingToken|
+|Generate|TOK:UST|Dragon|||DragonTokenGold|
 |Generate|TOK:V10|Wolf|||WolfToken|
 |Generate|TOK:V11|Faerie Rogue|||OonaQueenFaerieToken|
 |Generate|TOK:V12|Spirit|||SpiritToken|
