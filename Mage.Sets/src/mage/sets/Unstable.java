@@ -28,6 +28,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -43,6 +44,6 @@ public class Unstable extends ExpansionSet {
 
     private Unstable() {
         super("Unstable", "UST", ExpansionSet.buildDate(2017, 12, 8), SetType.JOKESET);
-
+        cards.add(new SetCardInfo("Sword of Dungeons and Dragons", 1, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsAndDragons.class));
     }
 }

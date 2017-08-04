@@ -180,6 +180,7 @@ Urza's Legacy|ULG|
 Unhinged|UNH|
 Urza's Saga|USG|
 Unstable|UST|
+HASCON Promo 2017|H17|
 From the Vault: Exiled|V09|
 From the Vault: Relics|V10|
 From the Vault: Legends|V11|

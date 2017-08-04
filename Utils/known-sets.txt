@@ -89,6 +89,7 @@ Gatecrash|Gatecrash|
 Grand Prix|GrandPrix|
 Guildpact|Guildpact|
 Guru|Guru|
+HASCON Promo 2017|HasconPromo2017|
 Homelands|Homelands|
 Hour of Devastation|HourOfDevastation|
 Ice Age|IceAge|

@@ -5,7 +5,9 @@ package mage.constants;
  * @author North
  */
 public enum ColoredManaSymbol {
-    W("W","white"), U("U","blue"), B("B","black"), R("R","red"), G("G","green");
+    W("W","white"), U("U","blue"), B("B","black"), R("R","red"), G("G","green"),
+    O("O","gold");
+    
 
     private final String text;
     private final String colorName;
@@ -38,6 +40,9 @@ public enum ColoredManaSymbol {
                 return B;
             case 'U':
                 return U;
+                
+            case 'O':
+                return O;
         }
         return null;
     }
