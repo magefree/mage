@@ -159,6 +159,7 @@ public class FifthDawn extends ExpansionSet {
         cards.add(new SetCardInfo("Night's Whisper", 55, Rarity.UNCOMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Nim Grotesque", 56, Rarity.UNCOMMON, mage.cards.n.NimGrotesque.class));
         cards.add(new SetCardInfo("Opaline Bracers", 141, Rarity.COMMON, mage.cards.o.OpalineBracers.class));
+        cards.add(new SetCardInfo("Ouphe Vandals", 90, Rarity.UNCOMMON, mage.cards.o.OupheVandals.class));
         cards.add(new SetCardInfo("Paradise Mantle", 142, Rarity.UNCOMMON, mage.cards.p.ParadiseMantle.class));
         cards.add(new SetCardInfo("Pentad Prism", 143, Rarity.COMMON, mage.cards.p.PentadPrism.class));
         cards.add(new SetCardInfo("Plasma Elemental", 34, Rarity.UNCOMMON, mage.cards.p.PlasmaElemental.class));
