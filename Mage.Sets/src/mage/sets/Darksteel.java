@@ -85,6 +85,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Heartseeker", 124, Rarity.RARE, mage.cards.h.Heartseeker.class));
         cards.add(new SetCardInfo("Hoverguard Observer", 22, Rarity.UNCOMMON, mage.cards.h.HoverguardObserver.class));
         cards.add(new SetCardInfo("Hunger of the Nim", 46, Rarity.COMMON, mage.cards.h.HungerOfTheNim.class));
+        cards.add(new SetCardInfo("Infested Roothold", 76, Rarity.UNCOMMON, mage.cards.i.InfestedRoothold.class));
         cards.add(new SetCardInfo("Inflame", 64, Rarity.COMMON, mage.cards.i.Inflame.class));
         cards.add(new SetCardInfo("Juggernaut", 125, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
         cards.add(new SetCardInfo("Karstoderm", 77, Rarity.UNCOMMON, mage.cards.k.Karstoderm.class));
