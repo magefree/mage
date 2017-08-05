@@ -137,6 +137,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Elite Archers", 13, Rarity.RARE, mage.cards.e.EliteArchers.class));
         cards.add(new SetCardInfo("Elvish Herder", 247, Rarity.COMMON, mage.cards.e.ElvishHerder.class));
         cards.add(new SetCardInfo("Elvish Lyrist", 248, Rarity.COMMON, mage.cards.e.ElvishLyrist.class));
+        cards.add(new SetCardInfo("Endless Wurm", 249, Rarity.RARE, mage.cards.e.EndlessWurm.class));
         cards.add(new SetCardInfo("Endoskeleton", 294, Rarity.UNCOMMON, mage.cards.e.Endoskeleton.class));
         cards.add(new SetCardInfo("Energy Field", 73, Rarity.RARE, mage.cards.e.EnergyField.class));
         cards.add(new SetCardInfo("Exhaustion", 74, Rarity.UNCOMMON, mage.cards.e.Exhaustion.class));

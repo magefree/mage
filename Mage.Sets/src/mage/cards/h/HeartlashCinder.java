@@ -49,12 +49,12 @@ import mage.game.Game;
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class HeartlashCinder extends CardImpl {
 
     public HeartlashCinder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Warrior");
 
@@ -63,12 +63,12 @@ public class HeartlashCinder extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        
+
         // Chroma - When Heartlash Cinder enters the battlefield, it gets +X/+0 until end of turn, where X is the number of red mana symbols in the mana costs of permanents you control.
-        ContinuousEffect effect = new BoostSourceEffect(new ChromaHeartlashCinderCount(), new StaticValue(0), Duration.EndOfTurn);
+        ContinuousEffect effect = new BoostSourceEffect(new ChromaHeartlashCinderCount(), new StaticValue(0), Duration.EndOfTurn, true);
         effect.setText("<i>Chroma</i> - When Heartlash Cinder enters the battlefield, it gets +X/+0 until end of turn, where X is the number of red mana symbols in the mana costs of permanents you control.");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false, true));
-        
+
     }
 
     public HeartlashCinder(final HeartlashCinder card) {

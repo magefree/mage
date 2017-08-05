@@ -111,6 +111,23 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         return newColor;
     }
 
+    /**
+     * Returns a new color which contains the intersection of the colors of this 
+     * ObjectColor and the other ObjectColor.
+     *
+     * @param other The other ObjectColor to intersect with
+     * @return A new color which is the intersection of this and other
+     */
+    public ObjectColor intersection(ObjectColor other) {
+        ObjectColor newColor = new ObjectColor();
+        newColor.white = white && other.white;
+        newColor.blue = blue && other.blue;
+        newColor.black = black && other.black;
+        newColor.red = red && other.red;
+        newColor.green = green && other.green;
+        return newColor;
+    }
+
     public int getColorCount() {
         int count = 0;
         if (white) {

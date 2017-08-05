@@ -52,7 +52,7 @@ import mage.filter.common.FilterAttackingCreature;
 public class RabbleRouser extends CardImpl {
 
     public RabbleRouser(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
 
@@ -66,7 +66,7 @@ public class RabbleRouser extends CardImpl {
         DynamicValue amount = new SourcePermanentPowerCount();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostAllEffect(amount, new StaticValue(0), Duration.EndOfTurn, new FilterAttackingCreature(), false,
-                        "Attacking creatures get +X/+0 until end of turn, where X is {this}'s power"),
+                        "Attacking creatures get +X/+0 until end of turn, where X is {this}'s power", true),
                 new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

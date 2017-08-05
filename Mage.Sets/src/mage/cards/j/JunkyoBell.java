@@ -54,12 +54,12 @@ import mage.target.targetpointer.FixedTarget;
 public class JunkyoBell extends CardImpl {
 
     public JunkyoBell(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // At the beginning of your upkeep, you may have target creature you control get +X/+X until end of turn,
         // where X is the number of creatures you control. If you do, sacrifice that creature at the beginning of the next end step.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent());
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BoostTargetEffect(amount, amount, Duration.EndOfTurn), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BoostTargetEffect(amount, amount, Duration.EndOfTurn, true), TargetController.YOU, true);
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addEffect(new JunkyoBellSacrificeEffect());
         this.addAbility(ability);
