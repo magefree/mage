@@ -155,6 +155,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Ember Beast", 190, Rarity.COMMON, mage.cards.e.EmberBeast.class));
         cards.add(new SetCardInfo("Engulfing Flames", 191, Rarity.UNCOMMON, mage.cards.e.EngulfingFlames.class));
         cards.add(new SetCardInfo("Entomb", 132, Rarity.RARE, mage.cards.e.Entomb.class));
+        cards.add(new SetCardInfo("Epicenter", 192, Rarity.RARE, mage.cards.e.Epicenter.class));
         cards.add(new SetCardInfo("Escape Artist", 84, Rarity.COMMON, mage.cards.e.EscapeArtist.class));
         cards.add(new SetCardInfo("Execute", 133, Rarity.UNCOMMON, mage.cards.e.Execute.class));
         cards.add(new SetCardInfo("Extract", 85, Rarity.RARE, mage.cards.e.Extract.class));
