@@ -27,10 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -50,6 +46,11 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -196,7 +197,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
                         }
                         if (defender != null) {
                             PlayerList playerList = game.getState().getPlayerList(event.getPlayerId());
-                            if (allowedDirection == MysticBarrier.ALLOW_ATTACKING_LEFT) {
+                            if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_LEFT)) {
                                 if (!playerList.getNext().equals(defender.getId())) {
                                     // the defender is not the player to the left
                                     Player attacker = game.getPlayer(event.getPlayerId());
@@ -206,7 +207,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
                                     return true;
                                 }
                             }
-                            if (allowedDirection == MysticBarrier.ALLOW_ATTACKING_RIGHT) {
+                            if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_RIGHT)) {
                                 if (!playerList.getPrevious().equals(defender.getId())) {
                                     // the defender is not the player to the right
                                     Player attacker = game.getPlayer(event.getPlayerId());
