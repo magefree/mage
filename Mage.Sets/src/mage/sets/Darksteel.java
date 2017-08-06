@@ -30,6 +30,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Spyglass", 93, Rarity.COMMON, mage.cards.a.ArcaneSpyglass.class));
         cards.add(new SetCardInfo("Arcbound Bruiser", 94, Rarity.COMMON, mage.cards.a.ArcboundBruiser.class));
         cards.add(new SetCardInfo("Arcbound Crusher", 95, Rarity.UNCOMMON, mage.cards.a.ArcboundCrusher.class));
+        cards.add(new SetCardInfo("Arcbound Fiend", 96, Rarity.UNCOMMON, mage.cards.a.ArcboundFiend.class));
         cards.add(new SetCardInfo("Arcbound Hybrid", 97, Rarity.COMMON, mage.cards.a.ArcboundHybrid.class));
         cards.add(new SetCardInfo("Arcbound Lancer", 98, Rarity.UNCOMMON, mage.cards.a.ArcboundLancer.class));
         cards.add(new SetCardInfo("Arcbound Overseer", 99, Rarity.RARE, mage.cards.a.ArcboundOverseer.class));
