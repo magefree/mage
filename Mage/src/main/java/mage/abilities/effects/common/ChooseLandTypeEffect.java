@@ -53,7 +53,7 @@ public class ChooseLandTypeEffect extends OneShotEffect {
             if (!game.isSimulation()) {
                 game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
             }
-            game.getState().setValue(mageObject.getId() + "_type", typeChoice.getChoice());
+            game.getState().setValue(mageObject.getId() + "_type", SubType.byDescription(typeChoice.getChoice()));
             if (mageObject instanceof Permanent) {
                 ((Permanent) mageObject).addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
             }

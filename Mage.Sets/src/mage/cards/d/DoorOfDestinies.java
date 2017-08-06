@@ -102,11 +102,11 @@ class AddCounterAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent doorOfDestinies = game.getPermanent(getSourceId());
         if (doorOfDestinies != null) {
-            String subtype = (String) game.getState().getValue(doorOfDestinies.getId() + "_type");
+            SubType subtype = (SubType) game.getState().getValue(doorOfDestinies.getId() + "_type");
             if (subtype != null) {
                 FilterSpell filter = new FilterSpell();
                 filter.add(new ControllerPredicate(TargetController.YOU));
-                filter.add(new SubtypePredicate(SubType.byDescription(subtype)));
+                filter.add(new SubtypePredicate(subtype));
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
                     return true;

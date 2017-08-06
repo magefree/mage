@@ -308,29 +308,22 @@ public abstract class ExpansionSet implements Serializable {
     private void addSpecial(List<Card> booster) {
         int specialCards = 0;
         List<CardInfo> specialBonus = getSpecialBonus();
-        if (specialBonus != null) {
-            specialCards += specialBonus.size();
-        }
+        specialCards += specialBonus.size();
+
         List<CardInfo> specialMythic = getSpecialMythic();
-        if (specialMythic != null) {
-            specialCards += specialMythic.size();
-        }
+        specialCards += specialMythic.size();
         List<CardInfo> specialRare = getSpecialRare();
-        if (specialRare != null) {
-            specialCards += specialRare.size();
-        }
+        specialCards += specialRare.size();
         List<CardInfo> specialUncommon = getSpecialUncommon();
-        if (specialUncommon != null) {
-            specialCards += specialUncommon.size();
-        }
+        specialCards += specialUncommon.size();
         List<CardInfo> specialCommon = getSpecialCommon();
-        if (specialCommon != null) {
-            specialCards += specialCommon.size();
-        }
+
+        specialCards += specialCommon.size();
+
         if (specialCards > 0) {
             for (int i = 0; i < numBoosterSpecial; i++) {
                 if (RandomUtil.nextInt(15) < 10) {
-                    if (specialCommon != null && !specialCommon.isEmpty()) {
+                    if (!specialCommon.isEmpty()) {
                         addToBooster(booster, specialCommon);
                     } else {
                         i--;
@@ -338,7 +331,7 @@ public abstract class ExpansionSet implements Serializable {
                     continue;
                 }
                 if (RandomUtil.nextInt(4) < 3) {
-                    if (specialUncommon != null && !specialUncommon.isEmpty()) {
+                    if (!specialUncommon.isEmpty()) {
                         addToBooster(booster, specialUncommon);
                     } else {
                         i--;
@@ -346,15 +339,15 @@ public abstract class ExpansionSet implements Serializable {
                     continue;
                 }
                 if (RandomUtil.nextInt(8) < 7) {
-                    if (specialRare != null && !specialRare.isEmpty()) {
+                    if (!specialRare.isEmpty()) {
                         addToBooster(booster, specialRare);
                     } else {
                         i--;
                     }
                     continue;
                 }
-                if (specialMythic != null && !specialMythic.isEmpty()) {
-                    if (specialBonus != null && !specialBonus.isEmpty()) {
+                if (!specialMythic.isEmpty()) {
+                    if (!specialBonus.isEmpty()) {
                         if (RandomUtil.nextInt(3) < 2) {
                             addToBooster(booster, specialMythic);
                             continue;
@@ -366,7 +359,7 @@ public abstract class ExpansionSet implements Serializable {
                 } else {
                     i--;
                 }
-                if (specialBonus != null && !specialBonus.isEmpty()) {
+                if (!specialBonus.isEmpty()) {
                     addToBooster(booster, specialBonus);
                 }
             }
@@ -407,27 +400,27 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     public List<CardInfo> getSpecialCommon() {
-        return null;
+        return new ArrayList<>();
     }
 
     public List<CardInfo> getSpecialUncommon() {
-        return null;
+        return new ArrayList<>();
     }
 
     public List<CardInfo> getSpecialRare() {
-        return null;
+        return new ArrayList<>();
     }
 
     public List<CardInfo> getSpecialMythic() {
-        return null;
+        return new ArrayList<>();
     }
 
     public List<CardInfo> getSpecialBonus() {
-        return null;
+        return new ArrayList<>();
     }
 
     public List<CardInfo> getSpecialLand() {
-        return null;
+        return new ArrayList<>();
     }
 
     public boolean isCustomSet() {
