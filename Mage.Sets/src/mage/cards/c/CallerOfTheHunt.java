@@ -40,10 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceCreatureType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 import mage.game.Game;
@@ -141,7 +138,7 @@ class ChooseCreatureTypeEffect extends OneShotEffect { // code by LevelX2, but t
             if (!game.isSimulation()) {
                 game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
             }
-            game.getState().setValue(mageObject.getId() + "_type", typeChoice.getChoice());
+            game.getState().setValue(mageObject.getId() + "_type", SubType.byDescription(typeChoice.getChoice()));
             return true;
         }
         return false;

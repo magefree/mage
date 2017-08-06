@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.constants.SubType;
 
 /**
  *
@@ -40,8 +41,8 @@ public class VolrathsLaboratoryToken extends Token {
     public VolrathsLaboratoryToken() {
         this(null, null);
     }
-    public VolrathsLaboratoryToken(ObjectColor color, String type) {
-        super(type, "2/2 creature token of the chosen color and type");
+    public VolrathsLaboratoryToken(ObjectColor color, SubType type) {
+        super(type.getDescription(), "2/2 creature token of the chosen color and type");
         cardType.add(CardType.CREATURE);
         if (color != null) {
             this.color.setColor(color);

@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.constants.SubType;
 
 /**
  *
@@ -40,8 +41,8 @@ public class RiptideReplicatorToken extends Token {
     public RiptideReplicatorToken() {
         this(null, null, 1);
     }
-    public RiptideReplicatorToken(ObjectColor color, String type, int x) {
-        super(type, "X/X creature token of the chosen color and type");
+    public RiptideReplicatorToken(ObjectColor color, SubType type, int x) {
+        super(type.getDescription(), "X/X creature token of the chosen color and type");
         cardType.add(CardType.CREATURE);
         if (color != null) {
             this.color.setColor(color);

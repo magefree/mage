@@ -48,9 +48,9 @@ public class BoostAllOfChosenSubtypeEffect extends BoostAllEffect {
 
     @Override
     protected void setRuntimeData(Ability source, Game game) {
-        String s = (String) game.getState().getValue(source.getSourceId() + "_type");
-        if (subtype != null) {
-            subtype = SubType.byDescription(s);
+        SubType s = (SubType) game.getState().getValue(source.getSourceId() + "_type");
+        if (s != null) {
+            subtype = s;
         } else {
             discard();
         }
