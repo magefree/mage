@@ -78,6 +78,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Boris Devilboon", 263, Rarity.RARE, mage.cards.b.BorisDevilboon.class));
         cards.add(new SetCardInfo("Carrion Ants", 4, Rarity.RARE, mage.cards.c.CarrionAnts.class));
         cards.add(new SetCardInfo("Cat Warriors", 91, Rarity.COMMON, mage.cards.c.CatWarriors.class));
+        cards.add(new SetCardInfo("Caverns of Despair", 136, Rarity.RARE, mage.cards.c.CavernsOfDespair.class));
         cards.add(new SetCardInfo("Chain Lightning", 137, Rarity.COMMON, mage.cards.c.ChainLightning.class));
         cards.add(new SetCardInfo("Chains of Mephistopheles", 5, Rarity.RARE, mage.cards.c.ChainsOfMephistopheles.class));
         cards.add(new SetCardInfo("Chromium", 264, Rarity.RARE, mage.cards.c.Chromium.class));
