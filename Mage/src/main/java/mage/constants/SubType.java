@@ -56,6 +56,7 @@ public enum SubType {
     ATOG("Atog", SubTypeSet.CreatureType, false),
     ATAT("AT-AT", SubTypeSet.CreatureType, true),
     AUROCHS("Aurochs", SubTypeSet.CreatureType, false),
+    AUTOBOT("Autobot", SubTypeSet.CreatureType, false),
     AVATAR("Avatar", SubTypeSet.CreatureType, false),
     // B
     BADGER("Badger", SubTypeSet.CreatureType, false),
@@ -99,6 +100,7 @@ public enum SubType {
     DEMON("Demon", SubTypeSet.CreatureType, false),
     DESERTER("Deserter", SubTypeSet.CreatureType, false),
     DEVIL("Devil", SubTypeSet.CreatureType, false),
+    DINOSAUR("Dinosaur", SubTypeSet.CreatureType, false),
     DJINN("Djinn", SubTypeSet.CreatureType, false),
     DRAGON("Dragon", SubTypeSet.CreatureType, false),
     DRAKE("Drake", SubTypeSet.CreatureType, false),
