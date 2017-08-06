@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -130,10 +129,10 @@ public class ShardsOfAlara extends ExpansionSet {
         cards.add(new SetCardInfo("Fire-Field Ogre", 168, Rarity.UNCOMMON, mage.cards.f.FireFieldOgre.class));
         cards.add(new SetCardInfo("Flameblast Dragon", 100, Rarity.RARE, mage.cards.f.FlameblastDragon.class));
         cards.add(new SetCardInfo("Fleshbag Marauder", 76, Rarity.UNCOMMON, mage.cards.f.FleshbagMarauder.class));
-        cards.add(new SetCardInfo("Forest", 246, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 247, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 248, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 249, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 246, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 247, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 248, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 249, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gather Specimens", 45, Rarity.RARE, mage.cards.g.GatherSpecimens.class));
         cards.add(new SetCardInfo("Gift of the Gargantuan", 132, Rarity.COMMON, mage.cards.g.GiftOfTheGargantuan.class));
         cards.add(new SetCardInfo("Glaze Fiend", 77, Rarity.COMMON, mage.cards.g.GlazeFiend.class));
@@ -155,10 +154,10 @@ public class ShardsOfAlara extends ExpansionSet {
         cards.add(new SetCardInfo("Incurable Ogre", 105, Rarity.COMMON, mage.cards.i.IncurableOgre.class));
         cards.add(new SetCardInfo("Infest", 80, Rarity.UNCOMMON, mage.cards.i.Infest.class));
         cards.add(new SetCardInfo("Invincible Hymn", 14, Rarity.RARE, mage.cards.i.InvincibleHymn.class));
-        cards.add(new SetCardInfo("Island", 234, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 235, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 237, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 234, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 235, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 237, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jhessian Infiltrator", 174, Rarity.UNCOMMON, mage.cards.j.JhessianInfiltrator.class));
         cards.add(new SetCardInfo("Jhessian Lookout", 46, Rarity.COMMON, mage.cards.j.JhessianLookout.class));
         cards.add(new SetCardInfo("Jund Battlemage", 106, Rarity.UNCOMMON, mage.cards.j.JundBattlemage.class));
@@ -189,10 +188,10 @@ public class ShardsOfAlara extends ExpansionSet {
         cards.add(new SetCardInfo("Mindlock Orb", 51, Rarity.RARE, mage.cards.m.MindlockOrb.class));
         cards.add(new SetCardInfo("Minion Reflector", 211, Rarity.RARE, mage.cards.m.MinionReflector.class));
         cards.add(new SetCardInfo("Mosstodon", 139, Rarity.COMMON, mage.cards.m.Mosstodon.class));
-        cards.add(new SetCardInfo("Mountain", 242, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 244, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 245, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 242, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 244, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 245, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mycoloth", 140, Rarity.RARE, mage.cards.m.Mycoloth.class));
         cards.add(new SetCardInfo("Naturalize", 141, Rarity.COMMON, mage.cards.n.Naturalize.class));
         cards.add(new SetCardInfo("Naya Battlemage", 142, Rarity.UNCOMMON, mage.cards.n.NayaBattlemage.class));
@@ -208,10 +207,10 @@ public class ShardsOfAlara extends ExpansionSet {
         cards.add(new SetCardInfo("Onyx Goblet", 81, Rarity.COMMON, mage.cards.o.OnyxGoblet.class));
         cards.add(new SetCardInfo("Ooze Garden", 143, Rarity.RARE, mage.cards.o.OozeGarden.class));
         cards.add(new SetCardInfo("Outrider of Jhess", 52, Rarity.COMMON, mage.cards.o.OutriderOfJhess.class));
-        cards.add(new SetCardInfo("Plains", 230, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 231, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 232, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 233, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 230, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 231, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 232, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 233, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Predator Dragon", 109, Rarity.RARE, mage.cards.p.PredatorDragon.class));
         cards.add(new SetCardInfo("Prince of Thralls", 182, Rarity.MYTHIC, mage.cards.p.PrinceOfThralls.class));
         cards.add(new SetCardInfo("Protomatter Powder", 53, Rarity.UNCOMMON, mage.cards.p.ProtomatterPowder.class));
@@ -272,10 +271,10 @@ public class ShardsOfAlara extends ExpansionSet {
         cards.add(new SetCardInfo("Steward of Valeron", 198, Rarity.COMMON, mage.cards.s.StewardOfValeron.class));
         cards.add(new SetCardInfo("Stoic Angel", 199, Rarity.RARE, mage.cards.s.StoicAngel.class));
         cards.add(new SetCardInfo("Sunseed Nurturer", 29, Rarity.UNCOMMON, mage.cards.s.SunseedNurturer.class));
-        cards.add(new SetCardInfo("Swamp", 238, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 239, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 240, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 241, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 238, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 239, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 240, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 241, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swerve", 200, Rarity.UNCOMMON, mage.cards.s.Swerve.class));
         cards.add(new SetCardInfo("Tar Fiend", 89, Rarity.RARE, mage.cards.t.TarFiend.class));
         cards.add(new SetCardInfo("Tezzeret the Seeker", 60, Rarity.MYTHIC, mage.cards.t.TezzeretTheSeeker.class));

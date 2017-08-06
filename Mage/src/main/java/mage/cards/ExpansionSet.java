@@ -43,6 +43,9 @@ import java.util.stream.Collectors;
  */
 public abstract class ExpansionSet implements Serializable {
 
+    public final static CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true);
+    public final static CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
+
     public class SetCardInfo implements Serializable {
 
         private final String name;

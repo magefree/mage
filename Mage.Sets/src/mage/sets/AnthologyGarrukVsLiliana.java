@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -61,10 +60,10 @@ public class AnthologyGarrukVsLiliana extends ExpansionSet {
         cards.add(new SetCardInfo("Enslave", 58, Rarity.UNCOMMON, mage.cards.e.Enslave.class));
         cards.add(new SetCardInfo("Faerie Macabre", 42, Rarity.COMMON, mage.cards.f.FaerieMacabre.class));
         cards.add(new SetCardInfo("Fleshbag Marauder", 38, Rarity.UNCOMMON, mage.cards.f.FleshbagMarauder.class));
-        cards.add(new SetCardInfo("Forest", 28, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 29, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 30, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 31, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 28, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 29, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 30, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 31, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garruk Wildspeaker", 1, Rarity.MYTHIC, mage.cards.g.GarrukWildspeaker.class));
         cards.add(new SetCardInfo("Genju of the Cedars", 13, Rarity.UNCOMMON, mage.cards.g.GenjuOfTheCedars.class));
         cards.add(new SetCardInfo("Genju of the Fens", 47, Rarity.UNCOMMON, mage.cards.g.GenjuOfTheFens.class));
@@ -97,10 +96,10 @@ public class AnthologyGarrukVsLiliana extends ExpansionSet {
         cards.add(new SetCardInfo("Slippery Karst", 26, Rarity.COMMON, mage.cards.s.SlipperyKarst.class));
         cards.add(new SetCardInfo("Snuff Out", 53, Rarity.COMMON, mage.cards.s.SnuffOut.class));
         cards.add(new SetCardInfo("Stampeding Wildebeests", 9, Rarity.UNCOMMON, mage.cards.s.StampedingWildebeests.class));
-        cards.add(new SetCardInfo("Swamp", 60, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 61, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 62, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 63, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 60, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 61, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 62, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 63, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tendrils of Corruption", 54, Rarity.COMMON, mage.cards.t.TendrilsOfCorruption.class));
         cards.add(new SetCardInfo("Treetop Village", 27, Rarity.UNCOMMON, mage.cards.t.TreetopVillage.class));
         cards.add(new SetCardInfo("Twisted Abomination", 45, Rarity.COMMON, mage.cards.t.TwistedAbomination.class));

@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -62,8 +61,8 @@ public class PhyrexiaVsTheCoalition extends ExpansionSet {
         cards.add(new SetCardInfo("Evasive Action", 50, Rarity.UNCOMMON, mage.cards.e.EvasiveAction.class));
         cards.add(new SetCardInfo("Exotic Curse", 56, Rarity.COMMON, mage.cards.e.ExoticCurse.class));
         cards.add(new SetCardInfo("Fertile Ground", 52, Rarity.COMMON, mage.cards.f.FertileGround.class));
-        cards.add(new SetCardInfo("Forest", 70, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 71, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 70, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 71, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gerrard Capashen", 46, Rarity.RARE, mage.cards.g.GerrardCapashen.class));
         cards.add(new SetCardInfo("Gerrard's Command", 53, Rarity.COMMON, mage.cards.g.GerrardsCommand.class));
         cards.add(new SetCardInfo("Harrow", 57, Rarity.COMMON, mage.cards.h.Harrow.class));
@@ -102,10 +101,10 @@ public class PhyrexiaVsTheCoalition extends ExpansionSet {
         cards.add(new SetCardInfo("Shivan Oasis", 65, Rarity.UNCOMMON, mage.cards.s.ShivanOasis.class));
         cards.add(new SetCardInfo("Slay", 25, Rarity.UNCOMMON, mage.cards.s.Slay.class));
         cards.add(new SetCardInfo("Sunscape Battlemage", 40, Rarity.UNCOMMON, mage.cards.s.SunscapeBattlemage.class));
-        cards.add(new SetCardInfo("Swamp", 32, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 33, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 34, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 35, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 32, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 33, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 34, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 35, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tendrils of Corruption", 30, Rarity.COMMON, mage.cards.t.TendrilsOfCorruption.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 66, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Thornscape Apprentice", 37, Rarity.COMMON, mage.cards.t.ThornscapeApprentice.class));

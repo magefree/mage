@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.h.HighTide;
 import mage.constants.Rarity;
@@ -75,7 +74,7 @@ public class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra, Fire of Kaladesh", 997, Rarity.SPECIAL, mage.cards.c.ChandraFireOfKaladesh.class));
         cards.add(new SetCardInfo("Chandra, Flamecaller", 175, Rarity.MYTHIC, mage.cards.c.ChandraFlamecaller.class));
         cards.add(new SetCardInfo("Chandra, Pyromaster", 75, Rarity.MYTHIC, mage.cards.c.ChandraPyromaster.class));
-        cards.add(new SetCardInfo("Chandra, Pyromaster", 102, Rarity.MYTHIC, mage.cards.c.ChandraPyromaster.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Chandra, Pyromaster", 102, Rarity.MYTHIC, mage.cards.c.ChandraPyromaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Roaring Flame", 997, Rarity.SPECIAL, mage.cards.c.ChandraRoaringFlame.class));
         cards.add(new SetCardInfo("Chandra, Torch of Defiance", 180, Rarity.MYTHIC, mage.cards.c.ChandraTorchOfDefiance.class));
         cards.add(new SetCardInfo("Chandra's Fury", 65, Rarity.COMMON, mage.cards.c.ChandrasFury.class));
@@ -154,7 +153,7 @@ public class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana, Defiant Necromancer", 996, Rarity.SPECIAL, mage.cards.l.LilianaDefiantNecromancer.class));
         cards.add(new SetCardInfo("Liliana, the Last Hope", 174, Rarity.MYTHIC, mage.cards.l.LilianaTheLastHope.class));
         cards.add(new SetCardInfo("Liliana Vess", 30, Rarity.RARE, mage.cards.l.LilianaVess.class));
-        cards.add(new SetCardInfo("Liliana Vess", 101, Rarity.MYTHIC, mage.cards.l.LilianaVess.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Liliana Vess", 101, Rarity.MYTHIC, mage.cards.l.LilianaVess.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Magister of Worth", 86, Rarity.SPECIAL, mage.cards.m.MagisterOfWorth.class));
         cards.add(new SetCardInfo("Mana Crypt", 6, Rarity.RARE, mage.cards.m.ManaCrypt.class));
         cards.add(new SetCardInfo("Markov Dreadknight", 151, Rarity.RARE, mage.cards.m.MarkovDreadknight.class));

@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -70,9 +69,9 @@ public class VenserVsKoth extends ExpansionSet {
         cards.add(new SetCardInfo("Galepowder Mage", 12, Rarity.RARE, mage.cards.g.GalepowderMage.class));
         cards.add(new SetCardInfo("Geyser Glider", 56, Rarity.UNCOMMON, mage.cards.g.GeyserGlider.class));
         cards.add(new SetCardInfo("Greater Stone Spirit", 61, Rarity.UNCOMMON, mage.cards.g.GreaterStoneSpirit.class));
-        cards.add(new SetCardInfo("Island", 41, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 42, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 43, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 41, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 42, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 43, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jaws of Stone", 72, Rarity.UNCOMMON, mage.cards.j.JawsOfStone.class));
         cards.add(new SetCardInfo("Jedit's Dragoons", 20, Rarity.COMMON, mage.cards.j.JeditsDragoons.class));
         cards.add(new SetCardInfo("Journeyer's Kite", 65, Rarity.RARE, mage.cards.j.JourneyersKite.class));
@@ -81,19 +80,19 @@ public class VenserVsKoth extends ExpansionSet {
         cards.add(new SetCardInfo("Lithophage", 57, Rarity.RARE, mage.cards.l.Lithophage.class));
         cards.add(new SetCardInfo("Minamo Sightbender", 5, Rarity.UNCOMMON, mage.cards.m.MinamoSightbender.class));
         cards.add(new SetCardInfo("Mistmeadow Witch", 6, Rarity.UNCOMMON, mage.cards.m.MistmeadowWitch.class));
-        cards.add(new SetCardInfo("Mountain", 74, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 75, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 76, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 77, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 74, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 75, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 76, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 77, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Neurok Invisimancer", 8, Rarity.COMMON, mage.cards.n.NeurokInvisimancer.class));
         cards.add(new SetCardInfo("New Benalia", 35, Rarity.UNCOMMON, mage.cards.n.NewBenalia.class));
         cards.add(new SetCardInfo("Oblivion Ring", 28, Rarity.UNCOMMON, mage.cards.o.OblivionRing.class));
         cards.add(new SetCardInfo("Overrule", 32, Rarity.COMMON, mage.cards.o.Overrule.class));
         cards.add(new SetCardInfo("Path to Exile", 23, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Pilgrim's Eye", 47, Rarity.COMMON, mage.cards.p.PilgrimsEye.class));
-        cards.add(new SetCardInfo("Plains", 38, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 39, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 40, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 38, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 39, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 40, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plated Geopede", 45, Rarity.COMMON, mage.cards.p.PlatedGeopede.class));
         cards.add(new SetCardInfo("Preordain", 24, Rarity.COMMON, mage.cards.p.Preordain.class));
         cards.add(new SetCardInfo("Primal Plasma", 16, Rarity.COMMON, mage.cards.p.PrimalPlasma.class));

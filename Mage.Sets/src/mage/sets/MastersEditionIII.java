@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.f.FeveredStrength;
 import mage.constants.Rarity;
@@ -114,9 +113,9 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Flash Flood", 35, Rarity.UNCOMMON, mage.cards.f.FlashFlood.class));
         cards.add(new SetCardInfo("Forced Retreat", 37, Rarity.COMMON, mage.cards.f.ForcedRetreat.class));
         cards.add(new SetCardInfo("Force Spike", 36, Rarity.COMMON, mage.cards.f.ForceSpike.class));
-        cards.add(new SetCardInfo("Forest", 228, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 229, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 230, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 228, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 229, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 230, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frost Giant", 101, Rarity.UNCOMMON, mage.cards.f.FrostGiant.class));
         cards.add(new SetCardInfo("Gaea's Touch", 120, Rarity.UNCOMMON, mage.cards.g.GaeasTouch.class));
         cards.add(new SetCardInfo("Ghostly Visit", 67, Rarity.COMMON, mage.cards.g.GhostlyVisit.class));
@@ -135,9 +134,9 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Hurloon Minotaur", 102, Rarity.COMMON, mage.cards.h.HurloonMinotaur.class));
         cards.add(new SetCardInfo("Immolation", 103, Rarity.COMMON, mage.cards.i.Immolation.class));
         cards.add(new SetCardInfo("Infuse", 38, Rarity.COMMON, mage.cards.i.Infuse.class));
-        cards.add(new SetCardInfo("Island", 219, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 220, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 221, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 219, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 220, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 221, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivory Guardians", 15, Rarity.UNCOMMON, mage.cards.i.IvoryGuardians.class));
         cards.add(new SetCardInfo("Jedit Ojanen", 153, Rarity.COMMON, mage.cards.j.JeditOjanen.class));
         cards.add(new SetCardInfo("Jerrard of the Closed Fist", 154, Rarity.COMMON, mage.cards.j.JerrardOfTheClosedFist.class));
@@ -170,18 +169,18 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Meng Huo's Horde", 129, Rarity.COMMON, mage.cards.m.MengHuosHorde.class));
         cards.add(new SetCardInfo("Mind Twist", 72, Rarity.RARE, mage.cards.m.MindTwist.class));
         cards.add(new SetCardInfo("Misfortune's Gain", 21, Rarity.COMMON, mage.cards.m.MisfortunesGain.class));
-        cards.add(new SetCardInfo("Mountain", 225, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 226, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 227, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 225, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 226, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 227, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nether Void", 73, Rarity.RARE, mage.cards.n.NetherVoid.class));
         cards.add(new SetCardInfo("Nicol Bolas", 163, Rarity.RARE, mage.cards.n.NicolBolas.class));
         cards.add(new SetCardInfo("Old Man of the Sea", 45, Rarity.RARE, mage.cards.o.OldManOfTheSea.class));
         cards.add(new SetCardInfo("Palladia-Mors", 164, Rarity.RARE, mage.cards.p.PalladiaMors.class));
         cards.add(new SetCardInfo("Pavel Maliki", 165, Rarity.UNCOMMON, mage.cards.p.PavelMaliki.class));
         cards.add(new SetCardInfo("Peach Garden Oath", 22, Rarity.COMMON, mage.cards.p.PeachGardenOath.class));
-        cards.add(new SetCardInfo("Plains", 216, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 217, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 218, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 216, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 217, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 218, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plateau", 209, Rarity.RARE, mage.cards.p.Plateau.class));
         cards.add(new SetCardInfo("Princess Lucrezia", 166, Rarity.UNCOMMON, mage.cards.p.PrincessLucrezia.class));
         cards.add(new SetCardInfo("Raging Minotaur", 109, Rarity.COMMON, mage.cards.r.RagingMinotaur.class));
@@ -216,9 +215,9 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Sunastian Falconer", 178, Rarity.UNCOMMON, mage.cards.s.SunastianFalconer.class));
         cards.add(new SetCardInfo("Sun Ce, Young Conquerer", 52, Rarity.UNCOMMON, mage.cards.s.SunCeYoungConquerer.class));
         cards.add(new SetCardInfo("Sun Quan, Lord of Wu", 53, Rarity.RARE, mage.cards.s.SunQuanLordOfWu.class));
-        cards.add(new SetCardInfo("Swamp", 222, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 223, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 224, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 222, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 223, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 224, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tetsuo Umezawa", 179, Rarity.RARE, mage.cards.t.TetsuoUmezawa.class));
         cards.add(new SetCardInfo("The Abyss", 77, Rarity.RARE, mage.cards.t.TheAbyss.class));
         cards.add(new SetCardInfo("The Lady of the Mountain", 180, Rarity.COMMON, mage.cards.t.TheLadyOfTheMountain.class));

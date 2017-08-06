@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -161,10 +160,10 @@ public class TenthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Flowstone Slide", 203, Rarity.RARE, mage.cards.f.FlowstoneSlide.class));
         cards.add(new SetCardInfo("Fog Elemental", 85, Rarity.UNCOMMON, mage.cards.f.FogElemental.class));
         cards.add(new SetCardInfo("Forbidding Watchtower", 352, Rarity.UNCOMMON, mage.cards.f.ForbiddingWatchtower.class));
-        cards.add(new SetCardInfo("Forest", 380, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 381, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 382, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 383, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 380, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 381, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 382, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 383, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fountain of Youth", 323, Rarity.UNCOMMON, mage.cards.f.FountainOfYouth.class));
         cards.add(new SetCardInfo("Fugitive Wizard", 86, Rarity.COMMON, mage.cards.f.FugitiveWizard.class));
         cards.add(new SetCardInfo("Furnace of Rath", 204, Rarity.RARE, mage.cards.f.FurnaceOfRath.class));
@@ -205,10 +204,10 @@ public class TenthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Icatian Priest", 24, Rarity.UNCOMMON, mage.cards.i.IcatianPriest.class));
         cards.add(new SetCardInfo("Icy Manipulator", 326, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("Incinerate", 213, Rarity.COMMON, mage.cards.i.Incinerate.class));
-        cards.add(new SetCardInfo("Island", 368, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 369, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 370, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 371, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 368, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 369, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 370, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 371, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jayemdae Tome", 327, Rarity.RARE, mage.cards.j.JayemdaeTome.class));
         cards.add(new SetCardInfo("Joiner Adept", 271, Rarity.RARE, mage.cards.j.JoinerAdept.class));
         cards.add(new SetCardInfo("Juggernaut", 328, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
@@ -255,10 +254,10 @@ public class TenthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Molimo, Maro-Sorcerer", 280, Rarity.RARE, mage.cards.m.MolimoMaroSorcerer.class));
         cards.add(new SetCardInfo("Mortal Combat", 160, Rarity.RARE, mage.cards.m.MortalCombat.class));
         cards.add(new SetCardInfo("Mortivore", 161, Rarity.RARE, mage.cards.m.Mortivore.class));
-        cards.add(new SetCardInfo("Mountain", 376, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 377, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 378, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 379, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 376, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 377, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 378, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 379, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nantuko Husk", 162, Rarity.UNCOMMON, mage.cards.n.NantukoHusk.class));
         cards.add(new SetCardInfo("Naturalize", 282, Rarity.COMMON, mage.cards.n.Naturalize.class));
         cards.add(new SetCardInfo("Natural Spring", 281, Rarity.COMMON, mage.cards.n.NaturalSpring.class));
@@ -284,10 +283,10 @@ public class TenthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Plagiarize", 97, Rarity.RARE, mage.cards.p.Plagiarize.class));
         cards.add(new SetCardInfo("Plague Beetle", 168, Rarity.COMMON, mage.cards.p.PlagueBeetle.class));
         cards.add(new SetCardInfo("Plague Wind", 169, Rarity.RARE, mage.cards.p.PlagueWind.class));
-        cards.add(new SetCardInfo("Plains", 364, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 365, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 366, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 367, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 364, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 365, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 366, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 367, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Platinum Angel", 339, Rarity.RARE, mage.cards.p.PlatinumAngel.class));
         cards.add(new SetCardInfo("Primal Rage", 286, Rarity.UNCOMMON, mage.cards.p.PrimalRage.class));
         cards.add(new SetCardInfo("Prodigal Pyromancer", 221, Rarity.COMMON, mage.cards.p.ProdigalPyromancer.class));
@@ -378,10 +377,10 @@ public class TenthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Sulfurous Springs", 359, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
         cards.add(new SetCardInfo("Sunken Hope", 112, Rarity.RARE, mage.cards.s.SunkenHope.class));
         cards.add(new SetCardInfo("Suntail Hawk", 50, Rarity.COMMON, mage.cards.s.SuntailHawk.class));
-        cards.add(new SetCardInfo("Swamp", 372, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 373, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 374, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 375, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 372, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 373, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 374, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 375, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sylvan Basilisk", 301, Rarity.UNCOMMON, mage.cards.s.SylvanBasilisk.class));
         cards.add(new SetCardInfo("Sylvan Scrying", 302, Rarity.UNCOMMON, mage.cards.s.SylvanScrying.class));
         cards.add(new SetCardInfo("Tangle Spider", 303, Rarity.UNCOMMON, mage.cards.t.TangleSpider.class));

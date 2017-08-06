@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -70,11 +69,11 @@ public class NissaVsObNixilis extends ExpansionSet {
         cards.add(new SetCardInfo("Fertile Thicket", 27, Rarity.COMMON, mage.cards.f.FertileThicket.class));
         cards.add(new SetCardInfo("Fertilid", 9, Rarity.COMMON, mage.cards.f.Fertilid.class));
         cards.add(new SetCardInfo("Fetid Imp", 48, Rarity.COMMON, mage.cards.f.FetidImp.class));
-        cards.add(new SetCardInfo("Forest", 31, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 32, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 33, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 34, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 35, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 31, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 32, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 33, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 34, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 35, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Foul Imp", 49, Rarity.COMMON, mage.cards.f.FoulImp.class));
         cards.add(new SetCardInfo("Gaea's Blessing", 10, Rarity.UNCOMMON, mage.cards.g.GaeasBlessing.class));
         cards.add(new SetCardInfo("Giant Scorpion", 50, Rarity.COMMON, mage.cards.g.GiantScorpion.class));
@@ -105,11 +104,11 @@ public class NissaVsObNixilis extends ExpansionSet {
         cards.add(new SetCardInfo("Shadows of the Past", 60, Rarity.UNCOMMON, mage.cards.s.ShadowsOfThePast.class));
         cards.add(new SetCardInfo("Smallpox", 61, Rarity.UNCOMMON, mage.cards.s.Smallpox.class));
         cards.add(new SetCardInfo("Squelching Leeches", 62, Rarity.UNCOMMON, mage.cards.s.SquelchingLeeches.class));
-        cards.add(new SetCardInfo("Swamp", 66, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 67, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 68, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 69, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 70, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 66, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 67, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 68, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 69, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 70, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tendrils of Corruption", 63, Rarity.COMMON, mage.cards.t.TendrilsOfCorruption.class));
         cards.add(new SetCardInfo("Thicket Elemental", 21, Rarity.RARE, mage.cards.t.ThicketElemental.class));
         cards.add(new SetCardInfo("Thornweald Archer", 22, Rarity.COMMON, mage.cards.t.ThornwealdArcher.class));

@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -138,10 +137,10 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Firebrand Ranger", 143, Rarity.UNCOMMON, mage.cards.f.FirebrandRanger.class));
         cards.add(new SetCardInfo("Firescreamer", 106, Rarity.COMMON, mage.cards.f.Firescreamer.class));
         cards.add(new SetCardInfo("Fires of Yavimaya", 246, Rarity.UNCOMMON, mage.cards.f.FiresOfYavimaya.class));
-        cards.add(new SetCardInfo("Forest", 347, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 348, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 349, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 350, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 347, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 348, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 349, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 350, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Tilling", 247, Rarity.COMMON, mage.cards.f.FrenziedTilling.class));
         cards.add(new SetCardInfo("Galina's Knight", 248, Rarity.COMMON, mage.cards.g.GalinasKnight.class));
         cards.add(new SetCardInfo("Geothermal Crevice", 323, Rarity.COMMON, mage.cards.g.GeothermalCrevice.class));
@@ -160,10 +159,10 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Hunting Kavu", 252, Rarity.UNCOMMON, mage.cards.h.HuntingKavu.class));
         cards.add(new SetCardInfo("Hypnotic Cloud", 109, Rarity.COMMON, mage.cards.h.HypnoticCloud.class));
         cards.add(new SetCardInfo("Irrigation Ditch", 324, Rarity.COMMON, mage.cards.i.IrrigationDitch.class));
-        cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jade Leech", 190, Rarity.RARE, mage.cards.j.JadeLeech.class));
         cards.add(new SetCardInfo("Juntu Stakes", 304, Rarity.RARE, mage.cards.j.JuntuStakes.class));
         cards.add(new SetCardInfo("Kangee, Aerie Keeper", 253, Rarity.RARE, mage.cards.k.KangeeAerieKeeper.class));
@@ -193,10 +192,10 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Meteor Storm", 256, Rarity.RARE, mage.cards.m.MeteorStorm.class));
         cards.add(new SetCardInfo("Might Weaver", 198, Rarity.UNCOMMON, mage.cards.m.MightWeaver.class));
         cards.add(new SetCardInfo("Molimo, Maro-Sorcerer", 199, Rarity.RARE, mage.cards.m.MolimoMaroSorcerer.class));
-        cards.add(new SetCardInfo("Mountain", 343, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 344, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 345, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 346, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 343, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 344, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 345, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 346, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mourning", 111, Rarity.COMMON, mage.cards.m.Mourning.class));
         cards.add(new SetCardInfo("Nightscape Apprentice", 112, Rarity.COMMON, mage.cards.n.NightscapeApprentice.class));
         cards.add(new SetCardInfo("Nightscape Master", 113, Rarity.RARE, mage.cards.n.NightscapeMaster.class));
@@ -221,10 +220,10 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Pincer Spider", 201, Rarity.COMMON, mage.cards.p.PincerSpider.class));
         cards.add(new SetCardInfo("Plague Spitter", 119, Rarity.UNCOMMON, mage.cards.p.PlagueSpitter.class));
         cards.add(new SetCardInfo("Plague Spores", 260, Rarity.COMMON, mage.cards.p.PlagueSpores.class));
-        cards.add(new SetCardInfo("Plains", 331, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 331, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Portal", 308, Rarity.RARE, mage.cards.p.PlanarPortal.class));
         cards.add(new SetCardInfo("Pouncing Kavu", 158, Rarity.COMMON, mage.cards.p.PouncingKavu.class));
         cards.add(new SetCardInfo("Power Armor", 309, Rarity.UNCOMMON, mage.cards.p.PowerArmor.class));
@@ -304,10 +303,10 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Sulfur Vent", 328, Rarity.COMMON, mage.cards.s.SulfurVent.class));
         cards.add(new SetCardInfo("Sunscape Apprentice", 41, Rarity.COMMON, mage.cards.s.SunscapeApprentice.class));
         cards.add(new SetCardInfo("Sunscape Master", 42, Rarity.RARE, mage.cards.s.SunscapeMaster.class));
-        cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 340, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 341, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 342, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 340, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 341, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 342, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sway of Illusion", 77, Rarity.UNCOMMON, mage.cards.s.SwayOfIllusion.class));
         cards.add(new SetCardInfo("Tainted Well", 126, Rarity.COMMON, mage.cards.t.TaintedWell.class));
         cards.add(new SetCardInfo("Tangle", 213, Rarity.UNCOMMON, mage.cards.t.Tangle.class));

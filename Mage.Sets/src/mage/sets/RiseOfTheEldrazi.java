@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -123,10 +122,10 @@ public class RiseOfTheEldrazi extends ExpansionSet {
         cards.add(new SetCardInfo("Fissure Vent", 144, Rarity.COMMON, mage.cards.f.FissureVent.class));
         cards.add(new SetCardInfo("Flame Slash", 145, Rarity.COMMON, mage.cards.f.FlameSlash.class));
         cards.add(new SetCardInfo("Fleeting Distraction", 67, Rarity.COMMON, mage.cards.f.FleetingDistraction.class));
-        cards.add(new SetCardInfo("Forest", 245, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 246, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 247, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 248, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 245, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 246, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 247, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 248, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forked Bolt", 146, Rarity.UNCOMMON, mage.cards.f.ForkedBolt.class));
         cards.add(new SetCardInfo("Frostwind Invoker", 68, Rarity.COMMON, mage.cards.f.FrostwindInvoker.class));
         cards.add(new SetCardInfo("Gelatinous Genesis", 183, Rarity.RARE, mage.cards.g.GelatinousGenesis.class));
@@ -158,10 +157,10 @@ public class RiseOfTheEldrazi extends ExpansionSet {
         cards.add(new SetCardInfo("Induce Despair", 114, Rarity.COMMON, mage.cards.i.InduceDespair.class));
         cards.add(new SetCardInfo("Inquisition of Kozilek", 115, Rarity.UNCOMMON, mage.cards.i.InquisitionOfKozilek.class));
         cards.add(new SetCardInfo("Irresistible Prey", 188, Rarity.UNCOMMON, mage.cards.i.IrresistiblePrey.class));
-        cards.add(new SetCardInfo("Island", 233, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 234, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 235, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 233, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 234, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 235, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("It That Betrays", 7, Rarity.RARE, mage.cards.i.ItThatBetrays.class));
         cards.add(new SetCardInfo("Jaddi Lifestrider", 189, Rarity.UNCOMMON, mage.cards.j.JaddiLifestrider.class));
         cards.add(new SetCardInfo("Joraga Treespeaker", 190, Rarity.UNCOMMON, mage.cards.j.JoragaTreespeaker.class));
@@ -199,10 +198,10 @@ public class RiseOfTheEldrazi extends ExpansionSet {
         cards.add(new SetCardInfo("Mnemonic Wall", 78, Rarity.COMMON, mage.cards.m.MnemonicWall.class));
         cards.add(new SetCardInfo("Momentous Fall", 197, Rarity.RARE, mage.cards.m.MomentousFall.class));
         cards.add(new SetCardInfo("Mortician Beetle", 117, Rarity.RARE, mage.cards.m.MorticianBeetle.class));
-        cards.add(new SetCardInfo("Mountain", 241, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 242, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 244, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 241, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 242, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 244, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mul Daya Channelers", 198, Rarity.RARE, mage.cards.m.MulDayaChannelers.class));
         cards.add(new SetCardInfo("Narcolepsy", 79, Rarity.COMMON, mage.cards.n.Narcolepsy.class));
         cards.add(new SetCardInfo("Naturalize", 199, Rarity.COMMON, mage.cards.n.Naturalize.class));
@@ -227,10 +226,10 @@ public class RiseOfTheEldrazi extends ExpansionSet {
         cards.add(new SetCardInfo("Perish the Thought", 123, Rarity.COMMON, mage.cards.p.PerishTheThought.class));
         cards.add(new SetCardInfo("Pestilence Demon", 124, Rarity.RARE, mage.cards.p.PestilenceDemon.class));
         cards.add(new SetCardInfo("Phantasmal Abomination", 80, Rarity.UNCOMMON, mage.cards.p.PhantasmalAbomination.class));
-        cards.add(new SetCardInfo("Plains", 229, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 230, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 231, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 232, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 229, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 230, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 231, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 232, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prey's Vengeance", 205, Rarity.UNCOMMON, mage.cards.p.PreysVengeance.class));
         cards.add(new SetCardInfo("Prophetic Prism", 222, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Puncturing Light", 41, Rarity.COMMON, mage.cards.p.PuncturingLight.class));
@@ -274,10 +273,10 @@ public class RiseOfTheEldrazi extends ExpansionSet {
         cards.add(new SetCardInfo("Surrakar Spellblade", 90, Rarity.RARE, mage.cards.s.SurrakarSpellblade.class));
         cards.add(new SetCardInfo("Surreal Memoir", 167, Rarity.UNCOMMON, mage.cards.s.SurrealMemoir.class));
         cards.add(new SetCardInfo("Survival Cache", 48, Rarity.UNCOMMON, mage.cards.s.SurvivalCache.class));
-        cards.add(new SetCardInfo("Swamp", 237, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 238, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 239, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 240, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 237, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 238, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 239, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 240, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tajuru Preserver", 211, Rarity.RARE, mage.cards.t.TajuruPreserver.class));
         cards.add(new SetCardInfo("Thought Gorger", 129, Rarity.RARE, mage.cards.t.ThoughtGorger.class));
         cards.add(new SetCardInfo("Time of Heroes", 49, Rarity.UNCOMMON, mage.cards.t.TimeOfHeroes.class));

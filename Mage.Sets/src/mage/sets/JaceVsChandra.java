@@ -6,7 +6,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -58,20 +57,20 @@ public class JaceVsChandra extends ExpansionSet {
         cards.add(new SetCardInfo("Incinerate", 51, Rarity.COMMON, mage.cards.i.Incinerate.class));
         cards.add(new SetCardInfo("Ingot Chewer", 45, Rarity.COMMON, mage.cards.i.IngotChewer.class));
         cards.add(new SetCardInfo("Inner-Flame Acolyte", 41, Rarity.COMMON, mage.cards.i.InnerFlameAcolyte.class));
-        cards.add(new SetCardInfo("Island", 30, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 31, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 32, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 33, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 30, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 31, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 32, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 33, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace Beleren", 1, Rarity.MYTHIC, mage.cards.j.JaceBeleren.class));
         cards.add(new SetCardInfo("Keldon Megaliths", 58, Rarity.UNCOMMON, mage.cards.k.KeldonMegaliths.class));
         cards.add(new SetCardInfo("Magma Jet", 52, Rarity.UNCOMMON, mage.cards.m.MagmaJet.class));
         cards.add(new SetCardInfo("Man-o'-War", 8, Rarity.COMMON, mage.cards.m.ManOWar.class));
         cards.add(new SetCardInfo("Martyr of Frost", 2, Rarity.COMMON, mage.cards.m.MartyrOfFrost.class));
         cards.add(new SetCardInfo("Mind Stone", 22, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
-        cards.add(new SetCardInfo("Mountain", 59, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 60, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 61, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 62, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 59, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 60, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 61, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 62, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mulldrifter", 12, Rarity.COMMON, mage.cards.m.Mulldrifter.class));
         cards.add(new SetCardInfo("Ophidian", 9, Rarity.COMMON, mage.cards.o.Ophidian.class));
         cards.add(new SetCardInfo("Oxidda Golem", 46, Rarity.COMMON, mage.cards.o.OxiddaGolem.class));
