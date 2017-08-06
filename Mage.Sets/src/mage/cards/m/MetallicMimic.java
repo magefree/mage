@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -43,6 +42,8 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -104,7 +105,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
                 && enteringCreature.getControllerId().equals(source.getControllerId())
                 && enteringCreature.isCreature()
                 && !event.getTargetId().equals(source.getSourceId())) {
-            String subtype = (String) game.getState().getValue(sourcePermanent.getId() + "_type");
+            SubType subtype = (SubType) game.getState().getValue(sourcePermanent.getId() + "_type");
             return subtype != null && enteringCreature.hasSubtype(subtype, game);
         }
         return false;

@@ -27,15 +27,15 @@
  */
 package mage.sets;
 
-import java.util.ArrayList;
-import java.util.List;
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -152,10 +152,10 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Flameblade Adept", 131, Rarity.UNCOMMON, mage.cards.f.FlamebladeAdept.class));
         cards.add(new SetCardInfo("Fling", 132, Rarity.COMMON, mage.cards.f.Fling.class));
         cards.add(new SetCardInfo("Floodwaters", 53, Rarity.COMMON, mage.cards.f.Floodwaters.class));
-        cards.add(new SetCardInfo("Forest", 254, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 267, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 268, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 269, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 254, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 267, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 268, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 269, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forsake the Worldly", 13, Rarity.COMMON, mage.cards.f.ForsakeTheWorldly.class));
         cards.add(new SetCardInfo("Forsaken Sanctuary", 281, Rarity.COMMON, mage.cards.f.ForsakenSanctuary.class));
         cards.add(new SetCardInfo("Foul Orchard", 279, Rarity.COMMON, mage.cards.f.FoulOrchard.class));
@@ -202,10 +202,10 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Initiate's Companion", 174, Rarity.COMMON, mage.cards.i.InitiatesCompanion.class));
         cards.add(new SetCardInfo("Insult // Injury", 213, Rarity.RARE, mage.cards.i.InsultInjury.class));
         cards.add(new SetCardInfo("Irrigated Farmland", 245, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class));
-        cards.add(new SetCardInfo("Island", 251, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 258, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 259, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 260, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 251, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 258, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 259, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 260, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kefnet the Mindful", 59, Rarity.MYTHIC, mage.cards.k.KefnetTheMindful.class));
         cards.add(new SetCardInfo("Kefnet's Monument", 231, Rarity.UNCOMMON, mage.cards.k.KefnetsMonument.class));
         cards.add(new SetCardInfo("Khenra Charioteer", 201, Rarity.UNCOMMON, mage.cards.k.KhenraCharioteer.class));
@@ -227,10 +227,10 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Miasmic Mummy", 100, Rarity.COMMON, mage.cards.m.MiasmicMummy.class));
         cards.add(new SetCardInfo("Mighty Leap", 20, Rarity.COMMON, mage.cards.m.MightyLeap.class));
         cards.add(new SetCardInfo("Minotaur Sureshot", 143, Rarity.COMMON, mage.cards.m.MinotaurSureshot.class));
-        cards.add(new SetCardInfo("Mountain", 253, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 264, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 266, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 253, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 264, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 266, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mouth // Feed", 214, Rarity.RARE, mage.cards.m.MouthFeed.class));
         cards.add(new SetCardInfo("Naga Oracle", 62, Rarity.COMMON, mage.cards.n.NagaOracle.class));
         cards.add(new SetCardInfo("Naga Vitalist", 176, Rarity.COMMON, mage.cards.n.NagaVitalist.class));
@@ -255,10 +255,10 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Pitiless Vizier", 103, Rarity.COMMON, mage.cards.p.PitilessVizier.class));
         cards.add(new SetCardInfo("Plague Belcher", 104, Rarity.RARE, mage.cards.p.PlagueBelcher.class));
         cards.add(new SetCardInfo("Pyramid of the Pantheon", 235, Rarity.RARE, mage.cards.p.PyramidOfThePantheon.class));
-        cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 255, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 256, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 257, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 255, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 256, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 257, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pouncing Cheetah", 179, Rarity.COMMON, mage.cards.p.PouncingCheetah.class));
         cards.add(new SetCardInfo("Prepare // Fight", 220, Rarity.RARE, mage.cards.p.PrepareFight.class));
         cards.add(new SetCardInfo("Protection of the Hekma", 23, Rarity.UNCOMMON, mage.cards.p.ProtectionOfTheHekma.class));
@@ -307,10 +307,10 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Sunscorched Desert", 249, Rarity.COMMON, mage.cards.s.SunscorchedDesert.class));
         cards.add(new SetCardInfo("Supernatural Stamina", 111, Rarity.COMMON, mage.cards.s.SupernaturalStamina.class));
         cards.add(new SetCardInfo("Supply Caravan", 30, Rarity.COMMON, mage.cards.s.SupplyCaravan.class));
-        cards.add(new SetCardInfo("Swamp", 252, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 263, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 252, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 263, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sweltering Suns", 149, Rarity.RARE, mage.cards.s.SwelteringSuns.class));
         cards.add(new SetCardInfo("Synchronized Strike", 190, Rarity.UNCOMMON, mage.cards.s.SynchronizedStrike.class));
         cards.add(new SetCardInfo("Tah-Crop Elite", 31, Rarity.COMMON, mage.cards.t.TahCropElite.class));

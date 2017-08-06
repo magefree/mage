@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -48,6 +47,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  *
@@ -142,7 +143,7 @@ class BoostCreatureEffectEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
+            SubType subtype = (SubType) game.getState().getValue(permanent.getId() + "_type");
             if (subtype != null) {
                 for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), game)) {
                     if (perm.hasSubtype(subtype, game)) {

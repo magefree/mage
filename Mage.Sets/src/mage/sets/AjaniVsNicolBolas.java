@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -69,8 +68,8 @@ public class AjaniVsNicolBolas extends ExpansionSet {
         cards.add(new SetCardInfo("Fire-Field Ogre", 53, Rarity.UNCOMMON, mage.cards.f.FireFieldOgre.class));
         cards.add(new SetCardInfo("Firemane Angel", 21, Rarity.RARE, mage.cards.f.FiremaneAngel.class));
         cards.add(new SetCardInfo("Fleetfoot Panther", 12, Rarity.UNCOMMON, mage.cards.f.FleetfootPanther.class));
-        cards.add(new SetCardInfo("Forest", 38, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 39, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 38, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 39, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Graypelt Refuge", 33, Rarity.UNCOMMON, mage.cards.g.GraypeltRefuge.class));
         cards.add(new SetCardInfo("Grazing Gladehart", 11, Rarity.COMMON, mage.cards.g.GrazingGladehart.class));
         cards.add(new SetCardInfo("Griffin Guide", 25, Rarity.UNCOMMON, mage.cards.g.GriffinGuide.class));
@@ -91,8 +90,8 @@ public class AjaniVsNicolBolas extends ExpansionSet {
         cards.add(new SetCardInfo("Marisi's Twinclaws", 17, Rarity.UNCOMMON, mage.cards.m.MarisisTwinclaws.class));
         cards.add(new SetCardInfo("Morgue Toad", 47, Rarity.COMMON, mage.cards.m.MorgueToad.class));
         cards.add(new SetCardInfo("Moroii", 51, Rarity.UNCOMMON, mage.cards.m.Moroii.class));
-        cards.add(new SetCardInfo("Mountain", 41, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 80, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 41, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 80, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nacatl Hunt-Pride", 20, Rarity.UNCOMMON, mage.cards.n.NacatlHuntPride.class));
         cards.add(new SetCardInfo("Naya Charm", 29, Rarity.UNCOMMON, mage.cards.n.NayaCharm.class));
         cards.add(new SetCardInfo("Nicol Bolas, Planeswalker", 42, Rarity.MYTHIC, mage.cards.n.NicolBolasPlaneswalker.class));
@@ -117,8 +116,8 @@ public class AjaniVsNicolBolas extends ExpansionSet {
         cards.add(new SetCardInfo("Spitemare", 16, Rarity.UNCOMMON, mage.cards.s.Spitemare.class));
         cards.add(new SetCardInfo("Steamcore Weird", 50, Rarity.COMMON, mage.cards.s.SteamcoreWeird.class));
         cards.add(new SetCardInfo("Surveilling Sprite", 43, Rarity.COMMON, mage.cards.s.SurveillingSprite.class));
-        cards.add(new SetCardInfo("Swamp", 77, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 78, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 77, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 78, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sylvan Bounty", 30, Rarity.COMMON, mage.cards.s.SylvanBounty.class));
         cards.add(new SetCardInfo("Sylvan Ranger", 8, Rarity.COMMON, mage.cards.s.SylvanRanger.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 76, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,16 +34,15 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -93,7 +91,7 @@ class DearlyDepartedEntersBattlefieldEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.hasSubtype("Human", game)) {
+        if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.hasSubtype(SubType.HUMAN, game)) {
             return true;
         }
         return false;

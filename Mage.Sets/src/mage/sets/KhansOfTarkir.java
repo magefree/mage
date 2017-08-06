@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -133,10 +132,10 @@ public class KhansOfTarkir extends ExpansionSet {
         cards.add(new SetCardInfo("Flooded Strand", 233, Rarity.RARE, mage.cards.f.FloodedStrand.class));
         cards.add(new SetCardInfo("Flying Crane Technique", 176, Rarity.RARE, mage.cards.f.FlyingCraneTechnique.class));
         cards.add(new SetCardInfo("Force Away", 40, Rarity.COMMON, mage.cards.f.ForceAway.class));
-        cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 267, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 268, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 269, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 267, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 268, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 269, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frontier Bivouac", 234, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
         cards.add(new SetCardInfo("Ghostfire Blade", 220, Rarity.RARE, mage.cards.g.GhostfireBlade.class));
         cards.add(new SetCardInfo("Glacial Stalker", 41, Rarity.COMMON, mage.cards.g.GlacialStalker.class));
@@ -158,10 +157,10 @@ public class KhansOfTarkir extends ExpansionSet {
         cards.add(new SetCardInfo("Icefeather Aven", 178, Rarity.UNCOMMON, mage.cards.i.IcefeatherAven.class));
         cards.add(new SetCardInfo("Icy Blast", 42, Rarity.RARE, mage.cards.i.IcyBlast.class));
         cards.add(new SetCardInfo("Incremental Growth", 138, Rarity.UNCOMMON, mage.cards.i.IncrementalGrowth.class));
-        cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 255, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 256, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 257, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 255, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 256, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 257, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivorytusk Fortress", 179, Rarity.RARE, mage.cards.i.IvorytuskFortress.class));
         cards.add(new SetCardInfo("Jeering Instigator", 113, Rarity.RARE, mage.cards.j.JeeringInstigator.class));
         cards.add(new SetCardInfo("Jeskai Ascendancy", 180, Rarity.RARE, mage.cards.j.JeskaiAscendancy.class));
@@ -202,10 +201,10 @@ public class KhansOfTarkir extends ExpansionSet {
         cards.add(new SetCardInfo("Molting Snakeskin", 80, Rarity.COMMON, mage.cards.m.MoltingSnakeskin.class));
         cards.add(new SetCardInfo("Monastery Flock", 47, Rarity.COMMON, mage.cards.m.MonasteryFlock.class));
         cards.add(new SetCardInfo("Monastery Swiftspear", 118, Rarity.UNCOMMON, mage.cards.m.MonasterySwiftspear.class));
-        cards.add(new SetCardInfo("Mountain", 262, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 263, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 264, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 262, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 263, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 264, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Murderous Cut", 81, Rarity.UNCOMMON, mage.cards.m.MurderousCut.class));
         cards.add(new SetCardInfo("Mystic Monastery", 236, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Mystic of the Hidden Way", 48, Rarity.COMMON, mage.cards.m.MysticOfTheHiddenWay.class));
@@ -216,10 +215,10 @@ public class KhansOfTarkir extends ExpansionSet {
         cards.add(new SetCardInfo("Opulent Palace", 238, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
         cards.add(new SetCardInfo("Pearl Lake Ancient", 49, Rarity.MYTHIC, mage.cards.p.PearlLakeAncient.class));
         cards.add(new SetCardInfo("Pine Walker", 143, Rarity.UNCOMMON, mage.cards.p.PineWalker.class));
-        cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 251, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 252, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 253, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 251, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 252, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 253, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Polluted Delta", 239, Rarity.RARE, mage.cards.p.PollutedDelta.class));
         cards.add(new SetCardInfo("Ponyback Brigade", 191, Rarity.COMMON, mage.cards.p.PonybackBrigade.class));
         cards.add(new SetCardInfo("Quiet Contemplation", 50, Rarity.UNCOMMON, mage.cards.q.QuietContemplation.class));
@@ -276,10 +275,10 @@ public class KhansOfTarkir extends ExpansionSet {
         cards.add(new SetCardInfo("Summit Prowler", 121, Rarity.COMMON, mage.cards.s.SummitProwler.class));
         cards.add(new SetCardInfo("Surrak Dragonclaw", 206, Rarity.MYTHIC, mage.cards.s.SurrakDragonclaw.class));
         cards.add(new SetCardInfo("Suspension Field", 25, Rarity.UNCOMMON, mage.cards.s.SuspensionField.class));
-        cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 259, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 260, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 259, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 260, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarm of Bloodflies", 92, Rarity.UNCOMMON, mage.cards.s.SwarmOfBloodflies.class));
         cards.add(new SetCardInfo("Swift Kick", 122, Rarity.COMMON, mage.cards.s.SwiftKick.class));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 243, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));

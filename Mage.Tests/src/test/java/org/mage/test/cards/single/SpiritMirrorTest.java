@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
@@ -28,7 +29,7 @@ public class SpiritMirrorTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Reflection", 1);
         Permanent reflection = getPermanent("Reflection");
-        Assert.assertTrue(reflection.hasSubtype("Reflection", currentGame));
+        Assert.assertTrue(reflection.hasSubtype(SubType.REFLECTION, currentGame));
     }
 
 
@@ -60,7 +61,7 @@ public class SpiritMirrorTest extends CardTestPlayerBase {
         // Only one token created
         assertPermanentCount(playerA, "Reflection", 1);
         Permanent reflection = getPermanent("Reflection");
-        Assert.assertTrue(reflection.hasSubtype("Reflection", currentGame));
+        Assert.assertTrue(reflection.hasSubtype(SubType.REFLECTION, currentGame));
     }
 
 

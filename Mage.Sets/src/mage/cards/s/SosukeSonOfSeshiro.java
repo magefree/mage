@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,6 +46,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -114,7 +115,7 @@ class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl {
             Permanent sourceCreature = game.getPermanent(event.getSourceId());
             Permanent targetCreature = game.getPermanent(event.getTargetId());
             if (sourceCreature != null && sourceCreature.getControllerId().equals(this.getControllerId()) 
-                && targetCreature != null && sourceCreature.hasSubtype("Warrior", game)) {
+                && targetCreature != null && sourceCreature.hasSubtype(SubType.WARRIOR, game)) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId()));
                     return true;
             }

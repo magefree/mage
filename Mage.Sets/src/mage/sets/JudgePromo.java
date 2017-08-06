@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -78,7 +77,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Flooded Strand", 44, Rarity.RARE, mage.cards.f.FloodedStrand.class));
         cards.add(new SetCardInfo("Flusterstorm", 65, Rarity.RARE, mage.cards.f.Flusterstorm.class));
         cards.add(new SetCardInfo("Force of Will", 83, Rarity.UNCOMMON, mage.cards.f.ForceOfWill.class));
-        cards.add(new SetCardInfo("Forest", 93, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 93, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gaddock Teeg", 112, Rarity.SPECIAL, mage.cards.g.GaddockTeeg.class));
         cards.add(new SetCardInfo("Gaea's Cradle", 3, Rarity.RARE, mage.cards.g.GaeasCradle.class));
         cards.add(new SetCardInfo("Gemstone Mine", 20, Rarity.UNCOMMON, mage.cards.g.GemstoneMine.class));
@@ -95,7 +94,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Imperial Recruiter", 74, Rarity.UNCOMMON, mage.cards.i.ImperialRecruiter.class));
         cards.add(new SetCardInfo("Imperial Seal", 109, Rarity.SPECIAL, mage.cards.i.ImperialSeal.class));// 2016 006/008
         cards.add(new SetCardInfo("Intuition", 11, Rarity.RARE, mage.cards.i.Intuition.class));
-        cards.add(new SetCardInfo("Island", 90, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 90, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Karador, Ghost Chieftain", 80, Rarity.MYTHIC, mage.cards.k.KaradorGhostChieftain.class));
         cards.add(new SetCardInfo("Karakas", 69, Rarity.UNCOMMON, mage.cards.k.Karakas.class));
         cards.add(new SetCardInfo("Karmic Guide", 67, Rarity.RARE, mage.cards.k.KarmicGuide.class));
@@ -111,8 +110,8 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Mind's Desire", 34, Rarity.RARE, mage.cards.m.MindsDesire.class));
         cards.add(new SetCardInfo("Mishra's Factory", 23, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Morphling", 53, Rarity.RARE, mage.cards.m.Morphling.class));
-        cards.add(new SetCardInfo("Mountain", 92, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mystic Confluence", 108, Rarity.SPECIAL, mage.cards.m.MysticConfluence.class, new CardGraphicInfo(null, true))); // 2016 005/008
+        cards.add(new SetCardInfo("Mountain", 92, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mystic Confluence", 108, Rarity.SPECIAL, mage.cards.m.MysticConfluence.class, NON_FULL_USE_VARIOUS)); // 2016 005/008
         cards.add(new SetCardInfo("Natural Order", 49, Rarity.RARE, mage.cards.n.NaturalOrder.class));
         cards.add(new SetCardInfo("Nekusar, the Mindrazer", 86, Rarity.MYTHIC, mage.cards.n.NekusarTheMindrazer.class));
         cards.add(new SetCardInfo("Noble Hierarch", 66, Rarity.RARE, mage.cards.n.NobleHierarch.class));
@@ -123,7 +122,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Pernicious Deed", 27, Rarity.RARE, mage.cards.p.PerniciousDeed.class));
         cards.add(new SetCardInfo("Phyrexian Dreadnought", 50, Rarity.RARE, mage.cards.p.PhyrexianDreadnought.class));
         cards.add(new SetCardInfo("Phyrexian Negator", 17, Rarity.RARE, mage.cards.p.PhyrexianNegator.class));
-        cards.add(new SetCardInfo("Plains", 89, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 89, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Polluted Delta", 45, Rarity.RARE, mage.cards.p.PollutedDelta.class));
         cards.add(new SetCardInfo("Ravages of War", 97, Rarity.RARE, mage.cards.r.RavagesOfWar.class));
         cards.add(new SetCardInfo("Ravenous Baloth", 28, Rarity.RARE, mage.cards.r.RavenousBaloth.class));
@@ -138,7 +137,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Stifle", 40, Rarity.RARE, mage.cards.s.Stifle.class));
         cards.add(new SetCardInfo("Stroke of Genius", 2, Rarity.RARE, mage.cards.s.StrokeOfGenius.class));
         cards.add(new SetCardInfo("Survival of the Fittest", 41, Rarity.RARE, mage.cards.s.SurvivalOfTheFittest.class));
-        cards.add(new SetCardInfo("Swamp", 91, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 91, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword of Feast and Famine", 85, Rarity.MYTHIC, mage.cards.s.SwordOfFeastAndFamine.class));
         cards.add(new SetCardInfo("Sword of Fire and Ice", 57, Rarity.RARE, mage.cards.s.SwordOfFireAndIce.class));
         cards.add(new SetCardInfo("Sword of Light and Shadow", 70, Rarity.RARE, mage.cards.s.SwordOfLightAndShadow.class));
@@ -148,10 +147,10 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Tradewind Rider", 10, Rarity.RARE, mage.cards.t.TradewindRider.class));
         cards.add(new SetCardInfo("Vampiric Tutor", 6, Rarity.RARE, mage.cards.v.VampiricTutor.class));
         cards.add(new SetCardInfo("Vendilion Clique", 58, Rarity.RARE, mage.cards.v.VendilionClique.class));
-        cards.add(new SetCardInfo("Vindicate", 31, Rarity.RARE, mage.cards.v.Vindicate.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Vindicate", 78, Rarity.RARE, mage.cards.v.Vindicate.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Wasteland", 55, Rarity.UNCOMMON, mage.cards.w.Wasteland.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Wasteland", 101, Rarity.RARE, mage.cards.w.Wasteland.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Vindicate", 31, Rarity.RARE, mage.cards.v.Vindicate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vindicate", 78, Rarity.RARE, mage.cards.v.Vindicate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wasteland", 55, Rarity.UNCOMMON, mage.cards.w.Wasteland.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wasteland", 101, Rarity.RARE, mage.cards.w.Wasteland.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wheel of Fortune", 54, Rarity.RARE, mage.cards.w.WheelOfFortune.class));
         cards.add(new SetCardInfo("Windswept Heath", 46, Rarity.RARE, mage.cards.w.WindsweptHeath.class));
         cards.add(new SetCardInfo("Wooded Foothills", 47, Rarity.RARE, mage.cards.w.WoodedFoothills.class));

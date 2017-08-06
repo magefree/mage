@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -123,10 +122,10 @@ public class Magic2015 extends ExpansionSet {
         cards.add(new SetCardInfo("Festergloom", 97, Rarity.COMMON, mage.cards.f.Festergloom.class));
         cards.add(new SetCardInfo("First Response", 12, Rarity.UNCOMMON, mage.cards.f.FirstResponse.class));
         cards.add(new SetCardInfo("Flesh to Dust", 98, Rarity.COMMON, mage.cards.f.FleshToDust.class));
-        cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 267, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 268, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 269, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 267, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 268, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 269, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forge Devil", 140, Rarity.COMMON, mage.cards.f.ForgeDevil.class));
         cards.add(new SetCardInfo("Foundry Street Denizen", 141, Rarity.COMMON, mage.cards.f.FoundryStreetDenizen.class));
         cards.add(new SetCardInfo("Frenzied Goblin", 142, Rarity.UNCOMMON, mage.cards.f.FrenziedGoblin.class));
@@ -166,10 +165,10 @@ public class Magic2015 extends ExpansionSet {
         cards.add(new SetCardInfo("Into the Void", 60, Rarity.UNCOMMON, mage.cards.i.IntoTheVoid.class));
         cards.add(new SetCardInfo("Invasive Species", 181, Rarity.COMMON, mage.cards.i.InvasiveSpecies.class));
         cards.add(new SetCardInfo("Invisibility", 61, Rarity.COMMON, mage.cards.i.Invisibility.class));
-        cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 255, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 256, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 257, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 255, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 256, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 257, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace's Ingenuity", 63, Rarity.UNCOMMON, mage.cards.j.JacesIngenuity.class));
         cards.add(new SetCardInfo("Jace, the Living Guildpact", 62, Rarity.MYTHIC, mage.cards.j.JaceTheLivingGuildpact.class));
         cards.add(new SetCardInfo("Jalira, Master Polymorphist", 64, Rarity.RARE, mage.cards.j.JaliraMasterPolymorphist.class));
@@ -201,10 +200,10 @@ public class Magic2015 extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Rot", 104, Rarity.COMMON, mage.cards.m.MindRot.class));
         cards.add(new SetCardInfo("Mind Sculpt", 70, Rarity.COMMON, mage.cards.m.MindSculpt.class));
         cards.add(new SetCardInfo("Miner's Bane", 157, Rarity.COMMON, mage.cards.m.MinersBane.class));
-        cards.add(new SetCardInfo("Mountain", 262, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 263, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 264, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 262, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 263, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 264, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Naturalize", 185, Rarity.COMMON, mage.cards.n.Naturalize.class));
         cards.add(new SetCardInfo("Necrobite", 105, Rarity.COMMON, mage.cards.n.Necrobite.class));
         cards.add(new SetCardInfo("Necrogen Scudder", 106, Rarity.UNCOMMON, mage.cards.n.NecrogenScudder.class));
@@ -233,10 +232,10 @@ public class Magic2015 extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Revoker", 225, Rarity.RARE, mage.cards.p.PhyrexianRevoker.class));
         cards.add(new SetCardInfo("Phytotitan", 191, Rarity.RARE, mage.cards.p.Phytotitan.class));
         cards.add(new SetCardInfo("Pillar of Light", 24, Rarity.COMMON, mage.cards.p.PillarOfLight.class));
-        cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 251, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 252, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 253, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 251, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 252, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 253, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plummet", 192, Rarity.COMMON, mage.cards.p.Plummet.class));
         cards.add(new SetCardInfo("Polymorphist's Jest", 75, Rarity.RARE, mage.cards.p.PolymorphistsJest.class));
         cards.add(new SetCardInfo("Preeminent Captain", 25, Rarity.RARE, mage.cards.p.PreeminentCaptain.class));
@@ -299,10 +298,10 @@ public class Magic2015 extends ExpansionSet {
         cards.add(new SetCardInfo("Stormtide Leviathan", 80, Rarity.RARE, mage.cards.s.StormtideLeviathan.class));
         cards.add(new SetCardInfo("Sunblade Elf", 202, Rarity.UNCOMMON, mage.cards.s.SunbladeElf.class));
         cards.add(new SetCardInfo("Sungrace Pegasus", 38, Rarity.COMMON, mage.cards.s.SungracePegasus.class));
-        cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 259, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 260, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 259, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 260, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terra Stomper", 284, Rarity.RARE, mage.cards.t.TerraStomper.class));
         cards.add(new SetCardInfo("The Chain Veil", 215, Rarity.MYTHIC, mage.cards.t.TheChainVeil.class));
         cards.add(new SetCardInfo("Thundering Giant", 165, Rarity.COMMON, mage.cards.t.ThunderingGiant.class));

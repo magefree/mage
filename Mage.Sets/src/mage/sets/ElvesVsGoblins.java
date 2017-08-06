@@ -6,7 +6,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -38,10 +37,10 @@ public class ElvesVsGoblins extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Warrior", 5, Rarity.COMMON, mage.cards.e.ElvishWarrior.class));
         cards.add(new SetCardInfo("Emberwilde Augur", 35, Rarity.COMMON, mage.cards.e.EmberwildeAugur.class));
         cards.add(new SetCardInfo("Flamewave Invoker", 36, Rarity.UNCOMMON, mage.cards.f.FlamewaveInvoker.class));
-        cards.add(new SetCardInfo("Forest", 28, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 29, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 30, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 31, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 28, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 29, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 30, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 31, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Cave", 57, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Gempalm Incinerator", 37, Rarity.UNCOMMON, mage.cards.g.GempalmIncinerator.class));
         cards.add(new SetCardInfo("Gempalm Strider", 6, Rarity.UNCOMMON, mage.cards.g.GempalmStrider.class));
@@ -61,10 +60,10 @@ public class ElvesVsGoblins extends ExpansionSet {
         cards.add(new SetCardInfo("Mogg Fanatic", 44, Rarity.UNCOMMON, mage.cards.m.MoggFanatic.class));
         cards.add(new SetCardInfo("Mogg War Marshal", 45, Rarity.COMMON, mage.cards.m.MoggWarMarshal.class));
         cards.add(new SetCardInfo("Moonglove Extract", 24, Rarity.COMMON, mage.cards.m.MoongloveExtract.class));
-        cards.add(new SetCardInfo("Mountain", 59, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 60, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 61, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 62, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 59, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 60, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 61, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 62, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mudbutton Torchrunner", 46, Rarity.COMMON, mage.cards.m.MudbuttonTorchrunner.class));
         cards.add(new SetCardInfo("Raging Goblin", 47, Rarity.COMMON, mage.cards.r.RagingGoblin.class));
         cards.add(new SetCardInfo("Reckless One", 48, Rarity.UNCOMMON, mage.cards.r.RecklessOne.class));

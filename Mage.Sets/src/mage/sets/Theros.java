@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -131,10 +130,10 @@ public class Theros extends ExpansionSet {
         cards.add(new SetCardInfo("Fleecemane Lion", 193, Rarity.RARE, mage.cards.f.FleecemaneLion.class));
         cards.add(new SetCardInfo("Fleetfeather Sandals", 216, Rarity.COMMON, mage.cards.f.FleetfeatherSandals.class));
         cards.add(new SetCardInfo("Fleshmad Steed", 88, Rarity.COMMON, mage.cards.f.FleshmadSteed.class));
-        cards.add(new SetCardInfo("Forest", 246, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 247, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 248, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 249, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 246, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 247, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 248, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 249, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gainsay", 49, Rarity.UNCOMMON, mage.cards.g.Gainsay.class));
         cards.add(new SetCardInfo("Gift of Immortality", 14, Rarity.RARE, mage.cards.g.GiftOfImmortality.class));
         cards.add(new SetCardInfo("Glare of Heresy", 15, Rarity.UNCOMMON, mage.cards.g.GlareOfHeresy.class));
@@ -154,10 +153,10 @@ public class Theros extends ExpansionSet {
         cards.add(new SetCardInfo("Hythonia the Cruel", 91, Rarity.MYTHIC, mage.cards.h.HythoniaTheCruel.class));
         cards.add(new SetCardInfo("Ill-Tempered Cyclops", 125, Rarity.COMMON, mage.cards.i.IllTemperedCyclops.class));
         cards.add(new SetCardInfo("Insatiable Harpy", 92, Rarity.UNCOMMON, mage.cards.i.InsatiableHarpy.class));
-        cards.add(new SetCardInfo("Island", 234, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 235, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 237, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 234, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 235, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 237, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Karametra's Acolyte", 160, Rarity.UNCOMMON, mage.cards.k.KarametrasAcolyte.class));
         cards.add(new SetCardInfo("Keepsake Gorgon", 93, Rarity.UNCOMMON, mage.cards.k.KeepsakeGorgon.class));
         cards.add(new SetCardInfo("Kragma Warcaller", 195, Rarity.UNCOMMON, mage.cards.k.KragmaWarcaller.class));
@@ -180,10 +179,10 @@ public class Theros extends ExpansionSet {
         cards.add(new SetCardInfo("Mistcutter Hydra", 162, Rarity.RARE, mage.cards.m.MistcutterHydra.class));
         cards.add(new SetCardInfo("Mnemonic Wall", 55, Rarity.COMMON, mage.cards.m.MnemonicWall.class));
         cards.add(new SetCardInfo("Mogis's Marauder", 97, Rarity.UNCOMMON, mage.cards.m.MogissMarauder.class));
-        cards.add(new SetCardInfo("Mountain", 242, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 244, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 245, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 242, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 244, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 245, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nemesis of Mortals", 163, Rarity.UNCOMMON, mage.cards.n.NemesisOfMortals.class));
         cards.add(new SetCardInfo("Nessian Asp", 164, Rarity.COMMON, mage.cards.n.NessianAsp.class));
         cards.add(new SetCardInfo("Nessian Courser", 165, Rarity.COMMON, mage.cards.n.NessianCourser.class));
@@ -207,10 +206,10 @@ public class Theros extends ExpansionSet {
         cards.add(new SetCardInfo("Pharika's Cure", 100, Rarity.COMMON, mage.cards.p.PharikasCure.class));
         cards.add(new SetCardInfo("Pharika's Mender", 197, Rarity.UNCOMMON, mage.cards.p.PharikasMender.class));
         cards.add(new SetCardInfo("Pheres-Band Centaurs", 171, Rarity.COMMON, mage.cards.p.PheresBandCentaurs.class));
-        cards.add(new SetCardInfo("Plains", 230, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 231, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 232, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 233, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 230, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 231, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 232, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 233, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Polis Crusher", 198, Rarity.RARE, mage.cards.p.PolisCrusher.class));
         cards.add(new SetCardInfo("Polukranos, World Eater", 172, Rarity.MYTHIC, mage.cards.p.PolukranosWorldEater.class));
         cards.add(new SetCardInfo("Portent of Betrayal", 133, Rarity.COMMON, mage.cards.p.PortentOfBetrayal.class));
@@ -259,10 +258,10 @@ public class Theros extends ExpansionSet {
         cards.add(new SetCardInfo("Stoneshock Giant", 142, Rarity.UNCOMMON, mage.cards.s.StoneshockGiant.class));
         cards.add(new SetCardInfo("Stormbreath Dragon", 143, Rarity.MYTHIC, mage.cards.s.StormbreathDragon.class));
         cards.add(new SetCardInfo("Stymied Hopes", 64, Rarity.COMMON, mage.cards.s.StymiedHopes.class));
-        cards.add(new SetCardInfo("Swamp", 238, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 239, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 240, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 241, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 238, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 239, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 240, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 241, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swan Song", 65, Rarity.RARE, mage.cards.s.SwanSong.class));
         cards.add(new SetCardInfo("Sylvan Caryatid", 180, Rarity.RARE, mage.cards.s.SylvanCaryatid.class));
         cards.add(new SetCardInfo("Temple of Abandon", 224, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));

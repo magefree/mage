@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -92,9 +91,9 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Bowman", 112, Rarity.UNCOMMON, mage.cards.f.FireBowman.class));
         cards.add(new SetCardInfo("Flanking Troops", 5, Rarity.UNCOMMON, mage.cards.f.FlankingTroops.class));
         cards.add(new SetCardInfo("Forced Retreat", 44, Rarity.COMMON, mage.cards.f.ForcedRetreat.class));
-        cards.add(new SetCardInfo("Forest", 178, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 179, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 180, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 178, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 179, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 180, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest Bear", 135, Rarity.COMMON, mage.cards.f.ForestBear.class));
         cards.add(new SetCardInfo("Ghostly Visit", 76, Rarity.COMMON, mage.cards.g.GhostlyVisit.class));
         cards.add(new SetCardInfo("Guan Yu's 1,000-Li March", 7, Rarity.RARE, mage.cards.g.GuanYus1000LiMarch.class));
@@ -105,9 +104,9 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Imperial Recruiter", 113, Rarity.UNCOMMON, mage.cards.i.ImperialRecruiter.class));
         cards.add(new SetCardInfo("Imperial Seal", 78, Rarity.RARE, mage.cards.i.ImperialSeal.class));
         cards.add(new SetCardInfo("Independent Troops", 114, Rarity.COMMON, mage.cards.i.IndependentTroops.class));
-        cards.add(new SetCardInfo("Island", 169, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 170, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 171, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 169, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 170, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 171, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kongming, 'Sleeping Dragon'", 9, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
         cards.add(new SetCardInfo("Lady Sun", 45, Rarity.RARE, mage.cards.l.LadySun.class));
         cards.add(new SetCardInfo("Lady Zhurong, Warrior Queen", 139, Rarity.RARE, mage.cards.l.LadyZhurongWarriorQueen.class));
@@ -123,17 +122,17 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Meng Huo, Barbarian King", 142, Rarity.RARE, mage.cards.m.MengHuoBarbarianKing.class));
         cards.add(new SetCardInfo("Meng Huo's Horde", 143, Rarity.COMMON, mage.cards.m.MengHuosHorde.class));
         cards.add(new SetCardInfo("Misfortune's Gain", 13, Rarity.COMMON, mage.cards.m.MisfortunesGain.class));
-        cards.add(new SetCardInfo("Mountain", 175, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 176, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 177, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 175, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 176, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 177, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain Bandit", 117, Rarity.COMMON, mage.cards.m.MountainBandit.class));
         cards.add(new SetCardInfo("Mystic Denial", 49, Rarity.UNCOMMON, mage.cards.m.MysticDenial.class));
         cards.add(new SetCardInfo("Overwhelming Forces", 79, Rarity.RARE, mage.cards.o.OverwhelmingForces.class));
         cards.add(new SetCardInfo("Pang Tong, 'Young Phoenix'", 14, Rarity.RARE, mage.cards.p.PangTongYoungPhoenix.class));
         cards.add(new SetCardInfo("Peach Garden Oath", 15, Rarity.UNCOMMON, mage.cards.p.PeachGardenOath.class));
-        cards.add(new SetCardInfo("Plains", 166, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 167, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 168, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 166, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 167, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 168, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Poison Arrow", 80, Rarity.UNCOMMON, mage.cards.p.PoisonArrow.class));
         cards.add(new SetCardInfo("Preemptive Strike", 50, Rarity.COMMON, mage.cards.p.PreemptiveStrike.class));
         cards.add(new SetCardInfo("Ravages of War", 17, Rarity.RARE, mage.cards.r.RavagesOfWar.class));
@@ -169,9 +168,9 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Straw Soldiers", 54, Rarity.COMMON, mage.cards.s.StrawSoldiers.class));
         cards.add(new SetCardInfo("Sun Ce, Young Conquerer", 55, Rarity.RARE, mage.cards.s.SunCeYoungConquerer.class));
         cards.add(new SetCardInfo("Sun Quan, Lord of Wu", 56, Rarity.RARE, mage.cards.s.SunQuanLordOfWu.class));
-        cards.add(new SetCardInfo("Swamp", 172, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 173, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 174, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 172, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 173, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 174, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Taoist Hermit", 150, Rarity.UNCOMMON, mage.cards.t.TaoistHermit.class));
         cards.add(new SetCardInfo("Taoist Mystic", 151, Rarity.RARE, mage.cards.t.TaoistMystic.class));
         cards.add(new SetCardInfo("Taunting Challenge", 152, Rarity.RARE, mage.cards.t.TauntingChallenge.class));

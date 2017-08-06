@@ -27,7 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,6 +43,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -155,10 +156,10 @@ class NakedSingularityEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getSourceId());
         return permanent != null
-                && (permanent.hasSubtype("Plains", game)
-                || permanent.hasSubtype("Island", game)
-                || permanent.hasSubtype("Swamp", game)
-                || permanent.hasSubtype("Mountain", game)
-                || permanent.hasSubtype("Forest", game));
+                && (permanent.hasSubtype(SubType.PLAINS, game)
+                || permanent.hasSubtype(SubType.ISLAND, game)
+                || permanent.hasSubtype(SubType.SWAMP, game)
+                || permanent.hasSubtype(SubType.MOUNTAIN, game)
+                || permanent.hasSubtype(SubType.FOREST, game));
     }
 }
