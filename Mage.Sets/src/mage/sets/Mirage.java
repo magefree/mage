@@ -150,7 +150,6 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Gravebane Zombie", 25, Rarity.COMMON, mage.cards.g.GravebaneZombie.class));
         cards.add(new SetCardInfo("Grave Servitude", 24, Rarity.COMMON, mage.cards.g.GraveServitude.class));
         cards.add(new SetCardInfo("Grinning Totem", 268, Rarity.RARE, mage.cards.g.GrinningTotem.class));
-        cards.add(new SetCardInfo("Hakim, Loreweaver", 68, Rarity.RARE, mage.cards.h.HakimLoreweaver.class));
         cards.add(new SetCardInfo("Hall of Gemstone", 119, Rarity.RARE, mage.cards.h.HallOfGemstone.class));
         cards.add(new SetCardInfo("Hammer of Bogardan", 181, Rarity.RARE, mage.cards.h.HammerOfBogardan.class));
         cards.add(new SetCardInfo("Harbinger of Night", 26, Rarity.RARE, mage.cards.h.HarbingerOfNight.class));
@@ -249,13 +248,13 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Shadow Guildmage", 38, Rarity.COMMON, mage.cards.s.ShadowGuildmage.class));
         cards.add(new SetCardInfo("Shallow Grave", 39, Rarity.RARE, mage.cards.s.ShallowGrave.class));
         cards.add(new SetCardInfo("Shaper Guildmage", 91, Rarity.COMMON, mage.cards.s.ShaperGuildmage.class));
+        cards.add(new SetCardInfo("Shauku, Endbringer", 40, Rarity.RARE, mage.cards.s.ShaukuEndbringer.class));
         cards.add(new SetCardInfo("Shimmer", 92, Rarity.RARE, mage.cards.s.Shimmer.class));
         cards.add(new SetCardInfo("Sidar Jabari", 243, Rarity.RARE, mage.cards.s.SidarJabari.class));
         cards.add(new SetCardInfo("Skulking Ghost", 41, Rarity.COMMON, mage.cards.s.SkulkingGhost.class));
         cards.add(new SetCardInfo("Sky Diamond", 284, Rarity.UNCOMMON, mage.cards.s.SkyDiamond.class));
         cards.add(new SetCardInfo("Soar", 93, Rarity.COMMON, mage.cards.s.Soar.class));
         cards.add(new SetCardInfo("Soul Rend", 42, Rarity.UNCOMMON, mage.cards.s.SoulRend.class));
-        cards.add(new SetCardInfo("Spectral Guardian", 245, Rarity.RARE, mage.cards.s.SpectralGuardian.class));
         cards.add(new SetCardInfo("Spirit of the Night", 44, Rarity.RARE, mage.cards.s.SpiritOfTheNight.class));
         cards.add(new SetCardInfo("Spitting Earth", 193, Rarity.COMMON, mage.cards.s.SpittingEarth.class));
         cards.add(new SetCardInfo("Stalking Tiger", 141, Rarity.COMMON, mage.cards.s.StalkingTiger.class));
