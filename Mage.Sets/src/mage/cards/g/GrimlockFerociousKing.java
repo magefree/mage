@@ -37,6 +37,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 
@@ -49,7 +50,7 @@ public class GrimlockFerociousKing extends CardImpl{
    public GrimlockFerociousKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dinosaur");
+        this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
         this.color.setRed(true);
