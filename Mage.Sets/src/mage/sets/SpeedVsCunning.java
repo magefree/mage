@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -81,9 +80,9 @@ public class SpeedVsCunning extends ExpansionSet {
         cards.add(new SetCardInfo("Impulse", 63, Rarity.COMMON, mage.cards.i.Impulse.class));
         cards.add(new SetCardInfo("Infantry Veteran", 3, Rarity.COMMON, mage.cards.i.InfantryVeteran.class));
         cards.add(new SetCardInfo("Inferno Trap", 67, Rarity.UNCOMMON, mage.cards.i.InfernoTrap.class));
-        cards.add(new SetCardInfo("Island", 75, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 76, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 77, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 75, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 76, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 77, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jeskai Elder", 46, Rarity.UNCOMMON, mage.cards.j.JeskaiElder.class));
         cards.add(new SetCardInfo("Kathari Bomber", 11, Rarity.COMMON, mage.cards.k.KathariBomber.class));
         cards.add(new SetCardInfo("Kor Hookmaster", 52, Rarity.COMMON, mage.cards.k.KorHookmaster.class));
@@ -96,19 +95,19 @@ public class SpeedVsCunning extends ExpansionSet {
         cards.add(new SetCardInfo("Mana Leak", 64, Rarity.COMMON, mage.cards.m.ManaLeak.class));
         cards.add(new SetCardInfo("Mardu Heart-Piercer", 13, Rarity.UNCOMMON, mage.cards.m.MarduHeartPiercer.class));
         cards.add(new SetCardInfo("Master Decoy", 50, Rarity.COMMON, mage.cards.m.MasterDecoy.class));
-        cards.add(new SetCardInfo("Mountain", 35, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 36, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 37, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 78, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 35, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 36, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 37, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 78, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystic Monastery", 73, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Nomad Outpost", 34, Rarity.UNCOMMON, mage.cards.n.NomadOutpost.class));
         cards.add(new SetCardInfo("Ogre Battledriver", 16, Rarity.RARE, mage.cards.o.OgreBattledriver.class));
         cards.add(new SetCardInfo("Oni of Wild Places", 19, Rarity.UNCOMMON, mage.cards.o.OniOfWildPlaces.class));
         cards.add(new SetCardInfo("Orcish Cannonade", 28, Rarity.COMMON, mage.cards.o.OrcishCannonade.class));
-        cards.add(new SetCardInfo("Plains", 38, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 79, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 80, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 81, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 38, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 79, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 80, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 81, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reckless Abandon", 20, Rarity.COMMON, mage.cards.r.RecklessAbandon.class));
         cards.add(new SetCardInfo("Repeal", 72, Rarity.COMMON, mage.cards.r.Repeal.class));
         cards.add(new SetCardInfo("Scourge Devil", 18, Rarity.UNCOMMON, mage.cards.s.ScourgeDevil.class));
@@ -119,9 +118,9 @@ public class SpeedVsCunning extends ExpansionSet {
         cards.add(new SetCardInfo("Stave Off", 61, Rarity.COMMON, mage.cards.s.StaveOff.class));
         cards.add(new SetCardInfo("Steam Augury", 68, Rarity.RARE, mage.cards.s.SteamAugury.class));
         cards.add(new SetCardInfo("Stonecloaker", 53, Rarity.UNCOMMON, mage.cards.s.Stonecloaker.class));
-        cards.add(new SetCardInfo("Swamp", 39, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 40, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 41, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 39, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 40, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 41, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swift Justice", 62, Rarity.COMMON, mage.cards.s.SwiftJustice.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 74, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Thousand Winds", 58, Rarity.RARE, mage.cards.t.ThousandWinds.class));

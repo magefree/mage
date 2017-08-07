@@ -1,6 +1,5 @@
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -224,7 +223,7 @@ public class PrereleaseEvents extends ExpansionSet {
         cards.add(new SetCardInfo("Phytotitan", 87, Rarity.SPECIAL, mage.cards.p.Phytotitan.class));
         cards.add(new SetCardInfo("Pia and Kiran Nalaar", 228, Rarity.RARE, mage.cards.p.PiaAndKiranNalaar.class));
         cards.add(new SetCardInfo("Pitiless Horde", 186, Rarity.RARE, mage.cards.p.PitilessHorde.class));
-        cards.add(new SetCardInfo("Plains", 66, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 66, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Outburst", 283, Rarity.RARE, mage.cards.p.PlanarOutburst.class));
         cards.add(new SetCardInfo("Prairie Stream", 284, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Priest of the Blood Rite", 229, Rarity.RARE, mage.cards.p.PriestOfTheBloodRite.class));

@@ -27,7 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -42,10 +41,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.VolrathsLaboratoryToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,7 +100,7 @@ class VolrathsLaboratoryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-        String type = (String) game.getState().getValue(source.getSourceId() + "_type");
+        SubType type = (SubType) game.getState().getValue(source.getSourceId() + "_type");
         Token token = new VolrathsLaboratoryToken(color, type);
         return token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
     }

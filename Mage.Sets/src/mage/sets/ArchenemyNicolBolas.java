@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -85,8 +84,8 @@ public class ArchenemyNicolBolas extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Fall", 47, Rarity.COMMON, mage.cards.f.FieryFall.class));
         cards.add(new SetCardInfo("Flametongue Kavu", 48, Rarity.UNCOMMON, mage.cards.f.FlametongueKavu.class));
         cards.add(new SetCardInfo("Flickerwisp", 9, Rarity.UNCOMMON, mage.cards.f.Flickerwisp.class));
-        cards.add(new SetCardInfo("Forest", 101, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 106, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 101, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 106, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Ancient", 65, Rarity.RARE, mage.cards.f.ForgottenAncient.class));
         cards.add(new SetCardInfo("Gideon Jura", 10, Rarity.MYTHIC, mage.cards.g.GideonJura.class));
         cards.add(new SetCardInfo("Gideon's Lawkeeper", 11, Rarity.COMMON, mage.cards.g.GideonsLawkeeper.class));
@@ -105,16 +104,16 @@ public class ArchenemyNicolBolas extends ExpansionSet {
         cards.add(new SetCardInfo("Inferno Titan", 53, Rarity.MYTHIC, mage.cards.i.InfernoTitan.class));
         cards.add(new SetCardInfo("Initiate's Companion", 116, Rarity.COMMON, mage.cards.i.InitiatesCompanion.class));
         cards.add(new SetCardInfo("Ior Ruin Expedition", 25, Rarity.COMMON, mage.cards.i.IorRuinExpedition.class));
-        cards.add(new SetCardInfo("Island", 103, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 98, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 103, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 98, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Khalni Heart Expedition", 67, Rarity.COMMON, mage.cards.k.KhalniHeartExpedition.class));
         cards.add(new SetCardInfo("Lightning Bolt", 54, Rarity.COMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Lightwielder Paladin", 14, Rarity.RARE, mage.cards.l.LightwielderPaladin.class));
         cards.add(new SetCardInfo("Limits of Solidarity", 112, Rarity.UNCOMMON, mage.cards.l.LimitsOfSolidarity.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 15, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
         cards.add(new SetCardInfo("Moment of Heroism", 16, Rarity.COMMON, mage.cards.m.MomentOfHeroism.class));
-        cards.add(new SetCardInfo("Mountain", 100, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 105, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 100, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 105, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nicol Bolas, Planeswalker", 85, Rarity.MYTHIC, mage.cards.n.NicolBolasPlaneswalker.class));
         cards.add(new SetCardInfo("Nightscape Familiar", 35, Rarity.COMMON, mage.cards.n.NightscapeFamiliar.class));
         cards.add(new SetCardInfo("Nissa, Worldwaker", 68, Rarity.MYTHIC, mage.cards.n.NissaWorldwaker.class));
@@ -124,8 +123,8 @@ public class ArchenemyNicolBolas extends ExpansionSet {
         cards.add(new SetCardInfo("Oran-Rief Hydra", 69, Rarity.RARE, mage.cards.o.OranRiefHydra.class));
         cards.add(new SetCardInfo("Overseer of the Damned", 36, Rarity.RARE, mage.cards.o.OverseerOfTheDamned.class));
         cards.add(new SetCardInfo("Pathmaker Initiate", 113, Rarity.COMMON, mage.cards.p.PathmakerInitiate.class));
-        cards.add(new SetCardInfo("Plains", 102, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 97, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 102, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 97, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Precinct Captain", 18, Rarity.RARE, mage.cards.p.PrecinctCaptain.class));
         cards.add(new SetCardInfo("Press the Advantage", 70, Rarity.UNCOMMON, mage.cards.p.PressTheAdvantage.class));
         cards.add(new SetCardInfo("Prognostic Sphinx", 26, Rarity.RARE, mage.cards.p.PrognosticSphinx.class));
@@ -149,8 +148,8 @@ public class ArchenemyNicolBolas extends ExpansionSet {
         cards.add(new SetCardInfo("Submerged Boneyard", 121, Rarity.COMMON, mage.cards.s.SubmergedBoneyard.class));
         cards.add(new SetCardInfo("Sudden Demise", 59, Rarity.RARE, mage.cards.s.SuddenDemise.class));
         cards.add(new SetCardInfo("Sun Titan", 21, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
-        cards.add(new SetCardInfo("Swamp", 104, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 99, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 104, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 99, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword of the Animist", 89, Rarity.RARE, mage.cards.s.SwordOfTheAnimist.class));
         cards.add(new SetCardInfo("Sylvan Bounty", 74, Rarity.COMMON, mage.cards.s.SylvanBounty.class));
         cards.add(new SetCardInfo("Talisman of Dominance", 90, Rarity.UNCOMMON, mage.cards.t.TalismanOfDominance.class));

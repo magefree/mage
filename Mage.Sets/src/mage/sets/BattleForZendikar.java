@@ -27,19 +27,17 @@
  */
 package mage.sets;
 
-import java.util.ArrayList;
-import java.util.List;
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
-import mage.cards.FrameStyle;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author fireshoes
  */
 public class BattleForZendikar extends ExpansionSet {
@@ -143,16 +141,16 @@ public class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Fertile Thicket", 237, Rarity.COMMON, mage.cards.f.FertileThicket.class));
         cards.add(new SetCardInfo("Firemantle Mage", 145, Rarity.UNCOMMON, mage.cards.f.FiremantleMage.class));
         cards.add(new SetCardInfo("Forerunner of Slaughter", 204, Rarity.UNCOMMON, mage.cards.f.ForerunnerOfSlaughter.class));
-        cards.add(new SetCardInfo("Forest", "270a", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", "274b", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Forest", "271a", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", "272a", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", "273a", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", "274a", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", "270b", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Forest", "271b", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Forest", "272b", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Forest", "273b", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Forest", "270a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "274b", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "271a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "272a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "273a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "274a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "270b", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "271b", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "272b", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "273b", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Fortified Rampart", 27, Rarity.COMMON, mage.cards.f.FortifiedRampart.class));
         cards.add(new SetCardInfo("From Beyond", 167, Rarity.RARE, mage.cards.f.FromBeyond.class));
         cards.add(new SetCardInfo("Geyserfield Stalker", 111, Rarity.COMMON, mage.cards.g.GeyserfieldStalker.class));
@@ -179,16 +177,16 @@ public class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Incubator Drone", 60, Rarity.COMMON, mage.cards.i.IncubatorDrone.class));
         cards.add(new SetCardInfo("Infuse with the Elements", 175, Rarity.UNCOMMON, mage.cards.i.InfuseWithTheElements.class));
         cards.add(new SetCardInfo("Inspired Charge", 32, Rarity.COMMON, mage.cards.i.InspiredCharge.class));
-        cards.add(new SetCardInfo("Island", "255a", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", "259b", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Island", "256a", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", "257a", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", "258a", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", "259a", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", "255b", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Island", "256b", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Island", "257b", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Island", "258b", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Island", "255a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "259b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", "256a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "257a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "258a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "259a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "255b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", "256b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", "257b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", "258b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jaddi Offshoot", 176, Rarity.UNCOMMON, mage.cards.j.JaddiOffshoot.class));
         cards.add(new SetCardInfo("Kalastria Healer", 114, Rarity.COMMON, mage.cards.k.KalastriaHealer.class));
         cards.add(new SetCardInfo("Kalastria Nightwatch", 115, Rarity.COMMON, mage.cards.k.KalastriaNightwatch.class));
@@ -214,21 +212,17 @@ public class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Mist Intruder", 61, Rarity.COMMON, mage.cards.m.MistIntruder.class));
         cards.add(new SetCardInfo("Molten Nursery", 130, Rarity.UNCOMMON, mage.cards.m.MoltenNursery.class));
         cards.add(new SetCardInfo("Mortuary Mire", 240, Rarity.COMMON, mage.cards.m.MortuaryMire.class));
-        cards.add(new SetCardInfo("Mountain", "265a", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", "269b", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC,
-                true)));
-        cards.add(new SetCardInfo("Mountain", "266a", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", "267a", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", "268a", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", "269a", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", "265b", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC,
-                true)));
-        cards.add(new SetCardInfo("Mountain", "266b", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC,
-                true)));
-        cards.add(new SetCardInfo("Mountain", "267b", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC,
-                true)));
-        cards.add(new SetCardInfo("Mountain", "268b", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC,
-                true)));
+        cards.add(new SetCardInfo("Mountain", "265a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+
+        cards.add(new SetCardInfo("Mountain", "269b", Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "266a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "267a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "268a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "269a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "265b", Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "266b", Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "267b", Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "268b", Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Munda, Ambush Leader", 215, Rarity.RARE, mage.cards.m.MundaAmbushLeader.class));
         cards.add(new SetCardInfo("Murasa Ranger", 178, Rarity.UNCOMMON, mage.cards.m.MurasaRanger.class));
         cards.add(new SetCardInfo("Murk Strider", 62, Rarity.COMMON, mage.cards.m.MurkStrider.class));
@@ -251,16 +245,16 @@ public class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Part the Waterveil", 80, Rarity.MYTHIC, mage.cards.p.PartTheWaterveil.class));
         cards.add(new SetCardInfo("Pathway Arrows", 225, Rarity.UNCOMMON, mage.cards.p.PathwayArrows.class));
         cards.add(new SetCardInfo("Pilgrim's Eye", 226, Rarity.UNCOMMON, mage.cards.p.PilgrimsEye.class));
-        cards.add(new SetCardInfo("Plains", "250a", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", "254b", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Plains", "251a", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", "252a", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", "253a", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", "254a", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", "250b", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Plains", "251b", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Plains", "252b", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Plains", "253b", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Plains", "250a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "254b", Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "251a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "252a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "253a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "254a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "250b", Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "251b", Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "252b", Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "253b", Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Planar Outburst", 42, Rarity.RARE, mage.cards.p.PlanarOutburst.class));
         cards.add(new SetCardInfo("Plated Crusher", 183, Rarity.UNCOMMON, mage.cards.p.PlatedCrusher.class));
         cards.add(new SetCardInfo("Plummet", 184, Rarity.COMMON, mage.cards.p.Plummet.class));
@@ -319,16 +313,16 @@ public class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Stone Haven Medic", 51, Rarity.COMMON, mage.cards.s.StoneHavenMedic.class));
         cards.add(new SetCardInfo("Sunken Hollow", 249, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Sure Strike", 157, Rarity.COMMON, mage.cards.s.SureStrike.class));
-        cards.add(new SetCardInfo("Swamp", "260a", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", "264b", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", "261a", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", "262a", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", "263a", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", "264a", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", "260b", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", "261b", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", "262b", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", "263b", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Swamp", "260a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "264b", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "261a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "262a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "263a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "264a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "260b", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "261b", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "262b", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "263b", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swarm Surge", 100, Rarity.COMMON, mage.cards.s.SwarmSurge.class));
         cards.add(new SetCardInfo("Swell of Growth", 191, Rarity.COMMON, mage.cards.s.SwellOfGrowth.class));
         cards.add(new SetCardInfo("Sylvan Scrying", 192, Rarity.UNCOMMON, mage.cards.s.SylvanScrying.class));

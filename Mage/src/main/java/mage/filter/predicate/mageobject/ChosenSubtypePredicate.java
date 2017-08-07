@@ -48,8 +48,8 @@ public class ChosenSubtypePredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        String subtype = (String) game.getState().getValue(cardID + "_type");
-        return input.hasSubtype(SubType.byDescription(subtype), game);
+        SubType subtype = (SubType) game.getState().getValue(cardID + "_type");
+        return input.hasSubtype(subtype, game);
     }
 
     @Override

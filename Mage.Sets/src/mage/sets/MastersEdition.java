@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.b.BasalThrull;
 import mage.cards.d.DwarvenSoldier;
@@ -117,9 +116,9 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Fissure", 93, Rarity.COMMON, mage.cards.f.Fissure.class));
         cards.add(new SetCardInfo("Forcefield", 157, Rarity.RARE, mage.cards.f.Forcefield.class));
         cards.add(new SetCardInfo("Force of Will", 33, Rarity.RARE, mage.cards.f.ForceOfWill.class));
-        cards.add(new SetCardInfo("Forest", 193, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 194, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 195, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 193, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 194, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 195, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fyndhorn Elves", 118, Rarity.COMMON, mage.cards.f.FyndhornElves.class));
         cards.add(new SetCardInfo("Ghazban Ogre", 120, Rarity.COMMON, mage.cards.g.GhazbanOgre.class));
         cards.add(new SetCardInfo("Giant Tortoise", 34, Rarity.COMMON, mage.cards.g.GiantTortoise.class));
@@ -147,9 +146,9 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Illusionary Forces", 38, Rarity.UNCOMMON, mage.cards.i.IllusionaryForces.class));
         cards.add(new SetCardInfo("Illusionary Wall", 39, Rarity.COMMON, mage.cards.i.IllusionaryWall.class));
         cards.add(new SetCardInfo("Illusions of Grandeur", 40, Rarity.RARE, mage.cards.i.IllusionsOfGrandeur.class));
-        cards.add(new SetCardInfo("Island", 184, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 185, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 186, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 184, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 185, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 186, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island of Wak-Wak", 176, Rarity.RARE, mage.cards.i.IslandOfWakWak.class));
         cards.add(new SetCardInfo("Ivory Tower", 158, Rarity.RARE, mage.cards.i.IvoryTower.class));
         cards.add(new SetCardInfo("Jacques le Vert", 147, Rarity.RARE, mage.cards.j.JacquesLeVert.class));
@@ -168,9 +167,9 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mirror Universe", 159, Rarity.RARE, mage.cards.m.MirrorUniverse.class));
         cards.add(new SetCardInfo("Mishra's Factory", 178, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Moat", 21, Rarity.RARE, mage.cards.m.Moat.class));
-        cards.add(new SetCardInfo("Mountain", 190, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 191, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 192, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 190, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 191, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 192, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain Yeti", 105, Rarity.COMMON, mage.cards.m.MountainYeti.class));
         cards.add(new SetCardInfo("Mystic Remora", 42, Rarity.UNCOMMON, mage.cards.m.MysticRemora.class));
         cards.add(new SetCardInfo("Nature's Lore", 124, Rarity.COMMON, mage.cards.n.NaturesLore.class));
@@ -185,9 +184,9 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Phantom Monster", 43, Rarity.COMMON, mage.cards.p.PhantomMonster.class));
         cards.add(new SetCardInfo("Phelddagrif", 150, Rarity.RARE, mage.cards.p.Phelddagrif.class));
         cards.add(new SetCardInfo("Phyrexian War Beast", 162, Rarity.UNCOMMON, PhyrexianWarBeast.class));
-        cards.add(new SetCardInfo("Plains", 181, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 182, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 183, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 181, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 182, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 183, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Polar Kraken", 44, Rarity.RARE, mage.cards.p.PolarKraken.class));
         cards.add(new SetCardInfo("Pox", 82, Rarity.RARE, mage.cards.p.Pox.class));
         cards.add(new SetCardInfo("Preacher", 24, Rarity.RARE, mage.cards.p.Preacher.class));
@@ -215,9 +214,9 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Storm Seeker", 132, Rarity.UNCOMMON, mage.cards.s.StormSeeker.class));
         cards.add(new SetCardInfo("Su-Chi", 168, Rarity.RARE, mage.cards.s.SuChi.class));
         cards.add(new SetCardInfo("Sunken City", 51, Rarity.UNCOMMON, mage.cards.s.SunkenCity.class));
-        cards.add(new SetCardInfo("Swamp", 187, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 188, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 189, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 187, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 188, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 189, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sylvan Library", 133, Rarity.RARE, mage.cards.s.SylvanLibrary.class));
         cards.add(new SetCardInfo("Tawnos's Coffin", 169, Rarity.RARE, mage.cards.t.TawnossCoffin.class));
         cards.add(new SetCardInfo("Thawing Glaciers", 180, Rarity.RARE, mage.cards.t.ThawingGlaciers.class));

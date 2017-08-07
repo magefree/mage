@@ -27,7 +27,6 @@
  */
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,10 +37,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.GameEvent;
@@ -50,6 +46,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -152,7 +150,7 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl {
         if (damageEvent.isCombatDamage()) {
             UUID controllerId = source.getControllerId();
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.hasSubtype("Zombie", game) && permanent.getControllerId() == controllerId) {
+            if (permanent != null && permanent.hasSubtype(SubType.ZOMBIE, game) && permanent.getControllerId().equals(controllerId)) {
                 return true;
             }
         }

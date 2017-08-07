@@ -27,9 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -44,6 +41,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -93,7 +94,7 @@ class HourOfGloryEffect extends OneShotEffect {
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetCreature != null) {
                 controller.moveCards(targetCreature, Zone.EXILED, source, game);
-                if (targetCreature.hasSubtype(SubType.GOD.getDescription(), game)) {
+                if (targetCreature.hasSubtype(SubType.GOD, game)) {
                     game.applyEffects();
                     Player targetController = game.getPlayer(targetCreature.getControllerId());
                     if (targetController != null) {

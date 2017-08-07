@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -70,10 +69,10 @@ public class PDSFireAndLightning extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Bolt", 17, Rarity.COMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Mogg Fanatic", 3, Rarity.UNCOMMON, mage.cards.m.MoggFanatic.class));
         cards.add(new SetCardInfo("Mogg Flunkies", 8, Rarity.COMMON, mage.cards.m.MoggFlunkies.class));
-        cards.add(new SetCardInfo("Mountain", 31, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 32, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 33, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 34, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 31, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 32, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 33, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 34, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pillage", 24, Rarity.UNCOMMON, mage.cards.p.Pillage.class));
         cards.add(new SetCardInfo("Price of Progress", 18, Rarity.UNCOMMON, mage.cards.p.PriceOfProgress.class));
         cards.add(new SetCardInfo("Reverberate", 20, Rarity.RARE, mage.cards.r.Reverberate.class));

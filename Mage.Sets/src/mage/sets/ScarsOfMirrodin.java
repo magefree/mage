@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -120,10 +119,10 @@ public class ScarsOfMirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Flameborn Hellion", 89, Rarity.COMMON, mage.cards.f.FlamebornHellion.class));
         cards.add(new SetCardInfo("Flesh Allergy", 62, Rarity.UNCOMMON, mage.cards.f.FleshAllergy.class));
         cards.add(new SetCardInfo("Flight Spellbomb", 155, Rarity.COMMON, mage.cards.f.FlightSpellbomb.class));
-        cards.add(new SetCardInfo("Forest", 246, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 247, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 248, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 249, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 246, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 247, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 248, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 249, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fulgent Distraction", 7, Rarity.COMMON, mage.cards.f.FulgentDistraction.class));
         cards.add(new SetCardInfo("Fume Spitter", 63, Rarity.COMMON, mage.cards.f.FumeSpitter.class));
         cards.add(new SetCardInfo("Furnace Celebration", 90, Rarity.UNCOMMON, mage.cards.f.FurnaceCelebration.class));
@@ -157,10 +156,10 @@ public class ScarsOfMirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Infiltration Lens", 167, Rarity.UNCOMMON, mage.cards.i.InfiltrationLens.class));
         cards.add(new SetCardInfo("Instill Infection", 68, Rarity.COMMON, mage.cards.i.InstillInfection.class));
         cards.add(new SetCardInfo("Iron Myr", 168, Rarity.COMMON, mage.cards.i.IronMyr.class));
-        cards.add(new SetCardInfo("Island", 234, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 235, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 237, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 234, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 235, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 237, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kemba, Kha Regent", 12, Rarity.RARE, mage.cards.k.KembaKhaRegent.class));
         cards.add(new SetCardInfo("Kemba's Skyguard", 13, Rarity.COMMON, mage.cards.k.KembasSkyguard.class));
         cards.add(new SetCardInfo("Koth of the Hammer", 94, Rarity.MYTHIC, mage.cards.k.KothOfTheHammer.class));
@@ -186,10 +185,10 @@ public class ScarsOfMirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Molten-Tail Masticore", 177, Rarity.MYTHIC, mage.cards.m.MoltenTailMasticore.class));
         cards.add(new SetCardInfo("Moriok Reaver", 70, Rarity.COMMON, mage.cards.m.MoriokReaver.class));
         cards.add(new SetCardInfo("Moriok Replica", 178, Rarity.COMMON, mage.cards.m.MoriokReplica.class));
-        cards.add(new SetCardInfo("Mountain", 242, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 244, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 245, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 242, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 244, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 245, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Opal", 179, Rarity.MYTHIC, mage.cards.m.MoxOpal.class));
         cards.add(new SetCardInfo("Myr Battlesphere", 180, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
         cards.add(new SetCardInfo("Myr Galvanizer", 181, Rarity.UNCOMMON, mage.cards.m.MyrGalvanizer.class));
@@ -214,10 +213,10 @@ public class ScarsOfMirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Panic Spellbomb", 191, Rarity.COMMON, mage.cards.p.PanicSpellbomb.class));
         cards.add(new SetCardInfo("Perilous Myr", 192, Rarity.COMMON, mage.cards.p.PerilousMyr.class));
         cards.add(new SetCardInfo("Plague Stinger", 75, Rarity.COMMON, mage.cards.p.PlagueStinger.class));
-        cards.add(new SetCardInfo("Plains", 230, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 231, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 232, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 233, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 230, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 231, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 232, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 233, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plated Seastrider", 38, Rarity.COMMON, mage.cards.p.PlatedSeastrider.class));
         cards.add(new SetCardInfo("Platinum Emperion", 193, Rarity.MYTHIC, mage.cards.p.PlatinumEmperion.class));
         cards.add(new SetCardInfo("Precursor Golem", 194, Rarity.RARE, mage.cards.p.PrecursorGolem.class));
@@ -260,10 +259,10 @@ public class ScarsOfMirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Strider Harness", 207, Rarity.COMMON, mage.cards.s.StriderHarness.class));
         cards.add(new SetCardInfo("Sunblast Angel", 22, Rarity.RARE, mage.cards.s.SunblastAngel.class));
         cards.add(new SetCardInfo("Sunspear Shikari", 23, Rarity.COMMON, mage.cards.s.SunspearShikari.class));
-        cards.add(new SetCardInfo("Swamp", 238, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 239, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 240, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 241, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 238, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 239, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 240, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 241, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword of Body and Mind", 208, Rarity.MYTHIC, mage.cards.s.SwordOfBodyAndMind.class));
         cards.add(new SetCardInfo("Sylvok Lifestaff", 209, Rarity.COMMON, mage.cards.s.SylvokLifestaff.class));
         cards.add(new SetCardInfo("Sylvok Replica", 210, Rarity.COMMON, mage.cards.s.SylvokReplica.class));

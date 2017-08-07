@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -166,10 +165,10 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Firebolt", 193, Rarity.COMMON, mage.cards.f.Firebolt.class));
         cards.add(new SetCardInfo("Flame Burst", 194, Rarity.COMMON, mage.cards.f.FlameBurst.class));
         cards.add(new SetCardInfo("Fledgling Imp", 137, Rarity.COMMON, mage.cards.f.FledglingImp.class));
-        cards.add(new SetCardInfo("Forest", 347, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 348, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 349, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 350, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 347, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 348, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 349, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 350, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frenetic Ogre", 195, Rarity.UNCOMMON, mage.cards.f.FreneticOgre.class));
         cards.add(new SetCardInfo("Frightcrawler", 138, Rarity.COMMON, mage.cards.f.Frightcrawler.class));
         cards.add(new SetCardInfo("Gallantry", 23, Rarity.UNCOMMON, mage.cards.g.Gallantry.class));
@@ -187,10 +186,10 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Infected Vermin", 144, Rarity.UNCOMMON, mage.cards.i.InfectedVermin.class));
         cards.add(new SetCardInfo("Innocent Blood", 145, Rarity.COMMON, mage.cards.i.InnocentBlood.class));
         cards.add(new SetCardInfo("Iridescent Angel", 288, Rarity.RARE, mage.cards.i.IridescentAngel.class));
-        cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivy Elemental", 245, Rarity.RARE, mage.cards.i.IvyElemental.class));
         cards.add(new SetCardInfo("Kamahl, Pit Fighter", 198, Rarity.RARE, mage.cards.k.KamahlPitFighter.class));
         cards.add(new SetCardInfo("Kamahl's Desire", 199, Rarity.COMMON, mage.cards.k.KamahlsDesire.class));
@@ -224,10 +223,10 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Mortivore", 152, Rarity.RARE, mage.cards.m.Mortivore.class));
         cards.add(new SetCardInfo("Mossfire Egg", 304, Rarity.UNCOMMON, mage.cards.m.MossfireEgg.class));
         cards.add(new SetCardInfo("Mossfire Valley", 321, Rarity.RARE, mage.cards.m.MossfireValley.class));
-        cards.add(new SetCardInfo("Mountain", 343, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 344, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 345, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 346, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 343, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 344, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 345, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 346, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mudhole", 208, Rarity.RARE, mage.cards.m.Mudhole.class));
         cards.add(new SetCardInfo("Muscle Burst", 252, Rarity.COMMON, mage.cards.m.MuscleBurst.class));
         cards.add(new SetCardInfo("Mystic Crusader", 33, Rarity.RARE, mage.cards.m.MysticCrusader.class));
@@ -263,10 +262,10 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Pilgrim of Justice", 40, Rarity.COMMON, mage.cards.p.PilgrimOfJustice.class));
         cards.add(new SetCardInfo("Pilgrim of Virtue", 41, Rarity.COMMON, mage.cards.p.PilgrimOfVirtue.class));
         cards.add(new SetCardInfo("Piper's Melody", 261, Rarity.UNCOMMON, mage.cards.p.PipersMelody.class));
-        cards.add(new SetCardInfo("Plains", 331, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 331, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Predict", 94, Rarity.UNCOMMON, mage.cards.p.Predict.class));
         cards.add(new SetCardInfo("Price of Glory", 214, Rarity.UNCOMMON, mage.cards.p.PriceOfGlory.class));
         cards.add(new SetCardInfo("Primal Frenzy", 262, Rarity.COMMON, mage.cards.p.PrimalFrenzy.class));
@@ -323,10 +322,10 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Stone-Tongue Basilisk", 276, Rarity.RARE, mage.cards.s.StoneTongueBasilisk.class));
         cards.add(new SetCardInfo("Sungrass Egg", 311, Rarity.UNCOMMON, mage.cards.s.SungrassEgg.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 328, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
-        cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 340, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 341, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 342, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 340, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 341, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 342, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sylvan Might", 277, Rarity.UNCOMMON, mage.cards.s.SylvanMight.class));
         cards.add(new SetCardInfo("Syncopate", 103, Rarity.COMMON, mage.cards.s.Syncopate.class));
         cards.add(new SetCardInfo("Tainted Pact", 164, Rarity.RARE, mage.cards.t.TaintedPact.class));

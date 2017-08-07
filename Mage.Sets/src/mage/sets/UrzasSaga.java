@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -153,10 +152,10 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Ants", 187, Rarity.UNCOMMON, mage.cards.f.FireAnts.class));
         cards.add(new SetCardInfo("Fluctuator", 295, Rarity.RARE, mage.cards.f.Fluctuator.class));
         cards.add(new SetCardInfo("Fog Bank", 75, Rarity.UNCOMMON, mage.cards.f.FogBank.class));
-        cards.add(new SetCardInfo("Forest", 347, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 348, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 349, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 350, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 347, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 348, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 349, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 350, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortitude", 253, Rarity.COMMON, mage.cards.f.Fortitude.class));
         cards.add(new SetCardInfo("Gaea's Bounty", 254, Rarity.COMMON, mage.cards.g.GaeasBounty.class));
         cards.add(new SetCardInfo("Gaea's Cradle", 321, Rarity.RARE, mage.cards.g.GaeasCradle.class));
@@ -193,10 +192,10 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Ill-Gotten Gains", 138, Rarity.RARE, mage.cards.i.IllGottenGains.class));
         cards.add(new SetCardInfo("Imaginary Pet", 81, Rarity.RARE, mage.cards.i.ImaginaryPet.class));
         cards.add(new SetCardInfo("Intrepid Hero", 19, Rarity.RARE, mage.cards.i.IntrepidHero.class));
-        cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jagged Lightning", 200, Rarity.UNCOMMON, mage.cards.j.JaggedLightning.class));
         cards.add(new SetCardInfo("Karn, Silver Golem", 298, Rarity.RARE, mage.cards.k.KarnSilverGolem.class));
         cards.add(new SetCardInfo("Launch", 82, Rarity.COMMON, mage.cards.l.Launch.class));
@@ -218,10 +217,10 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Monk Idealist", 20, Rarity.UNCOMMON, mage.cards.m.MonkIdealist.class));
         cards.add(new SetCardInfo("Monk Realist", 21, Rarity.COMMON, mage.cards.m.MonkRealist.class));
         cards.add(new SetCardInfo("Morphling", 85, Rarity.RARE, mage.cards.m.Morphling.class));
-        cards.add(new SetCardInfo("Mountain", 343, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 344, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 345, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 346, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 343, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 344, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 345, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 346, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("No Rest for the Wicked", 142, Rarity.UNCOMMON, mage.cards.n.NoRestForTheWicked.class));
         cards.add(new SetCardInfo("Noetic Scales", 304, Rarity.RARE, mage.cards.n.NoeticScales.class));
         cards.add(new SetCardInfo("Okk", 204, Rarity.RARE, mage.cards.o.Okk.class));
@@ -245,10 +244,10 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Processor", 306, Rarity.RARE, mage.cards.p.PhyrexianProcessor.class));
         cards.add(new SetCardInfo("Phyrexian Tower", 322, Rarity.RARE, mage.cards.p.PhyrexianTower.class));
         cards.add(new SetCardInfo("Pit Trap", 307, Rarity.UNCOMMON, mage.cards.p.PitTrap.class));
-        cards.add(new SetCardInfo("Plains", 331, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 331, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Birth", 31, Rarity.RARE, mage.cards.p.PlanarBirth.class));
         cards.add(new SetCardInfo("Planar Void", 149, Rarity.RARE, mage.cards.p.PlanarVoid.class));
         cards.add(new SetCardInfo("Polluted Mire", 323, Rarity.COMMON, mage.cards.p.PollutedMire.class));
@@ -312,10 +311,10 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Stern Proctor", 99, Rarity.UNCOMMON, mage.cards.s.SternProctor.class));
         cards.add(new SetCardInfo("Stroke of Genius", 100, Rarity.RARE, mage.cards.s.StrokeOfGenius.class));
         cards.add(new SetCardInfo("Sunder", 101, Rarity.RARE, mage.cards.s.Sunder.class));
-        cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 340, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 341, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 342, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 340, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 341, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 342, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Symbiosis", 275, Rarity.COMMON, mage.cards.s.Symbiosis.class));
         cards.add(new SetCardInfo("Tainted Aether", 161, Rarity.RARE, mage.cards.t.TaintedAether.class));
         cards.add(new SetCardInfo("Telepathy", 102, Rarity.UNCOMMON, mage.cards.t.Telepathy.class));

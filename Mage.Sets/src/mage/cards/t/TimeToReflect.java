@@ -27,11 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -39,6 +34,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -50,8 +46,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
+import java.util.*;
+
 /**
- *
  * @author jeffwadsworth
  */
 public class TimeToReflect extends CardImpl {
@@ -118,10 +115,10 @@ class BlockedOrWasBlockedByAZombieWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            if (game.getPermanent(event.getTargetId()).hasSubtype("Zombie", game)) {
+            if (game.getPermanent(event.getTargetId()).hasSubtype(SubType.ZOMBIE, game)) {
                 this.blockedOrWasBlockedByAZombieWatcher.add(new MageObjectReference(event.getSourceId(), game));
             }
-            if (game.getPermanent(event.getSourceId()).hasSubtype( "Zombie", game)) {
+            if (game.getPermanent(event.getSourceId()).hasSubtype(SubType.ZOMBIE, game)) {
                 this.blockedOrWasBlockedByAZombieWatcher.add(new MageObjectReference(event.getTargetId(), game));
             }
         }

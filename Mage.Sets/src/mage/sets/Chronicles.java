@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -130,18 +129,18 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Tor Wauki", 123, Rarity.UNCOMMON, mage.cards.t.TorWauki.class));
         cards.add(new SetCardInfo("Transmutation", 12, Rarity.COMMON, mage.cards.t.Transmutation.class));
         cards.add(new SetCardInfo("Triassic Egg", 90, Rarity.RARE, mage.cards.t.TriassicEgg.class));
-        cards.add(new SetCardInfo("Urza's Mine", 94, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Urza's Mine", 95, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Urza's Mine", 96, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Urza's Mine", 97, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Urza's Power Plant", 98, Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Urza's Power Plant", 99, Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Urza's Power Plant", 100, Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Urza's Power Plant", 101, Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Urza's Tower", 102, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Urza's Tower", 103, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Urza's Tower", 104, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Urza's Tower", 105, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Urza's Mine", 94, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Mine", 95, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Mine", 96, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Mine", 97, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Power Plant", 98, Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Power Plant", 99, Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Power Plant", 100, Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Power Plant", 101, Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Tower", 102, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Tower", 103, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Tower", 104, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Tower", 105, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vaevictis Asmadi", 124, Rarity.RARE, mage.cards.v.VaevictisAsmadi.class));
         cards.add(new SetCardInfo("Wall of Heat", 55, Rarity.COMMON, mage.cards.w.WallOfHeat.class));
         cards.add(new SetCardInfo("Wall of Opposition", 56, Rarity.UNCOMMON, mage.cards.w.WallOfOpposition.class));

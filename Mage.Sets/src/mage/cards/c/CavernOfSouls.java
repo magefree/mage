@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -52,6 +49,10 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -90,9 +91,9 @@ class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public ConditionalManaBuilder setMana(Mana mana, Ability source, Game game) {
-        Object value = game.getState().getValue(source.getSourceId() + "_type");
-        if (value != null && value instanceof String) {
-            creatureType = SubType.byDescription((String) value);
+        SubType value = (SubType) game.getState().getValue(source.getSourceId() + "_type");
+        if (value != null ) {
+            creatureType = value;
         }
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());

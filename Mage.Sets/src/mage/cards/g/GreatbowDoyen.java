@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -45,6 +44,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -110,7 +111,7 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
         Permanent damagedCreature = game.getPermanent(event.getTargetId());
         if (creature != null && damagedCreature != null 
                 && creature.isCreature()
-                && creature.hasSubtype("Archer", game)
+                && creature.hasSubtype(SubType.ARCHER, game)
                 && creature.getControllerId().equals(controllerId)) {
             this.getEffects().get(0).setValue("damageAmount", event.getAmount());
             this.getEffects().get(0).setValue("controller", damagedCreature.getControllerId());

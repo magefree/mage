@@ -226,7 +226,7 @@ foreach $name_collectorid (sort @setCards)
                 $landIsland++;
             }
             if (!exists ($alreadyIn{$cardNr})) {
-                print ("        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity.LAND, mage.cards.basiclands.$cardName.class, new CardGraphicInfo(null, true)));\n");
+                print ("        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity.LAND, mage.cards.basiclands.$cardName.class, USE_RANDOM_ART));\n");
             }
         }
         else {

@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -87,8 +86,8 @@ public class MirrodinBesieged extends ExpansionSet {
         cards.add(new SetCardInfo("Flayer Husk", 107, Rarity.COMMON, mage.cards.f.FlayerHusk.class));
         cards.add(new SetCardInfo("Flensermite", 41, Rarity.COMMON, mage.cards.f.Flensermite.class));
         cards.add(new SetCardInfo("Flesh-Eater Imp", 42, Rarity.UNCOMMON, mage.cards.f.FleshEaterImp.class));
-        cards.add(new SetCardInfo("Forest", 154, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 155, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 154, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 155, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frantic Salvage", 6, Rarity.COMMON, mage.cards.f.FranticSalvage.class));
         cards.add(new SetCardInfo("Fuel for the Cause", 25, Rarity.COMMON, mage.cards.f.FuelForTheCause.class));
         cards.add(new SetCardInfo("Galvanoth", 62, Rarity.RARE, mage.cards.g.Galvanoth.class));
@@ -109,8 +108,8 @@ public class MirrodinBesieged extends ExpansionSet {
         cards.add(new SetCardInfo("Ichor Wellspring", 110, Rarity.COMMON, mage.cards.i.IchorWellspring.class));
         cards.add(new SetCardInfo("Inkmoth Nexus", 145, Rarity.RARE, mage.cards.i.InkmothNexus.class));
         cards.add(new SetCardInfo("Into the Core", 67, Rarity.UNCOMMON, mage.cards.i.IntoTheCore.class));
-        cards.add(new SetCardInfo("Island", 148, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 149, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 148, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 149, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kemba's Legion", 9, Rarity.UNCOMMON, mage.cards.k.KembasLegion.class));
         cards.add(new SetCardInfo("Knowledge Pool", 111, Rarity.RARE, mage.cards.k.KnowledgePool.class));
         cards.add(new SetCardInfo("Koth's Courier", 68, Rarity.COMMON, mage.cards.k.KothsCourier.class));
@@ -133,8 +132,8 @@ public class MirrodinBesieged extends ExpansionSet {
         cards.add(new SetCardInfo("Mitotic Manipulation", 27, Rarity.RARE, mage.cards.m.MitoticManipulation.class));
         cards.add(new SetCardInfo("Morbid Plunder", 47, Rarity.COMMON, mage.cards.m.MorbidPlunder.class));
         cards.add(new SetCardInfo("Mortarpod", 115, Rarity.UNCOMMON, mage.cards.m.Mortarpod.class));
-        cards.add(new SetCardInfo("Mountain", 152, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 153, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 152, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 153, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myr Sire", 116, Rarity.COMMON, mage.cards.m.MyrSire.class));
         cards.add(new SetCardInfo("Myr Turbine", 117, Rarity.RARE, mage.cards.m.MyrTurbine.class));
         cards.add(new SetCardInfo("Myr Welder", 118, Rarity.RARE, mage.cards.m.MyrWelder.class));
@@ -157,8 +156,8 @@ public class MirrodinBesieged extends ExpansionSet {
         cards.add(new SetCardInfo("Pistus Strike", 86, Rarity.COMMON, mage.cards.p.PistusStrike.class));
         cards.add(new SetCardInfo("Plaguemaw Beast", 87, Rarity.UNCOMMON, mage.cards.p.PlaguemawBeast.class));
         cards.add(new SetCardInfo("Plague Myr", 125, Rarity.UNCOMMON, mage.cards.p.PlagueMyr.class));
-        cards.add(new SetCardInfo("Plains", 146, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 147, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 146, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 147, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Praetor's Counsel", 88, Rarity.MYTHIC, mage.cards.p.PraetorsCounsel.class));
         cards.add(new SetCardInfo("Priests of Norn", 16, Rarity.COMMON, mage.cards.p.PriestsOfNorn.class));
         cards.add(new SetCardInfo("Psychosis Crawler", 126, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
@@ -187,8 +186,8 @@ public class MirrodinBesieged extends ExpansionSet {
         cards.add(new SetCardInfo("Spread the Sickness", 56, Rarity.COMMON, mage.cards.s.SpreadTheSickness.class));
         cards.add(new SetCardInfo("Steel Sabotage", 33, Rarity.COMMON, mage.cards.s.SteelSabotage.class));
         cards.add(new SetCardInfo("Strandwalker", 137, Rarity.UNCOMMON, mage.cards.s.Strandwalker.class));
-        cards.add(new SetCardInfo("Swamp", 150, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 151, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 150, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 151, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword of Feast and Famine", 138, Rarity.MYTHIC, mage.cards.s.SwordOfFeastAndFamine.class));
         cards.add(new SetCardInfo("Tangle Hulk", 139, Rarity.COMMON, mage.cards.t.TangleHulk.class));
         cards.add(new SetCardInfo("Tangle Mantis", 91, Rarity.COMMON, mage.cards.t.TangleMantis.class));

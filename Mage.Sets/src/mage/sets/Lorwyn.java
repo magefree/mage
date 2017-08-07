@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -145,10 +144,10 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Fodder Launch", 114, Rarity.UNCOMMON, mage.cards.f.FodderLaunch.class));
         cards.add(new SetCardInfo("Footbottom Feast", 115, Rarity.COMMON, mage.cards.f.FootbottomFeast.class));
         cards.add(new SetCardInfo("Forced Fruition", 66, Rarity.RARE, mage.cards.f.ForcedFruition.class));
-        cards.add(new SetCardInfo("Forest", 298, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 299, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 300, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 301, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 298, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 299, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 300, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 301, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gaddock Teeg", 248, Rarity.RARE, mage.cards.g.GaddockTeeg.class));
         cards.add(new SetCardInfo("Galepowder Mage", 15, Rarity.RARE, mage.cards.g.GalepowderMage.class));
         cards.add(new SetCardInfo("Garruk Wildspeaker", 213, Rarity.RARE, mage.cards.g.GarrukWildspeaker.class));
@@ -192,10 +191,10 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Inkfathom Divers", 70, Rarity.COMMON, mage.cards.i.InkfathomDivers.class));
         cards.add(new SetCardInfo("Inner-Flame Acolyte", 181, Rarity.COMMON, mage.cards.i.InnerFlameAcolyte.class));
         cards.add(new SetCardInfo("Inner-Flame Igniter", 182, Rarity.UNCOMMON, mage.cards.i.InnerFlameIgniter.class));
-        cards.add(new SetCardInfo("Island", 286, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 287, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 288, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 289, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 286, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 287, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 288, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 289, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace Beleren", 71, Rarity.RARE, mage.cards.j.JaceBeleren.class));
         cards.add(new SetCardInfo("Jagged-Scar Archers", 222, Rarity.UNCOMMON, mage.cards.j.JaggedScarArchers.class));
         cards.add(new SetCardInfo("Judge of Currents", 22, Rarity.COMMON, mage.cards.j.JudgeOfCurrents.class));
@@ -231,10 +230,10 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Moonglove Extract", 258, Rarity.COMMON, mage.cards.m.MoongloveExtract.class));
         cards.add(new SetCardInfo("Moonglove Winnower", 126, Rarity.COMMON, mage.cards.m.MoongloveWinnower.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 270, Rarity.RARE, mage.cards.m.MosswortBridge.class));
-        cards.add(new SetCardInfo("Mountain", 294, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 295, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 296, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 297, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 294, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 295, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 296, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 297, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mournwhelk", 127, Rarity.COMMON, mage.cards.m.Mournwhelk.class));
         cards.add(new SetCardInfo("Mudbutton Torchrunner", 185, Rarity.COMMON, mage.cards.m.MudbuttonTorchrunner.class));
         cards.add(new SetCardInfo("Mulldrifter", 76, Rarity.COMMON, mage.cards.m.Mulldrifter.class));
@@ -255,10 +254,10 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Paperfin Rascal", 77, Rarity.COMMON, mage.cards.p.PaperfinRascal.class));
         cards.add(new SetCardInfo("Peppersmoke", 134, Rarity.COMMON, mage.cards.p.Peppersmoke.class));
         cards.add(new SetCardInfo("Pestermite", 78, Rarity.COMMON, mage.cards.p.Pestermite.class));
-        cards.add(new SetCardInfo("Plains", 282, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 283, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 284, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 285, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 282, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 283, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 284, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 285, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plover Knights", 35, Rarity.COMMON, mage.cards.p.PloverKnights.class));
         cards.add(new SetCardInfo("Pollen Lullaby", 36, Rarity.UNCOMMON, mage.cards.p.PollenLullaby.class));
         cards.add(new SetCardInfo("Ponder", 79, Rarity.COMMON, mage.cards.p.Ponder.class));
@@ -306,10 +305,10 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Sunrise Sovereign", 192, Rarity.RARE, mage.cards.s.SunriseSovereign.class));
         cards.add(new SetCardInfo("Surge of Thoughtweft", 43, Rarity.COMMON, mage.cards.s.SurgeOfThoughtweft.class));
         cards.add(new SetCardInfo("Surgespanner", 92, Rarity.RARE, mage.cards.s.Surgespanner.class));
-        cards.add(new SetCardInfo("Swamp", 290, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 291, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 292, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 293, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 290, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 291, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 292, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 293, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sygg, River Guide", 251, Rarity.RARE, mage.cards.s.SyggRiverGuide.class));
         cards.add(new SetCardInfo("Sylvan Echoes", 237, Rarity.UNCOMMON, mage.cards.s.SylvanEchoes.class));
         cards.add(new SetCardInfo("Tarfire", 194, Rarity.COMMON, mage.cards.t.Tarfire.class));

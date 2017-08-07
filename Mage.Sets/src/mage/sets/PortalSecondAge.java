@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -105,9 +104,9 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Eye Spy", 39, Rarity.UNCOMMON, mage.cards.e.EyeSpy.class));
         cards.add(new SetCardInfo("False Summoning", 40, Rarity.COMMON, mage.cards.f.FalseSummoning.class));
         cards.add(new SetCardInfo("Festival of Trokin", 136, Rarity.COMMON, mage.cards.f.FestivalOfTrokin.class));
-        cards.add(new SetCardInfo("Forest", 151, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 152, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 153, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 151, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 152, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 153, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Foul Spirit", 13, Rarity.UNCOMMON, mage.cards.f.FoulSpirit.class));
         cards.add(new SetCardInfo("Goblin Cavaliers", 95, Rarity.COMMON, mage.cards.g.GoblinCavaliers.class));
         cards.add(new SetCardInfo("Goblin Firestarter", 96, Rarity.UNCOMMON, mage.cards.g.GoblinFirestarter.class));
@@ -125,9 +124,9 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Horror", 15, Rarity.RARE, mage.cards.h.HiddenHorror.class));
         cards.add(new SetCardInfo("Hurricane", 69, Rarity.RARE, mage.cards.h.Hurricane.class));
         cards.add(new SetCardInfo("Ironhoof Ox", 70, Rarity.UNCOMMON, mage.cards.i.IronhoofOx.class));
-        cards.add(new SetCardInfo("Island", 154, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 155, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 156, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 154, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 155, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 156, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jagged Lightning", 106, Rarity.UNCOMMON, mage.cards.j.JaggedLightning.class));
         cards.add(new SetCardInfo("Kiss of Death", 16, Rarity.UNCOMMON, mage.cards.k.KissOfDeath.class));
         cards.add(new SetCardInfo("Lava Axe", 107, Rarity.COMMON, mage.cards.l.LavaAxe.class));
@@ -138,9 +137,9 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Rot", 18, Rarity.COMMON, mage.cards.m.MindRot.class));
         cards.add(new SetCardInfo("Moaning Spirit", 19, Rarity.COMMON, mage.cards.m.MoaningSpirit.class));
         cards.add(new SetCardInfo("Monstrous Growth", 73, Rarity.COMMON, mage.cards.m.MonstrousGrowth.class));
-        cards.add(new SetCardInfo("Mountain", 157, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 158, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 159, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 157, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 158, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 159, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Muck Rats", 20, Rarity.COMMON, mage.cards.m.MuckRats.class));
         cards.add(new SetCardInfo("Mystic Denial", 41, Rarity.UNCOMMON, mage.cards.m.MysticDenial.class));
         cards.add(new SetCardInfo("Natural Spring", 74, Rarity.COMMON, mage.cards.n.NaturalSpring.class));
@@ -157,9 +156,9 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Ogre Taskmaster", 112, Rarity.UNCOMMON, mage.cards.o.OgreTaskmaster.class));
         cards.add(new SetCardInfo("Ogre Warrior", 113, Rarity.COMMON, mage.cards.o.OgreWarrior.class));
         cards.add(new SetCardInfo("Path of Peace", 138, Rarity.COMMON, mage.cards.p.PathOfPeace.class));
-        cards.add(new SetCardInfo("Plains", 160, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 161, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 162, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 160, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 161, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 162, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plated Wurm", 81, Rarity.COMMON, mage.cards.p.PlatedWurm.class));
         cards.add(new SetCardInfo("Predatory Nightstalker", 22, Rarity.UNCOMMON, mage.cards.p.PredatoryNightstalker.class));
         cards.add(new SetCardInfo("Prowling Nightstalker", 23, Rarity.COMMON, mage.cards.p.ProwlingNightstalker.class));
@@ -180,9 +179,9 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Steam Catapult", 142, Rarity.RARE, mage.cards.s.SteamCatapult.class));
         cards.add(new SetCardInfo("Steam Frigate", 47, Rarity.COMMON, mage.cards.s.SteamFrigate.class));
         cards.add(new SetCardInfo("Stone Rain", 117, Rarity.COMMON, mage.cards.s.StoneRain.class));
-        cards.add(new SetCardInfo("Swamp", 163, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 164, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 165, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 163, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 164, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 165, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarm of Rats", 29, Rarity.COMMON, mage.cards.s.SwarmOfRats.class));
         cards.add(new SetCardInfo("Sylvan Basilisk", 86, Rarity.RARE, mage.cards.s.SylvanBasilisk.class));
         cards.add(new SetCardInfo("Sylvan Yeti", 87, Rarity.RARE, mage.cards.s.SylvanYeti.class));

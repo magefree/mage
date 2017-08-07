@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -137,9 +136,9 @@ public class AvacynRestored extends ExpansionSet {
         cards.add(new SetCardInfo("Fettergeist", 52, Rarity.UNCOMMON, mage.cards.f.Fettergeist.class));
         cards.add(new SetCardInfo("Fleeting Distraction", 53, Rarity.COMMON, mage.cards.f.FleetingDistraction.class));
         cards.add(new SetCardInfo("Flowering Lumberknot", 178, Rarity.COMMON, mage.cards.f.FloweringLumberknot.class));
-        cards.add(new SetCardInfo("Forest", 242, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 243, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 244, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 242, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 243, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 244, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gallows at Willow Hill", 215, Rarity.RARE, mage.cards.g.GallowsAtWillowHill.class));
         cards.add(new SetCardInfo("Galvanic Alchemist", 54, Rarity.COMMON, mage.cards.g.GalvanicAlchemist.class));
         cards.add(new SetCardInfo("Gang of Devils", 136, Rarity.UNCOMMON, mage.cards.g.GangOfDevils.class));
@@ -174,9 +173,9 @@ public class AvacynRestored extends ExpansionSet {
         cards.add(new SetCardInfo("Hunted Ghoul", 110, Rarity.COMMON, mage.cards.h.HuntedGhoul.class));
         cards.add(new SetCardInfo("Infinite Reflection", 61, Rarity.RARE, mage.cards.i.InfiniteReflection.class));
         cards.add(new SetCardInfo("Into the Void", 62, Rarity.UNCOMMON, mage.cards.i.IntoTheVoid.class));
-        cards.add(new SetCardInfo("Island", 233, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 234, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 235, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 233, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 234, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 235, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Joint Assault", 183, Rarity.COMMON, mage.cards.j.JointAssault.class));
         cards.add(new SetCardInfo("Kessig Malcontents", 142, Rarity.UNCOMMON, mage.cards.k.KessigMalcontents.class));
         cards.add(new SetCardInfo("Killing Wave", 111, Rarity.RARE, mage.cards.k.KillingWave.class));
@@ -202,9 +201,9 @@ public class AvacynRestored extends ExpansionSet {
         cards.add(new SetCardInfo("Moonlight Geist", 29, Rarity.COMMON, mage.cards.m.MoonlightGeist.class));
         cards.add(new SetCardInfo("Moonsilver Spear", 217, Rarity.RARE, mage.cards.m.MoonsilverSpear.class));
         cards.add(new SetCardInfo("Moorland Inquisitor", 30, Rarity.COMMON, mage.cards.m.MoorlandInquisitor.class));
-        cards.add(new SetCardInfo("Mountain", 239, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 240, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 241, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 239, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 240, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 241, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Narstad Scrapper", 218, Rarity.COMMON, mage.cards.n.NarstadScrapper.class));
         cards.add(new SetCardInfo("Natural End", 185, Rarity.COMMON, mage.cards.n.NaturalEnd.class));
         cards.add(new SetCardInfo("Nearheath Pilgrim", 31, Rarity.UNCOMMON, mage.cards.n.NearheathPilgrim.class));
@@ -217,9 +216,9 @@ public class AvacynRestored extends ExpansionSet {
         cards.add(new SetCardInfo("Pathbreaker Wurm", 188, Rarity.COMMON, mage.cards.p.PathbreakerWurm.class));
         cards.add(new SetCardInfo("Peel from Reality", 71, Rarity.COMMON, mage.cards.p.PeelFromReality.class));
         cards.add(new SetCardInfo("Pillar of Flame", 149, Rarity.COMMON, mage.cards.p.PillarOfFlame.class));
-        cards.add(new SetCardInfo("Plains", 230, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 231, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 232, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 230, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 231, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 232, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Polluted Dead", 116, Rarity.COMMON, mage.cards.p.PollutedDead.class));
         cards.add(new SetCardInfo("Predator's Gambit", 117, Rarity.COMMON, mage.cards.p.PredatorsGambit.class));
         cards.add(new SetCardInfo("Primal Surge", 189, Rarity.MYTHIC, mage.cards.p.PrimalSurge.class));
@@ -258,9 +257,9 @@ public class AvacynRestored extends ExpansionSet {
         cards.add(new SetCardInfo("Stern Mentor", 77, Rarity.UNCOMMON, mage.cards.s.SternMentor.class));
         cards.add(new SetCardInfo("Stolen Goods", 78, Rarity.RARE, mage.cards.s.StolenGoods.class));
         cards.add(new SetCardInfo("Stonewright", 157, Rarity.UNCOMMON, mage.cards.s.Stonewright.class));
-        cards.add(new SetCardInfo("Swamp", 236, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 237, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 238, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 236, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 237, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 238, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tamiyo, the Moon Sage", 79, Rarity.MYTHIC, mage.cards.t.TamiyoTheMoonSage.class));
         cards.add(new SetCardInfo("Tandem Lookout", 80, Rarity.UNCOMMON, mage.cards.t.TandemLookout.class));
         cards.add(new SetCardInfo("Temporal Mastery", 81, Rarity.MYTHIC, mage.cards.t.TemporalMastery.class));

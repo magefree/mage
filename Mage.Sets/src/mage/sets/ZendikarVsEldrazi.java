@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -68,9 +67,9 @@ public class ZendikarVsEldrazi extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 31, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Explorer's Scope", 28, Rarity.UNCOMMON, mage.cards.e.ExplorersScope.class));
         cards.add(new SetCardInfo("Forerunner of Slaughter", 64, Rarity.UNCOMMON, mage.cards.f.ForerunnerOfSlaughter.class));
-        cards.add(new SetCardInfo("Forest", 38, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 39, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 40, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 38, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 39, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 40, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forked Bolt", 60, Rarity.UNCOMMON, mage.cards.f.ForkedBolt.class));
         cards.add(new SetCardInfo("Frontier Guide", 12, Rarity.UNCOMMON, mage.cards.f.FrontierGuide.class));
         cards.add(new SetCardInfo("Graypelt Hunter", 13, Rarity.COMMON, mage.cards.g.GraypeltHunter.class));
@@ -90,16 +89,16 @@ public class ZendikarVsEldrazi extends ExpansionSet {
         cards.add(new SetCardInfo("Makindi Griffin", 6, Rarity.COMMON, mage.cards.m.MakindiGriffin.class));
         cards.add(new SetCardInfo("Marsh Casualties", 54, Rarity.UNCOMMON, mage.cards.m.MarshCasualties.class));
         cards.add(new SetCardInfo("Mind Stone", 65, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
-        cards.add(new SetCardInfo("Mountain", 73, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 74, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 75, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 73, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 74, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 75, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Oblivion Sower", 41, Rarity.MYTHIC, mage.cards.o.OblivionSower.class));
         cards.add(new SetCardInfo("Ondu Giant", 19, Rarity.COMMON, mage.cards.o.OnduGiant.class));
         cards.add(new SetCardInfo("Oust", 7, Rarity.UNCOMMON, mage.cards.o.Oust.class));
         cards.add(new SetCardInfo("Pawn of Ulamog", 55, Rarity.UNCOMMON, mage.cards.p.PawnOfUlamog.class));
-        cards.add(new SetCardInfo("Plains", 35, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 36, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 37, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 35, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 36, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 37, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Primal Command", 20, Rarity.RARE, mage.cards.p.PrimalCommand.class));
         cards.add(new SetCardInfo("Read the Bones", 56, Rarity.COMMON, mage.cards.r.ReadTheBones.class));
         cards.add(new SetCardInfo("Repel the Darkness", 8, Rarity.COMMON, mage.cards.r.RepelTheDarkness.class));
@@ -112,9 +111,9 @@ public class ZendikarVsEldrazi extends ExpansionSet {
         cards.add(new SetCardInfo("Smother", 57, Rarity.UNCOMMON, mage.cards.s.Smother.class));
         cards.add(new SetCardInfo("Stirring Wildwood", 33, Rarity.RARE, mage.cards.s.StirringWildwood.class));
         cards.add(new SetCardInfo("Stonework Puma", 30, Rarity.COMMON, mage.cards.s.StoneworkPuma.class));
-        cards.add(new SetCardInfo("Swamp", 70, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 71, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 72, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 70, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 71, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 72, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tajuru Archer", 23, Rarity.UNCOMMON, mage.cards.t.TajuruArcher.class));
         cards.add(new SetCardInfo("Territorial Baloth", 24, Rarity.COMMON, mage.cards.t.TerritorialBaloth.class));
         cards.add(new SetCardInfo("Torch Slinger", 63, Rarity.COMMON, mage.cards.t.TorchSlinger.class));
