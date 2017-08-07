@@ -3,6 +3,7 @@ package mage.constants;
 import mage.util.SubTypeList;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -56,7 +57,7 @@ public enum SubType {
     ATOG("Atog", SubTypeSet.CreatureType, false),
     ATAT("AT-AT", SubTypeSet.CreatureType, true),
     AUROCHS("Aurochs", SubTypeSet.CreatureType, false),
-    AUTOBOT("Autobot", SubTypeSet.CreatureType, false),
+    AUTOBOT("Autobot", SubTypeSet.CreatureType, true), // H17, Grimlock
     AVATAR("Avatar", SubTypeSet.CreatureType, false),
     // B
     BADGER("Badger", SubTypeSet.CreatureType, false),
@@ -100,7 +101,7 @@ public enum SubType {
     DEMON("Demon", SubTypeSet.CreatureType, false),
     DESERTER("Deserter", SubTypeSet.CreatureType, false),
     DEVIL("Devil", SubTypeSet.CreatureType, false),
-    DINOSAUR("Dinosaur", SubTypeSet.CreatureType, false),
+    DINOSAUR("Dinosaur", SubTypeSet.CreatureType, true), // only Grimlock right now, until Ixalan
     DJINN("Djinn", SubTypeSet.CreatureType, false),
     DRAGON("Dragon", SubTypeSet.CreatureType, false),
     DRAKE("Drake", SubTypeSet.CreatureType, false),
@@ -420,10 +421,10 @@ public enum SubType {
         return subTypeSet;
     }
 
-    public static SubTypeList getCreatureTypes(boolean customSet) {
-        SubTypeList subTypes = new SubTypeList();
+    public static Set<SubType> getCreatureTypes(boolean customSet) {
+        Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
         for (SubType s : values()) {
-            if (!s.customSet) {
+            if (s.customSet == customSet && s.getSubTypeSet() == SubTypeSet.CreatureType) {
                 subTypes.add(s);
             }
         }
