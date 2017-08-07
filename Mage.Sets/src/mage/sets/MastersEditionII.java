@@ -77,6 +77,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Aurochs", 153, Rarity.COMMON, mage.cards.a.Aurochs.class));
         cards.add(new SetCardInfo("Aysen Bureaucrats", 6, Rarity.COMMON, mage.cards.a.AysenBureaucrats.class));
         cards.add(new SetCardInfo("Badlands", 225, Rarity.RARE, mage.cards.b.Badlands.class));
+        cards.add(new SetCardInfo("Balduvian Conjurer", 40, Rarity.COMMON, mage.cards.b.BalduvianConjurer.class));
         cards.add(new SetCardInfo("Balduvian Dead", 79, Rarity.UNCOMMON, mage.cards.b.BalduvianDead.class));
         cards.add(new SetCardInfo("Balduvian Hydra", 118, Rarity.RARE, mage.cards.b.BalduvianHydra.class));
         cards.add(new SetCardInfo("Balduvian Trading Post", 226, Rarity.RARE, mage.cards.b.BalduvianTradingPost.class));

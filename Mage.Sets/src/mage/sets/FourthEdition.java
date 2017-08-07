@@ -78,12 +78,14 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Bird Maiden", 195, Rarity.COMMON, mage.cards.b.BirdMaiden.class));
         cards.add(new SetCardInfo("Birds of Paradise", 118, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
         cards.add(new SetCardInfo("Black Knight", 5, Rarity.UNCOMMON, mage.cards.b.BlackKnight.class));
+        cards.add(new SetCardInfo("Black Mana Battery", 316, Rarity.RARE, mage.cards.b.BlackManaBattery.class));
         cards.add(new SetCardInfo("Black Vise", 317, Rarity.UNCOMMON, mage.cards.b.BlackVise.class));
         cards.add(new SetCardInfo("Black Ward", 258, Rarity.UNCOMMON, mage.cards.b.BlackWard.class));
         cards.add(new SetCardInfo("Blessing", 259, Rarity.RARE, mage.cards.b.Blessing.class));
         cards.add(new SetCardInfo("Blight", 6, Rarity.UNCOMMON, mage.cards.b.Blight.class));
         cards.add(new SetCardInfo("Blood Lust", 196, Rarity.COMMON, mage.cards.b.BloodLust.class));
         cards.add(new SetCardInfo("Blue Elemental Blast", 63, Rarity.COMMON, mage.cards.b.BlueElementalBlast.class));
+        cards.add(new SetCardInfo("Blue Mana Battery", 318, Rarity.RARE, mage.cards.b.BlueManaBattery.class));
         cards.add(new SetCardInfo("Blue Ward", 260, Rarity.UNCOMMON, mage.cards.b.BlueWard.class));
         cards.add(new SetCardInfo("Bog Imp", 7, Rarity.COMMON, mage.cards.b.BogImp.class));
         cards.add(new SetCardInfo("Bog Wraith", 8, Rarity.UNCOMMON, mage.cards.b.BogWraith.class));
@@ -188,6 +190,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Grapeshot Catapult", 340, Rarity.COMMON, mage.cards.g.GrapeshotCatapult.class));
         cards.add(new SetCardInfo("Gray Ogre", 218, Rarity.COMMON, mage.cards.g.GrayOgre.class));
         cards.add(new SetCardInfo("Greed", 24, Rarity.RARE, mage.cards.g.Greed.class));
+        cards.add(new SetCardInfo("Green Mana Battery", 341, Rarity.RARE, mage.cards.g.GreenManaBattery.class));
         cards.add(new SetCardInfo("Green Ward", 277, Rarity.UNCOMMON, mage.cards.g.GreenWard.class));
         cards.add(new SetCardInfo("Grizzly Bears", 134, Rarity.COMMON, mage.cards.g.GrizzlyBears.class));
         cards.add(new SetCardInfo("Healing Salve", 278, Rarity.COMMON, mage.cards.h.HealingSalve.class));
@@ -297,6 +300,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Rag Man", 39, Rarity.RARE, mage.cards.r.RagMan.class));
         cards.add(new SetCardInfo("Raise Dead", 40, Rarity.COMMON, mage.cards.r.RaiseDead.class));
         cards.add(new SetCardInfo("Red Elemental Blast", 236, Rarity.COMMON, mage.cards.r.RedElementalBlast.class));
+        cards.add(new SetCardInfo("Red Mana Battery", 361, Rarity.RARE, mage.cards.r.RedManaBattery.class));
         cards.add(new SetCardInfo("Red Ward", 294, Rarity.UNCOMMON, mage.cards.r.RedWard.class));
         cards.add(new SetCardInfo("Regeneration", 152, Rarity.COMMON, mage.cards.r.Regeneration.class));
         cards.add(new SetCardInfo("Reverse Damage", 295, Rarity.RARE, mage.cards.r.ReverseDamage.class));
@@ -385,6 +389,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Web", 171, Rarity.RARE, mage.cards.w.Web.class));
         cards.add(new SetCardInfo("Whirling Dervish", 172, Rarity.UNCOMMON, mage.cards.w.WhirlingDervish.class));
         cards.add(new SetCardInfo("White Knight", 306, Rarity.UNCOMMON, mage.cards.w.WhiteKnight.class));
+        cards.add(new SetCardInfo("White Mana Battery", 375, Rarity.RARE, mage.cards.w.WhiteManaBattery.class));
         cards.add(new SetCardInfo("White Ward", 307, Rarity.UNCOMMON, mage.cards.w.WhiteWard.class));
         cards.add(new SetCardInfo("Wild Growth", 173, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Will-o'-the-Wisp", 55, Rarity.RARE, mage.cards.w.WillOTheWisp.class));

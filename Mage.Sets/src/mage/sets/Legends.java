@@ -72,8 +72,10 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Barktooth Warbeard", 261, Rarity.UNCOMMON, mage.cards.b.BarktoothWarbeard.class));
         cards.add(new SetCardInfo("Bartel Runeaxe", 262, Rarity.RARE, mage.cards.b.BartelRuneaxe.class));
         cards.add(new SetCardInfo("Beasts of Bogardan", 133, Rarity.UNCOMMON, mage.cards.b.BeastsOfBogardan.class));
+        cards.add(new SetCardInfo("Black Mana Battery", 216, Rarity.UNCOMMON, mage.cards.b.BlackManaBattery.class));
         cards.add(new SetCardInfo("Blight", 3, Rarity.UNCOMMON, mage.cards.b.Blight.class));
         cards.add(new SetCardInfo("Blood Lust", 135, Rarity.UNCOMMON, mage.cards.b.BloodLust.class));
+        cards.add(new SetCardInfo("Blue Mana Battery", 217, Rarity.UNCOMMON, mage.cards.b.BlueManaBattery.class));
         cards.add(new SetCardInfo("Boomerang", 48, Rarity.COMMON, mage.cards.b.Boomerang.class));
         cards.add(new SetCardInfo("Boris Devilboon", 263, Rarity.RARE, mage.cards.b.BorisDevilboon.class));
         cards.add(new SetCardInfo("Carrion Ants", 4, Rarity.RARE, mage.cards.c.CarrionAnts.class));
@@ -120,6 +122,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Gravity Sphere", 149, Rarity.RARE, mage.cards.g.GravitySphere.class));
         cards.add(new SetCardInfo("Great Defender", 185, Rarity.UNCOMMON, mage.cards.g.GreatDefender.class));
         cards.add(new SetCardInfo("Greed", 15, Rarity.RARE, mage.cards.g.Greed.class));
+        cards.add(new SetCardInfo("Green Mana Battery", 223, Rarity.UNCOMMON, mage.cards.g.GreenManaBattery.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 268, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));
         cards.add(new SetCardInfo("Hazezon Tamar", 270, Rarity.RARE, mage.cards.h.HazezonTamar.class));
         cards.add(new SetCardInfo("Headless Horseman", 16, Rarity.COMMON, mage.cards.h.HeadlessHorseman.class));
@@ -190,6 +193,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Ramses Overdark", 292, Rarity.RARE, mage.cards.r.RamsesOverdark.class));
         cards.add(new SetCardInfo("Rasputin Dreamweaver", 293, Rarity.RARE, mage.cards.r.RasputinDreamweaver.class));
         cards.add(new SetCardInfo("Recall", 70, Rarity.RARE, mage.cards.r.Recall.class));
+        cards.add(new SetCardInfo("Red Mana Battery", 236, Rarity.UNCOMMON, mage.cards.r.RedManaBattery.class));
         cards.add(new SetCardInfo("Reincarnation", 115, Rarity.UNCOMMON, mage.cards.r.Reincarnation.class));
         cards.add(new SetCardInfo("Relic Barrier", 237, Rarity.UNCOMMON, mage.cards.r.RelicBarrier.class));
         cards.add(new SetCardInfo("Remove Soul", 72, Rarity.COMMON, mage.cards.r.RemoveSoul.class));
@@ -245,6 +249,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Putrid Flesh", 41, Rarity.UNCOMMON, mage.cards.w.WallOfPutridFlesh.class));
         cards.add(new SetCardInfo("Wall of Wonder", 85, Rarity.UNCOMMON, mage.cards.w.WallOfWonder.class));
         cards.add(new SetCardInfo("Whirling Dervish", 125, Rarity.UNCOMMON, mage.cards.w.WhirlingDervish.class));
+        cards.add(new SetCardInfo("White Mana Battery", 244, Rarity.UNCOMMON, mage.cards.w.WhiteManaBattery.class));
         cards.add(new SetCardInfo("Willow Satyr", 126, Rarity.RARE, mage.cards.w.WillowSatyr.class));
         cards.add(new SetCardInfo("Winds of Change", 169, Rarity.UNCOMMON, mage.cards.w.WindsOfChange.class));
         cards.add(new SetCardInfo("Wolverine Pack", 128, Rarity.COMMON, mage.cards.w.WolverinePack.class));
