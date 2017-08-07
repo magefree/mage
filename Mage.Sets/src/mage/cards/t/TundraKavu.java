@@ -27,9 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,10 +37,15 @@ import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -76,7 +78,7 @@ public class TundraKavu extends CardImpl {
 class TundraKavuEffect extends BecomesBasicLandTargetEffect {
 
     public TundraKavuEffect() {
-        super(Duration.EndOfTurn, false, true, "");
+        super(Duration.EndOfTurn, false, true);
         staticText = "Target land becomes a Plains or an Island until end of turn.";
     }
 
@@ -105,7 +107,7 @@ class TundraKavuEffect extends BecomesBasicLandTargetEffect {
                     return;
                 }
             }
-            landTypes.add(choice.getChoice());
+            landTypes.add(SubType.byDescription(choice.getChoice()));
         } else {
             this.discard();
         }

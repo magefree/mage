@@ -50,8 +50,8 @@ import java.util.UUID;
 public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
 
     protected boolean chooseLandType;
-    protected List<SubType> landTypes = new ArrayList();
-    protected List<SubType> landTypesToAdd = new ArrayList();
+    protected List<SubType> landTypes = new ArrayList<>();
+    protected List<SubType> landTypesToAdd = new ArrayList<>();
     protected boolean loseOther;  // loses all other abilities, card types, and creature types
 
     public BecomesBasicLandTargetEffect(Duration duration) {
