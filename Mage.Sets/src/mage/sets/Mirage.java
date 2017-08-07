@@ -58,6 +58,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Alarum", 206, Rarity.COMMON, mage.cards.a.Alarum.class));
         cards.add(new SetCardInfo("Aleatory", 155, Rarity.UNCOMMON, mage.cards.a.Aleatory.class));
         cards.add(new SetCardInfo("Amber Prison", 257, Rarity.RARE, mage.cards.a.AmberPrison.class));
+        cards.add(new SetCardInfo("Amulet of Unmaking", 258, Rarity.RARE, mage.cards.a.AmuletOfUnmaking.class));
         cards.add(new SetCardInfo("Ancestral Memories", 52, Rarity.RARE, mage.cards.a.AncestralMemories.class));
         cards.add(new SetCardInfo("Armorer Guildmage", 156, Rarity.COMMON, mage.cards.a.ArmorerGuildmage.class));
         cards.add(new SetCardInfo("Armor of Thorns", 104, Rarity.COMMON, mage.cards.a.ArmorOfThorns.class));
