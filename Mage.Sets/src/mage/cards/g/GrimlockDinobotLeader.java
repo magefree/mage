@@ -70,7 +70,7 @@ public class GrimlockDinobotLeader extends CardImpl{
     public GrimlockDinobotLeader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT,CardType.CREATURE}, "{1}{R}{G}{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Autobot");
+        this.subtype.add(SubType.AUTOBOT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         
