@@ -115,13 +115,13 @@ class EternalizeEffect extends OneShotEffect {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(card); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
             token.getColor(game).setColor(ObjectColor.BLACK);
-            if (!token.getSubtype(game).contains("Zombie")) {
-                token.getSubtype(game).add(0, "Zombie");
+            if (!token.getSubtype(game).contains(SubType.ZOMBIE)) {
+                token.getSubtype(game).add(0, SubType.ZOMBIE);
             }
             token.getManaCost().clear();
             token.getPower().modifyBaseValue(4);
             token.getToughness().modifyBaseValue(4);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EMBALMED_CREATURE, token.getId(), source.getSourceId(), controller.getId()));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ETERNALIZED_CREATURE, token.getId(), source.getSourceId(), controller.getId()));
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false, null);
             // Probably it makes sense to remove also the Eternalize ability (it's not shown on the token cards).
             // Also it can never get active or? But it's not mentioned in the reminder text.
