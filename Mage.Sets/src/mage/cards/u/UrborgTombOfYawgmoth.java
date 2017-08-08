@@ -52,7 +52,7 @@ public class UrborgTombOfYawgmoth extends CardImpl {
         // Each land is a Swamp in addition to its other land types.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),
                 "Each land is a Swamp in addition to its other land types"));
-        ability.addEffect(new AddCardSubtypeAllEffect(new FilterLandPermanent(), "Swamp", DependencyType.BecomeSwamp));
+        ability.addEffect(new AddCardSubtypeAllEffect(new FilterLandPermanent(), SubType.SWAMP, DependencyType.BecomeSwamp));
         this.addAbility(ability);
 
     }

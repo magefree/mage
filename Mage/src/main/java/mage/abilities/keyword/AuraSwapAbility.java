@@ -94,7 +94,7 @@ class AuraSwapEffect extends OneShotEffect {
         if (controller != null) {
             Permanent auraSourcePermanent = game.getPermanent(source.getSourceId());
             if (auraSourcePermanent != null
-                    && auraSourcePermanent.getSubtype(game).contains("Aura")
+                    && auraSourcePermanent.getSubtype(game).contains(SubType.AURA)
                     && auraSourcePermanent.getOwnerId().equals(source.getControllerId())) {
                 Permanent enchantedPermanent = game.getPermanent(auraSourcePermanent.getAttachedTo());
                 filterCardToCheck.add(new AuraCardCanAttachToPermanentId(enchantedPermanent.getId()));

@@ -9,15 +9,6 @@ import java.util.stream.Collectors;
 
 public class SubTypeList extends ArrayList<SubType> {
 
-
-    public void add(int index, String s) {
-        add(index, SubType.byDescription(s));
-    }
-
-    public void add(int index, SubType s) {
-        super.add(index, s);
-    }
-
     public boolean addAll(List<String> subtypes) {
         return addAll(subtypes.stream().map(SubType::byDescription).collect(Collectors.toList()));
     }
@@ -26,9 +17,6 @@ public class SubTypeList extends ArrayList<SubType> {
         return removeAll(subtypes.stream().map(SubType::byDescription).collect(Collectors.toList()));
     }
 
-    public boolean add(SubType s) {
-       return super.add(s);
-    }
 
     public boolean add(SubType... subTypes) {
         return Collections.addAll(this, subTypes);
