@@ -27,7 +27,7 @@
  */
 package mage.cards.e;
 
-import java.util.List;
+import java.util.Iterator;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.InvertCondition;
@@ -90,8 +90,9 @@ class EpicenterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game);
-        for (Permanent p : permanents) {
+        Iterator<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game).iterator();
+        while (permanents.hasNext()) {
+            Permanent p = permanents.next();
             if (p.isLand()) {
                 p.sacrifice(source.getSourceId(), game);
             }

@@ -25,62 +25,71 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.t;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.MostCommonColorCondition;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author TheElk801
  */
-public class BarrinsUnmaking extends CardImpl {
+public class TsabosAssassin extends CardImpl {
 
-    public BarrinsUnmaking(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
+    public TsabosAssassin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        
+        this.subtype.add("Zombie");
+        this.subtype.add("Assassin");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Return target permanent to its owner's hand if that permanent shares a color with the most common color among all permanents or a color tied for most common.      
-        this.getSpellAbility().addEffect(new BarrinsUnmakingEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        // {tap}: Destroy target creature if it shares a color with the most common color among all permanents or a color tied for most common. A creature destroyed this way can't be regenerated.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new TsabosAssasinEffect(),new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public BarrinsUnmaking(final BarrinsUnmaking card) {
+    public TsabosAssassin(final TsabosAssassin card) {
         super(card);
     }
 
     @Override
-    public BarrinsUnmaking copy() {
-        return new BarrinsUnmaking(this);
+    public TsabosAssassin copy() {
+        return new TsabosAssassin(this);
     }
 }
+class TsabosAssasinEffect extends OneShotEffect {
 
-class BarrinsUnmakingEffect extends OneShotEffect {
-
-    public BarrinsUnmakingEffect() {
+    public TsabosAssasinEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Return target permanent to its owner's hand if that permanent shares a color with the most common color among all permanents or a color tied for most common.";
+        this.staticText = "Destroy target creature if it shares a color with the most common color among all permanents or a color tied for most common. A creature destroyed this way can't be regenerated.";
     }
 
-    public BarrinsUnmakingEffect(final BarrinsUnmakingEffect effect) {
+    public TsabosAssasinEffect(final TsabosAssasinEffect effect) {
         super(effect);
     }
 
     @Override
-    public BarrinsUnmakingEffect copy() {
-        return new BarrinsUnmakingEffect(this);
+    public TsabosAssasinEffect copy() {
+        return new TsabosAssasinEffect(this);
     }
 
     @Override
@@ -89,7 +98,7 @@ class BarrinsUnmakingEffect extends OneShotEffect {
         if (permanent != null) {
             Condition condition = new MostCommonColorCondition(permanent.getColor(game));
             if (condition.apply(game, source)) {
-                Effect effect = new ReturnToHandTargetEffect();
+                Effect effect = new DestroyTargetEffect();
                 effect.setTargetPointer(new FixedTarget(permanent.getId()));
                 return effect.apply(game, source);
             }

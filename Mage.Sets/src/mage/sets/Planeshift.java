@@ -99,6 +99,7 @@ public class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Gaea's Might", 81, Rarity.COMMON, mage.cards.g.GaeasMight.class));
         cards.add(new SetCardInfo("Gainsay", 26, Rarity.UNCOMMON, mage.cards.g.Gainsay.class));
         cards.add(new SetCardInfo("Gerrard's Command", 109, Rarity.COMMON, mage.cards.g.GerrardsCommand.class));
+        cards.add(new SetCardInfo("Heroic Defiance", 6, Rarity.COMMON, mage.cards.h.HeroicDefiance.class));
         cards.add(new SetCardInfo("Hobble", 7, Rarity.COMMON, mage.cards.h.Hobble.class));
         cards.add(new SetCardInfo("Honorable Scout", 8, Rarity.COMMON, mage.cards.h.HonorableScout.class));
         cards.add(new SetCardInfo("Horned Kavu", 110, Rarity.COMMON, mage.cards.h.HornedKavu.class));

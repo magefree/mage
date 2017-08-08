@@ -25,73 +25,76 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.h;
 
 import java.util.UUID;
+import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.MostCommonColorCondition;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author TheElk801
  */
-public class BarrinsUnmaking extends CardImpl {
+public class HeroicDefiance extends CardImpl {
 
-    public BarrinsUnmaking(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
+    public HeroicDefiance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
-        // Return target permanent to its owner's hand if that permanent shares a color with the most common color among all permanents or a color tied for most common.      
-        this.getSpellAbility().addEffect(new BarrinsUnmakingEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.subtype.add("Aura");
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // Enchanted creature gets +3/+3 unless it shares a color with the most common color among all permanents or a color tied for most common.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield),
+                        new HeroicDefianceCondition(),
+                        "Enchanted creature gets +3/+3 unless it shares a color with the most common color among all permanents or a color tied for most common")));
     }
 
-    public BarrinsUnmaking(final BarrinsUnmaking card) {
+    public HeroicDefiance(final HeroicDefiance card) {
         super(card);
     }
 
     @Override
-    public BarrinsUnmaking copy() {
-        return new BarrinsUnmaking(this);
+    public HeroicDefiance copy() {
+        return new HeroicDefiance(this);
     }
 }
 
-class BarrinsUnmakingEffect extends OneShotEffect {
+class HeroicDefianceCondition implements Condition {
 
-    public BarrinsUnmakingEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "Return target permanent to its owner's hand if that permanent shares a color with the most common color among all permanents or a color tied for most common.";
-    }
-
-    public BarrinsUnmakingEffect(final BarrinsUnmakingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BarrinsUnmakingEffect copy() {
-        return new BarrinsUnmakingEffect(this);
+    public HeroicDefianceCondition() {
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            Condition condition = new MostCommonColorCondition(permanent.getColor(game));
-            if (condition.apply(game, source)) {
-                Effect effect = new ReturnToHandTargetEffect();
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                return effect.apply(game, source);
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null) {
+            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+            if (creature != null) {
+                Condition condition = new MostCommonColorCondition(creature.getColor(game));
+                return !condition.apply(game, source);
             }
         }
         return false;
