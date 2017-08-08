@@ -131,4 +131,19 @@ public class DiscardTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
 
     }
+
+    @Test
+    public void testCabalTherapyAfterMathCard(){
+        addCard(Zone.HAND, playerA, "Cabal Therapy", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
+        addCard(Zone.HAND, playerB, "Driven // Despair");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cabal Therapy", playerB);
+
+        setChoice(playerA, "Driven");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerB, "Driven // Despair", 0);
+    }
 }
