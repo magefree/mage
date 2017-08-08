@@ -84,4 +84,30 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
         assertHandCount(playerA, 1);
     }
 
+    @Test
+    public void testUtopiaSprawlWithSpreadingSeas(){
+        addCard(Zone.HAND, playerA, "Spreading Seas", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+        addCard(Zone.HAND, playerA, "Utopia Sprawl");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Utopia Sprawl","Forest");
+        setChoice(playerA, "Green");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Forest");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertNotSubtype("Forest", "Forest");
+    }
+
+
+    @Test
+    public void testSpreadingSeasWithUrzaLand(){
+        addCard(Zone.HAND, playerA, "Spreading Seas", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Urza's Tower", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Urza's Tower");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertNotSubtype("Urza's Tower", "Urza's");
+        assertNotSubtype("Urza's Tower", "Tower");
+    }
 }

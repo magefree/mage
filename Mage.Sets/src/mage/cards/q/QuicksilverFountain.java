@@ -27,7 +27,6 @@
  */
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -51,6 +50,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -105,7 +106,7 @@ class QuicksilverFountainEffect extends OneShotEffect {
             if (player.choose(Outcome.Neutral, targetNonIslandLand, source.getId(), game)) {
                 Permanent landChosen = game.getPermanent(targetNonIslandLand.getFirstTarget());
                 landChosen.addCounters(CounterType.FLOOD.createInstance(), source, game);
-                ContinuousEffect becomesBasicLandTargetEffect = new BecomesBasicLandTargetEffect(Duration.OneUse, "Island");
+                ContinuousEffect becomesBasicLandTargetEffect = new BecomesBasicLandTargetEffect(Duration.OneUse, SubType.ISLAND);
                 becomesBasicLandTargetEffect.addDependencyType(DependencyType.BecomeIsland);
                 ConditionalContinuousEffect effect = new ConditionalContinuousEffect(becomesBasicLandTargetEffect, new LandHasFloodCounterCondition(this), staticText);
                 this.setTargetPointer(new FixedTarget(landChosen, game));

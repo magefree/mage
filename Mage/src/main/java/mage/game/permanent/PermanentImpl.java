@@ -27,7 +27,6 @@
  */
 package mage.game.permanent;
 
-import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -55,6 +54,8 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -925,7 +926,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean cantBeAttachedBy(MageObject source, Game game) {
         for (ProtectionAbility ability : this.getAbilities(game).getProtectionAbilities()) {
-            if (!(source.getSubtype(game).contains("Aura")
+            if (!(source.getSubtype(game).contains(SubType.AURA)
                     && !ability.removesAuras())
                     && !source.getId().equals(ability.getAuraIdNotToBeRemoved())
                     && !ability.canTarget(source, game)) {
