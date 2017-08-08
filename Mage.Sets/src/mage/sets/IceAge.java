@@ -75,6 +75,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Blue Scarab", 233, Rarity.UNCOMMON, mage.cards.b.BlueScarab.class));
         cards.add(new SetCardInfo("Brainstorm", 61, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Brand of Ill Omen", 177, Rarity.RARE, mage.cards.b.BrandOfIllOmen.class));
+        cards.add(new SetCardInfo("Brine Shaman", 3, Rarity.COMMON, mage.cards.b.BrineShaman.class));
         cards.add(new SetCardInfo("Brown Ouphe", 116, Rarity.COMMON, mage.cards.b.BrownOuphe.class));
         cards.add(new SetCardInfo("Brushland", 327, Rarity.RARE, mage.cards.b.Brushland.class));
         cards.add(new SetCardInfo("Burnt Offering", 4, Rarity.COMMON, mage.cards.b.BurntOffering.class));
