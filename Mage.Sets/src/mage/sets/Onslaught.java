@@ -56,6 +56,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodline Shaman", 249, Rarity.UNCOMMON, mage.cards.b.BloodlineShaman.class));
         cards.add(new SetCardInfo("Bloodstained Mire", 313, Rarity.RARE, mage.cards.b.BloodstainedMire.class, new CardGraphicInfo(new ObjectColor("RB"), null,false)));
         cards.add(new SetCardInfo("Boneknitter", 128, Rarity.UNCOMMON, mage.cards.b.Boneknitter.class));
+        cards.add(new SetCardInfo("Break Open", 190, Rarity.COMMON, mage.cards.b.BreakOpen.class));
         cards.add(new SetCardInfo("Brightstone Ritual", 191, Rarity.COMMON, mage.cards.b.BrightstoneRitual.class));
         cards.add(new SetCardInfo("Broodhatch Nantuko", 250, Rarity.UNCOMMON, mage.cards.b.BroodhatchNantuko.class));
         cards.add(new SetCardInfo("Cabal Archon", 129, Rarity.UNCOMMON, mage.cards.c.CabalArchon.class));
