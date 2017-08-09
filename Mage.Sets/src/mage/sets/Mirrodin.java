@@ -46,6 +46,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Bosh, Iron Golem", 147, Rarity.RARE, mage.cards.b.BoshIronGolem.class));
         cards.add(new SetCardInfo("Bottle Gnomes", 148, Rarity.UNCOMMON, mage.cards.b.BottleGnomes.class));
         cards.add(new SetCardInfo("Broodstar", 31, Rarity.RARE, mage.cards.b.Broodstar.class));
+        cards.add(new SetCardInfo("Brown Ouphe", 115, Rarity.UNCOMMON, mage.cards.b.BrownOuphe.class));
         cards.add(new SetCardInfo("Cathodion", 149, Rarity.UNCOMMON, mage.cards.c.Cathodion.class));
         cards.add(new SetCardInfo("Chalice of the Void", 150, Rarity.RARE, mage.cards.c.ChaliceOfTheVoid.class));
         cards.add(new SetCardInfo("Chimney Imp", 59, Rarity.COMMON, mage.cards.c.ChimneyImp.class));

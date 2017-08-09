@@ -66,9 +66,12 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Black Market", 116, Rarity.RARE, mage.cards.b.BlackMarket.class));
         cards.add(new SetCardInfo("Blaster Mage", 175, Rarity.COMMON, mage.cards.b.BlasterMage.class));
         cards.add(new SetCardInfo("Blockade Runner", 60, Rarity.COMMON, mage.cards.b.BlockadeRunner.class));
+        cards.add(new SetCardInfo("Blood Hound", 176, Rarity.RARE, mage.cards.b.BloodHound.class));
+        cards.add(new SetCardInfo("Boa Constrictor", 231, Rarity.UNCOMMON, mage.cards.b.BoaConstrictor.class));
         cards.add(new SetCardInfo("Bog Smugglers", 117, Rarity.COMMON, mage.cards.b.BogSmugglers.class));
         cards.add(new SetCardInfo("Bog Witch", 118, Rarity.COMMON, mage.cards.b.BogWitch.class));
         cards.add(new SetCardInfo("Brainstorm", 61, Rarity.COMMON, mage.cards.b.Brainstorm.class));
+        cards.add(new SetCardInfo("Briar Patch", 232, Rarity.UNCOMMON, mage.cards.b.BriarPatch.class));
         cards.add(new SetCardInfo("Bribery", 62, Rarity.RARE, mage.cards.b.Bribery.class));
         cards.add(new SetCardInfo("Buoyancy", 63, Rarity.COMMON, mage.cards.b.Buoyancy.class));
         cards.add(new SetCardInfo("Cackling Witch", 119, Rarity.UNCOMMON, mage.cards.c.CacklingWitch.class));

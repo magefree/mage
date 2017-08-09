@@ -64,6 +64,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Aurochs", 113, Rarity.COMMON, mage.cards.a.Aurochs.class));
         cards.add(new SetCardInfo("Balduvian Barbarians", 172, Rarity.COMMON, mage.cards.b.BalduvianBarbarians.class));
         cards.add(new SetCardInfo("Balduvian Bears", 114, Rarity.COMMON, mage.cards.b.BalduvianBears.class));
+        cards.add(new SetCardInfo("Balduvian Conjurer", 58, Rarity.UNCOMMON, mage.cards.b.BalduvianConjurer.class));
         cards.add(new SetCardInfo("Balduvian Hydra", 173, Rarity.RARE, mage.cards.b.BalduvianHydra.class));
         cards.add(new SetCardInfo("Barbed Sextant", 287, Rarity.COMMON, mage.cards.b.BarbedSextant.class));
         cards.add(new SetCardInfo("Battle Frenzy", 175, Rarity.COMMON, mage.cards.b.BattleFrenzy.class));
@@ -74,8 +75,11 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Blue Scarab", 233, Rarity.UNCOMMON, mage.cards.b.BlueScarab.class));
         cards.add(new SetCardInfo("Brainstorm", 61, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Brand of Ill Omen", 177, Rarity.RARE, mage.cards.b.BrandOfIllOmen.class));
+        cards.add(new SetCardInfo("Brine Shaman", 3, Rarity.COMMON, mage.cards.b.BrineShaman.class));
+        cards.add(new SetCardInfo("Brown Ouphe", 116, Rarity.COMMON, mage.cards.b.BrownOuphe.class));
         cards.add(new SetCardInfo("Brushland", 327, Rarity.RARE, mage.cards.b.Brushland.class));
         cards.add(new SetCardInfo("Burnt Offering", 4, Rarity.COMMON, mage.cards.b.BurntOffering.class));
+        cards.add(new SetCardInfo("Call to Arms", 234, Rarity.RARE, mage.cards.c.CallToArms.class));
         cards.add(new SetCardInfo("Caribou Range", 235, Rarity.RARE, mage.cards.c.CaribouRange.class));
         cards.add(new SetCardInfo("Celestial Sword", 289, Rarity.RARE, mage.cards.c.CelestialSword.class));
         cards.add(new SetCardInfo("Centaur Archer", 360, Rarity.UNCOMMON, mage.cards.c.CentaurArcher.class));

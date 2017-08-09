@@ -77,6 +77,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Borrowing 100,000 Arrows", 31, Rarity.UNCOMMON, mage.cards.b.Borrowing100000Arrows.class));
         cards.add(new SetCardInfo("Brilliant Plan", 32, Rarity.COMMON, mage.cards.b.BrilliantPlan.class));
         cards.add(new SetCardInfo("Burning of Xinye", 89, Rarity.RARE, mage.cards.b.BurningOfXinye.class));
+        cards.add(new SetCardInfo("Call to Arms", 4, Rarity.UNCOMMON, mage.cards.c.CallToArms.class));
         cards.add(new SetCardInfo("Capture of Jingzhou", 33, Rarity.RARE, mage.cards.c.CaptureOfJingzhou.class));
         cards.add(new SetCardInfo("Carrion Ants", 60, Rarity.UNCOMMON, mage.cards.c.CarrionAnts.class));
         cards.add(new SetCardInfo("Chain Lightning", 90, Rarity.COMMON, mage.cards.c.ChainLightning.class));

@@ -74,6 +74,7 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Aura Mutation", 232, Rarity.RARE, mage.cards.a.AuraMutation.class));
         cards.add(new SetCardInfo("Aura Shards", 233, Rarity.UNCOMMON, mage.cards.a.AuraShards.class));
         cards.add(new SetCardInfo("Backlash", 234, Rarity.UNCOMMON, mage.cards.b.Backlash.class));
+        cards.add(new SetCardInfo("Barrin's Unmaking", 46, Rarity.COMMON, mage.cards.b.BarrinsUnmaking.class));
         cards.add(new SetCardInfo("Benalish Emissary", 5, Rarity.UNCOMMON, mage.cards.b.BenalishEmissary.class));
         cards.add(new SetCardInfo("Benalish Heralds", 6, Rarity.UNCOMMON, mage.cards.b.BenalishHeralds.class));
         cards.add(new SetCardInfo("Benalish Lancer", 7, Rarity.COMMON, mage.cards.b.BenalishLancer.class));
@@ -148,6 +149,8 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Glimmering Angel", 17, Rarity.COMMON, mage.cards.g.GlimmeringAngel.class));
         cards.add(new SetCardInfo("Global Ruin", 18, Rarity.RARE, mage.cards.g.GlobalRuin.class));
         cards.add(new SetCardInfo("Goblin Spy", 145, Rarity.UNCOMMON, mage.cards.g.GoblinSpy.class));
+        cards.add(new SetCardInfo("Goham Djinn", 107, Rarity.UNCOMMON, mage.cards.g.GohamDjinn.class));
+        cards.add(new SetCardInfo("Halam Djinn", 146, Rarity.UNCOMMON, mage.cards.h.HalamDjinn.class));
         cards.add(new SetCardInfo("Hanna, Ship's Navigator", 249, Rarity.RARE, mage.cards.h.HannaShipsNavigator.class));
         cards.add(new SetCardInfo("Harrow", 189, Rarity.COMMON, mage.cards.h.Harrow.class));
         cards.add(new SetCardInfo("Harsh Judgment", 19, Rarity.RARE, mage.cards.h.HarshJudgment.class));
@@ -258,6 +261,7 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Rooting Kavu", 207, Rarity.UNCOMMON, mage.cards.r.RootingKavu.class));
         cards.add(new SetCardInfo("Rout", 34, Rarity.RARE, mage.cards.r.Rout.class));
         cards.add(new SetCardInfo("Ruby Leech", 161, Rarity.RARE, mage.cards.r.RubyLeech.class));
+        cards.add(new SetCardInfo("Ruham Djinn", 35, Rarity.UNCOMMON, mage.cards.r.RuhamDjinn.class));
         cards.add(new SetCardInfo("Sabertooth Nishoba", 268, Rarity.RARE, mage.cards.s.SabertoothNishoba.class));
         cards.add(new SetCardInfo("Salt Marsh", 326, Rarity.UNCOMMON, mage.cards.s.SaltMarsh.class));
         cards.add(new SetCardInfo("Samite Archer", 269, Rarity.UNCOMMON, mage.cards.s.SamiteArcher.class));
@@ -300,6 +304,7 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Stormscape Master", 76, Rarity.RARE, mage.cards.s.StormscapeMaster.class));
         cards.add(new SetCardInfo("Strength of Unity", 40, Rarity.COMMON, mage.cards.s.StrengthOfUnity.class));
         cards.add(new SetCardInfo("Stun", 172, Rarity.COMMON, mage.cards.s.Stun.class));
+        cards.add(new SetCardInfo("Sulam Djinn", 212, Rarity.UNCOMMON, mage.cards.s.SulamDjinn.class));
         cards.add(new SetCardInfo("Sulfur Vent", 328, Rarity.COMMON, mage.cards.s.SulfurVent.class));
         cards.add(new SetCardInfo("Sunscape Apprentice", 41, Rarity.COMMON, mage.cards.s.SunscapeApprentice.class));
         cards.add(new SetCardInfo("Sunscape Master", 42, Rarity.RARE, mage.cards.s.SunscapeMaster.class));
@@ -333,9 +338,11 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Treva, the Renewer", 280, Rarity.RARE, mage.cards.t.TrevaTheRenewer.class));
         cards.add(new SetCardInfo("Tribal Flames", 176, Rarity.COMMON, mage.cards.t.TribalFlames.class));
         cards.add(new SetCardInfo("Troll-Horn Cameo", 316, Rarity.UNCOMMON, mage.cards.t.TrollHornCameo.class));
+        cards.add(new SetCardInfo("Tsabo's Assassin", 128, Rarity.RARE, mage.cards.t.TsabosAssassin.class));
         cards.add(new SetCardInfo("Tsabo's Decree", 129, Rarity.RARE, mage.cards.t.TsabosDecree.class));
         cards.add(new SetCardInfo("Tsabo's Web", 317, Rarity.RARE, mage.cards.t.TsabosWeb.class));
         cards.add(new SetCardInfo("Tsabo Tavoc", 281, Rarity.RARE, mage.cards.t.TsaboTavoc.class));
+        cards.add(new SetCardInfo("Tsabo's Assassin", 128, Rarity.RARE, mage.cards.t.TsabosAssassin.class));
         cards.add(new SetCardInfo("Turf Wound", 177, Rarity.COMMON, mage.cards.t.TurfWound.class));
         cards.add(new SetCardInfo("Twilight's Call", 130, Rarity.RARE, mage.cards.t.TwilightsCall.class));
         cards.add(new SetCardInfo("Undermine", 282, Rarity.RARE, mage.cards.u.Undermine.class));
@@ -371,6 +378,7 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Yavimaya Barbarian", 290, Rarity.COMMON, mage.cards.y.YavimayaBarbarian.class));
         cards.add(new SetCardInfo("Yavimaya Kavu", 291, Rarity.UNCOMMON, mage.cards.y.YavimayaKavu.class));
         cards.add(new SetCardInfo("Yawgmoth's Agenda", 135, Rarity.RARE, mage.cards.y.YawgmothsAgenda.class));
+        cards.add(new SetCardInfo("Zanam Djinn", 90, Rarity.UNCOMMON, mage.cards.z.ZanamDjinn.class));
         cards.add(new SetCardInfo("Zap", 180, Rarity.COMMON, mage.cards.z.Zap.class));
     }
 }
