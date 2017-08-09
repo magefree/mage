@@ -32,16 +32,16 @@ import mage.MageInt;
 
 /**
  *
- * @author spjspj
+ * @author TheElk801
  */
-public class NestOfScarabsBlackInsectToken extends Token {
+public class CarrionBlackInsectToken extends Token {
 
-    public NestOfScarabsBlackInsectToken() {
-        super("Insect", "1/1 black Insect creature token");
+    public CarrionBlackInsectToken() {
+        super("Insect", "0/1 black Insect creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Insect");
-        power = new MageInt(1);
+        power = new MageInt(0);
         toughness = new MageInt(1);
     }
 }
