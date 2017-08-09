@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -65,6 +64,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Aurochs", 113, Rarity.COMMON, mage.cards.a.Aurochs.class));
         cards.add(new SetCardInfo("Balduvian Barbarians", 172, Rarity.COMMON, mage.cards.b.BalduvianBarbarians.class));
         cards.add(new SetCardInfo("Balduvian Bears", 114, Rarity.COMMON, mage.cards.b.BalduvianBears.class));
+        cards.add(new SetCardInfo("Balduvian Conjurer", 58, Rarity.UNCOMMON, mage.cards.b.BalduvianConjurer.class));
         cards.add(new SetCardInfo("Balduvian Hydra", 173, Rarity.RARE, mage.cards.b.BalduvianHydra.class));
         cards.add(new SetCardInfo("Barbed Sextant", 287, Rarity.COMMON, mage.cards.b.BarbedSextant.class));
         cards.add(new SetCardInfo("Battle Frenzy", 175, Rarity.COMMON, mage.cards.b.BattleFrenzy.class));
@@ -75,8 +75,11 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Blue Scarab", 233, Rarity.UNCOMMON, mage.cards.b.BlueScarab.class));
         cards.add(new SetCardInfo("Brainstorm", 61, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Brand of Ill Omen", 177, Rarity.RARE, mage.cards.b.BrandOfIllOmen.class));
+        cards.add(new SetCardInfo("Brine Shaman", 3, Rarity.COMMON, mage.cards.b.BrineShaman.class));
+        cards.add(new SetCardInfo("Brown Ouphe", 116, Rarity.COMMON, mage.cards.b.BrownOuphe.class));
         cards.add(new SetCardInfo("Brushland", 327, Rarity.RARE, mage.cards.b.Brushland.class));
         cards.add(new SetCardInfo("Burnt Offering", 4, Rarity.COMMON, mage.cards.b.BurntOffering.class));
+        cards.add(new SetCardInfo("Call to Arms", 234, Rarity.RARE, mage.cards.c.CallToArms.class));
         cards.add(new SetCardInfo("Caribou Range", 235, Rarity.RARE, mage.cards.c.CaribouRange.class));
         cards.add(new SetCardInfo("Celestial Sword", 289, Rarity.RARE, mage.cards.c.CelestialSword.class));
         cards.add(new SetCardInfo("Centaur Archer", 360, Rarity.UNCOMMON, mage.cards.c.CentaurArcher.class));
@@ -117,9 +120,9 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Folk of the Pines", 123, Rarity.COMMON, mage.cards.f.FolkOfThePines.class));
         cards.add(new SetCardInfo("Forbidden Lore", 124, Rarity.RARE, mage.cards.f.ForbiddenLore.class));
         cards.add(new SetCardInfo("Force Void", 70, Rarity.UNCOMMON, mage.cards.f.ForceVoid.class));
-        cards.add(new SetCardInfo("Forest", 328, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 329, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 330, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 328, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 329, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 330, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Lore", 125, Rarity.UNCOMMON, mage.cards.f.ForgottenLore.class));
         cards.add(new SetCardInfo("Foul Familiar", 14, Rarity.COMMON, mage.cards.f.FoulFamiliar.class));
         cards.add(new SetCardInfo("Fumarole", 369, Rarity.UNCOMMON, mage.cards.f.Fumarole.class));
@@ -161,9 +164,9 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Incinerate", 194, Rarity.COMMON, mage.cards.i.Incinerate.class));
         cards.add(new SetCardInfo("Infernal Darkness", 23, Rarity.RARE, mage.cards.i.InfernalDarkness.class));
         cards.add(new SetCardInfo("Infuse", 80, Rarity.COMMON, mage.cards.i.Infuse.class));
-        cards.add(new SetCardInfo("Island", 334, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 334, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jester's Cap", 299, Rarity.RARE, mage.cards.j.JestersCap.class));
         cards.add(new SetCardInfo("Jester's Mask", 300, Rarity.RARE, mage.cards.j.JestersMask.class));
         cards.add(new SetCardInfo("Jeweled Amulet", 301, Rarity.UNCOMMON, mage.cards.j.JeweledAmulet.class));
@@ -195,9 +198,9 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Warp", 36, Rarity.UNCOMMON, mage.cards.m.MindWarp.class));
         cards.add(new SetCardInfo("Mole Worms", 40, Rarity.UNCOMMON, mage.cards.m.MoleWorms.class));
         cards.add(new SetCardInfo("Moor Fiend", 41, Rarity.COMMON, mage.cards.m.MoorFiend.class));
-        cards.add(new SetCardInfo("Mountain", 340, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 341, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 342, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 340, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 341, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 342, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain Goat", 203, Rarity.COMMON, mage.cards.m.MountainGoat.class));
         cards.add(new SetCardInfo("Mudslide", 204, Rarity.RARE, mage.cards.m.Mudslide.class));
         cards.add(new SetCardInfo("Mystic Might", 86, Rarity.RARE, mage.cards.m.MysticMight.class));
@@ -218,9 +221,9 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Pentagram of the Ages", 307, Rarity.RARE, mage.cards.p.PentagramOfTheAges.class));
         cards.add(new SetCardInfo("Pestilence Rats", 45, Rarity.COMMON, mage.cards.p.PestilenceRats.class));
         cards.add(new SetCardInfo("Pit Trap", 308, Rarity.UNCOMMON, mage.cards.p.PitTrap.class));
-        cards.add(new SetCardInfo("Plains", 343, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 344, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 345, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 343, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 344, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 345, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Polar Kraken", 89, Rarity.RARE, mage.cards.p.PolarKraken.class));
         cards.add(new SetCardInfo("Portent", 90, Rarity.COMMON, mage.cards.p.Portent.class));
         cards.add(new SetCardInfo("Power Sink", 91, Rarity.COMMON, mage.cards.p.PowerSink.class));
@@ -272,9 +275,9 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Stunted Growth", 154, Rarity.RARE, mage.cards.s.StuntedGrowth.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 352, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
         cards.add(new SetCardInfo("Sunstone", 316, Rarity.UNCOMMON, mage.cards.s.Sunstone.class));
-        cards.add(new SetCardInfo("Swamp", 353, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 354, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 355, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 353, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 354, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 355, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 278, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Tarpan", 155, Rarity.COMMON, mage.cards.t.Tarpan.class));
         cards.add(new SetCardInfo("Thermokarst", 156, Rarity.UNCOMMON, mage.cards.t.Thermokarst.class));

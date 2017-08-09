@@ -27,7 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,6 +41,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author emerald000
@@ -95,12 +96,12 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         permanent.addCardType(CardType.CREATURE);
-                        if (!permanent.hasSubtype("Saproling", game)) {
-                            permanent.getSubtype(game).add("Saproling");
+                        if (!permanent.hasSubtype(SubType.SAPROLING, game)) {
+                            permanent.getSubtype(game).add(SubType.SAPROLING);
                         }
                         permanent.addCardType(CardType.LAND);
-                        if (!permanent.hasSubtype("Forest", game)) {
-                            permanent.getSubtype(game).add("Forest");
+                        if (!permanent.hasSubtype(SubType.FOREST, game)) {
+                            permanent.getSubtype(game).add(SubType.FOREST);
                         }
                         break;
                     case ColorChangingEffects_5:

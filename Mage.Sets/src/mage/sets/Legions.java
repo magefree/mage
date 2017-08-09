@@ -56,6 +56,7 @@ public class Legions extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         cards.add(new SetCardInfo("Akroma, Angel of Wrath", 1, Rarity.RARE, mage.cards.a.AkromaAngelOfWrath.class));
         cards.add(new SetCardInfo("Akroma's Devoted", 2, Rarity.UNCOMMON, mage.cards.a.AkromasDevoted.class));
+        cards.add(new SetCardInfo("Aphetto Exterminator", 59, Rarity.UNCOMMON, mage.cards.a.AphettoExterminator.class));
         cards.add(new SetCardInfo("Aven Envoy", 30, Rarity.COMMON, mage.cards.a.AvenEnvoy.class));
         cards.add(new SetCardInfo("Aven Redeemer", 3, Rarity.COMMON, mage.cards.a.AvenRedeemer.class));
         cards.add(new SetCardInfo("Aven Warhawk", 4, Rarity.UNCOMMON, mage.cards.a.AvenWarhawk.class));
@@ -97,6 +98,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Gempalm Incinerator", 94, Rarity.UNCOMMON, mage.cards.g.GempalmIncinerator.class));
         cards.add(new SetCardInfo("Gempalm Polluter", 70, Rarity.COMMON, mage.cards.g.GempalmPolluter.class));
         cards.add(new SetCardInfo("Gempalm Strider", 127, Rarity.UNCOMMON, mage.cards.g.GempalmStrider.class));
+        cards.add(new SetCardInfo("Ghastly Remains", 71, Rarity.RARE, mage.cards.g.GhastlyRemains.class));
         cards.add(new SetCardInfo("Glintwing Invoker", 40, Rarity.COMMON, mage.cards.g.GlintwingInvoker.class));
         cards.add(new SetCardInfo("Glowering Rogon", 128, Rarity.COMMON, mage.cards.g.GloweringRogon.class));
         cards.add(new SetCardInfo("Glowrider", 15, Rarity.RARE, mage.cards.g.Glowrider.class));

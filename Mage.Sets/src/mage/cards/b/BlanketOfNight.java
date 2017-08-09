@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
@@ -35,12 +34,11 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +53,7 @@ public class BlanketOfNight extends CardImpl {
         // Each land is a Swamp in addition to its other land types.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),
                 "Each land is a Swamp in addition to its other land types"));
-        ability.addEffect(new AddCardSubtypeAllEffect(StaticFilters.FILTER_LAND, "Swamp", DependencyType.BecomeSwamp));
+        ability.addEffect(new AddCardSubtypeAllEffect(StaticFilters.FILTER_LAND, SubType.SWAMP, DependencyType.BecomeSwamp));
         this.addAbility(ability);
     }
 

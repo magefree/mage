@@ -1,6 +1,5 @@
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -68,8 +67,8 @@ public class NewPhyrexia extends ExpansionSet {
         cards.add(new SetCardInfo("Fallen Ferromancer", 82, Rarity.UNCOMMON, mage.cards.f.FallenFerromancer.class));
         cards.add(new SetCardInfo("Flameborn Viron", 83, Rarity.COMMON, mage.cards.f.FlamebornViron.class));
         cards.add(new SetCardInfo("Forced Worship", 11, Rarity.COMMON, mage.cards.f.ForcedWorship.class));
-        cards.add(new SetCardInfo("Forest", 174, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 175, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 174, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 175, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fresh Meat", 109, Rarity.RARE, mage.cards.f.FreshMeat.class));
         cards.add(new SetCardInfo("Furnace Scamp", 84, Rarity.COMMON, mage.cards.f.FurnaceScamp.class));
         cards.add(new SetCardInfo("Geosurge", 85, Rarity.UNCOMMON, mage.cards.g.Geosurge.class));
@@ -90,8 +89,8 @@ public class NewPhyrexia extends ExpansionSet {
         cards.add(new SetCardInfo("Inquisitor Exarch", 12, Rarity.UNCOMMON, mage.cards.i.InquisitorExarch.class));
         cards.add(new SetCardInfo("Insatiable Souleater", 140, Rarity.COMMON, mage.cards.i.InsatiableSouleater.class));
         cards.add(new SetCardInfo("Invader Parasite", 87, Rarity.RARE, mage.cards.i.InvaderParasite.class));
-        cards.add(new SetCardInfo("Island", 168, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 169, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 168, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 169, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Isolation Cell", 141, Rarity.UNCOMMON, mage.cards.i.IsolationCell.class));
         cards.add(new SetCardInfo("Jin-Gitaxias, Core Augur", 37, Rarity.MYTHIC, mage.cards.j.JinGitaxiasCoreAugur.class));
         cards.add(new SetCardInfo("Jor Kadeen, the Prevailer", 128, Rarity.RARE, mage.cards.j.JorKadeenThePrevailer.class));
@@ -111,8 +110,8 @@ public class NewPhyrexia extends ExpansionSet {
         cards.add(new SetCardInfo("Mindculling", 39, Rarity.UNCOMMON, mage.cards.m.Mindculling.class));
         cards.add(new SetCardInfo("Moltensteel Dragon", 88, Rarity.RARE, mage.cards.m.MoltensteelDragon.class));
         cards.add(new SetCardInfo("Mortis Dogs", 66, Rarity.COMMON, mage.cards.m.MortisDogs.class));
-        cards.add(new SetCardInfo("Mountain", 172, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 173, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 172, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 173, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutagenic Growth", 116, Rarity.COMMON, mage.cards.m.MutagenicGrowth.class));
         cards.add(new SetCardInfo("Mycosynth Fiend", 117, Rarity.UNCOMMON, mage.cards.m.MycosynthFiend.class));
         cards.add(new SetCardInfo("Mycosynth Wellspring", 145, Rarity.COMMON, mage.cards.m.MycosynthWellspring.class));
@@ -133,8 +132,8 @@ public class NewPhyrexia extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Unlife", 18, Rarity.RARE, mage.cards.p.PhyrexianUnlife.class));
         cards.add(new SetCardInfo("Phyrexia's Core", 165, Rarity.UNCOMMON, mage.cards.p.PhyrexiasCore.class));
         cards.add(new SetCardInfo("Pith Driller", 69, Rarity.COMMON, mage.cards.p.PithDriller.class));
-        cards.add(new SetCardInfo("Plains", 166, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 167, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 166, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 167, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Porcelain Legionnaire", 19, Rarity.COMMON, mage.cards.p.PorcelainLegionnaire.class));
         cards.add(new SetCardInfo("Postmortem Lunge", 70, Rarity.UNCOMMON, mage.cards.p.PostmortemLunge.class));
         cards.add(new SetCardInfo("Praetor's Grasp", 71, Rarity.RARE, mage.cards.p.PraetorsGrasp.class));
@@ -170,8 +169,8 @@ public class NewPhyrexia extends ExpansionSet {
         cards.add(new SetCardInfo("Surge Node", 160, Rarity.UNCOMMON, mage.cards.s.SurgeNode.class));
         cards.add(new SetCardInfo("Surgical Extraction", 74, Rarity.RARE, mage.cards.s.SurgicalExtraction.class));
         cards.add(new SetCardInfo("Suture Priest", 25, Rarity.COMMON, mage.cards.s.SuturePriest.class));
-        cards.add(new SetCardInfo("Swamp", 170, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 171, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 170, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 171, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword of War and Peace", 161, Rarity.MYTHIC, mage.cards.s.SwordOfWarAndPeace.class));
         cards.add(new SetCardInfo("Tezzeret's Gambit", 47, Rarity.UNCOMMON, mage.cards.t.TezzeretsGambit.class));
         cards.add(new SetCardInfo("Thundering Tanadon", 122, Rarity.COMMON, mage.cards.t.ThunderingTanadon.class));

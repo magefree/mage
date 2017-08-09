@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -44,6 +43,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -107,10 +108,10 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
         if (protectionFilter == null) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
+                SubType subtype = (SubType) game.getState().getValue(permanent.getId() + "_type");
                 if (subtype != null) {
-                    protectionFilter = new FilterPermanent(subtype + 's');
-                    protectionFilter.add(new SubtypePredicate(SubType.byDescription(subtype)));
+                    protectionFilter = new FilterPermanent(subtype.getDescription() + 's');
+                    protectionFilter.add(new SubtypePredicate(subtype));
                 }
             }
         }

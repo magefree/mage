@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -43,9 +42,9 @@ import mage.game.permanent.Permanent;
 public class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
 
     private static FilterPermanent filter;
-    private static String addedSubtype;
+    private static SubType addedSubtype;
 
-    public AddCardSubtypeAllEffect(FilterPermanent _filter, String _addedSubtype, DependencyType _dependency) {
+    public AddCardSubtypeAllEffect(FilterPermanent _filter, SubType _addedSubtype, DependencyType _dependency) {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         filter = _filter;
         staticText = "";

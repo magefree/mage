@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +38,8 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -78,8 +79,8 @@ class DralnusCrusadeEffect extends ContinuousEffectImpl {
         for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, source.getControllerId(), source.getSourceId(), game)) {
             switch (layer) {
                 case TypeChangingEffects_4:
-                    if (!permanent.hasSubtype("Zombie", game)) {
-                        permanent.getSubtype(game).add("Zombie");
+                    if (!permanent.hasSubtype(SubType.ZOMBIE, game)) {
+                        permanent.getSubtype(game).add(SubType.ZOMBIE);
                     }
                     break;
                 case ColorChangingEffects_5:

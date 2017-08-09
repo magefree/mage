@@ -27,8 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,6 +45,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -104,7 +105,7 @@ class BlazingTorchEvasionEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return !blocker.hasSubtype("Vampire", game) && !blocker.hasSubtype("Zombie", game);
+        return !blocker.hasSubtype(SubType.VAMPIRE, game) && !blocker.hasSubtype(SubType.ZOMBIE, game);
     }
 
     @Override

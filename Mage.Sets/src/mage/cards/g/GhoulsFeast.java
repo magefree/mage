@@ -46,11 +46,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class GhoulsFeast extends CardImpl {
 
     public GhoulsFeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Target creature gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
         DynamicValue xValue = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature card"));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, new StaticValue(0), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, new StaticValue(0), Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

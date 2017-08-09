@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,16 +39,14 @@ import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.choices.ChoiceCreatureType;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -133,9 +129,7 @@ class ChooseCreatureTypeEffect extends OneShotEffect { // code by LevelX2, but t
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
         if (controller != null && mageObject != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose creature type");
-            typeChoice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toSet()));
+            Choice typeChoice = new ChoiceCreatureType();
             while (!controller.choose(outcome, typeChoice, game)) {
                 if (!controller.canRespond()) {
                     return false;
@@ -144,7 +138,7 @@ class ChooseCreatureTypeEffect extends OneShotEffect { // code by LevelX2, but t
             if (!game.isSimulation()) {
                 game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
             }
-            game.getState().setValue(mageObject.getId() + "_type", typeChoice.getChoice());
+            game.getState().setValue(mageObject.getId() + "_type", SubType.byDescription(typeChoice.getChoice()));
             return true;
         }
         return false;

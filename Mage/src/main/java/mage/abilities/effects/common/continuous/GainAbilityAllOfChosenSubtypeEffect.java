@@ -44,8 +44,8 @@ public class GainAbilityAllOfChosenSubtypeEffect extends GainAbilityAllEffect {
 
     @Override
     protected void setRuntimeData(Ability source, Game game) {
-      String s = (String) game.getState().getValue(source.getSourceId() + "_type");
-      subtype = SubType.byDescription(s);
+      subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
+
     }
 
 }

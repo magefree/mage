@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -67,9 +66,12 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Black Market", 116, Rarity.RARE, mage.cards.b.BlackMarket.class));
         cards.add(new SetCardInfo("Blaster Mage", 175, Rarity.COMMON, mage.cards.b.BlasterMage.class));
         cards.add(new SetCardInfo("Blockade Runner", 60, Rarity.COMMON, mage.cards.b.BlockadeRunner.class));
+        cards.add(new SetCardInfo("Blood Hound", 176, Rarity.RARE, mage.cards.b.BloodHound.class));
+        cards.add(new SetCardInfo("Boa Constrictor", 231, Rarity.UNCOMMON, mage.cards.b.BoaConstrictor.class));
         cards.add(new SetCardInfo("Bog Smugglers", 117, Rarity.COMMON, mage.cards.b.BogSmugglers.class));
         cards.add(new SetCardInfo("Bog Witch", 118, Rarity.COMMON, mage.cards.b.BogWitch.class));
         cards.add(new SetCardInfo("Brainstorm", 61, Rarity.COMMON, mage.cards.b.Brainstorm.class));
+        cards.add(new SetCardInfo("Briar Patch", 232, Rarity.UNCOMMON, mage.cards.b.BriarPatch.class));
         cards.add(new SetCardInfo("Bribery", 62, Rarity.RARE, mage.cards.b.Bribery.class));
         cards.add(new SetCardInfo("Buoyancy", 63, Rarity.COMMON, mage.cards.b.Buoyancy.class));
         cards.add(new SetCardInfo("Cackling Witch", 119, Rarity.UNCOMMON, mage.cards.c.CacklingWitch.class));
@@ -97,6 +99,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud Sprite", 67, Rarity.COMMON, mage.cards.c.CloudSprite.class));
         cards.add(new SetCardInfo("Coastal Piracy", 68, Rarity.UNCOMMON, mage.cards.c.CoastalPiracy.class));
         cards.add(new SetCardInfo("Collective Unconscious", 236, Rarity.RARE, mage.cards.c.CollectiveUnconscious.class));
+        cards.add(new SetCardInfo("Common Cause", 13, Rarity.RARE, mage.cards.c.CommonCause.class));
         cards.add(new SetCardInfo("Conspiracy", 127, Rarity.RARE, mage.cards.c.Conspiracy.class));
         cards.add(new SetCardInfo("Corrupt Official", 128, Rarity.RARE, mage.cards.c.CorruptOfficial.class));
         cards.add(new SetCardInfo("Counterspell", 69, Rarity.COMMON, mage.cards.c.Counterspell.class));
@@ -134,10 +137,10 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Flailing Soldier", 189, Rarity.COMMON, mage.cards.f.FlailingSoldier.class));
         cards.add(new SetCardInfo("Food Chain", 246, Rarity.RARE, mage.cards.f.FoodChain.class));
         cards.add(new SetCardInfo("Forced March", 136, Rarity.RARE, mage.cards.f.ForcedMarch.class));
-        cards.add(new SetCardInfo("Forest", 347, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 348, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 349, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 350, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 347, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 348, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 349, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 350, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Foster", 247, Rarity.RARE, mage.cards.f.Foster.class));
         cards.add(new SetCardInfo("Fountain of Cho", 317, Rarity.UNCOMMON, mage.cards.f.FountainOfCho.class));
         cards.add(new SetCardInfo("Fountain Watch", 19, Rarity.RARE, mage.cards.f.FountainWatch.class));
@@ -168,10 +171,10 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Intimidation", 142, Rarity.UNCOMMON, mage.cards.i.Intimidation.class));
         cards.add(new SetCardInfo("Invigorate", 254, Rarity.COMMON, mage.cards.i.Invigorate.class));
         cards.add(new SetCardInfo("Iron Lance", 300, Rarity.UNCOMMON, mage.cards.i.IronLance.class));
-        cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivory Mask", 24, Rarity.RARE, mage.cards.i.IvoryMask.class));
         cards.add(new SetCardInfo("Jhovall Queen", 25, Rarity.RARE, mage.cards.j.JhovallQueen.class));
         cards.add(new SetCardInfo("Jhovall Rider", 26, Rarity.UNCOMMON, mage.cards.j.JhovallRider.class));
@@ -202,10 +205,10 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Moment of Silence", 28, Rarity.COMMON, mage.cards.m.MomentOfSilence.class));
         cards.add(new SetCardInfo("Monkey Cage", 307, Rarity.RARE, mage.cards.m.MonkeyCage.class));
         cards.add(new SetCardInfo("Moonlit Wake", 29, Rarity.UNCOMMON, mage.cards.m.MoonlitWake.class));
-        cards.add(new SetCardInfo("Mountain", 343, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 344, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 345, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 346, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 343, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 344, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 345, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 346, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Muzzle", 30, Rarity.COMMON, mage.cards.m.Muzzle.class));
         cards.add(new SetCardInfo("Natural Affinity", 260, Rarity.RARE, mage.cards.n.NaturalAffinity.class));
         cards.add(new SetCardInfo("Nether Spirit", 149, Rarity.RARE, mage.cards.n.NetherSpirit.class));
@@ -217,10 +220,10 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Pangosaur", 261, Rarity.RARE, mage.cards.p.Pangosaur.class));
         cards.add(new SetCardInfo("Peat Bog", 322, Rarity.COMMON, mage.cards.p.PeatBog.class));
         cards.add(new SetCardInfo("Pious Warrior", 34, Rarity.COMMON, mage.cards.p.PiousWarrior.class));
-        cards.add(new SetCardInfo("Plains", 331, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 331, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Power Matrix", 309, Rarity.RARE, mage.cards.p.PowerMatrix.class));
         cards.add(new SetCardInfo("Primeval Shambler", 152, Rarity.UNCOMMON, mage.cards.p.PrimevalShambler.class));
         cards.add(new SetCardInfo("Pulverize", 207, Rarity.RARE, mage.cards.p.Pulverize.class));
@@ -288,10 +291,10 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Strongarm Thug", 165, Rarity.COMMON, mage.cards.s.StrongarmThug.class));
         cards.add(new SetCardInfo("Subterranean Hangar", 329, Rarity.UNCOMMON, mage.cards.s.SubterraneanHangar.class));
         cards.add(new SetCardInfo("Sustenance", 278, Rarity.UNCOMMON, mage.cards.s.Sustenance.class));
-        cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 340, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 341, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 342, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 340, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 341, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 342, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Task Force", 52, Rarity.COMMON, mage.cards.t.TaskForce.class));
         cards.add(new SetCardInfo("Tectonic Break", 216, Rarity.RARE, mage.cards.t.TectonicBreak.class));
         cards.add(new SetCardInfo("Territorial Dispute", 217, Rarity.RARE, mage.cards.t.TerritorialDispute.class));

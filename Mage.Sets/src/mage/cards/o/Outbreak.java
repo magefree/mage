@@ -27,8 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -38,7 +36,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceCreatureType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -49,6 +47,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -96,9 +96,7 @@ class OutbreakEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(SubType.getCreatureTypes(false).stream().map(p -> p.toString()).collect(Collectors.toSet()));
+            Choice typeChoice = new ChoiceCreatureType();
             while (!player.choose(outcome, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;

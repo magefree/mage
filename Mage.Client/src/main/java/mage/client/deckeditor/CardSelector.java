@@ -36,6 +36,7 @@ package mage.client.deckeditor;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.Map.Entry;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import mage.MageObject;
@@ -74,6 +75,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private BigCard bigCard;
     private boolean limited = false;
     private final SortSetting sortSetting;
+    private static final Map<String, Integer> pdAllowed = new HashMap<>();
 
     private final ActionListener searchAction = evt -> jButtonSearchActionPerformed(evt);
 
@@ -372,6 +374,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         try {
             java.util.List<Card> filteredCards = new ArrayList<>();
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            
+            boolean chkPD = chkPennyDreadful.isSelected();
+            if (chkPD) {
+                generatePennyDreadfulHash();
+            }
+            
             if (limited) {
                 for (Card card : cards) {
                     if (filter.match(card, null)) {
@@ -383,6 +391,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 for (CardInfo cardInfo : foundCards) {
                     Card card = cardInfo.getMockCard();
                     if (filter.match(card, null)) {
+                        if (chkPD) {
+                            if (!pdAllowed.containsKey(card.getName())) {
+                                continue;
+                            }
+                        }
                         filteredCards.add(card);
                     }
                 }
@@ -419,6 +432,22 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         }
     }
 
+    public void generatePennyDreadfulHash() {
+        if (pdAllowed.size() > 0) {
+            return;
+        }
+
+        Properties properties = new Properties();
+        try {
+            properties.load(CardSelector.class.getResourceAsStream("pennydreadful.properties"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (final Entry<Object, Object> entry : properties.entrySet()) {
+            pdAllowed.put((String) entry.getKey(), 1);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -439,6 +468,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jSeparator1 = new javax.swing.JToolBar.Separator();
         cbExpansionSet = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JToolBar.Separator();
+        chkPennyDreadful = new javax.swing.JCheckBox();
         btnBooster = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         tbTypes = new javax.swing.JToolBar();
@@ -582,6 +612,27 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(cbExpansionSet);
         tbColor.add(jSeparator2);
+
+
+        chkPennyDreadful.setText("Penny Dreadful");
+        chkPennyDreadful.setToolTipText("Will only allow Penny Dreadful legal cards to be shown.");
+        chkPennyDreadful.setFocusable(false);
+        chkPennyDreadful.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        chkPennyDreadful.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        chkPennyDreadful.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPilesActionPerformed(evt);
+            }
+        });
+        
+        JPopupMenu filterByFormatPopup = new JPopupMenu();
+        filterByFormatPopup.add(chkPennyDreadful);
+        filterByFormatPopup.setLayout(new GridBagLayout());
+
+        ButtonGroup selectByTypeModeGroup = new ButtonGroup();
+        JButton filterByFormatButton = new JButton ("Filter by Format");
+        makeButtonPopup(filterByFormatButton, filterByFormatPopup);
+        tbColor.add(filterByFormatButton);
 
         btnBooster.setText("Open Booster");
         btnBooster.setToolTipText("(CURRENTLY NOT WORKING) Generates a booster of the selected set and adds the cards to the card selector.");
@@ -939,16 +990,17 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                     .addComponent(chkRules, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(chkNames, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(cardSelectorBottomPanelLayout.createSequentialGroup()
-                        .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonRemoveFromMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonAddToSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonRemoveFromSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonSearch)
-                            .addComponent(jButtonClean)
-                            .addComponent(cardCount)
-                            .addComponent(jButtonAddToMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cardCountLabel))
+                            .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonSearch)
+                                .addComponent(jButtonClean)
+                                .addComponent(cardCount)
+                                .addComponent(jButtonAddToMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cardCountLabel)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1204,6 +1256,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JComboBox<String> cbExpansionSet;
     private javax.swing.JComboBox<SortBy> cbSortBy;
     private javax.swing.JCheckBox chkNames;
+    private javax.swing.JCheckBox chkPennyDreadful;
     private javax.swing.JCheckBox chkPiles;
     private javax.swing.JCheckBox chkRules;
     private javax.swing.JCheckBox chkTypes;
@@ -1286,5 +1339,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     @Override
     public void dragCardDrop(MouseEvent e, DragCardSource source, Collection<CardView> cards) {
         // Need to add cards back to tally
+    }
+
+    private static void makeButtonPopup(final AbstractButton button, final JPopupMenu popup) {
+        button.addActionListener(e -> popup.show(button, 0, button.getHeight()));
     }
 }

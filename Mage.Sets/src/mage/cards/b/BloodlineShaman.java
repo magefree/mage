@@ -27,8 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -37,7 +35,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceCreatureType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -46,6 +44,8 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,9 +98,7 @@ class BloodlineShamanEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null) {
             // Choose a creature type.
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toSet()));
+            Choice typeChoice = new ChoiceCreatureType();
             while (!controller.choose(outcome, typeChoice, game)) {
                 if (!controller.canRespond()) {
                     return false;

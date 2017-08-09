@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -141,8 +140,8 @@ public class FridayNightMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Bombardment", 37, Rarity.UNCOMMON, mage.cards.g.GoblinBombardment.class));
         cards.add(new SetCardInfo("Goblin Legionnaire", 85, Rarity.COMMON, mage.cards.g.GoblinLegionnaire.class));
         cards.add(new SetCardInfo("Goblin Ringleader", 87, Rarity.UNCOMMON, mage.cards.g.GoblinRingleader.class));
-        cards.add(new SetCardInfo("Goblin Warchief", 72, Rarity.UNCOMMON, mage.cards.g.GoblinWarchief.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Goblin Warchief", 192, Rarity.UNCOMMON, mage.cards.g.GoblinWarchief.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Goblin Warchief", 72, Rarity.UNCOMMON, mage.cards.g.GoblinWarchief.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Goblin Warchief", 192, Rarity.UNCOMMON, mage.cards.g.GoblinWarchief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Go for the Throat", 138, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
         cards.add(new SetCardInfo("Grisly Salvage", 162, Rarity.COMMON, mage.cards.g.GrislySalvage.class));
         cards.add(new SetCardInfo("Hordeling Outburst", 178, Rarity.UNCOMMON, mage.cards.h.HordelingOutburst.class));

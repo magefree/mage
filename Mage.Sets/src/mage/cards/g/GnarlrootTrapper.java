@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
@@ -53,6 +52,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -117,7 +118,7 @@ class GnarlrootTrapperManaCondition extends CreatureCastManaCondition {
     public boolean apply(Game game, Ability source) {
         if (super.apply(game, source)) {
             MageObject object = game.getObject(source.getSourceId());
-            if (object.hasSubtype("Elf", game)
+            if (object.hasSubtype(SubType.ELF, game)
                     && object.isCreature()) {
                 return true;
             }

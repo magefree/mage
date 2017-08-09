@@ -32,9 +32,9 @@ public class SpellsCostReductionAllOfChosenSubtypeEffect extends SpellsCostReduc
 
     @Override
     protected boolean selectedByRuntimeData(Card card, Ability source, Game game) {
-        String subtype = (String) game.getState().getValue(source.getSourceId() + "_type");
+        SubType subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
         if (subtype != null) {
-            return card.hasSubtype(SubType.byDescription(subtype), game);
+            return card.hasSubtype(subtype, game);
         }
         return false;
     }

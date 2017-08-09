@@ -27,13 +27,13 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -42,6 +42,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +97,7 @@ class RakishHeirTriggeredAbility extends TriggeredAbilityImpl {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent permanent = game.getPermanent(event.getSourceId());
         if (damageEvent.isCombatDamage() && permanent != null
-                && permanent.hasSubtype("Vampire", game) && permanent.getControllerId().equals(controllerId)) {
+                && permanent.hasSubtype(SubType.VAMPIRE, game) && permanent.getControllerId().equals(controllerId)) {
             this.getEffects().clear();
             AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
             effect.setTargetPointer(new FixedTarget(permanent.getId()));

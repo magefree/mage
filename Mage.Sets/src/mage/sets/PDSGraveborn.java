@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -68,10 +67,10 @@ public class PDSGraveborn extends ExpansionSet {
         cards.add(new SetCardInfo("Reanimate", 15, Rarity.UNCOMMON, mage.cards.r.Reanimate.class));
         cards.add(new SetCardInfo("Sickening Dreams", 18, Rarity.UNCOMMON, mage.cards.s.SickeningDreams.class));
         cards.add(new SetCardInfo("Sphinx of the Steel Wind", 9, Rarity.MYTHIC, mage.cards.s.SphinxOfTheSteelWind.class));
-        cards.add(new SetCardInfo("Swamp", 27, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 28, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 29, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 30, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 27, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 28, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 29, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 30, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terastodon", 7, Rarity.RARE, mage.cards.t.Terastodon.class));
         cards.add(new SetCardInfo("Twisted Abomination", 4, Rarity.COMMON, mage.cards.t.TwistedAbomination.class));
         cards.add(new SetCardInfo("Verdant Force", 8, Rarity.RARE, mage.cards.v.VerdantForce.class));

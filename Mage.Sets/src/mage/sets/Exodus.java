@@ -84,6 +84,7 @@ public class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Ertai, Wizard Adept", 33, Rarity.RARE, mage.cards.e.ErtaiWizardAdept.class));
         cards.add(new SetCardInfo("Exalted Dragon", 6, Rarity.RARE, mage.cards.e.ExaltedDragon.class));
         cards.add(new SetCardInfo("Fade Away", 34, Rarity.COMMON, mage.cards.f.FadeAway.class));
+        cards.add(new SetCardInfo("Fighting Chance", 82, Rarity.RARE, mage.cards.f.FightingChance.class));
         cards.add(new SetCardInfo("Flowstone Flood", 83, Rarity.UNCOMMON, mage.cards.f.FlowstoneFlood.class));
         cards.add(new SetCardInfo("Forbid", 35, Rarity.UNCOMMON, mage.cards.f.Forbid.class));
         cards.add(new SetCardInfo("Fugue", 62, Rarity.UNCOMMON, mage.cards.f.Fugue.class));

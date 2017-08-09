@@ -1,6 +1,5 @@
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -107,9 +106,9 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Fog", 102, Rarity.COMMON, mage.cards.f.Fog.class));
         cards.add(new SetCardInfo("Forcefield", 244, Rarity.RARE, mage.cards.f.Forcefield.class));
         cards.add(new SetCardInfo("Force of Nature", 103, Rarity.RARE, mage.cards.f.ForceOfNature.class));
-        cards.add(new SetCardInfo("Forest", 280, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 281, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 282, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 280, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 281, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 282, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fork", 153, Rarity.RARE, mage.cards.f.Fork.class));
         cards.add(new SetCardInfo("Frozen Shade", 18, Rarity.COMMON, mage.cards.f.FrozenShade.class));
         cards.add(new SetCardInfo("Fungusaur", 104, Rarity.RARE, mage.cards.f.Fungusaur.class));
@@ -142,9 +141,9 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ironclaw Orcs", 160, Rarity.COMMON, mage.cards.i.IronclawOrcs.class));
         cards.add(new SetCardInfo("Ironroot Treefolk", 112, Rarity.COMMON, mage.cards.i.IronrootTreefolk.class));
         cards.add(new SetCardInfo("Iron Star", 251, Rarity.UNCOMMON, mage.cards.i.IronStar.class));
-        cards.add(new SetCardInfo("Island", 283, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 284, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 285, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 283, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 284, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 285, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island Sanctuary", 210, Rarity.RARE, mage.cards.i.IslandSanctuary.class));
         cards.add(new SetCardInfo("Ivory Cup", 252, Rarity.UNCOMMON, mage.cards.i.IvoryCup.class));
         cards.add(new SetCardInfo("Jade Monolith", 253, Rarity.RARE, mage.cards.j.JadeMonolith.class));
@@ -179,9 +178,9 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 67, Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class));
         cards.add(new SetCardInfo("Mind Twist", 24, Rarity.RARE, mage.cards.m.MindTwist.class));
         cards.add(new SetCardInfo("Mons's Goblin Raiders", 165, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class));
-        cards.add(new SetCardInfo("Mountain", 286, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 287, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 288, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 286, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 287, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 288, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Emerald", 262, Rarity.RARE, mage.cards.m.MoxEmerald.class));
         cards.add(new SetCardInfo("Mox Jet", 263, Rarity.RARE, mage.cards.m.MoxJet.class));
         cards.add(new SetCardInfo("Mox Pearl", 264, Rarity.RARE, mage.cards.m.MoxPearl.class));
@@ -205,9 +204,9 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Phantom Monster", 70, Rarity.UNCOMMON, mage.cards.p.PhantomMonster.class));
         cards.add(new SetCardInfo("Pirate Ship", 71, Rarity.RARE, mage.cards.p.PirateShip.class));
         cards.add(new SetCardInfo("Plague Rats", 30, Rarity.COMMON, mage.cards.p.PlagueRats.class));
-        cards.add(new SetCardInfo("Plains", 289, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 290, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 291, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 289, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 290, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 291, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plateau", 292, Rarity.RARE, mage.cards.p.Plateau.class));
         cards.add(new SetCardInfo("Power Sink", 73, Rarity.COMMON, mage.cards.p.PowerSink.class));
         cards.add(new SetCardInfo("Power Surge", 168, Rarity.RARE, mage.cards.p.PowerSurge.class));
@@ -255,9 +254,9 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Stone Rain", 178, Rarity.COMMON, mage.cards.s.StoneRain.class));
         cards.add(new SetCardInfo("Stream of Life", 126, Rarity.COMMON, mage.cards.s.StreamOfLife.class));
         cards.add(new SetCardInfo("Sunglasses of Urza", 272, Rarity.RARE, mage.cards.s.SunglassesOfUrza.class));
-        cards.add(new SetCardInfo("Swamp", 295, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 296, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 297, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 295, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 296, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 297, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 225, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Taiga", 298, Rarity.RARE, mage.cards.t.Taiga.class));
         cards.add(new SetCardInfo("Terror", 39, Rarity.COMMON, mage.cards.t.Terror.class));

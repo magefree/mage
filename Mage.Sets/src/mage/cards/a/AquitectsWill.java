@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -43,6 +42,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +66,7 @@ public class AquitectsWill extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
 
         // That land is an Island in addition to its other types for as long as it has a flood counter on it.
-        this.getSpellAbility().addEffect(new AquitectsWillEffect(Duration.Custom, false, false, "Island"));
+        this.getSpellAbility().addEffect(new AquitectsWillEffect(Duration.Custom, false, false, SubType.ISLAND));
 
         // If you control a Merfolk, draw a card.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
@@ -86,7 +87,7 @@ public class AquitectsWill extends CardImpl {
 
 class AquitectsWillEffect extends BecomesBasicLandTargetEffect {
 
-    public AquitectsWillEffect(Duration duration, boolean chooseLandType, boolean loseType, String... landNames) {
+    public AquitectsWillEffect(Duration duration, boolean chooseLandType, boolean loseType, SubType... landNames) {
         super(duration, chooseLandType, loseType, landNames);
         staticText = "That land is an Island in addition to its other types for as long as it has a flood counter on it";
     }

@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.n.NafsAsp;
 import mage.cards.p.Piety;
@@ -79,12 +78,14 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Bird Maiden", 195, Rarity.COMMON, mage.cards.b.BirdMaiden.class));
         cards.add(new SetCardInfo("Birds of Paradise", 118, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
         cards.add(new SetCardInfo("Black Knight", 5, Rarity.UNCOMMON, mage.cards.b.BlackKnight.class));
+        cards.add(new SetCardInfo("Black Mana Battery", 316, Rarity.RARE, mage.cards.b.BlackManaBattery.class));
         cards.add(new SetCardInfo("Black Vise", 317, Rarity.UNCOMMON, mage.cards.b.BlackVise.class));
         cards.add(new SetCardInfo("Black Ward", 258, Rarity.UNCOMMON, mage.cards.b.BlackWard.class));
         cards.add(new SetCardInfo("Blessing", 259, Rarity.RARE, mage.cards.b.Blessing.class));
         cards.add(new SetCardInfo("Blight", 6, Rarity.UNCOMMON, mage.cards.b.Blight.class));
         cards.add(new SetCardInfo("Blood Lust", 196, Rarity.COMMON, mage.cards.b.BloodLust.class));
         cards.add(new SetCardInfo("Blue Elemental Blast", 63, Rarity.COMMON, mage.cards.b.BlueElementalBlast.class));
+        cards.add(new SetCardInfo("Blue Mana Battery", 318, Rarity.RARE, mage.cards.b.BlueManaBattery.class));
         cards.add(new SetCardInfo("Blue Ward", 260, Rarity.UNCOMMON, mage.cards.b.BlueWard.class));
         cards.add(new SetCardInfo("Bog Imp", 7, Rarity.COMMON, mage.cards.b.BogImp.class));
         cards.add(new SetCardInfo("Bog Wraith", 8, Rarity.UNCOMMON, mage.cards.b.BogWraith.class));
@@ -170,9 +171,9 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Flying Carpet", 338, Rarity.RARE, mage.cards.f.FlyingCarpet.class));
         cards.add(new SetCardInfo("Fog", 128, Rarity.COMMON, mage.cards.f.Fog.class));
         cards.add(new SetCardInfo("Force of Nature", 129, Rarity.RARE, mage.cards.f.ForceOfNature.class));
-        cards.add(new SetCardInfo("Forest", 175, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 176, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 177, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 175, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 176, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 177, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frozen Shade", 22, Rarity.COMMON, mage.cards.f.FrozenShade.class));
         cards.add(new SetCardInfo("Fungusaur", 130, Rarity.RARE, mage.cards.f.Fungusaur.class));
         cards.add(new SetCardInfo("Gaea's Liege", 131, Rarity.RARE, mage.cards.g.GaeasLiege.class));
@@ -189,6 +190,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Grapeshot Catapult", 340, Rarity.COMMON, mage.cards.g.GrapeshotCatapult.class));
         cards.add(new SetCardInfo("Gray Ogre", 218, Rarity.COMMON, mage.cards.g.GrayOgre.class));
         cards.add(new SetCardInfo("Greed", 24, Rarity.RARE, mage.cards.g.Greed.class));
+        cards.add(new SetCardInfo("Green Mana Battery", 341, Rarity.RARE, mage.cards.g.GreenManaBattery.class));
         cards.add(new SetCardInfo("Green Ward", 277, Rarity.UNCOMMON, mage.cards.g.GreenWard.class));
         cards.add(new SetCardInfo("Grizzly Bears", 134, Rarity.COMMON, mage.cards.g.GrizzlyBears.class));
         cards.add(new SetCardInfo("Healing Salve", 278, Rarity.COMMON, mage.cards.h.HealingSalve.class));
@@ -208,9 +210,9 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ironclaw Orcs", 224, Rarity.COMMON, mage.cards.i.IronclawOrcs.class));
         cards.add(new SetCardInfo("Ironroot Treefolk", 137, Rarity.COMMON, mage.cards.i.IronrootTreefolk.class));
         cards.add(new SetCardInfo("Iron Star", 344, Rarity.UNCOMMON, mage.cards.i.IronStar.class));
-        cards.add(new SetCardInfo("Island", 178, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 179, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 180, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 178, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 179, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 180, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island Fish Jasconius", 78, Rarity.RARE, mage.cards.i.IslandFishJasconius.class));
         cards.add(new SetCardInfo("Island Sanctuary", 281, Rarity.RARE, mage.cards.i.IslandSanctuary.class));
         cards.add(new SetCardInfo("Ivory Cup", 345, Rarity.UNCOMMON, mage.cards.i.IvoryCup.class));
@@ -256,9 +258,9 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mishra's Factory", 181, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Mons's Goblin Raiders", 231, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class));
         cards.add(new SetCardInfo("Morale", 288, Rarity.COMMON, mage.cards.m.Morale.class));
-        cards.add(new SetCardInfo("Mountain", 182, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 183, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 184, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 182, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 183, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 184, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Murk Dwellers", 32, Rarity.COMMON, mage.cards.m.MurkDwellers.class));
         cards.add(new SetCardInfo("Nafs Asp", 148, Rarity.COMMON, NafsAsp.class));
         cards.add(new SetCardInfo("Nether Shadow", 33, Rarity.RARE, mage.cards.n.NetherShadow.class));
@@ -283,9 +285,9 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Pirate Ship", 91, Rarity.RARE, mage.cards.p.PirateShip.class));
         cards.add(new SetCardInfo("Pit Scorpion", 37, Rarity.COMMON, mage.cards.p.PitScorpion.class));
         cards.add(new SetCardInfo("Plague Rats", 38, Rarity.COMMON, mage.cards.p.PlagueRats.class));
-        cards.add(new SetCardInfo("Plains", 186, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 187, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 188, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 186, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 187, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 188, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Power Sink", 93, Rarity.COMMON, mage.cards.p.PowerSink.class));
         cards.add(new SetCardInfo("Power Surge", 234, Rarity.RARE, mage.cards.p.PowerSurge.class));
         cards.add(new SetCardInfo("Pradesh Gypsies", 149, Rarity.COMMON, mage.cards.p.PradeshGypsies.class));
@@ -298,6 +300,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Rag Man", 39, Rarity.RARE, mage.cards.r.RagMan.class));
         cards.add(new SetCardInfo("Raise Dead", 40, Rarity.COMMON, mage.cards.r.RaiseDead.class));
         cards.add(new SetCardInfo("Red Elemental Blast", 236, Rarity.COMMON, mage.cards.r.RedElementalBlast.class));
+        cards.add(new SetCardInfo("Red Mana Battery", 361, Rarity.RARE, mage.cards.r.RedManaBattery.class));
         cards.add(new SetCardInfo("Red Ward", 294, Rarity.UNCOMMON, mage.cards.r.RedWard.class));
         cards.add(new SetCardInfo("Regeneration", 152, Rarity.COMMON, mage.cards.r.Regeneration.class));
         cards.add(new SetCardInfo("Reverse Damage", 295, Rarity.RARE, mage.cards.r.ReverseDamage.class));
@@ -336,9 +339,9 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Strip Mine", 189, Rarity.UNCOMMON, mage.cards.s.StripMine.class));
         cards.add(new SetCardInfo("Sunglasses of Urza", 365, Rarity.RARE, mage.cards.s.SunglassesOfUrza.class));
         cards.add(new SetCardInfo("Sunken City", 106, Rarity.COMMON, mage.cards.s.SunkenCity.class));
-        cards.add(new SetCardInfo("Swamp", 190, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 191, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 192, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 190, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 191, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 192, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 302, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Sylvan Library", 157, Rarity.RARE, mage.cards.s.SylvanLibrary.class));
         cards.add(new SetCardInfo("Tawnos's Wand", 366, Rarity.UNCOMMON, mage.cards.t.TawnossWand.class));
@@ -386,6 +389,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Web", 171, Rarity.RARE, mage.cards.w.Web.class));
         cards.add(new SetCardInfo("Whirling Dervish", 172, Rarity.UNCOMMON, mage.cards.w.WhirlingDervish.class));
         cards.add(new SetCardInfo("White Knight", 306, Rarity.UNCOMMON, mage.cards.w.WhiteKnight.class));
+        cards.add(new SetCardInfo("White Mana Battery", 375, Rarity.RARE, mage.cards.w.WhiteManaBattery.class));
         cards.add(new SetCardInfo("White Ward", 307, Rarity.UNCOMMON, mage.cards.w.WhiteWard.class));
         cards.add(new SetCardInfo("Wild Growth", 173, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Will-o'-the-Wisp", 55, Rarity.RARE, mage.cards.w.WillOTheWisp.class));

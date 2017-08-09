@@ -30,6 +30,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Spyglass", 93, Rarity.COMMON, mage.cards.a.ArcaneSpyglass.class));
         cards.add(new SetCardInfo("Arcbound Bruiser", 94, Rarity.COMMON, mage.cards.a.ArcboundBruiser.class));
         cards.add(new SetCardInfo("Arcbound Crusher", 95, Rarity.UNCOMMON, mage.cards.a.ArcboundCrusher.class));
+        cards.add(new SetCardInfo("Arcbound Fiend", 96, Rarity.UNCOMMON, mage.cards.a.ArcboundFiend.class));
         cards.add(new SetCardInfo("Arcbound Hybrid", 97, Rarity.COMMON, mage.cards.a.ArcboundHybrid.class));
         cards.add(new SetCardInfo("Arcbound Lancer", 98, Rarity.UNCOMMON, mage.cards.a.ArcboundLancer.class));
         cards.add(new SetCardInfo("Arcbound Overseer", 99, Rarity.RARE, mage.cards.a.ArcboundOverseer.class));
@@ -43,6 +44,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Barbed Lightning", 55, Rarity.COMMON, mage.cards.b.BarbedLightning.class));
         cards.add(new SetCardInfo("Blinkmoth Nexus", 163, Rarity.RARE, mage.cards.b.BlinkmothNexus.class));
         cards.add(new SetCardInfo("Burden of Greed", 38, Rarity.COMMON, mage.cards.b.BurdenOfGreed.class));
+        cards.add(new SetCardInfo("Carry Away", 19, Rarity.UNCOMMON, mage.cards.c.CarryAway.class));
         cards.add(new SetCardInfo("Chimeric Egg", 106, Rarity.UNCOMMON, mage.cards.c.ChimericEgg.class));
         cards.add(new SetCardInfo("Chittering Rats", 39, Rarity.COMMON, mage.cards.c.ChitteringRats.class));
         cards.add(new SetCardInfo("Chromescale Drake", 20, Rarity.RARE, mage.cards.c.ChromescaleDrake.class));
@@ -85,6 +87,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Heartseeker", 124, Rarity.RARE, mage.cards.h.Heartseeker.class));
         cards.add(new SetCardInfo("Hoverguard Observer", 22, Rarity.UNCOMMON, mage.cards.h.HoverguardObserver.class));
         cards.add(new SetCardInfo("Hunger of the Nim", 46, Rarity.COMMON, mage.cards.h.HungerOfTheNim.class));
+        cards.add(new SetCardInfo("Infested Roothold", 76, Rarity.UNCOMMON, mage.cards.i.InfestedRoothold.class));
         cards.add(new SetCardInfo("Inflame", 64, Rarity.COMMON, mage.cards.i.Inflame.class));
         cards.add(new SetCardInfo("Juggernaut", 125, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
         cards.add(new SetCardInfo("Karstoderm", 77, Rarity.UNCOMMON, mage.cards.k.Karstoderm.class));
@@ -133,6 +136,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Savage Beating", 67, Rarity.RARE, mage.cards.s.SavageBeating.class));
         cards.add(new SetCardInfo("Scavenging Scarab", 51, Rarity.COMMON, mage.cards.s.ScavengingScarab.class));
         cards.add(new SetCardInfo("Screams from Within", 52, Rarity.UNCOMMON, mage.cards.s.ScreamsFromWithin.class));
+        cards.add(new SetCardInfo("Second Sight", 33, Rarity.UNCOMMON, mage.cards.s.SecondSight.class));
         cards.add(new SetCardInfo("Serum Powder", 138, Rarity.RARE, mage.cards.s.SerumPowder.class));
         cards.add(new SetCardInfo("Shield of Kaldra", 139, Rarity.RARE, mage.cards.s.ShieldOfKaldra.class));
         cards.add(new SetCardInfo("Shunt", 68, Rarity.RARE, mage.cards.s.Shunt.class));

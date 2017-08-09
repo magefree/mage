@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,6 +37,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -45,6 +45,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -99,7 +101,7 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getControllerId().equals(this.controllerId) && (permanent.hasSubtype("Wolf", game) || permanent.hasSubtype("Werewolf", game))) {
+        if (permanent != null && permanent.getControllerId().equals(this.controllerId) && (permanent.hasSubtype(SubType.WOLF, game) || permanent.hasSubtype(SubType.WEREWOLF, game))) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object instanceof Spell) {
                 Card c = (Spell) object;

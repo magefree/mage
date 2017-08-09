@@ -31,6 +31,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -57,7 +58,7 @@ public class EnterAttributeAddChosenSubtypeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        String subtype = (String) game.getState().getValue(source.getSourceId() + "_type");
+        SubType subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
         if (permanent != null && subtype != null) {
             MageObject mageObject = permanent.getBasicMageObject(game);
             if (!mageObject.getSubtype(null).contains(subtype)) {

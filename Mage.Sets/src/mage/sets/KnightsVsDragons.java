@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -68,10 +67,10 @@ public class KnightsVsDragons extends ExpansionSet {
         cards.add(new SetCardInfo("Edge of Autumn", 25, Rarity.COMMON, mage.cards.e.EdgeOfAutumn.class));
         cards.add(new SetCardInfo("Fiery Fall", 76, Rarity.COMMON, mage.cards.f.FieryFall.class));
         cards.add(new SetCardInfo("Fire-Belly Changeling", 51, Rarity.COMMON, mage.cards.f.FireBellyChangeling.class));
-        cards.add(new SetCardInfo("Forest", 43, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 44, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 45, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 46, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 43, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 44, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 45, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 46, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghostfire", 69, Rarity.COMMON, mage.cards.g.Ghostfire.class));
         cards.add(new SetCardInfo("Grasslands", 35, Rarity.UNCOMMON, mage.cards.g.Grasslands.class));
         cards.add(new SetCardInfo("Griffin Guide", 33, Rarity.UNCOMMON, mage.cards.g.GriffinGuide.class));
@@ -94,17 +93,17 @@ public class KnightsVsDragons extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Warhammer", 31, Rarity.RARE, mage.cards.l.LoxodonWarhammer.class));
         cards.add(new SetCardInfo("Mighty Leap", 26, Rarity.COMMON, mage.cards.m.MightyLeap.class));
         cards.add(new SetCardInfo("Mordant Dragon", 58, Rarity.RARE, mage.cards.m.MordantDragon.class));
-        cards.add(new SetCardInfo("Mountain", 78, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 79, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 80, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 81, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 78, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 79, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 80, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 81, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mudbutton Torchrunner", 52, Rarity.COMMON, mage.cards.m.MudbuttonTorchrunner.class));
         cards.add(new SetCardInfo("Oblivion Ring", 34, Rarity.COMMON, mage.cards.o.OblivionRing.class));
         cards.add(new SetCardInfo("Paladin of Prahv", 22, Rarity.UNCOMMON, mage.cards.p.PaladinOfPrahv.class));
-        cards.add(new SetCardInfo("Plains", 39, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 40, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 41, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 42, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 39, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 40, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 41, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 42, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plover Knights", 20, Rarity.COMMON, mage.cards.p.PloverKnights.class));
         cards.add(new SetCardInfo("Punishing Fire", 66, Rarity.UNCOMMON, mage.cards.p.PunishingFire.class));
         cards.add(new SetCardInfo("Reciprocate", 24, Rarity.UNCOMMON, mage.cards.r.Reciprocate.class));

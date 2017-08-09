@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -46,6 +45,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInOpponentsGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,7 +99,7 @@ class AgadeemOccultistEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         int allycount = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent.hasSubtype("Ally", game)) {
+            if (permanent.hasSubtype(SubType.ALLY, game)) {
                 allycount++;
             }
         }

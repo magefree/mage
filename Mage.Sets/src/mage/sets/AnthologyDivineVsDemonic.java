@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -87,10 +86,10 @@ public class AnthologyDivineVsDemonic extends ExpansionSet {
         cards.add(new SetCardInfo("Otherworldly Journey", 16, Rarity.UNCOMMON, mage.cards.o.OtherworldlyJourney.class));
         cards.add(new SetCardInfo("Overeager Apprentice", 35, Rarity.COMMON, mage.cards.o.OvereagerApprentice.class));
         cards.add(new SetCardInfo("Pacifism", 17, Rarity.COMMON, mage.cards.p.Pacifism.class));
-        cards.add(new SetCardInfo("Plains", 26, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 27, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 28, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 29, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 26, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 27, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 28, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 29, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Promise of Power", 54, Rarity.RARE, mage.cards.p.PromiseOfPower.class));
         cards.add(new SetCardInfo("Reiver Demon", 43, Rarity.RARE, mage.cards.r.ReiverDemon.class));
         cards.add(new SetCardInfo("Reya Dawnbringer", 13, Rarity.RARE, mage.cards.r.ReyaDawnbringer.class));
@@ -104,10 +103,10 @@ public class AnthologyDivineVsDemonic extends ExpansionSet {
         cards.add(new SetCardInfo("Souldrinker", 39, Rarity.UNCOMMON, mage.cards.s.Souldrinker.class));
         cards.add(new SetCardInfo("Stinkweed Imp", 36, Rarity.COMMON, mage.cards.s.StinkweedImp.class));
         cards.add(new SetCardInfo("Sustainer of the Realm", 8, Rarity.UNCOMMON, mage.cards.s.SustainerOfTheRealm.class));
-        cards.add(new SetCardInfo("Swamp", 59, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 60, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 61, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 62, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 59, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 60, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 61, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 62, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twilight Shepherd", 11, Rarity.RARE, mage.cards.t.TwilightShepherd.class));
         cards.add(new SetCardInfo("Unholy Strength", 47, Rarity.COMMON, mage.cards.u.UnholyStrength.class));
         cards.add(new SetCardInfo("Venerable Monk", 5, Rarity.COMMON, mage.cards.v.VenerableMonk.class));

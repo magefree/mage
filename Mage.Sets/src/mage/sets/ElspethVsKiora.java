@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.i.IcatianJavelineers;
 import mage.constants.Rarity;
@@ -62,9 +61,9 @@ public class ElspethVsKiora extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 58, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Explore", 45, Rarity.COMMON, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Explosive Vegetation", 46, Rarity.UNCOMMON, mage.cards.e.ExplosiveVegetation.class));
-        cards.add(new SetCardInfo("Forest", 63, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 64, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 65, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 63, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 64, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 65, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gempalm Avenger", 9, Rarity.COMMON, mage.cards.g.GempalmAvenger.class));
         cards.add(new SetCardInfo("Grazing Gladehart", 47, Rarity.COMMON, mage.cards.g.GrazingGladehart.class));
         cards.add(new SetCardInfo("Gustcloak Harrier", 10, Rarity.COMMON, mage.cards.g.GustcloakHarrier.class));
@@ -73,9 +72,9 @@ public class ElspethVsKiora extends ExpansionSet {
         cards.add(new SetCardInfo("Gustcloak Skirmisher", 13, Rarity.UNCOMMON, mage.cards.g.GustcloakSkirmisher.class));
         cards.add(new SetCardInfo("Icatian Javelineers", 14, Rarity.COMMON, IcatianJavelineers.class));
         cards.add(new SetCardInfo("Inkwell Leviathan", 37, Rarity.RARE, mage.cards.i.InkwellLeviathan.class));
-        cards.add(new SetCardInfo("Island", 60, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 61, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 62, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 60, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 61, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 62, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kinsbaile Skirmisher", 15, Rarity.COMMON, mage.cards.k.KinsbaileSkirmisher.class));
         cards.add(new SetCardInfo("Kiora's Follower", 52, Rarity.UNCOMMON, mage.cards.k.KiorasFollower.class));
         cards.add(new SetCardInfo("Kiora, the Crashing Wave", 34, Rarity.MYTHIC, mage.cards.k.KioraTheCrashingWave.class));
@@ -92,10 +91,10 @@ public class ElspethVsKiora extends ExpansionSet {
         cards.add(new SetCardInfo("Noble Templar", 21, Rarity.COMMON, mage.cards.n.NobleTemplar.class));
         cards.add(new SetCardInfo("Omenspeaker", 39, Rarity.COMMON, mage.cards.o.Omenspeaker.class));
         cards.add(new SetCardInfo("Peel from Reality", 40, Rarity.COMMON, mage.cards.p.PeelFromReality.class));
-        cards.add(new SetCardInfo("Plains", 30, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 31, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 32, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 33, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 30, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 31, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 32, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 33, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plasm Capture", 55, Rarity.RARE, mage.cards.p.PlasmCapture.class));
         cards.add(new SetCardInfo("Precinct Captain", 22, Rarity.RARE, mage.cards.p.PrecinctCaptain.class));
         cards.add(new SetCardInfo("Raise the Alarm", 23, Rarity.COMMON, mage.cards.r.RaiseTheAlarm.class));

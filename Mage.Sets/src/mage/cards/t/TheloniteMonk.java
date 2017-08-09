@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -39,11 +38,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +68,7 @@ public class TheloniteMonk extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}, Sacrifice a green creature: Target land becomes a Forest.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.WhileOnBattlefield, "Forest"), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.WhileOnBattlefield, SubType.FOREST), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);

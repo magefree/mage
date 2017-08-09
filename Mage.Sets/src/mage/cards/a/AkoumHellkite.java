@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -46,6 +45,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -146,7 +147,7 @@ class AkoumHellkiteDamageEffect extends OneShotEffect {
         Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         Player player = game.getPlayer(source.getFirstTarget());
         if (land != null && player != null) {
-            if (land.hasSubtype("Mountain", game)) {
+            if (land.hasSubtype(SubType.MOUNTAIN, game)) {
                 player.damage(2, source.getSourceId(), game, false, true);
             } else {
                 player.damage(1, source.getSourceId(), game, false, true);
@@ -155,7 +156,7 @@ class AkoumHellkiteDamageEffect extends OneShotEffect {
         }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (land != null && permanent != null) {
-            if (land.hasSubtype("Mountain", game)) {
+            if (land.hasSubtype(SubType.MOUNTAIN, game)) {
                 permanent.damage(2, source.getSourceId(), game, false, true);
             } else {
                 permanent.damage(1, source.getSourceId(), game, false, true);

@@ -23,6 +23,7 @@
         <module>Mage.Game.MomirDuel</module>
         <module>Mage.Game.TinyLeadersDuel</module>
         <module>Mage.Game.CanadianHighlanderDuel</module>
+        <module>Mage.Game.PennyDreadfulCommanderFreeForAll</module>
         <module>Mage.Game.TwoPlayerDuel</module>
         <module>Mage.Player.AI</module>
         <module>Mage.Player.AIMinimax</module>

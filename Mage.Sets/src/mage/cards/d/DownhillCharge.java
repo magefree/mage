@@ -62,7 +62,7 @@ public class DownhillCharge extends CardImpl {
         // You may sacrifice a Mountain rather than pay Downhill Charge's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter))));
         // Target creature gets +X/+0 until end of turn, where X is the number of Mountains you control.
-        Effect effect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.EndOfTurn, true);
         effect.setText("Target creature gets +X/+0 until end of turn, where X is the number of Mountains you control.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

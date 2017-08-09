@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -49,6 +48,8 @@ import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author cbt33, LevelX2 (Walk the Aeons), KholdFuzion (Dandan)
@@ -65,7 +66,7 @@ public class Dreamwinder extends CardImpl {
         // Dreamwinder can't attack unless defending player controls an Island.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
         // {U}, Sacrifice an Island: Target land becomes an Island until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, "Island"), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, SubType.ISLAND), new ManaCostsImpl("{U}"));
         Target target = new TargetLandPermanent();
         ability.addTarget(target);
         FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an Island");

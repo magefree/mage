@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,6 +44,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -110,8 +111,8 @@ class BoldwyrIntimidatorEffect extends RestrictionEffect {
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         if (attacker != null && blocker != null) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (sourcePermanent != null && attacker.hasSubtype("Warrior", game)) {
-                return !blocker.hasSubtype("Coward", game);
+            if (sourcePermanent != null && attacker.hasSubtype(SubType.WARRIOR, game)) {
+                return !blocker.hasSubtype(SubType.COWARD, game);
             }
         }
         return true;

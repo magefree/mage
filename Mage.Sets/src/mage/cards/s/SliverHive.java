@@ -27,22 +27,15 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.ConditionalMana;
-import mage.MageObject;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
-import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
-import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -51,8 +44,9 @@ import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
 import mage.game.permanent.token.SliverToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,42 +89,5 @@ public class SliverHive extends CardImpl {
     @Override
     public SliverHive copy() {
         return new SliverHive(this);
-    }
-}
-
-class SliverHiveManaBuilder extends ConditionalManaBuilder {
-
-    @Override
-    public ConditionalMana build(Object... options) {
-        this.mana.setFlag(true); // indicates that the mana is from second ability
-        return new SliverHiveConditionalMana(this.mana);
-    }
-
-    @Override
-    public String getRule() {
-        return "Spend this mana only to cast a Sliver spell.";
-    }
-}
-
-class SliverHiveConditionalMana extends ConditionalMana {
-
-    SliverHiveConditionalMana(Mana mana) {
-        super(mana);
-        staticText = "Spend this mana only to cast a Sliver spell.";
-        addCondition(new SliverHiveManaCondition());
-    }
-}
-
-class SliverHiveManaCondition extends CreatureCastManaCondition {
-
-    @Override
-    public boolean apply(Game game, Ability source, UUID manaProducer, Cost costToPay) {
-        if (super.apply(game, source)) {
-            MageObject object = game.getObject(source.getSourceId());
-            if (object.hasSubtype("Sliver", game)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

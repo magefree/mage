@@ -27,7 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,15 +35,12 @@ import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -97,7 +93,7 @@ class ObeliskOfUrdBoostEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
+            SubType subtype = (SubType) game.getState().getValue(permanent.getId() + "_type");
             if (subtype != null) {
                 for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     if (perm.hasSubtype(subtype, game)) {

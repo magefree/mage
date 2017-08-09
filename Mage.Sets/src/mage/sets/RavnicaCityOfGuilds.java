@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -149,10 +148,10 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Flight of Fancy", 49, Rarity.COMMON, mage.cards.f.FlightOfFancy.class));
         cards.add(new SetCardInfo("Flow of Ideas", 50, Rarity.UNCOMMON, mage.cards.f.FlowOfIdeas.class));
         cards.add(new SetCardInfo("Followed Footsteps", 51, Rarity.RARE, mage.cards.f.FollowedFootsteps.class));
-        cards.add(new SetCardInfo("Forest", 303, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 304, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 305, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Forest", 306, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Forest", 303, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 304, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 305, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 306, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Goblin", 125, Rarity.UNCOMMON, mage.cards.f.FrenziedGoblin.class));
         cards.add(new SetCardInfo("Galvanic Arc", 126, Rarity.COMMON, mage.cards.g.GalvanicArc.class));
         cards.add(new SetCardInfo("Gate Hound", 19, Rarity.COMMON, mage.cards.g.GateHound.class));
@@ -196,10 +195,10 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Induce Paranoia", 56, Rarity.COMMON, mage.cards.i.InduceParanoia.class));
         cards.add(new SetCardInfo("Infectious Host", 91, Rarity.COMMON, mage.cards.i.InfectiousHost.class));
         cards.add(new SetCardInfo("Instill Furor", 134, Rarity.UNCOMMON, mage.cards.i.InstillFuror.class));
-        cards.add(new SetCardInfo("Island", 291, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 292, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 293, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Island", 294, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Island", 291, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 292, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 293, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 294, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivy Dancer", 171, Rarity.UNCOMMON, mage.cards.i.IvyDancer.class));
         cards.add(new SetCardInfo("Junktroller", 264, Rarity.UNCOMMON, mage.cards.j.Junktroller.class));
         cards.add(new SetCardInfo("Keening Banshee", 92, Rarity.UNCOMMON, mage.cards.k.KeeningBanshee.class));
@@ -223,10 +222,10 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Moonlight Bargain", 95, Rarity.RARE, mage.cards.m.MoonlightBargain.class));
         cards.add(new SetCardInfo("Moroii", 216, Rarity.UNCOMMON, mage.cards.m.Moroii.class));
         cards.add(new SetCardInfo("Mortipede", 96, Rarity.COMMON, mage.cards.m.Mortipede.class));
-        cards.add(new SetCardInfo("Mountain", 299, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 300, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 301, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 302, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mountain", 299, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 300, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 301, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 302, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Muddle the Mixture", 60, Rarity.COMMON, mage.cards.m.MuddleTheMixture.class));
         cards.add(new SetCardInfo("Necromantic Thirst", 97, Rarity.COMMON, mage.cards.n.NecromanticThirst.class));
         cards.add(new SetCardInfo("Necroplasm", 98, Rarity.RARE, mage.cards.n.Necroplasm.class));
@@ -246,10 +245,10 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Perplex", 217, Rarity.COMMON, mage.cards.p.Perplex.class));
         cards.add(new SetCardInfo("Phytohydra", 218, Rarity.RARE, mage.cards.p.Phytohydra.class));
         cards.add(new SetCardInfo("Plague Boiler", 269, Rarity.RARE, mage.cards.p.PlagueBoiler.class));
-        cards.add(new SetCardInfo("Plains", 287, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 288, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 289, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Plains", 290, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Plains", 287, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 288, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 289, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 290, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pollenbright Wings", 219, Rarity.UNCOMMON, mage.cards.p.PollenbrightWings.class));
         cards.add(new SetCardInfo("Primordial Sage", 177, Rarity.RARE, mage.cards.p.PrimordialSage.class));
         cards.add(new SetCardInfo("Privileged Position", 251, Rarity.RARE, mage.cards.p.PrivilegedPosition.class));
@@ -310,10 +309,10 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Surge of Zeal", 146, Rarity.COMMON, mage.cards.s.SurgeOfZeal.class));
         cards.add(new SetCardInfo("Surveilling Sprite", 67, Rarity.COMMON, mage.cards.s.SurveillingSprite.class));
         cards.add(new SetCardInfo("Svogthos, the Restless Tomb", 283, Rarity.UNCOMMON, mage.cards.s.SvogthosTheRestlessTomb.class));
-        cards.add(new SetCardInfo("Swamp", 295, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 296, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 297, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Swamp", 298, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Swamp", 295, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 296, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 297, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 298, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Szadek, Lord of Secrets", 234, Rarity.RARE, mage.cards.s.SzadekLordOfSecrets.class));
         cards.add(new SetCardInfo("Tattered Drake", 68, Rarity.COMMON, mage.cards.t.TatteredDrake.class));
         cards.add(new SetCardInfo("Telling Time", 69, Rarity.UNCOMMON, mage.cards.t.TellingTime.class));

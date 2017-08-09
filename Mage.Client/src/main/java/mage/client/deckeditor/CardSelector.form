@@ -206,6 +206,18 @@
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
         </Component>
+        <Component class="javax.swing.JCheckBox" name="chkPennyDreadful">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Penny Dreadful Only"/>
+            <Property name="toolTipText" type="java.lang.String" value="Will only allow Penny Dreadful legal cards to be shown."/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="4"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkPilesActionPerformed"/>
+          </Events>
+        </Component>
         <Component class="javax.swing.JButton" name="btnBooster">
           <Properties>
             <Property name="text" type="java.lang.String" value="Open Booster"/>
@@ -528,16 +540,18 @@
                       <Component id="chkRules" alignment="1" max="32767" attributes="0"/>
                       <Component id="chkNames" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jButtonRemoveFromMain" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jButtonAddToSideboard" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jButtonRemoveFromSideboard" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButtonSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButtonClean" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cardCount" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButtonAddToMain" alignment="3" max="-2" attributes="0"/>
-                              <Component id="cardCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jTextFieldSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonClean" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cardCount" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonAddToMain" alignment="3" max="-2" attributes="0"/>
+                                  <Component id="cardCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
