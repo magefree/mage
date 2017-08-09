@@ -69,6 +69,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Brood Sliver", 120, Rarity.RARE, mage.cards.b.BroodSliver.class));
         cards.add(new SetCardInfo("Caller of the Claw", 121, Rarity.RARE, mage.cards.c.CallerOfTheClaw.class));
         cards.add(new SetCardInfo("Canopy Crawler", 122, Rarity.UNCOMMON, mage.cards.c.CanopyCrawler.class));
+        cards.add(new SetCardInfo("Cephalid Pathmage", 31, Rarity.COMMON, mage.cards.c.CephalidPathmage.class));
         cards.add(new SetCardInfo("Chromeshell Crab", 32, Rarity.RARE, mage.cards.c.ChromeshellCrab.class));
         cards.add(new SetCardInfo("Clickslither", 90, Rarity.RARE, mage.cards.c.Clickslither.class));
         cards.add(new SetCardInfo("Cloudreach Cavalry", 7, Rarity.UNCOMMON, mage.cards.c.CloudreachCavalry.class));
