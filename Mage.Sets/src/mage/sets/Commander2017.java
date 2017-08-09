@@ -47,10 +47,10 @@ public class Commander2017 extends ExpansionSet {
         super("Commander 2017 Edition", "C17", ExpansionSet.buildDate(2017, 8, 25), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
 
-        cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 3, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
+        cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 45, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
         cards.add(new SetCardInfo("Ramos, Dragon Engine", 55, Rarity.MYTHIC, mage.cards.r.RamosDragonEngine.class));
         cards.add(new SetCardInfo("Taigam, Ojutai Master", 46, Rarity.MYTHIC, mage.cards.t.TaigamOjutaiMaster.class));
-        cards.add(new SetCardInfo("Wasitora, Nekoru Queen", 48, Rarity.MYTHIC, mage.cards.w.WasitoraNekoruQueen.class));
+        cards.add(new SetCardInfo("Wasitora, Nekoru Queen", 49, Rarity.MYTHIC, mage.cards.w.WasitoraNekoruQueen.class));
 
     }
 }
