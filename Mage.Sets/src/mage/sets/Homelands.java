@@ -91,6 +91,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Castle Sengir", 138, Rarity.UNCOMMON, mage.cards.c.CastleSengir.class));
         cards.add(new SetCardInfo("Cemetery Gate", 4, Rarity.COMMON, CemeteryGate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cemetery Gate", 5, Rarity.COMMON, CemeteryGate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chain Stasis", 28, Rarity.RARE, mage.cards.c.ChainStasis.class));
         cards.add(new SetCardInfo("Chandler", 88, Rarity.COMMON, mage.cards.c.Chandler.class));
         cards.add(new SetCardInfo("Clockwork Gnomes", 127, Rarity.COMMON, mage.cards.c.ClockworkGnomes.class));
         cards.add(new SetCardInfo("Coral Reef", 29, Rarity.COMMON, mage.cards.c.CoralReef.class));
