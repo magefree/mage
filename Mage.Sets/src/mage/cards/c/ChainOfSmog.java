@@ -25,89 +25,82 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.h;
+package mage.cards.c;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.common.TargetCardInHand;
+import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class HuntedWumpus extends CardImpl {
+public class ChainOfSmog extends CardImpl {
 
-    public HuntedWumpus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Beast");
+    public ChainOfSmog(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
-
-        // When Hunted Wumpus enters the battlefield, each other player may put a creature card from his or her hand onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new HuntedWumpusEffect(), false));
-
+        // Target player discards two cards. That player may copy this spell and may choose a new target for that copy.
+        this.getSpellAbility().addEffect(new ChainOfSmogEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public HuntedWumpus(final HuntedWumpus card) {
+    public ChainOfSmog(final ChainOfSmog card) {
         super(card);
     }
 
     @Override
-    public HuntedWumpus copy() {
-        return new HuntedWumpus(this);
+    public ChainOfSmog copy() {
+        return new ChainOfSmog(this);
     }
 }
 
-class HuntedWumpusEffect extends OneShotEffect {
+class ChainOfSmogEffect extends OneShotEffect {
 
-    public HuntedWumpusEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "each other player may put a creature card from his or her hand onto the battlefield";
+    ChainOfSmogEffect() {
+        super(Outcome.Discard);
+        this.staticText = "Target player discards two cards. That player may copy this spell and may choose a new target for that copy.";
     }
 
-    public HuntedWumpusEffect(final HuntedWumpusEffect effect) {
+    ChainOfSmogEffect(final ChainOfSmogEffect effect) {
         super(effect);
     }
 
     @Override
-    public HuntedWumpusEffect copy() {
-        return new HuntedWumpusEffect(this);
+    public ChainOfSmogEffect copy() {
+        return new ChainOfSmogEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (!playerId.equals(controller.getId())) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
-                        if (target.canChoose(source.getSourceId(), playerId, game)
-                                && player.chooseUse(Outcome.Neutral, "Put a creature card from your hand onto the battlefield?", source, game)
-                                && player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-                            Card card = game.getCard(target.getFirstTarget());
-                            if (card != null) {
-                                card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
-                            }
-                        }
+            UUID targetId = source.getFirstTarget();
+            Player affectedPlayer = game.getPlayer(targetId);
+            if (affectedPlayer != null) {
+                Effect effect = new DiscardTargetEffect(2);
+                effect.setTargetPointer(new FixedTarget(targetId));
+                effect.apply(game, source);
+                if (affectedPlayer.chooseUse(Outcome.Copy, "Copy the spell?", source, game)) {
+                    Spell spell = game.getStack().getSpell(source.getSourceId());
+                    if (spell != null) {
+                        spell.createCopyOnStack(game, source, affectedPlayer.getId(), true);
+                        game.informPlayers(affectedPlayer.getLogName() + " copies " + spell.getName() + '.');
                     }
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }

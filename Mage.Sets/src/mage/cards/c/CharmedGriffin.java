@@ -25,80 +25,83 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.h;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterArtifactOrEnchantmentCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class HuntedWumpus extends CardImpl {
+public class CharmedGriffin extends CardImpl {
 
-    public HuntedWumpus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Beast");
+    public CharmedGriffin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        this.subtype.add("Griffin");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // When Hunted Wumpus enters the battlefield, each other player may put a creature card from his or her hand onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new HuntedWumpusEffect(), false));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
+        // When Charmed Griffin enters the battlefield, each other player may put an artifact or enchantment card onto the battlefield from his or her hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CharmedGriffinEffect(), false));
     }
 
-    public HuntedWumpus(final HuntedWumpus card) {
+    public CharmedGriffin(final CharmedGriffin card) {
         super(card);
     }
 
     @Override
-    public HuntedWumpus copy() {
-        return new HuntedWumpus(this);
+    public CharmedGriffin copy() {
+        return new CharmedGriffin(this);
     }
 }
 
-class HuntedWumpusEffect extends OneShotEffect {
+class CharmedGriffinEffect extends OneShotEffect {
 
-    public HuntedWumpusEffect() {
+    public CharmedGriffinEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each other player may put a creature card from his or her hand onto the battlefield";
+        this.staticText = "each other player may put an artifact or enchantment card onto the battlefield from his or her hand";
     }
 
-    public HuntedWumpusEffect(final HuntedWumpusEffect effect) {
+    public CharmedGriffinEffect(final CharmedGriffinEffect effect) {
         super(effect);
     }
 
     @Override
-    public HuntedWumpusEffect copy() {
-        return new HuntedWumpusEffect(this);
+    public CharmedGriffinEffect copy() {
+        return new CharmedGriffinEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (!playerId.equals(controller.getId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
+                        TargetCardInHand target = new TargetCardInHand(new FilterArtifactOrEnchantmentCard());
                         if (target.canChoose(source.getSourceId(), playerId, game)
-                                && player.chooseUse(Outcome.Neutral, "Put a creature card from your hand onto the battlefield?", source, game)
-                                && player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+                                && player.chooseUse(Outcome.Neutral, "Put an artifact or enchantment card from your hand onto the battlefield?", source, game)
+                                && player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {
                                 card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
