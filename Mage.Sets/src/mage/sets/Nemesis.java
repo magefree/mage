@@ -69,6 +69,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Blinding Angel", 3, Rarity.RARE, mage.cards.b.BlindingAngel.class));
         cards.add(new SetCardInfo("Bola Warrior", 78, Rarity.COMMON, mage.cards.b.BolaWarrior.class));
         cards.add(new SetCardInfo("Carrion Wall", 54, Rarity.UNCOMMON, mage.cards.c.CarrionWall.class));
+        cards.add(new SetCardInfo("Chieftain en-Dal", 4, Rarity.UNCOMMON, mage.cards.c.ChieftainEnDal.class));
         cards.add(new SetCardInfo("Cloudskate", 29, Rarity.COMMON, mage.cards.c.Cloudskate.class));
         cards.add(new SetCardInfo("Daze", 30, Rarity.COMMON, mage.cards.d.Daze.class));
         cards.add(new SetCardInfo("Death Pit Offering", 56, Rarity.RARE, mage.cards.d.DeathPitOffering.class));
