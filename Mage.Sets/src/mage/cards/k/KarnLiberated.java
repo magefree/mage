@@ -157,6 +157,7 @@ class KarnLiberatedEffect extends OneShotEffect {
             }
         }
         game.addDelayedTriggeredAbility(new KarnLiberatedDelayedTriggeredAbility(exileId), source);
+        game.setStartingPlayerId(source.getControllerId());
         game.start(null);
         return true;
     }
