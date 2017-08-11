@@ -25,37 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets;
+package mage.abilities.condition.common;
 
-import mage.cards.ExpansionSet;
-import mage.constants.Rarity;
-import mage.constants.SetType;
+import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
+ * Describes condition when creature is equipped with more than one Equipment.
  *
- * @author fireshoes
+ * @author Saga
  */
-public class Commander2017 extends ExpansionSet {
+public enum EquippedMultipleSourceCondition implements Condition {
 
-    private static final Commander2017 instance = new Commander2017();
+   instance;
 
-    public static Commander2017 getInstance() {
-        return instance;
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        int countEquipped = 0;
+        if (permanent != null) {
+            for (UUID uuid : permanent.getAttachments()) {
+                Permanent attached = game.getBattlefield().getPermanent(uuid);
+                if (attached != null && attached.getSubtype(game).contains("Equipment")) {
+                    countEquipped++;
+                    if (countEquipped >= 2) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
-    private Commander2017() {
-        super("Commander 2017 Edition", "C17", ExpansionSet.buildDate(2017, 8, 25), SetType.SUPPLEMENTAL);
-        this.blockName = "Command Zone";
-
-        cards.add(new SetCardInfo("Balan, Wandering Knight", 2, Rarity.RARE, mage.cards.b.BalanWanderingKnight.class));
-        cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 45, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
-        cards.add(new SetCardInfo("Ramos, Dragon Engine", 55, Rarity.MYTHIC, mage.cards.r.RamosDragonEngine.class));
-        cards.add(new SetCardInfo("Scalelord Reckoner", 6, Rarity.RARE, mage.cards.s.ScalelordReckoner.class));
-        cards.add(new SetCardInfo("Taigam, Ojutai Master", 46, Rarity.MYTHIC, mage.cards.t.TaigamOjutaiMaster.class));
-        cards.add(new SetCardInfo("Taigam, Sidisi's Hand", 47, Rarity.RARE, mage.cards.t.TaigamSidisisHand.class));
-        cards.add(new SetCardInfo("Teferi's Protection", 8, Rarity.RARE, mage.cards.t.TeferisProtection.class));
-        cards.add(new SetCardInfo("Traverse the Outlands", 34, Rarity.RARE, mage.cards.t.TraverseTheOutlands.class));
-        cards.add(new SetCardInfo("Wasitora, Nekoru Queen", 49, Rarity.MYTHIC, mage.cards.w.WasitoraNekoruQueen.class));
-
+    @Override
+    public String toString() {
+        return "has multiple Equipments attached";
     }
+
 }

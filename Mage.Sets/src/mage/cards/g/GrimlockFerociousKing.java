@@ -25,37 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets;
+package mage.cards.g;
 
-import mage.cards.ExpansionSet;
-import mage.constants.Rarity;
-import mage.constants.SetType;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.TransformAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
+ * @author Saga
  */
-public class Commander2017 extends ExpansionSet {
+public class GrimlockFerociousKing extends CardImpl{
+    
+   public GrimlockFerociousKing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"");
+        this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(8);
+        this.toughness = new MageInt(8);
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.color.setWhite(true);
 
-    private static final Commander2017 instance = new Commander2017();
-
-    public static Commander2017 getInstance() {
-        return instance;
+        this.transformable = true;
+        this.nightCard = true;
+        
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        
+        // {2}: Grimlock, Ferocious King becomes Grimlock, Dinobot Leader.
+        this.addAbility(new TransformAbility());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(false), new ManaCostsImpl("{2}")));
     }
 
-    private Commander2017() {
-        super("Commander 2017 Edition", "C17", ExpansionSet.buildDate(2017, 8, 25), SetType.SUPPLEMENTAL);
-        this.blockName = "Command Zone";
-
-        cards.add(new SetCardInfo("Balan, Wandering Knight", 2, Rarity.RARE, mage.cards.b.BalanWanderingKnight.class));
-        cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 45, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
-        cards.add(new SetCardInfo("Ramos, Dragon Engine", 55, Rarity.MYTHIC, mage.cards.r.RamosDragonEngine.class));
-        cards.add(new SetCardInfo("Scalelord Reckoner", 6, Rarity.RARE, mage.cards.s.ScalelordReckoner.class));
-        cards.add(new SetCardInfo("Taigam, Ojutai Master", 46, Rarity.MYTHIC, mage.cards.t.TaigamOjutaiMaster.class));
-        cards.add(new SetCardInfo("Taigam, Sidisi's Hand", 47, Rarity.RARE, mage.cards.t.TaigamSidisisHand.class));
-        cards.add(new SetCardInfo("Teferi's Protection", 8, Rarity.RARE, mage.cards.t.TeferisProtection.class));
-        cards.add(new SetCardInfo("Traverse the Outlands", 34, Rarity.RARE, mage.cards.t.TraverseTheOutlands.class));
-        cards.add(new SetCardInfo("Wasitora, Nekoru Queen", 49, Rarity.MYTHIC, mage.cards.w.WasitoraNekoruQueen.class));
-
+    public GrimlockFerociousKing(final GrimlockFerociousKing card) {
+        super(card);
     }
+
+    @Override
+    public GrimlockFerociousKing copy() {
+        return new GrimlockFerociousKing(this);
+    } 
+    
 }
