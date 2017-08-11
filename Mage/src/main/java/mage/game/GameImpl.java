@@ -27,6 +27,10 @@
  */
 package mage.game;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.MageException;
 import mage.MageObject;
 import mage.abilities.*;
@@ -91,11 +95,6 @@ import mage.util.functions.ApplyToPermanent;
 import mage.watchers.Watchers;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -855,31 +854,33 @@ public abstract class GameImpl implements Game, Serializable {
         }
 
         //20091005 - 103.2
-        TargetPlayer targetPlayer = new TargetPlayer();
-        targetPlayer.setTargetName("starting player");
         Player choosingPlayer = null;
-        if (choosingPlayerId != null) {
-            choosingPlayer = this.getPlayer(choosingPlayerId);
-            if (choosingPlayer != null && !choosingPlayer.isInGame()) {
-                choosingPlayer = null;
+        if (startingPlayerId == null) {
+            TargetPlayer targetPlayer = new TargetPlayer();
+            targetPlayer.setTargetName("starting player");
+            if (choosingPlayerId != null) {
+                choosingPlayer = this.getPlayer(choosingPlayerId);
+                if (choosingPlayer != null && !choosingPlayer.isInGame()) {
+                    choosingPlayer = null;
+                }
             }
-        }
-        if (choosingPlayer == null) {
-            choosingPlayerId = pickChoosingPlayer();
-            if (choosingPlayerId == null) {
+            if (choosingPlayer == null) {
+                choosingPlayerId = pickChoosingPlayer();
+                if (choosingPlayerId == null) {
+                    return;
+                }
+                choosingPlayer = getPlayer(choosingPlayerId);
+            }
+            if (choosingPlayer == null) {
                 return;
             }
-            choosingPlayer = getPlayer(choosingPlayerId);
-        }
-        if (choosingPlayer == null) {
-            return;
-        }
-        getState().setChoosingPlayerId(choosingPlayerId); // needed to start/stop the timer if active
-        if (choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
-            startingPlayerId = targetPlayer.getTargets().get(0);
-        } else if (getState().getPlayers().size() < 3) {
-            // not possible to choose starting player, choosing player has probably conceded, so stop here
-            return;
+            getState().setChoosingPlayerId(choosingPlayerId); // needed to start/stop the timer if active
+            if (choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
+                startingPlayerId = targetPlayer.getTargets().get(0);
+            } else if (getState().getPlayers().size() < 3) {
+                // not possible to choose starting player, choosing player has probably conceded, so stop here
+                return;
+            }
         }
         if (startingPlayerId == null) {
             // choose any available player as starting player
@@ -898,15 +899,7 @@ public abstract class GameImpl implements Game, Serializable {
             logger.debug("Starting player not found. playerId:" + startingPlayerId);
             return;
         }
-        StringBuilder message = new StringBuilder(choosingPlayer.getLogName()).append(" chooses that ");
-        if (choosingPlayer.getId().equals(startingPlayerId)) {
-            message.append("he or she");
-        } else {
-            message.append(startingPlayer.getLogName());
-        }
-        message.append(" takes the first turn");
-
-        this.informPlayers(message.toString());
+        sendStartMessage(choosingPlayer, startingPlayer);
 
         //20091005 - 103.3
         int startingHandSize = 7;
@@ -1017,6 +1010,21 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
+    }
+
+    protected void sendStartMessage(Player choosingPlayer, Player startingPlayer) {
+        StringBuilder message = new StringBuilder();
+        if (choosingPlayer != null) {
+            message.append(choosingPlayer.getLogName()).append(" chooses that ");
+        }
+        if (choosingPlayer != null && choosingPlayer.getId().equals(startingPlayer.getId())) {
+            message.append("he or she");
+        } else {
+            message.append(startingPlayer.getLogName());
+        }
+        message.append(" takes the first turn");
+
+        this.informPlayers(message.toString());
     }
 
     protected UUID findWinnersAndLosers() {
@@ -2832,6 +2840,11 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public UUID getStartingPlayerId() {
         return startingPlayerId;
+    }
+
+    @Override
+    public void setStartingPlayerId(UUID startingPlayerId) {
+        this.startingPlayerId = startingPlayerId;
     }
 
     @Override
