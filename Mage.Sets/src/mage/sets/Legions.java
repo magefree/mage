@@ -76,6 +76,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Corpse Harvester", 62, Rarity.UNCOMMON, mage.cards.c.CorpseHarvester.class));
         cards.add(new SetCardInfo("Covert Operative", 33, Rarity.COMMON, mage.cards.c.CovertOperative.class));
         cards.add(new SetCardInfo("Crested Craghorn", 91, Rarity.COMMON, mage.cards.c.CrestedCraghorn.class));
+        cards.add(new SetCardInfo("Crookclaw Elder", 34, Rarity.UNCOMMON, mage.cards.c.CrookclawElder.class));
         cards.add(new SetCardInfo("Crypt Sliver", 63, Rarity.COMMON, mage.cards.c.CryptSliver.class));
         cards.add(new SetCardInfo("Dark Supplicant", 64, Rarity.UNCOMMON, mage.cards.d.DarkSupplicant.class));
         cards.add(new SetCardInfo("Daru Mender", 8, Rarity.UNCOMMON, mage.cards.d.DaruMender.class));
