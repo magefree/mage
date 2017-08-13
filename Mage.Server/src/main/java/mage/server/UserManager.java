@@ -33,6 +33,7 @@ import mage.server.User.UserState;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
 import mage.server.util.ThreadExecutor;
+import mage.view.UserView;
 import org.apache.log4j.Logger;
 
 /**
@@ -44,7 +45,12 @@ import org.apache.log4j.Logger;
 public enum UserManager {
     instance;
 
+    private static final Logger logger = Logger.getLogger(UserManager.class);
+
     protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
+    protected final ScheduledExecutorService userListExecutor = Executors.newSingleThreadScheduledExecutor();
+
+    private List<UserView> userInfoList = new ArrayList<>();
 
     private static final Logger LOGGER = Logger.getLogger(UserManager.class);
 
@@ -54,6 +60,8 @@ public enum UserManager {
 
     UserManager() {
         expireExecutor.scheduleAtFixedRate(this::checkExpired, 60, 60, TimeUnit.SECONDS);
+
+        userListExecutor.scheduleAtFixedRate(this::updateUserInfoList, 4, 4, TimeUnit.SECONDS);
     }
 
     public Optional<User> createUser(String userName, String host, AuthorizedUser authorizedUser) {
@@ -100,10 +108,16 @@ public enum UserManager {
     }
 
     public void disconnect(UUID userId, DisconnectReason reason) {
-        if (userId != null) {
-            getUser(userId).ifPresent(user -> user.setSessionId(""));// Session will be set again with new id if user reconnects
+        Optional<User> user = UserManager.instance.getUser(userId);
+        if (user.isPresent()) {
+            user.get().setSessionId("");
+            if (reason == DisconnectReason.Disconnected) {
+                user.get().setUserState(UserState.Offline);
+            }
         }
-        ChatManager.instance.removeUser(userId, reason);
+        if (userId != null) {
+            ChatManager.instance.removeUser(userId, reason);
+        }
     }
 
     public boolean isAdmin(UUID userId) {
@@ -148,18 +162,57 @@ public enum UserManager {
     }
 
     /**
-     * Is the connection lost for more than 3 minutes, the user will be removed
-     * (within 3 minutes the user can reconnect)
+     * Is the connection lost for more than 3 minutes, the user will be set to
+     * offline status. The user will be removed in validity check after 15
+     * minutes of no activities
+     *
      */
     private void checkExpired() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, -3);
-        List<User> usersToCheck = new ArrayList<>(users.values());
-        for (User user : usersToCheck) {
-            if (user.getUserState() != UserState.Expired && user.isExpired(calendar.getTime())) {
-                removeUser(user.getId(), DisconnectReason.SessionExpired);
+        Calendar calendarExp = Calendar.getInstance();
+        calendarExp.add(Calendar.MINUTE, -3);
+        Calendar calendarRemove = Calendar.getInstance();
+        calendarRemove.add(Calendar.MINUTE, -8);
+        List<User> toRemove = new ArrayList<>();
+        for (User user : users.values()) {
+            if (user.getUserState() == UserState.Disconnected || user.getUserState() == UserState.Offline
+                    && user.isExpired(calendarExp.getTime())) {
+                user.setUserState(UserState.Offline);
+            }
+            if (user.getUserState() == UserState.Offline && user.isExpired(calendarRemove.getTime())) {
+                toRemove.add(user);
             }
         }
+        for (User user : toRemove) {
+            removeUser(user.getId(), DisconnectReason.SessionExpired);
+        }
+    }
+
+    /**
+     * This method recreated the user list that will be send to all clients
+     *
+     */
+    private void updateUserInfoList() {
+        List<UserView> newUserInfoList = new ArrayList<>();
+        for (User user : UserManager.instance.getUsers()) {
+            newUserInfoList.add(new UserView(
+                    user.getName(),
+                    user.getHost(),
+                    user.getSessionId(),
+                    user.getConnectionTime(),
+                    user.getLastActivity(),
+                    user.getGameInfo(),
+                    user.getUserState().toString(),
+                    user.getChatLockedUntil(),
+                    user.getClientVersion(),
+                    user.getEmail(),
+                    user.getUserIdStr()
+            ));
+        }
+        userInfoList = newUserInfoList;
+    }
+
+    public List<UserView> getUserInfoList() {
+        return userInfoList;
     }
 
     public void handleException(Exception ex) {

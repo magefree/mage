@@ -43,7 +43,7 @@
             leasePeriod="5000"
             socketWriteTimeout="10000"
             maxGameThreads="10"
-            maxSecondsIdle="600"
+            maxSecondsIdle="300"
             minUserNameLength="3"
             maxUserNameLength="14"
             invalidUserNamePattern="[^a-z0-9_]"
