@@ -68,6 +68,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Carnivorous Plant", 38, Rarity.COMMON, mage.cards.c.CarnivorousPlant.class));
         cards.add(new SetCardInfo("Cave People", 59, Rarity.UNCOMMON, mage.cards.c.CavePeople.class));
         cards.add(new SetCardInfo("City of Shadows", 113, Rarity.RARE, mage.cards.c.CityOfShadows.class));
+        cards.add(new SetCardInfo("Cleansing", 77, Rarity.RARE, mage.cards.c.Cleansing.class));
         cards.add(new SetCardInfo("Coal Golem", 96, Rarity.UNCOMMON, mage.cards.c.CoalGolem.class));
         cards.add(new SetCardInfo("Dance of Many", 21, Rarity.RARE, mage.cards.d.DanceOfMany.class));
         cards.add(new SetCardInfo("Dark Heart of the Wood", 117, Rarity.COMMON, mage.cards.d.DarkHeartOfTheWood.class));
