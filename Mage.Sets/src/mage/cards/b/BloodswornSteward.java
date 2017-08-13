@@ -25,57 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.cards.b;
 
-package mage.cards.p;
-
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.keyword.EquipAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.CommanderPredicate;
 
 /**
  *
- * @author Viserion, North
+ * @author Saga
  */
-public class PistonSledge extends CardImpl {
-
-    private static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
-
-    static  {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+public class BloodswornSteward extends CardImpl {
+    
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Commander creatures");
+    static {
+        filter.add(new CommanderPredicate());
     }
+    
+    public BloodswornSteward(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        this.subtype.add(SubType.VAMPIRE, SubType.KNIGHT);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-    public PistonSledge (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        this.subtype.add("Equipment");
-
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(Outcome.BoostCreature, "attach it to target creature you control"), false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        
+        // Commander creatures you control get +2/+2 and have haste.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter));
+        Effect effect = new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter);
+        effect.setText("and have haste");
+        ability.addEffect(effect);
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public PistonSledge (final PistonSledge card) {
+    public BloodswornSteward(final BloodswornSteward card) {
         super(card);
     }
 
     @Override
-    public PistonSledge copy() {
-        return new PistonSledge(this);
+    public BloodswornSteward copy() {
+        return new BloodswornSteward(this);
     }
 }

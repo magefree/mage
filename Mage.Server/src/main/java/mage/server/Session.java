@@ -38,6 +38,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
+import static mage.server.DisconnectReason.LostConnection;
 import mage.server.game.GamesRoom;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
@@ -270,12 +271,13 @@ public class Session {
         this.isAdmin = true;
         User user = UserManager.instance.createUser("Admin", host, null).orElse(
                 UserManager.instance.getUserByName("Admin").get());
-
         UserData adminUserData = UserData.getDefaultUserDataView();
         adminUserData.setGroupId(UserGroup.ADMIN.getGroupId());
         user.setUserData(adminUserData);
         if (!UserManager.instance.connectToSession(sessionId, user.getId())) {
             logger.info("Error connecting Admin!");
+        } else {
+            user.setUserState(User.UserState.Connected);
         }
         this.userId = user.getId();
     }
@@ -329,39 +331,20 @@ public class Session {
 
     // because different threads can activate this
     public void userLostConnection() {
-        boolean lockSet = false;
-        try {
-            if (lock.tryLock(5000, TimeUnit.MILLISECONDS)) {
-                lockSet = true;
-                logger.debug("SESSION LOCK SET sessionId: " + sessionId);
-            } else {
-                logger.warn("CAN'T GET LOCK - userId: " + userId + " hold count: " + lock.getHoldCount());
-            }
-            Optional<User> _user = UserManager.instance.getUser(userId);
-            if (!_user.isPresent()) {
-                return; //user was already disconnected by other thread
-            }
-            User user = _user.get();
-            if (!user.isConnected()) {
-                return;
-            }
-            if (!user.getSessionId().equals(sessionId)) {
-                // user already reconnected with another instance
-                logger.info("OLD SESSION IGNORED - " + user.getName());
-                return;
-            }
-            // logger.info("LOST CONNECTION - " + user.getName() + " id: " + userId);
-            UserManager.instance.disconnect(userId, DisconnectReason.LostConnection);
-
-        } catch (InterruptedException ex) {
-            logger.error("SESSION LOCK lost connection - userId: " + userId, ex);
-        } finally {
-            if (lockSet) {
-                lock.unlock();
-                logger.trace("SESSION LOCK UNLOCK sessionId: " + sessionId);
-            }
+        Optional<User> _user = UserManager.instance.getUser(userId);
+        if (!_user.isPresent()) {
+            return; //user was already disconnected by other thread
         }
-
+        User user = _user.get();
+        if (!user.isConnected()) {
+            return;
+        }
+        if (!user.getSessionId().equals(sessionId)) {
+            // user already reconnected with another instance
+            logger.info("OLD SESSION IGNORED - " + user.getName());
+        } else {
+            // logger.info("LOST CONNECTION - " + user.getName() + " id: " + userId);
+        }
     }
 
     public void kill(DisconnectReason reason) {
@@ -397,7 +380,7 @@ public class Session {
                 logger.warn(" - method: " + call.getMethod());
                 logger.warn(" - cause: " + getBasicCause(ex).toString());
                 logger.trace("Stack trace:", ex);
-                userLostConnection();
+                SessionManager.instance.disconnect(sessionId, LostConnection);
             });
         }
     }

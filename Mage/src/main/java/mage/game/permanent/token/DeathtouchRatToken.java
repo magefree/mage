@@ -11,7 +11,7 @@
 *       of conditions and the following disclaimer in the documentation and/or other materials
 *       provided with the distribution.
 *
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com AS IS AND ANY EXPRESS OR IMPLIED
 * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
 * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
 * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
@@ -25,27 +25,27 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.Rarity;
-import mage.constants.SetType;
+package mage.game.permanent.token;
+import mage.constants.CardType;
+import mage.MageInt;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.constants.SubType;
 
 /**
  *
  * @author Saga
  */
-public class HasconPromo2017 extends ExpansionSet {
-    private static final HasconPromo2017 instance = new HasconPromo2017();
+public class DeathtouchRatToken extends Token {
 
-    public static HasconPromo2017 getInstance() {
-        return instance;
-    }
-
-    private HasconPromo2017() {
-        super("HASCON Promo 2017", "H17", ExpansionSet.buildDate(2017, 9, 8), SetType.JOKESET);
-        cards.add(new ExpansionSet.SetCardInfo("Grimlock, Dinobot Leader", 1, Rarity.MYTHIC, mage.cards.g.GrimlockDinobotLeader.class));
-        cards.add(new ExpansionSet.SetCardInfo("Grimlock, Ferocious King", 1, Rarity.MYTHIC, mage.cards.g.GrimlockFerociousKing.class));
-        cards.add(new ExpansionSet.SetCardInfo("Sword of Dungeons & Dragons", 3, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsAndDragons.class));
+    public DeathtouchRatToken() {
+        super("Rat", "1/1 black Rat creature token with deathtouch");
+        this.setExpansionSetCodeForImage("C17");
+        this.cardType.add(CardType.CREATURE);
+        this.color.setBlack(true);
+        this.subtype.add(SubType.RAT);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        this.addAbility(DeathtouchAbility.getInstance());
     }
 }

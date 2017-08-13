@@ -25,57 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.cards.g;
 
-package mage.cards.p;
-
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.keyword.EquipAbility;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  *
- * @author Viserion, North
+ * @author Saga
  */
-public class PistonSledge extends CardImpl {
+public class GrimlockFerociousKing extends CardImpl{
+    
+   public GrimlockFerociousKing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"");
+        this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(8);
+        this.toughness = new MageInt(8);
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.color.setWhite(true);
 
-    private static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
-
-    static  {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        this.transformable = true;
+        this.nightCard = true;
+        
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        
+        // {2}: Grimlock, Ferocious King becomes Grimlock, Dinobot Leader.
+        this.addAbility(new TransformAbility());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(false), new ManaCostsImpl("{2}")));
     }
 
-    public PistonSledge (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        this.subtype.add("Equipment");
-
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(Outcome.BoostCreature, "attach it to target creature you control"), false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledPermanent(filter))));
-    }
-
-    public PistonSledge (final PistonSledge card) {
+    public GrimlockFerociousKing(final GrimlockFerociousKing card) {
         super(card);
     }
 
     @Override
-    public PistonSledge copy() {
-        return new PistonSledge(this);
-    }
+    public GrimlockFerociousKing copy() {
+        return new GrimlockFerociousKing(this);
+    } 
+    
 }
