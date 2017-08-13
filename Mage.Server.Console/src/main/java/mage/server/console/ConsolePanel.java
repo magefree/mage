@@ -33,22 +33,20 @@
  */
 package mage.server.console;
 
-import mage.remote.Session;
-import mage.view.TableView;
-import mage.view.UserView;
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableRowSorter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-
+import javax.swing.*;
 import static javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN;
 import static javax.swing.JTable.AUTO_RESIZE_OFF;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableRowSorter;
+import mage.remote.Session;
+import mage.view.TableView;
+import mage.view.UserView;
+import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -359,13 +357,14 @@ class TableUserModel extends AbstractTableModel {
     public static final int POS_USER_NAME = 0;
     public static final int POS_HOST = 1;
     public static final int POS_TIME_CONNECTED = 2;
-    public static final int POS_SESSION_ID = 3;
-    public static final int POS_GAME_INFO = 4;
-    public static final int POS_USER_STATE = 5;
-    public static final int POS_CHAT_MUTE = 6;
-    public static final int POS_CLIENT_VERSION = 7;
+    public static final int POS_LAST_ACTIVITY = 3;
+    public static final int POS_SESSION_ID = 4;
+    public static final int POS_GAME_INFO = 5;
+    public static final int POS_USER_STATE = 6;
+    public static final int POS_CHAT_MUTE = 7;
+    public static final int POS_CLIENT_VERSION = 8;
 
-    private final String[] columnNames = new String[]{"User Name", "Host", "Time Connected", "SessionId", "Gameinfo", "User state", "Chat mute", "Client Version"};
+    private final String[] columnNames = new String[]{"User Name", "Host", "Time Connected", "Last activity", "SessionId", "Gameinfo", "User state", "Chat mute", "Client Version"};
     private UserView[] users = new UserView[0];
     private static final DateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
     private static final DateFormat formatterTimeStamp = new SimpleDateFormat("yy-M-dd HH:mm:ss");
@@ -394,6 +393,8 @@ class TableUserModel extends AbstractTableModel {
                 return users[arg0].getHost();
             case POS_TIME_CONNECTED:
                 return formatterTime.format(users[arg0].getTimeConnected());
+            case POS_LAST_ACTIVITY:
+                return formatterTime.format(users[arg0].getLastActivity());
             case POS_SESSION_ID:
                 return users[arg0].getSessionId();
             case POS_GAME_INFO:
@@ -544,10 +545,8 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
             return true;
         }
         for (UserView u1 : previousUsers) {
-            boolean found = false;
             for (UserView u2 : usersToCheck) {
                 if (u1.getUserName().equals(u2.getUserName())) {
-                    found = true;
                     String s = u1.getUserName() + ',' + u1.getHost();
                     if (peopleIps.get(s) == null) {
                         logger.warn("Found new user: " + u1.getUserName() + ',' + u1.getHost());
@@ -561,13 +560,9 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
                     break;
                 }
             }
-            if (!found) {
-                // some new user replaced old one
-                return true;
-            }
         }
         // seems nothing has been changed
-        return false;
+        return true;
     }
 
     @Override

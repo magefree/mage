@@ -125,34 +125,30 @@ public enum SessionManager {
     public void disconnect(String sessionId, DisconnectReason reason) {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            if (reason != DisconnectReason.AdminDisconnect) {
-                if (!sessions.containsKey(sessionId)) {
-                    // session was removed meanwhile by another thread so we can return
-                    return;
-                }
-                logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: " + sessionId);
-                sessions.remove(sessionId);
-                switch (reason) {
-                    case Disconnected: // regular session end or wrong client version
-                        if (session.getUserId() != null) { // if wrong client version no userId is set
-                            session.kill(reason);
-                        }
-                        break;
-                    case SessionExpired: // session ends after no reconnect happens in the defined time span
-                        session.kill(reason);
-                        break;
-                    case LostConnection: // user lost connection - session expires countdaoun starts
-                        session.userLostConnection();
-                        break;
-                    case ConnectingOtherInstance:
-                        break;
-                    default:
-                        logger.trace("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
-                }
-            } else {
-                sessions.remove(sessionId);
-                session.kill(reason);
+            if (!sessions.containsKey(sessionId)) {
+                // session was removed meanwhile by another thread so we can return
+                return;
             }
+            logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: " + sessionId);
+            sessions.remove(sessionId);
+            switch (reason) {
+                case AdminDisconnect:
+                    session.kill(reason);
+                    break;
+                case ConnectingOtherInstance:
+                case Disconnected: // regular session end or wrong client version
+                    UserManager.instance.disconnect(session.getUserId(), reason);
+                    break;
+                case SessionExpired: // session ends after no reconnect happens in the defined time span
+                    break;
+                case LostConnection: // user lost connection - session expires countdown starts
+                    session.userLostConnection();
+                    UserManager.instance.disconnect(session.getUserId(), reason);
+                    break;
+                default:
+                    logger.trace("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
+            }
+
         }
 
     }
