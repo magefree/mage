@@ -93,7 +93,7 @@ public class HungryLynx extends CardImpl {
         
         // Whenever a Rat dies, put a +1/+1 counter on each Cat you control. 
         Effect effect2 = new AddCountersAllEffect(CounterType.P1P1.createInstance(), filterCat);
-        effect2.setText(" put a +1/+1 counter on each Cat you control.");
+        effect2.setText("put a +1/+1 counter on each Cat you control");
         this.addAbility(new DiesCreatureTriggeredAbility(effect2, false, filterRat));
     }
 
