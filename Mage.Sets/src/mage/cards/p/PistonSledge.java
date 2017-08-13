@@ -28,7 +28,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,8 +41,11 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,6 +54,10 @@ import mage.target.common.TargetControlledPermanent;
 public class PistonSledge extends CardImpl {
 
     private static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
+
+    static  {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+    }
 
     public PistonSledge (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
