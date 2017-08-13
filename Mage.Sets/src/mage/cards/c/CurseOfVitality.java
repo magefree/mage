@@ -98,11 +98,14 @@ class CurseOfVitalityTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
+        UUID controller = this.getControllerId();
         if (enchantment != null
                 && enchantment.getAttachedTo() != null
                 && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
-            for (Effect effect: this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackerId()));                    
+            if (game.getCombat().getAttackerId() != controller) {
+                for (Effect effect: this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackerId()));
+                }
             }
             return true;
         }
