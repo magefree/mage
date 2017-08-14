@@ -85,7 +85,9 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Custody Battle", 197, Rarity.UNCOMMON, mage.cards.c.CustodyBattle.class));
         cards.add(new SetCardInfo("Daru Cavalier", 18, Rarity.COMMON, mage.cards.d.DaruCavalier.class));
         cards.add(new SetCardInfo("Daru Encampment", 315, Rarity.UNCOMMON, mage.cards.d.DaruEncampment.class));
+        cards.add(new SetCardInfo("Daru Healer", 19, Rarity.COMMON, mage.cards.d.DaruHealer.class));
         cards.add(new SetCardInfo("Daru Lancer", 20, Rarity.COMMON, mage.cards.d.DaruLancer.class));
+        cards.add(new SetCardInfo("Daunting Defender", 21, Rarity.COMMON, mage.cards.d.DauntingDefender.class));
         cards.add(new SetCardInfo("Dawning Purist", 22, Rarity.UNCOMMON, mage.cards.d.DawningPurist.class));
         cards.add(new SetCardInfo("Death Match", 136, Rarity.RARE, mage.cards.d.DeathMatch.class));
         cards.add(new SetCardInfo("Death Pulse", 137, Rarity.UNCOMMON, mage.cards.d.DeathPulse.class));

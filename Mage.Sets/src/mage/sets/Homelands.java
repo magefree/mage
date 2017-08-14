@@ -96,6 +96,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Clockwork Gnomes", 127, Rarity.COMMON, mage.cards.c.ClockworkGnomes.class));
         cards.add(new SetCardInfo("Coral Reef", 29, Rarity.COMMON, mage.cards.c.CoralReef.class));
         cards.add(new SetCardInfo("Dark Maze", 31, Rarity.COMMON, mage.cards.d.DarkMaze.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Daughter of Autumn", 56, Rarity.RARE, mage.cards.d.DaughterOfAutumn.class));
         cards.add(new SetCardInfo("Death Speakers", 109, Rarity.UNCOMMON, mage.cards.d.DeathSpeakers.class));
         cards.add(new SetCardInfo("Didgeridoo", 130, Rarity.RARE, mage.cards.d.Didgeridoo.class));
         cards.add(new SetCardInfo("Drudge Spell", 6, Rarity.UNCOMMON, mage.cards.d.DrudgeSpell.class));
