@@ -50,8 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CrashLanding extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forests you control");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with flying");
 
     static {
         filter.add(new SubtypePredicate(SubType.FOREST));
@@ -66,7 +66,7 @@ public class CrashLanding extends CardImpl {
         this.getSpellAbility().addEffect(new LoseAbilityTargetEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DamageTargetEffect(amount));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter2));
     }
 
     public CrashLanding(final CrashLanding card) {

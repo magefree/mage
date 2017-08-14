@@ -181,7 +181,7 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
             Card card = game.getCard(event.getTargetId());
             if (card != null
                     && watcher != null
-                    && card.getOwnerId() == controller.getId()) {
+                    && card.getOwnerId().equals(controller.getId())) {
                 for (Ability ability : card.getAbilities()) {
                     if (ability instanceof CyclingAbility) {
                         cardHasCycling = true;
@@ -224,8 +224,8 @@ class AbandonedSarcophagusWatcher extends Watcher {
             Card card = game.getCard(event.getSourceId());
             Player controller = game.getPlayer(event.getPlayerId());
             if (card != null
-                   && controller != null
-                   && card.getOwnerId() == controller.getId()) {
+                    && controller != null
+                    && card.getOwnerId().equals(controller.getId())) {
                 Cards c = getCardsCycledThisTurn(event.getPlayerId());
                 c.add(card);
                 cycledCardsThisTurn.put(event.getPlayerId(), c);

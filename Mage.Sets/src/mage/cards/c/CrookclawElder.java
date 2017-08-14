@@ -54,8 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CrookclawElder extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Merfolk you control");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Merfolk you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Bird you control");
+    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Wizards you control");
 
     static {
         filter.add(new SubtypePredicate(SubType.BIRD));
@@ -78,7 +78,7 @@ public class CrookclawElder extends CardImpl {
         // Tap two untapped Birds you control: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true)));
         this.addAbility(ability);
-        
+
         // Tap two untapped Wizards you control: Target creature gains flying until end of turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter2, true)));
         ability.addTarget(new TargetCreaturePermanent());

@@ -49,11 +49,10 @@ public class Reparations extends CardImpl {
 
     public Reparations(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");
-        
 
         // Whenever an opponent casts a spell that targets you or a creature you control, you may draw a card.
         this.addAbility(new ReparationsTriggeredAbility());
-        
+
     }
 
     public Reparations(final Reparations card) {
@@ -96,12 +95,12 @@ class ReparationsTriggeredAbility extends TriggeredAbilityImpl {
             Player targetPlayer = game.getPlayer(stackObject.getStackAbility().getFirstTarget());
             Permanent targetPermanent = game.getPermanent(stackObject.getStackAbility().getFirstTarget());
             if (targetPlayer != null
-                    && targetPlayer.getId() == controllerId) {
+                    && targetPlayer.getId().equals(controllerId)) {
                 return true;
             }
             if (targetPermanent != null
                     && targetPermanent.isCreature()
-                    && targetPermanent.getControllerId() == controllerId) {
+                    && targetPermanent.getControllerId().equals(controllerId)) {
                 return true;
             }
         }
