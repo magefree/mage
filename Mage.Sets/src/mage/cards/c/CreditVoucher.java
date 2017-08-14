@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.Iterator;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -36,9 +35,9 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -77,7 +76,7 @@ class CreditVoucherEffect extends OneShotEffect {
 
     CreditVoucherEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Shuffle any number of from your hand into your library, then draw that many cards";
+        this.staticText = "Shuffle any number of cards from your hand into your library, then draw that many cards";
     }
 
     CreditVoucherEffect(final CreditVoucherEffect effect) {
@@ -100,14 +99,8 @@ class CreditVoucherEffect extends OneShotEffect {
             int amountShuffled = 0;
             if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
                 if (!target.getTargets().isEmpty()) {
-                    Iterator<UUID> targets = target.getTargets().iterator();
-                    while (targets.hasNext()) {
-                        Card card = game.getCard(targets.next());
-                        if (card != null) {
-                            controller.moveCards(card, Zone.LIBRARY, source, game);
-                            amountShuffled++;
-                        }
-                    }
+                    amountShuffled = target.getTargets().size();
+                    controller.moveCards(new CardsImpl(target.getTargets()), Zone.LIBRARY, source, game);
                 }
             }
             controller.shuffleLibrary(source, game);
