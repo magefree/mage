@@ -28,6 +28,9 @@
 
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
@@ -39,10 +42,24 @@ import mage.constants.Zone;
  * @author LevelX2
  */
 public class GoldToken extends Token {
+    
+    final static private List<String> tokenImageSets = new ArrayList<>();
+    static {
+        tokenImageSets.addAll(Arrays.asList("BNG", "C17"));
+    }
 
     public GoldToken() {
+        this(null, 0);
+    }
+
+    public GoldToken(String setCode) {
+        this(setCode, 0);
+    }
+
+    public GoldToken(String setCode, int tokenType) {
         super("Gold", "colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
-        this.setOriginalExpansionSetCode("BNG");
+        availableImageSetCodes = tokenImageSets;
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
 
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost()));
