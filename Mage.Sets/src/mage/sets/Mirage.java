@@ -92,6 +92,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Cinder Cloud", 165, Rarity.UNCOMMON, mage.cards.c.CinderCloud.class));
         cards.add(new SetCardInfo("Civic Guildmage", 211, Rarity.COMMON, mage.cards.c.CivicGuildmage.class));
         cards.add(new SetCardInfo("Cloak of Invisibility", 58, Rarity.COMMON, mage.cards.c.CloakOfInvisibility.class));
+        cards.add(new SetCardInfo("Consuming Ferocity", 166, Rarity.UNCOMMON, mage.cards.c.ConsumingFerocity.class));
         cards.add(new SetCardInfo("Coral Fighters", 59, Rarity.UNCOMMON, mage.cards.c.CoralFighters.class));
         cards.add(new SetCardInfo("Crash of Rhinos", 108, Rarity.COMMON, mage.cards.c.CrashOfRhinos.class));
         cards.add(new SetCardInfo("Crimson Hellkite", 167, Rarity.RARE, mage.cards.c.CrimsonHellkite.class));

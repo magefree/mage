@@ -76,11 +76,13 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Corpse Harvester", 62, Rarity.UNCOMMON, mage.cards.c.CorpseHarvester.class));
         cards.add(new SetCardInfo("Covert Operative", 33, Rarity.COMMON, mage.cards.c.CovertOperative.class));
         cards.add(new SetCardInfo("Crested Craghorn", 91, Rarity.COMMON, mage.cards.c.CrestedCraghorn.class));
+        cards.add(new SetCardInfo("Crookclaw Elder", 34, Rarity.UNCOMMON, mage.cards.c.CrookclawElder.class));
         cards.add(new SetCardInfo("Crypt Sliver", 63, Rarity.COMMON, mage.cards.c.CryptSliver.class));
         cards.add(new SetCardInfo("Dark Supplicant", 64, Rarity.UNCOMMON, mage.cards.d.DarkSupplicant.class));
         cards.add(new SetCardInfo("Daru Mender", 8, Rarity.UNCOMMON, mage.cards.d.DaruMender.class));
         cards.add(new SetCardInfo("Daru Sanctifier", 9, Rarity.COMMON, mage.cards.d.DaruSanctifier.class));
         cards.add(new SetCardInfo("Daru Stinger", 10, Rarity.COMMON, mage.cards.d.DaruStinger.class));
+        cards.add(new SetCardInfo("Deathmark Prelate", 65, Rarity.UNCOMMON, mage.cards.d.DeathmarkPrelate.class));
         cards.add(new SetCardInfo("Defender of the Order", 11, Rarity.RARE, mage.cards.d.DefenderOfTheOrder.class));
         cards.add(new SetCardInfo("Defiant Elf", 123, Rarity.COMMON, mage.cards.d.DefiantElf.class));
         cards.add(new SetCardInfo("Deftblade Elite", 12, Rarity.COMMON, mage.cards.d.DeftbladeElite.class));
