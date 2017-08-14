@@ -66,5 +66,6 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Wasitora, Nekoru Queen", 49, Rarity.MYTHIC, mage.cards.w.WasitoraNekoruQueen.class));
         cards.add(new SetCardInfo("Kindred Dominance", 18, Rarity.RARE, mage.cards.w.WasitoraNekoruQueen.class));
 
+
     }
 }
