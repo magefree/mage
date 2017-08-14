@@ -1022,8 +1022,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         // Show the tables pane if there wasn't already an active pane
         MagePane topPanebefore = getTopMost(tablesPane);
-        if (topPanebefore == null) {
-            setActive(tablesPane);
+        setActive(tablesPane);
+        if (topPanebefore != null && topPanebefore != tablesPane) {
+            setActive(topPanebefore);
         }
     }
 
@@ -1189,7 +1190,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static final long serialVersionUID = -9104885239063142218L;
     private ImagePanel backgroundPane;
-    private TablesPane tablesPane;
+    private final TablesPane tablesPane;
 //    private CollectionViewerPane collectionViewerPane;
 
     public void setStatusText(String status) {
@@ -1319,7 +1320,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 DownloadPictures.startDownload(null, missingCards);
                 break;
             case CLIENT_DISCONNECT:
-                SessionHandler.disconnect(false);
+                if (SessionHandler.isConnected()) {
+                    endTables();
+                    SessionHandler.disconnect(false);
+                }
                 tablesPane.clearChat();
                 showMessage("You have disconnected");
                 setWindowTitle();
@@ -1347,6 +1351,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 break;
             case CLIENT_EXIT:
                 if (SessionHandler.isConnected()) {
+                    endTables();
                     SessionHandler.disconnect(false);
                 }
                 CardRepository.instance.closeDB();
@@ -1371,6 +1376,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     SessionHandler.sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
                 }
 
+        }
+    }
+
+    private void endTables() {
+        for (UUID gameId : GAMES.keySet()) {
+            SessionHandler.quitMatch(gameId);
+        }
+        for (UUID draftId : DRAFTS.keySet()) {
+            SessionHandler.quitDraft(draftId);
         }
     }
 

@@ -1271,22 +1271,7 @@ public class MageServerImpl implements MageServer {
 
         @Override
         public List<UserView> execute() throws MageException {
-            List<UserView> users = new ArrayList<>();
-            for (User user : UserManager.instance.getUsers()) {
-                users.add(new UserView(
-                        user.getName(),
-                        user.getHost(),
-                        user.getSessionId(),
-                        user.getConnectionTime(),
-                        user.getGameInfo(),
-                        user.getUserState().toString(),
-                        user.getChatLockedUntil(),
-                        user.getClientVersion(),
-                        user.getEmail(),
-                        user.getUserIdStr()
-                ));
-            }
-            return users;
+            return UserManager.instance.getUserInfoList();
         }
     }
 

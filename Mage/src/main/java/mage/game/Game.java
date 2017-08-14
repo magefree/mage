@@ -442,6 +442,8 @@ public interface Game extends MageItem, Serializable {
 
     UUID getStartingPlayerId();
 
+    void setStartingPlayerId(UUID startingPlayerId);
+
     void saveRollBackGameState();
 
     boolean canRollbackTurns(int turnsToRollback);
