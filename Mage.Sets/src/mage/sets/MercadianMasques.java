@@ -124,6 +124,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Deepwood Tantiv", 241, Rarity.UNCOMMON, mage.cards.d.DeepwoodTantiv.class));
         cards.add(new SetCardInfo("Deepwood Wolverine", 242, Rarity.COMMON, mage.cards.d.DeepwoodWolverine.class));
         cards.add(new SetCardInfo("Dehydration", 73, Rarity.COMMON, mage.cards.d.Dehydration.class));
+        cards.add(new SetCardInfo("Delraich", 133, Rarity.RARE, mage.cards.d.Delraich.class));
         cards.add(new SetCardInfo("Desert Twister", 243, Rarity.UNCOMMON, mage.cards.d.DesertTwister.class));
         cards.add(new SetCardInfo("Devout Witness", 17, Rarity.COMMON, mage.cards.d.DevoutWitness.class));
         cards.add(new SetCardInfo("Diplomatic Escort", 74, Rarity.UNCOMMON, mage.cards.d.DiplomaticEscort.class));
