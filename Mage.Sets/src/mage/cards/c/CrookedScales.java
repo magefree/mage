@@ -91,29 +91,32 @@ class CrookedScalesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent yourGuy = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Permanent theirGuy = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        boolean keepGoing;
-        Cost cost;
-        String message = "You lost the flip. Pay {3} to prevent your creature from being destroyed?";
-        do {
-            if (controller.flipCoin(game)) {
-                if (theirGuy != null) {
-                    theirGuy.destroy(controller.getId(), game, false);
-                }
-                keepGoing = false;
-            } else {
-                cost = new GenericManaCost(3);
-                if (!(controller.chooseUse(Outcome.Benefit, message, source, game) && cost.pay(source, game, controller.getId(), controller.getId(), false, null))) {
-                    if (yourGuy != null) {
-                        yourGuy.destroy(controller.getId(), game, false);
+        if (controller != null) {
+            Permanent yourGuy = game.getPermanent(getTargetPointer().getFirst(game, source));
+            Permanent theirGuy = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+            boolean keepGoing;
+            Cost cost;
+            String message = "You lost the flip. Pay {3} to prevent your creature from being destroyed?";
+            do {
+                if (controller.flipCoin(game)) {
+                    if (theirGuy != null) {
+                        theirGuy.destroy(controller.getId(), game, false);
                     }
                     keepGoing = false;
                 } else {
-                    keepGoing = true;
+                    cost = new GenericManaCost(3);
+                    if (!(controller.chooseUse(Outcome.Benefit, message, source, game) && cost.pay(source, game, controller.getId(), controller.getId(), false, null))) {
+                        if (yourGuy != null) {
+                            yourGuy.destroy(controller.getId(), game, false);
+                        }
+                        keepGoing = false;
+                    } else {
+                        keepGoing = true;
+                    }
                 }
-            }
-        } while (keepGoing);
-        return true;
+            } while (keepGoing && controller.isInGame());
+            return true;
+        }
+        return false;
     }
 }
