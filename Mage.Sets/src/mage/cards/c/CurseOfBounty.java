@@ -47,6 +47,7 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.players.Player;
 
@@ -141,7 +142,7 @@ class UntapAllNonlandsTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
-            for (Permanent nonland: game.getBattlefield().getAllActivePermanents(new FilterNonlandPermanent(), player.getId(), game)) {
+            for (Permanent nonland: game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_NON_LAND, player.getId(), game)) {
                 nonland.untap(game);
             }
             return true;
