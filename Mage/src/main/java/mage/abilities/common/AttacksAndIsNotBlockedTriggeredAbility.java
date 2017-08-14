@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -33,14 +32,14 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean setTargetPointer;
+    private final boolean setTargetPointer;
 
     public AttacksAndIsNotBlockedTriggeredAbility(Effect effect) {
         this(effect, false, false);
@@ -72,14 +71,12 @@ public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent sourcePermanent = game.getPermanent(getSourceId());
-        if(sourcePermanent.isAttacking()) {
-            for(CombatGroup combatGroup: game.getCombat().getGroups()) {
-                if(combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
-                    if(setTargetPointer) {
-                        for(Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(game.getCombat().getDefendingPlayerId(getSourceId(), game)));
-                        }
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
+        if (sourcePermanent != null && sourcePermanent.isAttacking()) {
+            for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+                if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
+                    if (setTargetPointer) {
+                        this.getEffects().setTargetPointer(new FixedTarget(game.getCombat().getDefendingPlayerId(getSourceId(), game)));
                     }
                     return true;
                 }

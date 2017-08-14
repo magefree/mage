@@ -58,7 +58,7 @@ public class PlayerDiedStackTargetHandlingTest extends CardTestMultiPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, "Lightning Helix", 2);
-        Assert.assertTrue("Active player has to be player C", currentGame.getActivePlayerId() == playerC.getId());
+        Assert.assertTrue("Active player has to be player C", currentGame.getActivePlayerId().equals(playerC.getId()));
 
         assertLife(playerA, 6);
 
@@ -93,7 +93,7 @@ public class PlayerDiedStackTargetHandlingTest extends CardTestMultiPlayerBase {
 
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
         assertGraveyardCount(playerA, "Tendrils of Agony", 1);
-        Assert.assertTrue("Active player has to be player C", currentGame.getActivePlayerId() == playerC.getId());
+        Assert.assertTrue("Active player has to be player C", currentGame.getActivePlayerId().equals(playerC.getId()));
 
         assertLife(playerA, 7);
 
