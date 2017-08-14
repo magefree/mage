@@ -101,12 +101,12 @@ class CurseOfBountyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.getSourceId());
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(this.getSourceId());
         UUID controller = this.getControllerId();
         if (enchantment != null
                 && enchantment.getAttachedTo() != null
                 && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
-            if (game.getCombat().getAttackerId() != controller) {
+            if (!game.getCombat().getAttackerId().equals(controller)) {
                 for (Effect effect: this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackerId()));
                 }
