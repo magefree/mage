@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -39,7 +38,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -54,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
 public class RealitySmasher extends CardImpl {
 
     public RealitySmasher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{C}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{C}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -66,7 +64,7 @@ public class RealitySmasher extends CardImpl {
         // Whenever Reality Smasher becomes the target of a spell an opponent controls, counter that spell unless its controller discards a card.
         this.addAbility(new RealitySmasherTriggeredAbility());
     }
-    
+
     public RealitySmasher(final RealitySmasher card) {
         super(card);
     }
@@ -78,8 +76,6 @@ public class RealitySmasher extends CardImpl {
 }
 
 class RealitySmasherTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterSpell spellCard = new FilterSpell("a spell");
 
     public RealitySmasherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new DiscardCardCost()), false);
@@ -106,11 +102,8 @@ class RealitySmasherTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         } else {
             if (event.getTargetId().equals(this.getSourceId())
-                    && game.getOpponents(this.controllerId).contains(event.getPlayerId())
-                    && spellCard.match(spell, getSourceId(), getControllerId(), game)) {
-                for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(spell.getId()));
-                }
+                    && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+                getEffects().setTargetPointer(new FixedTarget(spell.getId()));
                 return true;
             }
         }

@@ -42,6 +42,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -54,7 +55,7 @@ import mage.target.common.TargetCardInLibrary;
 public class LilianaVess extends CardImpl {
 
     public LilianaVess(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
         this.subtype.add("Liliana");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
@@ -96,19 +97,18 @@ class LilianaVessEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                Set<Card> creatureCards = new LinkedHashSet<>();
-                for (Card card : player.getGraveyard().getCards(game)) {
-                    if (card.isCreature()) {
-                        creatureCards.add(card);
-                    }
+        if (controller != null) {
+            Set<Card> creatureCards = new LinkedHashSet<>();
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    creatureCards.addAll(player.getGraveyard().getCards(new FilterCreatureCard(), game));
                 }
-                controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game, false, false, false, null);
             }
+            controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game, false, false, false, null);
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

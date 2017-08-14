@@ -42,7 +42,7 @@ foreach $num (sort {$a<=>$b} keys (%new_order))
     }
 }
 
-print ("Choose your preferred tag: "); 
+print ("Choose your preferred tag: ");
 
 my $cmd = <STDIN>;
 chomp $cmd;
@@ -77,6 +77,10 @@ sub get_name_of_card_from_class
         }
         $card_name =~ s/(.)([A-Z])/$1 $2/g;
         $card_name =~ s/\d//g;
+        $card_name =~ s/ The / the /g;
+        $card_name =~ s/ Of / of /g;
+        $card_name =~ s/ To / to /g;
+        $card_name =~ s/ And / and /g;
         return $card_name;
     }
     return "";
@@ -85,8 +89,8 @@ sub get_name_of_card_from_class
 if (exists ($new_order{$cmd}))
 {
     my $tag = $new_order{$cmd};
-    $tag =~ s/You chose //; 
-    $tag =~ s/,.*//; 
+    $tag =~ s/You chose //;
+    $tag =~ s/,.*//;
     chomp $tag;
     print ("You chose $tag\n");
 
