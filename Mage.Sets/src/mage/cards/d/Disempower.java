@@ -25,43 +25,36 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.cards.d;
 
-package mage.game.permanent.token;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.abilities.mana.SimpleManaAbility;
+import java.util.UUID;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class GoldToken extends Token {
-    
-    final static private List<String> tokenImageSets = new ArrayList<>();
-    static {
-        tokenImageSets.addAll(Arrays.asList("BNG", "C17"));
+public class Disempower extends CardImpl {
+
+    public Disempower(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
+
+        // Put target artifact or enchantment on top of its owner's library.
+        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
     }
 
-    public GoldToken() {
-        this(null, 0);
+    public Disempower(final Disempower card) {
+        super(card);
     }
 
-    public GoldToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public GoldToken(String setCode, int tokenType) {
-        super("Gold", "colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
-        availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
-        cardType.add(CardType.ARTIFACT);
-
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost()));
+    @Override
+    public Disempower copy() {
+        return new Disempower(this);
     }
 }

@@ -25,43 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.cards.d;
 
-package mage.game.permanent.token;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.abilities.mana.SimpleManaAbility;
+import java.util.UUID;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.keyword.TrampleAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class GoldToken extends Token {
-    
-    final static private List<String> tokenImageSets = new ArrayList<>();
+public class Delraich extends CardImpl {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
+
     static {
-        tokenImageSets.addAll(Arrays.asList("BNG", "C17"));
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public GoldToken() {
-        this(null, 0);
+    public Delraich(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}");
+
+        this.subtype.add("Horror");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+
+        // You may sacrifice three black creatures rather than pay Delraich's mana cost.
+        AlternativeCostSourceAbility alternateCosts = new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
+        this.addAbility(alternateCosts);
     }
 
-    public GoldToken(String setCode) {
-        this(setCode, 0);
+    public Delraich(final Delraich card) {
+        super(card);
     }
 
-    public GoldToken(String setCode, int tokenType) {
-        super("Gold", "colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
-        availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
-        cardType.add(CardType.ARTIFACT);
-
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost()));
+    @Override
+    public Delraich copy() {
+        return new Delraich(this);
     }
 }

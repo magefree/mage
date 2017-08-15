@@ -25,43 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.cards.d;
 
-package mage.game.permanent.token;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.abilities.mana.SimpleManaAbility;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class GoldToken extends Token {
-    
-    final static private List<String> tokenImageSets = new ArrayList<>();
-    static {
-        tokenImageSets.addAll(Arrays.asList("BNG", "C17"));
+public class DaruHealer extends CardImpl {
+
+    public DaruHealer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
+
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // {tap}: Prevent the next 1 damage that would be dealt to target creature or player this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
+
+        // Morph {W}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}")));
+
     }
 
-    public GoldToken() {
-        this(null, 0);
+    public DaruHealer(final DaruHealer card) {
+        super(card);
     }
 
-    public GoldToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public GoldToken(String setCode, int tokenType) {
-        super("Gold", "colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
-        availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
-        cardType.add(CardType.ARTIFACT);
-
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost()));
+    @Override
+    public DaruHealer copy() {
+        return new DaruHealer(this);
     }
 }

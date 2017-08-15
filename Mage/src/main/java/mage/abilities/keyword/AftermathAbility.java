@@ -180,7 +180,7 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
                 sourceId = sourceCard.getId();
             }
 
-            if (event.getTargetId() == sourceId) {
+            if (event.getTargetId().equals(sourceId)) {
                 // Moving this spell from stack to yard
                 Spell spell = game.getStack().getSpell(source.getSourceId());
                 if (spell != null && spell.getFromZone() == Zone.GRAVEYARD) {

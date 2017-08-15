@@ -183,7 +183,7 @@ class SpellWasNotCastCondition implements Condition {
             List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
             if (spells != null) {
                 for (Spell spell : spells) {
-                    if (spell.getSourceId() == cardId) {
+                    if (spell.getSourceId().equals(cardId)) {
                         return false;
                     }
                 }

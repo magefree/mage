@@ -86,6 +86,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Defender of the Order", 11, Rarity.RARE, mage.cards.d.DefenderOfTheOrder.class));
         cards.add(new SetCardInfo("Defiant Elf", 123, Rarity.COMMON, mage.cards.d.DefiantElf.class));
         cards.add(new SetCardInfo("Deftblade Elite", 12, Rarity.COMMON, mage.cards.d.DeftbladeElite.class));
+        cards.add(new SetCardInfo("Dermoplasm", 35, Rarity.RARE, mage.cards.d.Dermoplasm.class));
         cards.add(new SetCardInfo("Dreamborn Muse", 36, Rarity.RARE, mage.cards.d.DreambornMuse.class));
         cards.add(new SetCardInfo("Dripping Dead", 67, Rarity.COMMON, mage.cards.d.DrippingDead.class));
         cards.add(new SetCardInfo("Earthblighter", 68, Rarity.UNCOMMON, mage.cards.e.Earthblighter.class));

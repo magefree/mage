@@ -27,6 +27,9 @@
  */
 package mage.cards.m;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,10 +44,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  *
@@ -123,7 +122,7 @@ class MenacingOgreEffect extends OneShotEffect {
                 game.informPlayers(player.getLogName() + " chose number " + numberChosen.get(player));
                 if (numberChosen.get(player) >= highestNumber) {
                     player.loseLife(highestNumber, game, false);
-                    if (player.getId() == source.getControllerId()
+                    if (player.getId().equals(source.getControllerId())
                             && menacingOgre != null) {
                         menacingOgre.addCounters(CounterType.P1P1.createInstance(2), source, game);
                     }

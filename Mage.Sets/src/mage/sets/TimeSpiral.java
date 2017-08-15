@@ -73,6 +73,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Deep-Sea Kraken", 56, Rarity.RARE, mage.cards.d.DeepSeaKraken.class));
         cards.add(new SetCardInfo("Dementia Sliver", 236, Rarity.UNCOMMON, mage.cards.d.DementiaSliver.class));
         cards.add(new SetCardInfo("Demonic Collusion", 103, Rarity.RARE, mage.cards.d.DemonicCollusion.class));
+        cards.add(new SetCardInfo("Divine Congregation", 13, Rarity.COMMON, mage.cards.d.DivineCongregation.class));
         cards.add(new SetCardInfo("Draining Whelk", 57, Rarity.RARE, mage.cards.d.DrainingWhelk.class));
         cards.add(new SetCardInfo("Dralnu, Lich Lord", 237, Rarity.RARE, mage.cards.d.DralnuLichLord.class));
         cards.add(new SetCardInfo("Dread Return", 104, Rarity.UNCOMMON, mage.cards.d.DreadReturn.class));
