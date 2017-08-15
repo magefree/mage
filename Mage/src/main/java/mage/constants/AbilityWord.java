@@ -42,6 +42,7 @@ public enum AbilityWord {
     CONVERGE("Converge"),
     DELIRIUM("Delirium"),
     DOMAIN("Domain"),
+    EMINENCE("Eminence"),
     FATEFUL_HOUR("Fateful hour"),
     FEROCIOUS("Ferocious"),
     FORMIDABLE("Formidable"),
