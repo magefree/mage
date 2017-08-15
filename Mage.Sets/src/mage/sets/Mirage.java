@@ -53,6 +53,7 @@ public class Mirage extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Abyssal Hunter", 1, Rarity.RARE, mage.cards.a.AbyssalHunter.class));
+        cards.add(new SetCardInfo("Afiya Grove", 103, Rarity.RARE, mage.cards.a.AfiyaGrove.class));
         cards.add(new SetCardInfo("Afterlife", 205, Rarity.UNCOMMON, mage.cards.a.Afterlife.class));
         cards.add(new SetCardInfo("Agility", 154, Rarity.COMMON, mage.cards.a.Agility.class));
         cards.add(new SetCardInfo("Alarum", 206, Rarity.COMMON, mage.cards.a.Alarum.class));

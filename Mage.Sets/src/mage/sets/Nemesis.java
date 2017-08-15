@@ -56,6 +56,7 @@ public class Nemesis extends ExpansionSet {
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Accumulated Knowledge", 26, Rarity.COMMON, mage.cards.a.AccumulatedKnowledge.class));
         cards.add(new SetCardInfo("Aether Barrier", 27, Rarity.RARE, mage.cards.a.AetherBarrier.class));
+        cards.add(new SetCardInfo("Air Bladder", 28, Rarity.COMMON, mage.cards.a.AirBladder.class));
         cards.add(new SetCardInfo("Ancient Hydra", 76, Rarity.UNCOMMON, mage.cards.a.AncientHydra.class));
         cards.add(new SetCardInfo("Angelic Favor", 1, Rarity.UNCOMMON, mage.cards.a.AngelicFavor.class));
         cards.add(new SetCardInfo("Animate Land", 101, Rarity.UNCOMMON, mage.cards.a.AnimateLand.class));
