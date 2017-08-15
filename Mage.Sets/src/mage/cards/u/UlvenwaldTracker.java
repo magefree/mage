@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class UlvenwaldTracker extends CardImpl {
 
     public UlvenwaldTracker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 
@@ -64,7 +64,7 @@ public class UlvenwaldTracker extends CardImpl {
         Target controlledTarget = new TargetControlledCreaturePermanent();
         controlledTarget.setTargetTag(1);
         ability.addTarget(controlledTarget);
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature to fight");
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new AnotherTargetPredicate(2));
         Target secondTarget = new TargetCreaturePermanent(filter);
         secondTarget.setTargetTag(2);
