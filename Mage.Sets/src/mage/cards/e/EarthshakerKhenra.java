@@ -32,6 +32,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.keyword.EternalizeAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -40,11 +42,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -67,7 +71,7 @@ public class EarthshakerKhenra extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // When Earthshaker Khenra enters the battlefield, target creature with power less than or equal to Earthshaker Khenra's power can't block this turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new EarthshakerKhenraEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         originalId = ability.getOriginalId();
@@ -82,11 +86,10 @@ public class EarthshakerKhenra extends CardImpl {
         if (ability.getOriginalId().equals(originalId)) {
             Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
             if (sourcePermanent != null) {
-                int power = sourcePermanent.getPower().getValue();
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power less than or equal to " + getLogName() + "'s power");
-                filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, power + 1));
+                FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("creature with power less than or equal to " + getLogName() + "'s power");
+                targetFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, sourcePermanent.getPower().getValue() + 1));
                 ability.getTargets().clear();
-                ability.getTargets().add(new TargetCreaturePermanent(filter));
+                ability.getTargets().add(new TargetCreaturePermanent(targetFilter));
             }
         }
     }
@@ -99,5 +102,42 @@ public class EarthshakerKhenra extends CardImpl {
     @Override
     public EarthshakerKhenra copy() {
         return new EarthshakerKhenra(this);
+    }
+}
+
+class EarthshakerKhenraEffect extends OneShotEffect {
+
+    public EarthshakerKhenraEffect() {
+        super(Outcome.UnboostCreature);
+        this.staticText = "target creature with power less than or equal to {this}'s power can't block this turn";
+    }
+
+    public EarthshakerKhenraEffect(final EarthshakerKhenraEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public EarthshakerKhenraEffect copy() {
+        return new EarthshakerKhenraEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourceObject != null) {
+            Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+            /*
+            27.06.2017 	The target creature’s power is checked when you target it with Earthshaker Khenra’s ability
+                        and when that ability resolves. Once the ability resolves, if the creature’s power increases
+                        or Earthshaker Khenra’s power decreases, the target creature will still be unable to block.
+             */
+            if (targetCreature != null && targetCreature.getPower().getValue() <= sourceObject.getPower().getValue()) {
+                ContinuousEffect effect = new CantBlockTargetEffect(Duration.EndOfTurn);
+                effect.setTargetPointer(new FixedTarget(targetCreature, game));
+                game.addEffect(effect, source);
+            }
+            return true;
+        }
+        return false;
     }
 }
