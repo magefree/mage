@@ -82,7 +82,7 @@ public class AfiyaGrove extends CardImpl {
 class MoveCounterToTargetFromSourceEffect extends OneShotEffect {
 
     public MoveCounterToTargetFromSourceEffect() {
-        super(Outcome.Detriment);
+        super(Outcome.Benefit);
         this.staticText = "move a +1/+1 counter from {this} onto target creature";
     }
 
