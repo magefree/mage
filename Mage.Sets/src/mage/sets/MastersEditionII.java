@@ -64,6 +64,7 @@ public class MastersEditionII extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        cards.add(new SetCardInfo("AEther Storm", 39, Rarity.UNCOMMON, mage.cards.a.AetherStorm.class));
         cards.add(new SetCardInfo("Abbey Gargoyles", 1, Rarity.UNCOMMON, mage.cards.a.AbbeyGargoyles.class));
         cards.add(new SetCardInfo("Adarkar Sentinel", 201, Rarity.COMMON, mage.cards.a.AdarkarSentinel.class));
         cards.add(new SetCardInfo("Aeolipile", 202, Rarity.COMMON, mage.cards.a.Aeolipile.class));

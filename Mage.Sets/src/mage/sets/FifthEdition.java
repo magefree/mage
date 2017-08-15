@@ -32,6 +32,7 @@ public class FifthEdition extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        cards.add(new SetCardInfo("AEther Storm", 70, Rarity.UNCOMMON, mage.cards.a.AetherStorm.class));
         cards.add(new SetCardInfo("Abbey Gargoyles", 277, Rarity.UNCOMMON, mage.cards.a.AbbeyGargoyles.class));
         cards.add(new SetCardInfo("Abyssal Specter", 1, Rarity.UNCOMMON, mage.cards.a.AbyssalSpecter.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 410, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
