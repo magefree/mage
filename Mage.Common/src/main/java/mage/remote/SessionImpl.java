@@ -1440,7 +1440,7 @@ public class SessionImpl implements Session {
     @Override
     public boolean endUserSession(String userSessionId) {
         try {
-            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute userSessionId " + userSessionId + '?', "WARNING",
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to end userSessionId " + userSessionId + '?', "WARNING",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (isConnected()) {
                     server.endUserSession(sessionId, userSessionId);
