@@ -73,6 +73,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Taigam, Ojutai Master", 46, Rarity.MYTHIC, mage.cards.t.TaigamOjutaiMaster.class));
         cards.add(new SetCardInfo("Taigam, Sidisi's Hand", 47, Rarity.RARE, mage.cards.t.TaigamSidisisHand.class));
         cards.add(new SetCardInfo("Teferi's Protection", 8, Rarity.RARE, mage.cards.t.TeferisProtection.class));
+        cards.add(new SetCardInfo("Territorial Hellkite", 29, Rarity.RARE, mage.cards.t.TerritorialHellkite.class));
         cards.add(new SetCardInfo("The Ur-Dragon", 48, Rarity.MYTHIC, mage.cards.t.TheUrDragon.class));
         cards.add(new SetCardInfo("Traverse the Outlands", 34, Rarity.RARE, mage.cards.t.TraverseTheOutlands.class));
         cards.add(new SetCardInfo("Wasitora, Nekoru Queen", 49, Rarity.MYTHIC, mage.cards.w.WasitoraNekoruQueen.class));
