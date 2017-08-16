@@ -4,9 +4,9 @@ package mage.server;
  *
  * @author LevelX2
  */
-
 public enum DisconnectReason {
     LostConnection(" has lost connection"),
+    BecameInactive(" has become inactive"),
     Disconnected(" has left XMage"),
     CleaningUp(" [cleaning up]"),
     ConnectingOtherInstance(" reconnected and replaced still active old session"),
@@ -15,11 +15,12 @@ public enum DisconnectReason {
     Undefined("");
 
     String message;
-    DisconnectReason(String message){
+
+    DisconnectReason(String message) {
         this.message = message;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return message;
     }
 }

@@ -174,8 +174,12 @@ public enum UserManager {
         calendarRemove.add(Calendar.MINUTE, -8);
         List<User> toRemove = new ArrayList<>();
         for (User user : users.values()) {
-            if (user.getUserState() == UserState.Disconnected || user.getUserState() == UserState.Offline
+            if (user.getUserState() != UserState.Offline
                     && user.isExpired(calendarExp.getTime())) {
+                if (user.getUserState() == UserState.Connected) {
+                    user.lostConnection();
+                    disconnect(user.getId(), DisconnectReason.BecameInactive);
+                }
                 user.setUserState(UserState.Offline);
             }
             if (user.getUserState() == UserState.Offline && user.isExpired(calendarRemove.getTime())) {
