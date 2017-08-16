@@ -76,7 +76,5 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("The Ur-Dragon", 48, Rarity.MYTHIC, mage.cards.t.TheUrDragon.class));
         cards.add(new SetCardInfo("Traverse the Outlands", 34, Rarity.RARE, mage.cards.t.TraverseTheOutlands.class));
         cards.add(new SetCardInfo("Wasitora, Nekoru Queen", 49, Rarity.MYTHIC, mage.cards.w.WasitoraNekoruQueen.class));
-        cards.add(new SetCardInfo("Kindred Dominance", 18, Rarity.RARE, mage.cards.w.WasitoraNekoruQueen.class));
-        cards.add(new SetCardInfo("Mirror of the Forebears", 54, Rarity.UNCOMMON, mage.cards.m.MirrorOfTheForebears.class));
     }
 }
