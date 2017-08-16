@@ -49,6 +49,7 @@ public class Commander2017 extends ExpansionSet {
 
         cards.add(new SetCardInfo("Arahbo, Roar of the World", 35, Rarity.MYTHIC, mage.cards.a.ArahboRoarOfTheWorld.class));
         cards.add(new SetCardInfo("Balan, Wandering Knight", 2, Rarity.RARE, mage.cards.b.BalanWanderingKnight.class));
+        cards.add(new SetCardInfo("Bloodforged War Axe", 50, Rarity.RARE, mage.cards.b.BloodforgedWarAxe.class));
         cards.add(new SetCardInfo("Bloodsworn Steward", 22, Rarity.RARE, mage.cards.b.BloodswornSteward.class));
         cards.add(new SetCardInfo("Crimson Honor Guard", 23, Rarity.RARE, mage.cards.c.CrimsonHonorGuard.class));
         cards.add(new SetCardInfo("Curse of Bounty", 30, Rarity.UNCOMMON, mage.cards.c.CurseOfBounty.class));
