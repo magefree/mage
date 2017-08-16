@@ -63,6 +63,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Fractured Identity", 37, Rarity.RARE, mage.cards.f.FracturedIdentity.class));
         cards.add(new SetCardInfo("Inalla, Archmage Ritualist", 38, Rarity.MYTHIC, mage.cards.i.InallaArchmageRitualist.class));
         cards.add(new SetCardInfo("Kindred Dominance", 18, Rarity.RARE, mage.cards.k.KindredDominance.class));
+        cards.add(new SetCardInfo("Mirror of the Forebears", 54, Rarity.UNCOMMON, mage.cards.m.MirrorOfTheForebears.class));
         cards.add(new SetCardInfo("Nazahn, Revered Bladesmith", 44, Rarity.MYTHIC, mage.cards.n.NazahnReveredBladesmith.class));
         cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 45, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
         cards.add(new SetCardInfo("Patron of the Vein", 20, Rarity.RARE, mage.cards.p.PatronOfTheVein.class));
@@ -76,5 +77,6 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Traverse the Outlands", 34, Rarity.RARE, mage.cards.t.TraverseTheOutlands.class));
         cards.add(new SetCardInfo("Wasitora, Nekoru Queen", 49, Rarity.MYTHIC, mage.cards.w.WasitoraNekoruQueen.class));
         cards.add(new SetCardInfo("Kindred Dominance", 18, Rarity.RARE, mage.cards.w.WasitoraNekoruQueen.class));
+        cards.add(new SetCardInfo("Mirror of the Forebears", 54, Rarity.UNCOMMON, mage.cards.m.MirrorOfTheForebears.class));
     }
 }
