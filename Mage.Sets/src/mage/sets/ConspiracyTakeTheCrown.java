@@ -127,6 +127,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Ghostly Prison", 86, Rarity.UNCOMMON, mage.cards.g.GhostlyPrison.class));
         cards.add(new SetCardInfo("Gleam of Resistance", 87, Rarity.COMMON, mage.cards.g.GleamOfResistance.class));
         cards.add(new SetCardInfo("Goblin Balloon Brigade", 159, Rarity.COMMON, mage.cards.g.GoblinBalloonBrigade.class));
+        cards.add(new SetCardInfo("Goblin Racketeer", 53, Rarity.COMMON, mage.cards.g.GoblinRacketeer.class));
         cards.add(new SetCardInfo("Goblin Tunneler", 160, Rarity.COMMON, mage.cards.g.GoblinTunneler.class));
         cards.add(new SetCardInfo("Gods Willing", 88, Rarity.COMMON, mage.cards.g.GodsWilling.class));
         cards.add(new SetCardInfo("Gratuitous Violence", 161, Rarity.RARE, mage.cards.g.GratuitousViolence.class));
