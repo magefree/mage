@@ -151,6 +151,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Inquisition of Kozilek", 140, Rarity.RARE, mage.cards.i.InquisitionOfKozilek.class));
         cards.add(new SetCardInfo("Into the Void", 112, Rarity.UNCOMMON, mage.cards.i.IntoTheVoid.class));
         cards.add(new SetCardInfo("Irresistible Prey", 183, Rarity.UNCOMMON, mage.cards.i.IrresistiblePrey.class));
+        cards.add(new SetCardInfo("Jeering Homunculus", 33, Rarity.COMMON, mage.cards.j.JeeringHomunculus.class));
         cards.add(new SetCardInfo("Juniper Order Ranger", 204, Rarity.UNCOMMON, mage.cards.j.JuniperOrderRanger.class));
         cards.add(new SetCardInfo("Kami of the Crescent Moon", 113, Rarity.RARE, mage.cards.k.KamiOfTheCrescentMoon.class));
         cards.add(new SetCardInfo("Kaya, Ghost Assassin", 75, Rarity.MYTHIC, mage.cards.k.KayaGhostAssassin.class));
