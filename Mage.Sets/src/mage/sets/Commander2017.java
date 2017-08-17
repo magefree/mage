@@ -65,6 +65,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Herald's Horn", 53, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
         cards.add(new SetCardInfo("Hungry Lynx", 31, Rarity.RARE, mage.cards.h.HungryLynx.class));
         cards.add(new SetCardInfo("Inalla, Archmage Ritualist", 38, Rarity.MYTHIC, mage.cards.i.InallaArchmageRitualist.class));
+        cards.add(new SetCardInfo("Kheru Mind-Eater", 17, Rarity.RARE, mage.cards.k.KheruMindEater.class));
         cards.add(new SetCardInfo("Kindred Dominance", 18, Rarity.RARE, mage.cards.k.KindredDominance.class));
         cards.add(new SetCardInfo("Mirri, Weatherlight Duelist", 43, Rarity.MYTHIC, mage.cards.m.MirriWeatherlightDuelist.class));
         cards.add(new SetCardInfo("Mirror of the Forebears", 54, Rarity.UNCOMMON, mage.cards.m.MirrorOfTheForebears.class));
