@@ -64,6 +64,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Avatar of Woe", 128, Rarity.MYTHIC, mage.cards.a.AvatarOfWoe.class));
         cards.add(new SetCardInfo("Beast Within", 174, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Berserk", 175, Rarity.MYTHIC, mage.cards.b.Berserk.class));
+        cards.add(new SetCardInfo("Besmirch", 49, Rarity.UNCOMMON, mage.cards.b.Besmirch.class));
         cards.add(new SetCardInfo("Birds of Paradise", 176, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
         cards.add(new SetCardInfo("Blood-Toll Harpy", 129, Rarity.COMMON, mage.cards.b.BloodTollHarpy.class));
         cards.add(new SetCardInfo("Bonds of Quicksilver", 102, Rarity.COMMON, mage.cards.b.BondsOfQuicksilver.class));
@@ -84,6 +85,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Coordinated Assault", 154, Rarity.UNCOMMON, mage.cards.c.CoordinatedAssault.class));
         cards.add(new SetCardInfo("Copperhorn Scout", 179, Rarity.COMMON, mage.cards.c.CopperhornScout.class));
         cards.add(new SetCardInfo("Covenant of Minds", 105, Rarity.RARE, mage.cards.c.CovenantOfMinds.class));
+        cards.add(new SetCardInfo("Coveted Peacock", 29, Rarity.UNCOMMON, mage.cards.c.CovetedPeacock.class));
         cards.add(new SetCardInfo("Crown-Hunter Hireling", 50, Rarity.COMMON, mage.cards.c.CrownHunterHireling.class));
         cards.add(new SetCardInfo("Custodi Lich", 41, Rarity.RARE, mage.cards.c.CustodiLich.class));
         cards.add(new SetCardInfo("Daretti, Ingenious Iconoclast", 74, Rarity.MYTHIC, mage.cards.d.DarettiIngeniousIconoclast.class));
