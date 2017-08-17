@@ -1948,7 +1948,7 @@ public abstract class GameImpl implements Game, Serializable {
                         Player controller = this.getPlayer(planeswalker.getControllerId());
                         if (controller != null) {
                             Target targetPlaneswalkerToKeep = new TargetPermanent(filterPlaneswalker);
-                            targetPlaneswalkerToKeep.setTargetName(planeswalker.getName() + " to keep?");
+                            targetPlaneswalkerToKeep.setTargetName(planeswalkertype.toString() + " to keep?");
                             controller.chooseTarget(Outcome.Benefit, targetPlaneswalkerToKeep, null, this);
                             for (Permanent dupPlaneswalker : this.getBattlefield().getActivePermanents(filterPlaneswalker, planeswalker.getControllerId(), this)) {
                                 if (!targetPlaneswalkerToKeep.getTargets().contains(dupPlaneswalker.getId())) {
