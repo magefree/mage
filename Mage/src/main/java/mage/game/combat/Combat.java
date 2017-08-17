@@ -1414,7 +1414,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
-    public UUID getAttackerId() {
+    public UUID getAttackingPlayerId() {
         return attackingPlayerId;
     }
 

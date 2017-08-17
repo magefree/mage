@@ -27,10 +27,12 @@
  */
 package mage.cards.c;
 
-import mage.abilities.Ability;
+import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,15 +41,14 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.ZombieToken;
+import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
-import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.CreateTokenTargetEffect;
-import mage.game.permanent.token.ZombieToken;
 
 /**
  *
@@ -56,7 +57,7 @@ import mage.game.permanent.token.ZombieToken;
 public class CurseOfDisturbance extends CardImpl {
 
     public CurseOfDisturbance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
@@ -66,9 +67,7 @@ public class CurseOfDisturbance extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted player is attacked, create a 2/2 black Zombie creature token. Each opponent attacking that player does the same.
-        Ability ability = new CurseOfDisturbanceTriggeredAbility();
-        ability.addEffect(new CreateTokenEffect(new ZombieToken()));
-        this.addAbility(ability);
+        this.addAbility(new CurseOfDisturbanceTriggeredAbility());
     }
 
     public CurseOfDisturbance(final CurseOfDisturbance card) {
@@ -84,7 +83,7 @@ public class CurseOfDisturbance extends CardImpl {
 class CurseOfDisturbanceTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfDisturbanceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new ZombieToken()), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), false);
     }
 
     public CurseOfDisturbanceTriggeredAbility(final CurseOfDisturbanceTriggeredAbility ability) {
@@ -98,17 +97,21 @@ class CurseOfDisturbanceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(this.getSourceId());
-        UUID controller = this.getControllerId();
-        if (enchantment != null
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
+        Player controller = game.getPlayer(getControllerId());
+        if (controller != null && enchantment != null
                 && enchantment.getAttachedTo() != null
                 && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
-            if (!game.getCombat().getAttackerId().equals(controller)) {
-                for (Effect effect: this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackerId()));
+            for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+                if (group.getDefenderId().equals(enchantment.getAttachedTo())) {
+                    if (controller.hasOpponent(game.getCombat().getAttackingPlayerId(), game)) {
+                        Effect effect = new CreateTokenTargetEffect(new ZombieToken());
+                        effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));
+                        this.addEffect(effect);
+                    }
+                    return true;
                 }
             }
-            return true;
         }
         return false;
     }
@@ -122,5 +125,5 @@ class CurseOfDisturbanceTriggeredAbility extends TriggeredAbilityImpl {
     public CurseOfDisturbanceTriggeredAbility copy() {
         return new CurseOfDisturbanceTriggeredAbility(this);
     }
-    
+
 }

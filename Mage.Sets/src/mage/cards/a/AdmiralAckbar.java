@@ -108,7 +108,7 @@ class AdmiralAckbarTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getCombat().getAttackers().size() >= 2 && game.getCombat().getAttackerId().equals(getControllerId());
+        return game.getCombat().getAttackers().size() >= 2 && game.getCombat().getAttackingPlayerId().equals(getControllerId());
     }
 
     @Override

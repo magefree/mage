@@ -102,7 +102,7 @@ class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
                 && enchantment.getAttachedTo() != null
                 && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
             for (Effect effect: this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackerId()));                    
+                effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));                    
             }
             return true;
         }

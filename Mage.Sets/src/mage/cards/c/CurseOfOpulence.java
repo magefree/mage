@@ -28,8 +28,8 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
@@ -46,6 +46,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GoldToken;
+import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
@@ -67,9 +68,7 @@ public class CurseOfOpulence extends CardImpl {
 
         // Whenever enchanted player is attacked, create a colorless artifact token named Gold.
         // It has "sacrifice this artifact: Add one mana of any color to your mana pool." Each opponent attacking that player does the same.
-        Ability ability = new CurseOfOpulenceTriggeredAbility();
-        ability.addEffect(new CreateTokenEffect(new GoldToken()));
-        this.addAbility(ability);
+        this.addAbility(new CurseOfOpulenceTriggeredAbility());
     }
 
     public CurseOfOpulence(final CurseOfOpulence card) {
@@ -85,7 +84,7 @@ public class CurseOfOpulence extends CardImpl {
 class CurseOfOpulenceTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfOpulenceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new GoldToken()), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new GoldToken()), false);
     }
 
     public CurseOfOpulenceTriggeredAbility(final CurseOfOpulenceTriggeredAbility ability) {
@@ -99,13 +98,18 @@ class CurseOfOpulenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(this.getSourceId());
-        if (enchantment != null
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
+        Player controller = game.getPlayer(getControllerId());
+        if (controller != null && enchantment != null
                 && enchantment.getAttachedTo() != null
                 && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
             for (CombatGroup group : game.getCombat().getBlockingGroups()) {
                 if (group.getDefenderId().equals(enchantment.getAttachedTo())) {
-                    this.getEffects().setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+                    if (controller.hasOpponent(game.getCombat().getAttackingPlayerId(), game)) {
+                        Effect effect = new CreateTokenTargetEffect(new GoldToken());
+                        effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));
+                        this.addEffect(effect);
+                    }
                     return true;
                 }
             }
