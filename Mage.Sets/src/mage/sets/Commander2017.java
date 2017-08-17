@@ -75,6 +75,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Kindred Summons", 32, Rarity.RARE, mage.cards.k.KindredSummons.class));
         cards.add(new SetCardInfo("Licia, Sanguine Tribune", 40, Rarity.MYTHIC, mage.cards.l.LiciaSanguineTribune.class));
         cards.add(new SetCardInfo("Magus of the Mind", 12, Rarity.RARE, mage.cards.m.MagusOfTheMind.class));
+        cards.add(new SetCardInfo("Mathas, Fiend Seeker", 42, Rarity.MYTHIC, mage.cards.m.MathasFiendSeeker.class));
         cards.add(new SetCardInfo("Mirri, Weatherlight Duelist", 43, Rarity.MYTHIC, mage.cards.m.MirriWeatherlightDuelist.class));
         cards.add(new SetCardInfo("Mirror of the Forebears", 54, Rarity.UNCOMMON, mage.cards.m.MirrorOfTheForebears.class));
         cards.add(new SetCardInfo("Nazahn, Revered Bladesmith", 44, Rarity.MYTHIC, mage.cards.n.NazahnReveredBladesmith.class));
