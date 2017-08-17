@@ -118,6 +118,12 @@ public class Combat implements Serializable, Copyable<Combat> {
         return blockingGroups.values();
     }
 
+    /**
+     * Get all possible defender (players and plainwalkers) That does not mean
+     * neccessarly mean that they are really attacked
+     *
+     * @return
+     */
     public Set<UUID> getDefenders() {
         return defenders;
     }

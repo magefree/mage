@@ -27,10 +27,12 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,15 +41,13 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.GoldToken;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
-import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.CreateTokenTargetEffect;
-import mage.game.permanent.token.GoldToken;
 
 /**
  *
@@ -56,7 +56,7 @@ import mage.game.permanent.token.GoldToken;
 public class CurseOfOpulence extends CardImpl {
 
     public CurseOfOpulence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
@@ -65,7 +65,7 @@ public class CurseOfOpulence extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        // Whenever enchanted player is attacked, create a colorless artifact token named Gold. 
+        // Whenever enchanted player is attacked, create a colorless artifact token named Gold.
         // It has "sacrifice this artifact: Add one mana of any color to your mana pool." Each opponent attacking that player does the same.
         Ability ability = new CurseOfOpulenceTriggeredAbility();
         ability.addEffect(new CreateTokenEffect(new GoldToken()));
@@ -100,16 +100,15 @@ class CurseOfOpulenceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(this.getSourceId());
-        UUID controller = this.getControllerId();
         if (enchantment != null
                 && enchantment.getAttachedTo() != null
                 && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
-            if (!game.getCombat().getAttackerId().equals(controller)) {
-                for (Effect effect: this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackerId()));
+            for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+                if (group.getDefenderId().equals(enchantment.getAttachedTo())) {
+                    this.getEffects().setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+                    return true;
                 }
             }
-            return true;
         }
         return false;
     }
@@ -124,5 +123,5 @@ class CurseOfOpulenceTriggeredAbility extends TriggeredAbilityImpl {
     public CurseOfOpulenceTriggeredAbility copy() {
         return new CurseOfOpulenceTriggeredAbility(this);
     }
-    
+
 }
