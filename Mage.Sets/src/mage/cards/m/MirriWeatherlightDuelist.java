@@ -71,7 +71,7 @@ public class MirriWeatherlightDuelist extends CardImpl {
 
         // Whenever Mirri, Weatherlight Duelist attacks, each opponent can't block with more than one creature this combat.
         this.addAbility(new AttacksTriggeredAbility(new AddContinuousEffectToGame(new MirriWeatherlightDuelistBlockRestrictionEffect()), false));
-        
+
         // As long as Mirri, Weatherlight Duelist is tapped, no more than one creature can attack you each combat.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new MirriWeatherlightDuelistAttackRestrictionEffect(1), SourceTappedCondition.instance,
@@ -121,38 +121,6 @@ class MirriWeatherlightDuelistBlockRestrictionEffect extends RestrictionEffect {
     }
 }
 
-/*class MirriWeatherlightDuelistAttackRestrictionEffect extends RestrictionEffect {
-
-    MirriWeatherlightDuelistAttackRestrictionEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "no more than one creature can attack you each combat";
-    }
-
-    MirriWeatherlightDuelistAttackRestrictionEffect(final MirriWeatherlightDuelistAttackRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MirriWeatherlightDuelistAttackRestrictionEffect copy() {
-        return new MirriWeatherlightDuelistAttackRestrictionEffect(this);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
-        for (UUID creature : game.getCombat().getAttackers()) {
-            if (game.getPermanent(creature).getControllerId().equals(attacker.getControllerId())
-                    && game.getCombat().getDefendingPlayerId(creature, game).equals(source.getControllerId())) {
-                return false;
-            }
-        }
-        return true;
-    }
-}*/
 class MirriWeatherlightDuelistAttackRestrictionEffect extends ContinuousEffectImpl {
 
     private final int maxAttackedBy;
