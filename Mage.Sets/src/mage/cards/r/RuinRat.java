@@ -56,7 +56,7 @@ public class RuinRat extends CardImpl {
 
         // When Ruin Rat dies, exile target card from an opponent's graveyard.
         DiesTriggeredAbility ability = new DiesTriggeredAbility(new ExileTargetEffect());
-        ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard()));
+        ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
         this.addAbility(ability);
 
     }
