@@ -61,6 +61,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Edgar Markov", 36, Rarity.MYTHIC, mage.cards.e.EdgarMarkov.class));
         cards.add(new SetCardInfo("Fortunate Few", 4, Rarity.RARE, mage.cards.f.FortunateFew.class));
         cards.add(new SetCardInfo("Fractured Identity", 37, Rarity.RARE, mage.cards.f.FracturedIdentity.class));
+        cards.add(new SetCardInfo("Galecaster Colossus", 10, Rarity.RARE, mage.cards.g.GalecasterColossus.class));
         cards.add(new SetCardInfo("Herald's Horn", 53, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
         cards.add(new SetCardInfo("Hungry Lynx", 31, Rarity.RARE, mage.cards.h.HungryLynx.class));
         cards.add(new SetCardInfo("Inalla, Archmage Ritualist", 38, Rarity.MYTHIC, mage.cards.i.InallaArchmageRitualist.class));
