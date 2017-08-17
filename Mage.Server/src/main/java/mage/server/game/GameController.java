@@ -317,8 +317,17 @@ public class GameController implements GameCallback {
             for (final Entry<UUID, GameSessionPlayer> entry : gameSessions.entrySet()) {
                 entry.getValue().init();
             }
+
             GameWorker worker = new GameWorker(game, choosingPlayerId, this);
             gameFuture = gameExecutor.submit(worker);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+            }
+            if (game.getState().getChoosingPlayerId() != null) {
+                // start timer to force player to choose starting player otherwise loosing by being idle
+                setupTimeout(game.getState().getChoosingPlayerId());
+            }
         }
     }
 

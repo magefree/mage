@@ -50,6 +50,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Arahbo, Roar of the World", 35, Rarity.MYTHIC, mage.cards.a.ArahboRoarOfTheWorld.class));
         cards.add(new SetCardInfo("Balan, Wandering Knight", 2, Rarity.RARE, mage.cards.b.BalanWanderingKnight.class));
         cards.add(new SetCardInfo("Bloodforged War Axe", 50, Rarity.RARE, mage.cards.b.BloodforgedWarAxe.class));
+        cards.add(new SetCardInfo("Bloodline Necromancer", 14, Rarity.UNCOMMON, mage.cards.b.BloodlineNecromancer.class));
         cards.add(new SetCardInfo("Bloodsworn Steward", 22, Rarity.RARE, mage.cards.b.BloodswornSteward.class));
         cards.add(new SetCardInfo("Crimson Honor Guard", 23, Rarity.RARE, mage.cards.c.CrimsonHonorGuard.class));
         cards.add(new SetCardInfo("Curse of Bounty", 30, Rarity.UNCOMMON, mage.cards.c.CurseOfBounty.class));
@@ -58,15 +59,21 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Curse of Verbosity", 9, Rarity.UNCOMMON, mage.cards.c.CurseOfVerbosity.class));
         cards.add(new SetCardInfo("Curse of Vitality", 3, Rarity.UNCOMMON, mage.cards.c.CurseOfVitality.class));
         cards.add(new SetCardInfo("Edgar Markov", 36, Rarity.MYTHIC, mage.cards.e.EdgarMarkov.class));
+        cards.add(new SetCardInfo("Fortunate Few", 4, Rarity.RARE, mage.cards.f.FortunateFew.class));
+        cards.add(new SetCardInfo("Fractured Identity", 37, Rarity.RARE, mage.cards.f.FracturedIdentity.class));
+        cards.add(new SetCardInfo("Galecaster Colossus", 10, Rarity.RARE, mage.cards.g.GalecasterColossus.class));
         cards.add(new SetCardInfo("Herald's Horn", 53, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
         cards.add(new SetCardInfo("Hungry Lynx", 31, Rarity.RARE, mage.cards.h.HungryLynx.class));
-        cards.add(new SetCardInfo("Fractured Identity", 37, Rarity.RARE, mage.cards.f.FracturedIdentity.class));
         cards.add(new SetCardInfo("Inalla, Archmage Ritualist", 38, Rarity.MYTHIC, mage.cards.i.InallaArchmageRitualist.class));
+        cards.add(new SetCardInfo("Izzet Chemister", 26, Rarity.RARE, mage.cards.i.IzzetChemister.class));
+        cards.add(new SetCardInfo("Kheru Mind-Eater", 17, Rarity.RARE, mage.cards.k.KheruMindEater.class));
         cards.add(new SetCardInfo("Kindred Boon", 5, Rarity.RARE, mage.cards.k.KindredBoon.class));
         cards.add(new SetCardInfo("Kindred Charge", 27, Rarity.RARE, mage.cards.k.KindredCharge.class));
         cards.add(new SetCardInfo("Kindred Discovery", 11, Rarity.RARE, mage.cards.k.KindredDiscovery.class));
         cards.add(new SetCardInfo("Kindred Dominance", 18, Rarity.RARE, mage.cards.k.KindredDominance.class));
         cards.add(new SetCardInfo("Kindred Summons", 32, Rarity.RARE, mage.cards.k.KindredSummons.class));
+        cards.add(new SetCardInfo("Magus of the Mind", 12, Rarity.RARE, mage.cards.m.MagusOfTheMind.class));
+        cards.add(new SetCardInfo("Mirri, Weatherlight Duelist", 43, Rarity.MYTHIC, mage.cards.m.MirriWeatherlightDuelist.class));
         cards.add(new SetCardInfo("Mirror of the Forebears", 54, Rarity.UNCOMMON, mage.cards.m.MirrorOfTheForebears.class));
         cards.add(new SetCardInfo("Nazahn, Revered Bladesmith", 44, Rarity.MYTHIC, mage.cards.n.NazahnReveredBladesmith.class));
         cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 45, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
@@ -77,6 +84,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Taigam, Ojutai Master", 46, Rarity.MYTHIC, mage.cards.t.TaigamOjutaiMaster.class));
         cards.add(new SetCardInfo("Taigam, Sidisi's Hand", 47, Rarity.RARE, mage.cards.t.TaigamSidisisHand.class));
         cards.add(new SetCardInfo("Teferi's Protection", 8, Rarity.RARE, mage.cards.t.TeferisProtection.class));
+        cards.add(new SetCardInfo("Territorial Hellkite", 29, Rarity.RARE, mage.cards.t.TerritorialHellkite.class));
         cards.add(new SetCardInfo("The Ur-Dragon", 48, Rarity.MYTHIC, mage.cards.t.TheUrDragon.class));
         cards.add(new SetCardInfo("Traverse the Outlands", 34, Rarity.RARE, mage.cards.t.TraverseTheOutlands.class));
         cards.add(new SetCardInfo("Wasitora, Nekoru Queen", 49, Rarity.MYTHIC, mage.cards.w.WasitoraNekoruQueen.class));
