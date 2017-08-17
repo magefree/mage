@@ -27,10 +27,12 @@
  */
 package mage.cards.c;
 
-import mage.abilities.Ability;
+import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,14 +41,13 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
-import java.util.UUID;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.DrawCardTargetEffect;
 
 /**
  *
@@ -55,7 +56,7 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 public class CurseOfVerbosity extends CardImpl {
 
     public CurseOfVerbosity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
@@ -65,9 +66,7 @@ public class CurseOfVerbosity extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted player is attacked, draw a card. Each opponent attacking that player does the same.
-        Ability ability = new CurseOfVerbosityTriggeredAbility();
-        ability.addEffect(new DrawCardSourceControllerEffect(1));
-        this.addAbility(ability);
+        this.addAbility(new CurseOfVerbosityTriggeredAbility());
     }
 
     public CurseOfVerbosity(final CurseOfVerbosity card) {
@@ -83,7 +82,7 @@ public class CurseOfVerbosity extends CardImpl {
 class CurseOfVerbosityTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfVerbosityTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), false);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
     public CurseOfVerbosityTriggeredAbility(final CurseOfVerbosityTriggeredAbility ability) {
@@ -97,17 +96,21 @@ class CurseOfVerbosityTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(this.getSourceId());
-        UUID controller = this.getControllerId();
-        if (enchantment != null
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
+        Player controller = game.getPlayer(getControllerId());
+        if (controller != null && enchantment != null
                 && enchantment.getAttachedTo() != null
                 && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
-            if (!game.getCombat().getAttackerId().equals(controller)) {
-                for (Effect effect: this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackerId()));
+            for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+                if (group.getDefenderId().equals(enchantment.getAttachedTo())) {
+                    if (controller.hasOpponent(game.getCombat().getAttackingPlayerId(), game)) {
+                        Effect effect = new DrawCardTargetEffect(1);
+                        effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));
+                        this.addEffect(effect);
+                    }
+                    return true;
                 }
             }
-            return true;
         }
         return false;
     }

@@ -56,7 +56,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
                 attackerCount++;
             }
         }
-        return attackerCount >= minAttackers && game.getCombat().getAttackerId().equals(getControllerId());
+        return attackerCount >= minAttackers && game.getCombat().getAttackingPlayerId().equals(getControllerId());
     }
 
     @Override

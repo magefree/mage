@@ -102,7 +102,7 @@ class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl {
                 && enchantment.getAttachedTo() != null
                 && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
             TargetPermanent target = new TargetPermanent();
-            target.setTargetController(game.getCombat().getAttackerId());
+            target.setTargetController(game.getCombat().getAttackingPlayerId());
             addTarget(target);
             return true;
         }

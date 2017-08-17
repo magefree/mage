@@ -158,7 +158,7 @@ public final class CombatUtil {
 
     public static CombatInfo blockWithGoodTrade(Game game, List<Permanent> attackers, List<Permanent> blockers) {
 
-        UUID attackerId = game.getCombat().getAttackerId();
+        UUID attackerId = game.getCombat().getAttackingPlayerId();
         UUID defenderId = game.getCombat().getDefenders().iterator().next();
         if (attackerId == null || defenderId == null) {
             log.warn("Couldn't find attacker or defender: " + attackerId + ' ' + defenderId);
@@ -295,7 +295,7 @@ public final class CombatUtil {
     
     public static CombatInfo blockWithGoodTrade2(Game game, List<Permanent> attackers, List<Permanent> blockers) {
 
-        UUID attackerId = game.getCombat().getAttackerId();
+        UUID attackerId = game.getCombat().getAttackingPlayerId();
         UUID defenderId = game.getCombat().getDefenders().iterator().next();
         if (attackerId == null || defenderId == null) {
             log.warn("Couldn't find attacker or defender: " + attackerId + ' ' + defenderId);

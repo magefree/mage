@@ -84,7 +84,7 @@ public class CitadelSiege extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (this.getAbilities().contains(ability) && ability.getRule().startsWith("&bull Dragons")) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that player controls");
-            filter.add(new ControllerIdPredicate(game.getCombat().getAttackerId()));
+            filter.add(new ControllerIdPredicate(game.getCombat().getAttackingPlayerId()));
             ability.getTargets().clear();
             ability.addTarget(new TargetCreaturePermanent(filter));
         }

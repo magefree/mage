@@ -83,7 +83,7 @@ class OverwhelmingInstinctTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getCombat().getAttackers().size() >= 3 && game.getCombat().getAttackerId().equals(getControllerId());
+        return game.getCombat().getAttackers().size() >= 3 && game.getCombat().getAttackingPlayerId().equals(getControllerId());
     }
 
     @Override

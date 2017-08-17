@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -47,6 +46,8 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
+import mage.game.combat.CombatGroup;
+import mage.players.Player;
 
 /**
  *
@@ -55,7 +56,7 @@ import mage.abilities.effects.common.GainLifeTargetEffect;
 public class CurseOfVitality extends CardImpl {
 
     public CurseOfVitality(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
@@ -65,9 +66,7 @@ public class CurseOfVitality extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted player is attacked, you gain 2 life. Each opponent attacking that player does the same.
-        Ability ability = new CurseOfVitalityTriggeredAbility();
-        ability.addEffect(new GainLifeEffect(2));
-        this.addAbility(ability);
+        this.addAbility(new CurseOfVitalityTriggeredAbility());
     }
 
     public CurseOfVitality(final CurseOfVitality card) {
@@ -83,7 +82,7 @@ public class CurseOfVitality extends CardImpl {
 class CurseOfVitalityTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfVitalityTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeTargetEffect(2), false);
+        super(Zone.BATTLEFIELD, new GainLifeEffect(2), false);
     }
 
     public CurseOfVitalityTriggeredAbility(final CurseOfVitalityTriggeredAbility ability) {
@@ -97,17 +96,21 @@ class CurseOfVitalityTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(this.getSourceId());
-        UUID controller = this.getControllerId();
-        if (enchantment != null
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
+        Player controller = game.getPlayer(getControllerId());
+        if (controller != null && enchantment != null
                 && enchantment.getAttachedTo() != null
                 && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
-            if (!game.getCombat().getAttackerId().equals(controller)) {
-                for (Effect effect: this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackerId()));
+            for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+                if (group.getDefenderId().equals(enchantment.getAttachedTo())) {
+                    if (controller.hasOpponent(game.getCombat().getAttackingPlayerId(), game)) {
+                        Effect effect = new GainLifeTargetEffect(2);
+                        effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));
+                        this.addEffect(effect);
+                    }
+                    return true;
                 }
             }
-            return true;
         }
         return false;
     }

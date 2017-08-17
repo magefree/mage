@@ -49,6 +49,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
+import mage.game.combat.CombatGroup;
 import mage.players.Player;
 
 /**
@@ -58,7 +59,7 @@ import mage.players.Player;
 public class CurseOfBounty extends CardImpl {
 
     public CurseOfBounty(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
@@ -67,11 +68,9 @@ public class CurseOfBounty extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        // Whenever enchanted player is attacked, untap all nonland permanents you control. 
+        // Whenever enchanted player is attacked, untap all nonland permanents you control.
         // Each opponent attacking that player untaps all nonland permanents he or she controls.
-        Ability ability = new CurseOfBountyTriggeredAbility();
-        ability.addEffect(new UntapAllControllerEffect(new FilterNonlandPermanent()));
-        this.addAbility(ability);
+        this.addAbility(new CurseOfBountyTriggeredAbility());
     }
 
     public CurseOfBounty(final CurseOfBounty card) {
@@ -87,7 +86,7 @@ public class CurseOfBounty extends CardImpl {
 class CurseOfBountyTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfBountyTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new UntapAllNonlandsTargetEffect(), false);
+        super(Zone.BATTLEFIELD, new UntapAllControllerEffect(new FilterNonlandPermanent()), false);
     }
 
     public CurseOfBountyTriggeredAbility(final CurseOfBountyTriggeredAbility ability) {
@@ -101,17 +100,21 @@ class CurseOfBountyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(this.getSourceId());
-        UUID controller = this.getControllerId();
-        if (enchantment != null
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
+        Player controller = game.getPlayer(getControllerId());
+        if (controller != null && enchantment != null
                 && enchantment.getAttachedTo() != null
                 && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
-            if (!game.getCombat().getAttackerId().equals(controller)) {
-                for (Effect effect: this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackerId()));
+            for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+                if (group.getDefenderId().equals(enchantment.getAttachedTo())) {
+                    if (controller.hasOpponent(game.getCombat().getAttackingPlayerId(), game)) {
+                        Effect effect = new UntapAllNonlandsTargetEffect();
+                        effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));
+                        this.addEffect(effect);
+                    }
+                    return true;
                 }
             }
-            return true;
         }
         return false;
     }
@@ -129,7 +132,7 @@ class CurseOfBountyTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class UntapAllNonlandsTargetEffect extends OneShotEffect {
-    
+
     public UntapAllNonlandsTargetEffect() {
         super(Outcome.Untap);
     }
@@ -142,7 +145,7 @@ class UntapAllNonlandsTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
-            for (Permanent nonland: game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_NON_LAND, player.getId(), game)) {
+            for (Permanent nonland : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_NON_LAND, player.getId(), game)) {
                 nonland.untap(game);
             }
             return true;
