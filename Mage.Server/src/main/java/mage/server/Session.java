@@ -356,7 +356,7 @@ public class Session {
             } else {
                 logger.error("SESSION LOCK - kill: userId " + userId);
             }
-            UserManager.instance.removeUser(userId, reason);
+            UserManager.instance.removeUserFromAllTables(userId, reason);
         } catch (InterruptedException ex) {
             logger.error("SESSION LOCK - kill: userId " + userId, ex);
         } finally {

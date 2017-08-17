@@ -437,7 +437,7 @@ public class User {
         sideboarding.remove(tableId);
     }
 
-    public void remove(DisconnectReason reason) {
+    public void removeUserFromAllTables(DisconnectReason reason) {
         logger.trace("REMOVE " + userName + " Draft sessions " + draftSessions.size());
         for (DraftSession draftSession : draftSessions.values()) {
             draftSession.setKilled();

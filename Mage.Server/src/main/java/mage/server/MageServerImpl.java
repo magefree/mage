@@ -796,13 +796,21 @@ public class MageServerImpl implements MageServer {
     @Override
     public void quitMatch(final UUID gameId, final String sessionId) throws MageException {
         execute("quitMatch", sessionId, () -> {
-            Optional<Session> session = SessionManager.instance.getSession(sessionId);
-            if (!session.isPresent()) {
-                logger.error("Session not found : " + sessionId);
-            } else {
-                UUID userId = session.get().getUserId();
+            try {
+                callExecutor.execute(
+                        () -> {
+                            Optional<Session> session = SessionManager.instance.getSession(sessionId);
+                            if (!session.isPresent()) {
+                                logger.error("Session not found : " + sessionId);
+                            } else {
+                                UUID userId = session.get().getUserId();
+                                GameManager.instance.quitMatch(gameId, userId);
+                            }
 
-                GameManager.instance.quitMatch(gameId, userId);
+                        }
+                );
+            } catch (Exception ex) {
+                handleException(ex);
             }
         });
     }
@@ -810,33 +818,51 @@ public class MageServerImpl implements MageServer {
     @Override
     public void quitTournament(final UUID tournamentId, final String sessionId) throws MageException {
         execute("quitTournament", sessionId, () -> {
-            Optional<Session> session = SessionManager.instance.getSession(sessionId);
-            if (!session.isPresent()) {
-                logger.error("Session not found : " + sessionId);
-            } else {
-                UUID userId = session.get().getUserId();
+            try {
+                callExecutor.execute(
+                        () -> {
+                            Optional<Session> session = SessionManager.instance.getSession(sessionId);
+                            if (!session.isPresent()) {
+                                logger.error("Session not found : " + sessionId);
+                            } else {
+                                UUID userId = session.get().getUserId();
 
-                TournamentManager.instance.quit(tournamentId, userId);
+                                TournamentManager.instance.quit(tournamentId, userId);
+                            }
+                        }
+                );
+            } catch (Exception ex) {
+                handleException(ex);
             }
         });
     }
 
     @Override
+
     public void quitDraft(final UUID draftId, final String sessionId) throws MageException {
         execute("quitDraft", sessionId, () -> {
-            Optional<Session> session = SessionManager.instance.getSession(sessionId);
-            if (!session.isPresent()) {
-                logger.error("Session not found : " + sessionId);
-            } else {
-                UUID userId = session.get().getUserId();
-                UUID tableId = DraftManager.instance.getControllerByDraftId(draftId).getTableId();
-                Table table = TableManager.instance.getTable(tableId);
-                if (table.isTournament()) {
-                    UUID tournamentId = table.getTournament().getId();
-                    TournamentManager.instance.quit(tournamentId, userId);
-                }
+            try {
+                callExecutor.execute(
+                        () -> {
+                            Optional<Session> session = SessionManager.instance.getSession(sessionId);
+                            if (!session.isPresent()) {
+                                logger.error("Session not found : " + sessionId);
+                            } else {
+                                UUID userId = session.get().getUserId();
+                                UUID tableId = DraftManager.instance.getControllerByDraftId(draftId).getTableId();
+                                Table table = TableManager.instance.getTable(tableId);
+                                if (table.isTournament()) {
+                                    UUID tournamentId = table.getTournament().getId();
+                                    TournamentManager.instance.quit(tournamentId, userId);
+                                }
+                            }
+                        }
+                );
+            } catch (Exception ex) {
+                handleException(ex);
             }
-        });
+        }
+        );
     }
 
     @Override
@@ -1257,6 +1283,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public List<CardInfo> getMissingCardsData(List<String> classNames) {
         return CardRepository.instance.getMissingCards(classNames);
+
     }
 
     private static class MyActionWithNullNegativeResult extends ActionWithNullNegativeResult<Object> {
