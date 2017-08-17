@@ -32,13 +32,20 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.cost.SourceCostReductionForEachCardInGraveyardEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
+import mage.game.Game;
+import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -64,6 +71,7 @@ public class NemesisOfMortals extends CardImpl {
             effect.setText("Monstrosity 5.  This ability costs {1} less to activate for each creature card in your graveyard");
         }
         this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new NemesisOfMortalsCostReducingEffect(ability.getOriginalId())));
     }
 
     public NemesisOfMortals(final NemesisOfMortals card) {
@@ -74,4 +82,39 @@ public class NemesisOfMortals extends CardImpl {
     public NemesisOfMortals copy() {
         return new NemesisOfMortals(this);
     }
+}
+
+class NemesisOfMortalsCostReducingEffect extends CostModificationEffectImpl {
+
+    private final UUID originalId;
+
+    NemesisOfMortalsCostReducingEffect(UUID originalId) {
+        super(Duration.EndOfGame, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        this.originalId = originalId;
+    }
+
+    NemesisOfMortalsCostReducingEffect(final NemesisOfMortalsCostReducingEffect effect) {
+        super(effect);
+        this.originalId = effect.originalId;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            CardUtil.reduceCost(abilityToModify, controller.getGraveyard().getCards(new FilterCreatureCard(), game).size());
+        }
+        return true;
+    }
+
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        return abilityToModify.getOriginalId().equals(originalId);
+    }
+
+    @Override
+    public NemesisOfMortalsCostReducingEffect copy() {
+        return new NemesisOfMortalsCostReducingEffect(this);
+    }
+
 }

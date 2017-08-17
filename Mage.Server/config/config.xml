@@ -149,7 +149,7 @@
         <deckType name="Variant Magic - MTGO 1v1 Commander" jar="mage-deck-constructed.jar" className="mage.deck.MTGO1v1Commander"/>
         <deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed.jar" className="mage.deck.TinyLeaders"/>
         <deckType name="Variant Magic - Momir Basic" jar="mage-deck-constructed.jar" className="mage.deck.Momir"/>
-        <deckType name="Variant Magic - Penny Dreadful Commander" jar="mage-deck-pennydreadfulconstructed.jar" className="mage.deck.PennyDreadfulCommander"/>
+        <deckType name="Variant Magic - Penny Dreadful Commander" jar="mage-deck-constructed.jar" className="mage.deck.PennyDreadfulCommander"/>
         <deckType name="Block Constructed - Amonkhet" jar="mage-deck-constructed.jar" className="mage.deck.AmonkhetBlock"/>
         <deckType name="Block Constructed - Battle for Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.BattleForZendikarBlock"/>
         <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed.jar" className="mage.deck.InnistradBlock"/>
