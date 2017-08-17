@@ -25,48 +25,33 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.r;
+package mage.cards.d;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.effects.common.combat.GoadAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.target.common.TargetCardInOpponentsGraveyard;
 
 /**
  *
- * @author nickymikail
+ * @author TheElk801
  */
-public class RuinRat extends CardImpl {
+public class DisruptDecorum extends CardImpl {
 
-    public RuinRat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        
-        this.subtype.add("Rat");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public DisruptDecorum(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
 
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
-
-        // When Ruin Rat dies, exile target card from an opponent's graveyard.
-        DiesTriggeredAbility ability = new DiesTriggeredAbility(new ExileTargetEffect());
-        ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
-        this.addAbility(ability);
-
+        // Goad all creatures you don't control.
+        this.getSpellAbility().addEffect(new GoadAllEffect());
     }
 
-    public RuinRat(final RuinRat card) {
+    public DisruptDecorum(final DisruptDecorum card) {
         super(card);
     }
 
     @Override
-    public RuinRat copy() {
-        return new RuinRat(this);
+    public DisruptDecorum copy() {
+        return new DisruptDecorum(this);
     }
 }

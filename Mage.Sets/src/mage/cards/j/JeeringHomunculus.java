@@ -25,48 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.r;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.target.common.TargetCardInOpponentsGraveyard;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author nickymikail
+ * @author TheElk801
  */
-public class RuinRat extends CardImpl {
+public class JeeringHomunculus extends CardImpl {
 
-    public RuinRat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        
-        this.subtype.add("Rat");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public JeeringHomunculus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
+        this.subtype.add("Homunculus");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(4);
 
-        // When Ruin Rat dies, exile target card from an opponent's graveyard.
-        DiesTriggeredAbility ability = new DiesTriggeredAbility(new ExileTargetEffect());
-        ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
+        // When Jeering Homunculus enters the battlefield, you may goad target creature.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GoadTargetEffect(), true);
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-
     }
 
-    public RuinRat(final RuinRat card) {
+    public JeeringHomunculus(final JeeringHomunculus card) {
         super(card);
     }
 
     @Override
-    public RuinRat copy() {
-        return new RuinRat(this);
+    public JeeringHomunculus copy() {
+        return new JeeringHomunculus(this);
     }
 }

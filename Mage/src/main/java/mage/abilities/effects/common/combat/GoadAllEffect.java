@@ -25,48 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.r;
+package mage.abilities.effects.common.combat;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.target.common.TargetCardInOpponentsGraveyard;
+import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author nickymikail
+ * @author TheElk801
  */
-public class RuinRat extends CardImpl {
+public class GoadAllEffect extends OneShotEffect {
 
-    public RuinRat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        
-        this.subtype.add("Rat");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
-
-        // When Ruin Rat dies, exile target card from an opponent's graveyard.
-        DiesTriggeredAbility ability = new DiesTriggeredAbility(new ExileTargetEffect());
-        ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
-        this.addAbility(ability);
-
+    public GoadAllEffect() {
+        super(Outcome.Benefit);
+        staticText = "Goad all creatures you don't control.";
     }
 
-    public RuinRat(final RuinRat card) {
-        super(card);
+    public GoadAllEffect(final GoadAllEffect effect) {
+        super(effect);
     }
 
     @Override
-    public RuinRat copy() {
-        return new RuinRat(this);
+    public GoadAllEffect copy() {
+        return new GoadAllEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
+            if (!creature.getControllerId().equals(source.getControllerId())) {
+                Effect effect = new GoadTargetEffect();
+                effect.setTargetPointer(new FixedTarget(creature, game));
+                effect.apply(game, source);
+            }
+        }
+        return true;
     }
 }

@@ -25,48 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.r;
+package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.target.common.TargetCardInOpponentsGraveyard;
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author nickymikail
+ * @author TheElk801
  */
-public class RuinRat extends CardImpl {
+public class CantAttackYouEffect extends RestrictionEffect {
 
-    public RuinRat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        
-        this.subtype.add("Rat");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    private boolean canAttackYouAnyway = false;
 
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
-
-        // When Ruin Rat dies, exile target card from an opponent's graveyard.
-        DiesTriggeredAbility ability = new DiesTriggeredAbility(new ExileTargetEffect());
-        ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
-        this.addAbility(ability);
-
+    public CantAttackYouEffect(Duration duration) {
+        this(duration, false);
     }
 
-    public RuinRat(final RuinRat card) {
-        super(card);
+    public CantAttackYouEffect(Duration duration, boolean canAttackYouAnyway) {
+        super(duration);
+        this.canAttackYouAnyway = canAttackYouAnyway;
+    }
+
+    public CantAttackYouEffect(final CantAttackYouEffect effect) {
+        super(effect);
     }
 
     @Override
-    public RuinRat copy() {
-        return new RuinRat(this);
+    public CantAttackYouEffect copy() {
+        return new CantAttackYouEffect(this);
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
+    }
+
+    @Override
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+        for (UUID player : game.getOpponents(source.getId())) {
+            if (attacker.canAttack(player, game)) {
+                return false;
+            }
+        }
+        return !canAttackYouAnyway;
     }
 }
