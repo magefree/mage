@@ -95,7 +95,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             } else if (matchList.size() < 50) {
                 matchList.add(new MatchView(table));
             } else {
-                // more since 50 matches finished since this match so remove it
+                // more since 50 matches finished since this match so removeUserFromAllTables it
                 if (table.isTournament()) {
                     TournamentManager.instance.removeTournament(table.getTournament().getId());
                 }

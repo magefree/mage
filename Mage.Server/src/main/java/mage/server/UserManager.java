@@ -112,6 +112,7 @@ public enum UserManager {
         if (user.isPresent()) {
             user.get().setSessionId("");
             if (reason == DisconnectReason.Disconnected) {
+                removeUserFromAllTables(userId, reason);
                 user.get().setUserState(UserState.Offline);
             }
         }
@@ -130,19 +131,17 @@ public enum UserManager {
         return false;
     }
 
-    public void removeUser(final UUID userId, final DisconnectReason reason) {
+    public void removeUserFromAllTables(final UUID userId, final DisconnectReason reason) {
         if (userId != null) {
             getUser(userId).ifPresent(user
                     -> USER_EXECUTOR.execute(
                             () -> {
                                 try {
                                     LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
-                                    user.remove(reason);
+                                    user.removeUserFromAllTables(reason);
                                     LOGGER.debug("USER REMOVE END - " + user.getName());
                                 } catch (Exception ex) {
                                     handleException(ex);
-                                } finally {
-                                    users.remove(userId);
                                 }
                             }
                     ));
@@ -168,26 +167,39 @@ public enum UserManager {
      *
      */
     private void checkExpired() {
-        Calendar calendarExp = Calendar.getInstance();
-        calendarExp.add(Calendar.MINUTE, -3);
-        Calendar calendarRemove = Calendar.getInstance();
-        calendarRemove.add(Calendar.MINUTE, -8);
-        List<User> toRemove = new ArrayList<>();
-        for (User user : users.values()) {
-            if (user.getUserState() != UserState.Offline
-                    && user.isExpired(calendarExp.getTime())) {
-                if (user.getUserState() == UserState.Connected) {
-                    user.lostConnection();
-                    disconnect(user.getId(), DisconnectReason.BecameInactive);
+        try {
+            Calendar calendarExp = Calendar.getInstance();
+            calendarExp.add(Calendar.MINUTE, -3);
+            Calendar calendarRemove = Calendar.getInstance();
+            calendarRemove.add(Calendar.MINUTE, -8);
+            List<User> toRemove = new ArrayList<>();
+            for (User user : users.values()) {
+                try {
+                    if (user.getUserState() == UserState.Offline) {
+                        if (user.isExpired(calendarRemove.getTime())) {
+                            toRemove.add(user);
+                        }
+                    } else {
+                        if (user.isExpired(calendarExp.getTime())) {
+                            if (user.getUserState() == UserState.Connected) {
+                                user.lostConnection();
+                                disconnect(user.getId(), DisconnectReason.BecameInactive);
+                            }
+                            removeUserFromAllTables(user.getId(), DisconnectReason.SessionExpired);
+                            user.setUserState(UserState.Offline);
+                            // Remove the user from all tournaments
+
+                        }
+                    }
+                } catch (Exception ex) {
+                    handleException(ex);
                 }
-                user.setUserState(UserState.Offline);
             }
-            if (user.getUserState() == UserState.Offline && user.isExpired(calendarRemove.getTime())) {
-                toRemove.add(user);
+            for (User user : toRemove) {
+                users.remove(user.getId());
             }
-        }
-        for (User user : toRemove) {
-            removeUser(user.getId(), DisconnectReason.SessionExpired);
+        } catch (Exception ex) {
+            handleException(ex);
         }
     }
 
@@ -196,23 +208,27 @@ public enum UserManager {
      *
      */
     private void updateUserInfoList() {
-        List<UserView> newUserInfoList = new ArrayList<>();
-        for (User user : UserManager.instance.getUsers()) {
-            newUserInfoList.add(new UserView(
-                    user.getName(),
-                    user.getHost(),
-                    user.getSessionId(),
-                    user.getConnectionTime(),
-                    user.getLastActivity(),
-                    user.getGameInfo(),
-                    user.getUserState().toString(),
-                    user.getChatLockedUntil(),
-                    user.getClientVersion(),
-                    user.getEmail(),
-                    user.getUserIdStr()
-            ));
+        try {
+            List<UserView> newUserInfoList = new ArrayList<>();
+            for (User user : UserManager.instance.getUsers()) {
+                newUserInfoList.add(new UserView(
+                        user.getName(),
+                        user.getHost(),
+                        user.getSessionId(),
+                        user.getConnectionTime(),
+                        user.getLastActivity(),
+                        user.getGameInfo(),
+                        user.getUserState().toString(),
+                        user.getChatLockedUntil(),
+                        user.getClientVersion(),
+                        user.getEmail(),
+                        user.getUserIdStr()
+                ));
+            }
+            userInfoList = newUserInfoList;
+        } catch (Exception ex) {
+            handleException(ex);
         }
-        userInfoList = newUserInfoList;
     }
 
     public List<UserView> getUserInfoList() {

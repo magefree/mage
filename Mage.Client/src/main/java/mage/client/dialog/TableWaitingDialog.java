@@ -418,7 +418,12 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            SessionHandler.getTable(roomId, tableId).ifPresent(this::publish);
+            Optional<TableView> tableView = SessionHandler.getTable(roomId, tableId);
+            if (tableView.isPresent()) {
+                tableView.ifPresent(this::publish);
+            } else {
+                dialog.closeDialog();
+            }
             TimeUnit.SECONDS.sleep(1);
         }
         return null;

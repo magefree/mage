@@ -1321,7 +1321,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 break;
             case CLIENT_DISCONNECT:
                 if (SessionHandler.isConnected()) {
-                    endTables();
                     SessionHandler.disconnect(false);
                 }
                 tablesPane.clearChat();
@@ -1351,7 +1350,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 break;
             case CLIENT_EXIT:
                 if (SessionHandler.isConnected()) {
-                    endTables();
                     SessionHandler.disconnect(false);
                 }
                 CardRepository.instance.closeDB();
