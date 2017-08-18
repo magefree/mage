@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
 public class ScalelordReckoner extends CardImpl {
 
     public ScalelordReckoner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 
         this.subtype.add("Dragon");
         this.power = new MageInt(4);
@@ -111,7 +111,6 @@ class ScalelardReckonerTriggeredAbility extends TriggeredAbilityImpl {
             if (creature != null && filter.match(creature, getSourceId(), getControllerId(), game)) {
                 FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent that player controls");
                 filter.add(new ControllerIdPredicate(event.getPlayerId()));
-               // filter.setMessage("nonland permanent controlled by " + game.getPlayer(event.getTargetId()).getLogName());
                 this.getTargets().clear();
                 this.addTarget(new TargetPermanent(filter));
                 return true;
