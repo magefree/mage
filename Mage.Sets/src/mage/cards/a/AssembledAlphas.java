@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -52,7 +53,9 @@ public class AssembledAlphas extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Assembled Alphas blocks or becomes blocked by a creature, Assembled Alphas deals 3 damage to that creature and 3 damage to that creature's controller.
-        Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(new DamageTargetEffect(3, true, "that creature"), false);
+        Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(
+                new DamageTargetEffect(3, true, "that creature"), StaticFilters.FILTER_PERMANENT_CREATURE, false, null, true);
+
         Effect effect = new DamageTargetControllerEffect(3);
         effect.setText("and 3 damage to that creature's controller");
         ability.addEffect(effect);

@@ -85,9 +85,7 @@ public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl
             Permanent blocked = game.getPermanent(event.getTargetId());
             if (blocked != null && filter.match(blocked, game)) {
                 if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    }
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
                 return true;
             }
@@ -96,9 +94,7 @@ public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl
             Permanent blocker = game.getPermanent(event.getSourceId());
             if (blocker != null && filter.match(blocker, game)) {
                 if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                    }
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId()));
                 }
                 return true;
             }

@@ -67,6 +67,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Hungry Lynx", 31, Rarity.RARE, mage.cards.h.HungryLynx.class));
         cards.add(new SetCardInfo("Inalla, Archmage Ritualist", 38, Rarity.MYTHIC, mage.cards.i.InallaArchmageRitualist.class));
         cards.add(new SetCardInfo("Izzet Chemister", 26, Rarity.RARE, mage.cards.i.IzzetChemister.class));
+        cards.add(new SetCardInfo("Kess, Dissident Mage", 39, Rarity.MYTHIC, mage.cards.k.KessDissidentMage.class));
         cards.add(new SetCardInfo("Kheru Mind-Eater", 17, Rarity.RARE, mage.cards.k.KheruMindEater.class));
         cards.add(new SetCardInfo("Kindred Boon", 5, Rarity.RARE, mage.cards.k.KindredBoon.class));
         cards.add(new SetCardInfo("Kindred Charge", 27, Rarity.RARE, mage.cards.k.KindredCharge.class));
