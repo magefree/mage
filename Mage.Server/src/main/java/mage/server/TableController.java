@@ -428,7 +428,7 @@ public class TableController {
         }
         Deck deck = Deck.load(deckList, false, false);
         validDeck = updateDeck(userId, playerId, deck);
-        if (!validDeck) {
+        if (!validDeck && getTableState() == TableState.SIDEBOARDING) {
             logger.warn(" userId: " + userId + " - Modified deck card list!");
         }
     }
