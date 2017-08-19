@@ -168,13 +168,8 @@ public abstract class MatchImpl implements Match {
         MatchPlayer matchWinner = null;
         for (MatchPlayer matchPlayer : players) {
             if (!matchPlayer.hasQuit()) {
-                if (matchPlayer.getDeck() == null) {
-                    logger.error("MatchPlayer's deck was null - matchId " + this.getId() + " - " + matchPlayer.getName());
-                    matchPlayer.setQuit(true);
-                } else {
-                    activePlayers++;
-                    matchWinner = matchPlayer;
-                }
+                activePlayers++;
+                matchWinner = matchPlayer;
             }
             if (matchPlayer.getWins() >= options.getWinsNeeded()) {
                 matchPlayer.setMatchWinner(true);
