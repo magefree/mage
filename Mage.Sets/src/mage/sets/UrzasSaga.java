@@ -263,6 +263,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Redeem", 33, Rarity.UNCOMMON, mage.cards.r.Redeem.class));
         cards.add(new SetCardInfo("Reflexes", 208, Rarity.COMMON, mage.cards.r.Reflexes.class));
         cards.add(new SetCardInfo("Rejuvenate", 271, Rarity.COMMON, mage.cards.r.Rejuvenate.class));
+        cards.add(new SetCardInfo("Remembrance", 34, Rarity.RARE, mage.cards.r.Remembrance.class));
         cards.add(new SetCardInfo("Remote Isle", 324, Rarity.COMMON, mage.cards.r.RemoteIsle.class));
         cards.add(new SetCardInfo("Reprocess", 154, Rarity.RARE, mage.cards.r.Reprocess.class));
         cards.add(new SetCardInfo("Rescind", 92, Rarity.COMMON, mage.cards.r.Rescind.class));
