@@ -145,6 +145,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Karakas", 208, Rarity.RARE, mage.cards.k.Karakas.class));
         cards.add(new SetCardInfo("Kei Takahashi", 155, Rarity.UNCOMMON, mage.cards.k.KeiTakahashi.class));
         cards.add(new SetCardInfo("Killer Bees", 126, Rarity.UNCOMMON, mage.cards.k.KillerBees.class));
+        cards.add(new SetCardInfo("Kjeldoran Frostbeast", 156, Rarity.UNCOMMON, mage.cards.k.KjeldoranFrostbeast.class));
         cards.add(new SetCardInfo("Kobold Drill Sergeant", 104, Rarity.UNCOMMON, mage.cards.k.KoboldDrillSergeant.class));
         cards.add(new SetCardInfo("Kobold Overlord", 105, Rarity.UNCOMMON, mage.cards.k.KoboldOverlord.class));
         cards.add(new SetCardInfo("Kobolds of Kher Keep", 107, Rarity.COMMON, mage.cards.k.KoboldsOfKherKeep.class));

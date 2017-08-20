@@ -286,6 +286,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Unyaro Bee Sting", 148, Rarity.UNCOMMON, mage.cards.u.UnyaroBeeSting.class));
         cards.add(new SetCardInfo("Unyaro Griffin", 248, Rarity.UNCOMMON, mage.cards.u.UnyaroGriffin.class));
         cards.add(new SetCardInfo("Vaporous Djinn", 101, Rarity.UNCOMMON, mage.cards.v.VaporousDjinn.class));
+        cards.add(new SetCardInfo("Ventifact Bottle", 288, Rarity.RARE, mage.cards.v.VentifactBottle.class));
         cards.add(new SetCardInfo("Viashino Warrior", 200, Rarity.COMMON, mage.cards.v.ViashinoWarrior.class));
         cards.add(new SetCardInfo("Vigilant Martyr", 249, Rarity.UNCOMMON, mage.cards.v.VigilantMartyr.class));
         cards.add(new SetCardInfo("Village Elder", 149, Rarity.COMMON, mage.cards.v.VillageElder.class));

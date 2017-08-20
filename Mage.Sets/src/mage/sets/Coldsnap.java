@@ -85,6 +85,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Drelnoch", 32, Rarity.COMMON, mage.cards.d.Drelnoch.class));
         cards.add(new SetCardInfo("Field Marshal", 5, Rarity.RARE, mage.cards.f.FieldMarshal.class));
         cards.add(new SetCardInfo("Flashfreeze", 33, Rarity.UNCOMMON, mage.cards.f.Flashfreeze.class));
+        cards.add(new SetCardInfo("Freyalise's Radiance", 108, Rarity.UNCOMMON, mage.cards.f.FreyalisesRadiance.class));
         cards.add(new SetCardInfo("Frost Marsh", 146, Rarity.UNCOMMON, mage.cards.f.FrostMarsh.class));
         cards.add(new SetCardInfo("Frost Raptor", 34, Rarity.COMMON, mage.cards.f.FrostRaptor.class));
         cards.add(new SetCardInfo("Frozen Solid", 35, Rarity.COMMON, mage.cards.f.FrozenSolid.class));
