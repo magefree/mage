@@ -57,7 +57,7 @@ import java.util.UUID;
 public class GisaAndGeralf extends CardImpl {
 
     public GisaAndGeralf(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
@@ -107,6 +107,9 @@ class GisaAndGeralfContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
+            if (!game.getActivePlayerId().equals(player.getId())) {
+                return false;
+            }
             for (Card card : player.getGraveyard().getCards(filter, game)) {
                 ContinuousEffect effect = new GisaAndGeralfCastFromGraveyardEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));
@@ -166,10 +169,10 @@ class GisaAndGeralfWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell.isCreature() && spell.hasSubtype(SubType.ZOMBIE, game)) {
-               abilityUsed = true;
+                abilityUsed = true;
             }
         }
     }

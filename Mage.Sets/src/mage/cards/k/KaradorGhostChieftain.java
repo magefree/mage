@@ -56,7 +56,7 @@ import mage.watchers.Watcher;
 public class KaradorGhostChieftain extends CardImpl {
 
     public KaradorGhostChieftain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Centaur");
         this.subtype.add("Spirit");
@@ -66,7 +66,7 @@ public class KaradorGhostChieftain extends CardImpl {
 
         // Karador, Ghost Chieftain costs {1} less to cast for each creature card in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new KaradorGhostChieftainCostReductionEffect()));
-        
+
         // During each of your turns, you may cast one creature card from your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KaradorGhostChieftainContinuousEffect()), new KaradorGhostChieftainWatcher());
     }
@@ -137,6 +137,9 @@ class KaradorGhostChieftainContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
+            if (!game.getActivePlayerId().equals(player.getId())) {
+                return false;
+            }
             for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
                 ContinuousEffect effect = new KaradorGhostChieftainCastFromGraveyardEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));
@@ -196,10 +199,10 @@ class KaradorGhostChieftainWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell.isCreature()) {
-               abilityUsed = true;
+                abilityUsed = true;
             }
         }
     }
