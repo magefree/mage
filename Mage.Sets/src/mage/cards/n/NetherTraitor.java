@@ -99,6 +99,11 @@ class NetherTraitorTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        for (Zone z : Zone.values()) {
+            if (game.getShortLivingLKI(sourceId, z) && !z.equals(Zone.GRAVEYARD)) {
+                return false;
+            }
+        }
         if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {            
             if (zEvent.getTarget() != null &&
                     zEvent.getTarget().getOwnerId().equals(this.getControllerId()) &&

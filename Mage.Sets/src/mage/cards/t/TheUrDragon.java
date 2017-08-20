@@ -166,7 +166,7 @@ class TheUrDragonTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         for (UUID attacker : game.getCombat().getAttackers()) {
             Permanent creature = game.getPermanent(attacker);
-            if (creature != null && creature.getControllerId() == event.getPlayerId() && creature.getSubtype(game).contains(SubType.DRAGON)) {
+            if (creature != null && creature.getControllerId() == this.getControllerId() && creature.getSubtype(game).contains(SubType.DRAGON)) {
                 return true;
             }
         }
