@@ -64,7 +64,9 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Fortunate Few", 4, Rarity.RARE, mage.cards.f.FortunateFew.class));
         cards.add(new SetCardInfo("Fractured Identity", 37, Rarity.RARE, mage.cards.f.FracturedIdentity.class));
         cards.add(new SetCardInfo("Galecaster Colossus", 10, Rarity.RARE, mage.cards.g.GalecasterColossus.class));
+        cards.add(new SetCardInfo("Hammer of Nazahn", 51, Rarity.RARE, mage.cards.h.HammerOfNazahn.class));
         cards.add(new SetCardInfo("Herald's Horn", 53, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
+        cards.add(new SetCardInfo("Heirloom Blade", 52, Rarity.UNCOMMON, mage.cards.h.HeirloomBlade.class));
         cards.add(new SetCardInfo("Hungry Lynx", 31, Rarity.RARE, mage.cards.h.HungryLynx.class));
         cards.add(new SetCardInfo("Inalla, Archmage Ritualist", 38, Rarity.MYTHIC, mage.cards.i.InallaArchmageRitualist.class));
         cards.add(new SetCardInfo("Izzet Chemister", 26, Rarity.RARE, mage.cards.i.IzzetChemister.class));
@@ -87,6 +89,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Qasali Slingers", 33, Rarity.RARE, mage.cards.q.QasaliSlingers.class));
         cards.add(new SetCardInfo("Ramos, Dragon Engine", 55, Rarity.MYTHIC, mage.cards.r.RamosDragonEngine.class));
         cards.add(new SetCardInfo("Scalelord Reckoner", 6, Rarity.RARE, mage.cards.s.ScalelordReckoner.class));
+        cards.add(new SetCardInfo("Shifting Shadow", 28, Rarity.RARE, mage.cards.s.ShiftingShadow.class));
         cards.add(new SetCardInfo("Taigam, Ojutai Master", 46, Rarity.MYTHIC, mage.cards.t.TaigamOjutaiMaster.class));
         cards.add(new SetCardInfo("Taigam, Sidisi's Hand", 47, Rarity.RARE, mage.cards.t.TaigamSidisisHand.class));
         cards.add(new SetCardInfo("Teferi's Protection", 8, Rarity.RARE, mage.cards.t.TeferisProtection.class));
