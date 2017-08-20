@@ -27,8 +27,9 @@
  */
 package mage.cards.c;
 
+import java.util.HashSet;
+import java.util.Set;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -37,19 +38,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
+import mage.abilities.common.EnchantedPlayerAttackedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterNonlandPermanent;
-import mage.game.combat.CombatGroup;
 import mage.players.Player;
 
 /**
@@ -70,7 +66,7 @@ public class CurseOfBounty extends CardImpl {
 
         // Whenever enchanted player is attacked, untap all nonland permanents you control.
         // Each opponent attacking that player untaps all nonland permanents he or she controls.
-        this.addAbility(new CurseOfBountyTriggeredAbility());
+        this.addAbility(new EnchantedPlayerAttackedTriggeredAbility(new CurseOfBountyEffect()));
     }
 
     public CurseOfBounty(final CurseOfBounty card) {
@@ -83,51 +79,48 @@ public class CurseOfBounty extends CardImpl {
     }
 }
 
-class CurseOfBountyTriggeredAbility extends TriggeredAbilityImpl {
+class CurseOfBountyEffect extends OneShotEffect {
 
-    public CurseOfBountyTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new UntapAllControllerEffect(new FilterNonlandPermanent()), false);
+    CurseOfBountyEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "untap all nonland permanents you control. Each opponent attacking that player does the same.";
     }
 
-    public CurseOfBountyTriggeredAbility(final CurseOfBountyTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_ATTACKERS;
+    CurseOfBountyEffect(final CurseOfBountyEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
-        Player controller = game.getPlayer(getControllerId());
-        if (controller != null && enchantment != null
-                && enchantment.getAttachedTo() != null
-                && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
-            for (CombatGroup group : game.getCombat().getBlockingGroups()) {
-                if (group.getDefenderId().equals(enchantment.getAttachedTo())) {
-                    if (controller.hasOpponent(game.getCombat().getAttackingPlayerId(), game)) {
-                        Effect effect = new UntapAllNonlandsTargetEffect();
-                        effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));
-                        this.addEffect(effect);
+    public CurseOfBountyEffect copy() {
+        return new CurseOfBountyEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (enchantment != null) {
+            Player enchantedPlayer = game.getPlayer(enchantment.getAttachedTo());
+            if (enchantedPlayer != null) {
+                Set<UUID> players = new HashSet();
+                for (UUID attacker : game.getCombat().getAttackers()) {
+                    UUID defender = game.getCombat().getDefenderId(attacker);
+                    if (defender.equals(enchantedPlayer.getId())
+                            && game.getPlayer(source.getControllerId()).hasOpponent(game.getPermanent(attacker).getControllerId(), game)) {
+                        players.add(game.getPermanent(attacker).getControllerId());
                     }
-                    return true;
+                }
+                players.add(source.getControllerId());
+                for (UUID player : players) {
+                    game.getPlayer(player);
+                    Effect effect = new UntapAllNonlandsTargetEffect();
+                    effect.setTargetPointer(new FixedTarget(player));
+                    effect.apply(game, source);
                 }
             }
+            return true;
+
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted player is attacked, untap all nonland permanents you control. "
-                + "Each opponent attacking that player untaps all nonland permanents he or she controls.";
-    }
-
-    @Override
-    public CurseOfBountyTriggeredAbility copy() {
-        return new CurseOfBountyTriggeredAbility(this);
     }
 }
 

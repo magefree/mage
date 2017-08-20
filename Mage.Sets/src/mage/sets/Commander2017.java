@@ -81,6 +81,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Mirror of the Forebears", 54, Rarity.UNCOMMON, mage.cards.m.MirrorOfTheForebears.class));
         cards.add(new SetCardInfo("Nazahn, Revered Bladesmith", 44, Rarity.MYTHIC, mage.cards.n.NazahnReveredBladesmith.class));
         cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 45, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
+        cards.add(new SetCardInfo("Path of Ancestry", 56, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Patron of the Vein", 20, Rarity.RARE, mage.cards.p.PatronOfTheVein.class));
         cards.add(new SetCardInfo("Qasali Slingers", 33, Rarity.RARE, mage.cards.q.QasaliSlingers.class));
         cards.add(new SetCardInfo("Ramos, Dragon Engine", 55, Rarity.MYTHIC, mage.cards.r.RamosDragonEngine.class));
