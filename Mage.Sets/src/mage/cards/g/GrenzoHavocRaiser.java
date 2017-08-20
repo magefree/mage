@@ -1,0 +1,269 @@
+/*
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ *  Redistribution and use in source and binary forms, with or without modification, are
+ *  permitted provided that the following conditions are met:
+ *
+ *     1. Redistributions of source code must retain the above copyright notice, this list of
+ *        conditions and the following disclaimer.
+ *
+ *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *        of conditions and the following disclaimer in the documentation and/or other materials
+ *        provided with the distribution.
+ *
+ *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *  The views and conclusions contained in the software and documentation are those of the
+ *  authors and should not be interpreted as representing official policies, either expressed
+ *  or implied, of BetaSteward_at_googlemail.com.
+ */
+package mage.cards.g;
+
+import java.util.Objects;
+import java.util.UUID;
+import mage.MageInt;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.combat.GoadTargetEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.ManaType;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.game.ExileZone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.players.ManaPoolItem;
+import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+
+/**
+ *
+ * @author TheElk801, LevelX2
+ */
+public class GrenzoHavocRaiser extends CardImpl {
+
+    public GrenzoHavocRaiser(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}");
+
+        addSuperType(SuperType.LEGENDARY);
+        this.subtype.add("Goblin");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Whenever a creature you control deals combat damage to a player, choose one &mdash;
+        //Goad target creature that player controls; 
+        Effect effect = new GoadTargetEffect();
+        effect.setText("goad target creature that player controls");
+        Ability ability = new GrenzoHavocRaiserTriggeredAbility(effect);
+        //or Exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
+        Mode mode = new Mode();
+        mode.getEffects().add(new GrenzoHavocRaiserEffect());
+        ability.addMode(mode);
+        this.addAbility(ability);
+    }
+
+    public GrenzoHavocRaiser(final GrenzoHavocRaiser card) {
+        super(card);
+    }
+
+    @Override
+    public GrenzoHavocRaiser copy() {
+        return new GrenzoHavocRaiser(this);
+    }
+}
+
+class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
+
+    public GrenzoHavocRaiserTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect, false);
+    }
+
+    public GrenzoHavocRaiserTriggeredAbility(final GrenzoHavocRaiserTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public GrenzoHavocRaiserTriggeredAbility copy() {
+        return new GrenzoHavocRaiserTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Player opponent = game.getPlayer(event.getPlayerId());
+        if (opponent != null && game.getPermanent(event.getSourceId()).getControllerId() == this.controllerId) {
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
+            filter.add(new ControllerIdPredicate(opponent.getId()));
+            this.getTargets().clear();
+            this.addTarget(new TargetCreaturePermanent(filter));
+            for (Effect effect : this.getAllEffects()) {
+                if (effect instanceof GrenzoHavocRaiserEffect) {
+                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    effect.setValue("damage", event.getAmount());
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a creature you control deals combat damage to a player, " + super.getRule();
+    }
+}
+
+class GrenzoHavocRaiserEffect extends OneShotEffect {
+
+    public GrenzoHavocRaiserEffect() {
+        super(Outcome.PutCreatureInPlay);
+        this.staticText = "exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it";
+    }
+
+    public GrenzoHavocRaiserEffect(final GrenzoHavocRaiserEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GrenzoHavocRaiserEffect copy() {
+        return new GrenzoHavocRaiserEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+            if (damagedPlayer != null) {
+                MageObject sourceObject = game.getObject(source.getSourceId());
+                UUID exileId = CardUtil.getCardExileZoneId(game, source);
+                Card card = damagedPlayer.getLibrary().getFromTop(game);
+                if (card != null) {
+                    // move card to exile
+                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                    // player gains life
+//                    int cmc = card.getConvertedManaCost();
+//                    if (cmc > 0) {
+//                        controller.gainLife(cmc, game);
+//                    }
+                    // Add effects only if the card has a spellAbility (e.g. not for lands).
+                    if (card.getSpellAbility() != null) {
+                        // allow to cast the card
+                        game.addEffect(new GrenzoHavocRaiserCastFromExileEffect(card.getId(), exileId), source);
+                        // and you may spend mana as though it were mana of any color to cast it
+                        ContinuousEffect effect = new GrenzoHavocRaiserSpendAnyManaEffect();
+                        effect.setTargetPointer(new FixedTarget(card.getId()));
+                        game.addEffect(effect, source);
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+class GrenzoHavocRaiserCastFromExileEffect extends AsThoughEffectImpl {
+
+    private UUID cardId;
+    private UUID exileId;
+
+    public GrenzoHavocRaiserCastFromExileEffect(UUID cardId, UUID exileId) {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it";
+        this.cardId = cardId;
+        this.exileId = exileId;
+    }
+
+    public GrenzoHavocRaiserCastFromExileEffect(final GrenzoHavocRaiserCastFromExileEffect effect) {
+        super(effect);
+        this.cardId = effect.cardId;
+        this.exileId = effect.exileId;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public GrenzoHavocRaiserCastFromExileEffect copy() {
+        return new GrenzoHavocRaiserCastFromExileEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        if (sourceId.equals(cardId) && source.getControllerId().equals(affectedControllerId)) {
+            ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
+            return exileZone != null && exileZone.contains(cardId);
+        }
+        return false;
+    }
+}
+
+class GrenzoHavocRaiserSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
+
+    public GrenzoHavocRaiserSpendAnyManaEffect() {
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "you may spend mana as though it were mana of any color to cast it";
+    }
+
+    public GrenzoHavocRaiserSpendAnyManaEffect(final GrenzoHavocRaiserSpendAnyManaEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public GrenzoHavocRaiserSpendAnyManaEffect copy() {
+        return new GrenzoHavocRaiserSpendAnyManaEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return source.getControllerId().equals(affectedControllerId)
+                && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
+                && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
+                && (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId))
+                && game.getState().getZone(objectId) == Zone.STACK;
+    }
+
+    @Override
+    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+        return mana.getFirstAvailable();
+    }
+
+}
