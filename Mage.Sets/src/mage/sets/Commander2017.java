@@ -52,6 +52,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodforged War Axe", 50, Rarity.RARE, mage.cards.b.BloodforgedWarAxe.class));
         cards.add(new SetCardInfo("Bloodline Necromancer", 14, Rarity.UNCOMMON, mage.cards.b.BloodlineNecromancer.class));
         cards.add(new SetCardInfo("Bloodsworn Steward", 22, Rarity.RARE, mage.cards.b.BloodswornSteward.class));
+        cards.add(new SetCardInfo("Boneyard Scourge", 15, Rarity.RARE, mage.cards.b.BoneyardScourge.class));
         cards.add(new SetCardInfo("Crimson Honor Guard", 23, Rarity.RARE, mage.cards.c.CrimsonHonorGuard.class));
         cards.add(new SetCardInfo("Curse of Bounty", 30, Rarity.UNCOMMON, mage.cards.c.CurseOfBounty.class));
         cards.add(new SetCardInfo("Curse of Disturbance", 16, Rarity.UNCOMMON, mage.cards.c.CurseOfDisturbance.class));
