@@ -27,7 +27,8 @@
  */
 package mage.cards.c;
 
-import mage.abilities.TriggeredAbilityImpl;
+import java.util.HashSet;
+import java.util.Set;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -36,17 +37,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.EnchantedPlayerAttackedTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
-import mage.game.combat.CombatGroup;
 import mage.players.Player;
 
 /**
@@ -66,7 +65,7 @@ public class CurseOfVitality extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted player is attacked, you gain 2 life. Each opponent attacking that player does the same.
-        this.addAbility(new CurseOfVitalityTriggeredAbility());
+        this.addAbility(new EnchantedPlayerAttackedTriggeredAbility(new CurseOfVitalityEffect()));
     }
 
     public CurseOfVitality(final CurseOfVitality card) {
@@ -79,50 +78,47 @@ public class CurseOfVitality extends CardImpl {
     }
 }
 
-class CurseOfVitalityTriggeredAbility extends TriggeredAbilityImpl {
+class CurseOfVitalityEffect extends OneShotEffect {
 
-    public CurseOfVitalityTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(2), false);
+    CurseOfVitalityEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "gain 2 life. Each opponent attacking that player does the same.";
     }
 
-    public CurseOfVitalityTriggeredAbility(final CurseOfVitalityTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_ATTACKERS;
+    CurseOfVitalityEffect(final CurseOfVitalityEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
-        Player controller = game.getPlayer(getControllerId());
-        if (controller != null && enchantment != null
-                && enchantment.getAttachedTo() != null
-                && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
-            for (CombatGroup group : game.getCombat().getBlockingGroups()) {
-                if (group.getDefenderId().equals(enchantment.getAttachedTo())) {
-                    if (controller.hasOpponent(game.getCombat().getAttackingPlayerId(), game)) {
-                        Effect effect = new GainLifeTargetEffect(2);
-                        effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));
-                        this.addEffect(effect);
+    public CurseOfVitalityEffect copy() {
+        return new CurseOfVitalityEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (enchantment != null) {
+            Player enchantedPlayer = game.getPlayer(enchantment.getAttachedTo());
+            if (enchantedPlayer != null) {
+                Set<UUID> players = new HashSet();
+                for (UUID attacker : game.getCombat().getAttackers()) {
+                    UUID defender = game.getCombat().getDefenderId(attacker);
+                    if (defender.equals(enchantedPlayer.getId())
+                            && game.getPlayer(source.getControllerId()).hasOpponent(game.getPermanent(attacker).getControllerId(), game)) {
+                        players.add(game.getPermanent(attacker).getControllerId());
                     }
-                    return true;
+                }
+                players.add(source.getControllerId());
+                for (UUID player : players) {
+                    game.getPlayer(player);
+                    Effect effect = new GainLifeTargetEffect(2);
+                    effect.setTargetPointer(new FixedTarget(player));
+                    effect.apply(game, source);
                 }
             }
+            return true;
+
         }
         return false;
     }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted player is attacked, you gain 2 life. Each opponent attacking that player does the same.";
-    }
-
-    @Override
-    public CurseOfVitalityTriggeredAbility copy() {
-        return new CurseOfVitalityTriggeredAbility(this);
-    }
-
 }
