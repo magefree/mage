@@ -55,7 +55,7 @@ import mage.target.common.TargetLandPermanent;
 public class OrcishSettlers extends CardImpl {
 
     public OrcishSettlers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Orc");
 
         this.power = new MageInt(1);
@@ -96,24 +96,24 @@ class OrcishSettlersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = new ManacostVariableValue().calculate(game, source, this);
-        TargetLandPermanent target = new TargetLandPermanent(amount);
-
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        int amount = source.getManaCostsToPay().getX();
+        if (amount == 0) {
             return false;
         }
-
-        if (player.choose(Outcome.DestroyPermanent, target, id, game)) {
+        TargetLandPermanent target = new TargetLandPermanent(amount);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null
+                && target.canChoose(controller.getId(), game)
+                && controller.choose(Outcome.DestroyPermanent, target, source.getSourceId(), game)) {
             List<UUID> targets = target.getTargets();
-            for (UUID landId : targets) {
+            targets.forEach((landId) -> {
                 Permanent land = game.getPermanent(landId);
                 if (land != null) {
                     land.destroy(landId, game, false);
                 }
-            }
-
+            });
+            return true;
         }
-        return true;
+        return false;
     }
 }
