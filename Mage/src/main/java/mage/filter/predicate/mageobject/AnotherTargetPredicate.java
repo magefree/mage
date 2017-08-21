@@ -57,7 +57,7 @@ public class AnotherTargetPredicate implements ObjectSourcePlayerPredicate<Objec
     @Override
     public boolean apply(ObjectSourcePlayer<MageItem> input, Game game) {
         StackObject source = game.getStack().getStackObject(input.getSourceId());
-        if (source != null) {
+        if (source != null && source.getStackAbility().getTargets() != null) {
             for (Target target : source.getStackAbility().getTargets()) {
                 if (target.getTargetTag() > 0 // target is included in the target group to check
                         && target.getTargetTag() != targetTag // it's not the target of this predicate

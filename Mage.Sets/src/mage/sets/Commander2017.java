@@ -96,6 +96,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Territorial Hellkite", 29, Rarity.RARE, mage.cards.t.TerritorialHellkite.class));
         cards.add(new SetCardInfo("The Ur-Dragon", 48, Rarity.MYTHIC, mage.cards.t.TheUrDragon.class));
         cards.add(new SetCardInfo("Traverse the Outlands", 34, Rarity.RARE, mage.cards.t.TraverseTheOutlands.class));
+        cards.add(new SetCardInfo("Vindictive Lich", 21, Rarity.RARE, mage.cards.v.VindictiveLich.class));
         cards.add(new SetCardInfo("Wasitora, Nekoru Queen", 49, Rarity.MYTHIC, mage.cards.w.WasitoraNekoruQueen.class));
     }
 }
