@@ -31,8 +31,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -102,7 +102,7 @@ class MairsilThePretenderExileEffect extends OneShotEffect {
 
     MairsilThePretenderExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "";
+        this.staticText = "you may exile an artifact or creature card from your hand or graveyard and put a cage counter on it.";
     }
 
     MairsilThePretenderExileEffect(final MairsilThePretenderExileEffect effect) {
@@ -167,7 +167,8 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
                 if (filter.match(card, game)) {
                     for (Ability ability : card.getAbilities()) {
                         if (ability instanceof ActivatedAbility) {
-                            ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
+                            ActivatedAbilityImpl copyAbility = (ActivatedAbilityImpl) ability;
+                            copyAbility.setMaxActivationsPerTurn(1);
                             perm.addAbility(copyAbility, card.getId(), game);
                         }
                     }
