@@ -252,6 +252,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                             currentMaxModes++;
                         }
                     }
+                    if (currentMaxModes > this.getMaxModes()) {
+                        currentMaxModes = this.getMaxModes();
+                    }
                 }
             }
             while (this.selectedModes.size() < currentMaxModes) {
