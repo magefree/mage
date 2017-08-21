@@ -38,6 +38,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterOpponent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
@@ -48,59 +49,57 @@ import mage.target.common.TargetOpponent;
  *
  * @author anonymous
  */
+public class VindictiveLich extends CardImpl {
 
+    public VindictiveLich(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
- public class VindictiveLich extends CardImpl {   
+        this.subtype.add(SubType.ZOMBIE, SubType.WIZARD);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(1);
 
-public VindictiveLich(UUID ownerId, CardSetInfo setInfo) {
-    super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        // When Vindictive Lich dies, choose one or more. Each mode must target a different player.
+        // *Target opponent sacrifices a creature.
+        Ability ability = new DiesTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "target opponent"));
+        ability.getModes().setMinModes(1);
+        ability.getModes().setMaxModes(3);
+        ability.getModes().setMaxModesFilter(new FilterOpponent("a different player"));
 
-    this.subtype.add("Zombie");
-    this.subtype.add("Wizard");
-    this.power = new MageInt(4);
-    this.toughness = new MageInt(1);
+        FilterOpponent filter = new FilterOpponent("opponent (sacrifice)");
+        filter.add(new AnotherTargetPredicate(1, true));
+        Target target = new TargetOpponent(filter, false);
+        target.setTargetTag(1);
+        ability.addTarget(target);
 
-    // When Vindictive Lich dies, choose one or more. Each mode must target a different player.
-    // *Target opponent sacrifices a creature.
-    Ability ability = new DiesTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "target opponent"));
-    ability.getModes().setMinModes(1);
-    ability.getModes().setMaxModes(3);
+        // *Target opponent discards two cards.
+        Mode mode = new Mode();
+        mode.getEffects().add(new DiscardTargetEffect(2, false));
+        filter = new FilterOpponent("opponent (discard)");
+        filter.add(new AnotherTargetPredicate(2, true));
+        target = new TargetOpponent(filter, false);
+        target.setTargetTag(2);
+        mode.getTargets().add(target);
+        ability.addMode(mode);
 
-    FilterOpponent filter = new FilterOpponent();
-    filter.add(new AnotherTargetPredicate(1));    
-    Target target = new TargetOpponent(filter, false);
-    target.setTargetTag(1);
-    ability.addTarget(target);
+        // *Target opponent loses 5 life.
+        mode = new Mode();
+        mode.getEffects().add(new LoseLifeTargetEffect(2));
+        filter = new FilterOpponent("opponent (life loss)");
+        filter.add(new AnotherTargetPredicate(3, true));
+        target = new TargetOpponent(filter, false);
+        target.setTargetTag(3);
+        mode.getTargets().add(target);
+        ability.addMode(mode);
+        this.addAbility(ability);
+    }
 
-    // *Target opponent discards two cards.
-    Mode mode = new Mode();
-    mode.getEffects().add(new DiscardTargetEffect(2, false));
-    filter = new FilterOpponent();
-    filter.add(new AnotherTargetPredicate(2));      
-    target = new TargetOpponent(filter, false);
-    target.setTargetTag(2);
-    mode.getTargets().add(target);
-    ability.addMode(mode);
+    public VindictiveLich(final VindictiveLich card) {
+        super(card);
+    }
 
-    // *Target opponent loses 5 life.
-    mode = new Mode();
-    mode.getEffects().add(new LoseLifeTargetEffect(2));
-    filter = new FilterOpponent();
-    filter.add(new AnotherTargetPredicate(2));  
-    target = new TargetOpponent(filter, false);
-    target.setTargetTag(3);    
-    mode.getTargets().add(target);
-    ability.addMode(mode);
-    this.addAbility(ability);
-}
-
-public VindictiveLich(final VindictiveLich card) {
-    super(card);
-}
-
-@Override
-public VindictiveLich copy() {
-    return new VindictiveLich(this);
-}
+    @Override
+    public VindictiveLich copy() {
+        return new VindictiveLich(this);
+    }
 
 }

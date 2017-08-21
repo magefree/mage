@@ -38,6 +38,8 @@ import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
+import mage.filter.Filter;
+import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -57,6 +59,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private boolean eachModeOnlyOnce; // state if each mode can be chosen only once as long as the source object exists
     private final LinkedHashMap<UUID, Mode> duplicateModes = new LinkedHashMap<>();
     private OptionalAdditionalModeSourceCosts optionalAdditionalModeSourceCosts = null; // only set if costs have to be paid
+    private Filter maxModesFilter = null; // calculates the max number of available modes
 
     public Modes() {
         this.currentMode = new Mode();
@@ -89,6 +92,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.eachModeOnlyOnce = modes.eachModeOnlyOnce;
         this.eachModeMoreThanOnce = modes.eachModeMoreThanOnce;
         this.optionalAdditionalModeSourceCosts = modes.optionalAdditionalModeSourceCosts;
+        this.maxModesFilter = modes.maxModesFilter; // can't change so no copy needed
     }
 
     public Modes copy() {
@@ -149,6 +153,14 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
     public void setMaxModes(int maxModes) {
         this.maxModes = maxModes;
+    }
+
+    public Filter getMaxModesFilter() {
+        return maxModesFilter;
+    }
+
+    public void setMaxModesFilter(Filter maxModesFilter) {
+        this.maxModesFilter = maxModesFilter;
     }
 
     public int getMaxModes() {
@@ -230,7 +242,19 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
             // player chooses modes manually
             this.currentMode = null;
-            while (this.selectedModes.size() < this.getMaxModes()) {
+            int currentMaxModes = this.getMaxModes();
+            if (getMaxModesFilter() != null) {
+                if (maxModesFilter instanceof FilterPlayer) {
+                    currentMaxModes = 0;
+                    for (UUID targetPlayerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                        Player targetPlayer = game.getPlayer(targetPlayerId);
+                        if (((FilterPlayer) maxModesFilter).match(targetPlayer, source.getSourceId(), source.getControllerId(), game)) {
+                            currentMaxModes++;
+                        }
+                    }
+                }
+            }
+            while (this.selectedModes.size() < currentMaxModes) {
                 Mode choice = player.chooseMode(this, source, game);
                 if (choice == null) {
                     if (isEachModeOnlyOnce()) {
@@ -337,7 +361,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             return this.getMode().getEffects().getText(this.getMode());
         }
         StringBuilder sb = new StringBuilder();
-        if (this.getMinModes() == 1 && this.getMaxModes() == 3) {
+        if (this.getMaxModesFilter() != null) {
+            sb.append("choose one or more. Each mode must target ").append(getMaxModesFilter().getMessage());
+        } else if (this.getMinModes() == 1 && this.getMaxModes() == 3) {
             sb.append("choose one or more ");
         } else if (this.getMinModes() == 1 && this.getMaxModes() == 2) {
             sb.append("choose one or both ");

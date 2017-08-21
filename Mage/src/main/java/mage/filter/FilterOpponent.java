@@ -34,19 +34,23 @@ import mage.filter.predicate.other.PlayerPredicate;
  *
  * @author LevelX2
  */
-public class FilterOpponent extends FilterPlayer{
+public class FilterOpponent extends FilterPlayer {
 
     public FilterOpponent() {
-        super("opponent");       
+        this("opponent");
+    }
+
+    public FilterOpponent(String text) {
+        super(text);
         add(new PlayerPredicate(TargetController.OPPONENT));
     }
 
-   
-   public FilterOpponent(final FilterOpponent filter) {
+    public FilterOpponent(final FilterOpponent filter) {
         super(filter);
 
     }
-        @Override
+
+    @Override
     public FilterOpponent copy() {
         return new FilterOpponent(this);
     }
