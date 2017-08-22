@@ -55,6 +55,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -69,12 +70,13 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class InallaArchmageRitualist extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Wizard");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another nontoken Wizard");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("untapped Wizards you control");
 
     static {
         filter.add(new SubtypePredicate(SubType.WIZARD));
         filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(new AnotherPredicate());
         filter2.add(new SubtypePredicate(SubType.WIZARD));
         filter2.add(Predicates.not(new TappedPredicate()));
     }
@@ -94,7 +96,7 @@ public class InallaArchmageRitualist extends CardImpl {
                         new InallaArchmageRitualistEffect(), new ManaCostsImpl("{1}"), "Pay {1} to create a token copy?"),
                         filter, false, SetTargetPointer.PERMANENT, ""),
                 SourceOnBattlefieldOrCommandZoneCondition.instance,
-                "<i>Eminence</i> - Whenever a nontoken Wizard enters the battlefield under your control, "
+                "<i>Eminence</i> - Whenever another nontoken Wizard enters the battlefield under your control, "
                 + "{this} is in the command zone or on the battlefield, "
                 + "you may pay {1}. If you do, create a token that's a copy of that Wizard. "
                 + "That token gains haste. Exile it at the beginning of the next end step");
@@ -135,7 +137,7 @@ class InallaArchmageRitualistEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent permanent = ((FixedTarget) getTargetPointer()).getTargetedPermanentOrLKIBattlefield(game);
         if (permanent != null) {
             PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(null, null, true);
             effect.setTargetPointer(getTargetPointer());
