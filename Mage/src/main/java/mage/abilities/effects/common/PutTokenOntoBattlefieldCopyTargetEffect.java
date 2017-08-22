@@ -70,6 +70,12 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     private boolean gainsFlying;
     private boolean becomesArtifact;
     private ObjectColor color;
+    private boolean useLKI = false;
+
+    public PutTokenOntoBattlefieldCopyTargetEffect(boolean useLKI) {
+        this();
+        this.useLKI = useLKI;
+    }
 
     public PutTokenOntoBattlefieldCopyTargetEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -149,6 +155,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.gainsFlying = effect.gainsFlying;
         this.becomesArtifact = effect.becomesArtifact;
         this.color = effect.color;
+        this.useLKI = effect.useLKI;
     }
 
     public void setBecomesArtifact(boolean becomesArtifact) {
@@ -163,7 +170,12 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         } else {
             targetId = getTargetPointer().getFirst(game, source);
         }
-        Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
+        Permanent permanent;
+        if (useLKI) {
+            permanent = ((FixedTarget) getTargetPointer()).getTargetedPermanentOrLKIBattlefield(game);
+        } else {
+            permanent = game.getPermanentOrLKIBattlefield(targetId);
+        }
         Card copyFrom;
         ApplyToPermanent applier = new EmptyApplyToPermanent();
         if (permanent != null) {
@@ -220,7 +232,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         if (onlySubType != null && !token.getSubtype(game).contains(onlySubType)) {
             token.getSubtype(game).clear();
             token.getSubtype(game).add(onlySubType);
-        }        
+        }
         if (color != null) {
             token.getColor(game).setColor(color);
         }
@@ -279,8 +291,12 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     public void setOnlySubType(String onlySubType) {
         this.onlySubType = onlySubType;
     }
-    
+
     public void setOnlyColor(ObjectColor color) {
         this.color = color;
+    }
+
+    public void setUseLKI(boolean useLKI) {
+        this.useLKI = useLKI;
     }
 }

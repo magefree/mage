@@ -45,6 +45,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -97,7 +98,7 @@ class CloudstoneCurioEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent triggeringCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+            Permanent triggeringCreature = ((FixedTarget) getTargetPointer()).getTargetedPermanentOrLKIBattlefield(game);
             if (triggeringCreature == null) {
                 triggeringCreature = (Permanent) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
             }
