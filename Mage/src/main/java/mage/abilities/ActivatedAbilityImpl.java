@@ -45,7 +45,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
 
 /**
  *
@@ -53,22 +52,10 @@ import mage.util.CardUtil;
  */
 public abstract class ActivatedAbilityImpl extends AbilityImpl implements ActivatedAbility {
 
-    static class ActivationInfo {
-
-        public int turnNum;
-        public int activationCounter;
-
-        public ActivationInfo(int turnNum, int activationCounter) {
-            this.turnNum = turnNum;
-            this.activationCounter = activationCounter;
-        }
-    }
-
     protected TimingRule timing = TimingRule.INSTANT;
     protected TargetController mayActivate = TargetController.YOU;
     protected UUID activatorId;
     protected boolean checkPlayableMode;
-    private int maxActivationsPerTurn;
 
     protected ActivatedAbilityImpl(AbilityType abilityType, Zone zone) {
         super(abilityType, zone);
@@ -172,80 +159,53 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     public abstract ActivatedAbilityImpl copy();
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (hasMoreActivationsThisTurn(game)) {
-            if (super.activate(game, noMana)) {
-                ActivatedAbilityImpl.ActivationInfo activationInfo = getActivationInfo(game);
-                if (activationInfo == null) {
-                    activationInfo = new ActivatedAbilityImpl.ActivationInfo(game.getTurnNum(), 1);
-                } else if (activationInfo.turnNum != game.getTurnNum()) {
-                    activationInfo.turnNum = game.getTurnNum();
-                    activationInfo.activationCounter = 1;
-                } else {
-                    activationInfo.activationCounter++;
+    public boolean canActivate(UUID playerId, Game game) {
+        //20091005 - 602.2
+        switch (mayActivate) {
+            case ANY:
+                break;
+
+            case NOT_YOU:
+                if (controlsAbility(playerId, game)) {
+                    return false;
                 }
-                setActivationInfo(activationInfo, game);
+                break;
+
+            case OPPONENT:
+                if (!game.getPlayer(controllerId).hasOpponent(playerId, game)) {
+                    return false;
+                }
+                break;
+            case OWNER:
+                Permanent permanent = game.getPermanent(getSourceId());
+                if (!permanent.getOwnerId().equals(playerId)) {
+                    return false;
+                }
+                break;
+            case YOU:
+                if (!controlsAbility(playerId, game)) {
+                    return false;
+                }
+                break;
+            case CONTROLLER_ATTACHED_TO:
+                Permanent enchantment = game.getPermanent(getSourceId());
+                if (enchantment != null && enchantment.getAttachedTo() != null) {
+                    Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+                    if (enchanted != null && enchanted.getControllerId().equals(playerId)) {
+                        break;
+                    }
+                }
+                return false;
+        }
+        //20091005 - 602.5d/602.5e
+        if (timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)
+                || game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_AS_INSTANT, this, controllerId, game)) {
+            if (costs.canPay(this, sourceId, playerId, game) && canChooseTarget(game)) {
+                this.activatorId = playerId;
                 return true;
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        //20091005 - 602.2
-        if (hasMoreActivationsThisTurn(game)) {
-            switch (mayActivate) {
-                case ANY:
-                    break;
-
-                case NOT_YOU:
-                    if (controlsAbility(playerId, game)) {
-                        return false;
-                    }
-                    break;
-
-                case OPPONENT:
-                    if (!game.getPlayer(controllerId).hasOpponent(playerId, game)) {
-                        return false;
-                    }
-                    break;
-                case OWNER:
-                    Permanent permanent = game.getPermanent(getSourceId());
-                    if (!permanent.getOwnerId().equals(playerId)) {
-                        return false;
-                    }
-                    break;
-                case YOU:
-                    if (!controlsAbility(playerId, game)) {
-                        return false;
-                    }
-                    break;
-                case CONTROLLER_ATTACHED_TO:
-                    Permanent enchantment = game.getPermanent(getSourceId());
-                    if (enchantment != null && enchantment.getAttachedTo() != null) {
-                        Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-                        if (enchanted != null && enchanted.getControllerId().equals(playerId)) {
-                            break;
-                        }
-                    }
-                    return false;
-            }
-            //20091005 - 602.5d/602.5e
-            if (timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)
-                    || game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_AS_INSTANT, this, controllerId, game)) {
-                if (costs.canPay(this, sourceId, playerId, game) && canChooseTarget(game)) {
-                    this.activatorId = playerId;
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean hasMoreActivationsThisTurn(Game game) {
-        ActivatedAbilityImpl.ActivationInfo activationInfo = this.getActivationInfo(game);
-        return activationInfo == null || activationInfo.turnNum != game.getTurnNum() || activationInfo.activationCounter < maxActivationsPerTurn;
     }
 
     @Override
@@ -295,21 +255,4 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         return checkPlayableMode;
     }
 
-    public void setMaxActivationsPerTurn(int maxActivationsPerTurn) {
-        this.maxActivationsPerTurn = maxActivationsPerTurn;
-    }
-
-    private ActivatedAbilityImpl.ActivationInfo getActivationInfo(Game game) {
-        Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsTurn"+this.getOriginalId().toString(), sourceId, game));
-        Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsCount"+this.getOriginalId().toString(), sourceId, game));
-        if (turnNum == null || activationCount == null) {
-            return null;
-        }
-        return new ActivatedAbilityImpl.ActivationInfo(turnNum, activationCount);
-    }
-
-    private void setActivationInfo(ActivatedAbilityImpl.ActivationInfo activationInfo, Game game) {
-        game.getState().setValue(CardUtil.getCardZoneString("activationsTurn"+this.getOriginalId().toString(), sourceId, game), activationInfo.turnNum);
-        game.getState().setValue(CardUtil.getCardZoneString("activationsCount"+this.getOriginalId().toString(), sourceId, game), activationInfo.activationCounter);
-    }
 }
