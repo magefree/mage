@@ -101,6 +101,34 @@ public class PrimordialTest extends CardTestMultiPlayerBase {
     }
 
     /**
+     * I'm almost certain now about how this happens: when Sepulchral Primordial
+     * enters the battlefield, and there's at least one opponent without a
+     * creature in the graveyard, the ability doesn't trigger at all. It should
+     * trigger at least for the players with creatures in the yard.
+     */
+    @Test
+    public void SepulchralPrimordialFromGraveyardEmptyGraveTest() {
+        // When Sepulchral Primordial enters the battlefield, for each opponent, you may put up to one
+        // target creature card from that player's graveyard onto the battlefield under your control.
+        addCard(Zone.HAND, playerA, "Sepulchral Primordial"); // {5}{B}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+
+        // Player order: A -> D -> C -> B
+        addCard(Zone.GRAVEYARD, playerC, "Walking Corpse"); // Not in Range
+        addCard(Zone.GRAVEYARD, playerD, "Pillarfield Ox");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sepulchral Primordial");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Sepulchral Primordial", 1);
+        assertPermanentCount(playerA, "Walking Corpse", 0);
+        assertPermanentCount(playerA, "Pillarfield Ox", 1);
+        assertGraveyardCount(playerC, "Walking Corpse", 1);
+    }
+
+    /**
      * Diluvian Primordial ETB trigger never happened in a 3 player FFA
      * commander game. He just resolved, no ETB trigger occurred.
      */
