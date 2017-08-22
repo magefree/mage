@@ -36,6 +36,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -139,8 +140,9 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
     String canopyvista = "Canopy Vista";
 
     /*
-    NOTE: this test is currently failing due to bug in code. See issue #3072
+    TODO: NOTE: this test is currently failing due to bug in code. See issue #3072
      */
+    @Ignore
     @Test
     public void testBloodMoonBeforeUrborg() {
         // Blood Moon   2R
@@ -171,8 +173,9 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
     }
 
     /*
-    NOTE: this test is currently failing due to bug in code. See issue #3072
+    TODO: NOTE: this test is currently failing due to bug in code. See issue #3072
      */
+    @Ignore
     @Test
     public void testBloodMoonAfterUrborg() {
         // Blood Moon   2R

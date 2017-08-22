@@ -1,15 +1,14 @@
 package mage.target.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.target.TargetCard;
-
-import java.util.UUID;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.TargetCard;
 
 
 public class TargetCardInOpponentsGraveyard extends TargetCard {
@@ -55,7 +54,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
     public boolean canChoose(UUID sourceControllerId, Game game) {
         return canChoose(null, sourceControllerId, game);
     }
-    
+
    /**
      * Checks if there are enough {@link Card} that can be chosen.
      *
@@ -67,6 +66,9 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int possibleTargets = 0;
+        if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
+            return true;
+        }
         for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
             if (!playerId.equals(sourceControllerId)) {
                 Player player = game.getPlayer(playerId);

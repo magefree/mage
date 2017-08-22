@@ -27,6 +27,10 @@
  */
 package mage.target;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.MageItem;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -35,11 +39,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -88,6 +87,9 @@ public class TargetCard extends TargetObject {
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int possibleTargets = 0;
+        if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
+            return true;
+        }
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
