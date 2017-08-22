@@ -118,4 +118,33 @@ public class PhasingTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Tolarian Drake", 1);
         assertPermanentCount(playerA, "Firebreathing", 1);
     }
+
+    /**
+     * Effective 8/25 (#MTGC17 release), we're changing the rules so tokens can
+     * phase out and phase back in. Batterskulls rejoice! #WotCstaff
+     */
+    @Test
+    public void TestTokenPhaseBackIn() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        // Flying,
+        // Phasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)
+        addCard(Zone.HAND, playerA, "Tolarian Drake", 1); // Creature - Drake  2/4  {2}{U}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 6);
+
+        // Create a token that's a copy of target creature.
+        // Retrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
+        addCard(Zone.HAND, playerB, "Spitting Image", 1); // Sorcery {4}{G/U}{G/U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tolarian Drake");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Spitting Image", "Tolarian Drake");
+
+        setStopAt(6, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Tolarian Drake", 1);
+        assertGraveyardCount(playerB, "Spitting Image", 1);
+        assertPermanentCount(playerB, "Tolarian Drake", 1);
+    }
 }
