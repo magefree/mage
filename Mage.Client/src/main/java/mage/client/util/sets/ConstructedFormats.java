@@ -11,6 +11,7 @@ import mage.cards.repository.ExpansionRepository;
 import mage.constants.SetType;
 import mage.deck.Standard;
 
+
 /**
  * Utility class for constructed formats (expansions and other editions).
  *

@@ -858,7 +858,10 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Targets getTargets() {
-        return getModes().getMode().getTargets();
+        if (getModes().getMode() != null) {
+            return getModes().getMode().getTargets();
+        }
+        return null;
     }
 
     @Override
