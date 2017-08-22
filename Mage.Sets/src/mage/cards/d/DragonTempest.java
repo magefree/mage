@@ -46,6 +46,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -60,7 +61,7 @@ public class DragonTempest extends CardImpl {
     }
 
     public DragonTempest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
         // Whenever a creature with flying enters the battlefield under your control, it gains haste until the end of turn.
         Effect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
@@ -119,7 +120,7 @@ class DragonTempestDamageEffect extends OneShotEffect {
         if (controller != null) {
             int amount = game.getBattlefield().countAll(dragonFilter, controller.getId(), game);
             if (amount > 0) {
-                Permanent targetCreature = game.getPermanent(source.getTargets().getFirstTarget());
+                Permanent targetCreature = ((FixedTarget) getTargetPointer()).getTargetedPermanentOrLKIBattlefield(game);
                 if (targetCreature != null) {
                     targetCreature.damage(amount, getTargetPointer().getFirst(game, source), game, false, true);
                 } else {

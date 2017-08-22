@@ -43,6 +43,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -89,7 +90,7 @@ class CreamOfTheCropEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
+        Permanent permanent = ((FixedTarget) getTargetPointer()).getTargetedPermanentOrLKIBattlefield(game);
         if (player != null && permanent != null) {
             int numLooked = Math.min(permanent.getPower().getValue(), player.getLibrary().size());
             if (numLooked > 0) {
