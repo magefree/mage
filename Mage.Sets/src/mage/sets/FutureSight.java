@@ -83,6 +83,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Cutthroat il-Dal", 64, Rarity.COMMON, mage.cards.c.CutthroatIlDal.class));
         cards.add(new SetCardInfo("Cyclical Evolution", 125, Rarity.UNCOMMON, mage.cards.c.CyclicalEvolution.class));
         cards.add(new SetCardInfo("Dakmor Salvage", 169, Rarity.UNCOMMON, mage.cards.d.DakmorSalvage.class));
+        cards.add(new SetCardInfo("Darksteel Garrison", 167, Rarity.RARE, mage.cards.d.DarksteelGarrison.class));
         cards.add(new SetCardInfo("Daybreak Coronet", 21, Rarity.RARE, mage.cards.d.DaybreakCoronet.class));
         cards.add(new SetCardInfo("Death Rattle", 82, Rarity.COMMON, mage.cards.d.DeathRattle.class));
         cards.add(new SetCardInfo("Deepcavern Imp", 83, Rarity.COMMON, mage.cards.d.DeepcavernImp.class));
