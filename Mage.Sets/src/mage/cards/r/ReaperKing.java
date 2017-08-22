@@ -60,7 +60,7 @@ public class ReaperKing extends CardImpl {
     public ReaperKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2/W}{2/U}{2/B}{2/R}{2/G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Scarecrow");
+        this.subtype.add(SubType.SCARECROW);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

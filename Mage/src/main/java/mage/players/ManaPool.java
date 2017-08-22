@@ -414,6 +414,17 @@ public class ManaPool implements Serializable {
         return conditionalMana;
     }
 
+    public boolean ConditionalManaHasManaType(ManaType manaType) {
+        for (ManaPoolItem item : manaItems) {
+            if (item.isConditional()) {
+                if (item.getConditionalMana().get(manaType) > 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public int count() {
         int x = 0;
         for (ManaPoolItem item : manaItems) {

@@ -37,6 +37,7 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.filter.Filter;
 import mage.game.Game;
@@ -293,16 +294,16 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
 
         // Mono Hybrid mana costs
-        // First try only to pay colored mana with the pool
+        // First try only to pay colored mana or conditional colored mana with the pool
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof MonoHybridManaCost) {
-                if (((cost.containsColor(ColoredManaSymbol.W)) && pool.getWhite() > 0)
-                        || ((cost.containsColor(ColoredManaSymbol.B)) && pool.getBlack() > 0)
-                        || ((cost.containsColor(ColoredManaSymbol.R)) && pool.getRed() > 0)
-                        || ((cost.containsColor(ColoredManaSymbol.G)) && pool.getGreen() > 0)
-                        || ((cost.containsColor(ColoredManaSymbol.U)) && pool.getBlue() > 0)) {
+                if (((cost.containsColor(ColoredManaSymbol.W)) && (pool.getWhite() > 0 || pool.ConditionalManaHasManaType(ManaType.WHITE)))
+                        || ((cost.containsColor(ColoredManaSymbol.B)) && (pool.getBlack() > 0 || pool.ConditionalManaHasManaType(ManaType.BLACK)))
+                        || ((cost.containsColor(ColoredManaSymbol.R)) && (pool.getRed() > 0 || pool.ConditionalManaHasManaType(ManaType.RED)))
+                        || ((cost.containsColor(ColoredManaSymbol.G)) && (pool.getGreen() > 0 || pool.ConditionalManaHasManaType(ManaType.GREEN)))
+                        || ((cost.containsColor(ColoredManaSymbol.U)) && (pool.getBlue() > 0) || pool.ConditionalManaHasManaType(ManaType.BLUE))) {
                     cost.assignPayment(game, ability, pool, costToPay);
-                    if (pool.isEmpty()) {
+                    if (pool.isEmpty() && pool.getConditionalMana().isEmpty()) {
                         return;
                     }
                 }
