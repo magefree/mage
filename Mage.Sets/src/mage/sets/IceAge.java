@@ -102,6 +102,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Deflection", 65, Rarity.RARE, mage.cards.d.Deflection.class));
         cards.add(new SetCardInfo("Demonic Consultation", 9, Rarity.UNCOMMON, mage.cards.d.DemonicConsultation.class));
         cards.add(new SetCardInfo("Despotic Scepter", 291, Rarity.RARE, mage.cards.d.DespoticScepter.class));
+        cards.add(new SetCardInfo("Diabolic Vision", 362, Rarity.UNCOMMON, mage.cards.d.DiabolicVision.class));
         cards.add(new SetCardInfo("Disenchant", 244, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Dwarven Armory", 182, Rarity.RARE, mage.cards.d.DwarvenArmory.class));
         cards.add(new SetCardInfo("Elder Druid", 120, Rarity.RARE, mage.cards.e.ElderDruid.class));
