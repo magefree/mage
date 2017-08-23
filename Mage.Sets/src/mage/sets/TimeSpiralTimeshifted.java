@@ -69,6 +69,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Dandan", 19, Rarity.SPECIAL, mage.cards.d.Dandan.class));
         cards.add(new SetCardInfo("Darkness", 40, Rarity.COMMON, mage.cards.d.Darkness.class));
         cards.add(new SetCardInfo("Dauthi Slayer", 41, Rarity.COMMON, mage.cards.d.DauthiSlayer.class));
+        cards.add(new SetCardInfo("Defiant Vanguard", 5, Rarity.SPECIAL, mage.cards.d.DefiantVanguard.class));
         cards.add(new SetCardInfo("Desert", 118, Rarity.SPECIAL, mage.cards.d.Desert.class));
         cards.add(new SetCardInfo("Desolation Giant", 57, Rarity.SPECIAL, mage.cards.d.DesolationGiant.class));
         cards.add(new SetCardInfo("Disenchant", 6, Rarity.COMMON, mage.cards.d.Disenchant.class));

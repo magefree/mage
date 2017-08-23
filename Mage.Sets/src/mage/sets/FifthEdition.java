@@ -272,6 +272,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 104, Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class));
         cards.add(new SetCardInfo("Mesa Falcon", 322, Rarity.COMMON, MesaFalcon.class));
         cards.add(new SetCardInfo("Millstone", 390, Rarity.RARE, mage.cards.m.Millstone.class));
+        cards.add(new SetCardInfo("Mind Bomb", 105, Rarity.UNCOMMON, mage.cards.m.MindBomb.class));
         cards.add(new SetCardInfo("Mind Ravel", 38, Rarity.COMMON, mage.cards.m.MindRavel.class));
         cards.add(new SetCardInfo("Mindstab Thrull", 40, Rarity.COMMON, MindstabThrull.class));
         cards.add(new SetCardInfo("Mind Warp", 39, Rarity.UNCOMMON, mage.cards.m.MindWarp.class));

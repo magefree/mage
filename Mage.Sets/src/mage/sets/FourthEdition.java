@@ -254,6 +254,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Meekstone", 353, Rarity.RARE, mage.cards.m.Meekstone.class));
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 86, Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class));
         cards.add(new SetCardInfo("Millstone", 354, Rarity.RARE, mage.cards.m.Millstone.class));
+        cards.add(new SetCardInfo("Mind Bomb", 87, Rarity.UNCOMMON, mage.cards.m.MindBomb.class));
         cards.add(new SetCardInfo("Mind Twist", 31, Rarity.RARE, mage.cards.m.MindTwist.class));
         cards.add(new SetCardInfo("Mishra's Factory", 181, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Mons's Goblin Raiders", 231, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class));

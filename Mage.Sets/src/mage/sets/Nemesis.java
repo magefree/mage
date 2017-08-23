@@ -79,6 +79,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Death Pit Offering", 56, Rarity.RARE, mage.cards.d.DeathPitOffering.class));
         cards.add(new SetCardInfo("Defender en-Vec", 5, Rarity.COMMON, mage.cards.d.DefenderEnVec.class));
         cards.add(new SetCardInfo("Defiant Falcon", 6, Rarity.COMMON, mage.cards.d.DefiantFalcon.class));
+        cards.add(new SetCardInfo("Defiant Vanguard", 7, Rarity.UNCOMMON, mage.cards.d.DefiantVanguard.class));
         cards.add(new SetCardInfo("Divining Witch", 57, Rarity.RARE, mage.cards.d.DiviningWitch.class));
         cards.add(new SetCardInfo("Dominate", 31, Rarity.UNCOMMON, mage.cards.d.Dominate.class));
         cards.add(new SetCardInfo("Downhill Charge", 79, Rarity.COMMON, mage.cards.d.DownhillCharge.class));
