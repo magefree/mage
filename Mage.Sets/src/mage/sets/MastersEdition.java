@@ -229,6 +229,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Tornado", 136, Rarity.RARE, mage.cards.t.Tornado.class));
         cards.add(new SetCardInfo("Urza's Bauble", 170, Rarity.UNCOMMON, mage.cards.u.UrzasBauble.class));
         cards.add(new SetCardInfo("Urza's Chalice", 171, Rarity.COMMON, mage.cards.u.UrzasChalice.class));
+        cards.add(new SetCardInfo("Varchild's War-Riders", 110, Rarity.RARE, mage.cards.v.VarchildsWarRiders.class));
         cards.add(new SetCardInfo("Vesuvan Doppelganger", 54, Rarity.RARE, mage.cards.v.VesuvanDoppelganger.class));
         cards.add(new SetCardInfo("Vodalian Knights", 55, Rarity.UNCOMMON, mage.cards.v.VodalianKnights.class));
         cards.add(new SetCardInfo("Walking Wall", 172, Rarity.UNCOMMON, mage.cards.w.WalkingWall.class));
