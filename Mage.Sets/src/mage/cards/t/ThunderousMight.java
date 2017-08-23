@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -53,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class ThunderousMight extends CardImpl {
 
     public ThunderousMight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.subtype.add("Aura");
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -65,8 +63,9 @@ public class ThunderousMight extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks, it gets +X/+0 until end of turn, where X is your devotion to red.
-        Effect effect = new BoostEnchantedEffect(new DevotionCount(ColoredManaSymbol.R), new StaticValue(0), Duration.EndOfTurn);
+        BoostEnchantedEffect effect = new BoostEnchantedEffect(new DevotionCount(ColoredManaSymbol.R), new StaticValue(0), Duration.EndOfTurn);
         effect.setText("it gets +X/+0 until end of turn, where X is your devotion to red");
+        effect.setLockedIn(true);
         this.addAbility(new AttacksAttachedTriggeredAbility(effect, AttachmentType.AURA, false));
     }
 

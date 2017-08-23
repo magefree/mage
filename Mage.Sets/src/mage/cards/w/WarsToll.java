@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -56,7 +57,6 @@ public class WarsToll extends CardImpl {
 
     private final static FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
     private final static FilterLandPermanent filterOpponentLand = new FilterLandPermanent("an opponent taps a land");
-    
 
     static {
         filterOpponentCreature.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -70,7 +70,7 @@ public class WarsToll extends CardImpl {
         Effect effect = new TapAllEffect(filterOpponentLand);
         effect.setText("tap all lands that player controls");
         this.addAbility(new TapForManaAllTriggeredAbility(effect, filterOpponentLand, SetTargetPointer.PLAYER));
-        
+
         // If a creature an opponent controls attacks, all creatures that opponent controls attack if able.
         this.addAbility(new AttacksAllTriggeredAbility(new WarsTollEffect(), false, filterOpponentCreature, SetTargetPointer.PERMANENT, true));
 
@@ -84,6 +84,42 @@ public class WarsToll extends CardImpl {
     public WarsToll copy() {
         return new WarsToll(this);
     }
+}
+
+class TapAlEffect extends OneShotEffect {
+
+    protected FilterPermanent filter;
+
+    public TapAlEffect(FilterPermanent filter) {
+        super(Outcome.Tap);
+        this.filter = filter;
+        setText();
+    }
+
+    public TapAlEffect(final TapAlEffect effect) {
+        super(effect);
+        this.filter = effect.filter.copy();
+    }
+
+    @Override
+    public TapAlEffect copy() {
+        return new TapAlEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            if (permanent.getControllerId().equals(source.getFirstTarget())) {
+                permanent.tap(game);
+            }
+        }
+        return true;
+    }
+
+    private void setText() {
+        staticText = "tap all " + filter.getMessage();
+    }
+
 }
 
 class WarsTollEffect extends OneShotEffect {
