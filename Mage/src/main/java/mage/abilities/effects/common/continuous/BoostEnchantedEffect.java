@@ -72,6 +72,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();
+        this.lockedIn = effect.lockedIn;
     }
 
     @Override
