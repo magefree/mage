@@ -47,6 +47,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;
+    private boolean lockedIn = false;
 
     public BoostEnchantedEffect(int power, int toughness) {
         this(power, toughness, Duration.WhileOnBattlefield);
@@ -81,6 +82,10 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+        if (lockedIn) {
+            power = new StaticValue(power.calculate(game, source, this));
+            toughness = new StaticValue(toughness.calculate(game, source, this));
+        }
         if (affectedObjectsSet) {
             // Added boosts of activated or triggered abilities exist independent from the source they are created by
             // so a continuous effect for the permanent itself with the attachment is created
@@ -111,6 +116,10 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
             permanent.addToughness(toughness.calculate(game, source, this));
         }
         return true;
+    }
+
+    public void setLockedIn(boolean lockedIn) {
+        this.lockedIn = lockedIn;
     }
 
     private void setText() {
