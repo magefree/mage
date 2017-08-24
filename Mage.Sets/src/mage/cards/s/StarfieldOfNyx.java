@@ -107,7 +107,7 @@ class StarfieldOfNyxEffect extends ContinuousEffectImpl {
     static {
         filter.add(Predicates.not(new SubtypePredicate(SubType.AURA)));
         filter.add(new AnotherPredicate());
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public StarfieldOfNyxEffect() {
