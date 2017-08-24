@@ -78,6 +78,16 @@ public class PlayerLostLifeWatcher extends Watcher {
         return amountOfLifeLostThisTurn.getOrDefault(playerId, 0);
     }
 
+    public int getAllOppLifeLost(UUID playerId) {
+        int amount = 0;
+        for (UUID player : this.amountOfLifeLostThisTurn.keySet()) {
+            if (!player.equals(playerId)) {
+                amount += this.amountOfLifeLostThisTurn.get(player);
+            }
+        }
+        return amount;
+    }
+
     public int getLiveLostLastTurn(UUID playerId) {
         return amountOfLifeLostLastTurn.getOrDefault(playerId, 0);
     }
