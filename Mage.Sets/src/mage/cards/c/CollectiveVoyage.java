@@ -27,6 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.Objects;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -42,9 +44,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.Objects;
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -52,8 +51,7 @@ import java.util.UUID;
 public class CollectiveVoyage extends CardImpl {
 
     public CollectiveVoyage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
         // Join forces - Starting with you, each player may pay any amount of mana. Each player searches his or her library for up to X basic land cards, where X is the total amount of mana paid this way, puts them onto the battlefield tapped, then shuffles his or her library.
         this.getSpellAbility().addEffect(new CollectiveVoyageEffect());
@@ -91,7 +89,7 @@ class CollectiveVoyageEffect extends OneShotEffect {
         if (controller != null) {
             int xSum = 0;
             xSum += playerPaysXGenericMana(controller, source, game);
-            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (!Objects.equals(playerId, controller.getId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
@@ -100,7 +98,7 @@ class CollectiveVoyageEffect extends OneShotEffect {
                     }
                 }
             }
-            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, xSum, StaticFilters.FILTER_BASIC_LAND_CARD);
@@ -128,6 +126,8 @@ class CollectiveVoyageEffect extends OneShotEffect {
         int xValue = 0;
         boolean payed = false;
         while (player.canRespond() && !payed) {
+            int bookmark = game.bookmarkState();
+            player.resetStoredBookmark(game);
             xValue = player.announceXMana(0, Integer.MAX_VALUE, "How much mana will you pay?", game, source);
             if (xValue > 0) {
                 Cost cost = new GenericManaCost(xValue);
@@ -135,9 +135,14 @@ class CollectiveVoyageEffect extends OneShotEffect {
             } else {
                 payed = true;
             }
+            if (!payed) {
+                game.restoreState(bookmark, "Collective Voyage");
+                game.fireUpdatePlayersEvent();
+            } else {
+                game.removeBookmark(bookmark);
+            }
         }
         game.informPlayers(new StringBuilder(player.getLogName()).append(" pays {").append(xValue).append("}.").toString());
         return xValue;
     }
 }
-
