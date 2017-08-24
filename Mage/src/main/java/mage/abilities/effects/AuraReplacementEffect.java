@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -43,8 +44,6 @@ import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
-
-import java.util.UUID;
 
 /**
  * Cards with the Aura subtype don't change the zone they are in, if there is no
@@ -98,19 +97,23 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         }
         // Aura enters the battlefield attached
         Object object = game.getState().getValue("attachTo:" + card.getId());
-        if (object != null && object instanceof PermanentCard) {
-            return false;
+        if (object != null) {
+            if (object instanceof PermanentCard) {
+                // Aura is attached to a permanent on the battlefield
+                return false;
+            }
+            if (object instanceof UUID) {
+                Player player = game.getPlayer((UUID) object);
+                if (player != null) {
+                    // Aura is attached to a player
+                    return false;
+                }
+            }
         }
 
         UUID targetId = null;
         MageObject sourceObject = game.getObject(sourceId);
         boolean enchantCardInGraveyard = false;
-//        if (sourceObject instanceof Spell) {
-//            if (fromZone.equals(Zone.EXILED)) {
-//                // cast from exile (e.g. Neightveil Spector) -> no replacement
-//                return false;
-//            }
-//        }
         if (sourceObject instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) sourceObject;
             if (!stackAbility.getEffects().isEmpty()) {

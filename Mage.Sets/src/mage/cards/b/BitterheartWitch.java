@@ -98,21 +98,21 @@ class BitterheartWitchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (player != null && targetPlayer != null) {
+        if (controller != null && targetPlayer != null) {
             TargetCardInLibrary targetCard = new TargetCardInLibrary(filter);
-            if (player.searchLibrary(targetCard, game)) {
+            if (controller.searchLibrary(targetCard, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
                     game.getState().setValue("attachTo:" + card.getId(), targetPlayer.getId());
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
-                    targetPlayer.addAttachment(card.getId(), game);
+                    if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                        targetPlayer.addAttachment(card.getId(), game);
+                    }
                 }
-                player.shuffleLibrary(source, game);
-                return true;
             }
-            player.shuffleLibrary(source, game);
+            controller.shuffleLibrary(source, game);
+            return true;
         }
         return false;
     }
