@@ -223,6 +223,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Primal Boost", 277, Rarity.UNCOMMON, mage.cards.p.PrimalBoost.class));
         cards.add(new SetCardInfo("Profane Prayers", 162, Rarity.COMMON, mage.cards.p.ProfanePrayers.class));
         cards.add(new SetCardInfo("Prowling Pangolin", 163, Rarity.UNCOMMON, mage.cards.p.ProwlingPangolin.class));
+        cards.add(new SetCardInfo("Psychic Trance", 102, Rarity.RARE, mage.cards.p.PsychicTrance.class));
         cards.add(new SetCardInfo("Quicksilver Dragon", 103, Rarity.RARE, mage.cards.q.QuicksilverDragon.class));
         cards.add(new SetCardInfo("Ravenous Baloth", 278, Rarity.RARE, mage.cards.r.RavenousBaloth.class));
         cards.add(new SetCardInfo("Read the Runes", 104, Rarity.RARE, mage.cards.r.ReadTheRunes.class));
