@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -50,8 +51,6 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -97,13 +96,14 @@ class CurseOfMisfortunesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterCard filter = new FilterCard("Curse card that doesn't have the same name as a Curse attached to enchanted player");
-        filter.add(new SubtypePredicate(SubType.CURSE));
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
+        if (controller != null && enchantment != null && enchantment.getAttachedTo() != null) {
             Player targetPlayer = game.getPlayer(enchantment.getAttachedTo());
             Player player = game.getPlayer(source.getControllerId());
             if (player != null && targetPlayer != null) {
+                FilterCard filter = new FilterCard("Curse card that doesn't have the same name as a Curse attached to enchanted player");
+                filter.add(new SubtypePredicate(SubType.CURSE));
                 // get the names of attached Curses
                 for (UUID attachmentId: targetPlayer.getAttachments()) {
                     Permanent attachment = game.getPermanent(attachmentId);
@@ -111,19 +111,20 @@ class CurseOfMisfortunesEffect extends OneShotEffect {
                         filter.add(Predicates.not(new NamePredicate(attachment.getName())));
                     }
                 }
-
                 TargetCardInLibrary targetCard = new TargetCardInLibrary(filter);
                 if (player.searchLibrary(targetCard, game)) {
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
                         this.setTargetPointer(new FixedTarget(targetPlayer.getId()));
                         game.getState().setValue("attachTo:" + card.getId(), targetPlayer.getId());
-                        player.shuffleLibrary(source, game);
-                        return card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
+                        if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                            targetPlayer.addAttachment(card.getId(), game);
+                        }
                     }
                 }
                 player.shuffleLibrary(source, game);
             }
+            return true;
         }
         return false;
     }

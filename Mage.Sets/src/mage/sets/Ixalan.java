@@ -6,6 +6,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -30,5 +31,9 @@ public class Ixalan extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        cards.add(new SetCardInfo("Verdant Sun's Avatar", 410, Rarity.RARE, mage.cards.v.VerdantSunsAvatar.class));
+        cards.add(new SetCardInfo("Vraska's Contempt", 210, Rarity.RARE, mage.cards.v.VraskasContempt.class));
+        cards.add(new SetCardInfo("Waker of the Wilds", 415, Rarity.RARE, mage.cards.w.WakerOfTheWilds.class));
+        cards.add(new SetCardInfo("Walk the Plank", 220, Rarity.UNCOMMON, mage.cards.w.WalkThePlank.class));
     }
 }

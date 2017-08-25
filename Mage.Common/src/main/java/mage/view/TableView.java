@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.view;
 
 import java.io.Serializable;
@@ -33,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 import mage.constants.SkillLevel;
 import mage.constants.TableState;
 import mage.game.Game;
@@ -47,6 +45,7 @@ import mage.game.tournament.TournamentPlayer;
  * @author BetaSteward_at_googlemail.com
  */
 public class TableView implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private UUID tableId;
@@ -77,9 +76,9 @@ public class TableView implements Serializable {
         }
         this.controllerName = table.getControllerName();
         this.tableState = table.getState();
-        if (table.getState() == TableState.WAITING ||
-                table.getState() == TableState.READY_TO_START ||
-                table.getState() == TableState.STARTING) {
+        if (table.getState() == TableState.WAITING
+                || table.getState() == TableState.READY_TO_START
+                || table.getState() == TableState.STARTING) {
             this.createTime = table.getCreateTime();
         } else {
             if (table.isTournament()) {
@@ -94,7 +93,7 @@ public class TableView implements Serializable {
         }
         if (!table.isTournament()) {
             // MATCH
-            if (table.getState()==TableState.WAITING || table.getState()==TableState.READY_TO_START) {
+            if (table.getState() == TableState.WAITING || table.getState() == TableState.READY_TO_START) {
                 tableStateText = table.getState().toString() + " (" + table.getMatch().getPlayers().size() + '/' + table.getSeats().length + ')';
             } else {
                 tableStateText = table.getState().toString();
@@ -130,6 +129,9 @@ public class TableView implements Serializable {
             } else {
                 addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
                 addInfo.append(sbScore.toString());
+            }
+            if (table.getNumberOfSeats() > 3) {
+                addInfo.append(" Rng: ").append(table.getMatch().getOptions().getRange().toString());
             }
             this.additionalInfo = addInfo.toString();
             this.skillLevel = table.getMatch().getOptions().getSkillLevel();
