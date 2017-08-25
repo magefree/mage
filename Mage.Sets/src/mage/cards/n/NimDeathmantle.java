@@ -89,7 +89,7 @@ public class NimDeathmantle extends CardImpl {
 class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
 
     NimDeathmantleTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new NimDeathmantleEffect(), true);
+        super(Zone.BATTLEFIELD, new NimDeathmantleEffect(), false);
     }
 
     NimDeathmantleTriggeredAbility(NimDeathmantleTriggeredAbility ability) {

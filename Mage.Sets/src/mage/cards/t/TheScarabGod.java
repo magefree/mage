@@ -41,6 +41,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -188,8 +189,9 @@ class TheScarabGodEffect3 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // Create delayed triggered ability
-        Effect effect = new ReturnToHandSourceEffect(false, true);
+        Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return {this} to its owner's hand");
+        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
