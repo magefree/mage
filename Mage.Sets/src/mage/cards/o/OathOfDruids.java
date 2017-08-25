@@ -110,13 +110,13 @@ class OathOfDruidsPredicate implements ObjectSourcePlayerPredicate<ObjectSourceP
         if (targetPlayer == null || activePlayerId == null) {
             return false;
         }
-        if (targetPlayer.getId().equals(activePlayerId)) {
+        if (!targetPlayer.hasOpponent(activePlayerId, game)) {
             return false;
         }
         int countTargetPlayer = game.getBattlefield().countAll(filter, targetPlayer.getId(), game);
         int countActivePlayer = game.getBattlefield().countAll(filter, activePlayerId, game);
 
-        return countTargetPlayer > countActivePlayer && targetPlayer.hasOpponent(activePlayerId, game);
+        return countTargetPlayer > countActivePlayer;
     }
 
     @Override

@@ -65,7 +65,7 @@ public class OathOfScholars extends CardImpl {
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         this.addAbility(ability);
         originalId = ability.getOriginalId();
-        
+
     }
 
     @Override
@@ -73,9 +73,9 @@ public class OathOfScholars extends CardImpl {
         if (ability.getOriginalId().equals(originalId)) {
             Player activePlayer = game.getPlayer(game.getActivePlayerId());
             if (activePlayer != null) {
-                ability.setControllerId(activePlayer.getId());
                 ability.getTargets().clear();
                 TargetPlayer target = new TargetPlayer(1, 1, false, filter);
+                target.setTargetController(activePlayer.getId());
                 ability.getTargets().add(target);
             }
         }
@@ -100,8 +100,7 @@ class OathOfScholarsPredicate implements ObjectSourcePlayerPredicate<ObjectSourc
         Player firstPlayer = game.getPlayer(game.getActivePlayerId());
         if (targetPlayer == null
                 || firstPlayer == null
-                || targetPlayer.getId().equals(firstPlayer.getId())
-                || !game.getOpponents(targetPlayer.getId()).contains(firstPlayer.getId())) {
+                || !firstPlayer.hasOpponent(targetPlayer.getId(), game)) {
             return false;
         }
         int countHandTargetPlayer = targetPlayer.getHand().size();
@@ -130,15 +129,11 @@ class OathOfScholarsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = game.getObject(source.getSourceId());
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player firstPlayer = game.getPlayer(game.getActivePlayerId());
-        if (sourceObject == null
-                || targetPlayer == null
-                || firstPlayer == null) {
+        if (sourceObject == null || firstPlayer == null) {
             return false;
         }
-        if (firstPlayer.getHand().size() < targetPlayer.getHand().size() // the condition must be checked again on resolution
-                && firstPlayer.chooseUse(Outcome.AIDontUseIt, "Do you wish to discard your hand and draw 3 cards?", source, game)) {
+        if (firstPlayer.chooseUse(Outcome.AIDontUseIt, "Discard your hand and draw 3 cards?", source, game)) {
             firstPlayer.discard(firstPlayer.getHand().size(), true, source, game);
             firstPlayer.drawCards(3, game);
             return true;
