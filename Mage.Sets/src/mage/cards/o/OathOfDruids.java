@@ -63,10 +63,10 @@ public class OathOfDruids extends CardImpl {
     }
 
     public OathOfDruids(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
         // At the beginning of each player's upkeep, that player chooses target player who controls more creatures than he or she does and is his or her opponent. The first player may reveal cards from the top of his or her library until he or she reveals a creature card. If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfDruidsEffect(), TargetController.ANY, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfDruidsEffect(), TargetController.ANY, false);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         originalId = ability.getOriginalId();
         this.addAbility(ability);
@@ -77,9 +77,11 @@ public class OathOfDruids extends CardImpl {
         if (ability.getOriginalId().equals(originalId)) {
             Player activePlayer = game.getPlayer(game.getActivePlayerId());
             if (activePlayer != null) {
-                ability.setControllerId(activePlayer.getId());
                 ability.getTargets().clear();
+//                FilterPlayer filter = new FilterPlayer();
+//                filter.add(new OathOfDruidsPredicate());
                 TargetPlayer target = new TargetPlayer(1, 1, false, filter);
+                target.setTargetController(activePlayer.getId());
                 ability.getTargets().add(target);
             }
         }
@@ -114,12 +116,12 @@ class OathOfDruidsPredicate implements ObjectSourcePlayerPredicate<ObjectSourceP
         int countTargetPlayer = game.getBattlefield().countAll(filter, targetPlayer.getId(), game);
         int countActivePlayer = game.getBattlefield().countAll(filter, activePlayerId, game);
 
-        return countTargetPlayer > countActivePlayer;
+        return countTargetPlayer > countActivePlayer && targetPlayer.hasOpponent(activePlayerId, game);
     }
 
     @Override
     public String toString() {
-        return "player who controls more creatures than he or she does";
+        return "player who controls more creatures than he or she does and is his or her opponent";
     }
 }
 
@@ -127,7 +129,9 @@ class OathOfDruidsEffect extends OneShotEffect {
 
     public OathOfDruidsEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "that player chooses target player who controls more creatures than he or she does and is his or her opponent. The first player may reveal cards from the top of his or her library until he or she reveals a creature card. If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard";
+        staticText = "that player chooses target player who controls more creatures than he or she does and is his or her opponent. "
+                + "The first player may reveal cards from the top of his or her library until he or she reveals a creature card. "
+                + "If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard";
     }
 
     public OathOfDruidsEffect(OathOfDruidsEffect effect) {
@@ -137,16 +141,19 @@ class OathOfDruidsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = game.getObject(source.getSourceId());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || sourceObject == null) {
+        Player player = game.getPlayer(game.getActivePlayerId());
+        if (player == null || sourceObject == null) {
             return false;
         }
         Cards revealed = new CardsImpl();
         Card creatureCard = null;
         Cards nonCreatureCards = new CardsImpl();
+        if (!player.chooseUse(Outcome.Benefit, "Use this ability?", source, game)) {
+            return true;
+        }
         //The first player may reveal cards from the top of his or her library
-        while (creatureCard == null && controller.getLibrary().hasCards()) {
-            Card card = controller.getLibrary().removeFromTop(game);
+        while (creatureCard == null && player.getLibrary().hasCards()) {
+            Card card = player.getLibrary().removeFromTop(game);
             revealed.add(card);
             // until he or she reveals a creature card.
             if (card.isCreature()) {
@@ -155,14 +162,14 @@ class OathOfDruidsEffect extends OneShotEffect {
                 nonCreatureCards.add(card);
             }
         }
-        controller.revealCards(sourceObject.getIdName(), revealed, game);
+        player.revealCards(sourceObject.getIdName(), revealed, game);
 
         //If he or she does, that player puts that card onto the battlefield
         if (creatureCard != null) {
-            controller.moveCards(creatureCard, Zone.BATTLEFIELD, source, game);
+            player.moveCards(creatureCard, Zone.BATTLEFIELD, source, game);
         }
         // and all other cards revealed this way into his or her graveyard
-        controller.moveCards(nonCreatureCards, Zone.GRAVEYARD, source, game);
+        player.moveCards(nonCreatureCards, Zone.GRAVEYARD, source, game);
         return true;
     }
 
