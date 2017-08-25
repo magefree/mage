@@ -40,7 +40,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,6 +50,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.TheLocustGodInsectToken;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -105,8 +106,9 @@ class TheLocustGodEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // Create delayed triggered ability
-        Effect effect = new ReturnToHandSourceEffect(false, true);
+        Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return {this} to its owner's hand");
+        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;

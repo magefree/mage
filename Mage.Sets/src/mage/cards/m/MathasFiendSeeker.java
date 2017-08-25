@@ -80,7 +80,7 @@ public class MathasFiendSeeker extends CardImpl {
         // At the beginning of your end step, put a bounty counter on target creature an opponent controls. For as long as that creature has a bounty counter on it, it has "When this creature dies, each opponent draws a card and gains 2 life."
         Ability ability = new BeginningOfYourEndStepTriggeredAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), false);
         ability.addTarget(new TargetCreaturePermanent(filter));
-        Ability ability2 = new DiesTriggeredAbility(new DrawCardAllEffect(2, TargetController.OPPONENT));
+        Ability ability2 = new DiesTriggeredAbility(new DrawCardAllEffect(1, TargetController.OPPONENT));
         ability2.addEffect(new OpponentsGainLifeEffect());
         Effect effect = new MathasFiendSeekerGainAbilityEffect(
                 ability2,
