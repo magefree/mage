@@ -36,6 +36,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Aphetto Alchemist", 64, Rarity.UNCOMMON, mage.cards.a.AphettoAlchemist.class));
         cards.add(new SetCardInfo("Aphetto Dredging", 125, Rarity.COMMON, mage.cards.a.AphettoDredging.class));
         cards.add(new SetCardInfo("Aphetto Grifter", 65, Rarity.UNCOMMON, mage.cards.a.AphettoGrifter.class));
+        cards.add(new SetCardInfo("Aphetto Vulture", 126, Rarity.UNCOMMON, mage.cards.a.AphettoVulture.class));
         cards.add(new SetCardInfo("Arcanis the Omnipotent", 66, Rarity.RARE, mage.cards.a.ArcanisTheOmnipotent.class));
         cards.add(new SetCardInfo("Ascending Aven", 68, Rarity.COMMON, mage.cards.a.AscendingAven.class));
         cards.add(new SetCardInfo("Astral Slide", 4, Rarity.UNCOMMON, mage.cards.a.AstralSlide.class));
