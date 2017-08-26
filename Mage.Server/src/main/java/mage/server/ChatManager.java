@@ -86,19 +86,17 @@ public enum ChatManager {
         if (chatId != null) {
             ChatSession chatSession = chatSessions.get(chatId);
             if (chatSession != null) {
-                synchronized (chatSession) {
-                    if (chatSessions.containsKey(chatId)) {
-                        final Lock w = lock.writeLock();
-                        w.lock();
-                        try {
-                            chatSessions.remove(chatId);
-                        } finally {
-                            w.unlock();
-                        }
-                        logger.trace("Chat removed - chatId: " + chatId);
-                    } else {
-                        logger.trace("Chat to destroy does not exist - chatId: " + chatId);
+                if (chatSessions.containsKey(chatId)) {
+                    final Lock w = lock.writeLock();
+                    w.lock();
+                    try {
+                        chatSessions.remove(chatId);
+                    } finally {
+                        w.unlock();
                     }
+                    logger.trace("Chat removed - chatId: " + chatId);
+                } else {
+                    logger.trace("Chat to destroy does not exist - chatId: " + chatId);
                 }
             }
         }

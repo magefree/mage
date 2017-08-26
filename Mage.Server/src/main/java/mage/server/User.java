@@ -386,6 +386,8 @@ public class User {
             if (controller.isPresent()) {
                 ccSideboard(entry.getValue(), entry.getKey(), controller.get().getRemainingTime(), controller.get().getOptions().isLimited());
             } else {
+                // Table is missing after connection was lost during sideboard.
+                // Means other players were removed or conceded the game?
                 logger.error("sideboarding id not found : " + entry.getKey());
             }
         }
