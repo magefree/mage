@@ -29,6 +29,9 @@ package mage.server;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import mage.server.User.UserState;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
@@ -54,6 +57,7 @@ public enum UserManager {
 
     private static final Logger LOGGER = Logger.getLogger(UserManager.class);
 
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
 
     private static final ExecutorService USER_EXECUTOR = ThreadExecutor.instance.getCallExecutor();
@@ -69,7 +73,13 @@ public enum UserManager {
             return Optional.empty(); //user already exists
         }
         User user = new User(userName, host, authorizedUser);
-        users.put(user.getId(), user);
+        final Lock w = lock.writeLock();
+        w.lock();
+        try {
+            users.put(user.getId(), user);
+        } finally {
+            w.unlock();
+        }
         return Optional.of(user);
     }
 
@@ -83,17 +93,32 @@ public enum UserManager {
     }
 
     public Optional<User> getUserByName(String userName) {
-        Optional<User> u = users.values().stream().filter(user -> user.getName().equals(userName))
-                .findFirst();
-        if (u.isPresent()) {
-            return u;
-        } else {
-            return Optional.empty();
+        final Lock r = lock.readLock();
+        r.lock();
+        try {
+            Optional<User> u = users.values().stream().filter(user -> user.getName().equals(userName))
+                    .findFirst();
+            if (u.isPresent()) {
+                return u;
+            } else {
+                return Optional.empty();
+            }
+        } finally {
+            r.unlock();
         }
+
     }
 
     public Collection<User> getUsers() {
-        return users.values();
+        ArrayList<User> userList = new ArrayList<>();
+        final Lock r = lock.readLock();
+        r.lock();
+        try {
+            userList.addAll(users.values());
+        } finally {
+            r.unlock();
+        }
+        return userList;
     }
 
     public boolean connectToSession(String sessionId, UUID userId) {
@@ -112,12 +137,9 @@ public enum UserManager {
         if (user.isPresent()) {
             user.get().setSessionId("");
             if (reason == DisconnectReason.Disconnected) {
-                removeUserFromAllTables(userId, reason);
+                removeUserFromAllTablesAndChat(userId, reason);
                 user.get().setUserState(UserState.Offline);
             }
-        }
-        if (userId != null) {
-            ChatManager.instance.removeUser(userId, reason);
         }
     }
 
@@ -131,7 +153,7 @@ public enum UserManager {
         return false;
     }
 
-    public void removeUserFromAllTables(final UUID userId, final DisconnectReason reason) {
+    public void removeUserFromAllTablesAndChat(final UUID userId, final DisconnectReason reason) {
         if (userId != null) {
             getUser(userId).ifPresent(user
                     -> USER_EXECUTOR.execute(
@@ -139,6 +161,7 @@ public enum UserManager {
                                 try {
                                     LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
                                     user.removeUserFromAllTables(reason);
+                                    ChatManager.instance.removeUser(user.getId(), reason);
                                     LOGGER.debug("USER REMOVE END - " + user.getName());
                                 } catch (Exception ex) {
                                     handleException(ex);
@@ -173,7 +196,16 @@ public enum UserManager {
             Calendar calendarRemove = Calendar.getInstance();
             calendarRemove.add(Calendar.MINUTE, -8);
             List<User> toRemove = new ArrayList<>();
-            for (User user : users.values()) {
+            logger.info("Start Check Expired");
+            ArrayList<User> userList = new ArrayList<>();
+            final Lock r = lock.readLock();
+            r.lock();
+            try {
+                userList.addAll(users.values());
+            } finally {
+                r.unlock();
+            }
+            for (User user : userList) {
                 try {
                     if (user.getUserState() == UserState.Offline) {
                         if (user.isExpired(calendarRemove.getTime())) {
@@ -185,7 +217,7 @@ public enum UserManager {
                                 user.lostConnection();
                                 disconnect(user.getId(), DisconnectReason.BecameInactive);
                             }
-                            removeUserFromAllTables(user.getId(), DisconnectReason.SessionExpired);
+                            removeUserFromAllTablesAndChat(user.getId(), DisconnectReason.SessionExpired);
                             user.setUserState(UserState.Offline);
                             // Remove the user from all tournaments
 
@@ -195,9 +227,17 @@ public enum UserManager {
                     handleException(ex);
                 }
             }
-            for (User user : toRemove) {
-                users.remove(user.getId());
+            logger.info("Users to remove " + toRemove.size());
+            final Lock w = lock.readLock();
+            w.lock();
+            try {
+                for (User user : toRemove) {
+                    users.remove(user.getId());
+                }
+            } finally {
+                w.unlock();
             }
+            logger.info("End Check Expired");
         } catch (Exception ex) {
             handleException(ex);
         }

@@ -78,6 +78,7 @@ public enum TableManager {
     TableManager() {
         expireExecutor.scheduleAtFixedRate(() -> {
             try {
+                ChatManager.instance.clearUserMessageStorage();
                 checkTableHealthState();
             } catch (Exception ex) {
                 logger.fatal("Check table health state job error:", ex);
@@ -161,7 +162,7 @@ public enum TableManager {
         }
     }
 
-    // removeUserFromAllTables user from all tournament sub tables
+    // removeUserFromAllTablesAndChat user from all tournament sub tables
     public void userQuitTournamentSubTables(UUID userId) {
         for (TableController controller : controllers.values()) {
             if (controller.getTable() != null) {
@@ -174,7 +175,7 @@ public enum TableManager {
         }
     }
 
-    // removeUserFromAllTables user from all sub tables of a tournament
+    // removeUserFromAllTablesAndChat user from all sub tables of a tournament
     public void userQuitTournamentSubTables(UUID tournamentId, UUID userId) {
         for (TableController controller : controllers.values()) {
             if (controller.getTable().isTournamentSubTable() && controller.getTable().getTournament().getId().equals(tournamentId)) {
@@ -386,8 +387,8 @@ public enum TableManager {
         for (Table table : tableCopy) {
             try {
                 if (table.getState() != TableState.FINISHED
-                        && ((System.currentTimeMillis() - table.getStartTime().getTime()) / 1000) > 30) { // removeUserFromAllTables only if table started longer than 30 seconds ago
-                    // removeUserFromAllTables tables and games not valid anymore
+                        && ((System.currentTimeMillis() - table.getStartTime().getTime()) / 1000) > 30) { // removeUserFromAllTablesAndChat only if table started longer than 30 seconds ago
+                    // removeUserFromAllTablesAndChat tables and games not valid anymore
                     logger.debug(table.getId() + " [" + table.getName() + "] " + formatter.format(table.getStartTime() == null ? table.getCreateTime() : table.getCreateTime()) + " (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament" : ""));
                     getController(table.getId()).ifPresent(tableController -> {
                         if ((table.isTournament() && !tableController.isTournamentStillValid())
