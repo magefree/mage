@@ -23,7 +23,6 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public final class StaticFilters {
 
-
     public static final FilterSpiritOrArcaneCard SPIRIT_OR_ARCANE_CARD = new FilterSpiritOrArcaneCard();
     public static final FilterArtifactOrEnchantmentPermanent ARTIFACT_OR_ENCHANTMENT_PERMANENT = new FilterArtifactOrEnchantmentPermanent();
     public static final FilterEnchantmentPermanent FILTER_ENCHANTMENT_PERMANENT = new FilterEnchantmentPermanent();
@@ -37,6 +36,8 @@ public final class StaticFilters {
     public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_OR_CREATURE = new FilterPermanent("artifact or creature");
     public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_CREATURE_OR_ENCHANTMENT = new FilterPermanent("artifact, creature, or enchantment");
     public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_CREATURE_ENCHANTMENT_OR_LAND = new FilterPermanent("artifact, creature, enchantment, or land");
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT = new FilterControlledPermanent();
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT = new FilterControlledArtifactPermanent();
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("artifact or creature you control");
 
@@ -67,8 +68,6 @@ public final class StaticFilters {
 
     public static final FilterPermanent FILTER_ATTACKING_CREATURES = new FilterCreaturePermanent("attacking creatures");
 
-
-
     public static final FilterPermanent FILTER_AURA = new FilterPermanent();
     public static final FilterPermanent FILTER_EQUIPMENT = new FilterPermanent();
     public static final FilterPermanent FILTER_FORTIFICATION = new FilterPermanent();
@@ -90,7 +89,6 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_PERMANENT_NON_LAND.add(
                 Predicates.not(new CardTypePredicate(CardType.LAND)));
-
 
         FILTER_CREATURE_TOKENS.add(new TokenPredicate());
 

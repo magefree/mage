@@ -27,6 +27,10 @@
  */
 package mage.players;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -86,11 +90,6 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Map.Entry;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
@@ -1770,51 +1769,59 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @SuppressWarnings({"null", "ConstantConditions"})
     private int doDamage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
-        if (damage > 0 && canDamage(game.getObject(sourceId), game)) {
-            GameEvent event = new DamagePlayerEvent(playerId, sourceId, playerId, damage, preventable, combatDamage);
-            event.setAppliedEffects(appliedEffects);
-            if (!game.replaceEvent(event)) {
-                int actualDamage = event.getAmount();
-                if (actualDamage > 0) {
-                    UUID sourceControllerId = null;
-                    Abilities sourceAbilities = null;
-                    MageObject source = game.getPermanentOrLKIBattlefield(sourceId);
-                    if (source == null) {
-                        StackObject stackObject = game.getStack().getStackObject(sourceId);
-                        if (stackObject != null) {
-                            source = stackObject.getStackAbility().getSourceObject(game);
+        if (damage > 0) {
+            if (canDamage(game.getObject(sourceId), game)) {
+                GameEvent event = new DamagePlayerEvent(playerId, sourceId, playerId, damage, preventable, combatDamage);
+                event.setAppliedEffects(appliedEffects);
+                if (!game.replaceEvent(event)) {
+                    int actualDamage = event.getAmount();
+                    if (actualDamage > 0) {
+                        UUID sourceControllerId = null;
+                        Abilities sourceAbilities = null;
+                        MageObject source = game.getPermanentOrLKIBattlefield(sourceId);
+                        if (source == null) {
+                            StackObject stackObject = game.getStack().getStackObject(sourceId);
+                            if (stackObject != null) {
+                                source = stackObject.getStackAbility().getSourceObject(game);
+                            } else {
+                                source = game.getObject(sourceId);
+                            }
+                            if (source instanceof Spell) {
+                                sourceAbilities = ((Spell) source).getAbilities(game);
+                                sourceControllerId = ((Spell) source).getControllerId();
+                            } else if (source instanceof Card) {
+                                sourceAbilities = ((Card) source).getAbilities(game);
+                                sourceControllerId = ((Card) source).getOwnerId();
+                            } else if (source instanceof CommandObject) {
+                                sourceControllerId = ((CommandObject) source).getControllerId();
+                                sourceAbilities = ((CommandObject) source).getAbilities();
+                            }
                         } else {
-                            source = game.getObject(sourceId);
+                            sourceAbilities = ((Permanent) source).getAbilities(game);
+                            sourceControllerId = ((Permanent) source).getControllerId();
                         }
-                        if (source instanceof Spell) {
-                            sourceAbilities = ((Spell) source).getAbilities(game);
-                            sourceControllerId = ((Spell) source).getControllerId();
-                        } else if (source instanceof Card) {
-                            sourceAbilities = ((Card) source).getAbilities(game);
-                            sourceControllerId = ((Card) source).getOwnerId();
-                        } else if (source instanceof CommandObject) {
-                            sourceControllerId = ((CommandObject) source).getControllerId();
-                            sourceAbilities = ((CommandObject) source).getAbilities();
+                        if (sourceAbilities != null && sourceAbilities.containsKey(InfectAbility.getInstance().getId())) {
+                            addCounters(CounterType.POISON.createInstance(actualDamage), game);
+                        } else {
+                            GameEvent damageToLifeLossEvent = new GameEvent(EventType.DAMAGE_CAUSES_LIFE_LOSS, playerId, sourceId, playerId, actualDamage, combatDamage);
+                            if (!game.replaceEvent(damageToLifeLossEvent)) {
+                                this.loseLife(damageToLifeLossEvent.getAmount(), game, combatDamage);
+                            }
                         }
-                    } else {
-                        sourceAbilities = ((Permanent) source).getAbilities(game);
-                        sourceControllerId = ((Permanent) source).getControllerId();
-                    }
-                    if (sourceAbilities != null && sourceAbilities.containsKey(InfectAbility.getInstance().getId())) {
-                        addCounters(CounterType.POISON.createInstance(actualDamage), game);
-                    } else {
-                        GameEvent damageToLifeLossEvent = new GameEvent(EventType.DAMAGE_CAUSES_LIFE_LOSS, playerId, sourceId, playerId, actualDamage, combatDamage);
-                        if (!game.replaceEvent(damageToLifeLossEvent)) {
-                            this.loseLife(damageToLifeLossEvent.getAmount(), game, combatDamage);
+                        if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
+                            Player player = game.getPlayer(sourceControllerId);
+                            player.gainLife(actualDamage, game);
                         }
+                        game.fireEvent(new DamagedPlayerEvent(playerId, sourceId, playerId, actualDamage, combatDamage));
+                        return actualDamage;
                     }
-                    if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
-                        Player player = game.getPlayer(sourceControllerId);
-                        player.gainLife(actualDamage, game);
-                    }
-                    game.fireEvent(new DamagedPlayerEvent(playerId, sourceId, playerId, actualDamage, combatDamage));
-                    return actualDamage;
                 }
+            } else {
+                MageObject sourceObject = game.getObject(sourceId);
+                game.informPlayers(damage + " damage "
+                        + (sourceObject == null ? "" : "from " + sourceObject.getLogName())
+                        + "to " + getLogName()
+                        + (damage > 1 ? " were" : "was") + " prevented because of protection.");
             }
         }
         return 0;
