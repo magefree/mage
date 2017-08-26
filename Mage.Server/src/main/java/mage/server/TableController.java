@@ -511,7 +511,7 @@ public class TableController {
         if (this.userId != null && this.userId.equals(userId) // tourn. sub tables have no creator user
                 && (table.getState() == TableState.WAITING
                 || table.getState() == TableState.READY_TO_START)) {
-            // table not started yet and user is the owner, removeUserFromAllTables the table
+            // table not started yet and user is the owner, removeUserFromAllTablesAndChat the table
             TableManager.instance.removeTable(table.getId());
         } else {
             UUID playerId = userPlayerMap.get(userId);
@@ -826,7 +826,7 @@ public class TableController {
                                 }
                                 user.showUserMessage("Match info", sb.toString());
                             }
-                            // removeUserFromAllTables table from user - table manager holds table for display of finished matches
+                            // removeUserFromAllTablesAndChat table from user - table manager holds table for display of finished matches
                             if (!table.isTournamentSubTable()) {
                                 user.removeTable(entry.getValue());
                             }
@@ -913,7 +913,7 @@ public class TableController {
                     return false;
                 }
             } else {
-                // check if table creator is still a valid user, if not removeUserFromAllTables table
+                // check if table creator is still a valid user, if not removeUserFromAllTablesAndChat table
                 return UserManager.instance.getUser(userId).isPresent();
             }
         }

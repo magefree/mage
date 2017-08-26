@@ -30,6 +30,9 @@ package mage.server;
 import java.text.DateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.view.ChatMessage;
@@ -46,6 +49,8 @@ public class ChatSession {
     private static final Logger logger = Logger.getLogger(ChatSession.class);
     private static final DateFormat timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT);
 
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
+
     private final ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<>();
     private final UUID chatId;
     private final Date createTime;
@@ -61,7 +66,13 @@ public class ChatSession {
         UserManager.instance.getUser(userId).ifPresent(user -> {
             if (!clients.containsKey(userId)) {
                 String userName = user.getName();
-                clients.put(userId, userName);
+                final Lock w = lock.writeLock();
+                w.lock();
+                try {
+                    clients.put(userId, userName);
+                } finally {
+                    w.unlock();
+                }
                 broadcast(null, userName + " has joined (" + user.getClientVersion() + ')', MessageColor.BLUE, true, MessageType.STATUS, null);
                 logger.trace(userName + " joined chat " + chatId);
             }
@@ -77,8 +88,14 @@ public class ChatSession {
             }
             if (userId != null && clients.containsKey(userId)) {
                 String userName = clients.get(userId);
-                if (reason != DisconnectReason.LostConnection) { // for lost connection the user will be reconnected or session expire so no removeUserFromAllTables of chat yet
-                    clients.remove(userId);
+                if (reason != DisconnectReason.LostConnection) { // for lost connection the user will be reconnected or session expire so no removeUserFromAllTablesAndChat of chat yet
+                    final Lock w = lock.writeLock();
+                    w.lock();
+                    try {
+                        clients.remove(userId);
+                    } finally {
+                        w.unlock();
+                    }
                     logger.debug(userName + '(' + reason.toString() + ')' + " removed from chatId " + chatId);
                 }
                 String message = reason.getMessage();
@@ -117,7 +134,15 @@ public class ChatSession {
         if (!message.isEmpty()) {
             Set<UUID> clientsToRemove = new HashSet<>();
             ClientCallback clientCallback = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, new ChatMessage(userName, message, (withTime ? timeFormatter.format(new Date()) : ""), color, messageType, soundToPlay));
-            for (UUID userId : clients.keySet()) {
+            List<UUID> chatUserIds = new ArrayList<>();
+            final Lock r = lock.readLock();
+            r.lock();
+            try {
+                chatUserIds.addAll(clients.keySet());
+            } finally {
+                r.unlock();
+            }
+            for (UUID userId : chatUserIds) {
                 Optional<User> user = UserManager.instance.getUser(userId);
                 if (user.isPresent()) {
                     user.get().fireCallback(clientCallback);
@@ -125,7 +150,15 @@ public class ChatSession {
                     clientsToRemove.add(userId);
                 }
             }
-            clients.keySet().removeAll(clientsToRemove);
+            if (!clientsToRemove.isEmpty()) {
+                final Lock w = lock.readLock();
+                w.lock();
+                try {
+                    clients.keySet().removeAll(clientsToRemove);
+                } finally {
+                    w.unlock();
+                }
+            }
 
         }
     }

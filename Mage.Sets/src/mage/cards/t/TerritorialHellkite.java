@@ -29,12 +29,12 @@ package mage.cards.t;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -46,10 +46,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.RandomUtil;
@@ -64,7 +66,7 @@ public class TerritorialHellkite extends CardImpl {
     public TerritorialHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
 
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 
@@ -90,7 +92,8 @@ public class TerritorialHellkite extends CardImpl {
 
 class AttackedLastCombatWatcher extends Watcher {
 
-    public final Map<UUID, UUID> attackedLastCombatPlayers = new HashMap<>();
+    // Map<lastCombatOfPlayerId, Map<attackingCreature, attackedPlayerId>>
+    public final Map<UUID, Map<MageObjectReference, UUID>> attackedLastCombatPlayers = new HashMap<>();
 
     public AttackedLastCombatWatcher() {
         super(AttackedLastCombatWatcher.class.getSimpleName(), WatcherScope.GAME);
@@ -98,32 +101,34 @@ class AttackedLastCombatWatcher extends Watcher {
 
     public AttackedLastCombatWatcher(final AttackedLastCombatWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, UUID> entry : watcher.attackedLastCombatPlayers.entrySet()) {
-            attackedLastCombatPlayers.put(entry.getKey(), entry.getValue());
+        for (Entry<UUID, Map<MageObjectReference, UUID>> entry : watcher.attackedLastCombatPlayers.entrySet()) {
+            Map<MageObjectReference, UUID> allAttackersCopy = new HashMap<>();
+            allAttackersCopy.putAll(entry.getValue());
+            attackedLastCombatPlayers.put(entry.getKey(), allAttackersCopy);
         }
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        //TODO: this will have problems if the creature is stolen and then given back before the original controller's next combat
         if (event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE) {
-            if (!attackedLastCombatPlayers.keySet().isEmpty()) {
-                Iterator<Map.Entry<UUID, UUID>> attackers = attackedLastCombatPlayers.entrySet().iterator();
-                while (attackers.hasNext()) {
-                    Map.Entry<UUID, UUID> attacker = attackers.next();
-                    if (game.getPermanent(attacker.getKey()).getControllerId().equals(game.getActivePlayerId())) {
-                        attackers.remove();
-                    }
-                }
-            }
+            // Remove previous attacking creatures of the current combat's player if info exists
+            attackedLastCombatPlayers.remove(game.getCombat().getAttackingPlayerId());
         }
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            attackedLastCombatPlayers.put(event.getSourceId(), game.getCombat().getDefenderId(event.getSourceId()));
+            // remember which attacker attacked which player
+            Map<MageObjectReference, UUID> attackedPlayers = new HashMap<>();
+            for (UUID attackerId : game.getCombat().getAttackers()) {
+                Permanent attacker = game.getPermanent(attackerId);
+                if (attacker != null) {
+                    attackedPlayers.put(new MageObjectReference(attacker, game), game.getCombat().getDefenderId(attackerId));
+                }
+            }
+            attackedLastCombatPlayers.put(game.getCombat().getAttackingPlayerId(), attackedPlayers);
         }
     }
 
-    public Map<UUID, UUID> getAttackedLastCombatPlayers() {
-        return this.attackedLastCombatPlayers;
+    public Map<MageObjectReference, UUID> getAttackedLastCombatPlayers(UUID combatPlayerId) {
+        return attackedLastCombatPlayers.get(combatPlayerId);
     }
 
     @Override
@@ -152,22 +157,20 @@ class AttackIfAbleTargetRandoOpponentSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        AttackedLastCombatWatcher watcher = (AttackedLastCombatWatcher) game.getState().getWatchers().get(AttackedLastCombatWatcher.class.getSimpleName());
+        if (controller != null && sourcePermanent != null && watcher != null) {
             List<UUID> opponents = new ArrayList<>();
-            AttackedLastCombatWatcher watcher = (AttackedLastCombatWatcher) game.getState().getWatchers().get(AttackedLastCombatWatcher.class.getSimpleName());
-            if (watcher != null) {
-                boolean ignoreMe;
+            Map<MageObjectReference, UUID> attackedPlayers = watcher.getAttackedLastCombatPlayers(source.getControllerId());
+            MageObjectReference mor = new MageObjectReference(sourcePermanent, game);
+            if (attackedPlayers == null) {
+                opponents.addAll(game.getOpponents(controller.getId()));
+            } else {
                 for (UUID opp : game.getOpponents(controller.getId())) {
-                    ignoreMe = false;
-                    if (watcher.getAttackedLastCombatPlayers().getOrDefault(source.getSourceId(), source.getControllerId()).equals(opp)) {
-                        ignoreMe = true;
-                    }
-                    if (!ignoreMe) {
+                    if (!opp.equals(attackedPlayers.getOrDefault(mor, null))) {
                         opponents.add(opp);
                     }
                 }
-            } else {
-                opponents.addAll(game.getOpponents(controller.getId()));
             }
             if (!opponents.isEmpty()) {
                 Player opponent = game.getPlayer(opponents.get(RandomUtil.nextInt(opponents.size())));
@@ -175,12 +178,15 @@ class AttackIfAbleTargetRandoOpponentSourceEffect extends OneShotEffect {
                     ContinuousEffect effect = new AttacksIfAbleTargetPlayerSourceEffect();
                     effect.setTargetPointer(new FixedTarget(opponent.getId()));
                     game.addEffect(effect, source);
-                    return true;
+                    game.informPlayers(sourcePermanent.getLogName() + " has to attack " + opponent.getLogName() + ".");
                 }
             } else {
-                game.getPermanent(source.getSourceId()).tap(game);
+                game.informPlayers(sourcePermanent.getLogName() + " can't attack an opponent it didn't attack last combat.");
+                sourcePermanent.tap(game);
             }
+            return true;
         }
+
         return false;
     }
 }

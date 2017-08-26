@@ -51,6 +51,7 @@ public class JeeringHomunculus extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Jeering Homunculus enters the battlefield, you may goad target creature.
+        // (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
         Ability ability = new EntersBattlefieldTriggeredAbility(new GoadTargetEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

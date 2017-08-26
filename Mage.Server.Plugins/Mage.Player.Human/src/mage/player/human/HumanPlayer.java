@@ -705,7 +705,7 @@ public class HumanPlayer extends PlayerImpl {
                             // it's a main phase
                             if (!skippedAtLeastOnce
                                     || (!playerId.equals(game.getActivePlayerId())
-                                    && !this.getUserData().getUserSkipPrioritySteps().isStopOnAllMainPhases())) {
+                                    && !controllingPlayer.getUserData().getUserSkipPrioritySteps().isStopOnAllMainPhases())) {
                                 skippedAtLeastOnce = true;
                                 if (passWithManaPoolCheck(game)) {
                                     return false;
@@ -726,7 +726,7 @@ public class HumanPlayer extends PlayerImpl {
                             // It's end of turn phase
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
-                                    && !this.getUserData().getUserSkipPrioritySteps().isStopOnAllEndPhases())) {
+                                    && !controllingPlayer.getUserData().getUserSkipPrioritySteps().isStopOnAllEndPhases())) {
                                 skippedAtLeastOnce = true;
                                 if (passWithManaPoolCheck(game)) {
                                     return false;
@@ -834,7 +834,7 @@ public class HumanPlayer extends PlayerImpl {
                 return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
             }
         } catch (NullPointerException ex) {
-            String isNull = userData == null ? "null" : "not null";
+            String isNull = controllingPlayer.getUserData() == null ? "null" : "not null";
             logger.error("null pointer exception  UserData = " + isNull);
         }
         return true;
@@ -843,7 +843,7 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
         String autoOrderRuleText = null;
-        boolean autoOrderUse = getUserData().isAutoOrderTrigger();
+        boolean autoOrderUse = getControllingPlayersUserData(game).isAutoOrderTrigger();
         while (!abort) {
             // try to set trigger auto order
             List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
@@ -1045,7 +1045,7 @@ public class HumanPlayer extends PlayerImpl {
         while (!abort) {
             if (passedAllTurns
                     || passedUntilEndStepBeforeMyTurn
-                    || (!getUserData().getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction()
+                    || (!getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction()
                     && (passedTurn
                     || passedTurnSkipStack
                     || passedUntilEndOfTurn
@@ -1223,7 +1223,7 @@ public class HumanPlayer extends PlayerImpl {
         FilterCreatureForCombatBlock filter = filterCreatureForCombatBlock.copy();
         filter.add(new ControllerIdPredicate(defendingPlayerId));
         if (game.getBattlefield().count(filter, null, playerId, game) == 0
-                && !getUserData().getUserSkipPrioritySteps().isStopOnDeclareBlockerIfNoneAvailable()) {
+                && !getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockerIfNoneAvailable()) {
             return;
         }
         while (!abort) {
@@ -1420,7 +1420,7 @@ public class HumanPlayer extends PlayerImpl {
     protected void activateAbility(LinkedHashMap<UUID, ? extends ActivatedAbility> abilities, MageObject object, Game game) {
         updateGameStatePriority("activateAbility", game);
         if (abilities.size() == 1
-                && suppressAbilityPicker(abilities.values().iterator().next())) {
+                && suppressAbilityPicker(abilities.values().iterator().next(), game)) {
             ActivatedAbility ability = abilities.values().iterator().next();
             if (!ability.getTargets().isEmpty()
                     || !(ability.getCosts().size() == 1
@@ -1452,8 +1452,8 @@ public class HumanPlayer extends PlayerImpl {
         }
     }
 
-    private boolean suppressAbilityPicker(ActivatedAbility ability) {
-        if (this.getUserData().isShowAbilityPickerForced()) {
+    private boolean suppressAbilityPicker(ActivatedAbility ability, Game game) {
+        if (getControllingPlayersUserData(game).isShowAbilityPickerForced()) {
             if (ability instanceof PlayLandAbility) {
                 return true;
             }
