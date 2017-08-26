@@ -52,15 +52,15 @@ import mage.target.common.TargetCreaturePermanent;
  * @author anonymous
  */
 public class IslandOfWakWak extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filterWithFlying = new FilterCreaturePermanent("creature with flying");
-    
+
     static {
         filterWithFlying.add(new AbilityPredicate(FlyingAbility.class));
     }
-    
+
     public IslandOfWakWak(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: The power of target creature with flying becomes 0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new IslandOfWakWakEffect(), new TapSourceCost());
@@ -78,23 +78,22 @@ public class IslandOfWakWak extends CardImpl {
     }
 }
 
-
 class IslandOfWakWakEffect extends OneShotEffect {
-    
+
     public IslandOfWakWakEffect() {
         super(Outcome.Detriment);
         staticText = "The power of target creature with flying becomes 0 until end of turn";
     }
-    
+
     public IslandOfWakWakEffect(final IslandOfWakWakEffect effect) {
-       super(effect);
+        super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
-            int toughness = targetCreature.getToughness().getBaseValue();
+            int toughness = targetCreature.getToughness().getBaseValueModified();
             game.addEffect(new SetPowerToughnessTargetEffect(0, toughness, Duration.EndOfTurn), source);
             return true;
         }
