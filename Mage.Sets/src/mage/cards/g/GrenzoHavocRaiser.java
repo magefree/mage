@@ -54,7 +54,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -77,7 +79,7 @@ public class GrenzoHavocRaiser extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a creature you control deals combat damage to a player, choose one &mdash;
-        //Goad target creature that player controls; 
+        //Goad target creature that player controls;
         Effect effect = new GoadTargetEffect();
         effect.setText("goad target creature that player controls");
         Ability ability = new GrenzoHavocRaiserTriggeredAbility(effect);
@@ -120,10 +122,13 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Player opponent = game.getPlayer(event.getPlayerId());
-        if (opponent != null && game.getPermanent(event.getSourceId()).getControllerId() == this.controllerId) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
-            filter.add(new ControllerIdPredicate(opponent.getId()));
+        Player damagedPlayer = game.getPlayer(event.getPlayerId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (damagedPlayer != null && permanent != null
+                && ((DamageEvent) event).isCombatDamage()
+                && getControllerId().equals(permanent.getControllerId())) {
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + damagedPlayer.getLogName() + " controls");
+            filter.add(new ControllerIdPredicate(damagedPlayer.getId()));
             this.getTargets().clear();
             this.addTarget(new TargetCreaturePermanent(filter));
             for (Effect effect : this.getAllEffects()) {
@@ -171,11 +176,6 @@ class GrenzoHavocRaiserEffect extends OneShotEffect {
                 if (card != null) {
                     // move card to exile
                     controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
-                    // player gains life
-//                    int cmc = card.getConvertedManaCost();
-//                    if (cmc > 0) {
-//                        controller.gainLife(cmc, game);
-//                    }
                     // Add effects only if the card has a spellAbility (e.g. not for lands).
                     if (card.getSpellAbility() != null) {
                         // allow to cast the card
