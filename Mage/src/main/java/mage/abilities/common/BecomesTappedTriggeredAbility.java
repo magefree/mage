@@ -11,26 +11,35 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author Jeff
  */
-public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl{
+public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
 
-    FilterPermanent filter;
+    protected FilterPermanent filter;
+    protected boolean setTargetPointer;
 
     public BecomesTappedTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, new FilterPermanent("a permanent"));
     }
+
     public BecomesTappedTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
+        this(effect, optional, filter, false);
+    }
+
+    public BecomesTappedTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
+        this.setTargetPointer = setTargetPointer;
     }
 
     public BecomesTappedTriggeredAbility(final BecomesTappedTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -46,7 +55,13 @@ public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl{
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game);
+        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            if (setTargetPointer) {
+                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override

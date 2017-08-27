@@ -320,6 +320,7 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Teferi's Moat", 279, Rarity.RARE, mage.cards.t.TeferisMoat.class));
         cards.add(new SetCardInfo("Teferi's Response", 78, Rarity.RARE, mage.cards.t.TeferisResponse.class));
         cards.add(new SetCardInfo("Tek", 313, Rarity.RARE, mage.cards.t.Tek.class));
+        cards.add(new SetCardInfo("Temporal Distortion", 79, Rarity.RARE, mage.cards.t.TemporalDistortion.class));
         cards.add(new SetCardInfo("Thicket Elemental", 214, Rarity.RARE, mage.cards.t.ThicketElemental.class));
         cards.add(new SetCardInfo("Thornscape Apprentice", 215, Rarity.COMMON, mage.cards.t.ThornscapeApprentice.class));
         cards.add(new SetCardInfo("Thornscape Master", 216, Rarity.RARE, mage.cards.t.ThornscapeMaster.class));
