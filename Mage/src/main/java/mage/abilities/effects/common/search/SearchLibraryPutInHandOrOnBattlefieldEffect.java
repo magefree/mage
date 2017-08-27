@@ -103,21 +103,15 @@ public class SearchLibraryPutInHandOrOnBattlefieldEffect extends SearchEffect {
                         if (card.getName().equals(nameToPutOnBattlefield)) {
                             askToPutOntoBf = true;
                             cardToPutOnBf = card;
-                        } else {
-                            cards.add(card);
                         }
+                        cards.add(card);
                     }
                 }
-                if (askToPutOntoBf && cardToPutOnBf != null) {
-                    if (controller.chooseUse(Outcome.PutCardInPlay, "Put " + cardToPutOnBf.getLogName() + " onto the battlefield instead?", source, game)) {
-                        controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
-                    } else {
-                        controller.moveCards(cards, Zone.HAND, source, game);
-                    }
+                if (askToPutOntoBf && controller.chooseUse(Outcome.PutCardInPlay, "Put " + cardToPutOnBf.getLogName() + " onto the battlefield instead?", source, game)) {
+                    controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
                 } else {
                     controller.moveCards(cards, Zone.HAND, source, game);
                 }
-
                 if (revealCards) {
                     String name = "Reveal";
                     Card sourceCard = game.getCard(source.getSourceId());
@@ -146,7 +140,9 @@ public class SearchLibraryPutInHandOrOnBattlefieldEffect extends SearchEffect {
             sb.append("a ").append(target.getTargetName()).append(revealCards ? ", reveal it," : "").append(" and put that card into your hand");
         }
         if (nameToPutOnBattlefield != null) {
-            sb.append(". If you reveal a card named " + nameToPutOnBattlefield + " you may put it onto the battlefield instead");
+            sb.append(". If you reveal a card named ");
+            sb.append(nameToPutOnBattlefield);
+            sb.append("this way, you may put it onto the battlefield instead");
         }
         if (forceShuffle) {
             sb.append(". Then shuffle your library");
