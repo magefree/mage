@@ -104,8 +104,8 @@ class DuplicantExileTargetEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (permanent != null && sourceObject instanceof Permanent) {
-            if (permanent.moveToExile(null, null, source.getSourceId(), game)) {
-                ((Permanent) sourceObject).imprint(permanent.getId(), game);
+            if (permanent.moveToExile(null, null, source.getSourceId(), game)
+                    && ((Permanent) sourceObject).imprint(permanent.getId(), game)) {
                 ((Permanent) sourceObject).addInfo("imprint", "[Imprinted card - " + permanent.getName() + ']', game);
             }
             return true;
