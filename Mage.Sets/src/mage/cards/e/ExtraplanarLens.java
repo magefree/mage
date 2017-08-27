@@ -37,16 +37,19 @@ import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
@@ -56,11 +59,20 @@ import mage.util.CardUtil;
  */
 public class ExtraplanarLens extends CardImpl {
 
+    private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
+
     public ExtraplanarLens(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Imprint - When Extraplanar Lens enters the battlefield, you may exile target land you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExtraplanarLensImprintEffect(), true, "<i>Imprint - </i>"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExtraplanarLensImprintEffect(), true);
+        ability.setAbilityWord(AbilityWord.IMPRINT);
+        ability.addTarget(new TargetLandPermanent(filter));
+        this.addAbility(ability);
 
         // Whenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana to his or her mana pool of any type that land produced.
         this.addAbility(new ExtraplanarLensTriggeredAbility());
@@ -79,8 +91,6 @@ public class ExtraplanarLens extends CardImpl {
 
 class ExtraplanarLensImprintEffect extends OneShotEffect {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
-
     public ExtraplanarLensImprintEffect() {
         super(Outcome.Neutral);
         staticText = "you may exile target land you control";
@@ -95,19 +105,13 @@ class ExtraplanarLensImprintEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent extraplanarLens = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null) {
-            if (game.getBattlefield().countAll(filter, controller.getId(), game) > 0) {
-                TargetPermanent target = new TargetPermanent(1, filter);
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                        && controller.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
-                    Permanent targetLand = game.getPermanent(target.getFirstTarget());
-                    if (targetLand != null) {
-                        targetLand.moveToExile(null, extraplanarLens.getName() + " (Imprint)", source.getSourceId(), game);
-                        extraplanarLens.imprint(targetLand.getId(), game);
-                        extraplanarLens.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + targetLand.getLogName() + ']'), game);
-                    }
-                }
-                return true;
+            Permanent targetLand = game.getPermanent(source.getFirstTarget());
+            if (targetLand != null) {
+                targetLand.moveToExile(null, extraplanarLens.getName() + " (Imprint)", source.getSourceId(), game);
+                extraplanarLens.imprint(targetLand.getId(), game);
+                extraplanarLens.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + targetLand.getLogName() + ']'), game);
             }
+            return true;
         }
         return false;
     }
