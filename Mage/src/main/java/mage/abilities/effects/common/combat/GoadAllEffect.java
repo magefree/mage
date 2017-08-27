@@ -28,8 +28,9 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -60,9 +61,12 @@ public class GoadAllEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
             if (!creature.getControllerId().equals(source.getControllerId())) {
-                Effect effect = new GoadTargetEffect();
-                effect.setTargetPointer(new FixedTarget(creature, game));
-                effect.apply(game, source);
+                ContinuousEffect effect = new AttacksIfAbleTargetEffect(Duration.UntilYourNextTurn);
+                effect.setTargetPointer(new FixedTarget(creature.getId()));
+                game.addEffect(effect, source);
+                effect = new CantAttackYouEffect(Duration.UntilYourNextTurn, true);
+                effect.setTargetPointer(new FixedTarget(creature.getId()));
+                game.addEffect(effect, source);
             }
         }
         return true;
