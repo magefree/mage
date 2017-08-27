@@ -25,83 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.i;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author anonymous
+ * @author TheElk801
  */
-public class IslandOfWakWak extends CardImpl {
+public class PsychicTrance extends CardImpl {
 
-    private static final FilterCreaturePermanent filterWithFlying = new FilterCreaturePermanent("creature with flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wizards you control");
 
     static {
-        filterWithFlying.add(new AbilityPredicate(FlyingAbility.class));
+        filter.add(new SubtypePredicate(SubType.WIZARD));
     }
 
-    public IslandOfWakWak(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+    public PsychicTrance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
 
-        // {tap}: The power of target creature with flying becomes 0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new IslandOfWakWakEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filterWithFlying));
-        this.addAbility(ability);
+        // Until end of turn, Wizards you control gain "{tap}: Counter target spell."
+        Ability abilityToAdd = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new TapSourceCost());
+        abilityToAdd.addTarget(new TargetSpell());
+        Effect effect = new GainAbilityControlledEffect(abilityToAdd, Duration.EndOfTurn, filter);
+        effect.setText("until end of turn, Wizards you control gain \"{tap}: Counter target spell\"");
+        this.getSpellAbility().addEffect(effect);
     }
 
-    public IslandOfWakWak(final IslandOfWakWak card) {
+    public PsychicTrance(final PsychicTrance card) {
         super(card);
     }
 
     @Override
-    public IslandOfWakWak copy() {
-        return new IslandOfWakWak(this);
-    }
-}
-
-class IslandOfWakWakEffect extends OneShotEffect {
-
-    public IslandOfWakWakEffect() {
-        super(Outcome.Detriment);
-        staticText = "The power of target creature with flying becomes 0 until end of turn";
-    }
-
-    public IslandOfWakWakEffect(final IslandOfWakWakEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        if (targetCreature != null) {
-            int toughness = targetCreature.getToughness().getBaseValueModified();
-            game.addEffect(new SetPowerToughnessTargetEffect(0, toughness, Duration.EndOfTurn), source);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public Effect copy() {
-        return new IslandOfWakWakEffect(this);
+    public PsychicTrance copy() {
+        return new PsychicTrance(this);
     }
 }
