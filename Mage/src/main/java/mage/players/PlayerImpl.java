@@ -1829,7 +1829,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 MageObject sourceObject = game.getObject(sourceId);
                 game.informPlayers(damage + " damage "
                         + (sourceObject == null ? "" : "from " + sourceObject.getLogName())
-                        + "to " + getLogName()
+                        + " to " + getLogName()
                         + (damage > 1 ? " were" : "was") + " prevented because of protection.");
             }
         }

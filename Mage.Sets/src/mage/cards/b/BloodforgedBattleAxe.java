@@ -48,9 +48,9 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class BloodforgedWarAxe extends CardImpl {
+public class BloodforgedBattleAxe extends CardImpl {
 
-    public BloodforgedWarAxe(UUID ownerId, CardSetInfo setInfo) {
+    public BloodforgedBattleAxe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         this.subtype.add("Equipment");
@@ -59,36 +59,36 @@ public class BloodforgedWarAxe extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
 
         // Whenever equipped creature deals combat damage to a player, create a token that's a copy of Bloodforged War Axe.
-        this.addAbility(new BloodforgedWarAxeAbility());
+        this.addAbility(new BloodforgedBattleAxeAbility());
 
         // Equip 2
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
 
     }
 
-    public BloodforgedWarAxe(final BloodforgedWarAxe card) {
+    public BloodforgedBattleAxe(final BloodforgedBattleAxe card) {
         super(card);
     }
 
     @Override
-    public BloodforgedWarAxe copy() {
-        return new BloodforgedWarAxe(this);
+    public BloodforgedBattleAxe copy() {
+        return new BloodforgedBattleAxe(this);
     }
 }
 
-class BloodforgedWarAxeAbility extends TriggeredAbilityImpl {
+class BloodforgedBattleAxeAbility extends TriggeredAbilityImpl {
 
-    public BloodforgedWarAxeAbility() {
+    public BloodforgedBattleAxeAbility() {
         super(Zone.BATTLEFIELD, new PutTokenOntoBattlefieldCopySourceEffect());
     }
 
-    public BloodforgedWarAxeAbility(final BloodforgedWarAxeAbility ability) {
+    public BloodforgedBattleAxeAbility(final BloodforgedBattleAxeAbility ability) {
         super(ability);
     }
 
     @Override
-    public BloodforgedWarAxeAbility copy() {
-        return new BloodforgedWarAxeAbility(this);
+    public BloodforgedBattleAxeAbility copy() {
+        return new BloodforgedBattleAxeAbility(this);
     }
 
     @Override

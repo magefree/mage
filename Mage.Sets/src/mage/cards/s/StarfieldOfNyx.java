@@ -76,7 +76,7 @@ public class StarfieldOfNyx extends CardImpl {
     }
 
     public StarfieldOfNyx(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
 
         // At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
@@ -112,7 +112,7 @@ class StarfieldOfNyxEffect extends ContinuousEffectImpl {
 
     public StarfieldOfNyxEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
-        staticText = "Each other non-Aura enchantment is a creature in addition to its other types and has base power and toughness each equal to its converted mana cost";
+        staticText = "Each other non-Aura enchantment you control is a creature in addition to its other types and has base power and toughness each equal to its converted mana cost";
     }
 
     public StarfieldOfNyxEffect(final StarfieldOfNyxEffect effect) {
@@ -162,7 +162,7 @@ class StarfieldOfNyxEffect extends ContinuousEffectImpl {
     public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
         return allEffectsInLayer
                 .stream()
-                .filter(effect->effect.getDependencyTypes().contains(DependencyType.AuraAddingRemoving))
+                .filter(effect -> effect.getDependencyTypes().contains(DependencyType.AuraAddingRemoving))
                 .map(Effect::getId)
                 .collect(Collectors.toSet());
 

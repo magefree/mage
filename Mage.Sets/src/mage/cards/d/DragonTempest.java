@@ -46,7 +46,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -74,7 +73,7 @@ public class DragonTempest extends CardImpl {
                 new DragonTempestDamageEffect(),
                 new FilterCreaturePermanent(SubType.DRAGON, "a Dragon"),
                 false,
-                SetTargetPointer.PERMANENT,
+                SetTargetPointer.NONE,
                 ""
         );
         ability.addTarget(new TargetCreatureOrPlayer());
@@ -118,15 +117,16 @@ class DragonTempestDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            Permanent damageSource = (Permanent) getValue("permanentEnteringBattlefield");
             int amount = game.getBattlefield().countAll(dragonFilter, controller.getId(), game);
             if (amount > 0) {
-                Permanent targetCreature = ((FixedTarget) getTargetPointer()).getTargetedPermanentOrLKIBattlefield(game);
+                Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (targetCreature != null) {
-                    targetCreature.damage(amount, getTargetPointer().getFirst(game, source), game, false, true);
+                    targetCreature.damage(amount, damageSource.getId(), game, false, true);
                 } else {
                     Player player = game.getPlayer(source.getTargets().getFirstTarget());
                     if (player != null) {
-                        player.damage(amount, getTargetPointer().getFirst(game, source), game, false, true);
+                        player.damage(amount, damageSource.getId(), game, false, true);
                     }
                 }
             }
