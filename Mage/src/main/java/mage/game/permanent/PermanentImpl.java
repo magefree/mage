@@ -1210,6 +1210,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean imprint(UUID imprintedCard, Game game) {
+        if (!game.getExile().containsId(imprintedCard, game)){
+            return false;
+        }
         if (connectedCards.containsKey("imprint")) {
             this.connectedCards.get("imprint").add(imprintedCard);
         } else {

@@ -72,6 +72,7 @@ public enum CounterType {
     HEALING("healing"),
     HOOFPRINT("hoofprint"),
     HOUR("hour"),
+    HOURGLASS("hourglass"),
     ICE("ice"),
     INFECTION("infection"),
     INTERVENTION("intervention"),

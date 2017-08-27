@@ -118,6 +118,15 @@ public class Exile implements Serializable, Copyable<Exile> {
         return new Exile(this);
     }
 
+    public boolean containsId(UUID cardId, Game game) {
+        for (Card card : getAllCards(game)) {
+            if (card.getId().equals(cardId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void clear() {
         for (ExileZone exile : exileZones.values()) {
             exile.clear();
