@@ -51,6 +51,7 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -594,7 +595,7 @@ public class TestPlayer implements Player {
                     String group = groups[i];
                     if (group.startsWith("planeswalker=")) {
                         String planeswalkerName = group.substring(group.indexOf("planeswalker=") + 13);
-                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), game)) {
+                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, game)) {
                             if (permanent.getName().equals(planeswalkerName)) {
                                 defenderId = permanent.getId();
                             }

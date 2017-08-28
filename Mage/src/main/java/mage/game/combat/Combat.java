@@ -40,7 +40,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -60,7 +59,6 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     private static final Logger logger = Logger.getLogger(Combat.class);
 
-    private static FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
     private static FilterCreatureForCombatBlock filterBlockers = new FilterCreatureForCombatBlock();
     // There are effects that let creatures assigns combat damage equal to its toughness rather than its power
     private boolean useToughnessForDamage;
@@ -1026,6 +1024,13 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public void setDefenders(Game game) {
+        for (UUID playerId : getAttackablePlayers(game)) {
+            addDefender(playerId, game);
+        }
+    }
+
+    public List<UUID> getAttackablePlayers(Game game) {
+        List<UUID> attackablePlayers = new ArrayList<>();
         Player attackingPlayer = game.getPlayer(attackingPlayerId);
         if (attackingPlayer != null) {
             PlayerList players;
@@ -1035,7 +1040,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     while (attackingPlayer.isInGame()) {
                         Player opponent = players.getNext(game);
                         if (attackingPlayer.hasOpponent(opponent.getId(), game)) {
-                            addDefender(opponent.getId(), game);
+                            attackablePlayers.add(opponent.getId());
                             break;
                         }
                     }
@@ -1045,18 +1050,19 @@ public class Combat implements Serializable, Copyable<Combat> {
                     while (attackingPlayer.isInGame()) {
                         Player opponent = players.getPrevious(game);
                         if (attackingPlayer.hasOpponent(opponent.getId(), game)) {
-                            addDefender(opponent.getId(), game);
+                            attackablePlayers.add(opponent.getId());
                             break;
                         }
                     }
                     break;
                 case MULTIPLE:
                     for (UUID opponentId : game.getOpponents(attackingPlayerId)) {
-                        addDefender(opponentId, game);
+                        attackablePlayers.add(opponentId);
                     }
                     break;
             }
         }
+        return attackablePlayers;
     }
 
     private void addDefender(UUID defenderId, Game game) {
@@ -1074,7 +1080,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             }
             defenders.add(defenderId);
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterPlaneswalker, defenderId, game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, defenderId, game)) {
                 defenders.add(permanent.getId());
             }
         }
