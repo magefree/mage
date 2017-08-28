@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -45,6 +44,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -54,7 +55,6 @@ public class BriselaVoiceOfNightmares extends MeldCard {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDRAZI, SubType.ANGEL);
-        this.subtype.add("Angel");
         this.power = new MageInt(9);
         this.toughness = new MageInt(10);
 

@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCounteredControllerTriggeredAbility;
@@ -42,6 +41,8 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +64,6 @@ public class BaralChiefOfCompliance extends CardImpl {
 
        addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
-        this.subtype.add("Wizard");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

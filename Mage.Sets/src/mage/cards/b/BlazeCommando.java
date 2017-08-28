@@ -28,9 +28,6 @@
 
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
@@ -45,6 +42,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.SoldierTokenWithHaste;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -56,7 +57,6 @@ public class BlazeCommando extends CardImpl {
     public BlazeCommando (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");
         this.subtype.add(SubType.MINOTAUR, SubType.SOLDIER);
-        this.subtype.add("Soldier");
 
 
         this.power = new MageInt(5);

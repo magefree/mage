@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -42,6 +41,8 @@ import mage.constants.Zone;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Backfir3
@@ -52,7 +53,6 @@ public class BarrinMasterWizard extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
-        this.subtype.add("Wizard");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
