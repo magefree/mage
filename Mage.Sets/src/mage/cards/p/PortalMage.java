@@ -68,11 +68,11 @@ public class PortalMage extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
 
-        // If Portal Mage enters the battlefield during the declare attackers step, you may reselect the player or planeswalker that the target attacking creature attacks.
+        // When Portal Mage enters the battlefield during the declare attackers step, you may reselect which player or planeswalker target attacking creature is attacking.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new PortalMageEffect(), true),
                 new IsStepCondition(PhaseStep.DECLARE_ATTACKERS, false),
-                "If {this} enters the battlefield during the declare attackers step, you may reselect the player or planeswalker that the target attacking creature attacks. "
+                "When {this} enters the battlefield during the declare attackers step, you may reselect which player or planeswalker target attacking creature is attacking. "
                 + "<i>(It can't attack its controller or its controller's planeswalkers.)</i>");
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));
         this.addAbility(ability);
@@ -92,7 +92,7 @@ class PortalMageEffect extends OneShotEffect {
 
     public PortalMageEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may reselect the player or planeswalker that the target attacking creature attacks";
+        this.staticText = "you may reselect which player or planeswalker target attacking creature is attacking";
     }
 
     public PortalMageEffect(final PortalMageEffect effect) {
@@ -147,7 +147,7 @@ class PortalMageEffect extends OneShotEffect {
                                     attacked = permanent.getLogName();
                                 }
                             }
-                            game.informPlayers(attackingCreature.getLogName() + " attacks now " + attacked);
+                            game.informPlayers(attackingCreature.getLogName() + " now attacks " + attacked);
                             return true;
                         }
                     }
