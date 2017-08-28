@@ -47,6 +47,7 @@ public class Commander2017 extends ExpansionSet {
         super("Commander 2017 Edition", "C17", ExpansionSet.buildDate(2017, 8, 25), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
 
+        cards.add(new SetCardInfo("Alms Collector", 1, Rarity.RARE, mage.cards.a.AlmsCollector.class));
         cards.add(new SetCardInfo("Arahbo, Roar of the World", 35, Rarity.MYTHIC, mage.cards.a.ArahboRoarOfTheWorld.class));
         cards.add(new SetCardInfo("Balan, Wandering Knight", 2, Rarity.RARE, mage.cards.b.BalanWanderingKnight.class));
         cards.add(new SetCardInfo("Bloodforged Battle-Axe", 50, Rarity.RARE, mage.cards.b.BloodforgedBattleAxe.class));

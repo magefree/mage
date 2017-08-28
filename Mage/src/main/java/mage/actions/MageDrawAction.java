@@ -1,5 +1,8 @@
 package mage.actions;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.actions.impl.MageAction;
 import mage.actions.score.ArtificialScoringSystem;
 import mage.cards.Card;
@@ -9,10 +12,6 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 /**
  * Action for drawing cards.
  *
@@ -20,12 +19,13 @@ import java.util.UUID;
  */
 public class MageDrawAction extends MageAction {
 
+    private static final int NEGATIVE_VALUE = -1000000;
+
     private final Player player;
-    private final int amount;
     private final List<UUID> appliedEffects;
     private final List<Card> drawnCards;
 
-    private static final int NEGATIVE_VALUE = -1000000;
+    private int amount;
 
     public MageDrawAction(Player player, int amount, List<UUID> appliedEffects) {
         this.player = player;
@@ -44,27 +44,31 @@ public class MageDrawAction extends MageAction {
     public int doAction(Game game) {
         int numDrawn = 0;
         int score = 0;
-        for (int i = 0; i < amount; i++) {
-            int value = drawCard(game);
-            if (value == NEGATIVE_VALUE) {
-                continue;
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.DRAW_CARDS, player.getId(), null, player.getId(), null, amount);
+        event.addAppliedEffects(appliedEffects);
+        if (amount < 2 || !game.replaceEvent(event)) {
+            amount = event.getAmount();
+            for (int i = 0; i < amount; i++) {
+                int value = drawCard(game);
+                if (value == NEGATIVE_VALUE) {
+                    continue;
+                }
+                numDrawn++;
+                score += value;
             }
-            numDrawn++;
-            score += value;
-        }
-        if (!player.isTopCardRevealed() && numDrawn > 0) {
-            game.fireInformEvent(player.getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
-        }
-        if (player.isEmptyDraw()) {
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.EMPTY_DRAW, player.getId(), player.getId());
-            if (!game.replaceEvent(event)) {
-                game.doAction(new MageLoseGameAction(player, MageLoseGameAction.DRAW_REASON));
+            if (!player.isTopCardRevealed() && numDrawn > 0) {
+                game.fireInformEvent(player.getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
             }
+            if (player.isEmptyDraw()) {
+                event = GameEvent.getEvent(GameEvent.EventType.EMPTY_DRAW, player.getId(), player.getId());
+                if (!game.replaceEvent(event)) {
+                    game.doAction(new MageLoseGameAction(player, MageLoseGameAction.DRAW_REASON));
+                }
+            }
+
+            setScore(player, score);
+            game.setStateCheckRequired();
         }
-
-        setScore(player, score);
-        game.setStateCheckRequired();
-
         return numDrawn;
     }
 
