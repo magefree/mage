@@ -87,6 +87,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 45, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
         cards.add(new SetCardInfo("Path of Ancestry", 56, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Patron of the Vein", 20, Rarity.RARE, mage.cards.p.PatronOfTheVein.class));
+        cards.add(new SetCardInfo("Portal Mage", 13, Rarity.RARE, mage.cards.p.PortalMage.class));
         cards.add(new SetCardInfo("Qasali Slingers", 33, Rarity.RARE, mage.cards.q.QasaliSlingers.class));
         cards.add(new SetCardInfo("Ramos, Dragon Engine", 55, Rarity.MYTHIC, mage.cards.r.RamosDragonEngine.class));
         cards.add(new SetCardInfo("Scalelord Reckoner", 6, Rarity.RARE, mage.cards.s.ScalelordReckoner.class));
