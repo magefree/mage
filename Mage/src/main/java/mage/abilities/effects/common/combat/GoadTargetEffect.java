@@ -59,7 +59,7 @@ public class GoadTargetEffect extends OneShotEffect {
         ContinuousEffect effect = new AttacksIfAbleTargetEffect(Duration.UntilYourNextTurn);
         effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
         game.addEffect(effect, source);
-        effect = new CantAttackYouEffect(Duration.UntilYourNextTurn, true);
+        effect = new CantAttackYouEffect(Duration.EndOfTurn, true);
         effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
         game.addEffect(effect, source);
         return true;
