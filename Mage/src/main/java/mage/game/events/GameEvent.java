@@ -27,12 +27,11 @@
  */
 package mage.game.events;
 
-import mage.constants.Zone;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.constants.Zone;
 
 /**
  *
@@ -90,6 +89,7 @@ public class GameEvent implements Serializable {
         ZONE_CHANGE,
         ZONE_CHANGE_GROUP,
         EMPTY_DRAW,
+        DRAW_CARDS, // applies to an instruction to draw more than one card before any replacement effects apply to individual cards drawn
         DRAW_CARD, DREW_CARD,
         MIRACLE_CARD_REVEALED,
         MADNESS_CARD_EXILED,

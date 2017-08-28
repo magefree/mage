@@ -37,7 +37,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.target.TargetPlayer;
 
 /**
@@ -61,7 +60,7 @@ public class ToTheSlaughter extends CardImpl {
                 DeliriumCondition.instance,
                 "<br><i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, instead that player sacrifices a creature"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new SacrificeEffect(new FilterPlaneswalkerPermanent(), 1, "Target player"),
+                new SacrificeEffect(StaticFilters.FILTER_PERMANENT_PLANESWALKER, 1, "Target player"),
                 DeliriumCondition.instance, "and a planeswalker."));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

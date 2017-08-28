@@ -30,7 +30,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -45,6 +44,8 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  * @author LevelX
@@ -89,8 +90,7 @@ class KenzoTheHardhearted extends Token {
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Human");
-        subtype.add("Samurai");
+        subtype.add(SubType.HUMAN, SubType.SAMURAI);
         power = new MageInt(3);
         toughness = new MageInt(4);
 

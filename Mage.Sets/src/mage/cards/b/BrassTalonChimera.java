@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -46,6 +45,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author TheElk801
@@ -61,7 +62,7 @@ public class BrassTalonChimera extends CardImpl {
     public BrassTalonChimera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
 
-        this.subtype.add("Chimera");
+        this.subtype.add(SubType.CHIMERA);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

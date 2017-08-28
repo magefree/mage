@@ -64,7 +64,7 @@ public class Homelands extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
-        cards.add(new SetCardInfo("AEther Storm", 26, Rarity.UNCOMMON, mage.cards.a.AetherStorm.class));
+        cards.add(new SetCardInfo("Aether Storm", 26, Rarity.UNCOMMON, mage.cards.a.AetherStorm.class));
         cards.add(new SetCardInfo("Abbey Gargoyles", 101, Rarity.UNCOMMON, mage.cards.a.AbbeyGargoyles.class));
         cards.add(new SetCardInfo("Abbey Matron", 102, Rarity.COMMON, AbbeyMatron.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abbey Matron", 103, Rarity.COMMON, AbbeyMatron.class, NON_FULL_USE_VARIOUS));

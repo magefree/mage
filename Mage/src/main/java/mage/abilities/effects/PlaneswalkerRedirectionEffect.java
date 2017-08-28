@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterPlaneswalkerPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -47,8 +47,6 @@ import mage.target.TargetPermanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
-
-    private static FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent();
 
     public PlaneswalkerRedirectionEffect() {
         super(Duration.EndOfGame);
@@ -76,11 +74,11 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
             Player target = game.getPlayer(event.getTargetId());
             Player player = game.getPlayer(playerId);
             if (target != null && player != null) {
-                int numPlaneswalkers = game.getBattlefield().countAll(filter, target.getId(), game);
+                int numPlaneswalkers = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_PLANESWALKER, target.getId(), game);
                 if (numPlaneswalkers > 0 && player.chooseUse(outcome, "Redirect damage to planeswalker?", source, game)) {
-                    redirectTarget = new TargetPermanent(filter);
+                    redirectTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_PLANESWALKER);
                     if (numPlaneswalkers == 1) {
-                        List<Permanent> planeswalker = game.getBattlefield().getAllActivePermanents(filter, target.getId(), game);
+                        List<Permanent> planeswalker = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, target.getId(), game);
                         if (!planeswalker.isEmpty()) {
                             redirectTarget.add(planeswalker.get(0).getId(), game);
                         }

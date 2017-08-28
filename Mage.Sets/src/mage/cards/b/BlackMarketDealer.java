@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -49,6 +48,8 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Styxo
@@ -64,8 +65,7 @@ public class BlackMarketDealer extends CardImpl {
 
     public BlackMarketDealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.HUMAN, SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

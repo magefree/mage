@@ -655,4 +655,23 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     public CombatGroup copy() {
         return new CombatGroup(this);
     }
+
+    public boolean changeDefenderPostDeclaration(UUID newDefenderId, Game game) {
+        Permanent permanent = game.getPermanent(newDefenderId);
+        if (permanent != null) {
+            defenderId = newDefenderId;
+            defendingPlayerId = permanent.getControllerId();
+            defenderIsPlaneswalker = true;
+            return true;
+        } else {
+            Player defender = game.getPlayer(newDefenderId);
+            if (defender != null) {
+                defenderId = newDefenderId;
+                defendingPlayerId = newDefenderId;
+                defenderIsPlaneswalker = false;
+                return true;
+            }
+        }
+        return false;
+    }
 }

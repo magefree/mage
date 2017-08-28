@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -46,6 +45,8 @@ import mage.game.Game;
 import mage.game.permanent.token.DokaiWeaverofLifeToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -117,8 +118,7 @@ class DokaiWeaverofLife extends Token {
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Human");
-        subtype.add("Monk");
+        subtype.add(SubType.HUMAN, SubType.MONK);
         power = new MageInt(3);
         toughness = new MageInt(3);
 

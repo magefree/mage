@@ -29,7 +29,6 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -63,7 +62,7 @@ public class StarkeOfRath extends CardImpl {
     }
 
     public StarkeOfRath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Rogue");
@@ -110,13 +109,11 @@ class StarkeOfRathEffect extends OneShotEffect {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetPermanent != null) {
                 targetPermanent.destroy(source.getSourceId(), game, false);
-            }
-            MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-            if ((sourceObject instanceof Permanent) && targetPermanent != null) {
                 ContinuousEffect effect = new StarkeOfRathControlEffect();
                 effect.setTargetPointer(new FixedTarget(targetPermanent.getControllerId()));
                 game.addEffect(effect, source);
             }
+            return true;
         }
         return false;
     }
@@ -140,10 +137,10 @@ class StarkeOfRathControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
-        Player controller = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (permanent != null && controller != null) {
-            return permanent.changeControllerId(getTargetPointer().getFirst(game, source), game);
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        Player newController = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (permanent != null && newController != null) {
+            return permanent.changeControllerId(newController.getId(), game);
         } else {
             discard();
         }

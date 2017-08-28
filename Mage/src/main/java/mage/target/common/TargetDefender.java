@@ -34,8 +34,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.filter.Filter;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterPlaneswalkerOrPlayer;
-import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -93,7 +93,7 @@ public class TargetDefender extends TargetImpl {
                 }
             }
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, sourceControllerId, game)) {
             if ((notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game))
                     && filter.match(permanent, game)) {
                 count++;
@@ -117,7 +117,7 @@ public class TargetDefender extends TargetImpl {
                 }
             }
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, sourceControllerId, game)) {
             if (filter.match(permanent, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -140,7 +140,7 @@ public class TargetDefender extends TargetImpl {
                 possibleTargets.add(playerId);
             }
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, sourceControllerId, game)) {
             if ((notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game))
                     && filter.match(permanent, game)) {
                 possibleTargets.add(permanent.getId());
@@ -158,7 +158,7 @@ public class TargetDefender extends TargetImpl {
                 possibleTargets.add(playerId);
             }
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, sourceControllerId, game)) {
             if (filter.match(permanent, game)) {
                 possibleTargets.add(permanent.getId());
             }

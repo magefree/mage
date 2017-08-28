@@ -36,10 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,7 +51,7 @@ public class BloodHound extends CardImpl {
     public BloodHound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.HOUND);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

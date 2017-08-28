@@ -680,7 +680,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target.getOriginalTarget() instanceof TargetDefender) {
             // TODO: Improve, now planeswalker is always chosen if it exits
             List<Permanent> targets;
-            targets = game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), randomOpponentId, game);
+            targets = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, randomOpponentId, game);
             if (targets != null && !targets.isEmpty()) {
                 for (Permanent planeswalker : targets) {
                     if (target.canTarget(getId(), planeswalker.getId(), source, game)) {

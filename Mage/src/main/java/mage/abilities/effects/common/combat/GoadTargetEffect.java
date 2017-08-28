@@ -41,6 +41,13 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class GoadTargetEffect extends OneShotEffect {
 
+    /**
+     * 701.36. Goad
+     *
+     * 701.36a Certain spells and abilities can goad a creature. Until the next
+     * turn of the controller of that spell or ability, that creature attacks
+     * each combat if able and attacks a player other than that player if able.
+     */
     public GoadTargetEffect() {
         super(Outcome.Benefit);
     }
@@ -57,10 +64,10 @@ public class GoadTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         ContinuousEffect effect = new AttacksIfAbleTargetEffect(Duration.UntilYourNextTurn);
-        effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+        effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
         game.addEffect(effect, source);
-        effect = new CantAttackYouEffect(Duration.EndOfTurn, true);
-        effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+        effect = new CantAttackYouEffect(Duration.UntilYourNextTurn, true);
+        effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
         game.addEffect(effect, source);
         return true;
     }

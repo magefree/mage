@@ -55,20 +55,19 @@ public class WanderwineProphets extends CardImpl {
     }
 
     public WanderwineProphets(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
+        this.subtype.add(SubType.MERFOLK, SubType.WIZARD);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Champion a Merfolk
-        this.addAbility(new ChampionAbility(this, SubType.MERCENARY, false));
+        this.addAbility(new ChampionAbility(this, SubType.MERFOLK, false));
         // Whenever Wanderwine Prophets deals combat damage to a player, you may sacrifice a Merfolk. If you do, take an extra turn after this one.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new AddExtraTurnControllerEffect(), true);
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);
-        
+
     }
 
     public WanderwineProphets(final WanderwineProphets card) {

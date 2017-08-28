@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -48,6 +47,8 @@ import mage.filter.StaticFilters;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -91,7 +92,7 @@ class IchigaWhoTopplesOaks extends Token {
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Spirit");
+        subtype.add(SubType.SPIRIT);
         power = new MageInt(4);
         toughness = new MageInt(3);
 
