@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -36,7 +35,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +48,7 @@ public class Breathstealer extends CardImpl {
 
     public Breathstealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Nightstalker");
+        this.subtype.add(SubType.NIGHTSTALKER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

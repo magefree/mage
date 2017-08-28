@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,15 +37,14 @@ import mage.abilities.effects.common.CantAttackBlockTransformAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +60,7 @@ public class BoundByMoonsilver extends CardImpl {
 
     public BoundByMoonsilver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

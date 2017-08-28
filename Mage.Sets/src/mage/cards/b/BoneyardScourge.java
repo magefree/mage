@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -49,6 +48,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 
+import java.util.UUID;
+
 /**
  *
  * @author TheElk801
@@ -65,8 +66,7 @@ public class BoneyardScourge extends CardImpl {
     public BoneyardScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
 
-        this.subtype.add("Zombie");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.ZOMBIE, SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

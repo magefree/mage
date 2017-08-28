@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,12 +37,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.StackAbility;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +62,7 @@ public class BrownOuphe extends CardImpl {
     public BrownOuphe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
 
-        this.subtype.add("Ouphe");
+        this.subtype.add(SubType.OUPHE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

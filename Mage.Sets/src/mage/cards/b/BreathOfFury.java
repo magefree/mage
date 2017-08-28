@@ -36,10 +36,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TurnPhase;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 import mage.game.Game;
@@ -60,7 +57,7 @@ public class BreathOfFury extends CardImpl {
 
     public BreathOfFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature you control
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();

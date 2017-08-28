@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -42,6 +41,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,8 +59,7 @@ public class BloodlineNecromancer extends CardImpl {
     public BloodlineNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
 
-        this.subtype.add("Vampire");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.VAMPIRE, SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

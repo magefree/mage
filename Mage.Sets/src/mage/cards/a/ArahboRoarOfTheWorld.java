@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
@@ -36,7 +35,6 @@ import mage.abilities.condition.common.SourceOnBattlefieldOrCommandZoneCondition
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -44,14 +42,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -61,6 +52,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -84,8 +77,7 @@ public class ArahboRoarOfTheWorld extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Cat");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.CAT, SubType.AVATAR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

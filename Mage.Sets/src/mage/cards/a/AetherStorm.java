@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,13 +37,11 @@ import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +76,7 @@ class AetherStormReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     public AetherStormReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Creature spells with converted mana cost 4 or greater can't be cast.";
+        staticText = "Creature spells can't be cast.";
     }
 
     public AetherStormReplacementEffect(final AetherStormReplacementEffect effect) {

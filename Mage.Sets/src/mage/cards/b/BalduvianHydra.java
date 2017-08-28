@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,11 +39,10 @@ import mage.abilities.effects.common.PreventDamageToSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +53,7 @@ public class BalduvianHydra extends CardImpl {
     public BalduvianHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{R}{R}");
 
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

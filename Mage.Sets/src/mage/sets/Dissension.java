@@ -59,7 +59,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Assault Zeppelid", 103, Rarity.COMMON, mage.cards.a.AssaultZeppelid.class));
         cards.add(new SetCardInfo("Aurora Eidolon", 1, Rarity.COMMON, mage.cards.a.AuroraEidolon.class));
         cards.add(new SetCardInfo("Avatar of Discord", 140, Rarity.RARE, mage.cards.a.AvatarOfDiscord.class));
-        cards.add(new SetCardInfo("Azorius AEthermage", 104, Rarity.UNCOMMON, mage.cards.a.AzoriusAEthermage.class));
+        cards.add(new SetCardInfo("Azorius Aethermage", 104, Rarity.UNCOMMON, mage.cards.a.AzoriusAEthermage.class));
         cards.add(new SetCardInfo("Azorius Chancery", 170, Rarity.COMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Azorius First-Wing", 105, Rarity.COMMON, mage.cards.a.AzoriusFirstWing.class));
         cards.add(new SetCardInfo("Azorius Guildmage", 141, Rarity.UNCOMMON, mage.cards.a.AzoriusGuildmage.class));
