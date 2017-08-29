@@ -1514,7 +1514,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 if (object != null) {
                     LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(object, game.getState().getZone(object.getId()), game);
                     if (useableAbilities != null && !useableAbilities.isEmpty()) {
-                        game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(useableAbilities.values()));
+                        // game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(useableAbilities.values()));
                         // TODO: Improve this
                         return (SpellAbility) useableAbilities.values().iterator().next();
                     }
