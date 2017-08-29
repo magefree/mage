@@ -49,6 +49,7 @@ public class GameDay extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Abrade", 62, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
+        cards.add(new SetCardInfo("Adorned Pouncer", 61, Rarity.RARE, mage.cards.a.AdornedPouncer.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 52, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
         cards.add(new SetCardInfo("Black Sun's Zenith", 7, Rarity.RARE, mage.cards.b.BlackSunsZenith.class));
         cards.add(new SetCardInfo("Chief Engineer", 40, Rarity.RARE, mage.cards.c.ChiefEngineer.class));
@@ -62,7 +63,7 @@ public class GameDay extends ExpansionSet {
         cards.add(new SetCardInfo("Elite Inquisitor", 13, Rarity.RARE, mage.cards.e.EliteInquisitor.class));
         cards.add(new SetCardInfo("Essence Extraction", 55, Rarity.UNCOMMON, mage.cards.e.EssenceExtraction.class));
         cards.add(new SetCardInfo("Firemane Avenger", 24, Rarity.RARE, mage.cards.f.FiremaneAvenger.class));
-        cards.add(new SetCardInfo("Glorybringer", 59, Rarity.RARE, mage.cards.g.Glorybringer.class));
+        cards.add(new SetCardInfo("Glorybringer", 60, Rarity.RARE, mage.cards.g.Glorybringer.class));
         cards.add(new SetCardInfo("Goblin Diplomats", 29, Rarity.RARE, mage.cards.g.GoblinDiplomats.class));
         cards.add(new SetCardInfo("Hall of Triumph", 36, Rarity.RARE, mage.cards.h.HallOfTriumph.class));
         cards.add(new SetCardInfo("Heir of the Wilds", 37, Rarity.UNCOMMON, mage.cards.h.HeirOfTheWilds.class));
@@ -103,6 +104,7 @@ public class GameDay extends ExpansionSet {
         cards.add(new SetCardInfo("Treasure Mage", 6, Rarity.UNCOMMON, mage.cards.t.TreasureMage.class));
         cards.add(new SetCardInfo("Trophy Mage", 57, Rarity.UNCOMMON, mage.cards.t.TrophyMage.class));
         cards.add(new SetCardInfo("Trostani's Summoner", 27, Rarity.UNCOMMON, mage.cards.t.TrostanisSummoner.class));
+        cards.add(new SetCardInfo("Trueheart Duelist", 59, Rarity.UNCOMMON, mage.cards.t.TrueheartDuelist.class));
         cards.add(new SetCardInfo("Unsubstantiate", 53, Rarity.UNCOMMON, mage.cards.u.Unsubstantiate.class));
         cards.add(new SetCardInfo("Utter End", 38, Rarity.RARE, mage.cards.u.UtterEnd.class));
         cards.add(new SetCardInfo("Yahenni's Expertise", 58, Rarity.RARE, mage.cards.y.YahennisExpertise.class));
