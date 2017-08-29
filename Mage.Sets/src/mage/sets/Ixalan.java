@@ -31,6 +31,11 @@ public class Ixalan extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        cards.add(new SetCardInfo("Dragonskull Summit", 252, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
+        cards.add(new SetCardInfo("Drowned Catacomb", 253, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
+        cards.add(new SetCardInfo("Glacial Fortress", 255, Rarity.RARE, mage.cards.g.GlacialFortress.class));
+        cards.add(new SetCardInfo("Rootbound Crag", 256, Rarity.RARE, mage.cards.r.RootboundCrag.class));
+        cards.add(new SetCardInfo("Sunpetal Grove", 257, Rarity.RARE, mage.cards.s.SunpetalGrove.class));
         cards.add(new SetCardInfo("Verdant Sun's Avatar", 410, Rarity.RARE, mage.cards.v.VerdantSunsAvatar.class));
         cards.add(new SetCardInfo("Vraska's Contempt", 210, Rarity.RARE, mage.cards.v.VraskasContempt.class));
         cards.add(new SetCardInfo("Waker of the Wilds", 415, Rarity.RARE, mage.cards.w.WakerOfTheWilds.class));
