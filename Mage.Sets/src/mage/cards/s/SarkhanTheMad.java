@@ -41,6 +41,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -62,6 +63,7 @@ public class SarkhanTheMad extends CardImpl {
 
     public SarkhanTheMad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{R}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Sarkhan");
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));
 

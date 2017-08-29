@@ -46,6 +46,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
@@ -63,6 +64,7 @@ public class SaheeliRai extends CardImpl {
 
     public SaheeliRai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{U}{R}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Saheeli");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

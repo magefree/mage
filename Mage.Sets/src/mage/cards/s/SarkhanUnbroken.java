@@ -44,6 +44,7 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -65,6 +66,7 @@ public class SarkhanUnbroken extends CardImpl {
 
     public SarkhanUnbroken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{U}{R}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Sarkhan");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

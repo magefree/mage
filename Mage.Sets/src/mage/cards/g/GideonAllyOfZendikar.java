@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.game.command.emblems.GideonAllyOfZendikarEmblem;
 import mage.game.permanent.token.KnightAllyToken;
 import mage.game.permanent.token.Token;
@@ -53,6 +54,7 @@ public class GideonAllyOfZendikar extends CardImpl {
 
     public GideonAllyOfZendikar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Gideon");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

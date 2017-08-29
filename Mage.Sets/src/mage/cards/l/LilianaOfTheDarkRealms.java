@@ -62,6 +62,7 @@ public class LilianaOfTheDarkRealms extends CardImpl {
 
     public LilianaOfTheDarkRealms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{B}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Liliana");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

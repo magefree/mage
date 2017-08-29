@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.game.command.emblems.GideonOfTheTrialsEmblem;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
@@ -53,7 +54,7 @@ public class GideonOfTheTrials extends CardImpl {
 
     public GideonOfTheTrials(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{W}");
-
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Gideon");
 
         //Starting Loyalty: 3

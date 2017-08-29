@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.DragonToken;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,6 +57,7 @@ public class SarkhanVol extends CardImpl {
 
     public SarkhanVol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{G}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Sarkhan");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

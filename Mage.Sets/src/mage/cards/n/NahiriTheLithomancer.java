@@ -41,6 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -64,6 +65,7 @@ public class NahiriTheLithomancer extends CardImpl {
 
     public NahiriTheLithomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Nahiri");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

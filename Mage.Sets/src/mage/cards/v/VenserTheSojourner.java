@@ -65,6 +65,7 @@ public class VenserTheSojourner extends CardImpl {
 
     public VenserTheSojourner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Venser");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
