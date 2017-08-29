@@ -25,61 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.constants;
+package mage.cards.r;
+
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public enum AbilityWord {
+public class RipjawRaptor extends CardImpl {
 
-    BATTALION("Battalion"),
-    BLOODRUSH("Bloodrush"),
-    CHANNEL("Channel"),
-    CHROMA("Chroma"),
-    COHORT("Cohort"),
-    CONSTELLATION("Constellation"),
-    CONVERGE("Converge"),
-    DELIRIUM("Delirium"),
-    DOMAIN("Domain"),
-    EMINENCE("Eminence"),
-    ENRAGE("Enrage"),
-    FATEFUL_HOUR("Fateful hour"),
-    FEROCIOUS("Ferocious"),
-    FORMIDABLE("Formidable"),
-    GRANDEUR("Grandeur"),
-    HATE("Hate"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    IMPRINT("Imprint"),
-    INSPIRED("Inspired"),
-    JOIN_FORCES("Join forces"),
-    KINSHIP("Kinship"),
-    LANDFALL("Landfall"),
-    LIEUTENANT("Lieutenant"),
-    METALCRAFT("Metalcraft"),
-    MORBID("Morbid"),
-    PARLEY("Parley"),
-    RADIANCE("Radiance"),
-    RAID("Raid"),
-    RALLY("Rally"),
-    REVOLT("Revolt"),
-    SPELL_MASTERY("Spell mastery"),
-    STRIVE("Strive"),
-    SWEEP("Sweep"),
-    TEMPTING_OFFER("Tempting offer"),
-    THRESHOLD("Threshold"),
-    WILL_OF_THE_COUNCIL("Will of the council");
+    public RipjawRaptor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
-    private final String text;
+        this.subtype.add("Dinosaur");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
 
-    AbilityWord(String text) {
-        this.text = text;
+        // <i>Enrage</i> &mdash; Whenever Ripjaw Raptor is dealt damage, draw a card.
+        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
+        ability.setAbilityWord(AbilityWord.ENRAGE);
+        this.addAbility(ability);
+    }
+
+    public RipjawRaptor(final RipjawRaptor card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public RipjawRaptor copy() {
+        return new RipjawRaptor(this);
     }
-
 }
