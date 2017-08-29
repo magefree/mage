@@ -38,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -99,12 +100,13 @@ class WarsTollTapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-        filter.add(new ControllerIdPredicate(getTargetPointer().getFirst(game, source)));
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.tap(game);
+        if (getTargetPointer().getFirst(game, source) != null) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LAND, getTargetPointer().getFirst(game, source), game)) {
+                permanent.tap(game);
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 }
 
