@@ -48,6 +48,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
@@ -61,6 +62,7 @@ public class NissaNaturesArtisan extends CardImpl {
 
     public NissaNaturesArtisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{G}{G}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Nissa");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

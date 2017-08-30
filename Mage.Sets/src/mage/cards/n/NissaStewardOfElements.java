@@ -62,7 +62,7 @@ public class NissaStewardOfElements extends CardImpl {
 
     public NissaStewardOfElements(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{X}{G}{U}");
-
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Nissa");
 
         Ability abilityETB = new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.LOYALTY.createInstance()));

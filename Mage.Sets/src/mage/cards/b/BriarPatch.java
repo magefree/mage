@@ -52,7 +52,7 @@ public class BriarPatch extends CardImpl {
         Effect effect = new BoostTargetEffect(-1, 0, Duration.EndOfTurn);
         effect.setText("it gets -1/-0");
         Ability ability = new AttackedByCreatureTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PERMANENT);
-        this.getAbilities().add(ability);
+        addAbility(ability);
     }
 
     public BriarPatch(final BriarPatch card) {

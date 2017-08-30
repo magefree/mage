@@ -38,12 +38,12 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -99,12 +99,13 @@ class WarsTollTapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-        filter.add(new ControllerIdPredicate(getTargetPointer().getFirst(game, source)));
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.tap(game);
+        if (getTargetPointer().getFirst(game, source) != null) {
+            game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LAND, getTargetPointer().getFirst(game, source), game).forEach((permanent) -> {
+                permanent.tap(game);
+            });
+            return true;
         }
-        return true;
+        return false;
     }
 }
 
@@ -126,12 +127,10 @@ class WarsTollEffect extends OneShotEffect {
         Player opponent = game.getPlayer(game.getPermanent(getTargetPointer().getFirst(game, source)).getControllerId());
         if (opponent != null) {
             filterOpponentCreatures.add(new ControllerIdPredicate(opponent.getId()));
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
-                if (filterOpponentCreatures.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-                    //TODO: allow the player to choose between a planeswalker and player
-                    opponent.declareAttacker(permanent.getId(), source.getControllerId(), game, false);
-                }
-            }
+            game.getBattlefield().getAllActivePermanents(CardType.CREATURE).stream().filter((permanent) -> (filterOpponentCreatures.match(permanent, source.getSourceId(), source.getControllerId(), game))).forEachOrdered((permanent) -> {
+                //TODO: allow the player to choose between a planeswalker and player
+                opponent.declareAttacker(permanent.getId(), source.getControllerId(), game, false);
+            });
             return true;
         }
         return false;

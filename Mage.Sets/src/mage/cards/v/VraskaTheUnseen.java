@@ -43,6 +43,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlaneswalkerEvent;
@@ -68,6 +69,7 @@ public class VraskaTheUnseen extends CardImpl {
 
     public VraskaTheUnseen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{G}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Vraska");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

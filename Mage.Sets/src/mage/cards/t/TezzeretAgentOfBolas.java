@@ -43,6 +43,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -65,6 +66,7 @@ public class TezzeretAgentOfBolas extends CardImpl {
 
     public TezzeretAgentOfBolas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{B}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Tezzeret");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

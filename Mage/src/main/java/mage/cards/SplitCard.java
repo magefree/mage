@@ -119,6 +119,8 @@ public abstract class SplitCard extends CardImpl {
             case SPLIT_RIGHT:
                 return this.getRightHalfCard().cast(game, fromZone, ability, controllerId);
             default:
+                this.getLeftHalfCard().getSpellAbility().setControllerId(controllerId);
+                this.getRightHalfCard().getSpellAbility().setControllerId(controllerId);
                 return super.cast(game, fromZone, ability, controllerId);
         }
     }

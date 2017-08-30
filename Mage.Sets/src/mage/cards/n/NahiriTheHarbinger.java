@@ -49,6 +49,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -80,6 +81,7 @@ public class NahiriTheHarbinger extends CardImpl {
 
     public NahiriTheHarbinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{W}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Nahiri");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

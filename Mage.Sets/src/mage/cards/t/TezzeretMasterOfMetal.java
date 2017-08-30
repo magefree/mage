@@ -45,6 +45,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactCard;
@@ -64,6 +65,7 @@ public class TezzeretMasterOfMetal extends CardImpl {
 
     public TezzeretMasterOfMetal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Tezzeret");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

@@ -47,6 +47,7 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
+import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.Emblem;
@@ -886,14 +887,28 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public boolean canChooseTarget(Game game) {
+        if (this instanceof SpellAbility) {
+            if (SpellAbilityType.SPLIT_FUSED.equals(((SpellAbility) this).getSpellAbilityType())) {
+                Card card = game.getCard(getSourceId());
+                if (card != null) {
+                    return canChooseTargetAbility(((SplitCard) card).getLeftHalfCard().getSpellAbility(), game, getControllerId())
+                            && canChooseTargetAbility(((SplitCard) card).getRightHalfCard().getSpellAbility(), game, getControllerId());
+                }
+                return false;
+            }
+        }
+        return canChooseTargetAbility(this, game, getControllerId());
+    }
+
+    private static boolean canChooseTargetAbility(Ability ability, Game game, UUID controllerId) {
         int found = 0;
-        for (Mode mode : getModes().values()) {
-            if (mode.getTargets().canChoose(sourceId, controllerId, game)) {
+        for (Mode mode : ability.getModes().values()) {
+            if (mode.getTargets().canChoose(ability.getSourceId(), ability.getControllerId(), game)) {
                 found++;
-                if (getModes().isEachModeMoreThanOnce()) {
+                if (ability.getModes().isEachModeMoreThanOnce()) {
                     return true;
                 }
-                if (found >= getModes().getMinModes()) {
+                if (found >= ability.getModes().getMinModes()) {
                     return true;
                 }
             }

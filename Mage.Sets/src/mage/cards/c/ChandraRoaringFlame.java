@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.command.emblems.ChandraRoaringFlameEmblem;
 import mage.players.Player;
@@ -53,6 +54,7 @@ public class ChandraRoaringFlame extends CardImpl {
 
     public ChandraRoaringFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Chandra");
         this.color.setRed(true);
 

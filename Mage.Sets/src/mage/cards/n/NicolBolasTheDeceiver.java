@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -56,7 +57,7 @@ public class NicolBolasTheDeceiver extends CardImpl {
 
     public NicolBolasTheDeceiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{U}{B}{R}");
-
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Bolas");
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 

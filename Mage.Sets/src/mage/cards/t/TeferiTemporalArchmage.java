@@ -38,6 +38,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -52,6 +53,7 @@ public class TeferiTemporalArchmage extends CardImpl {
 
     public TeferiTemporalArchmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Teferi");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

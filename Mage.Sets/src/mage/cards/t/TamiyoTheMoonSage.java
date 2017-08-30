@@ -40,6 +40,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -56,6 +57,7 @@ public class TamiyoTheMoonSage extends CardImpl {
 
     public TamiyoTheMoonSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Tamiyo");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

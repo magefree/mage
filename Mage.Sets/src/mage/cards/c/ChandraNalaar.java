@@ -41,6 +41,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.target.TargetPlayer;
@@ -54,6 +55,7 @@ public class ChandraNalaar extends CardImpl {
 
     public ChandraNalaar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{R}{R}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Chandra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));

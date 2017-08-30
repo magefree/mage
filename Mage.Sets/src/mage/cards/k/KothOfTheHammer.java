@@ -43,6 +43,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -67,6 +68,7 @@ public class KothOfTheHammer extends CardImpl {
 
     public KothOfTheHammer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Koth");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

@@ -46,6 +46,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
@@ -71,6 +72,7 @@ public class JaceArchitectOfThought extends CardImpl {
 
     public JaceArchitectOfThought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{U}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Jace");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

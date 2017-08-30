@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -56,6 +57,7 @@ public class LilianaOfTheVeil extends CardImpl {
 
     public LilianaOfTheVeil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{B}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Liliana");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

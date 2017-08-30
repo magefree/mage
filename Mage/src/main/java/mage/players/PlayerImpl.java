@@ -966,8 +966,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (game == null || ability == null) {
             return false;
         }
+        ability.setControllerId(getId());
         if (ability.getSpellAbilityType() != SpellAbilityType.BASE) {
             ability = chooseSpellAbilityForCast(ability, game, noMana);
+            if (ability == null) {
+                // No ability could be cast (selected), probably because of no valid targets (happens often if a card can be cast by an effect).
+                return false;
+            }
         }
         //20091005 - 601.2a
         if (ability.getSourceId() == null) {
@@ -1241,22 +1246,35 @@ public abstract class PlayerImpl implements Player, Serializable {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         for (Ability ability : object.getAbilities()) {
             if (ability instanceof SpellAbility) {
-                if (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-                    if (zone == Zone.HAND) {
-                        // Fix so you don't need to choose Fuse twice
-                        useable.clear();
-                        useable.put(ability.getId(), (SpellAbility) ability);
+                switch (((SpellAbility) ability).getSpellAbilityType()) {
+                    case SPLIT_FUSED:
+                        if (zone == Zone.HAND) {
+                            if (((SpellAbility) ability).canChooseTarget(game)) {
+                                useable.put(ability.getId(), (SpellAbility) ability);
+                            }
+                        }
+                    case SPLIT:
+                        if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game)) {
+                            useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(), ((SplitCard) object).getLeftHalfCard().getSpellAbility());
+                        }
+                        if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game)) {
+                            useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(), ((SplitCard) object).getRightHalfCard().getSpellAbility());
+                        }
                         return useable;
-                    } else {
-                        // Fuse only allowed from hand
-                        continue;
-                    }
+                    case SPLIT_AFTERMATH:
+                        if (zone == Zone.GRAVEYARD) {
+                            if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game)) {
+                                useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(), ((SplitCard) object).getRightHalfCard().getSpellAbility());
+                            }
+                        } else {
+                            if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game)) {
+                                useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(), ((SplitCard) object).getLeftHalfCard().getSpellAbility());
+                            }
+                        }
+                        return useable;
+                    default:
+                        useable.put(ability.getId(), (SpellAbility) ability);
                 }
-                if (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
-                        || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH) {
-                    continue;
-                }
-                useable.put(ability.getId(), (SpellAbility) ability);
             }
         }
         return useable;

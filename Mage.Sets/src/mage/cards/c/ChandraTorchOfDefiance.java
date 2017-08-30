@@ -44,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -59,6 +60,7 @@ public class ChandraTorchOfDefiance extends CardImpl {
 
     public ChandraTorchOfDefiance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Chandra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

@@ -44,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.ElementalToken;
@@ -57,6 +58,7 @@ public class ChandraFlamecaller extends CardImpl {
 
     public ChandraFlamecaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{R}{R}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Chandra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

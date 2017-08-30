@@ -45,6 +45,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
@@ -68,6 +69,7 @@ public class KarnLiberated extends CardImpl {
 
     public KarnLiberated(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{7}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Karn");
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 

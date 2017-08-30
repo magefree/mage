@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.command.emblems.ElspethSunsChampionEmblem;
@@ -56,6 +57,7 @@ public class ElspethSunsChampion extends CardImpl {
 
     public ElspethSunsChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elspeth");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

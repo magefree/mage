@@ -38,6 +38,7 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.game.command.emblems.ObNixilisReignitedEmblem;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
@@ -50,6 +51,7 @@ public class ObNixilisReignited extends CardImpl {
 
     public ObNixilisReignited(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Nixilis");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

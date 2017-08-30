@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
@@ -52,6 +53,7 @@ public class ChandraPyrogenius extends CardImpl {
 
     public ChandraPyrogenius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{R}{R}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Chandra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

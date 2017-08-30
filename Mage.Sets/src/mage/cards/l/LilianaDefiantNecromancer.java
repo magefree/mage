@@ -64,6 +64,7 @@ public class LilianaDefiantNecromancer extends CardImpl {
 
     public LilianaDefiantNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Liliana");
         this.color.setBlack(true);
 

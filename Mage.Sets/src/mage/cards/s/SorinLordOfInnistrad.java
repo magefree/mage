@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -66,6 +67,7 @@ public class SorinLordOfInnistrad extends CardImpl {
 
     public SorinLordOfInnistrad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Sorin");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

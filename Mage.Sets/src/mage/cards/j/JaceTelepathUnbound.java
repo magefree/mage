@@ -45,6 +45,7 @@ import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
@@ -64,6 +65,7 @@ public class JaceTelepathUnbound extends CardImpl {
 
     public JaceTelepathUnbound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Jace");
 
         this.color.setBlue(true);

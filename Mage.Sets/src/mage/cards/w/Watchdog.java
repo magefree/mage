@@ -52,16 +52,16 @@ import mage.game.permanent.Permanent;
 public class Watchdog extends CardImpl {
 
     public Watchdog(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add("Hound");
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
         // Watchdog blocks each turn if able.
-        this.getAbilities().add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield)));
+        addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield)));
         // As long as Watchdog is untapped, all creatures attacking you get -1/-0.
-         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, new WatchdogFilter(), false), new InvertCondition(SourceTappedCondition.instance),"As long as {this} is untapped, all creatures attacking you get -1/-0")));
+        addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, new WatchdogFilter(), false), new InvertCondition(SourceTappedCondition.instance), "As long as {this} is untapped, all creatures attacking you get -1/-0")));
     }
 
     public Watchdog(final Watchdog card) {
@@ -74,13 +74,11 @@ public class Watchdog extends CardImpl {
     }
 }
 
-
 class WatchdogFilter extends FilterAttackingCreature {
 
     public WatchdogFilter() {
         super("creatures attacking you");
     }
-
 
     public WatchdogFilter(final WatchdogFilter filter) {
         super(filter);
@@ -93,15 +91,15 @@ class WatchdogFilter extends FilterAttackingCreature {
 
     @Override
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if(!super.match(permanent, sourceId, playerId, game)) {
+        if (!super.match(permanent, sourceId, playerId, game)) {
             return false;
         }
 
-        for(CombatGroup group : game.getCombat().getGroups()) {
-            for(UUID attacker : group.getAttackers()) {
-                if(attacker.equals(permanent.getId())) {
+        for (CombatGroup group : game.getCombat().getGroups()) {
+            for (UUID attacker : group.getAttackers()) {
+                if (attacker.equals(permanent.getId())) {
                     UUID defenderId = group.getDefenderId();
-                    if(defenderId.equals(playerId)) {
+                    if (defenderId.equals(playerId)) {
                         return true;
                     }
                 }

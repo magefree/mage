@@ -55,9 +55,8 @@ import mage.target.common.TargetLandPermanent;
 public class DawnsReflection extends CardImpl {
 
     public DawnsReflection(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.subtype.add("Aura");
-
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
@@ -78,6 +77,7 @@ public class DawnsReflection extends CardImpl {
         return new DawnsReflection(this);
     }
 }
+
 class DawnsReflectionTriggeredAbility extends TriggeredManaAbility {
 
     public DawnsReflectionTriggeredAbility() {
@@ -104,13 +104,11 @@ class DawnsReflectionTriggeredAbility extends TriggeredManaAbility {
         return enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo());
     }
 
-
     @Override
     public String getRule() {
         return "Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to his or her mana pool <i>(in addition to the mana the land produces)</i>.";
     }
 }
-
 
 class DawnsReflectionManaEffect extends ManaEffect {
 
@@ -131,18 +129,18 @@ class DawnsReflectionManaEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null){
-                int x = 2;
-
+        if (controller != null) {
+            int x = 2;
             Mana mana = new Mana();
-            for(int i = 0; i < x; i++){
+            for (int i = 0; i < x; i++) {
                 ChoiceColor choiceColor = new ChoiceColor();
-                while (controller.canRespond() && !controller.choose(Outcome.Benefit, choiceColor, game)) {
+                while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
+                    if (!controller.isInGame()) {
+                        return false;
+                    }
                 }
-
                 choiceColor.increaseMana(mana);
             }
-
             controller.getManaPool().addMana(mana, game, source);
             return true;
 
@@ -154,6 +152,5 @@ class DawnsReflectionManaEffect extends ManaEffect {
     public Mana getMana(Game game, Ability source) {
         return null;
     }
-
 
 }

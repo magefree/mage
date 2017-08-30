@@ -44,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterCreaturePermanent;
@@ -67,6 +68,7 @@ public class GideonBattleForged extends CardImpl {
 
     public GideonBattleForged(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Gideon");
 
         this.color.setWhite(true);

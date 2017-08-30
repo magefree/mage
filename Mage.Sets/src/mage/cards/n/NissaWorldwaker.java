@@ -63,6 +63,7 @@ public class NissaWorldwaker extends CardImpl {
 
     public NissaWorldwaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}{G}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Nissa");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

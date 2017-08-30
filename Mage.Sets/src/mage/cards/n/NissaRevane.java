@@ -38,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -62,6 +63,7 @@ public class NissaRevane extends CardImpl {
 
     public NissaRevane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{G}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Nissa");
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(2));
 

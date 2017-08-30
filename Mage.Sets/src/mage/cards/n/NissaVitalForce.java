@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.common.FilterPermanentCard;
@@ -63,6 +64,7 @@ public class NissaVitalForce extends CardImpl {
 
     public NissaVitalForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Nissa");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

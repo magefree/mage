@@ -44,6 +44,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
@@ -63,6 +64,7 @@ public class UginTheSpiritDragon extends CardImpl {
 
     public UginTheSpiritDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{8}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Ugin");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));

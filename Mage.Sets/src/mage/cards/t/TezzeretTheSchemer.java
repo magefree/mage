@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.command.emblems.TezzeretTheSchemerEmblem;
 import mage.game.permanent.token.EtheriumCellToken;
@@ -53,6 +54,7 @@ public class TezzeretTheSchemer extends CardImpl {
 
     public TezzeretTheSchemer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Tezzeret");
 
         //Starting Loyalty - 5

@@ -61,6 +61,7 @@ public class ChandraPyromaster extends CardImpl {
 
     public ChandraPyromaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Chandra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
