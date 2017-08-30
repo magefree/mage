@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.cost;
 
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -39,13 +38,15 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
+import org.apache.log4j.Logger;
 
 /**
  * @author fireshoes - Original Code
  * @author JRHerlehy - Implement as seperate class
- *         <p>
- *         Allows player to choose to cast as card from hand without paying its mana cost.
- *         </p>
+ * <p>
+ * Allows player to choose to cast as card from hand without paying its mana
+ * cost.
+ * </p>
  */
 public class CastWithoutPayingManaCostEffect extends OneShotEffect {
 
@@ -73,19 +74,27 @@ public class CastWithoutPayingManaCostEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
 
-        if (controller == null) return false;
+        if (controller == null) {
+            return false;
+        }
 
         Target target = new TargetCardInHand(filter);
-        if (target.canChoose(source.getSourceId(), controller.getId(), game) &&
-                controller.chooseUse(outcome, "Cast a card with converted mana cost " + manaCost +
-                        " or less from your hand without paying its mana cost?", source, game)) {
+        if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                && controller.chooseUse(outcome, "Cast a card with converted mana cost " + manaCost
+                        + " or less from your hand without paying its mana cost?", source, game)) {
             Card cardToCast = null;
             boolean cancel = false;
             while (controller.canRespond() && !cancel) {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     cardToCast = game.getCard(target.getFirstTarget());
-                    if (cardToCast != null && cardToCast.getSpellAbility().canChooseTarget(game)) {
-                        cancel = true;
+                    if (cardToCast != null) {
+                        if (cardToCast.getSpellAbility() == null) {
+                            Logger.getLogger(CastWithoutPayingManaCostEffect.class).fatal("Card: " + cardToCast.getName() + " is no land and has no spell ability!");
+                            cancel = true;
+                        }
+                        if (cardToCast.getSpellAbility().canChooseTarget(game)) {
+                            cancel = true;
+                        }
                     }
                 } else {
                     cancel = true;
