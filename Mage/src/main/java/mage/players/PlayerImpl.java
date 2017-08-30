@@ -969,6 +969,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         ability.setControllerId(getId());
         if (ability.getSpellAbilityType() != SpellAbilityType.BASE) {
             ability = chooseSpellAbilityForCast(ability, game, noMana);
+            if (ability == null) {
+                // No ability could be cast (selected), probably because of no valid targets (happens often if a card can be cast by an effect).
+                return false;
+            }
         }
         //20091005 - 601.2a
         if (ability.getSourceId() == null) {
