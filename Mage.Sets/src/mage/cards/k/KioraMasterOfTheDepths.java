@@ -43,6 +43,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
@@ -65,6 +66,7 @@ public class KioraMasterOfTheDepths extends CardImpl {
 
     public KioraMasterOfTheDepths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Kiora");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -68,6 +69,7 @@ public class DarettiIngeniousIconoclast extends CardImpl {
 
     public DarettiIngeniousIconoclast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{R}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Daretti");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

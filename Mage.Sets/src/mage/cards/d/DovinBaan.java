@@ -42,6 +42,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.command.emblems.DovinBaanEmblem;
 import mage.game.events.GameEvent;
@@ -56,6 +57,7 @@ public class DovinBaan extends CardImpl {
 
     public DovinBaan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{U}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dovin");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

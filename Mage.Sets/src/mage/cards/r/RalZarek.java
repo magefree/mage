@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
@@ -63,6 +64,7 @@ public class RalZarek extends CardImpl {
 
     public RalZarek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{R}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Ral");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

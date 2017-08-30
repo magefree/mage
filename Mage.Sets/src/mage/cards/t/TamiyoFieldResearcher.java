@@ -58,6 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.constants.SuperType;
 
 /**
  *
@@ -73,6 +74,7 @@ public class TamiyoFieldResearcher extends CardImpl {
 
     public TamiyoFieldResearcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{W}{U}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Tamiyo");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

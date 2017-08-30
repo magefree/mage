@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.BeastToken;
 import mage.target.common.TargetLandPermanent;
@@ -55,6 +56,7 @@ public class GarrukWildspeaker extends CardImpl {
 
     public GarrukWildspeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{G}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Garruk");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -60,7 +61,7 @@ public class LilianaDeathsMajesty extends CardImpl {
 
     public LilianaDeathsMajesty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
-
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Liliana");
 
         //Starting Loyalty: 5

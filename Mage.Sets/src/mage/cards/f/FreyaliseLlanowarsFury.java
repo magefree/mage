@@ -45,6 +45,7 @@ import mage.game.permanent.token.FreyaliseLlanowarsFuryToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
+import mage.constants.SuperType;
 
 /**
  *
@@ -60,6 +61,7 @@ public class FreyaliseLlanowarsFury extends CardImpl {
 
     public FreyaliseLlanowarsFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Freyalise");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

@@ -39,6 +39,7 @@ import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -51,7 +52,7 @@ import mage.game.permanent.token.PlantToken;
  * @author fireshoes
  */
 public class NissaVoiceOfZendikar extends CardImpl {
-    
+
     private static final FilterLandPermanent filter = new FilterLandPermanent("lands you control");
 
     static {
@@ -60,16 +61,17 @@ public class NissaVoiceOfZendikar extends CardImpl {
 
     public NissaVoiceOfZendikar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{G}{G}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Nissa");
-        
+
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Create a 0/1 green Plant creature token.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new PlantToken()), 1));
-        
+
         // -2: Put a +1/+1 counter on each creature you control.
         this.addAbility(new LoyaltyAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), -2));
-        
+
         // -7: You gain X life and draw X cards, where X is the number of lands you control.
         Effect effect = new GainLifeEffect(new PermanentsOnBattlefieldCount(filter));
         effect.setText("you gain X life");

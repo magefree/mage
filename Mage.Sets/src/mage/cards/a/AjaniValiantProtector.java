@@ -42,6 +42,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
@@ -55,6 +56,7 @@ public class AjaniValiantProtector extends CardImpl {
 
     public AjaniValiantProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{W}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

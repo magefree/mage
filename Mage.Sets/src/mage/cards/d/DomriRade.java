@@ -41,6 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
@@ -58,6 +59,7 @@ public class DomriRade extends CardImpl {
 
     public DomriRade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{G}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Domri");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
