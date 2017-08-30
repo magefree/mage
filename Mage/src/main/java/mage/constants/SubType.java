@@ -37,6 +37,7 @@ public enum SubType {
     CONTRAPTION("Contraption", SubTypeSet.ArtifactType, false),
     EQUIPMENT("Equipment", SubTypeSet.ArtifactType, false),
     FORTIFICATION("Fortification", SubTypeSet.ArtifactType, false),
+    TREASURE("Treasure", SubTypeSet.ArtifactType, false),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType, false),
     // 205.3m : Creatures and tribals share their lists of subtypes; these subtypes are called creature types.
     // A
