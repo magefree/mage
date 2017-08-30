@@ -31,37 +31,41 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class GoldToken extends Token {
+public class TreasureToken extends Token {
     
     final static private List<String> tokenImageSets = new ArrayList<>();
     static {
-        tokenImageSets.addAll(Arrays.asList("BNG", "C17"));
+        tokenImageSets.addAll(Arrays.asList("XLN"));
     }
 
-    public GoldToken() {
+    public TreasureToken() {
         this(null, 0);
     }
 
-    public GoldToken(String setCode) {
+    public TreasureToken(String setCode) {
         this(setCode, 0);
     }
 
-    public GoldToken(String setCode, int tokenType) {
-        super("Gold", "colorless artifact token named Gold with \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
+    public TreasureToken(String setCode, int tokenType) {
+        super("Treasure", "colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
+        subtype.add(SubType.TREASURE);
 
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost()));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost());
+        ability.addCost(new SacrificeSourceCost());
     }
 }
