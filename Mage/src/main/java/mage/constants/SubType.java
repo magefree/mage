@@ -102,7 +102,7 @@ public enum SubType {
     DEMON("Demon", SubTypeSet.CreatureType, false),
     DESERTER("Deserter", SubTypeSet.CreatureType, false),
     DEVIL("Devil", SubTypeSet.CreatureType, false),
-    DINOSAUR("Dinosaur", SubTypeSet.CreatureType, true), // only Grimlock right now, until Ixalan
+    DINOSAUR("Dinosaur", SubTypeSet.CreatureType, false), // With Ixalan now being spoiled, need this to be selectable
     DJINN("Djinn", SubTypeSet.CreatureType, false),
     DRAGON("Dragon", SubTypeSet.CreatureType, false),
     DRAKE("Drake", SubTypeSet.CreatureType, false),
