@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.permanent.token;
 
 import java.util.ArrayList;
@@ -33,6 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.CardType;
@@ -44,8 +44,9 @@ import mage.constants.Zone;
  * @author TheElk801
  */
 public class TreasureToken extends Token {
-    
+
     final static private List<String> tokenImageSets = new ArrayList<>();
+
     static {
         tokenImageSets.addAll(Arrays.asList("XLN"));
     }
@@ -65,7 +66,8 @@ public class TreasureToken extends Token {
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.TREASURE);
 
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
     }
 }
