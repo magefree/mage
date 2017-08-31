@@ -78,6 +78,7 @@ public enum CounterType {
     INTERVENTION("intervention"),
     JAVELIN("javelin"),
     KI("ki"),
+    LANDMARK("landmark"),
     LEVEL("level"),
     LORE("lore"),
     LUCK("luck"),
