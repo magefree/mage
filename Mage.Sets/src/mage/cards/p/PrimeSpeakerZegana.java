@@ -54,20 +54,19 @@ import mage.game.permanent.Permanent;
 public class PrimeSpeakerZegana extends CardImpl {
 
     public PrimeSpeakerZegana(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{U}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
         addSuperType(SuperType.LEGENDARY);
 
-        
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         //Prime Speaker Zegana enters the battlefield with X +1/+1 counters on it, where X is the greatest power among other creatures you control.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0),
-                new GreatestPowerCount(), true),
-                "where X is the greatest power among other creatures you control"));
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0),
+                new GreatestPowerCount(), true);
+        effect.setText("with X +1/+1 counters on it, where X is the greatest power among other creatures you control.");
+        this.addAbility(new EntersBattlefieldAbility(effect));
         //When Prime Speaker Zegana enters the battlefield, draw cards equal to its power.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new SourcePermanentPowerCount())));
     }
@@ -83,13 +82,12 @@ public class PrimeSpeakerZegana extends CardImpl {
 }
 
 class GreatestPowerCount implements DynamicValue {
-    
-    
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int value = 0;
-        for(Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), sourceAbility.getControllerId(), game)){
-            if(creature != null && creature.getPower().getValue() > value && !sourceAbility.getSourceId().equals(creature.getId())){
+        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), sourceAbility.getControllerId(), game)) {
+            if (creature != null && creature.getPower().getValue() > value && !sourceAbility.getSourceId().equals(creature.getId())) {
                 value = creature.getPower().getValue();
             }
         }
