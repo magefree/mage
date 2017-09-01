@@ -66,7 +66,7 @@ public class TemporalDistortion extends CardImpl {
     }
 
     public TemporalDistortion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // Whenever a creature or land becomes tapped, put an hourglass counter on it.
         Effect effect = new AddCountersTargetEffect(CounterType.HOURGLASS.createInstance());

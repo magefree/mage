@@ -25,59 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.cards.e;
 
-import mage.constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.Duration;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
+public class EntrancingMelody extends CardImpl {
 
-    private boolean enrage;
+    public EntrancingMelody(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
 
-    public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional) {
-        this(zone, effect, optional, false);
+        // Gain control of target creature with converted mana cost X.
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature with converted mana cost X")));
     }
 
-    public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean enrage) {
-        super(zone, effect, optional);
-        this.enrage = enrage;
-    }
-
-    public DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {
-        super(ability);
-        this.enrage = ability.enrage;
+    public EntrancingMelody(final EntrancingMelody card) {
+        super(card);
     }
 
     @Override
-    public DealtDamageToSourceTriggeredAbility copy() {
-        return new DealtDamageToSourceTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(getSourceId())) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("damage", event.getAmount());
-            }
-            return true;
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
+            int xValue = ability.getManaCostsToPay().getX();
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost X or less");
+            filter.add(Predicates.not(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue)));
+            ability.addTarget(new TargetCreaturePermanent(filter));
         }
-        return false;
     }
 
     @Override
-    public String getRule() {
-        return (enrage ? "<i>Enrage</i> - " : "") + "Whenever {this} is dealt damage, " + super.getRule();
+    public EntrancingMelody copy() {
+        return new EntrancingMelody(this);
     }
 }

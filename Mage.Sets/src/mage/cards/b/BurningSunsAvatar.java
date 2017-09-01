@@ -25,59 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.cards.b;
 
-import mage.constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
+public class BurningSunsAvatar extends CardImpl {
 
-    private boolean enrage;
+    public BurningSunsAvatar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");
 
-    public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional) {
-        this(zone, effect, optional, false);
+        this.subtype.add("Dinosaur");
+        this.subtype.add("Avatar");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
+
+        // When Burning Sun's Avatar enters the battlefield, it deals 3 damage to target opponent and 3 damage to up to one target creature.
+        Effect effect = new DamageTargetEffect(3);
+        effect.setText("it deals 3 damage to target opponent and 3 damage to up to one target creature");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
+        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
+        this.addAbility(ability);
     }
 
-    public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean enrage) {
-        super(zone, effect, optional);
-        this.enrage = enrage;
-    }
-
-    public DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {
-        super(ability);
-        this.enrage = ability.enrage;
-    }
-
-    @Override
-    public DealtDamageToSourceTriggeredAbility copy() {
-        return new DealtDamageToSourceTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+    public BurningSunsAvatar(final BurningSunsAvatar card) {
+        super(card);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(getSourceId())) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("damage", event.getAmount());
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return (enrage ? "<i>Enrage</i> - " : "") + "Whenever {this} is dealt damage, " + super.getRule();
+    public BurningSunsAvatar copy() {
+        return new BurningSunsAvatar(this);
     }
 }
