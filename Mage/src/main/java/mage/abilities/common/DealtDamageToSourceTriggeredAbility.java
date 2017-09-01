@@ -1,4 +1,4 @@
- /*
+/*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
 import mage.constants.Zone;
@@ -38,15 +37,22 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-
 public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private boolean enrage;
+
     public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional) {
+        this(zone, effect, optional, false);
+    }
+
+    public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean enrage) {
         super(zone, effect, optional);
+        this.enrage = enrage;
     }
 
     public DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {
         super(ability);
+        this.enrage = ability.enrage;
     }
 
     @Override
@@ -63,7 +69,7 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(getSourceId())) {
             for (Effect effect : this.getEffects()) {
-                    effect.setValue("damage", event.getAmount());
+                effect.setValue("damage", event.getAmount());
             }
             return true;
         }
@@ -72,6 +78,6 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} is dealt damage, " + super.getRule();
+        return (enrage ? "<i>Enrage</i> - " : "") + "Whenever {this} is dealt damage, " + super.getRule();
     }
 }
