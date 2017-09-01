@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.h;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,52 +35,52 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.other.OwnerIdPredicate;
+import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class HurkylsRecall extends CardImpl {
+public class RiversRebuke extends CardImpl {
 
-    public HurkylsRecall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
+    public RiversRebuke(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
-        // Return all artifacts target player owns to his or her hand.
-        this.getSpellAbility().addEffect(new HurkylsRecallReturnToHandEffect());
+        // Return all nonland permanents target player controls to their owner's hand.
+        this.getSpellAbility().addEffect(new RiversRebukeReturnToHandEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public HurkylsRecall(final HurkylsRecall card) {
+    public RiversRebuke(final RiversRebuke card) {
         super(card);
     }
 
     @Override
-    public HurkylsRecall copy() {
-        return new HurkylsRecall(this);
+    public RiversRebuke copy() {
+        return new RiversRebuke(this);
     }
 }
 
-class HurkylsRecallReturnToHandEffect extends OneShotEffect {
+class RiversRebukeReturnToHandEffect extends OneShotEffect {
 
-    public HurkylsRecallReturnToHandEffect() {
+    public RiversRebukeReturnToHandEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "Return all artifacts target player owns to his or her hand";
+        staticText = "Return all nonland permanents target player controls to their owner's hand";
     }
 
-    public HurkylsRecallReturnToHandEffect(final HurkylsRecallReturnToHandEffect effect) {
+    public RiversRebukeReturnToHandEffect(final RiversRebukeReturnToHandEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         if (targetPointer.getFirst(game, source) != null) {
-            FilterArtifactPermanent filter = new FilterArtifactPermanent();
-            filter.add(new OwnerIdPredicate(targetPointer.getFirst(game, source)));
+            FilterNonlandPermanent filter = new FilterNonlandPermanent();
+            filter.add(new ControllerIdPredicate(targetPointer.getFirst(game, source)));
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
             }
@@ -90,7 +90,7 @@ class HurkylsRecallReturnToHandEffect extends OneShotEffect {
     }
 
     @Override
-    public HurkylsRecallReturnToHandEffect copy() {
-        return new HurkylsRecallReturnToHandEffect(this);
+    public RiversRebukeReturnToHandEffect copy() {
+        return new RiversRebukeReturnToHandEffect(this);
     }
 }
