@@ -64,13 +64,14 @@ import mage.util.CardUtil;
 public class ShellOfTheLastKappa extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell that targets you");
+
     static {
         filter.add(new TargetYouPredicate());
         filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
     }
 
     public ShellOfTheLastKappa(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         addSuperType(SuperType.LEGENDARY);
 
         // {3}, {tap}: Exile target instant or sorcery spell that targets you.
@@ -117,14 +118,14 @@ class ShellOfTheLastKappaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
-            Permanent sourcePermanent  = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent == null) {
                 sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             }
             if (sourcePermanent != null) {
                 game.getStack().counter(spell.getId(), source.getSourceId(), game);
                 Card card = spell.getCard();
-                card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName(), id, game);
+                card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName(), source.getSourceId(), game);
             }
         }
         return false;
@@ -163,7 +164,6 @@ class ShellOfTheLastKappaCastEffect extends OneShotEffect {
         return false;
     }
 }
-
 
 class TargetYouPredicate implements ObjectPlayerPredicate<ObjectPlayer<StackObject>> {
 

@@ -55,8 +55,7 @@ import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
 public class ArchmageAscension extends CardImpl {
 
     public ArchmageAscension(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // At the beginning of each end step, if you drew two or more cards this turn, you may put a quest counter on Archmage Ascension.
         this.addAbility(new ArchmageAscensionTriggeredAbility(), new CardsAmountDrawnThisTurnWatcher());
@@ -64,7 +63,7 @@ public class ArchmageAscension extends CardImpl {
         // As long as Archmage Ascension has six or more quest counters on it, if you would draw a card,
         // you may instead search your library for a card, put that card into your hand, then shuffle your library.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchmageAscensionReplacementEffect()));
-        
+
     }
 
     public ArchmageAscension(final ArchmageAscension card) {
@@ -91,17 +90,17 @@ class ArchmageAscensionTriggeredAbility extends TriggeredAbilityImpl {
     public ArchmageAscensionTriggeredAbility copy() {
         return new ArchmageAscensionTriggeredAbility(this);
     }
-    
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent archmage = game.getPermanent(super.getSourceId());
-        CardsAmountDrawnThisTurnWatcher watcher =
-                (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.class.getSimpleName());
+        CardsAmountDrawnThisTurnWatcher watcher
+                = (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.class.getSimpleName());
         return archmage != null && watcher != null && watcher.getAmountCardsDrawn(this.getControllerId()) >= 2;
     }
 
@@ -115,8 +114,8 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
 
     public ArchmageAscensionReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "As long as {this} has six or more quest counters on it, if you would draw a card, " +
-                "you may instead search your library for a card, put that card into your hand, then shuffle your library";
+        staticText = "As long as {this} has six or more quest counters on it, if you would draw a card, "
+                + "you may instead search your library for a card, put that card into your hand, then shuffle your library";
     }
 
     public ArchmageAscensionReplacementEffect(final ArchmageAscensionReplacementEffect effect) {
@@ -141,19 +140,19 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
             if (player.searchLibrary(target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    card.moveToZone(Zone.HAND, id, game, false);
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     player.shuffleLibrary(source, game);
                 }
             }
         }
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent archmage = game.getPermanent(source.getSourceId());
