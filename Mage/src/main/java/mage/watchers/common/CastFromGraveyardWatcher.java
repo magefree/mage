@@ -27,17 +27,14 @@
  */
 package mage.watchers.common;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  *
@@ -66,7 +63,7 @@ public class CastFromGraveyardWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell != null) {
-                HashSet<Integer> zcc = spellsCastFromGraveyard.computeIfAbsent(spell.getSourceId(), k -> new HashSet<>());
+                Set<Integer> zcc = spellsCastFromGraveyard.computeIfAbsent(spell.getSourceId(), k -> new HashSet<>());
                 zcc.add(spell.getZoneChangeCounter(game));
             }
 
