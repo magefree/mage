@@ -49,10 +49,9 @@ import mage.players.Player;
 public class SuddenDemise extends CardImpl {
 
     public SuddenDemise(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
-
-        // Choose a color. Sudden Demise deals X damage to each creature of the chosen color.       
+        // Choose a color. Sudden Demise deals X damage to each creature of the chosen color.
         this.getSpellAbility().addEffect(new SuddenDemiseDamageEffect());
 
     }
@@ -71,7 +70,7 @@ class SuddenDemiseDamageEffect extends OneShotEffect {
 
     public SuddenDemiseDamageEffect() {
         super(Outcome.Damage);
-        this.staticText = "Choose a color. Sudden Demise deals X damage to each creature of the chosen color";
+        this.staticText = "Choose a color. {this} deals X damage to each creature of the chosen color";
     }
 
     public SuddenDemiseDamageEffect(final SuddenDemiseDamageEffect effect) {
@@ -93,7 +92,7 @@ class SuddenDemiseDamageEffect extends OneShotEffect {
                 final int damage = source.getManaCostsToPay().getX();
                 FilterPermanent filter = new FilterCreaturePermanent();
                 filter.add(new ColorPredicate(choice.getColor()));
-                for (Permanent permanent:game.getBattlefield().getActivePermanents(filter, source.getControllerId(), id, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                     permanent.damage(damage, source.getSourceId(), game, false, true);
                 }
                 return true;
