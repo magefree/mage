@@ -834,10 +834,23 @@ public class HumanPlayer extends PlayerImpl {
                 return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
             }
         } catch (NullPointerException ex) {
-            String isNull = controllingPlayer.getUserData() == null ? "null" : "not null";
-            logger.error("null pointer exception  UserData = " + isNull);
+            if (controllingPlayer.getUserData() != null) {
+                if (controllingPlayer.getUserData().getUserSkipPrioritySteps() != null) {
+                    if (game.getStep() != null) {
+                        if (game.getStep().getType() == null) {
+                            logger.error("game.getStep().getType() == null");
+                        }
+                    } else {
+                        logger.error("game.getStep() == null");
+                    }
+                } else {
+                    logger.error("UserData.getUserSkipPrioritySteps == null");
+                }
+            } else {
+                logger.error("UserData == null");
+            }
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -1223,7 +1236,9 @@ public class HumanPlayer extends PlayerImpl {
         FilterCreatureForCombatBlock filter = filterCreatureForCombatBlock.copy();
         filter.add(new ControllerIdPredicate(defendingPlayerId));
         if (game.getBattlefield().count(filter, null, playerId, game) == 0
-                && !getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockerIfNoneAvailable()) {
+                && !getControllingPlayersUserData(game)
+                        .getUserSkipPrioritySteps()
+                        .isStopOnDeclareBlockerIfNoneAvailable()) {
             return;
         }
         while (!abort) {
