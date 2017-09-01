@@ -52,7 +52,7 @@ import mage.watchers.Watcher;
 public class MoltenPsyche extends CardImpl {
 
     public MoltenPsyche(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
         // Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.
         // Metalcraft - If you control three or more artifacts, Molten Psyche deals damage to each opponent equal to the number of cards that player has drawn this turn.
@@ -106,10 +106,6 @@ class MoltenPsycheEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     player.drawCards(cardsToDraw.get(playerId), game);
-                    if (MetalcraftCondition.instance.apply(game, source) && !playerId.equals(source.getControllerId())) {
-                        MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get(MoltenPsycheWatcher.class.getSimpleName());
-                        player.damage(watcher.getDraws(playerId), source.getSourceId(), game, false, true);
-                    }
                 }
             }
             if (MetalcraftCondition.instance.apply(game, source)) {

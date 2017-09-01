@@ -1774,7 +1774,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (perm.isWorld()) {
                 worldEnchantment.add(perm);
             }
-            if (StaticFilters.FILTER_AURA.match(perm, this)) {
+            if (StaticFilters.FILTER_PERMANENT_AURA.match(perm, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
                     Card card = this.getCard(perm.getId());
@@ -1852,10 +1852,10 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            if (this.getState().isLegendaryRuleActive() && StaticFilters.FILTER_LEGENDARY.match(perm, this)) {
+            if (this.getState().isLegendaryRuleActive() && StaticFilters.FILTER_PERMANENT_LEGENDARY.match(perm, this)) {
                 legendary.add(perm);
             }
-            if (StaticFilters.FILTER_EQUIPMENT.match(perm, this)) {
+            if (StaticFilters.FILTER_PERMANENT_EQUIPMENT.match(perm, this)) {
                 //20091005 - 704.5p, 702.14d
                 if (perm.getAttachedTo() != null) {
                     Permanent attachedTo = getPermanent(perm.getAttachedTo());
@@ -1880,7 +1880,7 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            if (StaticFilters.FILTER_FORTIFICATION.match(perm, this)) {
+            if (StaticFilters.FILTER_PERMANENT_FORTIFICATION.match(perm, this)) {
                 if (perm.getAttachedTo() != null) {
                     Permanent land = getPermanent(perm.getAttachedTo());
                     if (land == null || !land.getAttachments().contains(perm.getId())) {

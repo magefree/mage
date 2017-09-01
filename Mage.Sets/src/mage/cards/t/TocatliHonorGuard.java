@@ -25,75 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.t;
 
 import java.util.UUID;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
- * @author LevelX2
+ * @author spjspj
  */
-public class ManaCrypt extends CardImpl {
+public class TocatliHonorGuard extends CardImpl {
 
-    public ManaCrypt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
+    public TocatliHonorGuard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        // At the beginning of your upkeep, flip a coin. If you lose the flip, Mana Crypt deals 3 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ManaCryptEffect(), TargetController.YOU, false));
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        // {tap}: Add {C}{C} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
+        // Creatures entering the battlefield don't cause abilities to trigger.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TorporOrbEffect()));
     }
 
-    public ManaCrypt(final ManaCrypt card) {
+    public TocatliHonorGuard(final TocatliHonorGuard card) {
         super(card);
     }
 
     @Override
-    public ManaCrypt copy() {
-        return new ManaCrypt(this);
-    }
-}
-
-class ManaCryptEffect extends OneShotEffect {
-
-    ManaCryptEffect() {
-        super(Outcome.Damage);
-        staticText = "flip a coin. If you lose the flip, {this} deals 3 damage to you";
-    }
-
-    ManaCryptEffect(final ManaCryptEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (!player.flipCoin(game)) {
-                player.damage(3, source.getSourceId(), game, false, true);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ManaCryptEffect copy() {
-        return new ManaCryptEffect(this);
+    public TocatliHonorGuard copy() {
+        return new TocatliHonorGuard(this);
     }
 }
