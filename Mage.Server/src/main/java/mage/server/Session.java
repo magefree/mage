@@ -374,11 +374,9 @@ public class Session {
             call.setMessageId(messageId++);
             callbackHandler.handleCallbackOneway(new Callback(call));
         } catch (HandleCallbackException ex) {
-            // ex.printStackTrace();
             UserManager.instance.getUser(userId).ifPresent(user -> {
-                logger.warn("SESSION CALLBACK EXCEPTION - " + user.getName() + " userId " + userId);
-                logger.warn(" - method: " + call.getMethod());
-                logger.warn(" - cause: " + getBasicCause(ex).toString());
+                user.setUserState(User.UserState.Disconnected);
+                logger.warn("SESSION CALLBACK EXCEPTION - " + user.getName() + " userId " + userId + " - cause: " + getBasicCause(ex).toString());
                 logger.trace("Stack trace:", ex);
                 SessionManager.instance.disconnect(sessionId, LostConnection);
             });
