@@ -69,22 +69,22 @@ public final class StaticFilters {
 
     public static final FilterPermanent FILTER_ATTACKING_CREATURES = new FilterCreaturePermanent("attacking creatures");
 
-    public static final FilterPermanent FILTER_AURA = new FilterPermanent();
-    public static final FilterPermanent FILTER_EQUIPMENT = new FilterPermanent();
-    public static final FilterPermanent FILTER_FORTIFICATION = new FilterPermanent();
-    public static final FilterPermanent FILTER_LEGENDARY = new FilterPermanent();
+    public static final FilterPermanent FILTER_PERMANENT_AURA = new FilterPermanent();
+    public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterPermanent();
+    public static final FilterPermanent FILTER_PERMANENT_FORTIFICATION = new FilterPermanent();
+    public static final FilterPermanent FILTER_PERMANENT_LEGENDARY = new FilterPermanent();
 
     static {
-        FILTER_AURA.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        FILTER_AURA.add(new SubtypePredicate(SubType.AURA));
+        FILTER_PERMANENT_AURA.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        FILTER_PERMANENT_AURA.add(new SubtypePredicate(SubType.AURA));
 
-        FILTER_EQUIPMENT.add(new CardTypePredicate(CardType.ARTIFACT));
-        FILTER_EQUIPMENT.add(new SubtypePredicate(SubType.EQUIPMENT));
+        FILTER_PERMANENT_EQUIPMENT.add(new CardTypePredicate(CardType.ARTIFACT));
+        FILTER_PERMANENT_EQUIPMENT.add(new SubtypePredicate(SubType.EQUIPMENT));
 
-        FILTER_FORTIFICATION.add(new CardTypePredicate(CardType.ARTIFACT));
-        FILTER_FORTIFICATION.add(new SubtypePredicate(SubType.FORTIFICATION));
+        FILTER_PERMANENT_FORTIFICATION.add(new CardTypePredicate(CardType.ARTIFACT));
+        FILTER_PERMANENT_FORTIFICATION.add(new SubtypePredicate(SubType.FORTIFICATION));
 
-        FILTER_LEGENDARY.add(new SupertypePredicate(SuperType.LEGENDARY));
+        FILTER_PERMANENT_LEGENDARY.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     static {
