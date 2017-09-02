@@ -62,7 +62,7 @@ public class XorLessLifeCondition implements Condition {
                 }
                 break;
             case CONTROLLER:
-                conditionApplies |= game.getPlayer(source.getControllerId()).getLife() <= amount;
+                conditionApplies = game.getPlayer(source.getControllerId()).getLife() <= amount;
                 break;
             case TARGET_OPPONENT:
                 //TODO: Implement this.
@@ -78,7 +78,7 @@ public class XorLessLifeCondition implements Condition {
                         }
                     }
                 }
-                conditionApplies |= maxLife <= amount;
+                conditionApplies = maxLife <= amount;
                 break;
         }
 
