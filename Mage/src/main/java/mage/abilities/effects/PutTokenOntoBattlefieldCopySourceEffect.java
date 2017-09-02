@@ -21,7 +21,7 @@ public class PutTokenOntoBattlefieldCopySourceEffect extends OneShotEffect {
     public PutTokenOntoBattlefieldCopySourceEffect(int copies) {
         super(Outcome.PutCreatureInPlay);
         this.number = copies;
-        staticText = "put a token onto the battlefield that's a copy of {this}";
+        staticText = "create a token that's a copy of {this}";
     }
 
     public PutTokenOntoBattlefieldCopySourceEffect(final PutTokenOntoBattlefieldCopySourceEffect effect) {

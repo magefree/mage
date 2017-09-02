@@ -26,22 +26,70 @@
 * or implied, of BetaSteward_at_googlemail.com.
  */
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.MageInt;
+import mage.MageObject;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author spjspj
+ * @author TheElk801
  */
-public class IllusionToken extends Token {
+public class JaceCunningCastawayIllusionToken extends Token {
 
-    public IllusionToken() {
-        super("Illusion", "2/2 blue Illusion creature token");
+    public JaceCunningCastawayIllusionToken() {
+        super("Illusion", "2/2 blue Illusion creature token with \"When this creature becomes the target of a spell, sacrifice it.\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
 
         subtype.add("Illusion");
         power = new MageInt(2);
         toughness = new MageInt(2);
+
+        this.addAbility(new IllusionTokenTriggeredAbility());
     }
+}
+
+class IllusionTokenTriggeredAbility extends TriggeredAbilityImpl {
+
+    public IllusionTokenTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
+    }
+
+    public IllusionTokenTriggeredAbility(final IllusionTokenTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public IllusionTokenTriggeredAbility copy() {
+        return new IllusionTokenTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TARGETED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        MageObject eventSourceObject = game.getObject(event.getSourceId());
+        if (eventSourceObject != null && event.getTargetId().equals(this.getSourceId()) && eventSourceObject instanceof Spell) {
+            getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "When this creature becomes the target of a spell, sacrifice it.";
+    }
+
 }
