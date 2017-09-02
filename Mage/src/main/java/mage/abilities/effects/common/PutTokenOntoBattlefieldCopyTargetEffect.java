@@ -41,6 +41,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
@@ -71,6 +72,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     private boolean becomesArtifact;
     private ObjectColor color;
     private boolean useLKI = false;
+    private boolean isntLegendary = false;
 
     public PutTokenOntoBattlefieldCopyTargetEffect(boolean useLKI) {
         this();
@@ -156,10 +158,15 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.becomesArtifact = effect.becomesArtifact;
         this.color = effect.color;
         this.useLKI = effect.useLKI;
+        this.isntLegendary = effect.isntLegendary;
     }
 
     public void setBecomesArtifact(boolean becomesArtifact) {
         this.becomesArtifact = becomesArtifact;
+    }
+
+    public void setIsntLegendary(boolean isntLegendary) {
+        this.isntLegendary = isntLegendary;
     }
 
     @Override
@@ -210,6 +217,9 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         applier.apply(game, token, source, targetId);
         if (becomesArtifact) {
             token.addCardType(CardType.ARTIFACT);
+        }
+        if (isntLegendary) {
+            token.getSuperType().remove(SuperType.LEGENDARY);
         }
         if (additionalCardType != null && !token.getCardType().contains(additionalCardType)) {
             token.addCardType(additionalCardType);
