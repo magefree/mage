@@ -300,6 +300,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Spelltwine", 94, Rarity.RARE, mage.cards.s.Spelltwine.class));
         cards.add(new SetCardInfo("Spirit of the Hearth", 73, Rarity.RARE, mage.cards.s.SpiritOfTheHearth.class));
         cards.add(new SetCardInfo("Staff of Nin", 224, Rarity.RARE, mage.cards.s.StaffOfNin.class));
+        cards.add(new SetCardInfo("Stalking Leonin", 7, Rarity.RARE, mage.cards.s.StalkingLeonin.class));
         cards.add(new SetCardInfo("Steel Hellkite", 225, Rarity.RARE, mage.cards.s.SteelHellkite.class));
         cards.add(new SetCardInfo("Stirring Wildwood", 281, Rarity.RARE, mage.cards.s.StirringWildwood.class));
         cards.add(new SetCardInfo("Stone Quarry", 282, Rarity.UNCOMMON, mage.cards.s.StoneQuarry.class));
