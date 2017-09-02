@@ -159,15 +159,15 @@ public class User {
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
         if (sessionId.isEmpty()) {
-            userState = UserState.Disconnected;
+            setUserState(UserState.Disconnected);
             lostConnection();
             logger.trace("USER - lost connection: " + userName + " id: " + userId);
 
         } else if (userState == UserState.Created) {
-            userState = UserState.Connected;
+            setUserState(UserState.Connected);
             logger.trace("USER - created: " + userName + " id: " + userId);
         } else {
-            userState = UserState.Connected;
+            setUserState(UserState.Connected);
             reconnect();
             logger.trace("USER - reconnected: " + userName + " id: " + userId);
         }
@@ -339,7 +339,7 @@ public class User {
         }
         lastActivity = new Date();
         if (userState == UserState.Disconnected) { // this can happen if user reconnects very fast after disconnect
-            userState = UserState.Connected;
+            setUserState(UserState.Connected);
         }
     }
 

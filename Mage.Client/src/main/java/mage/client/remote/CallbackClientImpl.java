@@ -27,6 +27,10 @@
  */
 package mage.client.remote;
 
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.UUID;
+import javax.swing.*;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -47,11 +51,6 @@ import mage.utils.CompressUtil;
 import mage.view.*;
 import mage.view.ChatMessage.MessageType;
 import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import java.awt.event.KeyEvent;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -325,11 +324,11 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     }
                     case VIEW_LIMITED_DECK: {
-                       TableClientMessage message = (TableClientMessage) callback.getData();
-                       DeckView deckView = message.getDeck();
-                       Deck deck = DeckUtil.construct(deckView);
-                       viewLimitedDeck(deck, message.getTableId(), message.getTime());
-                       break;
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        DeckView deckView = message.getDeck();
+                        Deck deck = DeckUtil.construct(deckView);
+                        viewLimitedDeck(deck, message.getTableId(), message.getTime());
+                        break;
                     }
                     case CONSTRUCT: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
@@ -356,14 +355,6 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case DRAFT_INFORM: //                            if (callback.getMessageId() > messageId) {
-                    {
-                        DraftClientMessage message = (DraftClientMessage) callback.getData();
-                    }
-//                            } else {
-//                                logger.warn("message out of sequence - ignoring");
-//                            }
-                    break;
                     case DRAFT_INIT: {
                         DraftClientMessage message = (DraftClientMessage) callback.getData();
                         DraftPanel panel = MageFrame.getDraft(callback.getObjectId());

@@ -35,7 +35,6 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.decks.InvalidDeckException;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
@@ -691,8 +690,6 @@ public class SessionImpl implements Session {
                 }
                 return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
             }
-        } catch (InvalidDeckException iex) {
-            handleInvalidDeckException(iex);
         } catch (GameException ex) {
             handleGameException(ex);
         } catch (MageException ex) {
@@ -1545,11 +1542,6 @@ public class SessionImpl implements Session {
     private void handleMageException(MageException ex) {
         logger.fatal("Server error", ex);
         client.showError(ex.getMessage());
-    }
-
-    private void handleInvalidDeckException(InvalidDeckException iex) {
-        logger.warn(iex.getMessage() + '\n' + iex.getInvalid());
-        client.showError(iex.getMessage() + '\n' + iex.getInvalid());
     }
 
     private void handleGameException(GameException ex) {

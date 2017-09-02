@@ -24,10 +24,16 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.server.draft;
 
+import java.rmi.RemoteException;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import mage.game.draft.Draft;
 import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
@@ -38,14 +44,6 @@ import mage.view.DraftClientMessage;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
 import org.apache.log4j.Logger;
-
-import java.rmi.RemoteException;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -89,19 +87,8 @@ public class DraftSession {
             UserManager.instance
                     .getUser(userId).
                     ifPresent(user -> user.fireCallback(
-                            new ClientCallback(ClientCallbackMethod.DRAFT_UPDATE, draft.getId(), getDraftView())));
+                    new ClientCallback(ClientCallbackMethod.DRAFT_UPDATE, draft.getId(), getDraftView())));
         }
-    }
-
-    // not used
-    //
-    public void inform(final String message) {
-        if (!killed) {
-            UserManager.instance
-                    .getUser(userId)
-                    .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INFORM, draft.getId(), new DraftClientMessage(getDraftView(), message))));
-        }
-
     }
 
     public void draftOver() {

@@ -82,7 +82,7 @@ public class CurseOfTheCabal extends CardImpl {
     }
 }
 
-class CurseOfTheCabalSacrificeEffect extends OneShotEffect{
+class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent FILTER = new FilterControlledPermanent(); // ggf filter.FilterPermanent
 
@@ -103,10 +103,11 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect{
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if(targetPlayer != null) {
+        if (targetPlayer != null) {
             int amount = game.getBattlefield().countAll(FILTER, targetPlayer.getId(), game) / 2;
-            if(amount < 1)
+            if (amount < 1) {
                 return true;
+            }
             Target target = new TargetControlledPermanent(amount, amount, FILTER, true);
             if (target.canChoose(targetPlayer.getId(), game)) {
                 while (!target.isChosen() && target.canChoose(targetPlayer.getId(), game) && targetPlayer.canRespond()) {
@@ -129,9 +130,9 @@ class CurseOfTheCabalTriggeredAbility extends ConditionalTriggeredAbility {
 
     public CurseOfTheCabalTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(
-                        Zone.EXILED, new CurseOfTheCabalTriggeredAbilityConditionalDelay(),
-                        TargetController.ANY, false, true
-                ),
+                Zone.EXILED, new CurseOfTheCabalTriggeredAbilityConditionalDelay(),
+                TargetController.ANY, false, true
+        ),
                 SuspendedCondition.instance,
                 "At the beginning of each player's upkeep, if {this} is suspended, that player may sacrifice a permanent. If he or she does, put two time counters on {this}."
         );
@@ -149,21 +150,22 @@ class CurseOfTheCabalTriggeredAbility extends ConditionalTriggeredAbility {
     }
 }
 
-class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceEffect{
+class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceEffect {
 
-    public CurseOfTheCabalTriggeredAbilityConditionalDelay(){
+    public CurseOfTheCabalTriggeredAbilityConditionalDelay() {
         super(CounterType.TIME.createInstance(), new StaticValue(2), false, true);
     }
 
     public boolean apply(Game game, Ability source) {
-        UUID id = game.getActivePlayerId();
-        Player target = game.getPlayer(id);
+        UUID activePlayerId = game.getActivePlayerId();
+        Player target = game.getPlayer(activePlayerId);
         Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledPermanent()));
-        if(target == null)
+        if (target == null) {
             return false;
-        if (cost.canPay(source, source.getSourceId(), id, game)
+        }
+        if (cost.canPay(source, source.getSourceId(), activePlayerId, game)
                 && target.chooseUse(Outcome.Sacrifice, "Sacrifice a permanent to delay Curse of the Cabal?", source, game)
-                && cost.pay(source, game, source.getSourceId(), id, true, null)) {
+                && cost.pay(source, game, source.getSourceId(), activePlayerId, true, null)) {
             return super.apply(game, source);
         }
         return true;

@@ -35,6 +35,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
@@ -66,7 +69,10 @@ public enum TableManager {
     private static final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 
     private final ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<>();
+    private final ReadWriteLock controllersLock = new ReentrantReadWriteLock();
+
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
+    private final ReadWriteLock tablesLock = new ReentrantReadWriteLock();
 
     /**
      * Defines how often checking process should be run on server.
@@ -88,23 +94,43 @@ public enum TableManager {
 
     public Table createTable(UUID roomId, UUID userId, MatchOptions options) {
         TableController tableController = new TableController(roomId, userId, options);
-        controllers.put(tableController.getTable().getId(), tableController);
-        tables.put(tableController.getTable().getId(), tableController.getTable());
+        putControllers(tableController.getTable().getId(), tableController);
+        putTables(tableController.getTable().getId(), tableController.getTable());
         return tableController.getTable();
     }
 
     public Table createTable(UUID roomId, MatchOptions options) {
         TableController tableController = new TableController(roomId, null, options);
-        controllers.put(tableController.getTable().getId(), tableController);
-        tables.put(tableController.getTable().getId(), tableController.getTable());
+        putControllers(tableController.getTable().getId(), tableController);
+        putTables(tableController.getTable().getId(), tableController.getTable());
         return tableController.getTable();
     }
 
     public Table createTournamentTable(UUID roomId, UUID userId, TournamentOptions options) {
         TableController tableController = new TableController(roomId, userId, options);
-        controllers.put(tableController.getTable().getId(), tableController);
-        tables.put(tableController.getTable().getId(), tableController.getTable());
+        putControllers(tableController.getTable().getId(), tableController);
+        putTables(tableController.getTable().getId(), tableController.getTable());
         return tableController.getTable();
+    }
+
+    private void putTables(UUID tableId, Table table) {
+        final Lock w = tablesLock.writeLock();
+        w.lock();
+        try {
+            tables.put(tableId, table);
+        } finally {
+            w.unlock();
+        }
+    }
+
+    private void putControllers(UUID controllerId, TableController tableController) {
+        final Lock w = controllersLock.writeLock();
+        w.lock();
+        try {
+            controllers.put(controllerId, tableController);
+        } finally {
+            w.unlock();
+        }
     }
 
     public Table getTable(UUID tableId) {
@@ -119,7 +145,27 @@ public enum TableManager {
     }
 
     public Collection<Table> getTables() {
-        return tables.values();
+        Collection<Table> newTables = new ArrayList<>();
+        final Lock r = tablesLock.readLock();
+        r.lock();
+        try {
+            newTables.addAll(tables.values());
+        } finally {
+            r.unlock();
+        }
+        return newTables;
+    }
+
+    public Collection<TableController> getControllers() {
+        Collection<TableController> newControllers = new ArrayList<>();
+        final Lock r = controllersLock.readLock();
+        r.lock();
+        try {
+            newControllers.addAll(controllers.values());
+        } finally {
+            r.unlock();
+        }
+        return newControllers;
     }
 
     public Optional<TableController> getController(UUID tableId) {
@@ -164,7 +210,7 @@ public enum TableManager {
 
     // removeUserFromAllTablesAndChat user from all tournament sub tables
     public void userQuitTournamentSubTables(UUID userId) {
-        for (TableController controller : controllers.values()) {
+        for (TableController controller : getControllers()) {
             if (controller.getTable() != null) {
                 if (controller.getTable().isTournamentSubTable()) {
                     controller.leaveTable(userId);
@@ -177,7 +223,7 @@ public enum TableManager {
 
     // removeUserFromAllTablesAndChat user from all sub tables of a tournament
     public void userQuitTournamentSubTables(UUID tournamentId, UUID userId) {
-        for (TableController controller : controllers.values()) {
+        for (TableController controller : getControllers()) {
             if (controller.getTable().isTournamentSubTable() && controller.getTable().getTournament().getId().equals(tournamentId)) {
                 if (controller.hasPlayer(userId)) {
                     controller.leaveTable(userId);
@@ -268,12 +314,6 @@ public enum TableManager {
         return false;
     }
 
-//    public boolean replayTable(UUID userId, UUID tableId) {
-//        if (controllers.containsKey(tableId)) {
-//            return controllers.get(tableId).replayTable(userId);
-//        }
-//        return false;
-//    }
     public void endGame(UUID tableId) {
         if (controllers.containsKey(tableId)) {
             if (controllers.get(tableId).endGameAndStartNextGame()) {
@@ -321,11 +361,24 @@ public enum TableManager {
     public void removeTable(UUID tableId) {
         TableController tableController = controllers.get(tableId);
         if (tableController != null) {
-            controllers.remove(tableId);
+            Lock w = controllersLock.writeLock();
+            w.lock();
+            try {
+                controllers.remove(tableId);
+            } finally {
+                w.unlock();
+            }
             tableController.cleanUp();  // deletes the table chat and references to users
 
             Table table = tables.get(tableId);
-            tables.remove(tableId);
+            w = tablesLock.writeLock();
+            w.lock();
+            try {
+                tables.remove(tableId);
+            } finally {
+                w.unlock();
+            }
+
             Match match = table.getMatch();
             Game game = null;
             if (match != null) {
@@ -383,8 +436,7 @@ public enum TableManager {
             debugServerState();
         }
         logger.debug("TABLE HEALTH CHECK");
-        List<Table> tableCopy = new ArrayList<>(tables.values());
-        for (Table table : tableCopy) {
+        for (Table table : getTables()) {
             try {
                 if (table.getState() != TableState.FINISHED
                         && ((System.currentTimeMillis() - table.getStartTime().getTime()) / 1000) > 30) { // removeUserFromAllTablesAndChat only if table started longer than 30 seconds ago
