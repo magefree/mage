@@ -47,7 +47,7 @@ public class ExileSourceCost extends CostImpl {
     private boolean toUniqueExileZone;
 
     public ExileSourceCost() {
-        this.text = "Exile {this}";
+        this.text = "exile {this}";
     }
 
     /**
@@ -57,7 +57,7 @@ public class ExileSourceCost extends CostImpl {
      * Deadeye Navigator) can identify the card
      */
     public ExileSourceCost(boolean toUniqueExileZone) {
-        this.text = "Exile {this}";
+        this.text = "exile {this}";
         this.toUniqueExileZone = toUniqueExileZone;
     }
 
@@ -76,6 +76,7 @@ public class ExileSourceCost extends CostImpl {
             if (toUniqueExileZone) {
                 exileZoneId = CardUtil.getExileZoneId(game, ability.getSourceId(), ability.getSourceObjectZoneChangeCounter());
                 exileZoneName = sourceObject.getName();
+                game.getState().setValue(sourceObject.getId().toString(), ability.getSourceObjectZoneChangeCounter());
             }
             controller.moveCardToExileWithInfo((Card) sourceObject, exileZoneId, exileZoneName, sourceId, game, game.getState().getZone(sourceObject.getId()), true);
                 // 117.11. The actions performed when paying a cost may be modified by effects.

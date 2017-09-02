@@ -151,19 +151,19 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl {
                             if (sublayer == SubLayer.NA) {
                                 land.getAbilities().clear();
                                 if (choice.equals("Forest")) {
-                                    land.addAbility(new GreenManaAbility(), id, game);
+                                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                                 }
                                 if (choice.equals("Plains")) {
-                                    land.addAbility(new WhiteManaAbility(), id, game);
+                                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                                 }
                                 if (choice.equals("Mountain")) {
-                                    land.addAbility(new RedManaAbility(), id, game);
+                                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                                 }
                                 if (choice.equals("Island")) {
-                                    land.addAbility(new BlueManaAbility(), id, game);
+                                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                                 }
                                 if (choice.equals("Swamp")) {
-                                    land.addAbility(new BlackManaAbility(), id, game);
+                                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                                 }
                             }
                             break;

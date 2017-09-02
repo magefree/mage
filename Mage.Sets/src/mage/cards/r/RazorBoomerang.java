@@ -52,7 +52,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class RazorBoomerang extends CardImpl {
 
     public RazorBoomerang(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add("Equipment");
 
         // Equipped creature has "{tap}, Unattach Razor Boomerang: Razor Boomerang deals 1 damage to target creature or player. Return Razor Boomerang to its owner's hand."
@@ -105,7 +105,7 @@ class RazorBoomerangEffect extends OneShotEffect {
         }
         Permanent razor = game.getPermanent(attachmentid);
         if (razor != null) {
-            razor.moveToZone(Zone.HAND, id, game, true);
+            razor.moveToZone(Zone.HAND, source.getSourceId(), game, true);
         }
         return true;
     }

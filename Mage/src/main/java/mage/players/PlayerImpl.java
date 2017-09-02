@@ -2959,7 +2959,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     public UserData getControllingPlayersUserData(Game game) {
-        if (isGameUnderControl()) {
+        if (!isGameUnderControl()) {
             Player player = game.getPlayer(getTurnControlledBy());
             if (player.isHuman()) {
                 return player.getUserData();
@@ -2969,8 +2969,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setUserData(UserData userData
-    ) {
+    public void setUserData(UserData userData) {
         this.userData = userData;
         getManaPool().setAutoPayment(userData.isManaPoolAutomatic());
         getManaPool().setAutoPaymentRestricted(userData.isManaPoolAutomaticRestricted());

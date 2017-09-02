@@ -302,6 +302,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Shadowblood Ridge", 326, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shadowmage Infiltrator", 294, Rarity.RARE, mage.cards.s.ShadowmageInfiltrator.class));
         cards.add(new SetCardInfo("Shelter", 46, Rarity.COMMON, mage.cards.s.Shelter.class));
+        cards.add(new SetCardInfo("Shifty Doppelganger", 101, Rarity.RARE, mage.cards.s.ShiftyDoppelganger.class));
         cards.add(new SetCardInfo("Shower of Coals", 221, Rarity.UNCOMMON, mage.cards.s.ShowerOfCoals.class));
         cards.add(new SetCardInfo("Simplify", 269, Rarity.COMMON, mage.cards.s.Simplify.class));
         cards.add(new SetCardInfo("Skeletal Scrying", 161, Rarity.UNCOMMON, mage.cards.s.SkeletalScrying.class));

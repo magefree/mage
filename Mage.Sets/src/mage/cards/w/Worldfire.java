@@ -47,8 +47,7 @@ import mage.players.Player;
 public class Worldfire extends CardImpl {
 
     public Worldfire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{R}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{R}{R}{R}");
 
         // Exile all permanents. Exile all cards from all hands and graveyards. Each player's life total becomes 1.
         this.getSpellAbility().addEffect(new WorldfireEffect());
@@ -65,9 +64,9 @@ public class Worldfire extends CardImpl {
 }
 
 class WorldfireEffect extends OneShotEffect {
-    
+
     private static FilterPermanent filter = new FilterPermanent();
-    
+
     public WorldfireEffect() {
         super(Outcome.Detriment);
         staticText = "Exile all permanents. Exile all cards from all hands and graveyards. Each player's life total becomes 1";
@@ -85,7 +84,7 @@ class WorldfireEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToExile(id, "all permanents", id, game);
+            permanent.moveToExile(null, "", source.getSourceId(), game);
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);

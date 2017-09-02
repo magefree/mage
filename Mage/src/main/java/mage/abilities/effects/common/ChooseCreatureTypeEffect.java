@@ -27,6 +27,8 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.LinkedHashSet;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -38,9 +40,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.LinkedHashSet;
-import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -71,6 +70,9 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
                 if (!controller.canRespond()) {
                     return false;
                 }
+            }
+            if (typeChoice.getChoice() == null) {
+                return false;
             }
             if (!game.isSimulation()) {
                 game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());

@@ -36,7 +36,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
@@ -48,8 +48,7 @@ import mage.target.TargetPlayer;
 public class HurkylsRecall extends CardImpl {
 
     public HurkylsRecall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Return all artifacts target player owns to his or her hand.
         this.getSpellAbility().addEffect(new HurkylsRecallReturnToHandEffect());
@@ -81,7 +80,7 @@ class HurkylsRecallReturnToHandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         if (targetPointer.getFirst(game, source) != null) {
             FilterArtifactPermanent filter = new FilterArtifactPermanent();
-            filter.add(new ControllerIdPredicate(targetPointer.getFirst(game, source)));
+            filter.add(new OwnerIdPredicate(targetPointer.getFirst(game, source)));
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
             }
