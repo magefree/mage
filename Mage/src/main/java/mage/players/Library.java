@@ -27,14 +27,15 @@
  */
 package mage.players;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.util.RandomUtil;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -138,9 +139,7 @@ public class Library implements Serializable {
     public void putOnBottom(Card card, Game game) {
         if (card.getOwnerId().equals(playerId)) {
             card.setZone(Zone.LIBRARY, game);
-            if (library.contains(card.getId())) {
-                library.remove(card.getId());
-            }
+            library.remove(card.getId());
             library.add(card.getId());
         } else {
             game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);

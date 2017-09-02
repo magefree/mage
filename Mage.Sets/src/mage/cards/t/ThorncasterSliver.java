@@ -27,13 +27,12 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,8 +41,9 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreatureOrPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class ThorncasterSliver extends CardImpl {
@@ -59,9 +59,9 @@ public class ThorncasterSliver extends CardImpl {
         Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(1), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityAllEffect(ability,
-                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS,
-                        "Sliver creatures you control have \"Whenever this creature attacks, it deals 1 damage to target creature or player.\"")));
+                new GainAbilityControlledEffect(ability,
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)
+                        .setText("Sliver creatures you control have \"Whenever this creature attacks, it deals 1 damage to target creature or player.\"")));
     }
 
     public ThorncasterSliver(final ThorncasterSliver card) {

@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -41,14 +40,7 @@ import mage.abilities.keyword.ReboundAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.Predicates;
@@ -60,6 +52,8 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.AttackedThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -187,13 +181,7 @@ class TaigamOjutaiMasterGainReboundEffect extends ContinuousEffectImpl {
     }
 
     private void addReboundAbility(Card card, Ability source, Game game) {
-        boolean found = false;
-        for (Ability ability : card.getAbilities()) {
-            if (ability instanceof ReboundAbility) {
-                found = true;
-                break;
-            }
-        }
+        boolean found = card.getAbilities().stream().anyMatch(ability -> ability instanceof ReboundAbility);
         if (!found) {
             Ability ability = new ReboundAbility();
             game.getState().addOtherAbility(card, ability);

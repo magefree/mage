@@ -52,21 +52,12 @@ public enum SuspendedCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
-        boolean found = false;
         if (card != null) {
-            for (Ability ability: card.getAbilities()) {
-                if (ability instanceof SuspendAbility) {
-                    found = true;
-                    break;
-                }
-            }
+            boolean found = card.getAbilities().stream().anyMatch(ability -> ability instanceof SuspendAbility);
+
             if (!found) {
-                for (Ability ability: game.getState().getAllOtherAbilities(source.getSourceId())) {
-                    if (ability instanceof SuspendAbility) {
-                        found = true;
-                        break;
-                    }
-                }
+                found = game.getState().getAllOtherAbilities(source.getSourceId()).stream().anyMatch(ability -> ability instanceof SuspendAbility);
+
             }
             if (found) {
                 if (game.getState().getZone(card.getId()) == Zone.EXILED &&
