@@ -27,6 +27,7 @@
  */
 package mage.game.permanent;
 
+import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -36,6 +37,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.*;
+import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.*;
@@ -54,8 +56,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -204,6 +204,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.minBlockedBy = 1;
         this.maxBlockedBy = 0;
         this.copy = false;
+        for (TextPart textPart : textParts) {
+            textPart.reset();
+        }
     }
 
     @Override
@@ -1210,7 +1213,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean imprint(UUID imprintedCard, Game game) {
-        if (!game.getExile().containsId(imprintedCard, game)){
+        if (!game.getExile().containsId(imprintedCard, game)) {
             return false;
         }
         if (connectedCards.containsKey("imprint")) {

@@ -222,6 +222,7 @@ public class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Nazahn, Revered Bladesmith", 44, Rarity.MYTHIC, mage.cards.n.NazahnReveredBladesmith.class));
         cards.add(new SetCardInfo("Necromantic Selection", 117, Rarity.RARE, mage.cards.n.NecromanticSelection.class));
         cards.add(new SetCardInfo("Nevinyrral's Disk", 217, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
+        cards.add(new SetCardInfo("New Blood", 19, Rarity.RARE, mage.cards.n.NewBlood.class));
         cards.add(new SetCardInfo("Nihil Spellbomb", 218, Rarity.COMMON, mage.cards.n.NihilSpellbomb.class));
         cards.add(new SetCardInfo("Nin, the Pain Artist", 183, Rarity.RARE, mage.cards.n.NinThePainArtist.class));
         cards.add(new SetCardInfo("Nissa's Pilgrimage", 155, Rarity.COMMON, mage.cards.n.NissasPilgrimage.class));
