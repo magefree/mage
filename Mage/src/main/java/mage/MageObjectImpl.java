@@ -103,7 +103,8 @@ public abstract class MageObjectImpl implements MageObject {
         this.subtype.addAll(object.subtype);
         supertype.addAll(object.supertype);
         this.copy = object.copy;
-        textParts = new ArrayList<>(object.textParts);
+        textParts = new ArrayList<>();
+        textParts.addAll(object.textParts);
     }
 
     @Override
