@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
  * permitted provided that the following conditions are met:
@@ -25,73 +25,66 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.utils;
+package mage.abilities.text;
 
-import java.io.Serializable;
+import mage.ObjectColor;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * This implementation is not finished yet. There is no support to also change
+ * the rules text of an object.
+ *
+ * @author LevelX2
  */
-public class MageVersion implements Serializable, Comparable<MageVersion> {
+public class TextPartColor extends TextPartImpl<ObjectColor> {
 
-    /**
-     *
-     */
-    public final static int MAGE_VERSION_MAJOR = 1;
-    public final static int MAGE_VERSION_MINOR = 4;
-    public final static int MAGE_VERSION_PATCH = 26;
-    public final static String MAGE_VERSION_MINOR_PATCH = "V3";
-    public final static String MAGE_VERSION_INFO = "";
+    private final ObjectColor objectColorBase;
+    private ObjectColor objectColorCurrent;
 
-    private final int major;
-    private final int minor;
-    private final int patch;
-    private final String minorPatch; // doesn't matter for compatibility
-
-    private String info = "";
-
-    public MageVersion(int major, int minor, int patch, String minorPatch, String info) {
-        this.major = major;
-        this.minor = minor;
-        this.patch = patch;
-        this.minorPatch = minorPatch;
-        this.info = info;
+    public TextPartColor(ObjectColor objectColor) {
+        this.objectColorBase = objectColor;
+        this.objectColorCurrent = objectColor;
     }
 
-    public int getMajor() {
-        return major;
+    public TextPartColor(final TextPartColor textPartColor) {
+        super();
+        this.objectColorBase = textPartColor.objectColorBase;
+        this.objectColorCurrent = textPartColor.objectColorCurrent;
     }
 
-    public int getMinor() {
-        return minor;
+    @Override
+    public String getText() {
+        return objectColorCurrent.getDescription();
     }
 
-    public int getPatch() {
-        return patch;
+    @Override
+    public ObjectColor getCurrentValue() {
+        return objectColorCurrent;
     }
 
-    public String getMinorPatch() {
-        return minorPatch;
+    @Override
+    public ObjectColor getBaseValue() {
+        return objectColorBase;
+    }
+
+    @Override
+    public void replaceWith(ObjectColor objectColor) {
+        this.objectColorCurrent = objectColor;
+    }
+
+    @Override
+    public void reset() {
+        this.objectColorCurrent = this.objectColorBase;
+    }
+
+    @Override
+    public TextPartColor copy() {
+        return new TextPartColor(this);
     }
 
     @Override
     public String toString() {
-        return major + "." + minor + '.' + patch + info + minorPatch;
-    }
-
-    @Override
-    public int compareTo(MageVersion o) {
-        if (major != o.major) {
-            return major - o.major;
-        }
-        if (minor != o.minor) {
-            return minor - o.minor;
-        }
-        if (patch != o.patch) {
-            return patch - o.patch;
-        }
-        return info.compareTo(o.info);
+        return objectColorCurrent.toString();
     }
 
 }

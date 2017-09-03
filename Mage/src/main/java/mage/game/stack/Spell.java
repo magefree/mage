@@ -45,6 +45,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
+import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
 import mage.cards.FrameStyle;
@@ -927,10 +928,23 @@ public class Spell extends StackObjImpl implements Card {
         return copy;
     }
 
+    @Override
     public boolean isAllCreatureTypes() {
         return false;
     }
 
+    @Override
     public void setIsAllCreatureTypes(boolean value) {
     }
+
+    @Override
+    public List<TextPart> getTextParts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TextPart addTextPart(TextPart textPart) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -27,6 +27,10 @@
  */
 package mage;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -36,6 +40,8 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.text.TextPart;
+import mage.abilities.text.TextPartSubType;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -45,10 +51,6 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
-
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 
 public abstract class MageObjectImpl implements MageObject {
 
@@ -68,6 +70,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected MageInt power;
     protected MageInt toughness;
     protected boolean copy;
+    protected List<TextPart> textParts;
 
     public MageObjectImpl() {
         this(UUID.randomUUID());
@@ -82,6 +85,7 @@ public abstract class MageObjectImpl implements MageObject {
         frameStyle = FrameStyle.M15_NORMAL;
         manaCost = new ManaCostsImpl<>("");
         abilities = new AbilitiesImpl<>();
+        textParts = new ArrayList<>();
     }
 
     public MageObjectImpl(final MageObjectImpl object) {
@@ -99,6 +103,8 @@ public abstract class MageObjectImpl implements MageObject {
         this.subtype.addAll(object.subtype);
         supertype.addAll(object.supertype);
         this.copy = object.copy;
+        textParts = new ArrayList<>();
+        textParts.addAll(object.textParts);
     }
 
     @Override
@@ -303,13 +309,33 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public boolean isAllCreatureTypes(){
+    public boolean isAllCreatureTypes() {
         return isAllCreatureTypes;
     }
 
     @Override
-    public void setIsAllCreatureTypes(boolean value){
+    public void setIsAllCreatureTypes(boolean value) {
         isAllCreatureTypes = value;
+    }
+
+    @Override
+    public List<TextPart> getTextParts() {
+        return textParts;
+    }
+
+    @Override
+    public TextPart addTextPart(TextPart textPart) {
+        textParts.add(textPart);
+        return textPart;
+    }
+
+    @Override
+    public void changeSubType(SubType fromSubType, SubType toSubType) {
+        for (TextPart textPart : textParts) {
+            if (textPart instanceof TextPartSubType && textPart.getCurrentValue().equals(fromSubType)) {
+                textPart.replaceWith(toSubType);
+            }
+        }
     }
 
 }

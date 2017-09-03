@@ -1,10 +1,15 @@
 package mage;
 
+import java.io.Serializable;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.ChangelingAbility;
+import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
@@ -13,10 +18,6 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.SubTypeList;
-
-import java.io.Serializable;
-import java.util.EnumSet;
-import java.util.UUID;
 
 public interface MageObject extends MageItem, Serializable {
 
@@ -58,7 +59,6 @@ public interface MageObject extends MageItem, Serializable {
 
     int getStartingLoyalty();
 
-
     void adjustCosts(Ability ability, Game game);
 
     void adjustTargets(Ability ability, Game game);
@@ -84,7 +84,6 @@ public interface MageObject extends MageItem, Serializable {
     void updateZoneChangeCounter(Game game, ZoneChangeEvent event);
 
     void setZoneChangeCounter(int value, Game game);
-
 
     default boolean isCreature() {
         return getCardType().contains(CardType.CREATURE);
@@ -163,7 +162,6 @@ public interface MageObject extends MageItem, Serializable {
         return false;
     }
 
-
     default boolean shareSubtypes(Card otherCard, Game game) {
 
         if (otherCard == null) {
@@ -191,7 +189,15 @@ public interface MageObject extends MageItem, Serializable {
 
     void setIsAllCreatureTypes(boolean value);
 
-    default void addCardTypes(EnumSet<CardType> cardType){
+    default void addCardTypes(EnumSet<CardType> cardType) {
         getCardType().addAll(cardType);
+    }
+
+    List<TextPart> getTextParts();
+
+    TextPart addTextPart(TextPart textPart);
+
+    default void changeSubType(SubType fromSubType, SubType toSubType) {
+
     }
 }
