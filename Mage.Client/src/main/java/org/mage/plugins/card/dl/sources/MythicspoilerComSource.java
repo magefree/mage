@@ -62,7 +62,6 @@ public enum MythicspoilerComSource implements CardImageSource {
     private Map<String, Set<String>> cardNameAliasesStart;
     private final Map<String, Map<String, String>> sets;
 
-
     @Override
     public String getSourceName() {
         return "mythicspoiler.com";
@@ -72,6 +71,7 @@ public enum MythicspoilerComSource implements CardImageSource {
         sets = new LinkedHashMap<>();
         setsAliases = new HashMap<>();
         setsAliases.put("exp", "bfz");
+        setsAliases.put("xln", "ixa");
         cardNameAliases = new HashMap<>();
         // set+wrong name from web side => correct card name
         cardNameAliases.put("MM2-otherwordlyjourney", "otherworldlyjourney");
