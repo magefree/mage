@@ -53,6 +53,7 @@ public class LaunchParty extends ExpansionSet {
         cards.add(new SetCardInfo("Angel of Deliverance", 35, Rarity.RARE, mage.cards.a.AngelOfDeliverance.class));
         cards.add(new SetCardInfo("Ant Queen", 7, Rarity.RARE, mage.cards.a.AntQueen.class));
         cards.add(new SetCardInfo("Bident of Thassa", 24, Rarity.RARE, mage.cards.b.BidentOfThassa.class));
+        cards.add(new SetCardInfo("Bishop of Rebirth", 41, Rarity.RARE, mage.cards.b.BishopOfRebirth.class));
         cards.add(new SetCardInfo("Blight Herder", 32, Rarity.RARE, mage.cards.b.BlightHerder.class));
         cards.add(new SetCardInfo("Breaking // Entering", 22, Rarity.RARE, mage.cards.b.BreakingEntering.class));
         cards.add(new SetCardInfo("Colossal Whale", 23, Rarity.RARE, mage.cards.c.ColossalWhale.class));
