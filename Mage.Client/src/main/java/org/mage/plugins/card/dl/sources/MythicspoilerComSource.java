@@ -35,9 +35,11 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.prefs.Preferences;
@@ -57,10 +59,11 @@ import org.mage.plugins.card.images.CardDownloadData;
 public enum MythicspoilerComSource implements CardImageSource {
 
     instance;
-    private Map<String, String> setsAliases;
-    private Map<String, String> cardNameAliases;
-    private Map<String, Set<String>> cardNameAliasesStart;
+    private final Map<String, String> setsAliases;
+    private final Map<String, String> cardNameAliases;
+    private final Map<String, Set<String>> cardNameAliasesStart;
     private final Map<String, Map<String, String>> sets;
+    private final Set<String> supportedSets;
 
     @Override
     public String getSourceName() {
@@ -68,6 +71,26 @@ public enum MythicspoilerComSource implements CardImageSource {
     }
 
     MythicspoilerComSource() {
+        supportedSets = new LinkedHashSet<>();
+        supportedSets.add("V16");
+        supportedSets.add("CN2");
+        supportedSets.add("DDR");
+        supportedSets.add("KLD");
+        supportedSets.add("MPS");
+        supportedSets.add("PZ2");
+        supportedSets.add("C16");
+        supportedSets.add("PCA");
+        supportedSets.add("AER");
+        supportedSets.add("MM3");
+        supportedSets.add("DDS");
+        supportedSets.add("W17");
+        supportedSets.add("AKH");
+        supportedSets.add("MPS");
+        supportedSets.add("CMA");
+        supportedSets.add("E01");
+        supportedSets.add("HOU");
+        supportedSets.add("C17");
+
         sets = new LinkedHashMap<>();
         setsAliases = new HashMap<>();
         setsAliases.put("exp", "bfz");
@@ -243,4 +266,12 @@ public enum MythicspoilerComSource implements CardImageSource {
     @Override
     public void doPause(String httpImageUrl) {
     }
+
+    @Override
+    public ArrayList<String> getSupportedSets() {
+        ArrayList<String> supportedSetsCopy = new ArrayList<>();
+        supportedSetsCopy.addAll(supportedSets);
+        return supportedSetsCopy;
+    }
+
 }

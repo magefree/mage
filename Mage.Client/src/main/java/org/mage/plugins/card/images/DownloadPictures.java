@@ -21,11 +21,16 @@ import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.swing.*;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.repository.CardInfo;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
+import static mage.remote.Connection.ProxyType.HTTP;
+import static mage.remote.Connection.ProxyType.NONE;
+import static mage.remote.Connection.ProxyType.SOCKS;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
@@ -39,18 +44,31 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     private static final Logger logger = Logger.getLogger(DownloadPictures.class);
 
+    public static final String ALL_CARDS = "- All cards from that source";
+    public static final String ALL_STANDARD_CARDS = "- All cards from standard from that source";
+    public static final String ALL_TOKENS = "- All token images from that source";
+
     private final JProgressBar bar;
     private final JOptionPane dlg;
     private boolean cancel;
     private final JButton closeButton;
     private final JButton startDownloadButton;
     private int cardIndex;
-    private List<CardDownloadData> cards;
-    private List<CardDownloadData> type2cards;
-    private final JComboBox jComboBox1;
-    private final JLabel jLabel1;
-    private static boolean offlineMode = false;
-    private JCheckBox checkBox;
+    private List<CardDownloadData> allCardsMissingImage;
+    List<CardDownloadData> cardsToDownload = new ArrayList<>();
+
+    private int missingCards = 0;
+    private int missingTokens = 0;
+
+    List<String> selectedSetCodes = new ArrayList<>();
+
+    private final JComboBox jComboBoxServer;
+    private final JLabel jLabelAllMissing;
+    private final JLabel jLabelServer;
+
+    private final JComboBox jComboBoxSet;
+    private final JLabel jLabelSet;
+
     private final Object sync = new Object();
 
     private static CardImageSource cardImageSource;
@@ -90,7 +108,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     }
 
     public DownloadPictures(List<CardDownloadData> cards) {
-        this.cards = cards;
+        this.allCardsMissingImage = cards;
 
         bar = new JProgressBar(this);
 
@@ -98,15 +116,21 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         p0.setLayout(new BoxLayout(p0, BoxLayout.Y_AXIS));
 
         p0.add(Box.createVerticalStrut(5));
-        jLabel1 = new JLabel();
-        jLabel1.setText("Please select server:");
 
-        jLabel1.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jLabelAllMissing = new JLabel();
 
-        p0.add(jLabel1);
+        jLabelAllMissing.setAlignmentX(Component.LEFT_ALIGNMENT);
+        p0.add(jLabelAllMissing);
         p0.add(Box.createVerticalStrut(5));
-        ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[]{
-            // "magiccards.info",
+
+        jLabelServer = new JLabel();
+        jLabelServer.setText("Please select server:");
+        jLabelServer.setAlignmentX(Component.LEFT_ALIGNMENT);
+        p0.add(jLabelServer);
+
+        p0.add(Box.createVerticalStrut(5));
+
+        ComboBoxModel jComboBoxDownloadSourcesModel = new DefaultComboBoxModel(new String[]{
             "wizards.com",
             "mythicspoiler.com",
             "tokens.mtg.onl", //"mtgimage.com (HQ)",
@@ -114,50 +138,45 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             "alternative.mtg.onl",
             "GrabBag",
             "magidex.com",
-            "scryfall.com", //"mtgathering.ru HQ",
+            "scryfall.com",
+            "magiccards.info"
+        //"mtgathering.ru HQ",
         //"mtgathering.ru MQ",
         //"mtgathering.ru LQ",
         });
-        jComboBox1 = new JComboBox();
+        jComboBoxServer = new JComboBox();
 
-        cardImageSource = MagicCardsImageSource.instance;
+        cardImageSource = WizardCardsImageSource.instance;
 
-        jComboBox1.setModel(jComboBox1Model);
-        jComboBox1.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jComboBox1.addActionListener(e -> {
-            JComboBox cb = (JComboBox) e.getSource();
-            switch (cb.getSelectedIndex() + 1) {
-                case 0:
-                    cardImageSource = MagicCardsImageSource.instance;
-                    break;
-                case 1:
-                    cardImageSource = WizardCardsImageSource.instance;
-                    break;
-                case 2:
-                    cardImageSource = MythicspoilerComSource.instance;
-                    break;
-                case 3:
-                    cardImageSource = TokensMtgImageSource.instance;
-                    break;
-                case 4:
-                    cardImageSource = MtgOnlTokensImageSource.instance;
-                    break;
-                case 5:
-                    cardImageSource = AltMtgOnlTokensImageSource.instance;
-                    break;
-                case 6:
-                    cardImageSource = GrabbagImageSource.instance;
-                    break;
-                case 7:
-                    cardImageSource = MagidexImageSource.instance;
-                    break;
-                case 8:
-                    cardImageSource = ScryfallImageSource.instance;
-                    break;
+        jComboBoxServer.setModel(jComboBoxDownloadSourcesModel);
+        jComboBoxServer.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jComboBoxServer.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxServerActionPerformed(evt);
             }
-            updateCardsToDownload();
         });
-        p0.add(jComboBox1);
+        p0.add(jComboBoxServer);
+
+        p0.add(Box.createVerticalStrut(5));
+
+        // Set selection ---------------------------------
+        jLabelSet = new JLabel();
+        jLabelSet.setText("Please select sets to download images for:");
+        jLabelSet.setAlignmentX(Component.LEFT_ALIGNMENT);
+        p0.add(jLabelSet);
+
+        jComboBoxSet = new JComboBox();
+        jComboBoxSet.setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
+        jComboBoxSet.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jComboBoxSet.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxSetActionPerformed(evt);
+            }
+        });
+        p0.add(jComboBoxSet);
+
         p0.add(Box.createVerticalStrut(5));
 
         // Start
@@ -165,31 +184,21 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         startDownloadButton.addActionListener(e -> {
             new Thread(DownloadPictures.this).start();
             startDownloadButton.setEnabled(false);
-            checkBox.setEnabled(false);
         });
         p0.add(Box.createVerticalStrut(5));
 
         // Progress
         p0.add(bar);
         bar.setStringPainted(true);
-        int count = cards.size();
-        float mb = (count * cardImageSource.getAverageSize()) / 1024;
-        bar.setString(String.format(cardIndex == cards.size() ? "%d of %d cards finished! Please close!"
-                : "%d of %d cards finished! Please wait! [%.1f Mb]", 0, cards.size(), mb));
         Dimension d = bar.getPreferredSize();
         d.width = 300;
         bar.setPreferredSize(d);
 
-        p0.add(Box.createVerticalStrut(5));
-        checkBox = new JCheckBox("Download images for Standard (Type2) only");
-        p0.add(checkBox);
-        p0.add(Box.createVerticalStrut(5));
-
-        checkBox.addActionListener(e -> updateCardsToDownload());
-
         // JOptionPane
         Object[] options = {startDownloadButton, closeButton = new JButton("Cancel")};
         dlg = new JOptionPane(p0, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, options, options[1]);
+
+        updateCardsToDownload();
     }
 
     public static boolean checkForMissingCardImages(List<CardInfo> allCards) {
@@ -209,31 +218,120 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         return missedCardTFiles.get();
     }
 
+    private void comboBoxServerActionPerformed(java.awt.event.ActionEvent evt) {
+        JComboBox cb = (JComboBox) evt.getSource();
+        switch (cb.getSelectedIndex()) {
+            case 0:
+                cardImageSource = WizardCardsImageSource.instance;
+                break;
+            case 1:
+                cardImageSource = MythicspoilerComSource.instance;
+                break;
+            case 2:
+                cardImageSource = TokensMtgImageSource.instance;
+                break;
+            case 3:
+                cardImageSource = MtgOnlTokensImageSource.instance;
+                break;
+            case 4:
+                cardImageSource = AltMtgOnlTokensImageSource.instance;
+                break;
+            case 5:
+                cardImageSource = GrabbagImageSource.instance;
+                break;
+            case 6:
+                cardImageSource = MagidexImageSource.instance;
+                break;
+            case 7:
+                cardImageSource = ScryfallImageSource.instance;
+                break;
+            case 8:
+                cardImageSource = MagicCardsImageSource.instance;
+                break;
+        }
+        jComboBoxSet.setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
+        updateCardsToDownload();
+    }
+
+    private Object[] getSetsForCurrentImageSource() {
+        // Set the available sets to the combo box
+        ArrayList<String> supportedSets = cardImageSource.getSupportedSets();
+        List<String> setNames = new ArrayList<>();
+        setNames.add(ALL_CARDS);
+        setNames.add(ALL_STANDARD_CARDS);
+        if (cardImageSource.providesTokenImages()) {
+            setNames.add(ALL_TOKENS);
+        }
+        if (supportedSets != null) {
+            for (String setCode : supportedSets) {
+                ExpansionSet expansionSet = Sets.findSet(setCode);
+                if (expansionSet != null) {
+                    setNames.add(expansionSet.getName());
+                } else {
+                    logger.error(cardImageSource.getSourceName() + ": Expansion set for code " + setCode + " not found!");
+                }
+            }
+
+        }
+        return setNames.toArray(new String[0]);
+    }
+
     private void updateCardsToDownload() {
-        List<CardDownloadData> cardsToDownload = cards;
-        if (type2cardsOnly()) {
-            selectType2andTokenCardsIfNotYetDone();
-            cardsToDownload = type2cards;
+        String expansionSelection = jComboBoxSet.getSelectedItem().toString();
+        selectedSetCodes.clear();
+        boolean tokens = false;
+        switch (expansionSelection) {
+            case ALL_CARDS:
+                if (cardImageSource.getSupportedSets() == null) {
+                    selectedSetCodes = cardImageSource.getSupportedSets();
+                } else {
+                    selectedSetCodes.addAll(cardImageSource.getSupportedSets());
+                }
+                break;
+            case ALL_STANDARD_CARDS:
+                List<String> standardSets = ConstructedFormats.getSetsByFormat(ConstructedFormats.STANDARD);
+                for (String setCode : cardImageSource.getSupportedSets()) {
+                    if (standardSets.contains(setCode)) {
+                        selectedSetCodes.add(setCode);
+                    } else {
+                        logger.debug("Set code " + setCode + " from download source " + cardImageSource.getSourceName());
+                    }
+                }
+                break;
+            case ALL_TOKENS:
+                tokens = true;
+            default:
+                int nonSetEntries = 2;
+                if (cardImageSource.providesTokenImages()) {
+                    nonSetEntries++;
+                }
+                selectedSetCodes.add(cardImageSource.getSupportedSets().get(jComboBoxSet.getSelectedIndex() - nonSetEntries));
+        }
+        cardsToDownload.clear();
+        for (CardDownloadData data : allCardsMissingImage) {
+            if ((data.isToken() && tokens)
+                    || (!data.isToken() && selectedSetCodes.contains(data.getSet()))) {
+                cardsToDownload.add(data);
+            }
         }
         updateProgressText(cardsToDownload.size());
     }
 
-    private boolean type2cardsOnly() {
-        return checkBox.isSelected();
-    }
-
-    private void selectType2andTokenCardsIfNotYetDone() {
-        if (type2cards == null) {
-            type2cards = new ArrayList<>();
-            for (CardDownloadData data : cards) {
-                if (data.isType2() || data.isToken()) {
-                    type2cards.add(data);
-                }
-            }
-        }
+    private void comboBoxSetActionPerformed(java.awt.event.ActionEvent evt) {
+        // Update the cards to download related to the selected set
+        updateCardsToDownload();
     }
 
     private void updateProgressText(int cardCount) {
+        missingTokens = 0;
+        for (CardDownloadData card : allCardsMissingImage) {
+            if (card.isToken()) {
+                missingTokens++;
+            }
+        }
+        missingCards = allCardsMissingImage.size() - missingTokens;
+        jLabelAllMissing.setText("Missing: " + missingCards + " cards / " + missingTokens + " tokens");
+
         float mb = (cardCount * cardImageSource.getAverageSize()) / 1024;
         bar.setString(String.format(cardIndex == cardCount ? "%d of %d cards finished! Please close!"
                 : "%d of %d cards finished! Please wait! [%.1f Mb]", 0, cardCount, mb));
@@ -262,11 +360,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             logger.warn("No formats defined. Try connecting to a server first!");
         }
 
-        int numberCardImages = allCards.size();
-        int numberWithoutTokens = 0;
         List<CardDownloadData> allCardsUrls = Collections.synchronizedList(new ArrayList<>());
         try {
-            offlineMode = true;
             allCards.parallelStream().forEach(card -> {
                 if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()
                         && !ignoreUrls.contains(card.getSetCode())) {
@@ -308,13 +403,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     logger.error("Card has no set name and won't be sent to client:" + card.getName());
                 }
             });
-            numberWithoutTokens = allCards.size();
             allCardsUrls.addAll(getTokenCardUrls());
         } catch (Exception e) {
             logger.error(e);
         }
-
-        int numberAllTokenImages = allCardsUrls.size() - numberWithoutTokens;
 
         /**
          * check to see which cards we already have
@@ -329,22 +421,13 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             }
         });
 
-        int tokenImages = 0;
-        for (CardDownloadData card : cardsToDownload) {
-            logger.debug((card.isToken() ? "Token" : "Card") + " image to download: " + card.getName() + " (" + card.getSet() + ')');
-            if (card.isToken()) {
-                tokenImages++;
-            }
-        }
-        logger.info("Check download images (total card images: " + numberCardImages + ", total token images: " + numberAllTokenImages + ')');
-        logger.info("   => Missing card images: " + (cardsToDownload.size() - tokenImages));
-        logger.info("   => Missing token images: " + tokenImages);
         return new ArrayList<>(cardsToDownload);
     }
 
     public static ArrayList<CardDownloadData> getTokenCardUrls() throws RuntimeException {
         ArrayList<CardDownloadData> list = new ArrayList<>();
-        InputStream in = DownloadPictures.class.getClassLoader().getResourceAsStream("card-pictures-tok.txt");
+        InputStream in = DownloadPictures.class
+                .getClassLoader().getResourceAsStream("card-pictures-tok.txt");
 
         if (in == null) {
             logger.error("resources input stream is null");
@@ -446,9 +529,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         if (p != null) {
             HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
-            List<CardDownloadData> cardsToDownload = this.checkBox.isSelected() ? type2cards : cards;
-
             update(0, cardsToDownload.size());
+            logger.info("Started download of " + cardsToDownload.size() + " cards from source: " + cardImageSource.getSourceName());
 
             int numberOfThreads = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_THREADS, "10"));
             ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
@@ -712,16 +794,18 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     card, count, mb));
         } else {
             List<CardDownloadData> remainingCards = Collections.synchronizedList(new ArrayList<>());
-            DownloadPictures.this.cards.parallelStream().forEach(cardDownloadData -> {
+            DownloadPictures.this.allCardsMissingImage.parallelStream().forEach(cardDownloadData -> {
                 TFile file = new TFile(CardImageUtils.generateImagePath(cardDownloadData));
                 if (!file.exists()) {
                     remainingCards.add(cardDownloadData);
                 }
             });
 
-            DownloadPictures.this.cards = new ArrayList<>(remainingCards);
+            // remove the cards not downloaded to get the siccessfull downloaded cards
+            DownloadPictures.this.cardsToDownload.removeAll(remainingCards);
+            DownloadPictures.this.allCardsMissingImage.removeAll(DownloadPictures.this.cardsToDownload);
 
-            count = DownloadPictures.this.cards.size();
+            count = remainingCards.size();
 
             if (count == 0) {
                 bar.setString("0 cards remaining! Please close!");

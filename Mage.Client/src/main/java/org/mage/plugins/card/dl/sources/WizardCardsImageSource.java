@@ -34,10 +34,13 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
-import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -46,6 +49,7 @@ import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -58,10 +62,13 @@ import org.mage.plugins.card.images.CardDownloadData;
 public enum WizardCardsImageSource implements CardImageSource {
 
     instance;
-    private Map<String, String> setsAliases;
-    private Map<String, String> languageAliases;
-    private final Map<String, Map<String, String>> sets;
 
+    private static final Logger logger = Logger.getLogger(WizardCardsImageSource.class);
+
+    private final Map<String, String> setsAliases;
+    private final Map<String, String> languageAliases;
+    private final Map<String, Map<String, String>> sets;
+    private final Set<String> supportedSets;
 
     @Override
     public String getSourceName() {
@@ -69,6 +76,197 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     WizardCardsImageSource() {
+        supportedSets = new LinkedHashSet<>();
+        supportedSets.add("LEA");
+        supportedSets.add("LEB");
+        supportedSets.add("2ED");
+        supportedSets.add("ARN");
+        supportedSets.add("ATQ");
+        supportedSets.add("3ED");
+        supportedSets.add("LEG");
+        supportedSets.add("DRK");
+        supportedSets.add("FEM");
+        supportedSets.add("4ED");
+        supportedSets.add("ICE");
+        supportedSets.add("CHR");
+        supportedSets.add("HML");
+        supportedSets.add("ALL");
+        supportedSets.add("MIR");
+        supportedSets.add("VIS");
+        supportedSets.add("5ED");
+        supportedSets.add("POR");
+        supportedSets.add("WTH");
+        supportedSets.add("TMP");
+        supportedSets.add("STH");
+        supportedSets.add("EXO");
+        supportedSets.add("P02");
+        supportedSets.add("UGL");
+        supportedSets.add("USG");
+        supportedSets.add("DD3DVD");
+        supportedSets.add("DD3EVG");
+        supportedSets.add("DD3GVL");
+        supportedSets.add("DD3JVC");
+
+        supportedSets.add("ULG");
+        supportedSets.add("6ED");
+        supportedSets.add("UDS");
+        supportedSets.add("PTK");
+        supportedSets.add("S99");
+        supportedSets.add("MMQ");
+        // supportedSets.add("BRB");Battle Royale Box Set
+        supportedSets.add("NEM");
+        supportedSets.add("S00");
+        supportedSets.add("PCY");
+        supportedSets.add("INV");
+        // supportedSets.add("BTD"); // Beatdown Boxset
+        supportedSets.add("PLS");
+        supportedSets.add("7ED");
+        supportedSets.add("APC");
+        supportedSets.add("ODY");
+        // supportedSets.add("DKM"); // Deckmasters 2001
+        supportedSets.add("TOR");
+        supportedSets.add("JUD");
+        supportedSets.add("ONS");
+        supportedSets.add("LGN");
+        supportedSets.add("SCG");
+        supportedSets.add("8ED");
+        supportedSets.add("MRD");
+        supportedSets.add("DST");
+        supportedSets.add("5DN");
+        supportedSets.add("CHK");
+        supportedSets.add("UNH");
+        supportedSets.add("BOK");
+        supportedSets.add("SOK");
+        supportedSets.add("9ED");
+        supportedSets.add("RAV");
+        supportedSets.add("GPT");
+        supportedSets.add("DIS");
+        supportedSets.add("CSP");
+        supportedSets.add("TSP");
+        supportedSets.add("TSB");
+        supportedSets.add("PLC");
+        supportedSets.add("FUT");
+        supportedSets.add("10E");
+        supportedSets.add("MED");
+        supportedSets.add("LRW");
+        supportedSets.add("EVG");
+        supportedSets.add("MOR");
+        supportedSets.add("SHM");
+        supportedSets.add("EVE");
+        supportedSets.add("DRB");
+        supportedSets.add("ME2");
+        supportedSets.add("ALA");
+        supportedSets.add("DD2");
+        supportedSets.add("CON");
+        supportedSets.add("DDC");
+        supportedSets.add("ARB");
+        supportedSets.add("M10");
+        // supportedSets.add("TD0"); // Magic Online Deck Series
+        supportedSets.add("V09");
+        supportedSets.add("HOP");
+        supportedSets.add("ME3");
+        supportedSets.add("ZEN");
+        supportedSets.add("DDD");
+        supportedSets.add("H09");
+        supportedSets.add("WWK");
+        supportedSets.add("DDE");
+        supportedSets.add("ROE");
+        supportedSets.add("DPA");
+        supportedSets.add("ARC");
+        supportedSets.add("M11");
+        supportedSets.add("V10");
+        supportedSets.add("DDF");
+        supportedSets.add("SOM");
+        // supportedSets.add("TD0"); // Commander Theme Decks
+        supportedSets.add("PD2");
+        supportedSets.add("ME4");
+        supportedSets.add("MBS");
+        supportedSets.add("DDG");
+        supportedSets.add("NPH");
+        supportedSets.add("CMD");
+        supportedSets.add("M12");
+        supportedSets.add("V11");
+        supportedSets.add("DDH");
+        supportedSets.add("ISD");
+        supportedSets.add("PD3");
+        supportedSets.add("DKA");
+        supportedSets.add("DDI");
+        supportedSets.add("AVR");
+        supportedSets.add("PC2");
+        supportedSets.add("M13");
+        supportedSets.add("V12");
+        supportedSets.add("DDJ");
+        supportedSets.add("RTR");
+        supportedSets.add("CM1");
+        // supportedSets.add("TD2"); // Duel Decks: Mirrodin Pure vs. New Phyrexia
+        supportedSets.add("GTC");
+        supportedSets.add("DDK");
+        supportedSets.add("DGM");
+        supportedSets.add("MMA");
+        supportedSets.add("M14");
+        supportedSets.add("V13");
+        supportedSets.add("DDL");
+        supportedSets.add("THS");
+        supportedSets.add("C13");
+        supportedSets.add("BNG");
+        supportedSets.add("DDM");
+        supportedSets.add("JOU");
+        // supportedSets.add("MD1"); // Modern Event Deck
+        supportedSets.add("CNS");
+        supportedSets.add("VMA");
+        supportedSets.add("M15");
+        supportedSets.add("V14");
+        supportedSets.add("DDN");
+        supportedSets.add("KTK");
+        supportedSets.add("C14");
+        // supportedSets.add("DD3"); // Duel Decks Anthology
+        supportedSets.add("FRF");
+        supportedSets.add("DDO");
+        supportedSets.add("DTK");
+        supportedSets.add("TPR");
+        supportedSets.add("MM2");
+        supportedSets.add("ORI");
+        supportedSets.add("V15");
+        supportedSets.add("DDP");
+        supportedSets.add("BFZ");
+        supportedSets.add("EXP");
+        supportedSets.add("C15");
+        // supportedSets.add("PZ1"); // Legendary Cube
+        supportedSets.add("OGW");
+        supportedSets.add("DDQ");
+        supportedSets.add("W16");
+        supportedSets.add("SOI");
+        supportedSets.add("EMA");
+        supportedSets.add("EMN");
+        supportedSets.add("V16");
+        supportedSets.add("CN2");
+        supportedSets.add("DDR");
+        supportedSets.add("KLD");
+        supportedSets.add("MPS");
+        // supportedSets.add("PZ2"); // Treasure Chests
+        supportedSets.add("C16");
+        supportedSets.add("PCA");
+        supportedSets.add("AER");
+        supportedSets.add("MM3");
+        supportedSets.add("DDS");
+        supportedSets.add("W17");
+        supportedSets.add("AKH");
+        supportedSets.add("MPS");
+        supportedSets.add("CMA");
+        supportedSets.add("E01");
+        supportedSets.add("HOU");
+        supportedSets.add("C17");
+//        supportedSets.add("XLN");
+//        supportedSets.add("DDT");
+//        supportedSets.add("IMA");
+//        supportedSets.add("E02");
+//        supportedSets.add("V17");
+//        supportedSets.add("UST");
+//        supportedSets.add("RIX");
+//        supportedSets.add("A25");
+//        supportedSets.add("DOM");
+//        supportedSets.add("M19");
+
         sets = new HashMap<>();
         setsAliases = new HashMap<>();
         setsAliases.put("2ED", "Unlimited Edition");
@@ -102,6 +300,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("C14", "Commander 2014");
         setsAliases.put("C15", "Commander 2015");
         setsAliases.put("C16", "Commander 2016");
+        setsAliases.put("C17", "Commander 2017");
         setsAliases.put("CMA", "Commander Anthology");
         setsAliases.put("CHK", "Champions of Kamigawa");
         setsAliases.put("CHR", "Chronicles");
@@ -140,6 +339,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("DRK", "The Dark");
         setsAliases.put("DST", "Darksteel");
         setsAliases.put("DTK", "Dragons of Tarkir");
+        setsAliases.put("E01", "Archenemy: Nicol Bolas");
         setsAliases.put("EMN", "Eldritch Moon");
         setsAliases.put("EMA", "Eternal Masters");
         setsAliases.put("EVE", "Eventide");
@@ -272,18 +472,20 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     private Map<String, String> getSetLinks(String cardSet) {
-        ConcurrentHashMap<String, String> setLinks = new ConcurrentHashMap<>();
+        LinkedHashMap<String, String> setLinks = new LinkedHashMap<>();
         ExecutorService executor = Executors.newFixedThreadPool(10);
         try {
             String setNames = setsAliases.get(cardSet);
             String preferedLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
             for (String setName : setNames.split("\\^")) {
-                String URLSetName = URLEncoder.encode(setName, "UTF-8");
+                // String URLSetName = URLEncoder.encode(setName, "UTF-8");
+                String URLSetName = setName.replaceAll(" ", "%20");
                 int page = 0;
                 int firstMultiverseIdLastPage = 0;
                 Pages:
                 while (page < 999) {
-                    String searchUrl = "http://gatherer.wizards.com/Pages/Search/Default.aspx?page=" + page + "&output=spoiler&method=visual&action=advanced&set=+[%22" + URLSetName + "%22]";
+                    String searchUrl = "http://gatherer.wizards.com/Pages/Search/Default.aspx?sort=cn+&page=" + page + "&action=advanced&output=spoiler&method=visual&set=+%5B%22" + URLSetName + "%22%5D";
+                    logger.debug("URL: " + searchUrl);
                     Document doc = getDocument(searchUrl);
                     Elements cardsImages = doc.select("img[src^=../../Handlers/]");
                     if (cardsImages.isEmpty()) {
@@ -307,7 +509,7 @@ public enum WizardCardsImageSource implements CardImageSource {
                 }
             }
         } catch (IOException ex) {
-            System.out.println("Exception when parsing the wizards page: " + ex.getMessage());
+            logger.error("Exception when parsing the wizards page: " + ex.getMessage());
         }
 
         executor.shutdown();
@@ -327,14 +529,15 @@ public enum WizardCardsImageSource implements CardImageSource {
         Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
         Document doc;
         if (proxyType == ProxyType.NONE) {
-            doc = Jsoup.connect(urlString).get();
+            doc = Jsoup.connect(urlString).timeout(60 * 1000).get();
         } else {
             String proxyServer = prefs.get("proxyAddress", "");
             int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
             URL url = new URL(urlString);
             Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));
             HttpURLConnection uc = (HttpURLConnection) url.openConnection(proxy);
-
+            uc.setConnectTimeout(10000);
+            uc.setReadTimeout(60000);
             uc.connect();
 
             String line;
@@ -356,7 +559,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         if (!variations.isEmpty()) {
             int landNumber = 1;
             for (Element variation : variations) {
-                Integer landMultiverseId = Integer.parseInt(variation.attr("onclick").replaceAll("[^\\d]", ""));
+                Integer landMultiverseId = Integer.parseInt(variation.attr("href").replaceAll("[^\\d]", ""));
                 links.put((cardName + landNumber).toLowerCase(), generateLink(landMultiverseId));
                 landNumber++;
             }
@@ -444,11 +647,11 @@ public enum WizardCardsImageSource implements CardImageSource {
                 }
 
                 int number = Integer.parseInt(collectorId.substring(0, length));
-
-                if (setLinks.size() >= number) {
-                    link = setLinks.get(Integer.toString(number - 1));
-                } else {
-                    link = setLinks.get(Integer.toString(number - 21));
+                List<String> l = new ArrayList<>(setLinks.values());
+                if (l.size() >= number) {
+                    link = l.get(number - 1);
+                } else {;
+                    link = l.get(number - 21);
                     if (link != null) {
                         link = link.replace(Integer.toString(number - 20), (Integer.toString(number - 20) + 'a'));
                     }
@@ -474,16 +677,24 @@ public enum WizardCardsImageSource implements CardImageSource {
 
     private final class GetImageLinkTask implements Runnable {
 
-        private final int multiverseId;
-        private final String cardName;
-        private final String preferedLanguage;
-        private final ConcurrentHashMap setLinks;
+        private int multiverseId;
+        private String cardName;
+        private String preferedLanguage;
+        private LinkedHashMap setLinks;
 
-        public GetImageLinkTask(int multiverseId, String cardName, String preferedLanguage, ConcurrentHashMap setLinks) {
-            this.multiverseId = multiverseId;
-            this.cardName = cardName;
-            this.preferedLanguage = preferedLanguage;
-            this.setLinks = setLinks;
+        public GetImageLinkTask(int multiverseId, String cardName, String preferedLanguage, LinkedHashMap setLinks) {
+            try {
+                this.multiverseId = multiverseId;
+                this.cardName = cardName;
+                this.preferedLanguage = preferedLanguage;
+                this.setLinks = setLinks;
+            } catch (Exception ex) {
+                logger.error(ex.getMessage());
+                logger.error("multiverseId: " + multiverseId);
+                logger.error("cardName: " + cardName);
+                logger.error("preferedLanguage: " + preferedLanguage);
+                logger.error("setLinks: " + setLinks.toString());
+            }
         }
 
         @Override
@@ -496,7 +707,7 @@ public enum WizardCardsImageSource implements CardImageSource {
                     setLinks.put(cardName.toLowerCase(), generateLink(preferedMultiverseId));
                 }
             } catch (IOException | NumberFormatException ex) {
-                System.out.println("Exception when parsing the wizards page: " + ex.getMessage());
+                logger.error("Exception when parsing the wizards page: " + ex.getMessage());
             }
         }
 
@@ -515,4 +726,12 @@ public enum WizardCardsImageSource implements CardImageSource {
     @Override
     public void doPause(String httpImageUrl) {
     }
+
+    @Override
+    public ArrayList<String> getSupportedSets() {
+        ArrayList<String> supportedSetsCopy = new ArrayList<>();
+        supportedSetsCopy.addAll(supportedSets);
+        return supportedSetsCopy;
+    }
+
 }
