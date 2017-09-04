@@ -69,7 +69,7 @@ public class DeathlessAncient extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Tap three untapped Vampires you control: Return Deathless Ancient from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new TapTargetCost(new TargetControlledPermanent(3, 3, filter, false))));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new TapTargetCost(new TargetControlledPermanent(3, 3, filter, true))));
 
     }
 
