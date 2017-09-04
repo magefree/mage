@@ -55,7 +55,7 @@ public class DeeprootWaters extends CardImpl {
         
 
         // Whenever you cast a Merfolk spell, create a 1/1 blue Merfolk creature token with hexproof.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new MerfolkHexproofToken(), 1, true, false), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new MerfolkHexproofToken()), filter, false));
     }
 
     public DeeprootWaters(final DeeprootWaters card) {
