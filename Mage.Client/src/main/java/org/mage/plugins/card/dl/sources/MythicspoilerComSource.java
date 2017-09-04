@@ -77,7 +77,7 @@ public enum MythicspoilerComSource implements CardImageSource {
         supportedSets.add("DDR");
         supportedSets.add("KLD");
         supportedSets.add("MPS");
-        supportedSets.add("PZ2");
+        // supportedSets.add("PZ2");
         supportedSets.add("C16");
         supportedSets.add("PCA");
         supportedSets.add("AER");

@@ -27,11 +27,10 @@
  */
 package org.mage.plugins.card.dl.sources;
 
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.images.CardDownloadData;
-
 import java.io.IOException;
 import java.util.HashMap;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.images.CardDownloadData;
 
 /**
  *
@@ -368,12 +367,12 @@ public enum MtgOnlTokensImageSource implements CardImageSource {
         }
         return -1;
     }
-    
+
     @Override
     public boolean isTokenSource() {
         return true;
     }
-    
+
     @Override
     public void doPause(String httpImageUrl) {
     }

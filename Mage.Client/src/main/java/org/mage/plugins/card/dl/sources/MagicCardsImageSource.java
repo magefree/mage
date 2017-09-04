@@ -1,7 +1,10 @@
 package org.mage.plugins.card.dl.sources;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import mage.client.dialog.PreferencesDialog;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.utils.CardImageUtils;
@@ -13,6 +16,202 @@ import org.mage.plugins.card.utils.CardImageUtils;
 public enum MagicCardsImageSource implements CardImageSource {
 
     instance;
+
+    private static final Set<String> supportedSets = new LinkedHashSet<String>() {
+        {
+            // add("PTC"); // Prerelease Events
+            add("LEA");
+            add("LEB");
+            add("2ED");
+            add("ARN");
+            add("ATQ");
+            add("3ED");
+            add("LEG");
+            add("DRK");
+            add("FEM");
+            add("4ED");
+            add("ICE");
+            add("CHR");
+            add("HML");
+            add("ALL");
+            add("MIR");
+            add("VIS");
+            add("5ED");
+            add("POR");
+            add("WTH");
+            add("TMP");
+            add("STH");
+            add("EXO");
+            add("P02");
+            add("UGL");
+            add("USG");
+            add("DD3DVD");
+            add("DD3EVG");
+            add("DD3GVL");
+            add("DD3JVC");
+
+            add("ULG");
+            add("6ED");
+            add("UDS");
+            add("PTK");
+            add("S99");
+            add("MMQ");
+            // add("BRB");Battle Royale Box Set
+            add("NEM");
+            add("S00");
+            add("PCY");
+            add("INV");
+            // add("BTD"); // Beatdown Boxset
+            add("PLS");
+            add("7ED");
+            add("APC");
+            add("ODY");
+            // add("DKM"); // Deckmasters 2001
+            add("TOR");
+            add("JUD");
+            add("ONS");
+            add("LGN");
+            add("SCG");
+            add("8ED");
+            add("MRD");
+            add("DST");
+            add("5DN");
+            add("CHK");
+            add("UNH");
+            add("BOK");
+            add("SOK");
+            add("9ED");
+            add("RAV");
+            add("GPT");
+            add("DIS");
+            add("CSP");
+            add("TSP");
+            add("TSB");
+            add("PLC");
+            add("FUT");
+            add("10E");
+            add("MED");
+            add("LRW");
+            add("EVG");
+            add("MOR");
+            add("SHM");
+            add("EVE");
+            add("DRB");
+            add("ME2");
+            add("ALA");
+            add("DD2");
+            add("CON");
+            add("DDC");
+            add("ARB");
+            add("M10");
+            // add("TD0"); // Magic Online Deck Series
+            add("V09");
+            add("HOP");
+            add("ME3");
+            add("ZEN");
+            add("DDD");
+            add("H09");
+            add("WWK");
+            add("DDE");
+            add("ROE");
+            add("DPA");
+            add("ARC");
+            add("M11");
+            add("V10");
+            add("DDF");
+            add("SOM");
+            // add("TD0"); // Commander Theme Decks
+            add("PD2");
+            add("ME4");
+            add("MBS");
+            add("DDG");
+            add("NPH");
+            add("CMD");
+            add("M12");
+            add("V11");
+            add("DDH");
+            add("ISD");
+            add("PD3");
+            add("DKA");
+            add("DDI");
+            add("AVR");
+            add("PC2");
+            add("M13");
+            add("V12");
+            add("DDJ");
+            add("RTR");
+            add("CM1");
+            // add("TD2"); // Duel Decks: Mirrodin Pure vs. New Phyrexia
+            add("GTC");
+            add("DDK");
+            add("DGM");
+            add("MMA");
+            add("M14");
+            add("V13");
+            add("DDL");
+            add("THS");
+            add("C13");
+            add("BNG");
+            add("DDM");
+            add("JOU");
+            // add("MD1"); // Modern Event Deck
+            add("CNS");
+            add("VMA");
+            add("M15");
+            add("V14");
+            add("DDN");
+            add("KTK");
+            add("C14");
+            // add("DD3"); // Duel Decks Anthology
+            add("FRF");
+            add("DDO");
+            add("DTK");
+            add("TPR");
+            add("MM2");
+            add("ORI");
+            add("V15");
+            add("DDP");
+            add("BFZ");
+            add("EXP");
+            add("C15");
+            // add("PZ1"); // Legendary Cube
+            add("OGW");
+            add("DDQ");
+            add("W16");
+            add("SOI");
+            add("EMA");
+            add("EMN");
+            add("V16");
+            add("CN2");
+            add("DDR");
+            add("KLD");
+            add("MPS");
+            // add("PZ2"); // Treasure Chests
+            add("C16");
+            add("PCA");
+            add("AER");
+            add("MM3");
+            add("DDS");
+            add("W17");
+            add("AKH");
+            add("MPS");
+            add("CMA");
+            add("E01");
+            add("HOU");
+            add("C17");
+//        add("XLN");
+//        add("DDT");
+//        add("IMA");
+//        add("E02");
+//        add("V17");
+//        add("UST");
+//        add("RIX");
+//        add("A25");
+//        add("DOM");
+//        add("M19");
+        }
+    };
+
     private static final Map<String, String> setNameTokenReplacement = new HashMap<String, String>() {
         {
             put("10E", "tenth-edition");
@@ -146,12 +345,11 @@ public enum MagicCardsImageSource implements CardImageSource {
         return "magiccards.info";
     }
 
-    
     @Override
     public String getNextHttpImageUrl() {
         return null;
     }
-    
+
     @Override
     public String getFileForHttpImage(String httpImageUrl) {
         return null;
@@ -210,18 +408,26 @@ public enum MagicCardsImageSource implements CardImageSource {
     public float getAverageSize() {
         return 70.0f;
     }
-    
+
     @Override
     public int getTotalImages() {
         return -1;
     }
-    
+
     @Override
     public boolean isTokenSource() {
         return true;
     }
-    
+
+    @Override
+    public ArrayList<String> getSupportedSets() {
+        ArrayList<String> supportedSetsCopy = new ArrayList<>();
+        supportedSetsCopy.addAll(supportedSets);
+        return supportedSetsCopy;
+    }
+
     @Override
     public void doPause(String httpImageUrl) {
     }
+
 }

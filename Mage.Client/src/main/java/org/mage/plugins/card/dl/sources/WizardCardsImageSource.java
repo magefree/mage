@@ -77,6 +77,7 @@ public enum WizardCardsImageSource implements CardImageSource {
 
     WizardCardsImageSource() {
         supportedSets = new LinkedHashSet<>();
+        // supportedSets.add("PTC"); // Prerelease Events
         supportedSets.add("LEA");
         supportedSets.add("LEB");
         supportedSets.add("2ED");
@@ -638,6 +639,9 @@ public enum WizardCardsImageSource implements CardImageSource {
         String setNames = setsAliases.get(cardSet);
         if (setNames != null) {
             Map<String, String> setLinks = sets.computeIfAbsent(cardSet, k -> getSetLinks(cardSet));
+            if (setLinks == null || setLinks.isEmpty()) {
+                return null;
+            }
             String link = setLinks.get(card.getDownloadName().toLowerCase());
             if (link == null) {
                 int length = collectorId.length();
@@ -663,6 +667,7 @@ public enum WizardCardsImageSource implements CardImageSource {
             return link;
         }
         return null;
+
     }
 
     @Override

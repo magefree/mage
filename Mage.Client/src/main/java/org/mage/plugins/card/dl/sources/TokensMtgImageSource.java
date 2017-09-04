@@ -27,9 +27,6 @@
  */
 package org.mage.plugins.card.dl.sources;
 
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.images.CardDownloadData;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +36,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.images.CardDownloadData;
 
 /**
  *
@@ -46,9 +45,8 @@ import java.util.Map;
  */
 public enum TokensMtgImageSource implements CardImageSource {
 
-   instance;
+    instance;
     private static final Logger logger = Logger.getLogger(TokensMtgImageSource.class);
-
 
     private List<TokenData> tokensData;
 
@@ -137,6 +135,7 @@ public enum TokensMtgImageSource implements CardImageSource {
         List<TokenData> newTokensData = getTokensData();
 
         if (newTokensData.isEmpty()) {
+            logger.info("Source " + getSourceName() + " provides no token data.");
             return null;
         }
 
@@ -146,17 +145,18 @@ public enum TokensMtgImageSource implements CardImageSource {
                 matchedTokens.add(token);
             }
         }
-//
-//        if (matchedTokens.isEmpty()) {
-//            logger.info("Could not find data for token " + name + ", set " + set + ".");
-//            return null;
-//        }
+
+        if (matchedTokens.isEmpty()) {
+            logger.info("Could not find data for token " + name + ", set " + set + ".");
+            return null;
+        }
 
         TokenData tokenData;
         if (type == 0) {
             if (matchedTokens.size() > 1) {
                 logger.info("Multiple images were found for token " + name + ", set " + set + '.');
             }
+            logger.info("Token found: " + name + ", set " + set + '.');
             tokenData = matchedTokens.get(0);
         } else {
             if (type > matchedTokens.size()) {
@@ -178,7 +178,7 @@ public enum TokensMtgImageSource implements CardImageSource {
                 tokensData = new ArrayList<>();
 
                 // get tokens data from resource file
-                try(InputStream inputStream = this.getClass().getResourceAsStream("/tokens-mtg-onl-list.csv")) {
+                try (InputStream inputStream = this.getClass().getResourceAsStream("/tokens-mtg-onl-list.csv")) {
                     List<TokenData> fileTokensData = parseTokensData(inputStream);
                     tokensData.addAll(fileTokensData);
                 } catch (Exception exception) {
@@ -188,7 +188,7 @@ public enum TokensMtgImageSource implements CardImageSource {
                 // description on site may contain new information
                 // try to add it
                 URL url = new URL("http://tokens.mtg.onl/data/SetsWithTokens.csv");
-                try(InputStream inputStream = url.openStream()) {
+                try (InputStream inputStream = url.openStream()) {
                     List<TokenData> siteTokensData = parseTokensData(inputStream);
                     List<TokenData> newTokensData = new ArrayList<>();
                     for (TokenData siteData : siteTokensData) {
@@ -219,8 +219,8 @@ public enum TokensMtgImageSource implements CardImageSource {
     private List<TokenData> parseTokensData(InputStream inputStream) throws IOException {
         List<TokenData> newTokensData = new ArrayList<>();
 
-        try(InputStreamReader inputReader = new InputStreamReader(inputStream, "Cp1252");
-            BufferedReader reader = new BufferedReader(inputReader)) {
+        try (InputStreamReader inputReader = new InputStreamReader(inputStream, "Cp1252");
+                BufferedReader reader = new BufferedReader(inputReader)) {
             // we have to specify encoding to read special comma
 
             reader.readLine(); // skip header
@@ -285,7 +285,19 @@ public enum TokensMtgImageSource implements CardImageSource {
 
     @Override
     public int getTotalImages() {
-        return -1;
+        return getTokenImages();
+    }
+
+    @Override
+    public int getTokenImages() {
+        int number = 0;
+        try {
+            List<TokenData> newTokensData = getTokensData();
+            number = newTokensData.size();
+        } catch (IOException ex) {
+            logger.error(getSourceName() + ": Loading available data failed. " + ex.getMessage());
+        }
+        return number;
     }
 
     @Override

@@ -23,16 +23,17 @@ public interface CardImageSource {
 
     int getTotalImages();
 
-    boolean isTokenSource();
+    default int getTokenImages() {
+        return 0;
+    }
+
+    default boolean isTokenSource() {
+        return false;
+    }
 
     void doPause(String httpImageUrl);
 
     default ArrayList<String> getSupportedSets() {
         return null;
     }
-
-    default boolean providesTokenImages() {
-        return false;
-    }
-;
 }
