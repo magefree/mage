@@ -49,9 +49,9 @@ import mage.game.Game;
  *
  * @author TheElk801
  */
-public class MilitantDinosaur extends CardImpl {
+public class BelligerentBrontodon extends CardImpl {
 
-    public MilitantDinosaur(UUID ownerId, CardSetInfo setInfo) {
+    public BelligerentBrontodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");
 
         this.subtype.add("Dinosaur");
@@ -62,13 +62,13 @@ public class MilitantDinosaur extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MilitantDinosaurCombatDamageRuleEffect()));
     }
 
-    public MilitantDinosaur(final MilitantDinosaur card) {
+    public BelligerentBrontodon(final BelligerentBrontodon card) {
         super(card);
     }
 
     @Override
-    public MilitantDinosaur copy() {
-        return new MilitantDinosaur(this);
+    public BelligerentBrontodon copy() {
+        return new BelligerentBrontodon(this);
     }
 }
 

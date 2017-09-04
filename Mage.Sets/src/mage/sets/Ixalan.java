@@ -55,9 +55,9 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Huatli, Dinosaur Knight", 285, Rarity.MYTHIC, mage.cards.h.HuatliDinosaurKnight.class));
         cards.add(new SetCardInfo("Jace, Cunning Castaway", 60, Rarity.MYTHIC, mage.cards.j.JaceCunningCastaway.class));
         cards.add(new SetCardInfo("Jace, Ingenious Mind-Mage", 280, Rarity.MYTHIC, mage.cards.j.JaceIngeniousMindMage.class));
-        cards.add(new SetCardInfo("Kumena's Omenspeaker", 196, Rarity.UNCOMMON, mage.cards.k.KumenasOmenspeaker.class));
+        cards.add(new SetCardInfo("Kumena's Speaker", 196, Rarity.UNCOMMON, mage.cards.k.KumenasSpeaker.class));
         cards.add(new SetCardInfo("Marauding Looter", 225, Rarity.UNCOMMON, mage.cards.m.MaraudingLooter.class));
-        cards.add(new SetCardInfo("Militant Dinosaur", 218, Rarity.UNCOMMON, mage.cards.m.MilitantDinosaur.class));
+        cards.add(new SetCardInfo("Belligerent Brontodon", 218, Rarity.UNCOMMON, mage.cards.m.BelligerentBrontodon.class));
         cards.add(new SetCardInfo("Old-Growth Dryads", 199, Rarity.RARE, mage.cards.o.OldGrowthDryads.class));
         cards.add(new SetCardInfo("Prosperous Pirates", 69, Rarity.COMMON, mage.cards.p.ProsperousPirates.class));
         cards.add(new SetCardInfo("Queen's Bay Soldier", 115, Rarity.COMMON, mage.cards.q.QueensBaySoldier.class));
@@ -77,13 +77,13 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Tocatli Honor Guard", 42, Rarity.RARE, mage.cards.t.TocatliHonorGuard.class));
         cards.add(new SetCardInfo("Treasure Cove", 1250, Rarity.RARE, mage.cards.t.TreasureCove.class));
         cards.add(new SetCardInfo("Treasure Map", 250, Rarity.RARE, mage.cards.t.TreasureMap.class));
-        cards.add(new SetCardInfo("Twilight Legion Battleship", 236, Rarity.UNCOMMON, mage.cards.t.TwilightLegionBattleship.class));
+        cards.add(new SetCardInfo("Dusk Legion Dreadnought", 236, Rarity.UNCOMMON, mage.cards.t.DuskLegionDreadnought.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 258, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Unfriendly Fire", 172, Rarity.COMMON, mage.cards.u.UnfriendlyFire.class));
         cards.add(new SetCardInfo("Vanquisher's Banner", 251, Rarity.RARE, mage.cards.v.VanquishersBanner.class));
         cards.add(new SetCardInfo("Verdant Sun's Avatar", 213, Rarity.RARE, mage.cards.v.VerdantSunsAvatar.class));
         cards.add(new SetCardInfo("Vraska's Contempt", 129, Rarity.RARE, mage.cards.v.VraskasContempt.class));
         cards.add(new SetCardInfo("Waker of the Wilds", 215, Rarity.RARE, mage.cards.w.WakerOfTheWilds.class));
-        cards.add(new SetCardInfo("Walk the Plank", 130, Rarity.UNCOMMON, mage.cards.w.WalkThePlank.class));      
+        cards.add(new SetCardInfo("Walk the Plank", 130, Rarity.UNCOMMON, mage.cards.w.WalkThePlank.class));
     }
 }

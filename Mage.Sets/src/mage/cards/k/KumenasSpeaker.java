@@ -25,43 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.t;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.keyword.CrewAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BoostSourceWhileControlsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author TheElk801
  */
-public class TwilightLegionBattleship extends CardImpl {
+public class KumenasSpeaker extends CardImpl {
 
-    public TwilightLegionBattleship(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        
-        this.subtype.add("Vehicle");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(6);
+    private static final FilterPermanent filter = new FilterPermanent("another Merfolk or an Island");
 
-        // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
-
-        // Crew 2
-        this.addAbility(new CrewAbility(2));
-
+    static {
+        filter.add(Predicates.or(
+                new SubtypePredicate(SubType.ISLAND),
+                Predicates.and(
+                        new SubtypePredicate(SubType.MERFOLK),
+                        new AnotherPredicate()
+                )
+        ));
     }
 
-    public TwilightLegionBattleship(final TwilightLegionBattleship card) {
+    public KumenasSpeaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
+
+        this.subtype.add("Merfolk");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Kumena's Omenspeaker gets +1/+1 as long as you control another Merfolk or Island.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
+    }
+
+    public KumenasSpeaker(final KumenasSpeaker card) {
         super(card);
     }
 
     @Override
-    public TwilightLegionBattleship copy() {
-        return new TwilightLegionBattleship(this);
+    public KumenasSpeaker copy() {
+        return new KumenasSpeaker(this);
     }
 }
