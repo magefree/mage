@@ -28,7 +28,11 @@
 package org.mage.plugins.card.dl.sources;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
@@ -37,11 +41,33 @@ import org.mage.plugins.card.images.CardDownloadData;
  *
  * @author spjspj
  */
-public enum  GrabbagImageSource implements CardImageSource {
+public enum GrabbagImageSource implements CardImageSource {
 
     instance;
     private static final Logger logger = Logger.getLogger(GrabbagImageSource.class);
     private static int maxTimes = 0;
+
+    private static final Set<String> supportedSets = new LinkedHashSet<String>() {
+        {
+            add("PTC");
+            add("EXP");
+            add("APAC");
+            add("ARENA");
+            add("FNMP");
+            add("GPX");
+            add("GRC");
+            add("JR");
+            add("MBP");
+            add("MGDC");
+            add("MLP");
+            add("MPRP");
+            add("MPS");
+            add("SUS");
+            add("UGIN");
+            add("WMCQ");
+
+        }
+    };
 
     @Override
     public String getSourceName() {
@@ -55,36 +81,37 @@ public enum  GrabbagImageSource implements CardImageSource {
 
     @Override
     public String getNextHttpImageUrl() {
-        if (copyUrlToImage == null) {
-            setupLinks();
-        }
-
-        for (String key : copyUrlToImageDone.keySet()) {
-            if (copyUrlToImageDone.get(key) < maxTimes) {
-                copyUrlToImageDone.put(key, maxTimes);
-                return getSourceName(key) + key;
-            }
-        }
-        if (maxTimes < 2) {
-            maxTimes++;
-        }
-        for (String key : copyUrlToImageDone.keySet()) {
-            if (copyUrlToImageDone.get(key) < maxTimes) {
-                copyUrlToImageDone.put(key, maxTimes);
-                return getSourceName(key) + key;
-            }
-        }
         return null;
+//        if (copyUrlToImage == null) {
+//            setupLinks();
+//        }
+//
+//        for (String key : copyUrlToImageDone.keySet()) {
+//            if (copyUrlToImageDone.get(key) < maxTimes) {
+//                copyUrlToImageDone.put(key, maxTimes);
+//                return getSourceName(key) + key;
+//            }
+//        }
+//        if (maxTimes < 2) {
+//            maxTimes++;
+//        }
+//        for (String key : copyUrlToImageDone.keySet()) {
+//            if (copyUrlToImageDone.get(key) < maxTimes) {
+//                copyUrlToImageDone.put(key, maxTimes);
+//                return getSourceName(key) + key;
+//            }
+//        }
+//        return null;
     }
 
     @Override
     public String getFileForHttpImage(String httpImageUrl) {
-        String copy = httpImageUrl;
-        if (copy != null) {
-            copy = copy.replaceFirst("http:\\/\\/static.starcitygames.com\\/sales\\/cardscans\\/", "");
-            copy = copy.replaceFirst("http:\\/\\/magiccards.info\\/scans\\/en\\/", "");
-            return copyUrlToImage.get(copy);
-        }
+//        String copy = httpImageUrl;
+//        if (copy != null) {
+//            copy = copy.replaceFirst("http:\\/\\/static.starcitygames.com\\/sales\\/cardscans\\/", "");
+//            copy = copy.replaceFirst("http:\\/\\/magiccards.info\\/scans\\/en\\/", "");
+//            return copyUrlToImage.get(copy);
+//        }
         return null;
     }
 
@@ -92,6 +119,11 @@ public enum  GrabbagImageSource implements CardImageSource {
     public String generateURL(CardDownloadData card) throws Exception {
         if (copyUrlToImage == null) {
             setupLinks();
+        }
+        for (Map.Entry<String, String> urlInfo : copyUrlToImage.entrySet()) {
+            if (urlInfo.getValue().contains(card.getSet()) && urlInfo.getValue().contains(card.getName())) {
+                return getSourceName(urlInfo.getValue()) + urlInfo.getKey();
+            }
         }
         return null;
     }
@@ -108,16 +140,16 @@ public enum  GrabbagImageSource implements CardImageSource {
         copyImageToUrl = new HashMap<>();
         copyUrlToImageDone = new HashMap<>();
 
-        //http://anonymouse.org/cgi-bin/anon-www.cgi/http://magiccards.info/scans/en/arena/42.jpg
-        copyUrlToImage.put("MTG/BNG/en/promo/ArbiterOfTheIdeal.jpg", "PTC.zip/PTC/Arbiter of the Ideal.full.jpg");
-        copyUrlToImage.put("MTG/BNG/en/promo/CourserOfKruphix.jpg", "PTC.zip/PTC/Courser of Kruphix.full.jpg");
-        copyUrlToImage.put("MTG/BNG/en/promo/EaterOfHope.jpg", "PTC.zip/PTC/Eater of Hope.full.jpg");
-        copyUrlToImage.put("MTG/BNG/en/promo/FatedReturn.jpg", "PTC.zip/PTC/Fated Return.full.jpg");
-        copyUrlToImage.put("MTG/BNG/en/promo/ForgestokerDragon.jpg", "PTC.zip/PTC/Forgestoker Dragon.full.jpg");
-        copyUrlToImage.put("MTG/BNG/en/promo/NessianWildsRavager.jpg", "PTC.zip/PTC/Nessian Wilds Ravager.full.jpg");
-        copyUrlToImage.put("MTG/BNG/en/promo/PainSeer.jpg", "PTC.zip/PTC/Pain Seer.full.jpg");
-        copyUrlToImage.put("MTG/BNG/en/promo/SilentSentinel.jpg", "PTC.zip/PTC/Silent Sentinel.full.jpg");
-        copyUrlToImage.put("MTG/BNG/en/promo/Tromokratis.jpg", "PTC.zip/PTC/Tromokratis.full.jpg");
+        copyUrlToImage.put("PTC/Arbiter of the Ideal", "MTG/BNG/en/promo/ArbiterOfTheIdeal.jpg");
+        copyUrlToImage.put("PTC/Courser of Kruphix", "MTG/BNG/en/promo/CourserOfKruphix.jpg");
+        copyUrlToImage.put("PTC/Eater of Hope", "MTG/BNG/en/promo/EaterOfHope.jpg");
+        copyUrlToImage.put("PTC/Fated Return", "MTG/BNG/en/promo/FatedReturn.jpg");
+        copyUrlToImage.put("PTC/Forgestoker Dragon", "MTG/BNG/en/promo/ForgestokerDragon.jpg");
+        copyUrlToImage.put("PTC/Nessian Wilds Ravager", "MTG/BNG/en/promo/NessianWildsRavager.jpg");
+        copyUrlToImage.put("PTC/Pain Seer", "MTG/BNG/en/promo/PainSeer.jpg");
+        copyUrlToImage.put("PTC/Silent Sentinel", "MTG/BNG/en/promo/SilentSentinel.jpg");
+        copyUrlToImage.put("PTC/Tromokratis", "MTG/BNG/en/promo/Tromokratis.jpg");
+
         copyUrlToImage.put("MTG/FRF/en/promo/prerelease/AleshaWhoSmilesAtDeath.jpg", "PTC.zip/PTC/Alesha, Who Smiles at Death.full.jpg");
         copyUrlToImage.put("MTG/FRF/en/promo/prerelease/Arcbond.jpg", "PTC.zip/PTC/Arcbond.full.jpg");
         copyUrlToImage.put("MTG/FRF/en/promo/prerelease/ArchfiendOfDepravity.jpg", "PTC.zip/PTC/Archfiend of Depravity.full.jpg");
@@ -1685,6 +1717,13 @@ public enum  GrabbagImageSource implements CardImageSource {
         } else {
             return "http://magiccards.info/scans/en/";
         }
+    }
+
+    @Override
+    public ArrayList<String> getSupportedSets() {
+        ArrayList<String> supportedSetsCopy = new ArrayList<>();
+        supportedSetsCopy.addAll(supportedSets);
+        return supportedSetsCopy;
     }
 
     @Override

@@ -674,6 +674,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (temporaryFile != null && temporaryFile.length() > 100) {
                     useTempFile = true;
                 } else {
+
                     cardImageSource.doPause(url.getPath());
                     httpConn = url.openConnection(p);
                     httpConn.connect();
