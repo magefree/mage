@@ -27,8 +27,6 @@
  */
 package mage.server;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.Nonnull;
@@ -41,7 +39,9 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
  * @author BetaSteward_at_googlemail.com
  */
 public enum SessionManager {
+
     instance;
+
     private static final Logger logger = Logger.getLogger(SessionManager.class);
 
     private final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
@@ -151,14 +151,6 @@ public enum SessionManager {
 
         }
 
-    }
-
-    public Map<String, Session> getSessions() {
-        Map<String, Session> map = new HashMap<>();
-        for (Map.Entry<String, Session> entry : sessions.entrySet()) {
-            map.put(entry.getKey(), entry.getValue());
-        }
-        return map;
     }
 
     /**
