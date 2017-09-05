@@ -91,6 +91,7 @@ public class GameEvent implements Serializable {
         EMPTY_DRAW,
         DRAW_CARDS, // applies to an instruction to draw more than one card before any replacement effects apply to individual cards drawn
         DRAW_CARD, DREW_CARD,
+        EXPLORED,
         MIRACLE_CARD_REVEALED,
         MADNESS_CARD_EXILED,
         INVESTIGATED,

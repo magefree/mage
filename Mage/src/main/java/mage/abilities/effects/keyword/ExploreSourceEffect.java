@@ -39,6 +39,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -75,6 +76,7 @@ public class ExploreSourceEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXPLORED, source.getSourceId(), source.getSourceId(), source.getControllerId()));
         if (player.getLibrary().hasCards()) {
             Card card = player.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl();
