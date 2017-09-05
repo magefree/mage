@@ -30,12 +30,10 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.text.TextPartSubType;
 import mage.cards.CardImpl;
@@ -48,7 +46,6 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -75,7 +72,6 @@ public class AtarkaWorldRender extends CardImpl {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Dragon you control");
         filter.add(new TextPartSubtypePredicate(textPart1));
         filter.add(Predicates.not(new TappedPredicate()));
-        this.addAbility(new KickerAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
         this.addAbility(new AtarkaWorldRenderEffect(filter));
 
     }
