@@ -74,6 +74,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Marauding Looter", 225, Rarity.UNCOMMON, mage.cards.m.MaraudingLooter.class));
         cards.add(new SetCardInfo("Mavren Fein, Dusk Apostle", 24, Rarity.RARE, mage.cards.m.MavrenFeinDuskApostle.class));
         cards.add(new SetCardInfo("Old-Growth Dryads", 199, Rarity.RARE, mage.cards.o.OldGrowthDryads.class));
+        cards.add(new SetCardInfo("Overflowing Insight", 64, Rarity.MYTHIC, mage.cards.o.OverflowingInsight.class));
         cards.add(new SetCardInfo("Pillar of Origins", 241, Rarity.UNCOMMON, mage.cards.p.PillarOfOrigins.class));
         cards.add(new SetCardInfo("Primal Amulet", 243, Rarity.RARE, mage.cards.p.PrimalAmulet.class));
         cards.add(new SetCardInfo("Primal Wellspring", 243, Rarity.RARE, mage.cards.p.PrimalWellspring.class));
