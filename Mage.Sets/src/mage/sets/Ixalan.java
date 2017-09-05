@@ -42,6 +42,8 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Captain Lannery Storm", 136, Rarity.RARE, mage.cards.c.CaptainLanneryStorm.class));
         cards.add(new SetCardInfo("Carnage Tyrant", 179, Rarity.MYTHIC, mage.cards.c.CarnageTyrant.class));
         cards.add(new SetCardInfo("Castaway's Despair", 281, Rarity.COMMON, mage.cards.c.CastawaysDespair.class));
+        cards.add(new SetCardInfo("Conqueror's Foothold", 234, Rarity.RARE, mage.cards.c.ConquerorsFoothold.class));
+        cards.add(new SetCardInfo("Conqueror's Galleon", 234, Rarity.RARE, mage.cards.c.ConquerorsGalleon.class));
         cards.add(new SetCardInfo("Daring Saboteur", 49, Rarity.RARE, mage.cards.d.DaringSaboteur.class));
         cards.add(new SetCardInfo("Deadeye Plunderers", 220, Rarity.UNCOMMON, mage.cards.d.DeadeyePlunderers.class));
         cards.add(new SetCardInfo("Deadeye Quartermaster", 50, Rarity.UNCOMMON, mage.cards.d.DeadeyeQuartermaster.class));

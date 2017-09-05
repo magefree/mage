@@ -4,7 +4,7 @@ package mage.abilities;
  * Created by IGOUDT on 5-3-2017.
  */
 public enum Gender {
-    MALE("his", "him"), FEMALE("her", "her");
+    MALE("his", "him"), FEMALE("her", "her"), NEUTRAL("its", "it");
 
     String personalPronoun;
     String possesivePronoun;
@@ -21,6 +21,5 @@ public enum Gender {
     public String getPossesivePronoun() {
         return possesivePronoun;
     }
-
 
 }
