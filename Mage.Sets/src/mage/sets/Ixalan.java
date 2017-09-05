@@ -90,6 +90,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Rowdy Crew", 159, Rarity.MYTHIC, mage.cards.r.RowdyCrew.class));
         cards.add(new SetCardInfo("Ruin Raider", 118, Rarity.RARE, mage.cards.r.RuinRaider.class));
         cards.add(new SetCardInfo("Sentinel Totem", 245, Rarity.UNCOMMON, mage.cards.s.SentinelTotem.class));
+        cards.add(new SetCardInfo("Settle the Wreckage", 34, Rarity.RARE, mage.cards.s.SettleTheWreckage.class));
         cards.add(new SetCardInfo("Shapers of Nature", 228, Rarity.UNCOMMON, mage.cards.s.ShapersOfNature.class));
         cards.add(new SetCardInfo("Shapers' Sanctuary", 206, Rarity.RARE, mage.cards.s.ShapersSanctuary.class));
         cards.add(new SetCardInfo("Sleek Schooner", 247, Rarity.UNCOMMON, mage.cards.s.SleekSchooner.class));
