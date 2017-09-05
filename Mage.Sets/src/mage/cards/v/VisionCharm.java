@@ -102,6 +102,8 @@ class VisionCharmEffect extends ContinuousEffectImpl {
 
     public VisionCharmEffect(final VisionCharmEffect effect) {
         super(effect);
+        targetLandType = effect.targetLandType;
+        targetBasicLandType = effect.targetBasicLandType;
     }
 
     @Override
@@ -120,8 +122,13 @@ class VisionCharmEffect extends ContinuousEffectImpl {
             choice = new ChoiceBasicLandType();
             controller.choose(outcome, choice, game);
             targetBasicLandType = choice.getChoice();
+            if (targetLandType == null || targetBasicLandType == null) {
+                this.discard();
+                return;
+            }
         } else {
             this.discard();
+            return;
         }
         FilterPermanent filter = new FilterLandPermanent();
         filter.add(new SubtypePredicate(SubType.byDescription(targetLandType)));
