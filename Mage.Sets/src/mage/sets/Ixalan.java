@@ -43,6 +43,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Carnage Tyrant", 179, Rarity.MYTHIC, mage.cards.c.CarnageTyrant.class));
         cards.add(new SetCardInfo("Daring Saboteur", 49, Rarity.RARE, mage.cards.d.DaringSaboteur.class));
         cards.add(new SetCardInfo("Deadeye Plunderers", 220, Rarity.UNCOMMON, mage.cards.d.DeadeyePlunderers.class));
+        cards.add(new SetCardInfo("Deadeye Quartermaster", 50, Rarity.UNCOMMON, mage.cards.d.DeadeyeQuartermaster.class));
         cards.add(new SetCardInfo("Deadeye Tormentor", 98, Rarity.COMMON, mage.cards.d.DeadeyeTormentor.class));
         cards.add(new SetCardInfo("Deadeye Tracker", 99, Rarity.RARE, mage.cards.d.DeadeyeTracker.class));
         cards.add(new SetCardInfo("Deathless Ancient", 100, Rarity.UNCOMMON, mage.cards.d.DeathlessAncient.class));
@@ -58,7 +59,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Entrancing Melody", 55, Rarity.RARE, mage.cards.e.EntrancingMelody.class));
         cards.add(new SetCardInfo("Gishath, Sun's Avatar", 222, Rarity.MYTHIC, mage.cards.g.GishathSunsAvatar.class));
         cards.add(new SetCardInfo("Glacial Fortress", 255, Rarity.RARE, mage.cards.g.GlacialFortress.class));
-        cards.add(new SetCardInfo("Goring Certatops", 13, Rarity.RARE, mage.cards.g.GoringCeratops.class));
+        cards.add(new SetCardInfo("Goring Ceratops", 13, Rarity.RARE, mage.cards.g.GoringCeratops.class));
         cards.add(new SetCardInfo("Headwater Sentries", 58, Rarity.COMMON, mage.cards.h.HeadwaterSentries.class));
         cards.add(new SetCardInfo("Herald of Secret Streams", 59, Rarity.RARE, mage.cards.h.HeraldOfSecretStreams.class));
         cards.add(new SetCardInfo("Huatli's Snubhorn", 286, Rarity.COMMON, mage.cards.h.HuatlisSnubhorn.class));
