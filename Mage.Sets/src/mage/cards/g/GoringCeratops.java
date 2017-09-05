@@ -25,41 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.combat;
+package mage.cards.g;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.StaticFilters;
 
 /**
  *
- * @author TheElk801
+ * @author caldover
  */
-public class CantAttackYouEffect extends RestrictionEffect {
+public class GoringCeratops extends CardImpl {
 
-    public CantAttackYouEffect(Duration duration) {
-        super(duration);
+    public GoringCeratops(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
+
+        this.subtype.add("Dinosaur");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Double Strike
+        this.addAbility(DoubleStrikeAbility.getInstance());
+
+        // Whenever Goring Ceratops attacks, other creatures you control gain double strike until end of turn.
+        Effect effect = new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true);
+        effect.setText("other creatures you control gain double strike");
+        Ability ability = new AttacksTriggeredAbility(effect, false);
+        this.addAbility(ability);
     }
 
-    public CantAttackYouEffect(final CantAttackYouEffect effect) {
-        super(effect);
+    public GoringCeratops(final GoringCeratops card) {
+        super(card);
     }
 
     @Override
-    public CantAttackYouEffect copy() {
-        return new CantAttackYouEffect(this);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
-    }
-
-    @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
-        return !defenderId.equals(source.getControllerId());
+    public GoringCeratops copy() {
+        return new GoringCeratops(this);
     }
 }
