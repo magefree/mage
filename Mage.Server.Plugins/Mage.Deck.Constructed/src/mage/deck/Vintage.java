@@ -94,7 +94,7 @@ public class Vintage extends Constructed {
         restricted.add("Memory Jar");
         restricted.add("Merchant Scroll");
         restricted.add("Mind's Desire");
-        restricted.add("Monastery Mentory")
+        restricted.add("Monastery Mentory");
         restricted.add("Mox Emerald");
         restricted.add("Mox Jet");
         restricted.add("Mox Pearl");
@@ -105,7 +105,7 @@ public class Vintage extends Constructed {
         restricted.add("Ponder");
         restricted.add("Sol Ring");
         restricted.add("Strip Mine");
-        restricted.add("Thorn of Amethyst")
+        restricted.add("Thorn of Amethyst");
         restricted.add("Time Vault");
         restricted.add("Time Walk");
         restricted.add("Timetwister");
