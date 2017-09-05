@@ -196,7 +196,7 @@ public enum UserManager {
             Calendar calendarRemove = Calendar.getInstance();
             calendarRemove.add(Calendar.MINUTE, -8);
             List<User> toRemove = new ArrayList<>();
-            logger.info("Start Check Expired");
+            logger.debug("Start Check Expired");
             ArrayList<User> userList = new ArrayList<>();
             final Lock r = lock.readLock();
             r.lock();
@@ -227,7 +227,7 @@ public enum UserManager {
                     handleException(ex);
                 }
             }
-            logger.info("Users to remove " + toRemove.size());
+            logger.debug("Users to remove " + toRemove.size());
             final Lock w = lock.readLock();
             w.lock();
             try {
@@ -237,7 +237,7 @@ public enum UserManager {
             } finally {
                 w.unlock();
             }
-            logger.info("End Check Expired");
+            logger.debug("End Check Expired");
         } catch (Exception ex) {
             handleException(ex);
         }
