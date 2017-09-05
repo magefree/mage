@@ -54,7 +54,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.ManaPoolItem;
@@ -125,7 +125,7 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
         Player damagedPlayer = game.getPlayer(event.getPlayerId());
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (damagedPlayer != null && permanent != null
-                && ((DamageEvent) event).isCombatDamage()
+                && ((DamagedEvent) event).isCombatDamage()
                 && getControllerId().equals(permanent.getControllerId())) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + damagedPlayer.getLogName() + " controls");
             filter.add(new ControllerIdPredicate(damagedPlayer.getId()));
