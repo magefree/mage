@@ -91,6 +91,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
             }
         }
         if (attacking) {
+            sb.append(" that are");
             if (tapped) {
                 sb.append(" tapped and");
             }

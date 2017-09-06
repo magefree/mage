@@ -35,7 +35,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -81,7 +81,7 @@ public class Mirrorpool extends CardImpl {
         this.addAbility(ability);
         
         // {4}{C}, {T}, Sacrifice Mirrorpool: Create a token that's a copy of target creature you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutTokenOntoBattlefieldCopyTargetEffect(), new ManaCostsImpl("{4}{C}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenCopyTargetEffect(), new ManaCostsImpl("{4}{C}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());

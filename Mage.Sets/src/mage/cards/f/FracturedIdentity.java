@@ -30,7 +30,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -90,7 +90,7 @@ class FracturedIdentityEffect extends OneShotEffect {
         permanent.moveToExile(null, null, source.getSourceId(), game);
         UUID controllerId = permanent.getControllerId();
         for (UUID opponentId : game.getOpponents(controllerId)) {
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(opponentId, null, false);
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(opponentId, null, false);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
         }

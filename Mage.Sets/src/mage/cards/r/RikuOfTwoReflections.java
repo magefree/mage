@@ -35,7 +35,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -82,7 +82,7 @@ public class RikuOfTwoReflections extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(effect, new ManaCostsImpl("{U}{R}")), filter, false, true));
 
         // Whenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, create a token that's a copy of that creature.
-        effect = new DoIfCostPaid(new PutTokenOntoBattlefieldCopyTargetEffect(true),
+        effect = new DoIfCostPaid(new CreateTokenCopyTargetEffect(true),
                 new ManaCostsImpl("{G}{U}"), "Create a token that's a copy of that creature?");
         effect.setText("you may pay {G}{U}. If you do, create a token that's a copy of that creature");
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterPermanent, false, SetTargetPointer.PERMANENT, null));

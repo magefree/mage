@@ -90,7 +90,7 @@ public class PopulateEffect extends OneShotEffect {
                     if (!game.isSimulation()) {
                         game.informPlayers("Token selected for populate: " + tokenToCopy.getLogName());
                     }
-                    Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+                    Effect effect = new CreateTokenCopyTargetEffect();
                     effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
                     return effect.apply(game, source);
                 }
