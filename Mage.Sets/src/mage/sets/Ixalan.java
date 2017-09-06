@@ -61,6 +61,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Dusk Legion Dreadnought", 236, Rarity.UNCOMMON, mage.cards.t.DuskLegionDreadnought.class));
         cards.add(new SetCardInfo("Emperor's Vanguard", 189, Rarity.RARE, mage.cards.e.EmperorsVanguard.class));
         cards.add(new SetCardInfo("Entrancing Melody", 55, Rarity.RARE, mage.cards.e.EntrancingMelody.class));
+        cards.add(new SetCardInfo("Fathom Fleet Captain", 106, Rarity.RARE, mage.cards.f.FathomFleetCaptain.class));
         cards.add(new SetCardInfo("Favorable Winds", 56, Rarity.UNCOMMON, mage.cards.f.FavorableWinds.class));
         cards.add(new SetCardInfo("Gishath, Sun's Avatar", 222, Rarity.MYTHIC, mage.cards.g.GishathSunsAvatar.class));
         cards.add(new SetCardInfo("Glacial Fortress", 255, Rarity.RARE, mage.cards.g.GlacialFortress.class));
