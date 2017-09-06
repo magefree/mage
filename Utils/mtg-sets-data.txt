@@ -204,3 +204,4 @@ Weatherlight|WTH|
 Worldwake|WWK|
 Ixalan|XLN|
 Zendikar|ZEN|
+Star Wars|SWS|
