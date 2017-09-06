@@ -67,25 +67,44 @@ public class CreateTokenTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder("put ");
-        sb.append(CardUtil.numberToText(amount.toString(), "a"));
-        sb.append(' ').append(token.getDescription()).append(" onto the battlefield");
-        if (tapped) {
-            sb.append(" tapped");
+        StringBuilder sb = new StringBuilder();
+        sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+        sb.append(" creates ");
+        if (amount.toString().equals("1")) {
+            sb.append("a ");
+            if (tapped && !attacking) {
+                sb.append("tapped ");
+            }
+            sb.append(token.getDescription());
+        } else {
+            sb.append(CardUtil.numberToText(amount.toString())).append(' ');
+            if (tapped && !attacking) {
+                sb.append("tapped ");
+            }
+            sb.append(token.getDescription());
+            if (token.getDescription().endsWith("token")) {
+                sb.append("s ");
+            }
+            int tokenLocation = sb.indexOf("token ");
+            if (tokenLocation != -1) {
+                sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
+            }
         }
         if (attacking) {
             if (tapped) {
-                sb.append(" and");
+                sb.append(" tapped and");
             }
             sb.append(" attacking");
         }
         String message = amount.getMessage();
         if (!message.isEmpty()) {
-            sb.append(" for each ");
+            if (amount.toString().equals("X")) {
+                sb.append(", where X is ");
+            } else {
+                sb.append(" for each ");
+            }
         }
         sb.append(message);
-        sb.append(" under target ").append(mode.getTargets().get(0).getTargetName());
-        sb.append("'s control");
         return sb.toString();
     }
 }
