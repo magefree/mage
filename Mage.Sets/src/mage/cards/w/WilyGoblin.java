@@ -25,46 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.CreateTokenCopySourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.game.permanent.token.TreasureToken;
 
 /**
  *
- * @author markedagain
+ * @author TheElk801
  */
-public class SproutingPhytohydra extends CardImpl {
+public class WilyGoblin extends CardImpl {
 
-    public SproutingPhytohydra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Hydra");
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
+    public WilyGoblin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}");
 
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        // Whenever Sprouting Phytohydra is dealt damage, you may create a token that's a copy of Sprouting Phytohydra.
-        Effect effect = new CreateTokenCopySourceEffect();
-        effect.setText("you may create a token that's a copy of {this}");
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, effect, true));
+        this.subtype.add("Goblin");
+        this.subtype.add("Pirate");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // When Wily Goblin enters the battlefield, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
     }
 
-    public SproutingPhytohydra(final SproutingPhytohydra card) {
+    public WilyGoblin(final WilyGoblin card) {
         super(card);
     }
 
     @Override
-    public SproutingPhytohydra copy() {
-        return new SproutingPhytohydra(this);
+    public WilyGoblin copy() {
+        return new WilyGoblin(this);
     }
 }

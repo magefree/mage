@@ -37,7 +37,7 @@ import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -100,7 +100,7 @@ class KindredChargeEffect extends OneShotEffect {
             filter.add(new SubtypePredicate(SubType.byDescription(creatureType)));
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
                 if (permanent != null) {
-                    PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);
+                    CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                     effect.apply(game, source);
                     for (Permanent addedToken : effect.getAddedPermanent()) {

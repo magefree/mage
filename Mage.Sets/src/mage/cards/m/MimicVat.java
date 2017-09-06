@@ -39,7 +39,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -206,7 +206,7 @@ class MimicVatCreateTokenEffect extends OneShotEffect {
         if (!permanent.getImprinted().isEmpty()) {
             Card card = game.getCard(permanent.getImprinted().get(0));
             if (card != null) {
-                PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);
+                CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
                 effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                 effect.apply(game, source);
                 for (Permanent addedToken : effect.getAddedPermanent()) {

@@ -33,7 +33,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -110,7 +110,7 @@ class FaerieArtisansEffect extends OneShotEffect {
         Permanent permanentToCopy = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanentToCopy != null) {
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(null, CardType.ARTIFACT, false);
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, CardType.ARTIFACT, false);
             effect.setTargetPointer(new FixedTarget(permanentToCopy, game));
             if (effect.apply(game, source)) {
                 String oldTokens = (String) game.getState().getValue(source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter());

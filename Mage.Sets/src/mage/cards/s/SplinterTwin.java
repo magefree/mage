@@ -37,7 +37,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -103,7 +103,7 @@ class SplinterTwinEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (permanent != null) {
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
             for (Permanent addedToken : effect.getAddedPermanent()) {

@@ -35,7 +35,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.game.Game;
@@ -102,7 +102,7 @@ class MyriadEffect extends OneShotEffect {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null && controller.chooseUse(Outcome.PutCreatureInPlay,
                             "Put a copy of " + sourceObject.getIdName() + " onto battlefield attacking " + opponent.getName() + '?', source, game)) {
-                        PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(controller.getId(), null, false, 1, true, true, playerId);
+                        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(controller.getId(), null, false, 1, true, true, playerId);
                         effect.setTargetPointer(new FixedTarget(sourceObject, game));
                         effect.apply(game, source);
                         tokens.addAll(effect.getAddedPermanent());

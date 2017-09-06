@@ -36,7 +36,7 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -103,7 +103,7 @@ class FeldonOfTheThirdPathEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), CardType.ARTIFACT, true);
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), CardType.ARTIFACT, true);
             effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
             effect.apply(game, source);
             for (Permanent addedToken : effect.getAddedPermanent()) {

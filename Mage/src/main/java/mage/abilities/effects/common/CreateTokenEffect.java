@@ -113,7 +113,7 @@ public class CreateTokenEffect extends OneShotEffect {
     public ArrayList<UUID> getLastAddedTokenIds() {
         return lastAddedTokenIds;
     }
-    
+
     public void exileTokensCreatedAtNextEndStep(Game game, Ability source) {
         for (UUID tokenId : this.getLastAddedTokenIds()) {
             Permanent tokenPermanent = game.getPermanent(tokenId);
@@ -122,7 +122,7 @@ public class CreateTokenEffect extends OneShotEffect {
                 exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
                 game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
             }
-        }        
+        }
     }
 
     public void exileTokensCreatedAtEndOfCombat(Game game, Ability source) {
@@ -133,9 +133,9 @@ public class CreateTokenEffect extends OneShotEffect {
                 exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
                 game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
             }
-        }        
+        }
     }
-    
+
     private void setText() {
         StringBuilder sb = new StringBuilder("create ");
         if (amount.toString().equals("1")) {
@@ -153,8 +153,13 @@ public class CreateTokenEffect extends OneShotEffect {
             if (token.getDescription().endsWith("token")) {
                 sb.append("s ");
             }
+            int tokenLocation = sb.indexOf("token ");
+            if (tokenLocation != -1) {
+                sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
+            }
         }
         if (attacking) {
+            sb.append(" that are");
             if (tapped) {
                 sb.append(" tapped and");
             }

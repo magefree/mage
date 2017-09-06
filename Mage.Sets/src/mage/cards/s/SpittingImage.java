@@ -30,7 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -54,7 +54,7 @@ public class SpittingImage extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G/U}{G/U}");
 
         // Create a token that's a copy of target creature.
-        this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());
+        this.getSpellAbility().addEffect(new CreateTokenCopyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Retrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

@@ -38,7 +38,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -114,7 +114,7 @@ class DanceOfManyCreateTokenCopyEffect extends OneShotEffect {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (permanent != null && sourceObject != null) {
 
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
             game.getState().setValue(source.getSourceId() + "_token", effect.getAddedPermanent());

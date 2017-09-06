@@ -29,42 +29,47 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.CreateTokenCopySourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.common.RaidCondition;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
- * @author markedagain
+ * @author TheElk801
  */
-public class SproutingPhytohydra extends CardImpl {
+public class StormFleetAerialist extends CardImpl {
 
-    public SproutingPhytohydra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Hydra");
-        this.power = new MageInt(0);
+    public StormFleetAerialist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
+
+        this.subtype.add("Human");
+        this.subtype.add("Pirate");
+        this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        // Whenever Sprouting Phytohydra is dealt damage, you may create a token that's a copy of Sprouting Phytohydra.
-        Effect effect = new CreateTokenCopySourceEffect();
-        effect.setText("you may create a token that's a copy of {this}");
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, effect, true));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // Raid - Storm Fleet Aerialist enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), false),
+                RaidCondition.instance,
+                "<i>Raid</i> - {this} enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn",
+                "{this} enters the battlefield with a +1/+1 counter"),
+                new PlayerAttackedWatcher());
     }
 
-    public SproutingPhytohydra(final SproutingPhytohydra card) {
+    public StormFleetAerialist(final StormFleetAerialist card) {
         super(card);
     }
 
     @Override
-    public SproutingPhytohydra copy() {
-        return new SproutingPhytohydra(this);
+    public StormFleetAerialist copy() {
+        return new StormFleetAerialist(this);
     }
 }

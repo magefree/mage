@@ -37,7 +37,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.Card;
@@ -115,7 +115,7 @@ class SaheeliRaiCreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent copiedPermanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (copiedPermanent != null) {
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(null, CardType.ARTIFACT, true);
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, CardType.ARTIFACT, true);
             if (effect.apply(game, source)) {
                 for (Permanent copyPermanent : effect.getAddedPermanent()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();

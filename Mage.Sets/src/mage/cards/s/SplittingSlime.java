@@ -30,7 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
-import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
+import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,7 +52,7 @@ public class SplittingSlime extends CardImpl {
         this.addAbility(new MonstrosityAbility("{4}{G}{G}", 3));
 
         // When Splitting Slime becomes monstrous, create a token that's a copy of Splitting Slime.
-        this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new PutTokenOntoBattlefieldCopySourceEffect()));
+        this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new CreateTokenCopySourceEffect()));
 
     }
 
