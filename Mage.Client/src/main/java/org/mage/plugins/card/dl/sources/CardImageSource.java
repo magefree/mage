@@ -36,4 +36,12 @@ public interface CardImageSource {
     default ArrayList<String> getSupportedSets() {
         return null;
     }
+
+    default boolean isSetSupportedComplete(String setCode) {
+        return true;
+    }
+
+    default boolean isImageProvided(String setCode, String cardName) {
+        return false;
+    }
 }

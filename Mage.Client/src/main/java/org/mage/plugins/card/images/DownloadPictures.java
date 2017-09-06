@@ -294,7 +294,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         for (CardDownloadData data : allCardsMissingImage) {
             if ((data.isToken() && tokens)
                     || (!data.isToken() && selectedSetCodes != null && selectedSetCodes.contains(data.getSet()))) {
-                cardsToDownload.add(data);
+                if (cardImageSource.isSetSupportedComplete(data.getSet()) || cardImageSource.isImageProvided(data.getSet(), data.getName())) {
+                    cardsToDownload.add(data);
+                }
             }
         }
         int numberTokenImagesAvailable = 0;
