@@ -67,6 +67,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Headwater Sentries", 58, Rarity.COMMON, mage.cards.h.HeadwaterSentries.class));
         cards.add(new SetCardInfo("Herald of Secret Streams", 59, Rarity.RARE, mage.cards.h.HeraldOfSecretStreams.class));
         cards.add(new SetCardInfo("Huatli's Snubhorn", 286, Rarity.COMMON, mage.cards.h.HuatlisSnubhorn.class));
+        cards.add(new SetCardInfo("Huatli's Spurring", 287, Rarity.UNCOMMON, mage.cards.h.HuatlisSpurring.class));
         cards.add(new SetCardInfo("Huatli, Dinosaur Knight", 285, Rarity.MYTHIC, mage.cards.h.HuatliDinosaurKnight.class));
         cards.add(new SetCardInfo("Huatli, Warrior Poet", 224, Rarity.MYTHIC, mage.cards.h.HuatliWarriorPoet.class));
         cards.add(new SetCardInfo("Jace's Sentinel", 283, Rarity.UNCOMMON, mage.cards.j.JacesSentinel.class));
