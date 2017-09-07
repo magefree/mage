@@ -33,10 +33,12 @@ public class Ixalan extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         cards.add(new SetCardInfo("Admiral Beckett Brass", 217, Rarity.MYTHIC, mage.cards.a.AdmiralBeckettBrass.class));
         cards.add(new SetCardInfo("Angrath's Marauders", 132, Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
+        cards.add(new SetCardInfo("Ashes of the Abhorrent", 2, Rarity.RARE, mage.cards.a.AshesOfTheAbhorrent.class));
         cards.add(new SetCardInfo("Bishop of Rebirth", 5, Rarity.RARE, mage.cards.b.BishopOfRebirth.class));
         cards.add(new SetCardInfo("Belligerent Brontodon", 218, Rarity.UNCOMMON, mage.cards.b.BelligerentBrontodon.class));
         cards.add(new SetCardInfo("Bellowing Aegisaur", 4, Rarity.UNCOMMON, mage.cards.b.BellowingAegisaur.class));
         cards.add(new SetCardInfo("Bloodcrazed Paladin", 93, Rarity.RARE, mage.cards.b.BloodcrazedPaladin.class));
+        cards.add(new SetCardInfo("Boneyard Parley", 94, Rarity.MYTHIC, mage.cards.b.BoneyardParley.class));
         cards.add(new SetCardInfo("Burning Sun's Avatar", 135, Rarity.RARE, mage.cards.b.BurningSunsAvatar.class));
         cards.add(new SetCardInfo("Call to the Feast", 219, Rarity.UNCOMMON, mage.cards.c.CallToTheFeast.class));
         cards.add(new SetCardInfo("Captain Lannery Storm", 136, Rarity.RARE, mage.cards.c.CaptainLanneryStorm.class));
@@ -69,6 +71,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Grasping Current", 282, Rarity.RARE, mage.cards.g.GraspingCurrent.class));
         cards.add(new SetCardInfo("Headwater Sentries", 58, Rarity.COMMON, mage.cards.h.HeadwaterSentries.class));
         cards.add(new SetCardInfo("Herald of Secret Streams", 59, Rarity.RARE, mage.cards.h.HeraldOfSecretStreams.class));
+        cards.add(new SetCardInfo("Hostage Taker", 223, Rarity.RARE, mage.cards.h.HostageTaker.class));
         cards.add(new SetCardInfo("Huatli's Snubhorn", 286, Rarity.COMMON, mage.cards.h.HuatlisSnubhorn.class));
         cards.add(new SetCardInfo("Huatli's Spurring", 287, Rarity.UNCOMMON, mage.cards.h.HuatlisSpurring.class));
         cards.add(new SetCardInfo("Huatli, Dinosaur Knight", 285, Rarity.MYTHIC, mage.cards.h.HuatliDinosaurKnight.class));
@@ -79,6 +82,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Jace, Ingenious Mind-Mage", 280, Rarity.MYTHIC, mage.cards.j.JaceIngeniousMindMage.class));
         cards.add(new SetCardInfo("Kinjalli's Sunwing", 19, Rarity.RARE, mage.cards.k.KinjallisSunwing.class));
         cards.add(new SetCardInfo("Kitesail Freebooter", 110, Rarity.UNCOMMON, mage.cards.k.KitesailFreebooter.class));
+        cards.add(new SetCardInfo("Kopala, Warden of Waves", 61, Rarity.RARE, mage.cards.k.KopalaWardenOfWaves.class));
         cards.add(new SetCardInfo("Kumena's Speaker", 196, Rarity.UNCOMMON, mage.cards.k.KumenasSpeaker.class));
         cards.add(new SetCardInfo("Lightning Strike", 149, Rarity.UNCOMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Marauding Looter", 225, Rarity.UNCOMMON, mage.cards.m.MaraudingLooter.class));
@@ -113,6 +117,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Slice in Twain", 207, Rarity.UNCOMMON, mage.cards.s.SliceinTwain.class));
         cards.add(new SetCardInfo("Sorcerous Spyglass", 248, Rarity.RARE, mage.cards.s.SorcerousSpyglass.class));
         cards.add(new SetCardInfo("Spires of Orazca", 249, Rarity.RARE, mage.cards.s.SpiresOfOrazca.class));
+        cards.add(new SetCardInfo("Spell Pierce", 81, Rarity.RARE, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Star of Extinction", 161, Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class));
         cards.add(new SetCardInfo("Stone Quarry", 289, Rarity.COMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Storm Fleet Aerialist", 63, Rarity.UNCOMMON, mage.cards.s.StormFleetAerialist.class));
