@@ -33,6 +33,7 @@ public class Ixalan extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         cards.add(new SetCardInfo("Admiral Beckett Brass", 217, Rarity.MYTHIC, mage.cards.a.AdmiralBeckettBrass.class));
         cards.add(new SetCardInfo("Angrath's Marauders", 132, Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
+        cards.add(new SetCardInfo("Arguel's Blood Fast", 90, Rarity.RARE, mage.cards.a.ArguelsBloodFast.class));
         cards.add(new SetCardInfo("Ashes of the Abhorrent", 2, Rarity.RARE, mage.cards.a.AshesOfTheAbhorrent.class));
         cards.add(new SetCardInfo("Bishop of Rebirth", 5, Rarity.RARE, mage.cards.b.BishopOfRebirth.class));
         cards.add(new SetCardInfo("Belligerent Brontodon", 218, Rarity.UNCOMMON, mage.cards.b.BelligerentBrontodon.class));
@@ -61,6 +62,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Drowned Catacomb", 253, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
         cards.add(new SetCardInfo("Duress", 105, Rarity.COMMON, mage.cards.d.Duress.class));
         cards.add(new SetCardInfo("Dusk Legion Dreadnought", 236, Rarity.UNCOMMON, mage.cards.d.DuskLegionDreadnought.class));
+        cards.add(new SetCardInfo("Duskborne Skymarcher", 9, Rarity.UNCOMMON, mage.cards.d.DuskborneSkymarcher.class));
         cards.add(new SetCardInfo("Emperor's Vanguard", 189, Rarity.RARE, mage.cards.e.EmperorsVanguard.class));
         cards.add(new SetCardInfo("Entrancing Melody", 55, Rarity.RARE, mage.cards.e.EntrancingMelody.class));
         cards.add(new SetCardInfo("Fathom Fleet Captain", 106, Rarity.RARE, mage.cards.f.FathomFleetCaptain.class));
@@ -98,6 +100,9 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Prosperous Pirates", 69, Rarity.COMMON, mage.cards.p.ProsperousPirates.class));
         cards.add(new SetCardInfo("Queen's Bay Soldier", 115, Rarity.COMMON, mage.cards.q.QueensBaySoldier.class));
         cards.add(new SetCardInfo("Raging Swordtooth", 226, Rarity.UNCOMMON, mage.cards.r.RagingSwordtooth.class));
+        cards.add(new SetCardInfo("Ranging Raptors", 201, Rarity.UNCOMMON, mage.cards.r.RangingRaptors.class));
+        cards.add(new SetCardInfo("Raptor Hatchling", 149, Rarity.UNCOMMON, mage.cards.r.RaptorHatchling.class));
+        cards.add(new SetCardInfo("Ravenous Daggertooth", 202, Rarity.COMMON, mage.cards.r.RavenousDaggertooth.class));
         cards.add(new SetCardInfo("Regisaur Alpha", 227, Rarity.RARE, mage.cards.r.RegisaurAlpha.class));
         cards.add(new SetCardInfo("Revel in Riches", 117, Rarity.RARE, mage.cards.r.RevelInRiches.class));
         cards.add(new SetCardInfo("Ripjaw Raptor", 203, Rarity.RARE, mage.cards.r.RipjawRaptor.class));
@@ -126,6 +131,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Sun-Crowned Hunters", 164, Rarity.COMMON, mage.cards.s.SunCrownedHunters.class));
         cards.add(new SetCardInfo("Sunbird's Invocation", 165, Rarity.RARE, mage.cards.s.SunbirdsInvocation.class));
         cards.add(new SetCardInfo("Sunpetal Grove", 257, Rarity.RARE, mage.cards.s.SunpetalGrove.class));
+        cards.add(new SetCardInfo("Temple of Aclazotz", 90, Rarity.RARE, mage.cards.t.TempleOfAclazotz.class));
         cards.add(new SetCardInfo("Thaumatic Compass", 249, Rarity.RARE, mage.cards.t.ThaumaticCompass.class));
         cards.add(new SetCardInfo("Tilonalli's Skinshifter", 170, Rarity.RARE, mage.cards.t.TilonallisSkinshifter.class));
         cards.add(new SetCardInfo("Tishana's Wayfinder", 211, Rarity.COMMON, mage.cards.t.TishanasWayfinder.class));
