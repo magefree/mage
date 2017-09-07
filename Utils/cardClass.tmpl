@@ -37,6 +37,9 @@ if ($power || $power eq 0) {
 if ($hasSubTypes eq 'true') {
     $OUT .="\nimport mage.constants.SubType;"
 }
+if ($hasSuperTypes eq 'true') {
+    $OUT .="\nimport mage.constants.SuperType;"
+}
 }
 =][=$abilitiesImports=]
 import mage.cards.CardImpl;
