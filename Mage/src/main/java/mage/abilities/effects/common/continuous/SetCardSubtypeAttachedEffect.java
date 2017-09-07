@@ -29,12 +29,15 @@ package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
+import mage.constants.AttachmentType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.SubTypeList;
-
-import java.util.List;
 
 /**
  * @author nantuko
@@ -44,7 +47,14 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
     private SubTypeList setSubtypes = new SubTypeList();
     private final AttachmentType attachmentType;
 
-    public SetCardSubtypeAttachedEffect(SubType setSubtype, Duration duration, AttachmentType attachmentType) {
+    public SetCardSubtypeAttachedEffect(Duration duration, AttachmentType attachmentType, SubType... setSubtype) {
+        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
+        this.setSubtypes.add(setSubtype);
+        this.attachmentType = attachmentType;
+        this.setText();
+    }
+
+    /*public SetCardSubtypeAttachedEffect(SubType setSubtype, Duration duration, AttachmentType attachmentType) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.setSubtypes.add(setSubtype);
         this.attachmentType = attachmentType;
@@ -56,7 +66,7 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
         this.setSubtypes.addAll(setSubtypes);
         this.attachmentType = attachmentType;
         setText();
-    }
+    }*/
 
     public SetCardSubtypeAttachedEffect(final SetCardSubtypeAttachedEffect effect) {
         super(effect);
