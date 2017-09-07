@@ -25,12 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.t;
+package mage.cards.d;
 
 import java.util.UUID;
+
 import mage.MageInt;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.CrewAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
