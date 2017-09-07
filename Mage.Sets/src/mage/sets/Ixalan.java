@@ -61,6 +61,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Dusk Legion Dreadnought", 236, Rarity.UNCOMMON, mage.cards.t.DuskLegionDreadnought.class));
         cards.add(new SetCardInfo("Emperor's Vanguard", 189, Rarity.RARE, mage.cards.e.EmperorsVanguard.class));
         cards.add(new SetCardInfo("Entrancing Melody", 55, Rarity.RARE, mage.cards.e.EntrancingMelody.class));
+        cards.add(new SetCardInfo("Fathom Fleet Captain", 106, Rarity.RARE, mage.cards.f.FathomFleetCaptain.class));
         cards.add(new SetCardInfo("Favorable Winds", 56, Rarity.UNCOMMON, mage.cards.f.FavorableWinds.class));
         cards.add(new SetCardInfo("Gishath, Sun's Avatar", 222, Rarity.MYTHIC, mage.cards.g.GishathSunsAvatar.class));
         cards.add(new SetCardInfo("Glacial Fortress", 255, Rarity.RARE, mage.cards.g.GlacialFortress.class));
@@ -76,6 +77,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Jace's Sentinel", 283, Rarity.UNCOMMON, mage.cards.j.JacesSentinel.class));
         cards.add(new SetCardInfo("Jace, Cunning Castaway", 60, Rarity.MYTHIC, mage.cards.j.JaceCunningCastaway.class));
         cards.add(new SetCardInfo("Jace, Ingenious Mind-Mage", 280, Rarity.MYTHIC, mage.cards.j.JaceIngeniousMindMage.class));
+        cards.add(new SetCardInfo("Kinjalli's Sunwing", 19, Rarity.RARE, mage.cards.k.KinjallisSunwing.class));
         cards.add(new SetCardInfo("Kitesail Freebooter", 110, Rarity.UNCOMMON, mage.cards.k.KitesailFreebooter.class));
         cards.add(new SetCardInfo("Kumena's Speaker", 196, Rarity.UNCOMMON, mage.cards.k.KumenasSpeaker.class));
         cards.add(new SetCardInfo("Lightning Strike", 149, Rarity.UNCOMMON, mage.cards.l.LightningStrike.class));
@@ -106,6 +108,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Shapers' Sanctuary", 206, Rarity.RARE, mage.cards.s.ShapersSanctuary.class));
         cards.add(new SetCardInfo("Sleek Schooner", 247, Rarity.UNCOMMON, mage.cards.s.SleekSchooner.class));
         cards.add(new SetCardInfo("Slice in Twain", 207, Rarity.UNCOMMON, mage.cards.s.SliceinTwain.class));
+        cards.add(new SetCardInfo("Sorcerous Spyglass", 248, Rarity.RARE, mage.cards.s.SorcerousSpyglass.class));
         cards.add(new SetCardInfo("Spires of Orazca", 249, Rarity.RARE, mage.cards.s.SpiresOfOrazca.class));
         cards.add(new SetCardInfo("Star of Extinction", 161, Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class));
         cards.add(new SetCardInfo("Stone Quarry", 289, Rarity.COMMON, mage.cards.s.StoneQuarry.class));
@@ -126,6 +129,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Vanquisher's Banner", 251, Rarity.RARE, mage.cards.v.VanquishersBanner.class));
         cards.add(new SetCardInfo("Verdant Sun's Avatar", 213, Rarity.RARE, mage.cards.v.VerdantSunsAvatar.class));
         cards.add(new SetCardInfo("Vraska's Contempt", 129, Rarity.RARE, mage.cards.v.VraskasContempt.class));
+        cards.add(new SetCardInfo("Wakening Sun's Avatar", 44, Rarity.MYTHIC, mage.cards.w.WakeningSunsAvatar.class));
         cards.add(new SetCardInfo("Waker of the Wilds", 215, Rarity.RARE, mage.cards.w.WakerOfTheWilds.class));
         cards.add(new SetCardInfo("Walk the Plank", 130, Rarity.UNCOMMON, mage.cards.w.WalkThePlank.class));
         cards.add(new SetCardInfo("Wanted Scoundrels", 131, Rarity.UNCOMMON, mage.cards.w.WantedScoundrels.class));
