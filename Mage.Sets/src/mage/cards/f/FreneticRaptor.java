@@ -25,41 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author Backfir3
+ * @author TheElk801
  */
-public class Bedlam extends CardImpl {
+public class FreneticRaptor extends CardImpl {
 
-    public Bedlam(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.BEAST, "Beasts");
 
-        // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.WhileOnBattlefield)));
+    public FreneticRaptor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
+
+        this.subtype.add("Dinosaur");
+        this.subtype.add("Beast");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
+
+        // Beasts can't block.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public Bedlam(final Bedlam card) {
+    public FreneticRaptor(final FreneticRaptor card) {
         super(card);
     }
 
     @Override
-    public Bedlam copy() {
-        return new Bedlam(this);
+    public FreneticRaptor copy() {
+        return new FreneticRaptor(this);
     }
 }
