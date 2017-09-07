@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ import mage.constants.Duration;
 public class Dromosaur extends CardImpl {
 
     public Dromosaur(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Lizard");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.subtype.add(SubType.DINOSAUR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
