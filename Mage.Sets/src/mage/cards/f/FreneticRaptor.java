@@ -25,41 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author Backfir3
+ * @author TheElk801
  */
-public class Dromosaur extends CardImpl {
+public class FreneticRaptor extends CardImpl {
 
-    public Dromosaur(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.subtype.add(SubType.DINOSAUR);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.BEAST, "Beasts");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+    public FreneticRaptor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
 
-        // Whenever Dromosaur blocks or becomes blocked by a creature, it gets +2/-2 until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new BoostSourceEffect(2, -2, Duration.EndOfTurn), false));
+        this.subtype.add("Dinosaur");
+        this.subtype.add("Beast");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
+
+        // Beasts can't block.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public Dromosaur(final Dromosaur card) {
+    public FreneticRaptor(final FreneticRaptor card) {
         super(card);
     }
 
     @Override
-    public Dromosaur copy() {
-        return new Dromosaur(this);
+    public FreneticRaptor copy() {
+        return new FreneticRaptor(this);
     }
 }
