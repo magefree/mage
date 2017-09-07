@@ -129,6 +129,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Vanquisher's Banner", 251, Rarity.RARE, mage.cards.v.VanquishersBanner.class));
         cards.add(new SetCardInfo("Verdant Sun's Avatar", 213, Rarity.RARE, mage.cards.v.VerdantSunsAvatar.class));
         cards.add(new SetCardInfo("Vraska's Contempt", 129, Rarity.RARE, mage.cards.v.VraskasContempt.class));
+        cards.add(new SetCardInfo("Wakening Sun's Avatar", 44, Rarity.MYTHIC, mage.cards.w.WakeningSunsAvatar.class));
         cards.add(new SetCardInfo("Waker of the Wilds", 215, Rarity.RARE, mage.cards.w.WakerOfTheWilds.class));
         cards.add(new SetCardInfo("Walk the Plank", 130, Rarity.UNCOMMON, mage.cards.w.WalkThePlank.class));
         cards.add(new SetCardInfo("Wanted Scoundrels", 131, Rarity.UNCOMMON, mage.cards.w.WantedScoundrels.class));
