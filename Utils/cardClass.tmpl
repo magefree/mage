@@ -34,6 +34,9 @@ if ($power || $power eq 0) {
     }else {
         $OUT .= "\nimport mage.MageInt;"
     }
+if ($hasSubTypes eq 'true') {
+    $OUT .="\nimport mage.constants.SubType;"
+}
 }
 =][=$abilitiesImports=]
 import mage.cards.CardImpl;

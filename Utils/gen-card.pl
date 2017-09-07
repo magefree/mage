@@ -186,6 +186,8 @@ $vars{'toughness'} = $card[7];
 my @types;
 $vars{'planeswalker'} = 'false';
 $vars{'subType'} = '';
+$vars{'hasSubTypes'} = 'false';
+$vars{'hasSuperTypes'} = 'false';
 my $cardAbilities = $card[8];
 my $type = $card[5];
 while ($type =~ m/([a-zA-Z]+)( )*/g) {
@@ -197,10 +199,13 @@ while ($type =~ m/([a-zA-Z]+)( )*/g) {
         }
     } else {
         if (@types) {
-            $vars{'subType'} .= "\n        this.subtype.add(\"$1\");";
+            my $st = uc($1);
+            $vars{'subType'} .= "\n        this.subtype.add(SubType.$st);";
+			$vars{'hasSubTypes'} = 'true';
         } else {
             my $st = uc($1);
-            $vars{'subType'} .= "\n        addSuperType(SuperType.$st);";
+            $vars{'subType'} .= "\n        this.addSuperType(SuperType.$st);";
+			$vars{'hasSuperTypes'} = 'true';
         }
     }
 }
