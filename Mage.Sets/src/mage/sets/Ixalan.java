@@ -71,6 +71,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Glacial Fortress", 255, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Goring Ceratops", 13, Rarity.RARE, mage.cards.g.GoringCeratops.class));
         cards.add(new SetCardInfo("Grasping Current", 282, Rarity.RARE, mage.cards.g.GraspingCurrent.class));
+        cards.add(new SetCardInfo("Grazing Whiptail", 190, Rarity.COMMON, mage.cards.g.GrazingWhiptail.class));
         cards.add(new SetCardInfo("Headwater Sentries", 58, Rarity.COMMON, mage.cards.h.HeadwaterSentries.class));
         cards.add(new SetCardInfo("Herald of Secret Streams", 59, Rarity.RARE, mage.cards.h.HeraldOfSecretStreams.class));
         cards.add(new SetCardInfo("Hostage Taker", 223, Rarity.RARE, mage.cards.h.HostageTaker.class));
