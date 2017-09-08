@@ -95,6 +95,7 @@ class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
+        // TODO fix to use SubType enum
         String choice = (String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY);
         if (enchantment != null && enchantment.getAttachedTo() != null && choice != null) {
             Permanent land = game.getPermanent(enchantment.getAttachedTo());

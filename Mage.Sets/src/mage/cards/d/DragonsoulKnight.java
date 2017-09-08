@@ -112,7 +112,7 @@ public class DragonsoulKnight extends CardImpl {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add("Dragon");
+                        permanent.getSubtype(game).add(SubType.DRAGON);
                     }
                     break;
             }

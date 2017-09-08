@@ -145,6 +145,7 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        // TODO fix to use SubType enum
         String choice = (String) game.getState().getValue(source.getSourceId().toString() + "_Terraformer");
         if (choice != null) {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {

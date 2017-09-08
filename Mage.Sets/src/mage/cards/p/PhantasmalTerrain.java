@@ -105,6 +105,7 @@ class PhantasmalTerrainContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        // TODO fix to use SubType enum
         Permanent enchantment = game.getPermanent(source.getSourceId());
         String choice = (String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY);
         if (enchantment != null && enchantment.getAttachedTo() != null && choice != null) {

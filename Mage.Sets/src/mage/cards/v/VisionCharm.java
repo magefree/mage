@@ -141,6 +141,7 @@ class VisionCharmEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        // TODO fix to use SubType enum
         for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
             Permanent land = it.next().getPermanent(game);
             if (land != null) {

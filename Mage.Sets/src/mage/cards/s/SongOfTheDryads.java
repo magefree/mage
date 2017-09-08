@@ -122,7 +122,7 @@ class BecomesColorlessForestLandEffect extends ContinuousEffectImpl {
                         permanent.getCardType().clear();
                         permanent.addCardType(CardType.LAND);
                         permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add("Forest");
+                        permanent.getSubtype(game).add(SubType.FOREST);
                         break;
                 }
                 return true;

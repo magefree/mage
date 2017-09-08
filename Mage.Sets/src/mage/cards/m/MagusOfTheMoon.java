@@ -106,7 +106,7 @@ public class MagusOfTheMoon extends CardImpl {
                         // So the ability removing has to be done before Layer 6
                         land.removeAllAbilities(source.getSourceId(), game);
                         land.getSubtype(game).removeAll(SubType.getLandTypes(false));
-                        land.getSubtype(game).add("Mountain");
+                        land.getSubtype(game).add(SubType.MOUNTAIN);
                         break;
                     case AbilityAddingRemovingEffects_6:
                         land.addAbility(new RedManaAbility(), source.getSourceId(), game);

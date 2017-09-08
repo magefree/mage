@@ -98,7 +98,7 @@ public class SlumberingTora extends CardImpl {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
                             permanent.addCardType(CardType.CREATURE);
-                            permanent.getSubtype(game).add("Cat");
+                            permanent.getSubtype(game).add(SubType.CAT);
                         }
                         break;
                     case PTChangingEffects_7:

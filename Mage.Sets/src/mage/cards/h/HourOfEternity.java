@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -106,7 +107,7 @@ class HourOfEternityEffect extends OneShotEffect {
                     token.getToughness().modifyBaseValue(4);
                     token.getColor(game).setColor(ObjectColor.BLACK);
                     token.getSubtype(game).clear();
-                    token.getSubtype(game).add("Zombie");
+                    token.getSubtype(game).add(SubType.ZOMBIE);
                     token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
                 }
             }

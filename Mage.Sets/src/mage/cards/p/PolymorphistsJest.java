@@ -40,6 +40,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -108,7 +109,7 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
                             permanent.getSubtype(game).clear();
-                            permanent.getSubtype(game).add("Frog");
+                            permanent.getSubtype(game).add(SubType.FROG);
                         }
 
                         break;
