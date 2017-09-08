@@ -27,7 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,13 +36,15 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
  */
 public class NaturesLore extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a Forest card");
+    private static final FilterCard filter = new FilterCard("Forest card");
 
     static {
         filter.add(new SubtypePredicate(SubType.FOREST));

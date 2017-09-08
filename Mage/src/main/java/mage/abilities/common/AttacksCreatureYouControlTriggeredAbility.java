@@ -97,7 +97,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public String getRule() {
-        return "Whenever a " + filter.getMessage() + " attacks, " + super.getRule();
+        return "Whenever a" + (filter.getMessage().startsWith("a") ? "n " : " ") + " attacks, " + super.getRule();
     }
 
 }
