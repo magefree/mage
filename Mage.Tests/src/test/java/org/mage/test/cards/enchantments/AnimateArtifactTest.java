@@ -29,6 +29,7 @@ package org.mage.test.cards.enchantments;
 
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -79,7 +80,7 @@ public class AnimateArtifactTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Juggernaut", 1);
         assertPermanentCount(playerA, "Animate Artifact", 1);
-        assertType("Juggernaut", CardType.CREATURE, "Juggernaut");
+        assertType("Juggernaut", CardType.CREATURE, SubType.JUGGERNAUT);
         assertPowerToughness(playerA, "Juggernaut", 5, 3);
     }
 

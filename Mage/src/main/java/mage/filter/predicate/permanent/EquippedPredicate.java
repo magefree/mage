@@ -6,6 +6,7 @@
 package mage.filter.predicate.permanent;
 
 import java.util.UUID;
+import mage.constants.SubType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -20,7 +21,7 @@ public class EquippedPredicate implements Predicate<Permanent> {
     public boolean apply(Permanent input, Game game) {
         for (UUID attachmentId : input.getAttachments()) {
             Permanent attachment = game.getPermanent(attachmentId);
-            if (attachment != null && attachment.getSubtype(game).contains("Equipment")) {
+            if (attachment != null && attachment.getSubtype(game).contains(SubType.EQUIPMENT)) {
                 return true;
             }
         }

@@ -136,7 +136,7 @@ class GaddockTeegReplacementEffectX extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        if (card != null && !card.isCreature() && card.getManaCost().getText().contains(SubType.X)) {
+        if (card != null && !card.isCreature() && card.getManaCost().getText().contains("X")) {
             return true;
         }
         return false;

@@ -33,6 +33,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  * Describes condition when creature is equipped.
@@ -49,7 +50,7 @@ public enum EquippedSourceCondition implements Condition {
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
-                if (attached != null && attached.getSubtype(game).contains("Equipment")) {
+                if (attached != null && attached.getSubtype(game).contains(SubType.EQUIPMENT)) {
                     return true;
                 }
             }

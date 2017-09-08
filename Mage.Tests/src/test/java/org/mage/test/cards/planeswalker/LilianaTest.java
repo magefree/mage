@@ -2,6 +2,7 @@ package org.mage.test.cards.planeswalker;
 
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
@@ -61,8 +62,8 @@ public class LilianaTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, wShepherd, 1);
         assertPermanentCount(playerB, yOx, 1);
         assertCounterCount(playerA, liliannaDM, CounterType.LOYALTY, 2);
-        assertType(wShepherd, CardType.CREATURE, "Zombie"); // should have subtype zombie on top of angel type
-        assertType(wShepherd, CardType.CREATURE, "Angel");
+        assertType(wShepherd, CardType.CREATURE, SubType.ZOMBIE); // should have subtype zombie on top of angel type
+        assertType(wShepherd, CardType.CREATURE, SubType.ANGEL);
         assertTapped(yOx, true);
     }
 }

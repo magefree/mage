@@ -245,7 +245,7 @@ public class Spell extends StackObjImpl implements Card {
             }
             counter(null, game);
             return false;
-        } else if (this.isEnchantment() && this.getSubtype(game).contains("Aura")) {
+        } else if (this.isEnchantment() && this.getSubtype(game).contains(SubType.AURA)) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
                 boolean bestow = ability instanceof BestowAbility;

@@ -106,10 +106,10 @@ class RosheenMeandererManaCondition implements Condition {
         if (AbilityType.SPELL == source.getAbilityType()) {
             MageObject object = game.getObject(source.getSourceId());
             return object != null
-                    && object.getManaCost().getText().contains(SubType.X);
+                    && object.getManaCost().getText().contains("X");
 
         } else {
-            return source.getManaCosts().getText().contains(SubType.X);
+            return source.getManaCosts().getText().contains("X");
         }
     }
 }

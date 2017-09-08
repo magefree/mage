@@ -53,7 +53,7 @@ import java.util.UUID;
 public class RiptideShapeshifter extends CardImpl {
 
     public RiptideShapeshifter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(3);
@@ -105,7 +105,7 @@ class RiptideShapeshifterEffect extends OneShotEffect {
             Cards revealedCards = new CardsImpl();
             while (controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().removeFromTop(game);
-                if (card.isCreature() && card.getSubtype(game).contains(choice.getChoice())) {
+                if (card.isCreature() && card.getSubtype(game).contains(SubType.byDescription(choice.getChoice()))) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     break;
                 }
