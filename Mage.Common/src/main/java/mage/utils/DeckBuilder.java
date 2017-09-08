@@ -8,6 +8,7 @@ import mage.interfaces.rate.RateCallback;
 import mage.util.RandomUtil;
 
 import java.util.*;
+import mage.constants.SubType;
 
 /**
  * Builds deck from provided card pool.
@@ -114,7 +115,7 @@ public final class DeckBuilder {
      * @param count
      */
     private static void addCardsToDeck(final Collection<MageScoredCard> remainingCards, final int minCost, final int maxCost,
-                                       final int count) {
+            final int count) {
 
         for (int c = count; c > 0; c--) {
 
@@ -140,7 +141,8 @@ public final class DeckBuilder {
     }
 
     /**
-     * Adds lands from non basic land (if provided), adds basic lands getting them from provided {@link RateCallback}}.
+     * Adds lands from non basic land (if provided), adds basic lands getting
+     * them from provided {@link RateCallback}}.
      *
      * @param allowedColors
      * @param landCardPool
@@ -241,9 +243,9 @@ public final class DeckBuilder {
             int type;
             if (card.isCreature()) {
                 type = 10;
-            } else if (card.getSubtype(null).contains("Equipment")) {
+            } else if (card.getSubtype(null).contains(SubType.EQUIPMENT)) {
                 type = 8;
-            } else if (card.getSubtype(null).contains("Aura")) {
+            } else if (card.getSubtype(null).contains(SubType.AURA)) {
                 type = 5;
             } else if (card.isInstant()) {
                 type = 7;
@@ -251,11 +253,11 @@ public final class DeckBuilder {
                 type = 6;
             }
 
-            this.score =
-                    // 5*card.getValue() + // not possible now
-                    3 * cardRater.rateCard(card) +
-                            // 3*card.getRemoval() + // not possible now
-                            type + getManaCostScore(card, allowedColors);
+            this.score
+                    = // 5*card.getValue() + // not possible now
+                    3 * cardRater.rateCard(card)
+                    + // 3*card.getRemoval() + // not possible now
+                    type + getManaCostScore(card, allowedColors);
         }
 
         private int getManaCostScore(Card card, List<ColoredManaSymbol> allowedColors) {

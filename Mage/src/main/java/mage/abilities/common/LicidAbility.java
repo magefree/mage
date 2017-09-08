@@ -47,6 +47,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -142,7 +143,7 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
                     licid.getCardType().clear();
                     licid.addCardType(CardType.ENCHANTMENT);
                     licid.getSubtype(game).clear();
-                    licid.getSubtype(game).add("Aura");
+                    licid.getSubtype(game).add(SubType.AURA);
                     break;
                 case AbilityAddingRemovingEffects_6:
                     ArrayList<Ability> toRemove = new ArrayList<>();

@@ -602,7 +602,7 @@ public class ModernCardRenderer extends CardRenderer {
         int partWidth = (int) Math.max(30, 0.20f * cardWidth);
 
         // Is it a creature?
-        boolean isVehicle = cardView.getSubTypes().contains("Vehicle");
+        boolean isVehicle = cardView.getSubTypes().contains(SubType.VEHICLE);
         if (cardView.isCreature() || isVehicle) {
             int x = cardWidth - borderWidth - partWidth;
 

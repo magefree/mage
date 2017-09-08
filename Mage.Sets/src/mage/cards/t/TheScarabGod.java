@@ -163,7 +163,7 @@ class TheScarabGodEffect2 extends OneShotEffect {
             controller.moveCards(card, Zone.EXILED, source, game); // Also if the move to exile is replaced, the copy takes place
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false, 1, false, false, null, 4, 4, false);
             effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-            effect.setOnlySubType("Zombie");
+            effect.setOnlySubType(SubType.ZOMBIE);
             effect.setOnlyColor(ObjectColor.BLACK);
             effect.apply(game, source);
             return true;
