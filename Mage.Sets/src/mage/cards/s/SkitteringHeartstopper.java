@@ -25,55 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.CantBlockAbility;
-import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class BloodsoakedChampion extends CardImpl {
+public class SkitteringHeartstopper extends CardImpl {
 
-    public BloodsoakedChampion(UUID ownerId, CardSetInfo setInfo) {
+    public SkitteringHeartstopper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
-        this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.subtype.add(SubType.INSECT);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        // Bloodstained Brave can't block.
-        this.addAbility(new CantBlockAbility());
-
-        // <i>Raid</i> - {1}{B}: Return Bloodstained Brave from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new ManaCostsImpl<>("{1}{B}"),
-                RaidCondition.instance,
-                "<i>Raid</i> &mdash; {1}{B}: Return {this} from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn");
-        this.addAbility(ability, new PlayerAttackedWatcher());
+        // {B}: Skittering Heartstopper gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public BloodsoakedChampion(final BloodsoakedChampion card) {
+    public SkitteringHeartstopper(final SkitteringHeartstopper card) {
         super(card);
     }
 
     @Override
-    public BloodsoakedChampion copy() {
-        return new BloodsoakedChampion(this);
+    public SkitteringHeartstopper copy() {
+        return new SkitteringHeartstopper(this);
     }
 }

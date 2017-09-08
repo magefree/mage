@@ -25,55 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.a;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBlockAbility;
-import mage.abilities.condition.common.RaidCondition;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.watchers.common.PlayerAttackedWatcher;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class BloodsoakedChampion extends CardImpl {
+public class AzcantaTheSunkenRuin extends CardImpl {
 
-    public BloodsoakedChampion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
-        this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
+    private static final FilterCard filter = new FilterCard("noncreature, nonland card");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // Bloodstained Brave can't block.
-        this.addAbility(new CantBlockAbility());
-
-        // <i>Raid</i> - {1}{B}: Return Bloodstained Brave from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new ManaCostsImpl<>("{1}{B}"),
-                RaidCondition.instance,
-                "<i>Raid</i> &mdash; {1}{B}: Return {this} from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn");
-        this.addAbility(ability, new PlayerAttackedWatcher());
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public BloodsoakedChampion(final BloodsoakedChampion card) {
+    public AzcantaTheSunkenRuin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+
+        this.addSuperType(SuperType.LEGENDARY);
+
+        // this card is the second face of double-faced card
+        this.nightCard = true;
+        this.transformable = true;
+
+        // (Transforms from Search for Azcanta)/
+        // {T} : Add {U} to your mana pool.
+        this.addAbility(new BlueManaAbility());
+
+        // {2}{U} , {T} : Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), filter, false), new ManaCostsImpl<>("{2}{U}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+    }
+
+    public AzcantaTheSunkenRuin(final AzcantaTheSunkenRuin card) {
         super(card);
     }
 
     @Override
-    public BloodsoakedChampion copy() {
-        return new BloodsoakedChampion(this);
+    public AzcantaTheSunkenRuin copy() {
+        return new AzcantaTheSunkenRuin(this);
     }
 }

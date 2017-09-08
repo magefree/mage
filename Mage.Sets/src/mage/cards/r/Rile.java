@@ -25,55 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.CantBlockAbility;
-import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.watchers.common.PlayerAttackedWatcher;
+import mage.constants.Duration;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class BloodsoakedChampion extends CardImpl {
+public class Rile extends CardImpl {
 
-    public BloodsoakedChampion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
-        this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
+    public Rile(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // Bloodstained Brave can't block.
-        this.addAbility(new CantBlockAbility());
-
-        // <i>Raid</i> - {1}{B}: Return Bloodstained Brave from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new ManaCostsImpl<>("{1}{B}"),
-                RaidCondition.instance,
-                "<i>Raid</i> &mdash; {1}{B}: Return {this} from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn");
-        this.addAbility(ability, new PlayerAttackedWatcher());
+        // Rile deals 1 damage to target creature you control. That creature gains trample until end of turn.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
+                .setText("That creature gains trample until end of turn"));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
     }
 
-    public BloodsoakedChampion(final BloodsoakedChampion card) {
+    public Rile(final Rile card) {
         super(card);
     }
 
     @Override
-    public BloodsoakedChampion copy() {
-        return new BloodsoakedChampion(this);
+    public Rile copy() {
+        return new Rile(this);
     }
 }

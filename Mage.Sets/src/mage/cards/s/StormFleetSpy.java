@@ -25,55 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBlockAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class BloodsoakedChampion extends CardImpl {
+public class StormFleetSpy extends CardImpl {
 
-    public BloodsoakedChampion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
-        this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
+    public StormFleetSpy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        // Bloodstained Brave can't block.
-        this.addAbility(new CantBlockAbility());
-
-        // <i>Raid</i> - {1}{B}: Return Bloodstained Brave from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new ManaCostsImpl<>("{1}{B}"),
+        // Raid — When Storm Fleet Spy enters the battlefield, if you attacked with a creature this turn, draw a card.
+        Ability ability = new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; {1}{B}: Return {this} from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn");
+                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, draw a card.");
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public BloodsoakedChampion(final BloodsoakedChampion card) {
+    public StormFleetSpy(final StormFleetSpy card) {
         super(card);
     }
 
     @Override
-    public BloodsoakedChampion copy() {
-        return new BloodsoakedChampion(this);
+    public StormFleetSpy copy() {
+        return new StormFleetSpy(this);
     }
 }
