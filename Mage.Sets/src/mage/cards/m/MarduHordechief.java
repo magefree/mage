@@ -47,7 +47,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
 public class MarduHordechief extends CardImpl {
 
     public MarduHordechief(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
 

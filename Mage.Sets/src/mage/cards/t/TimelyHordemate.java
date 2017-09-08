@@ -57,7 +57,7 @@ public class TimelyHordemate extends CardImpl {
     }
 
     public TimelyHordemate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
 

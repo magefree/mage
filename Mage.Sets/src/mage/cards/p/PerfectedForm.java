@@ -42,7 +42,7 @@ import mage.constants.SubType;
 public class PerfectedForm extends CardImpl {
 
     public PerfectedForm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add(SubType.INSECT);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(5);

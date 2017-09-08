@@ -58,7 +58,7 @@ public class WarNameAspirant extends CardImpl {
     }
 
     public WarNameAspirant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
 
