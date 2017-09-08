@@ -116,7 +116,7 @@ class ArmamentMasterEffect extends ContinuousEffectImpl {
             List<UUID> attachments = p.getAttachments();
             for (UUID attachmentId : attachments) {
                 Permanent attached = game.getPermanent(attachmentId);
-                if (attached != null && attached.getSubtype(game).contains("Equipment")) {
+                if (attached != null && attached.getSubtype(game).contains(SubType.EQUIPMENT)) {
                     count++;
                 }
             }

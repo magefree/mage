@@ -142,7 +142,7 @@ class NecromancersMagemarkEffect extends ReplacementEffectImpl {
             if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
                 for (UUID attachmentId : permanent.getAttachments()) {
                     Permanent attachment = game.getPermanentOrLKIBattlefield(attachmentId);
-                    if (attachment != null && attachment.getSubtype(game).contains("Aura")) {
+                    if (attachment != null && attachment.getSubtype(game).contains(SubType.AURA)) {
                         return true;
                     }
                 }

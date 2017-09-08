@@ -84,7 +84,7 @@ class SourceIsEquiped implements Condition {
             for (UUID attachmentUUID : attachments) {
                 Permanent attachment = game.getPermanent(attachmentUUID);
                 if (attachment != null) {
-                    if (attachment.getSubtype(game).contains("Equipment")) {
+                    if (attachment.getSubtype(game).contains(SubType.EQUIPMENT)) {
                         return true;
                     }
                 }

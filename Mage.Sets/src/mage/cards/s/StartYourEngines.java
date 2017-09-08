@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -89,7 +90,7 @@ class StartYourEnginesEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent != null && permanent.getSubtype(game).contains("Vehicle")) {
+            if (permanent != null && permanent.getSubtype(game).contains(SubType.VEHICLE)) {
                 if (sublayer == SubLayer.NA) {
                     permanent.addCardType(CardType.ARTIFACT);
                     permanent.addCardType(CardType.CREATURE);// TODO: Chcek if giving CREATURE Type is correct

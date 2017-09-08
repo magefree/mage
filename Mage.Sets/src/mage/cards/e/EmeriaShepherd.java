@@ -109,7 +109,7 @@ class EmeriaShepherdReturnToHandTargetEffect extends OneShotEffect {
             return false;
         }
         Zone toZone = Zone.HAND;
-        if (triggeringLand.getSubtype(game).contains("Plains")
+        if (triggeringLand.getSubtype(game).contains(SubType.PLAINS)
                 && controller.chooseUse(Outcome.PutCardInPlay, "Put the card to battlefield instead?", source, game)) {
             toZone = Zone.BATTLEFIELD;
         }

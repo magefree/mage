@@ -93,7 +93,7 @@ class TallowispAbilityPredicate implements Predicate<MageObject> {
         for (int i = 0; i < abilities.size(); i++) {
             if (abilities.get(i) instanceof EnchantAbility) {
                 String enchantText = abilities.get(i).getRule();
-                if (enchantText.startsWith("Enchant") && enchantText.contains("creature")) {
+                if (enchantText.startsWith(SubType.ENCHANT) && enchantText.contains(creature)) {
                     return true;
                 }
             }

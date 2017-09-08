@@ -73,7 +73,7 @@ public class Lightsaber extends CardImpl {
     public void adjustCosts(Ability ability, Game game) {
         if (ability instanceof EquipAbility) {
             Permanent targetCreature = game.getPermanent(ability.getTargets().getFirstTarget());
-            if (targetCreature != null && (targetCreature.getSubtype(game).contains("Sith") || targetCreature.getSubtype(game).contains("Jedi"))) {
+            if (targetCreature != null && (targetCreature.getSubtype(game).contains(SubType.SITH) || targetCreature.getSubtype(game).contains(SubType.JEDI))) {
                 CardUtil.increaseCost(ability, 1 - ability.getManaCostsToPay().convertedManaCost());
             }
         }

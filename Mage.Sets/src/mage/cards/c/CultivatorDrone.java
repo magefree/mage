@@ -118,7 +118,7 @@ class CultivatorDroneManaCondition extends ManaCondition implements Condition {
             }
         }
         if (costToPay instanceof ManaCost) {
-            return ((ManaCost) costToPay).getText().contains("{C}");
+            return ((ManaCost) costToPay).getText().contains(SubType.{C});
         }
         return false;
     }

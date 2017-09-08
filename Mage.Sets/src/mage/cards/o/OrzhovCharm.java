@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -118,7 +119,7 @@ class OrzhovCharmReturnToHandEffect extends OneShotEffect {
             for (UUID attachmentId : attachments) {
                 Permanent attachment = game.getPermanent(attachmentId);
                 if (attachment != null && attachment.getControllerId().equals(source.getControllerId())
-                        && attachment.getSubtype(game).contains("Aura")) {
+                        && attachment.getSubtype(game).contains(SubType.AURA)) {
                     attachment.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 }
             }

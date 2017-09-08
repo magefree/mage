@@ -108,7 +108,7 @@ class MarkOfEvictionEffect extends OneShotEffect {
                 toHand.add(enchanted);
                 for (UUID attachmentId : enchanted.getAttachments()) {
                     Permanent attachment = game.getPermanent(attachmentId);
-                    if (attachment != null && attachment.getSubtype(game).contains("Aura")) {
+                    if (attachment != null && attachment.getSubtype(game).contains(SubType.AURA)) {
                         toHand.add(attachment);
                     }
                 }

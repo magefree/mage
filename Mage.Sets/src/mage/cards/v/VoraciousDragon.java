@@ -96,7 +96,7 @@ class TwiceDevouredGoblins implements DynamicValue {
                             DevourEffect devourEffect = (DevourEffect) abilityEffect;
                             int amountGoblins = 0;
                             for (List<String> subtypesItem :devourEffect.getSubtypes(game, sourcePermanent.getId())) {
-                                if (subtypesItem.contains("Goblin")) {
+                                if (subtypesItem.contains(SubType.GOBLIN)) {
                                     ++amountGoblins;
                                 }
                             }
