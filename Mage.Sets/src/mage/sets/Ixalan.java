@@ -45,6 +45,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Captain Lannery Storm", 136, Rarity.RARE, mage.cards.c.CaptainLanneryStorm.class));
         cards.add(new SetCardInfo("Carnage Tyrant", 179, Rarity.MYTHIC, mage.cards.c.CarnageTyrant.class));
         cards.add(new SetCardInfo("Castaway's Despair", 281, Rarity.COMMON, mage.cards.c.CastawaysDespair.class));
+        cards.add(new SetCardInfo("Commune with Dinosaurs", 181, Rarity.COMMON, mage.cards.c.CommuneWithDinosaurs.class));
         cards.add(new SetCardInfo("Conqueror's Foothold", 234, Rarity.RARE, mage.cards.c.ConquerorsFoothold.class));
         cards.add(new SetCardInfo("Conqueror's Galleon", 234, Rarity.RARE, mage.cards.c.ConquerorsGalleon.class));
         cards.add(new SetCardInfo("Daring Saboteur", 49, Rarity.RARE, mage.cards.d.DaringSaboteur.class));
@@ -92,6 +93,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Mavren Fein, Dusk Apostle", 24, Rarity.RARE, mage.cards.m.MavrenFeinDuskApostle.class));
         cards.add(new SetCardInfo("Old-Growth Dryads", 199, Rarity.RARE, mage.cards.o.OldGrowthDryads.class));
         cards.add(new SetCardInfo("Opt", 65, Rarity.COMMON, mage.cards.o.Opt.class));
+        cards.add(new SetCardInfo("Otepec Huntmaster", 153, Rarity.UNCOMMON, mage.cards.o.OtepecHuntmaster.class));
         cards.add(new SetCardInfo("Overflowing Insight", 64, Rarity.MYTHIC, mage.cards.o.OverflowingInsight.class));
         cards.add(new SetCardInfo("Pillar of Origins", 241, Rarity.UNCOMMON, mage.cards.p.PillarOfOrigins.class));
         cards.add(new SetCardInfo("Pirate's Cutlass", 242, Rarity.COMMON, mage.cards.p.PiratesCutlass.class));
