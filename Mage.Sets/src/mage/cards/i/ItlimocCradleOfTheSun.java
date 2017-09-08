@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,40 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.i;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.Mana;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.mana.DynamicManaAbility;
+import mage.abilities.mana.GreenManaAbility;
+import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- * @author LevelX
+ * @author TheElk801
  */
-public class CommuneWithNature extends CardImpl {
+public class ItlimocCradleOfTheSun extends CardImpl {
 
-    public CommuneWithNature(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
+    public ItlimocCradleOfTheSun(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(
-                new LookLibraryAndPickControllerEffect(
-                        new StaticValue(5), false, new StaticValue(1), new FilterCreatureCard("a creature card"), false
-                )
+        this.addSuperType(SuperType.LEGENDARY);
+        this.nightCard = true;
+
+        // {T}: Add {G} to your mana pool.
+        this.addAbility(new GreenManaAbility());
+
+        // {T}: Add {G} to your mana pool for each creature you control.
+        DynamicManaAbility ability = new DynamicManaAbility(
+                Mana.GreenMana(1),
+                new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent("creature you control"))
         );
+        this.addAbility(ability);
     }
 
-    public CommuneWithNature(final CommuneWithNature card) {
+    public ItlimocCradleOfTheSun(final ItlimocCradleOfTheSun card) {
         super(card);
     }
 
     @Override
-    public CommuneWithNature copy() {
-        return new CommuneWithNature(this);
+    public ItlimocCradleOfTheSun copy() {
+        return new ItlimocCradleOfTheSun(this);
     }
-
 }
