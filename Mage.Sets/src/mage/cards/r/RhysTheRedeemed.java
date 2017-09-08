@@ -35,7 +35,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -117,7 +117,7 @@ class RhysTheRedeemedEffect extends OneShotEffect {
         if (controller != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                 if (permanent.getControllerId().equals(source.getControllerId())) {
-                    PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+                    CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                     effect.apply(game, source);
                 }

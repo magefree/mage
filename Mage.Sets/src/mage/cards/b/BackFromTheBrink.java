@@ -33,7 +33,7 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -57,7 +57,7 @@ public class BackFromTheBrink extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");
 
         // Exile a creature card from your graveyard and pay its mana cost: Create a token that's a copy of that card. Activate this ability only any time you could cast a sorcery.
-        Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+        Effect effect = new CreateTokenCopyTargetEffect();
         effect.setText("create a token that's a copy of that card");
         this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, effect, new BackFromTheBrinkCost()));
 

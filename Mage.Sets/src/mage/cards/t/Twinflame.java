@@ -33,7 +33,7 @@ import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -101,7 +101,7 @@ class TwinflameCopyEffect extends OneShotEffect {
             for (UUID creatureId : this.getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
                 if (creature != null) {
-                    PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);
+                    CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
                     effect.setTargetPointer(new FixedTarget(creature, game));
                     effect.apply(game, source);
                     toExile.addAll(effect.getAddedPermanent());

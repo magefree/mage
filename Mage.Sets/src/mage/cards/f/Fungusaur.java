@@ -34,6 +34,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -44,9 +45,9 @@ import mage.counters.CounterType;
 public class Fungusaur extends CardImpl {
 
     public Fungusaur(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Fungus");
-        this.subtype.add("Lizard");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.subtype.add(SubType.FUNGUS);
+        this.subtype.add(SubType.DINOSAUR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

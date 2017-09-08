@@ -36,7 +36,7 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -96,7 +96,7 @@ class CogworkAssemblerCreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent copiedPermanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (copiedPermanent != null) {
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(null, CardType.ARTIFACT, true);
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, CardType.ARTIFACT, true);
             if (effect.apply(game, source)) {
                 for (Permanent copyPermanent : effect.getAddedPermanent()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();

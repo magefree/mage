@@ -36,7 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -87,7 +87,7 @@ public class DarettiIngeniousIconoclast extends CardImpl {
 
         // -6: Choose target artifact card in a graveyard or artifact on the battlefield. Create three tokens that are copies of it.
         ability = new LoyaltyAbility(
-                new PutTokenOntoBattlefieldCopyTargetEffect(null, null, false, 3),
+                new CreateTokenCopyTargetEffect(null, null, false, 3),
                 -6);
         ability.addTarget(new TargetCardInGraveyardOrBattlefield(new FilterArtifactCard("artifact card in a graveyard or artifact on the battlefield")));
         this.addAbility(ability);

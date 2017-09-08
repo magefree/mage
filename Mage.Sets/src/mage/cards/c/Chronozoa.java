@@ -35,7 +35,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.LastTimeCounterRemovedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
+import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VanishingSacrificeAbility;
@@ -69,7 +69,7 @@ public class Chronozoa extends CardImpl {
         this.addAbility(new VanishingSacrificeAbility());
 
         // When Chronozoa is put into a graveyard from play, if it had no time counters on it, create two tokens that are copies of it.
-        Effect effect = new PutTokenOntoBattlefieldCopySourceEffect(2);
+        Effect effect = new CreateTokenCopySourceEffect(2);
         effect.setText("create two tokens that are copies of it");
         this.addAbility(new ConditionalTriggeredAbility(new DiesTriggeredAbility(effect, false),
                 LastTimeCounterRemovedCondition.instance,

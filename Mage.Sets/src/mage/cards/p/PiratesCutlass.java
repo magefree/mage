@@ -25,90 +25,65 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.p;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author TheElk801
  */
-public class BelligerentBrontodon extends CardImpl {
+public class PiratesCutlass extends CardImpl {
 
-    public BelligerentBrontodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Pirate you control");
 
-        this.subtype.add("Dinosaur");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(6);
-
-        // Each creature you control assigns combat damage equal to its toughness rather than its power.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MilitantDinosaurCombatDamageRuleEffect()));
+    static {
+        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public BelligerentBrontodon(final BelligerentBrontodon card) {
+    public PiratesCutlass(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+
+        this.subtype.add("Equipment");
+
+        // When Pirate's Cutlass enters the battlefield, attach it to target Pirate you control.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(Outcome.BoostCreature, "attach it to target Pirate you control"), false);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+
+        // Equipped creature gets +2/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 1)));
+
+        // Equip 2
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+
+    }
+
+    public PiratesCutlass(final PiratesCutlass card) {
         super(card);
     }
 
     @Override
-    public BelligerentBrontodon copy() {
-        return new BelligerentBrontodon(this);
-    }
-}
-
-class MilitantDinosaurCombatDamageRuleEffect extends ContinuousEffectImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
-    public MilitantDinosaurCombatDamageRuleEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Each creature you control assigns combat damage equal to its toughness rather than its power";
-    }
-
-    public MilitantDinosaurCombatDamageRuleEffect(final MilitantDinosaurCombatDamageRuleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MilitantDinosaurCombatDamageRuleEffect copy() {
-        return new MilitantDinosaurCombatDamageRuleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        // Change the rule
-        game.getCombat().setUseToughnessForDamage(true);
-        game.getCombat().addUseToughnessForDamageFilter(filter);
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+    public PiratesCutlass copy() {
+        return new PiratesCutlass(this);
     }
 }

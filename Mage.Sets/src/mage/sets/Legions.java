@@ -97,6 +97,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Essence Sliver", 13, Rarity.RARE, mage.cards.e.EssenceSliver.class));
         cards.add(new SetCardInfo("Feral Throwback", 126, Rarity.RARE, mage.cards.f.FeralThrowback.class));
         cards.add(new SetCardInfo("Flamewave Invoker", 92, Rarity.COMMON, mage.cards.f.FlamewaveInvoker.class));
+        cards.add(new SetCardInfo("Frenetic Raptor", 93, Rarity.UNCOMMON, mage.cards.f.FreneticRaptor.class));
         cards.add(new SetCardInfo("Fugitive Wizard", 38, Rarity.COMMON, mage.cards.f.FugitiveWizard.class));
         cards.add(new SetCardInfo("Gempalm Avenger", 14, Rarity.COMMON, mage.cards.g.GempalmAvenger.class));
         cards.add(new SetCardInfo("Gempalm Incinerator", 94, Rarity.UNCOMMON, mage.cards.g.GempalmIncinerator.class));

@@ -25,43 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.t;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.keyword.CrewAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author TheElk801
  */
-public class DuskLegionDreadnought extends CardImpl {
+public class FreneticRaptor extends CardImpl {
 
-    public DuskLegionDreadnought(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        
-        this.subtype.add("Vehicle");
-        this.power = new MageInt(4);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.BEAST, "Beasts");
+
+    public FreneticRaptor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
+
+        this.subtype.add("Dinosaur");
+        this.subtype.add("Beast");
+        this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
-
-        // Crew 2
-        this.addAbility(new CrewAbility(2));
-
+        // Beasts can't block.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public DuskLegionDreadnought(final DuskLegionDreadnought card) {
+    public FreneticRaptor(final FreneticRaptor card) {
         super(card);
     }
 
     @Override
-    public DuskLegionDreadnought copy() {
-        return new DuskLegionDreadnought(this);
+    public FreneticRaptor copy() {
+        return new FreneticRaptor(this);
     }
 }

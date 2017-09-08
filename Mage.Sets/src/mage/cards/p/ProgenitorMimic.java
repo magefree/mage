@@ -34,7 +34,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
+import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -67,7 +67,7 @@ public class ProgenitorMimic extends CardImpl {
         // You may have Progenitor Mimic enter the battlefield as a copy of any creature on the battlefield
         // except it gains "At the beginning of your upkeep, if this creature isn't a token,
         // create a token that's a copy of this creature."
-        Effect effect = new PutTokenOntoBattlefieldCopySourceEffect();
+        Effect effect = new CreateTokenCopySourceEffect();
         effect.setText("create a token that's a copy of this creature");
 
         AbilityApplier applier = new AbilityApplier(

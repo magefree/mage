@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -45,14 +44,15 @@ import mage.constants.Zone;
  */
 public class TrustyMachete extends CardImpl {
 
-    public TrustyMachete (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+    public TrustyMachete(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public TrustyMachete (final TrustyMachete card) {
+    public TrustyMachete(final TrustyMachete card) {
         super(card);
     }
 

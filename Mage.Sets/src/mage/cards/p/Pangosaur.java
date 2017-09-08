@@ -34,6 +34,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,8 +47,8 @@ import mage.game.events.GameEvent.EventType;
 public class Pangosaur extends CardImpl {
 
     public Pangosaur(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Lizard");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
@@ -66,6 +67,7 @@ public class Pangosaur extends CardImpl {
 }
 
 class PangosaurTriggeredAbility extends TriggeredAbilityImpl {
+
     PangosaurTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect());
     }
@@ -83,7 +85,7 @@ class PangosaurTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
     }
-    
+
     @Override
     public PangosaurTriggeredAbility copy() {
         return new PangosaurTriggeredAbility(this);
