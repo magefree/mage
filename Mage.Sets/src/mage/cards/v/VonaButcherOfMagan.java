@@ -25,53 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.[=$cardNameFirstLetter=];
+package mage.cards.v;
 
-import java.util.UUID;[=
-if ($power || $power eq 0) {
-    if ($planeswalker eq 'true') {
-        $OUT .= "\nimport mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;"
-    }else {
-        $OUT .= "\nimport mage.MageInt;"
-    }
-}
-if ($hasSubTypes eq 'true') {
-    $OUT .="\nimport mage.constants.SubType;"
-}
-if ($hasSuperTypes eq 'true') {
-    $OUT .="\nimport mage.constants.SuperType;"
-}
-=][=$abilitiesImports=]
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
+import mage.target.common.TargetNonlandPermanent;
 
 /**
  *
- * @author [=$author=]
+ * @author TheElk801
  */
-public class [=$className=] extends CardImpl {
+public class VonaButcherOfMagan extends CardImpl {
 
-    public [=$className=](UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{[=$type=]}, "[=$manaCost=]");
-        [=$subType=][=$colors=][=
-if ($power || $power eq 0) {
-    if ($planeswalker eq 'true') {
-        $OUT .= "\n        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility($power));";
-    } else {
-        $OUT .= "\n        this.power = new MageInt($power);";
-        $OUT .= "\n        this.toughness = new MageInt($toughness);";
-    }
-}
-=][=$abilities=]
+    public VonaButcherOfMagan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
+
+        this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.KNIGHT);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // Vigilance
+        this.addAbility(VigilanceAbility.getInstance());
+
+        // Lifelink
+        this.addAbility(LifelinkAbility.getInstance());
+
+        // {T}, Pay 7 life: Destroy target nonland permanent. Activate this ability only during your turn.
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost(), MyTurnCondition.instance);
+        ability.addCost(new PayLifeCost(7));
+        ability.addTarget(new TargetNonlandPermanent());
+        this.addAbility(ability);
     }
 
-    public [=$className=](final [=$className=] card) {
+    public VonaButcherOfMagan(final VonaButcherOfMagan card) {
         super(card);
     }
 
     @Override
-    public [=$className=] copy() {
-        return new [=$className=](this);
+    public VonaButcherOfMagan copy() {
+        return new VonaButcherOfMagan(this);
     }
 }

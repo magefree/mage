@@ -25,53 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.[=$cardNameFirstLetter=];
+package mage.cards.t;
 
-import java.util.UUID;[=
-if ($power || $power eq 0) {
-    if ($planeswalker eq 'true') {
-        $OUT .= "\nimport mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;"
-    }else {
-        $OUT .= "\nimport mage.MageInt;"
-    }
-}
-if ($hasSubTypes eq 'true') {
-    $OUT .="\nimport mage.constants.SubType;"
-}
-if ($hasSuperTypes eq 'true') {
-    $OUT .="\nimport mage.constants.SuperType;"
-}
-=][=$abilitiesImports=]
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.DinosaurToken;
 
 /**
  *
- * @author [=$author=]
+ * @author TheElk801
  */
-public class [=$className=] extends CardImpl {
+public class ThunderingSpineback extends CardImpl {
 
-    public [=$className=](UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{[=$type=]}, "[=$manaCost=]");
-        [=$subType=][=$colors=][=
-if ($power || $power eq 0) {
-    if ($planeswalker eq 'true') {
-        $OUT .= "\n        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility($power));";
-    } else {
-        $OUT .= "\n        this.power = new MageInt($power);";
-        $OUT .= "\n        this.toughness = new MageInt($toughness);";
-    }
-}
-=][=$abilities=]
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dinosaurs");
+
+    static {
+        filter.add(new SubtypePredicate(SubType.DINOSAUR));
     }
 
-    public [=$className=](final [=$className=] card) {
+    public ThunderingSpineback(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        // Other Dinosaurs you control get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+
+        // {5}{G}: Create a 3/3 green Dinosaur creature token with trample.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DinosaurToken()), new ManaCostsImpl("{5}{G}")));
+    }
+
+    public ThunderingSpineback(final ThunderingSpineback card) {
         super(card);
     }
 
     @Override
-    public [=$className=] copy() {
-        return new [=$className=](this);
+    public ThunderingSpineback copy() {
+        return new ThunderingSpineback(this);
     }
 }

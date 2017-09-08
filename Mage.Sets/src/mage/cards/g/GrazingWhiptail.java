@@ -25,53 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.[=$cardNameFirstLetter=];
+package mage.cards.g;
 
-import java.util.UUID;[=
-if ($power || $power eq 0) {
-    if ($planeswalker eq 'true') {
-        $OUT .= "\nimport mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;"
-    }else {
-        $OUT .= "\nimport mage.MageInt;"
-    }
-}
-if ($hasSubTypes eq 'true') {
-    $OUT .="\nimport mage.constants.SubType;"
-}
-if ($hasSuperTypes eq 'true') {
-    $OUT .="\nimport mage.constants.SuperType;"
-}
-=][=$abilitiesImports=]
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.keyword.ReachAbility;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
 /**
  *
- * @author [=$author=]
+ * @author TheElk801
  */
-public class [=$className=] extends CardImpl {
+public class GrazingWhiptail extends CardImpl {
 
-    public [=$className=](UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{[=$type=]}, "[=$manaCost=]");
-        [=$subType=][=$colors=][=
-if ($power || $power eq 0) {
-    if ($planeswalker eq 'true') {
-        $OUT .= "\n        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility($power));";
-    } else {
-        $OUT .= "\n        this.power = new MageInt($power);";
-        $OUT .= "\n        this.toughness = new MageInt($toughness);";
-    }
-}
-=][=$abilities=]
+    public GrazingWhiptail(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+
+        // Reach
+        this.addAbility(ReachAbility.getInstance());
     }
 
-    public [=$className=](final [=$className=] card) {
+    public GrazingWhiptail(final GrazingWhiptail card) {
         super(card);
     }
 
     @Override
-    public [=$className=] copy() {
-        return new [=$className=](this);
+    public GrazingWhiptail copy() {
+        return new GrazingWhiptail(this);
     }
 }

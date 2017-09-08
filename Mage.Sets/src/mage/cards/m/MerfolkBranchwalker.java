@@ -25,53 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.[=$cardNameFirstLetter=];
+package mage.cards.m;
 
-import java.util.UUID;[=
-if ($power || $power eq 0) {
-    if ($planeswalker eq 'true') {
-        $OUT .= "\nimport mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;"
-    }else {
-        $OUT .= "\nimport mage.MageInt;"
-    }
-}
-if ($hasSubTypes eq 'true') {
-    $OUT .="\nimport mage.constants.SubType;"
-}
-if ($hasSuperTypes eq 'true') {
-    $OUT .="\nimport mage.constants.SuperType;"
-}
-=][=$abilitiesImports=]
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.keyword.ExploreSourceEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
 /**
  *
- * @author [=$author=]
+ * @author TheElk801
  */
-public class [=$className=] extends CardImpl {
+public class MerfolkBranchwalker extends CardImpl {
 
-    public [=$className=](UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{[=$type=]}, "[=$manaCost=]");
-        [=$subType=][=$colors=][=
-if ($power || $power eq 0) {
-    if ($planeswalker eq 'true') {
-        $OUT .= "\n        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility($power));";
-    } else {
-        $OUT .= "\n        this.power = new MageInt($power);";
-        $OUT .= "\n        this.toughness = new MageInt($toughness);";
-    }
-}
-=][=$abilities=]
+    public MerfolkBranchwalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
+
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SCOUT);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // When Merfolk Branchwalker enters the battlefield, it explores.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
-    public [=$className=](final [=$className=] card) {
+    public MerfolkBranchwalker(final MerfolkBranchwalker card) {
         super(card);
     }
 
     @Override
-    public [=$className=] copy() {
-        return new [=$className=](this);
+    public MerfolkBranchwalker copy() {
+        return new MerfolkBranchwalker(this);
     }
 }

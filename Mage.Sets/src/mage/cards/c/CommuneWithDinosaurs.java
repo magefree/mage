@@ -25,53 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.[=$cardNameFirstLetter=];
+package mage.cards.c;
 
-import java.util.UUID;[=
-if ($power || $power eq 0) {
-    if ($planeswalker eq 'true') {
-        $OUT .= "\nimport mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;"
-    }else {
-        $OUT .= "\nimport mage.MageInt;"
-    }
-}
-if ($hasSubTypes eq 'true') {
-    $OUT .="\nimport mage.constants.SubType;"
-}
-if ($hasSuperTypes eq 'true') {
-    $OUT .="\nimport mage.constants.SuperType;"
-}
-=][=$abilitiesImports=]
+import java.util.UUID;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author [=$author=]
+ * @author TheElk801
  */
-public class [=$className=] extends CardImpl {
+public class CommuneWithDinosaurs extends CardImpl {
 
-    public [=$className=](UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{[=$type=]}, "[=$manaCost=]");
-        [=$subType=][=$colors=][=
-if ($power || $power eq 0) {
-    if ($planeswalker eq 'true') {
-        $OUT .= "\n        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility($power));";
-    } else {
-        $OUT .= "\n        this.power = new MageInt($power);";
-        $OUT .= "\n        this.toughness = new MageInt($toughness);";
-    }
-}
-=][=$abilities=]
+    private static final FilterCard filter = new FilterCard("a Dinosaur or land card");
+
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.LAND),
+                new SubtypePredicate(SubType.DINOSAUR)
+        ));
     }
 
-    public [=$className=](final [=$className=] card) {
+    public CommuneWithDinosaurs(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
+
+        //Look at the top five cards of your library. You may reveal a Dinosaur or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(1), filter, false));
+    }
+
+    public CommuneWithDinosaurs(final CommuneWithDinosaurs card) {
         super(card);
     }
 
     @Override
-    public [=$className=] copy() {
-        return new [=$className=](this);
+    public CommuneWithDinosaurs copy() {
+        return new CommuneWithDinosaurs(this);
     }
 }
