@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +48,7 @@ public class SupplantForm extends CardImpl {
         // Return target creature to its owner's hand. You create a token that's a copy of that creature.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+        Effect effect = new CreateTokenCopyTargetEffect();
         effect.setText("You create a token that's a copy of that creature");
         this.getSpellAbility().addEffect(effect);
     }

@@ -40,15 +40,8 @@ import mage.game.permanent.Permanent;
  */
 public class CantAttackYouEffect extends RestrictionEffect {
 
-    private boolean canAttackYouAnyway = false;
-
     public CantAttackYouEffect(Duration duration) {
-        this(duration, false);
-    }
-
-    public CantAttackYouEffect(Duration duration, boolean canAttackYouAnyway) {
         super(duration);
-        this.canAttackYouAnyway = canAttackYouAnyway;
     }
 
     public CantAttackYouEffect(final CantAttackYouEffect effect) {
@@ -67,11 +60,6 @@ public class CantAttackYouEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
-        for (UUID player : game.getOpponents(source.getId())) {
-            if (attacker.canAttack(player, game)) {
-                return false;
-            }
-        }
-        return !canAttackYouAnyway;
+        return !defenderId.equals(source.getControllerId());
     }
 }

@@ -30,7 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
+import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,7 +52,7 @@ public class Spawnwrithe extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Whenever Spawnwrithe deals combat damage to a player, create a token that's a copy of Spawnwrithe.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new PutTokenOntoBattlefieldCopySourceEffect(), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenCopySourceEffect(), false));
 
     }
 

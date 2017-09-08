@@ -39,7 +39,7 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
@@ -161,7 +161,7 @@ class TheScarabGodEffect2 extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
             controller.moveCards(card, Zone.EXILED, source, game); // Also if the move to exile is replaced, the copy takes place
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, false, 1, false, false, null, 4, 4, false);
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false, 1, false, false, null, 4, 4, false);
             effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
             effect.setOnlySubType("Zombie");
             effect.setOnlyColor(ObjectColor.BLACK);

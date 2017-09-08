@@ -30,7 +30,7 @@ package mage.cards.b;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
+import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -81,7 +81,7 @@ public class BloodforgedBattleAxe extends CardImpl {
 class BloodforgedBattleAxeAbility extends TriggeredAbilityImpl {
 
     public BloodforgedBattleAxeAbility() {
-        super(Zone.BATTLEFIELD, new PutTokenOntoBattlefieldCopySourceEffect());
+        super(Zone.BATTLEFIELD, new CreateTokenCopySourceEffect());
     }
 
     public BloodforgedBattleAxeAbility(final BloodforgedBattleAxeAbility ability) {

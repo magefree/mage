@@ -29,7 +29,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,7 +46,7 @@ public class CacklingCounterpart extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
         // Create a token that's a copy of target creature you control.
-        this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());
+        this.getSpellAbility().addEffect(new CreateTokenCopyTargetEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Flashback {5}{U}{U}

@@ -23,8 +23,11 @@ import mage.players.Player;
  */
 public class ExileAndReturnTransformedSourceEffect extends OneShotEffect {
 
-
     protected Effect additionalEffect;
+
+    public ExileAndReturnTransformedSourceEffect() {
+        this(Gender.NEUTRAL);
+    }
 
     public ExileAndReturnTransformedSourceEffect(Gender gender) {
         this(gender, null);

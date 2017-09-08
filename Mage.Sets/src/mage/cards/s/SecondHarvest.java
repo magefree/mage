@@ -30,7 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -89,7 +89,7 @@ class SecondHarvestEffect extends OneShotEffect {
             filter.add(new TokenPredicate());
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
                 if (permanent != null) {
-                    PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+                    CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                     effect.apply(game, source);
                 }

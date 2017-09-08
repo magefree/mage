@@ -37,7 +37,7 @@ import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -66,7 +66,7 @@ public class JaceCunningCastaway extends CardImpl {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Whenever one or more creatures you control deal combat damage to a player this turn, draw a card, then discard a card.
-        this.addAbility(new LoyaltyAbility(new JaceArchitectOfThouStartEffect1(), 1));
+        this.addAbility(new LoyaltyAbility(new JaceCunningCastawayEffect1(), 1));
 
         // -2: Create a 2/2 blue Illusion creature token with "When this creature becomes the target of a spell, sacrifice it."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new JaceCunningCastawayIllusionToken()), -2));
@@ -85,45 +85,45 @@ public class JaceCunningCastaway extends CardImpl {
     }
 }
 
-class JaceArchitectOfThouStartEffect1 extends OneShotEffect {
+class JaceCunningCastawayEffect1 extends OneShotEffect {
 
-    public JaceArchitectOfThouStartEffect1() {
+    public JaceCunningCastawayEffect1() {
         super(Outcome.DrawCard);
         this.staticText = "Whenever one or more creatures you control deal combat damage to a player this turn, draw a card, then discard a card";
     }
 
-    public JaceArchitectOfThouStartEffect1(final JaceArchitectOfThouStartEffect1 effect) {
+    public JaceCunningCastawayEffect1(final JaceCunningCastawayEffect1 effect) {
         super(effect);
     }
 
     @Override
-    public JaceArchitectOfThouStartEffect1 copy() {
-        return new JaceArchitectOfThouStartEffect1(this);
+    public JaceCunningCastawayEffect1 copy() {
+        return new JaceCunningCastawayEffect1(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DelayedTriggeredAbility delayedAbility = new ThopterSpyNetwoDamageTriggeredAbility();
+        DelayedTriggeredAbility delayedAbility = new JaceCunningCastawayDamageTriggeredAbility();
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }
 }
 
-class ThopterSpyNetwoDamageTriggeredAbility extends DelayedTriggeredAbility {
+class JaceCunningCastawayDamageTriggeredAbility extends DelayedTriggeredAbility {
 
     List<UUID> damagedPlayerIds = new ArrayList<>();
 
-    public ThopterSpyNetwoDamageTriggeredAbility() {
+    public JaceCunningCastawayDamageTriggeredAbility() {
         super(new DrawDiscardControllerEffect(1, 1), Duration.EndOfTurn, false);
     }
 
-    public ThopterSpyNetwoDamageTriggeredAbility(final ThopterSpyNetwoDamageTriggeredAbility ability) {
+    public JaceCunningCastawayDamageTriggeredAbility(final JaceCunningCastawayDamageTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public ThopterSpyNetwoDamageTriggeredAbility copy() {
-        return new ThopterSpyNetwoDamageTriggeredAbility(this);
+    public JaceCunningCastawayDamageTriggeredAbility copy() {
+        return new JaceCunningCastawayDamageTriggeredAbility(this);
     }
 
     @Override
@@ -176,8 +176,8 @@ class JaceCunningCastawayCopyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (permanent != null) {
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, false, 2);
-            effect.setTargetPointer(new FixedTarget(source.getSourceId()));
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false, 2);
+            effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
             effect.setIsntLegendary(true);
             return effect.apply(game, source);
         }

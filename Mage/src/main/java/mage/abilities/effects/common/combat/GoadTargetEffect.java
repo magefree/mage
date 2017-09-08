@@ -33,6 +33,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -63,12 +65,17 @@ public class GoadTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ContinuousEffect effect = new AttacksIfAbleTargetEffect(Duration.UntilYourNextTurn);
-        effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
-        game.addEffect(effect, source);
-        effect = new CantAttackYouEffect(Duration.UntilYourNextTurn, true);
-        effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
-        game.addEffect(effect, source);
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (targetCreature != null && controller != null) {
+            ContinuousEffect effect = new AttacksIfAbleTargetEffect(Duration.UntilYourNextTurn);
+            effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
+            game.addEffect(effect, source);
+            effect = new CantAttackYouEffect(Duration.UntilYourNextTurn);
+            effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
+            game.addEffect(effect, source);
+            game.informPlayers(controller.getLogName() + " is goating " + targetCreature.getLogName());
+        }
         return true;
     }
 }

@@ -25,57 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.k;
+package mage.cards.h;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.BoostSourceWhileControlsEffect;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author TheElk801
  */
-public class KumenasOmenspeaker extends CardImpl {
+public class HuatlisSpurring extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("another Merfolk or Island");
+    private static final FilterPermanent filter = new FilterPermanent("a Jace planeswalker");
 
     static {
-        filter.add(Predicates.or(
-                new SubtypePredicate(SubType.ISLAND),
-                Predicates.and(
-                        new SubtypePredicate(SubType.MERFOLK),
-                        new AnotherPredicate()
-                )
-        ));
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter.add(new SubtypePredicate(SubType.HUATLI));
     }
 
-    public KumenasOmenspeaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
+    public HuatlisSpurring(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
-        this.subtype.add("Merfolk");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Kumena's Omenspeaker gets +1/+1 as long as you control another Merfolk or Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
+        // Target creature gets +2/+0 until end of turn. If you control a Huatli planeswalker, that creature gets +4/+0 until end of turn instead.
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
+                new BoostTargetEffect(4, 0, Duration.EndOfTurn),
+                new BoostTargetEffect(2, 0, Duration.EndOfTurn),
+                new PermanentsOnTheBattlefieldCondition(filter),
+                "Target creature gets +2/+0 until end of turn. If you control a Huatli planeswalker, that creature gets +4/+0 until end of turn instead."));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public KumenasOmenspeaker(final KumenasOmenspeaker card) {
+    public HuatlisSpurring(final HuatlisSpurring card) {
         super(card);
     }
 
     @Override
-    public KumenasOmenspeaker copy() {
-        return new KumenasOmenspeaker(this);
+    public HuatlisSpurring copy() {
+        return new HuatlisSpurring(this);
     }
 }

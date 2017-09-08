@@ -33,7 +33,7 @@ import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -97,7 +97,7 @@ class MirrorMatchEffect extends OneShotEffect {
                 Permanent attacker = game.getPermanent(attackerId);
                 if (attacker != null
                         && source.getControllerId().equals(game.getCombat().getDefendingPlayerId(attackerId, game))) {
-                    PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, false);
+                    CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false);
                     effect.setTargetPointer(new FixedTarget(attacker, game));
                     effect.apply(game, source);
                     CombatGroup group = game.getCombat().findGroup(attacker.getId());

@@ -54,7 +54,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author LevelX2
  */
-public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
+public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     private final UUID playerId;
     private final CardType additionalCardType;
@@ -74,12 +74,12 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     private boolean useLKI = false;
     private boolean isntLegendary = false;
 
-    public PutTokenOntoBattlefieldCopyTargetEffect(boolean useLKI) {
+    public CreateTokenCopyTargetEffect(boolean useLKI) {
         this();
         this.useLKI = useLKI;
     }
 
-    public PutTokenOntoBattlefieldCopyTargetEffect() {
+    public CreateTokenCopyTargetEffect() {
         super(Outcome.PutCreatureInPlay);
         this.playerId = null;
         this.additionalCardType = null;
@@ -95,15 +95,15 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.color = null;
     }
 
-    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId) {
+    public CreateTokenCopyTargetEffect(UUID playerId) {
         this(playerId, null, false);
     }
 
-    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste) {
+    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste) {
         this(playerId, additionalCardType, gainsHaste, 1);
     }
 
-    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number) {
+    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number) {
         this(playerId, additionalCardType, gainsHaste, number, false, false);
     }
 
@@ -117,15 +117,15 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
      * @param tapped
      * @param attacking
      */
-    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking) {
+    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking) {
         this(playerId, additionalCardType, gainsHaste, number, tapped, attacking, null);
     }
 
-    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer) {
+    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer) {
         this(playerId, additionalCardType, gainsHaste, number, tapped, attacking, attackedPlayer, Integer.MIN_VALUE, Integer.MIN_VALUE, false);
     }
 
-    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer, int power, int toughness, boolean gainsFlying) {
+    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer, int power, int toughness, boolean gainsFlying) {
         super(Outcome.PutCreatureInPlay);
         this.playerId = playerId;
         this.additionalCardType = additionalCardType;
@@ -140,7 +140,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.gainsFlying = gainsFlying;
     }
 
-    public PutTokenOntoBattlefieldCopyTargetEffect(final PutTokenOntoBattlefieldCopyTargetEffect effect) {
+    public CreateTokenCopyTargetEffect(final CreateTokenCopyTargetEffect effect) {
         super(effect);
         this.playerId = effect.playerId;
         this.additionalCardType = effect.additionalCardType;
@@ -258,8 +258,8 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     }
 
     @Override
-    public PutTokenOntoBattlefieldCopyTargetEffect copy() {
-        return new PutTokenOntoBattlefieldCopyTargetEffect(this);
+    public CreateTokenCopyTargetEffect copy() {
+        return new CreateTokenCopyTargetEffect(this);
     }
 
     @Override
@@ -267,27 +267,29 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Put ");
+        StringBuilder sb = new StringBuilder("create ");
         if (number == 1) {
-            sb.append("a token");
+            sb.append("a ");
+            if (tapped && !attacking) {
+                sb.append("tapped ");
+            }
+            sb.append("token");
         } else {
-            sb.append(CardUtil.numberToText(number)).append(" tokens");
+            sb.append(number);
+            sb.append(" ");
+            if (tapped && !attacking) {
+                sb.append("tapped ");
+            }
+            sb.append("tokens");
         }
-        sb.append(" onto the battlefield ");
-        if (tapped && !attacking) {
-            sb.append("tapped ");
-        } else if (!tapped && attacking) {
-            sb.append("attacking ");
-        } else if (tapped && attacking) {
-            sb.append("tapped and attacking ");
-        }
-        sb.append("that's a copy of target ");
-        if (mode.getTargets() != null) {
-            sb.append(mode.getTargets().get(0).getTargetName());
+        if (attacking) {
+            sb.append(" that are");
+            if (tapped) {
+                sb.append(" tapped and");
+            }
+            sb.append(" attacking");
         }
         return sb.toString();
-
     }
 
     public List<Permanent> getAddedPermanent() {

@@ -51,7 +51,7 @@ import mage.util.CardUtil;
 public class ElderwoodScion extends CardImpl {
 
     public ElderwoodScion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);
@@ -139,13 +139,13 @@ class ElderwoodScionCostReductionEffect2 extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, -2);
+        CardUtil.increaseCost(spellAbility, 2);
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
+        if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED) {
             if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
                 for (Target target : abilityToModify.getTargets()) {
                     for (UUID targetUUID : target.getTargets()) {

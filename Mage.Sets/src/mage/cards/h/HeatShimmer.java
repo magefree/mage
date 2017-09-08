@@ -34,7 +34,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -90,7 +90,7 @@ class HeatShimmerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (controller != null && permanent != null) {
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
             for (Permanent addedToken : effect.getAddedPermanent()) {

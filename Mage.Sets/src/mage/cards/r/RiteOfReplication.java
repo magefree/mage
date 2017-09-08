@@ -30,7 +30,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -51,8 +51,8 @@ public class RiteOfReplication extends CardImpl {
 
         // Create a token that's a copy of target creature. If Rite of Replication was kicked, create five of those tokens instead.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new PutTokenOntoBattlefieldCopyTargetEffect(null, null, false, 5),
-                new PutTokenOntoBattlefieldCopyTargetEffect(), KickedCondition.instance,
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenCopyTargetEffect(null, null, false, 5),
+                new CreateTokenCopyTargetEffect(), KickedCondition.instance,
                 "Create a token that's a copy of target creature. If {this} was kicked, create five of those tokens instead"));
     }
 

@@ -388,7 +388,7 @@ public class User {
             } else {
                 // Table is missing after connection was lost during sideboard.
                 // Means other players were removed or conceded the game?
-                logger.error("sideboarding id not found : " + entry.getKey());
+                logger.debug(getName() + " reconnects during sideboarding but tableId not found: " + entry.getKey());
             }
         }
         ServerMessagesUtil.instance.incReconnects();
@@ -450,12 +450,14 @@ public class User {
             TournamentManager.instance.quit(tournamentId, userId);
         }
         userTournaments.clear();
+        constructing.clear();
         logger.trace("REMOVE " + userName + " Tables " + tables.size());
         for (Entry<UUID, Table> entry : tables.entrySet()) {
             logger.debug("-- leave tableId: " + entry.getValue().getId());
             TableManager.instance.leaveTable(userId, entry.getValue().getId());
         }
         tables.clear();
+        sideboarding.clear();
         logger.trace("REMOVE " + userName + " Game sessions: " + gameSessions.size());
         for (GameSessionPlayer gameSessionPlayer : gameSessions.values()) {
             logger.debug("-- kill game session of gameId: " + gameSessionPlayer.getGameId());

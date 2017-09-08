@@ -27,9 +27,8 @@
  */
 package mage.cards.o;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,12 +41,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -58,16 +52,9 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class OniPossession extends CardImpl {
 
-    private static final List<String> setSubtypes = new ArrayList<>();
-
-    static {
-        setSubtypes.add("Demon");
-        setSubtypes.add("Spirit");
-    }
-
     public OniPossession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -84,7 +71,7 @@ public class OniPossession extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
         // Enchanted creature is a Demon Spirit.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetCardSubtypeAttachedEffect(setSubtypes, Duration.WhileOnBattlefield, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetCardSubtypeAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA, SubType.DEMON, SubType.SPIRIT)));
     }
 
     public OniPossession(final OniPossession card) {

@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CipherEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -54,7 +54,7 @@ public class StolenIdentity extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
 
         // Create a token that's a copy of target artifact or creature.
-        this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());
+        this.getSpellAbility().addEffect(new CreateTokenCopyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         // Cipher
         this.getSpellAbility().addEffect(new CipherEffect());

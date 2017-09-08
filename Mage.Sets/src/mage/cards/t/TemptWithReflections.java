@@ -33,7 +33,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -88,7 +88,7 @@ class TemptWithReflectionsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+            Effect effect = new CreateTokenCopyTargetEffect();
             effect.setTargetPointer(getTargetPointer());
             effect.apply(game, source);
 
@@ -111,13 +111,13 @@ class TemptWithReflectionsEffect extends OneShotEffect {
             } while (!player.getId().equals(game.getActivePlayerId()));
 
             for (UUID playerId : playersSaidYes) {
-                effect = new PutTokenOntoBattlefieldCopyTargetEffect(playerId);
+                effect = new CreateTokenCopyTargetEffect(playerId);
                 effect.setTargetPointer(getTargetPointer());
                 effect.apply(game, source);
             }
 
             if (!playersSaidYes.isEmpty()) {
-                effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+                effect = new CreateTokenCopyTargetEffect();
                 effect.setTargetPointer(getTargetPointer());
                 effect.apply(game, source);
             }
