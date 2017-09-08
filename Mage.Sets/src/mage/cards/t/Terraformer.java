@@ -145,8 +145,7 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        // TODO fix to use SubType enum
-        String choice = (String) game.getState().getValue(source.getSourceId().toString() + "_Terraformer");
+        SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "_Terraformer"));
         if (choice != null) {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
                 Permanent land = it.next().getPermanent(game);
@@ -161,19 +160,19 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
                         case AbilityAddingRemovingEffects_6:
                             if (sublayer == SubLayer.NA) {
                                 land.getAbilities().clear();
-                                if (choice.equals("Forest")) {
+                                if (choice.equals(SubType.FOREST)) {
                                     land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                                 }
-                                if (choice.equals("Plains")) {
+                                if (choice.equals(SubType.PLAINS)) {
                                     land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                                 }
-                                if (choice.equals("Mountain")) {
+                                if (choice.equals(SubType.MOUNTAIN)) {
                                     land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                                 }
-                                if (choice.equals("Island")) {
+                                if (choice.equals(SubType.ISLAND)) {
                                     land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                                 }
-                                if (choice.equals("Swamp")) {
+                                if (choice.equals(SubType.SWAMP)) {
                                     land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                                 }
                             }

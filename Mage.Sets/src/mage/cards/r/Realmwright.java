@@ -61,7 +61,7 @@ import mage.players.Player;
 public class Realmwright extends CardImpl {
 
     public Realmwright(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
         this.subtype.add(SubType.VEDALKEN);
         this.subtype.add(SubType.WIZARD);
 
@@ -103,10 +103,9 @@ class RealmwrightEffect2 extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        // TODO fix to use SubType enum
         Player you = game.getPlayer(source.getControllerId());
         List<Permanent> lands = game.getBattlefield().getAllActivePermanents(new FilterControlledLandPermanent(), source.getControllerId(), game);
-        String choice = (String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY);
+        SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
         if (you != null && choice != null) {
             for (Permanent land : lands) {
                 if (land != null) {
@@ -119,7 +118,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl {
                         case AbilityAddingRemovingEffects_6:
                             if (sublayer == SubLayer.NA) {
                                 boolean addAbility = true;
-                                if (choice.equals("Forest")) {
+                                if (choice.equals(SubType.FOREST)) {
                                     for (Ability existingAbility : land.getAbilities()) {
                                         if (existingAbility instanceof GreenManaAbility) {
                                             addAbility = false;
@@ -130,7 +129,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl {
                                         land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                                     }
                                 }
-                                if (choice.equals("Plains")) {
+                                if (choice.equals(SubType.PLAINS)) {
                                     for (Ability existingAbility : land.getAbilities()) {
                                         if (existingAbility instanceof WhiteManaAbility) {
                                             addAbility = false;
@@ -141,7 +140,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl {
                                         land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                                     }
                                 }
-                                if (choice.equals("Mountain")) {
+                                if (choice.equals(SubType.MOUNTAIN)) {
                                     for (Ability existingAbility : land.getAbilities()) {
                                         if (existingAbility instanceof RedManaAbility) {
                                             addAbility = false;
@@ -152,7 +151,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl {
                                         land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                                     }
                                 }
-                                if (choice.equals("Island")) {
+                                if (choice.equals(SubType.ISLAND)) {
                                     for (Ability existingAbility : land.getAbilities()) {
                                         if (existingAbility instanceof BlueManaAbility) {
                                             addAbility = false;
@@ -163,7 +162,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl {
                                         land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                                     }
                                 }
-                                if (choice.equals("Swamp")) {
+                                if (choice.equals(SubType.SWAMP)) {
                                     for (Ability existingAbility : land.getAbilities()) {
                                         if (existingAbility instanceof BlackManaAbility) {
                                             addAbility = false;
