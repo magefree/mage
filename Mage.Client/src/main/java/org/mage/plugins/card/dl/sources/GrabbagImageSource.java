@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
 
@@ -415,6 +416,21 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/Yoda, Jedi Master", "6arN1Hl.png");
         singleLinks.put("SWS/Y-Wing", "aQQ5zwA.jpg");
         singleLinks.put("SWS/Zam Wesell", "ToG0C1r.jpg");
+        // Emblems
+        singleLinks.put("SWS/Obi-Wan Kenobi", "Qyc10aT.png");
+        singleLinks.put("SWS/Aurra Sing", "BLWbVJC.png");
+        singleLinks.put("SWS/Yoda", "zH0sYxg.png");
+        // Tokens
+        singleLinks.put("SWS/Ewok", "N2MvJyr.png");
+        singleLinks.put("SWS/B-Wing", "oH62AUD.png");
+        singleLinks.put("SWS/Hunter", "oJiawFA.png");
+        singleLinks.put("SWS/TIE Fighter", "CLOuJ05.png");
+        singleLinks.put("SWS/Trooper", "2XKqdX5.png");
+        singleLinks.put("SWS/AT-AT", "Tv5b7h1.png");
+        singleLinks.put("SWS/Rebel", "pVoShnF.png");
+        singleLinks.put("SWS/Royal Guard", "9tqE8vL.png");
+        singleLinks.put("SWS/Tusken Raider", "gPMiSmP.png");
+        singleLinks.put("SWS/Droid", "4PRrWFF.png");
 
 //        singleLinks.put("MTG/FRF/en/promo/prerelease/AleshaWhoSmilesAtDeath.jpg", "PTC.zip/PTC/Alesha, Who Smiles at Death.full.jpg");
 //        singleLinks.put("MTG/FRF/en/promo/prerelease/Arcbond.jpg", "PTC.zip/PTC/Arcbond.full.jpg");
@@ -1953,6 +1969,11 @@ public enum GrabbagImageSource implements CardImageSource {
 
     @Override
     public String generateTokenUrl(CardDownloadData card) throws IOException {
+        try {
+            return generateURL(card);
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(GrabbagImageSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
@@ -1969,7 +1990,7 @@ public enum GrabbagImageSource implements CardImageSource {
 
     @Override
     public boolean isTokenSource() {
-        return false;
+        return true;
     }
 
     private String getSourceName(CardDownloadData card, String httpImageUrl) {
