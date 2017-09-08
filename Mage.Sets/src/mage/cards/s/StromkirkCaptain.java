@@ -55,8 +55,8 @@ public class StromkirkCaptain extends CardImpl {
 
     public StromkirkCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

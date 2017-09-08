@@ -51,8 +51,8 @@ public class KnightOfTheWhiteOrchid extends CardImpl {
 
     public KnightOfTheWhiteOrchid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.KNIGHT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

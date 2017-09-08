@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
@@ -53,7 +54,7 @@ public class Watchdog extends CardImpl {
 
     public Watchdog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.HOUND);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

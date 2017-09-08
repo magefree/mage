@@ -99,7 +99,7 @@ public class ChainedToTheRocks extends CardImpl {
 
     public ChainedToTheRocks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant Mountain you control
         TargetPermanent auraTarget = new TargetPermanent(filter);

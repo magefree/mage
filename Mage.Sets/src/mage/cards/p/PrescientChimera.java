@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
 /**
@@ -45,7 +46,7 @@ public class PrescientChimera extends CardImpl {
 
     public PrescientChimera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        this.subtype.add("Chimera");
+        this.subtype.add(SubType.CHIMERA);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

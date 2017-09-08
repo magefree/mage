@@ -63,8 +63,8 @@ public class PlagueBelcher extends CardImpl {
     public PlagueBelcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.subtype.add("Zombie");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

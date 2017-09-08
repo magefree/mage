@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -50,7 +51,7 @@ public class CavernLampad extends CardImpl {
 
     public CavernLampad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Nymph");
+        this.subtype.add(SubType.NYMPH);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -65,8 +65,8 @@ public class TimberProtector extends CardImpl {
 
     public TimberProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);

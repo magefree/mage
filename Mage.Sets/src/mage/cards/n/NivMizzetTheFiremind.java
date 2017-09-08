@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -52,8 +53,8 @@ public class NivMizzetTheFiremind extends CardImpl {
     public NivMizzetTheFiremind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dragon");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.DRAGON);
+        this.subtype.add(SubType.WIZARD);
 
 
         this.power = new MageInt(4);

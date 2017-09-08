@@ -36,6 +36,7 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,7 +48,7 @@ public class DreadbringerLampads extends CardImpl {
 
     public DreadbringerLampads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Nymph");
+        this.subtype.add(SubType.NYMPH);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

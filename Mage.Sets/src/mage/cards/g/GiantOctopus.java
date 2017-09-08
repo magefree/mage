@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class GiantOctopus extends CardImpl {
 
     public GiantOctopus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Octopus");
+        this.subtype.add(SubType.OCTOPUS);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -55,8 +55,8 @@ public class ScionOfTheUrDragon extends CardImpl {
     public ScionOfTheUrDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dragon");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.DRAGON);
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

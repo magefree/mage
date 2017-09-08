@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -60,8 +61,8 @@ public class NightshadeAssassin extends CardImpl {
 
     public NightshadeAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Assassin");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

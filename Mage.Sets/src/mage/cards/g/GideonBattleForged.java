@@ -43,6 +43,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
@@ -69,7 +70,7 @@ public class GideonBattleForged extends CardImpl {
     public GideonBattleForged(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Gideon");
+        this.subtype.add(SubType.GIDEON);
 
         this.color.setWhite(true);
 
@@ -117,8 +118,8 @@ class GideonBattleForgedToken extends Token {
     public GideonBattleForgedToken() {
         super("", "4/4 Human Soldier creature with indestructible");
         cardType.add(CardType.CREATURE);
-        subtype.add("Human");
-        subtype.add("Soldier");
+        subtype.add(SubType.HUMAN);
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(4);
         toughness = new MageInt(4);
         this.addAbility(IndestructibleAbility.getInstance());

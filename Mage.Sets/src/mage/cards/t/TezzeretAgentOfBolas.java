@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -67,7 +68,7 @@ public class TezzeretAgentOfBolas extends CardImpl {
     public TezzeretAgentOfBolas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{B}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Tezzeret");
+        this.subtype.add(SubType.TEZZERET);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

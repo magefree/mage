@@ -35,6 +35,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,7 +51,7 @@ public class Hellrider extends CardImpl {
 
     public Hellrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Devil");
+        this.subtype.add(SubType.DEVIL);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

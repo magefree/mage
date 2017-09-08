@@ -35,6 +35,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.RocEggToken;
 
 /**
@@ -47,7 +48,7 @@ public class RocEgg extends CardImpl {
 
     public RocEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.subtype.add("Bird");
+        this.subtype.add(SubType.BIRD);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

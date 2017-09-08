@@ -41,6 +41,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -70,8 +71,8 @@ public class MinionOfLeshrac extends CardImpl {
     public MinionOfLeshrac(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
         
-        this.subtype.add("Demon");
-        this.subtype.add("Minion");
+        this.subtype.add(SubType.DEMON);
+        this.subtype.add(SubType.MINION);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

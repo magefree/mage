@@ -53,7 +53,7 @@ public class SealockMonster extends CardImpl {
 
     public SealockMonster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        this.subtype.add("Octopus");
+        this.subtype.add(SubType.OCTOPUS);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

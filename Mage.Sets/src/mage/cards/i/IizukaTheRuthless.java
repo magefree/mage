@@ -58,8 +58,8 @@ public class IizukaTheRuthless extends CardImpl {
     public IizukaTheRuthless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Samurai");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SAMURAI);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

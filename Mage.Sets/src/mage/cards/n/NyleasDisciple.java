@@ -36,6 +36,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 
 /**
@@ -46,8 +47,8 @@ public class NyleasDisciple extends CardImpl {
 
     public NyleasDisciple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Centaur");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

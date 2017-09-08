@@ -62,8 +62,8 @@ public class ThornbiteStaff extends CardImpl {
 
     public ThornbiteStaff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{2}");
-        this.subtype.add("Shaman");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "{2}, {T}: This creature deals 1 damage to target creature or player" and "Whenever a creature dies, untap this creature."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(2));

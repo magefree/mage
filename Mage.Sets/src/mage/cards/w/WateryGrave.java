@@ -37,6 +37,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class WateryGrave extends CardImpl {
 
     public WateryGrave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.subtype.add("Island");
-        this.subtype.add("Swamp");
+        this.subtype.add(SubType.ISLAND);
+        this.subtype.add(SubType.SWAMP);
         
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());

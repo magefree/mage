@@ -54,7 +54,7 @@ public class FalkenrathAristocrat extends CardImpl {
 
     public FalkenrathAristocrat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);

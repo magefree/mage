@@ -35,6 +35,7 @@ import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -45,7 +46,7 @@ public class IchorclawMyr extends CardImpl {
 
     public IchorclawMyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
-        this.subtype.add("Myr");
+        this.subtype.add(SubType.MYR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

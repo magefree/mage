@@ -36,6 +36,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -47,7 +48,7 @@ public class StonefareCrocodile extends CardImpl {
 
     public StonefareCrocodile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Crocodile");
+        this.subtype.add(SubType.CROCODILE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

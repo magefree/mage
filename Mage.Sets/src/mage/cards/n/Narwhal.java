@@ -35,6 +35,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class Narwhal extends CardImpl {
 
     public Narwhal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.subtype.add("Whale");
+        this.subtype.add(SubType.WHALE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

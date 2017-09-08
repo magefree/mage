@@ -34,6 +34,7 @@ import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -44,8 +45,8 @@ public class PheresBandTromper extends CardImpl {
 
     public PheresBandTromper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Centaur");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

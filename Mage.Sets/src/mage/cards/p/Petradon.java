@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetLandPermanent;
@@ -53,8 +54,8 @@ public class Petradon extends CardImpl {
 
     public Petradon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");
-        this.subtype.add("Nightmare");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.NIGHTMARE);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

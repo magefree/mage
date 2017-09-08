@@ -34,6 +34,7 @@ import mage.abilities.effects.common.continuous.SwitchPowerToughnessSourceEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -44,8 +45,8 @@ public class ValakutFireboar extends CardImpl {
 
     public ValakutFireboar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Boar");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.BOAR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(7);

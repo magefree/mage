@@ -36,6 +36,7 @@ import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,8 +46,8 @@ public class OkibaGangShinobi extends CardImpl {
 
     public OkibaGangShinobi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Rat");
-        this.subtype.add("Ninja");
+        this.subtype.add(SubType.RAT);
+        this.subtype.add(SubType.NINJA);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

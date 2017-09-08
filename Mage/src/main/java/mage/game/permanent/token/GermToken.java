@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author spjspj
@@ -58,7 +59,7 @@ public class GermToken extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Germ");
+        subtype.add(SubType.GERM);
         power = new MageInt(0);
         toughness = new MageInt(0);
     }

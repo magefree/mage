@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -88,7 +89,7 @@ class RiddleformToken extends Token {
         super("", "3/3 Sphinx creature with flying");
         cardType.add(CardType.CREATURE);
 
-        subtype.add("Sphinx");
+        subtype.add(SubType.SPHINX);
         power = new MageInt(3);
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());

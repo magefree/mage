@@ -34,6 +34,7 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,7 +46,7 @@ public class ScarwoodTreefolk extends CardImpl {
 
     public ScarwoodTreefolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Treefolk");
+        this.subtype.add(SubType.TREEFOLK);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

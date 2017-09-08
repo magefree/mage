@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -39,7 +40,7 @@ public class DinOfTheFireherdToken extends Token {
     public DinOfTheFireherdToken() {
         super("Elemental", "5/5 black and red Elemental creature");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         color.setBlack(true);
         color.setRed(true);
         power = new MageInt(5);

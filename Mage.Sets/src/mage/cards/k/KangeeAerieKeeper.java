@@ -68,8 +68,8 @@ public class KangeeAerieKeeper extends CardImpl {
     public KangeeAerieKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Bird");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

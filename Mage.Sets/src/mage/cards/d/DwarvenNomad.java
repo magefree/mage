@@ -36,6 +36,7 @@ import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,8 +57,8 @@ public class DwarvenNomad extends CardImpl {
 
     public DwarvenNomad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Dwarf");
-        this.subtype.add("Nomad");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.NOMAD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -57,7 +57,7 @@ public class GenjuOfTheFens extends CardImpl {
 
     public GenjuOfTheFens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant Swamp
         TargetPermanent auraTarget = new TargetLandPermanent(FILTER);
@@ -90,7 +90,7 @@ public class GenjuOfTheFens extends CardImpl {
             super("Spirit", "2/2 black Spirit creature with \"{B}: This creature gets +1/+1 until end of turn.\"");
             cardType.add(CardType.CREATURE);
             color.setBlack(true);
-            subtype.add("Spirit");
+            subtype.add(SubType.SPIRIT);
             power = new MageInt(2);
             toughness = new MageInt(2);
             addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));

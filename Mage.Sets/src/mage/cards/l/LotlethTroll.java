@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
@@ -53,8 +54,8 @@ public class LotlethTroll extends CardImpl {
 
     public LotlethTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Troll");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.TROLL);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

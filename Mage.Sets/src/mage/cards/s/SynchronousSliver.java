@@ -50,7 +50,7 @@ public class SynchronousSliver extends CardImpl {
 
     public SynchronousSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

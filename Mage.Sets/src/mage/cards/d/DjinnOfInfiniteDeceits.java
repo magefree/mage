@@ -58,7 +58,7 @@ public class DjinnOfInfiniteDeceits extends CardImpl {
 
     public DjinnOfInfiniteDeceits(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
-        this.subtype.add("Djinn");
+        this.subtype.add(SubType.DJINN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(7);

@@ -40,6 +40,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -74,7 +75,7 @@ class StirringWildwoodToken extends Token {
     public StirringWildwoodToken() {
         super("", "3/4 green and white Elemental creature with reach");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         color.setGreen(true);
         color.setWhite(true);
         power = new MageInt(3);

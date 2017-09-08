@@ -50,7 +50,7 @@ public class ShieldsOfVelisVel extends CardImpl {
 
     public ShieldsOfVelisVel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{W}");
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());

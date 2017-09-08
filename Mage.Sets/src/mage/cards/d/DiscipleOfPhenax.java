@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -54,8 +55,8 @@ public class DiscipleOfPhenax extends CardImpl {
 
     public DiscipleOfPhenax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

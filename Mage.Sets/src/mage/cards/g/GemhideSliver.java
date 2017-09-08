@@ -51,7 +51,7 @@ public class GemhideSliver extends CardImpl {
 
     public GemhideSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.continuous.UntapAllDuringEachOtherPlayersUn
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,7 +54,7 @@ public class IvorytuskFortress extends CardImpl {
 
     public IvorytuskFortress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{B}{G}");
-        this.subtype.add("Elephant");
+        this.subtype.add(SubType.ELEPHANT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);

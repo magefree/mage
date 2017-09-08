@@ -53,8 +53,8 @@ public class UgnaughtScrapWorker extends CardImpl {
 
     public UgnaughtScrapWorker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Ugnaught");
-        this.subtype.add("Artificier");
+        this.subtype.add(SubType.UGNAUGHT);
+        this.subtype.add(SubType.ARTIFICIER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

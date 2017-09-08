@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class TalonTrooper extends CardImpl {
 
     public TalonTrooper (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
-        this.subtype.add("Bird");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.SCOUT);
 
 
         this.power = new MageInt(2);

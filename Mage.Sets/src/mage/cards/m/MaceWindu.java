@@ -37,6 +37,7 @@ import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterSpellOrPermanent;
@@ -58,8 +59,8 @@ public class MaceWindu extends CardImpl {
     public MaceWindu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Jedi");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.JEDI);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

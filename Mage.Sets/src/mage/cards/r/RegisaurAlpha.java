@@ -62,7 +62,7 @@ public class RegisaurAlpha extends CardImpl {
     public RegisaurAlpha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
 
-        this.subtype.add("Dinosaur");
+        this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

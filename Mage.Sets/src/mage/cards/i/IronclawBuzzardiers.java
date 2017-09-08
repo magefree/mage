@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -57,8 +58,8 @@ public class IronclawBuzzardiers extends CardImpl {
 
     public IronclawBuzzardiers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Orc");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.ORC);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

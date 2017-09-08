@@ -33,6 +33,7 @@ import mage.abilities.keyword.LandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -43,7 +44,7 @@ public class DryadSophisticate extends CardImpl {
 
     public DryadSophisticate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Dryad");
+        this.subtype.add(SubType.DRYAD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

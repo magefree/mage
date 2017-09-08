@@ -57,7 +57,7 @@ public class UndeadAlchemist extends CardImpl {
 
     public UndeadAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

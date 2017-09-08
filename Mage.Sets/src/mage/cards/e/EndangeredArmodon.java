@@ -33,6 +33,7 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
@@ -53,7 +54,7 @@ public class EndangeredArmodon extends CardImpl {
 
     public EndangeredArmodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Elephant");
+        this.subtype.add(SubType.ELEPHANT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

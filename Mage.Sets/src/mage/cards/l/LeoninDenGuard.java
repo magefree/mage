@@ -38,6 +38,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -52,8 +53,8 @@ public class LeoninDenGuard extends CardImpl {
 
     public LeoninDenGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Cat");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.SOLDIER);
 
         this.color.setWhite(true);
         this.power = new MageInt(1);

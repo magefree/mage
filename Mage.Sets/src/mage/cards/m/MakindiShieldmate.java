@@ -35,6 +35,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -45,9 +46,9 @@ public class MakindiShieldmate extends CardImpl {
 
     public MakindiShieldmate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Soldier");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

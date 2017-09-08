@@ -38,6 +38,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
@@ -50,9 +51,9 @@ public class ChildrenOfKorlis extends CardImpl {
 
     public ChildrenOfKorlis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Rebel");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.REBEL);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

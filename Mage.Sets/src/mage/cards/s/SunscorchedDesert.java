@@ -35,6 +35,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -46,7 +47,7 @@ public class SunscorchedDesert extends CardImpl {
     public SunscorchedDesert(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.subtype.add("Desert");
+        this.subtype.add(SubType.DESERT);
 
         // When Sunscorced Desert enters the battlefield, it deals 1 damage to target player.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1));

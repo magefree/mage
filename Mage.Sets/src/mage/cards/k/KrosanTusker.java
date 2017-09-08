@@ -36,6 +36,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -48,8 +49,8 @@ public class KrosanTusker extends CardImpl {
 
     public KrosanTusker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
-        this.subtype.add("Boar");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BOAR);
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);

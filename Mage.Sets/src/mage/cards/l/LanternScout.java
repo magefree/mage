@@ -53,9 +53,9 @@ public class LanternScout extends CardImpl {
 
     public LanternScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SCOUT);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

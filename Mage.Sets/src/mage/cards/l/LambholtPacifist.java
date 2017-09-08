@@ -41,6 +41,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
@@ -58,9 +59,9 @@ public class LambholtPacifist extends CardImpl {
 
     public LambholtPacifist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

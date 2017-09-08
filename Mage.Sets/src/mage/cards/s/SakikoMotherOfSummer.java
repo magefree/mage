@@ -36,6 +36,7 @@ import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,8 +55,8 @@ public class SakikoMotherOfSummer extends CardImpl {
     public SakikoMotherOfSummer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Snake");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

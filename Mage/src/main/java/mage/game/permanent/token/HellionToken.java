@@ -29,6 +29,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -40,7 +41,7 @@ public class HellionToken extends Token {
         super("Hellion", "4/4 red Hellion creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Hellion");
+        subtype.add(SubType.HELLION);
         power = new MageInt(4);
         toughness = new MageInt(4);
     }

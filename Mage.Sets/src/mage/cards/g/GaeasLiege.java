@@ -71,7 +71,7 @@ public class GaeasLiege extends CardImpl {
     public GaeasLiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
         
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

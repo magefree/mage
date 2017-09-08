@@ -36,6 +36,7 @@ import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,8 +49,8 @@ public class ColdEyedSelkie extends CardImpl {
 
     public ColdEyedSelkie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/U}{G/U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

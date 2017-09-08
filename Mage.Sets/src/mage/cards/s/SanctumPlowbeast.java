@@ -36,6 +36,7 @@ import mage.abilities.keyword.PlainscyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,7 +46,7 @@ public class SanctumPlowbeast extends CardImpl {
 
     public SanctumPlowbeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{W}{U}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
 
 

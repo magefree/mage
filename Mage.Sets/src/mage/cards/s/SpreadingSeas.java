@@ -54,7 +54,7 @@ public class SpreadingSeas extends CardImpl {
     public SpreadingSeas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

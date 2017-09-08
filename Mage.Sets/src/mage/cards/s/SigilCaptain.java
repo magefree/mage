@@ -35,6 +35,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -51,8 +52,8 @@ public class SigilCaptain extends CardImpl {
 
     public SigilCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}{W}");
-        this.subtype.add("Rhino");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.RHINO);
+        this.subtype.add(SubType.SOLDIER);
 
 
 

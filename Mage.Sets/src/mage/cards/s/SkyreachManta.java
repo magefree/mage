@@ -34,6 +34,7 @@ import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class SkyreachManta extends CardImpl {
 
     public SkyreachManta(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
-        this.subtype.add("Fish");
+        this.subtype.add(SubType.FISH);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

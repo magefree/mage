@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,7 +50,7 @@ public class DwarvenVigilantes extends CardImpl {
 
     public DwarvenVigilantes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Dwarf");
+        this.subtype.add(SubType.DWARF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.abilities.keyword.FirstStrikeAbility;
 
 /**
@@ -42,6 +43,6 @@ public class RoyalGuardToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         addAbility(FirstStrikeAbility.getInstance());
-        subtype.add("Soldier");
+        subtype.add(SubType.SOLDIER);
     }
 }

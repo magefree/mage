@@ -7,6 +7,7 @@ import mage.abilities.keyword.EternalizeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 public class ProvenCombatant extends CardImpl {
 
@@ -14,8 +15,8 @@ public class ProvenCombatant extends CardImpl {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{U}");
 
 
-        subtype.add("Human");
-        subtype.add("Warrior");
+        subtype.add(SubType.HUMAN);
+        subtype.add(SubType.WARRIOR);
 
         power = new MageInt(1);
         toughness = new MageInt(1);

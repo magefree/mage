@@ -39,6 +39,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -51,8 +52,8 @@ public class UrsineFylgja extends CardImpl {
 
     public UrsineFylgja(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Bear");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.BEAR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

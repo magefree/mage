@@ -34,6 +34,7 @@ import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class UktabiEfreet extends CardImpl {
 
     public UktabiEfreet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Efreet");
+        this.subtype.add(SubType.EFREET);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

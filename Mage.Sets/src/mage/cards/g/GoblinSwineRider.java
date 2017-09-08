@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 
 /**
@@ -44,7 +45,7 @@ public class GoblinSwineRider extends CardImpl {
 
     public GoblinSwineRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Goblin");
+        this.subtype.add(SubType.GOBLIN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

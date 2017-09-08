@@ -56,7 +56,7 @@ public class HowlpackWolf extends CardImpl {
 
     public HowlpackWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.WOLF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

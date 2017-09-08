@@ -46,8 +46,8 @@ public class SteamFrigate extends CardImpl {
 
     public SteamFrigate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Pirate");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

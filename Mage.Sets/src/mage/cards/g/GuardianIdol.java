@@ -37,6 +37,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -74,7 +75,7 @@ class GuardianIdolGolemToken extends Token {
         super("Golem", "2/2 Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Golem");
+        subtype.add(SubType.GOLEM);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

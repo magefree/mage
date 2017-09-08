@@ -35,6 +35,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,7 +57,7 @@ public class InitiatesCompanion extends CardImpl {
     public InitiatesCompanion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.CAT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

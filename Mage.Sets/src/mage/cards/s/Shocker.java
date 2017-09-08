@@ -36,6 +36,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,7 +49,7 @@ public class Shocker extends CardImpl {
 
     public Shocker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

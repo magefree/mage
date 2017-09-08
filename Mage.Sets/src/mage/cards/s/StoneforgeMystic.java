@@ -60,8 +60,8 @@ public class StoneforgeMystic extends CardImpl {
     public StoneforgeMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
 
-        this.subtype.add("Kor");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

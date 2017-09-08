@@ -39,6 +39,7 @@ import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -50,7 +51,7 @@ public class ChaosImps extends CardImpl {
  
     public ChaosImps(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
-        this.subtype.add("Imp");
+        this.subtype.add(SubType.IMP);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);

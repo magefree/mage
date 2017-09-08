@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -55,8 +56,8 @@ public class SoulScourge extends CardImpl {
 
     public SoulScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Nightmare");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.NIGHTMARE);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

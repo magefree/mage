@@ -43,6 +43,7 @@ import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -54,7 +55,7 @@ public class Chronozoa extends CardImpl {
 
     public Chronozoa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

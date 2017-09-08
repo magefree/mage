@@ -34,6 +34,7 @@ import mage.abilities.keyword.SupportAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class ExpeditionRaptor extends CardImpl {
 
     public ExpeditionRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.subtype.add("Bird");
+        this.subtype.add(SubType.BIRD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

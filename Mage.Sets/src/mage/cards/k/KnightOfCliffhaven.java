@@ -40,6 +40,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -49,8 +50,8 @@ public class KnightOfCliffhaven extends LevelerCard {
 
     public KnightOfCliffhaven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.KNIGHT);
 
         this.color.setWhite(true);
         this.power = new MageInt(2);

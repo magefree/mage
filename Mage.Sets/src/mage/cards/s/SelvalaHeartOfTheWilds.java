@@ -70,8 +70,8 @@ public class SelvalaHeartOfTheWilds extends CardImpl {
     public SelvalaHeartOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

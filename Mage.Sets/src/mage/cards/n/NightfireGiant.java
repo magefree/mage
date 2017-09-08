@@ -59,8 +59,8 @@ public class NightfireGiant extends CardImpl {
 
     public NightfireGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

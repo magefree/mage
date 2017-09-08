@@ -61,8 +61,8 @@ public class ScionOfOona extends CardImpl {
 
     public ScionOfOona(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Faerie");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.FAERIE);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

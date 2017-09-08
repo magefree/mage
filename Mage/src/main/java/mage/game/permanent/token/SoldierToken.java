@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.util.RandomUtil;
 
 /**
@@ -53,7 +54,7 @@ public class SoldierToken extends Token {
 
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Soldier");
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

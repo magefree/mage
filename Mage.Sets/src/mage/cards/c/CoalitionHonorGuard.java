@@ -48,8 +48,8 @@ public class CoalitionHonorGuard extends CardImpl {
     public CoalitionHonorGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Flagbearer");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.FLAGBEARER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

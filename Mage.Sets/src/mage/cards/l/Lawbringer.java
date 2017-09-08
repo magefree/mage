@@ -38,6 +38,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,8 +58,8 @@ public class Lawbringer extends CardImpl {
 
     public Lawbringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Rebel");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.REBEL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -80,7 +80,7 @@ public class PhantasmalImage extends CardImpl {
 
     public PhantasmalImage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.ILLUSION);
 
         this.color.setBlue(true);
         this.power = new MageInt(0);

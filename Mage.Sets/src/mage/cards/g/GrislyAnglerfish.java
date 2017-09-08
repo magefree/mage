@@ -36,6 +36,7 @@ import mage.abilities.effects.RequirementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,8 +50,8 @@ public class GrislyAnglerfish extends CardImpl {
 
     public GrislyAnglerfish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Fish");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.FISH);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

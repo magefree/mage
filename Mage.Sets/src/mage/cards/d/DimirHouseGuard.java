@@ -37,6 +37,7 @@ import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -48,7 +49,7 @@ public class DimirHouseGuard extends CardImpl {
 
     public DimirHouseGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Skeleton");
+        this.subtype.add(SubType.SKELETON);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

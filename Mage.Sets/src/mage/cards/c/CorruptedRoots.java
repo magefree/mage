@@ -59,7 +59,7 @@ public class CorruptedRoots extends CardImpl {
 
     public CorruptedRoots(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant Forest or Plains
         TargetPermanent auraTarget = new TargetPermanent(filter);

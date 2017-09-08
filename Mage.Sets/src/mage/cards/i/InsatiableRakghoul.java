@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
 import mage.counters.CounterType;
@@ -53,8 +54,8 @@ public class InsatiableRakghoul extends CardImpl {
 
     public InsatiableRakghoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.MUTANT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

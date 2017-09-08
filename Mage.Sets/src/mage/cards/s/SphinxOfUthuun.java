@@ -43,6 +43,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -58,7 +59,7 @@ public class SphinxOfUthuun extends CardImpl {
 
     public SphinxOfUthuun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
-        this.subtype.add("Sphinx");
+        this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);

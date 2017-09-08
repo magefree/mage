@@ -50,7 +50,7 @@ public class EvilPresence extends CardImpl {
 
     public EvilPresence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         TargetPermanent auraTarget = new TargetLandPermanent();

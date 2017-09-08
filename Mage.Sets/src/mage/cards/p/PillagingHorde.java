@@ -35,6 +35,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class PillagingHorde extends CardImpl {
 
     public PillagingHorde(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Barbarian");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.BARBARIAN);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

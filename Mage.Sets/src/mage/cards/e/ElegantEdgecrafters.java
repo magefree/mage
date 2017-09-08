@@ -35,6 +35,7 @@ import mage.abilities.keyword.FabricateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,8 +55,8 @@ public class ElegantEdgecrafters extends CardImpl {
 
     public ElegantEdgecrafters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

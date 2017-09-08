@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 
@@ -48,7 +49,7 @@ public class DominatingLicid extends CardImpl {
 
     public DominatingLicid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Licid");
+        this.subtype.add(SubType.LICID);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

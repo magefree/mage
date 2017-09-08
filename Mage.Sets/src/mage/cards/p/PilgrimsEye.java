@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -58,7 +59,7 @@ public class PilgrimsEye extends CardImpl {
 
     public PilgrimsEye (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Thopter");
+        this.subtype.add(SubType.THOPTER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

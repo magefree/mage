@@ -63,7 +63,7 @@ public class SigardaHeronsGrace extends CardImpl {
     public SigardaHeronsGrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

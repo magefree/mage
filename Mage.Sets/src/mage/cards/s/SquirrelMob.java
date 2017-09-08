@@ -53,7 +53,7 @@ public class SquirrelMob extends CardImpl {
 
     public SquirrelMob(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Squirrel");
+        this.subtype.add(SubType.SQUIRREL);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

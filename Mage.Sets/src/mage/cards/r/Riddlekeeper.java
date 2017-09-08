@@ -35,6 +35,7 @@ import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SetTargetPointer;
 import mage.filter.StaticFilters;
 
@@ -47,7 +48,7 @@ public class Riddlekeeper extends CardImpl {
     public Riddlekeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.subtype.add("Homunculus");
+        this.subtype.add(SubType.HOMUNCULUS);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

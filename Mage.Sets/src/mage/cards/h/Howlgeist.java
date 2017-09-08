@@ -35,6 +35,7 @@ import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -45,8 +46,8 @@ public class Howlgeist extends CardImpl {
 
     public Howlgeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.WOLF);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

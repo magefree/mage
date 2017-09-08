@@ -38,6 +38,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -48,7 +49,7 @@ public class ConquerorsGalleon extends CardImpl {
     public ConquerorsGalleon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        this.subtype.add("Vehicle");
+        this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(10);
 

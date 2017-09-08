@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,7 +48,7 @@ public class FarrelsZealot extends CardImpl {
 
     public FarrelsZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        this.subtype.add("Human");
+        this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

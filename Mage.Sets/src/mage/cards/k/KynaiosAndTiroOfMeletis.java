@@ -57,8 +57,8 @@ public class KynaiosAndTiroOfMeletis extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(8);
 

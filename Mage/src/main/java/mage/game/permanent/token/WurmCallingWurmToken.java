@@ -29,6 +29,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author spjspj
@@ -39,7 +40,7 @@ public class WurmCallingWurmToken extends Token {
         super("Wurm", "X/X green Wurm creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Wurm");
+        subtype.add(SubType.WURM);
         power = new MageInt(0);
         toughness = new MageInt(0);
     }

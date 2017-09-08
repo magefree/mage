@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,7 +49,7 @@ public class MijaeDjinn extends CardImpl {
 
     public MijaeDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}{R}");
-        this.subtype.add("Djinn");
+        this.subtype.add(SubType.DJINN);
         this.power = new MageInt(6);
         this.toughness = new MageInt(3);
 

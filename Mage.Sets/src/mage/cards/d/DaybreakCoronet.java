@@ -58,7 +58,7 @@ public class DaybreakCoronet extends CardImpl {
     
     public DaybreakCoronet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant creature with another Aura attached to it

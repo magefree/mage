@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPermanent;
 
 /**
@@ -45,8 +46,8 @@ public class MerfolkSkyscout extends CardImpl {
 
     public MerfolkSkyscout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

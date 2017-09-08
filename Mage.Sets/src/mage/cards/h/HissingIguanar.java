@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -44,7 +45,7 @@ public class HissingIguanar extends CardImpl {
 
     public HissingIguanar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Lizard");
+        this.subtype.add(SubType.LIZARD);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

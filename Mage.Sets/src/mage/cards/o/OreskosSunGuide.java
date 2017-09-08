@@ -34,6 +34,7 @@ import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class OreskosSunGuide extends CardImpl {
 
     public OreskosSunGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Cat");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.MONK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -55,7 +56,7 @@ public class MaraudingMaulhorn extends CardImpl {
 
     public MaraudingMaulhorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);

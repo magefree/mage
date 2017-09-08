@@ -33,6 +33,7 @@ import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class RaidingNightstalker extends CardImpl {
 
     public RaidingNightstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Nightstalker");
+        this.subtype.add(SubType.NIGHTSTALKER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

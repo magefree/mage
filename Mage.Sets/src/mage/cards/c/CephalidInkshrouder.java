@@ -38,6 +38,7 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -50,7 +51,7 @@ public class CephalidInkshrouder extends CardImpl {
     public CephalidInkshrouder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         
-        this.subtype.add("Cephalid");
+        this.subtype.add(SubType.CEPHALID);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

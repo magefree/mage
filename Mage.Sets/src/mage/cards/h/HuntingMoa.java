@@ -36,6 +36,7 @@ import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,8 +48,8 @@ public class HuntingMoa extends CardImpl {
 
     public HuntingMoa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Bird");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

@@ -58,8 +58,8 @@ public class JolraelEmpressOfBeasts extends CardImpl {
     public JolraelEmpressOfBeasts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

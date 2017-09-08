@@ -35,6 +35,7 @@ import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -62,8 +63,8 @@ public class OrzhovAdvokist extends CardImpl {
     public OrzhovAdvokist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Advisor");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

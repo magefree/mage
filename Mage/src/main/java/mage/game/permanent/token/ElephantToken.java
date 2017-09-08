@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -60,7 +61,7 @@ public class ElephantToken extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Elephant");
+        subtype.add(SubType.ELEPHANT);
         power = new MageInt(3);
         toughness = new MageInt(3);
     }

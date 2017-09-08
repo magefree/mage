@@ -45,6 +45,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -60,7 +61,7 @@ public class XathridGorgon extends CardImpl {
 
     public XathridGorgon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
-        this.subtype.add("Gorgon");
+        this.subtype.add(SubType.GORGON);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);

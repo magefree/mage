@@ -51,7 +51,7 @@ public class IslandFishJasconius extends CardImpl {
 
     public IslandFishJasconius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}{U}");
-        this.subtype.add("Fish");
+        this.subtype.add(SubType.FISH);
         this.power = new MageInt(6);
         this.toughness = new MageInt(8);
 

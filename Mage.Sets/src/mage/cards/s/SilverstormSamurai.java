@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class SilverstormSamurai extends CardImpl {
 
     public SilverstormSamurai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
-        this.subtype.add("Fox");
-        this.subtype.add("Samurai");
+        this.subtype.add(SubType.FOX);
+        this.subtype.add(SubType.SAMURAI);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -55,7 +56,7 @@ public class ThiefOfBlood extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

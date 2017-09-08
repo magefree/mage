@@ -39,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -54,8 +55,8 @@ public class SultaiSoothsayer extends CardImpl {
 
     public SultaiSoothsayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}{U}");
-        this.subtype.add("Naga");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);

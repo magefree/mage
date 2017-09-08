@@ -37,6 +37,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.Wurm1Token;
 import mage.game.permanent.token.Wurm2Token;
 
@@ -48,7 +49,7 @@ public class WurmcoilEngine extends CardImpl {
 
     public WurmcoilEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.subtype.add("Wurm");
+        this.subtype.add(SubType.WURM);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

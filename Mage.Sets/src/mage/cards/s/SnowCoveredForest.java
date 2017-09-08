@@ -32,6 +32,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -44,7 +45,7 @@ public class SnowCoveredForest extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.addSuperType(SuperType.BASIC);
         this.addSuperType(SuperType.SNOW);
-        this.subtype.add("Forest");
+        this.subtype.add(SubType.FOREST);
 
         // G
         this.addAbility(new GreenManaAbility());

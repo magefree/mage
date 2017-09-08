@@ -34,6 +34,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -44,7 +45,7 @@ public class KilnWalker extends CardImpl {
 
     public KilnWalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.CONSTRUCT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

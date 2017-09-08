@@ -39,6 +39,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 
@@ -50,8 +51,8 @@ public class Phytotitan extends CardImpl {
 
     public Phytotitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.PLANT);
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(2);

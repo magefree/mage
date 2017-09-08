@@ -58,8 +58,8 @@ public class SlayerOfTheWicked extends CardImpl {
 
     public SlayerOfTheWicked(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

@@ -33,6 +33,7 @@ import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class WillowDryad extends CardImpl {
 
     public WillowDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Dryad");
+        this.subtype.add(SubType.DRYAD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

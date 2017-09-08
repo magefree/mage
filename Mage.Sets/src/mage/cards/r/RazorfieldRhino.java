@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -49,7 +50,7 @@ public class RazorfieldRhino extends CardImpl {
 
     public RazorfieldRhino (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
-        this.subtype.add("Rhino");
+        this.subtype.add(SubType.RHINO);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         ContinuousEffect effect1 = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
@@ -49,8 +50,8 @@ public class KjeldoranFrostbeast extends CardImpl {
     public KjeldoranFrostbeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
 
-        this.subtype.add("Elemental");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

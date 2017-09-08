@@ -52,7 +52,7 @@ public class DjinnIlluminatus extends CardImpl {
 
     public DjinnIlluminatus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U/R}{U/R}");
-        this.subtype.add("Djinn");
+        this.subtype.add(SubType.DJINN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

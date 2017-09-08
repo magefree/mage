@@ -36,6 +36,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,8 +46,8 @@ public class DeepcavernImp extends CardImpl {
 
     public DeepcavernImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Imp");
-        this.subtype.add("Rebel");
+        this.subtype.add(SubType.IMP);
+        this.subtype.add(SubType.REBEL);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

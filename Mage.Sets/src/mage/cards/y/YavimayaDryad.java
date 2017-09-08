@@ -61,7 +61,7 @@ public class YavimayaDryad extends CardImpl {
 
     public YavimayaDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Dryad");
+        this.subtype.add(SubType.DRYAD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

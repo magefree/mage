@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -51,7 +52,7 @@ public class RustmouthOgre extends CardImpl {
 
     public RustmouthOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
-        this.subtype.add("Ogre");
+        this.subtype.add(SubType.OGRE);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

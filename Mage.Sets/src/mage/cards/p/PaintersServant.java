@@ -40,6 +40,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -60,7 +61,7 @@ public class PaintersServant extends CardImpl {
 
     public PaintersServant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.subtype.add("Scarecrow");
+        this.subtype.add(SubType.SCARECROW);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

@@ -62,7 +62,7 @@ public class ConstrictingSliver extends CardImpl {
 
     public ConstrictingSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

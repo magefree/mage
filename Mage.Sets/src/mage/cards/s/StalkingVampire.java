@@ -34,6 +34,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author nantuko
@@ -42,7 +43,7 @@ public class StalkingVampire extends CardImpl {
 
     public StalkingVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
         this.color.setBlack(true);
 
         this.nightCard = true;

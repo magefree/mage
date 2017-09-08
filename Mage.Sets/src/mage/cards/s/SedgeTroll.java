@@ -56,7 +56,7 @@ public class SedgeTroll extends CardImpl {
 
     public SedgeTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Troll");
+        this.subtype.add(SubType.TROLL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

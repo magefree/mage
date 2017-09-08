@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -57,7 +58,7 @@ public class WorldheartPhoenix extends CardImpl {
 
     public WorldheartPhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Phoenix");
+        this.subtype.add(SubType.PHOENIX);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.i.InsidiousMist;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -49,8 +50,8 @@ public class ElusiveTormentor extends CardImpl {
 
     public ElusiveTormentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

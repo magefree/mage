@@ -46,8 +46,8 @@ public class KorCartographer extends CardImpl {
 
     public KorCartographer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

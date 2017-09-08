@@ -40,6 +40,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.game.command.emblems.ObiWanKenobiEmblem;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,7 +53,7 @@ public class ObiWanKenobi extends CardImpl {
 
     public ObiWanKenobi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
-        this.subtype.add("Obi-Wan");
+        this.subtype.add(SubType.OBI_WAN);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 

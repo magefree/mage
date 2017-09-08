@@ -63,7 +63,7 @@ public class SolitaryCamel extends CardImpl {
     public SolitaryCamel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.subtype.add("Camel");
+        this.subtype.add(SubType.CAMEL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

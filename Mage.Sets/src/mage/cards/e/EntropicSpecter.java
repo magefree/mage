@@ -53,8 +53,8 @@ public class EntropicSpecter extends CardImpl {
 
     public EntropicSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Specter");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPECTER);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

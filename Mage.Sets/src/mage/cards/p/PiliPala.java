@@ -37,6 +37,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,7 +47,7 @@ public class PiliPala extends CardImpl {
 
     public PiliPala(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
-        this.subtype.add("Scarecrow");
+        this.subtype.add(SubType.SCARECROW);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

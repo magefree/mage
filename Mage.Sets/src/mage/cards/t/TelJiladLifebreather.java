@@ -58,8 +58,8 @@ public class TelJiladLifebreather extends CardImpl {
     }
     public TelJiladLifebreather(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Troll");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.TROLL);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

@@ -39,6 +39,7 @@ import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -50,8 +51,8 @@ public class KithkinSpellduster extends CardImpl {
 
     public KithkinSpellduster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.KITHKIN);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

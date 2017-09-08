@@ -52,8 +52,8 @@ public class MaralenOfTheMornsong extends CardImpl {
     public MaralenOfTheMornsong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elf");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

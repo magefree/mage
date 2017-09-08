@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.SuperType;
@@ -41,8 +42,8 @@ public class UramiToken extends Token {
     public UramiToken() {
         super("Urami", "legendary 5/5 black Demon Spirit creature token with flying named Urami");
         cardType.add(CardType.CREATURE);
-        subtype.add("Demon");
-        subtype.add("Spirit");
+        subtype.add(SubType.DEMON);
+        subtype.add(SubType.SPIRIT);
         addSuperType(SuperType.LEGENDARY);
 
         color.setBlack(true);

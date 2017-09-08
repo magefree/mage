@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 import java.util.Collections;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class EwokToken extends Token {
         availableImageSetCodes.addAll(Collections.singletonList("SWS"));
 
         cardType.add(CardType.CREATURE);
-        subtype.add("Ewok");
+        subtype.add(SubType.EWOK);
         color.setGreen(true);
     }
 }

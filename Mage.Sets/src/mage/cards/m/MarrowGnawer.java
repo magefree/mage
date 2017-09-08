@@ -68,8 +68,8 @@ public class MarrowGnawer extends CardImpl {
     public MarrowGnawer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Rat");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.RAT);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

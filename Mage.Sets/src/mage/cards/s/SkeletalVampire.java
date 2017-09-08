@@ -61,8 +61,8 @@ public class SkeletalVampire extends CardImpl {
 
     public SkeletalVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Skeleton");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.SKELETON);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -38,6 +38,7 @@ import mage.cards.*;
 import mage.choices.Choice;
 import mage.choices.ChoiceCreatureType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -53,7 +54,7 @@ public class RiptideShapeshifter extends CardImpl {
 
     public RiptideShapeshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

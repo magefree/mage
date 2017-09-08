@@ -29,6 +29,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
@@ -43,7 +44,7 @@ public class AssassinToken extends Token {
         super("Assassin", "1/1 black Assassin creature tokens with \"Whenever this creature deals combat damage to a player, that player loses the game.\"");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Assassin");
+        subtype.add(SubType.ASSASSIN);
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseGameTargetPlayerEffect(), false, true));

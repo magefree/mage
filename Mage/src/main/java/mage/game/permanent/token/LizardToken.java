@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class LizardToken extends Token {
         super("Lizard", "2/2 green Lizard creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Lizard");
+        subtype.add(SubType.LIZARD);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

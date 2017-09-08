@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CopySpellForEachItCouldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterInPlay;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,7 +56,7 @@ public class InkTreaderNephilim extends CardImpl {
 
     public InkTreaderNephilim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}{U}");
-        this.subtype.add("Nephilim");
+        this.subtype.add(SubType.NEPHILIM);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

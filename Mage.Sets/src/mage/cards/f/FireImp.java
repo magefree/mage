@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,7 +47,7 @@ public class FireImp extends CardImpl {
 
     public FireImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Imp");
+        this.subtype.add(SubType.IMP);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

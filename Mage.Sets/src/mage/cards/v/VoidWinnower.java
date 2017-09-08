@@ -37,6 +37,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -54,7 +55,7 @@ public class VoidWinnower extends CardImpl {
 
     public VoidWinnower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
 
         this.power = new MageInt(11);
         this.toughness = new MageInt(9);

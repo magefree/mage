@@ -66,8 +66,8 @@ public class JayaBallardTaskMage extends CardImpl {
     public JayaBallardTaskMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SPELLSHAPER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

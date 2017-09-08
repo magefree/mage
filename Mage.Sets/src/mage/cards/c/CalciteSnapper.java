@@ -35,6 +35,7 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -45,7 +46,7 @@ public class CalciteSnapper extends CardImpl {
 
     public CalciteSnapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Turtle");
+        this.subtype.add(SubType.TURTLE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);

@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -44,7 +45,7 @@ public class KalitasVampireToken extends Token {
         super("Vampire", new StringBuilder(tokenPower).append('/').append(tokenToughness).append(" black Vampire creature token").toString());
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Vampire");
+        subtype.add(SubType.VAMPIRE);
         power = new MageInt(tokenPower);
         toughness = new MageInt(tokenToughness);
     }

@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.FlankingAbility;
@@ -44,7 +45,7 @@ public class RiftmarkedKnightToken extends Token {
         super("Knight", "2/2 black Knight creature token with flanking, protection from white, and haste");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Knight");
+        subtype.add(SubType.KNIGHT);
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));

@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -48,8 +49,8 @@ public class KessigDireSwine extends CardImpl {
 
     public KessigDireSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Boar");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.BOAR);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

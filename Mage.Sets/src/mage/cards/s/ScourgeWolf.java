@@ -38,6 +38,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -49,8 +50,8 @@ public class ScourgeWolf extends CardImpl {
 
     public ScourgeWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");
-        this.subtype.add("Wolf");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.WOLF);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

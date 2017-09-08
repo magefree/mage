@@ -36,6 +36,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class FetidPools extends CardImpl {
     public FetidPools(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.subtype.add("Island");
-        this.subtype.add("Swamp");
+        this.subtype.add(SubType.ISLAND);
+        this.subtype.add(SubType.SWAMP);
 
         // <i>({T}: Add {U} or {B} to your mana pool.)</i>
         this.addAbility(new BlueManaAbility());

@@ -43,6 +43,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -62,7 +63,7 @@ public class GideonChampionOfJustice extends CardImpl {
     public GideonChampionOfJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Gideon");
+        this.subtype.add(SubType.GIDEON);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
@@ -126,8 +127,8 @@ class GideonChampionOfJusticeToken extends Token {
     public GideonChampionOfJusticeToken() {
         super("", "indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him");
         cardType.add(CardType.CREATURE);
-        subtype.add("Human");
-        subtype.add("Soldier");
+        subtype.add(SubType.HUMAN);
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(0);
         toughness = new MageInt(0);
 

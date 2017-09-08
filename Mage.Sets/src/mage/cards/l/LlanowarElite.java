@@ -39,6 +39,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -49,7 +50,7 @@ public class LlanowarElite extends CardImpl {
 
     public LlanowarElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ELF);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

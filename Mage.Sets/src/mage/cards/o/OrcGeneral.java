@@ -65,8 +65,8 @@ public class OrcGeneral extends CardImpl {
 
     public OrcGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Orc");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ORC);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -38,6 +38,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -48,7 +49,7 @@ public class KrallenhordeWantons extends CardImpl {
 
     public KrallenhordeWantons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.WEREWOLF);
         this.color.setGreen(true);
 
         // this card is the second face of double-faced card

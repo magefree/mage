@@ -55,8 +55,8 @@ public class MaraudingKnight extends CardImpl {
 
     public MaraudingKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

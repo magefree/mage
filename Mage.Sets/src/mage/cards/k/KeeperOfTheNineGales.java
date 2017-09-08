@@ -62,8 +62,8 @@ public class KeeperOfTheNineGales extends CardImpl {
 
     public KeeperOfTheNineGales(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Bird");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

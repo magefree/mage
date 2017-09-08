@@ -53,7 +53,7 @@ public class RazorBoomerang extends CardImpl {
 
     public RazorBoomerang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "{tap}, Unattach Razor Boomerang: Razor Boomerang deals 1 damage to target creature or player. Return Razor Boomerang to its owner's hand."
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RazorBoomerangEffect(this.getId()), new TapSourceCost());

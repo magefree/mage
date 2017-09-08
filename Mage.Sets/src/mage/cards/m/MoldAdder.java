@@ -35,6 +35,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -55,8 +56,8 @@ public class MoldAdder extends CardImpl {
 
     public MoldAdder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Fungus");
-        this.subtype.add("Snake");
+        this.subtype.add(SubType.FUNGUS);
+        this.subtype.add(SubType.SNAKE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

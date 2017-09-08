@@ -37,6 +37,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 
@@ -49,8 +50,8 @@ public class DreadWanderer extends CardImpl {
     public DreadWanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
 
-        this.subtype.add("Zombie");
-        this.subtype.add("Jackal");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.JACKAL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -39,6 +39,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
@@ -58,8 +59,8 @@ public class SmolderingMarsh extends CardImpl {
 
     public SmolderingMarsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Swamp");
-        this.subtype.add("Mountain");
+        this.subtype.add(SubType.SWAMP);
+        this.subtype.add(SubType.MOUNTAIN);
 
         // Smoldering Marsh enters the battlefield tapped unless you control two or more basic lands.
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1));

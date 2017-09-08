@@ -65,8 +65,8 @@ public class OgreSlumlord extends CardImpl {
     
     public OgreSlumlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.ROGUE);
 
 
         this.power = new MageInt(3);

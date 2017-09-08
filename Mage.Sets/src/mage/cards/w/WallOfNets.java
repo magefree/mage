@@ -37,6 +37,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
@@ -49,7 +50,7 @@ public class WallOfNets extends CardImpl {
 
     public WallOfNets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        this.subtype.add("Wall");
+        this.subtype.add(SubType.WALL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(7);
 

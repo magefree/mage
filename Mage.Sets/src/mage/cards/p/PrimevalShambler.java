@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -47,8 +48,8 @@ public class PrimevalShambler extends CardImpl {
 
     public PrimevalShambler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Horror");
-        this.subtype.add("Mercenary");
+        this.subtype.add(SubType.HORROR);
+        this.subtype.add(SubType.MERCENARY);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

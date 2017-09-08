@@ -36,6 +36,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,8 +46,8 @@ public class StompingGround extends CardImpl {
 
     public StompingGround(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.subtype.add("Mountain");
-        this.subtype.add("Forest");
+        this.subtype.add(SubType.MOUNTAIN);
+        this.subtype.add(SubType.FOREST);
 
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());

@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,8 +62,8 @@ public class JediSentinel extends CardImpl {
 
     public JediSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}{W}");
-        this.subtype.add("Twi'lek");
-        this.subtype.add("Jedi");
+        this.subtype.add(SubType.TWILEK);
+        this.subtype.add(SubType.JEDI);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

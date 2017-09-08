@@ -34,6 +34,7 @@ import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -44,7 +45,7 @@ public class Scorchwalker extends CardImpl {
 
     public Scorchwalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);

@@ -39,6 +39,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -52,8 +53,8 @@ public class DivinityOfPride extends CardImpl {
 
     public DivinityOfPride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/B}{W/B}{W/B}{W/B}{W/B}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

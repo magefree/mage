@@ -63,7 +63,7 @@ public class MtendaGriffin extends CardImpl {
 
     public MtendaGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Griffin");
+        this.subtype.add(SubType.GRIFFIN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -56,7 +56,7 @@ public class FlowOfMaggots extends CardImpl {
 
     public FlowOfMaggots(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

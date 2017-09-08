@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -48,8 +49,8 @@ public class GoldmeadowHarrierToken extends Token {
         this.setOriginalExpansionSetCode("FUT");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Kithkin");
-        subtype.add("Soldier");
+        subtype.add(SubType.KITHKIN);
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

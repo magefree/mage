@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,7 +49,7 @@ public class PhyrexianInfiltrator extends CardImpl {
 
     public PhyrexianInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Minion");
+        this.subtype.add(SubType.MINION);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

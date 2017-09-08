@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.IslandwalkAbility;
 
@@ -42,7 +43,7 @@ public class CoralBarrierSquidToken extends Token {
         this.setOriginalExpansionSetCode("M15");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Squid");
+        subtype.add(SubType.SQUID);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

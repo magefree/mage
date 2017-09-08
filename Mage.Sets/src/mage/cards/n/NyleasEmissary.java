@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -50,7 +51,7 @@ public class NyleasEmissary extends CardImpl {
 
     public NyleasEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.CAT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

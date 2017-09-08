@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -45,7 +46,7 @@ public class ReignOfThePitToken extends Token {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
         color.setBlack(true);
-        subtype.add("Demon");
+        subtype.add(SubType.DEMON);
         cardType.add(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());
     }

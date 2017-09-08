@@ -36,6 +36,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
@@ -48,7 +49,7 @@ public class ViridianHarvest extends CardImpl {
 
     public ViridianHarvest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         TargetPermanent auraTarget = new TargetArtifactPermanent();

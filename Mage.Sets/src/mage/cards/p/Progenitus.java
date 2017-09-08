@@ -36,6 +36,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -49,8 +50,8 @@ public class Progenitus extends CardImpl {
     public Progenitus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Hydra");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.HYDRA);
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);

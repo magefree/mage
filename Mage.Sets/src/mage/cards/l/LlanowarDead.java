@@ -33,6 +33,7 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class LlanowarDead extends CardImpl {
 
     public LlanowarDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.ELF);
 
 
         this.power = new MageInt(2);

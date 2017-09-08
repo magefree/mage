@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -59,7 +60,7 @@ public class BeastToken2 extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Beast");
+        subtype.add(SubType.BEAST);
         power = new MageInt(4);
         toughness = new MageInt(4);
     }

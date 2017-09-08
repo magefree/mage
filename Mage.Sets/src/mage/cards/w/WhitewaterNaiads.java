@@ -35,6 +35,7 @@ import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,7 +47,7 @@ public class WhitewaterNaiads extends CardImpl {
 
     public WhitewaterNaiads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{U}{U}");
-        this.subtype.add("Nymph");
+        this.subtype.add(SubType.NYMPH);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

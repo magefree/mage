@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.h.HowlingChorus;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -49,8 +50,8 @@ public class ShrillHowler extends CardImpl {
 
     public ShrillHowler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Werewolf");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.WEREWOLF);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

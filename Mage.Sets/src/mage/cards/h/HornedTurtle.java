@@ -33,6 +33,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author Loki
@@ -42,7 +43,7 @@ public class HornedTurtle extends CardImpl {
     public HornedTurtle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
 
-        this.subtype.add("Turtle");
+        this.subtype.add(SubType.TURTLE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
     }

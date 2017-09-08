@@ -55,7 +55,7 @@ public class PhenaxGodOfDeception extends CardImpl {
     public PhenaxGodOfDeception(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("God");
+        this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);

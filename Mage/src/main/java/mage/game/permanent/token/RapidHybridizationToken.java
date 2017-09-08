@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -43,8 +44,8 @@ public class RapidHybridizationToken extends Token {
 
         color.setGreen(true);
 
-        subtype.add("Frog");
-        subtype.add("Lizard");
+        subtype.add(SubType.FROG);
+        subtype.add(SubType.LIZARD);
 
         power = new MageInt(3);
         toughness = new MageInt(3);

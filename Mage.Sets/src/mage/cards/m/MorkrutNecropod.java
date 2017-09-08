@@ -35,6 +35,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,8 +58,8 @@ public class MorkrutNecropod extends CardImpl {
 
     public MorkrutNecropod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
-        this.subtype.add("Slug");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.SLUG);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

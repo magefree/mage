@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
@@ -69,7 +70,7 @@ public class JadeStatue extends CardImpl {
             super("", "3/6 Golem artifact creature");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
-            this.subtype.add("Golem");
+            this.subtype.add(SubType.GOLEM);
             power = new MageInt(3);
             toughness = new MageInt(6);
 	}

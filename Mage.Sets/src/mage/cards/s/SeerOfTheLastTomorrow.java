@@ -38,6 +38,7 @@ import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
@@ -50,8 +51,8 @@ public class SeerOfTheLastTomorrow extends CardImpl {
     public SeerOfTheLastTomorrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.subtype.add("Naga");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

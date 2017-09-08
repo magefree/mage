@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class CyclopsOfOneEyedPass extends CardImpl {
 
     public CyclopsOfOneEyedPass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Cyclops");
+        this.subtype.add(SubType.CYCLOPS);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);

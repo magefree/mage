@@ -38,6 +38,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.GoldmeadowHarrierToken;
 
@@ -49,8 +50,8 @@ public class GoldmeadowLookout extends CardImpl {
 
     public GoldmeadowLookout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.KITHKIN);
+        this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

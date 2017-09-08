@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class TrainedArmodon extends CardImpl {
 
     public TrainedArmodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Elephant");
+        this.subtype.add(SubType.ELEPHANT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

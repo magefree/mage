@@ -66,7 +66,7 @@ public class WardenOfTheFirstTree extends CardImpl {
 
     public WardenOfTheFirstTree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Human");
+        this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -112,8 +112,8 @@ class WardenOfTheFirstTree1 extends Token {
     public WardenOfTheFirstTree1() {
         super("Warden of the First Tree", "Human Warrior with base power and toughness 3/3");
         this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -125,9 +125,9 @@ class WardenOfTheFirstTree2 extends Token {
     public WardenOfTheFirstTree2() {
         super("Warden of the First Tree", "Human Spirit Warrior with trample and lifelink");
         this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Human");
-        this.subtype.add("Spirit");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

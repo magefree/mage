@@ -59,7 +59,7 @@ public class DevoutHarpist extends CardImpl {
     }
     public DevoutHarpist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Human");
+        this.subtype.add(SubType.HUMAN);
 
         this.color.setWhite(true);
         this.power = new MageInt(1);

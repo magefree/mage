@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class LongFinnedSkywhale extends CardImpl {
 
     public LongFinnedSkywhale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.subtype.add("Whale");
+        this.subtype.add(SubType.WHALE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

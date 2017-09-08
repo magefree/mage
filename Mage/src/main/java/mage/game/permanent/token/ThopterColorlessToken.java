@@ -33,6 +33,7 @@ import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.util.RandomUtil;
 
 /**
@@ -52,7 +53,7 @@ public class ThopterColorlessToken extends Token {
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Thopter");
+        subtype.add(SubType.THOPTER);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

@@ -36,6 +36,7 @@ import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,8 +46,8 @@ public class MonCalamariInitiate extends CardImpl {
 
     public MonCalamariInitiate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.subtype.add("Calamari");
-        this.subtype.add("Jedi");
+        this.subtype.add(SubType.CALAMARI);
+        this.subtype.add(SubType.JEDI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

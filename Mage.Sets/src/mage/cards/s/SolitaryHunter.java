@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.o.OneOfThePack;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -49,9 +50,9 @@ public class SolitaryHunter extends CardImpl {
 
     public SolitaryHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.WEREWOLF);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

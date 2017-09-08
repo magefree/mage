@@ -40,6 +40,7 @@ import mage.abilities.keyword.DredgeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -57,8 +58,8 @@ public class GolgariGraveTroll extends CardImpl {
 
     public GolgariGraveTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Troll");
-        this.subtype.add("Skeleton");
+        this.subtype.add(SubType.TROLL);
+        this.subtype.add(SubType.SKELETON);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

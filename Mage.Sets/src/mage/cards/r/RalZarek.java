@@ -39,6 +39,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
@@ -65,7 +66,7 @@ public class RalZarek extends CardImpl {
     public RalZarek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{R}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Ral");
+        this.subtype.add(SubType.RAL);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 

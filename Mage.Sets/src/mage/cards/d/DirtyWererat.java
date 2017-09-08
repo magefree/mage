@@ -45,6 +45,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -56,9 +57,9 @@ public class DirtyWererat extends CardImpl {
 
     public DirtyWererat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rat");
-        this.subtype.add("Minion");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.RAT);
+        this.subtype.add(SubType.MINION);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

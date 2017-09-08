@@ -51,7 +51,7 @@ public class MerchantShip extends CardImpl {
 
     public MerchantShip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
-        this.subtype.add("Human");
+        this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

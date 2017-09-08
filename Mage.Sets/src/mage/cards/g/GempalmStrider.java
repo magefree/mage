@@ -55,7 +55,7 @@ public class GempalmStrider extends CardImpl {
 
     public GempalmStrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ELF);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

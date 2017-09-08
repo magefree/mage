@@ -42,6 +42,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -70,8 +71,8 @@ public class JabbaTheHutt extends CardImpl {
     public JabbaTheHutt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Hutt");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.HUTT);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

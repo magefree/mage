@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -51,7 +52,7 @@ public class GnarledScarhide extends CardImpl {
 
     public GnarledScarhide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{B}");
-        this.subtype.add("Minotaur");
+        this.subtype.add(SubType.MINOTAUR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -43,7 +44,7 @@ public class HornetNestInsectToken extends Token {
         setOriginalExpansionSetCode("M15");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Insect");
+        subtype.add(SubType.INSECT);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

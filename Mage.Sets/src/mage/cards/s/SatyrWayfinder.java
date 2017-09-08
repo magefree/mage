@@ -39,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
@@ -54,7 +55,7 @@ public class SatyrWayfinder extends CardImpl {
 
     public SatyrWayfinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.subtype.add("Satyr");
+        this.subtype.add(SubType.SATYR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

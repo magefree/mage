@@ -38,6 +38,7 @@ import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,9 +55,9 @@ public class PutridWarrior extends CardImpl {
 
     public PutridWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Soldier");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

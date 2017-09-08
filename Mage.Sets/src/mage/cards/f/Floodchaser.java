@@ -57,7 +57,7 @@ public class Floodchaser extends CardImpl {
 
     public Floodchaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -42,6 +42,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -58,8 +59,8 @@ public class LaquatussChampion extends CardImpl {
 
     public LaquatussChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        this.subtype.add("Nightmare");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.NIGHTMARE);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(3);

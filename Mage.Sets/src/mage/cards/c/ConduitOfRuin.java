@@ -39,6 +39,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -70,7 +71,7 @@ public class ConduitOfRuin extends CardImpl {
 
     public ConduitOfRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

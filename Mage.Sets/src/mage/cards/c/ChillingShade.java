@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -49,7 +50,7 @@ public class ChillingShade extends CardImpl {
     public ChillingShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         addSuperType(SuperType.SNOW);
-        this.subtype.add("Shade");
+        this.subtype.add(SubType.SHADE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

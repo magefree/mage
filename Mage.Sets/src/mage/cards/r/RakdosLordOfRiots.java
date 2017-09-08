@@ -56,7 +56,7 @@ public class RakdosLordOfRiots extends CardImpl {
     public RakdosLordOfRiots(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -46,9 +47,9 @@ public class KazanduBlademaster extends CardImpl {
 
     public KazanduBlademaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

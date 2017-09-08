@@ -39,6 +39,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -49,7 +50,7 @@ public class MoonriseIntruder extends CardImpl {
 
     public MoonriseIntruder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.color.setRed(true);

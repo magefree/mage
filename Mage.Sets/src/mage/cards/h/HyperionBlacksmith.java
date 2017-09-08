@@ -36,6 +36,7 @@ import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
@@ -56,8 +57,8 @@ public class HyperionBlacksmith extends CardImpl {
 
     public HyperionBlacksmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

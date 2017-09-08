@@ -40,6 +40,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.game.command.emblems.GideonAllyOfZendikarEmblem;
@@ -55,7 +56,7 @@ public class GideonAllyOfZendikar extends CardImpl {
     public GideonAllyOfZendikar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Gideon");
+        this.subtype.add(SubType.GIDEON);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
@@ -88,9 +89,9 @@ class GideonAllyOfZendikarToken extends Token {
     public GideonAllyOfZendikarToken() {
         super("", "5/5 Human Soldier Ally creature with indestructible");
         cardType.add(CardType.CREATURE);
-        subtype.add("Human");
-        subtype.add("Soldier");
-        subtype.add("Ally");
+        subtype.add(SubType.HUMAN);
+        subtype.add(SubType.SOLDIER);
+        subtype.add(SubType.ALLY);
         power = new MageInt(5);
         toughness = new MageInt(5);
 

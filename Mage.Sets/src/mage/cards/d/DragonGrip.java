@@ -54,7 +54,7 @@ public class DragonGrip extends CardImpl {
 
     public DragonGrip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Ferocious - If you control a creature with power 4 or greater, you may cast Dragon Grip as though it had flash.
         AsThoughEffect effect = new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame);

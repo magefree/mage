@@ -62,8 +62,8 @@ public class DiregrafColossus extends CardImpl {
 
     public DiregrafColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.GIANT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

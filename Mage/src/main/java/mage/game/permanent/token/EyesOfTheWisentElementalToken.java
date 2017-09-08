@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,7 +42,7 @@ public class EyesOfTheWisentElementalToken extends Token {
         this.setOriginalExpansionSetCode("MMA");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(4);
         toughness = new MageInt(4);
         setTokenType(1);

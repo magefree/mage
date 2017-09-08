@@ -57,8 +57,8 @@ public class SkyshroudPoacher extends CardImpl {
     
     public SkyshroudPoacher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Rebel");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.REBEL);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

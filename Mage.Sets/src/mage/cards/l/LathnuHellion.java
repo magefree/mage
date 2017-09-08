@@ -40,6 +40,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -50,7 +51,7 @@ public class LathnuHellion extends CardImpl {
 
     public LathnuHellion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Hellion");
+        this.subtype.add(SubType.HELLION);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

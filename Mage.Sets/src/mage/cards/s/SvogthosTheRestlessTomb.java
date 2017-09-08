@@ -40,6 +40,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -77,8 +78,8 @@ class SvogthosToken extends Token {
     public SvogthosToken() {
         super("", "black and green Plant Zombie creature with \"This creature's power and toughness are each equal to the number of creature cards in your graveyard.\"");
         cardType.add(CardType.CREATURE);
-        subtype.add("Plant");
-        subtype.add("Zombie");
+        subtype.add(SubType.PLANT);
+        subtype.add(SubType.ZOMBIE);
         color.setGreen(true);
         color.setBlack(true);
         power = new MageInt(0);

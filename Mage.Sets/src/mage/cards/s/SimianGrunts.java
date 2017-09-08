@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class SimianGrunts extends CardImpl {
 
     public SimianGrunts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Ape");
+        this.subtype.add(SubType.APE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

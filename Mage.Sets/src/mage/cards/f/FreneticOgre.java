@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -48,7 +49,7 @@ public class FreneticOgre extends CardImpl {
 
     public FreneticOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add("Ogre");
+        this.subtype.add(SubType.OGRE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

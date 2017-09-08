@@ -49,8 +49,8 @@ public class RakaDisciple extends CardImpl {
 
     public RakaDisciple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

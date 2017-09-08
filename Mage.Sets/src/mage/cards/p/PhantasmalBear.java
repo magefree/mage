@@ -34,6 +34,7 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class PhantasmalBear extends CardImpl {
 
     public PhantasmalBear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
-        this.subtype.add("Bear");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.BEAR);
+        this.subtype.add(SubType.ILLUSION);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

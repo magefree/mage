@@ -54,9 +54,9 @@ public class KorCastigator extends CardImpl {
 
     public KorCastigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Wizard");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

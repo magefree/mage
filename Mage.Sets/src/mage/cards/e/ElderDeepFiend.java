@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 
@@ -49,8 +50,8 @@ public class ElderDeepFiend extends CardImpl {
 
     public ElderDeepFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Octopus");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.OCTOPUS);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

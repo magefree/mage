@@ -42,6 +42,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -52,8 +53,8 @@ public class SophicCentaur extends CardImpl {
 
     public SophicCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Centaur");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

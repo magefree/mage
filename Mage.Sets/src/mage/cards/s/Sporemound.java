@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.SaprolingToken;
 
@@ -46,7 +47,7 @@ public class Sporemound extends CardImpl {
 
     public Sporemound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Fungus");
+        this.subtype.add(SubType.FUNGUS);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

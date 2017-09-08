@@ -53,7 +53,7 @@ public class MaelstromWanderer extends CardImpl {
     public MaelstromWanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);

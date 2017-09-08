@@ -54,9 +54,9 @@ public class TuktukScrapper extends CardImpl {
 
     public TuktukScrapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Artificer");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.ARTIFICER);
+        this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

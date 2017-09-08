@@ -37,6 +37,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,7 +47,7 @@ public class VertigoSpawn extends CardImpl {
 
     public VertigoSpawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

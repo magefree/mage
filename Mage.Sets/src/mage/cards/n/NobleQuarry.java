@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -51,7 +52,7 @@ public class NobleQuarry extends CardImpl {
 
     public NobleQuarry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Unicorn");
+        this.subtype.add(SubType.UNICORN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

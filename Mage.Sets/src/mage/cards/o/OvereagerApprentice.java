@@ -37,6 +37,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -47,8 +48,8 @@ public class OvereagerApprentice extends CardImpl {
 
     public OvereagerApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Minion");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.MINION);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

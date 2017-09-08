@@ -35,6 +35,7 @@ import mage.abilities.keyword.HauntAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -46,7 +47,7 @@ public class ExhumerThrull extends CardImpl {
 
     public ExhumerThrull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
-        this.subtype.add("Thrull");
+        this.subtype.add(SubType.THRULL);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -66,8 +66,8 @@ public class TetsuoUmezawa extends CardImpl {
     public TetsuoUmezawa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ARCHER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

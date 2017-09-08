@@ -37,6 +37,7 @@ import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -56,9 +57,9 @@ public class JediKnight extends CardImpl {
 
     public JediKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Jedi");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.JEDI);
+        this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

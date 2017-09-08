@@ -61,8 +61,8 @@ public class SpellstutterSprite extends CardImpl {
 
     public SpellstutterSprite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.FAERIE);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

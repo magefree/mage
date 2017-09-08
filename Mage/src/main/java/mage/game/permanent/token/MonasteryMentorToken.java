@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.ProwessAbility;
 
@@ -41,7 +42,7 @@ public class MonasteryMentorToken extends Token {
         super("Monk", "1/1 white Monk creature token with prowess");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Monk");
+        subtype.add(SubType.MONK);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(new ProwessAbility());

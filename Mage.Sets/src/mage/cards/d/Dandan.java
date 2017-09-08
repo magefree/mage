@@ -48,7 +48,7 @@ public class Dandan extends CardImpl {
 
     public Dandan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}");
-        this.subtype.add("Fish");
+        this.subtype.add(SubType.FISH);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -46,8 +47,8 @@ public class GeralfsMindcrusher extends CardImpl {
 
     public GeralfsMindcrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

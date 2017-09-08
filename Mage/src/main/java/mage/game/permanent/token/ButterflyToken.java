@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -41,7 +42,7 @@ public class ButterflyToken extends Token {
         super("Butterfly", "1/1 green Insect creature token with flying named Butterfly");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Insect");
+        subtype.add(SubType.INSECT);
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.InexorableBlobOozeToken;
 
 /**
@@ -46,7 +47,7 @@ public class InexorableBlob extends CardImpl {
 
     public InexorableBlob(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.subtype.add("Ooze");
+        this.subtype.add(SubType.OOZE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

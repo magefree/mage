@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,7 +52,7 @@ public class HellholeRats extends CardImpl {
 
     public HellholeRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
-        this.subtype.add("Rat");
+        this.subtype.add(SubType.RAT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

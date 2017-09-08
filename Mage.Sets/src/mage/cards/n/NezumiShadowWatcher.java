@@ -56,8 +56,8 @@ public class NezumiShadowWatcher extends CardImpl {
 
     public NezumiShadowWatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Rat");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.RAT);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

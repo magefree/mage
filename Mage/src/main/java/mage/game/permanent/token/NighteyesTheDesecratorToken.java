@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -49,8 +50,8 @@ public class NighteyesTheDesecratorToken extends Token {
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Rat");
-        subtype.add("Wizard");
+        subtype.add(SubType.RAT);
+        subtype.add(SubType.WIZARD);
         power = new MageInt(4);
         toughness = new MageInt(2);
         // {4}{B}: Put target creature card from a graveyard onto the battlefield under your control.

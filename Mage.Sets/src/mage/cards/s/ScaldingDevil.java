@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
@@ -47,7 +48,7 @@ public class ScaldingDevil extends CardImpl {
 
     public ScaldingDevil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Devil");
+        this.subtype.add(SubType.DEVIL);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

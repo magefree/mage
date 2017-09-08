@@ -66,8 +66,8 @@ public class GwyllionHedgeMage extends CardImpl {
 
     public GwyllionHedgeMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W/B}");
-        this.subtype.add("Hag");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.HAG);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

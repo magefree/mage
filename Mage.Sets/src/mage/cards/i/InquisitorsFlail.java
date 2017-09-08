@@ -36,6 +36,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -52,7 +53,7 @@ public class InquisitorsFlail extends CardImpl {
 
     public InquisitorsFlail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // If equipped creature would deal combat damage, it deals double that damage instead.
         // If another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead.

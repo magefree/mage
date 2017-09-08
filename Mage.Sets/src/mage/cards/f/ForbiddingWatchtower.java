@@ -37,6 +37,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -74,7 +75,7 @@ class ForbiddingWatchtowerToken extends Token {
     ForbiddingWatchtowerToken() {
         super("Soldier", "1/5 white Soldier creature");
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.SOLDIER);
         color.setWhite(true);
         
         power = new MageInt(1);

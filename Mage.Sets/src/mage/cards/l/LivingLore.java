@@ -41,6 +41,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -62,7 +63,7 @@ public class LivingLore extends CardImpl {
 
     public LivingLore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.HorrorToken;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
@@ -47,7 +48,7 @@ public class HuntedLammasu extends CardImpl {
 
     public HuntedLammasu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.subtype.add("Lammasu");
+        this.subtype.add(SubType.LAMMASU);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

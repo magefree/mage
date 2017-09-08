@@ -41,6 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -61,8 +62,8 @@ public class SithEvoker extends CardImpl {
 
     public SithEvoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.subtype.add("Chiss");
-        this.subtype.add("Sith");
+        this.subtype.add(SubType.CHISS);
+        this.subtype.add(SubType.SITH);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -51,7 +51,7 @@ public class MerrowCommerce extends CardImpl {
 
     public MerrowCommerce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{U}");
-        this.subtype.add("Merfolk");
+        this.subtype.add(SubType.MERFOLK);
 
 
         // At the beginning of your end step, untap all Merfolk you control.

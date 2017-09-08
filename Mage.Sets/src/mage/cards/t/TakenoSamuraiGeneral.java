@@ -52,8 +52,8 @@ public class TakenoSamuraiGeneral extends CardImpl {
     public TakenoSamuraiGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Samurai");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SAMURAI);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

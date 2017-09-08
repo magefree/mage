@@ -52,7 +52,7 @@ public class TinStreetMarket extends CardImpl {
     public TinStreetMarket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
         
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant land

@@ -40,6 +40,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -60,7 +61,7 @@ public class MoonringIsland extends CardImpl {
 
     public MoonringIsland(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Island");
+        this.subtype.add(SubType.ISLAND);
 
         // <i>({tap}: Add {U} to your mana pool.)</i>
         this.addAbility(new BlueManaAbility());

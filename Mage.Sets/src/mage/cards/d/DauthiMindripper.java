@@ -38,6 +38,7 @@ import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -47,8 +48,8 @@ public class DauthiMindripper extends CardImpl {
 
     public DauthiMindripper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Dauthi");
-        this.subtype.add("Minion");
+        this.subtype.add(SubType.DAUTHI);
+        this.subtype.add(SubType.MINION);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -47,7 +48,7 @@ public class RukhEggBirdToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setRed(true);
 
-        subtype.add("Bird");
+        subtype.add(SubType.BIRD);
         power = new MageInt(4);
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());

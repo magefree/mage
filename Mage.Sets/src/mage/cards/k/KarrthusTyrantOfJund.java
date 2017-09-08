@@ -66,7 +66,7 @@ public class KarrthusTyrantOfJund extends CardImpl {
     public KarrthusTyrantOfJund(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

@@ -33,6 +33,7 @@ import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
  
 /**
  *
@@ -42,7 +43,7 @@ public class SpawnOfRixMaadi extends CardImpl {
  
     public SpawnOfRixMaadi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
  
 
 

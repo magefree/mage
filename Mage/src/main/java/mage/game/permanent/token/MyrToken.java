@@ -6,6 +6,7 @@ import java.util.List;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 public class MyrToken extends Token {
 
@@ -24,7 +25,7 @@ public class MyrToken extends Token {
         this.setOriginalExpansionSetCode(expansionSetCode);
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
-        subtype.add("Myr");
+        subtype.add(SubType.MYR);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

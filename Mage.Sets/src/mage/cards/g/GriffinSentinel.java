@@ -35,6 +35,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author Loki
@@ -43,7 +44,7 @@ public class GriffinSentinel extends CardImpl {
 
     public GriffinSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Griffin");
+        this.subtype.add(SubType.GRIFFIN);
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(VigilanceAbility.getInstance());

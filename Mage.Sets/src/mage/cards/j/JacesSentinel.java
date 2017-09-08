@@ -64,8 +64,8 @@ public class JacesSentinel extends CardImpl {
     public JacesSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.subtype.add("Merfolk");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

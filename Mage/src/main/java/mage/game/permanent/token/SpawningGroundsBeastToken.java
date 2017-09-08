@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 
@@ -41,7 +42,7 @@ public class SpawningGroundsBeastToken extends Token {
         super("Beast", "5/5 green Beast creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Beast");
+        subtype.add(SubType.BEAST);
         power = new MageInt(5);
         toughness = new MageInt(5);
         this.addAbility(TrampleAbility.getInstance());

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,8 +47,8 @@ public class SilentAttendant extends CardImpl {
 
     public SilentAttendant (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-    this.subtype.add("Human");
-    this.subtype.add("Cleric");
+    this.subtype.add(SubType.HUMAN);
+    this.subtype.add(SubType.CLERIC);
 
     this.power = new MageInt(0);
     this.toughness = new MageInt(2);

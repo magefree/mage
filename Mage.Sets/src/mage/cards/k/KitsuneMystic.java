@@ -58,8 +58,8 @@ public class KitsuneMystic extends CardImpl {
 
     public KitsuneMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Fox");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.FOX);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -96,8 +96,8 @@ class AutumnTailKitsuneSage extends Token {
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Fox");
-        subtype.add("Wizard");
+        subtype.add(SubType.FOX);
+        subtype.add(SubType.WIZARD);
         power = new MageInt(4);
         toughness = new MageInt(5);
 

@@ -53,8 +53,8 @@ public class TreefolkHarbinger extends CardImpl {
     
     public TreefolkHarbinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

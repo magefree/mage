@@ -39,6 +39,7 @@ import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -55,8 +56,8 @@ public class ChoArrimAlchemist extends CardImpl {
 
     public ChoArrimAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

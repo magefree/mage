@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
@@ -49,7 +50,7 @@ public class JudgesFamiliar extends CardImpl {
 
     public JudgesFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/U}");
-        this.subtype.add("Bird");
+        this.subtype.add(SubType.BIRD);
 
 
         this.power = new MageInt(1);

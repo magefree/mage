@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -46,7 +47,7 @@ public class PromiseOfPowerDemonToken extends Token {
         setTokenType(2);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Demon");
+        subtype.add(SubType.DEMON);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
 

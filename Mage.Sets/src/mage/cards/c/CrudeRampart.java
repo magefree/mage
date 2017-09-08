@@ -35,6 +35,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class CrudeRampart extends CardImpl {
 
     public CrudeRampart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Wall");
+        this.subtype.add(SubType.WALL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

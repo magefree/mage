@@ -38,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,8 +52,8 @@ public class SingeMindOgre extends CardImpl {
 
     public SingeMindOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.MUTANT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

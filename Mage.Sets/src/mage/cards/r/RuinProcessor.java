@@ -36,6 +36,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,8 +46,8 @@ public class RuinProcessor extends CardImpl {
 
     public RuinProcessor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Processor");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.PROCESSOR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(8);
 

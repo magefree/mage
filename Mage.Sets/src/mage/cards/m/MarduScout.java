@@ -33,6 +33,7 @@ import mage.abilities.keyword.DashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class MarduScout extends CardImpl {
 
     public MarduScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

@@ -38,6 +38,7 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,8 +49,8 @@ public class MurkStrider extends CardImpl {
 
     public MurkStrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Processor");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.PROCESSOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

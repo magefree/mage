@@ -40,6 +40,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -53,7 +54,7 @@ public class ScrapyardMongrel extends CardImpl {
 
     public ScrapyardMongrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.HOUND);
 
         this.color.setRed(true);
         this.power = new MageInt(3);

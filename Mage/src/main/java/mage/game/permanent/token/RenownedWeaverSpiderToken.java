@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ReachAbility;
@@ -44,7 +45,7 @@ public class RenownedWeaverSpiderToken extends Token {
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.GREEN);
-        subtype.add("Spider");
+        subtype.add(SubType.SPIDER);
         power = new MageInt(1);
         toughness = new MageInt(3);
         this.addAbility(ReachAbility.getInstance());

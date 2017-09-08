@@ -36,6 +36,7 @@ import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.util.RandomUtil;
 
@@ -54,8 +55,8 @@ public class EldraziScionToken extends Token {
     public EldraziScionToken() {
         super("Eldrazi Scion", "1/1 colorless Eldrazi Scion creature token with \"Sacrifice this creature: Add {C} to your mana pool.\"");
         cardType.add(CardType.CREATURE);
-        subtype.add("Eldrazi");
-        subtype.add("Scion");
+        subtype.add(SubType.ELDRAZI);
+        subtype.add(SubType.SCION);
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GenericMana(1), new SacrificeSourceCost()));

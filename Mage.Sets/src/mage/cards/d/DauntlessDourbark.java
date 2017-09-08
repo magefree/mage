@@ -69,8 +69,8 @@ public class DauntlessDourbark extends CardImpl {
 
     public DauntlessDourbark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.WARRIOR);
 
         this.color.setGreen(true);
         this.power = new MageInt(0);

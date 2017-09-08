@@ -36,6 +36,7 @@ import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -46,7 +47,7 @@ public class WanderguardSentry extends CardImpl {
 
     public WanderguardSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Drone");
+        this.subtype.add(SubType.DRONE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

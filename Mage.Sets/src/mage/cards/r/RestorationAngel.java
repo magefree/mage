@@ -64,7 +64,7 @@ public class RestorationAngel extends CardImpl {
 
     public RestorationAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -45,7 +46,7 @@ public class VoraciousWurm extends CardImpl {
 
     public VoraciousWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.subtype.add("Wurm");
+        this.subtype.add(SubType.WURM);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

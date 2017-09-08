@@ -34,6 +34,7 @@ import mage.abilities.keyword.EvolveAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class ElusiveKrasis extends CardImpl {
 
     public ElusiveKrasis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
-        this.subtype.add("Fish");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.FISH);
+        this.subtype.add(SubType.MUTANT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);

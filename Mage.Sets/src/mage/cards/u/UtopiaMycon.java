@@ -64,7 +64,7 @@ public class UtopiaMycon extends CardImpl {
 
     public UtopiaMycon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Fungus");
+        this.subtype.add(SubType.FUNGUS);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

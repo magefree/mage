@@ -36,6 +36,7 @@ import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,8 +49,8 @@ public class SatyrPiper extends CardImpl {
 
     public SatyrPiper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Satyr");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.SATYR);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

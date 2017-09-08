@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SetTargetPointer;
 
 /**
@@ -45,7 +46,7 @@ public class ShriekingSpecter extends CardImpl {
 
     public ShriekingSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
-        this.subtype.add("Specter");
+        this.subtype.add(SubType.SPECTER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

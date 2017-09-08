@@ -78,8 +78,8 @@ public class NazahnReveredBladesmith extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Cat");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

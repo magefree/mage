@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureSpell;
@@ -75,7 +76,7 @@ class OpalCaryatidSoldier extends Token {
     public OpalCaryatidSoldier() {
         super("Soldier", "2/2 Soldier creature");
         cardType.add(CardType.CREATURE);
-        subtype.add("Soldier");
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

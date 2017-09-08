@@ -35,6 +35,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class HandOfCruelty extends CardImpl {
 
     public HandOfCruelty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Samurai");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SAMURAI);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

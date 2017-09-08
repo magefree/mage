@@ -63,7 +63,7 @@ public class IfnirDeadlands extends CardImpl {
     public IfnirDeadlands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         
-        this.subtype.add("Desert");
+        this.subtype.add(SubType.DESERT);
 
         // {t}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

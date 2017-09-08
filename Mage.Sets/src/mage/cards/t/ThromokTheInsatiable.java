@@ -34,6 +34,7 @@ import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -45,7 +46,7 @@ public class ThromokTheInsatiable extends CardImpl {
     public ThromokTheInsatiable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Hellion");
+        this.subtype.add(SubType.HELLION);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

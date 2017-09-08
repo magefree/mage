@@ -41,6 +41,7 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEf
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -69,7 +70,7 @@ public class YodaJediMaster extends CardImpl {
 
     public YodaJediMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{U}");
-        this.subtype.add("Yoda");
+        this.subtype.add(SubType.YODA);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

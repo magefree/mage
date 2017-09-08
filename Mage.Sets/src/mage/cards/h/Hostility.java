@@ -40,6 +40,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -55,8 +56,8 @@ public class Hostility extends CardImpl {
 
     public Hostility(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Incarnation");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.INCARNATION);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

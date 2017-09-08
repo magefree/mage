@@ -42,6 +42,7 @@ import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -60,7 +61,7 @@ public class TrostaniSelesnyasVoice extends CardImpl {
     public TrostaniSelesnyasVoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dryad");
+        this.subtype.add(SubType.DRYAD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);

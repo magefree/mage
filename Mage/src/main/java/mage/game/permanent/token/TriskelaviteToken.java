@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -48,7 +49,7 @@ public class TriskelaviteToken extends Token {
         this.setOriginalExpansionSetCode("TSP");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Triskelavite");
+        subtype.add(SubType.TRISKELAVITE);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

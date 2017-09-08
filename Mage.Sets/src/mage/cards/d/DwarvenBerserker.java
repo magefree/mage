@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -48,8 +49,8 @@ public class DwarvenBerserker extends CardImpl {
 
     public DwarvenBerserker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Dwarf");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

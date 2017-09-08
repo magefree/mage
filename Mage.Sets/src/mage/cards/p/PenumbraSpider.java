@@ -35,6 +35,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.PenumbraSpiderToken;
 
 /**
@@ -45,7 +46,7 @@ public class PenumbraSpider extends CardImpl {
 
     public PenumbraSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.subtype.add("Spider");
+        this.subtype.add(SubType.SPIDER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

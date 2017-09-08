@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.GiantWarriorToken;
@@ -47,7 +48,7 @@ public class FeudkillersVerdict extends CardImpl {
 
     public FeudkillersVerdict(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{4}{W}{W}");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.GIANT);
 
         // You gain 10 life. Then if you have more life than an opponent, create a 5/5 white Giant Warrior creature token.
         this.getSpellAbility().addEffect(new FeudkillersVerdictEffect());

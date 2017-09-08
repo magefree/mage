@@ -55,8 +55,8 @@ public class GravebornMuse extends CardImpl {
 
     public GravebornMuse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

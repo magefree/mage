@@ -61,7 +61,7 @@ public class WrexialTheRisenDeep extends CardImpl {
     public WrexialTheRisenDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Kraken");
+        this.subtype.add(SubType.KRAKEN);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(8);

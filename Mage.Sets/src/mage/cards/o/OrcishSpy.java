@@ -36,6 +36,7 @@ import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,8 +47,8 @@ public class OrcishSpy extends CardImpl {
 
     public OrcishSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Orc");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.ORC);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

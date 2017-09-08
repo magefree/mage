@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.Counter;
@@ -52,7 +53,7 @@ public class GilderBairn extends CardImpl {
 
     public GilderBairn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/U}{G/U}");
-        this.subtype.add("Ouphe");
+        this.subtype.add(SubType.OUPHE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

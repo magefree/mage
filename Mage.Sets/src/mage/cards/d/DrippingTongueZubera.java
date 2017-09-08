@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.SpiritToken;
 import mage.watchers.common.ZuberasDiedWatcher;
 
@@ -47,8 +48,8 @@ public class DrippingTongueZubera extends CardImpl {
 
     public DrippingTongueZubera (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Zubera");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.ZUBERA);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

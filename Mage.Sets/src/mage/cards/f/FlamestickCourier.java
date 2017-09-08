@@ -63,7 +63,7 @@ public class FlamestickCourier extends CardImpl {
 
     public FlamestickCourier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Goblin");
+        this.subtype.add(SubType.GOBLIN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -61,8 +61,8 @@ public class VizierOfManyFaces extends CardImpl {
     public VizierOfManyFaces(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
-        this.subtype.add("Shapeshifter");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.SHAPESHIFTER);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

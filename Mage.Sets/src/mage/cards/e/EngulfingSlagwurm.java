@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,7 +50,7 @@ public class EngulfingSlagwurm extends CardImpl {
 
     public EngulfingSlagwurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.subtype.add("Wurm");
+        this.subtype.add(SubType.WURM);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

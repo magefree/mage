@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,7 +42,7 @@ public class HeliodGodOfTheSunToken extends Token {
         this.cardType.add(CardType.CREATURE);
         this.cardType.add(CardType.ENCHANTMENT);
 
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.CLERIC);
         this.color.setWhite(true);
 
         this.power = new MageInt(2);

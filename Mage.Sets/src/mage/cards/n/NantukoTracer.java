@@ -35,6 +35,7 @@ import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -45,8 +46,8 @@ public class NantukoTracer extends CardImpl {
 
     public NantukoTracer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Insect");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.INSECT);
+        this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

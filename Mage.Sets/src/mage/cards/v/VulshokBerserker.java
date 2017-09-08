@@ -34,6 +34,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class VulshokBerserker extends CardImpl {
 
     public VulshokBerserker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.BERSERKER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

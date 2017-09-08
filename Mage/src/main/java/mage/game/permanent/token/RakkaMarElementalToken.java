@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class RakkaMarElementalToken extends Token {
         super("Elemental", "3/1 red Elemental creature with Haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(3);
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());

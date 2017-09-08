@@ -33,6 +33,7 @@ import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
  
 /**
  *
@@ -42,7 +43,7 @@ public class RakdosCackler extends CardImpl {
  
     public RakdosCackler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/R}");
-        this.subtype.add("Devil");
+        this.subtype.add(SubType.DEVIL);
  
 
 

@@ -65,8 +65,8 @@ public class JaggedScarArchers extends CardImpl {
 
     public JaggedScarArchers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

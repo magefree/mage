@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class OneDozenEyesBeastToken extends Token {
         super("Beast", "5/5 green Beast creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Beast");
+        subtype.add(SubType.BEAST);
         power = new MageInt(5);
         toughness = new MageInt(5);
     }

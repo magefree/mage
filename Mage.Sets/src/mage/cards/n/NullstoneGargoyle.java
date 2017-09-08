@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,7 +52,7 @@ public class NullstoneGargoyle extends CardImpl {
     public NullstoneGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{9}");
 
-        this.subtype.add("Gargoyle");
+        this.subtype.add(SubType.GARGOYLE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

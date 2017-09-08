@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -45,7 +46,7 @@ public class SerendibEfreet extends CardImpl {
 
     public SerendibEfreet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Efreet");
+        this.subtype.add(SubType.EFREET);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

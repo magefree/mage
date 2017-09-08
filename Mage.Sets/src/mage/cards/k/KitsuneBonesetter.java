@@ -37,6 +37,7 @@ import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,8 +50,8 @@ public class KitsuneBonesetter extends CardImpl {
 
     public KitsuneBonesetter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Fox");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.FOX);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

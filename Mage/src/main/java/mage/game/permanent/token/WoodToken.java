@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 
@@ -42,7 +43,7 @@ public class WoodToken extends Token {
         this.setOriginalExpansionSetCode("MIR");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Wall");
+        subtype.add(SubType.WALL);
         power = new MageInt(0);
         toughness = new MageInt(1);
 

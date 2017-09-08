@@ -59,8 +59,8 @@ public class DesertNomads extends CardImpl {
 
     public DesertNomads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Nomad");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.NOMAD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -34,6 +34,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,8 +56,8 @@ public class OversoulOfDusk extends CardImpl {
 
     public OversoulOfDusk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/W}{G/W}{G/W}{G/W}{G/W}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

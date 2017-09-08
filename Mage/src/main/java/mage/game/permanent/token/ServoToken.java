@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.util.RandomUtil;
 
 /**
@@ -51,7 +52,7 @@ public class ServoToken extends Token {
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Servo");
+        subtype.add(SubType.SERVO);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

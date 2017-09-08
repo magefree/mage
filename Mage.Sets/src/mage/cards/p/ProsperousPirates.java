@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.TreasureToken;
 
 /**
@@ -45,8 +46,8 @@ public class ProsperousPirates extends CardImpl {
     public ProsperousPirates(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Pirate");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

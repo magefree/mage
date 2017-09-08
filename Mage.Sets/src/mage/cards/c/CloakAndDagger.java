@@ -57,8 +57,8 @@ public class CloakAndDagger extends CardImpl {
 
     public CloakAndDagger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{2}");
-        this.subtype.add("Rogue");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.ROGUE);
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+0 and has shroud.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0));

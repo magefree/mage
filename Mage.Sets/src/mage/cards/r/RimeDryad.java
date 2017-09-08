@@ -54,7 +54,7 @@ public class RimeDryad extends CardImpl {
 
     public RimeDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Dryad");
+        this.subtype.add(SubType.DRYAD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

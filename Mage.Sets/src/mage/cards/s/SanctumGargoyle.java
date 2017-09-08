@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -47,7 +48,7 @@ public class SanctumGargoyle extends CardImpl {
 
     public SanctumGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Gargoyle");
+        this.subtype.add(SubType.GARGOYLE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

@@ -34,6 +34,7 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class JolraelsCentaur extends CardImpl {
 
     public JolraelsCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Centaur");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

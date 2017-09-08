@@ -35,6 +35,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 
@@ -47,7 +48,7 @@ public class RimeboundDead extends CardImpl {
     public RimeboundDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         addSuperType(SuperType.SNOW);
-        this.subtype.add("Skeleton");
+        this.subtype.add(SubType.SKELETON);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -45,6 +45,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -68,7 +69,7 @@ public class KozilekTheGreatDistortion extends CardImpl {
     public KozilekTheGreatDistortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{C}{C}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);
 

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -51,8 +52,8 @@ public class GoblinRacketeer extends CardImpl {
     public GoblinRacketeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
-        this.subtype.add("Goblin");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

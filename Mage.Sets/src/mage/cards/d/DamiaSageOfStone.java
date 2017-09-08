@@ -40,6 +40,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -55,8 +56,8 @@ public class DamiaSageOfStone extends CardImpl {
     public DamiaSageOfStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Gorgon");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.GORGON);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

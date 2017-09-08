@@ -60,7 +60,7 @@ public class FellShepherd extends CardImpl {
 
     public FellShepherd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(6);

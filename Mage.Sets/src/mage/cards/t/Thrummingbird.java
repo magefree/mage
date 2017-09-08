@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author Loki, nantuko, North
@@ -44,8 +45,8 @@ public class Thrummingbird extends CardImpl {
 
     public Thrummingbird(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Bird");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

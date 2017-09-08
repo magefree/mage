@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -47,7 +48,7 @@ public class LightningRagerToken extends Token {
         this.setOriginalExpansionSetCode("C15");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(5);
         toughness = new MageInt(1);
         addAbility(TrampleAbility.getInstance());

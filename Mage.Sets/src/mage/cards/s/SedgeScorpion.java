@@ -33,6 +33,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class SedgeScorpion extends CardImpl {
 
     public SedgeScorpion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Scorpion");
+        this.subtype.add(SubType.SCORPION);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

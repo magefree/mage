@@ -36,6 +36,7 @@ import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
@@ -59,8 +60,8 @@ public class KiAdiMundi extends CardImpl {
     public KiAdiMundi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Cerean");
-        this.subtype.add("Jedi");
+        this.subtype.add(SubType.CEREAN);
+        this.subtype.add(SubType.JEDI);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

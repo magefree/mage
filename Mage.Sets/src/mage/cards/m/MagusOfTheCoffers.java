@@ -56,8 +56,8 @@ public class MagusOfTheCoffers extends CardImpl {
 
     public MagusOfTheCoffers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

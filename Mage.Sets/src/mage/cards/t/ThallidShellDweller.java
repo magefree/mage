@@ -38,6 +38,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -51,7 +52,7 @@ public class ThallidShellDweller extends CardImpl {
 
     public ThallidShellDweller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Fungus");
+        this.subtype.add(SubType.FUNGUS);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);

@@ -38,6 +38,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInASingleGraveyard;
 
@@ -49,8 +50,8 @@ public class GrixisSojourners extends CardImpl {
 
     public GrixisSojourners(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Ogre");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.OGRE);
 
 
 

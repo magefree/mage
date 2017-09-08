@@ -35,6 +35,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
@@ -46,9 +47,9 @@ public class ChasmGuide extends CardImpl {
 
     public ChasmGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Scout");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.SCOUT);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

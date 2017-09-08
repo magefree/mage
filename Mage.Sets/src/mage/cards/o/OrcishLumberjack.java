@@ -65,7 +65,7 @@ public class OrcishLumberjack extends CardImpl {
 
     public OrcishLumberjack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Orc");
+        this.subtype.add(SubType.ORC);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

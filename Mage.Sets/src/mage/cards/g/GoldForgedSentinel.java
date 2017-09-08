@@ -33,6 +33,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class GoldForgedSentinel extends CardImpl {
 
     public GoldForgedSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
-        this.subtype.add("Chimera");
+        this.subtype.add(SubType.CHIMERA);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

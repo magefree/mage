@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -39,7 +40,7 @@ public class EldraziToken extends Token {
     public EldraziToken() {
         super("Eldrazi", "10/10 colorless Eldrazi creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Eldrazi");
+        subtype.add(SubType.ELDRAZI);
         power = new MageInt(10);
         toughness = new MageInt(10);
     }

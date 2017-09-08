@@ -31,6 +31,7 @@ import java.util.Collections;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class TrooperToken extends Token {
         availableImageSetCodes.addAll(Collections.singletonList("SWS"));
 
         cardType.add(CardType.CREATURE);
-        subtype.add("Trooper");
+        subtype.add(SubType.TROOPER);
 
         color.setWhite(true);
         power = new MageInt(1);

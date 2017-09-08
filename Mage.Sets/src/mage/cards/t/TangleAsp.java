@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,7 +47,7 @@ public class TangleAsp extends CardImpl {
 
     public TangleAsp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.subtype.add("Snake");
+        this.subtype.add(SubType.SNAKE);
 
         this.color.setGreen(true);
         this.power = new MageInt(1);

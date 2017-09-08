@@ -38,6 +38,7 @@ import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -48,7 +49,7 @@ public class DagobahMawSlug extends CardImpl {
 
     public DagobahMawSlug(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
-        this.subtype.add("Slug");
+        this.subtype.add(SubType.SLUG);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

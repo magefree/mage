@@ -34,6 +34,7 @@ import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class SigiledBehemoth extends CardImpl {
 
     public SigiledBehemoth (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
 
         this.power = new MageInt(5);

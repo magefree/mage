@@ -65,7 +65,7 @@ public class DrownerOfHope extends CardImpl {
 
     public DrownerOfHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

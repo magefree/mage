@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
@@ -45,7 +46,7 @@ public class RavenousBaboons extends CardImpl {
 
     public RavenousBaboons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Monkey");
+        this.subtype.add(SubType.MONKEY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

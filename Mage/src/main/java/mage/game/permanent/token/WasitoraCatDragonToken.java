@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -41,8 +42,8 @@ public class WasitoraCatDragonToken extends Token {
         super("Cat Dragon", "3/3 black, red, and green Cat Dragon creature token with flying");
 
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Cat");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.DRAGON);
         color.setBlack(true);
         color.setRed(true);
         color.setGreen(true);

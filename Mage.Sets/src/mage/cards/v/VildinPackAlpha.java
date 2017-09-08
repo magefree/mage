@@ -54,7 +54,7 @@ public class VildinPackAlpha extends CardImpl {
 
     public VildinPackAlpha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
         this.color.setRed(true);

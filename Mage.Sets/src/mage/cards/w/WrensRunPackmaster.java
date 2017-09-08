@@ -59,8 +59,8 @@ public class WrensRunPackmaster extends CardImpl {
 
     public WrensRunPackmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

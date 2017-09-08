@@ -59,7 +59,7 @@ public class Tromokratis extends CardImpl {
     public Tromokratis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Kraken");
+        this.subtype.add(SubType.KRAKEN);
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

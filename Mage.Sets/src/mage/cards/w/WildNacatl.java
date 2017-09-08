@@ -57,8 +57,8 @@ public class WildNacatl extends CardImpl {
     public WildNacatl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
 
-        this.subtype.add("Cat");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

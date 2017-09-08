@@ -38,6 +38,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -50,8 +51,8 @@ public class RotFarmSkeleton extends CardImpl {
 
     public RotFarmSkeleton (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Skeleton");
+        this.subtype.add(SubType.PLANT);
+        this.subtype.add(SubType.SKELETON);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);

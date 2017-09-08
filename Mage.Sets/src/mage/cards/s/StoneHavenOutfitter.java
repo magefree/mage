@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -58,9 +59,9 @@ public class StoneHavenOutfitter extends CardImpl {
 
     public StoneHavenOutfitter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Artificer");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.ARTIFICER);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

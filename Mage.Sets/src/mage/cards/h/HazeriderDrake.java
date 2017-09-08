@@ -35,6 +35,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class HazeriderDrake extends CardImpl {
 
     public HazeriderDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}");
-        this.subtype.add("Drake");
+        this.subtype.add(SubType.DRAKE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

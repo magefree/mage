@@ -39,6 +39,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -178,7 +179,7 @@ class TestamentOfFaithToken extends Token {
     TestamentOfFaithToken() {
         super("Wall", "X/X Wall creature with defender");
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Wall");
+        this.subtype.add(SubType.WALL);
         color.setWhite(true);
         this.addAbility(DefenderAbility.getInstance());
     }

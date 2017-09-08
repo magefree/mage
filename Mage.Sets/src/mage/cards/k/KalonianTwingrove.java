@@ -60,8 +60,8 @@ public class KalonianTwingrove extends CardImpl {
 
     public KalonianTwingrove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

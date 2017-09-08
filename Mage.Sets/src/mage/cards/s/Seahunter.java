@@ -57,8 +57,8 @@ public class Seahunter extends CardImpl {
 
     public Seahunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Mercenary");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.MERCENARY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

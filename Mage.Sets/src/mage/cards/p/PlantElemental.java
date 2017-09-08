@@ -54,8 +54,8 @@ public class PlantElemental extends CardImpl {
 
     public PlantElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.PLANT);
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

@@ -60,8 +60,8 @@ public class LysAlanaBowmaster extends CardImpl {
 
     public LysAlanaBowmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

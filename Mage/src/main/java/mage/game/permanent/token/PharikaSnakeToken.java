@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.abilities.keyword.DeathtouchAbility;
 
 /**
@@ -41,7 +42,7 @@ public class PharikaSnakeToken extends Token {
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Snake");
+        subtype.add(SubType.SNAKE);
         color.setBlack(true);
         color.setGreen(true);
         this.addAbility(DeathtouchAbility.getInstance());

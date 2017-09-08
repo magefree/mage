@@ -33,6 +33,7 @@ import mage.abilities.keyword.RampageAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class WolverinePack extends CardImpl {
 
     public WolverinePack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Wolverine");
+        this.subtype.add(SubType.WOLVERINE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

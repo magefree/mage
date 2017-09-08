@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author Loki
@@ -60,7 +61,7 @@ public class SpiritToken extends Token {
             setTokenType(tokenType);
         }
         cardType.add(CardType.CREATURE);
-        subtype.add("Spirit");
+        subtype.add(SubType.SPIRIT);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

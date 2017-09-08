@@ -33,6 +33,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 
@@ -50,7 +51,7 @@ public class EnemyOfTheGuildpact extends CardImpl {
     
     public EnemyOfTheGuildpact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

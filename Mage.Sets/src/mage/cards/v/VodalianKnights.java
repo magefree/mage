@@ -51,8 +51,8 @@ public class VodalianKnights extends CardImpl {
 
     public VodalianKnights(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -33,6 +33,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class Watchwolf extends CardImpl {
 
     public Watchwolf (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.WOLF);
 
 
         this.power = new MageInt(3);

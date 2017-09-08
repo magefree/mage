@@ -56,9 +56,9 @@ public class KazuulWarlord extends CardImpl {
 
     public KazuulWarlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Warrior");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

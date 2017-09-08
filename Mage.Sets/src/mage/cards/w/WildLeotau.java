@@ -35,6 +35,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.TargetController;
 
@@ -46,7 +47,7 @@ public class WildLeotau extends CardImpl {
 
     public WildLeotau(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.CAT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

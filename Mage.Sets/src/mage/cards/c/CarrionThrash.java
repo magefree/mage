@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.AnotherCardPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -54,8 +55,8 @@ public class CarrionThrash extends CardImpl {
 
     public CarrionThrash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
-        this.subtype.add("Viashino");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

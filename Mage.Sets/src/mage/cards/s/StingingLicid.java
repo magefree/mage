@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DamageAttachedControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 
 /**
@@ -47,7 +48,7 @@ public class StingingLicid extends CardImpl {
 
     public StingingLicid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Licid");
+        this.subtype.add(SubType.LICID);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

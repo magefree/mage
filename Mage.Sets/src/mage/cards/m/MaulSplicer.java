@@ -60,8 +60,8 @@ public class MaulSplicer extends CardImpl {
 
     public MaulSplicer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ARTIFICER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

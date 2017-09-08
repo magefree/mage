@@ -58,7 +58,7 @@ public class DevouringGreed extends CardImpl {
 
     public DevouringGreed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // As an additional cost to cast Devouring Greed, you may sacrifice any number of Spirits.

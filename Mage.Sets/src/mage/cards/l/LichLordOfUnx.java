@@ -61,8 +61,8 @@ public class LichLordOfUnx extends CardImpl {
 
     public LichLordOfUnx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

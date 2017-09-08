@@ -34,6 +34,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,8 +54,8 @@ public class LeoninArmorguard extends CardImpl {
 
     public LeoninArmorguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}");
-        this.subtype.add("Cat");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.SOLDIER);
 
 
 

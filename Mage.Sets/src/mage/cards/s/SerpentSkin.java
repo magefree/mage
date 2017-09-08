@@ -52,7 +52,7 @@ public class SerpentSkin extends CardImpl {
 
     public SerpentSkin (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         this.addAbility(FlashAbility.getInstance());
 

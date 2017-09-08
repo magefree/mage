@@ -36,6 +36,7 @@ import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,9 +46,9 @@ public class SpellgorgerBarbarian extends CardImpl {
 
     public SpellgorgerBarbarian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Nightmare");
-        this.subtype.add("Barbarian");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.NIGHTMARE);
+        this.subtype.add(SubType.BARBARIAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

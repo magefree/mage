@@ -7,6 +7,7 @@ package mage.game.permanent.token;
 
 import mage.abilities.keyword.SpaceflightAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -21,6 +22,6 @@ public class TIEFighterToken extends Token {
         cardType.add(CardType.ARTIFACT);
         color.setBlack(true);
         addAbility(SpaceflightAbility.getInstance());
-        subtype.add("Starship");
+        subtype.add(SubType.STARSHIP);
     }
 }

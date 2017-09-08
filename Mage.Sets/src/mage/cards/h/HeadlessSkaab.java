@@ -34,6 +34,7 @@ import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -45,8 +46,8 @@ public class HeadlessSkaab extends CardImpl {
 
     public HeadlessSkaab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);

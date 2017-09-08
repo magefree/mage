@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -50,7 +51,7 @@ public class PurphorossEmissary extends CardImpl {
 
     public PurphorossEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Ox");
+        this.subtype.add(SubType.OX);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -46,7 +47,7 @@ public class Pyknite extends CardImpl {
 
     public Pyknite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Ouphe");
+        this.subtype.add(SubType.OUPHE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

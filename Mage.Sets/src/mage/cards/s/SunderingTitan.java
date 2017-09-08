@@ -56,7 +56,7 @@ public class SunderingTitan extends CardImpl {
 
     public SunderingTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{8}");
-        this.subtype.add("Golem");
+        this.subtype.add(SubType.GOLEM);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(10);

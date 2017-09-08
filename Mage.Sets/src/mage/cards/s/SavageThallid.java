@@ -71,7 +71,7 @@ public class SavageThallid extends CardImpl {
     
     public SavageThallid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Fungus");
+        this.subtype.add(SubType.FUNGUS);
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);
 

@@ -36,6 +36,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -52,8 +53,8 @@ public class DryadMilitant extends CardImpl {
 
     public DryadMilitant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/W}");
-        this.subtype.add("Dryad");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.DRYAD);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

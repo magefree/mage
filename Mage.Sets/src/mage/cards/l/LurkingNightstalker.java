@@ -34,6 +34,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -44,7 +45,7 @@ public class LurkingNightstalker extends CardImpl {
 
     public LurkingNightstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Nightstalker");
+        this.subtype.add(SubType.NIGHTSTALKER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -43,6 +43,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -65,8 +66,8 @@ public class UlashtTheHateSeed extends CardImpl {
     public UlashtTheHateSeed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Hellion");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.HELLION);
+        this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

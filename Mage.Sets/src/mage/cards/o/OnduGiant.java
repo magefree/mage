@@ -34,6 +34,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -47,8 +48,8 @@ public class OnduGiant extends CardImpl {
 
     public OnduGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Giant");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

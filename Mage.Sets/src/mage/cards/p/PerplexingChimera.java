@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -101,7 +102,7 @@ public class PerplexingChimera extends CardImpl {
 
     public PerplexingChimera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Chimera");
+        this.subtype.add(SubType.CHIMERA);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

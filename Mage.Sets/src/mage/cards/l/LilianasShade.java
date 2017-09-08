@@ -58,7 +58,7 @@ public class LilianasShade extends CardImpl {
 
     public LilianasShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Shade");
+        this.subtype.add(SubType.SHADE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

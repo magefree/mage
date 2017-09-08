@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -49,7 +50,7 @@ public class SquirrelToken extends Token {
         super("Squirrel", "1/1 green Squirrel creature token");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
-        subtype.add("Squirrel");
+        subtype.add(SubType.SQUIRREL);
 
         color.setGreen(true);
         power = new MageInt(1);

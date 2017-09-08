@@ -36,6 +36,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -47,8 +48,8 @@ public class LagonnaBandElder extends CardImpl {
 
     public LagonnaBandElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.subtype.add("Centaur");
-        this.subtype.add("Advisor");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.ADVISOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.constants.SuperType;
 
@@ -47,7 +48,7 @@ public class TuktukTheReturnedToken extends Token {
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         addSuperType(SuperType.LEGENDARY);
-        subtype.add("Goblin");
+        subtype.add(SubType.GOBLIN);
         power = new MageInt(5);
         toughness = new MageInt(5);
     }

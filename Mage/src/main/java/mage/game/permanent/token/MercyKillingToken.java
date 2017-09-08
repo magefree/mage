@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,8 +42,8 @@ public class MercyKillingToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setWhite(true);
-        subtype.add("Elf");
-        subtype.add("Warrior");
+        subtype.add(SubType.ELF);
+        subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

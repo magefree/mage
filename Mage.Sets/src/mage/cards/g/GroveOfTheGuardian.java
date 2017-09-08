@@ -42,6 +42,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -91,7 +92,7 @@ public class GroveOfTheGuardian extends CardImpl {
             cardType.add(CardType.CREATURE);
             color.setGreen(true);
             color.setWhite(true);
-            this.subtype.add("Elemental");
+            this.subtype.add(SubType.ELEMENTAL);
             power = new MageInt(8);
             toughness = new MageInt(8);
             this.addAbility(VigilanceAbility.getInstance());

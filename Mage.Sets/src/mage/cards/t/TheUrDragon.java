@@ -73,8 +73,8 @@ public class TheUrDragon extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{U}{B}{R}{G}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dragon");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.DRAGON);
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
 

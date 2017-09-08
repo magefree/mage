@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -50,8 +51,8 @@ public class LeafcrownDryad extends CardImpl {
 
     public LeafcrownDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Nymph");
-        this.subtype.add("Dryad");
+        this.subtype.add(SubType.NYMPH);
+        this.subtype.add(SubType.DRYAD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

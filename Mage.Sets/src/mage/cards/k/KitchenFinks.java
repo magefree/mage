@@ -35,6 +35,7 @@ import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class KitchenFinks extends CardImpl {
 
     public KitchenFinks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G/W}{G/W}");
-        this.subtype.add("Ouphe");
+        this.subtype.add(SubType.OUPHE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

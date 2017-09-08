@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -45,7 +46,7 @@ public class FireSnake extends CardImpl {
 
     public FireSnake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add("Snake");
+        this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

@@ -35,6 +35,7 @@ import mage.abilities.keyword.MountaincyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class ValleyRannet extends CardImpl {
 
     public ValleyRannet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
 
 

@@ -29,6 +29,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class HippoToken extends Token {
         
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Hippo");
+        subtype.add(SubType.HIPPO);
         
         power = new MageInt(1);
         toughness = new MageInt(1);

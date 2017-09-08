@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
 
@@ -45,7 +46,7 @@ public class Wurm1Token extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Wurm");
+        subtype.add(SubType.WURM);
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(DeathtouchAbility.getInstance());

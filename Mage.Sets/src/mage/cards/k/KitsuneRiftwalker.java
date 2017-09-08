@@ -52,8 +52,8 @@ public class KitsuneRiftwalker extends CardImpl {
 
     public KitsuneRiftwalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        this.subtype.add("Fox");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.FOX);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

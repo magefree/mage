@@ -39,6 +39,7 @@ import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,7 +61,7 @@ public class DecimatorBeetle extends CardImpl {
     public DecimatorBeetle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
 
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

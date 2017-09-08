@@ -36,6 +36,7 @@ import mage.abilities.keyword.SwampcyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,8 +47,8 @@ public class TwistedAbomination extends CardImpl {
 
     public TwistedAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.MUTANT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);

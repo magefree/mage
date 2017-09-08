@@ -53,7 +53,7 @@ public class ChamberOfManipulation extends CardImpl {
 
     public ChamberOfManipulation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant land

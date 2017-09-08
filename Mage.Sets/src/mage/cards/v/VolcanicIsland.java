@@ -33,6 +33,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class VolcanicIsland extends CardImpl {
 
     public VolcanicIsland(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Island");
-        this.subtype.add("Mountain");
+        this.subtype.add(SubType.ISLAND);
+        this.subtype.add(SubType.MOUNTAIN);
         
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());

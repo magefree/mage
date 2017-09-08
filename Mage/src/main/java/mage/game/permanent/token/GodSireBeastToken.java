@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -42,7 +43,7 @@ public class GodSireBeastToken extends Token {
         color.setGreen(true);
         color.setWhite(true);
         color.setRed(true);
-        subtype.add("Beast");
+        subtype.add(SubType.BEAST);
         power = new MageInt(8);
         toughness = new MageInt(8);
     }

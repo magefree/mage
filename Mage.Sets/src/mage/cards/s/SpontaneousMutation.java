@@ -41,6 +41,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
@@ -54,7 +55,7 @@ public class SpontaneousMutation extends CardImpl {
 
     public SpontaneousMutation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

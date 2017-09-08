@@ -56,7 +56,7 @@ public class Foratog extends CardImpl {
     }
     public Foratog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Atog");
+        this.subtype.add(SubType.ATOG);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

@@ -59,7 +59,7 @@ public class HomingSliver extends CardImpl {
 
     public HomingSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

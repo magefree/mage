@@ -57,8 +57,8 @@ public class DireFleetCaptain extends CardImpl {
     public DireFleetCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}");
 
-        this.subtype.add("Orc");
-        this.subtype.add("Pirate");
+        this.subtype.add(SubType.ORC);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

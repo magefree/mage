@@ -62,7 +62,7 @@ public class DevouringRage extends CardImpl {
 
     public DevouringRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // As an additional cost to cast Devouring Rage, you may sacrifice any number of Spirits.

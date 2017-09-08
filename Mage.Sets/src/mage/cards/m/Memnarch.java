@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -53,7 +54,7 @@ public class Memnarch extends CardImpl {
     public Memnarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

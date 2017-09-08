@@ -47,7 +47,7 @@ public class HerosResolve extends CardImpl {
 
     public HerosResolve(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

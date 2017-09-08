@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
@@ -44,7 +45,7 @@ public class BalduvianToken extends Token {
         color.setRed(true);
         power = new MageInt(3);
         toughness = new MageInt(1);
-        subtype.add("Graveborn");
+        subtype.add(SubType.GRAVEBORN);
         addAbility(HasteAbility.getInstance());
     }
 }

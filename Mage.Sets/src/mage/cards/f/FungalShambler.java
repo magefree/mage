@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -47,8 +48,8 @@ public class FungalShambler extends CardImpl {
 
     public FungalShambler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{U}{B}");
-        this.subtype.add("Fungus");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.FUNGUS);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 

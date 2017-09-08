@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continuous.UntapSourceDuringEachOtherPlayer
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -54,7 +55,7 @@ public class Endbringer extends CardImpl {
 
     public Endbringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{C}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

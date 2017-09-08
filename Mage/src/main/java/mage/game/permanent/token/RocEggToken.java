@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -40,7 +41,7 @@ public class RocEggToken extends Token {
     public RocEggToken() {
         super("Bird", "3/3 white Bird creature token with flying");
         cardType.add(CardType.CREATURE);
-        subtype.add("Bird");
+        subtype.add(SubType.BIRD);
         color.setWhite(true);
         power = new MageInt(3);
         toughness = new MageInt(3);

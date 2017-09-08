@@ -38,6 +38,7 @@ import mage.abilities.keyword.AmplifyAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -52,7 +53,7 @@ public class GhastlyRemains extends CardImpl {
     public GhastlyRemains(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
 
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

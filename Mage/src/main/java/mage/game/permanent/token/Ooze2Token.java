@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -41,7 +42,7 @@ public class Ooze2Token extends Token {
     public Ooze2Token() {
         super("Ooze", "2/2 green Ooze creature tokens with \"When this creature is put into a graveyard, create two 1/1 green Ooze creature tokens.\"");
         cardType.add(CardType.CREATURE);
-        subtype.add("Ooze");
+        subtype.add(SubType.OOZE);
         color.setGreen(true);
         power = new MageInt(2);
         toughness = new MageInt(2);

@@ -38,6 +38,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -75,7 +76,7 @@ public class SimicKeyrune extends CardImpl {
             cardType.add(CardType.CREATURE);
             color.setGreen(true);
             color.setBlue(true);
-            subtype.add("Crab");
+            subtype.add(SubType.CRAB);
             power = new MageInt(2);
             toughness = new MageInt(3);
             this.addAbility(HexproofAbility.getInstance());

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.FlyingAbility;
@@ -45,7 +46,7 @@ public class RiseOfEaglesBirdToken extends Token {
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.BLUE);
-        subtype.add("Bird");
+        subtype.add(SubType.BIRD);
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());

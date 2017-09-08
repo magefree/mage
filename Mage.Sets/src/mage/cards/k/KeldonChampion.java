@@ -37,6 +37,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -47,8 +48,8 @@ public class KeldonChampion extends CardImpl {
 
     public KeldonChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Barbarian");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.BARBARIAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

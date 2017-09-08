@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.LifelinkAbility;
 
@@ -41,7 +42,7 @@ public class IxalanVampireToken extends Token {
         super("Vampire", "1/1 white Vampire creature token with lifelink");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Vampire");
+        subtype.add(SubType.VAMPIRE);
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(LifelinkAbility.getInstance());

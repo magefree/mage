@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 import mage.game.permanent.token.WolfToken;
 
@@ -48,8 +49,8 @@ public class PackGuardian extends CardImpl {
 
     public PackGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Wolf");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.WOLF);
+        this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

@@ -33,6 +33,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class PerfectedForm extends CardImpl {
 
     public PerfectedForm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.INSECT);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
         this.color.setBlue(true);

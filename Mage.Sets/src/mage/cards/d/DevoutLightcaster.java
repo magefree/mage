@@ -36,6 +36,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
@@ -54,8 +55,8 @@ public class DevoutLightcaster extends CardImpl {
 
     public DevoutLightcaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

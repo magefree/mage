@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,8 +58,8 @@ public class GlenElendraLiege extends CardImpl {
 
     public GlenElendraLiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U/B}{U/B}{U/B}");
-        this.subtype.add("Faerie");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.FAERIE);
+        this.subtype.add(SubType.KNIGHT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

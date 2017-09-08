@@ -37,6 +37,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInHand;
 
@@ -48,8 +49,8 @@ public class ViashinoSkeleton extends CardImpl {
 
     public ViashinoSkeleton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Viashino");
-        this.subtype.add("Skeleton");
+        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.SKELETON);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
