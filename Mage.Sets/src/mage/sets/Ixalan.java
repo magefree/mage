@@ -35,6 +35,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Angrath's Marauders", 132, Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
         cards.add(new SetCardInfo("Arguel's Blood Fast", 90, Rarity.RARE, mage.cards.a.ArguelsBloodFast.class));
         cards.add(new SetCardInfo("Ashes of the Abhorrent", 2, Rarity.RARE, mage.cards.a.AshesOfTheAbhorrent.class));
+        cards.add(new SetCardInfo("Azcanta, The Sunken Ruin", 74, Rarity.RARE, mage.cards.a.AzcantaTheSunkenRuin.class));
         cards.add(new SetCardInfo("Bishop of Rebirth", 5, Rarity.RARE, mage.cards.b.BishopOfRebirth.class));
         cards.add(new SetCardInfo("Belligerent Brontodon", 218, Rarity.UNCOMMON, mage.cards.b.BelligerentBrontodon.class));
         cards.add(new SetCardInfo("Bellowing Aegisaur", 4, Rarity.UNCOMMON, mage.cards.b.BellowingAegisaur.class));
@@ -109,11 +110,13 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Prosperous Pirates", 69, Rarity.COMMON, mage.cards.p.ProsperousPirates.class));
         cards.add(new SetCardInfo("Queen's Bay Soldier", 115, Rarity.COMMON, mage.cards.q.QueensBaySoldier.class));
         cards.add(new SetCardInfo("Raging Swordtooth", 226, Rarity.UNCOMMON, mage.cards.r.RagingSwordtooth.class));
+        cards.add(new SetCardInfo("Rampaging Ferocidon", 154, Rarity.RARE, mage.cards.r.RampagingFerocidon.class));
         cards.add(new SetCardInfo("Ranging Raptors", 201, Rarity.UNCOMMON, mage.cards.r.RangingRaptors.class));
         cards.add(new SetCardInfo("Raptor Hatchling", 149, Rarity.UNCOMMON, mage.cards.r.RaptorHatchling.class));
         cards.add(new SetCardInfo("Ravenous Daggertooth", 202, Rarity.COMMON, mage.cards.r.RavenousDaggertooth.class));
         cards.add(new SetCardInfo("Regisaur Alpha", 227, Rarity.RARE, mage.cards.r.RegisaurAlpha.class));
         cards.add(new SetCardInfo("Revel in Riches", 117, Rarity.RARE, mage.cards.r.RevelInRiches.class));
+        cards.add(new SetCardInfo("Rile", 158, Rarity.COMMON, mage.cards.r.Rile.class));
         cards.add(new SetCardInfo("Ripjaw Raptor", 203, Rarity.RARE, mage.cards.r.RipjawRaptor.class));
         cards.add(new SetCardInfo("River's Rebuke", 71, Rarity.RARE, mage.cards.r.RiversRebuke.class));
         cards.add(new SetCardInfo("Rootbound Crag", 256, Rarity.RARE, mage.cards.r.RootboundCrag.class));
@@ -122,11 +125,13 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctum Seeker", 120, Rarity.RARE, mage.cards.s.SanctumSeeker.class));
         cards.add(new SetCardInfo("Sanguine Sacrament", 33, Rarity.RARE, mage.cards.s.SanguineSacrament.class));
         cards.add(new SetCardInfo("Savage Stomp", 205, Rarity.UNCOMMON, mage.cards.s.SavageStomp.class));
+        cards.add(new SetCardInfo("Search for Azcanta", 74, Rarity.RARE, mage.cards.s.SearchForAzcanta.class));
         cards.add(new SetCardInfo("Sentinel Totem", 245, Rarity.UNCOMMON, mage.cards.s.SentinelTotem.class));
         cards.add(new SetCardInfo("Settle the Wreckage", 34, Rarity.RARE, mage.cards.s.SettleTheWreckage.class));
         cards.add(new SetCardInfo("Shapers of Nature", 228, Rarity.UNCOMMON, mage.cards.s.ShapersOfNature.class));
         cards.add(new SetCardInfo("Shapers' Sanctuary", 206, Rarity.RARE, mage.cards.s.ShapersSanctuary.class));
         cards.add(new SetCardInfo("Siren Stormtamer", 79, Rarity.UNCOMMON, mage.cards.s.SirenStormtamer.class));
+        cards.add(new SetCardInfo("Skittering Heartstopper", 122, Rarity.COMMON, mage.cards.s.SkitteringHeartstopper.class));
         cards.add(new SetCardInfo("Sleek Schooner", 247, Rarity.UNCOMMON, mage.cards.s.SleekSchooner.class));
         cards.add(new SetCardInfo("Slice in Twain", 207, Rarity.UNCOMMON, mage.cards.s.SliceinTwain.class));
         cards.add(new SetCardInfo("Sorcerous Spyglass", 248, Rarity.RARE, mage.cards.s.SorcerousSpyglass.class));
@@ -136,6 +141,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Stone Quarry", 289, Rarity.COMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Storm Fleet Aerialist", 63, Rarity.UNCOMMON, mage.cards.s.StormFleetAerialist.class));
         cards.add(new SetCardInfo("Storm Fleet Arsonist", 162, Rarity.UNCOMMON, mage.cards.s.StormFleetArsonist.class));
+        cards.add(new SetCardInfo("Storm Fleet Spy", 84, Rarity.UNCOMMON, mage.cards.s.StormFleetSpy.class));
         cards.add(new SetCardInfo("Sun-Blessed Mount", 288, Rarity.RARE, mage.cards.s.SunBlessedMount.class));
         cards.add(new SetCardInfo("Sun-Crowned Hunters", 164, Rarity.COMMON, mage.cards.s.SunCrownedHunters.class));
         cards.add(new SetCardInfo("Sunbird's Invocation", 165, Rarity.RARE, mage.cards.s.SunbirdsInvocation.class));

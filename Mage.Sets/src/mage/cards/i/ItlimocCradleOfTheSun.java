@@ -25,55 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.i;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.CantBlockAbility;
-import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+
+import mage.Mana;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.mana.DynamicManaAbility;
+import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.watchers.common.PlayerAttackedWatcher;
+import mage.constants.SuperType;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
- * @author emerald000
+ * @author JRHerlehy
  */
-public class BloodsoakedChampion extends CardImpl {
+public class ItlimocCradleOfTheSun extends CardImpl {
 
-    public BloodsoakedChampion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
-        this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature you control");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // Bloodstained Brave can't block.
-        this.addAbility(new CantBlockAbility());
-
-        // <i>Raid</i> - {1}{B}: Return Bloodstained Brave from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new ManaCostsImpl<>("{1}{B}"),
-                RaidCondition.instance,
-                "<i>Raid</i> &mdash; {1}{B}: Return {this} from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn");
-        this.addAbility(ability, new PlayerAttackedWatcher());
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public BloodsoakedChampion(final BloodsoakedChampion card) {
+    public ItlimocCradleOfTheSun(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+        
+        this.addSuperType(SuperType.LEGENDARY);
+
+        // (Transforms from Growing Rites of Itlimoc.)/
+        this.nightCard = true;
+
+        // {T}: Add {G} to your mana pool.
+        this.addAbility(new GreenManaAbility());
+
+        // {T}: Add {G} to your mana pool for each creature you control.
+        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(filter)));
+    }
+
+    public ItlimocCradleOfTheSun(final ItlimocCradleOfTheSun card) {
         super(card);
     }
 
     @Override
-    public BloodsoakedChampion copy() {
-        return new BloodsoakedChampion(this);
+    public ItlimocCradleOfTheSun copy() {
+        return new ItlimocCradleOfTheSun(this);
     }
 }

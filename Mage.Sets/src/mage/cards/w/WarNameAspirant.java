@@ -57,7 +57,7 @@ public class WarNameAspirant extends CardImpl {
     }
 
     public WarNameAspirant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 
@@ -67,7 +67,7 @@ public class WarNameAspirant extends CardImpl {
         // <i>Raid</i> - War-Name Aspirant enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), false),
                 RaidCondition.instance,
-                "<i>Raid</i> - {this} enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn",
+                "<i>Raid</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn",
                 "{this} enters the battlefield with a +1/+1 counter"),
                 new PlayerAttackedWatcher());
 
