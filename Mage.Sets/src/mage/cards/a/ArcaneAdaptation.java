@@ -25,68 +25,72 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.a;
 
-import mage.MageObject;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.util.SubTypeList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-import mage.abilities.common.AsEntersBattlefieldAbility;
 
 /**
  *
- * @author anonymous
+ * @author TheElk801
  */
-public class Conspiracy extends CardImpl {
+public class ArcaneAdaptation extends CardImpl {
 
-    public Conspiracy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
+    public ArcaneAdaptation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
-        // As Conspiracy enters the battlefield, choose a creature type.
+        // As Arcane Adaptation enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Neutral)));
-        // Creature cards you own that aren't on the battlefield, creature spells you control, and creatures you control are the chosen type.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConspiracyEffect()));
+        // Creatures you control are the chosen type in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConspyEffect()));
     }
 
-    public Conspiracy(final Conspiracy card) {
+    public ArcaneAdaptation(final ArcaneAdaptation card) {
         super(card);
     }
 
     @Override
-    public Conspiracy copy() {
-        return new Conspiracy(this);
+    public ArcaneAdaptation copy() {
+        return new ArcaneAdaptation(this);
     }
 }
 
-class ConspiracyEffect extends ContinuousEffectImpl {
+class ConspyEffect extends ContinuousEffectImpl {
 
-    public ConspiracyEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "Creature cards you own that aren't on the battlefield, creature spells you control, and creatures you control are the chosen type";
+    public ConspyEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "Creatures you control are the chosen type in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield";
     }
 
-    public ConspiracyEffect(final ConspiracyEffect effect) {
+    public ConspyEffect(final ConspyEffect effect) {
         super(effect);
     }
 
     @Override
-    public ConspiracyEffect copy() {
-        return new ConspiracyEffect(this);
+    public ConspyEffect copy() {
+        return new ConspyEffect(this);
     }
 
     @Override
@@ -98,35 +102,50 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             // in graveyard
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if (card.isCreature()) {
-                    setCreatureSubtype(card, choice, game);
+                if (card.isCreature() && !card.getSubtype(game).contains(choice)) {
+                    for (SubType s : card.getSubtype(game)) {
+                        game.getState().getCreateCardAttribute(card).getSubtype().add(s);
+                    }
+                    game.getState().getCreateCardAttribute(card).getSubtype().add(choice);
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card.isCreature()) {
-                    setCreatureSubtype(card, choice, game);
+                if (card.isCreature() && !card.getSubtype(game).contains(choice)) {
+                    for (SubType s : card.getSubtype(game)) {
+                        game.getState().getCreateCardAttribute(card).getSubtype().add(s);
+                    }
+                    game.getState().getCreateCardAttribute(card).getSubtype().add(choice);
                 }
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
-                    setCreatureSubtype(card, choice, game);
+                if (card.isCreature() && !card.getSubtype(game).contains(choice)) {
+                    for (SubType s : card.getSubtype(game)) {
+                        game.getState().getCreateCardAttribute(card).getSubtype().add(s);
+                    }
+                    game.getState().getCreateCardAttribute(card).getSubtype().add(choice);
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
-                    setCreatureSubtype(card, choice, game);
+                if (card.getOwnerId().equals(controller.getId()) && card.isCreature() && !card.getSubtype(game).contains(choice)) {
+                    for (SubType s : card.getSubtype(game)) {
+                        game.getState().getCreateCardAttribute(card).getSubtype().add(s);
+                    }
+                    game.getState().getCreateCardAttribute(card).getSubtype().add(choice);
                 }
             }
             // commander in command zone
             for (UUID commanderId : controller.getCommandersIds()) {
                 if (game.getState().getZone(commanderId) == Zone.COMMAND) {
                     Card card = game.getCard(commanderId);
-                    if (card.isCreature()) {
-                        setCreatureSubtype(card, choice, game);
+                    if (card.isCreature() && !card.getSubtype(game).contains(choice)) {
+                        for (SubType s : card.getSubtype(game)) {
+                            game.getState().getCreateCardAttribute(card).getSubtype().add(s);
+                        }
+                        game.getState().getCreateCardAttribute(card).getSubtype().add(choice);
                     }
                 }
             }
@@ -135,40 +154,27 @@ class ConspiracyEffect extends ContinuousEffectImpl {
                 StackObject stackObject = iterator.next();
                 if (stackObject instanceof Spell
                         && stackObject.getControllerId().equals(source.getControllerId())
-                        && stackObject.isCreature()) {
+                        && stackObject.isCreature()
+                        && !stackObject.getSubtype(game).contains(choice)) {
                     Card card = ((Spell) stackObject).getCard();
-                    setCreatureSubtype(card, choice, game);
+                    for (SubType s : card.getSubtype(game)) {
+                        game.getState().getCreateCardAttribute(card).getSubtype().add(s);
+                    }
+                    game.getState().getCreateCardAttribute(card).getSubtype().add(choice);
                 }
             }
             // creatures you control
             List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(
                     new FilterControlledCreaturePermanent(), source.getControllerId(), game);
             for (Permanent creature : creatures) {
-                setCreatureSubtype(creature, choice, game);
+                if (creature != null && !creature.getSubtype(game).contains(choice)) {
+                    creature.getSubtype(game).add(choice);
+                }
             }
             return true;
         }
+
         return false;
-    }
-
-    private void setCreatureSubtype(MageObject object, SubType subtype, Game game) {
-        if (object != null) {
-            if (object instanceof Card) {
-                Card card = (Card) object;
-                setChosenSubtype(
-                        game.getState().getCreateCardAttribute(card).getSubtype(),
-                        subtype);
-            } else {
-                setChosenSubtype(object.getSubtype(game), subtype);
-            }
-        }
-    }
-
-    private void setChosenSubtype(SubTypeList subtype, SubType choice) {
-        if (subtype.size() != 1 || !subtype.contains(choice)) {
-            subtype.removeAll(SubType.getCreatureTypes(false));
-            subtype.add(choice);
-        }
     }
 
     @Override
