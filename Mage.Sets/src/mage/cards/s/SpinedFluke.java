@@ -37,6 +37,7 @@ import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -49,8 +50,8 @@ public class SpinedFluke extends CardImpl {
 
     public SpinedFluke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Worm");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.WORM);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);

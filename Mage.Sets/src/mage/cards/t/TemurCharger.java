@@ -39,6 +39,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -59,7 +60,7 @@ public class TemurCharger extends CardImpl {
 
     public TemurCharger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Horse");
+        this.subtype.add(SubType.HORSE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

@@ -71,7 +71,7 @@ public class InameAsOne extends CardImpl {
     public InameAsOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{B}{B}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

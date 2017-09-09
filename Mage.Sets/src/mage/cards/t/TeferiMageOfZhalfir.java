@@ -52,8 +52,8 @@ public class TeferiMageOfZhalfir extends CardImpl {
     public TeferiMageOfZhalfir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

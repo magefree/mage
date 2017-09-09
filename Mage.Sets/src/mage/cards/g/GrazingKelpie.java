@@ -38,6 +38,7 @@ import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -50,7 +51,7 @@ public class GrazingKelpie extends CardImpl {
 
     public GrazingKelpie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G/U}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

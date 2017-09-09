@@ -33,6 +33,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class Savannah extends CardImpl {
 
     public Savannah(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Forest");
-        this.subtype.add("Plains");
+        this.subtype.add(SubType.FOREST);
+        this.subtype.add(SubType.PLAINS);
         
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());

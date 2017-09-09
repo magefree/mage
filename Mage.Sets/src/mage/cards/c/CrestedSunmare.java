@@ -64,7 +64,7 @@ public class CrestedSunmare extends CardImpl {
     public CrestedSunmare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 
-        this.subtype.add("Horse");
+        this.subtype.add(SubType.HORSE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,7 +42,7 @@ public class OmnathElementalToken extends Token {
         setTokenType(2);
         setOriginalExpansionSetCode("BFZ");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
 
         color.setRed(true);
         color.setGreen(true);

@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,7 +48,7 @@ public class ForgeDevil extends CardImpl {
 
     public ForgeDevil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Devil");
+        this.subtype.add(SubType.DEVIL);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

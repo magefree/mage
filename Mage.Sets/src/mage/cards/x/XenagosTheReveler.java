@@ -43,6 +43,7 @@ import mage.cards.CardsImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -64,7 +65,7 @@ public class XenagosTheReveler extends CardImpl {
     public XenagosTheReveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Xenagos");
+        this.subtype.add(SubType.XENAGOS);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

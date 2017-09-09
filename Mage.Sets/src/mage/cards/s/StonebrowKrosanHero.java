@@ -36,6 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -55,8 +56,8 @@ public class StonebrowKrosanHero extends CardImpl {
     public StonebrowKrosanHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Centaur");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

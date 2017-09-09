@@ -51,7 +51,7 @@ public class ShimmeringWings extends CardImpl {
 
     public ShimmeringWings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         
         // Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)

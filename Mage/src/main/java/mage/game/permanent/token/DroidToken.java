@@ -31,6 +31,7 @@ import java.util.Collections;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class DroidToken extends Token {
 
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
-        subtype.add("Droid");
+        subtype.add(SubType.DROID);
 
         power = new MageInt(1);
         toughness = new MageInt(1);

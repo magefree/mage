@@ -36,6 +36,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -46,7 +47,7 @@ public class GrinningDemon extends CardImpl {
 
     public GrinningDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

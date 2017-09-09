@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -50,7 +51,7 @@ public class EmissaryOfDespair extends CardImpl {
 
     public EmissaryOfDespair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

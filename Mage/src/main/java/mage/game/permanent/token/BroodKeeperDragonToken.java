@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -47,7 +48,7 @@ public class BroodKeeperDragonToken extends Token {
         this.setOriginalExpansionSetCode("M15");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Dragon");
+        subtype.add(SubType.DRAGON);
         power = new MageInt(2);
         toughness = new MageInt(2);
 

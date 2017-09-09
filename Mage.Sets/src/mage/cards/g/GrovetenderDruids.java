@@ -38,6 +38,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.GrovetenderDruidsPlantToken;
@@ -51,9 +52,9 @@ public class GrovetenderDruids extends CardImpl {
 
     public GrovetenderDruids(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.DRUID);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

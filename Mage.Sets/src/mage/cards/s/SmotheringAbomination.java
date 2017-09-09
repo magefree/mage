@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -53,7 +54,7 @@ public class SmotheringAbomination extends CardImpl {
 
     public SmotheringAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

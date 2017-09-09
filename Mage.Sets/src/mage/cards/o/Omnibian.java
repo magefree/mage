@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -49,7 +50,7 @@ public class Omnibian extends CardImpl {
 
     public Omnibian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}{U}");
-        this.subtype.add("Frog");
+        this.subtype.add(SubType.FROG);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -74,7 +75,7 @@ class OmnibianFrogToken extends Token {
 
     public OmnibianFrogToken() {
         super("", "3/3 Frog");
-        this.subtype.add("Frog");
+        this.subtype.add(SubType.FROG);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }

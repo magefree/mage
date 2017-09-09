@@ -57,7 +57,7 @@ public class ReachOfBranches extends CardImpl {
 
     public ReachOfBranches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{4}{G}");
-        this.subtype.add("Treefolk");
+        this.subtype.add(SubType.TREEFOLK);
 
         // Create a 2/5 green Treefolk Shaman creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TreefolkShamanToken()));

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class CaribouToken extends Token {
         super("Caribou", "0/1 white Caribou creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Caribou");
+        subtype.add(SubType.CARIBOU);
         power = new MageInt(0);
         toughness = new MageInt(1);
     }

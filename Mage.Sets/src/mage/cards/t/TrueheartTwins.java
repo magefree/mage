@@ -35,6 +35,7 @@ import mage.abilities.keyword.ExertAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -46,8 +47,8 @@ public class TrueheartTwins extends CardImpl {
     public TrueheartTwins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         
-        this.subtype.add("Jackal");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.JACKAL);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

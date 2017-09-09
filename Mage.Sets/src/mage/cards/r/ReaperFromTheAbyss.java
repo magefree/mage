@@ -63,7 +63,7 @@ public class ReaperFromTheAbyss extends CardImpl {
 
     public ReaperFromTheAbyss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

@@ -34,6 +34,7 @@ import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -44,8 +45,8 @@ public class SetessanOathsworn extends CardImpl {
 
     public SetessanOathsworn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Satyr");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.SATYR);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

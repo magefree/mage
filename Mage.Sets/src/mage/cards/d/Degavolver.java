@@ -42,6 +42,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -54,7 +55,7 @@ public class Degavolver extends CardImpl {
 
     public Degavolver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Volver");
+        this.subtype.add(SubType.VOLVER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

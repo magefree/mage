@@ -38,6 +38,7 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,8 +50,8 @@ public class WastelandStrangler extends CardImpl {
 
     public WastelandStrangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Processor");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.PROCESSOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

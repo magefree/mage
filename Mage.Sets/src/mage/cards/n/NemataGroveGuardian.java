@@ -59,7 +59,7 @@ public class NemataGroveGuardian extends CardImpl {
     public NemataGroveGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Treefolk");
+        this.subtype.add(SubType.TREEFOLK);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

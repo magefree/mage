@@ -40,6 +40,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -60,7 +61,7 @@ public class VileManifestation extends CardImpl {
     public VileManifestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

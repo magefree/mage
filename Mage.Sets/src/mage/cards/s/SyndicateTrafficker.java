@@ -39,6 +39,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -53,8 +54,8 @@ public class SyndicateTrafficker extends CardImpl {
 
     public SyndicateTrafficker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Aetherborn");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.AETHERBORN);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

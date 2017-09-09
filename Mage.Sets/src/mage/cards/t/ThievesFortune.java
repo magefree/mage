@@ -34,6 +34,7 @@ import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 
@@ -45,7 +46,7 @@ public class ThievesFortune extends CardImpl {
 
     public ThievesFortune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{2}{U}");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.ROGUE);
 
 
         // Prowl {U}

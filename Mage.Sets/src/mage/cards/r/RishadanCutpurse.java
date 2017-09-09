@@ -34,6 +34,7 @@ import mage.abilities.effects.common.SacrificeOpponentsUnlessPayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class RishadanCutpurse extends CardImpl {
 
     public RishadanCutpurse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Pirate");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

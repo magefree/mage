@@ -45,6 +45,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
@@ -73,8 +74,8 @@ public class GrenzoHavocRaiser extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Goblin");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

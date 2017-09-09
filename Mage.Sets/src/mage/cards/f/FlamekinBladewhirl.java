@@ -53,8 +53,8 @@ public class FlamekinBladewhirl extends CardImpl {
 
     public FlamekinBladewhirl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

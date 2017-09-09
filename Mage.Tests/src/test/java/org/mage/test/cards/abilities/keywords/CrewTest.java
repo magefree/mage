@@ -30,6 +30,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -57,7 +58,7 @@ public class CrewTest extends CardTestPlayerBase {
 
         assertTappedCount("Silvercoat Lion", true, 2);
         assertPowerToughness(playerA, "Cultivator's Caravan", 5, 5);
-        assertType("Cultivator's Caravan", CardType.CREATURE, "Vehicle");
+        assertType("Cultivator's Caravan", CardType.CREATURE, SubType.VEHICLE);
     }
 
     @Test
@@ -78,7 +79,7 @@ public class CrewTest extends CardTestPlayerBase {
         assertTappedCount("Speedway Fanatic", true, 1);
         assertPowerToughness(playerA, "Smuggler's Copter", 3, 3);
         assertAbility(playerA, "Smuggler's Copter", HasteAbility.getInstance(), true);
-        assertType("Smuggler's Copter", CardType.CREATURE, "Vehicle");
+        assertType("Smuggler's Copter", CardType.CREATURE, SubType.VEHICLE);
     }
 
     @Test

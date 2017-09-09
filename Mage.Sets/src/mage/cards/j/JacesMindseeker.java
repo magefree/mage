@@ -41,6 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -58,8 +59,8 @@ public class JacesMindseeker extends CardImpl {
 
     public JacesMindseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.subtype.add("Fish");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.FISH);
+        this.subtype.add(SubType.ILLUSION);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

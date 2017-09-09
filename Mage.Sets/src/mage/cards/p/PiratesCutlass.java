@@ -63,7 +63,7 @@ public class PiratesCutlass extends CardImpl {
     public PiratesCutlass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // When Pirate's Cutlass enters the battlefield, attach it to target Pirate you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(Outcome.BoostCreature, "attach it to target Pirate you control"), false);

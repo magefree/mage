@@ -33,6 +33,7 @@ import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author nantuko
@@ -61,7 +62,7 @@ public class SpiritWhiteToken extends Token {
             setTokenType(tokenType);
         }
         cardType.add(CardType.CREATURE);
-        subtype.add("Spirit");
+        subtype.add(SubType.SPIRIT);
         color.setWhite(true);
         power = new MageInt(1);
         toughness = new MageInt(1);

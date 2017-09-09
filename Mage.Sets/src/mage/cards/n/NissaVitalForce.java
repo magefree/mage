@@ -39,6 +39,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
@@ -65,7 +66,7 @@ public class NissaVitalForce extends CardImpl {
     public NissaVitalForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Nissa");
+        this.subtype.add(SubType.NISSA);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
@@ -100,7 +101,7 @@ class NissaVitalForceToken extends Token {
         super("", "5/5 Elemental creature with haste");
         this.cardType.add(CardType.CREATURE);
 
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(HasteAbility.getInstance());

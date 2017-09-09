@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class JagwaspSwarm extends CardImpl {
 
     public JagwaspSwarm (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
         this.color.setBlack(true);        
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

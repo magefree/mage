@@ -36,6 +36,7 @@ import mage.abilities.keyword.HauntAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,8 +57,8 @@ public class OrzhovPontiff extends CardImpl {
 
     public OrzhovPontiff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

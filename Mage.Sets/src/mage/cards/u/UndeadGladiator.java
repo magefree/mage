@@ -39,6 +39,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 
@@ -50,8 +51,8 @@ public class UndeadGladiator extends CardImpl {
 
     public UndeadGladiator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Barbarian");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.BARBARIAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

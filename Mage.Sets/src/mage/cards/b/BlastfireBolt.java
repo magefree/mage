@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -94,7 +95,7 @@ class DestroyAllAttachedEquipmentEffect extends OneShotEffect {
                 List<UUID> attachments = new ArrayList<>(target.getAttachments());
                 for (UUID attachmentId : attachments) {
                     Permanent attachment = game.getPermanent(attachmentId);
-                    if (attachment != null && attachment.getSubtype(game).contains("Equipment")) {
+                    if (attachment != null && attachment.getSubtype(game).contains(SubType.EQUIPMENT)) {
                         attachment.destroy(source.getSourceId(), game, false);
                     }
                 }

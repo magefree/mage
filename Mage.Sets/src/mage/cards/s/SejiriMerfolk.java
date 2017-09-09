@@ -59,8 +59,8 @@ public class SejiriMerfolk extends CardImpl {
 
     public SejiriMerfolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SOLDIER);
 
         this.color.setBlue(true);
         this.power = new MageInt(2);

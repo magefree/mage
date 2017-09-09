@@ -35,6 +35,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetArtifactPermanent;
@@ -53,7 +54,7 @@ public class DrossScorpion extends CardImpl {
     
     public DrossScorpion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
-        this.subtype.add("Scorpion");
+        this.subtype.add(SubType.SCORPION);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

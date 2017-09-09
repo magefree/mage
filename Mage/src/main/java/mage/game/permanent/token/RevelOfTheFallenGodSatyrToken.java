@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.HasteAbility;
@@ -44,7 +45,7 @@ public class RevelOfTheFallenGodSatyrToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.RED);
         color.setColor(ObjectColor.GREEN);
-        subtype.add("Satyr");
+        subtype.add(SubType.SATYR);
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(HasteAbility.getInstance());

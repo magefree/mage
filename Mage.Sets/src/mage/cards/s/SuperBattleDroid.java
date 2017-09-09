@@ -33,6 +33,7 @@ import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class SuperBattleDroid extends CardImpl {
 
     public SuperBattleDroid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}{U}");
-        this.subtype.add("Droid");
+        this.subtype.add(SubType.DROID);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

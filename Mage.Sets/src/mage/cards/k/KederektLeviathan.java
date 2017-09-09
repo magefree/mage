@@ -36,6 +36,7 @@ import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -52,7 +53,7 @@ public class KederektLeviathan extends CardImpl {
 
     public KederektLeviathan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}");
-        this.subtype.add("Leviathan");
+        this.subtype.add(SubType.LEVIATHAN);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

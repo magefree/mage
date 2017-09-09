@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -60,8 +61,8 @@ public class UlamogsNullifier extends CardImpl {
 
     public UlamogsNullifier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Processor");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.PROCESSOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

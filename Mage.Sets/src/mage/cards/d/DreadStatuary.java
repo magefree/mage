@@ -37,6 +37,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -70,7 +71,7 @@ class DreadStatuaryToken extends Token {
         super("", "4/2 Golem artifact creature");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
-        subtype.add("Golem");
+        subtype.add(SubType.GOLEM);
         power = new MageInt(4);
         toughness = new MageInt(2);
     }

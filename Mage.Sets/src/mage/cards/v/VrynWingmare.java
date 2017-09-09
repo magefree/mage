@@ -39,6 +39,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -54,7 +55,7 @@ public class VrynWingmare extends CardImpl {
 
     public VrynWingmare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Pegasus");
+        this.subtype.add(SubType.PEGASUS);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

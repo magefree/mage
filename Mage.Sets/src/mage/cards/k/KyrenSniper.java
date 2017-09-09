@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
@@ -45,7 +46,7 @@ public class KyrenSniper extends CardImpl {
 
     public KyrenSniper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Goblin");
+        this.subtype.add(SubType.GOBLIN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

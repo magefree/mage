@@ -38,6 +38,7 @@ import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SubLayer;
 import mage.filter.FilterSpell;
@@ -61,7 +62,7 @@ public class RiverfallMimic extends CardImpl {
 
     public RiverfallMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U/R}");
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
 
         this.color.setRed(true);
         this.color.setBlue(true);

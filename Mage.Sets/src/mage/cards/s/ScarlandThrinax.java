@@ -38,6 +38,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -52,7 +53,7 @@ public class ScarlandThrinax extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}");
 
 
-        this.subtype.add("Lizard");
+        this.subtype.add(SubType.LIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

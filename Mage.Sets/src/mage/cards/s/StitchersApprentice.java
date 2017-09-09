@@ -38,6 +38,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -56,7 +57,7 @@ public class StitchersApprentice extends CardImpl {
 
     public StitchersApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.subtype.add("Homunculus");
+        this.subtype.add(SubType.HOMUNCULUS);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

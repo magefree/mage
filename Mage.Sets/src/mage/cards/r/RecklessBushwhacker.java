@@ -39,6 +39,7 @@ import mage.abilities.keyword.SurgeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -57,9 +58,9 @@ public class RecklessBushwhacker extends CardImpl {
 
     public RecklessBushwhacker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

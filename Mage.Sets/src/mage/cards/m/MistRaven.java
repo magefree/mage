@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,7 +47,7 @@ public class MistRaven extends CardImpl {
 
     public MistRaven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.subtype.add("Bird");
+        this.subtype.add(SubType.BIRD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,8 +42,8 @@ public class FreshVolunteers extends CardImpl {
 
     public FreshVolunteers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Rebel");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.REBEL);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DiscardOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -45,8 +46,8 @@ public class LoxodonSmiter extends CardImpl {
 
     public LoxodonSmiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
-        this.subtype.add("Elephant");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.ELEPHANT);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -37,6 +37,7 @@ import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.TargetStackObject;
 
@@ -48,7 +49,7 @@ public class Droideka extends CardImpl {
 
     public Droideka(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Droid");
+        this.subtype.add(SubType.DROID);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
 

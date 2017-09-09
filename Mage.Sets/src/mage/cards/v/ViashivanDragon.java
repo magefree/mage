@@ -9,6 +9,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -17,7 +18,7 @@ public class ViashivanDragon extends CardImpl {
 
     public ViashivanDragon(UUID cardId, CardSetInfo cardSetInfo) {
         super(cardId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{G}{G}");
-        subtype.add("Dragon");
+        subtype.add(SubType.DRAGON);
         color.setGreen(true);
         color.setRed(true);
         power = new MageInt(4);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.RenownAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,7 +47,7 @@ public class UndercityTroll extends CardImpl {
 
     public UndercityTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Troll");
+        this.subtype.add(SubType.TROLL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

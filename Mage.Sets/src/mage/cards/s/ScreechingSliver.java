@@ -53,7 +53,7 @@ public class ScreechingSliver extends CardImpl {
 
     public ScreechingSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

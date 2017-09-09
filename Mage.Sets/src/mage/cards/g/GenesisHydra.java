@@ -37,6 +37,7 @@ import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -58,8 +59,8 @@ public class GenesisHydra extends CardImpl {
 
     public GenesisHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.PLANT);
+        this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

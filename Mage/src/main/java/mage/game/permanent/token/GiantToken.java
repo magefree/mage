@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -39,7 +40,7 @@ public class GiantToken extends Token {
     public GiantToken() {
         super("Giant", "4/4 red Giant creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Giant");
+        subtype.add(SubType.GIANT);
         color.setRed(true);
         power = new MageInt(4);
         toughness = new MageInt(4);

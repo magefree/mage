@@ -40,6 +40,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -58,8 +59,8 @@ public class MinaAndDennWildborn extends CardImpl {
     public MinaAndDennWildborn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elf");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

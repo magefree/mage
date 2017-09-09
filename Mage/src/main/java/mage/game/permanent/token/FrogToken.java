@@ -29,6 +29,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,7 +42,7 @@ public class FrogToken extends Token {
         super("Frog", "1/1 blue Frog creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Frog");
+        subtype.add(SubType.FROG);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

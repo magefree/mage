@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class PongifyApeToken extends Token {
         super("Ape", "3/3 green Ape creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Ape");
+        subtype.add(SubType.APE);
         power = new MageInt(3);
         toughness = new MageInt(3);
     }

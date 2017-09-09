@@ -66,8 +66,8 @@ public class GalecasterColossus extends CardImpl {
     public GalecasterColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
 
-        this.subtype.add("Giant");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

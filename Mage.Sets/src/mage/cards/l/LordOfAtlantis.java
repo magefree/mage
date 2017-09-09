@@ -58,7 +58,7 @@ public class LordOfAtlantis extends CardImpl {
 
     public LordOfAtlantis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
-        this.subtype.add("Merfolk");
+        this.subtype.add(SubType.MERFOLK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

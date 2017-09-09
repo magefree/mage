@@ -58,7 +58,7 @@ public class SarkhanTheDragonspeaker extends CardImpl {
     public SarkhanTheDragonspeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Sarkhan");
+        this.subtype.add(SubType.SARKHAN);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
@@ -118,7 +118,7 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
                         permanent.getCardType().clear();
                         permanent.addCardType(CardType.CREATURE);
                         permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add("Dragon");
+                        permanent.getSubtype(game).add(SubType.DRAGON);
                         permanent.getSuperType().clear();
                         permanent.addSuperType(SuperType.LEGENDARY);
                     }

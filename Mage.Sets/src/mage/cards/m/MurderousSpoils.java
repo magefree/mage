@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
@@ -97,7 +98,7 @@ class MurderousSpoilsEffect extends OneShotEffect {
             List<Permanent> attachments = new ArrayList<>();
             for (UUID uuid : target.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
-                if (attached.getSubtype(game).contains("Equipment")) {
+                if (attached.getSubtype(game).contains(SubType.EQUIPMENT)) {
                     attachments.add(attached);
                 }
             }

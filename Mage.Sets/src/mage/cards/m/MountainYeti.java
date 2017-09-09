@@ -35,6 +35,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class MountainYeti extends CardImpl {
 
     public MountainYeti(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Yeti");
+        this.subtype.add(SubType.YETI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

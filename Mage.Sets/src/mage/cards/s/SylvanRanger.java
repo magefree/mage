@@ -34,6 +34,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
@@ -47,8 +48,8 @@ public class SylvanRanger extends CardImpl {
 
     public SylvanRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

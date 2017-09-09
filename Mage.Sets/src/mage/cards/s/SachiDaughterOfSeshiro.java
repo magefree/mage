@@ -58,8 +58,8 @@ public class SachiDaughterOfSeshiro extends CardImpl {
     public SachiDaughterOfSeshiro(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Snake");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

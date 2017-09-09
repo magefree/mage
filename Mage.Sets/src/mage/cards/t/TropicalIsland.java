@@ -33,6 +33,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class TropicalIsland extends CardImpl {
 
     public TropicalIsland(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Forest");
-        this.subtype.add("Island");
+        this.subtype.add(SubType.FOREST);
+        this.subtype.add(SubType.ISLAND);
         
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());

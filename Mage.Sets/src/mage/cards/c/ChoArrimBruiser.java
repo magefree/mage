@@ -35,6 +35,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,8 +46,8 @@ public class ChoArrimBruiser extends CardImpl {
 
     public ChoArrimBruiser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Rebel");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.REBEL);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

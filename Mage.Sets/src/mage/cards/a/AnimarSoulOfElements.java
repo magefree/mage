@@ -46,6 +46,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
 /**
@@ -111,9 +112,15 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
-            Card sourceCard = game.getCard(abilityToModify.getSourceId());
-            if (sourceCard != null && abilityToModify.getControllerId().equals(source.getControllerId()) && (sourceCard.isCreature())) {
-                return true;
+            if (abilityToModify.getControllerId().equals(source.getControllerId())) {
+                Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
+                if (spell != null) {
+                    return spell.isCreature();
+                } else {
+                    // used at least for flashback ability because Flashback ability doesn't use stack or for getPlayables where spell is not cast yet
+                    Card sourceCard = game.getCard(abilityToModify.getSourceId());
+                    return sourceCard != null && sourceCard.isCreature();
+                }
             }
         }
         return false;

@@ -57,7 +57,7 @@ public class KirdApe extends CardImpl {
 
     public KirdApe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Ape");
+        this.subtype.add(SubType.APE);
 
         this.color.setRed(true);
         this.power = new MageInt(1);

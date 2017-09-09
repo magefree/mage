@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -47,7 +48,7 @@ public class IncitedRabble extends CardImpl {
 
     public IncitedRabble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Human");
+        this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.color.setRed(true);

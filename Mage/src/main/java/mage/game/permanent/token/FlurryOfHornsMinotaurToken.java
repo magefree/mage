@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.HasteAbility;
@@ -43,7 +44,7 @@ public class FlurryOfHornsMinotaurToken extends Token {
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.RED);
-        subtype.add("Minotaur");
+        subtype.add(SubType.MINOTAUR);
         power = new MageInt(2);
         toughness = new MageInt(3);
         addAbility(HasteAbility.getInstance());

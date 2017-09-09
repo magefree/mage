@@ -53,7 +53,7 @@ public class SilvergladeElemental extends CardImpl {
 
     public SilvergladeElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

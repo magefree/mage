@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -49,7 +50,7 @@ public class Stonecloaker extends CardImpl {
 
     public Stonecloaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Gargoyle");
+        this.subtype.add(SubType.GARGOYLE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

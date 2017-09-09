@@ -29,6 +29,7 @@
 package mage.game.permanent.token;
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -56,7 +57,7 @@ public class SengirNosferatuBatToken extends Token {
         super("Bat", "1/2 black Bat creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Bat");
+        subtype.add(SubType.BAT);
         power = new MageInt(1);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

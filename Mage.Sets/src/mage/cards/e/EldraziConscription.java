@@ -52,8 +52,8 @@ public class EldraziConscription extends CardImpl {
 
     public EldraziConscription (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{8}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

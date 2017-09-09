@@ -36,6 +36,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,7 +46,7 @@ public class DarksteelSentinel extends CardImpl {
 
     public DarksteelSentinel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
-        this.subtype.add("Golem");
+        this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlashAbility.getInstance());

@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -62,8 +63,8 @@ public class GoblinArtisans extends CardImpl {
 
     public GoblinArtisans(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -33,6 +33,7 @@ import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -43,7 +44,7 @@ public class DampenThought extends CardImpl {
 
     public DampenThought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // Target player puts the top four cards of his or her library into his or her graveyard.

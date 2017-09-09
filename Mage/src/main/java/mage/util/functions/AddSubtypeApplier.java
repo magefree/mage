@@ -8,6 +8,7 @@ package mage.util.functions;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -17,9 +18,9 @@ import mage.game.permanent.Permanent;
  */
 public class AddSubtypeApplier extends ApplyToPermanent {
 
-    private final String subtype;
+    private final SubType subtype;
 
-    public AddSubtypeApplier(String subtype) {
+    public AddSubtypeApplier(SubType subtype) {
         this.subtype = subtype;
     }
 

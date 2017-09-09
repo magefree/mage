@@ -36,6 +36,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,8 +56,8 @@ public class KorLineSlinger extends CardImpl {
 
     public KorLineSlinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

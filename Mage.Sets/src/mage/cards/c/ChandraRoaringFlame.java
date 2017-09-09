@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -55,7 +56,7 @@ public class ChandraRoaringFlame extends CardImpl {
     public ChandraRoaringFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Chandra");
+        this.subtype.add(SubType.CHANDRA);
         this.color.setRed(true);
 
         this.nightCard = true;

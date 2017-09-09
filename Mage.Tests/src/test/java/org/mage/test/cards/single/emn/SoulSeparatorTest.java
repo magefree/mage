@@ -4,6 +4,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
@@ -40,7 +41,7 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
 
         Permanent saToken = getPermanent("Sylvan Advocate", playerA);
         Assert.assertTrue(saToken.getAbilities().contains(FlyingAbility.getInstance()));
-        Assert.assertTrue(saToken.getSubtype(currentGame).contains("Spirit"));
+        Assert.assertTrue(saToken.getSubtype(currentGame).contains(SubType.SPIRIT));
         Assert.assertTrue(saToken.getAbilities().contains(VigilanceAbility.getInstance()));
         assertPowerToughness(playerA, "Sylvan Advocate", 1, 1);
     }
@@ -76,7 +77,7 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
 
         Permanent treeToken = getPermanent("Tree of Perdition", playerA);
         Assert.assertTrue(treeToken.getAbilities().contains(FlyingAbility.getInstance()));
-        Assert.assertTrue(treeToken.getSubtype(currentGame).contains("Spirit"));
+        Assert.assertTrue(treeToken.getSubtype(currentGame).contains(SubType.SPIRIT));
         Assert.assertTrue(treeToken.getAbilities().contains(DefenderAbility.getInstance()));
 
         assertLife(playerA, 20);

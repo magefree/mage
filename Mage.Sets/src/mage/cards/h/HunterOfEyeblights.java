@@ -39,6 +39,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -64,8 +65,8 @@ public class HunterOfEyeblights extends CardImpl {
 
     public HunterOfEyeblights(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Elf");
-        this.subtype.add("Assassin");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

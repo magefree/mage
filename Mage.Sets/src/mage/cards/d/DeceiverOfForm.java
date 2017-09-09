@@ -50,7 +50,7 @@ public class DeceiverOfForm extends CardImpl {
 
     public DeceiverOfForm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{C}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

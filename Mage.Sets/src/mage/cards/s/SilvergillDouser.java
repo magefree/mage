@@ -61,8 +61,8 @@ public class SilvergillDouser extends CardImpl {
 
     public SilvergillDouser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

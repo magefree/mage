@@ -53,7 +53,7 @@ public class SealockMonster extends CardImpl {
 
     public SealockMonster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        this.subtype.add("Octopus");
+        this.subtype.add(SubType.OCTOPUS);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -116,8 +116,8 @@ class SealockMonsterBecomesIslandTargetEffect extends ContinuousEffectImpl {
                         }
                         break;
                     case TypeChangingEffects_4:
-                        if (!land.getSubtype(game).contains("Island")) {
-                            land.getSubtype(game).add("Island");
+                        if (!land.getSubtype(game).contains(SubType.ISLAND)) {
+                            land.getSubtype(game).add(SubType.ISLAND);
                         }
                         break;
                 }

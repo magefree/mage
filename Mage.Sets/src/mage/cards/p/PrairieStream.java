@@ -39,6 +39,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
@@ -58,8 +59,8 @@ public class PrairieStream extends CardImpl {
 
     public PrairieStream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Plains");
-        this.subtype.add("Island");
+        this.subtype.add(SubType.PLAINS);
+        this.subtype.add(SubType.ISLAND);
 
         // Prairie Stream enters the battlefield tapped unless you control two or more basic lands.
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1));

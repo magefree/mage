@@ -43,6 +43,7 @@ import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -53,7 +54,7 @@ public class FlameWreathedPhoenix extends CardImpl {
 
     public FlameWreathedPhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Phoenix");
+        this.subtype.add(SubType.PHOENIX);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

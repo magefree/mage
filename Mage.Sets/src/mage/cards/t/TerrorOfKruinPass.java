@@ -64,7 +64,7 @@ public class TerrorOfKruinPass extends CardImpl {
 
     public TerrorOfKruinPass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.WEREWOLF);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

@@ -9,6 +9,7 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
@@ -25,7 +26,7 @@ public class Magmaroth extends CardImpl{
 
     public Magmaroth(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(5);
         toughness = new MageInt(5);
 

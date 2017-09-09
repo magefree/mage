@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.ReefWormFishToken;
 
 /**
@@ -44,7 +45,7 @@ public class ReefWorm extends CardImpl {
 
     public ReefWorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add("Worm");
+        this.subtype.add(SubType.WORM);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

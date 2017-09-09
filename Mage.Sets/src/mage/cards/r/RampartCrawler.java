@@ -54,8 +54,8 @@ public class RampartCrawler extends CardImpl {
 
     public RampartCrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Lizard");
-        this.subtype.add("Mercenary");
+        this.subtype.add(SubType.LIZARD);
+        this.subtype.add(SubType.MERCENARY);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

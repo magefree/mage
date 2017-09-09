@@ -38,6 +38,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -51,8 +52,8 @@ public class IroncladRevolutionary extends CardImpl {
     public IroncladRevolutionary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
-        this.subtype.add("Aetherborn");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.AETHERBORN);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

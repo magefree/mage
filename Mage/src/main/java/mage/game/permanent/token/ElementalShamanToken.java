@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -55,8 +56,8 @@ public class ElementalShamanToken extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Elemental");
-        subtype.add("Shaman");
+        subtype.add(SubType.ELEMENTAL);
+        subtype.add(SubType.SHAMAN);
         power = new MageInt(3);
         toughness = new MageInt(1);
     }

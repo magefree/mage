@@ -41,6 +41,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -100,8 +101,8 @@ class MythRealizedToken extends Token {
     public MythRealizedToken() {
         super("", "Monk Avatar creature in addition to its other types and gains \"This creature's power and toughness are each equal to the number of lore counters on it.\"");
         cardType.add(CardType.CREATURE);
-        subtype.add("Monk");
-        subtype.add("Avatar");
+        subtype.add(SubType.MONK);
+        subtype.add(SubType.AVATAR);
         power = new MageInt(0);
         toughness = new MageInt(0);
     }

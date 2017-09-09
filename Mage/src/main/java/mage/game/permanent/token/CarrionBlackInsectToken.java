@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class CarrionBlackInsectToken extends Token {
         super("Insect", "0/1 black Insect creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Insect");
+        subtype.add(SubType.INSECT);
         power = new MageInt(0);
         toughness = new MageInt(1);
     }

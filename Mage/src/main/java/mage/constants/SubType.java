@@ -257,6 +257,7 @@ public enum SubType {
     QUARREN("Quarren", SubTypeSet.CreatureType, true), // Star Wars
     // R
     RABBIT("Rabbit", SubTypeSet.CreatureType),
+    RAIDER("Raider", SubTypeSet.CreatureType, true), // Star Wars
     RAT("Rat", SubTypeSet.CreatureType),
     REBEL("Rebel", SubTypeSet.CreatureType),
     REFLECTION("Reflection", SubTypeSet.CreatureType),
@@ -317,6 +318,7 @@ public enum SubType {
     TRISKELAVITE("Triskelavite", SubTypeSet.CreatureType),
     TROLL("Troll", SubTypeSet.CreatureType),
     TURTLE("Turtle", SubTypeSet.CreatureType),
+    TUSKEN("Tusken", SubTypeSet.CreatureType, true), // Star Wars
     TROOPER("Trooper", SubTypeSet.CreatureType, true), // Star Wars
     TWILEK("Twi'lek", SubTypeSet.CreatureType, true), // Star Wars
 

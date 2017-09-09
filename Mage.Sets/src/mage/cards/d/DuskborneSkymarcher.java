@@ -60,8 +60,8 @@ public class DuskborneSkymarcher extends CardImpl {
     public DuskborneSkymarcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
 
-        this.subtype.add("Vampire");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -37,6 +37,7 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -47,8 +48,8 @@ public class VeteranMotorist extends CardImpl {
 
     public VeteranMotorist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
-        this.subtype.add("Dwarf");
-        this.subtype.add("Pilot");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.PILOT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

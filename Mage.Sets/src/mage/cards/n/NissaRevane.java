@@ -64,7 +64,7 @@ public class NissaRevane extends CardImpl {
     public NissaRevane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{G}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Nissa");
+        this.subtype.add(SubType.NISSA);
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(2));
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1, nissasChosenFilter)), 1);

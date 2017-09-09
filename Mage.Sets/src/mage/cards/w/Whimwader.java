@@ -35,6 +35,7 @@ import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPer
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -54,7 +55,7 @@ public class Whimwader extends CardImpl {
 
     public Whimwader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);

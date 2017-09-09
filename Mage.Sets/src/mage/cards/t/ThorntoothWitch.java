@@ -55,8 +55,8 @@ public class ThorntoothWitch extends CardImpl {
 
     public ThorntoothWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

@@ -55,7 +55,7 @@ public class PeopleOfTheWoods extends CardImpl {
 
     public PeopleOfTheWoods(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
-        this.subtype.add("Human");
+        this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(0);
 

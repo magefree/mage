@@ -66,7 +66,7 @@ public class NahiriTheLithomancer extends CardImpl {
     public NahiriTheLithomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Nahiri");
+        this.subtype.add(SubType.NAHIRI);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

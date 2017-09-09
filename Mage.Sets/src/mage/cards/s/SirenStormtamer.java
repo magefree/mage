@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.Game;
@@ -60,9 +61,9 @@ public class SirenStormtamer extends CardImpl {
     public SirenStormtamer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
 
-        this.subtype.add("Siren");
-        this.subtype.add("Pirate");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.SIREN);
+        this.subtype.add(SubType.PIRATE);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

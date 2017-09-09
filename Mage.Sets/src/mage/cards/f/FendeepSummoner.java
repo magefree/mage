@@ -57,8 +57,8 @@ public class FendeepSummoner extends CardImpl {
 
     public FendeepSummoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
@@ -84,8 +84,8 @@ class FendeepSummonerToken extends Token {
     public FendeepSummonerToken() {
         super("", "3/5 Treefolk Warrior");
         this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Treefolk");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
     }

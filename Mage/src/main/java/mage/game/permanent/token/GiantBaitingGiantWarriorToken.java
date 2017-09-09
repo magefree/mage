@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
@@ -42,8 +43,8 @@ public class GiantBaitingGiantWarriorToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setGreen(true);
-        subtype.add("Giant");
-        subtype.add("Warrior");
+        subtype.add(SubType.GIANT);
+        subtype.add(SubType.WARRIOR);
         power = new MageInt(4);
         toughness = new MageInt(4);
         this.addAbility(HasteAbility.getInstance());

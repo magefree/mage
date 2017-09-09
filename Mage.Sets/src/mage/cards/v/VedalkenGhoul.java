@@ -34,6 +34,7 @@ import mage.abilities.effects.common.LoseLifeDefendingPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class VedalkenGhoul extends CardImpl {
 
     public VedalkenGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
-        this.subtype.add("Vedalken");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.VEDALKEN);
+        this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

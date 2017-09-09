@@ -39,6 +39,7 @@ import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -59,9 +60,9 @@ public class ShamanEnKor extends CardImpl {
 
     public ShamanEnKor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Cleric");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.CLERIC);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

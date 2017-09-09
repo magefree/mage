@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -44,7 +45,7 @@ public class ArchitectOfTheUntamedBeastToken extends Token {
         super("Beast", "6/6 colorless Beast artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Beast");
+        subtype.add(SubType.BEAST);
         power = new MageInt(6);
         toughness = new MageInt(6);
     }

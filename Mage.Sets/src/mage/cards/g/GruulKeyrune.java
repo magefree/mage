@@ -38,6 +38,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -75,7 +76,7 @@ public class GruulKeyrune extends CardImpl {
             cardType.add(CardType.CREATURE);
             color.setRed(true);
             color.setGreen(true);
-            subtype.add("Beast");
+            subtype.add(SubType.BEAST);
             power = new MageInt(3);
             toughness = new MageInt(2);
             this.addAbility(TrampleAbility.getInstance());

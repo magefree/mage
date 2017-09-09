@@ -62,7 +62,7 @@ public class KondasBanner extends CardImpl {
     public KondasBanner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         Target target = new TargetControlledCreaturePermanent(1, 1, legendaryFilter, false);
         // Konda's Banner can be attached only to a legendary creature.

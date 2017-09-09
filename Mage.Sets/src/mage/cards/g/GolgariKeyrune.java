@@ -38,6 +38,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -74,7 +75,7 @@ public class GolgariKeyrune extends CardImpl {
             cardType.add(CardType.CREATURE);
             color.setGreen(true);
             color.setBlack(true);
-            this.subtype.add("Insect");
+            this.subtype.add(SubType.INSECT);
             power = new MageInt(2);
             toughness = new MageInt(2);
             this.addAbility(DeathtouchAbility.getInstance());

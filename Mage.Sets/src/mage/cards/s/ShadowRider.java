@@ -33,6 +33,7 @@ import mage.abilities.keyword.FlankingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class ShadowRider extends CardImpl {
 
     public ShadowRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.KNIGHT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -58,7 +58,7 @@ public class CauterySliver extends CardImpl {
 
     public CauterySliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -63,8 +63,8 @@ public class GontiLordOfLuxury extends CardImpl {
     public GontiLordOfLuxury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Aetherborn");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.AETHERBORN);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

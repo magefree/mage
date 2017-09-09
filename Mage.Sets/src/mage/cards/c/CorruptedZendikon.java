@@ -39,6 +39,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -54,7 +55,7 @@ public class CorruptedZendikon extends CardImpl {
 
     public CorruptedZendikon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
@@ -90,7 +91,7 @@ class CorruptedZendikonOozeToken extends Token {
         super("Ooze", "3/3 black Ooze creature");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Ooze");
+        subtype.add(SubType.OOZE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }

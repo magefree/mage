@@ -40,6 +40,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -67,7 +68,7 @@ public class StormtideLeviathan extends CardImpl {
 
     public StormtideLeviathan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}{U}");
-        this.subtype.add("Leviathan");
+        this.subtype.add(SubType.LEVIATHAN);
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -113,8 +114,8 @@ class StormtideLeviathanEffect extends ContinuousEffectImpl {
         for (Permanent land : game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), game)) {
             switch (layer) {
                 case TypeChangingEffects_4:
-                    if (!land.getSubtype(game).contains("Island")) {
-                        land.getSubtype(game).add("Island");
+                    if (!land.getSubtype(game).contains(SubType.ISLAND)) {
+                        land.getSubtype(game).add(SubType.ISLAND);
                     }
                     break;
                 case AbilityAddingRemovingEffects_6:

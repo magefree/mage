@@ -34,6 +34,7 @@ import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 
 /**
@@ -44,7 +45,7 @@ public class SiltCrawler extends CardImpl {
 
     public SiltCrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

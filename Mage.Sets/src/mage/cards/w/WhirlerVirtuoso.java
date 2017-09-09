@@ -37,6 +37,7 @@ import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.ThopterColorlessToken;
 
@@ -48,8 +49,8 @@ public class WhirlerVirtuoso extends CardImpl {
 
     public WhirlerVirtuoso(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
-        this.subtype.add("Vedalken");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.VEDALKEN);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

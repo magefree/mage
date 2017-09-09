@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -56,8 +57,8 @@ public class TishanaVoiceOfThunder extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{U}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Merfolk");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

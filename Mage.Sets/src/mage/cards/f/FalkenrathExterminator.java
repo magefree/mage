@@ -39,6 +39,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,8 +52,8 @@ public class FalkenrathExterminator extends CardImpl {
 
     public FalkenrathExterminator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

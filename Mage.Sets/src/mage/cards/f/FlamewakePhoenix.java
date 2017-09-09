@@ -41,6 +41,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -52,7 +53,7 @@ public class FlamewakePhoenix extends CardImpl {
 
     public FlamewakePhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.subtype.add("Phoenix");
+        this.subtype.add(SubType.PHOENIX);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

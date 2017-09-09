@@ -37,6 +37,7 @@ import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
@@ -50,7 +51,7 @@ public class MillenniumFalcon extends CardImpl {
     public MillenniumFalcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Starship");
+        this.subtype.add(SubType.STARSHIP);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

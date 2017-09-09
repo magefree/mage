@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class MessengerFalcons extends CardImpl {
 
     public MessengerFalcons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G/U}{W}");
-        this.subtype.add("Bird");
+        this.subtype.add(SubType.BIRD);
 
 
 

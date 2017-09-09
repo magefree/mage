@@ -33,6 +33,7 @@ import mage.abilities.mana.AnyColorLandsProduceManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -44,8 +45,8 @@ public class NagaVitalist extends CardImpl {
     public NagaVitalist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.subtype.add("Naga");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.DRUID);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

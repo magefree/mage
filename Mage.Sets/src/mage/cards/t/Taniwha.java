@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
@@ -54,7 +55,7 @@ public class Taniwha extends CardImpl {
     public Taniwha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Serpent");
+        this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

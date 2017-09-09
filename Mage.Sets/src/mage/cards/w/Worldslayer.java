@@ -38,6 +38,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,7 +55,7 @@ public class Worldslayer extends CardImpl {
 
     public Worldslayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature deals combat damage to a player, destroy all permanents other than Worldslayer.
         this.addAbility(new WorldslayerTriggeredAbility());

@@ -39,6 +39,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -50,7 +51,7 @@ public class DomesticatedHydra extends CardImpl {
 
     public DomesticatedHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

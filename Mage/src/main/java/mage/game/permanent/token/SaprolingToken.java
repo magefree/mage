@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.util.RandomUtil;
 
 /**
@@ -64,7 +65,7 @@ public class SaprolingToken extends Token {
         }
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Saproling");
+        subtype.add(SubType.SAPROLING);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

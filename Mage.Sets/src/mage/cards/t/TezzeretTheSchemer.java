@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -55,7 +56,7 @@ public class TezzeretTheSchemer extends CardImpl {
     public TezzeretTheSchemer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Tezzeret");
+        this.subtype.add(SubType.TEZZERET);
 
         //Starting Loyalty - 5
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

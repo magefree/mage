@@ -53,8 +53,8 @@ public class WarrenInstigator extends CardImpl {
 
     public WarrenInstigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.BERSERKER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

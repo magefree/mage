@@ -38,6 +38,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -50,8 +51,8 @@ public class KnotvineMystic extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");
 
 
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         

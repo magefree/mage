@@ -38,6 +38,7 @@ import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,7 +52,7 @@ public class JaceMemoryAdept extends CardImpl {
     public JaceMemoryAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{U}{U}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Jace");
+        this.subtype.add(SubType.JACE);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 

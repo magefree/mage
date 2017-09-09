@@ -37,6 +37,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,7 +52,7 @@ public class NetcasterSpider extends CardImpl {
 
     public NetcasterSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Spider");
+        this.subtype.add(SubType.SPIDER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

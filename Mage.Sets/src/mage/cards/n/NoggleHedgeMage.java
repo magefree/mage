@@ -66,8 +66,8 @@ public class NoggleHedgeMage extends CardImpl {
 
     public NoggleHedgeMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U/R}");
-        this.subtype.add("Noggle");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.NOGGLE);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

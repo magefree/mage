@@ -56,8 +56,8 @@ public class ExperimentKraj extends CardImpl {
     public ExperimentKraj(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Ooze");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.OOZE);
+        this.subtype.add(SubType.MUTANT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);

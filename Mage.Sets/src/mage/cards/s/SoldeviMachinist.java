@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 
 /**
@@ -53,9 +54,9 @@ public class SoldeviMachinist extends CardImpl {
 
     public SoldeviMachinist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

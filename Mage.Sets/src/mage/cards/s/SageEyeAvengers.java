@@ -37,6 +37,7 @@ import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -52,8 +53,8 @@ public class SageEyeAvengers extends CardImpl {
 
     public SageEyeAvengers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
-        this.subtype.add("Djinn");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.DJINN);
+        this.subtype.add(SubType.MONK);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

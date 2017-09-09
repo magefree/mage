@@ -57,7 +57,7 @@ public class CallerOfTheHunt extends CardImpl {
     public CallerOfTheHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.subtype.add("Human");
+        this.subtype.add(SubType.HUMAN);
 
         // As an additional cost to cast Caller of the Hunt, choose a creature type.
         // Caller of the Hunt's power and toughness are each equal to the number of creatures of the chosen type on the battlefield.

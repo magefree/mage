@@ -58,7 +58,7 @@ public class KrosanGroundshaker extends CardImpl {
 
     public KrosanGroundshaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

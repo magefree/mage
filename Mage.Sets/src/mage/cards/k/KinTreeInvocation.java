@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -92,8 +93,8 @@ class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
         }
 
         SubTypeList list = new SubTypeList();
-        list.add("Spirit");
-        list.add("Warrior");
+        list.add(SubType.SPIRIT);
+        list.add(SubType.WARRIOR);
         ObjectColor objectColor = new ObjectColor();
         objectColor.setBlack(true);
         objectColor.setGreen(true);

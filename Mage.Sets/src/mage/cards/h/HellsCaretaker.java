@@ -38,6 +38,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -52,7 +53,7 @@ public class HellsCaretaker extends CardImpl {
 
     public HellsCaretaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

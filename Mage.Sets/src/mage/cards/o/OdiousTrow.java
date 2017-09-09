@@ -35,6 +35,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -45,7 +46,7 @@ public class OdiousTrow extends CardImpl {
 
     public OdiousTrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/G}");
-        this.subtype.add("Troll");
+        this.subtype.add(SubType.TROLL);
 
 
         this.power = new MageInt(1);

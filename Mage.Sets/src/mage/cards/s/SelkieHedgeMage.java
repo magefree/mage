@@ -66,8 +66,8 @@ public class SelkieHedgeMage extends CardImpl {
 
     public SelkieHedgeMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G/U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WIZARD);
 
         this.color.setBlue(true);
         this.color.setGreen(true);

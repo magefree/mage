@@ -39,6 +39,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.counters.CounterType;
@@ -54,7 +55,7 @@ public class FairgroundsTrumpeter extends CardImpl {
 
     public FairgroundsTrumpeter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.subtype.add("Elephant");
+        this.subtype.add(SubType.ELEPHANT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

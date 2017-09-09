@@ -35,6 +35,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class TeekasDragon extends CardImpl {
 
     public TeekasDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{9}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -48,8 +49,8 @@ public class TwilekSeductress extends CardImpl {
 
     public TwilekSeductress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.subtype.add("Twi'lek");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.TWILEK);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

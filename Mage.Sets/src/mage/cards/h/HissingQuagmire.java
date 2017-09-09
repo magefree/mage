@@ -40,6 +40,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -81,7 +82,7 @@ class HissingQuagmireToken extends Token {
     public HissingQuagmireToken() {
         super("", "2/2 black and green Elemental creature with deathtouch");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         color.setBlack(true);
         color.setGreen(true);
         power = new MageInt(2);

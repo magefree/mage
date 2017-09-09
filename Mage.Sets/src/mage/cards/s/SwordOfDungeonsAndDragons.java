@@ -74,7 +74,7 @@ public class SwordOfDungeonsAndDragons extends CardImpl {
 
     public SwordOfDungeonsAndDragons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2 and has protection from Rogues and from Clerics.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2));

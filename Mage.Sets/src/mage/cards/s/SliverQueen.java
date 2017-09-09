@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.permanent.token.SliverToken;
@@ -48,7 +49,7 @@ public class SliverQueen extends CardImpl {
     public SliverQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

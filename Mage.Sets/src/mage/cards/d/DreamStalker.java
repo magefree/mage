@@ -34,6 +34,7 @@ import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 
 /**
@@ -44,7 +45,7 @@ public class DreamStalker extends CardImpl {
 
     public DreamStalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.ILLUSION);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);

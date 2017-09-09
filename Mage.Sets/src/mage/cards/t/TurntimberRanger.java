@@ -36,6 +36,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.permanent.token.WolfToken;
 
@@ -47,9 +48,9 @@ public class TurntimberRanger extends CardImpl {
 
     public TurntimberRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SCOUT);
+        this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

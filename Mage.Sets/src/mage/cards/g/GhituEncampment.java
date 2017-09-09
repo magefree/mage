@@ -38,6 +38,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -73,7 +74,7 @@ class GhituEncampmentToken extends Token {
     public GhituEncampmentToken() {
         super("Warrior", "2/1 red Warrior creature with first strike");
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.WARRIOR);
 
         this.color.setRed(true);
         power = new MageInt(2);

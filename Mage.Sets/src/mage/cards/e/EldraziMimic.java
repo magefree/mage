@@ -60,7 +60,7 @@ public class EldraziMimic extends CardImpl {
 
     public EldraziMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

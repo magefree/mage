@@ -33,6 +33,7 @@ import mage.abilities.keyword.MountainwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class MountainGoat extends CardImpl {
 
     public MountainGoat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Goat");
+        this.subtype.add(SubType.GOAT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

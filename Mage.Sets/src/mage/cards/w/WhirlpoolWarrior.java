@@ -42,6 +42,7 @@ import mage.abilities.effects.common.ShuffleHandIntoLibraryDrawThatManySourceEff
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -55,8 +56,8 @@ public class WhirlpoolWarrior extends CardImpl {
 
     public WhirlpoolWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

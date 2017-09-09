@@ -35,6 +35,7 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -47,7 +48,7 @@ public class DevilToken extends Token {
         super("Devil", "1/1 red Devil creature with \"When this creature dies, it deals 1 damage to target creature or player.\"");
         availableImageSetCodes.addAll(Collections.singletonList("SOI"));
         cardType.add(CardType.CREATURE);
-        subtype.add("Devil");
+        subtype.add(SubType.DEVIL);
         color.setRed(true);
         power = new MageInt(1);
         toughness = new MageInt(1);

@@ -37,6 +37,7 @@ import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -51,7 +52,7 @@ public class KrarkClanOgre extends CardImpl {
 
     public KrarkClanOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.subtype.add("Ogre");
+        this.subtype.add(SubType.OGRE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

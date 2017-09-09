@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CantBeTargetedAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
@@ -56,7 +57,7 @@ public class SpellbaneCentaur extends CardImpl {
 
     public SpellbaneCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Centaur");
+        this.subtype.add(SubType.CENTAUR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

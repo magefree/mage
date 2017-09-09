@@ -53,7 +53,7 @@ public class PrimevalForce extends CardImpl {
     
     public PrimevalForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{G}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

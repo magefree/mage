@@ -42,6 +42,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -62,7 +63,7 @@ public class KefnetTheMindful extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("God");
+        this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

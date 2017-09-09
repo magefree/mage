@@ -35,6 +35,7 @@ import mage.abilities.keyword.DredgeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -45,7 +46,7 @@ public class GolgariBrownscale extends CardImpl {
 
     public GolgariBrownscale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Lizard");
+        this.subtype.add(SubType.LIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

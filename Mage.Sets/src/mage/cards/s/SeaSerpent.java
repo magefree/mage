@@ -57,7 +57,7 @@ public class SeaSerpent extends CardImpl {
 
     public SeaSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        this.subtype.add("Serpent");
+        this.subtype.add(SubType.SERPENT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

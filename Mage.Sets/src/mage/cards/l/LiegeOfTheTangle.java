@@ -59,7 +59,7 @@ public class LiegeOfTheTangle extends CardImpl {
 
     public LiegeOfTheTangle (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -190,7 +190,7 @@ class AwakeningLandToken extends Token {
         super("", "8/8 green Elemental creature");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(8);
         toughness = new MageInt(8);
     }

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -44,7 +45,7 @@ public class NettletoothDjinn extends CardImpl {
 
     public NettletoothDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Djinn");
+        this.subtype.add(SubType.DJINN);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

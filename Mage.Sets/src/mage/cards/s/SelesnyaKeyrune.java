@@ -37,6 +37,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -73,7 +74,7 @@ public class SelesnyaKeyrune extends CardImpl {
             cardType.add(CardType.CREATURE);
             color.setWhite(true);
             color.setGreen(true);
-            this.subtype.add("Wolf");
+            this.subtype.add(SubType.WOLF);
             power = new MageInt(3);
             toughness = new MageInt(3);
         }

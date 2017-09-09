@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -40,7 +41,7 @@ public class ElementalMasteryElementalToken extends Token {
     public ElementalMasteryElementalToken() {
         super("Elemental", "1/1 red Elemental creature token with haste");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         color.setRed(true);
         power = new MageInt(1);
         toughness = new MageInt(1);

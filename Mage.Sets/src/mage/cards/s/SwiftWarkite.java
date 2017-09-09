@@ -44,6 +44,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -67,7 +68,7 @@ public class SwiftWarkite extends CardImpl {
 
     public SwiftWarkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

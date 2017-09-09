@@ -36,6 +36,7 @@ import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -55,8 +56,8 @@ public class StrikeTeamCommando extends CardImpl {
 
     public StrikeTeamCommando(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G/W}{G/W}");
-        this.subtype.add("Human");
-        this.subtype.add("Rebel");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.REBEL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

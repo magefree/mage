@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class TasseledDromedary extends CardImpl {
 
     public TasseledDromedary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Camel");
+        this.subtype.add(SubType.CAMEL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
     }

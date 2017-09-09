@@ -34,6 +34,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -50,7 +51,7 @@ public class DesecratorHag extends CardImpl {
 
     public DesecratorHag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B/G}{B/G}");
-        this.subtype.add("Hag");
+        this.subtype.add(SubType.HAG);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

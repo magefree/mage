@@ -40,6 +40,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -59,7 +60,7 @@ public class SapseepForest extends CardImpl {
 
     public SapseepForest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Forest");
+        this.subtype.add(SubType.FOREST);
 
         // <i>({tap}: Add {G} to your mana pool.)</i>
         this.addAbility(new GreenManaAbility());

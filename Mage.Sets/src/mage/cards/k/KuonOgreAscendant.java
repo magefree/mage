@@ -38,6 +38,7 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -55,8 +56,8 @@ public class KuonOgreAscendant extends CardImpl {
     public KuonOgreAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Ogre");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.MONK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

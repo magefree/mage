@@ -45,7 +45,7 @@ public class UndercityShade extends CardImpl {
 
     public UndercityShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Shade");
+        this.subtype.add(SubType.SHADE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

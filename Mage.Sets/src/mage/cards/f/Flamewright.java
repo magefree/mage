@@ -40,6 +40,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -63,8 +64,8 @@ public class Flamewright extends CardImpl {
 
     public Flamewright(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,8 +46,8 @@ public class ViashinoRacketeer extends CardImpl {
 
     public ViashinoRacketeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Viashino");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

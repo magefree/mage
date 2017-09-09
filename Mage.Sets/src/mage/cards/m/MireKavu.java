@@ -53,7 +53,7 @@ public class MireKavu extends CardImpl {
 
     public MireKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Kavu");
+        this.subtype.add(SubType.KAVU);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

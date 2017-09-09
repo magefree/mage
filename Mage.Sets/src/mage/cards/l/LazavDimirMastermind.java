@@ -56,7 +56,7 @@ public class LazavDimirMastermind extends CardImpl {
     public LazavDimirMastermind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}{B}{B}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

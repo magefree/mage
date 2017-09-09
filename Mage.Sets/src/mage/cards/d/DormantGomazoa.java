@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -48,7 +49,7 @@ public class DormantGomazoa extends CardImpl {
 
     public DormantGomazoa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Jellyfish");
+        this.subtype.add(SubType.JELLYFISH);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

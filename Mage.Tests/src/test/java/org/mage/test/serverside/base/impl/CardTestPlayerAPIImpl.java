@@ -700,11 +700,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param type     A type to test for
      * @param subType  a subtype to test for
      */
-    public void assertType(String cardName, CardType type, String subType) throws AssertionError {
+    public void assertType(String cardName, CardType type, SubType subType) throws AssertionError {
         Permanent found = getPermanent(cardName);
         Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
         if (subType != null) {
-            Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ':' + subType + ')', found.getSubtype(currentGame).contains(subType));
+            Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ':' + subType.getDescription() + ')', found.getSubtype(currentGame).contains(subType));
         }
     }
 
@@ -725,10 +725,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param cardName Name of the permanent that should be checked.
      * @param subType  a subtype to test for
      */
-    public void assertNotSubtype(String cardName, String subType) throws AssertionError {
+    public void assertNotSubtype(String cardName, SubType subType) throws AssertionError {
         Permanent found = getPermanent(cardName);
         if (subType != null) {
-            Assert.assertFalse("(Battlefield) card sub-type equal (" + cardName + ':' + subType + ')', found.getSubtype(currentGame).contains(subType));
+            Assert.assertFalse("(Battlefield) card sub-type equal (" + cardName + ':' + subType.getDescription() + ')', found.getSubtype(currentGame).contains(subType));
         }
     }
 

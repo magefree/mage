@@ -34,6 +34,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class HighlandGame extends CardImpl {
 
     public HighlandGame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Elk");
+        this.subtype.add(SubType.ELK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

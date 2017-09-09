@@ -36,6 +36,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -46,8 +47,8 @@ public class KrosanCloudscraper extends CardImpl {
 
     public KrosanCloudscraper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{G}{G}{G}");
-        this.subtype.add("Beast");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.BEAST);
+        this.subtype.add(SubType.MUTANT);
 
         this.power = new MageInt(13);
         this.toughness = new MageInt(13);

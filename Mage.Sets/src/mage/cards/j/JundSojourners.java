@@ -38,6 +38,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -48,8 +49,8 @@ public class JundSojourners extends CardImpl {
 
     public JundSojourners(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}");
-        this.subtype.add("Viashino");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.SHAMAN);
 
 
 

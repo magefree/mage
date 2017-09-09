@@ -41,6 +41,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -68,7 +69,7 @@ public class PolisCrusher extends CardImpl {
 
     public PolisCrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
-        this.subtype.add("Cyclops");
+        this.subtype.add(SubType.CYCLOPS);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

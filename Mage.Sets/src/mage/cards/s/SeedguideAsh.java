@@ -54,8 +54,8 @@ public class SeedguideAsh extends CardImpl {
 
     public SeedguideAsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

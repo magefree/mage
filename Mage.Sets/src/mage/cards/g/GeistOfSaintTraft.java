@@ -37,6 +37,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -51,8 +52,8 @@ public class GeistOfSaintTraft extends CardImpl {
     public GeistOfSaintTraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Spirit");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -63,8 +63,8 @@ public class KorlashHeirToBlackblade extends CardImpl {
     public KorlashHeirToBlackblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Zombie");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

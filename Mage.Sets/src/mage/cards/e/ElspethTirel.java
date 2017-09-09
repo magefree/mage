@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
@@ -54,7 +55,7 @@ public class ElspethTirel extends CardImpl {
     public ElspethTirel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elspeth");
+        this.subtype.add(SubType.ELSPETH);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 

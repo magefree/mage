@@ -54,7 +54,7 @@ public class Juggernaut extends CardImpl {
 
     public Juggernaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
-        this.subtype.add("Juggernaut");
+        this.subtype.add(SubType.JUGGERNAUT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

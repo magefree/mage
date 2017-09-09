@@ -34,6 +34,7 @@ import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -44,7 +45,7 @@ public class TolarianSerpent extends CardImpl {
 
     public TolarianSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
-        this.subtype.add("Serpent");
+        this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

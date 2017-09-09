@@ -44,6 +44,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -59,8 +60,8 @@ public class LimDulsPaladin extends CardImpl {
 
     public LimDulsPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

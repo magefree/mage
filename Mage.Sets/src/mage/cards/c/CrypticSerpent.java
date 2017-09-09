@@ -34,6 +34,7 @@ import mage.abilities.effects.common.cost.SourceCostReductionForEachCardInGravey
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
 
@@ -46,7 +47,7 @@ public class CrypticSerpent extends CardImpl {
     public CrypticSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
 
-        this.subtype.add("Serpent");
+        this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

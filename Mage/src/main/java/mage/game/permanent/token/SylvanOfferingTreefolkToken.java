@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -43,7 +44,7 @@ public class SylvanOfferingTreefolkToken extends Token {
         super("Treefolk", "X/X green Treefolk creature token");
         setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
-        subtype.add("Treefolk");
+        subtype.add(SubType.TREEFOLK);
         color.setGreen(true);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);

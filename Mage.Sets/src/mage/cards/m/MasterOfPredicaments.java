@@ -37,6 +37,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -52,7 +53,7 @@ public class MasterOfPredicaments extends CardImpl {
 
     public MasterOfPredicaments(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        this.subtype.add("Sphinx");
+        this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

@@ -38,6 +38,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.game.permanent.token.FaerieToken;
@@ -52,8 +53,8 @@ public class HuntedTroll extends CardImpl {
 
     public HuntedTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.subtype.add("Troll");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.TROLL);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(4);

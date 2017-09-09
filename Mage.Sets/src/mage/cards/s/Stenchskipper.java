@@ -46,7 +46,7 @@ public class Stenchskipper extends CardImpl {
 
     public Stenchskipper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

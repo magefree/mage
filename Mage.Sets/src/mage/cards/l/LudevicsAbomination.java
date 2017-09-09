@@ -33,6 +33,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class LudevicsAbomination extends CardImpl {
 
     public LudevicsAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Lizard");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.LIZARD);
+        this.subtype.add(SubType.HORROR);
         this.color.setBlue(true);
 
         // this card is the second face of double-faced card

@@ -53,7 +53,7 @@ public class GenjuOfTheRealm extends CardImpl {
 
     public GenjuOfTheRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{U}{B}{R}{G}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
         addSuperType(SuperType.LEGENDARY);
 
         // Enchant Land
@@ -92,7 +92,7 @@ public class GenjuOfTheRealm extends CardImpl {
             this.color.setBlack(true);
             this.color.setRed(true);
             this.color.setGreen(true);
-            subtype.add("Spirit");
+            subtype.add(SubType.SPIRIT);
             power = new MageInt(8);
             toughness = new MageInt(12);
             this.addAbility(TrampleAbility.getInstance());

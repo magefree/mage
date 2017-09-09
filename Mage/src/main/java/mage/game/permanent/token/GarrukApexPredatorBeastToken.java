@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
 
@@ -43,7 +44,7 @@ public class GarrukApexPredatorBeastToken extends Token {
         setTokenType(1);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Beast");
+        subtype.add(SubType.BEAST);
         power = new MageInt(3);
         toughness = new MageInt(3);
 

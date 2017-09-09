@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -50,7 +51,7 @@ public class DokaiWeaverofLifeToken extends Token {
         super("Elemental", "X/X green Elemental creature token, where X is the number of lands you control");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(0);
         toughness = new MageInt(0);
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filterLands);

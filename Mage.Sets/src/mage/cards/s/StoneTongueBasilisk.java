@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -53,7 +54,7 @@ public class StoneTongueBasilisk extends CardImpl {
 
     public StoneTongueBasilisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
-        this.subtype.add("Basilisk");
+        this.subtype.add(SubType.BASILISK);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

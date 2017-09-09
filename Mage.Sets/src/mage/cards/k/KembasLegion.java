@@ -49,8 +49,8 @@ public class KembasLegion extends CardImpl {
 
     public KembasLegion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
-        this.subtype.add("Cat");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);

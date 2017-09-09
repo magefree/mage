@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -48,7 +49,7 @@ public class GreaterKraytDragon extends CardImpl {
 
     public GreaterKraytDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}{W}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(7);
 

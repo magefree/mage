@@ -39,6 +39,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
@@ -57,8 +58,8 @@ public class CanopyVista extends CardImpl {
 
     public CanopyVista(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.subtype.add("Forest");
-        this.subtype.add("Plains");
+        this.subtype.add(SubType.FOREST);
+        this.subtype.add(SubType.PLAINS);
 
         // Canopy Vista enters the battlefield tapped unless you control two or more basic lands.
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1));

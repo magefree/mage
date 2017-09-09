@@ -38,6 +38,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -52,8 +53,8 @@ public class CorruptOfficial extends CardImpl {
 
     public CorruptOfficial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Minion");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.MINION);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

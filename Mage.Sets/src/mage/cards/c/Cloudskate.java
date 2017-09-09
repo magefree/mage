@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class Cloudskate extends CardImpl {
 
     public Cloudskate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

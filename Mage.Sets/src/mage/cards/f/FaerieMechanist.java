@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -54,8 +55,8 @@ public class FaerieMechanist extends CardImpl {
     public FaerieMechanist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{U}");
 
-        this.subtype.add("Faerie");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.FAERIE);
+        this.subtype.add(SubType.ARTIFICER);
     this.power = new MageInt(2);
     this.toughness = new MageInt(2);
         // Flying

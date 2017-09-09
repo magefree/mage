@@ -63,7 +63,7 @@ public class Filth extends CardImpl {
 
     public Filth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Incarnation");
+        this.subtype.add(SubType.INCARNATION);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

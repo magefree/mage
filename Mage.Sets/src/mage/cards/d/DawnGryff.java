@@ -33,6 +33,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class DawnGryff extends CardImpl {
 
     public DawnGryff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Hippogriff");
+        this.subtype.add(SubType.HIPPOGRIFF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

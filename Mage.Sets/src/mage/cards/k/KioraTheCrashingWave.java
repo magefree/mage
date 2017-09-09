@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEff
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
@@ -66,7 +67,7 @@ public class KioraTheCrashingWave extends CardImpl {
     public KioraTheCrashingWave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Kiora");
+        this.subtype.add(SubType.KIORA);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(2));
 

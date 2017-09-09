@@ -37,6 +37,7 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.ForlornPseudammaZombieToken;
 
 /**
@@ -47,7 +48,7 @@ public class ForlornPseudamma extends CardImpl {
 
     public ForlornPseudamma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

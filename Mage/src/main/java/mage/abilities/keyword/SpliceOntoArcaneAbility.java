@@ -41,6 +41,7 @@ import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -182,7 +183,7 @@ class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         MageObject object = game.getObject(abilityToModify.getSourceId());
-        if (object != null && object.getSubtype(game).contains("Arcane")) {
+        if (object != null && object.getSubtype(game).contains(SubType.ARCANE)) {
             return spliceSpellCanBeActivated(source, game);
         }
         return false;

@@ -58,7 +58,7 @@ public class DerangedHermit extends CardImpl {
 
     public DerangedHermit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ELF);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

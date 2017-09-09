@@ -41,6 +41,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
 
@@ -53,7 +54,7 @@ public class PouncingKavu extends CardImpl {
 
     public PouncingKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Kavu");
+        this.subtype.add(SubType.KAVU);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

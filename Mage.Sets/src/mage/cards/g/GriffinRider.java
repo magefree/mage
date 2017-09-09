@@ -61,8 +61,8 @@ public class GriffinRider extends CardImpl {
 
     public GriffinRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.KNIGHT);
 
         this.color.setWhite(true);
         this.power = new MageInt(1);

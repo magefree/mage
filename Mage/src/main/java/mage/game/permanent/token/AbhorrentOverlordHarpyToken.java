@@ -29,6 +29,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -42,7 +43,7 @@ public class AbhorrentOverlordHarpyToken extends Token {
         super("Harpy", "1/1 black Harpy creature tokens with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Harpy");
+        subtype.add(SubType.HARPY);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

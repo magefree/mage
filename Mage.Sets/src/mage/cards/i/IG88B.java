@@ -39,6 +39,7 @@ import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -54,8 +55,8 @@ public class IG88B extends CardImpl {
     public IG88B(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Droid");
-        this.subtype.add("Hunter");
+        this.subtype.add(SubType.DROID);
+        this.subtype.add(SubType.HUNTER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

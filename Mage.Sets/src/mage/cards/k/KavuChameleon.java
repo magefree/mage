@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -49,7 +50,7 @@ public class KavuChameleon extends CardImpl {
 
     public KavuChameleon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Kavu");
+        this.subtype.add(SubType.KAVU);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

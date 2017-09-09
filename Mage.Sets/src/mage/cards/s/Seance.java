@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -98,7 +99,7 @@ class SeanceEffect extends OneShotEffect {
             controller.moveCards(card, Zone.EXILED, source, game); // Also if the move to exile is replaced, the copy takes place
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false);
             effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-            effect.setAdditionalSubType("Spirit");
+            effect.setAdditionalSubType(SubType.SPIRIT);
             effect.apply(game, source);
             ExileTargetEffect exileEffect = new ExileTargetEffect();
             exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanent(), game));

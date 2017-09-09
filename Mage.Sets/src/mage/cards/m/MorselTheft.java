@@ -38,6 +38,7 @@ import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -48,7 +49,7 @@ public class MorselTheft extends CardImpl {
 
     public MorselTheft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{2}{B}{B}");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.ROGUE);
 
         // Prowl {1}{B}
         this.addAbility(new ProwlAbility(this, "{1}{B}"));

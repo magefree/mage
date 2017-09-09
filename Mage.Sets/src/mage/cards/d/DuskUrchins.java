@@ -37,6 +37,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -47,7 +48,7 @@ public class DuskUrchins extends CardImpl {
 
     public DuskUrchins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Ouphe");
+        this.subtype.add(SubType.OUPHE);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

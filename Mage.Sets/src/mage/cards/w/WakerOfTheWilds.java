@@ -39,6 +39,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -55,8 +56,8 @@ public class WakerOfTheWilds extends CardImpl {
     public WakerOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
-        this.subtype.add("Merfolk");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -8,14 +8,15 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 public class MoaningWall extends CardImpl {
 
     public MoaningWall(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        subtype.add("Zombie");
-        subtype.add("Wall");
+        subtype.add(SubType.ZOMBIE);
+        subtype.add(SubType.WALL);
         power = new MageInt(0);
         toughness = new MageInt(5);
 

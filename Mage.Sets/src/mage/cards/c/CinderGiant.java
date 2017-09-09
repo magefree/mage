@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -51,7 +52,7 @@ public class CinderGiant extends CardImpl {
 
     public CinderGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.GIANT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

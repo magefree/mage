@@ -28,6 +28,7 @@
 package org.mage.test.cards.enchantments;
 
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -95,7 +96,7 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Forest");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertNotSubtype("Forest", "Forest");
+        assertNotSubtype("Forest", SubType.FOREST);
     }
 
 
@@ -107,7 +108,7 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Urza's Tower");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertNotSubtype("Urza's Tower", "Urza's");
-        assertNotSubtype("Urza's Tower", "Tower");
+        assertNotSubtype("Urza's Tower", SubType.URZAS);
+        assertNotSubtype("Urza's Tower", SubType.TOWER);
     }
 }

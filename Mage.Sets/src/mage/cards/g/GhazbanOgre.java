@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -54,7 +55,7 @@ public class GhazbanOgre extends CardImpl {
 
     public GhazbanOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Ogre");
+        this.subtype.add(SubType.OGRE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

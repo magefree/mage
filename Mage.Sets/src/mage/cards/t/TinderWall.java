@@ -42,6 +42,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
@@ -59,8 +60,8 @@ public class TinderWall extends CardImpl {
 
     public TinderWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Wall");
+        this.subtype.add(SubType.PLANT);
+        this.subtype.add(SubType.WALL);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

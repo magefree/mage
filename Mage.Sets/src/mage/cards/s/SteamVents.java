@@ -37,6 +37,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class SteamVents extends CardImpl {
 
     public SteamVents (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.subtype.add("Island");
-        this.subtype.add("Mountain");
+        this.subtype.add(SubType.ISLAND);
+        this.subtype.add(SubType.MOUNTAIN);
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, Steam Vents enters the battlefield tapped"));

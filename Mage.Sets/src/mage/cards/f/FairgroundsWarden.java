@@ -38,6 +38,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,8 +62,8 @@ public class FairgroundsWarden extends CardImpl {
 
     public FairgroundsWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Dwarf");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

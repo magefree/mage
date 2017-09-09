@@ -43,6 +43,7 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -53,8 +54,8 @@ public class EnclaveCryptologist extends LevelerCard {
 
     public EnclaveCryptologist (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WIZARD);
         this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

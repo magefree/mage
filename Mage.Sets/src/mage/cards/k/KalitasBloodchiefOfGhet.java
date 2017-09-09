@@ -37,6 +37,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -56,8 +57,8 @@ public class KalitasBloodchiefOfGhet extends CardImpl {
     public KalitasBloodchiefOfGhet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Vampire");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.WARRIOR);
 
         // {B}{B}{B}, {T}: Destroy target creature. If that creature dies this way, create a black Vampire creature token. Its power is equal to that creature's power and its toughness is equal to that creature's toughness.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KalitasDestroyEffect(), new ManaCostsImpl("{B}{B}{B}"));

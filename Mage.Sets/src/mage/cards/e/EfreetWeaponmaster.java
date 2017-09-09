@@ -37,6 +37,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -55,8 +56,8 @@ public class EfreetWeaponmaster extends CardImpl {
 
     public EfreetWeaponmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{R}{W}");
-        this.subtype.add("Efreet");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.EFREET);
+        this.subtype.add(SubType.MONK);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

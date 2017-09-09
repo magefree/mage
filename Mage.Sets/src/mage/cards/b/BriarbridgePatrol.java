@@ -88,7 +88,7 @@ enum BriarbridgePatrolCondition implements Condition {
             if (sacrificedPermanents != null && !sacrificedPermanents.isEmpty()) {
                 int amountOfClues = 0;
                 for (Permanent permanent : sacrificedPermanents) {
-                    if (permanent.getSubtype(game).contains("Clue")) {
+                    if (permanent.getSubtype(game).contains(SubType.CLUE)) {
                         amountOfClues++;
                     }
                 }

@@ -35,6 +35,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -45,9 +46,9 @@ public class NirkanaAssassin extends CardImpl {
 
     public NirkanaAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Assassin");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.ASSASSIN);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

@@ -33,6 +33,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class CrashOfRhinos extends CardImpl {
 
     public CrashOfRhinos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
-        this.subtype.add("Rhino");
+        this.subtype.add(SubType.RHINO);
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(4);

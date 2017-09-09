@@ -41,6 +41,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -84,7 +85,7 @@ class ForiysianTotemToken extends Token {
         super("", "4/4 red Giant artifact creature with trample");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
-        subtype.add("Giant");
+        subtype.add(SubType.GIANT);
         color.setRed(true);
         power = new MageInt(4);
         toughness = new MageInt(4);

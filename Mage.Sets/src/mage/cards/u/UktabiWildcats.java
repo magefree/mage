@@ -63,7 +63,7 @@ public class UktabiWildcats extends CardImpl {
     
     public UktabiWildcats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.CAT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

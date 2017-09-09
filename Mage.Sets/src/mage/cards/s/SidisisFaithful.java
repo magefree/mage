@@ -36,6 +36,7 @@ import mage.abilities.keyword.ExploitAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,8 +47,8 @@ public class SidisisFaithful extends CardImpl {
 
     public SidisisFaithful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
-        this.subtype.add("Naga");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

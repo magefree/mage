@@ -44,6 +44,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Zone;
@@ -138,7 +139,7 @@ class ChronatogTotemToken extends Token {
         super("Atog", "1/2 blue Atog artifact creature");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Atog");
+        subtype.add(SubType.ATOG);
         power = new MageInt(1);
         toughness = new MageInt(2);
         color.setBlue(true);

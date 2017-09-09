@@ -37,6 +37,7 @@ import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -47,7 +48,7 @@ public class ReveredUnicorn extends CardImpl {
 
     public ReveredUnicorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Unicorn");
+        this.subtype.add(SubType.UNICORN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

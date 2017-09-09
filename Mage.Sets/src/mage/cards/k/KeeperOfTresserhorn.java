@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -47,7 +48,7 @@ public class KeeperOfTresserhorn extends CardImpl {
 
     public KeeperOfTresserhorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

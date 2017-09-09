@@ -35,6 +35,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 
 /**
@@ -46,7 +47,7 @@ public class HorizonDrake extends CardImpl {
 
     public HorizonDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Drake");
+        this.subtype.add(SubType.DRAKE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

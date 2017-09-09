@@ -36,6 +36,7 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -58,7 +59,7 @@ public class ElspethSunsChampion extends CardImpl {
     public ElspethSunsChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elspeth");
+        this.subtype.add(SubType.ELSPETH);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 

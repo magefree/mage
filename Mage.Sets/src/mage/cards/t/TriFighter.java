@@ -34,6 +34,7 @@ import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class TriFighter extends CardImpl {
 
     public TriFighter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{U/B}{U/B}");
-        this.subtype.add("Droid");
-        this.subtype.add("Starship");
+        this.subtype.add(SubType.DROID);
+        this.subtype.add(SubType.STARSHIP);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -59,7 +59,7 @@ public class Immerwolf extends CardImpl {
 
     public Immerwolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.WOLF);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -49,7 +49,7 @@ public class MaggotTherapy extends CardImpl {
     public MaggotTherapy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

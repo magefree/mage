@@ -36,6 +36,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.game.permanent.token.Token;
 
@@ -68,7 +69,7 @@ class DaxossTormentToken extends Token {
         super("", "5/5 Demon creature with flying and haste");
         cardType.add(CardType.CREATURE);
         
-        subtype.add("Demon");
+        subtype.add(SubType.DEMON);
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());

@@ -57,7 +57,7 @@ public class GuardiansMagemark extends CardImpl {
     
     public GuardiansMagemark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

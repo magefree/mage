@@ -35,6 +35,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -55,8 +56,8 @@ public class HungryDragonsnake extends CardImpl {
 
     public HungryDragonsnake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Snake");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

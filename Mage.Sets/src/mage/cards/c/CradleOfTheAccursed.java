@@ -38,6 +38,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.ZombieToken;
 
@@ -50,7 +51,7 @@ public class CradleOfTheAccursed extends CardImpl {
     public CradleOfTheAccursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.subtype.add("Desert");
+        this.subtype.add(SubType.DESERT);
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

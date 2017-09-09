@@ -36,6 +36,7 @@ import mage.abilities.keyword.ExtortAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,7 +57,7 @@ public class TreasuryThrull extends CardImpl {
 
     public TreasuryThrull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{B}");
-        this.subtype.add("Thrull");
+        this.subtype.add(SubType.THRULL);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

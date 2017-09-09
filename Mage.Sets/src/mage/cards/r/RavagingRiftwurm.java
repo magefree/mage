@@ -39,6 +39,7 @@ import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -49,7 +50,7 @@ public class RavagingRiftwurm extends CardImpl {
 
     public RavagingRiftwurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Wurm");
+        this.subtype.add(SubType.WURM);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

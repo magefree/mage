@@ -50,7 +50,7 @@ public class ImperialHellkite extends CardImpl {
     
     public ImperialHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

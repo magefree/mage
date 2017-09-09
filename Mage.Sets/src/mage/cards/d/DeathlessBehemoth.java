@@ -59,7 +59,7 @@ public class DeathlessBehemoth extends CardImpl {
 
     public DeathlessBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

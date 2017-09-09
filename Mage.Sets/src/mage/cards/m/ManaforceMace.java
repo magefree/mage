@@ -36,6 +36,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 
@@ -47,7 +48,7 @@ public class ManaforceMace extends CardImpl {
 
     public ManaforceMace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Domain - Equipped creature gets +1/+1 for each basic land type among lands you control.
         DomainValue value = new DomainValue();

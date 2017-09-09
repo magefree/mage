@@ -39,6 +39,7 @@ import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.FaerieRogueToken;
@@ -53,7 +54,7 @@ public class NotoriousThrong extends CardImpl {
 
     public NotoriousThrong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{U}");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.ROGUE);
 
         // Prowl {5}{U}
         this.addAbility(new ProwlAbility(this, "{5}{U}"));

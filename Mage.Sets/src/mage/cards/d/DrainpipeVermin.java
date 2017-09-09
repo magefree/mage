@@ -37,6 +37,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.target.TargetPlayer;
 
@@ -48,7 +49,7 @@ public class DrainpipeVermin extends CardImpl {
 
     public DrainpipeVermin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Rat");
+        this.subtype.add(SubType.RAT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.target.TargetSpell;
@@ -49,8 +50,8 @@ public class GoblinFlectomancer extends CardImpl {
 
     public GoblinFlectomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

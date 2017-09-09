@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,8 +56,8 @@ public class WeedPrunerPoplar extends CardImpl {
 
     public WeedPrunerPoplar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Assassin");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

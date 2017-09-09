@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -47,8 +48,8 @@ public class MoltingHarpy extends CardImpl {
 
     public MoltingHarpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Harpy");
-        this.subtype.add("Mercenary");
+        this.subtype.add(SubType.HARPY);
+        this.subtype.add(SubType.MERCENARY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

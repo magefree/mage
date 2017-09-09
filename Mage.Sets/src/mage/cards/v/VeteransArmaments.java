@@ -60,8 +60,8 @@ public class VeteransArmaments extends CardImpl {
 
     public VeteransArmaments(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{2}");
-        this.subtype.add("Soldier");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."
         DynamicValue attackingCreatures = new AttackingCreatureCount("attacking creature");

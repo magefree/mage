@@ -37,6 +37,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -62,8 +63,8 @@ public class HannaShipsNavigator extends CardImpl {
     public HannaShipsNavigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ARTIFICER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,8 +47,8 @@ public class KurosTaken extends CardImpl {
 
     public KurosTaken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Rat");
-        this.subtype.add("Samurai");
+        this.subtype.add(SubType.RAT);
+        this.subtype.add(SubType.SAMURAI);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

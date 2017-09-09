@@ -41,6 +41,7 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
@@ -52,8 +53,8 @@ public class QarsiDeceiver extends CardImpl {
 
     public QarsiDeceiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Naga");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

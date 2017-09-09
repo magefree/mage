@@ -60,7 +60,7 @@ public class SylvanPrimordial extends CardImpl {
 
     public SylvanPrimordial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(8);

@@ -54,8 +54,8 @@ public class MalakirBloodwitch extends CardImpl {
 
     public MalakirBloodwitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

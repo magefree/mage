@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.b.BriselaVoiceOfNightmares;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Rarity;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
@@ -53,8 +54,8 @@ public class GiselaTheBrokenBlade extends CardImpl {
     public GiselaTheBrokenBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Angel");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ANGEL);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +46,9 @@ public class SakuraTribeScout extends CardImpl {
 
     public SakuraTribeScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Snake");
-        this.subtype.add("Shaman");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,8 +55,8 @@ public class IkraShidiqiTheUsurper extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Naga");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(7);
 

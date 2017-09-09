@@ -38,6 +38,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -48,8 +49,8 @@ public class DrownyardBehemoth extends CardImpl {
 
     public DrownyardBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Crab");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.CRAB);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 

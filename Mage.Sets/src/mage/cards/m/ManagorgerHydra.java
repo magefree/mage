@@ -35,6 +35,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -45,7 +46,7 @@ public class ManagorgerHydra extends CardImpl {
 
     public ManagorgerHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

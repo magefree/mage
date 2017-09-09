@@ -35,6 +35,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -45,8 +46,8 @@ public class RottingGiant extends CardImpl {
 
     public RottingGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

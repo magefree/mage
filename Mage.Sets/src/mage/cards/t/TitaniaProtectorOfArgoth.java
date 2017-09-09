@@ -37,6 +37,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandCard;
@@ -60,7 +61,7 @@ public class TitaniaProtectorOfArgoth extends CardImpl {
     public TitaniaProtectorOfArgoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);

@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -114,7 +115,7 @@ class LurkingEvilToken extends Token {
         super("Horror", "4/4 Horror creature with flying");
         power = new MageInt(4);
         toughness = new MageInt(4);
-        subtype.add("Horror");
+        subtype.add(SubType.HORROR);
         cardType.add(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());
     }

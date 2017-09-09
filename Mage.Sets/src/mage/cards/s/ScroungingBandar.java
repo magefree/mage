@@ -37,6 +37,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -63,8 +64,8 @@ public class ScroungingBandar extends CardImpl {
     public ScroungingBandar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.subtype.add("Cat");
-        this.subtype.add("Monkey");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.MONKEY);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -53,8 +54,8 @@ public class CankerAbomination extends CardImpl {
 
     public CankerAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B/G}{B/G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

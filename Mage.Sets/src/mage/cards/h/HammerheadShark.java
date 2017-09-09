@@ -46,7 +46,7 @@ public class HammerheadShark extends CardImpl {
 
     public HammerheadShark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Fish");
+        this.subtype.add(SubType.FISH);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

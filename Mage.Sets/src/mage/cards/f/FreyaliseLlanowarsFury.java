@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -62,7 +63,7 @@ public class FreyaliseLlanowarsFury extends CardImpl {
     public FreyaliseLlanowarsFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Freyalise");
+        this.subtype.add(SubType.FREYALISE);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

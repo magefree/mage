@@ -55,7 +55,7 @@ public class TotemGuideHartebeest extends CardImpl {
 
     public TotemGuideHartebeest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Antelope");
+        this.subtype.add(SubType.ANTELOPE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);

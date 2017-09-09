@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -48,9 +49,9 @@ public class PhantomNishoba extends CardImpl {
 
     public PhantomNishoba(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");
-        this.subtype.add("Cat");
-        this.subtype.add("Beast");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.BEAST);
+        this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

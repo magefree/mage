@@ -35,6 +35,7 @@ import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class ChorusOfTheTides extends CardImpl {
 
     public ChorusOfTheTides(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Siren");
+        this.subtype.add(SubType.SIREN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

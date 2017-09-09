@@ -33,6 +33,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -51,7 +52,7 @@ public class ChoiceOfDamnations extends CardImpl {
 
     public ChoiceOfDamnations(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Target opponent chooses a number. You may have that player lose that much life. If you don't, that player sacrifices all but that many permanents.
         this.getSpellAbility().addEffect(new ChoiceOfDamnationsEffect());

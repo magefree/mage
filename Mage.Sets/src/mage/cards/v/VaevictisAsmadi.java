@@ -48,8 +48,8 @@ public class VaevictisAsmadi extends CardImpl {
     public VaevictisAsmadi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{R}{R}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elder");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.ELDER);
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

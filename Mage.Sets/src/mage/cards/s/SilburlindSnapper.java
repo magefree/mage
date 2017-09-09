@@ -36,6 +36,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,7 +52,7 @@ public class SilburlindSnapper extends CardImpl {
 
     public SilburlindSnapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        this.subtype.add("Turtle");
+        this.subtype.add(SubType.TURTLE);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class TrainedOrgg extends CardImpl {
 
     public TrainedOrgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}");
-        this.subtype.add("Orgg");
+        this.subtype.add(SubType.ORGG);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

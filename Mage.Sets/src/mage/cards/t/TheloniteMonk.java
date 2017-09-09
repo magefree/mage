@@ -61,9 +61,9 @@ public class TheloniteMonk extends CardImpl {
 
     public TheloniteMonk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Insect");
-        this.subtype.add("Monk");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.INSECT);
+        this.subtype.add(SubType.MONK);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

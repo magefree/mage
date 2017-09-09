@@ -52,8 +52,8 @@ public class GiantHarbinger extends CardImpl {
 
     public GiantHarbinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add("Giant");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

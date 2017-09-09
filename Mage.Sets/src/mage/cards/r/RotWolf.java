@@ -35,6 +35,7 @@ import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class RotWolf extends CardImpl {
 
     public RotWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.WOLF);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

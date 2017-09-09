@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterArtifactSpell;
 
 /**
@@ -43,8 +44,8 @@ import mage.filter.common.FilterArtifactSpell;
 public class VedalkenArchmage extends CardImpl {
     public VedalkenArchmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.subtype.add("Vedalken");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.VEDALKEN);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);

@@ -42,6 +42,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
@@ -55,7 +56,7 @@ public class EldraziObligator extends CardImpl {
 
     public EldraziObligator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,7 +47,7 @@ public class JeeringHomunculus extends CardImpl {
     public JeeringHomunculus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.subtype.add("Homunculus");
+        this.subtype.add(SubType.HOMUNCULUS);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

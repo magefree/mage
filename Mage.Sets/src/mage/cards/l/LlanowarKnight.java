@@ -34,6 +34,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class LlanowarKnight extends CardImpl {
 
     public LlanowarKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
-        this.subtype.add("Elf");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

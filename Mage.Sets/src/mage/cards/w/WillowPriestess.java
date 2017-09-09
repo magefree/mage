@@ -66,8 +66,8 @@ public class WillowPriestess extends CardImpl {
 
     public WillowPriestess(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Faerie");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.FAERIE);
+        this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

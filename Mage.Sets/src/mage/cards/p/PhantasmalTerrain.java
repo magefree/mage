@@ -43,6 +43,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -60,8 +61,8 @@ import mage.target.common.TargetLandPermanent;
 public class PhantasmalTerrain extends CardImpl {
 
     public PhantasmalTerrain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
-        this.subtype.add("Aura");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
+        this.subtype.add(SubType.AURA);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
@@ -105,7 +106,7 @@ class PhantasmalTerrainContinuousEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        String choice = (String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY);
+        SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
         if (enchantment != null && enchantment.getAttachedTo() != null && choice != null) {
             Permanent land = game.getPermanent(enchantment.getAttachedTo());
             if (land != null) {
@@ -119,19 +120,19 @@ class PhantasmalTerrainContinuousEffect extends ContinuousEffectImpl {
                     case AbilityAddingRemovingEffects_6:
                         if (sublayer == SubLayer.NA) {
                             land.getAbilities().clear();
-                            if (choice.equals("Forest")) {
+                            if (choice.equals(SubType.FOREST)) {
                                 land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                             }
-                            if (choice.equals("Plains")) {
+                            if (choice.equals(SubType.PLAINS)) {
                                 land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                             }
-                            if (choice.equals("Mountain")) {
+                            if (choice.equals(SubType.MOUNTAIN)) {
                                 land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                             }
-                            if (choice.equals("Island")) {
+                            if (choice.equals(SubType.ISLAND)) {
                                 land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                             }
-                            if (choice.equals("Swamp")) {
+                            if (choice.equals(SubType.SWAMP)) {
                                 land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                             }
                         }

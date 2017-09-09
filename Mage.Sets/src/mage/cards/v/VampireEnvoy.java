@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,9 +45,9 @@ public class VampireEnvoy extends CardImpl {
 
     public VampireEnvoy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Cleric");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.CLERIC);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

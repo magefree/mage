@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,7 +42,7 @@ public class CrestedSunmareToken extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
         color.setWhite(true);
-        subtype.add("Horse");
+        subtype.add(SubType.HORSE);
         cardType.add(CardType.CREATURE);
     }
 }

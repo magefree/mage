@@ -40,6 +40,7 @@ import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 
@@ -51,7 +52,7 @@ public class GoblinFlotilla extends CardImpl {
 
     public GoblinFlotilla(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.subtype.add("Goblin");
+        this.subtype.add(SubType.GOBLIN);
         
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

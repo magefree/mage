@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -48,7 +49,7 @@ public class ShivanHellkite extends CardImpl {
 
     public ShivanHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

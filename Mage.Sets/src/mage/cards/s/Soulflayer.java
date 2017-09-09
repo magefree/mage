@@ -53,6 +53,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -70,7 +71,7 @@ public class Soulflayer extends CardImpl {
 
     public Soulflayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

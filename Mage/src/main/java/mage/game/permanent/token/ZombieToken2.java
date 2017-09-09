@@ -29,6 +29,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class ZombieToken2 extends Token {
         super("Zombie", String.valueOf(zPower) + '/' + String.valueOf(zToughness) + " black Zombie creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Zombie");
+        subtype.add(SubType.ZOMBIE);
         power = new MageInt(zPower);
         toughness = new MageInt(zToughness);
         setOriginalExpansionSetCode("EMN");

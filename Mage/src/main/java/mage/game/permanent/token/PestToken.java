@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class PestToken extends Token {
         super("Pest", "0/1 colorless Pest artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Pest");
+        subtype.add(SubType.PEST);
         power = new MageInt(0);
         toughness = new MageInt(1);
     }

@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -47,7 +48,7 @@ public class FiremaneAvenger extends CardImpl {
 
     public FiremaneAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
 
 
         this.power = new MageInt(3);

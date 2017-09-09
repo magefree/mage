@@ -37,6 +37,7 @@ import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
@@ -58,7 +59,7 @@ public class Extruder extends CardImpl {
 
     public Extruder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
-        this.subtype.add("Juggernaut");
+        this.subtype.add(SubType.JUGGERNAUT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

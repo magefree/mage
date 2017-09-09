@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.SaprolingToken;
@@ -49,8 +50,8 @@ public class SelesnyaGuildmage extends CardImpl {
 
     public SelesnyaGuildmage (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/W}{G/W}");
-        this.subtype.add("Elf");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.WIZARD);
 
 
         this.power = new MageInt(2);    

@@ -34,6 +34,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class KarooMeerkat extends CardImpl {
 
     public KarooMeerkat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Mongoose");
+        this.subtype.add(SubType.MONGOOSE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

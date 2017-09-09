@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class ScarwoodGoblins extends CardImpl {
 
     public ScarwoodGoblins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
-        this.subtype.add("Goblin");
+        this.subtype.add(SubType.GOBLIN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

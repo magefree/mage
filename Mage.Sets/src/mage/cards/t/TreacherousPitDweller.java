@@ -50,7 +50,7 @@ public class TreacherousPitDweller extends CardImpl {
 
     public TreacherousPitDweller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

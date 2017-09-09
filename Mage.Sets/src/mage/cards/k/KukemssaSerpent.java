@@ -65,7 +65,7 @@ public class KukemssaSerpent extends CardImpl {
 
     public KukemssaSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Serpent");
+        this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

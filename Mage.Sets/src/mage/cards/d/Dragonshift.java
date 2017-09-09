@@ -40,6 +40,7 @@ import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -91,7 +92,7 @@ public class Dragonshift extends CardImpl {
             cardType.add(CardType.CREATURE);
             color.setBlue(true);
             color.setRed(true);
-            subtype.add("Dragon");
+            subtype.add(SubType.DRAGON);
             power = new MageInt(4);
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());

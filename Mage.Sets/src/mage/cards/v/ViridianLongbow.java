@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -52,7 +53,7 @@ public class ViridianLongbow extends CardImpl {
 
     public ViridianLongbow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "{tap}: This creature deals 1 damage to target creature or player."
         Effect effect = new DamageTargetEffect(1);

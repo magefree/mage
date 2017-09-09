@@ -44,6 +44,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.SnakeToken;
@@ -56,8 +57,8 @@ public class HoodedHydra extends CardImpl {
 
     public HoodedHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}{G}");
-        this.subtype.add("Snake");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

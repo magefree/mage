@@ -33,6 +33,7 @@ import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class PhantomWarrior extends CardImpl {
 
     public PhantomWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Illusion");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ILLUSION);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

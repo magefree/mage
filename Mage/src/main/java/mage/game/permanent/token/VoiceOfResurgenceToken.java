@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -48,7 +49,7 @@ public class VoiceOfResurgenceToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setWhite(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
 
         power = new MageInt(0);
         toughness = new MageInt(0);

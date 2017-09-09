@@ -54,8 +54,8 @@ public class QuillSlingerBoggart extends CardImpl {
 
     public QuillSlingerBoggart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

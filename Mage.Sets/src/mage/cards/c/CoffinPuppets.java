@@ -63,7 +63,7 @@ public class CoffinPuppets extends CardImpl {
     public CoffinPuppets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
 
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

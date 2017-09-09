@@ -34,6 +34,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class GrenzosCutthroat extends CardImpl {
 
     public GrenzosCutthroat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

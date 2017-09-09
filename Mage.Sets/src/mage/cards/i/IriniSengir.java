@@ -35,6 +35,7 @@ import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentCard;
@@ -56,8 +57,8 @@ public class IriniSengir extends CardImpl {
     public IriniSengir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Vampire");
-        this.subtype.add("Dwarf");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.DWARF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

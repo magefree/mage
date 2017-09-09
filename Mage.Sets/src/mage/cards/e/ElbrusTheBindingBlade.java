@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.w.WithengarUnbound;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -55,7 +56,7 @@ public class ElbrusTheBindingBlade extends CardImpl {
     public ElbrusTheBindingBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         this.transformable = true;
         this.secondSideCardClazz = WithengarUnbound.class;

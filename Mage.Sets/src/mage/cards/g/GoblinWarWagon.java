@@ -38,6 +38,7 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -49,7 +50,7 @@ public class GoblinWarWagon extends CardImpl {
 
     public GoblinWarWagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
-        this.subtype.add("Juggernaut");
+        this.subtype.add(SubType.JUGGERNAUT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

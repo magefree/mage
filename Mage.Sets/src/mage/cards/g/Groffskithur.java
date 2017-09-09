@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -53,7 +54,7 @@ public class Groffskithur extends CardImpl {
 
     public Groffskithur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

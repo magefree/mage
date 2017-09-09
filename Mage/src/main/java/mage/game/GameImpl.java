@@ -1900,9 +1900,9 @@ public abstract class GameImpl implements Game, Serializable {
                     Permanent attachment = getPermanent(attachmentId);
                     if (attachment != null
                             && (attachment.isCreature()
-                            || !(attachment.getSubtype(this).contains("Aura")
-                            || attachment.getSubtype(this).contains("Equipment")
-                            || attachment.getSubtype(this).contains("Fortification")))) {
+                            || !(attachment.getSubtype(this).contains(SubType.AURA)
+                            || attachment.getSubtype(this).contains(SubType.EQUIPMENT)
+                            || attachment.getSubtype(this).contains(SubType.FORTIFICATION)))) {
                         if (perm.removeAttachment(attachment.getId(), this)) {
                             somethingHappened = true;
                             break;

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.cost.SourceCostReductionForEachCardInGravey
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 
@@ -45,8 +46,8 @@ public class Ghoultree extends CardImpl {
 
     public Ghoultree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{G}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Treefolk");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.TREEFOLK);
 
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);

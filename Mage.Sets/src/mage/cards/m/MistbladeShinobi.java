@@ -36,6 +36,7 @@ import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -54,8 +55,8 @@ public class MistbladeShinobi extends CardImpl {
 
     public MistbladeShinobi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Ninja");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.NINJA);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

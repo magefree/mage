@@ -59,7 +59,7 @@ public class MyojinOfNightsReach extends CardImpl {
     public MyojinOfNightsReach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);

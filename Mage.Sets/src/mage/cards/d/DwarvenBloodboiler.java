@@ -61,7 +61,7 @@ public class DwarvenBloodboiler extends CardImpl {
 
     public DwarvenBloodboiler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}{R}");
-        this.subtype.add("Dwarf");
+        this.subtype.add(SubType.DWARF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

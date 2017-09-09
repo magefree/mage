@@ -33,6 +33,7 @@ import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class WolfPack extends CardImpl {
 
     public WolfPack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.WOLF);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
 

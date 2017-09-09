@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.mana.GreenManaAbility;
 
@@ -42,8 +43,8 @@ public class LlanowarElvesToken extends Token {
         this.setOriginalExpansionSetCode("FUT");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Elf");
-        subtype.add("Druid");
+        subtype.add(SubType.ELF);
+        subtype.add(SubType.DRUID);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

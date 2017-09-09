@@ -40,6 +40,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.game.command.emblems.GideonOfTheTrialsEmblem;
@@ -55,7 +56,7 @@ public class GideonOfTheTrials extends CardImpl {
     public GideonOfTheTrials(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Gideon");
+        this.subtype.add(SubType.GIDEON);
 
         //Starting Loyalty: 3
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -94,8 +95,8 @@ class GideonOfTheTrialsToken extends Token {
     public GideonOfTheTrialsToken() {
         super("", "a 4/4 Human Soldier creature with indestructible");
         cardType.add(CardType.CREATURE);
-        subtype.add("Human");
-        subtype.add("Soldier");
+        subtype.add(SubType.HUMAN);
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(4);
         toughness = new MageInt(4);
         this.addAbility(IndestructibleAbility.getInstance());

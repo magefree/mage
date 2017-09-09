@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -45,7 +46,7 @@ public class ForlornPseudammaZombieToken extends Token {
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Zombie");
+        subtype.add(SubType.ZOMBIE);
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.setOriginalExpansionSetCode("BNG");

@@ -32,6 +32,7 @@ import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class DragonBroodmotherDragonToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setRed(true);
-        subtype.add("Dragon");
+        subtype.add(SubType.DRAGON);
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());

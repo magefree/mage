@@ -7,6 +7,7 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -17,7 +18,7 @@ public class ChaosMaw extends CardImpl {
     }
     public ChaosMaw(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
-        subtype.add("Hellion");
+        subtype.add(SubType.HELLION);
         power = new MageInt(6);
         toughness = new MageInt(6);
 

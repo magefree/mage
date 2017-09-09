@@ -60,7 +60,7 @@ public class DementiaSliver extends CardImpl {
 
     public DementiaSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

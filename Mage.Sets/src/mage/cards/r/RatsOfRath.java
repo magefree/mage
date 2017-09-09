@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -62,7 +63,7 @@ public class RatsOfRath extends CardImpl {
 
     public RatsOfRath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Rat");
+        this.subtype.add(SubType.RAT);
         
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

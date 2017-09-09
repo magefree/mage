@@ -35,6 +35,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,7 +46,7 @@ public class DuskLegionDreadnought extends CardImpl {
     public DuskLegionDreadnought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
         
-        this.subtype.add("Vehicle");
+        this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

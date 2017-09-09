@@ -8,14 +8,15 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 public class SteadfastSentinel extends CardImpl {
 
     public SteadfastSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        subtype.add("Human");
-        subtype.add("Cleric");
+        subtype.add(SubType.HUMAN);
+        subtype.add(SubType.CLERIC);
         power = new MageInt(2);
         toughness = new MageInt(3);
 

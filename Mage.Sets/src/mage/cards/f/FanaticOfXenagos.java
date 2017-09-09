@@ -41,6 +41,7 @@ import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -51,8 +52,8 @@ public class FanaticOfXenagos extends CardImpl {
 
     public FanaticOfXenagos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
-        this.subtype.add("Centaur");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

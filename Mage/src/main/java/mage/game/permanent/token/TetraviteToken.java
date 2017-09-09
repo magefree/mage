@@ -46,7 +46,7 @@ public class TetraviteToken extends Token {
         super("Tetravite", "1/1 colorless Tetravite artifact creature token");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
-        subtype.add("Tetravite");
+        subtype.add(SubType.TETRAVITE);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

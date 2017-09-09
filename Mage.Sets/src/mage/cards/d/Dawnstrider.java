@@ -38,6 +38,7 @@ import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInHand;
@@ -50,8 +51,8 @@ public class Dawnstrider extends CardImpl {
 
     public Dawnstrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Dryad");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.DRYAD);
+        this.subtype.add(SubType.SPELLSHAPER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

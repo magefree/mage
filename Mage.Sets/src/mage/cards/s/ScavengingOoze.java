@@ -37,6 +37,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -53,7 +54,7 @@ public class ScavengingOoze extends CardImpl {
 
     public ScavengingOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Ooze");
+        this.subtype.add(SubType.OOZE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

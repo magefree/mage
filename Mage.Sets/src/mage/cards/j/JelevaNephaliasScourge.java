@@ -41,6 +41,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.WatcherScope;
@@ -64,8 +65,8 @@ public class JelevaNephaliasScourge extends CardImpl {
     public JelevaNephaliasScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Vampire");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

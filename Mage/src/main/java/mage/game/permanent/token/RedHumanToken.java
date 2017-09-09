@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.ObjectColor;
 
@@ -40,7 +41,7 @@ public class RedHumanToken extends Token {
     public RedHumanToken() {
         super("Human", "1/1 red Human creature token");
         this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Human");
+        this.subtype.add(SubType.HUMAN);
 
         this.color = ObjectColor.RED;
         this.power = new MageInt(1);

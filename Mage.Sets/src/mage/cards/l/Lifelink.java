@@ -49,7 +49,7 @@ public class Lifelink extends CardImpl {
 
     public Lifelink (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

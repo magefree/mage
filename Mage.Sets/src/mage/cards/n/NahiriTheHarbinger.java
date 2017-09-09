@@ -47,6 +47,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -82,7 +83,7 @@ public class NahiriTheHarbinger extends CardImpl {
     public NahiriTheHarbinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Nahiri");
+        this.subtype.add(SubType.NAHIRI);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 

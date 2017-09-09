@@ -39,6 +39,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.target.TargetPermanent;
 
@@ -51,7 +52,7 @@ public class KrondTheDawnClad extends CardImpl {
     public KrondTheDawnClad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}{W}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Archon");
+        this.subtype.add(SubType.ARCHON);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

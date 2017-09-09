@@ -50,7 +50,7 @@ public class EpicProportions extends CardImpl {
 
     public EpicProportions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{G}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         this.addAbility(FlashAbility.getInstance());
         TargetPermanent auraTarget = new TargetCreaturePermanent();

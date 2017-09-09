@@ -62,8 +62,8 @@ public class MyrBattlesphere extends CardImpl {
 
     public MyrBattlesphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");
-        this.subtype.add("Myr");
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.MYR);
+        this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
 

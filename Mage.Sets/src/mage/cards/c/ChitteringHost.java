@@ -39,6 +39,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.MeldCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -49,8 +50,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 public class ChitteringHost extends MeldCard {
     public ChitteringHost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

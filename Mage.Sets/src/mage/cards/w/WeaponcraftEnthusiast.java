@@ -33,6 +33,7 @@ import mage.abilities.keyword.FabricateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class WeaponcraftEnthusiast extends CardImpl {
 
     public WeaponcraftEnthusiast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Aetherborn");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.AETHERBORN);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

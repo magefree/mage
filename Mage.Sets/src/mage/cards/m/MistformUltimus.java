@@ -33,6 +33,7 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -45,7 +46,7 @@ public class MistformUltimus extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

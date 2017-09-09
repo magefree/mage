@@ -38,6 +38,7 @@ import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -51,8 +52,8 @@ public class GoblinLegionnaire extends CardImpl {
 
     public GoblinLegionnaire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.SOLDIER);
 
 
         this.power = new MageInt(2);

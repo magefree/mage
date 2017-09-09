@@ -65,8 +65,8 @@ public class HigureTheStillWind extends CardImpl {
 
     public HigureTheStillWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Ninja");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.NINJA);
         addSuperType(SuperType.LEGENDARY);
 
         this.power = new MageInt(3);

@@ -39,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -58,7 +59,7 @@ public class KeeperOfTheLens extends CardImpl {
 
     public KeeperOfTheLens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");
-        this.subtype.add("Golem");
+        this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

@@ -40,6 +40,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -49,8 +50,8 @@ public class IkiralOutrider extends LevelerCard {
 
     public IkiralOutrider (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
         this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

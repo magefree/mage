@@ -59,7 +59,7 @@ public class SovereignsOfLostAlara extends CardImpl {
 
     public SovereignsOfLostAlara(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{U}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
 
 

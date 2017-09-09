@@ -35,6 +35,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -45,7 +46,7 @@ public class LorescaleCoatl extends CardImpl {
 
     public LorescaleCoatl (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
-        this.subtype.add("Snake");
+        this.subtype.add(SubType.SNAKE);
 
 
 

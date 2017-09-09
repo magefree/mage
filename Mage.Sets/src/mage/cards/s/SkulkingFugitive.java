@@ -35,6 +35,7 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class SkulkingFugitive extends CardImpl {
 
     public SkulkingFugitive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Horror");
-        this.subtype.add("Mercenary");
+        this.subtype.add(SubType.HORROR);
+        this.subtype.add(SubType.MERCENARY);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

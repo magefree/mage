@@ -56,8 +56,8 @@ public class SunriseSovereign extends CardImpl {
 
     public SunriseSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        this.subtype.add("Giant");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

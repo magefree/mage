@@ -58,8 +58,8 @@ public class KaradorGhostChieftain extends CardImpl {
     public KaradorGhostChieftain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Centaur");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

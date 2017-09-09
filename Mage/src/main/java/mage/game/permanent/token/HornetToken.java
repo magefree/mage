@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -48,7 +49,7 @@ public class HornetToken extends Token {
         this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Insect");
+        subtype.add(SubType.INSECT);
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());

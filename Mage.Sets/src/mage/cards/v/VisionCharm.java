@@ -93,7 +93,7 @@ public class VisionCharm extends CardImpl {
 class VisionCharmEffect extends ContinuousEffectImpl {
 
     private String targetLandType;
-    private String targetBasicLandType;
+    private SubType targetBasicLandType;
 
     public VisionCharmEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
@@ -121,7 +121,7 @@ class VisionCharmEffect extends ContinuousEffectImpl {
             targetLandType = choice.getChoice();
             choice = new ChoiceBasicLandType();
             controller.choose(outcome, choice, game);
-            targetBasicLandType = choice.getChoice();
+            targetBasicLandType = SubType.byDescription(choice.getChoice());
             if (targetLandType == null || targetBasicLandType == null) {
                 this.discard();
                 return;
@@ -141,6 +141,7 @@ class VisionCharmEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        // TODO fix to use SubType enum
         for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
             Permanent land = it.next().getPermanent(game);
             if (land != null) {
@@ -152,22 +153,20 @@ class VisionCharmEffect extends ContinuousEffectImpl {
                     case AbilityAddingRemovingEffects_6:
                         if (sublayer == SubLayer.NA) {
                             land.getAbilities().clear();
-                            switch (targetBasicLandType) {
-                                case "Swamp":
-                                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
-                                    break;
-                                case "Mountain":
-                                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                                    break;
-                                case "Forest":
-                                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                                    break;
-                                case "Island":
-                                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-                                    break;
-                                case "Plains":
-                                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
-                                    break;
+                            if (targetBasicLandType.equals(SubType.FOREST)) {
+                                land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                            }
+                            if (targetBasicLandType.equals(SubType.PLAINS)) {
+                                land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                            }
+                            if (targetBasicLandType.equals(SubType.MOUNTAIN)) {
+                                land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                            }
+                            if (targetBasicLandType.equals(SubType.ISLAND)) {
+                                land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                            }
+                            if (targetBasicLandType.equals(SubType.SWAMP)) {
+                                land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                             }
                         }
                 }
@@ -175,6 +174,7 @@ class VisionCharmEffect extends ContinuousEffectImpl {
                 it.remove();
             }
         }
+
         return true;
     }
 

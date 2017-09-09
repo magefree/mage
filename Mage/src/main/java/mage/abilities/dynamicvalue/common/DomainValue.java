@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -62,19 +63,19 @@ public class DomainValue implements DynamicValue {
         }
         for (Permanent p : game.getBattlefield().getAllActivePermanents(targetPlayer)) {
             if (p.isLand()) {
-                if (havePlains == 0 && p.getSubtype(game).contains("Plains")) {
+                if (havePlains == 0 && p.getSubtype(game).contains(SubType.PLAINS)) {
                     havePlains = 1;
                 }
-                if (haveIslands == 0 && p.getSubtype(game).contains("Island")) {
+                if (haveIslands == 0 && p.getSubtype(game).contains(SubType.ISLAND)) {
                     haveIslands = 1;
                 }
-                if (haveMountains == 0 && p.getSubtype(game).contains("Mountain")) {
+                if (haveMountains == 0 && p.getSubtype(game).contains(SubType.MOUNTAIN)) {
                     haveMountains = 1;
                 }
-                if (haveSwamps == 0 && p.getSubtype(game).contains("Swamp")) {
+                if (haveSwamps == 0 && p.getSubtype(game).contains(SubType.SWAMP)) {
                     haveSwamps = 1;
                 }
-                if (haveForests == 0 && p.getSubtype(game).contains("Forest")) {
+                if (haveForests == 0 && p.getSubtype(game).contains(SubType.FOREST)) {
                     haveForests = 1;
                 }
             }

@@ -41,6 +41,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -55,8 +56,8 @@ public class CentaurVinecrasher extends CardImpl {
 
     public CentaurVinecrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Centaur");
+        this.subtype.add(SubType.PLANT);
+        this.subtype.add(SubType.CENTAUR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

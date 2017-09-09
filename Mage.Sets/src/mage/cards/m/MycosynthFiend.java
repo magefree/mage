@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -47,7 +48,7 @@ public class MycosynthFiend extends CardImpl {
 
     public MycosynthFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -42,6 +42,7 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,8 +55,8 @@ public class GuulDrazAssassin extends LevelerCard {
 
     public GuulDrazAssassin (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Assassin");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.ASSASSIN);
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

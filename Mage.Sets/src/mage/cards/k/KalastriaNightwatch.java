@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -45,9 +46,9 @@ public class KalastriaNightwatch extends CardImpl {
 
     public KalastriaNightwatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Warrior");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

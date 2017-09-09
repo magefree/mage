@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -39,8 +40,8 @@ public class HumanClericToken extends Token {
     public HumanClericToken() {
         super("Human Cleric", "1/1 white and black Human Cleric creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Human");
-        subtype.add("Cleric");
+        subtype.add(SubType.HUMAN);
+        subtype.add(SubType.CLERIC);
         color.setWhite(true);
         color.setBlack(true);
         power = new MageInt(1);

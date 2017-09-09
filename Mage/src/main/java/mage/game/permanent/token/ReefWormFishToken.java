@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -43,7 +44,7 @@ public class ReefWormFishToken extends Token {
         setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Fish");
+        subtype.add(SubType.FISH);
         power = new MageInt(3);
         toughness = new MageInt(3);
 

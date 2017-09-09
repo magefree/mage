@@ -67,7 +67,7 @@ public class EmrakulThePromisedEnd extends CardImpl {
     public EmrakulThePromisedEnd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{13}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(13);
         this.toughness = new MageInt(13);
 

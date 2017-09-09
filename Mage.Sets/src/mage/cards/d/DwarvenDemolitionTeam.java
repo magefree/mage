@@ -56,7 +56,7 @@ public class DwarvenDemolitionTeam extends CardImpl {
     
     public DwarvenDemolitionTeam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Dwarf");
+        this.subtype.add(SubType.DWARF);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

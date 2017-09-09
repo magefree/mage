@@ -35,6 +35,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class SootfeatherFlock extends CardImpl {
 
     public SootfeatherFlock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Bird");
+        this.subtype.add(SubType.BIRD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

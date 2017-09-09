@@ -33,6 +33,7 @@ import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class TattermungeManiac extends CardImpl {
 
     public TattermungeManiac(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

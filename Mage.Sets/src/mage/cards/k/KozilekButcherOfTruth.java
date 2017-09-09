@@ -37,6 +37,7 @@ import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -48,7 +49,7 @@ public class KozilekButcherOfTruth extends CardImpl {
     public KozilekButcherOfTruth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{10}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);
 

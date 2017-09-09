@@ -41,6 +41,7 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.ElephantToken;
 
@@ -51,8 +52,8 @@ public class KazanduTuskcaller extends LevelerCard {
 
     public KazanduTuskcaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
 
         this.color.setGreen(true);
         this.power = new MageInt(1);

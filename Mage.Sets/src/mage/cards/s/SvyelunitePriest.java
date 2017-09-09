@@ -39,6 +39,7 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -52,8 +53,8 @@ public class SvyelunitePriest extends CardImpl {
 
     public SvyelunitePriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

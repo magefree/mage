@@ -56,8 +56,8 @@ public class DrogskolCaptain extends CardImpl {
 
     public DrogskolCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

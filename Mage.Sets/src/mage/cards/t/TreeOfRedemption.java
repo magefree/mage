@@ -38,6 +38,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
@@ -54,7 +55,7 @@ public class TreeOfRedemption extends CardImpl {
 
     public TreeOfRedemption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Plant");
+        this.subtype.add(SubType.PLANT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(13);

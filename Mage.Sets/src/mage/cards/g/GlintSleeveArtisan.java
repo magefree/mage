@@ -33,6 +33,7 @@ import mage.abilities.keyword.FabricateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class GlintSleeveArtisan extends CardImpl {
 
     public GlintSleeveArtisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Dwarf");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

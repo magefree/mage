@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
@@ -49,7 +50,7 @@ public class CourserOfKruphix extends CardImpl {
 
     public CourserOfKruphix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Centaur");
+        this.subtype.add(SubType.CENTAUR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

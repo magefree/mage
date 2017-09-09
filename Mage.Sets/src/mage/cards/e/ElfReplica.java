@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -48,7 +49,7 @@ public class ElfReplica extends CardImpl {
 
     public ElfReplica(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ELF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{G}"));

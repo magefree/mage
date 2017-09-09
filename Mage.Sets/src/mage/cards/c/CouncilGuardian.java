@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -55,8 +56,8 @@ public class CouncilGuardian extends CardImpl {
     public CouncilGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
 
-        this.subtype.add("Giant");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

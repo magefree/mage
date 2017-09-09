@@ -36,6 +36,7 @@ import mage.abilities.effects.common.combat.CantAttackBlockUnlessPaysSourceEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,8 +47,8 @@ public class QalSismaBehemoth extends CardImpl {
 
     public QalSismaBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -46,7 +47,7 @@ public class ShamblingStrider extends CardImpl {
 
     public ShamblingStrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Yeti");
+        this.subtype.add(SubType.YETI);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

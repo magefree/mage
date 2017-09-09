@@ -39,6 +39,7 @@ import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.GoblinToken;
 
 /**
@@ -49,8 +50,8 @@ public class KathariBomber extends CardImpl {
 
     public KathariBomber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
-        this.subtype.add("Bird");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.SHAMAN);
 
 
         

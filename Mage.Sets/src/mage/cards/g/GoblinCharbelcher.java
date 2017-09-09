@@ -36,6 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -101,7 +102,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
                 cards.add(card);
                 if (card.isLand()){
                     landFound = true;
-                    if(card.getSubtype(game).contains("Mountain")){
+                    if(card.getSubtype(game).contains(SubType.MOUNTAIN)){
                         isMountain = true;
                     }
                     break;

@@ -33,6 +33,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class TundraWolves extends CardImpl {
 
     public TundraWolves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.WOLF);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -42,8 +43,8 @@ public class OonaQueenFaerieToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setBlack(true);
-        subtype.add("Faerie");
-        subtype.add("Rogue");
+        subtype.add(SubType.FAERIE);
+        subtype.add(SubType.ROGUE);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

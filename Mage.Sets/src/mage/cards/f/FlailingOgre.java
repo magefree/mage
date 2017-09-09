@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -48,7 +49,7 @@ public class FlailingOgre extends CardImpl {
 
     public FlailingOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Ogre");
+        this.subtype.add(SubType.OGRE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

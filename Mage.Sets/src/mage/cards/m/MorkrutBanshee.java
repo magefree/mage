@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,7 +50,7 @@ public class MorkrutBanshee extends CardImpl {
 
     public MorkrutBanshee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.color.setBlack(true);
         this.power = new MageInt(4);

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -43,8 +44,8 @@ public class CorpseweftZombieToken extends Token {
     public CorpseweftZombieToken(int power, int toughness) {
         super("Zombie Horror", "X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way");
         cardType.add(CardType.CREATURE);
-        subtype.add("Zombie");
-        subtype.add("Horror");
+        subtype.add(SubType.ZOMBIE);
+        subtype.add(SubType.HORROR);
         color.setBlack(true);
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);

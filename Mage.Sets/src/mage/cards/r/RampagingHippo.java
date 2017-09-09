@@ -8,12 +8,13 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 public class RampagingHippo extends CardImpl {
 
     public RampagingHippo(UUID cardID, CardSetInfo cardSetInfo){
         super(cardID, cardSetInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        subtype.add("Hippo");
+        subtype.add(SubType.HIPPO);
         power = new MageInt(5);
         toughness = new MageInt(6);
 

@@ -6,12 +6,13 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 public class ScroungerOfSouls extends CardImpl {
 
     public ScroungerOfSouls(UUID cardID, CardSetInfo cardSetInfo){
         super(cardID, cardSetInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        subtype.add("Horror");
+        subtype.add(SubType.HORROR);
 
         power = new MageInt(3);
         toughness = new MageInt(4);

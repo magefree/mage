@@ -57,8 +57,8 @@ public class KitsuneDiviner extends CardImpl {
 
     public KitsuneDiviner (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Fox");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.FOX);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         

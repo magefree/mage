@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,7 +52,7 @@ public class TreasureKeeper extends CardImpl {
     public TreasureKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
 
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

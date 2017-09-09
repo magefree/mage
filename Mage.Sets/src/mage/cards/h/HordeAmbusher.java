@@ -41,6 +41,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -60,8 +61,8 @@ public class HordeAmbusher extends CardImpl {
 
     public HordeAmbusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.BERSERKER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

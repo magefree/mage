@@ -34,6 +34,7 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -47,7 +48,7 @@ public class EmperorCrocodile extends CardImpl {
 
     public EmperorCrocodile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Crocodile");
+        this.subtype.add(SubType.CROCODILE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -52,7 +52,7 @@ public class HarborSerpent extends CardImpl {
 
     public HarborSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
-        this.subtype.add("Serpent");
+        this.subtype.add(SubType.SERPENT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

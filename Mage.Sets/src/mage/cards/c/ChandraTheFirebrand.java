@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -56,7 +57,7 @@ public class ChandraTheFirebrand extends CardImpl {
     public ChandraTheFirebrand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{R}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Chandra");
+        this.subtype.add(SubType.CHANDRA);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

@@ -33,6 +33,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class LagacLizard extends CardImpl {
 
     public LagacLizard (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Lizard");
+        this.subtype.add(SubType.LIZARD);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

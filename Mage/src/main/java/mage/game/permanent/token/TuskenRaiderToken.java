@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -40,7 +41,7 @@ public class TuskenRaiderToken extends Token {
         this.setOriginalExpansionSetCode("SWS");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Tusken");
-        subtype.add("Raider");
+        subtype.add(SubType.TUSKEN);
+        subtype.add(SubType.RAIDER);
     }
 }

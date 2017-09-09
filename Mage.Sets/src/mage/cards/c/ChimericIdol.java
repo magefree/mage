@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -74,7 +75,7 @@ class ChimericIdolToken extends Token {
         super("Turtle", "3/3 Turtle artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Turtle");
+        subtype.add(SubType.TURTLE);
         power = new MageInt(3);
         toughness = new MageInt(3);
     }

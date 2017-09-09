@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,7 +47,7 @@ public class DrudgeReavers extends CardImpl {
 
     public DrudgeReavers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Skeleton");
+        this.subtype.add(SubType.SKELETON);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -33,6 +33,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
@@ -46,9 +47,9 @@ public class CivicWayfinder extends CardImpl {
 
     public CivicWayfinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Warrior");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

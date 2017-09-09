@@ -67,8 +67,8 @@ public class JaradGolgariLichLord extends CardImpl {
     public JaradGolgariLichLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Zombie");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.ELF);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

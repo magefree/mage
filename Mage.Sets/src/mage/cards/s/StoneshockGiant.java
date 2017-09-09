@@ -36,6 +36,7 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,7 +58,7 @@ public class StoneshockGiant extends CardImpl {
 
     public StoneshockGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

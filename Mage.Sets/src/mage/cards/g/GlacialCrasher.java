@@ -52,7 +52,7 @@ public class GlacialCrasher extends CardImpl {
 
     public GlacialCrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

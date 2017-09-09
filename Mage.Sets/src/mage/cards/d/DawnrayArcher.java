@@ -38,6 +38,7 @@ import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
@@ -49,8 +50,8 @@ public class DawnrayArcher extends CardImpl {
 
     public DawnrayArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

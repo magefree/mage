@@ -29,6 +29,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -56,7 +57,7 @@ public class SaprolingBurstToken extends Token {
     public SaprolingBurstToken(MageObjectReference saprolingBurstMOR) {
         super("Saproling", "green Saproling creature token with \"This creature's power and toughness are each equal to the number of fade counters on Saproling Burst.\"");
         this.color.setGreen(true);
-        this.subtype.add("Saproling");
+        this.subtype.add(SubType.SAPROLING);
         this.cardType.add(CardType.CREATURE);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new SaprolingBurstTokenDynamicValue(saprolingBurstMOR), Duration.WhileOnBattlefield)));
     }

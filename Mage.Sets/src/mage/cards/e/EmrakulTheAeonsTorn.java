@@ -40,6 +40,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -59,7 +60,7 @@ public class EmrakulTheAeonsTorn extends CardImpl {
     public EmrakulTheAeonsTorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{15}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(15);
         this.toughness = new MageInt(15);
 

@@ -63,8 +63,8 @@ public class MikaeusTheUnhallowed extends CardImpl {
     public MikaeusTheUnhallowed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Zombie");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

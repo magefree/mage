@@ -43,6 +43,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -60,7 +61,7 @@ public class RockHydra extends CardImpl {
     public RockHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{R}{R}");
         
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         

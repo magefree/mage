@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
@@ -61,7 +62,7 @@ public class EmeriaShepherd extends CardImpl {
 
     public EmeriaShepherd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -108,7 +109,7 @@ class EmeriaShepherdReturnToHandTargetEffect extends OneShotEffect {
             return false;
         }
         Zone toZone = Zone.HAND;
-        if (triggeringLand.getSubtype(game).contains("Plains")
+        if (triggeringLand.getSubtype(game).contains(SubType.PLAINS)
                 && controller.chooseUse(Outcome.PutCardInPlay, "Put the card to battlefield instead?", source, game)) {
             toZone = Zone.BATTLEFIELD;
         }

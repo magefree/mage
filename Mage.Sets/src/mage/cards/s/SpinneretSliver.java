@@ -55,7 +55,7 @@ public class SpinneretSliver extends CardImpl {
 
     public SpinneretSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -58,7 +58,7 @@ public class PrecursorGolem extends CardImpl {
 
     public PrecursorGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
-        this.subtype.add("Golem");
+        this.subtype.add(SubType.GOLEM);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

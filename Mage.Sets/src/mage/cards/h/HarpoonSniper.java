@@ -59,8 +59,8 @@ public class HarpoonSniper extends CardImpl {
 
     public HarpoonSniper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

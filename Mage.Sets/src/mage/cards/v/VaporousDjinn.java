@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
@@ -52,7 +53,7 @@ public class VaporousDjinn extends CardImpl {
 
     public VaporousDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.subtype.add("Djinn");
+        this.subtype.add(SubType.DJINN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

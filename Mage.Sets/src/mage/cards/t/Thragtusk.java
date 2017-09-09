@@ -36,6 +36,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.BeastToken;
 
 /**
@@ -46,7 +47,7 @@ public class Thragtusk extends CardImpl {
 
     public Thragtusk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
 
         this.power = new MageInt(5);

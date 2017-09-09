@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -50,8 +51,8 @@ public class OrcishBloodpainter extends CardImpl {
 
     public OrcishBloodpainter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Orc");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ORC);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

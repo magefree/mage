@@ -35,6 +35,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -46,8 +47,8 @@ public class PitilessVizier extends CardImpl {
     public PitilessVizier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         
-        this.subtype.add("Minotaur");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

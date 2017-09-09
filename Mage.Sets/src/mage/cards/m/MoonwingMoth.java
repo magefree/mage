@@ -45,7 +45,7 @@ public class MoonwingMoth extends CardImpl {
 
     public MoonwingMoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

@@ -59,8 +59,8 @@ public class ElvishBranchbender extends CardImpl {
 
     public ElvishBranchbender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -117,7 +117,7 @@ class ElvishBranchbenderToken extends Token {
     ElvishBranchbenderToken(int xValue) {
         super("Treefolk", "X/X Treefolk creature in addition to its other types, where X is the number of Elves you control");
         cardType.add(CardType.CREATURE);
-        subtype.add("Treefolk");
+        subtype.add(SubType.TREEFOLK);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
     }

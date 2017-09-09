@@ -38,6 +38,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,8 +55,8 @@ public class SidisiBroodTyrant extends CardImpl {
     public SidisiBroodTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Naga");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

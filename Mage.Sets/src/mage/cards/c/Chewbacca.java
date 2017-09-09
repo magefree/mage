@@ -36,6 +36,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -57,8 +58,8 @@ public class Chewbacca extends CardImpl {
     public Chewbacca(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Wookiee");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.WOOKIEE);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

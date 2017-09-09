@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -61,7 +62,7 @@ public class LeafdrakeRoostDrakeToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setBlue(true);
-        subtype.add("Drake");
+        subtype.add(SubType.DRAKE);
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

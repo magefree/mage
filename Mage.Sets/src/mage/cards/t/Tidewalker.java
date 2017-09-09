@@ -61,7 +61,7 @@ public class Tidewalker extends CardImpl {
 
     public Tidewalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

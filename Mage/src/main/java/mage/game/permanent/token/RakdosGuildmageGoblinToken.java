@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
@@ -41,7 +42,7 @@ public class RakdosGuildmageGoblinToken extends Token {
         super("Goblin", "2/1 red Goblin creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Goblin");
+        subtype.add(SubType.GOBLIN);
         power = new MageInt(2);
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());

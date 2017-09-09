@@ -34,6 +34,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class Oraxid extends CardImpl {
 
     public Oraxid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Crab");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.CRAB);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

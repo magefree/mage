@@ -57,8 +57,8 @@ public class NamelessOne extends CardImpl {
 
     public NamelessOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Wizard");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

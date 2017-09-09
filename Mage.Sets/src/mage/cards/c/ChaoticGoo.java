@@ -38,6 +38,7 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -54,7 +55,7 @@ public class ChaoticGoo extends CardImpl {
 
     public ChaoticGoo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Ooze");
+        this.subtype.add(SubType.OOZE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

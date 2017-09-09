@@ -54,7 +54,7 @@ public class HornedSliver extends CardImpl {
 
     public HornedSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -48,7 +49,7 @@ public class RabidWombat extends CardImpl {
     public RabidWombat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
-        this.subtype.add("Wombat");
+        this.subtype.add(SubType.WOMBAT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

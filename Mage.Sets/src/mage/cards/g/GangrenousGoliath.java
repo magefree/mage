@@ -55,8 +55,8 @@ public class GangrenousGoliath extends CardImpl {
 
     public GangrenousGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.GIANT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

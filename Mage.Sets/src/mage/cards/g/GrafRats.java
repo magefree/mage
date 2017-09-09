@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.c.ChitteringHost;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 
@@ -48,7 +49,7 @@ public class GrafRats extends CardImpl {
 
     public GrafRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Rat");
+        this.subtype.add(SubType.RAT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

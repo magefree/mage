@@ -34,6 +34,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class TempestDrake extends CardImpl {
 
     public TempestDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
-        this.subtype.add("Drake");
+        this.subtype.add(SubType.DRAKE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

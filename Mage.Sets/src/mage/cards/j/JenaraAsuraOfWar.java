@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -49,7 +50,7 @@ public class JenaraAsuraOfWar extends CardImpl {
 
     public JenaraAsuraOfWar (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
         addSuperType(SuperType.LEGENDARY);
 
 

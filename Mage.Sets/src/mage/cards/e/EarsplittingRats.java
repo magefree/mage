@@ -37,6 +37,7 @@ import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -47,7 +48,7 @@ public class EarsplittingRats extends CardImpl {
 
     public EarsplittingRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Rat");
+        this.subtype.add(SubType.RAT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

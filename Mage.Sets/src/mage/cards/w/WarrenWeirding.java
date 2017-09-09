@@ -63,7 +63,7 @@ public class WarrenWeirding extends CardImpl {
 
     public WarrenWeirding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{1}{B}");
-        this.subtype.add("Goblin");
+        this.subtype.add(SubType.GOBLIN);
 
 
         // Target player sacrifices a creature. If a Goblin is sacrificed this way, that player creates two 1/1 black Goblin Rogue creature tokens, and those tokens gain haste until end of turn.

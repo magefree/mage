@@ -54,7 +54,7 @@ public class RogueElephant extends CardImpl {
 
     public RogueElephant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Elephant");
+        this.subtype.add(SubType.ELEPHANT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

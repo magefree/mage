@@ -58,8 +58,8 @@ public class KrenkoMobBoss extends CardImpl {
     public KrenkoMobBoss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

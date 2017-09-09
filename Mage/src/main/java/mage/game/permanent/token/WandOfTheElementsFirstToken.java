@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -40,7 +41,7 @@ public class WandOfTheElementsFirstToken extends Token {
     public WandOfTheElementsFirstToken() {
         super("Elemental", "2/2 blue Elemental creature token with flying");
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.color.setBlue(true);
         power = new MageInt(2);
         toughness = new MageInt(2);

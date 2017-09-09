@@ -38,6 +38,7 @@ import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCardInHand;
 
@@ -50,7 +51,7 @@ public class VexingSphinx extends CardImpl {
     public VexingSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 
-        this.subtype.add("Sphinx");
+        this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

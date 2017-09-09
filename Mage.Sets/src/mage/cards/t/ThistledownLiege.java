@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,8 +58,8 @@ public class ThistledownLiege extends CardImpl {
 
     public ThistledownLiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W/U}{W/U}{W/U}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.KITHKIN);
+        this.subtype.add(SubType.KNIGHT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

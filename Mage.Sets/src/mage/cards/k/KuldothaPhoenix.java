@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 
@@ -53,7 +54,7 @@ public class KuldothaPhoenix extends CardImpl {
 
     public KuldothaPhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}");
-        this.subtype.add("Phoenix");
+        this.subtype.add(SubType.PHOENIX);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

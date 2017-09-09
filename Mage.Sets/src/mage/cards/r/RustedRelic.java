@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -71,7 +72,7 @@ class RustedRelicToken extends Token {
     public RustedRelicToken() {
         super("Rusted Relic", "5/5 Golem artifact creature");
         cardType.add(CardType.CREATURE);
-        subtype.add("Golem");
+        subtype.add(SubType.GOLEM);
         power = new MageInt(5);
         toughness = new MageInt(5);
     }

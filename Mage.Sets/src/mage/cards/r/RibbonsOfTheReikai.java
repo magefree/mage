@@ -51,7 +51,7 @@ public class RibbonsOfTheReikai extends CardImpl {
 
     public RibbonsOfTheReikai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // Draw a card for each Spirit you control.

@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -58,7 +59,7 @@ public class DeceiverExarch extends CardImpl {
 
     public DeceiverExarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);

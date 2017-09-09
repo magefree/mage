@@ -39,6 +39,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -51,8 +52,8 @@ public class Skinshifter extends CardImpl {
 
     public Skinshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -86,7 +87,7 @@ public class Skinshifter extends CardImpl {
         public RhinoToken() {
             super("Rhino", "Rhino with base power and toughness 4/4 and gains trample");
             this.cardType.add(CardType.CREATURE);
-            this.subtype.add("Rhino");
+            this.subtype.add(SubType.RHINO);
 
             this.color.setGreen(true);
             this.power = new MageInt(4);
@@ -100,7 +101,7 @@ public class Skinshifter extends CardImpl {
         public BirdToken() {
             super("Bird", "Bird with base power and toughness 2/2 and gains flying");
             this.cardType.add(CardType.CREATURE);
-            this.subtype.add("Bird");
+            this.subtype.add(SubType.BIRD);
 
             this.color.setGreen(true);
             this.power = new MageInt(2);
@@ -114,7 +115,7 @@ public class Skinshifter extends CardImpl {
         public PlantToken() {
             super("Plant", "Plant with base power and toughness 0/8");
             this.cardType.add(CardType.CREATURE);
-            this.subtype.add("Plant");
+            this.subtype.add(SubType.PLANT);
 
             this.color.setGreen(true);
             this.power = new MageInt(0);

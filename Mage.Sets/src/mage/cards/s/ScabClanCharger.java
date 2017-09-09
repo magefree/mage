@@ -34,6 +34,7 @@ import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -44,8 +45,8 @@ public class ScabClanCharger extends CardImpl {
 
     public ScabClanCharger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Centaur");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

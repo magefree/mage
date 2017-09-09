@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.CanBlockOnlyFlyingAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -43,7 +44,7 @@ public class CloudSpriteToken extends Token {
         this.setOriginalExpansionSetCode("FUT");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Faerie");
+        subtype.add(SubType.FAERIE);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

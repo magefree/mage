@@ -35,6 +35,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class MonstrousCarabid extends CardImpl {
 
     public MonstrousCarabid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
 
 
         

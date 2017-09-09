@@ -36,6 +36,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,7 +57,7 @@ public class GreaterSandwurm extends CardImpl {
     public GreaterSandwurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
 
-        this.subtype.add("Wurm");
+        this.subtype.add(SubType.WURM);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

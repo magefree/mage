@@ -36,6 +36,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,7 +56,7 @@ public class NebulonBFrigate extends CardImpl {
 
     public NebulonBFrigate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{W}");
-        this.subtype.add("Starship");
+        this.subtype.add(SubType.STARSHIP);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -56,7 +57,7 @@ public class WakestoneGargoyle extends CardImpl {
     
     public WakestoneGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Gargoyle");
+        this.subtype.add(SubType.GARGOYLE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

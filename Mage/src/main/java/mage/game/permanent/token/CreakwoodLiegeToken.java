@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,7 +42,7 @@ public class CreakwoodLiegeToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         color.setGreen(true);
-        subtype.add("Worm");
+        subtype.add(SubType.WORM);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

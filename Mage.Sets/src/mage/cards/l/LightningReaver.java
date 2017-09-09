@@ -41,6 +41,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
@@ -55,8 +56,8 @@ public class LightningReaver extends CardImpl {
 
     public LightningReaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.BEAST);
 
 
         

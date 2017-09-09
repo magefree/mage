@@ -35,6 +35,7 @@ import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class LooterIlKor extends CardImpl {
 
     public LooterIlKor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Kor");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

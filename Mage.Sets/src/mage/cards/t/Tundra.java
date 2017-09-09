@@ -33,6 +33,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class Tundra extends CardImpl {
 
     public Tundra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Plains");
-        this.subtype.add("Island");
+        this.subtype.add(SubType.PLAINS);
+        this.subtype.add(SubType.ISLAND);
         
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());

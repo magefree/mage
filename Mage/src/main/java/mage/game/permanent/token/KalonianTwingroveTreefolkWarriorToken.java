@@ -55,8 +55,8 @@ public class KalonianTwingroveTreefolkWarriorToken extends Token {
         this.setOriginalExpansionSetCode("M15");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Treefolk");
-        subtype.add("Warrior");
+        subtype.add(SubType.TREEFOLK);
+        subtype.add(SubType.WARRIOR);
         power = new MageInt(0);
         toughness = new MageInt(0);
 

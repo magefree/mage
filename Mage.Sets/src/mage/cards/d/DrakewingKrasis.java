@@ -34,6 +34,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class DrakewingKrasis extends CardImpl {
 
     public DrakewingKrasis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
-        this.subtype.add("Lizard");
-        this.subtype.add("Drake");
+        this.subtype.add(SubType.LIZARD);
+        this.subtype.add(SubType.DRAKE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import static mage.cards.r.RavenousWampa.RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -57,7 +58,7 @@ public class RavenousWampa extends CardImpl {
 
     public RavenousWampa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R/W}{R/W}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

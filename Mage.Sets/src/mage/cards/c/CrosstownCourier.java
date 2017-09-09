@@ -36,6 +36,7 @@ import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -51,7 +52,7 @@ public class CrosstownCourier extends CardImpl {
 
     public CrosstownCourier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Vedalken");
+        this.subtype.add(SubType.VEDALKEN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

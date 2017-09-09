@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,8 +50,8 @@ public class CoalhaulerSwine extends CardImpl {
     public CoalhaulerSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         
-        this.subtype.add("Boar");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BOAR);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

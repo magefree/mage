@@ -39,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,8 +52,8 @@ public class MerfolkSpy extends CardImpl {
 
     public MerfolkSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

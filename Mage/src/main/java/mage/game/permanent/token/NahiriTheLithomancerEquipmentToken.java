@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -50,7 +51,7 @@ public class NahiriTheLithomancerEquipmentToken extends Token {
     public NahiriTheLithomancerEquipmentToken() {
         super("Stoneforged Blade", "colorless Equipment artifact token named Stoneforged Blade with indestructible, \"Equipped creature gets +5/+5 and has double strike,\" and equip {0}");
         cardType.add(CardType.ARTIFACT);
-        subtype.add("Equipment");
+        subtype.add(SubType.EQUIPMENT);
 
         this.addAbility(IndestructibleAbility.getInstance());
 

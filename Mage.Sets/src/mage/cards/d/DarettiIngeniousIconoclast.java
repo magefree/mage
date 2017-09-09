@@ -40,6 +40,7 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
@@ -70,7 +71,7 @@ public class DarettiIngeniousIconoclast extends CardImpl {
     public DarettiIngeniousIconoclast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{R}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Daretti");
+        this.subtype.add(SubType.DARETTI);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

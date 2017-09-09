@@ -35,6 +35,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,8 +47,8 @@ public class CultbrandCinder extends CardImpl {
 
     public CultbrandCinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B/R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

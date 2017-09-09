@@ -34,6 +34,7 @@ import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class HoundOfGriselbrand extends CardImpl {
 
     public HoundOfGriselbrand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.HOUND);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

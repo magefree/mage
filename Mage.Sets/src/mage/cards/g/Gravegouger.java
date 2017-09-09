@@ -38,6 +38,7 @@ import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInASingleGraveyard;
@@ -50,8 +51,8 @@ public class Gravegouger extends CardImpl {
 
     public Gravegouger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Nightmare");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.NIGHTMARE);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

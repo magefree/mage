@@ -34,6 +34,7 @@ import mage.abilities.effects.common.search.SearchLibraryGraveyardPutInHandEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 
@@ -52,7 +53,7 @@ public class SunBlessedMount extends CardImpl {
     public SunBlessedMount(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
 
-        this.subtype.add("Dinosaur");
+        this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

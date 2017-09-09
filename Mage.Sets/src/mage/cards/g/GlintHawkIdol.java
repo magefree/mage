@@ -83,7 +83,7 @@ class GlintHawkIdolToken extends Token {
         super("", "2/2 Bird artifact creature with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Bird");
+        subtype.add(SubType.BIRD);
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());

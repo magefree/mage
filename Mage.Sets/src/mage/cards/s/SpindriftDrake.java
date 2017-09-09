@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -46,7 +47,7 @@ public class SpindriftDrake extends CardImpl {
 
     public SpindriftDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
-        this.subtype.add("Drake");
+        this.subtype.add(SubType.DRAKE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

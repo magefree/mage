@@ -29,6 +29,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -40,7 +41,7 @@ public class GremlinToken extends Token {
         super("Gremlin", "2/2 red Gremlin creature token");
         cardType.add(CardType.CREATURE);
         this.setOriginalExpansionSetCode("AER");
-        subtype.add("Gremlin");
+        subtype.add(SubType.GREMLIN);
         color.setRed(true);
         power = new MageInt(2);
         toughness = new MageInt(2);

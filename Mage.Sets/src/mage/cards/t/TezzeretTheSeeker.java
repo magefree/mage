@@ -59,7 +59,7 @@ public class TezzeretTheSeeker extends CardImpl {
     public TezzeretTheSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Tezzeret");
+        this.subtype.add(SubType.TEZZERET);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 

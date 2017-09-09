@@ -55,8 +55,8 @@ public class SandTrooper extends CardImpl {
 
     public SandTrooper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Trooper");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.TROOPER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

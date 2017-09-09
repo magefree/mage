@@ -59,7 +59,7 @@ public class ScavengerGrounds extends CardImpl {
     public ScavengerGrounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.subtype.add("Desert");
+        this.subtype.add(SubType.DESERT);
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

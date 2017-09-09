@@ -35,6 +35,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -45,7 +46,7 @@ public class MorgueToad extends CardImpl {
 
     public MorgueToad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Frog");
+        this.subtype.add(SubType.FROG);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

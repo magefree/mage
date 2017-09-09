@@ -55,7 +55,7 @@ public class TundraKavu extends CardImpl {
 
     public TundraKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Kavu");
+        this.subtype.add(SubType.KAVU);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

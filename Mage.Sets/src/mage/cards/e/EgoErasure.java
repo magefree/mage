@@ -50,7 +50,7 @@ public class EgoErasure extends CardImpl {
 
     public EgoErasure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{U}");
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());

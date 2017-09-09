@@ -38,6 +38,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -50,8 +51,8 @@ public class DeathbringerThoctar extends CardImpl {
 
     public DeathbringerThoctar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.BEAST);
 
 
         

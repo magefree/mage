@@ -48,7 +48,7 @@ public class CathedralMembrane extends CardImpl {
 
     public CathedralMembrane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W/P}");
-        this.subtype.add("Wall");
+        this.subtype.add(SubType.WALL);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

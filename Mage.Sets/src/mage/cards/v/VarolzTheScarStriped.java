@@ -55,8 +55,8 @@ public class VarolzTheScarStriped extends CardImpl {
     public VarolzTheScarStriped(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Troll");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.TROLL);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

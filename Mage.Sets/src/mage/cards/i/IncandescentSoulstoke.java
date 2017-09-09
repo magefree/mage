@@ -69,8 +69,8 @@ public class IncandescentSoulstoke extends CardImpl {
 
     public IncandescentSoulstoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

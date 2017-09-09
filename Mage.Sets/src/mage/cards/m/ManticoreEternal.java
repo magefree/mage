@@ -7,13 +7,14 @@ import mage.abilities.keyword.AfflictAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 public class ManticoreEternal extends CardImpl {
 
     public ManticoreEternal(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        subtype.add("Zombie");
-        subtype.add("Manticore");
+        subtype.add(SubType.ZOMBIE);
+        subtype.add(SubType.MANTICORE);
         power = new MageInt(5);
         toughness = new MageInt(4);
 

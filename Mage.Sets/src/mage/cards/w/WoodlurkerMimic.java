@@ -38,6 +38,7 @@ import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SubLayer;
 import mage.filter.FilterSpell;
@@ -61,7 +62,7 @@ public class WoodlurkerMimic extends CardImpl {
 
     public WoodlurkerMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/G}");
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
 
         this.color.setGreen(true);
         this.color.setBlack(true);

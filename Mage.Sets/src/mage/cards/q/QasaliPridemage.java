@@ -37,6 +37,7 @@ import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.Target;
@@ -52,8 +53,8 @@ public class QasaliPridemage extends CardImpl {
 
     public QasaliPridemage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
-        this.subtype.add("Cat");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

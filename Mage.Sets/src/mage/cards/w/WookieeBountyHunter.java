@@ -34,6 +34,7 @@ import mage.abilities.keyword.BountyAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class WookieeBountyHunter extends CardImpl {
 
     public WookieeBountyHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Wookiee");
-        this.subtype.add("Hunter");
+        this.subtype.add(SubType.WOOKIEE);
+        this.subtype.add(SubType.HUNTER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

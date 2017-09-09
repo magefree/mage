@@ -34,6 +34,7 @@ import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 
@@ -46,8 +47,8 @@ public class NoggleBridgebreaker extends CardImpl {
 
     public NoggleBridgebreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U/R}{U/R}");
-        this.subtype.add("Noggle");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.NOGGLE);
+        this.subtype.add(SubType.ROGUE);
 
 
         this.power = new MageInt(4);

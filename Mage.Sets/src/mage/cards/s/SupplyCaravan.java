@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.WarriorVigilantToken;
@@ -56,7 +57,7 @@ public class SupplyCaravan extends CardImpl {
     public SupplyCaravan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
 
-        this.subtype.add("Camel");
+        this.subtype.add(SubType.CAMEL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

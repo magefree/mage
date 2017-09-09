@@ -34,6 +34,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -50,8 +51,8 @@ public class HavengulSkaab extends CardImpl {
 
     public HavengulSkaab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

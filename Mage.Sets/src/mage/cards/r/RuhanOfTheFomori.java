@@ -34,6 +34,7 @@ import mage.abilities.effects.common.combat.AttackIfAbleTargetRandomOpponentSour
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 
@@ -46,8 +47,8 @@ public class RuhanOfTheFomori extends CardImpl {
     public RuhanOfTheFomori(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Giant");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

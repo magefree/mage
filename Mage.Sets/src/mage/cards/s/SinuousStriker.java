@@ -10,6 +10,7 @@ import mage.abilities.keyword.EternalizeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -19,8 +20,8 @@ public class SinuousStriker extends CardImpl {
 
     public SinuousStriker(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        subtype.add("Naga");
-        subtype.add("Warrior");
+        subtype.add(SubType.NAGA);
+        subtype.add(SubType.WARRIOR);
 
         power = new MageInt(2);
         toughness = new MageInt(2);

@@ -36,6 +36,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -83,8 +84,8 @@ public class BecomesAuraSourceEffect extends ContinuousEffectImpl implements Sou
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        if (!permanent.getSubtype(game).contains("Aura")) {
-                            permanent.getSubtype(game).add("Aura");
+                        if (!permanent.getSubtype(game).contains(SubType.AURA)) {
+                            permanent.getSubtype(game).add(SubType.AURA);
                         }
                     }
                     break;

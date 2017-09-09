@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -52,7 +53,7 @@ public class CryptbornHorror extends CardImpl {
 
     public CryptbornHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/R}{B/R}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
         this.color.setBlack(true);
         this.color.setRed(true);
         this.power = new MageInt(0);

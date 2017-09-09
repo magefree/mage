@@ -40,6 +40,7 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -49,8 +50,8 @@ public class HadaSpyPatrol extends LevelerCard {
 
     public HadaSpyPatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ROGUE);
 
         this.color.setBlue(true);
         this.power = new MageInt(1);

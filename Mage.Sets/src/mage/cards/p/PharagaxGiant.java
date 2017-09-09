@@ -38,6 +38,7 @@ import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -48,7 +49,7 @@ public class PharagaxGiant extends CardImpl {
 
     public PharagaxGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

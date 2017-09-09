@@ -54,7 +54,7 @@ public class FathomSeer extends CardImpl {
     }
     public FathomSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.ILLUSION);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

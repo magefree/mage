@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetEnchantmentPermanent;
 
 /**
@@ -45,8 +46,8 @@ public class EnlightenedAscetic extends CardImpl {
 
     public EnlightenedAscetic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Cat");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.MONK);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

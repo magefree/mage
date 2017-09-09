@@ -53,8 +53,8 @@ public class KithkinMourncaller extends CardImpl {
 
     public KithkinMourncaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.KITHKIN);
+        this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

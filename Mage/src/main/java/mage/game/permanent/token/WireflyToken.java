@@ -29,6 +29,7 @@ package mage.game.permanent.token;
 
 import mage.constants.CardType;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class WireflyToken extends Token {
         this.setOriginalExpansionSetCode("DST");
         this.getPower().modifyBaseValue(2);
         this.getToughness().modifyBaseValue(2);
-        this.getSubtype(null).add("Insect");
+        this.getSubtype(null).add(SubType.INSECT);
         this.addCardType(CardType.ARTIFACT);
         this.addCardType(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());

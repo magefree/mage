@@ -36,6 +36,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class ShelteredThicket extends CardImpl {
     public ShelteredThicket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.subtype.add("Mountain");
-        this.subtype.add("Forest");
+        this.subtype.add(SubType.MOUNTAIN);
+        this.subtype.add(SubType.FOREST);
 
         // <i>({T}: Add {R} or {G} to your mana pool.)</i>
         this.addAbility(new RedManaAbility());

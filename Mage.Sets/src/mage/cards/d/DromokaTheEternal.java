@@ -48,7 +48,7 @@ public class DromokaTheEternal extends CardImpl {
     public DromokaTheEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

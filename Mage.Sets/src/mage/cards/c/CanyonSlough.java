@@ -36,6 +36,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class CanyonSlough extends CardImpl {
     public CanyonSlough(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.subtype.add("Swamp");
-        this.subtype.add("Mountain");
+        this.subtype.add(SubType.SWAMP);
+        this.subtype.add(SubType.MOUNTAIN);
 
         // <i>({T}: Add {B} or {R} to your mana pool.)</i>
         this.addAbility(new BlackManaAbility());

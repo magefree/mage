@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -39,6 +40,6 @@ public class DevastatingSummonsElementalToken extends Token {
         super("Elemental", "X/X red Elemental creature");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
     }
 }

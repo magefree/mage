@@ -50,8 +50,8 @@ public class FreneticRaptor extends CardImpl {
     public FreneticRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
 
-        this.subtype.add("Dinosaur");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.DINOSAUR);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

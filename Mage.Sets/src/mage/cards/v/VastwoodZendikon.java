@@ -51,7 +51,7 @@ public class VastwoodZendikon extends CardImpl {
 
     public VastwoodZendikon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant land
@@ -86,7 +86,7 @@ class VastwoodElementalToken extends Token {
         super("", "6/4 green Elemental creature");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(6);
         toughness = new MageInt(4);
     }

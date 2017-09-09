@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class SpikeToken extends Token {
         super("Spike", "1/1 green Spike creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Spike");
+        subtype.add(SubType.SPIKE);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

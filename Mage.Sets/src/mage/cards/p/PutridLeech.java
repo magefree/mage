@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -50,8 +51,8 @@ public class PutridLeech extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
         
 
-        this.subtype.add("Zombie");
-        this.subtype.add("Leech");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.LEECH);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new PayLifeCost(2)));

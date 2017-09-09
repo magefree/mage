@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
@@ -46,7 +47,7 @@ public class GangOfDevils extends CardImpl {
 
     public GangOfDevils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        this.subtype.add("Devil");
+        this.subtype.add(SubType.DEVIL);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

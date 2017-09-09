@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -55,7 +56,7 @@ public class HushwingGryff extends CardImpl {
 
     public HushwingGryff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Hippogriff");
+        this.subtype.add(SubType.HIPPOGRIFF);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

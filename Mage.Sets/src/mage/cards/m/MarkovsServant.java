@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class MarkovsServant extends CardImpl {
 
     public MarkovsServant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},null);
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
         this.color.setBlack(true);
 
         this.power = new MageInt(4);

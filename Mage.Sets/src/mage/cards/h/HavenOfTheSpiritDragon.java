@@ -158,7 +158,7 @@ class UginPlaneswalkerCardPredicate implements Predicate<Card> {
     @Override
     public boolean apply(Card input, Game game) {
         return input.isPlaneswalker()
-                && input.getName().contains("Ugin, the Spirit Dragon");
+                && input.getSubtype(game).contains(SubType.UGIN);
     }
 
     @Override

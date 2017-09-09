@@ -57,7 +57,7 @@ public class MarshLurker extends CardImpl {
 
     public MarshLurker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

@@ -48,8 +48,8 @@ public class ThoughtweftTrio extends CardImpl {
 
     public ThoughtweftTrio(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.KITHKIN);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -46,7 +46,7 @@ public class ToxinSliver extends CardImpl {
 
     public ToxinSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

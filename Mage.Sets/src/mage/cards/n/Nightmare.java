@@ -56,8 +56,8 @@ public class Nightmare extends CardImpl {
 
     public Nightmare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
-        this.subtype.add("Nightmare");
-        this.subtype.add("Horse");
+        this.subtype.add(SubType.NIGHTMARE);
+        this.subtype.add(SubType.HORSE);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

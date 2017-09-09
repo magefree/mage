@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class PincherToken extends Token {
         super("Pincher", "2/2 colorless Pincher creature token");
         setOriginalExpansionSetCode("5ND");
         cardType.add(CardType.CREATURE);
-        subtype.add("Pincher");
+        subtype.add(SubType.PINCHER);
         power = new MageInt(2);
         toughness = new MageInt(2);
 

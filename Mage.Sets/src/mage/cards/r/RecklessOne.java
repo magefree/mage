@@ -56,8 +56,8 @@ public class RecklessOne extends CardImpl {
 
     public RecklessOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

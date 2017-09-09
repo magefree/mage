@@ -32,6 +32,7 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -44,7 +45,7 @@ public class SnowCoveredSwamp extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.addSuperType(SuperType.BASIC);
         this.addSuperType(SuperType.SNOW);
-        this.subtype.add("Swamp");
+        this.subtype.add(SubType.SWAMP);
 
         // B
         this.addAbility(new BlackManaAbility());

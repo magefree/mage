@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
@@ -64,8 +65,8 @@ public class ShamanOfTheGreatHunt extends CardImpl {
     
     public ShamanOfTheGreatHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Orc");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ORC);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

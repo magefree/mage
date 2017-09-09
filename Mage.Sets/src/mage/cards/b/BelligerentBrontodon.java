@@ -49,7 +49,7 @@ public class BelligerentBrontodon extends CardImpl {
     public BelligerentBrontodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");
 
-        this.subtype.add("Dinosaur");
+        this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

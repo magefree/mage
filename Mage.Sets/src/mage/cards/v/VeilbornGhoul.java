@@ -54,7 +54,7 @@ public class VeilbornGhoul extends CardImpl {
 
     public VeilbornGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);

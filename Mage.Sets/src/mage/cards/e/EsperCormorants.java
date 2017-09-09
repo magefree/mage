@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class EsperCormorants extends CardImpl {
 
     public EsperCormorants(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{W}{U}");
-        this.subtype.add("Bird");
+        this.subtype.add(SubType.BIRD);
 
 
         this.power = new MageInt(3);

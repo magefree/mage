@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,9 +42,9 @@ public class ExpeditionEnvoy extends CardImpl {
 
     public ExpeditionEnvoy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SCOUT);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
     }

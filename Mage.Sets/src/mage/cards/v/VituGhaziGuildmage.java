@@ -37,6 +37,7 @@ import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -47,8 +48,8 @@ public class VituGhaziGuildmage extends CardImpl {
 
     public VituGhaziGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
-        this.subtype.add("Dryad");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.DRYAD);
+        this.subtype.add(SubType.SHAMAN);
 
 
         this.power = new MageInt(2);

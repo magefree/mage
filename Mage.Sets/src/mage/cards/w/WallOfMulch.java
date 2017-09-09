@@ -60,7 +60,7 @@ public class WallOfMulch extends CardImpl {
     
     public WallOfMulch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Wall");
+        this.subtype.add(SubType.WALL);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);

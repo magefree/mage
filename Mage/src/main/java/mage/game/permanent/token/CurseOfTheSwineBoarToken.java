@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -44,7 +45,7 @@ public class CurseOfTheSwineBoarToken extends Token {
         super("Boar", "2/2 green Boar creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Boar");
+        subtype.add(SubType.BOAR);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

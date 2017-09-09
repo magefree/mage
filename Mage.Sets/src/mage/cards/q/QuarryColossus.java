@@ -57,7 +57,7 @@ public class QuarryColossus extends CardImpl {
 
     public QuarryColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);

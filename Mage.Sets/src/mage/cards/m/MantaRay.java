@@ -58,7 +58,7 @@ public class MantaRay extends CardImpl {
 
     public MantaRay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Fish");
+        this.subtype.add(SubType.FISH);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

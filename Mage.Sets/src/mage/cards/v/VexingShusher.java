@@ -38,6 +38,7 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -54,8 +55,8 @@ public class VexingShusher extends CardImpl {
 
     public VexingShusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}{R/G}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

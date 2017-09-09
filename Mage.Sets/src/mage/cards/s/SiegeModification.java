@@ -61,7 +61,7 @@ public class SiegeModification extends CardImpl {
     public SiegeModification(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
 
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature or Vehicle
         TargetPermanent auraTarget = new TargetPermanent(filter);

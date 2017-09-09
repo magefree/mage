@@ -33,6 +33,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class JhovallQueen extends CardImpl {
 
     public JhovallQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
-        this.subtype.add("Cat");
-        this.subtype.add("Rebel");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.REBEL);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);

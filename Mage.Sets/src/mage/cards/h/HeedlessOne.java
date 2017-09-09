@@ -56,8 +56,8 @@ public class HeedlessOne extends CardImpl {
 
     public HeedlessOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

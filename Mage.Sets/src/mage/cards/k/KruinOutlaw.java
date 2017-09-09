@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.t.TerrorOfKruinPass;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -50,9 +51,9 @@ public class KruinOutlaw extends CardImpl {
 
     public KruinOutlaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ROGUE);
+        this.subtype.add(SubType.WEREWOLF);
 
         this.transformable = true;
         this.secondSideCardClazz = TerrorOfKruinPass.class;

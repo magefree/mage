@@ -33,6 +33,7 @@ import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,7 +46,7 @@ public class GhastlyHaunting extends CardImpl {
 
     public GhastlyHaunting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
         this.color.setBlue(true);
 
         // this card is the second face of double-faced card

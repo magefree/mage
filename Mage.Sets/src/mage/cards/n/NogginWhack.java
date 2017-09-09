@@ -38,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -54,7 +55,7 @@ public class NogginWhack extends CardImpl {
 
     public NogginWhack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{2}{B}{B}");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.ROGUE);
 
 
         // Prowl {1}{B}

@@ -40,6 +40,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
 
@@ -52,7 +53,7 @@ public class FaerieSquadron extends CardImpl {
 
     public FaerieSquadron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
-        this.subtype.add("Faerie");
+        this.subtype.add(SubType.FAERIE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

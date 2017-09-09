@@ -36,6 +36,7 @@ import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,8 +47,8 @@ public class ThalakosMistfolk extends CardImpl {
 
     public ThalakosMistfolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Thalakos");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.THALAKOS);
+        this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

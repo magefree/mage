@@ -51,8 +51,8 @@ public class DauntingDefender extends CardImpl {
     public DauntingDefender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

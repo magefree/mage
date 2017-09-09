@@ -42,6 +42,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -114,7 +115,7 @@ class GodPharaohsGiftEffect extends OneShotEffect {
                     token.getToughness().modifyBaseValue(4);
                     token.getColor(game).setColor(ObjectColor.BLACK);
                     token.getSubtype(game).clear();
-                    token.getSubtype(game).add("Zombie");
+                    token.getSubtype(game).add(SubType.ZOMBIE);
                     if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
                         Permanent tokenPermanent = game.getPermanent(token.getLastAddedToken());
                         if (tokenPermanent != null) {

@@ -48,8 +48,8 @@ public class GaddockTeeg extends CardImpl {
     public GaddockTeeg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Kithkin");
-        this.subtype.add("Advisor");
+        this.subtype.add(SubType.KITHKIN);
+        this.subtype.add(SubType.ADVISOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

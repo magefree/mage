@@ -59,8 +59,8 @@ public class WellgabberApothecary extends CardImpl {
 
     public WellgabberApothecary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

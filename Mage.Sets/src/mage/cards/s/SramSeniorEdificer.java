@@ -58,8 +58,8 @@ public class SramSeniorEdificer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dwarf");
-        this.subtype.add("Advisor");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

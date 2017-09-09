@@ -54,8 +54,8 @@ public class KentaroTheSmilingCat extends CardImpl {
     public KentaroTheSmilingCat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Samurai");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SAMURAI);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

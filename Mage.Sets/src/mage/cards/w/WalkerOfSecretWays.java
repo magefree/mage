@@ -63,8 +63,8 @@ public class WalkerOfSecretWays extends CardImpl {
 
     public WalkerOfSecretWays(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Ninja");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.NINJA);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

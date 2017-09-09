@@ -38,6 +38,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -54,8 +55,8 @@ public class KariZevSkyshipRaider extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Pirate");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

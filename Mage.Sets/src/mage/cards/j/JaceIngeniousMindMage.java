@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
@@ -52,7 +53,7 @@ public class JaceIngeniousMindMage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Jace");
+        this.subtype.add(SubType.JACE);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 

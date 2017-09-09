@@ -57,7 +57,7 @@ public class Cockatrice extends CardImpl {
 
     public Cockatrice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.subtype.add("Cockatrice");
+        this.subtype.add(SubType.COCKATRICE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

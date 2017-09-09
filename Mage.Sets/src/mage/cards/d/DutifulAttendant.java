@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.AnotherCardPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -53,8 +54,8 @@ public class DutifulAttendant extends CardImpl {
 
     public DutifulAttendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

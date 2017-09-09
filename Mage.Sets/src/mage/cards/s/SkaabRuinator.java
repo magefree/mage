@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -54,8 +55,8 @@ public class SkaabRuinator extends CardImpl {
 
     public SkaabRuinator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);

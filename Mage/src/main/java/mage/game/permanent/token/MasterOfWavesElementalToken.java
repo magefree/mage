@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -39,7 +40,7 @@ public class MasterOfWavesElementalToken extends Token {
     public MasterOfWavesElementalToken() {
         super("Elemental", "1/0 blue Elemental creature");
         this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.color.setBlue(true);
 

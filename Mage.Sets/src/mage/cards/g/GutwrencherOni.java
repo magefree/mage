@@ -58,8 +58,8 @@ public class GutwrencherOni extends CardImpl {
 
     public GutwrencherOni(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Demon");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.DEMON);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

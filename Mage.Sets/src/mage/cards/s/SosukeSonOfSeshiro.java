@@ -64,8 +64,8 @@ public class SosukeSonOfSeshiro extends CardImpl {
     public SosukeSonOfSeshiro(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Snake");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

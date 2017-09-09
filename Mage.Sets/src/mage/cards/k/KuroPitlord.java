@@ -50,8 +50,8 @@ public class KuroPitlord extends CardImpl {
     public KuroPitlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Demon");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.DEMON);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);

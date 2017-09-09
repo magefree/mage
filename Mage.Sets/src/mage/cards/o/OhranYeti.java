@@ -37,6 +37,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -59,7 +60,7 @@ public class OhranYeti extends CardImpl {
     public OhranYeti(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         addSuperType(SuperType.SNOW);
-        this.subtype.add("Yeti");
+        this.subtype.add(SubType.YETI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -64,7 +64,7 @@ public class WallOfForgottenPharaohs extends CardImpl {
     public WallOfForgottenPharaohs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
 
-        this.subtype.add("Wall");
+        this.subtype.add(SubType.WALL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
@@ -54,7 +55,7 @@ public class LoomingHoverguard extends CardImpl {
 
     public LoomingHoverguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
-        this.subtype.add("Drone");
+        this.subtype.add(SubType.DRONE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

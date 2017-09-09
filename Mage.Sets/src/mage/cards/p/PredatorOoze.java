@@ -36,6 +36,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -46,7 +47,7 @@ public class PredatorOoze extends CardImpl {
 
     public PredatorOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");
-        this.subtype.add("Ooze");
+        this.subtype.add(SubType.OOZE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

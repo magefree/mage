@@ -53,8 +53,8 @@ public class KaervekTheMerciless extends CardImpl {
     public KaervekTheMerciless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

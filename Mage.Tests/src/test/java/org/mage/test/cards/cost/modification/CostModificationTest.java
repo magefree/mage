@@ -2,6 +2,7 @@ package org.mage.test.cards.cost.modification;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -140,44 +141,80 @@ public class CostModificationTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Fated Conflagration", 1);
         assertGraveyardCount(playerB, "Carnivorous Moss-Beast", 1);
     }
-    
+
     /*
     * Reported bug: Grand Arbiter Augustin IV makes moth spells you cast and your opponent cast {1} more. Should only affect opponent's spells costs.
-    */
+     */
     @Test
     public void testArbiterIncreasingCostBothPlayers() {
-        
+
         String gArbiter = "Grand Arbiter Augustin IV";
         String divination = "Divination";
         String doomBlade = "Doom Blade";
-                
+
         /*
-        Grand Arbiter Augustin IV {2}{W}{U} 
+        Grand Arbiter Augustin IV {2}{W}{U}
             2/3 Legendary Creature - Human Advisor
             White spells you cast cost 1 less to cast.
             Blue spells you cast cost 1 less to cast.
             Spells your opponents cast cost 1 more to cast.
-        */
+         */
         addCard(Zone.BATTLEFIELD, playerA, gArbiter);
         addCard(Zone.HAND, playerA, divination); // {2}{U} Sorcery: draw two cards
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-        
+
         addCard(Zone.HAND, playerB, doomBlade);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2); // {1}{B} Instant: destroy target non-black creature
-        
+
         // Divination should only cost {1}{U} now with the cost reduction in place for your blue spells.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, divination);
-        
+
         // Doom Blade cast by the opponent should cost {2}{B} now with the cost increase in effect for opponent spells.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, doomBlade, gArbiter);
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertGraveyardCount(playerA, divination, 1);
         assertHandCount(playerA, 2);
         assertTappedCount("Island", true, 2);
         assertPermanentCount(playerA, gArbiter, 1);
         assertHandCount(playerB, doomBlade, 1);
+    }
+
+    /**
+     * Zoetic Cavern's cast as creature cost is not modified as Animar, Soul of
+     * Elements gains counters.
+     */
+    @Test
+    public void ReduceCostToCastZoeticCavern() {
+
+        // Protection from white and from black
+        // Whenever you cast a creature spell, put a +1/+1 counter on Animar, Soul of Elements.
+        // Creature spells you cast cost {1} less to cast for each +1/+1 counter on Animar.
+        addCard(Zone.BATTLEFIELD, playerA, "Animar, Soul of Elements");
+
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+
+        addCard(Zone.HAND, playerA, "Zoetic Cavern");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zoetic Cavern");
+        setChoice(playerA, "Yes");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 2);
+        assertCounterCount(playerA, "Animar, Soul of Elements", CounterType.P1P1, 3);
+
+        assertHandCount(playerA, "Zoetic Cavern", 0);
+        assertPermanentCount(playerA, "Zoetic Cavern", 0);
+
+        assertTappedCount("Plains", false, 2); // 2 for 1st Lion 1 for 2nd lion and only 1 mana needed to cast face down Zoetic
+
     }
 }

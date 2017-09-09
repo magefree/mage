@@ -39,6 +39,7 @@ import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -50,8 +51,8 @@ public class SkarrganSkybreaker extends CardImpl {
 
     public SkarrganSkybreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}{G}");
-        this.subtype.add("Giant");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

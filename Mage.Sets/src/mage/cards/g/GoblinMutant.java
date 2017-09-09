@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,8 +62,8 @@ public class GoblinMutant extends CardImpl {
 
     public GoblinMutant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.MUTANT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);

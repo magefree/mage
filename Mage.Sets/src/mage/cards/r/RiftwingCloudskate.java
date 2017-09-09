@@ -38,6 +38,7 @@ import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPermanent;
 
 /**
@@ -48,7 +49,7 @@ public class RiftwingCloudskate extends CardImpl {
 
     public RiftwingCloudskate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.ILLUSION);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

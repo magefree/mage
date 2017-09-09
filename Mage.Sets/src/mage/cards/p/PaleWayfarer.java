@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,8 +55,8 @@ public class PaleWayfarer extends CardImpl {
 
     public PaleWayfarer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -48,8 +49,8 @@ public class HomicidalBrute extends CardImpl {
 
     public HomicidalBrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Human");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.MUTANT);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

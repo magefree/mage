@@ -33,6 +33,7 @@ import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class SlinkingSerpent extends CardImpl {
 
     public SlinkingSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
-        this.subtype.add("Serpent");
+        this.subtype.add(SubType.SERPENT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

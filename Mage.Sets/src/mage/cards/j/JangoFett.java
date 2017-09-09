@@ -40,6 +40,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -64,8 +65,8 @@ public class JangoFett extends CardImpl {
     public JangoFett(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Hunter");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.HUNTER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -58,7 +58,7 @@ public class RingOfXathrid extends CardImpl {
 
     public RingOfXathrid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // {2}: Regenerate equipped creature.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.EQUIPMENT), new GenericManaCost(2)));

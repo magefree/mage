@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -42,7 +43,7 @@ public class NightwingHorrorToken extends Token {
         cardType.add(CardType.CREATURE);
         this.color.setBlue(true);
         this.color.setBlack(true);
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
