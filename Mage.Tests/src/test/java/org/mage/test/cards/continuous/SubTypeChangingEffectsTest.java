@@ -177,7 +177,7 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
         // As Arcane Adaptation enters the battlefield, choose a creature type.
         // Creatures you control are the chosen type in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
         addCard(Zone.HAND, playerA, "Arcane Adaptation", 1); // Enchantment {2}{U}
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
@@ -253,7 +253,7 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
         // As Arcane Adaptation enters the battlefield, choose a creature type.
         // Creatures you control are the chosen type in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
         addCard(Zone.HAND, playerA, "Arcane Adaptation", 1); // Enchantment {2}{U}
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
