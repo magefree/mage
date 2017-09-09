@@ -61,7 +61,7 @@ public class IsolatedChapel extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter));
-        String abilityText = "tap it unless you control a Plains or a Swamp";
+        String abilityText = " tapped unless you control a Plains or a Swamp";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());

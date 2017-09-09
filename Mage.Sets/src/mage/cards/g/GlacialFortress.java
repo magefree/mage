@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.g;
 
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -59,10 +58,10 @@ public class GlacialFortress extends CardImpl {
     }
 
     public GlacialFortress(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter));
-        String abilityText = "tap it unless you control a Plains or an Island";
+        String abilityText = " tapped unless you control a Plains or an Island";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new BlueManaAbility());
         this.addAbility(new WhiteManaAbility());

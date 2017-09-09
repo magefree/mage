@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -57,7 +56,7 @@ public class GreenwheelLiberator extends CardImpl {
         // permanent you controlled left the battlefield this turn.
         Ability ability = new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false, RevoltCondition.instance,
-                "<i>Revolt</i> &mdash; enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn", null);
+                "<i>Revolt</i> &mdash; {this} enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn", null);
         ability.addWatcher(new RevoltWatcher());
         this.addAbility(ability);
     }

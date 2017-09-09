@@ -108,6 +108,7 @@ public class EntersBattlefieldAbility extends StaticAbility {
         if (abilityRule != null && !abilityRule.isEmpty()) {
             return abilityRule;
         }
-        return (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s") + " the battlefield" + super.getRule();
+        String superRule = super.getRule();
+        return (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s") + " the battlefield" + (superRule.charAt(0) == ' ' ? "" : " ") + superRule;
     }
 }
