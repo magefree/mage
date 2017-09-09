@@ -29,7 +29,6 @@ package mage.cards.c;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -44,10 +43,10 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.SubTypeList;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 
 /**
  *
@@ -56,10 +55,10 @@ import java.util.UUID;
 public class Conspiracy extends CardImpl {
 
     public Conspiracy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
 
         // As Conspiracy enters the battlefield, choose a creature type.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Neutral)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Neutral)));
         // Creature cards you own that aren't on the battlefield, creature spells you control, and creatures you control are the chosen type.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConspiracyEffect()));
     }
@@ -134,9 +133,9 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             // creature spells you control
             for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
                 StackObject stackObject = iterator.next();
-                if (stackObject instanceof Spell &&
-                        stackObject.getControllerId().equals(source.getControllerId()) &&
-                        stackObject.isCreature()) {
+                if (stackObject instanceof Spell
+                        && stackObject.getControllerId().equals(source.getControllerId())
+                        && stackObject.isCreature()) {
                     Card card = ((Spell) stackObject).getCard();
                     setCreatureSubtype(card, choice, game);
                 }
@@ -166,7 +165,7 @@ class ConspiracyEffect extends ContinuousEffectImpl {
     }
 
     private void setChosenSubtype(SubTypeList subtype, SubType choice) {
-        if (subtype.size() != 1 ||  !subtype.contains(choice)) {
+        if (subtype.size() != 1 || !subtype.contains(choice)) {
             subtype.removeAll(SubType.getCreatureTypes(false));
             subtype.add(choice);
         }

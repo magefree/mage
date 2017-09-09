@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -41,6 +40,8 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +59,7 @@ public class FrenziedGoblin extends CardImpl {
 
         // Whenever Frenzied Goblin attacks, you may pay {R}. If you do, target creature can't block this turn.
         Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{R}")),false,
-                "Whenever {this} attacks you may pay {R}. If you do, target creature can't block this turn.");
+                "Whenever {this} attacks you, may pay {R}. If you do, target creature can't block this turn.");
         Target target = new TargetCreaturePermanent();
         ability.addTarget(target);
         this.addAbility(ability);

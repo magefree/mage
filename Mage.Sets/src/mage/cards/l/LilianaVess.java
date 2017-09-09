@@ -27,9 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
@@ -49,6 +46,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -90,7 +91,7 @@ class LilianaVessEffect extends OneShotEffect {
 
     public LilianaVessEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put all creature cards in all graveyards onto the battlefield under your control";
+        staticText = "Put all creature cards from all graveyards onto the battlefield under your control";
     }
 
     public LilianaVessEffect(final LilianaVessEffect effect) {

@@ -50,12 +50,13 @@ import mage.game.permanent.Permanent;
 public class CentaurOmenreader extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("creature spells");
+
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public CentaurOmenreader(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         addSuperType(SuperType.SNOW);
         this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.SHAMAN);

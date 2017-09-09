@@ -56,7 +56,7 @@ public class MarduHordechief extends CardImpl {
 
         // <i>Raid</i> - When Mardu Hordechief enters the battlefield, if you attacked with a creature this turn, create a 1/1 white Warrior creature token
         this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WarriorToken())), RaidCondition.instance,
-                "<i>Raid</i> -  When {this} enters the battlefield, if you attacked with a creature this turn, create a 1/1 white Warrior creature token."),
+                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, create a 1/1 white Warrior creature token."),
                 new PlayerAttackedWatcher());
     }
 

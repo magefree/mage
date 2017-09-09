@@ -45,6 +45,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
 /**
@@ -54,7 +55,7 @@ import mage.util.CardUtil;
 public class RakdosLordOfRiots extends CardImpl {
 
     public RakdosLordOfRiots(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
 
@@ -102,12 +103,12 @@ class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifyingEffectImpl 
     public RakdosLordOfRiotsCantCastEffect copy() {
         return new RakdosLordOfRiotsCantCastEffect(this);
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.CAST_SPELL;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getSourceId().equals(source.getSourceId())) {
@@ -147,9 +148,15 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
-            Card sourceCard = game.getCard(abilityToModify.getSourceId());
-            if (sourceCard != null && abilityToModify.getControllerId().equals(source.getControllerId()) && (sourceCard.isCreature())) {
-                return true;
+            if (abilityToModify.getControllerId().equals(source.getControllerId())) {
+                Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
+                if (spell != null) {
+                    return spell.isCreature();
+                } else {
+                    // used at least for flashback ability because Flashback ability doesn't use stack or for getPlayables where spell is not cast yet
+                    Card sourceCard = game.getCard(abilityToModify.getSourceId());
+                    return sourceCard != null && sourceCard.isCreature();
+                }
             }
         }
         return false;

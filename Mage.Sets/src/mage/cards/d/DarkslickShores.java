@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -51,24 +50,24 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 public class DarkslickShores extends CardImpl {
 
     private final static FilterLandPermanent filter = new FilterLandPermanent();
-    
+
     static {
         filter.add(new AnotherPredicate());
     }
 
-    public DarkslickShores (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+    public DarkslickShores(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
         // Darkslick Shores enters the battlefield tapped unless you control two or fewer other lands.
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 3));
-        String abilityText = "tapped unless you control two or fewer other lands";
+        String abilityText = " tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-        
+
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
     }
 
-    public DarkslickShores (final DarkslickShores card) {
+    public DarkslickShores(final DarkslickShores card) {
         super(card);
     }
 

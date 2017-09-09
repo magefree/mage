@@ -60,7 +60,7 @@ public class StormFleetArsonist extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterPermanent(), 1, "Target opponent")),
                 RaidCondition.instance,
-                "<i>Raid</i> - When {this} enters the battlefield, if you attacked with a creature this turn, target opponent sacrifices a permanent.");
+                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, target opponent sacrifices a permanent.");
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }

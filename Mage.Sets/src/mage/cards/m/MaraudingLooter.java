@@ -59,7 +59,7 @@ public class MaraudingLooter extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new DrawDiscardControllerEffect(1, 1), TargetController.YOU, false),
                 RaidCondition.instance,
-                "<i>Raid</i> - At the beginning of your end step, "
+                "<i>Raid</i> &mdash; At the beginning of your end step, "
                 + "if you attacked with a creature this turn, "
                 + "you may draw a card. If you do, discard a card");
         this.addAbility(ability, new PlayerAttackedWatcher());

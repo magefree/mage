@@ -32,8 +32,8 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.DealsCombatDamageTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -62,13 +62,13 @@ import mage.util.CardUtil;
 public class LivingLore extends CardImpl {
 
     public LivingLore(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add(SubType.AVATAR);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.subtype.add("Avatar");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // As Living Lore enters the battlefield, exile an instant or sorcery card from your graveyard.
-        this.addAbility(new EntersBattlefieldAbility(new LivingLoreExileEffect(), "exile an instant or sorcery card from your graveyard"));
+        this.addAbility(new AsEntersBattlefieldAbility(new LivingLoreExileEffect(), "exile an instant or sorcery card from your graveyard"));
 
         // Living Lore's power and toughness are each equal to the exiled card's converted mana cost.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new LivingLoreSetPowerToughnessSourceEffect()));

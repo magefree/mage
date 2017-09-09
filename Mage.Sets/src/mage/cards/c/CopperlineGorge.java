@@ -47,12 +47,13 @@ import mage.filter.StaticFilters;
  * @author maurer.it_at_gmail.com
  */
 public class CopperlineGorge extends CardImpl {
+
     public CopperlineGorge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
         // Copperline Gorge enters the battlefield tapped unless you control two or fewer other lands.
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_LANDS, ComparisonType.FEWER_THAN, 3));
-        String abilityText = "tapped unless you control two or fewer other lands";
+        String abilityText = " tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -51,19 +50,19 @@ import mage.target.TargetPlayer;
  */
 public class EtchedMonstrosity extends CardImpl {
 
-    public EtchedMonstrosity (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
+    public EtchedMonstrosity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(5)), "{this} gets five -1/-1 counters"));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(5)), " with five -1/-1 counters on it"));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(3), new ManaCostsImpl("{W}{U}{B}{R}{G}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance(5)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public EtchedMonstrosity (final EtchedMonstrosity card) {
+    public EtchedMonstrosity(final EtchedMonstrosity card) {
         super(card);
     }
 
