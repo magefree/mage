@@ -47,12 +47,13 @@ import mage.filter.StaticFilters;
  * @author maurer.it_at_gmail.com
  */
 public class SeachromeCoast extends CardImpl {
+
     public SeachromeCoast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
         // Seachrome Coast enters the battlefield tapped unless you control two or fewer other lands.
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_LANDS, ComparisonType.FEWER_THAN, 3));
-        String abilityText = "tap it unless you control fewer than 3 lands";
+        String abilityText = " tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
 
         // {T}: Add {W} or {U} to your mana pool.

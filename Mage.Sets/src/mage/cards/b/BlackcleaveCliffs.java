@@ -51,10 +51,10 @@ public class BlackcleaveCliffs extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     public BlackcleaveCliffs(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 3));
-        String abilityText = "tapped unless you control fewer than 3 lands";
+        String abilityText = " tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
