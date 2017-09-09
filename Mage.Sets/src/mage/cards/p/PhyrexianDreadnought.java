@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -54,7 +55,7 @@ public class PhyrexianDreadnought extends CardImpl {
 
     public PhyrexianDreadnought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
-        this.subtype.add("Dreadnought");
+        this.subtype.add(SubType.DREADNOUGHT);
 
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);

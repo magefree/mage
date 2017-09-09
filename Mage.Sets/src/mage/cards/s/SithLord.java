@@ -37,6 +37,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -52,8 +53,8 @@ public class SithLord extends CardImpl {
 
     public SithLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Sith");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SITH);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

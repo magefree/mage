@@ -38,6 +38,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -54,7 +55,7 @@ public class GiltLeafAmbush extends CardImpl {
 
     public GiltLeafAmbush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{2}{G}");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ELF);
 
         // Create two 1/1 green Elf Warrior creature tokens into play. Clash with an opponent. If you win, those creatures gain deathtouch until end of turn
         this.getSpellAbility().addEffect(new GiltLeafAmbushCreateTokenEffect());

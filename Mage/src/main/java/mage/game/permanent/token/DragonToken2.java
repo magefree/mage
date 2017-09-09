@@ -33,6 +33,7 @@ import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -60,7 +61,7 @@ public class DragonToken2 extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Dragon");
+        subtype.add(SubType.DRAGON);
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());

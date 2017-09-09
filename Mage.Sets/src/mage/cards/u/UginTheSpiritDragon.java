@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -65,7 +66,7 @@ public class UginTheSpiritDragon extends CardImpl {
     public UginTheSpiritDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{8}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Ugin");
+        this.subtype.add(SubType.UGIN);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));
 

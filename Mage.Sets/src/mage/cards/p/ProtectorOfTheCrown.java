@@ -37,6 +37,7 @@ import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -54,8 +55,8 @@ public class ProtectorOfTheCrown extends CardImpl {
     public ProtectorOfTheCrown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
 
-        this.subtype.add("Giant");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 

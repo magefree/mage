@@ -54,7 +54,7 @@ public class OranRiefHydra extends CardImpl {
 
     public OranRiefHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

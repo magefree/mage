@@ -35,6 +35,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class GurmagSwiftwing extends CardImpl {
 
     public GurmagSwiftwing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Bat");
+        this.subtype.add(SubType.BAT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

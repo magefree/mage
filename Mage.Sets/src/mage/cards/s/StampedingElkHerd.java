@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -48,7 +49,7 @@ public class StampedingElkHerd extends CardImpl {
 
     public StampedingElkHerd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Elk");
+        this.subtype.add(SubType.ELK);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -58,7 +58,7 @@ public class PrideSovereign extends CardImpl {
     public PrideSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.CAT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

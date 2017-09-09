@@ -37,6 +37,7 @@ import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class MarrowChomper extends CardImpl {
 
     public MarrowChomper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Lizard");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.LIZARD);
 
 
         

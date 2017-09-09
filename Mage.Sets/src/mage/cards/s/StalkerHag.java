@@ -34,6 +34,7 @@ import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class StalkerHag extends CardImpl {
 
     public StalkerHag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/G}{B/G}{B/G}");
-        this.subtype.add("Hag");
+        this.subtype.add(SubType.HAG);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

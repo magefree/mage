@@ -55,7 +55,7 @@ public class SwarmOfRats extends CardImpl {
 
     public SwarmOfRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Rat");
+        this.subtype.add(SubType.RAT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

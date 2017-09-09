@@ -47,7 +47,7 @@ public class RiotSpikes extends CardImpl {
 
     public RiotSpikes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B/R}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

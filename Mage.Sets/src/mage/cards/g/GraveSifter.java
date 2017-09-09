@@ -57,8 +57,8 @@ public class GraveSifter extends CardImpl {
 
     public GraveSifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);

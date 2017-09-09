@@ -39,6 +39,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -55,7 +56,7 @@ public class Skullwinder extends CardImpl {
 
     public Skullwinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Snake");
+        this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

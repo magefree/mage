@@ -29,6 +29,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -49,7 +50,7 @@ public class BeastToken3 extends Token {
         setOriginalExpansionSetCode("AKH");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Beast");
+        subtype.add(SubType.BEAST);
         power = new MageInt(4);
         toughness = new MageInt(2);
     }

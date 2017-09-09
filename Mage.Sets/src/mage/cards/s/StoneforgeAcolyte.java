@@ -65,9 +65,9 @@ public class StoneforgeAcolyte extends CardImpl {
 
     public StoneforgeAcolyte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Artificer");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.ARTIFICER);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

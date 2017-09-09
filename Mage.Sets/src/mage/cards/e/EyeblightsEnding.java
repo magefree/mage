@@ -52,7 +52,7 @@ public class EyeblightsEnding extends CardImpl {
 
     public EyeblightsEnding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{2}{B}");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ELF);
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

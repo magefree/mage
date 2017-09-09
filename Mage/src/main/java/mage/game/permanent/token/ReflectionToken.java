@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,7 +42,7 @@ public class ReflectionToken extends Token {
         this.setOriginalExpansionSetCode("TMP");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Reflection");
+        subtype.add(SubType.REFLECTION);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

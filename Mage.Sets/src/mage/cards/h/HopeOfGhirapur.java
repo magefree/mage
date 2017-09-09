@@ -63,7 +63,7 @@ public class HopeOfGhirapur extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Thopter");
+        this.subtype.add(SubType.THOPTER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

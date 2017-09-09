@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -39,7 +40,7 @@ public class WalkerOfTheGroveToken extends Token {
     public WalkerOfTheGroveToken() {
         super("Elemental", "4/4 green Elemental creature token");
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.color.setGreen(true);
         power = new MageInt(4);
         toughness = new MageInt(4);

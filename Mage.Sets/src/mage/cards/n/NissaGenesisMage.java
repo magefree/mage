@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -57,7 +58,7 @@ public class NissaGenesisMage extends CardImpl {
     public NissaGenesisMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{G}{G}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Nissa");
+        this.subtype.add(SubType.NISSA);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 

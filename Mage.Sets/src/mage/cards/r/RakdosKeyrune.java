@@ -38,6 +38,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -74,7 +75,7 @@ public class RakdosKeyrune extends CardImpl {
             cardType.add(CardType.CREATURE);
             color.setBlack(true);
             color.setRed(true);
-            this.subtype.add("Devil");
+            this.subtype.add(SubType.DEVIL);
             power = new MageInt(3);
             toughness = new MageInt(1);
             this.addAbility(FirstStrikeAbility.getInstance());

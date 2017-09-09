@@ -48,7 +48,7 @@ public class CrystallineSliver extends CardImpl {
 
     public CrystallineSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

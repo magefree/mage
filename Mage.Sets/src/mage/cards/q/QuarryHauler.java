@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -53,7 +54,7 @@ public class QuarryHauler extends CardImpl {
     public QuarryHauler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.subtype.add("Camel");
+        this.subtype.add(SubType.CAMEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

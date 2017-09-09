@@ -41,6 +41,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -57,7 +58,7 @@ public class GideonMartialParagon extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}");
         this.addSuperType(SuperType.LEGENDARY);
 
-        this.subtype.add("Gideon");
+        this.subtype.add(SubType.GIDEON);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
@@ -99,8 +100,8 @@ class GideonMartialParagonToken extends Token {
     public GideonMartialParagonToken() {
         super("", "5/5 Human Soldier creature with indestructible");
         cardType.add(CardType.CREATURE);
-        subtype.add("Human");
-        subtype.add("Soldier");
+        subtype.add(SubType.HUMAN);
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(5);
         toughness = new MageInt(5);
 

@@ -39,6 +39,7 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -48,8 +49,8 @@ public class HalimarWavewatch extends LevelerCard {
 
     public HalimarWavewatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SOLDIER);
 
         this.color.setBlue(true);
         this.power = new MageInt(0);

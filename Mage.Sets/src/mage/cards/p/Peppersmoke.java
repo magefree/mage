@@ -55,7 +55,7 @@ public class Peppersmoke extends CardImpl {
 
     public Peppersmoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{B}");
-        this.subtype.add("Faerie");
+        this.subtype.add(SubType.FAERIE);
 
 
         // Target creature gets -1/-1 until end of turn. If you control a Faerie, draw a card.

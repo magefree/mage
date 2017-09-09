@@ -37,6 +37,7 @@ import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -62,8 +63,8 @@ public class Skullsnatcher extends CardImpl {
 
     public Skullsnatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Rat");
-        this.subtype.add("Ninja");
+        this.subtype.add(SubType.RAT);
+        this.subtype.add(SubType.NINJA);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

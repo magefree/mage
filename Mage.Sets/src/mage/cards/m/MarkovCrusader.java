@@ -61,8 +61,8 @@ public class MarkovCrusader extends CardImpl {
 
     public MarkovCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

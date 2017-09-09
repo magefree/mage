@@ -37,6 +37,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
@@ -51,8 +52,8 @@ public class SilvergladePathfinder extends CardImpl {
 
     public SilvergladePathfinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Dryad");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.DRYAD);
+        this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -31,6 +31,7 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -51,7 +52,7 @@ public class CatToken2 extends Token {
         setOriginalExpansionSetCode("AKH");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Cat");
+        subtype.add(SubType.CAT);
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(LifelinkAbility.getInstance());

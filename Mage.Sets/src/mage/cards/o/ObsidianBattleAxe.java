@@ -57,8 +57,8 @@ public class ObsidianBattleAxe extends CardImpl {
 
     public ObsidianBattleAxe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{3}");
-        this.subtype.add("Warrior");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+1 and has haste.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 1));

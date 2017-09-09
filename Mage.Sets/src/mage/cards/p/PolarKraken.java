@@ -36,6 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -47,7 +48,7 @@ public class PolarKraken extends CardImpl {
 
     public PolarKraken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{U}{U}{U}");
-        this.subtype.add("Kraken");
+        this.subtype.add(SubType.KRAKEN);
 
         this.power = new MageInt(11);
         this.toughness = new MageInt(11);

@@ -49,6 +49,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -69,8 +70,8 @@ public class KheruLichLord extends CardImpl {
 
     public KheruLichLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}{U}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

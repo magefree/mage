@@ -55,7 +55,7 @@ public class SquelchingLeeches extends CardImpl {
     
     public SquelchingLeeches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Leech");
+        this.subtype.add(SubType.LEECH);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

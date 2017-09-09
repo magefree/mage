@@ -40,6 +40,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author North, noxx
@@ -48,9 +49,9 @@ public class TranscendentMaster extends LevelerCard {
 
     public TranscendentMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.CLERIC);
+        this.subtype.add(SubType.AVATAR);
 
         this.color.setWhite(true);
         this.power = new MageInt(3);

@@ -49,7 +49,7 @@ public class GorillaPack extends CardImpl {
 
     public GorillaPack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Ape");
+        this.subtype.add(SubType.APE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

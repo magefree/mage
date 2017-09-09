@@ -58,7 +58,7 @@ public class GenjuOfTheFields extends CardImpl {
 
     public GenjuOfTheFields(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant Plains
         TargetPermanent auraTarget = new TargetLandPermanent(FILTER);
@@ -96,7 +96,7 @@ public class GenjuOfTheFields extends CardImpl {
             super("Spirit", "2/5 white Spirit creature");
             cardType.add(CardType.CREATURE);
             color.setWhite(true);
-            subtype.add("Spirit");
+            subtype.add(SubType.SPIRIT);
             power = new MageInt(2);
             toughness = new MageInt(5);
         }

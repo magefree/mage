@@ -56,8 +56,8 @@ public class DoubtlessOne extends CardImpl {
 
     public DoubtlessOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Cleric");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.CLERIC);
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

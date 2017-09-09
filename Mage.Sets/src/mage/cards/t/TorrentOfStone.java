@@ -53,7 +53,7 @@ public class TorrentOfStone extends CardImpl {
 
     public TorrentOfStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // Torrent of Stone deals 4 damage to target creature.

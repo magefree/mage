@@ -29,6 +29,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class HazezonTamarSandWarriorToken extends Token {
         color.setRed(true);
         color.setGreen(true);
         color.setWhite(true);
-        subtype.add("Sand");
-        subtype.add("Warrior");
+        subtype.add(SubType.SAND);
+        subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

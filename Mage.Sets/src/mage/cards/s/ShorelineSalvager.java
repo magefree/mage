@@ -58,7 +58,7 @@ public class ShorelineSalvager extends CardImpl {
 
     public ShorelineSalvager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Surrakar");
+        this.subtype.add(SubType.SURRAKAR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class VedalkenHeretic extends CardImpl {
 
     public VedalkenHeretic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}");
-        this.subtype.add("Vedalken");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.VEDALKEN);
+        this.subtype.add(SubType.ROGUE);
 
 
 

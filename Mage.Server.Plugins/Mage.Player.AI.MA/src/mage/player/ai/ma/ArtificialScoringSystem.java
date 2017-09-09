@@ -11,6 +11,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  * @author ubeefx, nantuko
@@ -56,7 +57,7 @@ public final class ArtificialScoringSystem {
             //score + =cardDefinition.getActivations().size()*50;
             //score += cardDefinition.getManaActivations().size()*80;
         } else {
-            if (permanent.getSubtype(game).contains("Equipment")) {
+            if (permanent.getSubtype(game).contains(SubType.EQUIPMENT)) {
                 score += 100;
             }
         }

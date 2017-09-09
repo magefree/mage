@@ -7,12 +7,13 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 public class FeralProwler extends CardImpl {
 
     public FeralProwler(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        subtype.add("Cat");
+        subtype.add(SubType.CAT);
 
         power = new MageInt(1);
         toughness = new MageInt(3);

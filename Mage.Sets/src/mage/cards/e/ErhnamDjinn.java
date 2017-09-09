@@ -57,7 +57,7 @@ public class ErhnamDjinn extends CardImpl {
 
     public ErhnamDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Djinn");
+        this.subtype.add(SubType.DJINN);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

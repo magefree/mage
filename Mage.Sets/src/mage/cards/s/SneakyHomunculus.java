@@ -37,6 +37,7 @@ import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,8 +57,8 @@ public class SneakyHomunculus extends CardImpl {
 
     public SneakyHomunculus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Homunculus");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.HOMUNCULUS);
+        this.subtype.add(SubType.ILLUSION);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

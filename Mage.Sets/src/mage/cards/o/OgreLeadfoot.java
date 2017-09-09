@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterArtifactCreaturePermanent;
 
 /**
@@ -45,7 +46,7 @@ public class OgreLeadfoot extends CardImpl {
     public OgreLeadfoot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         
-        this.subtype.add("Ogre");
+        this.subtype.add(SubType.OGRE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

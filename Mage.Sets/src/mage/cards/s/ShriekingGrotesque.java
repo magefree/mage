@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.target.TargetPlayer;
 import mage.watchers.common.ManaSpentToCastWatcher;
@@ -51,7 +52,7 @@ public class ShriekingGrotesque extends CardImpl {
 
     public ShriekingGrotesque(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Gargoyle");
+        this.subtype.add(SubType.GARGOYLE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

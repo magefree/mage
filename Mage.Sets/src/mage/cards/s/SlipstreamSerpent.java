@@ -51,7 +51,7 @@ public class SlipstreamSerpent extends CardImpl {
 
     public SlipstreamSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}");
-        this.subtype.add("Serpent");
+        this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

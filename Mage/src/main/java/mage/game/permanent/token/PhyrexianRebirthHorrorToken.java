@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class PhyrexianRebirthHorrorToken extends Token {
         super("Horror", "X/X colorless Horror artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Horror");
+        subtype.add(SubType.HORROR);
         power = new MageInt(0);
         toughness = new MageInt(0);
     }

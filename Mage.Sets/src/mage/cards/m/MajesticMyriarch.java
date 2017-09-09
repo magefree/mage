@@ -54,6 +54,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -71,7 +72,7 @@ public class MajesticMyriarch extends CardImpl {
     public MajesticMyriarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
 
-        this.subtype.add("Chimera");
+        this.subtype.add(SubType.CHIMERA);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

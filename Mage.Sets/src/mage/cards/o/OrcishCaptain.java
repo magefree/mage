@@ -58,8 +58,8 @@ public class OrcishCaptain extends CardImpl {
 
     public OrcishCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Orc");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ORC);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

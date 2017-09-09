@@ -46,7 +46,7 @@ public class DarksteelPlate extends CardImpl {
 
     public DarksteelPlate (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Darksteel Plate is indestructible.
         this.addAbility(IndestructibleAbility.getInstance());

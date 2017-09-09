@@ -44,8 +44,8 @@ public class SpeciesGorger extends CardImpl {
 
     public SpeciesGorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}");
-        this.subtype.add("Frog");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.FROG);
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

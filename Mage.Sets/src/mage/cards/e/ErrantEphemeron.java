@@ -35,6 +35,7 @@ import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class ErrantEphemeron extends CardImpl {
 
     public ErrantEphemeron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.ILLUSION);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

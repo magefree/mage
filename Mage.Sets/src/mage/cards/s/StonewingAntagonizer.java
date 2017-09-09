@@ -33,6 +33,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class StonewingAntagonizer extends CardImpl {
 
     public StonewingAntagonizer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"");
-        this.subtype.add("Gargoyle");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.GARGOYLE);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

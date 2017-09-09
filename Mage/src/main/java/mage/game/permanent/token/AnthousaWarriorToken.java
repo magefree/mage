@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -43,7 +44,7 @@ public class AnthousaWarriorToken extends Token {
     public AnthousaWarriorToken() {
         super("", "2/2 Warrior creatures");
         cardType.add(CardType.CREATURE);
-        subtype.add("Warrior");
+        subtype.add(SubType.WARRIOR);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

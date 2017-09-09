@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
@@ -58,8 +59,8 @@ public class DragonlordAtarka extends CardImpl {
     public DragonlordAtarka(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elder");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.ELDER);
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

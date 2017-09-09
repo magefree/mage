@@ -62,7 +62,7 @@ public class MaskedGorgon extends CardImpl {
 
     public MaskedGorgon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Gorgon");
+        this.subtype.add(SubType.GORGON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

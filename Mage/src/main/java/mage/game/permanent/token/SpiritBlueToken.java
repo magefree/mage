@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -40,7 +41,7 @@ public class SpiritBlueToken extends Token {
     public SpiritBlueToken() {
         super("Spirit", "1/1 blue Spirit creature token with flying");
         cardType.add(CardType.CREATURE);
-        subtype.add("Spirit");
+        subtype.add(SubType.SPIRIT);
         color.setBlue(true);
         power = new MageInt(1);
         toughness = new MageInt(1);

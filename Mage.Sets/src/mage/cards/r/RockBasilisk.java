@@ -56,7 +56,7 @@ public class RockBasilisk extends CardImpl {
 
     public RockBasilisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
-        this.subtype.add("Basilisk");
+        this.subtype.add(SubType.BASILISK);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

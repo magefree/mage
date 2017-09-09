@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.mana.GreenManaAbility;
@@ -61,8 +62,8 @@ public class FreyaliseLlanowarsFuryToken extends Token {
         setOriginalExpansionSetCode(setCode);
         this.cardType.add(CardType.CREATURE);
         this.color = ObjectColor.GREEN;
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

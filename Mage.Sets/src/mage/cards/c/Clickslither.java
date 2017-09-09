@@ -61,7 +61,7 @@ public class Clickslither extends CardImpl {
 
     public Clickslither(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}{R}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

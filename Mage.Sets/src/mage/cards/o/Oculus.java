@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class Oculus extends CardImpl {
 
     public Oculus (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Homunculus");
+        this.subtype.add(SubType.HOMUNCULUS);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

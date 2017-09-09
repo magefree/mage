@@ -58,7 +58,7 @@ public class MyrGalvanizer extends CardImpl {
 
     public MyrGalvanizer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Myr");
+        this.subtype.add(SubType.MYR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // Other Myr creatures you control get +1/+1.

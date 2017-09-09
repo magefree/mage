@@ -34,6 +34,7 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -52,9 +53,9 @@ public class WretchedAnurid extends CardImpl {
 
     public WretchedAnurid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Frog");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.FROG);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

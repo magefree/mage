@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -66,8 +67,8 @@ public class MelekIzzetParagon extends CardImpl {
     public MelekIzzetParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Weird");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.WEIRD);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -47,7 +48,7 @@ public class OrmendahlProfanePrince extends CardImpl {
     public OrmendahlProfanePrince(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
         this.power = new MageInt(9);
         this.toughness = new MageInt(7);
         this.color.setBlack(true);

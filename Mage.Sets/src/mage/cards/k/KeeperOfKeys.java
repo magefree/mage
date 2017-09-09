@@ -38,6 +38,7 @@ import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -52,9 +53,9 @@ public class KeeperOfKeys extends CardImpl {
     public KeeperOfKeys(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ROGUE);
+        this.subtype.add(SubType.MUTANT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

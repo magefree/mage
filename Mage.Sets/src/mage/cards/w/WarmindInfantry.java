@@ -34,6 +34,7 @@ import mage.abilities.keyword.BattalionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -44,8 +45,8 @@ public class WarmindInfantry extends CardImpl {
 
     public WarmindInfantry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

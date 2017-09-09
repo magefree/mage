@@ -37,6 +37,7 @@ import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -55,7 +56,7 @@ public class FlayerOfTheHatebound extends CardImpl {
 
     public FlayerOfTheHatebound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        this.subtype.add("Devil");
+        this.subtype.add(SubType.DEVIL);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

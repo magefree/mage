@@ -34,6 +34,7 @@ import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class RazorSwine extends CardImpl {
 
     public RazorSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Boar");
+        this.subtype.add(SubType.BOAR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

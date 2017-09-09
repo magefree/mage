@@ -64,8 +64,8 @@ public class LysAlanaScarblade extends CardImpl {
 
     public LysAlanaScarblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.subtype.add("Elf");
-        this.subtype.add("Assassin");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

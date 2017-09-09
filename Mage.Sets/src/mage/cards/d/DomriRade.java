@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -60,7 +61,7 @@ public class DomriRade extends CardImpl {
     public DomriRade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{G}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Domri");
+        this.subtype.add(SubType.DOMRI);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

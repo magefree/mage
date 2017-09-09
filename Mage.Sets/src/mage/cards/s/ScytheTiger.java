@@ -36,6 +36,7 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -50,7 +51,7 @@ public class ScytheTiger extends CardImpl {
 
     public ScytheTiger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.CAT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

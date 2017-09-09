@@ -34,6 +34,7 @@ import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class GorgerWurm extends CardImpl {
 
     public GorgerWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
-        this.subtype.add("Wurm");
+        this.subtype.add(SubType.WURM);
 
 
         this.power = new MageInt(5);

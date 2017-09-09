@@ -37,6 +37,7 @@ import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -55,7 +56,7 @@ public class CorpseCur extends CardImpl {
 
     public CorpseCur (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.HOUND);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(InfectAbility.getInstance());

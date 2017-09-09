@@ -58,7 +58,7 @@ public class MagnigothTreefolk extends CardImpl {
 
     public MagnigothTreefolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Treefolk");
+        this.subtype.add(SubType.TREEFOLK);
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);
 

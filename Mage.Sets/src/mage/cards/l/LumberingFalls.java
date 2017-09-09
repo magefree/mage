@@ -39,6 +39,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -78,7 +79,7 @@ class LumberingFallsToken extends Token {
     public LumberingFallsToken() {
         super("", "3/3 green and blue Elemental creature with hexproof");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         color.setBlue(true);
         color.setGreen(true);
         power = new MageInt(3);

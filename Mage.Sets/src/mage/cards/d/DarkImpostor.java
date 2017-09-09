@@ -56,8 +56,8 @@ public class DarkImpostor extends CardImpl {
 
     public DarkImpostor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Assassin");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.ASSASSIN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

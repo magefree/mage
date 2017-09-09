@@ -37,6 +37,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -47,8 +48,8 @@ public class ElvishAberration extends CardImpl {
 
     public ElvishAberration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.MUTANT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

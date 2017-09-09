@@ -47,8 +47,8 @@ public class SplitTailMiko extends CardImpl {
 
     public SplitTailMiko(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Fox");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.FOX);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

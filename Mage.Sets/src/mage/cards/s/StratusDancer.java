@@ -39,6 +39,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
@@ -50,8 +51,8 @@ public class StratusDancer extends CardImpl {
 
     public StratusDancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Djinn");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.DJINN);
+        this.subtype.add(SubType.MONK);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

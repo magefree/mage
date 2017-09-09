@@ -36,6 +36,7 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -46,8 +47,8 @@ public class WompRat extends CardImpl {
 
     public WompRat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.subtype.add("Rat");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.RAT);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

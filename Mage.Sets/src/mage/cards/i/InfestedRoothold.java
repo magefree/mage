@@ -36,6 +36,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,7 +57,7 @@ public class InfestedRoothold extends CardImpl {
     public InfestedRoothold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
 
-        this.subtype.add("Wall");
+        this.subtype.add(SubType.WALL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

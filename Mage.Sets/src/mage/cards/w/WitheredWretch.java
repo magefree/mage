@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -47,8 +48,8 @@ public class WitheredWretch extends CardImpl {
 
     public WitheredWretch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

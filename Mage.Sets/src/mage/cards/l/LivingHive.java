@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.InsectToken;
@@ -50,8 +51,8 @@ public class LivingHive extends CardImpl {
 
     public LivingHive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.INSECT);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

@@ -56,7 +56,7 @@ public class EvilEyeOfUrborg extends CardImpl {
 
     public EvilEyeOfUrborg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Eye");
+        this.subtype.add(SubType.EYE);
         this.power = new MageInt(6);
         this.toughness = new MageInt(3);
 

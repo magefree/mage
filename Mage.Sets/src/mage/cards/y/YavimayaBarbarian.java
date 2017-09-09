@@ -34,6 +34,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class YavimayaBarbarian extends CardImpl {
 
     public YavimayaBarbarian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Barbarian");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.BARBARIAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

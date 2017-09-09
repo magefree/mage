@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,7 +48,7 @@ public class SupplyLineCranes extends CardImpl {
 
     public SupplyLineCranes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.subtype.add("Bird");
+        this.subtype.add(SubType.BIRD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

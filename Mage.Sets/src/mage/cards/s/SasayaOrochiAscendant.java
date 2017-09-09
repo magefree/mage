@@ -63,8 +63,8 @@ public class SasayaOrochiAscendant extends CardImpl {
     public SasayaOrochiAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Snake");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.MONK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

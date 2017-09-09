@@ -59,8 +59,8 @@ public class GrandArbiterAugustinIV extends CardImpl {
     public GrandArbiterAugustinIV(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Advisor");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ADVISOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

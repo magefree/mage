@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.TargetPlayer;
 
@@ -49,7 +50,7 @@ public class MortisDogs extends CardImpl {
 
     public MortisDogs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.HOUND);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

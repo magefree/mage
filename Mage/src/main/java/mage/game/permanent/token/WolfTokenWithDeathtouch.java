@@ -29,6 +29,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
 
@@ -42,7 +43,7 @@ public class WolfTokenWithDeathtouch extends Token {
         super("Wolf", "1/1 black Wolf creature token with deathtouch");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Wolf");
+        subtype.add(SubType.WOLF);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

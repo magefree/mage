@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 
@@ -41,7 +42,7 @@ public class WallToken extends Token {
         super("", "2/6 white wall creature with defender");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Wall");
+        subtype.add(SubType.WALL);
         power = new MageInt(2);
         toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());

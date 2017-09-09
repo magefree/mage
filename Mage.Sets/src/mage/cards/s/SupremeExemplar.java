@@ -52,7 +52,7 @@ public class SupremeExemplar extends CardImpl {
 
     public SupremeExemplar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
 

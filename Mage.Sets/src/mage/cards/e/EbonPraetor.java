@@ -57,8 +57,8 @@ public class EbonPraetor extends CardImpl {
 
     public EbonPraetor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        this.subtype.add("Avatar");
-        this.subtype.add("Praetor");
+        this.subtype.add(SubType.AVATAR);
+        this.subtype.add(SubType.PRAETOR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

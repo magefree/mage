@@ -40,6 +40,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 
@@ -51,7 +52,7 @@ public class FlameheartWerewolf extends CardImpl {
 
     public FlameheartWerewolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.color.setRed(true);

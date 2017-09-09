@@ -35,6 +35,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -45,8 +46,8 @@ public class UlvenwaldAbomination extends CardImpl {
 
     public UlvenwaldAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

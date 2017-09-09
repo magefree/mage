@@ -35,6 +35,7 @@ import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,8 +55,8 @@ public class RazorjawOni extends CardImpl {
     
     public RazorjawOni(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Demon");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.DEMON);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

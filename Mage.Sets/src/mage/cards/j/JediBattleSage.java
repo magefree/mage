@@ -37,6 +37,7 @@ import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,8 +49,8 @@ public class JediBattleSage extends CardImpl {
 
     public JediBattleSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Sullustan");
-        this.subtype.add("Jedi");
+        this.subtype.add(SubType.SULLUSTAN);
+        this.subtype.add(SubType.JEDI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

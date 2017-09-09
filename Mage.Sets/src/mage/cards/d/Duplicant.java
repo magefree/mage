@@ -61,7 +61,7 @@ public class Duplicant extends CardImpl {
 
     public Duplicant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

@@ -57,7 +57,7 @@ public class CrovaxTheCursed extends CardImpl {
     public CrovaxTheCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

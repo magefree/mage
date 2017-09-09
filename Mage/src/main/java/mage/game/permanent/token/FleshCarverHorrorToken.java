@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -45,7 +46,7 @@ public class FleshCarverHorrorToken extends Token {
         setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Horror");
+        subtype.add(SubType.HORROR);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
 

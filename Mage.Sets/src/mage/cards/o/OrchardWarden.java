@@ -57,8 +57,8 @@ public class OrchardWarden extends CardImpl {
     
     public OrchardWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

@@ -39,6 +39,7 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.command.emblems.JaceUnravelerOfSecretsEmblem;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,7 +55,7 @@ public class JaceUnravelerOfSecrets extends CardImpl {
     public JaceUnravelerOfSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Jace");
+        this.subtype.add(SubType.JACE);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 

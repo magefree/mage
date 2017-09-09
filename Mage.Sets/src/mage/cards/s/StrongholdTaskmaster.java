@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,8 +56,8 @@ public class StrongholdTaskmaster extends CardImpl {
 
     public StrongholdTaskmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Giant");
-        this.subtype.add("Minion");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.MINION);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

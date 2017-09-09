@@ -34,6 +34,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -100,7 +101,7 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
                 if (sourceEvent.getType() == EventType.ENTERS_THE_BATTLEFIELD && sourceEvent instanceof EntersTheBattlefieldEvent) {
                     EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
                     // Only for entering Jedis
-                    if (entersTheBattlefieldEvent.getTarget().getSubtype(game).contains("Jedi")) {
+                    if (entersTheBattlefieldEvent.getTarget().getSubtype(game).contains(SubType.JEDI)) {
                         // Only for triggers of permanents
                         if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
                             return true;
@@ -112,7 +113,7 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
                     ZoneChangeEvent leavesTheBattlefieldEvent = (ZoneChangeEvent) sourceEvent;
                     if (leavesTheBattlefieldEvent.getFromZone() == Zone.BATTLEFIELD) {
                         // Only for leaving Jedis
-                        if (leavesTheBattlefieldEvent.getTarget().getSubtype(game).contains("Jedi")) {
+                        if (leavesTheBattlefieldEvent.getTarget().getSubtype(game).contains(SubType.JEDI)) {
                             // Only for triggers of permanents
                             if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
                                 return true;

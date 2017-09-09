@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -61,7 +62,7 @@ public class WolfToken extends Token {
 
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Wolf");
+        subtype.add(SubType.WOLF);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

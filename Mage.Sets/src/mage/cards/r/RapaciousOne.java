@@ -35,6 +35,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -50,8 +51,8 @@ public class RapaciousOne extends CardImpl {
 
     public RapaciousOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Drone");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.DRONE);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

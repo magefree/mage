@@ -71,7 +71,7 @@ public class Tek extends CardImpl {
 
     public Tek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

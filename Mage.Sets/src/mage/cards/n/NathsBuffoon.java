@@ -51,8 +51,8 @@ public class NathsBuffoon extends CardImpl {
 
     public NathsBuffoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

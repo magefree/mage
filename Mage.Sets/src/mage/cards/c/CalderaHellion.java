@@ -36,6 +36,7 @@ import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -46,7 +47,7 @@ public class CalderaHellion extends CardImpl {
 
     public CalderaHellion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.subtype.add("Hellion");
+        this.subtype.add(SubType.HELLION);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -49,7 +49,7 @@ public class LivingTerrain extends CardImpl {
 
     public LivingTerrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant land
@@ -78,7 +78,7 @@ class TreefolkToken extends Token {
             super("Treefolk", "5/6 green Treefolk creature");
             cardType.add(CardType.CREATURE);
             this.color.setGreen(true);
-            subtype.add("Treefolk");
+            subtype.add(SubType.TREEFOLK);
             power = new MageInt(5);
             toughness = new MageInt(6);
         }

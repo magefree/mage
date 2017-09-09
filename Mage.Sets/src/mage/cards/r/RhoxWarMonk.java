@@ -34,6 +34,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class RhoxWarMonk extends CardImpl {
 
     public RhoxWarMonk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
-        this.subtype.add("Rhino");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.RHINO);
+        this.subtype.add(SubType.MONK);
 
 
         this.power = new MageInt(3);

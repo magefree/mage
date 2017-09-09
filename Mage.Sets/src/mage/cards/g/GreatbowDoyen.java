@@ -62,8 +62,8 @@ public class GreatbowDoyen extends CardImpl {
 
     public GreatbowDoyen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

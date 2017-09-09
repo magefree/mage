@@ -54,8 +54,8 @@ public class NezumiShortfang extends CardImpl {
 
     public NezumiShortfang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.subtype.add("Rat");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.RAT);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -90,8 +90,8 @@ class StabwhiskerTheOdious extends Token {
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Rat");
-        subtype.add("Shaman");
+        subtype.add(SubType.RAT);
+        subtype.add(SubType.SHAMAN);
         power = new MageInt(3);
         toughness = new MageInt(3);
 

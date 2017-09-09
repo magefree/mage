@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -49,7 +50,7 @@ public class Lithatog extends CardImpl {
 
     public Lithatog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
-        this.subtype.add("Atog");
+        this.subtype.add(SubType.ATOG);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

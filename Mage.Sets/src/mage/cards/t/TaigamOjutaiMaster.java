@@ -77,8 +77,8 @@ public class TaigamOjutaiMaster extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.MONK);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

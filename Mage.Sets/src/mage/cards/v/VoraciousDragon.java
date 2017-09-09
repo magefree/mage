@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -55,7 +56,7 @@ public class VoraciousDragon extends CardImpl {
 
     public VoraciousDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -95,7 +96,7 @@ class TwiceDevouredGoblins implements DynamicValue {
                             DevourEffect devourEffect = (DevourEffect) abilityEffect;
                             int amountGoblins = 0;
                             for (List<String> subtypesItem :devourEffect.getSubtypes(game, sourcePermanent.getId())) {
-                                if (subtypesItem.contains("Goblin")) {
+                                if (subtypesItem.contains(SubType.GOBLIN)) {
                                     ++amountGoblins;
                                 }
                             }

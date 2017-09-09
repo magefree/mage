@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -39,7 +40,7 @@ public class InexorableBlobOozeToken extends Token {
     public InexorableBlobOozeToken() {
         super("Ooze", "3/3 green Ooze creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Ooze");
+        subtype.add(SubType.OOZE);
         color.setGreen(true);
         power = new MageInt(3);
         toughness = new MageInt(3);

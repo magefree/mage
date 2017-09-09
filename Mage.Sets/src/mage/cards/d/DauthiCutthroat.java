@@ -38,6 +38,7 @@ import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -57,8 +58,8 @@ public class DauthiCutthroat extends CardImpl {
 
     public DauthiCutthroat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Dauthi");
-        this.subtype.add("Minion");
+        this.subtype.add(SubType.DAUTHI);
+        this.subtype.add(SubType.MINION);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

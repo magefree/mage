@@ -39,6 +39,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -55,7 +56,7 @@ public class WildDogs extends CardImpl {
 
     public WildDogs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.HOUND);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

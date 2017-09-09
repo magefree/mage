@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -41,7 +42,7 @@ public class PentaviteToken extends Token {
         super("Pentavite", "1/1 colorless Pentavite artifact creature token with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Pentavite");
+        subtype.add(SubType.PENTAVITE);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

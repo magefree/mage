@@ -32,6 +32,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -44,7 +45,7 @@ public class SnowCoveredPlains extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         addSuperType(SuperType.BASIC);
         addSuperType(SuperType.SNOW);
-        this.subtype.add("Plains");
+        this.subtype.add(SubType.PLAINS);
 
         // W
         this.addAbility(new WhiteManaAbility());

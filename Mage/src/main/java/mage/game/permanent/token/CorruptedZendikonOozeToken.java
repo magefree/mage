@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class CorruptedZendikonOozeToken extends Token {
         super("Ooze", "3/3 black Ooze creature");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Ooze");
+        subtype.add(SubType.OOZE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }

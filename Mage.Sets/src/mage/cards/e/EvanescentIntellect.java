@@ -52,7 +52,7 @@ public class EvanescentIntellect extends CardImpl {
 
     public EvanescentIntellect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant creature

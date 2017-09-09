@@ -38,6 +38,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -76,7 +77,7 @@ private static class OjutaiMonumentToken extends Token {
             cardType.add(CardType.CREATURE);
             color.setBlue(true);
             color.setBlack(true);
-            this.subtype.add("Dragon");
+            this.subtype.add(SubType.DRAGON);
             power = new MageInt(4);
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());

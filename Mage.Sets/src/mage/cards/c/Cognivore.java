@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -55,7 +56,7 @@ public class Cognivore extends CardImpl {
 
     public Cognivore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
-        this.subtype.add("Lhurgoyf");
+        this.subtype.add(SubType.LHURGOYF);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

@@ -55,7 +55,7 @@ public class RootwaterAlligator extends CardImpl {
 
     public RootwaterAlligator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Crocodile");
+        this.subtype.add(SubType.CROCODILE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

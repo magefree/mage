@@ -33,6 +33,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -44,7 +45,7 @@ public class IsamaruHoundofKonda extends CardImpl {
     public IsamaruHoundofKonda (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.HOUND);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

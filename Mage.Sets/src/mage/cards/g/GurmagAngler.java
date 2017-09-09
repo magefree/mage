@@ -33,6 +33,7 @@ import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class GurmagAngler extends CardImpl {
 
     public GurmagAngler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Fish");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.FISH);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

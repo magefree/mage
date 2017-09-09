@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -60,7 +61,7 @@ public class CatToken extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Cat");
+        subtype.add(SubType.CAT);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -42,7 +43,7 @@ public class ThopterToken extends Token {
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         color.setBlue(true);
-        subtype.add("Thopter");
+        subtype.add(SubType.THOPTER);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

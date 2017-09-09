@@ -67,7 +67,7 @@ public class RakdosTheDefiler extends CardImpl {
     public RakdosTheDefiler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
 

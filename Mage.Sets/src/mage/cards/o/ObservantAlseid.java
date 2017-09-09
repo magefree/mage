@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -51,7 +52,7 @@ public class ObservantAlseid extends CardImpl {
 
     public ObservantAlseid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Nymph");
+        this.subtype.add(SubType.NYMPH);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

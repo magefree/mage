@@ -34,6 +34,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -45,8 +46,8 @@ public class SkaabGoliath extends CardImpl {
 
     public SkaabGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(9);

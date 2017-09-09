@@ -62,8 +62,8 @@ public class DevoutChaplain extends CardImpl {
 
     public DevoutChaplain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.CLERIC);
 
         this.color.setWhite(true);
         this.power = new MageInt(2);

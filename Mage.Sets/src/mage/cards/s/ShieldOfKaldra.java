@@ -62,7 +62,7 @@ public class ShieldOfKaldra extends CardImpl {
     public ShieldOfKaldra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipment named Sword of Kaldra, Shield of Kaldra, and Helm of Kaldra are indestructible.
         Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);

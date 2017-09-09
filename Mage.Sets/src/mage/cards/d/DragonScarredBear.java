@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -48,7 +49,7 @@ public class DragonScarredBear extends CardImpl {
 
     public DragonScarredBear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Bear");
+        this.subtype.add(SubType.BEAR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

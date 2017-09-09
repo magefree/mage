@@ -60,8 +60,8 @@ public class ObzedatGhostCouncil extends CardImpl {
 
     public ObzedatGhostCouncil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}{B}{B}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Advisor");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.ADVISOR);
         addSuperType(SuperType.LEGENDARY);
 
         this.power = new MageInt(5);

@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
@@ -59,8 +60,8 @@ public class SuqAtaFirewalker extends CardImpl {
 
     public SuqAtaFirewalker(UUID cardId, CardSetInfo cardSetInfo) {
         super(cardId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        subtype.add("Human");
-        subtype.add("Wizard");
+        subtype.add(SubType.HUMAN);
+        subtype.add(SubType.WIZARD);
         power = new MageInt(0);
         toughness = new MageInt(1);
         color.setBlue(true);

@@ -39,6 +39,7 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,8 +55,8 @@ public class KorDuelist extends CardImpl {
 
     public KorDuelist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -83,7 +84,7 @@ class SourceIsEquiped implements Condition {
             for (UUID attachmentUUID : attachments) {
                 Permanent attachment = game.getPermanent(attachmentUUID);
                 if (attachment != null) {
-                    if (attachment.getSubtype(game).contains("Equipment")) {
+                    if (attachment.getSubtype(game).contains(SubType.EQUIPMENT)) {
                         return true;
                     }
                 }

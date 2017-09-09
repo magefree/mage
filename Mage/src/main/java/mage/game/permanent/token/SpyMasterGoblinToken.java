@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -54,7 +55,7 @@ public class SpyMasterGoblinToken extends Token {
         super("Goblin", "1/1 red Goblin creature token with \"Creatures you control attack each combat if able.\"");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Goblin");
+        subtype.add(SubType.GOBLIN);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

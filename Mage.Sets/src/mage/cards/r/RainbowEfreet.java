@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,7 +47,7 @@ public class RainbowEfreet extends CardImpl {
 
     public RainbowEfreet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Efreet");
+        this.subtype.add(SubType.EFREET);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

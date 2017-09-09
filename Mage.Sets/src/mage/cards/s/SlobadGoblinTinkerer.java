@@ -39,6 +39,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -64,8 +65,8 @@ public class SlobadGoblinTinkerer extends CardImpl {
     public SlobadGoblinTinkerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Goblin");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.ARTIFICER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

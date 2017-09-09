@@ -195,7 +195,7 @@ class AshiokNightmareWeaverAddTypeEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        creature.getSubtype(game).add("Nightmare");
+                        creature.getSubtype(game).add(SubType.NIGHTMARE);
                     }
                     break;
             }

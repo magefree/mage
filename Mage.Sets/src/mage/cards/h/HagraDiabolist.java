@@ -58,9 +58,9 @@ public class HagraDiabolist extends CardImpl {
 
     public HagraDiabolist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Shaman");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

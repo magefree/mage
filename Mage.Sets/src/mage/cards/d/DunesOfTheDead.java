@@ -34,6 +34,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -45,7 +46,7 @@ public class DunesOfTheDead extends CardImpl {
     public DunesOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         
-        this.subtype.add("Desert");
+        this.subtype.add(SubType.DESERT);
 
         // {T}: Add {C} to your mana pool.
         addAbility(new ColorlessManaAbility());

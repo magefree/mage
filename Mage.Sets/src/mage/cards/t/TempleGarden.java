@@ -37,6 +37,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class TempleGarden extends CardImpl {
 
     public TempleGarden (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.subtype.add("Forest");
-        this.subtype.add("Plains");
+        this.subtype.add(SubType.FOREST);
+        this.subtype.add(SubType.PLAINS);
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));

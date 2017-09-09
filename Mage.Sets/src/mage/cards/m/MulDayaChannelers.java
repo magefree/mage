@@ -45,6 +45,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -59,9 +60,9 @@ public class MulDayaChannelers extends CardImpl {
 
     public MulDayaChannelers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.DRUID);
+        this.subtype.add(SubType.SHAMAN);
 
         this.color.setGreen(true);
         this.power = new MageInt(2);

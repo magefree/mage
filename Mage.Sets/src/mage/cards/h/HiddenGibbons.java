@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
@@ -82,7 +83,7 @@ class HiddenGibbonsApe extends Token {
     public HiddenGibbonsApe() {
         super("Ape", "4/4 Ape creature");
         cardType.add(CardType.CREATURE);
-        subtype.add("Ape");
+        subtype.add(SubType.APE);
         power = new MageInt(4);
         toughness = new MageInt(4);
     }

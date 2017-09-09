@@ -75,7 +75,7 @@ public class UneshCriosphinxSovereign extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Sphinx");
+        this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

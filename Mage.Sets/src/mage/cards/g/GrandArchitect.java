@@ -69,8 +69,8 @@ public class GrandArchitect extends CardImpl {
 
     public GrandArchitect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Vedalken");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.VEDALKEN);
+        this.subtype.add(SubType.ARTIFICER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

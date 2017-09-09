@@ -62,9 +62,9 @@ public class MalakirSoothsayer extends CardImpl {
 
     public MalakirSoothsayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Shaman");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -54,7 +55,7 @@ public class ChampionsDrake extends CardImpl {
     public ChampionsDrake(UUID ownerId, CardSetInfo setInfo) {
 
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Drake");
+        this.subtype.add(SubType.DRAKE);
 
         this.color.setBlue(true);
         this.power = new MageInt(1);

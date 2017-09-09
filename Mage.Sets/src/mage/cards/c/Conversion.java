@@ -106,7 +106,7 @@ public class Conversion extends CardImpl {
                         break;
                     case TypeChangingEffects_4:
                         land.getSubtype(game).clear();
-                        land.getSubtype(game).add("Plains");
+                        land.getSubtype(game).add(SubType.PLAINS);
                         break;
                 }
             }

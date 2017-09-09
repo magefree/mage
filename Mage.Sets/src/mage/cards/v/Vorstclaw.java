@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,8 +42,8 @@ public class Vorstclaw extends CardImpl {
 
     public Vorstclaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

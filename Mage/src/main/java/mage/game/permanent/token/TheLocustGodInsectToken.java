@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -44,7 +45,7 @@ public class TheLocustGodInsectToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setRed(true);
-        subtype.add("Insect");
+        subtype.add(SubType.INSECT);
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());

@@ -35,6 +35,7 @@ import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class FireFieldOgre extends CardImpl {
 
     public FireFieldOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.MUTANT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

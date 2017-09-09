@@ -54,7 +54,7 @@ public class PlagueSliver extends CardImpl {
 
     public PlagueSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

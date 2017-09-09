@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetOpponent;
 
@@ -47,8 +48,8 @@ public class WantedScoundrels extends CardImpl {
     public WantedScoundrels(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Pirate");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

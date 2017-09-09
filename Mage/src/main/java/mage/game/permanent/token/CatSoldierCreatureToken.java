@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.Token;
 
 /**
@@ -43,8 +44,8 @@ public class CatSoldierCreatureToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         
-        subtype.add("Cat");
-        subtype.add("Soldier");
+        subtype.add(SubType.CAT);
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
         

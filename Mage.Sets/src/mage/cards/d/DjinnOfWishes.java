@@ -40,6 +40,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -56,7 +57,7 @@ public class DjinnOfWishes extends CardImpl {
 
     public DjinnOfWishes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        this.subtype.add("Djinn");
+        this.subtype.add(SubType.DJINN);
 
         this.color.setBlue(true);
         this.power = new MageInt(4);

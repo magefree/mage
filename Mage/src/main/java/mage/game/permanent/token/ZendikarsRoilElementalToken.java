@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class ZendikarsRoilElementalToken extends Token {
         super("Elemental", "2/2 green Elemental creature token");
         cardType.add(CardType.CREATURE);
         setOriginalExpansionSetCode("ORI");
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         color.setGreen(true);
         power = new MageInt(2);
         toughness = new MageInt(2);

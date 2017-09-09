@@ -33,6 +33,7 @@ import java.util.Collections;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -49,7 +50,7 @@ public class ThrullToken extends Token {
     public ThrullToken() {
         super("Thrull", "1/1 black Thrull creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Thrull");
+        subtype.add(SubType.THRULL);
         color.setBlack(true);
         power = new MageInt(1);
         toughness = new MageInt(1);

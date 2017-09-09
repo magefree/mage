@@ -65,8 +65,8 @@ public class FaerieArtisans extends CardImpl {
     public FaerieArtisans(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-        this.subtype.add("Faerie");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.FAERIE);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

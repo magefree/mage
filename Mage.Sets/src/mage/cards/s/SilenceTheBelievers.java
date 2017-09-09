@@ -33,6 +33,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -100,7 +101,7 @@ class SilenceTheBelieversExileEffect extends OneShotEffect {
                     List<UUID> attachments = new ArrayList<>(creature.getAttachments());
                     for (UUID attachmentId: attachments) {
                         Permanent attachment = game.getPermanent(attachmentId);
-                        if (attachment != null && attachment.getSubtype(game).contains("Aura")) {
+                        if (attachment != null && attachment.getSubtype(game).contains(SubType.AURA)) {
                             controller.moveCardToExileWithInfo(attachment, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
                         }
                     }

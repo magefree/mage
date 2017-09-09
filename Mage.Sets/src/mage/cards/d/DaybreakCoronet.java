@@ -58,7 +58,7 @@ public class DaybreakCoronet extends CardImpl {
     
     public DaybreakCoronet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant creature with another Aura attached to it
@@ -110,7 +110,7 @@ class AuraAttachedPredicate implements Predicate<Permanent> {
             if (!uuid.equals(ownId)) {
                 Permanent attachment = game.getPermanent(uuid);
                 if (attachment != null
-                        && attachment.getSubtype(game).contains("Aura")) {
+                        && attachment.getSubtype(game).contains(SubType.AURA)) {
                     return true;
                 }
             }

@@ -38,6 +38,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureSpell;
@@ -84,7 +85,7 @@ class HiddenSpiderToken extends Token {
     public HiddenSpiderToken() {
         super("Spider", "3/5 Spider creature with reach");
         cardType.add(CardType.CREATURE);
-        subtype.add("Spider");
+        subtype.add(SubType.SPIDER);
         power = new MageInt(3);
         toughness = new MageInt(5);
         this.addAbility(ReachAbility.getInstance());

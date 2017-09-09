@@ -39,6 +39,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -59,8 +60,8 @@ public class DistendedMindbender extends CardImpl {
 
     public DistendedMindbender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.INSECT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

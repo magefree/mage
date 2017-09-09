@@ -57,9 +57,9 @@ public class SeascapeAerialist extends CardImpl {
 
     public SeascapeAerialist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

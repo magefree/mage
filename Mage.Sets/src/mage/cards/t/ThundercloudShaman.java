@@ -59,8 +59,8 @@ public class ThundercloudShaman extends CardImpl {
 
     public ThundercloudShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.subtype.add("Giant");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

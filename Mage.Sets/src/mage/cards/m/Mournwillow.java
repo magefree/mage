@@ -38,6 +38,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,8 +51,8 @@ public class Mournwillow extends CardImpl {
 
     public Mournwillow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Skeleton");
+        this.subtype.add(SubType.PLANT);
+        this.subtype.add(SubType.SKELETON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

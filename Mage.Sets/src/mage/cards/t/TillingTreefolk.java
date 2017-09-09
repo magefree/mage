@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -47,8 +48,8 @@ public class TillingTreefolk extends CardImpl {
     
     public TillingTreefolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

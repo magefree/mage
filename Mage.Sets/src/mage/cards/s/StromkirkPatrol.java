@@ -34,6 +34,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -44,8 +45,8 @@ public class StromkirkPatrol extends CardImpl {
 
     public StromkirkPatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

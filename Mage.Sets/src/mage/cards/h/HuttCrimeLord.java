@@ -36,6 +36,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -46,8 +47,8 @@ public class HuttCrimeLord extends CardImpl {
 
     public HuttCrimeLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.subtype.add("Hutt");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.HUTT);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

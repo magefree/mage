@@ -29,6 +29,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,7 +58,7 @@ public class AuraAttachedTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getSourceId())) {
             Permanent attachment = game.getPermanent(event.getSourceId());
-            if (attachment != null && attachment.getSubtype(game).contains("Aura")) {
+            if (attachment != null && attachment.getSubtype(game).contains(SubType.AURA)) {
                 return true;
             }
         }

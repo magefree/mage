@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class AssemblyWorkerToken extends Token {
         super("Assembly-Worker", "2/2 Assembly-Worker artifact creature");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Assembly-Worker");
+        this.subtype.add(SubType.ASSEMBLY_WORKER);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

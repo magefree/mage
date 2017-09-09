@@ -34,6 +34,7 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class SigiledSkink extends CardImpl {
 
     public SigiledSkink(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Lizard");
+        this.subtype.add(SubType.LIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

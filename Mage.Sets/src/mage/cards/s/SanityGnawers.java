@@ -35,6 +35,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -45,7 +46,7 @@ public class SanityGnawers extends CardImpl {
 
     public SanityGnawers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
-        this.subtype.add("Rat");
+        this.subtype.add(SubType.RAT);
 
 
         

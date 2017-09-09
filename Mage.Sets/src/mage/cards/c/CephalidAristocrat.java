@@ -34,6 +34,7 @@ import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class CephalidAristocrat extends CardImpl {
 
     public CephalidAristocrat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Cephalid");
+        this.subtype.add(SubType.CEPHALID);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

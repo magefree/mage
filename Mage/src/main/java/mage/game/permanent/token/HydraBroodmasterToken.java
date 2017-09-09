@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -49,7 +50,7 @@ public class HydraBroodmasterToken extends Token {
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Hydra");
+        subtype.add(SubType.HYDRA);
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
     }

@@ -36,6 +36,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -91,7 +92,7 @@ class WitchbaneOrbEffect extends OneShotEffect {
             List<Permanent> toDestroy = new ArrayList<>();
             for (UUID attachmentId : controller.getAttachments()) {
                 Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getSubtype(game).contains("Curse")) {
+                if (attachment != null && attachment.getSubtype(game).contains(SubType.CURSE)) {
                     toDestroy.add(attachment);
                 }
             }

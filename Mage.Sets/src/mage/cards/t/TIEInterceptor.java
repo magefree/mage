@@ -36,6 +36,7 @@ import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,7 +49,7 @@ public class TIEInterceptor extends CardImpl {
 
     public TIEInterceptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Starship");
+        this.subtype.add(SubType.STARSHIP);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

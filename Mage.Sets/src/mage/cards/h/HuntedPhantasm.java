@@ -36,6 +36,7 @@ import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
@@ -48,7 +49,7 @@ public class HuntedPhantasm extends CardImpl {
 
     public HuntedPhantasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);

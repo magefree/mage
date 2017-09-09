@@ -48,8 +48,8 @@ public class FelhidePetrifier extends CardImpl {
 
     public FelhidePetrifier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

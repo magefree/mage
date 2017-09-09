@@ -36,6 +36,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,7 +51,7 @@ public class MageSlayer extends CardImpl {
 
     public MageSlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}{G}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature attacks, it deals damage equal to its power to defending player.
         this.addAbility(new AttacksAttachedTriggeredAbility(new MageSlayerEffect(), false));

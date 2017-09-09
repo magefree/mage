@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -47,8 +48,8 @@ public class KavuScout extends CardImpl {
 
     public KavuScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Kavu");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.KAVU);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);

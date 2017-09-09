@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
@@ -49,8 +50,8 @@ public class SithMindseer extends CardImpl {
 
     public SithMindseer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Sith");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SITH);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

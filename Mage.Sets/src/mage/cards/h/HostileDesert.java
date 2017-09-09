@@ -38,6 +38,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
@@ -53,7 +54,7 @@ public class HostileDesert extends CardImpl {
     public HostileDesert(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.subtype.add("Desert");
+        this.subtype.add(SubType.DESERT);
 
         // {T}: Add {C} to your mana pool.
         addAbility(new ColorlessManaAbility());
@@ -78,7 +79,7 @@ class HostileDesertToken extends Token {
     public HostileDesertToken() {
         super("", "3/4 elemental creature");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(3);
         toughness = new MageInt(4);
     }

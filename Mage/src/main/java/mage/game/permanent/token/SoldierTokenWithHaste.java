@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
@@ -52,7 +53,7 @@ public class SoldierTokenWithHaste extends Token {
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         color.setRed(true);
-        subtype.add("Soldier");
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());

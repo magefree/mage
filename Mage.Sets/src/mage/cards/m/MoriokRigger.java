@@ -35,6 +35,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactPermanent;
@@ -47,9 +48,9 @@ public class MoriokRigger extends CardImpl {
 
     public MoriokRigger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
-        this.subtype.add("Rigger");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ROGUE);
+        this.subtype.add(SubType.RIGGER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

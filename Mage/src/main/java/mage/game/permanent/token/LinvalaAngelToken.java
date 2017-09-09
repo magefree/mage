@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -42,7 +43,7 @@ public class LinvalaAngelToken extends Token {
         setOriginalExpansionSetCode("OGW");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Angel");
+        subtype.add(SubType.ANGEL);
         power = new MageInt(3);
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());

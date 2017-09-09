@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -50,8 +51,8 @@ public class ThrissNantukoPrimus extends CardImpl {
     public ThrissNantukoPrimus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Insect");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.INSECT);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

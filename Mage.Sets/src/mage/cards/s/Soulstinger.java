@@ -37,6 +37,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -51,8 +52,8 @@ public class Soulstinger extends CardImpl {
     public Soulstinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
-        this.subtype.add("Scorpion");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.SCORPION);
+        this.subtype.add(SubType.DEMON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

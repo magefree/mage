@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -52,7 +53,7 @@ public class EnsouledScimitar extends CardImpl {
 
     public EnsouledScimitar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // {3}: Ensouled Scimitar becomes a 1/5 Spirit artifact creature with flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new EnsouledScimitarToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{3}")));
@@ -78,7 +79,7 @@ class EnsouledScimitarToken extends Token {
         super("Pincher", "1/5 Spirit artifact creature with flying");
         setOriginalExpansionSetCode("5ND");
         cardType.add(CardType.CREATURE);
-        subtype.add("Spirit");
+        subtype.add(SubType.SPIRIT);
         power = new MageInt(1);
         toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());

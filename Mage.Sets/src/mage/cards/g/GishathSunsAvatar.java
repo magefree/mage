@@ -64,8 +64,8 @@ public class GishathSunsAvatar extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}{W}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dinosaur");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.DINOSAUR);
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
 

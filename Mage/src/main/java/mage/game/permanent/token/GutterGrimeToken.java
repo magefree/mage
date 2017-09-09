@@ -29,6 +29,7 @@
 package mage.game.permanent.token;
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -57,7 +58,7 @@ public class GutterGrimeToken extends Token {
     public GutterGrimeToken(UUID sourceId) {
         super("Ooze", "green Ooze creature token with \"This creature's power and toughness are each equal to the number of slime counters on Gutter Grime.\"");
         cardType.add(CardType.CREATURE);
-        subtype.add("Ooze");
+        subtype.add(SubType.OOZE);
         color.setGreen(true);
         power = new MageInt(0);
         toughness = new MageInt(0);

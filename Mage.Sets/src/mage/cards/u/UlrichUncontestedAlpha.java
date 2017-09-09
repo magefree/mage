@@ -59,7 +59,7 @@ public class UlrichUncontestedAlpha extends CardImpl {
     public UlrichUncontestedAlpha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.color.setRed(true);

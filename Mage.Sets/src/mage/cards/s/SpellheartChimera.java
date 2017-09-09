@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -49,7 +50,7 @@ public class SpellheartChimera extends CardImpl {
 
     public SpellheartChimera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
-        this.subtype.add("Chimera");
+        this.subtype.add(SubType.CHIMERA);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

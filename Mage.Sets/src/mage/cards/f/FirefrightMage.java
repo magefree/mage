@@ -39,6 +39,7 @@ import mage.abilities.effects.common.combat.CantBeBlockedByAllTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,8 +66,8 @@ public class FirefrightMage extends CardImpl {
 
     public FirefrightMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.SPELLSHAPER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

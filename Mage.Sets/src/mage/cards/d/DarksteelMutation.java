@@ -38,6 +38,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -53,7 +54,7 @@ public class DarksteelMutation extends CardImpl {
 
     public DarksteelMutation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -86,7 +87,7 @@ class DarksteelMutationInsectToken extends Token {
         super("Insect", "Insect artifact creature with base power and toughness 0/1");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Insect");
+        subtype.add(SubType.INSECT);
         power = new MageInt(0);
         toughness = new MageInt(1);
 

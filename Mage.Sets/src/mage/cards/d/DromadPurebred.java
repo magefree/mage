@@ -34,6 +34,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -44,8 +45,8 @@ public class DromadPurebred extends CardImpl {
 
     public DromadPurebred(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Camel");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.CAMEL);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);
 

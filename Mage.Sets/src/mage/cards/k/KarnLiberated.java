@@ -44,6 +44,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -70,7 +71,7 @@ public class KarnLiberated extends CardImpl {
     public KarnLiberated(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{7}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Karn");
+        this.subtype.add(SubType.KARN);
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 
         // +4: Target player exiles a card from his or her hand.
@@ -122,7 +123,7 @@ class KarnLiberatedEffect extends OneShotEffect {
         for (ExileZone zone : game.getExile().getExileZones()) {
             if (zone.getId().equals(exileId)) {
                 for (Card card : zone.getCards(game)) {
-                    if (!card.getSubtype(game).contains("Aura") && card.isPermanent()) {
+                    if (!card.getSubtype(game).contains(SubType.AURA) && card.isPermanent()) {
                         cards.add(card);
                     }
                 }
@@ -154,7 +155,7 @@ class KarnLiberatedEffect extends OneShotEffect {
         }
         for (Card card : cards) {
             game.getState().setZone(card.getId(), Zone.EXILED);
-            if (card.isPermanent() && !card.getSubtype(game).contains("Aura")) {
+            if (card.isPermanent() && !card.getSubtype(game).contains(SubType.AURA)) {
                 game.getExile().add(exileId, sourceObject.getIdName(), card);
             }
         }

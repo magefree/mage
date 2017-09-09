@@ -60,7 +60,7 @@ public class ThallidGerminator extends CardImpl {
 
     public ThallidGerminator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Fungus");
+        this.subtype.add(SubType.FUNGUS);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

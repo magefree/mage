@@ -41,6 +41,7 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -61,7 +62,7 @@ public class JaceCunningCastaway extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Jace");
+        this.subtype.add(SubType.JACE);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

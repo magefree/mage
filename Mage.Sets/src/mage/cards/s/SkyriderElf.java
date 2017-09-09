@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -46,9 +47,9 @@ public class SkyriderElf extends CardImpl {
 
     public SkyriderElf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}{U}");
-        this.subtype.add("Elf");
-        this.subtype.add("Warrior");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

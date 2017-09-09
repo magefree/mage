@@ -64,8 +64,8 @@ public class GoblinWizard extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.rarity = Rarity.RARE;
 
-        this.subtype.add("Goblin");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

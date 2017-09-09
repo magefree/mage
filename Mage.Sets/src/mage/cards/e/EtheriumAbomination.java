@@ -35,6 +35,7 @@ import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class EtheriumAbomination extends CardImpl {
 
     public EtheriumAbomination (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{U}{B}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
 
         
         this.power = new MageInt(4);

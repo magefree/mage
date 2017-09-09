@@ -37,6 +37,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class OvergrownTomb extends CardImpl {
 
     public OvergrownTomb (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.subtype.add("Swamp");
-        this.subtype.add("Forest");
+        this.subtype.add(SubType.SWAMP);
+        this.subtype.add(SubType.FOREST);
 
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());

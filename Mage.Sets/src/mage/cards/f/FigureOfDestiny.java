@@ -62,7 +62,7 @@ public class FigureOfDestiny extends CardImpl {
 
     public FigureOfDestiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}");
-        this.subtype.add("Kithkin");
+        this.subtype.add(SubType.KITHKIN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -106,8 +106,8 @@ public class FigureOfDestiny extends CardImpl {
         public FigureOfDestinyToken1() {
             super("Figure of Destiny", "Kithkin Spirit with base power and toughness 2/2");
             this.cardType.add(CardType.CREATURE);
-            this.subtype.add("Kithkin");
-            this.subtype.add("Spirit");
+            this.subtype.add(SubType.KITHKIN);
+            this.subtype.add(SubType.SPIRIT);
 
             this.color.setRed(true);
             this.color.setWhite(true);
@@ -121,9 +121,9 @@ public class FigureOfDestiny extends CardImpl {
         public FigureOfDestinyToken2() {
             super("Figure of Destiny", "Kithkin Spirit Warrior with base power and toughness 4/4");
             this.cardType.add(CardType.CREATURE);
-            this.subtype.add("Kithkin");
-            this.subtype.add("Spirit");
-            this.subtype.add("Warrior");
+            this.subtype.add(SubType.KITHKIN);
+            this.subtype.add(SubType.SPIRIT);
+            this.subtype.add(SubType.WARRIOR);
 
             this.color.setRed(true);
             this.color.setWhite(true);
@@ -137,10 +137,10 @@ public class FigureOfDestiny extends CardImpl {
         public FigureOfDestinyToken3() {
             super("Figure of Destiny", "Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike");
             this.cardType.add(CardType.CREATURE);
-            this.subtype.add("Kithkin");
-            this.subtype.add("Spirit");
-            this.subtype.add("Warrior");
-            this.subtype.add("Avatar");
+            this.subtype.add(SubType.KITHKIN);
+            this.subtype.add(SubType.SPIRIT);
+            this.subtype.add(SubType.WARRIOR);
+            this.subtype.add(SubType.AVATAR);
 
             this.color.setRed(true);
             this.color.setWhite(true);

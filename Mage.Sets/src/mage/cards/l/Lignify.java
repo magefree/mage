@@ -37,6 +37,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -52,8 +53,8 @@ public class Lignify extends CardImpl {
 
     public Lignify(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -85,7 +86,7 @@ class LignifyTreefolkToken extends Token {
     public LignifyTreefolkToken() {
         super("Treefolk", "a Treefolk with base power and toughness 0/4 with no abilities");
         cardType.add(CardType.CREATURE);
-        subtype.add("Treefolk");
+        subtype.add(SubType.TREEFOLK);
         power = new MageInt(0);
         toughness = new MageInt(4);
 

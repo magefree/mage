@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -63,7 +64,7 @@ public class GarrukTheVeilCursed extends CardImpl {
     public GarrukTheVeilCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Garruk");
+        this.subtype.add(SubType.GARRUK);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

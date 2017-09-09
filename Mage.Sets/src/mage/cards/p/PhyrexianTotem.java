@@ -40,6 +40,7 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -82,7 +83,7 @@ public class PhyrexianTotem extends CardImpl {
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setBlack(true);
-            this.subtype.add("Horror");
+            this.subtype.add(SubType.HORROR);
             power = new MageInt(5);
             toughness = new MageInt(5);
             this.addAbility(TrampleAbility.getInstance());

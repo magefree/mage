@@ -40,6 +40,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -111,7 +112,7 @@ public class IzzetKeyrune extends CardImpl {
             cardType.add(CardType.CREATURE);
             color.setBlue(true);
             color.setRed(true);
-            this.subtype.add("Elemental");
+            this.subtype.add(SubType.ELEMENTAL);
             power = new MageInt(2);
             toughness = new MageInt(1);
         }

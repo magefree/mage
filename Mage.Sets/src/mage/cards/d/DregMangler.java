@@ -35,6 +35,7 @@ import mage.abilities.keyword.ScavengeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class DregMangler extends CardImpl {
 
     public DregMangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.PLANT);
+        this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

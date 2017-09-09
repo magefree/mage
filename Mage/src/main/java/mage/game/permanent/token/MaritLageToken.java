@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -43,7 +44,7 @@ public class MaritLageToken extends Token {
         super("Marit Lage", "legendary 20/20 black Avatar creature token with flying and indestructible named Marit Lage");
         this.setOriginalExpansionSetCode("CSP");
         cardType.add(CardType.CREATURE);
-        subtype.add("Avatar");
+        subtype.add(SubType.AVATAR);
         addSuperType(SuperType.LEGENDARY);
 
         color.setBlack(true);

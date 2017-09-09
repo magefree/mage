@@ -37,6 +37,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -50,7 +51,7 @@ public class Genesis extends CardImpl {
 
     public Genesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Incarnation");
+        this.subtype.add(SubType.INCARNATION);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

@@ -53,7 +53,7 @@ public class Draco extends CardImpl {
 
     public Draco(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{16}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
 

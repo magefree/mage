@@ -32,6 +32,7 @@ import java.util.Arrays;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.util.RandomUtil;
 
 /**
@@ -44,7 +45,7 @@ public class WarriorToken extends Token {
         super("Warrior", "1/1 white Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Warrior");
+        subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
         availableImageSetCodes.addAll(Arrays.asList("KTK", "DTK"));

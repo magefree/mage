@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 
@@ -41,7 +42,7 @@ public class StoneTrapIdolToken extends Token {
         super("Construct", "6/12  colorless Construct artifact creature token with trample");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
-        subtype.add("Construct");
+        subtype.add(SubType.CONSTRUCT);
         power = new MageInt(6);
         toughness = new MageInt(12);
         addAbility(TrampleAbility.getInstance());

@@ -37,6 +37,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureSpell;
@@ -76,7 +77,7 @@ class OpalChampionKnight extends Token {
     public OpalChampionKnight() {
         super("Knight", "3/3 Knight creature with first strike");
         cardType.add(CardType.CREATURE);
-        subtype.add("Knight");
+        subtype.add(SubType.KNIGHT);
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(FirstStrikeAbility.getInstance());

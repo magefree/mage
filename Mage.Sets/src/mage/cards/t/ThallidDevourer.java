@@ -58,7 +58,7 @@ public class ThallidDevourer extends CardImpl {
 
     public ThallidDevourer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Fungus");
+        this.subtype.add(SubType.FUNGUS);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

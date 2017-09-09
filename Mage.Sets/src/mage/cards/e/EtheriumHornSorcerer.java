@@ -36,6 +36,7 @@ import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,8 +47,8 @@ public class EtheriumHornSorcerer extends CardImpl {
 
     public EtheriumHornSorcerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{U}{R}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.WIZARD);
 
 
         this.power = new MageInt(3);

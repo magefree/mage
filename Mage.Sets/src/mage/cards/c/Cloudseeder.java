@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.CloudSpriteToken;
 
@@ -50,8 +51,8 @@ public class Cloudseeder extends CardImpl {
 
     public Cloudseeder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.subtype.add("Faerie");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.FAERIE);
+        this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

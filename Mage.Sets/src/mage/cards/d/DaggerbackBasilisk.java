@@ -33,6 +33,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class DaggerbackBasilisk extends CardImpl {
 
     public DaggerbackBasilisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Basilisk");
+        this.subtype.add(SubType.BASILISK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

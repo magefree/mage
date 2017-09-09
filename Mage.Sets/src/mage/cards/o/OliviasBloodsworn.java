@@ -60,8 +60,8 @@ public class OliviasBloodsworn extends CardImpl {
 
     public OliviasBloodsworn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

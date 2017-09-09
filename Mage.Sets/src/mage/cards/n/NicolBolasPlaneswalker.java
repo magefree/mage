@@ -38,6 +38,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
@@ -62,7 +63,7 @@ public class NicolBolasPlaneswalker extends CardImpl {
     public NicolBolasPlaneswalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{U}{B}{B}{R}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Bolas");
+        this.subtype.add(SubType.BOLAS);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 

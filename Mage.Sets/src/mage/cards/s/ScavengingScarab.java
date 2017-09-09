@@ -34,6 +34,7 @@ import mage.abilities.common.CantBlockAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author Loki
@@ -42,7 +43,7 @@ public class ScavengingScarab extends CardImpl {
 
     public ScavengingScarab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

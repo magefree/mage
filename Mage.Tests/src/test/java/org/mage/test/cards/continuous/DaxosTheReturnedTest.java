@@ -29,6 +29,7 @@ package org.mage.test.cards.continuous;
 
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
@@ -69,7 +70,7 @@ public class DaxosTheReturnedTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Underworld Dreams", 2);
         assertCounterCount(playerA, CounterType.EXPERIENCE, 2);
         assertPowerToughness(playerA, "Spirit", 2, 2, Filter.ComparisonScope.All);
-        assertType("Spirit", CardType.ENCHANTMENT, "Spirit");
+        assertType("Spirit", CardType.ENCHANTMENT, SubType.SPIRIT);
 
     }
 

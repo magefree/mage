@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,8 +42,8 @@ public class KnightAllyToken extends Token {
         this.setExpansionSetCodeForImage("BFZ");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Knight");
-        subtype.add("Ally");
+        subtype.add(SubType.KNIGHT);
+        subtype.add(SubType.ALLY);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

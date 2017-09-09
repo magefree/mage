@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.StaticFilters;
 
@@ -47,7 +48,7 @@ public class TetheredGriffin extends CardImpl {
 
     public TetheredGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Griffin");
+        this.subtype.add(SubType.GRIFFIN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

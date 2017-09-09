@@ -63,9 +63,9 @@ public class MundasVanguard extends CardImpl {
 
     public MundasVanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Knight");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.KNIGHT);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

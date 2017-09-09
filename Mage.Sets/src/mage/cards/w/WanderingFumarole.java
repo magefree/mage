@@ -40,6 +40,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -82,7 +83,7 @@ class WanderingFumaroleToken extends Token {
     public WanderingFumaroleToken() {
         super("", "1/4 blue and red Elemental creature with \"0: Switch this creature's power and toughness until end of turn.\"");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         color.setRed(true);
         color.setBlue(true);
         power = new MageInt(1);

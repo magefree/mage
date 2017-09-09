@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -40,6 +41,6 @@ public class RebelToken extends Token {
         this.setOriginalExpansionSetCode("SWS");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Rebel");
+        subtype.add(SubType.REBEL);
     }
 }

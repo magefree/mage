@@ -52,7 +52,7 @@ public class WindZendikon extends CardImpl {
 
     public WindZendikon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant land
@@ -86,7 +86,7 @@ public class WindZendikon extends CardImpl {
             super("", "2/2 blue Elemental creature with flying");
             cardType.add(CardType.CREATURE);
             color.setBlue(true);
-            subtype.add("Elemental");
+            subtype.add(SubType.ELEMENTAL);
             power = new MageInt(2);
             toughness = new MageInt(2);
             addAbility(FlyingAbility.getInstance());

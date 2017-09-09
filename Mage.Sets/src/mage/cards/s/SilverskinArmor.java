@@ -45,7 +45,7 @@ public class SilverskinArmor extends CardImpl {
 
     public SilverskinArmor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{2}")));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1, Duration.WhileOnBattlefield)));

@@ -55,7 +55,7 @@ public class DeviantGlee extends CardImpl {
 
     public DeviantGlee (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
         this.color.setBlack(true);
 
         // Enchant creature

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.UnlessPaysDelayedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.PhaseStep;
 
 /**
@@ -46,7 +47,7 @@ public class GlassAsp extends CardImpl {
 
     public GlassAsp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Snake");
+        this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

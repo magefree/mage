@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -52,9 +53,9 @@ public class MysticPenitent extends CardImpl {
 
     public MysticPenitent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Nomad");
-        this.subtype.add("Mystic");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.NOMAD);
+        this.subtype.add(SubType.MYSTIC);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

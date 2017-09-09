@@ -38,6 +38,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -54,8 +55,8 @@ public class ChasmSkulker extends CardImpl {
 
     public ChasmSkulker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.subtype.add("Squid");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.SQUID);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

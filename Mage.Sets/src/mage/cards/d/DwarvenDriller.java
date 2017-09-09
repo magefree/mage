@@ -36,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -52,7 +53,7 @@ public class DwarvenDriller extends CardImpl {
     public DwarvenDriller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
-        this.subtype.add("Dwarf");
+        this.subtype.add(SubType.DWARF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

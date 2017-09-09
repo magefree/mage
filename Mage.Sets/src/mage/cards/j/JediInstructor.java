@@ -36,6 +36,7 @@ import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -55,8 +56,8 @@ public class JediInstructor extends CardImpl {
 
     public JediInstructor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Twi'lek");
-        this.subtype.add("Jedi");
+        this.subtype.add(SubType.TWILEK);
+        this.subtype.add(SubType.JEDI);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

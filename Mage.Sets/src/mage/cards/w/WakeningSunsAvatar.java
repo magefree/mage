@@ -57,8 +57,8 @@ public class WakeningSunsAvatar extends CardImpl {
     public WakeningSunsAvatar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}{W}");
 
-        this.subtype.add("Dinosaur");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.DINOSAUR);
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

@@ -64,7 +64,7 @@ public class ShefetMonitor extends CardImpl {
     public ShefetMonitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
 
-        this.subtype.add("Lizard");
+        this.subtype.add(SubType.LIZARD);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

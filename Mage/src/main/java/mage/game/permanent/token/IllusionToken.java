@@ -27,6 +27,7 @@
  */
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class IllusionToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
 
-        subtype.add("Illusion");
+        subtype.add(SubType.ILLUSION);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

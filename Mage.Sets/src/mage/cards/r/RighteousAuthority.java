@@ -55,7 +55,7 @@ public class RighteousAuthority extends CardImpl {
 
     public RighteousAuthority (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{U}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
 

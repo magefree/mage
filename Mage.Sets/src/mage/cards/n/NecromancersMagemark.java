@@ -37,6 +37,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -67,7 +68,7 @@ public class NecromancersMagemark extends CardImpl {
 
     public NecromancersMagemark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -141,7 +142,7 @@ class NecromancersMagemarkEffect extends ReplacementEffectImpl {
             if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
                 for (UUID attachmentId : permanent.getAttachments()) {
                     Permanent attachment = game.getPermanentOrLKIBattlefield(attachmentId);
-                    if (attachment != null && attachment.getSubtype(game).contains("Aura")) {
+                    if (attachment != null && attachment.getSubtype(game).contains(SubType.AURA)) {
                         return true;
                     }
                 }

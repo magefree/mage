@@ -35,6 +35,7 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 
@@ -46,7 +47,7 @@ public class HorseshoeCrab extends CardImpl {
 
     public HorseshoeCrab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Crab");
+        this.subtype.add(SubType.CRAB);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

@@ -33,6 +33,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class OgreBerserker extends CardImpl {
 
     public OgreBerserker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.BERSERKER);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

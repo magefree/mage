@@ -36,6 +36,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -46,7 +47,7 @@ public class SnappingCreeper extends CardImpl {
 
     public SnappingCreeper (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Plant");
+        this.subtype.add(SubType.PLANT);
         this.color.setGreen(true);        
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

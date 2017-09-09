@@ -39,6 +39,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -57,7 +58,7 @@ public class Grozoth extends CardImpl {
 
     public Grozoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}{U}");
-        this.subtype.add("Leviathan");
+        this.subtype.add(SubType.LEVIATHAN);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
 

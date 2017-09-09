@@ -41,6 +41,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -61,8 +62,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private boolean gainsHaste;
     private final int number;
     private List<Permanent> addedTokenPermanents;
-    private String additionalSubType;
-    private String onlySubType;
+    private SubType additionalSubType;
+    private SubType onlySubType;
     private boolean tapped;
     private boolean attacking;
     private UUID attackedPlayer;
@@ -296,11 +297,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         return addedTokenPermanents;
     }
 
-    public void setAdditionalSubType(String additionalSubType) {
+    public void setAdditionalSubType(SubType additionalSubType) {
         this.additionalSubType = additionalSubType;
     }
 
-    public void setOnlySubType(String onlySubType) {
+    public void setOnlySubType(SubType onlySubType) {
         this.onlySubType = onlySubType;
     }
 

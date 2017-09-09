@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,8 +56,8 @@ public class EyeblightAssassin extends CardImpl {
 
     public EyeblightAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Elf");
-        this.subtype.add("Assassin");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

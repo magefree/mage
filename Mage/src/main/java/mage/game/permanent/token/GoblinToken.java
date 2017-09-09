@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -59,7 +60,7 @@ public class GoblinToken extends Token {
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
-        subtype.add("Goblin");
+        subtype.add(SubType.GOBLIN);
         color.setRed(true);
         power = new MageInt(1);
         toughness = new MageInt(1);

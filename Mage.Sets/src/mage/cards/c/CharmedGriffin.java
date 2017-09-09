@@ -37,6 +37,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactOrEnchantmentCard;
@@ -53,7 +54,7 @@ public class CharmedGriffin extends CardImpl {
     public CharmedGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        this.subtype.add("Griffin");
+        this.subtype.add(SubType.GRIFFIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

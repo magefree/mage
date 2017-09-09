@@ -53,7 +53,7 @@ public class SigardaHostOfHerons extends CardImpl {
     public SigardaHostOfHerons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

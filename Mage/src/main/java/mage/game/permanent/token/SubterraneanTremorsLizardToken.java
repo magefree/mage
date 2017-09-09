@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class SubterraneanTremorsLizardToken extends Token {
         super("Lizard", "an 8/8 red Lizard creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Lizard");
+        subtype.add(SubType.LIZARD);
         power = new MageInt(8);
         toughness = new MageInt(8);
     }

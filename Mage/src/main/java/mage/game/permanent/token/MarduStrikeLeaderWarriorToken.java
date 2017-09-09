@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class MarduStrikeLeaderWarriorToken extends Token {
         super("Warrior", "2/1 black Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Warrior");
+        subtype.add(SubType.WARRIOR);
         power = new MageInt(2);
         toughness = new MageInt(1);
     }

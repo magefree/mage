@@ -37,6 +37,7 @@ import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
@@ -52,7 +53,7 @@ public class SheoldredWhisperingOne extends CardImpl {
     public SheoldredWhisperingOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Praetor");
+        this.subtype.add(SubType.PRAETOR);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

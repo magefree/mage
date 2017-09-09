@@ -59,7 +59,7 @@ public class DwarvenPony extends CardImpl {
 
     public DwarvenPony(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Horse");
+        this.subtype.add(SubType.HORSE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

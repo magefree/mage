@@ -62,7 +62,7 @@ public class GatecreeperVine extends CardImpl {
 
     public GatecreeperVine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Plant");
+        this.subtype.add(SubType.PLANT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);

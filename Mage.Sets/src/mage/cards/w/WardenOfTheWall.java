@@ -39,6 +39,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -78,7 +79,7 @@ class GargoyleToken extends Token {
         super("", "2/3 Gargoyle artifact creature with flying");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
-        subtype.add("Gargoyle");
+        subtype.add(SubType.GARGOYLE);
         power = new MageInt(2);
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());

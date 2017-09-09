@@ -34,6 +34,7 @@ import mage.abilities.keyword.ForestcyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class WirewoodGuardian extends CardImpl {
 
     public WirewoodGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.MUTANT);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

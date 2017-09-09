@@ -44,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -66,7 +67,7 @@ public class NarsetTranscendent extends CardImpl {
     public NarsetTranscendent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{U}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Narset");
+        this.subtype.add(SubType.NARSET);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 

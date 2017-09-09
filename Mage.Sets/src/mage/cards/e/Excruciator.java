@@ -35,6 +35,7 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -50,7 +51,7 @@ public class Excruciator extends CardImpl {
     public Excruciator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
 
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

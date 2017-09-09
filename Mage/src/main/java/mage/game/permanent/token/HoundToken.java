@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -39,7 +40,7 @@ public class HoundToken extends Token {
     public HoundToken() {
         super("Hound", "1/1 green Hound creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Hound");
+        subtype.add(SubType.HOUND);
 
         color.setGreen(true);
         power = new MageInt(1);

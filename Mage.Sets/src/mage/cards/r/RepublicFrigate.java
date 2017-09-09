@@ -33,6 +33,7 @@ import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class RepublicFrigate extends CardImpl {
 
     public RepublicFrigate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Starship");
+        this.subtype.add(SubType.STARSHIP);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

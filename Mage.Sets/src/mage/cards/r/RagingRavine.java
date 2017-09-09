@@ -44,6 +44,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -89,7 +90,7 @@ class RagingRavineToken extends Token {
     public RagingRavineToken() {
         super("", "3/3 red and green Elemental creature");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         color.setRed(true);
         color.setGreen(true);
         power = new MageInt(3);

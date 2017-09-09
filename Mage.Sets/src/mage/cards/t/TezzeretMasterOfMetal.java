@@ -41,6 +41,7 @@ import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -66,7 +67,7 @@ public class TezzeretMasterOfMetal extends CardImpl {
     public TezzeretMasterOfMetal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Tezzeret");
+        this.subtype.add(SubType.TEZZERET);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 

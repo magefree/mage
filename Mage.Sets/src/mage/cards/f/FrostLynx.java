@@ -36,6 +36,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -55,8 +56,8 @@ public class FrostLynx extends CardImpl {
 
     public FrostLynx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.CAT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -35,6 +35,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.DragonEggDragonToken;
 
 /**
@@ -45,7 +46,7 @@ public class DragonEgg extends CardImpl {
 
     public DragonEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);

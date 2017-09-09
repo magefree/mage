@@ -60,8 +60,8 @@ public class SetonKrosanProtector extends CardImpl {
     public SetonKrosanProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Centaur");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

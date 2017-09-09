@@ -38,6 +38,7 @@ import mage.abilities.keyword.DredgeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -56,7 +57,7 @@ public class Necroplasm extends CardImpl {
 
     public Necroplasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Ooze");
+        this.subtype.add(SubType.OOZE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -57,7 +57,7 @@ public class SummitApes extends CardImpl {
 
     public SummitApes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Ape");
+        this.subtype.add(SubType.APE);
 
         this.color.setGreen(true);
         this.power = new MageInt(5);

@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactSpell;
@@ -76,7 +77,7 @@ class HiddenGuerrillasSoldier extends Token {
     public HiddenGuerrillasSoldier() {
         super("Soldier", "5/3 Soldier creature with trample");
         cardType.add(CardType.CREATURE);
-        subtype.add("Soldier");
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(5);
         toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());

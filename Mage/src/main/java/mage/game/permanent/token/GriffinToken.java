@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -42,7 +43,7 @@ public class GriffinToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
 
-        subtype.add("Griffin");
+        subtype.add(SubType.GRIFFIN);
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

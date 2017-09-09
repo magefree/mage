@@ -36,6 +36,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
@@ -56,8 +57,8 @@ public class SageOfTheInwardEye extends CardImpl {
 
     public SageOfTheInwardEye(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
-        this.subtype.add("Djinn");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.DJINN);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

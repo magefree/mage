@@ -39,6 +39,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -60,7 +61,7 @@ public class DarthTyranus extends CardImpl {
 
     public DarthTyranus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{W}{U}{B}");
-        this.subtype.add("Dooku");
+        this.subtype.add(SubType.DOOKU);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

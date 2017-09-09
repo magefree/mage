@@ -37,6 +37,7 @@ import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -57,7 +58,7 @@ public class DefiantGreatmaw extends CardImpl {
     public DefiantGreatmaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.subtype.add("Hippo");
+        this.subtype.add(SubType.HIPPO);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

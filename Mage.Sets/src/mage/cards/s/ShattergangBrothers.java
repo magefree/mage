@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -60,8 +61,8 @@ public class ShattergangBrothers extends CardImpl {
     public ShattergangBrothers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Goblin");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.ARTIFICER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

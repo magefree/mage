@@ -58,7 +58,7 @@ public class EvilEyeOfOrmsByGore extends CardImpl {
 
     public EvilEyeOfOrmsByGore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Eye");
+        this.subtype.add(SubType.EYE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);

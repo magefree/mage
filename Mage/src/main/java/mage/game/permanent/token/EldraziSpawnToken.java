@@ -36,6 +36,7 @@ import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.util.RandomUtil;
 
@@ -54,8 +55,8 @@ public class EldraziSpawnToken extends Token {
     public EldraziSpawnToken() {
         super("Eldrazi Spawn", "0/1 colorless Eldrazi Spawn creature with \"Sacrifice this creature: Add {C} to your mana pool.\"");
         cardType.add(CardType.CREATURE);
-        subtype.add("Eldrazi");
-        subtype.add("Spawn");
+        subtype.add(SubType.ELDRAZI);
+        subtype.add(SubType.SPAWN);
         power = new MageInt(0);
         toughness = new MageInt(1);
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));

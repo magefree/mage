@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.ObjectColor;
 
@@ -60,7 +61,7 @@ public class TitaniaProtectorOfArgothElementalToken extends Token {
         this.setOriginalExpansionSetCode(setCode);
         this.cardType.add(CardType.CREATURE);
         this.color = ObjectColor.GREEN;
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
     }

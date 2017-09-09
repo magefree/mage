@@ -36,6 +36,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,7 +50,7 @@ public class TrainingDrone extends CardImpl {
 
     public TrainingDrone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Drone");
+        this.subtype.add(SubType.DRONE);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -85,7 +86,7 @@ class TrainingDroneEffect extends RestrictionEffect {
             List<UUID> attachments = permanent.getAttachments();
             for (UUID uuid : attachments) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
-                if (attached.getSubtype(game).contains("Equipment")) {
+                if (attached.getSubtype(game).contains(SubType.EQUIPMENT)) {
                     return false;
                 }
             }

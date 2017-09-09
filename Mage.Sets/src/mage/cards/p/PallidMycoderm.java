@@ -64,7 +64,7 @@ public class PallidMycoderm extends CardImpl {
 
     public PallidMycoderm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Fungus");
+        this.subtype.add(SubType.FUNGUS);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

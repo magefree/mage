@@ -36,6 +36,7 @@ import mage.abilities.keyword.HauntAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -53,7 +54,7 @@ public class GravenDominator extends CardImpl {
 
     public GravenDominator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
-        this.subtype.add("Gargoyle");
+        this.subtype.add(SubType.GARGOYLE);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

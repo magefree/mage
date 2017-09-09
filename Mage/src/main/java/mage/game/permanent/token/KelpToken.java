@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 
@@ -42,8 +43,8 @@ public class KelpToken extends Token {
         this.setOriginalExpansionSetCode("MIR");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Plant");
-        subtype.add("Wall");
+        subtype.add(SubType.PLANT);
+        subtype.add(SubType.WALL);
         power = new MageInt(0);
         toughness = new MageInt(1);
 

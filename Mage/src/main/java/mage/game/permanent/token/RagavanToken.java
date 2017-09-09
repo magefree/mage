@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -43,7 +44,7 @@ public class RagavanToken extends Token {
         this.getPower().modifyBaseValue(2);
         this.getToughness().modifyBaseValue(1);
         this.color.setRed(true);
-        this.getSubtype(null).add("Monkey");
+        this.getSubtype(null).add(SubType.MONKEY);
         this.addCardType(CardType.CREATURE);
     }
 }

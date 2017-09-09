@@ -50,8 +50,8 @@ public class ThornbowArcher extends CardImpl {
 
     public ThornbowArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Elf");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ARCHER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

@@ -41,6 +41,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.game.Game;
@@ -56,8 +57,8 @@ public class QueenMarchesa extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}{B}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Assassin");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

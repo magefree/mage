@@ -33,6 +33,7 @@ import mage.abilities.keyword.PhasingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class SandbarCrocodile extends CardImpl {
 
     public SandbarCrocodile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Crocodile");
+        this.subtype.add(SubType.CROCODILE);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);

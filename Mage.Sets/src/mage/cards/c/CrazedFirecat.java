@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -50,8 +51,8 @@ public class CrazedFirecat extends CardImpl {
     public CrazedFirecat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
 
-        this.subtype.add("Elemental");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.CAT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

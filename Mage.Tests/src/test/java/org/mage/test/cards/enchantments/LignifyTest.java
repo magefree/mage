@@ -29,6 +29,7 @@ package org.mage.test.cards.enchantments;
 
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
@@ -70,7 +71,7 @@ public class LignifyTest extends CardTestPlayerBase {
 
         Permanent hivelord = getPermanent("Sliver Hivelord", playerB);
 
-        Assert.assertFalse("Sliver Hivelord may not be of subtype Sliver", hivelord.getSubtype(currentGame).contains("Sliver"));
+        Assert.assertFalse("Sliver Hivelord may not be of subtype Sliver", hivelord.getSubtype(currentGame).contains(SubType.SLIVER));
 
     }
 

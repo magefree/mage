@@ -37,6 +37,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -47,7 +48,7 @@ public class KavuPrimarch extends CardImpl {
 
     public KavuPrimarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Kavu");
+        this.subtype.add(SubType.KAVU);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

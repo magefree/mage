@@ -34,6 +34,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -45,8 +46,8 @@ public class IhsansShade extends CardImpl {
     public IhsansShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Shade");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.SHADE);
+        this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -48,8 +49,8 @@ public class FanaticOfMogis extends CardImpl {
 
     public FanaticOfMogis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

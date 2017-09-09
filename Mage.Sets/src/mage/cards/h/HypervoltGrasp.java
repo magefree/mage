@@ -53,7 +53,7 @@ public class HypervoltGrasp extends CardImpl {
 
     public HypervoltGrasp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         
         

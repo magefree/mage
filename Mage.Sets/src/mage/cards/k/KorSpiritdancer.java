@@ -57,8 +57,8 @@ public class KorSpiritdancer extends CardImpl {
 
     public KorSpiritdancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);

@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -66,7 +67,7 @@ public class SistersOfStoneDeath extends CardImpl {
     public SistersOfStoneDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{G}{G}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Gorgon");
+        this.subtype.add(SubType.GORGON);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);

@@ -39,6 +39,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,7 +51,7 @@ public class ConqueringManticore extends CardImpl {
 
     public ConqueringManticore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
-        this.subtype.add("Manticore");
+        this.subtype.add(SubType.MANTICORE);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

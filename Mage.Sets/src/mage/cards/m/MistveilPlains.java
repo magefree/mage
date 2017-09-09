@@ -41,6 +41,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -62,7 +63,7 @@ public class MistveilPlains extends CardImpl {
 
     public MistveilPlains(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Plains");
+        this.subtype.add(SubType.PLAINS);
 
         // <i>({tap}: Add {W} to your mana pool.)</i>
         this.addAbility(new WhiteManaAbility());

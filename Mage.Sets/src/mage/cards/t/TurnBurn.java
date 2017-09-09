@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
 import mage.game.permanent.token.Token;
@@ -81,7 +82,7 @@ public class TurnBurn extends SplitCard {
             super("Weird", "a red Weird with base power and toughness 0/1");
             cardType.add(CardType.CREATURE);
             color.setRed(true);
-            subtype.add("Weird");
+            subtype.add(SubType.WEIRD);
             power = new MageInt(0);
             toughness = new MageInt(1);
         }

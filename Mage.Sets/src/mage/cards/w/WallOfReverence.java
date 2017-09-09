@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,8 +53,8 @@ public class WallOfReverence extends CardImpl {
 
     public WallOfReverence (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Wall");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.WALL);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(6);

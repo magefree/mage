@@ -54,7 +54,7 @@ public class GiantsIre extends CardImpl {
 
     public GiantsIre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{R}");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.GIANT);
 
         // Giant's Ire deals 4 damage to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

@@ -37,6 +37,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class GodlessShrine extends CardImpl {
 
     public GodlessShrine (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.subtype.add("Plains");
-        this.subtype.add("Swamp");
+        this.subtype.add(SubType.PLAINS);
+        this.subtype.add(SubType.SWAMP);
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, Godless Shrine enters the battlefield tapped"));

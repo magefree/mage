@@ -56,8 +56,8 @@ public class SilverfurPartisan extends CardImpl {
 
     public SilverfurPartisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Wolf");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.WOLF);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

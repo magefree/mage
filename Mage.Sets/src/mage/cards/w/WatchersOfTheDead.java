@@ -36,6 +36,7 @@ import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -53,7 +54,7 @@ public class WatchersOfTheDead extends CardImpl {
 
     public WatchersOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.CAT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

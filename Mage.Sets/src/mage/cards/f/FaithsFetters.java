@@ -53,7 +53,7 @@ public class FaithsFetters extends CardImpl {
 
     public FaithsFetters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant permanent
         TargetPermanent auraTarget = new TargetPermanent();

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
@@ -47,9 +48,9 @@ public class CrossbowInfantry extends CardImpl {
 
     public CrossbowInfantry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

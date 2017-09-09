@@ -45,6 +45,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -61,7 +62,7 @@ public class ManorGargoyle extends CardImpl {
 
     public ManorGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
-        this.subtype.add("Gargoyle");
+        this.subtype.add(SubType.GARGOYLE);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

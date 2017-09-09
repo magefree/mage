@@ -39,6 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -149,12 +150,12 @@ public class BestowAbility extends SpellAbility {
         if (permanent != null) {
             MageObject basicObject = permanent.getBasicMageObject(game);
             if (basicObject != null) {
-                basicObject.getSubtype(null).remove("Aura");
+                basicObject.getSubtype(null).remove(SubType.AURA);
                 if (!basicObject.isCreature()) {
                     basicObject.addCardType(CardType.CREATURE);
                 }
             }
-            permanent.getSubtype(null).remove("Aura");
+            permanent.getSubtype(null).remove(SubType.AURA);
             if (!permanent.isCreature()) {
                 permanent.addCardType(CardType.CREATURE);
             }
@@ -187,9 +188,9 @@ class BestowEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent bestowPermanent = game.getPermanentEntering(source.getSourceId());
         if (bestowPermanent != null) {
-            if (bestowPermanent.getSubtype(game).contains("Aura")) {
+            if (bestowPermanent.getSubtype(game).contains(SubType.AURA)) {
                 MageObject basicObject = bestowPermanent.getBasicMageObject(game);
-                basicObject.getSubtype(null).add("Aura");
+                basicObject.getSubtype(null).add(SubType.AURA);
                 basicObject.getCardType().remove(CardType.CREATURE);
             }
         }

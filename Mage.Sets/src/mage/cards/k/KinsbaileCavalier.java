@@ -55,8 +55,8 @@ public class KinsbaileCavalier extends CardImpl {
 
     public KinsbaileCavalier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.KITHKIN);
+        this.subtype.add(SubType.KNIGHT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

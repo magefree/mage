@@ -35,6 +35,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,7 +47,7 @@ public class RavenousDaggertooth extends CardImpl {
     public RavenousDaggertooth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.subtype.add("Dinosaur");
+        this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

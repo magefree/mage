@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -41,7 +42,7 @@ public class FaerieToken extends Token {
         super("Faerie", "1/1 blue Faerie creature tokens with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Faerie");
+        subtype.add(SubType.FAERIE);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

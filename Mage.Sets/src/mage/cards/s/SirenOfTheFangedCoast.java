@@ -39,6 +39,7 @@ import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,7 +51,7 @@ public class SirenOfTheFangedCoast extends CardImpl {
 
     public SirenOfTheFangedCoast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        this.subtype.add("Siren");
+        this.subtype.add(SubType.SIREN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

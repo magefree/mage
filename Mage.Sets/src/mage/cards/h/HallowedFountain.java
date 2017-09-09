@@ -37,6 +37,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class HallowedFountain extends CardImpl {
 
     public HallowedFountain (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.subtype.add("Plains");
-        this.subtype.add("Island");
+        this.subtype.add(SubType.PLAINS);
+        this.subtype.add(SubType.ISLAND);
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, Hallowed Fountain enters the battlefield tapped"));

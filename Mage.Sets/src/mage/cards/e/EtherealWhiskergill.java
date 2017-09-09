@@ -47,7 +47,7 @@ public class EtherealWhiskergill extends CardImpl {
 
     public EtherealWhiskergill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

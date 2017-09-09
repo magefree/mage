@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 
 import java.util.Arrays;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -42,7 +43,7 @@ public class HumanToken extends Token {
         super("Human", "1/1 white Human creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Human");
+        subtype.add(SubType.HUMAN);
         power = new MageInt(1);
         toughness = new MageInt(1);
         availableImageSetCodes.addAll(Arrays.asList("DKA", "AVR", "FNMP"));

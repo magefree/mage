@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -46,7 +47,7 @@ public class HeapDoll extends CardImpl {
 
     public HeapDoll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");
-        this.subtype.add("Scarecrow");
+        this.subtype.add(SubType.SCARECROW);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

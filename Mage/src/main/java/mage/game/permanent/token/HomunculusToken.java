@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,7 +42,7 @@ public class HomunculusToken extends Token {
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         color.setBlue(true);
-        subtype.add("Homunculus");
+        subtype.add(SubType.HOMUNCULUS);
         power = new MageInt(0);
         toughness = new MageInt(1);
     }

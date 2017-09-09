@@ -37,6 +37,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class SacredFoundry extends CardImpl {
 
     public SacredFoundry (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.subtype.add("Mountain");
-        this.subtype.add("Plains");
+        this.subtype.add(SubType.MOUNTAIN);
+        this.subtype.add(SubType.PLAINS);
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));

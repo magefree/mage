@@ -35,6 +35,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,7 +46,7 @@ public class TurntimberBasilisk extends CardImpl {
 
     public TurntimberBasilisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Basilisk");
+        this.subtype.add(SubType.BASILISK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

@@ -32,6 +32,7 @@ import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class SerpentGeneratorSnakeToken extends Token {
         super("Snake", "1/1 colorless Snake artifact creature token with \"Whenever this creature deals damage to a player, that player gets a poison counter.\"");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Snake");
+        subtype.add(SubType.SNAKE);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

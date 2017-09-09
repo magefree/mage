@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -51,7 +52,7 @@ public class MisthollowGriffin extends CardImpl {
 
     public MisthollowGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.subtype.add("Griffin");
+        this.subtype.add(SubType.GRIFFIN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -56,7 +56,7 @@ public class SpawnOfThraxes extends CardImpl {
     
     public SpawnOfThraxes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

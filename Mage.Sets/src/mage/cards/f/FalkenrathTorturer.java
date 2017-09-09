@@ -53,7 +53,7 @@ public class FalkenrathTorturer extends CardImpl {
 
     public FalkenrathTorturer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

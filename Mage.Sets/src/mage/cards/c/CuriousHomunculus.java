@@ -48,6 +48,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.v.VoraciousReader;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
@@ -61,7 +62,7 @@ public class CuriousHomunculus extends CardImpl {
 
     public CuriousHomunculus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Homunculus");
+        this.subtype.add(SubType.HOMUNCULUS);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

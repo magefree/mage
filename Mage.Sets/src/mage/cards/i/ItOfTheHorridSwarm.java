@@ -36,6 +36,7 @@ import mage.abilities.keyword.EmergeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.InsectToken;
 
 /**
@@ -46,8 +47,8 @@ public class ItOfTheHorridSwarm extends CardImpl {
 
     public ItOfTheHorridSwarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.INSECT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

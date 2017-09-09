@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
@@ -100,7 +101,7 @@ class SoulExchangeEffect extends OneShotEffect{
             if (c.isPaid() && c instanceof ExileTargetCost) {
                 for (Permanent exiled : ((ExileTargetCost) c).getPermanents()) {
                   if (exiled != null){
-                      if(exiled.getSubtype(game).contains("Thrull")){
+                      if(exiled.getSubtype(game).contains(SubType.THRULL)){
                         game.getPermanent(source.getFirstTarget()).addCounters(CounterType.P2P2.createInstance(), source, game);
                         return true;
                         }

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -41,7 +42,7 @@ public class HauntedAngelToken extends Token {
         super("Angel", "3/3 black Angel creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Angel");
+        subtype.add(SubType.ANGEL);
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

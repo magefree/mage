@@ -40,6 +40,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -71,8 +72,8 @@ public class NoyanDarRoilShaper extends CardImpl {
     public NoyanDarRoilShaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Merfolk");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -135,7 +136,7 @@ class AwakenElementalToken extends Token {
         super("", "0/0 Elemental creature with haste");
         this.cardType.add(CardType.CREATURE);
 
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

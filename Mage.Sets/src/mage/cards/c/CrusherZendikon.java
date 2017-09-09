@@ -40,6 +40,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -55,7 +56,7 @@ public class CrusherZendikon extends CardImpl {
 
     public CrusherZendikon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant land
@@ -88,7 +89,7 @@ class BeastToken extends Token {
         super("", "4/2 red Beast creature with trample");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Beast");
+        subtype.add(SubType.BEAST);
         power = new MageInt(4);
         toughness = new MageInt(2);
         this.addAbility(TrampleAbility.getInstance());

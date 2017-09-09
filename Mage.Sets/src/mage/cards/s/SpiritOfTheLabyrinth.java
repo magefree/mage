@@ -51,7 +51,7 @@ public class SpiritOfTheLabyrinth extends CardImpl {
 
     public SpiritOfTheLabyrinth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

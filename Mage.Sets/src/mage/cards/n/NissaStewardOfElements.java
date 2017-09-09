@@ -63,7 +63,7 @@ public class NissaStewardOfElements extends CardImpl {
     public NissaStewardOfElements(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{X}{G}{U}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Nissa");
+        this.subtype.add(SubType.NISSA);
 
         Ability abilityETB = new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.LOYALTY.createInstance()));
         abilityETB.setRuleVisible(false);
@@ -146,7 +146,7 @@ class NissaStewardOfElementsToken extends Token {
     public NissaStewardOfElementsToken() {
         super("", "5/5 Elemental creature with flying and haste");
         this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());

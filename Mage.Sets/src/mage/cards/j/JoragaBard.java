@@ -57,9 +57,9 @@ public class JoragaBard extends CardImpl {
 
     public JoragaBard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Rogue");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ROGUE);
+        this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);

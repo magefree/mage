@@ -50,7 +50,7 @@ public class WildbloodPack extends CardImpl {
 
     public WildbloodPack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.WEREWOLF);
         this.color.setRed(true);
 
         // this card is the second face of double-faced card

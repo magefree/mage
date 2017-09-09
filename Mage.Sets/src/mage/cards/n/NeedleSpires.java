@@ -40,6 +40,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -81,7 +82,7 @@ class NeedleSpiresToken extends Token {
     public NeedleSpiresToken() {
         super("", "2/1 red and white Elemental creature with double strike");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         color.setRed(true);
         color.setWhite(true);
         power = new MageInt(2);

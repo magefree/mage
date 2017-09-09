@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -48,8 +49,8 @@ public class EldraziHorrorToken extends Token {
     public EldraziHorrorToken() {
         super("Eldrazi Horror", "3/2 colorless Eldrazi Horror creature");
         cardType.add(CardType.CREATURE);
-        subtype.add("Eldrazi");
-        subtype.add("Horror");
+        subtype.add(SubType.ELDRAZI);
+        subtype.add(SubType.HORROR);
         power = new MageInt(3);
         toughness = new MageInt(2);
         availableImageSetCodes = tokenImageSets;

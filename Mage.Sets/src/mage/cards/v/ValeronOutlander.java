@@ -35,6 +35,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class ValeronOutlander extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
 
 
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));

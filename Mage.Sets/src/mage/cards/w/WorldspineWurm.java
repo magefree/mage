@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.WurmToken2;
 
 /**
@@ -47,7 +48,7 @@ public class WorldspineWurm extends CardImpl {
 
     public WorldspineWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{G}{G}{G}");
-        this.subtype.add("Wurm");
+        this.subtype.add(SubType.WURM);
 
         this.power = new MageInt(15);
         this.toughness = new MageInt(15);

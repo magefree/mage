@@ -37,6 +37,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,7 +56,7 @@ public class SpittingSpider extends CardImpl {
     }
     public SpittingSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Spider");
+        this.subtype.add(SubType.SPIDER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);

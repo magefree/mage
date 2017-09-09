@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -52,7 +53,7 @@ public class GlintEyeNephilim extends CardImpl {
 
     public GlintEyeNephilim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}{G}");
-        this.subtype.add("Nephilim");
+        this.subtype.add(SubType.NEPHILIM);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

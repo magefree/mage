@@ -37,6 +37,7 @@ import mage.abilities.keyword.GraftAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,8 +57,8 @@ public class SporebackTroll extends CardImpl {
 
     public SporebackTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Troll");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.TROLL);
+        this.subtype.add(SubType.MUTANT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

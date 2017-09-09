@@ -37,6 +37,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -58,7 +59,7 @@ public class SurrakarSpellblade extends CardImpl {
 
     public SurrakarSpellblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Surrakar");
+        this.subtype.add(SubType.SURRAKAR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

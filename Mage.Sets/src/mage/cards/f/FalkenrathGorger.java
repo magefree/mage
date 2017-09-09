@@ -53,8 +53,8 @@ public class FalkenrathGorger extends CardImpl {
 
     public FalkenrathGorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         /**

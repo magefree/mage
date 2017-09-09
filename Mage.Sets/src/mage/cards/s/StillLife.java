@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -68,7 +69,7 @@ class StillLifeCentaur extends Token {
     public StillLifeCentaur() {
         super("Centaur", "4/3 Centaur creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Centaur");
+        subtype.add(SubType.CENTAUR);
         power = new MageInt(4);
         toughness = new MageInt(3);
     }

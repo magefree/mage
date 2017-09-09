@@ -66,7 +66,7 @@ public class StarDestroyer extends CardImpl {
 
     public StarDestroyer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{U}{B}{R}");
-        this.subtype.add("Starship");
+        this.subtype.add(SubType.STARSHIP);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

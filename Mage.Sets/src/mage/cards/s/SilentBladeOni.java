@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
@@ -55,8 +56,8 @@ public class SilentBladeOni extends CardImpl {
 
     public SilentBladeOni(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{B}{B}");
-        this.subtype.add("Demon");
-        this.subtype.add("Ninja");
+        this.subtype.add(SubType.DEMON);
+        this.subtype.add(SubType.NINJA);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);

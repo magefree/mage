@@ -70,7 +70,7 @@ public class InfernalDenizen extends CardImpl {
     public InfernalDenizen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{B}");
 
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 

@@ -34,6 +34,7 @@ import mage.abilities.effects.keyword.ExploreSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class TishanasWayfinder extends CardImpl {
     public TishanasWayfinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         
-        this.subtype.add("Merfolk");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

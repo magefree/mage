@@ -54,7 +54,7 @@ public class SilasRennSeekerAdept extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{U}{B}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
+        this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

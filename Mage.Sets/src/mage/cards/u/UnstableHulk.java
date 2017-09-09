@@ -41,6 +41,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -51,8 +52,8 @@ public class UnstableHulk extends CardImpl {
 
     public UnstableHulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.MUTANT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

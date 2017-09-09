@@ -48,6 +48,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -69,8 +70,8 @@ public class MarathWillOfTheWild extends CardImpl {
     public MarathWillOfTheWild(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elemental");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

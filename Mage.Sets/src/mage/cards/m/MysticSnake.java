@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetSpell;
 
 /**
@@ -45,7 +46,7 @@ public class MysticSnake extends CardImpl {
 
     public MysticSnake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}{U}");
-        this.subtype.add("Snake");
+        this.subtype.add(SubType.SNAKE);
 
 
         this.power = new MageInt(2);

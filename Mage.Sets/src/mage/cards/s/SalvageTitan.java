@@ -37,6 +37,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -51,7 +52,7 @@ public class SalvageTitan extends CardImpl {
 
     public SalvageTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{B}{B}");
-        this.subtype.add("Golem");
+        this.subtype.add(SubType.GOLEM);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);

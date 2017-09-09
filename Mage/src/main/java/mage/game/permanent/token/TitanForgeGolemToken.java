@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class TitanForgeGolemToken extends Token {
         super("Golem", "9/9 colorless Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Golem");
+        subtype.add(SubType.GOLEM);
         power = new MageInt(9);
         toughness = new MageInt(9);
     }

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class ProsshKoboldToken extends Token {
         super("Kobolds of Kher Keep", "0/1 red Kobold creature tokens");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Kobold");
+        subtype.add(SubType.KOBOLD);
         power = new MageInt(0);
         toughness = new MageInt(1);
     }

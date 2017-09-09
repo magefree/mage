@@ -53,7 +53,7 @@ public class GhostlyPossession extends CardImpl {
 
     public GhostlyPossession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

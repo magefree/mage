@@ -36,6 +36,7 @@ import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -46,8 +47,8 @@ public class ProbeDroid extends CardImpl {
 
     public ProbeDroid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Droid");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.DROID);
+        this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -245,7 +245,7 @@ public class Spell extends StackObjImpl implements Card {
             }
             counter(null, game);
             return false;
-        } else if (this.isEnchantment() && this.getSubtype(game).contains("Aura")) {
+        } else if (this.isEnchantment() && this.getSubtype(game).contains(SubType.AURA)) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
                 boolean bestow = ability instanceof BestowAbility;
@@ -253,7 +253,7 @@ public class Spell extends StackObjImpl implements Card {
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
                     card.getCardType().remove(CardType.CREATURE);
-                    card.getSubtype(game).add("Aura");
+                    card.getSubtype(game).add(SubType.AURA);
                 }
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     if (bestow) {
@@ -482,7 +482,7 @@ public class Spell extends StackObjImpl implements Card {
     public SubTypeList getSubtype(Game game) {
         if (this.getSpellAbility() instanceof BestowAbility) {
             SubTypeList subtypes = card.getSubtype(game);
-            subtypes.add("Aura");
+            subtypes.add(SubType.AURA);
             return subtypes;
         }
         return card.getSubtype(game);
@@ -492,7 +492,7 @@ public class Spell extends StackObjImpl implements Card {
     public boolean hasSubtype(SubType subtype, Game game) {
         if (this.getSpellAbility() instanceof BestowAbility) { // workaround for Bestow (don't like it)
             SubTypeList subtypes = card.getSubtype(game);
-            subtypes.add("Aura");
+            subtypes.add(SubType.AURA);
             if (subtypes.contains(subtype)) {
                 return true;
             }

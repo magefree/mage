@@ -37,6 +37,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -56,8 +57,8 @@ public class GlissaTheTraitor extends CardImpl {
     public GlissaTheTraitor (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Zombie");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.ELF);
 
 
         this.power = new MageInt(3);

@@ -37,6 +37,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,7 +47,7 @@ public class CinderWall extends CardImpl {
 
     public CinderWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Wall");
+        this.subtype.add(SubType.WALL);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

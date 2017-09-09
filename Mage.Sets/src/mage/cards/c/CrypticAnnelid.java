@@ -36,6 +36,7 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,8 +46,8 @@ public class CrypticAnnelid extends CardImpl {
 
     public CrypticAnnelid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Worm");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.WORM);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

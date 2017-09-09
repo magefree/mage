@@ -67,7 +67,7 @@ public class ScourgeOfValkas extends CardImpl {
 
     public ScourgeOfValkas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
 
         this.color.setRed(true);
         this.power = new MageInt(4);

@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -45,7 +46,7 @@ public class HunterToken extends Token {
         this.setOriginalExpansionSetCode("SWS");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Hunter");
+        subtype.add(SubType.HUNTER);
     }
 }
 

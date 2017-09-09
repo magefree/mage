@@ -53,7 +53,7 @@ public class WarFalcon extends CardImpl {
 
     public WarFalcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Bird");
+        this.subtype.add(SubType.BIRD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

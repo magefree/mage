@@ -56,7 +56,7 @@ public class ElvenRiders extends CardImpl {
 
     public ElvenRiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ELF);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

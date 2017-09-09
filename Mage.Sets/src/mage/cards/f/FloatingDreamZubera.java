@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.watchers.common.ZuberasDiedWatcher;
 
 /**
@@ -45,8 +46,8 @@ public class FloatingDreamZubera extends CardImpl {
 
     public FloatingDreamZubera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Zubera");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.ZUBERA);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

@@ -66,7 +66,7 @@ public class CaptivatingVampire extends CardImpl {
     public CaptivatingVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
 
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -119,7 +119,7 @@ class CaptivatingVampireEffect extends ContinuousEffectImpl {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         if (!permanent.hasSubtype(SubType.VAMPIRE, game)) {
-                            permanent.getSubtype(game).add("Vampire");
+                            permanent.getSubtype(game).add(SubType.VAMPIRE);
                         }
                     }
                     break;

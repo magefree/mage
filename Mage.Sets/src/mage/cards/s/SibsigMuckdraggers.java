@@ -36,6 +36,7 @@ import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -47,7 +48,7 @@ public class SibsigMuckdraggers extends CardImpl {
 
     public SibsigMuckdraggers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{B}");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
 

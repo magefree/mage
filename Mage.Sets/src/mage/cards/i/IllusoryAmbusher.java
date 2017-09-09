@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,8 +50,8 @@ public class IllusoryAmbusher extends CardImpl {
 
     public IllusoryAmbusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Cat");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 

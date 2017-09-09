@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.Counter;
@@ -86,7 +87,7 @@ public class ChimericEgg extends CardImpl {
             super("", "6/6 Construct artifact creature with trample");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
-            this.subtype.add("Construct");
+            this.subtype.add(SubType.CONSTRUCT);
             power = new MageInt(6);
             toughness = new MageInt(6);
             this.addAbility(TrampleAbility.getInstance());

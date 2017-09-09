@@ -32,6 +32,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -51,7 +52,7 @@ public class TerashisVerdict extends CardImpl {
 
     public TerashisVerdict(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Destroy target attacking creature with power 3 or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

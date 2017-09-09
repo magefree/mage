@@ -38,6 +38,7 @@ import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 
@@ -50,8 +51,8 @@ public class SpiritOfTheNight extends CardImpl {
     public SpiritOfTheNight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Demon");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.DEMON);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);

@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
@@ -50,8 +51,8 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class Embersmith extends CardImpl {
     public Embersmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ARTIFICER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

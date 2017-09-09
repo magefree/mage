@@ -40,6 +40,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -75,7 +76,7 @@ class CelestialColonnadeToken extends Token {
     public CelestialColonnadeToken() {
         super("", "4/4 white and blue Elemental creature with flying and vigilance");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         color.setBlue(true);
         color.setWhite(true);
         power = new MageInt(4);

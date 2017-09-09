@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class WretchedGryff extends CardImpl {
 
     public WretchedGryff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Hippogriff");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.HIPPOGRIFF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

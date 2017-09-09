@@ -51,7 +51,7 @@ public class DackFayden extends CardImpl {
     public DackFayden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dack");
+        this.subtype.add(SubType.DACK);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

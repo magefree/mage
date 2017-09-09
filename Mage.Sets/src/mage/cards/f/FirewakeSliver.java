@@ -63,7 +63,7 @@ public class FirewakeSliver extends CardImpl {
     
     public FirewakeSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

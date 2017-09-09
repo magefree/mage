@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import java.io.InputStream;
 import java.util.*;
+import mage.constants.SubType;
 
 /**
  * Class responsible for reading ratings from resources and rating given cards.
@@ -60,9 +61,9 @@ public final class RateCard {
             type = 15;
         } else if (card.isCreature()) {
             type = 10;
-        } else if (card.getSubtype(null).contains("Equipment")) {
+        } else if (card.getSubtype(null).contains(SubType.EQUIPMENT)) {
             type = 8;
-        } else if (card.getSubtype(null).contains("Aura")) {
+        } else if (card.getSubtype(null).contains(SubType.AURA)) {
             type = 5;
         } else if (card.isInstant()) {
             type = 7;
@@ -77,7 +78,7 @@ public final class RateCard {
     }
 
     private static int isRemoval(Card card) {
-        if (card.getSubtype(null).contains("Aura") || card.isInstant() || card.isSorcery()) {
+        if (card.getSubtype(null).contains(SubType.AURA) || card.isInstant() || card.isSorcery()) {
 
             for (Ability ability : card.getAbilities()) {
                 for (Effect effect : ability.getEffects()) {

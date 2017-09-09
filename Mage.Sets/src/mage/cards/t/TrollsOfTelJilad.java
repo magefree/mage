@@ -37,6 +37,7 @@ import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -56,8 +57,8 @@ public class TrollsOfTelJilad extends CardImpl {
 
     public TrollsOfTelJilad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
-        this.subtype.add("Troll");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.TROLL);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);

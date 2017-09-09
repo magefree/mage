@@ -36,6 +36,7 @@ import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.CentaurEnchantmentCreatureToken;
 
 /**
@@ -46,8 +47,8 @@ public class PheresBandRaiders extends CardImpl {
 
     public PheresBandRaiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
-        this.subtype.add("Centaur");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

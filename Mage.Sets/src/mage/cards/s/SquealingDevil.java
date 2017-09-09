@@ -42,6 +42,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
@@ -62,7 +63,7 @@ public class SquealingDevil extends CardImpl {
     public SquealingDevil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.subtype.add("Devil");
+        this.subtype.add(SubType.DEVIL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

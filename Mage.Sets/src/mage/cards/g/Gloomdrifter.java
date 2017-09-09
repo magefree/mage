@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -62,8 +63,8 @@ public class Gloomdrifter extends CardImpl {
 
     public Gloomdrifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Minion");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.MINION);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

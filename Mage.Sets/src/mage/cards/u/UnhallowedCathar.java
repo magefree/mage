@@ -33,6 +33,7 @@ import mage.abilities.common.CantBlockAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class UnhallowedCathar extends CardImpl {
 
     public UnhallowedCathar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Zombie");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.SOLDIER);
         this.color.setBlack(true);
 
         // this card is the second face of double-faced card

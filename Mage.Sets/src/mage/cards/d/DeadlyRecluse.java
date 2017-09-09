@@ -35,6 +35,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,7 +46,7 @@ public class DeadlyRecluse extends CardImpl {
     public DeadlyRecluse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
 
-        this.subtype.add("Spider");
+        this.subtype.add(SubType.SPIDER);
         this.power = new MageInt(1);
     this.toughness = new MageInt(2);
         this.addAbility(ReachAbility.getInstance());

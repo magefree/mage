@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
@@ -82,7 +83,7 @@ class HiddenAncientsTreefolk extends Token {
     public HiddenAncientsTreefolk() {
         super("Treefolk", "5/5 Treefolk creature");
         cardType.add(CardType.CREATURE);
-        subtype.add("Treefolk");
+        subtype.add(SubType.TREEFOLK);
         power = new MageInt(5);
         toughness = new MageInt(5);
     }

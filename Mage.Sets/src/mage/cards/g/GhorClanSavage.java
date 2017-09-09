@@ -33,6 +33,7 @@ import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class GhorClanSavage extends CardImpl {
 
     public GhorClanSavage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Centaur");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.BERSERKER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

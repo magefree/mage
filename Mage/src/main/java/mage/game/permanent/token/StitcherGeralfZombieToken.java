@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -45,7 +46,7 @@ public class StitcherGeralfZombieToken extends Token {
         setTokenType(1);
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Zombie");
+        subtype.add(SubType.ZOMBIE);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
     }

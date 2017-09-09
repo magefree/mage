@@ -51,7 +51,7 @@ public class CairnWanderer extends CardImpl {
     public CairnWanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
 
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

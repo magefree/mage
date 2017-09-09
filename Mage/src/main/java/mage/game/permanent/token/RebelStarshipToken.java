@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.abilities.keyword.SpaceflightAbility;
 
 /**
@@ -43,7 +44,7 @@ public class RebelStarshipToken extends Token {
         cardType.add(CardType.ARTIFACT);
         abilities.add(SpaceflightAbility.getInstance());
         color.setBlue(true);
-        subtype.add("Rebel");
-        subtype.add("Starship");
+        subtype.add(SubType.REBEL);
+        subtype.add(SubType.STARSHIP);
     }
 }

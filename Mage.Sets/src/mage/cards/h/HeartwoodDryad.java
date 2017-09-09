@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -49,7 +50,7 @@ public class HeartwoodDryad extends CardImpl {
 
     public HeartwoodDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Dryad");
+        this.subtype.add(SubType.DRYAD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

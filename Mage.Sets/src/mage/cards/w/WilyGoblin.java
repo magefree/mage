@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.TreasureToken;
 
 /**
@@ -45,8 +46,8 @@ public class WilyGoblin extends CardImpl {
     public WilyGoblin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}");
 
-        this.subtype.add("Goblin");
-        this.subtype.add("Pirate");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

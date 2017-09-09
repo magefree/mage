@@ -35,6 +35,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class SewnEyeDrake extends CardImpl {
 
     public SewnEyeDrake (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U/R}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Drake");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.DRAKE);
         
 
 

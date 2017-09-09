@@ -35,6 +35,7 @@ import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -45,7 +46,7 @@ public class MorgueThrull extends CardImpl {
 
     public MorgueThrull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Thrull");
+        this.subtype.add(SubType.THRULL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

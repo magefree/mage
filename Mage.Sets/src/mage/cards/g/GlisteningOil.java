@@ -55,7 +55,7 @@ public class GlisteningOil extends CardImpl {
 
     public GlisteningOil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         
         // Enchant creature

@@ -56,7 +56,7 @@ public class GenjuOfTheFalls extends CardImpl {
 
     public GenjuOfTheFalls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant Island
         TargetPermanent auraTarget = new TargetLandPermanent(FILTER);
@@ -89,7 +89,7 @@ public class GenjuOfTheFalls extends CardImpl {
             super("Spirit", "3/2 blue Spirit creature with flying");
             cardType.add(CardType.CREATURE);
             color.setBlue(true);
-            subtype.add("Spirit");
+            subtype.add(SubType.SPIRIT);
             power = new MageInt(3);
             toughness = new MageInt(2);
             addAbility(FlyingAbility.getInstance());

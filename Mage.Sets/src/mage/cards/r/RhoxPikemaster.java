@@ -57,8 +57,8 @@ public class RhoxPikemaster extends CardImpl {
     public RhoxPikemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
 
-        this.subtype.add("Rhino");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.RHINO);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FirstStrikeAbility.getInstance());

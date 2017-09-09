@@ -38,6 +38,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -75,7 +76,7 @@ public class DimirKeyrune extends CardImpl {
             cardType.add(CardType.CREATURE);
             color.setBlue(true);
             color.setBlack(true);
-            subtype.add("Horror");
+            subtype.add(SubType.HORROR);
             power = new MageInt(2);
             toughness = new MageInt(2);
             this.addAbility(new CantBeBlockedSourceAbility());

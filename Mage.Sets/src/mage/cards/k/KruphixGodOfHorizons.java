@@ -52,7 +52,7 @@ public class KruphixGodOfHorizons extends CardImpl {
     public KruphixGodOfHorizons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{G}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("God");
+        this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);

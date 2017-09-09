@@ -35,6 +35,7 @@ import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,8 +58,8 @@ public class LeoninIconoclast extends CardImpl {
 
     public LeoninIconoclast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Cat");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.MONK);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

@@ -43,6 +43,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.HippoToken;
@@ -57,7 +58,7 @@ public class QuestingPhelddagrif extends CardImpl {
 
     public QuestingPhelddagrif(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
-        this.subtype.add("Phelddagrif");
+        this.subtype.add(SubType.PHELDDAGRIF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

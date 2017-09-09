@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -47,8 +48,8 @@ public class PitRaptor extends CardImpl {
 
     public PitRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Bird");
-        this.subtype.add("Mercenary");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.MERCENARY);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

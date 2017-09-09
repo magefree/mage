@@ -60,7 +60,7 @@ public class KeepsakeGorgon extends CardImpl {
 
     public KeepsakeGorgon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Gorgon");
+        this.subtype.add(SubType.GORGON);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);

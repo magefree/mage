@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,8 +57,8 @@ public class Warmonger extends CardImpl {
 
     public Warmonger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Monger");
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.MONGER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

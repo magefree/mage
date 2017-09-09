@@ -52,8 +52,8 @@ public class YidrisMaelstromWielder extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}{R}{G}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Ogre");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

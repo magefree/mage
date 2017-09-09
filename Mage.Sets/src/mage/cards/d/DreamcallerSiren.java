@@ -65,8 +65,8 @@ public class DreamcallerSiren extends CardImpl {
     public DreamcallerSiren(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
-        this.subtype.add("Siren");
-        this.subtype.add("Pirate");
+        this.subtype.add(SubType.SIREN);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -59,7 +59,7 @@ public class SapphireDrake extends CardImpl {
 
     public SapphireDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        this.subtype.add("Drake");
+        this.subtype.add(SubType.DRAKE);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

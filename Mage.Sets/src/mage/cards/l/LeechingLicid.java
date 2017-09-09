@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -49,7 +50,7 @@ public class LeechingLicid extends CardImpl {
 
     public LeechingLicid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Licid");
+        this.subtype.add(SubType.LICID);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

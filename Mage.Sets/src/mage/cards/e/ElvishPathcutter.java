@@ -58,8 +58,8 @@ public class ElvishPathcutter extends CardImpl {
 
     public ElvishPathcutter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

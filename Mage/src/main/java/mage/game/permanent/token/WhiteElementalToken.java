@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -41,7 +42,7 @@ public class WhiteElementalToken extends Token {
         super("Elemental", "4/4 white Elemental creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(4);
         toughness = new MageInt(4);
         setTokenType(2);

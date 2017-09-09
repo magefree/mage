@@ -2,6 +2,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -13,8 +14,8 @@ public class MerfolkWizardToken extends Token {
         super("Merfolk Wizard", "1/1 blue Merfolk Wizard creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Merfolk");
-        subtype.add("Wizard");
+        subtype.add(SubType.MERFOLK);
+        subtype.add(SubType.WIZARD);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

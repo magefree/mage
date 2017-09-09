@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 
@@ -47,8 +48,8 @@ public class DispersalTechnician extends CardImpl {
     public DispersalTechnician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
         
-        this.subtype.add("Vedalken");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.VEDALKEN);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

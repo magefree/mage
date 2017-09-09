@@ -38,6 +38,7 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -49,8 +50,8 @@ public class UlamogsReclaimer extends CardImpl {
 
     public UlamogsReclaimer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Processor");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.PROCESSOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 

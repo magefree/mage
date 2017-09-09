@@ -37,6 +37,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -57,7 +58,7 @@ public class CantinaBand extends CardImpl {
 
     public CantinaBand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
-        this.subtype.add("Bith");
+        this.subtype.add(SubType.BITH);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

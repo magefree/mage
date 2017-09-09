@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -58,7 +59,7 @@ public class Hankyu extends CardImpl {
 
     public Hankyu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         /* Equipped creature has "{T}: Put an aim counter on Hankyu" and */
         SimpleActivatedAbility ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HankyuAddCounterEffect(this.getId()), new TapSourceCost());

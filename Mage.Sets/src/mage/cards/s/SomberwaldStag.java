@@ -36,6 +36,7 @@ import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -55,7 +56,7 @@ public class SomberwaldStag extends CardImpl {
 
     public SomberwaldStag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Elk");
+        this.subtype.add(SubType.ELK);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

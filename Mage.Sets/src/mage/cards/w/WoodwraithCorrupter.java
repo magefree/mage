@@ -61,8 +61,8 @@ public class WoodwraithCorrupter extends CardImpl {
     public WoodwraithCorrupter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{G}");
 
-        this.subtype.add("Elemental");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
 
@@ -90,8 +90,8 @@ class WoodwraithCorrupterToken extends Token {
     public WoodwraithCorrupterToken() {
         super("", "4/4 black and green Elemental Horror creature");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
-        subtype.add("Horror");
+        subtype.add(SubType.ELEMENTAL);
+        subtype.add(SubType.HORROR);
         power = new MageInt(4);
         toughness = new MageInt(4);
     }

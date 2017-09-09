@@ -38,6 +38,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,8 +50,8 @@ public class LoxodonMystic extends CardImpl {
 
     public LoxodonMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.subtype.add("Elephant");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.ELEPHANT);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

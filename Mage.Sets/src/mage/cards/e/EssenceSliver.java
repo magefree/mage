@@ -54,7 +54,7 @@ public class EssenceSliver extends CardImpl {
 
     public EssenceSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

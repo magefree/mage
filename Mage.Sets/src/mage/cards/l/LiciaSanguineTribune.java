@@ -44,6 +44,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -65,8 +66,8 @@ public class LiciaSanguineTribune extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{W}{B}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Vampire");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.EyesOfTheWisentElementalToken;
@@ -54,7 +55,7 @@ public class EyesOfTheWisent extends CardImpl {
 
     public EyesOfTheWisent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{G}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         // Whenever an opponent casts a blue spell during your turn, you may create a 4/4 green Elemental creature token.
         this.addAbility(new ConditionalTriggeredAbility(

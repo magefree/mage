@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -47,8 +48,8 @@ public class NantukoShade extends CardImpl {
 
     public NantukoShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Insect");
-        this.subtype.add("Shade");
+        this.subtype.add(SubType.INSECT);
+        this.subtype.add(SubType.SHADE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

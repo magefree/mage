@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
@@ -58,7 +59,7 @@ public class NicolBolasTheDeceiver extends CardImpl {
     public NicolBolasTheDeceiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{U}{B}{R}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Bolas");
+        this.subtype.add(SubType.BOLAS);
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
         // +3: Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.

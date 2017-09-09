@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class CallTheSkyBreakerElementalToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setRed(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
             setTokenType(2);
         }

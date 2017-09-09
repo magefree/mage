@@ -33,6 +33,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class LandLeeches extends CardImpl {
 
     public LandLeeches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Leech");
+        this.subtype.add(SubType.LEECH);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

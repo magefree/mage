@@ -60,8 +60,8 @@ public class HarborBandit extends CardImpl {
 
     public HarborBandit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ROGUE);
 
         this.color.setBlack(true);
         this.power = new MageInt(2);

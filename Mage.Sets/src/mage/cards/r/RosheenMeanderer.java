@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 
@@ -52,8 +53,8 @@ public class RosheenMeanderer extends CardImpl {
     public RosheenMeanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R/G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Giant");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

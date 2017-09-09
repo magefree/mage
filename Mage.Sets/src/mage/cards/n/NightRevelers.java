@@ -51,7 +51,7 @@ public class NightRevelers extends CardImpl {
 
     public NightRevelers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
 
         this.color.setRed(true);
         this.power = new MageInt(4);

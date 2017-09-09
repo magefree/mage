@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class Drelnoch extends CardImpl {
 
     public Drelnoch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Yeti");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.YETI);
+        this.subtype.add(SubType.MUTANT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

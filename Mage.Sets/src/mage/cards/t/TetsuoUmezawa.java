@@ -66,8 +66,8 @@ public class TetsuoUmezawa extends CardImpl {
     public TetsuoUmezawa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ARCHER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
@@ -129,7 +129,7 @@ class TetsuoUmezawaEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
         if (stackObject != null && event.getTargetId().equals(source.getSourceId())) {
-            if (stackObject.getSubtype(game).contains("Aura")) {
+            if (stackObject.getSubtype(game).contains(SubType.AURA)) {
                 return true;
             }
         }

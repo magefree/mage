@@ -33,6 +33,7 @@ import mage.abilities.keyword.FadingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class SkyshroudRidgeback extends CardImpl {
 
     public SkyshroudRidgeback(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

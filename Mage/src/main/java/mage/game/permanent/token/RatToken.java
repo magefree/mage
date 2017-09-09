@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,7 +47,7 @@ public class RatToken extends Token {
         this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Rat");
+        subtype.add(SubType.RAT);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

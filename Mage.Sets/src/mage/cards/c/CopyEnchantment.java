@@ -37,6 +37,7 @@ import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -87,7 +88,7 @@ class CopyEnchantmentEffect extends CopyPermanentEffect {
             if (super.apply(game, source)) {
                 Permanent permanentToCopy = getBluePrintPermanent();
                 if (permanentToCopy != null) {
-                    if (permanentToCopy.getSubtype(game).contains("Aura")) {
+                    if (permanentToCopy.getSubtype(game).contains(SubType.AURA)) {
                         Target target = getBluePrintPermanent().getSpellAbility().getTargets().get(0);
                         Outcome auraOutcome = Outcome.BoostCreature;
                         Ability:

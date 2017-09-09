@@ -40,6 +40,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
 
@@ -52,7 +53,7 @@ public class Rakavolver extends CardImpl {
 
     public Rakavolver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Volver");
+        this.subtype.add(SubType.VOLVER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -56,7 +56,7 @@ public class RelentlessRats extends CardImpl {
 
     public RelentlessRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Rat");
+        this.subtype.add(SubType.RAT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

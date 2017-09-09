@@ -35,6 +35,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,7 +46,7 @@ public class DesertOfTheMindful extends CardImpl {
     public DesertOfTheMindful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.subtype.add("Desert");
+        this.subtype.add(SubType.DESERT);
 
         // Desert of the Mindful enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

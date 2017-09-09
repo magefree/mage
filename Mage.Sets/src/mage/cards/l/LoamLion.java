@@ -57,7 +57,7 @@ public class LoamLion extends CardImpl {
 
     public LoamLion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.CAT);
 
         this.color.setWhite(true);
         this.power = new MageInt(1);

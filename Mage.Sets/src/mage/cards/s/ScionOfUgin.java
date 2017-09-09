@@ -33,6 +33,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class ScionOfUgin extends CardImpl {
 
     public ScionOfUgin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}");
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.DRAGON);
+        this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

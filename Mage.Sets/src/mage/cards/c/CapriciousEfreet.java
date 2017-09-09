@@ -34,6 +34,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
@@ -63,7 +64,7 @@ public class CapriciousEfreet extends CardImpl {
 
     public CapriciousEfreet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
-        this.subtype.add("Efreet");
+        this.subtype.add(SubType.EFREET);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);

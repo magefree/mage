@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
 
@@ -41,7 +42,7 @@ public class OphiomancerSnakeToken extends Token {
         super("Snake", "1/1 black Snake creature token with deathtouch");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Snake");
+        subtype.add(SubType.SNAKE);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(DeathtouchAbility.getInstance());

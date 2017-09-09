@@ -64,8 +64,8 @@ public class CateranOverlord extends CardImpl {
 
     public CateranOverlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");
-        this.subtype.add("Horror");
-        this.subtype.add("Mercenary");
+        this.subtype.add(SubType.HORROR);
+        this.subtype.add(SubType.MERCENARY);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);

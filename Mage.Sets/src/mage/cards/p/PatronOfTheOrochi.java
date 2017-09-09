@@ -56,7 +56,7 @@ public class PatronOfTheOrochi extends CardImpl {
     public PatronOfTheOrochi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

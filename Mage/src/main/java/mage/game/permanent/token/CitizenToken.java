@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class CitizenToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         
-        subtype.add("Citizen");
+        subtype.add(SubType.CITIZEN);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

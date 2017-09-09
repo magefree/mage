@@ -37,6 +37,7 @@ import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -47,7 +48,7 @@ public class SkitterOfLizards extends CardImpl {
 
     public SkitterOfLizards(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Lizard");
+        this.subtype.add(SubType.LIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

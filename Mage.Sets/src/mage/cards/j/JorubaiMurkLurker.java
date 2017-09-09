@@ -63,7 +63,7 @@ public class JorubaiMurkLurker extends CardImpl {
 
     public JorubaiMurkLurker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Leech");
+        this.subtype.add(SubType.LEECH);
 
         this.color.setBlue(true);
         this.power = new MageInt(1);

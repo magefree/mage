@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -48,7 +49,7 @@ public class BaruFistOfKrosaToken extends Token {
         super("Wurm", "X/X green Wurm creature token, where X is the number of lands you control");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Wurm");
+        subtype.add(SubType.WURM);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
     }

@@ -37,6 +37,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -54,7 +55,7 @@ public class SongOfTheDryads extends CardImpl {
 
     public SongOfTheDryads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant permanent
         TargetPermanent auraTarget = new TargetPermanent();
@@ -121,7 +122,7 @@ class BecomesColorlessForestLandEffect extends ContinuousEffectImpl {
                         permanent.getCardType().clear();
                         permanent.addCardType(CardType.LAND);
                         permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add("Forest");
+                        permanent.getSubtype(game).add(SubType.FOREST);
                         break;
                 }
                 return true;

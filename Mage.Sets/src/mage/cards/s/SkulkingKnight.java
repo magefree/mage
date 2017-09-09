@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlankingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class SkulkingKnight extends CardImpl {
 
     public SkulkingKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.KNIGHT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

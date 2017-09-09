@@ -33,6 +33,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class MisshapenFiend extends CardImpl {
 
     public MisshapenFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Horror");
-        this.subtype.add("Mercenary");
+        this.subtype.add(SubType.HORROR);
+        this.subtype.add(SubType.MERCENARY);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

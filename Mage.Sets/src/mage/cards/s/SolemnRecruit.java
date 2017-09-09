@@ -37,6 +37,7 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.watchers.common.RevoltWatcher;
 
@@ -49,8 +50,8 @@ public class SolemnRecruit extends CardImpl {
     public SolemnRecruit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
 
-        this.subtype.add("Dwarf");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

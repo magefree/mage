@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.FlyingAbility;
@@ -41,7 +42,7 @@ public class DrakeToken extends Token {
     public DrakeToken() {
         super("Drake", "2/2 blue Drake creature token with flying");
         this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Drake");
+        this.subtype.add(SubType.DRAKE);
 
         this.color = ObjectColor.BLUE;
         this.power = new MageInt(2);

@@ -50,7 +50,7 @@ public class KrallenhordeKiller extends CardImpl {
 
     public KrallenhordeKiller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.WEREWOLF);
         this.color.setGreen(true);
 
         this.power = new MageInt(2);

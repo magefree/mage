@@ -9,6 +9,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.HexproofAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -22,7 +23,7 @@ public class MerfolkHexproofToken extends Token {
     public MerfolkHexproofToken() {
         super("Merfolk", "1/1 blue Merfolk creature token with hexproof");
         this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Merfolk");
+        this.subtype.add(SubType.MERFOLK);
         this.color = ObjectColor.BLUE;
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

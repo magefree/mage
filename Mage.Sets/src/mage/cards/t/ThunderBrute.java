@@ -40,6 +40,7 @@ import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -50,7 +51,7 @@ public class ThunderBrute extends CardImpl {
 
     public ThunderBrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
-        this.subtype.add("Cyclops");
+        this.subtype.add(SubType.CYCLOPS);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
