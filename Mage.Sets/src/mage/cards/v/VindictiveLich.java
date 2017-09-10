@@ -83,7 +83,7 @@ public class VindictiveLich extends CardImpl {
 
         // *Target opponent loses 5 life.
         mode = new Mode();
-        mode.getEffects().add(new LoseLifeTargetEffect(2));
+        mode.getEffects().add(new LoseLifeTargetEffect(5));
         filter = new FilterOpponent("opponent (life loss)");
         filter.add(new AnotherTargetPredicate(3, true));
         target = new TargetOpponent(filter, false);
