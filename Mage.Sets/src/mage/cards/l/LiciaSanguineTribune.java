@@ -44,10 +44,10 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -81,7 +81,7 @@ public class LiciaSanguineTribune extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Pay 5 life: Put three +1/+1 counters on Licia. Activate this ability only on your turn and only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)), new PayLifeCost(5), 1, MyTurnCondition.instance));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), new PayLifeCost(5), 1, MyTurnCondition.instance));
     }
 
     public LiciaSanguineTribune(final LiciaSanguineTribune card) {
