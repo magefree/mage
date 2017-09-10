@@ -46,9 +46,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     private static final Logger logger = Logger.getLogger(DownloadPictures.class);
 
-    public static final String ALL_CARDS = "- All cards from that source";
-    public static final String ALL_STANDARD_CARDS = "- All cards from standard from that source";
-    public static final String ALL_TOKENS = "- All token images from that source";
+    public static final String ALL_IMAGES = "- All images from that source";
+    public static final String ALL_STANDARD_IMAGES = "- All images from standard from that source";
+    public static final String ALL_TOKENS = "- Only all token images from that source";
 
     private final JProgressBar bar;
     private final JOptionPane dlg;
@@ -204,7 +204,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         bar.setStringPainted(true);
 
         Dimension d = bar.getPreferredSize();
-        d.width = 300;
+        d.width = 400;
         bar.setPreferredSize(d);
 
         // JOptionPane
@@ -232,8 +232,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         ArrayList<String> supportedSets = cardImageSource.getSupportedSets();
         List<String> setNames = new ArrayList<>();
         if (supportedSets != null) {
-            setNames.add(ALL_CARDS);
-            setNames.add(ALL_STANDARD_CARDS);
+            setNames.add(ALL_IMAGES);
+            setNames.add(ALL_STANDARD_IMAGES);
         }
         if (cardImageSource.isTokenSource()) {
             setNames.add(ALL_TOKENS);
@@ -258,16 +258,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     private void updateCardsToDownload(String itemText) {
         selectedSetCodes.clear();
-        boolean tokens = false;
         switch (itemText) {
-            case ALL_CARDS:
+            case ALL_IMAGES:
                 if (cardImageSource.getSupportedSets() == null) {
                     selectedSetCodes = cardImageSource.getSupportedSets();
                 } else {
                     selectedSetCodes.addAll(cardImageSource.getSupportedSets());
                 }
                 break;
-            case ALL_STANDARD_CARDS:
+            case ALL_STANDARD_IMAGES:
                 List<String> standardSets = ConstructedFormats.getSetsByFormat(ConstructedFormats.STANDARD);
                 for (String setCode : cardImageSource.getSupportedSets()) {
                     if (standardSets.contains(setCode)) {
@@ -276,9 +275,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         logger.debug("Set code " + setCode + " from download source " + cardImageSource.getSourceName());
                     }
                 }
-                break;
-            case ALL_TOKENS:
-                tokens = true;
                 break;
             default:
                 int nonSetEntries = 0;
@@ -291,19 +287,24 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 selectedSetCodes.add(cardImageSource.getSupportedSets().get(jComboBoxSet.getSelectedIndex() - nonSetEntries));
         }
         cardsToDownload.clear();
+        int numberTokenImagesAvailable = 0;
+        int numberCardImagesAvailable = 0;
         for (CardDownloadData data : allCardsMissingImage) {
-            if ((data.isToken() && tokens)
-                    || (!data.isToken() && selectedSetCodes != null && selectedSetCodes.contains(data.getSet()))) {
-                if (cardImageSource.isSetSupportedComplete(data.getSet()) || cardImageSource.isImageProvided(data.getSet(), data.getName())) {
+            if (data.isToken() && cardImageSource.isTokenSource()) {
+                if (cardImageSource.isImageProvided(data.getSet(), data.getName())) {
+                    numberTokenImagesAvailable++;
                     cardsToDownload.add(data);
+                }
+            } else {
+                if (selectedSetCodes != null && selectedSetCodes.contains(data.getSet())) {
+                    if (cardImageSource.isSetSupportedComplete(data.getSet()) || cardImageSource.isImageProvided(data.getSet(), data.getName())) {
+                        numberCardImagesAvailable++;
+                        cardsToDownload.add(data);
+                    }
                 }
             }
         }
-        int numberTokenImagesAvailable = 0;
-        if (tokens) {
-            cardImageSource.getTokenImages();
-        }
-        updateProgressText(cardsToDownload.size() + numberTokenImagesAvailable);
+        updateProgressText(numberCardImagesAvailable, numberTokenImagesAvailable);
     }
 
     private void comboBoxSetItemSelected(ItemEvent event) {
@@ -311,7 +312,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         updateCardsToDownload(event.getItem().toString());
     }
 
-    private void updateProgressText(int cardCount) {
+    private void updateProgressText(int cardCount, int tokenCount) {
         missingTokens = 0;
         for (CardDownloadData card : allCardsMissingImage) {
             if (card.isToken()) {
@@ -320,10 +321,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         }
         missingCards = allCardsMissingImage.size() - missingTokens;
         jLabelAllMissing.setText("Missing: " + missingCards + " card images / " + missingTokens + " token images");
-
-        float mb = (cardCount * cardImageSource.getAverageSize()) / 1024;
-        bar.setString(String.format(cardIndex == cardCount ? "%d of %d image downloads finished! Please close!"
-                : "%d of %d image downloads finished! Please wait! [%.1f Mb]", 0, cardCount, mb));
+        int imageSum = cardCount + tokenCount;
+        float mb = (imageSum * cardImageSource.getAverageSize()) / 1024;
+        bar.setString(String.format(cardIndex == imageSum ? "%d of %d (%d cards/%d tokens) image downloads finished! Please close!"
+                : "%d of %d (%d cards/%d tokens) image downloads finished! Please wait! [%.1f Mb]", 0, imageSum, cardCount, tokenCount, mb));
     }
 
     private static String createDownloadName(CardInfo card) {
