@@ -78,6 +78,6 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return (enrage ? "<i>Enrage</i> - " : "") + "Whenever {this} is dealt damage, " + super.getRule();
+        return (enrage ? "<i>Enrage</i> &mdash; " : "") + "Whenever {this} is dealt damage, " + super.getRule();
     }
 }
