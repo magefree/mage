@@ -143,6 +143,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Skittering Heartstopper", 122, Rarity.COMMON, mage.cards.s.SkitteringHeartstopper.class));
         cards.add(new SetCardInfo("Sleek Schooner", 247, Rarity.UNCOMMON, mage.cards.s.SleekSchooner.class));
         cards.add(new SetCardInfo("Slice in Twain", 207, Rarity.UNCOMMON, mage.cards.s.SliceinTwain.class));
+        cards.add(new SetCardInfo("Snapping Sailback", 208, Rarity.UNCOMMON, mage.cards.s.SnappingSailback.class));
         cards.add(new SetCardInfo("Sorcerous Spyglass", 248, Rarity.RARE, mage.cards.s.SorcerousSpyglass.class));
         cards.add(new SetCardInfo("Spell Pierce", 81, Rarity.RARE, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Spires of Orazca", 249, Rarity.RARE, mage.cards.s.SpiresOfOrazca.class));
