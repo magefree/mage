@@ -25,10 +25,8 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
-import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
@@ -43,8 +41,6 @@ import mage.game.Game;
  */
 public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
 
-    private final Condition condition;
-
     public ActivateIfConditionActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
         this.condition = condition;
@@ -52,31 +48,11 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
 
     public ActivateIfConditionActivatedAbility(ActivateIfConditionActivatedAbility ability) {
         super(ability);
-        this.condition = ability.condition;
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (condition.apply(game, this)) {
-            return super.canActivate(playerId, game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (canActivate(this.controllerId, game)) {
-            return super.activate(game, noMana);
-        }
-        return false;
     }
 
     @Override
     public boolean resolve(Game game) {
-        if (super.resolve(game)) {
-            return true;
-        }
-        return false;
+        return super.resolve(game);
     }
 
     @Override
@@ -88,15 +64,15 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
             sb.append(" Activate this ability only ");
         }
         if (condition.toString() != null) {
-            if (!condition.toString().startsWith("during") &&
-                !condition.toString().startsWith("before")) {
+            if (!condition.toString().startsWith("during")
+                    && !condition.toString().startsWith("before")) {
                 sb.append("if ");
             }
             sb.append(condition.toString()).append('.');
         } else {
             sb.append(" [Condition toString() == null] ");
         }
-        return sb.toString() ;
+        return sb.toString();
     }
 
     @Override
