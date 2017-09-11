@@ -73,7 +73,7 @@ public class IconicMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Doomed Traveler", 16, Rarity.COMMON, mage.cards.d.DoomedTraveler.class));
         cards.add(new SetCardInfo("Dragon Bell Monk", 17, Rarity.COMMON, mage.cards.d.DragonBellMonk.class));
         cards.add(new SetCardInfo("Elesh Norn, Grand Cenobite", 18, Rarity.MYTHIC, mage.cards.e.EleshNornGrandCenobite.class));
-        cards.add(new SetCardInfo("Emerge Unscathed", 19, Rarity.UNCOMMON, mage.cards.e.EmergeUnscathed.class));
+        cards.add(new SetCardInfo("Emerge Unscathed", 19, Rarity.COMMON, mage.cards.e.EmergeUnscathed.class));
         cards.add(new SetCardInfo("Emeria Angel", 20, Rarity.RARE, mage.cards.e.EmeriaAngel.class));
         cards.add(new SetCardInfo("Great Teacher's Decree", 21, Rarity.UNCOMMON, mage.cards.g.GreatTeachersDecree.class));
         cards.add(new SetCardInfo("Guard Duty", 22, Rarity.COMMON, mage.cards.g.GuardDuty.class));
@@ -106,7 +106,7 @@ public class IconicMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Day of the Dragons", 49, Rarity.RARE, mage.cards.d.DayOfTheDragons.class));
         cards.add(new SetCardInfo("Diminish", 50, Rarity.COMMON, mage.cards.d.Diminish.class));
         cards.add(new SetCardInfo("Dissolve", 51, Rarity.COMMON, mage.cards.d.Dissolve.class));
-        cards.add(new SetCardInfo("Distortion Strike", 52, Rarity.COMMON, mage.cards.d.DistortionStrike.class));
+        cards.add(new SetCardInfo("Distortion Strike", 52, Rarity.UNCOMMON, mage.cards.d.DistortionStrike.class));
         cards.add(new SetCardInfo("Doorkeeper", 53, Rarity.COMMON, mage.cards.d.Doorkeeper.class));
         cards.add(new SetCardInfo("Elusive Spellfist", 54, Rarity.COMMON, mage.cards.e.ElusiveSpellfist.class));
         cards.add(new SetCardInfo("Flusterstorm", 55, Rarity.RARE, mage.cards.f.Flusterstorm.class));
@@ -167,7 +167,7 @@ public class IconicMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Thoughtseize", 110, Rarity.RARE, mage.cards.t.Thoughtseize.class));
         cards.add(new SetCardInfo("Thrill-Kill Assassin", 111, Rarity.COMMON, mage.cards.t.ThrillKillAssassin.class));
         cards.add(new SetCardInfo("Virulent Swipe", 112, Rarity.COMMON, mage.cards.v.VirulentSwipe.class));
-        cards.add(new SetCardInfo("Wight of Precinct Six", 113, Rarity.UNCOMMON, mage.cards.w.WightOfPrecinctSix.class));
+        cards.add(new SetCardInfo("Wight of Precinct Six", 113, Rarity.COMMON, mage.cards.w.WightOfPrecinctSix.class));
         cards.add(new SetCardInfo("Ulcerate", 114, Rarity.UNCOMMON, mage.cards.u.Ulcerate.class));
         cards.add(new SetCardInfo("Wrench Mind", 115, Rarity.COMMON, mage.cards.w.WrenchMind.class));
         cards.add(new SetCardInfo("Anger of the Gods", 116, Rarity.RARE, mage.cards.a.AngerOfTheGods.class));
@@ -201,7 +201,7 @@ public class IconicMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Ryusei, the Falling Star", 144, Rarity.RARE, mage.cards.r.RyuseiTheFallingStar.class));
         cards.add(new SetCardInfo("Scourge of Valkas", 145, Rarity.RARE, mage.cards.s.ScourgeOfValkas.class));
         cards.add(new SetCardInfo("Splatter Thug", 146, Rarity.COMMON, mage.cards.s.SplatterThug.class));
-        cards.add(new SetCardInfo("Staggershock", 147, Rarity.COMMON, mage.cards.s.Staggershock.class));
+        cards.add(new SetCardInfo("Staggershock", 147, Rarity.UNCOMMON, mage.cards.s.Staggershock.class));
         cards.add(new SetCardInfo("Surreal Memoir", 148, Rarity.UNCOMMON, mage.cards.s.SurrealMemoir.class));
         cards.add(new SetCardInfo("Thundermaw Hellkite", 149, Rarity.MYTHIC, mage.cards.t.ThundermawHellkite.class));
         cards.add(new SetCardInfo("Tormenting Voice", 150, Rarity.COMMON, mage.cards.t.TormentingVoice.class));
