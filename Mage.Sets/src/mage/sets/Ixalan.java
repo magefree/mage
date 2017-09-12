@@ -62,6 +62,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Deeproot Waters", 51, Rarity.UNCOMMON, mage.cards.d.DeeprootWaters.class));
         cards.add(new SetCardInfo("Dinosaur Stampede", 140, Rarity.UNCOMMON, mage.cards.d.DinosaurStampede.class));
         cards.add(new SetCardInfo("Dire Fleet Captain", 221, Rarity.UNCOMMON, mage.cards.d.DireFleetCaptain.class));
+        cards.add(new SetCardInfo("Dowsing Dagger", 235, Rarity.RARE, mage.cards.d.DowsingDagger.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 252, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dreamcaller Siren", 54, Rarity.RARE, mage.cards.d.DreamcallerSiren.class));
         cards.add(new SetCardInfo("Drover of the Mighty", 187, Rarity.UNCOMMON, mage.cards.d.DroverOfTheMighty.class));
@@ -101,6 +102,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Legion Conquistador", 20, Rarity.COMMON, mage.cards.l.LegionConquistador.class));
         cards.add(new SetCardInfo("Lightning Strike", 149, Rarity.UNCOMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Lookout's Dispersal", 62, Rarity.UNCOMMON, mage.cards.l.LookoutsDispersal.class));
+        cards.add(new SetCardInfo("Lost Vale", 235, Rarity.RARE, mage.cards.l.LostVale.class));
         cards.add(new SetCardInfo("Lurking Chupacabra", 111, Rarity.UNCOMMON, mage.cards.l.LurkingChupacabra.class));
         cards.add(new SetCardInfo("Marauding Looter", 225, Rarity.UNCOMMON, mage.cards.m.MaraudingLooter.class));
         cards.add(new SetCardInfo("Mavren Fein, Dusk Apostle", 24, Rarity.RARE, mage.cards.m.MavrenFeinDuskApostle.class));
