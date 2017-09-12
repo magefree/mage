@@ -30,7 +30,6 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effects;
@@ -70,8 +69,6 @@ public class WellOfKnowledge extends CardImpl {
 }
 
 class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
-
-    private final Condition condition;
 
     public WellOfKnowledgeConditionalActivatedAbility() {
         super(Zone.BATTLEFIELD, new WellOfKnowledgeEffect(), new GenericManaCost(2));

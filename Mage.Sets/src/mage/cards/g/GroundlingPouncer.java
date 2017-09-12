@@ -65,7 +65,7 @@ public class GroundlingPouncer extends CardImpl {
     }
 
     public GroundlingPouncer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G/U}");
         this.subtype.add(SubType.FAERIE);
 
         this.power = new MageInt(2);
@@ -97,7 +97,6 @@ class GroundlingPouncerAbility extends LimitedTimesPerTurnActivatedAbility {
 
     private static final Effects emptyEffects = new Effects();
 
-    private final Condition condition;
     private final String ruleText;
 
     public GroundlingPouncerAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
@@ -108,7 +107,6 @@ class GroundlingPouncerAbility extends LimitedTimesPerTurnActivatedAbility {
 
     public GroundlingPouncerAbility(GroundlingPouncerAbility ability) {
         super(ability);
-        this.condition = ability.condition;
         this.ruleText = ability.ruleText;
     }
 
@@ -118,14 +116,6 @@ class GroundlingPouncerAbility extends LimitedTimesPerTurnActivatedAbility {
             return emptyEffects;
         }
         return super.getEffects(game, effectType);
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (!condition.apply(game, this)) {
-            return false;
-        }
-        return super.canActivate(playerId, game);
     }
 
     @Override
