@@ -275,7 +275,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         return checkPlayableMode;
     }
 
-    private boolean hasMoreActivationsThisTurn(Game game) {
+    protected boolean hasMoreActivationsThisTurn(Game game) {
         ActivationInfo activationInfo = getActivationInfo(game);
         return activationInfo == null || activationInfo.turnNum != game.getTurnNum() || activationInfo.activationCounter < maxActivationsPerTurn;
     }
@@ -305,8 +305,8 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     private ActivationInfo getActivationInfo(Game game) {
-        Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsTurn", sourceId, game));
-        Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsCount", sourceId, game));
+        Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsTurn" + originalId, sourceId, game));
+        Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsCount" + originalId, sourceId, game));
         if (turnNum == null || activationCount == null) {
             return null;
         }
@@ -314,7 +314,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     private void setActivationInfo(ActivationInfo activationInfo, Game game) {
-        game.getState().setValue(CardUtil.getCardZoneString("activationsTurn", sourceId, game), activationInfo.turnNum);
-        game.getState().setValue(CardUtil.getCardZoneString("activationsCount", sourceId, game), activationInfo.activationCounter);
+        game.getState().setValue(CardUtil.getCardZoneString("activationsTurn" + originalId, sourceId, game), activationInfo.turnNum);
+        game.getState().setValue(CardUtil.getCardZoneString("activationsCount" + originalId, sourceId, game), activationInfo.activationCounter);
     }
 }

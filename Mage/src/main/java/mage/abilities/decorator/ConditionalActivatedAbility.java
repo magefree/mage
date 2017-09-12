@@ -4,7 +4,6 @@
  */
 package mage.abilities.decorator;
 
-import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -24,7 +23,6 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     private static final Effects emptyEffects = new Effects();
 
-    private final Condition condition;
     private String ruleText = null;
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
@@ -62,14 +60,6 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
             return emptyEffects;
         }
         return super.getEffects(game, effectType);
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (!condition.apply(game, this)) {
-            return false;
-        }
-        return super.canActivate(playerId, game);
     }
 
     @Override
