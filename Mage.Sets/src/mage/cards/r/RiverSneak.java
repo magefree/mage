@@ -25,45 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DrawCardControllerTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.LoseLifeOpponentsEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class PsychosisCrawler extends CardImpl {
+public class RiverSneak extends CardImpl {
 
-    public PsychosisCrawler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.subtype.add(SubType.HORROR);
+    private static final FilterPermanent filter = new FilterPermanent("another Merfolk");
 
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Duration.EndOfGame)));
-        this.addAbility(new DrawCardControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
+    static {
+        filter.add(new AnotherPredicate());
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new SubtypePredicate(SubType.MERFOLK));
     }
 
-    public PsychosisCrawler(final PsychosisCrawler card) {
+    public RiverSneak(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
+
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WARRIOR);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // River Sneak can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
+
+        // Whenever another Merfolk enters the battlefield under your control, River sneak gets +1/+1 until end of turn.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter, false, null, true));
+    }
+
+    public RiverSneak(final RiverSneak card) {
         super(card);
     }
 
     @Override
-    public PsychosisCrawler copy() {
-        return new PsychosisCrawler(this);
+    public RiverSneak copy() {
+        return new RiverSneak(this);
     }
 }
