@@ -49,6 +49,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Captain Lannery Storm", 136, Rarity.RARE, mage.cards.c.CaptainLanneryStorm.class));
         cards.add(new SetCardInfo("Carnage Tyrant", 179, Rarity.MYTHIC, mage.cards.c.CarnageTyrant.class));
         cards.add(new SetCardInfo("Castaway's Despair", 281, Rarity.COMMON, mage.cards.c.CastawaysDespair.class));
+        cards.add(new SetCardInfo("Charging Monstrosaur", 138, Rarity.UNCOMMON, mage.cards.c.ChargingMonstrosaur.class));
         cards.add(new SetCardInfo("Chart a Course", 48, Rarity.UNCOMMON, mage.cards.c.ChartACourse.class));
         cards.add(new SetCardInfo("Commune with Dinosaurs", 181, Rarity.COMMON, mage.cards.c.CommuneWithDinosaurs.class));
         cards.add(new SetCardInfo("Conqueror's Foothold", 234, Rarity.RARE, mage.cards.c.ConquerorsFoothold.class));
@@ -106,6 +107,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Lookout's Dispersal", 62, Rarity.UNCOMMON, mage.cards.l.LookoutsDispersal.class));
         cards.add(new SetCardInfo("Lost Vale", 235, Rarity.RARE, mage.cards.l.LostVale.class));
         cards.add(new SetCardInfo("Lurking Chupacabra", 111, Rarity.UNCOMMON, mage.cards.l.LurkingChupacabra.class));
+        cards.add(new SetCardInfo("Makeshift Munitions", 151, Rarity.UNCOMMON, mage.cards.m.MakeshiftMunitions.class));
         cards.add(new SetCardInfo("Marauding Looter", 225, Rarity.UNCOMMON, mage.cards.m.MaraudingLooter.class));
         cards.add(new SetCardInfo("Mavren Fein, Dusk Apostle", 24, Rarity.RARE, mage.cards.m.MavrenFeinDuskApostle.class));
         cards.add(new SetCardInfo("Merfolk Branchwalker", 197, Rarity.UNCOMMON, mage.cards.m.MerfolkBranchwalker.class));
