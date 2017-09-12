@@ -25,45 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DrawCardControllerTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.LoseLifeOpponentsEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class PsychosisCrawler extends CardImpl {
+public class MakeshiftMunitions extends CardImpl {
 
-    public PsychosisCrawler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.subtype.add(SubType.HORROR);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature you control");
 
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Duration.EndOfGame)));
-        this.addAbility(new DrawCardControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE)
+        ));
     }
 
-    public PsychosisCrawler(final PsychosisCrawler card) {
+    public MakeshiftMunitions(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+
+        // {1}, Sacrifice an artifact or creature: Makeshift Munitions deals 1 damage to target creature or player.
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new DamageTargetEffect(1),
+                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+        );
+        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addCost(new GenericManaCost(1));
+        this.addAbility(ability);
+    }
+
+    public MakeshiftMunitions(final MakeshiftMunitions card) {
         super(card);
     }
 
     @Override
-    public PsychosisCrawler copy() {
-        return new PsychosisCrawler(this);
+    public MakeshiftMunitions copy() {
+        return new MakeshiftMunitions(this);
     }
 }

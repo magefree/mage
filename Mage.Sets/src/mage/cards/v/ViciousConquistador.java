@@ -25,45 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DrawCardControllerTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class PsychosisCrawler extends CardImpl {
+public class ViciousConquistador extends CardImpl {
 
-    public PsychosisCrawler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.subtype.add(SubType.HORROR);
+    public ViciousConquistador(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
 
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.SOLDIER);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Duration.EndOfGame)));
-        this.addAbility(new DrawCardControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
+        // Whenever Vicious Conquistador attacks, each opponent loses 1 life.
+        this.addAbility(new AttacksTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
     }
 
-    public PsychosisCrawler(final PsychosisCrawler card) {
+    public ViciousConquistador(final ViciousConquistador card) {
         super(card);
     }
 
     @Override
-    public PsychosisCrawler copy() {
-        return new PsychosisCrawler(this);
+    public ViciousConquistador copy() {
+        return new ViciousConquistador(this);
     }
 }

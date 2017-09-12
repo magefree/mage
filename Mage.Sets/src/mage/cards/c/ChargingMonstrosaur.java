@@ -25,45 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DrawCardControllerTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.LoseLifeOpponentsEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.constants.SubType;
+import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class PsychosisCrawler extends CardImpl {
+public class ChargingMonstrosaur extends CardImpl {
 
-    public PsychosisCrawler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.subtype.add(SubType.HORROR);
+    public ChargingMonstrosaur(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
 
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Duration.EndOfGame)));
-        this.addAbility(new DrawCardControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+
     }
 
-    public PsychosisCrawler(final PsychosisCrawler card) {
+    public ChargingMonstrosaur(final ChargingMonstrosaur card) {
         super(card);
     }
 
     @Override
-    public PsychosisCrawler copy() {
-        return new PsychosisCrawler(this);
+    public ChargingMonstrosaur copy() {
+        return new ChargingMonstrosaur(this);
     }
 }

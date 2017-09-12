@@ -25,45 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DrawCardControllerTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.LoseLifeOpponentsEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.condition.common.SourceAttackingCondition;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.IndestructibleAbility;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class PsychosisCrawler extends CardImpl {
+public class AdantoVanguard extends CardImpl {
 
-    public PsychosisCrawler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.subtype.add(SubType.HORROR);
+    public AdantoVanguard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.SOLDIER);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Duration.EndOfGame)));
-        this.addAbility(new DrawCardControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
+        // As long as Adanto Vanguard is attacking, it gets +2/+0.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
+                SourceAttackingCondition.instance,
+                "As long as {this} is attacking, it gets +2/+0"
+        )));
+
+        // Pay 4 life: Adanto Vanguard gains indestructible until end of turn.
+        this.addAbility(new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
+                new PayLifeCost(4)
+        ));
+
     }
 
-    public PsychosisCrawler(final PsychosisCrawler card) {
+    public AdantoVanguard(final AdantoVanguard card) {
         super(card);
     }
 
     @Override
-    public PsychosisCrawler copy() {
-        return new PsychosisCrawler(this);
+    public AdantoVanguard copy() {
+        return new AdantoVanguard(this);
     }
 }
