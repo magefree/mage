@@ -25,40 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 
 /**
  *
- * @author maurer.it_at_gmail.com
+ * @author TheElk801
  */
-public class PulseTracker extends CardImpl {
+public class ViciousConquistador extends CardImpl {
 
-    public PulseTracker(UUID ownerId, CardSetInfo setInfo) {
+    public ViciousConquistador(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
+
         this.subtype.add(SubType.VAMPIRE);
-        this.subtype.add(SubType.ROGUE);
-
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(2);
 
+        // Whenever Vicious Conquistador attacks, each opponent loses 1 life.
         this.addAbility(new AttacksTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
     }
 
-    public PulseTracker(final PulseTracker card) {
+    public ViciousConquistador(final ViciousConquistador card) {
         super(card);
     }
 
     @Override
-    public PulseTracker copy() {
-        return new PulseTracker(this);
+    public ViciousConquistador copy() {
+        return new ViciousConquistador(this);
     }
 }
