@@ -50,7 +50,6 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     public ConditionalActivatedAbility(final ConditionalActivatedAbility ability) {
         super(ability);
-        this.condition = ability.condition;
         this.ruleText = ability.ruleText;
     }
 

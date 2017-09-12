@@ -29,16 +29,18 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -55,7 +57,7 @@ import mage.players.Player;
 public class CruelDeceiver extends CardImpl {
 
     public CruelDeceiver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(2);
@@ -82,7 +84,7 @@ class CruelDeceiverEffect extends OneShotEffect {
 
     public CruelDeceiverEffect() {
         super(Outcome.AddAbility);
-        this.staticText = "Reveal the top card of your library. If it's a land card, {this} gets +2/+2 and gains trample until end of turn";
+        this.staticText = "Reveal the top card of your library. If it's a land card, Cruel Deceiver gains \"Whenever Cruel Deceiver deals damage to a creature, destroy that creature\" until end of turn";
     }
 
     public CruelDeceiverEffect(final CruelDeceiverEffect effect) {
@@ -96,15 +98,18 @@ class CruelDeceiverEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             Cards cards = new CardsImpl();
-            Card card = player.getLibrary().getFromTop(game);
-            cards.add(card);
-            player.revealCards("Cruel Deceiver", cards, game);
-            if (card != null && card.isLand()) {
-                game.addEffect(new BoostSourceEffect(2,2,Duration.EndOfTurn), source);
-                game.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(),Duration.EndOfTurn), source);
+            Card card = controller.getLibrary().getFromTop(game);
+            if (card != null) {
+                cards.add(card);
+                controller.revealCards(sourceObject.getIdName(), cards, game);
+                if (card.isLand()) {
+                    game.addEffect(new BoostSourceEffect(1, 0, Duration.EndOfTurn), source);
+                    game.addEffect(new GainAbilitySourceEffect(new DealsDamageToACreatureTriggeredAbility(new DestroyTargetEffect(true), false, false, true), Duration.EndOfTurn), source);
+                }
             }
             return true;
         }

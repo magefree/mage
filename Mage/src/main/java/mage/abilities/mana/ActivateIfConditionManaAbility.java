@@ -50,7 +50,6 @@ public class ActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
 
     public ActivateIfConditionManaAbility(ActivateIfConditionManaAbility ability) {
         super(ability);
-        this.condition = ability.condition;
     }
 
     @Override
