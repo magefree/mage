@@ -106,6 +106,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Legion Conquistador", 20, Rarity.COMMON, mage.cards.l.LegionConquistador.class));
         cards.add(new SetCardInfo("Legion's Landing", 22, Rarity.RARE, mage.cards.l.LegionsLanding.class));
         cards.add(new SetCardInfo("Lightning Strike", 149, Rarity.UNCOMMON, mage.cards.l.LightningStrike.class));
+        cards.add(new SetCardInfo("Lightning-Rig Crew", 150, Rarity.UNCOMMON, mage.cards.l.LightningRigCrew.class));
         cards.add(new SetCardInfo("Lookout's Dispersal", 62, Rarity.UNCOMMON, mage.cards.l.LookoutsDispersal.class));
         cards.add(new SetCardInfo("Lost Vale", 235, Rarity.RARE, mage.cards.l.LostVale.class));
         cards.add(new SetCardInfo("Lurking Chupacabra", 111, Rarity.UNCOMMON, mage.cards.l.LurkingChupacabra.class));
