@@ -650,12 +650,12 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Set the commanderId of the player
      *
-     * @param commandersIds
+     * @param commanderId
      */
     void addCommanderId(UUID commanderId);
 
     /**
-     * Get the commanderId of the player
+     * Get the commanderIds of the player
      *
      * @return
      */

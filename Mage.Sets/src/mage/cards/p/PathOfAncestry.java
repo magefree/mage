@@ -29,6 +29,7 @@ package mage.cards.p;
 
 import java.util.Iterator;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -44,6 +45,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
+import mage.players.Player;
 
 /**
  *
@@ -105,19 +107,24 @@ class PathOfAncestryTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getData().equals(abilityOriginalId)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.isCreature()) {
-                Iterator<SubType> spellSubs = spell.getSubtype(game).iterator();
-                while (spellSubs.hasNext()) {
-                    SubType sType = spellSubs.next();
-                    if (sType.getSubTypeSet() == SubTypeSet.CreatureType) {
-                        for (UUID cmdr : game.getPlayer(spell.getControllerId()).getCommandersIds()) {
-                            if (game.getObject(cmdr).getSubtype(game).contains(sType)) {
-                                return true;
+                Player controller = game.getPlayer(getControllerId());
+                if (controller != null && controller.getCommandersIds() != null && !controller.getCommandersIds().isEmpty()) {
+                    Iterator<SubType> spellSubs = spell.getSubtype(game).iterator();
+                    while (spellSubs.hasNext()) {
+                        SubType sType = spellSubs.next();
+                        if (sType.getSubTypeSet() == SubTypeSet.CreatureType) {
+                            for (UUID cmdr : controller.getCommandersIds()) {
+                                MageObject commander = game.getObject(cmdr);
+                                if (commander != null && commander.getSubtype(game).contains(sType)) {
+                                    return true;
+                                }
                             }
                         }
                     }
                 }
             }
         }
+
         return false;
     }
 
