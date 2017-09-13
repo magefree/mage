@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -45,16 +44,17 @@ import mage.constants.SubType;
  */
 public class TempleGarden extends CardImpl {
 
-    public TempleGarden (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+    public TempleGarden(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
         this.subtype.add(SubType.FOREST);
         this.subtype.add(SubType.PLAINS);
+
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
     }
 
-    public TempleGarden (final TempleGarden card) {
+    public TempleGarden(final TempleGarden card) {
         super(card);
     }
 
