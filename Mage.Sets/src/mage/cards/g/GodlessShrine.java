@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -45,16 +44,17 @@ import mage.constants.SubType;
  */
 public class GodlessShrine extends CardImpl {
 
-    public GodlessShrine (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+    public GodlessShrine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
         this.subtype.add(SubType.PLAINS);
         this.subtype.add(SubType.SWAMP);
+
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, Godless Shrine enters the battlefield tapped"));
     }
 
-    public GodlessShrine (final GodlessShrine card) {
+    public GodlessShrine(final GodlessShrine card) {
         super(card);
     }
 

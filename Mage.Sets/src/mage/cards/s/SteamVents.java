@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -45,16 +44,17 @@ import mage.constants.SubType;
  */
 public class SteamVents extends CardImpl {
 
-    public SteamVents (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+    public SteamVents(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
         this.subtype.add(SubType.ISLAND);
         this.subtype.add(SubType.MOUNTAIN);
+
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, Steam Vents enters the battlefield tapped"));
     }
 
-    public SteamVents (final SteamVents card) {
+    public SteamVents(final SteamVents card) {
         super(card);
     }
 

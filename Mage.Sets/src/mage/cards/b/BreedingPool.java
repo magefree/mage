@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.b;
 
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -46,15 +45,16 @@ import java.util.UUID;
  */
 public class BreedingPool extends CardImpl {
 
-    public BreedingPool (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+    public BreedingPool(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
         this.subtype.add(SubType.FOREST, SubType.ISLAND);
+
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, Breeding Pool enters the battlefield tapped"));
     }
 
-    public BreedingPool (final BreedingPool card) {
+    public BreedingPool(final BreedingPool card) {
         super(card);
     }
 
