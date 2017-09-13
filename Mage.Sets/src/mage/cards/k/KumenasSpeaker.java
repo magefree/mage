@@ -50,13 +50,10 @@ public class KumenasSpeaker extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another Merfolk or an Island");
 
     static {
+        filter.add(new AnotherPredicate());
         filter.add(Predicates.or(
                 new SubtypePredicate(SubType.ISLAND),
-                Predicates.and(
-                        new SubtypePredicate(SubType.MERFOLK),
-                        new AnotherPredicate()
-                )
-        ));
+                new SubtypePredicate(SubType.MERFOLK)));
     }
 
     public KumenasSpeaker(UUID ownerId, CardSetInfo setInfo) {
