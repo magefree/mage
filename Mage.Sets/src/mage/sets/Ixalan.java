@@ -48,6 +48,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Burning Sun's Avatar", 135, Rarity.RARE, mage.cards.b.BurningSunsAvatar.class));
         cards.add(new SetCardInfo("Call to the Feast", 219, Rarity.UNCOMMON, mage.cards.c.CallToTheFeast.class));
         cards.add(new SetCardInfo("Captain Lannery Storm", 136, Rarity.RARE, mage.cards.c.CaptainLanneryStorm.class));
+        cards.add(new SetCardInfo("Captivating Crew", 137, Rarity.RARE, mage.cards.c.CaptivatingCrew.class));
         cards.add(new SetCardInfo("Carnage Tyrant", 179, Rarity.MYTHIC, mage.cards.c.CarnageTyrant.class));
         cards.add(new SetCardInfo("Castaway's Despair", 281, Rarity.COMMON, mage.cards.c.CastawaysDespair.class));
         cards.add(new SetCardInfo("Charging Monstrosaur", 138, Rarity.UNCOMMON, mage.cards.c.ChargingMonstrosaur.class));
