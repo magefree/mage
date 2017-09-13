@@ -25,21 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.l;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.DiscardsACardOpponentTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.targetpointer.FixedTarget;
+import mage.constants.SetTargetPointer;
 
 /**
  *
@@ -48,11 +42,10 @@ import mage.target.targetpointer.FixedTarget;
 public class LilianasCaress extends CardImpl {
 
     public LilianasCaress(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // Whenever an opponent discards a card, that player loses 2 life.
-        this.addAbility(new LilianasCaressAbility());
+        this.addAbility(new DiscardsACardOpponentTriggeredAbility(new LoseLifeTargetEffect(2), false, SetTargetPointer.PLAYER));
     }
 
     public LilianasCaress(final LilianasCaress card) {
@@ -62,44 +55,6 @@ public class LilianasCaress extends CardImpl {
     @Override
     public LilianasCaress copy() {
         return new LilianasCaress(this);
-    }
-
-}
-
-class LilianasCaressAbility extends TriggeredAbilityImpl {
-
-    public LilianasCaressAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), false);
-    }
-
-    public LilianasCaressAbility(final LilianasCaressAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LilianasCaressAbility copy() {
-        return new LilianasCaressAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DISCARDED_CARD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent discards a card, that player loses 2 life.";
     }
 
 }
