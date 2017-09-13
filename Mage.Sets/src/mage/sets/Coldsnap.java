@@ -106,6 +106,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Jester's Scepter", 137, Rarity.RARE, mage.cards.j.JestersScepter.class));
         cards.add(new SetCardInfo("Jokulmorder", 37, Rarity.RARE, mage.cards.j.Jokulmorder.class));
         cards.add(new SetCardInfo("Jotun Grunt", 8, Rarity.UNCOMMON, mage.cards.j.JotunGrunt.class));
+        cards.add(new SetCardInfo("Jotun Owl Keeper", 9, Rarity.UNCOMMON, mage.cards.j.JotunOwlKeeper.class));
         cards.add(new SetCardInfo("Juniper Order Ranger", 130, Rarity.UNCOMMON, mage.cards.j.JuniperOrderRanger.class));
         cards.add(new SetCardInfo("Karplusan Strider", 112, Rarity.UNCOMMON, mage.cards.k.KarplusanStrider.class));
         cards.add(new SetCardInfo("Karplusan Wolverine", 87, Rarity.COMMON, mage.cards.k.KarplusanWolverine.class));
