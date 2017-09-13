@@ -58,6 +58,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Adarkar Windform", 26, Rarity.UNCOMMON, mage.cards.a.AdarkarWindform.class));
         cards.add(new SetCardInfo("Allosaurus Rider", 101, Rarity.RARE, mage.cards.a.AllosaurusRider.class));
         cards.add(new SetCardInfo("Arctic Flats", 143, Rarity.UNCOMMON, mage.cards.a.ArcticFlats.class));
+        cards.add(new SetCardInfo("Arctic Nishoba", 102, Rarity.UNCOMMON, mage.cards.a.ArcticNishoba.class));
         cards.add(new SetCardInfo("Arcum Dagsson", 27, Rarity.RARE, mage.cards.a.ArcumDagsson.class));
         cards.add(new SetCardInfo("Aurochs Herd", 103, Rarity.COMMON, mage.cards.a.AurochsHerd.class));
         cards.add(new SetCardInfo("Balduvian Rage", 76, Rarity.UNCOMMON, mage.cards.b.BalduvianRage.class));
