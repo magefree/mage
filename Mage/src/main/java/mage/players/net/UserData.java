@@ -75,7 +75,7 @@ public class UserData implements Serializable {
         this.autoOrderTrigger = userData.autoOrderTrigger;
         this.useFirstManaAbility = userData.useFirstManaAbility;
         this.userIdStr = userData.userIdStr;
-        // todo: why we don't copy user stats here?
+        // todo: why we don't update user stats here? => can't be updated from client side
     }
 
     public static UserData getDefaultUserDataView() {
