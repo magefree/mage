@@ -65,7 +65,7 @@ public class SummitApes extends CardImpl {
 
         // As long as you control a Mountain, Summit Apes has menace. (It can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility()), new PermanentsOnTheBattlefieldCondition(filter), rule)));
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(MenaceAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule)));
     }
 
     public SummitApes(final SummitApes card) {

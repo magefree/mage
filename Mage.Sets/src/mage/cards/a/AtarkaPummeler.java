@@ -63,7 +63,7 @@ public class AtarkaPummeler extends CardImpl {
         // <i>Formidable</i> - {3}{R}{R}: Creatures you control gain menace until end of turn. Activate this ability only if creature you control have total power 8 or greater.  (They can't be blocked except by two or more creatures.)
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
-                new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, filter),
+                new GainAbilityAllEffect(MenaceAbility.getInstance(), Duration.EndOfTurn, filter),
                 new ManaCostsImpl("{3}{R}{R}"),
                 FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);

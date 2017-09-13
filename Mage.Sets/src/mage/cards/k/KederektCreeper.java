@@ -53,7 +53,7 @@ public class KederektCreeper extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
         
         // Menace (This creature can't be blocked except by two or more creatures.)
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
     }
 
     public KederektCreeper(final KederektCreeper card) {

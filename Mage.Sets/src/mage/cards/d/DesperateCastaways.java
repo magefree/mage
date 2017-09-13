@@ -29,38 +29,76 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.MeleeAbility;
-import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.RestrictionEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
+import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author emerald000
+ * @author TheElk801
  */
-public class DeputizedProtester extends CardImpl {
+public class DesperateCastaways extends CardImpl {
 
-    public DeputizedProtester(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+    public DesperateCastaways(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
+
         this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        // Menace
-        this.addAbility(MenaceAbility.getInstance());
-        // Melee
-        this.addAbility(new MeleeAbility());
+        // Desperate Castaways can't attack unless you control an artifact.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DesperateCastawaysEffect()));
     }
 
-    public DeputizedProtester(final DeputizedProtester card) {
+    public DesperateCastaways(final DesperateCastaways card) {
         super(card);
     }
 
     @Override
-    public DeputizedProtester copy() {
-        return new DeputizedProtester(this);
+    public DesperateCastaways copy() {
+        return new DesperateCastaways(this);
+    }
+}
+
+class DesperateCastawaysEffect extends RestrictionEffect {
+
+    public DesperateCastawaysEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "{this} can't attack unless you control an artifact";
+    }
+
+    public DesperateCastawaysEffect(final DesperateCastawaysEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DesperateCastawaysEffect copy() {
+        return new DesperateCastawaysEffect(this);
+    }
+
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            if (game.getBattlefield().countAll(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, source.getControllerId(), game) > 0) {
+                return false;
+            }
+            return true;
+        }  // do not apply to other creatures.
+        return false;
     }
 }

@@ -25,53 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class GatstafRavagers extends CardImpl {
+public class KinjallisCaller extends CardImpl {
 
-    public GatstafRavagers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(5);
-        
-        this.color.setRed(true);
+    private static final FilterCard filter = new FilterCard("Dinosaur spells");
 
-        this.transformable = true;
-        this.nightCard = true;
-
-        // Menace
-        this.addAbility(MenaceAbility.getInstance());
-        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Gatstaf Ravagers.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+    static {
+        filter.add(new SubtypePredicate(SubType.DINOSAUR));
     }
 
-    public GatstafRavagers(final GatstafRavagers card) {
+    public KinjallisCaller(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
+
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.CLERIC);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(3);
+
+        // Dinosaur spells you cast cost {1} less to cast.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+    }
+
+    public KinjallisCaller(final KinjallisCaller card) {
         super(card);
     }
 
     @Override
-    public GatstafRavagers copy() {
-        return new GatstafRavagers(this);
+    public KinjallisCaller copy() {
+        return new KinjallisCaller(this);
     }
 }

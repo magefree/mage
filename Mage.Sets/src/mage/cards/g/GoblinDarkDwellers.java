@@ -72,7 +72,7 @@ public class GoblinDarkDwellers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
         
         // When Goblin Dark-Dwellers enters the battlefield, you may cast target instant or sorcery card with converted mana cost 3 or less
         // from your graveyard without paying its mana cost. If that card would be put into your graveyard this turn, exile it instead.

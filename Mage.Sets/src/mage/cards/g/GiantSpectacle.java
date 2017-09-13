@@ -65,7 +65,7 @@ public class GiantSpectacle extends CardImpl {
 
         // Enchanted creature gets +2/+1 and has menace.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1));
-        Effect effect = new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.AURA);
+        Effect effect = new GainAbilityAttachedEffect(MenaceAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has menace");
         ability.addEffect(effect);
         this.addAbility(ability);

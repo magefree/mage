@@ -71,7 +71,7 @@ public class JangoFett extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
 
         // Haste
         this.addAbility(HasteAbility.getInstance());

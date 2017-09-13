@@ -5,28 +5,35 @@
  */
 package mage.abilities.keyword;
 
+import java.io.ObjectStreamException;
 import mage.abilities.Ability;
-import mage.abilities.StaticAbility;
+import mage.abilities.EvasionAbility;
+import mage.abilities.MageSingleton;
 import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
-import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class MenaceAbility extends StaticAbility {
+public class MenaceAbility extends EvasionAbility implements MageSingleton {
 
-    public MenaceAbility() {
-        super(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2));
+    private static final MenaceAbility instance = new MenaceAbility();
+
+    private Object readResolve() throws ObjectStreamException {
+        return instance;
     }
 
-    public MenaceAbility(final MenaceAbility ability) {
-        super(ability);
+    public static MenaceAbility getInstance() {
+        return instance;
+    }
+
+    private MenaceAbility() {
+        this.addEffect(new CantBeBlockedByOneEffect(2));
     }
 
     @Override
     public Ability copy() {
-        return new MenaceAbility(this);
+        return instance;
     }
 
     @Override

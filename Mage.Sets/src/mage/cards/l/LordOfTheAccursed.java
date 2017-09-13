@@ -65,7 +65,7 @@ public class LordOfTheAccursed extends CardImpl {
     
         //{2}{B}, Tap: All Zombies gain menace until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
-                new MenaceAbility(),
+                MenaceAbility.getInstance(),
                 Duration.EndOfTurn,
                 filter, "All Zombies gains menace until end of turn."),
                 new ManaCostsImpl("{1}{B}"));

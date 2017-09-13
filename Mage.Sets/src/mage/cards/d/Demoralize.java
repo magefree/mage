@@ -52,7 +52,7 @@ public class Demoralize extends CardImpl {
 
 
         // All creatures gain menace until end of turn. (They can't be blocked except by two or more creatures.)
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(MenaceAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
 
         // Threshold — If seven or more cards are in your graveyard, creatures can't block this turn.
         this.getSpellAbility().addEffect(

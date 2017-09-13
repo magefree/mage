@@ -25,53 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.keyword.ExploreSourceEffect;
+import mage.constants.SubType;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class GatstafRavagers extends CardImpl {
+public class BrazenBuccaneers extends CardImpl {
 
-    public GatstafRavagers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(5);
-        
-        this.color.setRed(true);
+    public BrazenBuccaneers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
-        this.transformable = true;
-        this.nightCard = true;
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Menace
-        this.addAbility(MenaceAbility.getInstance());
-        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Gatstaf Ravagers.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+
+        // When Brazen Buccaneers enters the battlefield, it explores.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
-    public GatstafRavagers(final GatstafRavagers card) {
+    public BrazenBuccaneers(final BrazenBuccaneers card) {
         super(card);
     }
 
     @Override
-    public GatstafRavagers copy() {
-        return new GatstafRavagers(this);
+    public BrazenBuccaneers copy() {
+        return new BrazenBuccaneers(this);
     }
 }

@@ -50,7 +50,7 @@ public class ShatterskullRecruit extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
     }
 
     public ShatterskullRecruit(final ShatterskullRecruit card) {

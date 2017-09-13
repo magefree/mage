@@ -25,53 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.constants.Duration;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class GatstafRavagers extends CardImpl {
+public class TilonallisKnight extends CardImpl {
 
-    public GatstafRavagers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(5);
-        
-        this.color.setRed(true);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
-        this.transformable = true;
-        this.nightCard = true;
-
-        // Menace
-        this.addAbility(MenaceAbility.getInstance());
-        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Gatstaf Ravagers.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+    static {
+        filter.add(new SubtypePredicate(SubType.DINOSAUR));
     }
 
-    public GatstafRavagers(final GatstafRavagers card) {
+    public TilonallisKnight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.KNIGHT);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Whenever Tilonalli's Knight attacks, if you control a Dinosaur, Tilonalli's Knight gets +1/+1 until end of turn.
+        Ability ability = new ConditionalTriggeredAbility(
+                new AttacksTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false),
+                new PermanentsOnTheBattlefieldCondition(filter),
+                "Whenever {this} attacks, if you control a Dinosaur, {this} gets +1/+1 until end of turn."
+        );
+        this.addAbility(ability);
+    }
+
+    public TilonallisKnight(final TilonallisKnight card) {
         super(card);
     }
 
     @Override
-    public GatstafRavagers copy() {
-        return new GatstafRavagers(this);
+    public TilonallisKnight copy() {
+        return new TilonallisKnight(this);
     }
 }

@@ -63,7 +63,7 @@ public class RelentlessDead extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
 
         // When Relentless Dead dies, you may pay {B}. If you do, return it to its owner's hand.
         this.addAbility(new DiesTriggeredAbility(new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl("{B}"))));

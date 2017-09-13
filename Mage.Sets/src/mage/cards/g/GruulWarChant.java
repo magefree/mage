@@ -60,7 +60,7 @@ public class GruulWarChant extends CardImpl {
 
 
         // Attacking creatures you control get +1/+0 and have menace. (They can't be blocked except by two or more creatures.)
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(MenaceAbility.getInstance(), Duration.WhileOnBattlefield, filter));
         ability.addEffect(new BoostAllEffect(1,0, Duration.WhileOnBattlefield, filter, false));
         this.addAbility(ability);
     }

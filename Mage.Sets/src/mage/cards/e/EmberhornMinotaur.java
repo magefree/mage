@@ -59,7 +59,7 @@ public class EmberhornMinotaur extends CardImpl {
         Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
         effect.setText("it gets +1/+1");
         BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(effect);
-        effect = new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn);
+        effect = new GainAbilitySourceEffect(MenaceAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains menace until end of turn");
         ability.addEffect(effect);
         this.addAbility(new ExertAbility(ability));

@@ -67,7 +67,7 @@ public class KheruMindEater extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
 
         // Whenever Kheru Mind-Eater deals combat damage to a player, that player exiles a card from his or her hand face down.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new KheruMindEaterExileEffect(), false, true));

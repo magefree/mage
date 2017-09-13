@@ -58,7 +58,7 @@ public class Dreamstealer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
 
         // When Dreamstealer deals combat damage to a player, that player discards that many cards.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DreamstealerDiscardEffect(), false, true));

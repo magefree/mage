@@ -105,7 +105,7 @@ public class ExertTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAbility(playerA, minotaur, new MenaceAbility(), true);
+        assertAbility(playerA, minotaur, MenaceAbility.getInstance(), true);
         assertPowerToughness(playerA, minotaur, 5, 4);
     }
 

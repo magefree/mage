@@ -60,7 +60,7 @@ public class ScroungedScythe extends CardImpl {
 
         // As long as equipped creature is a Human, it has menace.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.EQUIPMENT),
+                new ConditionalContinuousEffect(new GainAbilityAttachedEffect(MenaceAbility.getInstance(), AttachmentType.EQUIPMENT),
                 new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
 
         // Equip {2}

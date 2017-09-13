@@ -60,11 +60,11 @@ public class PurphorossEmissary extends CardImpl {
         this.addAbility(new BestowAbility(this, "{6}{R}"));
         
         // Menace (This creature can't be blocked except by two or more creatures.)
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
         
         // Enchanted creature gets +3/+3 and and has menace.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,3));
-        Effect effect = new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.AURA);
+        Effect effect = new GainAbilityAttachedEffect(MenaceAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has menace");
         ability.addEffect(effect);
         this.addAbility(ability);

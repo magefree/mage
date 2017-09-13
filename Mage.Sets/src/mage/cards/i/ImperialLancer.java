@@ -25,53 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class GatstafRavagers extends CardImpl {
+public class ImperialLancer extends CardImpl {
 
-    public GatstafRavagers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(5);
-        
-        this.color.setRed(true);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Dinosaur");
 
-        this.transformable = true;
-        this.nightCard = true;
-
-        // Menace
-        this.addAbility(MenaceAbility.getInstance());
-        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Gatstaf Ravagers.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+    static {
+        filter.add(new SubtypePredicate(SubType.DINOSAUR));
     }
 
-    public GatstafRavagers(final GatstafRavagers card) {
+    public ImperialLancer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
+
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.KNIGHT);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Imperial Lancer has double strike as long as you control a Dinosaur.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
+                        new PermanentsOnTheBattlefieldCondition(filter), "{this} has double strike as long as you control a Dinosaur")));
+    }
+
+    public ImperialLancer(final ImperialLancer card) {
         super(card);
     }
 
     @Override
-    public GatstafRavagers copy() {
-        return new GatstafRavagers(this);
+    public ImperialLancer copy() {
+        return new ImperialLancer(this);
     }
 }
