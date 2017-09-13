@@ -27,6 +27,11 @@
  */
 package mage.cards;
 
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -47,12 +52,6 @@ import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
-
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -669,7 +668,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void removeCounters(Counter counter, Game game) {
-        removeCounters(counter.getName(), counter.getCount(), game);
+        if (counter != null) {
+            removeCounters(counter.getName(), counter.getCount(), game);
+        }
     }
 
     @Override
