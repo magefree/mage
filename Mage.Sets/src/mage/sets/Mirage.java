@@ -180,6 +180,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Wurm", 122, Rarity.COMMON, mage.cards.j.JungleWurm.class));
         cards.add(new SetCardInfo("Kaervek's Torch", 185, Rarity.COMMON, mage.cards.k.KaerveksTorch.class));
         cards.add(new SetCardInfo("Karoo Meerkat", 123, Rarity.UNCOMMON, mage.cards.k.KarooMeerkat.class));
+        cards.add(new SetCardInfo("Kukemssa Pirates", 71, Rarity.RARE, mage.cards.k.KukemssaPirates.class));
         cards.add(new SetCardInfo("Kukemssa Serpent", 72, Rarity.COMMON, mage.cards.k.KukemssaSerpent.class));
         cards.add(new SetCardInfo("Lead Golem", 271, Rarity.UNCOMMON, mage.cards.l.LeadGolem.class));
         cards.add(new SetCardInfo("Lightning Reflexes", 186, Rarity.COMMON, mage.cards.l.LightningReflexes.class));
