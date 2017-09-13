@@ -64,6 +64,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Arena of the Ancients", 188, Rarity.RARE, mage.cards.a.ArenaOfTheAncients.class));
         cards.add(new SetCardInfo("Ashes to Ashes", 58, Rarity.UNCOMMON, mage.cards.a.AshesToAshes.class));
         cards.add(new SetCardInfo("Astrolabe", 189, Rarity.COMMON, mage.cards.a.Astrolabe.class));
+        cards.add(new SetCardInfo("Axelrod Gunnarson", 143, Rarity.UNCOMMON, mage.cards.a.AxelrodGunnarson.class));
         cards.add(new SetCardInfo("Barktooth Warbeard", 144, Rarity.COMMON, mage.cards.b.BarktoothWarbeard.class));
         cards.add(new SetCardInfo("Barl's Cage", 190, Rarity.RARE, mage.cards.b.BarlsCage.class));
         cards.add(new SetCardInfo("Bartel Runeaxe", 145, Rarity.UNCOMMON, mage.cards.b.BartelRuneaxe.class));
