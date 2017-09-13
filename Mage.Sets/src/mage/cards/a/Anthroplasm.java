@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
 public class Anthroplasm extends CardImpl {
 
     public Anthroplasm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(0);
@@ -65,7 +65,7 @@ public class Anthroplasm extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AnthroplasmEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
+
     }
 
     public Anthroplasm(final Anthroplasm card) {
@@ -80,12 +80,12 @@ public class Anthroplasm extends CardImpl {
 
 class AnthroplasmEffect extends OneShotEffect {
 
-    AnthroplasmEffect ( ) {
+    AnthroplasmEffect() {
         super(Outcome.Benefit);
-        staticText = "Remove all +1/+1 counters from Anthroplasm and put X +1/+1 counters on it";
+        staticText = "Remove all +1/+1 counters from {this} and put X +1/+1 counters on it";
     }
 
-    AnthroplasmEffect ( AnthroplasmEffect effect ) {
+    AnthroplasmEffect(AnthroplasmEffect effect) {
         super(effect);
     }
 

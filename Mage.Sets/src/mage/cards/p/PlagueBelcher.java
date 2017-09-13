@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
@@ -77,7 +78,7 @@ public class PlagueBelcher extends CardImpl {
         this.addAbility(ability);
 
         // Whenever another Zombie you control dies, each opponent loses 1 life.
-        this.addAbility(new DiesCreatureTriggeredAbility(new LoseLifeOpponentsEffect(), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter));
     }
 
     public PlagueBelcher(final PlagueBelcher card) {
