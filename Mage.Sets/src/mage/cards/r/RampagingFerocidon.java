@@ -71,7 +71,7 @@ public class RampagingFerocidon extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
 
         // Players can't gain life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RampagingFerocidonEffect()));

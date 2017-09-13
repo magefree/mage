@@ -53,7 +53,7 @@ public class FlamebladeAdept extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
 
         // Whenever you cycle or discard a card, Flameblade Adept gets +1/+0 until end of turn.
         this.addAbility(new CycleOrDiscardControllerTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn)));

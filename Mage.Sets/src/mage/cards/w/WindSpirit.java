@@ -54,7 +54,7 @@ public class WindSpirit extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Menace (This creature can't be blocked except by two or more creatures.)
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
     }
 
     public WindSpirit(final WindSpirit card) {

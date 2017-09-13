@@ -62,7 +62,7 @@ public class PyreheartWolf extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Pyreheart Wolf attacks, creatures you control gain menace until end of turn. (They can't be blocked except by two or more creatures.)
-        this.addAbility(new AttacksTriggeredAbility(new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, filter), false));
+        this.addAbility(new AttacksTriggeredAbility(new GainAbilityAllEffect(MenaceAbility.getInstance(), Duration.EndOfTurn, filter), false));
 
         // Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
         this.addAbility(new UndyingAbility());

@@ -76,7 +76,7 @@ public class TerrorOfKruinPass extends CardImpl {
 
         this.addAbility(DoubleStrikeAbility.getInstance());
         // Werewolves you control have menace. (They can't be blocked except by two or more creatures.)
-        Effect effect = new ConditionalContinuousEffect(new GainAbilityAllEffect(new MenaceAbility(), Duration.Custom, filter), new TransformedCondition(), ruleText);
+        Effect effect = new ConditionalContinuousEffect(new GainAbilityAllEffect(MenaceAbility.getInstance(), Duration.Custom, filter), new TransformedCondition(), ruleText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Terror of Kruin Pass.

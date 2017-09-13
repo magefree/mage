@@ -55,7 +55,7 @@ public class FiremantleMage extends CardImpl {
 
         // <i>Rally</i> — Whenver Firemantle Mage or another Ally enters the battlefield under your control, creatures you control gain menace until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(new MenaceAbility(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), false));
+                new GainAbilityControlledEffect(MenaceAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), false));
     }
 
     public FiremantleMage(final FiremantleMage card) {

@@ -56,7 +56,7 @@ public class GorillaWarCry extends CardImpl {
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, BeforeBlockersAreDeclaredCondition.instance));
 
         // All creatures gain menace until end of turn. <i>(They can't be blocked except by two or more creatures.)</i>
-        Effect effect = new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, new FilterCreaturePermanent());
+        Effect effect = new GainAbilityAllEffect(MenaceAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent());
         effect.setText("All creatures gain menace until end of turn. <i>(They can't be blocked except by two or more creatures.)</i>");
         this.getSpellAbility().addEffect(effect);
 

@@ -49,7 +49,7 @@ public class ViashinoRunner extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace (This creature can't be blocked except by two or more creatures.)
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
     }
 
     public ViashinoRunner(final ViashinoRunner card) {

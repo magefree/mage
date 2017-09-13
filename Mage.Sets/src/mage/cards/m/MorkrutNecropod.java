@@ -64,7 +64,7 @@ public class MorkrutNecropod extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
 
         // Whenever Morkrut Necropod attacks or blocks, sacrifice another creature or land.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new SacrificeControllerEffect(filter, 1, ""), false));

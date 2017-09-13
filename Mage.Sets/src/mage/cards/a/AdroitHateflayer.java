@@ -51,7 +51,7 @@ public class AdroitHateflayer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
         
         // Whenever Adroit Hateflayer attacks, each opponent loses 2 life.
         this.addAbility(new AttacksTriggeredAbility(new LoseLifeOpponentsEffect(2), false));

@@ -66,13 +66,13 @@ public class CaterwaulingBoggart extends CardImpl {
 
         // Each Goblin you control has menace. (They can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
-                new MenaceAbility(),
+                MenaceAbility.getInstance(),
                 Duration.WhileOnBattlefield, filterGoblin,
                 "Each Goblin you control has menace. (They can't be blocked except by two or more creatures.)")));
 
         // Each Elemental you control has menace. (They can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
-                new MenaceAbility(),
+                MenaceAbility.getInstance(),
                 Duration.WhileOnBattlefield, filterElemental,
                 "Each Elemental you control has menace. (They can't be blocked except by two or more creatures.)")));
     }

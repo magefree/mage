@@ -63,7 +63,7 @@ public class ImposingVisage extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has menace. (It can't be blocked except by two or more creatures.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(MenaceAbility.getInstance(), AttachmentType.AURA)));
     }
 
     public ImposingVisage(final ImposingVisage card) {

@@ -50,7 +50,7 @@ public class MaulfistSquad extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
         
         // Fabricate 1
         this.addAbility(new FabricateAbility(1));

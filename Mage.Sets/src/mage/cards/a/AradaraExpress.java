@@ -49,7 +49,7 @@ public class AradaraExpress extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(MenaceAbility.getInstance());
         // Crew 4
         this.addAbility(new CrewAbility(4));
     }
