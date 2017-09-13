@@ -102,6 +102,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Jace's Sentinel", 283, Rarity.UNCOMMON, mage.cards.j.JacesSentinel.class));
         cards.add(new SetCardInfo("Jace, Cunning Castaway", 60, Rarity.MYTHIC, mage.cards.j.JaceCunningCastaway.class));
         cards.add(new SetCardInfo("Jace, Ingenious Mind-Mage", 280, Rarity.MYTHIC, mage.cards.j.JaceIngeniousMindMage.class));
+        cards.add(new SetCardInfo("Kinjalli's Caller", 18, Rarity.COMMON, mage.cards.k.KinjallisCaller.class));
         cards.add(new SetCardInfo("Kinjalli's Sunwing", 19, Rarity.RARE, mage.cards.k.KinjallisSunwing.class));
         cards.add(new SetCardInfo("Kitesail Freebooter", 110, Rarity.UNCOMMON, mage.cards.k.KitesailFreebooter.class));
         cards.add(new SetCardInfo("Kopala, Warden of Waves", 61, Rarity.RARE, mage.cards.k.KopalaWardenOfWaves.class));
