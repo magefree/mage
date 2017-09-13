@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -54,7 +55,7 @@ import mage.util.RandomUtil;
 public class MoldgrafMonstrosity extends CardImpl {
 
     public MoldgrafMonstrosity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");
         this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(8);
@@ -62,7 +63,9 @@ public class MoldgrafMonstrosity extends CardImpl {
 
         this.addAbility(TrampleAbility.getInstance());
         // When Moldgraf Monstrosity dies, exile it, then return two creature cards at random from your graveyard to the battlefield.
-        DiesTriggeredAbility ability = new DiesTriggeredAbility(new ExileSourceEffect());
+        Effect effect = new ExileSourceEffect();
+        effect.setText("");
+        DiesTriggeredAbility ability = new DiesTriggeredAbility(effect);
         ability.addEffect(new MoldgrafMonstrosityEffect());
         this.addAbility(ability);
     }
@@ -81,7 +84,7 @@ class MoldgrafMonstrosityEffect extends OneShotEffect {
 
     public MoldgrafMonstrosityEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "then return two creature cards at random from your graveyard to the battlefield";
+        this.staticText = "exile it, then return two creature cards at random from your graveyard to the battlefield";
     }
 
     public MoldgrafMonstrosityEffect(final MoldgrafMonstrosityEffect effect) {

@@ -305,6 +305,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Smokestack", 309, Rarity.RARE, mage.cards.s.Smokestack.class));
         cards.add(new SetCardInfo("Smoldering Crater", 328, Rarity.COMMON, mage.cards.s.SmolderingCrater.class));
         cards.add(new SetCardInfo("Sneak Attack", 218, Rarity.RARE, mage.cards.s.SneakAttack.class));
+        cards.add(new SetCardInfo("Somnophore", 97, Rarity.RARE, mage.cards.s.Somnophore.class));
         cards.add(new SetCardInfo("Spined Fluke", 160, Rarity.UNCOMMON, mage.cards.s.SpinedFluke.class));
         cards.add(new SetCardInfo("Spire Owl", 98, Rarity.COMMON, mage.cards.s.SpireOwl.class));
         cards.add(new SetCardInfo("Spreading Algae", 274, Rarity.UNCOMMON, mage.cards.s.SpreadingAlgae.class));

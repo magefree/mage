@@ -58,6 +58,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Adarkar Windform", 26, Rarity.UNCOMMON, mage.cards.a.AdarkarWindform.class));
         cards.add(new SetCardInfo("Allosaurus Rider", 101, Rarity.RARE, mage.cards.a.AllosaurusRider.class));
         cards.add(new SetCardInfo("Arctic Flats", 143, Rarity.UNCOMMON, mage.cards.a.ArcticFlats.class));
+        cards.add(new SetCardInfo("Arctic Nishoba", 102, Rarity.UNCOMMON, mage.cards.a.ArcticNishoba.class));
         cards.add(new SetCardInfo("Arcum Dagsson", 27, Rarity.RARE, mage.cards.a.ArcumDagsson.class));
         cards.add(new SetCardInfo("Aurochs Herd", 103, Rarity.COMMON, mage.cards.a.AurochsHerd.class));
         cards.add(new SetCardInfo("Balduvian Rage", 76, Rarity.UNCOMMON, mage.cards.b.BalduvianRage.class));
@@ -106,6 +107,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Jester's Scepter", 137, Rarity.RARE, mage.cards.j.JestersScepter.class));
         cards.add(new SetCardInfo("Jokulmorder", 37, Rarity.RARE, mage.cards.j.Jokulmorder.class));
         cards.add(new SetCardInfo("Jotun Grunt", 8, Rarity.UNCOMMON, mage.cards.j.JotunGrunt.class));
+        cards.add(new SetCardInfo("Jotun Owl Keeper", 9, Rarity.UNCOMMON, mage.cards.j.JotunOwlKeeper.class));
         cards.add(new SetCardInfo("Juniper Order Ranger", 130, Rarity.UNCOMMON, mage.cards.j.JuniperOrderRanger.class));
         cards.add(new SetCardInfo("Karplusan Strider", 112, Rarity.UNCOMMON, mage.cards.k.KarplusanStrider.class));
         cards.add(new SetCardInfo("Karplusan Wolverine", 87, Rarity.COMMON, mage.cards.k.KarplusanWolverine.class));
