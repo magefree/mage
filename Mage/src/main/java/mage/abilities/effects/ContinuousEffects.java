@@ -243,20 +243,22 @@ public class ContinuousEffects implements Serializable {
         return effects.stream().filter(effect -> effect.hasLayer(layer)).collect(Collectors.toList());
     }
 
-    public Map<RequirementEffect, Set<Ability>> getApplicableRequirementEffects(Permanent permanent, Game game) {
+    public Map<RequirementEffect, Set<Ability>> getApplicableRequirementEffects(Permanent permanent, boolean playerRealted, Game game) {
         Map<RequirementEffect, Set<Ability>> effects = new HashMap<>();
         for (RequirementEffect effect : requirementEffects) {
-            Set<Ability> abilities = requirementEffects.getAbility(effect.getId());
-            Set<Ability> applicableAbilities = new HashSet<>();
-            for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, ability instanceof MageSingleton ? permanent : null, null)) {
-                    if (effect.applies(permanent, ability, game)) {
-                        applicableAbilities.add(ability);
+            if (playerRealted == effect.isPlayerRelated()) {
+                Set<Ability> abilities = requirementEffects.getAbility(effect.getId());
+                Set<Ability> applicableAbilities = new HashSet<>();
+                for (Ability ability : abilities) {
+                    if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, ability instanceof MageSingleton ? permanent : null, null)) {
+                        if (effect.applies(permanent, ability, game)) {
+                            applicableAbilities.add(ability);
+                        }
                     }
                 }
-            }
-            if (!applicableAbilities.isEmpty()) {
-                effects.put(effect, abilities);
+                if (!applicableAbilities.isEmpty()) {
+                    effects.put(effect, abilities);
+                }
             }
         }
         return effects;
