@@ -187,6 +187,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Spell Pierce", 81, Rarity.RARE, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Spell Swindle", 82, Rarity.RARE, mage.cards.s.SpellSwindle.class));
         cards.add(new SetCardInfo("Spires of Orazca", 249, Rarity.RARE, mage.cards.s.SpiresOfOrazca.class));
+        cards.add(new SetCardInfo("Spitfire Bastion", 173, Rarity.RARE, mage.cards.s.SpitfireBastion.class));
         cards.add(new SetCardInfo("Star of Extinction", 161, Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class));
         cards.add(new SetCardInfo("Stone Quarry", 289, Rarity.COMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Storm Fleet Aerialist", 83, Rarity.UNCOMMON, mage.cards.s.StormFleetAerialist.class));
@@ -213,6 +214,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Treasure Map", 250, Rarity.RARE, mage.cards.t.TreasureMap.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 258, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Unfriendly Fire", 172, Rarity.COMMON, mage.cards.u.UnfriendlyFire.class));
+        cards.add(new SetCardInfo("Vance's Blasting Cannons", 173, Rarity.RARE, mage.cards.v.VancesBlastingCannons.class));
         cards.add(new SetCardInfo("Vanquisher's Banner", 251, Rarity.RARE, mage.cards.v.VanquishersBanner.class));
         cards.add(new SetCardInfo("Verdant Sun's Avatar", 213, Rarity.RARE, mage.cards.v.VerdantSunsAvatar.class));
         cards.add(new SetCardInfo("Vicious Conquistador", 128, Rarity.UNCOMMON, mage.cards.v.ViciousConquistador.class));
