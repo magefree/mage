@@ -136,6 +136,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Opt", 65, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Otepec Huntmaster", 153, Rarity.UNCOMMON, mage.cards.o.OtepecHuntmaster.class));
         cards.add(new SetCardInfo("Overflowing Insight", 64, Rarity.MYTHIC, mage.cards.o.OverflowingInsight.class));
+        cards.add(new SetCardInfo("Perilous Voyage", 67, Rarity.UNCOMMON, mage.cards.p.PerilousVoyage.class));
         cards.add(new SetCardInfo("Pillar of Origins", 241, Rarity.UNCOMMON, mage.cards.p.PillarOfOrigins.class));
         cards.add(new SetCardInfo("Pirate's Cutlass", 242, Rarity.COMMON, mage.cards.p.PiratesCutlass.class));
         cards.add(new SetCardInfo("Plains", 260, Rarity.LAND, mage.cards.basiclands.Plains.class));
