@@ -25,64 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class SoulConduit extends CardImpl {
+public class AxisOfMortality extends CardImpl {
 
-    public SoulConduit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
+    public AxisOfMortality(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}{W}");
 
-        // {6}, {tap}: Two target players exchange life totals.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulConduitEffect(), new GenericManaCost(6));
-        ability.addCost(new TapSourceCost());
+        // At the beginning of your upkeep, you may have two target players exchange life totals.
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AxisOfMortalityEffect(), TargetController.YOU, true);
         ability.addTarget(new TargetPlayer());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public SoulConduit(final SoulConduit card) {
+    public AxisOfMortality(final AxisOfMortality card) {
         super(card);
     }
 
     @Override
-    public SoulConduit copy() {
-        return new SoulConduit(this);
+    public AxisOfMortality copy() {
+        return new AxisOfMortality(this);
     }
 }
 
-class SoulConduitEffect extends OneShotEffect {
+class AxisOfMortalityEffect extends OneShotEffect {
 
-    public SoulConduitEffect() {
+    public AxisOfMortalityEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Two target players exchange life totals";
+        this.staticText = "two target players exchange life totals";
     }
 
-    public SoulConduitEffect(final SoulConduitEffect effect) {
+    public AxisOfMortalityEffect(final AxisOfMortalityEffect effect) {
         super(effect);
     }
 
     @Override
-    public SoulConduitEffect copy() {
-        return new SoulConduitEffect(this);
+    public AxisOfMortalityEffect copy() {
+        return new AxisOfMortalityEffect(this);
     }
 
     @Override
