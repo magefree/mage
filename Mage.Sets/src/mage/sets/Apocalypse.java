@@ -70,6 +70,7 @@ public class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Ringleader", 62, Rarity.UNCOMMON, mage.cards.g.GoblinRingleader.class));
         cards.add(new SetCardInfo("Goblin Trenches", 104, Rarity.RARE, mage.cards.g.GoblinTrenches.class));
         cards.add(new SetCardInfo("Grave Defiler", 40, Rarity.UNCOMMON, mage.cards.g.GraveDefiler.class));
+        cards.add(new SetCardInfo("Guided Passage", 105, Rarity.RARE, mage.cards.g.GuidedPassage.class));
         cards.add(new SetCardInfo("Haunted Angel", 12, Rarity.UNCOMMON, mage.cards.h.HauntedAngel.class));
         cards.add(new SetCardInfo("Helionaut", 13, Rarity.COMMON, mage.cards.h.Helionaut.class));
 	cards.add(new SetCardInfo("Ice Cave", 24, Rarity.RARE, mage.cards.i.IceCave.class));
