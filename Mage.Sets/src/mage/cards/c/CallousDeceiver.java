@@ -56,7 +56,7 @@ import mage.players.Player;
 public class CallousDeceiver extends CardImpl {
 
     public CallousDeceiver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);

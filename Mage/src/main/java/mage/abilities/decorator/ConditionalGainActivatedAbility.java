@@ -46,7 +46,6 @@ import mage.game.Game;
  */
 public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
 
-    private final Condition condition;
     private String staticText = "";
 
     private static final Effects emptyEffects = new Effects();
@@ -71,7 +70,6 @@ public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
 
     public ConditionalGainActivatedAbility(ConditionalGainActivatedAbility ability) {
         super(ability);
-        this.condition = ability.condition;
         this.staticText = ability.staticText;
     }
 

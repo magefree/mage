@@ -69,10 +69,13 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
+        if (!super.hasMoreActivationsThisTurn(game) || !(condition == null || condition.apply(game, this))) {
+            return false;
+        }
         if (!controlsAbility(playerId, game)) {
             return false;
         }
-        if (timing == TimingRule.SORCERY 
+        if (timing == TimingRule.SORCERY
                 && !game.canPlaySorcery(playerId)
                 && !game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_AS_INSTANT, this, controllerId, game)) {
             return false;
