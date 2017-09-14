@@ -39,7 +39,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -84,7 +83,7 @@ class CruelDeceiverEffect extends OneShotEffect {
 
     public CruelDeceiverEffect() {
         super(Outcome.AddAbility);
-        this.staticText = "Reveal the top card of your library. If it's a land card, Cruel Deceiver gains \"Whenever Cruel Deceiver deals damage to a creature, destroy that creature\" until end of turn";
+        this.staticText = "Reveal the top card of your library. If it's a land card, {this} gains \"Whenever Cruel Deceiver deals damage to a creature, destroy that creature\" until end of turn";
     }
 
     public CruelDeceiverEffect(final CruelDeceiverEffect effect) {
@@ -107,7 +106,6 @@ class CruelDeceiverEffect extends OneShotEffect {
                 cards.add(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
                 if (card.isLand()) {
-                    game.addEffect(new BoostSourceEffect(1, 0, Duration.EndOfTurn), source);
                     game.addEffect(new GainAbilitySourceEffect(new DealsDamageToACreatureTriggeredAbility(new DestroyTargetEffect(true), false, false, true), Duration.EndOfTurn), source);
                 }
             }

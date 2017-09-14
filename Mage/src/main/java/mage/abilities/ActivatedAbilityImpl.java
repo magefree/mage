@@ -276,6 +276,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected boolean hasMoreActivationsThisTurn(Game game) {
+        if (maxActivationsPerTurn == Integer.MAX_VALUE) {
+            return true;
+        }
         ActivationInfo activationInfo = getActivationInfo(game);
         return activationInfo == null || activationInfo.turnNum != game.getTurnNum() || activationInfo.activationCounter < maxActivationsPerTurn;
     }
