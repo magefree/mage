@@ -155,6 +155,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Ravenous Daggertooth", 202, Rarity.COMMON, mage.cards.r.RavenousDaggertooth.class));
         cards.add(new SetCardInfo("Regisaur Alpha", 227, Rarity.RARE, mage.cards.r.RegisaurAlpha.class));
         cards.add(new SetCardInfo("Revel in Riches", 117, Rarity.RARE, mage.cards.r.RevelInRiches.class));
+        cards.add(new SetCardInfo("Rigging Runner", 157, Rarity.UNCOMMON, mage.cards.r.RiggingRunner.class));
         cards.add(new SetCardInfo("Rile", 158, Rarity.COMMON, mage.cards.r.Rile.class));
         cards.add(new SetCardInfo("Ripjaw Raptor", 203, Rarity.RARE, mage.cards.r.RipjawRaptor.class));
         cards.add(new SetCardInfo("River Sneak", 70, Rarity.UNCOMMON, mage.cards.r.RiverSneak.class));

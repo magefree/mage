@@ -25,19 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.filter.common;
 
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterControlledCreaturePermanent extends FilterControlledPermanent {
+public class FilterControlledCreaturePermanent extends FilterPermanent {
 
     public FilterControlledCreaturePermanent() {
         this("creature you control");
@@ -46,8 +48,8 @@ public class FilterControlledCreaturePermanent extends FilterControlledPermanent
     public FilterControlledCreaturePermanent(String name) {
         super(name);
         this.add(new CardTypePredicate(CardType.CREATURE));
-    }    
-    
+        this.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public FilterControlledCreaturePermanent(SubType subtype, String name) {
         super(name);
