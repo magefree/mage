@@ -50,7 +50,7 @@ public class RancidRats extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Skulk
-        this.addAbility(SkulkAbility.getInstance());
+        this.addAbility(new SkulkAbility());
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
     }

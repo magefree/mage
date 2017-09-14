@@ -49,7 +49,7 @@ public class FarbogRevenant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Skulk
-        this.addAbility(SkulkAbility.getInstance());
+        this.addAbility(new SkulkAbility());
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
