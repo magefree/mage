@@ -151,7 +151,6 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
                             game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
                         }
                         doEffect = false;
-                        break;
                     }
                 }
             }
