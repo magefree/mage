@@ -27,21 +27,14 @@
  */
 package mage.cards.m;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -54,7 +47,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -63,15 +55,11 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.other.CounterCardPredicate;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -93,8 +81,7 @@ public class MairsilThePretender extends CardImpl {
 
         // Mairsil, the Pretender has all activated abilities of all cards you own in exile with cage counters on them. You may activate each of those abilities only once each turn.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new MairsilThePretenderGainAbilitiesEffect());
-        ability.addEffect(new MairsilThePretenderRuleModifyingEffect());
-        this.addAbility(ability, new MairsilThePretenderWatcher());
+        this.addAbility(ability);
     }
 
     public MairsilThePretender(final MairsilThePretender card) {
@@ -182,11 +169,8 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
                 if (filter.match(card, game)) {
                     for (Ability ability : card.getAbilities()) {
                         if (ability instanceof ActivatedAbility) {
-                            UUID originaId = ability.getId();
-                            ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
-                            Effect effect = new DoNothingEffect();
-                            effect.setValue("key", originaId);
-                            copyAbility.addEffect(effect);
+                            ActivatedAbilityImpl copyAbility = (ActivatedAbilityImpl) ability.copy();
+                            copyAbility.setMaxActivationsPerTurn(1);
                             perm.addAbility(copyAbility, card.getId(), game);
                         }
                     }
@@ -200,137 +184,5 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
     @Override
     public MairsilThePretenderGainAbilitiesEffect copy() {
         return new MairsilThePretenderGainAbilitiesEffect(this);
-    }
-}
-
-class MairsilThePretenderWatcher extends Watcher {
-
-    public final Map<UUID, Set<UUID>> activatedThisTurnAbilities = new HashMap<>();
-
-    public MairsilThePretenderWatcher() {
-        super(MairsilThePretenderWatcher.class.getSimpleName(), WatcherScope.GAME);
-    }
-
-    public MairsilThePretenderWatcher(final MairsilThePretenderWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Set<UUID>> entry : watcher.activatedThisTurnAbilities.entrySet()) {
-            activatedThisTurnAbilities.put(entry.getKey(), entry.getValue());
-        }
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event instanceof ZoneChangeEvent) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                Permanent permanent = zEvent.getTarget();
-                if (permanent != null) {
-                    this.activatedThisTurnAbilities.remove(permanent.getId());
-                }
-            }
-        }
-        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
-            Set<UUID> permAbilities;
-            if (activatedThisTurnAbilities.keySet().contains(event.getSourceId())) {
-                permAbilities = activatedThisTurnAbilities.get(event.getSourceId());
-            } else {
-                permAbilities = new HashSet<>();
-            }
-            StackAbility ability = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (ability != null && ability.getStackAbility().isActivated()) {
-                for (Effect effect : ability.getAllEffects()) {
-                    if (effect instanceof DoNothingEffect) {
-                        permAbilities.add((UUID) effect.getValue("key"));
-                        this.activatedThisTurnAbilities.put(event.getSourceId(), permAbilities);
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        activatedThisTurnAbilities.clear();
-    }
-
-    public Map<UUID, Set<UUID>> getActivatedThisTurnAbilities() {
-        return this.activatedThisTurnAbilities;
-    }
-
-    @Override
-    public MairsilThePretenderWatcher copy() {
-        return new MairsilThePretenderWatcher(this);
-    }
-
-}
-
-class MairsilThePretenderRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public MairsilThePretenderRuleModifyingEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-    }
-
-    public MairsilThePretenderRuleModifyingEffect(final MairsilThePretenderRuleModifyingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MairsilThePretenderRuleModifyingEffect copy() {
-        return new MairsilThePretenderRuleModifyingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-        MairsilThePretenderWatcher watcher = (MairsilThePretenderWatcher) game.getState().getWatchers().get(MairsilThePretenderWatcher.class.getSimpleName());
-        if (watcher != null && ability != null && ability.isPresent()) {
-            for (Effect effect : ability.get().getAllEffects()) {
-                if (effect instanceof DoNothingEffect) {
-                    UUID originalID = (UUID) effect.getValue("key");
-                    if (watcher.getActivatedThisTurnAbilities().keySet().contains(event.getSourceId())) {
-                        if (watcher.getActivatedThisTurnAbilities().get(event.getSourceId()).contains(originalID)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        return "This ability can only be activated once each turn.";
-    }
-}
-
-class DoNothingEffect extends OneShotEffect {
-
-    DoNothingEffect() {
-        super(Outcome.Neutral);
-    }
-
-    DoNothingEffect(final DoNothingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DoNothingEffect copy() {
-        return new DoNothingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 }

@@ -25,47 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.e;
+package mage.cards.r;
 
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.common.RaidCondition;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
-import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.constants.SubType;
+import mage.counters.CounterType;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LevelX2
  */
-public class EvolvingWilds extends CardImpl {
+public class RiggingRunner extends CardImpl {
 
-    public EvolvingWilds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
+    public RiggingRunner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
 
-        // {T}, Sacrifice Evolving Wilds: Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true),
-                new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.PIRATE);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // First strike
+        this.addAbility(FirstStrikeAbility.getInstance());
+
+        // Raid — Rigging Runner enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), false),
+                RaidCondition.instance,
+                "<i>Raid</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn",
+                "{this} enters the battlefield with a +1/+1 counter"),
+                new PlayerAttackedWatcher());
     }
 
-    public EvolvingWilds(final EvolvingWilds card) {
+    public RiggingRunner(final RiggingRunner card) {
         super(card);
     }
 
     @Override
-    public EvolvingWilds copy() {
-        return new EvolvingWilds(this);
+    public RiggingRunner copy() {
+        return new RiggingRunner(this);
     }
-
 }
