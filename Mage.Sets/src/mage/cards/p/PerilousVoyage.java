@@ -30,7 +30,6 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -60,9 +59,8 @@ public class PerilousVoyage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Return target nonland permanent you don't control to its owner's hand. If its converted mana cost was 2 or less, scry 2.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new PerilousVoyageEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public PerilousVoyage(final PerilousVoyage card) {
