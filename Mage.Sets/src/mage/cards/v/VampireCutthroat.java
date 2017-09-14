@@ -50,7 +50,7 @@ public class VampireCutthroat extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Skulk
-        this.addAbility(new SkulkAbility());
+        this.addAbility(SkulkAbility.getInstance());
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
     }

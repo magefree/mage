@@ -60,7 +60,7 @@ public class Fogwalker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Skulk
-        this.addAbility(new SkulkAbility());
+        this.addAbility(SkulkAbility.getInstance());
         // When Fogwalker enters the battlefield, target creature an opponent controls doesn't untap during it controler's next untap step.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DontUntapInControllersNextUntapStepTargetEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
