@@ -216,6 +216,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Vanquisher's Banner", 251, Rarity.RARE, mage.cards.v.VanquishersBanner.class));
         cards.add(new SetCardInfo("Verdant Sun's Avatar", 213, Rarity.RARE, mage.cards.v.VerdantSunsAvatar.class));
         cards.add(new SetCardInfo("Vicious Conquistador", 128, Rarity.UNCOMMON, mage.cards.v.ViciousConquistador.class));
+        cards.add(new SetCardInfo("Vineshaper Mystic", 214, Rarity.UNCOMMON, mage.cards.v.VineshaperMystic.class));
         cards.add(new SetCardInfo("Vona, Butcher of Magan", 231, Rarity.MYTHIC, mage.cards.v.VonaButcherOfMagan.class));
         cards.add(new SetCardInfo("Vraska's Contempt", 129, Rarity.RARE, mage.cards.v.VraskasContempt.class));
         cards.add(new SetCardInfo("Vraska, Relic Seeker", 232, Rarity.MYTHIC, mage.cards.v.VraskaRelicSeeker.class));
