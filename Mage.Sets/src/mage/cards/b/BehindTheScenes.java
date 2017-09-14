@@ -52,7 +52,7 @@ public class BehindTheScenes extends CardImpl {
 
         // Creatures you control have skulk.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(SkulkAbility.getInstance(), Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES)));
+                new GainAbilityControlledEffect(new SkulkAbility(), Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES)));
 
         // {4}{W}: Creatures you control get +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,

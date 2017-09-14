@@ -5,12 +5,11 @@
  */
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.abilities.Ability;
-import mage.abilities.EvasionAbility;
-import mage.abilities.MageSingleton;
+import mage.abilities.StaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -18,31 +17,26 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class SkulkAbility extends EvasionAbility implements MageSingleton {
+public class SkulkAbility extends StaticAbility {
 
-    private static final SkulkAbility instance = new SkulkAbility();
-
-    private Object readResolve() throws ObjectStreamException {
-        return instance;
+    public SkulkAbility() {
+        super(Zone.BATTLEFIELD, new SkulkEffect(Duration.WhileOnBattlefield));
     }
 
-    public static SkulkAbility getInstance() {
-        return instance;
-    }
-
-    private SkulkAbility() {
-        this.addEffect(new SkulkEffect(Duration.WhileOnBattlefield));
+    public SkulkAbility(final SkulkAbility ability) {
+        super(ability);
     }
 
     @Override
     public Ability copy() {
-        return instance;
+        return new SkulkAbility(this);
     }
 
     @Override
     public String getRule() {
         return "Skulk <i>(This creature can't be blocked by creatures with greater power.)</i>";
     }
+
 }
 
 class SkulkEffect extends RestrictionEffect {
