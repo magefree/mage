@@ -48,7 +48,7 @@ public class FurtiveHomunculus extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Skulk (This creature can't be blocked by creatures with greater power.)
-        this.addAbility(new SkulkAbility());
+        this.addAbility(SkulkAbility.getInstance());
     }
 
     public FurtiveHomunculus(final FurtiveHomunculus card) {

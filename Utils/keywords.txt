@@ -76,7 +76,7 @@ Shadow|instance|
 Shroud|instance|
 Soulbond|instance|
 Soulshift|number|
-Skulk|new|
+Skulk|instance|
 Storm|new|
 Sunburst|new|
 Swampcycling|cost|

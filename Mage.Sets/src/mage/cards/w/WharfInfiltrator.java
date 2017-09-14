@@ -62,7 +62,7 @@ public class WharfInfiltrator extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Skulk
-        this.addAbility(new SkulkAbility());
+        this.addAbility(SkulkAbility.getInstance());
 
         // Whenever Wharf Infiltrator deals combat damage to a player, you may draw a card. If you do, discard a card.
         Effect effect = new DrawDiscardControllerEffect();
