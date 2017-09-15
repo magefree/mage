@@ -37,8 +37,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -46,12 +50,22 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class SpiritualAsylum extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("Creatures and lands you control");
+
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.LAND)
+        ));
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
+
     public SpiritualAsylum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // Creatures and lands you control have shroud.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(),
-                Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+                Duration.WhileOnBattlefield, filter)));
 
         // When a creature you control attacks, sacrifice Spiritual Asylum.
         AttacksCreatureYouControlTriggeredAbility ability = new AttacksCreatureYouControlTriggeredAbility(new SacrificeSourceEffect());
