@@ -108,7 +108,7 @@ class VancesBlastingCannonsExileEffect extends OneShotEffect {
         if (controller != null && sourcePermanent != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                String exileName = sourcePermanent.getIdName() + " <this card may be cast the turn it was exiled";
+                String exileName = sourcePermanent.getIdName() + (card.isLand() ? "" : " <this card may be cast the turn it was exiled");
                 controller.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
                 if (game.getState().getZone(card.getId()) == Zone.EXILED && !card.isLand()) {
                     ContinuousEffect effect = new CastFromNonHandZoneTargetEffect(Duration.EndOfTurn);
