@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class AnointedDeacon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target Vampire you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampire");
 
     static {
         filter.add(new SubtypePredicate(SubType.VAMPIRE));
