@@ -158,6 +158,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Nest Robber", 152, Rarity.COMMON, mage.cards.n.NestRobber.class));
         cards.add(new SetCardInfo("Old-Growth Dryads", 199, Rarity.RARE, mage.cards.o.OldGrowthDryads.class));
+        cards.add(new SetCardInfo("One with the Wind", 64, Rarity.COMMON, mage.cards.o.OneWithTheWind.class));
         cards.add(new SetCardInfo("Opt", 65, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Otepec Huntmaster", 153, Rarity.UNCOMMON, mage.cards.o.OtepecHuntmaster.class));
         cards.add(new SetCardInfo("Overflowing Insight", 66, Rarity.MYTHIC, mage.cards.o.OverflowingInsight.class));
