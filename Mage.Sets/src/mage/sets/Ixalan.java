@@ -105,6 +105,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Frenzied Raptor", 146, Rarity.COMMON, mage.cards.f.FrenziedRaptor.class));
         cards.add(new SetCardInfo("Gishath, Sun's Avatar", 222, Rarity.MYTHIC, mage.cards.g.GishathSunsAvatar.class));
         cards.add(new SetCardInfo("Glacial Fortress", 255, Rarity.RARE, mage.cards.g.GlacialFortress.class));
+        cards.add(new SetCardInfo("Glorifier of Dusk", 12, Rarity.UNCOMMON, mage.cards.g.GlorifierOfDusk.class));
         cards.add(new SetCardInfo("Goring Ceratops", 13, Rarity.RARE, mage.cards.g.GoringCeratops.class));
         cards.add(new SetCardInfo("Grasping Current", 282, Rarity.RARE, mage.cards.g.GraspingCurrent.class));
         cards.add(new SetCardInfo("Grazing Whiptail", 190, Rarity.COMMON, mage.cards.g.GrazingWhiptail.class));
