@@ -217,6 +217,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Shapers' Sanctuary", 206, Rarity.RARE, mage.cards.s.ShapersSanctuary.class));
         cards.add(new SetCardInfo("Sheltering Light", 35, Rarity.UNCOMMON, mage.cards.s.ShelteringLight.class));
         cards.add(new SetCardInfo("Shining Aerosaur", 36, Rarity.COMMON, mage.cards.s.ShiningAerosaur.class));
+        cards.add(new SetCardInfo("Shore Keeper", 77, Rarity.COMMON, mage.cards.s.ShoreKeeper.class));
         cards.add(new SetCardInfo("Siren Lookout", 78, Rarity.COMMON, mage.cards.s.SirenLookout.class));
         cards.add(new SetCardInfo("Siren Stormtamer", 79, Rarity.UNCOMMON, mage.cards.s.SirenStormtamer.class));
         cards.add(new SetCardInfo("Skittering Heartstopper", 122, Rarity.COMMON, mage.cards.s.SkitteringHeartstopper.class));
