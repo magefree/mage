@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -38,9 +38,10 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.TargetPermanent;
 
 /**
- * @author nantuko
+ *
+ * @author TheElk801
  */
-public class SmiteTheMonstrous extends CardImpl {
+public class LegionsJudgment extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
 
@@ -48,20 +49,20 @@ public class SmiteTheMonstrous extends CardImpl {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
-    public SmiteTheMonstrous(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
+    public LegionsJudgment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
 
         // Destroy target creature with power 4 or greater.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public SmiteTheMonstrous(final SmiteTheMonstrous card) {
+    public LegionsJudgment(final LegionsJudgment card) {
         super(card);
     }
 
     @Override
-    public SmiteTheMonstrous copy() {
-        return new SmiteTheMonstrous(this);
+    public LegionsJudgment copy() {
+        return new LegionsJudgment(this);
     }
 }
