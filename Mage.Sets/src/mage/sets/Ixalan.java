@@ -72,6 +72,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Conqueror's Galleon", 234, Rarity.RARE, mage.cards.c.ConquerorsGalleon.class));
         cards.add(new SetCardInfo("Contract Killing", 95, Rarity.COMMON, mage.cards.c.ContractKilling.class));
         cards.add(new SetCardInfo("Costly Plunder", 96, Rarity.COMMON, mage.cards.c.CostlyPlunder.class));
+        cards.add(new SetCardInfo("Crash the Ramparts", 182, Rarity.COMMON, mage.cards.c.CrashTheRamparts.class));
         cards.add(new SetCardInfo("Daring Saboteur", 49, Rarity.RARE, mage.cards.d.DaringSaboteur.class));
         cards.add(new SetCardInfo("Dark Nourishment", 97, Rarity.UNCOMMON, mage.cards.d.DarkNourishment.class));
         cards.add(new SetCardInfo("Deadeye Plunderers", 220, Rarity.UNCOMMON, mage.cards.d.DeadeyePlunderers.class));
