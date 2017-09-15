@@ -118,6 +118,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Huatli's Snubhorn", 286, Rarity.COMMON, mage.cards.h.HuatlisSnubhorn.class));
         cards.add(new SetCardInfo("Huatli's Spurring", 287, Rarity.UNCOMMON, mage.cards.h.HuatlisSpurring.class));
         cards.add(new SetCardInfo("Huatli, Warrior Poet", 224, Rarity.MYTHIC, mage.cards.h.HuatliWarriorPoet.class));
+        cards.add(new SetCardInfo("Imperial Aerosaur", 14, Rarity.UNCOMMON, mage.cards.i.ImperialAerosaur.class));
         cards.add(new SetCardInfo("Imperial Lancer", 15, Rarity.UNCOMMON, mage.cards.i.ImperialLancer.class));
         cards.add(new SetCardInfo("Island", 264, Rarity.LAND, mage.cards.basiclands.Island.class));
         cards.add(new SetCardInfo("Island", 265, Rarity.LAND, mage.cards.basiclands.Island.class));
