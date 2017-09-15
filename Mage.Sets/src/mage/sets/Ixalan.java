@@ -203,6 +203,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Rummaging Goblin", 160, Rarity.COMMON, mage.cards.r.RummagingGoblin.class));
         cards.add(new SetCardInfo("Run Aground", 72, Rarity.COMMON, mage.cards.r.RunAground.class));
         cards.add(new SetCardInfo("Ruthless Knave", 119, Rarity.UNCOMMON, mage.cards.r.RuthlessKnave.class));
+        cards.add(new SetCardInfo("Sailor of Means", 73, Rarity.COMMON, mage.cards.s.SailorOfMeans.class));
         cards.add(new SetCardInfo("Sanctum Seeker", 120, Rarity.RARE, mage.cards.s.SanctumSeeker.class));
         cards.add(new SetCardInfo("Sanguine Sacrament", 33, Rarity.RARE, mage.cards.s.SanguineSacrament.class));
         cards.add(new SetCardInfo("Savage Stomp", 205, Rarity.UNCOMMON, mage.cards.s.SavageStomp.class));
