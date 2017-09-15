@@ -69,6 +69,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Adarkar Sentinel", 201, Rarity.COMMON, mage.cards.a.AdarkarSentinel.class));
         cards.add(new SetCardInfo("Aeolipile", 202, Rarity.COMMON, mage.cards.a.Aeolipile.class));
         cards.add(new SetCardInfo("Ambush Party", 115, Rarity.COMMON, mage.cards.a.AmbushParty.class));
+        cards.add(new SetCardInfo("An-Zerrin Ruins", 117, Rarity.RARE, mage.cards.a.AnZerrinRuins.class));
         cards.add(new SetCardInfo("Anarchy", 116, Rarity.RARE, mage.cards.a.Anarchy.class));
         cards.add(new SetCardInfo("Angel of Fury", 2, Rarity.RARE, mage.cards.a.AngelOfFury.class));
         cards.add(new SetCardInfo("Angel of Light", 3, Rarity.UNCOMMON, mage.cards.a.AngelOfLight.class));
