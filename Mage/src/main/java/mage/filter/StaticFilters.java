@@ -64,6 +64,7 @@ public final class StaticFilters {
     public static final FilterSpell FILTER_SPELL = new FilterSpell();
 
     public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELL = new FilterSpell("instant or sorcery spell");
+    public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELLS = new FilterSpell("instant or sorcery spells");
 
     public static final FilterPermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
 
@@ -122,6 +123,11 @@ public final class StaticFilters {
         ));
 
         FILTER_INSTANT_OR_SORCERY_SPELL.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)
+        ));
+        
+        FILTER_INSTANT_OR_SORCERY_SPELLS.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)
         ));

@@ -114,6 +114,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Hunter", 157, Rarity.COMMON, ElvishHunter.class));
         cards.add(new SetCardInfo("Elvish Ranger", 158, Rarity.COMMON, mage.cards.e.ElvishRanger.class));
         cards.add(new SetCardInfo("Elvish Spirit Guide", 159, Rarity.UNCOMMON, mage.cards.e.ElvishSpiritGuide.class));
+        cards.add(new SetCardInfo("Energy Storm", 11, Rarity.RARE, mage.cards.e.EnergyStorm.class));
         cards.add(new SetCardInfo("Enervate", 47, Rarity.COMMON, mage.cards.e.Enervate.class));
         cards.add(new SetCardInfo("Errantry", 124, Rarity.COMMON, mage.cards.e.Errantry.class));
         cards.add(new SetCardInfo("Farrel's Mantle", 13, Rarity.UNCOMMON, mage.cards.f.FarrelsMantle.class));
