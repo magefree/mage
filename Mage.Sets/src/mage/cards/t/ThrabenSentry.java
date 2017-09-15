@@ -37,22 +37,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author nantuko
  */
 public class ThrabenSentry extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
 
     public ThrabenSentry(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
@@ -66,7 +59,7 @@ public class ThrabenSentry extends CardImpl {
 
         // Whenever another creature you control dies, you may transform Thraben Sentry.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DiesCreatureTriggeredAbility(new TransformSourceEffect(true), true, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new TransformSourceEffect(true), true, new FilterControlledCreaturePermanent()));
     }
 
     public ThrabenSentry(final ThrabenSentry card) {

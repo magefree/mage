@@ -41,7 +41,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SharesColorWithSourcePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -56,6 +55,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
+import mage.constants.CardType;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /*
  * 702.77. Conspire
@@ -75,12 +77,13 @@ import java.util.UUID;
 public class ConspireAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     private static final String keywordText = "Conspire";
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control that share a color with it");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped creatures you control that share a color with it");
     protected static final String CONSPIRE_ACTIVATION_KEY = "ConspireActivation";
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SharesColorWithSourcePredicate());
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public enum ConspireTargets {
@@ -166,7 +169,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
                 if (conspireCost.canPay(ability, getSourceId(), getControllerId(), game)
                         && player.chooseUse(Outcome.Benefit, "Pay " + conspireCost.getText(false) + " ?", ability, game)) {
                     activateConspire(ability, game);
-                    for (Iterator it = conspireCost.iterator(); it.hasNext(); ) {
+                    for (Iterator it = conspireCost.iterator(); it.hasNext();) {
                         Cost cost = (Cost) it.next();
                         ability.getCosts().add(cost.copy());
                     }

@@ -30,20 +30,15 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreatureExploresTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -60,8 +55,9 @@ public class WildgrowthWalker extends CardImpl {
 
         // Whenever a creature you control explores, put a +1/+1 counter on Wildgrowth Walker and you gain 3 life.
         Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance());
-        Ability ability = new WildgrowthWalkerTriggeredAbility(effect);
+        Ability ability = new CreatureExploresTriggeredAbility(effect);
         effect = new GainLifeEffect(3);
+        effect.setText("and you gain 3 life");
         ability.addEffect(effect);
         this.addAbility(ability);
     }
@@ -73,40 +69,5 @@ public class WildgrowthWalker extends CardImpl {
     @Override
     public WildgrowthWalker copy() {
         return new WildgrowthWalker(this);
-    }
-}
-
-class WildgrowthWalkerTriggeredAbility extends TriggeredAbilityImpl {
-
-    WildgrowthWalkerTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
-    }
-
-    WildgrowthWalkerTriggeredAbility(final WildgrowthWalkerTriggeredAbility effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.EXPLORED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent creature = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (creature != null) {
-            return creature.getControllerId().equals(controllerId);
-        }
-        return false;
-    }
-
-    @Override
-    public WildgrowthWalkerTriggeredAbility copy() {
-        return new WildgrowthWalkerTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature you control explores, put a +1/+1 counter on {this} and you gain 3 life";
     }
 }

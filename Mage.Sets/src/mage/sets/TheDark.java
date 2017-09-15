@@ -116,6 +116,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Riptide", 34, Rarity.COMMON, mage.cards.r.Riptide.class));
         cards.add(new SetCardInfo("Safe Haven", 115, Rarity.RARE, mage.cards.s.SafeHaven.class));
         cards.add(new SetCardInfo("Savaen Elves", 47, Rarity.COMMON, mage.cards.s.SavaenElves.class));
+        cards.add(new SetCardInfo("Scarwood Bandits", 48, Rarity.RARE, mage.cards.s.ScarwoodBandits.class));
         cards.add(new SetCardInfo("Scarwood Goblins", 119, Rarity.COMMON, mage.cards.s.ScarwoodGoblins.class));
         cards.add(new SetCardInfo("Scarwood Hag", 49, Rarity.UNCOMMON, mage.cards.s.ScarwoodHag.class));
         cards.add(new SetCardInfo("Scavenger Folk", 50, Rarity.COMMON, mage.cards.s.ScavengerFolk.class));

@@ -3,6 +3,7 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -15,7 +16,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected FilterCreaturePermanent filter;
+    protected FilterPermanent filter;
     private boolean setTargetPointer;
 
     public DiesCreatureTriggeredAbility(Effect effect, boolean optional) {
@@ -34,15 +35,15 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
         this.setTargetPointer = setTargetPointer;
     }
 
-    public DiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
+    public DiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
         this(effect, optional, filter, false);
     }
 
-    public DiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, boolean setTargetPointer) {
+    public DiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
         this(Zone.BATTLEFIELD, effect, optional, filter, setTargetPointer);
     }
 
-    public DiesCreatureTriggeredAbility(Zone zone, Effect effect, boolean optional, FilterCreaturePermanent filter, boolean setTargetPointer) {
+    public DiesCreatureTriggeredAbility(Zone zone, Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
         super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
@@ -68,7 +69,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-            if (filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
+            if (filter.match(zEvent.getTarget(), sourceId, controllerId, game) && zEvent.getTarget().isCreature()) {
                 if (setTargetPointer) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));

@@ -72,7 +72,7 @@ class SwordPointDiplomacyEffect extends OneShotEffect {
 
     SwordPointDiplomacyEffect() {
         super(Outcome.Benefit);
-        this.staticText = "";
+        this.staticText = "Reveal the top three cards of your library. For each of those cards, put that card into your hand unless any opponent pays 3 life. Then exile the rest.";
     }
 
     SwordPointDiplomacyEffect(final SwordPointDiplomacyEffect effect) {
@@ -102,10 +102,10 @@ class SwordPointDiplomacyEffect extends OneShotEffect {
             Cost cost = new PayLifeCost(3);
             for (UUID oppId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(oppId);
-                if (!(opponent != null
+                if (opponent != null
                         && cost.canPay(source, source.getSourceId(), opponent.getId(), game)
                         && opponent.chooseUse(Outcome.Neutral, "Pay 3 life to prevent " + controller.getLogName() + " from getting " + card.getLogName() + "?", source, game)
-                        && cost.pay(source, game, source.getSourceId(), opponent.getId(), true))) {
+                        && cost.pay(source, game, source.getSourceId(), opponent.getId(), true)) {
                     keepIt = false;
                 }
             }
