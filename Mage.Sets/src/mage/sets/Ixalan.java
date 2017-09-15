@@ -119,6 +119,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Itlimoc, Cradle of the Sun", 191, Rarity.RARE, mage.cards.i.ItlimocCradleOfTheSun.class));
         cards.add(new SetCardInfo("Ixalan's Binding", 17, Rarity.UNCOMMON, mage.cards.i.IxalansBinding.class));
         cards.add(new SetCardInfo("Jace, Cunning Castaway", 60, Rarity.MYTHIC, mage.cards.j.JaceCunningCastaway.class));
+        cards.add(new SetCardInfo("Jace, Ingenious Mind-Mage", 280, Rarity.MYTHIC, mage.cards.j.JaceIngeniousMindMage.class));
         cards.add(new SetCardInfo("Jace's Sentinel", 283, Rarity.UNCOMMON, mage.cards.j.JacesSentinel.class));
         cards.add(new SetCardInfo("Kinjalli's Caller", 18, Rarity.COMMON, mage.cards.k.KinjallisCaller.class));
         cards.add(new SetCardInfo("Kinjalli's Sunwing", 19, Rarity.RARE, mage.cards.k.KinjallisSunwing.class));
@@ -127,6 +128,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Kumena's Speaker", 196, Rarity.UNCOMMON, mage.cards.k.KumenasSpeaker.class));
         cards.add(new SetCardInfo("Legion Conquistador", 20, Rarity.COMMON, mage.cards.l.LegionConquistador.class));
         cards.add(new SetCardInfo("Legion's Landing", 22, Rarity.RARE, mage.cards.l.LegionsLanding.class));
+        cards.add(new SetCardInfo("Lightning-Rig Crew", 150, Rarity.UNCOMMON, mage.cards.l.LightningRigCrew.class));
         cards.add(new SetCardInfo("Lightning Strike", 149, Rarity.UNCOMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Lookout's Dispersal", 62, Rarity.UNCOMMON, mage.cards.l.LookoutsDispersal.class));
         cards.add(new SetCardInfo("Lost Vale", 235, Rarity.RARE, mage.cards.l.LostVale.class));
@@ -140,6 +142,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 273, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class));
+        cards.add(new SetCardInfo("Old-Growth Dryads", 199, Rarity.RARE, mage.cards.o.OldGrowthDryads.class));
         cards.add(new SetCardInfo("Opt", 65, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Otepec Huntmaster", 153, Rarity.UNCOMMON, mage.cards.o.OtepecHuntmaster.class));
         cards.add(new SetCardInfo("Overflowing Insight", 66, Rarity.MYTHIC, mage.cards.o.OverflowingInsight.class));
@@ -200,12 +203,15 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Storm Fleet Arsonist", 162, Rarity.UNCOMMON, mage.cards.s.StormFleetArsonist.class));
         cards.add(new SetCardInfo("Storm Fleet Spy", 84, Rarity.UNCOMMON, mage.cards.s.StormFleetSpy.class));
         cards.add(new SetCardInfo("Sunbird's Invocation", 165, Rarity.RARE, mage.cards.s.SunbirdsInvocation.class));
+        cards.add(new SetCardInfo("Sun-Blessed Mount", 288, Rarity.RARE, mage.cards.s.SunBlessedMount.class));
+        cards.add(new SetCardInfo("Sun-Crowned Hunters", 164, Rarity.COMMON, mage.cards.s.SunCrownedHunters.class));
         cards.add(new SetCardInfo("Sunpetal Grove", 257, Rarity.RARE, mage.cards.s.SunpetalGrove.class));
         cards.add(new SetCardInfo("Sure Strike", 166, Rarity.COMMON, mage.cards.s.SureStrike.class));
         cards.add(new SetCardInfo("Swamp", 268, Rarity.LAND, mage.cards.basiclands.Swamp.class));
         cards.add(new SetCardInfo("Swamp", 269, Rarity.LAND, mage.cards.basiclands.Swamp.class));
         cards.add(new SetCardInfo("Swamp", 270, Rarity.LAND, mage.cards.basiclands.Swamp.class));
         cards.add(new SetCardInfo("Swamp", 271, Rarity.LAND, mage.cards.basiclands.Swamp.class));
+        cards.add(new SetCardInfo("Sword-Point Diplomacy", 126, Rarity.RARE, mage.cards.s.SwordPointDiplomacy.class));
         cards.add(new SetCardInfo("Temple of Aclazotz", 90, Rarity.RARE, mage.cards.t.TempleOfAclazotz.class));
         cards.add(new SetCardInfo("Thaumatic Compass", 249, Rarity.RARE, mage.cards.t.ThaumaticCompass.class));
         cards.add(new SetCardInfo("Thundering Spineback", 210, Rarity.UNCOMMON, mage.cards.t.ThunderingSpineback.class));
