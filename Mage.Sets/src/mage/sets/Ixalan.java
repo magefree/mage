@@ -162,6 +162,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Paladin of the Bloodstained", 25, Rarity.COMMON, mage.cards.p.PaladinOfTheBloodstained.class));
         cards.add(new SetCardInfo("Perilous Voyage", 67, Rarity.UNCOMMON, mage.cards.p.PerilousVoyage.class));
         cards.add(new SetCardInfo("Pillar of Origins", 241, Rarity.UNCOMMON, mage.cards.p.PillarOfOrigins.class));
+        cards.add(new SetCardInfo("Pious Interdiction", 26, Rarity.COMMON, mage.cards.p.PiousInterdiction.class));
         cards.add(new SetCardInfo("Pirate's Cutlass", 242, Rarity.COMMON, mage.cards.p.PiratesCutlass.class));
         cards.add(new SetCardInfo("Plains", 260, Rarity.LAND, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Plains", 261, Rarity.LAND, mage.cards.basiclands.Plains.class));
