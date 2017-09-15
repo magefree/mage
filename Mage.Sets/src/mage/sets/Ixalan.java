@@ -105,6 +105,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Encampment Keeper", 11, Rarity.COMMON, mage.cards.e.EncampmentKeeper.class));
         cards.add(new SetCardInfo("Entrancing Melody", 55, Rarity.RARE, mage.cards.e.EntrancingMelody.class));
         cards.add(new SetCardInfo("Fathom Fleet Captain", 106, Rarity.RARE, mage.cards.f.FathomFleetCaptain.class));
+        cards.add(new SetCardInfo("Fathom Fleet Firebrand", 142, Rarity.COMMON, mage.cards.f.FathomFleetFirebrand.class));
         cards.add(new SetCardInfo("Favorable Winds", 56, Rarity.UNCOMMON, mage.cards.f.FavorableWinds.class));
         cards.add(new SetCardInfo("Fell Flagship", 238, Rarity.RARE, mage.cards.f.FellFlagship.class));
         cards.add(new SetCardInfo("Field of Ruin", 254, Rarity.UNCOMMON, mage.cards.f.FieldOfRuin.class));
