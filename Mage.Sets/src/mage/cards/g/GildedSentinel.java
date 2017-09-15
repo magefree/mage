@@ -28,48 +28,29 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class GhoulcallersChant extends CardImpl {
+public class GildedSentinel extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Zombie cards from your graveyard");
+    public GildedSentinel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
 
-    static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        this.subtype.add(SubType.GOLEM);
     }
 
-    public GhoulcallersChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
-
-        // Choose one - Return target creature card from your graveyard to your hand
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // or return two target Zombie cards from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
-        this.getSpellAbility().addMode(mode);
-    }
-
-    public GhoulcallersChant(final GhoulcallersChant card) {
+    public GildedSentinel(final GildedSentinel card) {
         super(card);
     }
 
     @Override
-    public GhoulcallersChant copy() {
-        return new GhoulcallersChant(this);
+    public GildedSentinel copy() {
+        return new GildedSentinel(this);
     }
 }

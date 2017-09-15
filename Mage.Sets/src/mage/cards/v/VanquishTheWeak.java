@@ -25,51 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.v;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.constants.ComparisonType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class GhoulcallersChant extends CardImpl {
+public class VanquishTheWeak extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Zombie cards from your graveyard");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
-    public GhoulcallersChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
+    public VanquishTheWeak(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
-        // Choose one - Return target creature card from your graveyard to your hand
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // or return two target Zombie cards from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
-        this.getSpellAbility().addMode(mode);
+        // Destroy target creature with power 3 or less.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public GhoulcallersChant(final GhoulcallersChant card) {
+    public VanquishTheWeak(final VanquishTheWeak card) {
         super(card);
     }
 
     @Override
-    public GhoulcallersChant copy() {
-        return new GhoulcallersChant(this);
+    public VanquishTheWeak copy() {
+        return new VanquishTheWeak(this);
     }
 }

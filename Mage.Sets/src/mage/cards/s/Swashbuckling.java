@@ -25,51 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.constants.SubType;
+import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class GhoulcallersChant extends CardImpl {
+public class Swashbuckling extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Zombie cards from your graveyard");
+    public Swashbuckling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
-    static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        this.subtype.add(SubType.AURA);
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // Enchanted creature gets +2/+2 and has haste.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public GhoulcallersChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
-
-        // Choose one - Return target creature card from your graveyard to your hand
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // or return two target Zombie cards from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
-        this.getSpellAbility().addMode(mode);
-    }
-
-    public GhoulcallersChant(final GhoulcallersChant card) {
+    public Swashbuckling(final Swashbuckling card) {
         super(card);
     }
 
     @Override
-    public GhoulcallersChant copy() {
-        return new GhoulcallersChant(this);
+    public Swashbuckling copy() {
+        return new Swashbuckling(this);
     }
 }

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -41,35 +41,36 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class GhoulcallersChant extends CardImpl {
+public class MarchOfTheDrowned extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Zombie cards from your graveyard");
+    private static final FilterCard filter = new FilterCard("Pirate cards from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(new SubtypePredicate(SubType.PIRATE));
     }
 
-    public GhoulcallersChant(UUID ownerId, CardSetInfo setInfo) {
+    public MarchOfTheDrowned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
-        // Choose one - Return target creature card from your graveyard to your hand
+        // Choose one —
+        // &amp;bull; Return target creature card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // or return two target Zombie cards from your graveyard to your hand.
+        // &amp;bull; Return two target Pirate cards from your graveyard to your hand.
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnToHandTargetEffect());
         mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
         this.getSpellAbility().addMode(mode);
     }
 
-    public GhoulcallersChant(final GhoulcallersChant card) {
+    public MarchOfTheDrowned(final MarchOfTheDrowned card) {
         super(card);
     }
 
     @Override
-    public GhoulcallersChant copy() {
-        return new GhoulcallersChant(this);
+    public MarchOfTheDrowned copy() {
+        return new MarchOfTheDrowned(this);
     }
 }

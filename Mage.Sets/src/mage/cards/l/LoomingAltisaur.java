@@ -25,51 +25,35 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.l;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.MageInt;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class GhoulcallersChant extends CardImpl {
+public class LoomingAltisaur extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Zombie cards from your graveyard");
-
-    static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+    public LoomingAltisaur(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(7);
     }
 
-    public GhoulcallersChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
-
-        // Choose one - Return target creature card from your graveyard to your hand
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // or return two target Zombie cards from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
-        this.getSpellAbility().addMode(mode);
-    }
-
-    public GhoulcallersChant(final GhoulcallersChant card) {
+    public LoomingAltisaur(final LoomingAltisaur card) {
         super(card);
     }
 
     @Override
-    public GhoulcallersChant copy() {
-        return new GhoulcallersChant(this);
+    public LoomingAltisaur copy() {
+        return new LoomingAltisaur(this);
     }
 }

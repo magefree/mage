@@ -29,37 +29,64 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.keyword.ExploreSourceEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.constants.SubType;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author TheElk801
  */
-public class IxallisDiviner extends CardImpl {
+public class ImperialAerosaur extends CardImpl {
 
-    public IxallisDiviner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.DRUID);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(3);
-
-        // When Ixalli's Diviner enters the battlefield, it explores.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new AnotherPredicate());
     }
 
-    public IxallisDiviner(final IxallisDiviner card) {
+    public ImperialAerosaur(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
+
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // When Imperial Aerosaur enters the battlefield, another target creature you control gets +1/+1 and gains flying until end of turn.
+        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
+        effect.setText("another target creature you control gets +1/+1");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
+        ability.addEffect(effect);
+        effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains flying until end of turn");
+        ability.addEffect(effect);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public ImperialAerosaur(final ImperialAerosaur card) {
         super(card);
     }
 
     @Override
-    public IxallisDiviner copy() {
-        return new IxallisDiviner(this);
+    public ImperialAerosaur copy() {
+        return new ImperialAerosaur(this);
     }
 }

@@ -25,51 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.constants.Zone;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class GhoulcallersChant extends CardImpl {
+public class BlossomDryad extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Zombie cards from your graveyard");
+    public BlossomDryad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-    static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        this.subtype.add(SubType.DRYAD);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // {t}: Untap target land.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetLandPermanent());
+        this.addAbility(ability);
     }
 
-    public GhoulcallersChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
-
-        // Choose one - Return target creature card from your graveyard to your hand
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // or return two target Zombie cards from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
-        this.getSpellAbility().addMode(mode);
-    }
-
-    public GhoulcallersChant(final GhoulcallersChant card) {
+    public BlossomDryad(final BlossomDryad card) {
         super(card);
     }
 
     @Override
-    public GhoulcallersChant copy() {
-        return new GhoulcallersChant(this);
+    public BlossomDryad copy() {
+        return new BlossomDryad(this);
     }
 }

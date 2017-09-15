@@ -25,51 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.constants.Duration;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class GhoulcallersChant extends CardImpl {
+public class CrashTheRamparts extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Zombie cards from your graveyard");
+    public CrashTheRamparts(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
-    static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        // Target creature gets +3/+3 and gains trample until end of turn.
+        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
+        effect.setText("Target creature gets +3/+3");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains trample until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GhoulcallersChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
-
-        // Choose one - Return target creature card from your graveyard to your hand
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // or return two target Zombie cards from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
-        this.getSpellAbility().addMode(mode);
-    }
-
-    public GhoulcallersChant(final GhoulcallersChant card) {
+    public CrashTheRamparts(final CrashTheRamparts card) {
         super(card);
     }
 
     @Override
-    public GhoulcallersChant copy() {
-        return new GhoulcallersChant(this);
+    public CrashTheRamparts copy() {
+        return new CrashTheRamparts(this);
     }
 }

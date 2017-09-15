@@ -25,51 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.h;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.Target;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class GhoulcallersChant extends CardImpl {
+public class HierophantsChalice extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Zombie cards from your graveyard");
+    public HierophantsChalice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-    static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        // When Hierophant's Chalice enters the battlefield, target opponent loses 1 life and you gain 1 life.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), false);
+        ability.addEffect(new GainLifeEffect(1));
+        Target target = new TargetOpponent();
+        ability.addTarget(target);
+        this.addAbility(ability);
+
+        // {t}: Add {c} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
     }
 
-    public GhoulcallersChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
-
-        // Choose one - Return target creature card from your graveyard to your hand
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // or return two target Zombie cards from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
-        this.getSpellAbility().addMode(mode);
-    }
-
-    public GhoulcallersChant(final GhoulcallersChant card) {
+    public HierophantsChalice(final HierophantsChalice card) {
         super(card);
     }
 
     @Override
-    public GhoulcallersChant copy() {
-        return new GhoulcallersChant(this);
+    public HierophantsChalice copy() {
+        return new HierophantsChalice(this);
     }
 }
