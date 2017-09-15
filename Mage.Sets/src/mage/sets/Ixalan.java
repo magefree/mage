@@ -60,6 +60,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Charging Monstrosaur", 138, Rarity.UNCOMMON, mage.cards.c.ChargingMonstrosaur.class));
         cards.add(new SetCardInfo("Chart a Course", 48, Rarity.UNCOMMON, mage.cards.c.ChartACourse.class));
         cards.add(new SetCardInfo("Cobbled Wings", 233, Rarity.COMMON, mage.cards.c.CobbledWings.class));
+        cards.add(new SetCardInfo("Colossal Dreadmaw", 180, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Commune with Dinosaurs", 181, Rarity.COMMON, mage.cards.c.CommuneWithDinosaurs.class));
         cards.add(new SetCardInfo("Conqueror's Foothold", 234, Rarity.RARE, mage.cards.c.ConquerorsFoothold.class));
         cards.add(new SetCardInfo("Conqueror's Galleon", 234, Rarity.RARE, mage.cards.c.ConquerorsGalleon.class));
@@ -99,6 +100,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 277, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Forest", 278, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Forest", 279, Rarity.LAND, mage.cards.basiclands.Forest.class));
+        cards.add(new SetCardInfo("Frenzied Raptor", 146, Rarity.COMMON, mage.cards.f.FrenziedRaptor.class));
         cards.add(new SetCardInfo("Gishath, Sun's Avatar", 222, Rarity.MYTHIC, mage.cards.g.GishathSunsAvatar.class));
         cards.add(new SetCardInfo("Glacial Fortress", 255, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Goring Ceratops", 13, Rarity.RARE, mage.cards.g.GoringCeratops.class));
@@ -145,6 +147,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 273, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class));
+        cards.add(new SetCardInfo("Nest Robber", 152, Rarity.COMMON, mage.cards.n.NestRobber.class));
         cards.add(new SetCardInfo("Old-Growth Dryads", 199, Rarity.RARE, mage.cards.o.OldGrowthDryads.class));
         cards.add(new SetCardInfo("Opt", 65, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Otepec Huntmaster", 153, Rarity.UNCOMMON, mage.cards.o.OtepecHuntmaster.class));
@@ -190,10 +193,12 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Shadowed Caravel", 246, Rarity.RARE, mage.cards.s.ShadowedCaravel.class));
         cards.add(new SetCardInfo("Shapers of Nature", 228, Rarity.UNCOMMON, mage.cards.s.ShapersOfNature.class));
         cards.add(new SetCardInfo("Shapers' Sanctuary", 206, Rarity.RARE, mage.cards.s.ShapersSanctuary.class));
+        cards.add(new SetCardInfo("Shining Aerosaur", 36, Rarity.COMMON, mage.cards.s.ShiningAerosaur.class));
         cards.add(new SetCardInfo("Siren Stormtamer", 79, Rarity.UNCOMMON, mage.cards.s.SirenStormtamer.class));
         cards.add(new SetCardInfo("Skittering Heartstopper", 122, Rarity.COMMON, mage.cards.s.SkitteringHeartstopper.class));
         cards.add(new SetCardInfo("Skulduggery", 123, Rarity.COMMON, mage.cards.s.Skulduggery.class));
         cards.add(new SetCardInfo("Sky Terror", 229, Rarity.UNCOMMON, mage.cards.s.SkyTerror.class));
+        cards.add(new SetCardInfo("Skyblade of the Legion", 37, Rarity.COMMON, mage.cards.s.SkybladeOfTheLegion.class));
         cards.add(new SetCardInfo("Sleek Schooner", 247, Rarity.UNCOMMON, mage.cards.s.SleekSchooner.class));
         cards.add(new SetCardInfo("Snapping Sailback", 208, Rarity.UNCOMMON, mage.cards.s.SnappingSailback.class));
         cards.add(new SetCardInfo("Sorcerous Spyglass", 248, Rarity.RARE, mage.cards.s.SorcerousSpyglass.class));
@@ -210,6 +215,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Sun-Blessed Mount", 288, Rarity.RARE, mage.cards.s.SunBlessedMount.class));
         cards.add(new SetCardInfo("Sun-Crowned Hunters", 164, Rarity.COMMON, mage.cards.s.SunCrownedHunters.class));
         cards.add(new SetCardInfo("Sunpetal Grove", 257, Rarity.RARE, mage.cards.s.SunpetalGrove.class));
+        cards.add(new SetCardInfo("Sunrise Seeker", 40, Rarity.COMMON, mage.cards.s.SunriseSeeker.class));
         cards.add(new SetCardInfo("Sure Strike", 166, Rarity.COMMON, mage.cards.s.SureStrike.class));
         cards.add(new SetCardInfo("Swamp", 268, Rarity.LAND, mage.cards.basiclands.Swamp.class));
         cards.add(new SetCardInfo("Swamp", 269, Rarity.LAND, mage.cards.basiclands.Swamp.class));
@@ -243,6 +249,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Wanted Scoundrels", 131, Rarity.UNCOMMON, mage.cards.w.WantedScoundrels.class));
         cards.add(new SetCardInfo("Wildgrowth Walker", 216, Rarity.UNCOMMON, mage.cards.w.WildgrowthWalker.class));
         cards.add(new SetCardInfo("Wily Goblin", 174, Rarity.UNCOMMON, mage.cards.w.WilyGoblin.class));
+        cards.add(new SetCardInfo("Wind Strider", 88, Rarity.COMMON, mage.cards.w.WindStrider.class));
         cards.add(new SetCardInfo("Woodland Stream", 284, Rarity.COMMON, mage.cards.w.WoodlandStream.class));
     }
 }
