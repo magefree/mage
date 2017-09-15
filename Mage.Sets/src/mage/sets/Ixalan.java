@@ -198,6 +198,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Primal Amulet", 243, Rarity.RARE, mage.cards.p.PrimalAmulet.class));
         cards.add(new SetCardInfo("Primal Wellspring", 243, Rarity.RARE, mage.cards.p.PrimalWellspring.class));
         cards.add(new SetCardInfo("Prosperous Pirates", 69, Rarity.COMMON, mage.cards.p.ProsperousPirates.class));
+        cards.add(new SetCardInfo("Prying Blade", 244, Rarity.COMMON, mage.cards.p.PryingBlade.class));
         cards.add(new SetCardInfo("Pterodon Knight", 28, Rarity.COMMON, mage.cards.p.PterodonKnight.class));
         cards.add(new SetCardInfo("Queen's Agent", 114, Rarity.COMMON, mage.cards.q.QueensAgent.class));
         cards.add(new SetCardInfo("Queen's Bay Soldier", 115, Rarity.COMMON, mage.cards.q.QueensBaySoldier.class));
