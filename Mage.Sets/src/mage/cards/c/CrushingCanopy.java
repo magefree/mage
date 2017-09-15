@@ -25,52 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
  * @author TheElk801
  */
-public class MarchOfTheDrowned extends CardImpl {
+public class CrushingCanopy extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Pirate cards from your graveyard");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public MarchOfTheDrowned(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
+    public CrushingCanopy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
-        // Choose one —
-        // &amp;bull; Return target creature card from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // &amp;bull; Return two target Pirate cards from your graveyard to your hand.
+        // Choose one --
+        // * Destroy target creature with flying.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        // * Destroy target enchantment.
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
+        mode.getTargets().add(new TargetEnchantmentPermanent());
+        mode.getEffects().add(new DestroyTargetEffect());
         this.getSpellAbility().addMode(mode);
     }
 
-    public MarchOfTheDrowned(final MarchOfTheDrowned card) {
+    public CrushingCanopy(final CrushingCanopy card) {
         super(card);
     }
 
     @Override
-    public MarchOfTheDrowned copy() {
-        return new MarchOfTheDrowned(this);
+    public CrushingCanopy copy() {
+        return new CrushingCanopy(this);
     }
 }

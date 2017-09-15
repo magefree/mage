@@ -25,52 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
  * @author TheElk801
  */
-public class MarchOfTheDrowned extends CardImpl {
+public class FathomFleetFirebrand extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Pirate cards from your graveyard");
+    public FathomFleetFirebrand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-    static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // {1}{r}: Fathom Fleet Firebrand gets +1/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
-    public MarchOfTheDrowned(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
-
-        // Choose one —
-        // &amp;bull; Return target creature card from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // &amp;bull; Return two target Pirate cards from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
-        this.getSpellAbility().addMode(mode);
-    }
-
-    public MarchOfTheDrowned(final MarchOfTheDrowned card) {
+    public FathomFleetFirebrand(final FathomFleetFirebrand card) {
         super(card);
     }
 
     @Override
-    public MarchOfTheDrowned copy() {
-        return new MarchOfTheDrowned(this);
+    public FathomFleetFirebrand copy() {
+        return new FathomFleetFirebrand(this);
     }
 }

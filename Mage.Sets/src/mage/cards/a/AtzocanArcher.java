@@ -25,52 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.a;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.FightTargetSourceEffect;
+import mage.constants.SubType;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author TheElk801
  */
-public class MarchOfTheDrowned extends CardImpl {
+public class AtzocanArcher extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Pirate cards from your graveyard");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(new AnotherPredicate());
     }
 
-    public MarchOfTheDrowned(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
+    public AtzocanArcher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        // Choose one —
-        // &amp;bull; Return target creature card from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // &amp;bull; Return two target Pirate cards from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
-        this.getSpellAbility().addMode(mode);
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ARCHER);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
+
+        // Reach
+        this.addAbility(ReachAbility.getInstance());
+
+        // When Atzocan Archer enters the battlefield, you may have it fight another target creature.
+        Effect effect = new FightTargetSourceEffect();
+        effect.setText("you may have it fight another target creature");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
-    public MarchOfTheDrowned(final MarchOfTheDrowned card) {
+    public AtzocanArcher(final AtzocanArcher card) {
         super(card);
     }
 
     @Override
-    public MarchOfTheDrowned copy() {
-        return new MarchOfTheDrowned(this);
+    public AtzocanArcher copy() {
+        return new AtzocanArcher(this);
     }
 }
