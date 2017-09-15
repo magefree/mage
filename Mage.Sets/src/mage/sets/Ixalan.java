@@ -213,6 +213,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Tocatli Honor Guard", 42, Rarity.RARE, mage.cards.t.TocatliHonorGuard.class));
         cards.add(new SetCardInfo("Treasure Cove", 1250, Rarity.RARE, mage.cards.t.TreasureCove.class));
         cards.add(new SetCardInfo("Treasure Map", 250, Rarity.RARE, mage.cards.t.TreasureMap.class));
+        cards.add(new SetCardInfo("Trove of Temptation", 171, Rarity.UNCOMMON, mage.cards.t.TroveOfTemptation.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 258, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Unfriendly Fire", 172, Rarity.COMMON, mage.cards.u.UnfriendlyFire.class));
         cards.add(new SetCardInfo("Vance's Blasting Cannons", 173, Rarity.RARE, mage.cards.v.VancesBlastingCannons.class));

@@ -1073,7 +1073,7 @@ public class HumanPlayer extends PlayerImpl {
 
             List<UUID> possibleAttackers = new ArrayList<>();
             for (Permanent possibleAttacker : game.getBattlefield().getActivePermanents(filter, attackingPlayerId, game)) {
-                if (possibleAttacker.canAttack(game)) {
+                if (possibleAttacker.canAttack(null, game)) {
                     possibleAttackers.add(possibleAttacker.getId());
                 }
             }
@@ -1207,7 +1207,7 @@ public class HumanPlayer extends PlayerImpl {
                         // already attacks other player taht has to be attacked
                         continue;
                     }
-                    if (defendingPlayerId != null || attacker.canAttack(forcedToAttackId, game)) {
+                    if (defendingPlayerId != null || attacker.canAttackInPrinciple(forcedToAttackId, game)) {
                         game.informPlayer(this, "You are forced to attack " + forcedToAttack.getName() + " or a controlled planeswalker e.g. with " + attacker.getIdName() + ".");
                         return false;
                     }

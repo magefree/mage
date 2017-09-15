@@ -1030,15 +1030,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean canAttack(Game game) {
-        return canAttack(null, game);
-    }
-
-    @Override
     public boolean canAttack(UUID defenderId, Game game) {
         if (tapped) {
             return false;
         }
+        return canAttackInPrinciple(defenderId, game);
+    }
+
+    @Override
+    public boolean canAttackInPrinciple(UUID defenderId, Game game) {
         if (hasSummoningSickness() && !game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK_AS_HASTE, this.getControllerId(), game)) {
             return false;
         }
