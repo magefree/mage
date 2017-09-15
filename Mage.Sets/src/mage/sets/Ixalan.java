@@ -37,6 +37,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Air Elemental", 45, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Ancient Brontodon", 175, Rarity.COMMON, mage.cards.a.AncientBrontodon.class));
         cards.add(new SetCardInfo("Angrath's Marauders", 132, Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
+        cards.add(new SetCardInfo("Anointed Deacon", 89, Rarity.COMMON, mage.cards.a.AnointedDeacon.class));
         cards.add(new SetCardInfo("Arcane Adaptation", 46, Rarity.RARE, mage.cards.a.ArcaneAdaptation.class));
         cards.add(new SetCardInfo("Arguel's Blood Fast", 90, Rarity.RARE, mage.cards.a.ArguelsBloodFast.class));
         cards.add(new SetCardInfo("Ashes of the Abhorrent", 2, Rarity.RARE, mage.cards.a.AshesOfTheAbhorrent.class));
@@ -77,6 +78,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Deathgorge Scavenger", 184, Rarity.RARE, mage.cards.d.DeathgorgeScavenger.class));
         cards.add(new SetCardInfo("Deathless Ancient", 100, Rarity.UNCOMMON, mage.cards.d.DeathlessAncient.class));
         cards.add(new SetCardInfo("Deeproot Champion", 185, Rarity.RARE, mage.cards.d.DeeprootChampion.class));
+        cards.add(new SetCardInfo("Deeproot Warrior", 186, Rarity.COMMON, mage.cards.d.DeeprootWarrior.class));
         cards.add(new SetCardInfo("Deeproot Waters", 51, Rarity.UNCOMMON, mage.cards.d.DeeprootWaters.class));
         cards.add(new SetCardInfo("Demolish", 139, Rarity.COMMON, mage.cards.d.Demolish.class));
         cards.add(new SetCardInfo("Demystify", 8, Rarity.COMMON, mage.cards.d.Demystify.class));
@@ -96,6 +98,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Duress", 105, Rarity.COMMON, mage.cards.d.Duress.class));
         cards.add(new SetCardInfo("Duskborne Skymarcher", 9, Rarity.UNCOMMON, mage.cards.d.DuskborneSkymarcher.class));
         cards.add(new SetCardInfo("Dusk Legion Dreadnought", 236, Rarity.UNCOMMON, mage.cards.d.DuskLegionDreadnought.class));
+        cards.add(new SetCardInfo("Emergent Growth", 188, Rarity.UNCOMMON, mage.cards.e.EmergentGrowth.class));
         cards.add(new SetCardInfo("Emissary of Sunrise", 10, Rarity.UNCOMMON, mage.cards.e.EmissaryOfSunrise.class));
         cards.add(new SetCardInfo("Emperor's Vanguard", 189, Rarity.RARE, mage.cards.e.EmperorsVanguard.class));
         cards.add(new SetCardInfo("Encampment Keeper", 11, Rarity.COMMON, mage.cards.e.EncampmentKeeper.class));
@@ -135,9 +138,12 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Itlimoc, Cradle of the Sun", 191, Rarity.RARE, mage.cards.i.ItlimocCradleOfTheSun.class));
         cards.add(new SetCardInfo("Ixalan's Binding", 17, Rarity.UNCOMMON, mage.cards.i.IxalansBinding.class));
         cards.add(new SetCardInfo("Ixalli's Diviner", 192, Rarity.COMMON, mage.cards.i.IxallisDiviner.class));
+        cards.add(new SetCardInfo("Ixalli's Keeper", 193, Rarity.COMMON, mage.cards.i.IxallisKeeper.class));
         cards.add(new SetCardInfo("Jace, Cunning Castaway", 60, Rarity.MYTHIC, mage.cards.j.JaceCunningCastaway.class));
         cards.add(new SetCardInfo("Jace, Ingenious Mind-Mage", 280, Rarity.MYTHIC, mage.cards.j.JaceIngeniousMindMage.class));
         cards.add(new SetCardInfo("Jace's Sentinel", 283, Rarity.UNCOMMON, mage.cards.j.JacesSentinel.class));
+        cards.add(new SetCardInfo("Jade Guardian", 194, Rarity.COMMON, mage.cards.j.JadeGuardian.class));
+        cards.add(new SetCardInfo("Jungle Delver", 195, Rarity.COMMON, mage.cards.j.JungleDelver.class));
         cards.add(new SetCardInfo("Kinjalli's Caller", 18, Rarity.COMMON, mage.cards.k.KinjallisCaller.class));
         cards.add(new SetCardInfo("Kinjalli's Sunwing", 19, Rarity.RARE, mage.cards.k.KinjallisSunwing.class));
         cards.add(new SetCardInfo("Kitesail Freebooter", 110, Rarity.UNCOMMON, mage.cards.k.KitesailFreebooter.class));
@@ -162,6 +168,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 273, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class));
+        cards.add(new SetCardInfo("New Horizons", 198, Rarity.COMMON, mage.cards.n.NewHorizons.class));
         cards.add(new SetCardInfo("Nest Robber", 152, Rarity.COMMON, mage.cards.n.NestRobber.class));
         cards.add(new SetCardInfo("Old-Growth Dryads", 199, Rarity.RARE, mage.cards.o.OldGrowthDryads.class));
         cards.add(new SetCardInfo("One with the Wind", 64, Rarity.COMMON, mage.cards.o.OneWithTheWind.class));
@@ -178,6 +185,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 261, Rarity.LAND, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Plains", 263, Rarity.LAND, mage.cards.basiclands.Plains.class));
+        cards.add(new SetCardInfo("Pounce", 200, Rarity.COMMON, mage.cards.p.Pounce.class));
         cards.add(new SetCardInfo("Priest of the Wakening Sun", 27, Rarity.RARE, mage.cards.p.PriestOfTheWakeningSun.class));
         cards.add(new SetCardInfo("Primal Amulet", 243, Rarity.RARE, mage.cards.p.PrimalAmulet.class));
         cards.add(new SetCardInfo("Primal Wellspring", 243, Rarity.RARE, mage.cards.p.PrimalWellspring.class));
@@ -200,6 +208,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Rigging Runner", 157, Rarity.UNCOMMON, mage.cards.r.RiggingRunner.class));
         cards.add(new SetCardInfo("Rile", 158, Rarity.COMMON, mage.cards.r.Rile.class));
         cards.add(new SetCardInfo("Ripjaw Raptor", 203, Rarity.RARE, mage.cards.r.RipjawRaptor.class));
+        cards.add(new SetCardInfo("River Heralds' Boon", 204, Rarity.COMMON, mage.cards.r.RiverHeraldsBoon.class));
         cards.add(new SetCardInfo("Ritual of Rejuvenation", 32, Rarity.COMMON, mage.cards.r.RitualOfRejuvenation.class));
         cards.add(new SetCardInfo("River Sneak", 70, Rarity.UNCOMMON, mage.cards.r.RiverSneak.class));
         cards.add(new SetCardInfo("River's Rebuke", 71, Rarity.RARE, mage.cards.r.RiversRebuke.class));
@@ -236,6 +245,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Sorcerous Spyglass", 248, Rarity.RARE, mage.cards.s.SorcerousSpyglass.class));
         cards.add(new SetCardInfo("Spell Pierce", 81, Rarity.COMMON, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Spell Swindle", 82, Rarity.RARE, mage.cards.s.SpellSwindle.class));
+        cards.add(new SetCardInfo("Spike-Tailed Ceratops", 209, Rarity.COMMON, mage.cards.s.SpikeTailedCeratops.class));
         cards.add(new SetCardInfo("Spires of Orazca", 249, Rarity.RARE, mage.cards.s.SpiresOfOrazca.class));
         cards.add(new SetCardInfo("Spitfire Bastion", 173, Rarity.RARE, mage.cards.s.SpitfireBastion.class));
         cards.add(new SetCardInfo("Star of Extinction", 161, Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class));
