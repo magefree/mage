@@ -25,51 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.h;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.CantBlockAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.MenaceAbility;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public class GhoulcallersChant extends CardImpl {
+public class HeadstrongBrute extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Zombie cards from your graveyard");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Pirate");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(new AnotherPredicate());
     }
 
-    public GhoulcallersChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
+    public HeadstrongBrute(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        // Choose one - Return target creature card from your graveyard to your hand
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // or return two target Zombie cards from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
-        this.getSpellAbility().addMode(mode);
+        this.subtype.add(SubType.ORC);
+        this.subtype.add(SubType.PIRATE);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Headstrong Brute can't block.
+        this.addAbility(new CantBlockAbility());
+
+        // Headstrong Brute has menace as long as you control another Pirate.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(MenaceAbility.getInstance(), Duration.WhileOnBattlefield),
+                        new PermanentsOnTheBattlefieldCondition(filter), "{this} has menace as long as you control another Pirate")));
     }
 
-    public GhoulcallersChant(final GhoulcallersChant card) {
+    public HeadstrongBrute(final HeadstrongBrute card) {
         super(card);
     }
 
     @Override
-    public GhoulcallersChant copy() {
-        return new GhoulcallersChant(this);
+    public HeadstrongBrute copy() {
+        return new HeadstrongBrute(this);
     }
 }
