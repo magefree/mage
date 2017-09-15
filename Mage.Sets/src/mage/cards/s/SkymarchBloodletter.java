@@ -25,52 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.constants.SubType;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.Target;
+import mage.target.common.TargetOpponent;
 
 /**
  *
  * @author TheElk801
  */
-public class MarchOfTheDrowned extends CardImpl {
+public class SkymarchBloodletter extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Pirate cards from your graveyard");
+    public SkymarchBloodletter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-    static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.SOLDIER);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // When Skymarch Bloodletters enters the battlefield, target opponent loses 1 life and you gain 1 life.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), false);
+        ability.addEffect(new GainLifeEffect(1));
+        Target target = new TargetOpponent();
+        ability.addTarget(target);
+        this.addAbility(ability);
     }
 
-    public MarchOfTheDrowned(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
-
-        // Choose one —
-        // &amp;bull; Return target creature card from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        // &amp;bull; Return two target Pirate cards from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
-        this.getSpellAbility().addMode(mode);
-    }
-
-    public MarchOfTheDrowned(final MarchOfTheDrowned card) {
+    public SkymarchBloodletter(final SkymarchBloodletter card) {
         super(card);
     }
 
     @Override
-    public MarchOfTheDrowned copy() {
-        return new MarchOfTheDrowned(this);
+    public SkymarchBloodletter copy() {
+        return new SkymarchBloodletter(this);
     }
 }

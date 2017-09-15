@@ -239,6 +239,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Skulduggery", 123, Rarity.COMMON, mage.cards.s.Skulduggery.class));
         cards.add(new SetCardInfo("Sky Terror", 229, Rarity.UNCOMMON, mage.cards.s.SkyTerror.class));
         cards.add(new SetCardInfo("Skyblade of the Legion", 37, Rarity.COMMON, mage.cards.s.SkybladeOfTheLegion.class));
+        cards.add(new SetCardInfo("Skymarch Bloodletter", 124, Rarity.COMMON, mage.cards.s.SkymarchBloodletter.class));
         cards.add(new SetCardInfo("Slash of Talons", 38, Rarity.COMMON, mage.cards.s.SlashOfTalons.class));
         cards.add(new SetCardInfo("Sleek Schooner", 247, Rarity.UNCOMMON, mage.cards.s.SleekSchooner.class));
         cards.add(new SetCardInfo("Snapping Sailback", 208, Rarity.UNCOMMON, mage.cards.s.SnappingSailback.class));
