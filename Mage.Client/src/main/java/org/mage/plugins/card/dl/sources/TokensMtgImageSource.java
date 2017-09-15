@@ -57,11 +57,6 @@ public enum TokensMtgImageSource implements CardImageSource {
     private static final Set<String> supportedSets = new LinkedHashSet<String>();
 
     private final Object tokensDataSync = new Object();
-    private final Set<String> supportedSets;
-
-    private TokensMtgImageSource() {
-        this.supportedSets = new LinkedHashSet<>();
-    }
 
     @Override
     public String getSourceName() {
@@ -356,10 +351,4 @@ public enum TokensMtgImageSource implements CardImageSource {
         return false;
     }
 
-    @Override
-    public ArrayList<String> getSupportedSets() {
-        ArrayList<String> supportedSetsCopy = new ArrayList<>();
-        supportedSetsCopy.addAll(supportedSets);
-        return supportedSetsCopy;
-    }
 }
