@@ -110,6 +110,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Grasping Current", 282, Rarity.RARE, mage.cards.g.GraspingCurrent.class));
         cards.add(new SetCardInfo("Grazing Whiptail", 190, Rarity.COMMON, mage.cards.g.GrazingWhiptail.class));
         cards.add(new SetCardInfo("Growing Rites of Itlimoc", 191, Rarity.RARE, mage.cards.g.GrowingRitesOfItlimoc.class));
+        cards.add(new SetCardInfo("Headstrong Brute", 147, Rarity.COMMON, mage.cards.h.HeadstrongBrute.class));
         cards.add(new SetCardInfo("Headwater Sentries", 58, Rarity.COMMON, mage.cards.h.HeadwaterSentries.class));
         cards.add(new SetCardInfo("Herald of Secret Streams", 59, Rarity.RARE, mage.cards.h.HeraldOfSecretStreams.class));
         cards.add(new SetCardInfo("Hijack", 148, Rarity.COMMON, mage.cards.h.Hijack.class));
@@ -172,6 +173,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Primal Amulet", 243, Rarity.RARE, mage.cards.p.PrimalAmulet.class));
         cards.add(new SetCardInfo("Primal Wellspring", 243, Rarity.RARE, mage.cards.p.PrimalWellspring.class));
         cards.add(new SetCardInfo("Prosperous Pirates", 69, Rarity.COMMON, mage.cards.p.ProsperousPirates.class));
+        cards.add(new SetCardInfo("Pterodon Knight", 28, Rarity.COMMON, mage.cards.p.PterodonKnight.class));
         cards.add(new SetCardInfo("Queen's Agent", 114, Rarity.COMMON, mage.cards.q.QueensAgent.class));
         cards.add(new SetCardInfo("Queen's Bay Soldier", 115, Rarity.COMMON, mage.cards.q.QueensBaySoldier.class));
         cards.add(new SetCardInfo("Raging Swordtooth", 226, Rarity.UNCOMMON, mage.cards.r.RagingSwordtooth.class));
@@ -202,6 +204,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Sentinel Totem", 245, Rarity.UNCOMMON, mage.cards.s.SentinelTotem.class));
         cards.add(new SetCardInfo("Settle the Wreckage", 34, Rarity.RARE, mage.cards.s.SettleTheWreckage.class));
         cards.add(new SetCardInfo("Shadowed Caravel", 246, Rarity.RARE, mage.cards.s.ShadowedCaravel.class));
+        cards.add(new SetCardInfo("Shaper Apprentice", 75, Rarity.COMMON, mage.cards.s.ShaperApprentice.class));
         cards.add(new SetCardInfo("Shapers of Nature", 228, Rarity.UNCOMMON, mage.cards.s.ShapersOfNature.class));
         cards.add(new SetCardInfo("Shapers' Sanctuary", 206, Rarity.RARE, mage.cards.s.ShapersSanctuary.class));
         cards.add(new SetCardInfo("Shining Aerosaur", 36, Rarity.COMMON, mage.cards.s.ShiningAerosaur.class));
