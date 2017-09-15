@@ -376,4 +376,10 @@ public enum MtgOnlTokensImageSource implements CardImageSource {
     @Override
     public void doPause(String httpImageUrl) {
     }
+
+    @Override
+    public boolean isImageProvided(String setCode, String cardName) {
+        return true;
+    }
+
 }

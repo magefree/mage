@@ -81,12 +81,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         WIZARDS("wizards.com", WizardCardsImageSource.instance),
         MYTHICSPOILER("mythicspoiler.com", MythicspoilerComSource.instance),
         TOKENS("tokens.mtg.onl", TokensMtgImageSource.instance),
-        MTG_ONL("mtg.onl", MtgOnlTokensImageSource.instance),
+        // MTG_ONL("mtg.onl", MtgOnlTokensImageSource.instance),
         ALTERNATIVE("alternative.mtg.onl", AltMtgOnlTokensImageSource.instance),
         GRAB_BAG("GrabBag", GrabbagImageSource.instance),
         MAGIDEX("magidex.com", MagidexImageSource.instance),
-        SCRYFALL("scryfall.com", ScryfallImageSource.instance),
-        MAGICCARDS("magiccards.info", MagicCardsImageSource.instance);
+        SCRYFALL("scryfall.com", ScryfallImageSource.instance);
+        // MAGICCARDS("magiccards.info", MagicCardsImageSource.instance)
 
         private final String text;
         private final CardImageSource source;
@@ -276,6 +276,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
                 }
                 break;
+            case ALL_TOKENS:
+                break;
             default:
                 int nonSetEntries = 0;
                 if (cardImageSource.getSupportedSets() != null) {
@@ -290,8 +292,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         int numberTokenImagesAvailable = 0;
         int numberCardImagesAvailable = 0;
         for (CardDownloadData data : allCardsMissingImage) {
-            if (data.isToken() && cardImageSource.isTokenSource()) {
-                if (cardImageSource.isImageProvided(data.getSet(), data.getName())) {
+            if (data.isToken()) {
+                if (cardImageSource.isTokenSource()
+                        && cardImageSource.isImageProvided(data.getSet(), data.getName())) {
                     numberTokenImagesAvailable++;
                     cardsToDownload.add(data);
                 }

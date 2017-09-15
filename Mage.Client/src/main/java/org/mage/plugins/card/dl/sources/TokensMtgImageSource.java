@@ -34,8 +34,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
@@ -53,6 +55,11 @@ public enum TokensMtgImageSource implements CardImageSource {
     private HashMap<String, ArrayList<TokenData>> tokensData;
 
     private final Object tokensDataSync = new Object();
+    private final Set<String> supportedSets;
+
+    private TokensMtgImageSource() {
+        this.supportedSets = new LinkedHashSet<>();
+    }
 
     @Override
     public String getSourceName() {
@@ -201,6 +208,7 @@ public enum TokensMtgImageSource implements CardImageSource {
                     List<TokenData> siteTokensData = parseTokensData(inputStream);
                     for (TokenData siteData : siteTokensData) {
                         String key = siteData.getExpansionSetCode() + "/" + siteData.getName();
+                        supportedSets.add(siteData.getExpansionSetCode());
                         ArrayList<TokenData> list = tokensData.get(key);
                         if (list == null) {
                             list = new ArrayList<>();
@@ -335,4 +343,10 @@ public enum TokensMtgImageSource implements CardImageSource {
         return false;
     }
 
+    @Override
+    public ArrayList<String> getSupportedSets() {
+        ArrayList<String> supportedSetsCopy = new ArrayList<>();
+        supportedSetsCopy.addAll(supportedSets);
+        return supportedSetsCopy;
+    }
 }
