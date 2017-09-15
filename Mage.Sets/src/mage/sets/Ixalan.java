@@ -79,6 +79,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Dinosaur Stampede", 140, Rarity.UNCOMMON, mage.cards.d.DinosaurStampede.class));
         cards.add(new SetCardInfo("Dire Fleet Captain", 221, Rarity.UNCOMMON, mage.cards.d.DireFleetCaptain.class));
         cards.add(new SetCardInfo("Dire Fleet Hoarder", 102, Rarity.COMMON, mage.cards.d.DireFleetHoarder.class));
+        cards.add(new SetCardInfo("Dire Fleet Interloper", 103, Rarity.COMMON, mage.cards.d.DireFleetInterloper.class));
         cards.add(new SetCardInfo("Dire Fleet Ravager", 104, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
         cards.add(new SetCardInfo("Dowsing Dagger", 235, Rarity.RARE, mage.cards.d.DowsingDagger.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 252, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
@@ -122,6 +123,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 267, Rarity.LAND, mage.cards.basiclands.Island.class));
         cards.add(new SetCardInfo("Itlimoc, Cradle of the Sun", 191, Rarity.RARE, mage.cards.i.ItlimocCradleOfTheSun.class));
         cards.add(new SetCardInfo("Ixalan's Binding", 17, Rarity.UNCOMMON, mage.cards.i.IxalansBinding.class));
+        cards.add(new SetCardInfo("Ixalli's Diviner", 192, Rarity.COMMON, mage.cards.i.IxallisDiviner.class));
         cards.add(new SetCardInfo("Jace, Cunning Castaway", 60, Rarity.MYTHIC, mage.cards.j.JaceCunningCastaway.class));
         cards.add(new SetCardInfo("Jace, Ingenious Mind-Mage", 280, Rarity.MYTHIC, mage.cards.j.JaceIngeniousMindMage.class));
         cards.add(new SetCardInfo("Jace's Sentinel", 283, Rarity.UNCOMMON, mage.cards.j.JacesSentinel.class));
@@ -163,6 +165,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Primal Amulet", 243, Rarity.RARE, mage.cards.p.PrimalAmulet.class));
         cards.add(new SetCardInfo("Primal Wellspring", 243, Rarity.RARE, mage.cards.p.PrimalWellspring.class));
         cards.add(new SetCardInfo("Prosperous Pirates", 69, Rarity.COMMON, mage.cards.p.ProsperousPirates.class));
+        cards.add(new SetCardInfo("Queen's Agent", 114, Rarity.COMMON, mage.cards.q.QueensAgent.class));
         cards.add(new SetCardInfo("Queen's Bay Soldier", 115, Rarity.COMMON, mage.cards.q.QueensBaySoldier.class));
         cards.add(new SetCardInfo("Raging Swordtooth", 226, Rarity.UNCOMMON, mage.cards.r.RagingSwordtooth.class));
         cards.add(new SetCardInfo("Raiders' Wake", 116, Rarity.UNCOMMON, mage.cards.r.RaidersWake.class));
@@ -188,12 +191,14 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Sanguine Sacrament", 33, Rarity.RARE, mage.cards.s.SanguineSacrament.class));
         cards.add(new SetCardInfo("Savage Stomp", 205, Rarity.UNCOMMON, mage.cards.s.SavageStomp.class));
         cards.add(new SetCardInfo("Search for Azcanta", 74, Rarity.RARE, mage.cards.s.SearchForAzcanta.class));
+        cards.add(new SetCardInfo("Seekers' Squire", 121, Rarity.UNCOMMON, mage.cards.s.SeekersSquire.class));
         cards.add(new SetCardInfo("Sentinel Totem", 245, Rarity.UNCOMMON, mage.cards.s.SentinelTotem.class));
         cards.add(new SetCardInfo("Settle the Wreckage", 34, Rarity.RARE, mage.cards.s.SettleTheWreckage.class));
         cards.add(new SetCardInfo("Shadowed Caravel", 246, Rarity.RARE, mage.cards.s.ShadowedCaravel.class));
         cards.add(new SetCardInfo("Shapers of Nature", 228, Rarity.UNCOMMON, mage.cards.s.ShapersOfNature.class));
         cards.add(new SetCardInfo("Shapers' Sanctuary", 206, Rarity.RARE, mage.cards.s.ShapersSanctuary.class));
         cards.add(new SetCardInfo("Shining Aerosaur", 36, Rarity.COMMON, mage.cards.s.ShiningAerosaur.class));
+        cards.add(new SetCardInfo("Siren Lookout", 78, Rarity.COMMON, mage.cards.s.SirenLookout.class));
         cards.add(new SetCardInfo("Siren Stormtamer", 79, Rarity.UNCOMMON, mage.cards.s.SirenStormtamer.class));
         cards.add(new SetCardInfo("Skittering Heartstopper", 122, Rarity.COMMON, mage.cards.s.SkitteringHeartstopper.class));
         cards.add(new SetCardInfo("Skulduggery", 123, Rarity.COMMON, mage.cards.s.Skulduggery.class));
