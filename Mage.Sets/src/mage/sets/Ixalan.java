@@ -75,6 +75,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Deeproot Waters", 51, Rarity.UNCOMMON, mage.cards.d.DeeprootWaters.class));
         cards.add(new SetCardInfo("Demolish", 139, Rarity.COMMON, mage.cards.d.Demolish.class));
         cards.add(new SetCardInfo("Demystify", 8, Rarity.COMMON, mage.cards.d.Demystify.class));
+        cards.add(new SetCardInfo("Depths of Desire", 52, Rarity.COMMON, mage.cards.d.DepthsOfDesire.class));
         cards.add(new SetCardInfo("Desperate Castaways", 101, Rarity.COMMON, mage.cards.d.DesperateCastaways.class));
         cards.add(new SetCardInfo("Dinosaur Stampede", 140, Rarity.UNCOMMON, mage.cards.d.DinosaurStampede.class));
         cards.add(new SetCardInfo("Dire Fleet Captain", 221, Rarity.UNCOMMON, mage.cards.d.DireFleetCaptain.class));
