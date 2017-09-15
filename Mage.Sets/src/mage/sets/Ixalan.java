@@ -41,6 +41,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Adaptation", 46, Rarity.RARE, mage.cards.a.ArcaneAdaptation.class));
         cards.add(new SetCardInfo("Arguel's Blood Fast", 90, Rarity.RARE, mage.cards.a.ArguelsBloodFast.class));
         cards.add(new SetCardInfo("Ashes of the Abhorrent", 2, Rarity.RARE, mage.cards.a.AshesOfTheAbhorrent.class));
+        cards.add(new SetCardInfo("Atzocan Archer", 176, Rarity.UNCOMMON, mage.cards.a.AtzocanArcher.class));
         cards.add(new SetCardInfo("Axis of Mortality", 3, Rarity.MYTHIC, mage.cards.a.AxisOfMortality.class));
         cards.add(new SetCardInfo("Azcanta, The Sunken Ruin", 74, Rarity.RARE, mage.cards.a.AzcantaTheSunkenRuin.class));
         cards.add(new SetCardInfo("Belligerent Brontodon", 218, Rarity.UNCOMMON, mage.cards.b.BelligerentBrontodon.class));
