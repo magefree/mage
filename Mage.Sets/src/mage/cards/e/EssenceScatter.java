@@ -44,6 +44,7 @@ public class EssenceScatter extends CardImpl {
     public EssenceScatter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
+        // Counter target creature spell.
         this.getSpellAbility().addTarget(new TargetSpell(new FilterCreatureSpell()));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }

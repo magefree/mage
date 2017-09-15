@@ -222,7 +222,7 @@ Eldrazi Spawn, 1a, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice 
 Eldrazi Spawn, 1b, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1} to your mana pool.
 Eldrazi Spawn, 1c, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1} to your mana pool.
 Elemental, 2, R, *|*, -, Creature - Elemental, Jung Park, -
-Hellion, 3, R, 4|4, -, Creature - Hellion, Anthony Francisco, -
+Hellion, 1, R, 4|4, -, Creature - Hellion, Anthony Francisco, -
 Ooze, 4, G, *|*, -, Creature - Ooze, Daniel Ljunggren, -
 Tuktuk The Returned, 5, -, 5|5, -, Legendary Artifact Creature - Goblin Golem, Franz Vohwinkel, -
 
@@ -344,7 +344,7 @@ Soldier, 3, W, 1|1, -, Creature - Soldier, Greg Staples, -
 Drake, 4, U, 2|2, -, Creature - Drake, Svetlin Velinov, Flying
 Zombie, 5, B, 2|2, -, Creature - Zombie, Lucas Graciano, -
 Goblin, 6, R, 1|1, -, Creature - Goblin, Karl Kopinski, -
-Hellion, 7, R, 4|4, -, Creature - Hellion, Anthony Francisco, -
+Hellion, 1, R, 4|4, -, Creature - Hellion, Anthony Francisco, -
 Beast, 8, G, 3|3, -, Creature - Beast, John Donahue, -
 Saproling, 9, G, 1|1, -, Creature - Saproling, Brad Rigney, -
 Wurm, 10, G, 6|6, -, Creature - Wurm, Anthony Francisco, -
@@ -664,7 +664,7 @@ DDP - Duel Decks: Zendikar vs. Eldrazi (2015-08-28)
 Eldrazi Spawn, 076, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1} to your mana pool.
 Eldrazi Spawn, 077, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1} to your mana pool.
 Eldrazi Spawn, 078, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1} to your mana pool.
-Hellion, 079, R, 4|4, -, Creature - Hellion, Anthony Francisco, -
+Hellion, 1, R, 4|4, -, Creature - Hellion, Anthony Francisco, -
 Plant, 080, G, -, -, Creature - Plant, Daren Bader, -
 
 BFZ - Battle for Zendikar (2015-10-09)
@@ -745,3 +745,20 @@ Clue, 015, -, -, -, Artifact - Clue, James Paick, {2}‚ Sacrifice this Artifact
 Clue, 016, -, -, -, Artifact - Clue, Franz Vohwinkel, {2}‚ Sacrifice this Artifact: Draw a card.
 Jace Emblem, 017, -, -, -, Emblem - Jace, Tyler Jacobson, Whenever an opponent casts his or her first spell each turn� counter that spell.
 Arlinn Emblem, 018, -, -, -, Emblem - Arlinn, Winona Nelson, Creatures you control have haste and '{T}: This creature deals damage equal to its power to target creature or player.'
+
+
+SWS - Star Wars Custom set
+
+Rebel, 001, W, 1|1, -, Creature - Rebel, Alex Konstad, -
+Trooper, 002, W, 1|1, -, Creature - Trooper, Darren Tan, -
+Tusken Raider, 003, W, 1|1, -, Creature - Tusken Raider, William O'Connor, -
+Ewok, 004, G, 1|1, -, Creature - Ewok, Chris NG, -
+Hunter, 005, R, 4|4, -, Creature - Hunter, Steve Argyle, -
+Royal Guard, 006, R, 2|2, -, Creature - Soldier, Aldo Katayanagi, First Strike
+AT-AT, 007, -, 5|5, -, Artifact Creature - AT-AT, Prokhoda, When this creature dies� create two 1/1 white Trooper creature tokens.
+B-Wing, 008, -, 1|1, -, Artifact Creature - Rebel Starship, Anthony Devine, Spaceflight
+Droid, 009, -, 1|1, -, Artifact Creature - Droid, PeetuGee, -
+TIE Fighter, 010, -, 1|1, -, Artifact Creature - Starship, Darren Tan, Spaceflight
+Yoda Emblem, 011, -, -, -, Emblem - Yoda, Jerry Vanderstelt, Hexproof� you and your creatures have.
+Obi-Wan Kenobi Emblem, 012, -, -, -, Emblem - Obi-Wan Kenobi, Jerry Vanderstelt, Creatures you control get +1/+1 and have vigilance� first strike� and lifelink.
+Aurra Sing Emblem, 013, -, -, -, Emblem - Aurra Sing, Willman1701, Whenever a nontoken creature you control leaves the battlefield� discard a card.

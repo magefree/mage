@@ -1939,7 +1939,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     protected int combatPotential(Permanent creature, Game game) {
         log.debug("combatPotential");
-        if (!creature.canAttack(game)) {
+        if (!creature.canAttack(null, game)) {
             return 0;
         }
         int potential = creature.getPower().getValue();

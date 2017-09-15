@@ -105,6 +105,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         return defenderId;
     }
 
+    public UUID getDefendingPlayerId() {
+        return defendingPlayerId;
+    }
+
     public List<UUID> getAttackers() {
         return attackers;
     }
