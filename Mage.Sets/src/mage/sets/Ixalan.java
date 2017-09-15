@@ -167,6 +167,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Pillar of Origins", 241, Rarity.UNCOMMON, mage.cards.p.PillarOfOrigins.class));
         cards.add(new SetCardInfo("Pious Interdiction", 26, Rarity.COMMON, mage.cards.p.PiousInterdiction.class));
         cards.add(new SetCardInfo("Pirate's Cutlass", 242, Rarity.COMMON, mage.cards.p.PiratesCutlass.class));
+        cards.add(new SetCardInfo("Pirate's Prize", 68, Rarity.COMMON, mage.cards.p.PiratesPrize.class));
         cards.add(new SetCardInfo("Plains", 260, Rarity.LAND, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Plains", 261, Rarity.LAND, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class));
