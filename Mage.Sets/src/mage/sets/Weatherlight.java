@@ -125,6 +125,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Horror", 14, Rarity.UNCOMMON, mage.cards.h.HiddenHorror.class));
         cards.add(new SetCardInfo("Hurloon Shaman", 108, Rarity.UNCOMMON, mage.cards.h.HurloonShaman.class));
         cards.add(new SetCardInfo("Infernal Tribute", 15, Rarity.RARE, mage.cards.i.InfernalTribute.class));
+        cards.add(new SetCardInfo("Inner Sanctum", 134, Rarity.RARE, mage.cards.i.InnerSanctum.class));
         cards.add(new SetCardInfo("Jabari's Banner", 150, Rarity.UNCOMMON, mage.cards.j.JabarisBanner.class));
         cards.add(new SetCardInfo("Lava Hounds", 109, Rarity.UNCOMMON, mage.cards.l.LavaHounds.class));
         cards.add(new SetCardInfo("Llanowar Behemoth", 74, Rarity.UNCOMMON, mage.cards.l.LlanowarBehemoth.class));
