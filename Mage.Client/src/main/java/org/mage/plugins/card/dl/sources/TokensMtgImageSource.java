@@ -41,6 +41,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
+import org.mage.plugins.card.images.DownloadPictures;
 
 /**
  *
@@ -53,6 +54,7 @@ public enum TokensMtgImageSource implements CardImageSource {
 
     // [[EXP/Name, TokenData>
     private HashMap<String, ArrayList<TokenData>> tokensData;
+    private static final Set<String> supportedSets = new LinkedHashSet<String>();
 
     private final Object tokensDataSync = new Object();
     private final Set<String> supportedSets;
@@ -182,6 +184,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     private HashMap<String, ArrayList<TokenData>> getTokensData() throws IOException {
         synchronized (tokensDataSync) {
             if (tokensData == null) {
+                DownloadPictures.getInstance().updateAndViewMessage("Creating token data...");
                 tokensData = new HashMap<>();
 
                 // get tokens data from resource file
@@ -193,6 +196,7 @@ public enum TokensMtgImageSource implements CardImageSource {
                         if (list == null) {
                             list = new ArrayList<>();
                             tokensData.put(key, list);
+                            supportedSets.add(tokenData.getExpansionSetCode());
                             logger.info("Added key: " + key);
                         }
                         list.add(tokenData);
@@ -227,8 +231,10 @@ public enum TokensMtgImageSource implements CardImageSource {
                             }
                         }
                     }
-                } catch (Exception exception) {
-                    logger.warn("Failed to get tokens description from tokens.mtg.onl", exception);
+                    DownloadPictures.getInstance().updateAndViewMessage("");
+                } catch (Exception ex) {
+                    logger.warn("Failed to get tokens description from tokens.mtg.onl", ex);
+                    DownloadPictures.getInstance().updateAndViewMessage(ex.getMessage());
                 }
             }
         }
@@ -325,6 +331,13 @@ public enum TokensMtgImageSource implements CardImageSource {
 
     @Override
     public void doPause(String httpImageUrl) {
+    }
+
+    @Override
+    public ArrayList<String> getSupportedSets() {
+        ArrayList<String> supportedSetsCopy = new ArrayList<>();
+        supportedSetsCopy.addAll(supportedSets);
+        return supportedSetsCopy;
     }
 
     @Override

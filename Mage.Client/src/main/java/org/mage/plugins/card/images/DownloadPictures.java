@@ -26,6 +26,7 @@ import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.client.MageFrame;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
@@ -44,12 +45,15 @@ import org.mage.plugins.card.utils.CardImageUtils;
 
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 
+    private static DownloadPictures instance;
+
     private static final Logger logger = Logger.getLogger(DownloadPictures.class);
 
     public static final String ALL_IMAGES = "- All images from that source";
     public static final String ALL_STANDARD_IMAGES = "- All images from standard from that source";
     public static final String ALL_TOKENS = "- Only all token images from that source";
 
+    private JDialog dialog;
     private final JProgressBar bar;
     private final JOptionPane dlg;
     private boolean cancel;
@@ -57,7 +61,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     private final JButton startDownloadButton;
     private int cardIndex;
     private List<CardDownloadData> allCardsMissingImage;
-    List<CardDownloadData> cardsToDownload = new ArrayList<>();
+    private List<CardDownloadData> cardsToDownload;
 
     private int missingCards = 0;
     private int missingTokens = 0;
@@ -65,6 +69,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     List<String> selectedSetCodes = new ArrayList<>();
 
     private final JComboBox jComboBoxServer;
+    private final JLabel jLabelMessage;
     private final JLabel jLabelAllMissing;
     private final JLabel jLabelServer;
 
@@ -107,6 +112,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     }
 
+    public static DownloadPictures getInstance() {
+        return instance;
+    }
+
     public static void main(String[] args) {
         startDownload();
     }
@@ -118,18 +127,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
          * JOptionPane.showMessageDialog(null,
          * "All card pictures have been downloaded."); return; }
          */
-        DownloadPictures download = new DownloadPictures();
-        JDialog dlg = download.getDlg(null);
-        dlg.setVisible(true);
-        dlg.dispose();
-        download.cancel = true;
+        instance = new DownloadPictures(MageFrame.getInstance());
+        Thread t1 = new Thread(new LoadMissingCardData(instance));
+        t1.start();
+        instance.getDlg().setVisible(true);
+        instance.getDlg().dispose();
+        instance.cancel = true;
     }
 
-    public JDialog getDlg(JFrame frame) {
-        String title = "Downloading images";
-
-        final JDialog dialog = this.dlg.createDialog(frame, title);
-        closeButton.addActionListener(e -> dialog.setVisible(false));
+    public JDialog getDlg() {
         return dialog;
     }
 
@@ -137,10 +143,21 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         this.cancel = cancel;
     }
 
-    public DownloadPictures() {
+    static int WIDTH = 400;
+
+    public DownloadPictures(JFrame frame) {
+
+        cardsToDownload = new ArrayList<>();
+
         JPanel p0 = new JPanel();
         p0.setLayout(new BoxLayout(p0, BoxLayout.Y_AXIS));
 
+        p0.add(Box.createVerticalStrut(5));
+
+        jLabelMessage = new JLabel();
+        jLabelMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jLabelMessage.setText("Initializing image download...");
+        p0.add(jLabelMessage);
         p0.add(Box.createVerticalStrut(5));
 
         jLabelAllMissing = new JLabel();
@@ -153,6 +170,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         jLabelServer = new JLabel();
         jLabelServer.setText("Please select image source:");
         jLabelServer.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jLabelServer.setVisible(false);
         p0.add(jLabelServer);
 
         p0.add(Box.createVerticalStrut(5));
@@ -160,12 +178,18 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         jComboBoxServer = new JComboBox();
         jComboBoxServer.setModel(new DefaultComboBoxModel(DownloadSources.values()));
         jComboBoxServer.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jComboBoxServer.setAlignmentY(Component.LEFT_ALIGNMENT);
         jComboBoxServer.addItemListener((ItemEvent event) -> {
             if (event.getStateChange() == ItemEvent.SELECTED) {
                 comboBoxServerItemSelected(event);
             }
         });
+        Dimension d = jComboBoxServer.getPreferredSize();
+        d.width = WIDTH;
+        jComboBoxServer.setPreferredSize(d);
         p0.add(jComboBoxServer);
+        jComboBoxServer.setVisible(false);
+
         // set the first source as default
         cardImageSource = WizardCardsImageSource.instance;
 
@@ -175,10 +199,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         jLabelSet = new JLabel();
         jLabelSet.setText("Please select sets to download the images for:");
         jLabelSet.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jLabelSet.setVisible(false);
         p0.add(jLabelSet);
 
         jComboBoxSet = new JComboBox();
-        jComboBoxSet.setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
+//         jComboBoxSet.setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
         jComboBoxSet.setAlignmentX(Component.LEFT_ALIGNMENT);
         jComboBoxSet.addItemListener((ItemEvent event) -> {
             if (event.getStateChange() == ItemEvent.SELECTED) {
@@ -187,6 +212,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         });
 
         p0.add(jComboBoxSet);
+        jComboBoxSet.setVisible(false);
 
         p0.add(Box.createVerticalStrut(5));
 
@@ -203,28 +229,58 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         p0.add(bar);
         bar.setStringPainted(true);
 
-        Dimension d = bar.getPreferredSize();
-        d.width = 400;
+        d = bar.getPreferredSize();
+        d.width = WIDTH;
         bar.setPreferredSize(d);
+        bar.setVisible(false);
 
         // JOptionPane
         Object[] options = {startDownloadButton, closeButton = new JButton("Cancel")};
-        dlg = new JOptionPane(p0, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, options, options[1]);
+        startDownloadButton.setVisible(false);
+        closeButton.addActionListener(e -> dialog.setVisible(false));
+        closeButton.setVisible(false);
 
-        setAllMissingCards();
+        dlg = new JOptionPane(p0, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, options, options[1]);
+        dialog = this.dlg.createDialog(frame, "Downloading images");
     }
 
     public void setAllMissingCards() {
+        updateAndViewMessage("Get all available cards from the repository...");
         List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
+        updateAndViewMessage("Check which images are missing ...");
         this.allCardsMissingImage = getNeededCards(cards);
+        updateAndViewMessage("Check which images the current source is providing ...");
+        jComboBoxSet.setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
+
         updateCardsToDownload(jComboBoxSet.getSelectedItem().toString());
+
+        jComboBoxServer.setVisible(true);
+        jLabelServer.setVisible(true);
+        jComboBoxSet.setVisible(true);
+        jLabelSet.setVisible(true);
+        bar.setVisible(true);
+        startDownloadButton.setVisible(true);
+        closeButton.setVisible(true);
+
+        updateAndViewMessage("");
     }
 
     private void comboBoxServerItemSelected(ItemEvent evt) {
-        cardImageSource = ((DownloadSources) evt.getItem()).getSource();
-        // update the available sets / token comboBox
-        jComboBoxSet.setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
-        updateCardsToDownload(jComboBoxSet.getSelectedItem().toString());
+        if (jComboBoxServer.isEnabled()) {
+            cardImageSource = ((DownloadSources) evt.getItem()).getSource();
+            // update the available sets / token comboBox
+            jComboBoxSet.setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
+            updateCardsToDownload(jComboBoxSet.getSelectedItem().toString());
+        }
+    }
+
+    public void updateAndViewMessage(String text) {
+        jLabelMessage.setText(text);
+        if (dialog != null) {
+            dialog.pack();
+            dialog.validate();
+            dialog.repaint();
+        }
     }
 
     private Object[] getSetsForCurrentImageSource() {
@@ -293,8 +349,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         int numberCardImagesAvailable = 0;
         for (CardDownloadData data : allCardsMissingImage) {
             if (data.isToken()) {
-                if (cardImageSource.isTokenSource()
-                        && cardImageSource.isImageProvided(data.getSet(), data.getName())) {
+                if (cardImageSource.isTokenSource() && cardImageSource.isImageProvided(data.getSet(), data.getName())) {
                     numberTokenImagesAvailable++;
                     cardsToDownload.add(data);
                 }
@@ -812,4 +867,25 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     }
 
     private static final long serialVersionUID = 1L;
+
+}
+
+class LoadMissingCardData implements Runnable {
+
+    private static DownloadPictures downloadPictures;
+
+    public LoadMissingCardData(DownloadPictures downloadPictures) {
+        LoadMissingCardData.downloadPictures = downloadPictures;
+    }
+
+    @Override
+    public void run() {
+        downloadPictures.setAllMissingCards();
+    }
+
+    public static void main() {
+
+        (new Thread(new LoadMissingCardData(downloadPictures))).start();
+    }
+
 }
