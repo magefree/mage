@@ -44,6 +44,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
 
     protected FilterControlledCreaturePermanent filter;
     protected boolean setTargetPointer;
+    protected boolean once = false;
 
     public AttacksCreatureYouControlTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -73,6 +74,10 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
         this.setTargetPointer = ability.setTargetPointer;
     }
 
+    public void setOnce(boolean once) {
+        this.once = once;
+    }
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
@@ -97,7 +102,6 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public String getRule() {
-        return "Whenever a" + (filter.getMessage().startsWith("a") ? "n " : " ") + " attacks, " + super.getRule();
+        return "When" + (once ? "" : "ever") + " a" + (filter.getMessage().startsWith("a") ? "n " : " ") + " attacks, " + super.getRule();
     }
-
 }

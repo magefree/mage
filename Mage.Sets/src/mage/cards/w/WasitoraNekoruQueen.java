@@ -30,8 +30,7 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -42,18 +41,13 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WasitoraCatDragonToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -77,7 +71,7 @@ public class WasitoraNekoruQueen extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Wasitora, Nekoru Queen deals combat damage to a player, that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying
-        this.addAbility(new WasitoraNekoruQueenTriggeredAbility());
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new WasitoraNekoruQueenEffect(), false, true));
     }
 
     public WasitoraNekoruQueen(final WasitoraNekoruQueen card) {
@@ -87,44 +81,6 @@ public class WasitoraNekoruQueen extends CardImpl {
     @Override
     public WasitoraNekoruQueen copy() {
         return new WasitoraNekoruQueen(this);
-    }
-}
-
-class WasitoraNekoruQueenTriggeredAbility extends TriggeredAbilityImpl {
-
-    public WasitoraNekoruQueenTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new WasitoraNekoruQueenEffect());
-    }
-
-    public WasitoraNekoruQueenTriggeredAbility(final WasitoraNekoruQueenTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public WasitoraNekoruQueenTriggeredAbility copy() {
-        return new WasitoraNekoruQueenTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying";
     }
 }
 
@@ -151,11 +107,11 @@ class WasitoraNekoruQueenEffect extends OneShotEffect {
         if (damagedPlayer != null && controller != null) {
             FilterControlledPermanent filter = new FilterControlledPermanent("creature");
             filter.add(new CardTypePredicate(CardType.CREATURE));
-            TargetPermanent target = new TargetPermanent(filter);
-            if (damagedPlayer.choose(Outcome.Sacrifice, target, source.getId(), game)) {
+            TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+            if (damagedPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
                 Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());
                 if (objectToBeSacrificed != null) {
-                    if (objectToBeSacrificed.sacrifice(source.getId(), game)) {
+                    if (objectToBeSacrificed.sacrifice(source.getSourceId(), game)) {
                         return true;
                     }
                 }
