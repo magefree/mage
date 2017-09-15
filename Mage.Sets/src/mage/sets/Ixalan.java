@@ -153,6 +153,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Lurking Chupacabra", 111, Rarity.UNCOMMON, mage.cards.l.LurkingChupacabra.class));
         cards.add(new SetCardInfo("Makeshift Munitions", 151, Rarity.UNCOMMON, mage.cards.m.MakeshiftMunitions.class));
         cards.add(new SetCardInfo("Marauding Looter", 225, Rarity.UNCOMMON, mage.cards.m.MaraudingLooter.class));
+        cards.add(new SetCardInfo("March of the Drowned", 112, Rarity.COMMON, mage.cards.m.MarchOfTheDrowned.class));
         cards.add(new SetCardInfo("Mark of the Vampire", 113, Rarity.COMMON, mage.cards.m.MarkOfTheVampire.class));
         cards.add(new SetCardInfo("Mavren Fein, Dusk Apostle", 24, Rarity.RARE, mage.cards.m.MavrenFeinDuskApostle.class));
         cards.add(new SetCardInfo("Merfolk Branchwalker", 197, Rarity.UNCOMMON, mage.cards.m.MerfolkBranchwalker.class));
