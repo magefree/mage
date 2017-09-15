@@ -57,7 +57,7 @@ public class ExploreSourceEffect extends OneShotEffect {
 
     public ExploreSourceEffect() {
         super(Outcome.Benefit);
-        this.staticText = "it explores";
+        this.staticText = "it explores. <i>(Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)</i>";
     }
 
     public ExploreSourceEffect(final ExploreSourceEffect effect) {
