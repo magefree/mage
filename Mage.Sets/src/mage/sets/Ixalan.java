@@ -119,6 +119,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Cannonade", 143, Rarity.UNCOMMON, mage.cards.f.FieryCannonade.class));
         cards.add(new SetCardInfo("Fire Shrine Keeper", 144, Rarity.COMMON, mage.cards.f.FireShrineKeeper.class));
         cards.add(new SetCardInfo("Firecannon Blast", 145, Rarity.COMMON, mage.cards.f.FirecannonBlast.class));
+        cards.add(new SetCardInfo("Fleet Swallower", 57, Rarity.RARE, mage.cards.f.FleetSwallower.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Forest", 277, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Forest", 278, Rarity.LAND, mage.cards.basiclands.Forest.class));
