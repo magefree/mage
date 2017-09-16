@@ -317,7 +317,7 @@ public class Commander2013 extends ExpansionSet {
         cards.add(new SetCardInfo("Skyscribing", 57, Rarity.UNCOMMON, mage.cards.s.Skyscribing.class));
         cards.add(new SetCardInfo("Skyward Eye Prophets", 214, Rarity.UNCOMMON, mage.cards.s.SkywardEyeProphets.class));
         cards.add(new SetCardInfo("Slice and Dice", 119, Rarity.UNCOMMON, mage.cards.s.SliceAndDice.class));
-        cards.add(new SetCardInfo("Slice in Twain", 170, Rarity.UNCOMMON, mage.cards.s.SliceinTwain.class));
+        cards.add(new SetCardInfo("Slice in Twain", 170, Rarity.UNCOMMON, mage.cards.s.SliceInXXTwain.class));
         cards.add(new SetCardInfo("Slippery Karst", 324, Rarity.COMMON, mage.cards.s.SlipperyKarst.class));
         cards.add(new SetCardInfo("Smoldering Crater", 325, Rarity.COMMON, mage.cards.s.SmolderingCrater.class));
         cards.add(new SetCardInfo("Sol Ring", 259, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
