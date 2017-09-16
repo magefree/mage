@@ -272,6 +272,10 @@ public enum MythicspoilerComSource implements CardImageSource {
         cardNameAliases.put("AKH-reducerumble", "reducerubble");
         cardNameAliases.put("AKH-forsakethewordly", "forsaketheworldly");
         cardNameAliases.put("AKH-kefnatsmonument", "kefnetsmonument");
+        cardNameAliases.put("XLN-kinjaliscaller", "kinjalliscaller");
+        cardNameAliases.put("XLN-lookoutsdecision", "lookoutsdispersal");
+        cardNameAliases.put("XLN-infuriatedgladiodon", "ragingswordtooth");
+        cardNameAliases.put("XLN-redoubledvolley", "repeatingbarrage");
 
         cardNameAliasesStart = new HashMap<>();
         HashSet<String> names = new HashSet<>();
