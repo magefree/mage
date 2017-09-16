@@ -50,7 +50,7 @@ public class AlleyStrangler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
     }
 
     public AlleyStrangler(final AlleyStrangler card) {

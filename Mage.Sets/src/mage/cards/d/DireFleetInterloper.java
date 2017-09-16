@@ -52,7 +52,7 @@ public class DireFleetInterloper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
 
         // When Dire Fleet Interloper enters the battlefield, it explores. 
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));

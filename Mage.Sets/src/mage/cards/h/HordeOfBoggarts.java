@@ -66,7 +66,7 @@ public class HordeOfBoggarts extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
         
         // Menace (This creature can't be blocked except by two or more creatures.)
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
     }
 
     public HordeOfBoggarts(final HordeOfBoggarts card) {

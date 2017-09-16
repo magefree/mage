@@ -187,7 +187,7 @@ class MajesticMyriarchEffect extends OneShotEffect {
 
         // Menace
         if (game.getBattlefield().contains(filterMenace, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilitySourceEffect(MenaceAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn), source);
         }
 
         // Reach

@@ -65,7 +65,7 @@ public class MadcapSkills extends CardImpl {
         
         // Enchanted creature gets +3/+0 and and has menace. (It can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(MenaceAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.AURA)));
     }
 
     public MadcapSkills(final MadcapSkills card) {

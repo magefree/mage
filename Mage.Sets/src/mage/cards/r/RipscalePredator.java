@@ -49,7 +49,7 @@ public class RipscalePredator extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Ripscale Predator can't be blocked except by two or more creatures.
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
     }
 
     public RipscalePredator(final RipscalePredator card) {

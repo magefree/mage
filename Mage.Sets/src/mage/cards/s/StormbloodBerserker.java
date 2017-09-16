@@ -51,7 +51,7 @@ public class StormbloodBerserker extends CardImpl {
 
         this.addAbility(new BloodthirstAbility(2));
         // Menace (This creature can't be blocked except by two or more creatures.)
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
     }
 
     public StormbloodBerserker(final StormbloodBerserker card) {

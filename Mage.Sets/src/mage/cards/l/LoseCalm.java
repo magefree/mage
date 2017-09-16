@@ -56,7 +56,7 @@ public class LoseCalm extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, "It gains haste until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        effect = new GainAbilityTargetEffect(MenaceAbility.getInstance(), Duration.EndOfTurn);
+        effect = new GainAbilityTargetEffect(new MenaceAbility(), Duration.EndOfTurn);
         effect.setText("and menace until end of turn. (A creature with menace can't be blocked except by two or more creatures.) ");
         this.getSpellAbility().addEffect(effect);
     }

@@ -50,7 +50,7 @@ public class VineKami extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace (This creature can't be blocked except by two or more creatures.)
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
         this.addAbility(new SoulshiftAbility(6));
     }
 

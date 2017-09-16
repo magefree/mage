@@ -63,7 +63,7 @@ public class KozileksShrieker extends CardImpl {
         Effect effect = new BoostSourceEffect(1, 0, Duration.EndOfTurn);
         effect.setText("{this} gets +1/+0");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{C}"));
-        effect = new GainAbilitySourceEffect(MenaceAbility.getInstance(), Duration.EndOfTurn);
+        effect = new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn);
         effect.setText("and gains menace until end of turn");
         ability.addEffect(effect);
         this.addAbility(ability);
