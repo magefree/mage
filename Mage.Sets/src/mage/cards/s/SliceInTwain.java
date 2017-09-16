@@ -46,7 +46,7 @@ public class SliceInTwain extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br>br>Draw a card"));
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
     }
 
