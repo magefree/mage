@@ -33,7 +33,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -71,7 +71,7 @@ public class ConquerorsFoothold extends CardImpl {
 
         // {6}, {T}: Return target card from your graveyard to your hand.
         SimpleActivatedAbility ability3 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new ReturnToHandTargetEffect(),
+                new ReturnFromGraveyardToHandTargetEffect(),
                 new ManaCostsImpl("{6}"));
         ability3.addCost(new TapSourceCost());
         ability3.addTarget(new TargetCardInYourGraveyard());

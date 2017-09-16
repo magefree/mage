@@ -85,7 +85,8 @@ public class AdmiralBeckettBrass extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // At the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new GainControlTargetEffect(Duration.Custom), TargetController.YOU, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new GainControlTargetEffect(Duration.Custom)
+                .setText("gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn"), TargetController.YOU, false);
         ability.addTarget(new TargetNonlandPermanent());
         originalId = ability.getOriginalId();
         this.addAbility(ability, new DamagedByPiratesWatcher());
