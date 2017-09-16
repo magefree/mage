@@ -31,6 +31,8 @@ public class Ixalan extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.maxCardNumberInBooster = 279;
+
         cards.add(new SetCardInfo("Adanto, the First Fort", 22, Rarity.RARE, mage.cards.a.AdantoTheFirstFort.class));
         cards.add(new SetCardInfo("Adanto Vanguard", 1, Rarity.UNCOMMON, mage.cards.a.AdantoVanguard.class));
         cards.add(new SetCardInfo("Admiral Beckett Brass", 217, Rarity.MYTHIC, mage.cards.a.AdmiralBeckettBrass.class));

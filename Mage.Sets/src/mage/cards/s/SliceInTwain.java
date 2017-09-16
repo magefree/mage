@@ -40,9 +40,9 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class SliceInXXTwain extends CardImpl {
+public class SliceInTwain extends CardImpl {
 
-    public SliceInXXTwain(UUID ownerId, CardSetInfo setInfo) {
+    public SliceInTwain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -50,12 +50,12 @@ public class SliceInXXTwain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
     }
 
-    public SliceInXXTwain(final SliceInXXTwain card) {
+    public SliceInTwain(final SliceInTwain card) {
         super(card);
     }
 
     @Override
-    public SliceInXXTwain copy() {
-        return new SliceInXXTwain(this);
+    public SliceInTwain copy() {
+        return new SliceInTwain(this);
     }
 }
