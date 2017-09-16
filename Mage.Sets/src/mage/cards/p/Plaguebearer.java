@@ -39,13 +39,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -54,15 +55,15 @@ import mage.target.TargetPermanent;
  */
 public class Plaguebearer extends CardImpl {
 
-    private final UUID originalId;
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
+    private static final FilterPermanent filter = new FilterPermanent("nonblack creature with converted mana cost X");
 
     static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public Plaguebearer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -71,26 +72,27 @@ public class Plaguebearer extends CardImpl {
         // {X}{X}{B}: Destroy target nonblack creature with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{B}"));
         ability.addTarget(new TargetPermanent(filter));
-        originalId = ability.getOriginalId();
+        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_PERM);
         this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
+        if (ability.getTargetAdjustment() == TargetAdjustment.X_CMC_EQUAL_PERM) {
             int xValue = ability.getManaCostsToPay().getX();
+            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter().copy();
+            StringBuilder message = new StringBuilder(filter2.getMessage());
+            message.setLength(message.length() - 1);
+            message.append(xValue);
+            filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+            filter2.setMessage(message.toString());
             ability.getTargets().clear();
-            FilterCreaturePermanent filter = new FilterCreaturePermanent(new StringBuilder("nonblack creature with converted mana cost ").append(xValue).toString());
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-            filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-            Target target = new TargetPermanent(filter);
-            ability.addTarget(target);
+            ability.getTargets().add(new TargetPermanent(filter2));
         }
     }
 
     public Plaguebearer(final Plaguebearer card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override

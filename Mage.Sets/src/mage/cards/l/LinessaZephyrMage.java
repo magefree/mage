@@ -43,19 +43,20 @@ import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -63,10 +64,14 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LinessaZephyrMage extends CardImpl {
 
-    private final UUID originalId;
+    private static final FilterPermanent filter = new FilterPermanent("creature with converted mana cost X");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
 
     public LinessaZephyrMage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
@@ -74,12 +79,12 @@ public class LinessaZephyrMage extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-         //TODO: Make ability properly copiable
+        //TODO: Make ability properly copiable
         // {X}{U}{U}, {tap}: Return target creature with converted mana cost X to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{X}{U}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        originalId = ability.getOriginalId();
+        ability.addTarget(new TargetPermanent(filter));
+        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_PERM);
         this.addAbility(ability);
 
         // Grandeur - Discard another card named Linessa, Zephyr Mage: Target player returns a creature he or she controls to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.
@@ -90,17 +95,20 @@ public class LinessaZephyrMage extends CardImpl {
 
     public LinessaZephyrMage(final LinessaZephyrMage card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
+        if (ability.getTargetAdjustment() == TargetAdjustment.X_CMC_EQUAL_PERM) {
             int xValue = ability.getManaCostsToPay().getX();
+            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter().copy();
+            StringBuilder message = new StringBuilder(filter2.getMessage());
+            message.setLength(message.length() - 1);
+            message.append(xValue);
+            filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+            filter2.setMessage(message.toString());
             ability.getTargets().clear();
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost " + xValue);
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-            ability.getTargets().add(new TargetCreaturePermanent(filter));
+            ability.getTargets().add(new TargetPermanent(filter2));
         }
     }
 

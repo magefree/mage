@@ -42,6 +42,7 @@ import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -57,8 +58,6 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  */
 public class GethLordOfTheVault extends CardImpl {
 
-    private final UUID originalId;
-
     public GethLordOfTheVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
@@ -73,14 +72,14 @@ public class GethLordOfTheVault extends CardImpl {
         // {X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped.
         // Then that player puts the top X cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
-        originalId = ability.getOriginalId();
+        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_NONPERM);
         ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("artifact or creature card with converted mana cost X from an opponent's graveyard")));
         this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
+        if (ability.getTargetAdjustment() == TargetAdjustment.X_CMC_EQUAL_NONPERM) {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
             FilterCard filter = new FilterCard("artifact or creature card with converted mana cost " + xValue + " from an opponent's graveyard");
@@ -95,7 +94,6 @@ public class GethLordOfTheVault extends CardImpl {
 
     public GethLordOfTheVault(final GethLordOfTheVault card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override
