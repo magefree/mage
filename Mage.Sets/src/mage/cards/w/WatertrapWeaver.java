@@ -32,10 +32,10 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -63,7 +63,7 @@ public class WatertrapWeaver extends CardImpl {
 
         // When Watertrap Weaver enters the battlefield, tap target creature an opponent controls.  That creature doesn't untap during its controller's next untap step.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
-        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
+        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("that creature"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
