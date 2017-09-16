@@ -159,7 +159,7 @@ class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
 class VancesBlastingCannonsFlipTrigger extends TriggeredAbilityImpl {
 
     public VancesBlastingCannonsFlipTrigger() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true));
+        super(Zone.BATTLEFIELD, new TransformSourceEffect(true), true);
     }
 
     public VancesBlastingCannonsFlipTrigger(final VancesBlastingCannonsFlipTrigger ability) {
@@ -189,6 +189,6 @@ class VancesBlastingCannonsFlipTrigger extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast your third spell in a turn, transform {this}";
+        return "Whenever you cast your third spell in a turn, you may transform {this}";
     }
 }
