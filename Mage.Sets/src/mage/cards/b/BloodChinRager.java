@@ -60,7 +60,7 @@ public class BloodChinRager extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Blood-Chin Rager attacks, Warrior creatures you control gain menace until end of turn. (They can't be blocked except by two or more creatures.)
-        this.addAbility(new AttacksTriggeredAbility(new GainAbilityAllEffect(MenaceAbility.getInstance(), Duration.EndOfTurn, filter), false));
+        this.addAbility(new AttacksTriggeredAbility(new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, filter), false));
     }
 
     public BloodChinRager(final BloodChinRager card) {

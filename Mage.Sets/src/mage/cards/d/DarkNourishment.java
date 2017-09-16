@@ -42,9 +42,9 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class DarkNourishment extends CardImpl {
 
     public DarkNourishment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{9}{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");
 
-        // Dark Nourishment deals 3 damage to target creature or player.  You gain 3 life.
+        // Dark Nourishment deals 3 damage to target creature or player. You gain 3 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new GainLifeEffect(3));

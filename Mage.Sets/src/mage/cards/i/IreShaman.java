@@ -64,7 +64,7 @@ public class IreShaman extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace (This creature can't be blocked except by two or more creatures.)
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
 
         // Megamorph {R}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{R}"), true));

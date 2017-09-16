@@ -52,7 +52,7 @@ public class AshesOfTheAbhorrent extends CardImpl {
     public AshesOfTheAbhorrent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
-        // Players can't cast spells from graveyards or activate abilities from graveyards.
+        // Players can't cast spells from graveyards or activate abilities of cards in graveyards.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AshesOfTheAbhorrentEffect()));
 
         // Whenever a creature dies, you gain 1 life.
@@ -73,7 +73,7 @@ class AshesOfTheAbhorrentEffect extends ContinuousRuleModifyingEffectImpl {
 
     public AshesOfTheAbhorrentEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "Players can't cast spells from graveyards or activate abilities from graveyards";
+        staticText = "Players can't cast spells from graveyards or activate abilities of cards in graveyards";
     }
 
     public AshesOfTheAbhorrentEffect(final AshesOfTheAbhorrentEffect effect) {

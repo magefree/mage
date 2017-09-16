@@ -32,11 +32,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.constants.SubType;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -54,7 +54,7 @@ public class TempestCaller extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Tempest Caller enters the battlefield, tap all creatures target opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new TapAllTargetPlayerControlsEffect(FILTER_PERMANENT_CREATURES));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new TapAllTargetPlayerControlsEffect(new FilterCreaturePermanent("creatures target opponent controls")));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

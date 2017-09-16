@@ -32,10 +32,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -66,6 +66,7 @@ public class FathomFleetCutthroat extends CardImpl {
         // When Fathom Fleet Cutthroat enters the battlefield, destroy target creature an opponent controls that was dealt damage this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
     public FathomFleetCutthroat(final FathomFleetCutthroat card) {

@@ -19,7 +19,7 @@ public class GraniticTitan extends CardImpl {
         toughness = new MageInt(4);
 
         // Menace
-        addAbility(MenaceAbility.getInstance());
+        addAbility(new MenaceAbility());
 
         // Cycling {2}
         addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));

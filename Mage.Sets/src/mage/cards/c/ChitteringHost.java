@@ -61,13 +61,13 @@ public class ChitteringHost extends MeldCard {
         this.addAbility(HasteAbility.getInstance());
 
         // Menace <i>(This creature can't be blocked except by two or more creatures.
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
 
         // When Chittering Host enters the battlefield, other creatures you control get +1/+0 and gain menace until end of turn.
         Effect effect = new BoostControlledEffect(1, 0, Duration.EndOfTurn, true);
         effect.setText("other creatures you control get +1/+0");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        effect = new GainAbilityAllEffect(MenaceAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("other creatures"), true);
+        effect = new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("other creatures"), true);
         effect.setText("and gain menace until end of turn");
         ability.addEffect(effect);
         this.addAbility(ability);

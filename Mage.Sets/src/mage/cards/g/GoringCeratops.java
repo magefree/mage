@@ -37,8 +37,8 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
 /**
@@ -59,7 +59,7 @@ public class GoringCeratops extends CardImpl {
 
         // Whenever Goring Ceratops attacks, other creatures you control gain double strike until end of turn.
         Effect effect = new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true);
-        effect.setText("other creatures you control gain double strike");
+        effect.setText("other creatures you control gain double strike until end of turn");
         Ability ability = new AttacksTriggeredAbility(effect, false);
         this.addAbility(ability);
     }

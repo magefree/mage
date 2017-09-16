@@ -78,7 +78,7 @@ public class PriestOfTheWakeningSun extends CardImpl {
         this.addAbility(ability);
 
         // {3}{W}{W}, Sacrifice Priest of the Wakening Sun: Search your library for a Dinosaur card, reveal it, put it into your hand, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
+        TargetCardInLibrary target = new TargetCardInLibrary(filter);
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(target), true, true), new ManaCostsImpl("{3}{W}{W}"));
         ability2.addCost(new SacrificeSourceCost());
         this.addAbility(ability2);

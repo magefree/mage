@@ -35,10 +35,10 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class RuthlessKnave extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("three other creatures");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("three three Treasures");
 
     static {
         filter.add(new SubtypePredicate(SubType.TREASURE));

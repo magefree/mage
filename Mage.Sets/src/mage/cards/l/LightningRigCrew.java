@@ -35,10 +35,10 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class LightningRigCrew extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell();
+    private static final FilterSpell filter = new FilterSpell("a Pirate spell");
 
     static {
         filter.add(new SubtypePredicate(SubType.PIRATE));

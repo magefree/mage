@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -79,6 +79,7 @@ public class FieldOfRuin extends CardImpl {
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new FieldOfRuinEffect());
         ability.addTarget(new TargetLandPermanent(filter));
+        this.addAbility(ability);
     }
 
     public FieldOfRuin(final FieldOfRuin card) {
@@ -95,7 +96,7 @@ class FieldOfRuinEffect extends OneShotEffect {
 
     FieldOfRuinEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player searches his or her library for a basic land card, puts it onto the battlefield, then shuffles his or her library.";
+        this.staticText = "Each player searches his or her library for a basic land card, puts it onto the battlefield, then shuffles his or her library";
     }
 
     FieldOfRuinEffect(final FieldOfRuinEffect effect) {
@@ -116,13 +117,7 @@ class FieldOfRuinEffect extends OneShotEffect {
                 if (player != null) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD);
                     if (player.searchLibrary(target, game)) {
-                        for (UUID cardId : target.getTargets()) {
-                            Card card = player.getLibrary().getCard(cardId, game);
-                            if (card != null) {
-                                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
-                            }
-
-                        }
+                        player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
                         player.shuffleLibrary(source, game);
                     }
                 }

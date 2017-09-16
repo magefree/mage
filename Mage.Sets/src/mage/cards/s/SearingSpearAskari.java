@@ -59,7 +59,7 @@ public class SearingSpearAskari extends CardImpl {
         this.addAbility(new FlankingAbility());
         
         // {1}{R}: Searing Spear Askari gains menace until end of turn. (It can't be blocked except by two or more creatures.)
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(MenaceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
     public SearingSpearAskari(final SearingSpearAskari card) {

@@ -65,7 +65,7 @@ public class GrafHarvest extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
 
         // Zombies you control have menace.
-        Effect effect = new GainAbilityAllEffect(MenaceAbility.getInstance(), Duration.WhileOnBattlefield, filter);
+        Effect effect = new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter);
         effect.setText("Zombies you control have menace. <i>(They can't be blocked except by two or more creatures.)</i>");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

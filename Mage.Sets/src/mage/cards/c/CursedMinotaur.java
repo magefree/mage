@@ -50,7 +50,7 @@ public class CursedMinotaur extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
 
     }
 

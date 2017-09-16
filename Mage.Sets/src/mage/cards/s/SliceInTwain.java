@@ -25,54 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Quercitron
+ * @author Loki
  */
-public class BelligerentSliver extends CardImpl {
+public class SliceInTwain extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures you control");
-    
-    static  {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate(SubType.SLIVER));
-    }
-    
-    public BelligerentSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add(SubType.SLIVER);
+    public SliceInTwain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
 
-        this.color.setRed(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Sliver creatures you control have menace. (They can't be blocked except by two or more creatures.)"
-        Effect effect = new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter);
-        effect.setText("Sliver creatures you control have menace. (They can't be blocked except by two or more creatures.)");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br>br>Draw a card"));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
     }
 
-    public BelligerentSliver(final BelligerentSliver card) {
+    public SliceInTwain(final SliceInTwain card) {
         super(card);
     }
 
     @Override
-    public BelligerentSliver copy() {
-        return new BelligerentSliver(this);
+    public SliceInTwain copy() {
+        return new SliceInTwain(this);
     }
 }

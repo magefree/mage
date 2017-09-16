@@ -50,7 +50,7 @@ public class DeputizedProtester extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
         // Melee
         this.addAbility(new MeleeAbility());
     }

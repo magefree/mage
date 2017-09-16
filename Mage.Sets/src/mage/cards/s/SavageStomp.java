@@ -69,7 +69,9 @@ public class SavageStomp extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Savage Stomp costs {2} less to cast if it targets a Dinosaur you control.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(2, SavageStompCondition.instance)));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK,
+                new SpellCostReductionSourceEffect(2, SavageStompCondition.instance))
+                .setRuleAtTheTop(true));
 
         // Put a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());

@@ -58,7 +58,7 @@ public class DireFleetRavager extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());

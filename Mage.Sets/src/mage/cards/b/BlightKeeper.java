@@ -36,11 +36,11 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetOpponent;
 
@@ -63,7 +63,7 @@ public class BlightKeeper extends CardImpl {
 
         // {7}{B}, {T}, Sacrifice Blight Keeper: Target opponent loses 4 life and you gain 4 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(4), new ManaCostsImpl("{7}{B}"));
-        ability.addEffect(new GainLifeEffect(4));
+        ability.addEffect(new GainLifeEffect(4).setText("and you gain 4 life"));
         ability.addTarget(new TargetOpponent());
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

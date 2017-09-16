@@ -64,7 +64,8 @@ public class DireFleetCaptain extends CardImpl {
 
         // Whenever Dire Fleet Captain attacks, it gets +1/+1 until end of turn for each other attacking Pirate.
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, value, Duration.EndOfTurn, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, value, Duration.EndOfTurn, true)
+                .setText("it gets +1/+1 until end of turn for each other attacking Pirate"), false));
     }
 
     public DireFleetCaptain(final DireFleetCaptain card) {

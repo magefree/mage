@@ -32,11 +32,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.CreatureExploresTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -65,6 +65,7 @@ public class LurkingChupacabra extends CardImpl {
         // Whenever a creature you control explores, target creature an opponent controls gets -2/-2 until end of turn
         Ability ability = new CreatureExploresTriggeredAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
     public LurkingChupacabra(final LurkingChupacabra card) {

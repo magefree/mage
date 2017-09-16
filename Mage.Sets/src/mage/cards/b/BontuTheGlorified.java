@@ -65,7 +65,7 @@ public class BontuTheGlorified extends CardImpl {
         this.toughness = new MageInt(6);
 
         //Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
 
         //Indestructible
         this.addAbility(IndestructibleAbility.getInstance());

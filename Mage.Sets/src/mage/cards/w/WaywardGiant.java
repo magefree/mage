@@ -48,7 +48,7 @@ public class WaywardGiant extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
     }
 
     public WaywardGiant(final WaywardGiant card) {

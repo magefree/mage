@@ -203,7 +203,7 @@ public class RenownTest extends CardTestPlayerBase {
 
         Permanent goblin = getPermanent("Goblin Glory Chaser", playerA);
         Assert.assertEquals("has has renown", true, goblin.isRenowned());
-        assertAbility(playerA, "Goblin Glory Chaser", MenaceAbility.getInstance(), true);
+        assertAbility(playerA, "Goblin Glory Chaser", new MenaceAbility(), true);
         assertPowerToughness(playerA, "Goblin Glory Chaser", 2, 2);
 
         assertLife(playerA, 20);

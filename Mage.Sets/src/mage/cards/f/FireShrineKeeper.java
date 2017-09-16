@@ -57,7 +57,7 @@ public class FireShrineKeeper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
 
         // {7}{R}, {T}, Sacrifice Fire Shrine Keeper: It deals 3 damage to each of up to two target creatures.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
