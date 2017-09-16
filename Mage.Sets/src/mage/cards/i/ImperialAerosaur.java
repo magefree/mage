@@ -29,17 +29,16 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -72,7 +71,7 @@ public class ImperialAerosaur extends CardImpl {
         // When Imperial Aerosaur enters the battlefield, another target creature you control gets +1/+1 and gains flying until end of turn.
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setText("another target creature you control gets +1/+1");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(effect);
         ability.addEffect(effect);
         effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying until end of turn");
