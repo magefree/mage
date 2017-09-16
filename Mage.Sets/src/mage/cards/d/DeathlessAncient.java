@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -59,7 +59,7 @@ public class DeathlessAncient extends CardImpl {
 
     public DeathlessAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        
+
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(4);
@@ -69,7 +69,9 @@ public class DeathlessAncient extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Tap three untapped Vampires you control: Return Deathless Ancient from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new TapTargetCost(new TargetControlledPermanent(3, 3, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToHandEffect(),
+                new TapTargetCost(new TargetControlledPermanent(3, 3, filter, true))));
 
     }
 

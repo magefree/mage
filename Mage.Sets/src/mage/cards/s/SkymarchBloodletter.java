@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
@@ -60,7 +60,7 @@ public class SkymarchBloodletter extends CardImpl {
 
         // When Skymarch Bloodletters enters the battlefield, target opponent loses 1 life and you gain 1 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), false);
-        ability.addEffect(new GainLifeEffect(1));
+        ability.addEffect(new GainLifeEffect(1).setText("and you gain 1 life"));
         Target target = new TargetOpponent();
         ability.addTarget(target);
         this.addAbility(ability);
