@@ -95,6 +95,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Fleet Hoarder", 102, Rarity.COMMON, mage.cards.d.DireFleetHoarder.class));
         cards.add(new SetCardInfo("Dire Fleet Interloper", 103, Rarity.COMMON, mage.cards.d.DireFleetInterloper.class));
         cards.add(new SetCardInfo("Dire Fleet Ravager", 104, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
+        cards.add(new SetCardInfo("Dive Down", 53, Rarity.COMMON, mage.cards.d.DiveDown.class));
         cards.add(new SetCardInfo("Dowsing Dagger", 235, Rarity.RARE, mage.cards.d.DowsingDagger.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 252, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dreamcaller Siren", 54, Rarity.RARE, mage.cards.d.DreamcallerSiren.class));
@@ -111,6 +112,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Encampment Keeper", 11, Rarity.COMMON, mage.cards.e.EncampmentKeeper.class));
         cards.add(new SetCardInfo("Entrancing Melody", 55, Rarity.RARE, mage.cards.e.EntrancingMelody.class));
         cards.add(new SetCardInfo("Fathom Fleet Captain", 106, Rarity.RARE, mage.cards.f.FathomFleetCaptain.class));
+        cards.add(new SetCardInfo("Fathom Fleet Cutthroat", 107, Rarity.COMMON, mage.cards.f.FathomFleetCutthroat.class));
         cards.add(new SetCardInfo("Fathom Fleet Firebrand", 142, Rarity.COMMON, mage.cards.f.FathomFleetFirebrand.class));
         cards.add(new SetCardInfo("Favorable Winds", 56, Rarity.UNCOMMON, mage.cards.f.FavorableWinds.class));
         cards.add(new SetCardInfo("Fell Flagship", 238, Rarity.RARE, mage.cards.f.FellFlagship.class));
@@ -118,6 +120,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Cannonade", 143, Rarity.UNCOMMON, mage.cards.f.FieryCannonade.class));
         cards.add(new SetCardInfo("Fire Shrine Keeper", 144, Rarity.COMMON, mage.cards.f.FireShrineKeeper.class));
         cards.add(new SetCardInfo("Firecannon Blast", 145, Rarity.COMMON, mage.cards.f.FirecannonBlast.class));
+        cards.add(new SetCardInfo("Fleet Swallower", 57, Rarity.RARE, mage.cards.f.FleetSwallower.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Forest", 277, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Forest", 278, Rarity.LAND, mage.cards.basiclands.Forest.class));
@@ -183,6 +186,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 273, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class));
+        cards.add(new SetCardInfo("Navigator's Ruin", 63, Rarity.UNCOMMON, mage.cards.n.NavigatorsRuin.class));
         cards.add(new SetCardInfo("New Horizons", 198, Rarity.COMMON, mage.cards.n.NewHorizons.class));
         cards.add(new SetCardInfo("Nest Robber", 152, Rarity.COMMON, mage.cards.n.NestRobber.class));
         cards.add(new SetCardInfo("Old-Growth Dryads", 199, Rarity.RARE, mage.cards.o.OldGrowthDryads.class));
@@ -248,9 +252,11 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Shapers' Sanctuary", 206, Rarity.RARE, mage.cards.s.ShapersSanctuary.class));
         cards.add(new SetCardInfo("Sheltering Light", 35, Rarity.UNCOMMON, mage.cards.s.ShelteringLight.class));
         cards.add(new SetCardInfo("Shining Aerosaur", 36, Rarity.COMMON, mage.cards.s.ShiningAerosaur.class));
+        cards.add(new SetCardInfo("Shipwreck Looter", 76, Rarity.COMMON, mage.cards.s.ShipwreckLooter.class));
         cards.add(new SetCardInfo("Shore Keeper", 77, Rarity.COMMON, mage.cards.s.ShoreKeeper.class));
         cards.add(new SetCardInfo("Siren Lookout", 78, Rarity.COMMON, mage.cards.s.SirenLookout.class));
         cards.add(new SetCardInfo("Siren Stormtamer", 79, Rarity.UNCOMMON, mage.cards.s.SirenStormtamer.class));
+        cards.add(new SetCardInfo("Siren's Ruse", 80, Rarity.COMMON, mage.cards.s.SirensRuse.class));
         cards.add(new SetCardInfo("Skittering Heartstopper", 122, Rarity.COMMON, mage.cards.s.SkitteringHeartstopper.class));
         cards.add(new SetCardInfo("Skulduggery", 123, Rarity.COMMON, mage.cards.s.Skulduggery.class));
         cards.add(new SetCardInfo("Sky Terror", 229, Rarity.UNCOMMON, mage.cards.s.SkyTerror.class));
@@ -258,6 +264,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Skymarch Bloodletter", 124, Rarity.COMMON, mage.cards.s.SkymarchBloodletter.class));
         cards.add(new SetCardInfo("Slash of Talons", 38, Rarity.COMMON, mage.cards.s.SlashOfTalons.class));
         cards.add(new SetCardInfo("Sleek Schooner", 247, Rarity.UNCOMMON, mage.cards.s.SleekSchooner.class));
+        cards.add(new SetCardInfo("Slice in Twain", 207, Rarity.UNCOMMON, mage.cards.s.SliceinTwain.class));
         cards.add(new SetCardInfo("Snapping Sailback", 208, Rarity.UNCOMMON, mage.cards.s.SnappingSailback.class));
         cards.add(new SetCardInfo("Sorcerous Spyglass", 248, Rarity.RARE, mage.cards.s.SorcerousSpyglass.class));
         cards.add(new SetCardInfo("Spell Pierce", 81, Rarity.COMMON, mage.cards.s.SpellPierce.class));
@@ -267,6 +274,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Spitfire Bastion", 173, Rarity.RARE, mage.cards.s.SpitfireBastion.class));
         cards.add(new SetCardInfo("Spreading Rot", 125, Rarity.COMMON, mage.cards.s.SpreadingRot.class));
         cards.add(new SetCardInfo("Star of Extinction", 161, Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class));
+        cards.add(new SetCardInfo("Steadfast Armasaur", 39, Rarity.UNCOMMON, mage.cards.s.SteadfastArmasaur.class));
         cards.add(new SetCardInfo("Stone Quarry", 289, Rarity.COMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Storm Fleet Aerialist", 83, Rarity.UNCOMMON, mage.cards.s.StormFleetAerialist.class));
         cards.add(new SetCardInfo("Storm Fleet Arsonist", 162, Rarity.UNCOMMON, mage.cards.s.StormFleetArsonist.class));
@@ -302,6 +310,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Unclaimed Territory", 258, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Unfriendly Fire", 172, Rarity.COMMON, mage.cards.u.UnfriendlyFire.class));
         cards.add(new SetCardInfo("Unknown Shores", 259, Rarity.COMMON, mage.cards.u.UnknownShores.class));
+        cards.add(new SetCardInfo("Vampire's Zeal", 43, Rarity.COMMON, mage.cards.v.VampiresZeal.class));
         cards.add(new SetCardInfo("Vance's Blasting Cannons", 173, Rarity.RARE, mage.cards.v.VancesBlastingCannons.class));
         cards.add(new SetCardInfo("Vanquish the Weak", 127, Rarity.COMMON, mage.cards.v.VanquishTheWeak.class));
         cards.add(new SetCardInfo("Vanquisher's Banner", 251, Rarity.RARE, mage.cards.v.VanquishersBanner.class));
