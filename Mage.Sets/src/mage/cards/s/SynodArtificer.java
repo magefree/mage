@@ -74,7 +74,7 @@ public class SynodArtificer extends CardImpl {
         tapEffect.setText("Tap X target noncreature artifacts.");
         Ability tapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, tapEffect, new ManaCostsImpl("{X}"));
         tapAbility.addCost(new TapSourceCost());
-        tapAbility.setTargetAdjustment(TargetAdjustment.XCOST);
+        tapAbility.setTargetAdjustment(TargetAdjustment.X_TARGETS);
         tapAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(tapAbility);
 
@@ -83,14 +83,14 @@ public class SynodArtificer extends CardImpl {
         untapEffect.setText("Untap X target noncreature artifacts.");
         Ability untapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, untapEffect, new ManaCostsImpl("{X}"));
         untapAbility.addCost(new TapSourceCost());
-        untapAbility.setTargetAdjustment(TargetAdjustment.XCOST);
+        untapAbility.setTargetAdjustment(TargetAdjustment.X_TARGETS);
         untapAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(untapAbility);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getTargetAdjustment() == TargetAdjustment.XCOST) {
+        if (ability.getTargetAdjustment() == TargetAdjustment.X_TARGETS) {
             FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
             ability.getTargets().clear();
             ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));

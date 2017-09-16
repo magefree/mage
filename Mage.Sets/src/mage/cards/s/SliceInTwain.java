@@ -25,59 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetAdjustment;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.TargetPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author Loki
  */
-public class MishrasHelix extends CardImpl {
+public class SliceInTwain extends CardImpl {
 
-    public MishrasHelix(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
+    public SliceInTwain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
 
-        //TODO: Make ability properly copiable
-        // {X}, {tap}: Tap X target lands.
-        Effect effect = new TapTargetEffect("X target lands");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
-        ability.setTargetAdjustment(TargetAdjustment.X_TARGETS);
-        this.addAbility(ability);
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br>br>Draw a card"));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
     }
 
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getTargetAdjustment() == TargetAdjustment.X_TARGETS) {
-            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
-            ability.getTargets().clear();
-            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));
-        }
-    }
-
-    public MishrasHelix(final MishrasHelix card) {
+    public SliceInTwain(final SliceInTwain card) {
         super(card);
     }
 
     @Override
-    public MishrasHelix copy() {
-        return new MishrasHelix(this);
+    public SliceInTwain copy() {
+        return new SliceInTwain(this);
     }
 }

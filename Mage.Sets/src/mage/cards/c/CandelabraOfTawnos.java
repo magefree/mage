@@ -61,13 +61,13 @@ public class CandelabraOfTawnos extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
-        ability.setTargetAdjustment(TargetAdjustment.XCOST);
+        ability.setTargetAdjustment(TargetAdjustment.X_TARGETS);
         this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getTargetAdjustment() == TargetAdjustment.XCOST) {
+        if (ability.getTargetAdjustment() == TargetAdjustment.X_TARGETS) {
             FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
             ability.getTargets().clear();
             ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));

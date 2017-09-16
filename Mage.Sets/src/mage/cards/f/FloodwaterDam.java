@@ -65,7 +65,7 @@ public class FloodwaterDam extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getTargetAdjustment() == TargetAdjustment.XCOST) {
+        if (ability.getTargetAdjustment() == TargetAdjustment.X_TARGETS) {
             FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
             ability.getTargets().clear();
             ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));
