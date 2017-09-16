@@ -255,6 +255,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Shore Keeper", 77, Rarity.COMMON, mage.cards.s.ShoreKeeper.class));
         cards.add(new SetCardInfo("Siren Lookout", 78, Rarity.COMMON, mage.cards.s.SirenLookout.class));
         cards.add(new SetCardInfo("Siren Stormtamer", 79, Rarity.UNCOMMON, mage.cards.s.SirenStormtamer.class));
+        cards.add(new SetCardInfo("Siren's Ruse", 80, Rarity.COMMON, mage.cards.s.SirensRuse.class));
         cards.add(new SetCardInfo("Skittering Heartstopper", 122, Rarity.COMMON, mage.cards.s.SkitteringHeartstopper.class));
         cards.add(new SetCardInfo("Skulduggery", 123, Rarity.COMMON, mage.cards.s.Skulduggery.class));
         cards.add(new SetCardInfo("Sky Terror", 229, Rarity.UNCOMMON, mage.cards.s.SkyTerror.class));
