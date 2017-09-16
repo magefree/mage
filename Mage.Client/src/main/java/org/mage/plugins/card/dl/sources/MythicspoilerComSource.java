@@ -64,6 +64,7 @@ public enum MythicspoilerComSource implements CardImageSource {
     private final Map<String, Set<String>> cardNameAliasesStart;
     private final Map<String, Map<String, String>> sets;
     private final Set<String> supportedSets;
+    private final Map<String, Map<String, String>> manualLinks;
 
     @Override
     public String getSourceName() {
@@ -277,6 +278,21 @@ public enum MythicspoilerComSource implements CardImageSource {
         cardNameAliases.put("XLN-infuriatedgladiodon", "ragingswordtooth");
         cardNameAliases.put("XLN-redoubledvolley", "repeatingbarrage");
 
+        // <card name, card link>
+        manualLinks = new HashMap<>();
+        HashMap<String, String> links = new HashMap<>();
+        links.put("templeofaclazotz", "templeofaclazotz");
+        links.put("conquerorsfoothold", "conquerorsfoothold");
+        links.put("primalwellspring", "primalwellspring");
+        links.put("azcantathesunkenruin", "azcantathesunkenruin");
+        links.put("spiresoforazca", "spiresoforazca");
+        links.put("treasurecove", "treasurecove");
+        links.put("itlimoccradleofthesun", "itlimoccradleofthesun");
+        links.put("lostvale", "lostvale");
+        links.put("adantothefirstfort", "adantothefirstport");
+        links.put("spitfirebastion", "spitfirebastion");
+        manualLinks.put("XLN", links);
+
         cardNameAliasesStart = new HashMap<>();
         HashSet<String> names = new HashSet<>();
         names.add("eldrazidevastator.jpg");
@@ -372,7 +388,12 @@ public enum MythicspoilerComSource implements CardImageSource {
                 pageLinks.put(cardName, baseUrl + cardLink);
             }
         }
-
+        Map<String, String> linksToAdd = manualLinks.get(cardSet);
+        if (linksToAdd != null) {
+            for (Map.Entry<String, String> link : linksToAdd.entrySet()) {
+                pageLinks.put(link.getKey(), baseUrl + "cards/" + link.getValue() + ".jpg");
+            }
+        }
         return pageLinks;
     }
 
