@@ -74,6 +74,7 @@ public class NecropolisFiend extends CardImpl {
         this.addAbility(new DelveAbility());
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+        //TODO: Make ability properly copiable
         // {X}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn.
         DynamicValue xValue = new SignInversionDynamicValue(new ManacostVariableValue());
         Effect effect = new BoostTargetEffect(xValue,xValue,Duration.EndOfTurn);

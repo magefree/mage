@@ -69,6 +69,7 @@ public class SynodArtificer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
+        //TODO: Make ability properly copiable
         // {X}, {tap}: Tap X target noncreature artifacts.
         Effect tapEffect = new TapTargetEffect();
         tapEffect.setText("Tap X target noncreature artifacts.");
