@@ -268,6 +268,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Spitfire Bastion", 173, Rarity.RARE, mage.cards.s.SpitfireBastion.class));
         cards.add(new SetCardInfo("Spreading Rot", 125, Rarity.COMMON, mage.cards.s.SpreadingRot.class));
         cards.add(new SetCardInfo("Star of Extinction", 161, Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class));
+        cards.add(new SetCardInfo("Steadfast Armasaur", 39, Rarity.UNCOMMON, mage.cards.s.SteadfastArmasaur.class));
         cards.add(new SetCardInfo("Stone Quarry", 289, Rarity.COMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Storm Fleet Aerialist", 83, Rarity.UNCOMMON, mage.cards.s.StormFleetAerialist.class));
         cards.add(new SetCardInfo("Storm Fleet Arsonist", 162, Rarity.UNCOMMON, mage.cards.s.StormFleetArsonist.class));
