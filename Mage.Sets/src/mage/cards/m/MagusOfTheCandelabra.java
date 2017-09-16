@@ -39,20 +39,21 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 
 /**
  * @author duncant
  */
 public class MagusOfTheCandelabra extends CardImpl {
 
-    private final UUID originalId;
-
     public MagusOfTheCandelabra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -65,22 +66,22 @@ public class MagusOfTheCandelabra extends CardImpl {
         effect.setText("untap X target lands");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
-        originalId = ability.getOriginalId();
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
+        ability.setTargetAdjustment(TargetAdjustment.XCOST);
         this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)){
-            int xValue = ability.getManaCostsToPay().getX();
+        if (ability.getTargetAdjustment() == TargetAdjustment.XCOST) {
+            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
             ability.getTargets().clear();
-            ability.addTarget(new TargetLandPermanent(xValue, xValue, StaticFilters.FILTER_LANDS, false));
+            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));
         }
     }
 
     public MagusOfTheCandelabra(final MagusOfTheCandelabra card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override

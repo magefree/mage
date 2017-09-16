@@ -40,10 +40,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
@@ -53,17 +54,9 @@ import mage.target.common.TargetCardInHand;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class AlexiZephyrMage extends CardImpl {
-    
-    private final UUID originalId;
-    
-    private static final FilterPermanent filter = new FilterPermanent("Target creatures");
-    
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
 
     public AlexiZephyrMage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SPELLSHAPER);
@@ -75,22 +68,21 @@ public class AlexiZephyrMage extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{X}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
-        this.addAbility(ability);        
-        
-        originalId = ability.getOriginalId();
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.addAbility(ability);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {          
+        if (ability.getTargetAdjustment() == TargetAdjustment.XCOST) {
+            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
             ability.getTargets().clear();
-            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter));  
+            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));
         }
     }
 
     public AlexiZephyrMage(final AlexiZephyrMage card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override
