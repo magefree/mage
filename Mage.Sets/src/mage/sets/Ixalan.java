@@ -95,6 +95,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Fleet Hoarder", 102, Rarity.COMMON, mage.cards.d.DireFleetHoarder.class));
         cards.add(new SetCardInfo("Dire Fleet Interloper", 103, Rarity.COMMON, mage.cards.d.DireFleetInterloper.class));
         cards.add(new SetCardInfo("Dire Fleet Ravager", 104, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
+        cards.add(new SetCardInfo("Dive Down", 53, Rarity.COMMON, mage.cards.d.DiveDown.class));
         cards.add(new SetCardInfo("Dowsing Dagger", 235, Rarity.RARE, mage.cards.d.DowsingDagger.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 252, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dreamcaller Siren", 54, Rarity.RARE, mage.cards.d.DreamcallerSiren.class));
