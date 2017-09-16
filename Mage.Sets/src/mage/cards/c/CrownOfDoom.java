@@ -39,14 +39,13 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.PlayerIdPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -58,7 +57,11 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class CrownOfDoom extends CardImpl {
 
-    private UUID abilityId;
+    private static final FilterPlayer filter = new FilterPlayer("player other than Crown of Doom's owner");
+
+    static {
+        filter.add(new CrownOfDoomPredicate());
+    }
 
     public CrownOfDoom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
@@ -71,32 +74,38 @@ public class CrownOfDoom extends CardImpl {
         //TODO: Make ability properly copiable
         // {2}: Target player other than Crown of Doom's owner gains control of it. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new CrownOfDoomEffect(), new ManaCostsImpl("{2}"), MyTurnCondition.instance);
-        ability.addTarget(new TargetPlayer(1, 1, false, new FilterPlayer("player other than Crown of Doom's owner")));
-        abilityId = ability.getOriginalId();
+        ability.addTarget(new TargetPlayer(1, 1, false, filter));
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(abilityId)) {
-            Card sourceCard = game.getCard(ability.getSourceId());
-            if (sourceCard != null) {
-                ability.getTargets().clear();
-                FilterPlayer filter = new FilterPlayer("player other than " + sourceCard.getIdName() + "'s owner");
-                filter.add(Predicates.not(new PlayerIdPredicate(sourceCard.getOwnerId())));
-                ability.addTarget(new TargetPlayer(1, 1, false, filter));
-            }
-        }
     }
 
     public CrownOfDoom(final CrownOfDoom card) {
         super(card);
-        this.abilityId = card.abilityId;
     }
 
     @Override
     public CrownOfDoom copy() {
         return new CrownOfDoom(this);
+    }
+}
+
+class CrownOfDoomPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+
+    public CrownOfDoomPredicate() {
+    }
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
+        Player player = input.getObject();
+        UUID playerId = input.getPlayerId();
+        if (player == null || playerId == null) {
+            return false;
+        }
+        return !player.getId().equals(playerId);
+    }
+
+    @Override
+    public String toString() {
+        return "Owner()";
     }
 }
 
