@@ -139,10 +139,9 @@ class SunbirdsInvocationEffect extends OneShotEffect {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     if (controller.chooseUse(outcome, "Do you wish to cast " + card.getName(), source, game)) {
-                        Card copy = game.copyCard(card, source, source.getControllerId());
-                        controller.cast(copy.getSpellAbility(), game, true);
+                        controller.cast(card.getSpellAbility(), game, true);
+                        cards.remove(card);
                     }
-                    return true;
                 }
             }
         }
