@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
 public class PyromancersGoggles extends CardImpl {
 
     public PyromancersGoggles(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
         addSuperType(SuperType.LEGENDARY);
 
         // {T}: Add {R} to your mana pool.
@@ -89,7 +89,7 @@ class PyromancersGogglesTriggeredAbility extends TriggeredAbilityImpl {
     String abilityOriginalId;
 
     public PyromancersGogglesTriggeredAbility(UUID abilityOriginalId, Effect effect) {
-        super(Zone.ALL, effect, true);
+        super(Zone.ALL, effect, false);
         this.abilityOriginalId = abilityOriginalId.toString();
     }
 

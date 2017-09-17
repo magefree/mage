@@ -81,7 +81,7 @@ class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
     String abilityOriginalId;
 
     public PyrimalWellspringTriggeredAbility(UUID abilityOriginalId, Effect effect) {
-        super(Zone.ALL, effect, true);
+        super(Zone.ALL, effect, false);
         this.abilityOriginalId = abilityOriginalId.toString();
     }
 
