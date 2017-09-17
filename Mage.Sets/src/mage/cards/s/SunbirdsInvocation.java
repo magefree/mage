@@ -92,7 +92,7 @@ class SunbirdsInvocationTriggeredAbility extends SpellCastControllerTriggeredAbi
             if (spell != null && spell.getFromZone() == Zone.HAND) {
                 if (spell.getCard() != null) {
                     for (Effect effect : getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(spell.getId()));
+                        effect.setTargetPointer(new FixedTarget(spell.getId(), spell.getZoneChangeCounter(game)));
                     }
                     return true;
                 }
@@ -126,7 +126,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        int xValue = game.getStack().getSpell(getTargetPointer().getFirst(game, source)).getConvertedManaCost();
+        int xValue = game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.STACK).getConvertedManaCost();
         cards.addAll(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
