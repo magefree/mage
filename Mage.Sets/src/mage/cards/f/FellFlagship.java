@@ -33,12 +33,12 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.CrewAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -70,6 +70,9 @@ public class FellFlagship extends CardImpl {
 
         // Crew 3
         this.addAbility(new CrewAbility(3));
+
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
     }
 
