@@ -433,9 +433,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), true);
                         url.setType2(isType2);
                         allCardsUrls.add(url);
-                        if (card.getSetCode().equals("XLN")) {
-                            logger.info(card.getSetCode() + "second side: " + card.getSecondSideName() + " -name: " + card.getName());
-                        }
                     }
                     if (card.isFlipCard()) {
                         if (card.getFlipCardName() == null || card.getFlipCardName().trim().isEmpty()) {
