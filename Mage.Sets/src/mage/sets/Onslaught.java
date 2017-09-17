@@ -276,6 +276,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Starlit Sanctum", 325, Rarity.UNCOMMON, mage.cards.s.StarlitSanctum.class));
         cards.add(new SetCardInfo("Starstorm", 238, Rarity.RARE, mage.cards.s.Starstorm.class));
         cards.add(new SetCardInfo("Steely Resolve", 286, Rarity.RARE, mage.cards.s.SteelyResolve.class));
+        cards.add(new SetCardInfo("Strongarm Tactics", 173, Rarity.RARE, mage.cards.s.StrongarmTactics.class));
         cards.add(new SetCardInfo("Sunfire Balm", 56, Rarity.UNCOMMON, mage.cards.s.SunfireBalm.class));
         cards.add(new SetCardInfo("Supreme Inquisitor", 117, Rarity.RARE, mage.cards.s.SupremeInquisitor.class));
         cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
