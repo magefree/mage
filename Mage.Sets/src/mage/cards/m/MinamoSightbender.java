@@ -64,6 +64,7 @@ public class MinamoSightbender extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
+        //TODO: Make ability properly copiable
         // {X}, {T}: Target creature with power X or less can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl("{X}"));
         Target target = new TargetCreaturePermanent(filter);

@@ -67,6 +67,7 @@ public class Plaguebearer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        //TODO: Make ability properly copiable
         // {X}{X}{B}: Destroy target nonblack creature with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{B}"));
         ability.addTarget(new TargetPermanent(filter));

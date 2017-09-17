@@ -60,6 +60,7 @@ public class AncientHellkite extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
+        //TODO: Make ability properly copiable
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"), SourceAttackingCondition.instance);
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));

@@ -58,6 +58,7 @@ public class DeclarationOfNaught extends CardImpl {
         // As Declaration of Naught enters the battlefield, name a card.
         this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.ALL)));
 
+        //TODO: Make ability properly copiable
         // {U}: Counter target spell with the chosen name.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}"));
         ability.addTarget(new TargetSpell(filter));

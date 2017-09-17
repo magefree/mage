@@ -28,6 +28,7 @@
 package mage.cards.g;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,6 +44,9 @@ public class GildedSentinel extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
 
         this.subtype.add(SubType.GOLEM);
+
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
     }
 
     public GildedSentinel(final GildedSentinel card) {

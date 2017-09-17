@@ -68,6 +68,7 @@ public class MartyrOfBones extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        //TODO: Make ability properly copiable
         // {1}, Reveal X black cards from your hand, Sacrifice Martyr of Bones: Exile up to X target cards from a single graveyard.
         Effect effect = new ExileTargetEffect(null, null, Zone.GRAVEYARD);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));

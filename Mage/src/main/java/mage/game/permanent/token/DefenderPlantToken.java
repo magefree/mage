@@ -52,7 +52,7 @@ public class DefenderPlantToken extends Token {
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PLANT);
         power = new MageInt(0);
-        toughness = new MageInt(1);
+        toughness = new MageInt(2);
 
         this.addAbility(DefenderAbility.getInstance());
     }

@@ -53,6 +53,7 @@ public class MishrasHelix extends CardImpl {
     public MishrasHelix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
+        //TODO: Make ability properly copiable
         // {X}, {tap}: Tap X target lands.
         Effect effect = new TapTargetEffect("X target lands");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));

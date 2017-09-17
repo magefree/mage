@@ -69,6 +69,7 @@ public class GethLordOfTheVault extends CardImpl {
 
         // Intimidate
         this.addAbility(IntimidateAbility.getInstance());
+        //TODO: Make ability properly copiable
         // {X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped.
         // Then that player puts the top X cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
