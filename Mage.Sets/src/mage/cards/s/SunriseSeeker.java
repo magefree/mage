@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.ExploreSourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class SunriseSeeker extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Sunrise Seeker enters the battlefield, it explores.
-        this.addAbility(new EntersBattlefieldAbility(new ExploreSourceEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
     public SunriseSeeker(final SunriseSeeker card) {
