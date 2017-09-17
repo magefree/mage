@@ -111,7 +111,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
 
     public SunbirdsInvocationEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Reveal the top X cards of your library, where X is that spell's converted mana cost. You may cast a card revealed this way with converted mana cost X or less without paying its mana cost. Put the rest on the bottom of your library in a random order";
+        staticText = "reveal the top X cards of your library, where X is that spell's converted mana cost. You may cast a card revealed this way with converted mana cost X or less without paying its mana cost. Put the rest on the bottom of your library in a random order";
     }
 
     public SunbirdsInvocationEffect(final SunbirdsInvocationEffect effect) {
