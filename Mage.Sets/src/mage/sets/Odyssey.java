@@ -214,6 +214,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Metamorphic Wurm", 250, Rarity.UNCOMMON, mage.cards.m.MetamorphicWurm.class));
         cards.add(new SetCardInfo("Millikin", 302, Rarity.UNCOMMON, mage.cards.m.Millikin.class));
         cards.add(new SetCardInfo("Mindslicer", 149, Rarity.RARE, mage.cards.m.Mindslicer.class));
+        cards.add(new SetCardInfo("Mine Layer", 205, Rarity.RARE, mage.cards.m.MineLayer.class));
         cards.add(new SetCardInfo("Minotaur Explorer", 206, Rarity.UNCOMMON, mage.cards.m.MinotaurExplorer.class));
         cards.add(new SetCardInfo("Mirari", 303, Rarity.RARE, mage.cards.m.Mirari.class));
         cards.add(new SetCardInfo("Molten Influence", 207, Rarity.RARE, mage.cards.m.MoltenInfluence.class));
