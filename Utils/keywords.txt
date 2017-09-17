@@ -54,7 +54,7 @@ Lifelink|instance|
 Living weapon|new|
 Madness|card, cost|
 Melee|new|
-Menace|instance|
+Menace|new|
 Miracle|cost|
 Mountaincycling|cost|
 Mountainwalk|new|
