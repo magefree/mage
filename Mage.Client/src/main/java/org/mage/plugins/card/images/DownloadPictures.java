@@ -429,9 +429,13 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
                             throw new IllegalStateException("Second side card can't have empty name.");
                         }
+
                         url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), true);
                         url.setType2(isType2);
                         allCardsUrls.add(url);
+                        if (card.getSetCode().equals("XLN")) {
+                            logger.info(card.getSetCode() + "second side: " + card.getSecondSideName() + " -name: " + card.getName());
+                        }
                     }
                     if (card.isFlipCard()) {
                         if (card.getFlipCardName() == null || card.getFlipCardName().trim().isEmpty()) {
@@ -444,11 +448,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         allCardsUrls.add(cardDownloadData);
                     }
                 } else if (card.getCardNumber().isEmpty() || "0".equals(card.getCardNumber())) {
-                    System.err.println("There was a critical error!");
                     logger.error("Card has no collector ID and won't be sent to client: " + card.getName());
                 } else if (card.getSetCode().isEmpty()) {
-                    System.err.println("There was a critical error!");
                     logger.error("Card has no set name and won't be sent to client:" + card.getName());
+                } else {
+                    logger.info("Card was not selected: " + card.getName());
                 }
             });
             allCardsUrls.addAll(getTokenCardUrls());
