@@ -57,7 +57,7 @@ public class SkeletonKey extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has skulk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(SkulkAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SkulkAbility(), AttachmentType.EQUIPMENT)));
 
         // Whenever equipped creature deals combat damage to a player, you may draw a card. if you do, discard a card.
         Ability ability = new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "equipped creature", true);

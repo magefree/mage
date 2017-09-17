@@ -54,7 +54,7 @@ public class PersistentNightmare extends CardImpl {
         this.nightCard = true;
 
         // Skulk
-        this.addAbility(SkulkAbility.getInstance());
+        this.addAbility(new SkulkAbility());
 
         // When Persistent Nightmare deals combat damage to a player, return it to its owner's hand.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnToHandSourceEffect(), false));
