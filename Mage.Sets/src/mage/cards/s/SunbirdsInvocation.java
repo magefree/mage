@@ -111,7 +111,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
 
     public SunbirdsInvocationEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "reveal the top X cards of your library, where X is that spell's converted mana cost. You may cast a card revealed this way with converted mana cost X or less without paying its mana cost. Put the rest on the bottom of your library in a random order";
+        staticText = "Reveal the top X cards of your library, where X is that spell's converted mana cost. You may cast a card revealed this way with converted mana cost X or less without paying its mana cost. Put the rest on the bottom of your library in a random order";
     }
 
     public SunbirdsInvocationEffect(final SunbirdsInvocationEffect effect) {
@@ -139,10 +139,9 @@ class SunbirdsInvocationEffect extends OneShotEffect {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     if (controller.chooseUse(outcome, "Do you wish to cast " + card.getName(), source, game)) {
-                        Card copy = game.copyCard(card, source, source.getControllerId());
-                        controller.cast(copy.getSpellAbility(), game, true);
+                        controller.cast(card.getSpellAbility(), game, true);
+                        cards.remove(card);
                     }
-                    return true;
                 }
             }
         }
