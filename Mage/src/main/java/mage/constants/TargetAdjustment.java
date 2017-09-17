@@ -6,5 +6,5 @@ package mage.constants;
  */
 public enum TargetAdjustment {
 
-    NONE, X_TARGETS, X_CMC_EQUAL_PERM, X_CMC_EQUAL_NONPERM, DEFENDING_PLAYER
+    NONE, X_TARGETS, X_CMC_EQUAL_PERM, GETH, DEFENDING_PLAYER,X_POWER_LEQ
 }

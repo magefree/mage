@@ -81,11 +81,7 @@ public class Plaguebearer extends CardImpl {
         if (ability.getTargetAdjustment() == TargetAdjustment.X_CMC_EQUAL_PERM) {
             int xValue = ability.getManaCostsToPay().getX();
             FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter().copy();
-            StringBuilder message = new StringBuilder(filter2.getMessage());
-            message.setLength(message.length() - 1);
-            message.append(xValue);
             filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-            filter2.setMessage(message.toString());
             ability.getTargets().clear();
             ability.getTargets().add(new TargetPermanent(filter2));
         }

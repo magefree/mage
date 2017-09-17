@@ -79,14 +79,13 @@ public class GorillaShaman extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability.getTargetAdjustment() == TargetAdjustment.X_CMC_EQUAL_PERM) {
             int xValue = ability.getManaCostsToPay().getX();
-            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter().copy();
-            StringBuilder message = new StringBuilder(filter2.getMessage());
-            message.setLength(message.length() - 1);
-            message.append(xValue);
+            TargetPermanent oldTarget = (TargetPermanent) ability.getTargets().get(0);
+            int minTargets = oldTarget.getMinNumberOfTargets();
+            int maxTargets = oldTarget.getMaxNumberOfTargets();
+            FilterPermanent filter2 = oldTarget.getFilter().copy();
             filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-            filter2.setMessage(message.toString());
             ability.getTargets().clear();
-            ability.getTargets().add(new TargetPermanent(filter2));
+            ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, filter2, false));
         }
     }
 

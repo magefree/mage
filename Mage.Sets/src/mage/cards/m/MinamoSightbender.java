@@ -33,19 +33,20 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -53,11 +54,14 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MinamoSightbender extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power X or less");
-    private final UUID originalId;
+    private static final FilterPermanent filter = new FilterPermanent("creature with power X or less");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
 
     public MinamoSightbender(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -67,34 +71,30 @@ public class MinamoSightbender extends CardImpl {
         //TODO: Make ability properly copiable
         // {X}, {T}: Target creature with power X or less can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl("{X}"));
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
+        ability.setTargetAdjustment(TargetAdjustment.X_POWER_LEQ);
         ability.addTarget(target);
         ability.addCost(new TapSourceCost());
-        originalId = ability.getOriginalId();
         this.addAbility(ability);
 
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            for (Effect effect : ability.getEffects()) {
-                if (effect instanceof CantBeBlockedTargetEffect) {
-                    int manaX = ability.getManaCostsToPay().getX();
-                    ability.getTargets().clear();
-                    FilterCreaturePermanent newFilter = new FilterCreaturePermanent(new StringBuilder("creature with power ").append(manaX).append(" or less").toString());
-                    filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, manaX + 1));
-                    Target target = new TargetCreaturePermanent(newFilter);
-                    ability.addTarget(target);
-                    break;
-                }
-            }
+        if (ability.getTargetAdjustment() == TargetAdjustment.X_POWER_LEQ) {
+            int xValue = ability.getManaCostsToPay().getX();
+            TargetPermanent oldTarget = (TargetPermanent) ability.getTargets().get(0);
+            int minTargets = oldTarget.getMinNumberOfTargets();
+            int maxTargets = oldTarget.getMaxNumberOfTargets();
+            FilterPermanent filter2 = oldTarget.getFilter().copy();
+            filter2.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+            ability.getTargets().clear();
+            ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, filter2, false));
         }
     }
 
     public MinamoSightbender(final MinamoSightbender card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override
