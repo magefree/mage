@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 
 /**
@@ -54,7 +54,7 @@ public class BelligerentBrontodon extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Each creature you control assigns combat damage equal to its toughness rather than its power.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MilitantDinosaurCombatDamageRuleEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BelligerentBrontodonCombatDamageRuleEffect()));
     }
 
     public BelligerentBrontodon(final BelligerentBrontodon card) {
@@ -67,31 +67,27 @@ public class BelligerentBrontodon extends CardImpl {
     }
 }
 
-class MilitantDinosaurCombatDamageRuleEffect extends ContinuousEffectImpl {
+class BelligerentBrontodonCombatDamageRuleEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
-    public MilitantDinosaurCombatDamageRuleEffect() {
+    public BelligerentBrontodonCombatDamageRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Each creature you control assigns combat damage equal to its toughness rather than its power";
     }
 
-    public MilitantDinosaurCombatDamageRuleEffect(final MilitantDinosaurCombatDamageRuleEffect effect) {
+    public BelligerentBrontodonCombatDamageRuleEffect(final BelligerentBrontodonCombatDamageRuleEffect effect) {
         super(effect);
     }
 
     @Override
-    public MilitantDinosaurCombatDamageRuleEffect copy() {
-        return new MilitantDinosaurCombatDamageRuleEffect(this);
+    public BelligerentBrontodonCombatDamageRuleEffect copy() {
+        return new BelligerentBrontodonCombatDamageRuleEffect(this);
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         // Change the rule
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        filter.add(new ControllerIdPredicate(source.getControllerId()));
         game.getCombat().setUseToughnessForDamage(true);
         game.getCombat().addUseToughnessForDamageFilter(filter);
         return true;
