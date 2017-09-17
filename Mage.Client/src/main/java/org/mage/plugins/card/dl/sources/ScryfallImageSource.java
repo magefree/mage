@@ -199,11 +199,25 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("E01");
         supportedSets.add("HOU");
         supportedSets.add("C17");
+        supportedSets.add("XLN");
+//        supportedSets.add("DDT");
+        supportedSets.add("IMA");
+//        supportedSets.add("E02");
+//        supportedSets.add("V17");
+//        supportedSets.add("UST");
+//        supportedSets.add("RIX");
+//        supportedSets.add("A25");
+//        supportedSets.add("DOM");
+//        supportedSets.add("M19");
+
     }
 
     @Override
     public String generateURL(CardDownloadData card) throws Exception {
-        return "https://api.scryfall.com/cards/" + formatSetName(card.getSet()) + "/" + card.getCollectorId() + "?format=image";
+        return "https://api.scryfall.com/cards/" + formatSetName(card.getSet()) + "/"
+                + card.getCollectorId()
+                + (card.isSecondSide() ? "b" : "")
+                + "?format=image";
     }
 
     @Override

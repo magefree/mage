@@ -25,87 +25,93 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.constants.SubType;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
  * @author TheElk801
  */
-public class DeathgorgeScavenger extends CardImpl {
+public class IridescentDrake extends CardImpl {
 
-    public DeathgorgeScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
+    public IridescentDrake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-        this.subtype.add(SubType.DINOSAUR);
-        this.power = new MageInt(3);
+        this.subtype.add(SubType.DRAKE);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Deathgorge Scavenger enters the battlefield or attacks, you may exile target card from a graveyard. If a creature card is exiled this way, you gain 2 life. If a noncreature card is exiled this way, Deathgorge Scavenger gets +1/+1 until end of turn.
-        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DeathgorgeScavengerEffect(), true);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // When Iridescent Drake enters the battlefield, put target Aura card from a graveyard onto the battlefield under your control attached to Iridescent Drake.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new IridescentDrakeEffect());
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);
     }
 
-    public DeathgorgeScavenger(final DeathgorgeScavenger card) {
+    public IridescentDrake(final IridescentDrake card) {
         super(card);
     }
 
     @Override
-    public DeathgorgeScavenger copy() {
-        return new DeathgorgeScavenger(this);
+    public IridescentDrake copy() {
+        return new IridescentDrake(this);
     }
 }
 
-class DeathgorgeScavengerEffect extends OneShotEffect {
+class IridescentDrakeEffect extends OneShotEffect {
 
-    public DeathgorgeScavengerEffect() {
+    public IridescentDrakeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile target card from a graveyard. If a creature card is exiled this way, you gain 2 life. If a noncreature card is exiled this way, {this} gets +1/+1 until end of turn";
+        this.staticText = "put target Aura card from a graveyard onto the battlefield under your control attached to {this}";
     }
 
-    public DeathgorgeScavengerEffect(final DeathgorgeScavengerEffect effect) {
+    public IridescentDrakeEffect(final IridescentDrakeEffect effect) {
         super(effect);
     }
 
     @Override
-    public DeathgorgeScavengerEffect copy() {
-        return new DeathgorgeScavengerEffect(this);
+    public IridescentDrakeEffect copy() {
+        return new IridescentDrakeEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = game.getCard(getTargetPointer().getFirst(game, source));
-            if (card != null) {
-                controller.moveCards(card, Zone.EXILED, source, game);
-                if (card.isCreature()) {
-                    controller.gainLife(2, game);
-                } else {
-                    game.addEffect(new BoostSourceEffect(1, 1, Duration.EndOfTurn), source);
-                }
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        Card targetAuraCard = game.getCard(source.getFirstTarget());
+        if (controller != null
+                && permanent != null
+                && controller.canRespond()
+                && targetAuraCard != null
+                && new AuraCardCanAttachToPermanentId(permanent.getId()).apply(targetAuraCard, game)) {
+            Target target = targetAuraCard.getSpellAbility().getTargets().get(0);
+            if (target != null) {
+                game.getState().setValue("attachTo:" + targetAuraCard.getId(), permanent);
+                controller.moveCards(targetAuraCard, Zone.BATTLEFIELD, source, game);
+                return permanent.addAttachment(targetAuraCard.getId(), game);
             }
-            return true;
         }
         return false;
     }
-
 }

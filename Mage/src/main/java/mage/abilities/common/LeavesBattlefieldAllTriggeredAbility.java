@@ -30,12 +30,14 @@ package mage.abilities.common;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -44,6 +46,7 @@ import mage.game.permanent.Permanent;
 public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterPermanent filter;
+    protected SetTargetPointer setTargetPointer;
 
     public LeavesBattlefieldAllTriggeredAbility(Effect effect, FilterPermanent filter) {
         this(effect, filter, false);
@@ -54,13 +57,19 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public LeavesBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional) {
+        this(zone, effect, filter, optional, SetTargetPointer.NONE);
+    }
+
+    public LeavesBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.filter = filter;
+        this.setTargetPointer = setTargetPointer;
     }
 
     public LeavesBattlefieldAllTriggeredAbility(final LeavesBattlefieldAllTriggeredAbility ability) {
         super(ability);
         filter = ability.filter;
+        setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -79,8 +88,20 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
             UUID targetId = event.getTargetId();
             Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-            if (permanent != null) {
-                return filter.match(permanent, getSourceId(), getControllerId(), game);
+            if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+                if (setTargetPointer != SetTargetPointer.NONE) {
+                    for (Effect effect : this.getEffects()) {
+                        switch (setTargetPointer) {
+                            case PERMANENT:
+                                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                                break;
+                            case PLAYER:
+                                effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                                break;
+                        }
+                    }
+                }
+                return true;
             }
         }
         return false;

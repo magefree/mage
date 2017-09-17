@@ -64,7 +64,7 @@ public class SearchForAzcanta extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
 
         // At the beginning of your upkeep, look at the top card of your library. You may put it into your graveyard. Then if you have seven or more cards in your graveyard, you may transform Search for Azcanta.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SearchForAzcantaLookLibraryEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SearchForAzcantaLookLibraryEffect(), TargetController.YOU, true);
         ability.addEffect(new ConditionalOneShotEffect(new TransformSourceEffect(true), new CardsInControllerGraveCondition(7),
                 "Then if you have seven or more cards in your graveyard, you may transform {this}"));
         this.addAbility(ability);

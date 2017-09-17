@@ -72,7 +72,6 @@ public class ImperialAerosaur extends CardImpl {
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setText("another target creature you control gets +1/+1");
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.addEffect(effect);
         effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying until end of turn");
         ability.addEffect(effect);

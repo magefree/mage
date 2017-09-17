@@ -53,7 +53,9 @@ public class SunCrownedHunters extends CardImpl {
         this.toughness = new MageInt(4);
 
         // <i>Enrage</i> &mdash; Whenever Sun-Crowned Hunters is dealt damage, it deals 3 damage to target opponent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3, true, "it"), false, true);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(
+                Zone.BATTLEFIELD, new DamageTargetEffect(3).setText("it deals 3 damage to target opponent"), false, true
+        );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

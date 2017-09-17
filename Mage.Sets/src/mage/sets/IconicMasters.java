@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -54,9 +53,9 @@ public class IconicMasters extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        
+
         cards.add(new SetCardInfo("Scion of Ugin", 1, Rarity.COMMON, mage.cards.s.ScionOfUgin.class));
-        cards.add(new SetCardInfo("Abzan Battle Priest", 2, Rarity.COMMON, mage.cards.a.AbzanBattlePriest.class));
+        cards.add(new SetCardInfo("Abzan Battle Priest", 2, Rarity.UNCOMMON, mage.cards.a.AbzanBattlePriest.class));
         cards.add(new SetCardInfo("Abzan Falconer", 3, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));
         cards.add(new SetCardInfo("Ainok Bond-Kin", 4, Rarity.COMMON, mage.cards.a.AinokBondKin.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 5, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
@@ -197,7 +196,7 @@ public class IconicMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Monastery Swiftspear", 140, Rarity.UNCOMMON, mage.cards.m.MonasterySwiftspear.class));
         cards.add(new SetCardInfo("Pillar of Flame", 141, Rarity.COMMON, mage.cards.p.PillarOfFlame.class));
         cards.add(new SetCardInfo("Prodigal Pyromancer", 142, Rarity.UNCOMMON, mage.cards.p.ProdigalPyromancer.class));
-        cards.add(new SetCardInfo("Rift Bolt", 143, Rarity.COMMON, mage.cards.r.RiftBolt.class));
+        cards.add(new SetCardInfo("Rift Bolt", 143, Rarity.UNCOMMON, mage.cards.r.RiftBolt.class));
         cards.add(new SetCardInfo("Ryusei, the Falling Star", 144, Rarity.RARE, mage.cards.r.RyuseiTheFallingStar.class));
         cards.add(new SetCardInfo("Scourge of Valkas", 145, Rarity.RARE, mage.cards.s.ScourgeOfValkas.class));
         cards.add(new SetCardInfo("Splatter Thug", 146, Rarity.COMMON, mage.cards.s.SplatterThug.class));
@@ -227,7 +226,7 @@ public class IconicMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Ivy Elemental", 170, Rarity.COMMON, mage.cards.i.IvyElemental.class));
         cards.add(new SetCardInfo("Jaddi Offshoot", 171, Rarity.COMMON, mage.cards.j.JaddiOffshoot.class));
         cards.add(new SetCardInfo("Jugan, the Rising Star", 172, Rarity.RARE, mage.cards.j.JuganTheRisingStar.class));
-        cards.add(new SetCardInfo("Lead the Stampede", 173, Rarity.UNCOMMON, mage.cards.l.LeadTheStampede.class));
+        cards.add(new SetCardInfo("Lead the Stampede", 173, Rarity.COMMON, mage.cards.l.LeadTheStampede.class));
         cards.add(new SetCardInfo("Lotus Cobra", 174, Rarity.RARE, mage.cards.l.LotusCobra.class));
         cards.add(new SetCardInfo("Lure", 175, Rarity.UNCOMMON, mage.cards.l.Lure.class));
         cards.add(new SetCardInfo("Nantuko Shaman", 176, Rarity.COMMON, mage.cards.n.NantukoShaman.class));
