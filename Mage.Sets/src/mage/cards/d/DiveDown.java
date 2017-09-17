@@ -48,7 +48,7 @@ public class DiveDown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Target creature you control gets +0/+3 and gains hexproof until end of turn. 
-        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(0, 3, Duration.EndOfTurn);
         effect.setText("Target creature you control gets +0/+3");
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn);
