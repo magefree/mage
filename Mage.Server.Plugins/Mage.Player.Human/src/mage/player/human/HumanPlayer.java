@@ -1112,8 +1112,10 @@ public class HumanPlayer extends PlayerImpl {
                     // attack selected default defender
                     declareAttacker(attacker.getId(), attackedDefender, game, false);
                 }
-//            } else if (response.getInteger() != null) { // Ok or F-Key
-
+            } else if (response.getInteger() != null) { // F-Key
+                if (checkIfAttackersValid(game)) {
+                    return;
+                }
             } else if (response.getBoolean() != null) { // ok button
                 if (checkIfAttackersValid(game)) {
                     return;

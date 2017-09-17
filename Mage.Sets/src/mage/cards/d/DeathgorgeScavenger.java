@@ -34,12 +34,12 @@ import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.Card;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -92,14 +92,16 @@ class DeathgorgeScavengerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && card != null) {
-            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
-            if (card.isCreature()) {
-                controller.gainLife(2, game);
-            } else {
-                new BoostSourceEffect(1, 1, Duration.EndOfTurn).apply(game, source);
+        if (controller != null) {
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
+            if (card != null) {
+                controller.moveCards(card, Zone.EXILED, source, game);
+                if (card.isCreature()) {
+                    controller.gainLife(2, game);
+                } else {
+                    game.addEffect(new BoostSourceEffect(1, 1, Duration.EndOfTurn), source);
+                }
             }
             return true;
         }
