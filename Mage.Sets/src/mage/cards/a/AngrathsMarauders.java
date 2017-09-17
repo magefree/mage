@@ -50,7 +50,7 @@ public class AngrathsMarauders extends CardImpl {
 
     public AngrathsMarauders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(4);
@@ -69,6 +69,7 @@ public class AngrathsMarauders extends CardImpl {
         return new AngrathsMarauders(this);
     }
 }
+
 class AngrathsMaraudersEffect extends ReplacementEffectImpl {
 
     public AngrathsMaraudersEffect() {
@@ -96,11 +97,11 @@ class AngrathsMaraudersEffect extends ReplacementEffectImpl {
                 return true;
         }
         return false;
-    } 
-    
+    }
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getSourceId().equals(source.getControllerId());
+        return game.getControllerId(event.getSourceId()).equals(source.getControllerId());
     }
 
     @Override
