@@ -40,7 +40,7 @@ public class CardDownloadData {
     }
 
     public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor, boolean token, boolean twoFacedCard, boolean secondSide) {
-        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor, token, false, false, "");
+        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor, token, twoFacedCard, secondSide, "");
     }
 
     public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor, boolean token, boolean twoFacedCard, boolean secondSide, String tokenClassName) {
@@ -72,7 +72,7 @@ public class CardDownloadData {
         this.usesVariousArt = card.usesVariousArt;
         this.tokenSetCode = card.tokenSetCode;
         this.tokenDescriptor = card.tokenDescriptor;
-        this.tokenClassName = tokenClassName;
+        this.tokenClassName = card.tokenClassName;
         this.fileName = card.fileName;
 
     }
@@ -163,7 +163,7 @@ public class CardDownloadData {
     public String getTokenDescriptor() {
         return tokenDescriptor;
     }
-    
+
     public void setTokenClassName(String tokenClassName) {
         this.tokenClassName = tokenClassName;
     }
