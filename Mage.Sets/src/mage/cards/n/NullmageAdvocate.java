@@ -54,7 +54,7 @@ import java.util.UUID;
 public class NullmageAdvocate extends CardImpl {
 
     public NullmageAdvocate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.INSECT);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
@@ -64,11 +64,11 @@ public class NullmageAdvocate extends CardImpl {
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return two target cards from an opponent's graveyard to his or her hand");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        
+
         effect = new DestroyTargetEffect("Destroy target artifact or enchantment");
         effect.setTargetPointer(new SecondTargetPointer());
         ability.addEffect(effect);
-        ability.addTarget(new TargetCardInOpponentsGraveyard(2,2, new FilterCard("two target cards from an opponent's graveyard"), true));
+        ability.addTarget(new TargetCardInOpponentsGraveyard(2, 2, new FilterCard("cards from an opponent's graveyard"), true));
         ability.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
         this.addAbility(ability);
     }

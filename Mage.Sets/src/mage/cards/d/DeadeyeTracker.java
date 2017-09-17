@@ -40,24 +40,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.OwnerPredicate;
-import mage.target.common.TargetCardInASingleGraveyard;
+import mage.target.common.TargetCardInOpponentsGraveyard;
 
 /**
  *
  * @author TheElk801
  */
 public class DeadeyeTracker extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("cards from an opponent's graveyard");
-
-    static {
-        filter.add(Predicates.not(new OwnerPredicate(TargetController.YOU)));
-    }
 
     public DeadeyeTracker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
@@ -73,7 +64,7 @@ public class DeadeyeTracker extends CardImpl {
         Effect effect = new ExploreSourceEffect();
         effect.setText("{this} explores");
         ability.addEffect(effect);
-        ability.addTarget(new TargetCardInASingleGraveyard(2, 2, filter));
+        ability.addTarget(new TargetCardInOpponentsGraveyard(2, 2, new FilterCard("cards from an opponent's graveyard"), true));
         this.addAbility(ability);
     }
 
