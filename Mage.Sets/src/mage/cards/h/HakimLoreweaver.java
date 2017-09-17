@@ -64,11 +64,10 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author jeffwadsworth
+ * @author jeffwadsworth, TheElk801
  */
 public class HakimLoreweaver extends CardImpl {
 
-    private final static String rule = "Return target Aura card from your graveyard to the battlefield attached to Hakim, Loreweaver. Activate this ability only during your upkeep and only if Hakim isn't enchanted.";
     private static final FilterCard filter = new FilterCard("target Aura card from your graveyard");
 
     static {
@@ -90,7 +89,11 @@ public class HakimLoreweaver extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {U}{U}: Return target Aura card from your graveyard to the battlefield attached to Hakim, Loreweaver. Activate this ability only during your upkeep and only if Hakim isn't enchanted.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new HakimLoreweaverEffect(), new ManaCostsImpl("{U}{U}"), new HakimLoreweaverCondition(), rule);
+        Ability ability = new ConditionalActivatedAbility(
+                Zone.BATTLEFIELD,
+                new HakimLoreweaverEffect(),
+                new ManaCostsImpl("{U}{U}"),
+                new HakimLoreweaverCondition());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 
@@ -121,7 +124,7 @@ class HakimLoreweaverEffect extends OneShotEffect {
 
     public HakimLoreweaverEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Return target Aura card from your graveyard to the battlefield attached to {this}. Activate this ability only during your upkeep and only if Hakim isn't enchanted";
+        this.staticText = "Return target Aura card from your graveyard to the battlefield attached to {this}.";
     }
 
     public HakimLoreweaverEffect(final HakimLoreweaverEffect effect) {
@@ -176,5 +179,10 @@ class HakimLoreweaverCondition implements Condition {
                     && game.getActivePlayerId().equals(source.getControllerId());
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "only during your upkeep and only if {this} isn't enchanted";
     }
 }

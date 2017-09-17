@@ -154,6 +154,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Gravebane Zombie", 25, Rarity.COMMON, mage.cards.g.GravebaneZombie.class));
         cards.add(new SetCardInfo("Grave Servitude", 24, Rarity.COMMON, mage.cards.g.GraveServitude.class));
         cards.add(new SetCardInfo("Grinning Totem", 268, Rarity.RARE, mage.cards.g.GrinningTotem.class));
+        cards.add(new SetCardInfo("Hakim, Loreweaver", 68, Rarity.RARE, mage.cards.h.HakimLoreweaver.class));
         cards.add(new SetCardInfo("Hall of Gemstone", 119, Rarity.RARE, mage.cards.h.HallOfGemstone.class));
         cards.add(new SetCardInfo("Hammer of Bogardan", 181, Rarity.RARE, mage.cards.h.HammerOfBogardan.class));
         cards.add(new SetCardInfo("Harbinger of Night", 26, Rarity.RARE, mage.cards.h.HarbingerOfNight.class));
