@@ -67,6 +67,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Blaster Mage", 175, Rarity.COMMON, mage.cards.b.BlasterMage.class));
         cards.add(new SetCardInfo("Blockade Runner", 60, Rarity.COMMON, mage.cards.b.BlockadeRunner.class));
         cards.add(new SetCardInfo("Blood Hound", 176, Rarity.RARE, mage.cards.b.BloodHound.class));
+        cards.add(new SetCardInfo("Blood Oath", 177, Rarity.RARE, mage.cards.b.BloodOath.class));
         cards.add(new SetCardInfo("Boa Constrictor", 231, Rarity.UNCOMMON, mage.cards.b.BoaConstrictor.class));
         cards.add(new SetCardInfo("Bog Smugglers", 117, Rarity.COMMON, mage.cards.b.BogSmugglers.class));
         cards.add(new SetCardInfo("Bog Witch", 118, Rarity.COMMON, mage.cards.b.BogWitch.class));
