@@ -25,47 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.SkulkAbility;
+import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.PhaseOutTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class BehindTheScenes extends CardImpl {
+public class TeferisVeil extends CardImpl {
 
-    public BehindTheScenes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
+    public TeferisVeil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
-        // Creatures you control have skulk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(new SkulkAbility(), Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES)));
-
-        // {4}{W}: Creatures you control get +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostControlledEffect(1, 1, Duration.EndOfTurn, FILTER_PERMANENT_CREATURES),
-                new ManaCostsImpl("{4}{W}")));
+        // Whenever a creature you control attacks, it phases out at end of combat.
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new PhaseOutTargetEffect("it", false)));
+        effect.setText("it phases out at end of combat");
+        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(effect, false, true));
     }
 
-    public BehindTheScenes(final BehindTheScenes card) {
+    public TeferisVeil(final TeferisVeil card) {
         super(card);
     }
 
     @Override
-    public BehindTheScenes copy() {
-        return new BehindTheScenes(this);
+    public TeferisVeil copy() {
+        return new TeferisVeil(this);
     }
 }

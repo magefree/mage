@@ -25,17 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.g;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -45,49 +46,41 @@ import mage.players.Player;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class DuskmantleSeer extends CardImpl {
+public class GamePreserve extends CardImpl {
 
-    public DuskmantleSeer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        this.subtype.add(SubType.VAMPIRE);
-        this.subtype.add(SubType.WIZARD);
+    public GamePreserve(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // At the beginning of your upkeep, each player reveals the top card of his or her library, loses life equal to that card's converted mana cost, then puts it into his or her hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DuskmantleSeerEffect(), TargetController.YOU, false, false));
-
+        // At the beginning of your upkeep, each player reveals the top card of his or her library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DuskmarEffect(), TargetController.YOU, false));
     }
 
-    public DuskmantleSeer(final DuskmantleSeer card) {
+    public GamePreserve(final GamePreserve card) {
         super(card);
     }
 
     @Override
-    public DuskmantleSeer copy() {
-        return new DuskmantleSeer(this);
+    public GamePreserve copy() {
+        return new GamePreserve(this);
     }
 }
 
-class DuskmantleSeerEffect extends OneShotEffect {
+class DuskmarEffect extends OneShotEffect {
 
-    public DuskmantleSeerEffect() {
+    public DuskmarEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player reveals the top card of his or her library, loses life equal to that card's converted mana cost, then puts it into his or her hand";
+        this.staticText = "each player reveals the top card of his or her library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control";
     }
 
-    public DuskmantleSeerEffect(final DuskmantleSeerEffect effect) {
+    public DuskmarEffect(final DuskmarEffect effect) {
         super(effect);
     }
 
     @Override
-    public DuskmantleSeerEffect copy() {
-        return new DuskmantleSeerEffect(this);
+    public DuskmarEffect copy() {
+        return new DuskmarEffect(this);
     }
 
     @Override
@@ -96,17 +89,24 @@ class DuskmantleSeerEffect extends OneShotEffect {
         if (sourceCard == null) {
             return false;
         }
+        boolean putToPlay = true;
+        Cards cards = new CardsImpl();
         for (Player player : game.getPlayers().values()) {
             if (player.getLibrary().hasCards()) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    Cards cards = new CardsImpl();
                     cards.add(card);
+                    if (!card.isCreature()) {
+                        putToPlay = false;
+                    }
                     player.revealCards(sourceCard.getName() + ": Revealed by " + player.getName(), cards, game);
-                    player.loseLife(card.getConvertedManaCost(), game, false);
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 }
+            } else {
+                putToPlay = false;
             }
+        }
+        if (putToPlay) {
+            game.getPlayers().values().iterator().next().moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
         }
         return true;
     }
