@@ -133,6 +133,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Lowland Tracker", 17, Rarity.COMMON, mage.cards.l.LowlandTracker.class));
         cards.add(new SetCardInfo("Macetail Hystrodon", 106, Rarity.COMMON, mage.cards.m.MacetailHystrodon.class));
         cards.add(new SetCardInfo("Magma Sliver", 107, Rarity.RARE, mage.cards.m.MagmaSliver.class));
+        cards.add(new SetCardInfo("Master of the Veil", 43, Rarity.UNCOMMON, mage.cards.m.MasterOfTheVeil.class));
         cards.add(new SetCardInfo("Merchant of Secrets", 44, Rarity.COMMON, mage.cards.m.MerchantOfSecrets.class));
         cards.add(new SetCardInfo("Mistform Sliver", 46, Rarity.COMMON, mage.cards.m.MistformSliver.class));
         cards.add(new SetCardInfo("Mistform Ultimus", 47, Rarity.RARE, mage.cards.m.MistformUltimus.class));
