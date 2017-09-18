@@ -120,6 +120,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Crashing Centaur", 235, Rarity.UNCOMMON, mage.cards.c.CrashingCentaur.class));
         cards.add(new SetCardInfo("Crypt Creeper", 125, Rarity.COMMON, mage.cards.c.CryptCreeper.class));
         cards.add(new SetCardInfo("Crystal Quarry", 318, Rarity.RARE, mage.cards.c.CrystalQuarry.class));
+        cards.add(new SetCardInfo("Cultural Exchange", 79, Rarity.RARE, mage.cards.c.CulturalExchange.class));
         cards.add(new SetCardInfo("Cursed Monstrosity", 126, Rarity.RARE, mage.cards.c.CursedMonstrosity.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 319, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Darkwater Egg", 299, Rarity.UNCOMMON, mage.cards.d.DarkwaterEgg.class));
