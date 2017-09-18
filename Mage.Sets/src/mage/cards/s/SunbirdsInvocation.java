@@ -125,15 +125,11 @@ class SunbirdsInvocationEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        Spell spell = game.getStack().getSpell(this.getTargetPointer().getFirst(game, source));
-        int xValue = 0;
-        if (spell == null) {
-            spell = (Spell) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.STACK);
-        }
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         if (spell == null) {
             return false;
         }
-        xValue = spell.getConvertedManaCost();
+        int xValue = spell.getConvertedManaCost();
         Cards cards = new CardsImpl();
         cards.addAll(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {

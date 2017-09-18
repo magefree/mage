@@ -78,7 +78,7 @@ public class RikuOfTwoReflections extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast an instant or sorcery spell, you may pay {U}{R}. If you do, copy that spell. You may choose new targets for the copy.
-        Effect effect = new CopyTargetSpellEffect();
+        Effect effect = new CopyTargetSpellEffect(true);
         effect.setText("copy that spell. You may choose new targets for the copy");
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(effect, new ManaCostsImpl("{U}{R}")), filter, false, true));
 

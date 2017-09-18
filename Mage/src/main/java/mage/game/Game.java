@@ -57,6 +57,7 @@ import mage.game.match.MatchType;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
@@ -105,6 +106,10 @@ public interface Game extends MageItem, Serializable {
     UUID getOwnerId(UUID objectId);
 
     UUID getOwnerId(MageObject object);
+
+    Spell getSpell(UUID spellId);
+
+    Spell getSpellOrLKIStack(UUID spellId);
 
     Permanent getPermanent(UUID permanentId);
 

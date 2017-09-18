@@ -446,6 +446,20 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
+    public Spell getSpell(UUID spellId) {
+        return state.getStack().getSpell(spellId);
+    }
+
+    @Override
+    public Spell getSpellOrLKIStack(UUID spellId) {
+        Spell spell = state.getStack().getSpell(spellId);
+        if (spell == null) {
+            spell = (Spell) this.getLastKnownInformation(spellId, Zone.STACK);
+        }
+        return spell;
+    }
+
+    @Override
     public Permanent getPermanent(UUID permanentId) {
         return state.getPermanent(permanentId);
     }

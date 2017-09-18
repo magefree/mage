@@ -55,7 +55,7 @@ import mage.target.TargetPlayer;
 public class InfernalKirin extends CardImpl {
 
     public InfernalKirin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN);
         this.subtype.add(SubType.SPIRIT);
@@ -100,11 +100,11 @@ class InfernalKirinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         if (spell != null) {
             int cmc = spell.getConvertedManaCost();
             Player targetPlayer = null;
-            for(Target target: source.getTargets()) {
+            for (Target target : source.getTargets()) {
                 if (target instanceof TargetPlayer) {
                     targetPlayer = game.getPlayer(target.getFirstTarget());
                 }
@@ -112,7 +112,7 @@ class InfernalKirinEffect extends OneShotEffect {
             if (targetPlayer != null) {
                 if (!targetPlayer.getHand().isEmpty()) {
                     targetPlayer.revealCards("Infernal Kirin", targetPlayer.getHand(), game);
-                    for (UUID uuid: targetPlayer.getHand().copy()) {
+                    for (UUID uuid : targetPlayer.getHand().copy()) {
                         Card card = game.getCard(uuid);
                         if (card != null && card.getConvertedManaCost() == cmc) {
                             targetPlayer.discard(card, source, game);

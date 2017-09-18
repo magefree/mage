@@ -36,7 +36,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -92,12 +91,9 @@ class DovescapeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(this.getTargetPointer().getFirst(game, source));
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         int spellCMC = 0;
         UUID spellControllerID = null;
-        if (spell == null) {
-            spell = (Spell) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.STACK);
-        }
         if (spell != null) {
             spellCMC = spell.getConvertedManaCost();
             spellControllerID = spell.getControllerId();
