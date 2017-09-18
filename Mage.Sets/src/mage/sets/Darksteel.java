@@ -78,6 +78,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Fireball", 60, Rarity.UNCOMMON, mage.cards.f.Fireball.class));
         cards.add(new SetCardInfo("Flamebreak", 61, Rarity.RARE, mage.cards.f.Flamebreak.class));
         cards.add(new SetCardInfo("Furnace Dragon", 62, Rarity.RARE, mage.cards.f.FurnaceDragon.class));
+        cards.add(new SetCardInfo("Gemini Engine", 121, Rarity.RARE, mage.cards.g.GeminiEngine.class));
         cards.add(new SetCardInfo("Genesis Chamber", 122, Rarity.UNCOMMON, mage.cards.g.GenesisChamber.class));
         cards.add(new SetCardInfo("Geth's Grimoire", 123, Rarity.UNCOMMON, mage.cards.g.GethsGrimoire.class));
         cards.add(new SetCardInfo("Goblin Archaeologist", 63, Rarity.UNCOMMON, mage.cards.g.GoblinArchaeologist.class));
