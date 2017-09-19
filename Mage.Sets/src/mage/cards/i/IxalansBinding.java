@@ -107,6 +107,9 @@ class IxalansBindingReplacementEffect extends ContinuousRuleModifyingEffectImpl 
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Card card = game.getCard(event.getSourceId());
+        if(event.getPlayerId().equals(source.getControllerId())){
+            return false;
+        }
         if (sourcePermanent != null && card != null) {
             UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (exileZone != null) {

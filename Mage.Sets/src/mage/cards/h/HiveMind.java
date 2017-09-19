@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
 public class HiveMind extends CardImpl {
 
     public HiveMind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");
 
         // Whenever a player casts an instant or sorcery spell, each other player copies that spell. Each of those players may choose new targets for his or her copy.
         this.addAbility(new HiveMindTriggeredAbility());
@@ -125,11 +125,7 @@ class HiveMindEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell;
-        spell = game.getStack().getSpell(((FixedTarget) getTargetPointer()).getTarget());
-        if (spell == null) { // if spell e.g. was countered
-            spell = (Spell) game.getLastKnownInformation(((FixedTarget) getTargetPointer()).getTarget(), Zone.STACK);
-        }
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         Player player = game.getPlayer(source.getControllerId());
         if (spell != null && player != null) {
             for (UUID playerId : game.getState().getPlayersInRange(player.getId(), game)) {

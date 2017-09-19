@@ -25,82 +25,89 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastAllTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureAllEffect;
+import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.filter.FilterSpell;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.DovescapeToken;
-import mage.game.permanent.token.Token;
-import mage.game.stack.Spell;
+import mage.target.Target;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author TheElk801
  */
-public class Dovescape extends CardImpl {
+public class Backslide extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a morph ability");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(new AbilityPredicate(MorphAbility.class));
     }
 
-    public Dovescape(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W/U}{W/U}{W/U}");
+    public Backslide(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        // Whenever a player casts a noncreature spell, counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's converted mana cost.
-        this.addAbility(new SpellCastAllTriggeredAbility(new DovescapeEffect(), filter, false, SetTargetPointer.SPELL));
+        // Turn target creature with a morph ability face down.
+        this.getSpellAbility().addEffect(new BackslideEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+
+        // Cycling {U}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+
     }
 
-    public Dovescape(final Dovescape card) {
+    public Backslide(final Backslide card) {
         super(card);
     }
 
     @Override
-    public Dovescape copy() {
-        return new Dovescape(this);
+    public Backslide copy() {
+        return new Backslide(this);
     }
 }
 
-class DovescapeEffect extends OneShotEffect {
+class BackslideEffect extends OneShotEffect {
 
-    DovescapeEffect() {
+    BackslideEffect() {
         super(Outcome.Benefit);
-        this.staticText = "counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's converted mana cost";
+        this.staticText = "Turn target creature with a morph ability face down.";
     }
 
-    DovescapeEffect(final DovescapeEffect effect) {
+    BackslideEffect(final BackslideEffect effect) {
         super(effect);
     }
 
     @Override
-    public DovescapeEffect copy() {
-        return new DovescapeEffect(this);
+    public BackslideEffect copy() {
+        return new BackslideEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
-        int spellCMC = 0;
-        UUID spellControllerID = null;
-        if (spell != null) {
-            spellCMC = spell.getConvertedManaCost();
-            spellControllerID = spell.getControllerId();
-            game.getStack().counter(spell.getId(), source.getSourceId(), game);
+        Predicate pred = new PermanentIdPredicate(UUID.randomUUID());
+        for (Target target : source.getTargets()) {
+            for (UUID targetId : target.getTargets()) {
+                pred = Predicates.or(pred, new PermanentIdPredicate(targetId));
+            }
         }
-        Token token = new DovescapeToken();
-        token.putOntoBattlefield(spellCMC, game, source.getSourceId(), spellControllerID);
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        filter.add(pred);
+        game.addEffect(new BecomesFaceDownCreatureAllEffect(filter), source);
         return true;
     }
 }

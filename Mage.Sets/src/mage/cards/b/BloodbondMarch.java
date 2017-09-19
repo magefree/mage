@@ -85,7 +85,7 @@ public class BloodbondMarch extends CardImpl {
                 return false;
             }
 
-            Spell spell = (Spell) game.getStack().getStackObject(targetPointer.getFirst(game, source));
+            Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
 
             if (spell == null) {
                 return false;

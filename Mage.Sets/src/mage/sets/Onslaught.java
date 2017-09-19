@@ -46,6 +46,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Aven Brigadier", 7, Rarity.RARE, mage.cards.a.AvenBrigadier.class));
         cards.add(new SetCardInfo("Aven Fateshaper", 69, Rarity.UNCOMMON, mage.cards.a.AvenFateshaper.class));
         cards.add(new SetCardInfo("Aven Soulgazer", 8, Rarity.UNCOMMON, mage.cards.a.AvenSoulgazer.class));
+        cards.add(new SetCardInfo("Backslide", 70, Rarity.COMMON, mage.cards.b.Backslide.class));
         cards.add(new SetCardInfo("Barkhide Mauler", 246, Rarity.COMMON, mage.cards.b.BarkhideMauler.class));
         cards.add(new SetCardInfo("Barren Moor", 312, Rarity.COMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Battering Craghorn", 188, Rarity.COMMON, mage.cards.b.BatteringCraghorn.class));

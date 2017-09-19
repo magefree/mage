@@ -43,7 +43,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.ThrullToken;
 import mage.game.stack.Spell;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author LevelX2
@@ -95,10 +94,7 @@ class EndrekSahrMasterBreederEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell == null) {
-            spell = (Spell) game.getLastKnownInformation(((FixedTarget) getTargetPointer()).getTarget(), Zone.STACK);
-        }
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         if (spell != null) {
             int cmc = spell.getConvertedManaCost();
             if (cmc > 0) {

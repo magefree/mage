@@ -60,7 +60,7 @@ public class ClovenCasting extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{U}{R}");
 
         // Whenever you cast a multicolored instant or sorcery spell, you may pay {1}. If you do, copy that spell. You may choose new targets for the copy.
-        Effect effect = new CopyTargetSpellEffect();
+        Effect effect = new CopyTargetSpellEffect(true);
         effect.setText("copy that spell. You may choose new targets for the copy");
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(effect, new GenericManaCost(1)), filter, true, true));
     }

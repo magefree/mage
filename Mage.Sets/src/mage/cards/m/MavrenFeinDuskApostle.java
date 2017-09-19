@@ -79,7 +79,7 @@ public class MavrenFeinDuskApostle extends CardImpl {
 
 class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken Vampire you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken Vampires you control");
 
     static {
         filter.add(new SubtypePredicate(SubType.VAMPIRE));
@@ -109,7 +109,7 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         for (UUID creatureId : game.getCombat().getAttackers()) {
             Permanent creature = game.getPermanent(creatureId);
-            if (creature != null && filter.match(creature, game)) {
+            if (creature != null && filter.match(creature, game) && creature.getControllerId().equals(controllerId)) {
                 return true;
             }
         }

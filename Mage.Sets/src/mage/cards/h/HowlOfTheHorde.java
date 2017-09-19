@@ -77,7 +77,7 @@ public class HowlOfTheHorde extends CardImpl {
 class HowlOfTheHordeDelayedTriggeredAbility extends DelayedTriggeredAbility {
     
     HowlOfTheHordeDelayedTriggeredAbility() {
-        super(new CopyTargetSpellEffect(), Duration.EndOfTurn);
+        super(new CopyTargetSpellEffect(true), Duration.EndOfTurn);
     }
 
     HowlOfTheHordeDelayedTriggeredAbility(final HowlOfTheHordeDelayedTriggeredAbility ability) {
