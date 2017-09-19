@@ -75,6 +75,7 @@ public class LilianaDefiantNecromancer extends CardImpl {
         // +2: Each player discards a card.
         this.addAbility(new LoyaltyAbility(new DiscardEachPlayerEffect(1, false), 2));
 
+        //TODO: Make ability properly copiable
         // -X: Return target nonlegendary creature with converted mana cost X from your graveyard to the battlefield.
         Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
         ability2Id = ability.getOriginalId();

@@ -72,6 +72,7 @@ public class PentarchPaladin extends CardImpl {
         // As Pentarch Paladin enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
         
+        //TODO: Make ability properly copiable
         // {W}{W}, {tap}: Destroy target permanent of the chosen color.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{W}"));
         ability.addCost(new TapSourceCost());

@@ -71,6 +71,7 @@ public class VileRequiem extends CardImpl {
         // At the beginning of your upkeep, you may put a verse counter on Vile Requiem.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true ), TargetController.YOU, true));
+        //TODO: Make ability properly copiable
         // {1}{B}, Sacrifice Vile Requiem: Destroy up to X target nonblack creatures, where X is the number of verse counters on Vile Requiem. They can't be regenerated.
         Effect effect = new DestroyTargetEffect(true);
         effect.setText("Destroy up to X target nonblack creatures, where X is the number of verse counters on {this}. They can't be regenerated");
