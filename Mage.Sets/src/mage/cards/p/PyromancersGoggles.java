@@ -62,7 +62,7 @@ public class PyromancersGoggles extends CardImpl {
         this.addAbility(ability);
 
         // When that mana is used to cast a red instant or sorcery spell, copy that spell and you may choose new targets for the copy.
-        Effect effect = new CopyTargetSpellEffect();
+        Effect effect = new CopyTargetSpellEffect(true);
         effect.setText("copy that spell and you may choose new targets for the copy");
         this.addAbility(new PyromancersGogglesTriggeredAbility(ability.getOriginalId(), effect));
 

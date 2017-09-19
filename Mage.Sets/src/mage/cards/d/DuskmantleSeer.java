@@ -40,6 +40,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -49,7 +50,7 @@ import mage.players.Player;
 public class DuskmantleSeer extends CardImpl {
 
     public DuskmantleSeer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.WIZARD);
 
@@ -91,15 +92,15 @@ class DuskmantleSeerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card sourceCard = game.getCard(source.getSourceId());
+        Permanent sourceCard = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourceCard == null) {
             return false;
         }
-        for (Player player: game.getPlayers().values()) {
-            if(player.getLibrary().hasCards()){
+        for (Player player : game.getPlayers().values()) {
+            if (player.getLibrary().hasCards()) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    Cards cards  = new CardsImpl();
+                    Cards cards = new CardsImpl();
                     cards.add(card);
                     player.revealCards(sourceCard.getName() + ": Revealed by " + player.getName(), cards, game);
                     player.loseLife(card.getConvertedManaCost(), game, false);

@@ -1096,6 +1096,16 @@
 |Generate|TOK:WWK|Snake|||SnakeToken|
 |Generate|TOK:WWK|Soldier Ally|||JoinTheRanksSoldierToken|
 |Generate|TOK:WWK|Wolf|||WolfToken|
+|Generate|TOK:XLN|Dinosaur|||DinosaurToken|
+|Generate|TOK:XLN|Illusion|||JaceCunningCastawayIllusionToken|
+|Generate|TOK:XLN|Merfolk|||MerfolkHexproofToken|
+|Generate|TOK:XLN|Pirate|||PirateToken|
+|Generate|TOK:XLN|Plant|||DefenderPlantToken|
+|Generate|TOK:XLN|Treasure|1||TreasureToken|
+|Generate|TOK:XLN|Treasure|2||TreasureToken|
+|Generate|TOK:XLN|Treasure|3||TreasureToken|
+|Generate|TOK:XLN|Treasure|4||TreasureToken|
+|Generate|TOK:XLN|Vampire|||IxalanVampireToken|
 |Generate|TOK:ZEN|Angel|||AngelToken|
 |Generate|TOK:ZEN|Beast|||BeastToken2|
 |Generate|TOK:ZEN|Bird|||BirdToken|

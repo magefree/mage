@@ -92,7 +92,7 @@ class SunbirdsInvocationTriggeredAbility extends SpellCastControllerTriggeredAbi
             if (spell != null && spell.getFromZone() == Zone.HAND) {
                 if (spell.getCard() != null) {
                     for (Effect effect : getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(spell.getId(), spell.getZoneChangeCounter(game)));
+                        effect.setTargetPointer(new FixedTarget(spell.getId()));
                     }
                     return true;
                 }
@@ -125,8 +125,12 @@ class SunbirdsInvocationEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
+        if (spell == null) {
+            return false;
+        }
+        int xValue = spell.getConvertedManaCost();
         Cards cards = new CardsImpl();
-        int xValue = game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.STACK).getConvertedManaCost();
         cards.addAll(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
@@ -138,7 +142,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
             if (controller.chooseTarget(Outcome.PlayForFree, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
-                    if (controller.chooseUse(outcome, "Do you wish to cast " + card.getName(), source, game)) {
+                    if (controller.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
                         controller.cast(card.getSpellAbility(), game, true);
                         cards.remove(card);
                     }

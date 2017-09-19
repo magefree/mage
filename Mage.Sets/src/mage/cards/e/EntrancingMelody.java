@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class EntrancingMelody extends CardImpl {
 
     public EntrancingMelody(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
 
         // Gain control of target creature with converted mana cost X.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true));

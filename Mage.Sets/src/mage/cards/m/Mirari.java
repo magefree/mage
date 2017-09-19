@@ -84,7 +84,7 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     MirariTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyTargetSpellEffect(), new GenericManaCost(3)), false);
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyTargetSpellEffect(true), new GenericManaCost(3)), false);
         this.addTarget(new TargetSpell(filter));
     }
 

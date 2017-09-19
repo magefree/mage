@@ -158,6 +158,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Snow-Covered Swamp", 153, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class));
         cards.add(new SetCardInfo("Soul Spike", 70, Rarity.RARE, mage.cards.s.SoulSpike.class));
         cards.add(new SetCardInfo("Squall Drifter", 17, Rarity.COMMON, mage.cards.s.SquallDrifter.class));
+        cards.add(new SetCardInfo("Stalking Yeti", 98, Rarity.UNCOMMON, mage.cards.s.StalkingYeti.class));
         cards.add(new SetCardInfo("Steam Spitter", 124, Rarity.UNCOMMON, mage.cards.s.SteamSpitter.class));
         cards.add(new SetCardInfo("Stromgald Crusader", 71, Rarity.UNCOMMON, mage.cards.s.StromgaldCrusader.class));
         cards.add(new SetCardInfo("Sun's Bounty", 18, Rarity.COMMON, mage.cards.s.SunsBounty.class));

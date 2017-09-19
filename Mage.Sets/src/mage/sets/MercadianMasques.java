@@ -67,6 +67,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Blaster Mage", 175, Rarity.COMMON, mage.cards.b.BlasterMage.class));
         cards.add(new SetCardInfo("Blockade Runner", 60, Rarity.COMMON, mage.cards.b.BlockadeRunner.class));
         cards.add(new SetCardInfo("Blood Hound", 176, Rarity.RARE, mage.cards.b.BloodHound.class));
+        cards.add(new SetCardInfo("Blood Oath", 177, Rarity.RARE, mage.cards.b.BloodOath.class));
         cards.add(new SetCardInfo("Boa Constrictor", 231, Rarity.UNCOMMON, mage.cards.b.BoaConstrictor.class));
         cards.add(new SetCardInfo("Bog Smugglers", 117, Rarity.COMMON, mage.cards.b.BogSmugglers.class));
         cards.add(new SetCardInfo("Bog Witch", 118, Rarity.COMMON, mage.cards.b.BogWitch.class));
@@ -151,6 +152,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Fountain Watch", 19, Rarity.RARE, mage.cards.f.FountainWatch.class));
         cards.add(new SetCardInfo("Fresh Volunteers", 20, Rarity.COMMON, mage.cards.f.FreshVolunteers.class));
         cards.add(new SetCardInfo("Furious Assault", 191, Rarity.COMMON, mage.cards.f.FuriousAssault.class));
+        cards.add(new SetCardInfo("Game Preserve", 248, Rarity.RARE, mage.cards.g.GamePreserve.class));
         cards.add(new SetCardInfo("Gerrard's Irregulars", 192, Rarity.COMMON, mage.cards.g.GerrardsIrregulars.class));
         cards.add(new SetCardInfo("Ghoul's Feast", 137, Rarity.UNCOMMON, mage.cards.g.GhoulsFeast.class));
         cards.add(new SetCardInfo("Giant Caterpillar", 249, Rarity.COMMON, mage.cards.g.GiantCaterpillar.class));

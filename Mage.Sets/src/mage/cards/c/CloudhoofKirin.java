@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
 public class CloudhoofKirin extends CardImpl {
 
     public CloudhoofKirin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN);
         this.subtype.add(SubType.SPIRIT);
@@ -98,10 +98,10 @@ class CloudhoofKirinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         if (spell != null) {
             Player targetPlayer = null;
-            for(Target target: source.getTargets()) {
+            for (Target target : source.getTargets()) {
                 if (target instanceof TargetPlayer) {
                     targetPlayer = game.getPlayer(target.getFirstTarget());
                 }

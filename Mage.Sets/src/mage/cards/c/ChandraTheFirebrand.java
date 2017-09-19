@@ -91,7 +91,7 @@ public class ChandraTheFirebrand extends CardImpl {
 class ChandraTheFirebrandAbility extends DelayedTriggeredAbility {
 
     ChandraTheFirebrandAbility() {
-        super(new CopyTargetSpellEffect(), Duration.EndOfTurn);
+        super(new CopyTargetSpellEffect(true), Duration.EndOfTurn);
     }
 
     ChandraTheFirebrandAbility(final ChandraTheFirebrandAbility ability) {

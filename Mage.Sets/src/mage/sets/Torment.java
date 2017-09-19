@@ -151,6 +151,7 @@ public class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Pyromania", 112, Rarity.UNCOMMON, mage.cards.p.Pyromania.class));
         cards.add(new SetCardInfo("Radiate", 113, Rarity.RARE, mage.cards.r.Radiate.class));
         cards.add(new SetCardInfo("Rancid Earth", 78, Rarity.COMMON, mage.cards.r.RancidEarth.class));
+        cards.add(new SetCardInfo("Reborn Hero", 14, Rarity.RARE, mage.cards.r.RebornHero.class));
         cards.add(new SetCardInfo("Restless Dreams", 79, Rarity.COMMON, mage.cards.r.RestlessDreams.class));
         cards.add(new SetCardInfo("Sengir Vampire", 80, Rarity.RARE, mage.cards.s.SengirVampire.class));
         cards.add(new SetCardInfo("Seton's Scout", 138, Rarity.UNCOMMON, mage.cards.s.SetonsScout.class));

@@ -48,7 +48,7 @@ import mage.players.Player;
 public class BounteousKirin extends CardImpl {
 
     public BounteousKirin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN, SubType.SPIRIT);
 
@@ -89,7 +89,7 @@ class BounteousKirinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getState().getStack().getSpell(getTargetPointer().getFirst(game, source));
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         if (spell != null) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {

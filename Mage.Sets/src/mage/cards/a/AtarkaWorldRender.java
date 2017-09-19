@@ -35,14 +35,11 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.text.TextPartSubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.TextPartSubtypePredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -68,11 +65,7 @@ public class AtarkaWorldRender extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever a Dragon you control attacks, it gains double strike until end of turn.
-        TextPartSubType textPart1 = (TextPartSubType) addTextPart(new TextPartSubType(SubType.DRAGON));
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Dragon you control");
-        filter.add(new TextPartSubtypePredicate(textPart1));
-        filter.add(Predicates.not(new TappedPredicate()));
-        this.addAbility(new AtarkaWorldRenderEffect(filter));
+        this.addAbility(new AtarkaWorldRenderEffect());
 
     }
 
@@ -88,16 +81,18 @@ public class AtarkaWorldRender extends CardImpl {
 
 class AtarkaWorldRenderEffect extends TriggeredAbilityImpl {
 
-    FilterControlledCreaturePermanent filter;
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("dragon you control");
 
-    public AtarkaWorldRenderEffect(FilterControlledCreaturePermanent filter) {
+    static {
+        filter.add(new SubtypePredicate(SubType.DRAGON));
+    }
+
+    public AtarkaWorldRenderEffect() {
         super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
-        this.filter = filter;
     }
 
     public AtarkaWorldRenderEffect(final AtarkaWorldRenderEffect ability) {
         super(ability);
-        this.filter = ability.filter.copy();
     }
 
     @Override

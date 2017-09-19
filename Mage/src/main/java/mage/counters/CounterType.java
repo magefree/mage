@@ -87,6 +87,7 @@ public enum CounterType {
     M1M1(new BoostCounter(-1, -1).name),
     M2M1(new BoostCounter(-2, -1).name),
     M2M2(new BoostCounter(-2, -2).name),
+    MINE("mine"),
     MINING("mining"),
     MIRE("mire"),
     MUSTER("muster"),
