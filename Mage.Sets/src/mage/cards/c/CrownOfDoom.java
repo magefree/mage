@@ -47,6 +47,7 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
@@ -57,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class CrownOfDoom extends CardImpl {
 
-    private static final FilterPlayer filter = new FilterPlayer("player other than Crown of Doom's owner");
+    private static final FilterPlayer filter = new FilterPlayer("player other than {this}'s owner");
 
     static {
         filter.add(new CrownOfDoomPredicate());
@@ -95,17 +96,17 @@ class CrownOfDoomPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePl
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
-        Player player = input.getObject();
-        UUID playerId = input.getPlayerId();
-        if (player == null || playerId == null) {
+        Player targetPlayer = input.getObject();
+        Permanent sourceObject = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        if (targetPlayer == null || sourceObject == null) {
             return false;
         }
-        return !player.getId().equals(playerId);
+        return !targetPlayer.getId().equals(sourceObject.getOwnerId());
     }
 
     @Override
     public String toString() {
-        return "Owner()";
+        return "Owner(" + ')';
     }
 }
 
