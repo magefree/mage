@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  */
 public class AncientHellkite extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature defending player controlsknlokn");
+    private static final FilterPermanent filter = new FilterPermanent("creature defending player controls");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
@@ -65,31 +65,15 @@ public class AncientHellkite extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        //TODO: Make ability properly copiable
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"), SourceAttackingCondition.instance);
         ability.addTarget(new TargetPermanent(filter));
-//        ability.setTargetAdjustment(TargetAdjustment.DEFENDING_PLAYER);
         this.addAbility(ability);
     }
 
     public AncientHellkite(final AncientHellkite card) {
         super(card);
     }
-
-//    @Override
-//    public void adjustTargets(Ability ability, Game game) {
-//        if (ability.getTargetAdjustment() == TargetAdjustment.DEFENDING_PLAYER) {
-//            TargetPermanent oldTarget = (TargetPermanent) ability.getTargets().get(0);
-//            int minTargets = oldTarget.getMinNumberOfTargets();
-//            int maxTargets = oldTarget.getMaxNumberOfTargets();
-//            FilterPermanent filter2 = oldTarget.getFilter().copy();
-//            UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
-//            filter2.add(new ControllerIdPredicate(defenderId));
-//            ability.getTargets().clear();
-//            ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, filter2, false));
-//        }
-//    }
 
     @Override
     public AncientHellkite copy() {

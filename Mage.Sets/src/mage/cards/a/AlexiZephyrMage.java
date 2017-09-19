@@ -40,12 +40,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
 
@@ -63,7 +60,6 @@ public class AlexiZephyrMage extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        //TODO: Make ability properly copiable
         // {X}{U}, {tap}, Discard two cards: Return X target creatures to their owners' hands.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{X}{U}"));
         ability.addCost(new TapSourceCost());
@@ -71,15 +67,6 @@ public class AlexiZephyrMage extends CardImpl {
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURES));
         this.addAbility(ability);
     }
-
-//    @Override
-//    public void adjustTargets(Ability ability, Game game) {
-//        if (ability.getTargetAdjustment() == TargetAdjustment.X_TARGETS) {
-//            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
-//            ability.getTargets().clear();
-//            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));
-//        }
-//    }
 
     public AlexiZephyrMage(final AlexiZephyrMage card) {
         super(card);

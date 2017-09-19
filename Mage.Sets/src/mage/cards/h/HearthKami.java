@@ -38,13 +38,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.ComparisonType;
 import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.game.Game;
 import mage.target.TargetPermanent;
 
 /**
@@ -65,7 +62,6 @@ public class HearthKami extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        //TODO: Make ability properly copiable
         // {X}, Sacrifice Hearth Kami: Destroy target artifact with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new SacrificeSourceCost());
@@ -73,17 +69,6 @@ public class HearthKami extends CardImpl {
         ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_PERM);
         this.addAbility(ability);
     }
-
-//    @Override
-//    public void adjustTargets(Ability ability, Game game) {
-//        if (ability.getTargetAdjustment() == TargetAdjustment.X_CMC_EQUAL_PERM) {
-//            int xValue = ability.getManaCostsToPay().getX();
-//            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter().copy();
-//            filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-//            ability.getTargets().clear();
-//            ability.getTargets().add(new TargetPermanent(filter2));
-//        }
-//    }
 
     public HearthKami(final HearthKami card) {
         super(card);

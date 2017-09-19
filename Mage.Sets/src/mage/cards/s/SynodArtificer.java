@@ -45,7 +45,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
 import mage.target.TargetPermanent;
 
 /**
@@ -68,7 +67,6 @@ public class SynodArtificer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        //TODO: Make ability properly copiable
         // {X}, {tap}: Tap X target noncreature artifacts.
         Effect tapEffect = new TapTargetEffect();
         tapEffect.setText("Tap X target noncreature artifacts.");
@@ -87,15 +85,6 @@ public class SynodArtificer extends CardImpl {
         untapAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(untapAbility);
     }
-
-//    @Override
-//    public void adjustTargets(Ability ability, Game game) {
-//        if (ability.getTargetAdjustment() == TargetAdjustment.X_TARGETS) {
-//            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
-//            ability.getTargets().clear();
-//            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));
-//        }
-//    }
 
     public SynodArtificer(final SynodArtificer card) {
         super(card);

@@ -37,11 +37,8 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.TargetPermanent;
 
 /**
@@ -53,7 +50,6 @@ public class FloodwaterDam extends CardImpl {
     public FloodwaterDam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        //TODO: Make ability properly copiable
         // {X}{X}{1}, {tap}: Tap X target lands.
         Effect effect = new TapTargetEffect();
         effect.setText("tap X target lands");
@@ -62,15 +58,6 @@ public class FloodwaterDam extends CardImpl {
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
         this.addAbility(ability);
     }
-
-//    @Override
-//    public void adjustTargets(Ability ability, Game game) {
-//        if (ability.getTargetAdjustment() == TargetAdjustment.X_TARGETS) {
-//            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
-//            ability.getTargets().clear();
-//            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));
-//        }
-//    }
 
     public FloodwaterDam(final FloodwaterDam card) {
         super(card);

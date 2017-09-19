@@ -39,10 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
 import mage.target.TargetPermanent;
 
 /**
@@ -54,7 +51,6 @@ public class CandelabraOfTawnos extends CardImpl {
     public CandelabraOfTawnos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        //TODO: Make ability properly copiable
         // {X}, {T}: Untap X target lands.
         Effect effect = new UntapTargetEffect();
         effect.setText("untap X target lands");
@@ -64,15 +60,6 @@ public class CandelabraOfTawnos extends CardImpl {
         ability.setTargetAdjustment(TargetAdjustment.X_TARGETS);
         this.addAbility(ability);
     }
-
-//    @Override
-//    public void adjustTargets(Ability ability, Game game) {
-//        if (ability.getTargetAdjustment() == TargetAdjustment.X_TARGETS) {
-//            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
-//            ability.getTargets().clear();
-//            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));
-//        }
-//    }
 
     public CandelabraOfTawnos(final CandelabraOfTawnos card) {
         super(card);

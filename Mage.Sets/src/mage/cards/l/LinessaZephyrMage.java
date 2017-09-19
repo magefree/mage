@@ -40,7 +40,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetAdjustment;
@@ -48,7 +47,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -79,7 +77,6 @@ public class LinessaZephyrMage extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        //TODO: Make ability properly copiable
         // {X}{U}{U}, {tap}: Return target creature with converted mana cost X to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{X}{U}{U}"));
         ability.addCost(new TapSourceCost());
@@ -96,17 +93,6 @@ public class LinessaZephyrMage extends CardImpl {
     public LinessaZephyrMage(final LinessaZephyrMage card) {
         super(card);
     }
-
-//    @Override
-//    public void adjustTargets(Ability ability, Game game) {
-//        if (ability.getTargetAdjustment() == TargetAdjustment.X_CMC_EQUAL_PERM) {
-//            int xValue = ability.getManaCostsToPay().getX();
-//            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter().copy();
-//            filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-//            ability.getTargets().clear();
-//            ability.getTargets().add(new TargetPermanent(filter2));
-//        }
-//    }
 
     @Override
     public LinessaZephyrMage copy() {

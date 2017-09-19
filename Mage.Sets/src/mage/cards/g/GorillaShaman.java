@@ -37,14 +37,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.ComparisonType;
 import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.game.Game;
 import mage.target.TargetPermanent;
 
 /**
@@ -67,27 +64,12 @@ public class GorillaShaman extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        //TODO: Make ability properly copiable
         // {X}{X}{1}: Destroy target noncreature artifact with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{1}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_PERM);
         this.addAbility(ability);
     }
-
-//    @Override
-//    public void adjustTargets(Ability ability, Game game) {
-//        if (ability.getTargetAdjustment() == TargetAdjustment.X_CMC_EQUAL_PERM) {
-//            int xValue = ability.getManaCostsToPay().getX();
-//            TargetPermanent oldTarget = (TargetPermanent) ability.getTargets().get(0);
-//            int minTargets = oldTarget.getMinNumberOfTargets();
-//            int maxTargets = oldTarget.getMaxNumberOfTargets();
-//            FilterPermanent filter2 = oldTarget.getFilter().copy();
-//            filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-//            ability.getTargets().clear();
-//            ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, filter2, false));
-//        }
-//    }
 
     public GorillaShaman(final GorillaShaman card) {
         super(card);

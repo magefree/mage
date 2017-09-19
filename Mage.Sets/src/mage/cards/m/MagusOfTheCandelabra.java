@@ -41,10 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
 import mage.target.TargetPermanent;
 
 /**
@@ -60,7 +57,6 @@ public class MagusOfTheCandelabra extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        //TODO: Make ability properly copiable
         // {X}, {T}: Untap X target lands.
         Effect effect = new UntapTargetEffect();
         effect.setText("untap X target lands");
@@ -70,15 +66,6 @@ public class MagusOfTheCandelabra extends CardImpl {
         ability.setTargetAdjustment(TargetAdjustment.X_TARGETS);
         this.addAbility(ability);
     }
-
-//    @Override
-//    public void adjustTargets(Ability ability, Game game) {
-//        if (ability.getTargetAdjustment() == TargetAdjustment.X_TARGETS) {
-//            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
-//            ability.getTargets().clear();
-//            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));
-//        }
-//    }
 
     public MagusOfTheCandelabra(final MagusOfTheCandelabra card) {
         super(card);

@@ -38,13 +38,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.ComparisonType;
 import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -68,7 +65,6 @@ public class MinamoSightbender extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        //TODO: Make ability properly copiable
         // {X}, {T}: Target creature with power X or less can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl("{X}"));
         Target target = new TargetPermanent(filter);
@@ -78,20 +74,6 @@ public class MinamoSightbender extends CardImpl {
         this.addAbility(ability);
 
     }
-
-//    @Override
-//    public void adjustTargets(Ability ability, Game game) {
-//        if (ability.getTargetAdjustment() == TargetAdjustment.X_POWER_LEQ) {
-//            int xValue = ability.getManaCostsToPay().getX();
-//            TargetPermanent oldTarget = (TargetPermanent) ability.getTargets().get(0);
-//            int minTargets = oldTarget.getMinNumberOfTargets();
-//            int maxTargets = oldTarget.getMaxNumberOfTargets();
-//            FilterPermanent filter2 = oldTarget.getFilter().copy();
-//            filter2.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-//            ability.getTargets().clear();
-//            ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, filter2, false));
-//        }
-//    }
 
     public MinamoSightbender(final MinamoSightbender card) {
         super(card);

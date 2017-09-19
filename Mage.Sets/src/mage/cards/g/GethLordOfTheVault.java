@@ -39,7 +39,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetAdjustment;
@@ -47,10 +46,8 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 
 /**
@@ -76,25 +73,12 @@ public class GethLordOfTheVault extends CardImpl {
 
         // Intimidate
         this.addAbility(IntimidateAbility.getInstance());
-        //TODO: Make ability properly copiable
         // {X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped.
         // Then that player puts the top X cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
-        ability.setTargetAdjustment(TargetAdjustment.GETH);
+        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_GY_CARD);
         ability.addTarget(new TargetCardInOpponentsGraveyard(filter));
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getTargetAdjustment() == TargetAdjustment.GETH) {
-            int xValue = ability.getManaCostsToPay().getX();
-            TargetCard oldTarget = (TargetCard) ability.getTargets().get(0);
-            FilterCard filter2 = oldTarget.getFilter().copy();
-            filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-            ability.getTargets().clear();
-            ability.getTargets().add(new TargetCardInOpponentsGraveyard(filter2));
-        }
     }
 
     public GethLordOfTheVault(final GethLordOfTheVault card) {

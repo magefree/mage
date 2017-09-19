@@ -28,7 +28,6 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -40,8 +39,6 @@ import mage.constants.CardType;
 import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.NamePredicate;
-import mage.game.Game;
 import mage.target.TargetSpell;
 
 /**
@@ -58,24 +55,11 @@ public class DeclarationOfNaught extends CardImpl {
         // As Declaration of Naught enters the battlefield, name a card.
         this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.ALL)));
 
-        //TODO: Make ability properly copiable
         // {U}: Counter target spell with the chosen name.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}"));
         ability.setTargetAdjustment(TargetAdjustment.CHOSEN_NAME);
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
-
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getTargetAdjustment() == TargetAdjustment.CHOSEN_NAME) {
-            ability.getTargets().clear();
-            FilterSpell filter2 = new FilterSpell("spell with the chosen name");
-            filter2.add(new NamePredicate((String) game.getState().getValue(ability.getSourceId().toString() + NameACardEffect.INFO_KEY)));
-            TargetSpell target = new TargetSpell(1, filter2);
-            ability.addTarget(target);
-        }
     }
 
     public DeclarationOfNaught(final DeclarationOfNaught card) {
