@@ -46,6 +46,7 @@ import mage.counters.Counters;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -351,6 +352,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 ability.getTargets().clear();
                 ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, permanentFilter, false));
                 break;
+            case X_TARGETS:
+                xValue = ability.getManaCostsToPay().getX();
+                permanentFilter = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
+                ability.getTargets().clear();
+                ability.addTarget(new TargetPermanent(xValue, permanentFilter));
+                break;
             case X_POWER_LEQ:// Minamo Sightbender only
                 xValue = ability.getManaCostsToPay().getX();
                 oldTargetPermanent = (TargetPermanent) ability.getTargets().get(0);
@@ -360,12 +367,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 permanentFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
                 ability.getTargets().clear();
                 ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, permanentFilter, false));
-                break;
-            case X_TARGETS:
-                xValue = ability.getManaCostsToPay().getX();
-                permanentFilter = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
-                ability.getTargets().clear();
-                ability.addTarget(new TargetPermanent(xValue, permanentFilter));
                 break;
             case X_CMC_EQUAL_GY_CARD: //Geth, Lord of the Vault only
                 xValue = ability.getManaCostsToPay().getX();
@@ -381,6 +382,18 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 filterSpell.add(new NamePredicate((String) game.getState().getValue(ability.getSourceId().toString() + NameACardEffect.INFO_KEY)));
                 TargetSpell target = new TargetSpell(1, filterSpell);
                 ability.addTarget(target);
+                break;
+            case CHOSEN_COLOR: //Pentarch Paladin only
+                ObjectColor chosenColor = (ObjectColor) game.getState().getValue(ability.getSourceId() + "_color");
+                ability.getTargets().clear();
+                FilterPermanent filter = new FilterPermanent("permanent of the chosen color.");
+                if (chosenColor != null) {
+                    filter.add(new ColorPredicate(chosenColor));
+                } else {
+                    filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, -5));// Pretty sure this is always false
+                }
+                oldTargetPermanent = new TargetPermanent(filter);
+                ability.addTarget(oldTargetPermanent);
                 break;
         }
     }
