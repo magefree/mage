@@ -40,10 +40,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -51,7 +51,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AncientHellkite extends CardImpl {
 
-    private final UUID originalId;
+    private static final FilterPermanent filter = new FilterPermanent("creature defending player controlsknlokn");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(new DefendingPlayerControlsPredicate());
+    }
 
     public AncientHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
@@ -63,27 +68,28 @@ public class AncientHellkite extends CardImpl {
         //TODO: Make ability properly copiable
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"), SourceAttackingCondition.instance);
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
-        originalId = ability.getOriginalId();
+        ability.addTarget(new TargetPermanent(filter));
+//        ability.setTargetAdjustment(TargetAdjustment.DEFENDING_PLAYER);
         this.addAbility(ability);
     }
 
     public AncientHellkite(final AncientHellkite card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            ability.getTargets().clear();
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-            UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
-            filter.add(new ControllerIdPredicate(defenderId));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            ability.addTarget(target);
-        }
-    }
+//    @Override
+//    public void adjustTargets(Ability ability, Game game) {
+//        if (ability.getTargetAdjustment() == TargetAdjustment.DEFENDING_PLAYER) {
+//            TargetPermanent oldTarget = (TargetPermanent) ability.getTargets().get(0);
+//            int minTargets = oldTarget.getMinNumberOfTargets();
+//            int maxTargets = oldTarget.getMaxNumberOfTargets();
+//            FilterPermanent filter2 = oldTarget.getFilter().copy();
+//            UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
+//            filter2.add(new ControllerIdPredicate(defenderId));
+//            ability.getTargets().clear();
+//            ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, filter2, false));
+//        }
+//    }
 
     @Override
     public AncientHellkite copy() {
