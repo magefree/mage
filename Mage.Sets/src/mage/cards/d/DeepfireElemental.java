@@ -74,16 +74,16 @@ public class DeepfireElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getTargetAdjustment() == TargetAdjustment.X_CMC_EQUAL_PERM) {
-            int xValue = ability.getManaCostsToPay().getX();
-            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter().copy();
-            filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-            ability.getTargets().clear();
-            ability.getTargets().add(new TargetPermanent(filter2));
-        }
-    }
+//    @Override
+//    public void adjustTargets(Ability ability, Game game) {
+//        if (ability.getTargetAdjustment() == TargetAdjustment.X_CMC_EQUAL_PERM) {
+//            int xValue = ability.getManaCostsToPay().getX();
+//            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter().copy();
+//            filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+//            ability.getTargets().clear();
+//            ability.getTargets().add(new TargetPermanent(filter2));
+//        }
+//    }
 
     public DeepfireElemental(final DeepfireElemental card) {
         super(card);

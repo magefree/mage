@@ -79,19 +79,19 @@ public class MinamoSightbender extends CardImpl {
 
     }
 
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getTargetAdjustment() == TargetAdjustment.X_POWER_LEQ) {
-            int xValue = ability.getManaCostsToPay().getX();
-            TargetPermanent oldTarget = (TargetPermanent) ability.getTargets().get(0);
-            int minTargets = oldTarget.getMinNumberOfTargets();
-            int maxTargets = oldTarget.getMaxNumberOfTargets();
-            FilterPermanent filter2 = oldTarget.getFilter().copy();
-            filter2.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-            ability.getTargets().clear();
-            ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, filter2, false));
-        }
-    }
+//    @Override
+//    public void adjustTargets(Ability ability, Game game) {
+//        if (ability.getTargetAdjustment() == TargetAdjustment.X_POWER_LEQ) {
+//            int xValue = ability.getManaCostsToPay().getX();
+//            TargetPermanent oldTarget = (TargetPermanent) ability.getTargets().get(0);
+//            int minTargets = oldTarget.getMinNumberOfTargets();
+//            int maxTargets = oldTarget.getMaxNumberOfTargets();
+//            FilterPermanent filter2 = oldTarget.getFilter().copy();
+//            filter2.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+//            ability.getTargets().clear();
+//            ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, filter2, false));
+//        }
+//    }
 
     public MinamoSightbender(final MinamoSightbender card) {
         super(card);

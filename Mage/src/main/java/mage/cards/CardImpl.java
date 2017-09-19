@@ -42,12 +42,16 @@ import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.*;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.target.TargetPermanent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
@@ -315,6 +319,46 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         }
         return spellAbility;
+    }
+
+//    @Override
+//    public void adjustCosts(Ability ability, Game game) {
+//    }
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue;
+        TargetPermanent oldTargetPermanent;
+        int minTargets;
+        int maxTargets;
+        switch (ability.getTargetAdjustment()) {
+            case NONE:
+                break;
+            case X_CMC_EQUAL_PERM:
+                xValue = ability.getManaCostsToPay().getX();
+                oldTargetPermanent = (TargetPermanent) ability.getTargets().get(0);
+                minTargets = oldTargetPermanent.getMinNumberOfTargets();
+                maxTargets = oldTargetPermanent.getMaxNumberOfTargets();
+                FilterPermanent filter2 = oldTargetPermanent.getFilter().copy();
+                filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+                ability.getTargets().clear();
+                ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, filter2, false));
+                break;
+            case X_POWER_LEQ:
+                xValue = ability.getManaCostsToPay().getX();
+                oldTargetPermanent = (TargetPermanent) ability.getTargets().get(0);
+                minTargets = oldTargetPermanent.getMinNumberOfTargets();
+                maxTargets = oldTargetPermanent.getMaxNumberOfTargets();
+                filter2 = oldTargetPermanent.getFilter().copy();
+                filter2.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+                ability.getTargets().clear();
+                ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, filter2, false));
+                break;
+            case X_TARGETS:
+                xValue = ability.getManaCostsToPay().getX();
+                filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
+                ability.getTargets().clear();
+                ability.addTarget(new TargetPermanent(xValue, filter2));
+        }
     }
 
     @Override

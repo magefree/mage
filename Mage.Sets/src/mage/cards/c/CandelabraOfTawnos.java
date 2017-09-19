@@ -65,14 +65,14 @@ public class CandelabraOfTawnos extends CardImpl {
         this.addAbility(ability);
     }
 
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getTargetAdjustment() == TargetAdjustment.X_TARGETS) {
-            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
-            ability.getTargets().clear();
-            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));
-        }
-    }
+//    @Override
+//    public void adjustTargets(Ability ability, Game game) {
+//        if (ability.getTargetAdjustment() == TargetAdjustment.X_TARGETS) {
+//            FilterPermanent filter2 = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
+//            ability.getTargets().clear();
+//            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter2));
+//        }
+//    }
 
     public CandelabraOfTawnos(final CandelabraOfTawnos card) {
         super(card);

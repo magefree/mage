@@ -75,19 +75,19 @@ public class GorillaShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getTargetAdjustment() == TargetAdjustment.X_CMC_EQUAL_PERM) {
-            int xValue = ability.getManaCostsToPay().getX();
-            TargetPermanent oldTarget = (TargetPermanent) ability.getTargets().get(0);
-            int minTargets = oldTarget.getMinNumberOfTargets();
-            int maxTargets = oldTarget.getMaxNumberOfTargets();
-            FilterPermanent filter2 = oldTarget.getFilter().copy();
-            filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-            ability.getTargets().clear();
-            ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, filter2, false));
-        }
-    }
+//    @Override
+//    public void adjustTargets(Ability ability, Game game) {
+//        if (ability.getTargetAdjustment() == TargetAdjustment.X_CMC_EQUAL_PERM) {
+//            int xValue = ability.getManaCostsToPay().getX();
+//            TargetPermanent oldTarget = (TargetPermanent) ability.getTargets().get(0);
+//            int minTargets = oldTarget.getMinNumberOfTargets();
+//            int maxTargets = oldTarget.getMaxNumberOfTargets();
+//            FilterPermanent filter2 = oldTarget.getFilter().copy();
+//            filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+//            ability.getTargets().clear();
+//            ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, filter2, false));
+//        }
+//    }
 
     public GorillaShaman(final GorillaShaman card) {
         super(card);

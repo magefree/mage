@@ -37,6 +37,7 @@ import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -49,11 +50,10 @@ import mage.target.TargetSpell;
  */
 public class DeclarationOfNaught extends CardImpl {
 
-    private final UUID originalId;
     static final private FilterSpell filter = new FilterSpell("spell with the chosen name");
 
     public DeclarationOfNaught(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
 
         // As Declaration of Naught enters the battlefield, name a card.
         this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.ALL)));
@@ -61,15 +61,15 @@ public class DeclarationOfNaught extends CardImpl {
         //TODO: Make ability properly copiable
         // {U}: Counter target spell with the chosen name.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}"));
+        ability.setTargetAdjustment(TargetAdjustment.CHOSEN_NAME);
         ability.addTarget(new TargetSpell(filter));
-        originalId = ability.getOriginalId();
         this.addAbility(ability);
 
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
+        if (ability.getTargetAdjustment() == TargetAdjustment.CHOSEN_NAME) {
             ability.getTargets().clear();
             FilterSpell filter2 = new FilterSpell("spell with the chosen name");
             filter2.add(new NamePredicate((String) game.getState().getValue(ability.getSourceId().toString() + NameACardEffect.INFO_KEY)));
@@ -80,7 +80,6 @@ public class DeclarationOfNaught extends CardImpl {
 
     public DeclarationOfNaught(final DeclarationOfNaught card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override
