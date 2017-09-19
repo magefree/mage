@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.HalfValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
@@ -85,7 +85,7 @@ public class RakdosTheDefiler extends CardImpl {
         // Whenever Rakdos deals combat damage to a player, that player sacrifices half the non-Demon permanents he or she controls, rounded up.
         effect = new SacrificeEffect(damageToPlayerTriggerFilter, new HalfValue(new PermanentsTargetOpponentControlsCount(damageToPlayerTriggerFilter), true), "");
         effect.setText("that player sacrifices half the non-Demon permanents he or she controls, rounded up");
-        ability = new DealsDamageToAPlayerTriggeredAbility(effect, false, true);
+        ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false, true);
         this.addAbility(ability);
     }
 

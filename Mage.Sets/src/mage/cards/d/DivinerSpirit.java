@@ -30,7 +30,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -47,14 +47,14 @@ import mage.players.Player;
 public class DivinerSpirit extends CardImpl {
 
     public DivinerSpirit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
         // Whenever Diviner Spirit deals combat damage to a player, you and that player each draw that many cards.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DivinerSpiritEffect(), false, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DivinerSpiritEffect(), false, true));
     }
 
     public DivinerSpirit(final DivinerSpirit card) {
