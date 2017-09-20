@@ -47,6 +47,7 @@ import mage.counters.Counters;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -61,6 +62,7 @@ import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInOpponentsGraveyard;
+import mage.target.common.TargetCreaturePermanent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
@@ -403,6 +405,16 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     permanentFilter = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
                     ability.getTargets().clear();
                     ability.addTarget(new TargetPermanent(0, xValue, permanentFilter, false));
+                }
+                break;
+            case TREASURE_COUNTER_POWER:
+                sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
+                if (sourcePermanent != null) {
+                    xValue = sourcePermanent.getCounters(game).getCount(CounterType.TREASURE);
+                    FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with power less than or equal to the number of treasure counters on {this}");
+                    filter2.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+                    ability.getTargets().clear();
+                    ability.getTargets().add(new TargetCreaturePermanent(filter2));
                 }
                 break;
         }
