@@ -53,6 +53,7 @@ public class FloodwaterDam extends CardImpl {
     public FloodwaterDam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
+        //TODO: Make ability properly copiable
         // {X}{X}{1}, {tap}: Tap X target lands.
         Effect effect = new TapTargetEffect();
         effect.setText("tap X target lands");

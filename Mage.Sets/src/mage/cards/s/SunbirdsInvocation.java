@@ -111,7 +111,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
 
     public SunbirdsInvocationEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Reveal the top X cards of your library, where X is that spell's converted mana cost. You may cast a card revealed this way with converted mana cost X or less without paying its mana cost. Put the rest on the bottom of your library in a random order";
+        staticText = "reveal the top X cards of your library, where X is that spell's converted mana cost. You may cast a card revealed this way with converted mana cost X or less without paying its mana cost. Put the rest on the bottom of your library in a random order";
     }
 
     public SunbirdsInvocationEffect(final SunbirdsInvocationEffect effect) {
@@ -125,8 +125,12 @@ class SunbirdsInvocationEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
+        if (spell == null) {
+            return false;
+        }
+        int xValue = spell.getConvertedManaCost();
         Cards cards = new CardsImpl();
-        int xValue = game.getStack().getSpell(getTargetPointer().getFirst(game, source)).getConvertedManaCost();
         cards.addAll(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
@@ -138,11 +142,10 @@ class SunbirdsInvocationEffect extends OneShotEffect {
             if (controller.chooseTarget(Outcome.PlayForFree, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
-                    if (controller.chooseUse(outcome, "Do you wish to cast " + card.getName(), source, game)) {
-                        Card copy = game.copyCard(card, source, source.getControllerId());
-                        controller.cast(copy.getSpellAbility(), game, true);
+                    if (controller.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
+                        controller.cast(card.getSpellAbility(), game, true);
+                        cards.remove(card);
                     }
-                    return true;
                 }
             }
         }

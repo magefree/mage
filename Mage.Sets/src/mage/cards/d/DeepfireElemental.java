@@ -68,6 +68,7 @@ public class DeepfireElemental extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
+        //TODO: Make ability properly copiable
         // {X}{X}{1}: Destroy target artifact or creature with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{1}"));
         ability.addTarget(new TargetPermanent(filter));

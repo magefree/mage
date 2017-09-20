@@ -137,15 +137,16 @@ class CreatureEvaluator {
     public int evaluate(Permanent creature, Game game) {
         if (!values.containsKey(creature.getId())) {
             int value = 0;
-            if (creature.canAttack(game))
+            if (creature.canAttack(null, game)) {
                 value += 2;
+            }
             value += creature.getPower().getValue();
             value += creature.getToughness().getValue();
             value += creature.getAbilities().getEvasionAbilities().size();
             value += creature.getAbilities().getProtectionAbilities().size();
-            value += creature.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())?1:0;
-            value += creature.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())?2:0;
-            value += creature.getAbilities().containsKey(TrampleAbility.getInstance().getId())?1:0;
+            value += creature.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId()) ? 1 : 0;
+            value += creature.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId()) ? 2 : 0;
+            value += creature.getAbilities().containsKey(TrampleAbility.getInstance().getId()) ? 1 : 0;
             values.put(creature.getId(), value);
         }
         return values.get(creature.getId());

@@ -54,7 +54,7 @@ public class GoblinFreerunner extends CardImpl {
         addAbility(new SurgeAbility(this, "{1}{R}"));
         
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
     }
 
     public GoblinFreerunner(final GoblinFreerunner card) {

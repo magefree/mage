@@ -25,28 +25,24 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.condition.common.SourceAttackingCondition;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -55,92 +51,43 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AncientHellkite extends CardImpl {
 
+    private final UUID originalId;
+
     public AncientHellkite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
+        //TODO: Make ability properly copiable
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new AncientHellkiteAbility());
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"), SourceAttackingCondition.instance);
+        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
+        originalId = ability.getOriginalId();
+        this.addAbility(ability);
     }
 
     public AncientHellkite(final AncientHellkite card) {
         super(card);
+        this.originalId = card.originalId;
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability.getOriginalId().equals(originalId)) {
+            ability.getTargets().clear();
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+            UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
+            filter.add(new ControllerIdPredicate(defenderId));
+            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            ability.addTarget(target);
+        }
     }
 
     @Override
     public AncientHellkite copy() {
         return new AncientHellkite(this);
-    }
-
-}
-
-class AncientHellkiteAbility extends ActivatedAbilityImpl {
-
-    private static final FilterCreaturePermanent filterTemplate = new FilterCreaturePermanent("creature defending player controls");
-
-    public AncientHellkiteAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
-        addCost(new AncientHellkiteCost());
-        addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
-        addTarget(new TargetCreaturePermanent(filterTemplate));
-    }
-
-    public AncientHellkiteAbility(final AncientHellkiteAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public AncientHellkiteAbility copy() {
-        return new AncientHellkiteAbility(this);
-    }
-
-    @Override
-    public boolean activate(Game game, boolean noMana) {
-        UUID defenderId = game.getCombat().getDefenderId(sourceId);
-        if (defenderId != null) {
-            FilterCreaturePermanent filter = filterTemplate.copy();
-            filter.add(new ControllerIdPredicate(defenderId));
-
-            this.getTargets().clear();
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            this.addTarget(target);
-            return super.activate(game, noMana);
-        }
-        return false;
-    }
-}
-
-class AncientHellkiteCost extends CostImpl {
-
-    public AncientHellkiteCost() {
-        this.text = "Activate this ability only if Ancient Hellkite is attacking";
-    }
-
-    public AncientHellkiteCost(final AncientHellkiteCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public AncientHellkiteCost copy() {
-        return new AncientHellkiteCost(this);
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null && permanent.isAttacking()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        this.paid = true;
-        return paid;
     }
 
 }

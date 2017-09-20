@@ -161,7 +161,7 @@ class OdricLunarchMarshalEffect extends OneShotEffect {
         
         // Menace
         if (game.getBattlefield().contains(filterMenace, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityControlledEffect(MenaceAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
+            game.addEffect(new GainAbilityControlledEffect(new MenaceAbility(), Duration.EndOfTurn, filterCreatures), source);
         }
         
         // Reach
@@ -171,7 +171,7 @@ class OdricLunarchMarshalEffect extends OneShotEffect {
         
         // Skulk
         if (game.getBattlefield().contains(filterSkulk, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityControlledEffect(SkulkAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
+            game.addEffect(new GainAbilityControlledEffect(new SkulkAbility(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Trample

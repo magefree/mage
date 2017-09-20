@@ -25,39 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.cards.p;
 
-package mage.cards.s;
-
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
-import mage.target.TargetPermanent;
-
-import java.util.UUID;
+import mage.game.permanent.token.IxalanVampireToken;
 
 /**
  *
- * @author Loki
+ * @author TheElk801
  */
-public class SliceinTwain extends CardImpl {
+public class PaladinOfTheBloodstained extends CardImpl {
 
-    public SliceinTwain (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}");
+    public PaladinOfTheBloodstained(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.KNIGHT);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        // When Paladin of the Bloodstained enters the battlefield, create a 1/1 white Vampire creature token with lifelink.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken())));
     }
 
-    public SliceinTwain (final SliceinTwain card) {
+    public PaladinOfTheBloodstained(final PaladinOfTheBloodstained card) {
         super(card);
     }
 
     @Override
-    public SliceinTwain copy() {
-        return new SliceinTwain(this);
+    public PaladinOfTheBloodstained copy() {
+        return new PaladinOfTheBloodstained(this);
     }
 }

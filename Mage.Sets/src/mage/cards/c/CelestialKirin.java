@@ -50,7 +50,7 @@ import mage.game.stack.Spell;
 public class CelestialKirin extends CardImpl {
 
     public CelestialKirin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN);
         this.subtype.add(SubType.SPIRIT);
@@ -92,7 +92,7 @@ class CelestialKirinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getState().getStack().getSpell(getTargetPointer().getFirst(game, source));
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         if (spell != null) {
             int cmc = spell.getConvertedManaCost();
             FilterPermanent filter = new FilterPermanent();

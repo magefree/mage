@@ -41,7 +41,7 @@ public final class StaticFilters {
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT = new FilterControlledArtifactPermanent();
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("artifact or creature you control");
 
-    public static final FilterControlledPermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");
+    public static final FilterPermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_ANOTHER_CREATURE = new FilterControlledCreaturePermanent("another creature");
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_NON_LAND = new FilterControlledPermanent("nonland permanent");
     public static final FilterLandPermanent FILTER_LAND = new FilterLandPermanent();
@@ -64,6 +64,7 @@ public final class StaticFilters {
     public static final FilterSpell FILTER_SPELL = new FilterSpell();
 
     public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELL = new FilterSpell("instant or sorcery spell");
+    public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELLS = new FilterSpell("instant or sorcery spells");
 
     public static final FilterPermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
 
@@ -122,6 +123,11 @@ public final class StaticFilters {
         ));
 
         FILTER_INSTANT_OR_SORCERY_SPELL.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)
+        ));
+        
+        FILTER_INSTANT_OR_SORCERY_SPELLS.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)
         ));

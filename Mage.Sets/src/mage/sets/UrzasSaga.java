@@ -150,6 +150,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Fertile Ground", 252, Rarity.COMMON, mage.cards.f.FertileGround.class));
         cards.add(new SetCardInfo("Fiery Mantle", 186, Rarity.COMMON, mage.cards.f.FieryMantle.class));
         cards.add(new SetCardInfo("Fire Ants", 187, Rarity.UNCOMMON, mage.cards.f.FireAnts.class));
+        cards.add(new SetCardInfo("Flesh Reaver", 136, Rarity.UNCOMMON, mage.cards.f.FleshReaver.class));
         cards.add(new SetCardInfo("Fluctuator", 295, Rarity.RARE, mage.cards.f.Fluctuator.class));
         cards.add(new SetCardInfo("Fog Bank", 75, Rarity.UNCOMMON, mage.cards.f.FogBank.class));
         cards.add(new SetCardInfo("Forest", 347, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));

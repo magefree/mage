@@ -28,10 +28,11 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -52,7 +53,13 @@ public class GargoyleCastle extends CardImpl {
 
         this.addAbility(new ColorlessManaAbility());
         // {T}, {5}, Sacrifice Gargoyle Castle: Put a 3/4 colorless Gargoyle artifact creature token with flying onto the battlefield.
-        this.addAbility(new GargoyleCastleAbility());
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new CreateTokenEffect(new GargoyleToken()),
+                new ManaCostsImpl("{5}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
     }
 
     public GargoyleCastle(final GargoyleCastle card) {
@@ -62,27 +69,6 @@ public class GargoyleCastle extends CardImpl {
     @Override
     public GargoyleCastle copy() {
         return new GargoyleCastle(this);
-    }
-
-}
-
-class GargoyleCastleAbility extends ActivatedAbilityImpl {
-
-    public GargoyleCastleAbility() {
-        super(Zone.BATTLEFIELD, null);
-        addCost(new TapSourceCost());
-        addCost(new GenericManaCost(5));
-        addCost(new SacrificeSourceCost());
-        addEffect(new CreateTokenEffect(new GargoyleToken()));
-    }
-
-    public GargoyleCastleAbility(final GargoyleCastleAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GargoyleCastleAbility copy() {
-        return new GargoyleCastleAbility(this);
     }
 
 }

@@ -28,6 +28,7 @@
 package mage.cards.m;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -38,9 +39,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,9 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class MarkOfTheVampire extends CardImpl {
 
     public MarkOfTheVampire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent target = new TargetCreaturePermanent();
@@ -63,8 +63,9 @@ public class MarkOfTheVampire extends CardImpl {
         this.addAbility(new EnchantAbility(target.getTargetName()));
 
         // Enchanted creature gets +2/+2 and has lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA)));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        ability.addEffect(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA).setText("and has lifelink"));
+        this.addAbility(ability);
     }
 
     public MarkOfTheVampire(final MarkOfTheVampire card) {

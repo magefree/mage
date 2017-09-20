@@ -78,6 +78,7 @@ public class JacesSentinel extends CardImpl {
                 new CantBeBlockedSourceEffect(),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "and has can't be blocked"));
+        this.addAbility(ability);
     }
 
     public JacesSentinel(final JacesSentinel card) {

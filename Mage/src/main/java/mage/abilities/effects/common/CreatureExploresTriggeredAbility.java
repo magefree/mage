@@ -1,0 +1,43 @@
+package mage.abilities.effects.common;
+
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+
+public class CreatureExploresTriggeredAbility extends TriggeredAbilityImpl {
+
+    public CreatureExploresTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect, false);
+    }
+
+    public CreatureExploresTriggeredAbility(final CreatureExploresTriggeredAbility effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.EXPLORED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent creature = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (creature != null) {
+            return creature.getControllerId().equals(controllerId);
+        }
+        return false;
+    }
+
+    @Override
+    public CreatureExploresTriggeredAbility copy() {
+        return new CreatureExploresTriggeredAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a creature you control explores, " + super.getRule();
+    }
+}

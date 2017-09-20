@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -37,7 +36,6 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-
 public class Commander2013 extends ExpansionSet {
 
     private static final Commander2013 instance = new Commander2013();
@@ -317,7 +315,7 @@ public class Commander2013 extends ExpansionSet {
         cards.add(new SetCardInfo("Skyscribing", 57, Rarity.UNCOMMON, mage.cards.s.Skyscribing.class));
         cards.add(new SetCardInfo("Skyward Eye Prophets", 214, Rarity.UNCOMMON, mage.cards.s.SkywardEyeProphets.class));
         cards.add(new SetCardInfo("Slice and Dice", 119, Rarity.UNCOMMON, mage.cards.s.SliceAndDice.class));
-        cards.add(new SetCardInfo("Slice in Twain", 170, Rarity.UNCOMMON, mage.cards.s.SliceinTwain.class));
+        cards.add(new SetCardInfo("Slice in Twain", 170, Rarity.UNCOMMON, mage.cards.s.SliceInTwain.class));
         cards.add(new SetCardInfo("Slippery Karst", 324, Rarity.COMMON, mage.cards.s.SlipperyKarst.class));
         cards.add(new SetCardInfo("Smoldering Crater", 325, Rarity.COMMON, mage.cards.s.SmolderingCrater.class));
         cards.add(new SetCardInfo("Sol Ring", 259, Rarity.UNCOMMON, mage.cards.s.SolRing.class));

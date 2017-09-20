@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import mage.util.SubTypeList;
 
 public enum SubType {
@@ -12,7 +11,6 @@ public enum SubType {
     //205.3k Instants and sorceries share their lists of subtypes; these subtypes are called spell types.
     ARCANE("Arcane", SubTypeSet.SpellType),
     TRAP("Trap", SubTypeSet.SpellType),
-
     // 205.3i: Lands have their own unique set of subtypes; these subtypes are called land types.
     // Of that list, Forest, Island, Mountain, Plains, and Swamp are the basic land types.
     FOREST("Forest", SubTypeSet.BasicLandType),
@@ -28,13 +26,11 @@ public enum SubType {
     MINE("Mine", SubTypeSet.NonBasicLandType),
     POWER_PLANT("Power-Plant", SubTypeSet.NonBasicLandType),
     TOWER("Tower", SubTypeSet.NonBasicLandType),
-
     // 205.3h Enchantments have their own unique set of subtypes; these subtypes are called enchantment types.
     AURA("Aura", SubTypeSet.EnchantmentType),
     CARTOUCHE("Cartouche", SubTypeSet.EnchantmentType),
     CURSE("Curse", SubTypeSet.EnchantmentType),
     SHRINE("Shrine", SubTypeSet.EnchantmentType),
-
     // 205.3g: Artifacts have their own unique set of subtypes; these subtypes are called artifact types.
     CLUE("Clue", SubTypeSet.ArtifactType),
     CONTRAPTION("Contraption", SubTypeSet.ArtifactType),
@@ -42,7 +38,6 @@ public enum SubType {
     FORTIFICATION("Fortification", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType),
-
     // 205.3m : Creatures and tribals share their lists of subtypes; these subtypes are called creature types.
     // A
     ADVISOR("Advisor", SubTypeSet.CreatureType),
@@ -320,6 +315,7 @@ public enum SubType {
     TURTLE("Turtle", SubTypeSet.CreatureType),
     TUSKEN("Tusken", SubTypeSet.CreatureType, true), // Star Wars
     TROOPER("Trooper", SubTypeSet.CreatureType, true), // Star Wars
+    TRILOBITE("Trilobite", SubTypeSet.CreatureType),
     TWILEK("Twi'lek", SubTypeSet.CreatureType, true), // Star Wars
 
     // U
@@ -426,8 +422,11 @@ public enum SubType {
                 return s;
             }
         }
-        throw new IllegalArgumentException("no subtype for " + subType + " exists");
+        org.apache.log4j.Logger.getLogger(SubType.class).error("no subtype for " + subType + " exists");
+        return null;
     }
+
+    ;
 
     public SubTypeSet getSubTypeSet() {
         return subTypeSet;
@@ -445,9 +444,9 @@ public enum SubType {
 
     public static Set<SubType> getBasicLands(boolean customSet) {
         return Arrays.stream(values())
-                     .filter(p -> p.getSubTypeSet() == SubTypeSet.BasicLandType)
-                     .filter(s -> s.customSet == customSet)
-                     .collect(Collectors.toSet());
+                .filter(p -> p.getSubTypeSet() == SubTypeSet.BasicLandType)
+                .filter(s -> s.customSet == customSet)
+                .collect(Collectors.toSet());
     }
 
     public static SubTypeList getLandTypes(boolean customSet) {

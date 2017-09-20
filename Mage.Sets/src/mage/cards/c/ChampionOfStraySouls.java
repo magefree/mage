@@ -75,6 +75,7 @@ public class ChampionOfStraySouls extends CardImpl {
          * ability, before you pay any costs. You can't target any of the
          * creatures you sacrifice.
          */
+        //TODO: Make ability properly copiable
         // {3}{B}{B}, {T}, Sacrifice X other creatures: Return X target creatures from your graveyard to the battlefield.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
         effect.setText("Return X target creatures from your graveyard to the battlefield");

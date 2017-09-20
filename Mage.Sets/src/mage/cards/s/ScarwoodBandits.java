@@ -31,20 +31,20 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldCondition;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.ForestwalkAbility;
-import mage.abilities.Mode;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -53,7 +53,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 import mage.util.CardUtil;
@@ -65,7 +64,7 @@ import mage.util.CardUtil;
 public class ScarwoodBandits extends CardImpl {
 
     public ScarwoodBandits(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
@@ -73,16 +72,16 @@ public class ScarwoodBandits extends CardImpl {
 
         // Forestwalk
         this.addAbility(new ForestwalkAbility());
-        
+
         // {2}{G}, {tap}: Unless an opponent pays {2}, gain control of target artifact for as long as Scarwood Bandits remains on the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-            new DoUnlessAnyOpponentPaysEffect(
-                new ConditionalContinuousEffect(
-                    new GainControlTargetEffect(Duration.Custom, true),
-                    new SourceOnBattlefieldCondition(),
-                    "gain control of target artifact for as long as {this} remains on the battlefield"),
-                new GenericManaCost(2)),
-            new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new DoUnlessAnyOpponentPaysEffect(
+                        new ConditionalContinuousEffect(
+                                new GainControlTargetEffect(Duration.Custom, true),
+                                SourceOnBattlefieldCondition.instance,
+                                "gain control of target artifact for as long as {this} remains on the battlefield"),
+                        new GenericManaCost(2)),
+                new ManaCostsImpl("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

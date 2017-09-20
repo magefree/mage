@@ -37,7 +37,6 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class EntrancingMelody extends CardImpl {
 
     public EntrancingMelody(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
 
         // Gain control of target creature with converted mana cost X.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true));
@@ -65,8 +64,8 @@ public class EntrancingMelody extends CardImpl {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost X or less");
-            filter.add(Predicates.not(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue)));
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost X");
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             ability.addTarget(new TargetCreaturePermanent(filter));
         }
     }

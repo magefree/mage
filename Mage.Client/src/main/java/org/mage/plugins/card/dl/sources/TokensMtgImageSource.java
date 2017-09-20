@@ -27,9 +27,6 @@
  */
 package org.mage.plugins.card.dl.sources;
 
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.images.CardDownloadData;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,8 +34,14 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.logging.Level;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.images.CardDownloadData;
+import org.mage.plugins.card.images.DownloadPictures;
 
 /**
  *
@@ -46,11 +49,12 @@ import java.util.Map;
  */
 public enum TokensMtgImageSource implements CardImageSource {
 
-   instance;
+    instance;
     private static final Logger logger = Logger.getLogger(TokensMtgImageSource.class);
 
-
-    private List<TokenData> tokensData;
+    // [[EXP/Name, TokenData>
+    private HashMap<String, ArrayList<TokenData>> tokensData;
+    private static final Set<String> supportedSets = new LinkedHashSet<String>();
 
     private final Object tokensDataSync = new Object();
 
@@ -100,7 +104,12 @@ public enum TokensMtgImageSource implements CardImageSource {
         "Sorin",
         "Tamiyo",
         "Teferi",
-        "Venser",};
+        "Venser",
+        // Custom Emblems
+        "Yoda",
+        "Obi-Wan Kenobi",
+        "Aurra Sing"
+    };
 
     private static final Map<String, String> SET_NAMES_REPLACEMENT = new HashMap<String, String>() {
         {
@@ -134,36 +143,31 @@ public enum TokensMtgImageSource implements CardImageSource {
         // e.g. http://tokens.mtg.onl/tokens/ORI_010-Thopter.jpg -- token number 010
         // We don't know these numbers, but we can take them from a file
         // with tokens information that can be downloaded from the site.
-        List<TokenData> newTokensData = getTokensData();
-
-        if (newTokensData.isEmpty()) {
+        if (tokensData.isEmpty()) {
+            logger.info("Source " + getSourceName() + " provides no token data.");
             return null;
         }
 
-        List<TokenData> matchedTokens = new ArrayList<>();
-        for (TokenData token : newTokensData) {
-            if (name.equalsIgnoreCase(token.getName()) && set.equalsIgnoreCase(token.getExpansionSetCode())) {
-                matchedTokens.add(token);
-            }
+        String key = set + "/" + name;
+        List<TokenData> list = tokensData.get(key);
+        if (list == null) {
+            logger.info("Could not find data for token " + name + ", set " + set + ".");
+            return null;
         }
-//
-//        if (matchedTokens.isEmpty()) {
-//            logger.info("Could not find data for token " + name + ", set " + set + ".");
-//            return null;
-//        }
 
         TokenData tokenData;
         if (type == 0) {
-            if (matchedTokens.size() > 1) {
+            if (list.size() > 1) {
                 logger.info("Multiple images were found for token " + name + ", set " + set + '.');
             }
-            tokenData = matchedTokens.get(0);
+            logger.info("Token found: " + name + ", set " + set + '.');
+            tokenData = list.get(0);
         } else {
-            if (type > matchedTokens.size()) {
+            if (type > list.size()) {
                 logger.warn("Not enough images for token with type " + type + ", name " + name + ", set " + set + '.');
                 return null;
             }
-            tokenData = matchedTokens.get(card.getType() - 1);
+            tokenData = list.get(card.getType() - 1);
         }
 
         String url = "http://tokens.mtg.onl/tokens/" + tokenData.getExpansionSetCode().trim() + '_'
@@ -172,15 +176,26 @@ public enum TokensMtgImageSource implements CardImageSource {
         return url;
     }
 
-    private List<TokenData> getTokensData() throws IOException {
+    private HashMap<String, ArrayList<TokenData>> getTokensData() throws IOException {
         synchronized (tokensDataSync) {
             if (tokensData == null) {
-                tokensData = new ArrayList<>();
+                DownloadPictures.getInstance().updateAndViewMessage("Creating token data...");
+                tokensData = new HashMap<>();
 
                 // get tokens data from resource file
-                try(InputStream inputStream = this.getClass().getResourceAsStream("/tokens-mtg-onl-list.csv")) {
+                try (InputStream inputStream = this.getClass().getResourceAsStream("/tokens-mtg-onl-list.csv")) {
                     List<TokenData> fileTokensData = parseTokensData(inputStream);
-                    tokensData.addAll(fileTokensData);
+                    for (TokenData tokenData : fileTokensData) {
+                        String key = tokenData.getExpansionSetCode() + "/" + tokenData.getName();
+                        ArrayList<TokenData> list = tokensData.get(key);
+                        if (list == null) {
+                            list = new ArrayList<>();
+                            tokensData.put(key, list);
+                            supportedSets.add(tokenData.getExpansionSetCode());
+                            logger.info("Added key: " + key);
+                        }
+                        list.add(tokenData);
+                    }
                 } catch (Exception exception) {
                     logger.warn("Failed to get tokens description from resource file tokens-mtg-onl-list.csv", exception);
                 }
@@ -188,27 +203,33 @@ public enum TokensMtgImageSource implements CardImageSource {
                 // description on site may contain new information
                 // try to add it
                 URL url = new URL("http://tokens.mtg.onl/data/SetsWithTokens.csv");
-                try(InputStream inputStream = url.openStream()) {
+                try (InputStream inputStream = url.openStream()) {
                     List<TokenData> siteTokensData = parseTokensData(inputStream);
-                    List<TokenData> newTokensData = new ArrayList<>();
                     for (TokenData siteData : siteTokensData) {
-                        boolean isNew = true;
-                        for (TokenData fileData : tokensData) {
-                            if (siteData.getName().equalsIgnoreCase(fileData.getName())
-                                    && siteData.getNumber().equalsIgnoreCase(fileData.getNumber())
-                                    && siteData.getExpansionSetCode().equalsIgnoreCase(fileData.getExpansionSetCode())) {
-                                isNew = false;
-                                break;
+                        String key = siteData.getExpansionSetCode() + "/" + siteData.getName();
+                        supportedSets.add(siteData.getExpansionSetCode());
+                        ArrayList<TokenData> list = tokensData.get(key);
+                        if (list == null) {
+                            list = new ArrayList<>();
+                            tokensData.put(key, list);
+                            list.add(siteData);
+                        } else {
+                            boolean newToken = true;
+                            for (TokenData tokenData : list) {
+                                if (siteData.getNumber().equals(tokenData.number)) {
+                                    newToken = false;
+                                    break;
+                                }
+                            }
+                            if (newToken) {
+                                list.add(siteData);
                             }
                         }
-                        if (isNew) {
-                            newTokensData.add(siteData);
-                        }
                     }
-
-                    tokensData.addAll(newTokensData);
-                } catch (Exception exception) {
-                    logger.warn("Failed to get tokens description from tokens.mtg.onl", exception);
+                    DownloadPictures.getInstance().updateAndViewMessage("");
+                } catch (Exception ex) {
+                    logger.warn("Failed to get tokens description from tokens.mtg.onl", ex);
+                    DownloadPictures.getInstance().updateAndViewMessage(ex.getMessage());
                 }
             }
         }
@@ -219,8 +240,8 @@ public enum TokensMtgImageSource implements CardImageSource {
     private List<TokenData> parseTokensData(InputStream inputStream) throws IOException {
         List<TokenData> newTokensData = new ArrayList<>();
 
-        try(InputStreamReader inputReader = new InputStreamReader(inputStream, "Cp1252");
-            BufferedReader reader = new BufferedReader(inputReader)) {
+        try (InputStreamReader inputReader = new InputStreamReader(inputStream, "Cp1252");
+                BufferedReader reader = new BufferedReader(inputReader)) {
             // we have to specify encoding to read special comma
 
             reader.readLine(); // skip header
@@ -285,7 +306,17 @@ public enum TokensMtgImageSource implements CardImageSource {
 
     @Override
     public int getTotalImages() {
-        return -1;
+        return getTokenImages();
+    }
+
+    @Override
+    public int getTokenImages() {
+        try {
+            getTokensData();
+        } catch (IOException ex) {
+            logger.error(getSourceName() + ": Loading available data failed. " + ex.getMessage());
+        }
+        return tokensData.size();
     }
 
     @Override
@@ -296,4 +327,28 @@ public enum TokensMtgImageSource implements CardImageSource {
     @Override
     public void doPause(String httpImageUrl) {
     }
+
+    @Override
+    public ArrayList<String> getSupportedSets() {
+        ArrayList<String> supportedSetsCopy = new ArrayList<>();
+        supportedSetsCopy.addAll(supportedSets);
+        return supportedSetsCopy;
+    }
+
+    @Override
+    public boolean isImageProvided(String setCode, String cardName) {
+        try {
+            getTokensData();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(TokensMtgImageSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String key = setCode + "/" + cardName;
+        return (tokensData.containsKey(key));
+    }
+
+    @Override
+    public boolean isSetSupportedComplete(String setCode) {
+        return false;
+    }
+
 }

@@ -63,7 +63,7 @@ public class DarthVader extends CardImpl {
         this.nightCard = true;
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());

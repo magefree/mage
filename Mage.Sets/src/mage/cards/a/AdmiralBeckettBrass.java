@@ -53,6 +53,7 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetNonlandPermanent;
@@ -86,7 +87,7 @@ public class AdmiralBeckettBrass extends CardImpl {
 
         // At the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new GainControlTargetEffect(Duration.Custom), TargetController.YOU, false);
-        ability.addTarget(new TargetNonlandPermanent());
+        ability.addTarget(new TargetNonlandPermanent(new FilterNonlandPermanent("nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn")));
         originalId = ability.getOriginalId();
         this.addAbility(ability, new DamagedByPiratesWatcher());
     }
@@ -137,15 +138,17 @@ class DamagedByPiratesWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getFlag()) {
-            Permanent creature = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (creature != null && creature.getSubtype(game).contains(SubType.PIRATE)) {
-                if (damageSourceIds.keySet().contains(event.getTargetId())) {
-                    damageSourceIds.get(event.getTargetId()).add(creature.getId());
-                } else {
-                    Set<UUID> creatureSet = new HashSet();
-                    creatureSet.add(creature.getId());
-                    damageSourceIds.put(event.getTargetId(), creatureSet);
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
+            if (((DamagedPlayerEvent) event).isCombatDamage()) {
+                Permanent creature = game.getPermanentOrLKIBattlefield(event.getSourceId());
+                if (creature != null && creature.getSubtype(game).contains(SubType.PIRATE)) {
+                    if (damageSourceIds.keySet().contains(event.getTargetId())) {
+                        damageSourceIds.get(event.getTargetId()).add(creature.getId());
+                    } else {
+                        Set<UUID> creatureSet = new HashSet();
+                        creatureSet.add(creature.getId());
+                        damageSourceIds.put(event.getTargetId(), creatureSet);
+                    }
                 }
             }
         }

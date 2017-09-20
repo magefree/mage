@@ -45,6 +45,6 @@ public class PirateToken extends Token {
         subtype.add(SubType.PIRATE);
         power = new MageInt(2);
         toughness = new MageInt(2);
-        addAbility(MenaceAbility.getInstance());
+        addAbility(new MenaceAbility());
     }
 }

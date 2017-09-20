@@ -60,9 +60,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.combat.Combat;
@@ -445,6 +443,20 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
         return null;
+    }
+
+    @Override
+    public Spell getSpell(UUID spellId) {
+        return state.getStack().getSpell(spellId);
+    }
+
+    @Override
+    public Spell getSpellOrLKIStack(UUID spellId) {
+        Spell spell = state.getStack().getSpell(spellId);
+        if (spell == null) {
+            spell = (Spell) this.getLastKnownInformation(spellId, Zone.STACK);
+        }
+        return spell;
     }
 
     @Override
@@ -1930,33 +1942,6 @@ public abstract class GameImpl implements Game, Serializable {
                     if (count > counterAbility.getAmount()) {
                         perm.removeCounters(counterAbility.getCounterType().getName(), count - counterAbility.getAmount(), this);
                         somethingHappened = true;
-                    }
-                }
-            }
-        }
-        //201300713 - 704.5j
-        // If a player controls two or more planeswalkers that share a planeswalker type, that player
-        // chooses one of them, and the rest are put into their owners' graveyards.
-        // This is called the "planeswalker uniqueness rule."
-        if (planeswalkers.size() > 1) {  //don't bother checking if less than 2 planeswalkers in play
-            for (Permanent planeswalker : planeswalkers) {
-                for (SubType planeswalkertype : planeswalker.getSubtype(this)) {
-                    FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
-                    filterPlaneswalker.add(new SubtypePredicate(planeswalkertype));
-                    filterPlaneswalker.add(new ControllerIdPredicate(planeswalker.getControllerId()));
-                    if (getBattlefield().contains(filterPlaneswalker, planeswalker.getControllerId(), this, 2)) {
-                        Player controller = this.getPlayer(planeswalker.getControllerId());
-                        if (controller != null) {
-                            Target targetPlaneswalkerToKeep = new TargetPermanent(filterPlaneswalker);
-                            targetPlaneswalkerToKeep.setTargetName(planeswalkertype.toString() + " to keep?");
-                            controller.chooseTarget(Outcome.Benefit, targetPlaneswalkerToKeep, null, this);
-                            for (Permanent dupPlaneswalker : this.getBattlefield().getActivePermanents(filterPlaneswalker, planeswalker.getControllerId(), this)) {
-                                if (!targetPlaneswalkerToKeep.getTargets().contains(dupPlaneswalker.getId())) {
-                                    movePermanentToGraveyardWithInfo(dupPlaneswalker);
-                                }
-                            }
-                        }
-                        return true;
                     }
                 }
             }

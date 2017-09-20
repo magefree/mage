@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
 public class CurseOfEchoes extends CardImpl {
 
     public CurseOfEchoes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
         this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
@@ -143,7 +143,7 @@ class CurseOfEchoesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         if (spell != null) {
             String chooseMessage = "Copy target spell?  You may choose new targets for the copy.";
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {

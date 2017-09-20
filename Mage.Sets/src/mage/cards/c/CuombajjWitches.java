@@ -62,6 +62,7 @@ public class CuombajjWitches extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
+        //TODO: Make ability properly copiable
         // {T}: Cuombajj Witches deals 1 damage to target creature or player and 1 damage to target creature or player of an opponent's choice.
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to target creature or player and 1 damage to target creature or player of an opponent's choice");

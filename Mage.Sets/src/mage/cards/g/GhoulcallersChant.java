@@ -52,8 +52,7 @@ public class GhoulcallersChant extends CardImpl {
     }
 
     public GhoulcallersChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // Choose one - Return target creature card from your graveyard to your hand
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

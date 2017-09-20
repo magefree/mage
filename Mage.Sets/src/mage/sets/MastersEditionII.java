@@ -69,6 +69,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Adarkar Sentinel", 201, Rarity.COMMON, mage.cards.a.AdarkarSentinel.class));
         cards.add(new SetCardInfo("Aeolipile", 202, Rarity.COMMON, mage.cards.a.Aeolipile.class));
         cards.add(new SetCardInfo("Ambush Party", 115, Rarity.COMMON, mage.cards.a.AmbushParty.class));
+        cards.add(new SetCardInfo("An-Zerrin Ruins", 117, Rarity.RARE, mage.cards.a.AnZerrinRuins.class));
         cards.add(new SetCardInfo("Anarchy", 116, Rarity.RARE, mage.cards.a.Anarchy.class));
         cards.add(new SetCardInfo("Angel of Fury", 2, Rarity.RARE, mage.cards.a.AngelOfFury.class));
         cards.add(new SetCardInfo("Angel of Light", 3, Rarity.UNCOMMON, mage.cards.a.AngelOfLight.class));
@@ -114,6 +115,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Hunter", 157, Rarity.COMMON, ElvishHunter.class));
         cards.add(new SetCardInfo("Elvish Ranger", 158, Rarity.COMMON, mage.cards.e.ElvishRanger.class));
         cards.add(new SetCardInfo("Elvish Spirit Guide", 159, Rarity.UNCOMMON, mage.cards.e.ElvishSpiritGuide.class));
+        cards.add(new SetCardInfo("Energy Storm", 11, Rarity.RARE, mage.cards.e.EnergyStorm.class));
         cards.add(new SetCardInfo("Enervate", 47, Rarity.COMMON, mage.cards.e.Enervate.class));
         cards.add(new SetCardInfo("Errantry", 124, Rarity.COMMON, mage.cards.e.Errantry.class));
         cards.add(new SetCardInfo("Farrel's Mantle", 13, Rarity.UNCOMMON, mage.cards.f.FarrelsMantle.class));

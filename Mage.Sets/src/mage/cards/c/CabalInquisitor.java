@@ -52,11 +52,10 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author cbt33
  */
-
 public class CabalInquisitor extends CardImpl {
 
     public CabalInquisitor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MINION);
 
@@ -82,10 +81,7 @@ public class CabalInquisitor extends CardImpl {
     }
 }
 
-
 class ActivateAsSorceryConditionalActivatedAbility extends ActivatedAbilityImpl {
-
-    private Condition condition;
 
     private static final Effects emptyEffects = new Effects();
 
@@ -95,10 +91,8 @@ class ActivateAsSorceryConditionalActivatedAbility extends ActivatedAbilityImpl 
         timing = TimingRule.SORCERY;
     }
 
-
     public ActivateAsSorceryConditionalActivatedAbility(final ActivateAsSorceryConditionalActivatedAbility ability) {
         super(ability);
-        this.condition = ability.condition;
     }
 
     @Override
@@ -107,14 +101,6 @@ class ActivateAsSorceryConditionalActivatedAbility extends ActivatedAbilityImpl 
             return emptyEffects;
         }
         return super.getEffects(game, effectType);
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (!condition.apply(game, this)) {
-            return false;
-        }
-        return super.canActivate(playerId, game);
     }
 
     @Override

@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -247,7 +246,7 @@ public class ScarsOfMirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Skinrender", 78, Rarity.UNCOMMON, mage.cards.s.Skinrender.class));
         cards.add(new SetCardInfo("Skithiryx, the Blight Dragon", 79, Rarity.MYTHIC, mage.cards.s.SkithiryxTheBlightDragon.class));
         cards.add(new SetCardInfo("Sky-Eel School", 44, Rarity.COMMON, mage.cards.s.SkyEelSchool.class));
-        cards.add(new SetCardInfo("Slice in Twain", 127, Rarity.UNCOMMON, mage.cards.s.SliceinTwain.class));
+        cards.add(new SetCardInfo("Slice in Twain", 127, Rarity.UNCOMMON, mage.cards.s.SliceInTwain.class));
         cards.add(new SetCardInfo("Snapsail Glider", 203, Rarity.COMMON, mage.cards.s.SnapsailGlider.class));
         cards.add(new SetCardInfo("Soliton", 204, Rarity.COMMON, mage.cards.s.Soliton.class));
         cards.add(new SetCardInfo("Soul Parry", 21, Rarity.COMMON, mage.cards.s.SoulParry.class));

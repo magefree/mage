@@ -59,7 +59,7 @@ public class SithLord extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
 
         // Sith Lord enters the battlefield with X +1/+1 counters on it, where X is the total life lost by your opponents this turn.
         this.addAbility(new EntersBattlefieldAbility(new SithLordEffect(), rule));

@@ -49,7 +49,10 @@ public class DeadeyeQuartermaster extends CardImpl {
     private static final FilterCard filter = new FilterCard("an Equipment or Vehicle card");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.EQUIPMENT), new SubtypePredicate(SubType.EQUIPMENT)));
+        filter.add(Predicates.or(
+                new SubtypePredicate(SubType.EQUIPMENT),
+                new SubtypePredicate(SubType.VEHICLE)
+        ));
     }
 
     public DeadeyeQuartermaster(UUID ownerId, CardSetInfo setInfo) {

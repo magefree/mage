@@ -28,6 +28,7 @@
 package mage.cards.f;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -58,6 +59,8 @@ public class FellFlagship extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         this.subtype.add(SubType.VEHICLE);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
         // Pirates you control get +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter)));

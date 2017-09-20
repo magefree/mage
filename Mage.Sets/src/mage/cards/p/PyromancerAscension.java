@@ -127,7 +127,7 @@ class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl {
 class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl {
 
     PyromancerAscensionCopyTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), true);
+        super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(true), true);
     }
 
     PyromancerAscensionCopyTriggeredAbility(final PyromancerAscensionCopyTriggeredAbility ability) {

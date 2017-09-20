@@ -48,7 +48,7 @@ public class BoggartBrute extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
     }
 
     public BoggartBrute(final BoggartBrute card) {

@@ -56,7 +56,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 
 
         // Creatures you control have menace. (They can't be blocked except by two or more creatures.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(MenaceAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)));
     }
 
     public GoblinWarDrums(final GoblinWarDrums card) {

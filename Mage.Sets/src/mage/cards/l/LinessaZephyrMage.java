@@ -74,6 +74,7 @@ public class LinessaZephyrMage extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
+         //TODO: Make ability properly copiable
         // {X}{U}{U}, {tap}: Return target creature with converted mana cost X to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{X}{U}{U}"));
         ability.addCost(new TapSourceCost());

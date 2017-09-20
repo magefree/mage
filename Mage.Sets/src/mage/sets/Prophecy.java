@@ -81,6 +81,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Despoil", 62, Rarity.COMMON, mage.cards.d.Despoil.class));
         cards.add(new SetCardInfo("Devastate", 87, Rarity.COMMON, mage.cards.d.Devastate.class));
         cards.add(new SetCardInfo("Diving Griffin", 6, Rarity.COMMON, mage.cards.d.DivingGriffin.class));
+        cards.add(new SetCardInfo("Dual Nature", 112, Rarity.RARE, mage.cards.d.DualNature.class));
         cards.add(new SetCardInfo("Entangler", 7, Rarity.UNCOMMON, mage.cards.e.Entangler.class));
         cards.add(new SetCardInfo("Excavation", 33, Rarity.UNCOMMON, mage.cards.e.Excavation.class));
         cards.add(new SetCardInfo("Fault Riders", 88, Rarity.COMMON, mage.cards.f.FaultRiders.class));
@@ -122,6 +123,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Quicksilver Wall", 41, Rarity.UNCOMMON, mage.cards.q.QuicksilverWall.class));
         cards.add(new SetCardInfo("Rebel Informer", 75, Rarity.RARE, mage.cards.r.RebelInformer.class));
         cards.add(new SetCardInfo("Rethink", 42, Rarity.COMMON, mage.cards.r.Rethink.class));
+        cards.add(new SetCardInfo("Reveille Squad", 18, Rarity.UNCOMMON, mage.cards.r.ReveilleSquad.class));
         cards.add(new SetCardInfo("Rhystic Circle", 19, Rarity.COMMON, mage.cards.r.RhysticCircle.class));
         cards.add(new SetCardInfo("Rhystic Study", 45, Rarity.COMMON, mage.cards.r.RhysticStudy.class));
         cards.add(new SetCardInfo("Rhystic Tutor", 77, Rarity.RARE, mage.cards.r.RhysticTutor.class));

@@ -33,15 +33,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -64,9 +64,9 @@ public class BishopOfTheBloodstained extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Bishop of the Bloodstained enters the battlefield, target player loses 1 life for each vampire you control.
+        // When Bishop of the Bloodstained enters the battlefield, target opponent loses 1 life for each vampire you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(filter)));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 

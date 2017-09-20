@@ -52,7 +52,7 @@ import mage.players.Player;
 public class VerdantSunsAvatar extends CardImpl {
 
     public VerdantSunsAvatar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
 
         this.subtype.add(SubType.DINOSAUR);
         this.subtype.add(SubType.AVATAR);

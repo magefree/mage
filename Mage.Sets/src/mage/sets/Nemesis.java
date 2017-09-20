@@ -152,6 +152,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Skyshroud Ridgeback", 120, Rarity.COMMON, mage.cards.s.SkyshroudRidgeback.class));
         cards.add(new SetCardInfo("Sneaky Homunculus", 44, Rarity.COMMON, mage.cards.s.SneakyHomunculus.class));
         cards.add(new SetCardInfo("Spineless Thug", 71, Rarity.COMMON, mage.cards.s.SpinelessThug.class));
+        cards.add(new SetCardInfo("Spiritual Asylum", 23, Rarity.RARE, mage.cards.s.SpiritualAsylum.class));
         cards.add(new SetCardInfo("Stampede Driver", 122, Rarity.UNCOMMON, mage.cards.s.StampedeDriver.class));
         cards.add(new SetCardInfo("Stronghold Discipline", 73, Rarity.COMMON, mage.cards.s.StrongholdDiscipline.class));
         cards.add(new SetCardInfo("Stronghold Gambit", 100, Rarity.RARE, mage.cards.s.StrongholdGambit.class));

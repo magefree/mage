@@ -101,7 +101,7 @@ class RamosDragonEngineAddCountersEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (you != null && permanent != null) {
-            Spell spell = game.getStack().getSpell(this.getTargetPointer().getFirst(game, source));
+            Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
             if (spell != null) {
                 int amount = 0;
                 if (spell.getColor(game).isWhite()) {

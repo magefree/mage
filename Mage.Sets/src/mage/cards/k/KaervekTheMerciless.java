@@ -29,7 +29,6 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -51,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class KaervekTheMerciless extends CardImpl {
 
     public KaervekTheMerciless(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
@@ -94,9 +93,9 @@ class KaervekTheMercilessEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject spellCast = game.getObject(getTargetPointer().getFirst(game, source));
-        if (spellCast instanceof Spell) {
-            int cost = ((Spell) spellCast).getConvertedManaCost();
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
+        if (spell != null) {
+            int cost = spell.getConvertedManaCost();
             Player target = game.getPlayer(source.getFirstTarget());
             if (target != null) {
                 target.damage(cost, source.getSourceId(), game, false, true);

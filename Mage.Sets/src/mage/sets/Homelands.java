@@ -73,6 +73,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Ambush", 78, Rarity.COMMON, mage.cards.a.Ambush.class));
         cards.add(new SetCardInfo("Ambush Party", 79, Rarity.COMMON, mage.cards.a.AmbushParty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ambush Party", 80, Rarity.COMMON, mage.cards.a.AmbushParty.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("An-Zerrin Ruins", 87, Rarity.RARE, mage.cards.a.AnZerrinRuins.class));
         cards.add(new SetCardInfo("Anaba Ancestor", 81, Rarity.RARE, mage.cards.a.AnabaAncestor.class));
         cards.add(new SetCardInfo("Anaba Bodyguard", 82, Rarity.COMMON, mage.cards.a.AnabaBodyguard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anaba Bodyguard", 83, Rarity.COMMON, mage.cards.a.AnabaBodyguard.class, NON_FULL_USE_VARIOUS));
@@ -82,6 +83,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("An-Havva Constable", 51, Rarity.RARE, mage.cards.a.AnHavvaConstable.class));
         cards.add(new SetCardInfo("An-Havva Inn", 52, Rarity.UNCOMMON, mage.cards.a.AnHavvaInn.class));
         cards.add(new SetCardInfo("An-Havva Township", 136, Rarity.UNCOMMON, mage.cards.a.AnHavvaTownship.class));
+        cards.add(new SetCardInfo("An-Zerrin Ruins", 87, Rarity.RARE, mage.cards.a.AnZerrinRuins.class));
         cards.add(new SetCardInfo("Aysen Abbey", 137, Rarity.UNCOMMON, mage.cards.a.AysenAbbey.class));
         cards.add(new SetCardInfo("Aysen Bureaucrats", 104, Rarity.COMMON, mage.cards.a.AysenBureaucrats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aysen Bureaucrats", 105, Rarity.COMMON, mage.cards.a.AysenBureaucrats.class, NON_FULL_USE_VARIOUS));

@@ -60,7 +60,7 @@ public class MoonriseIntruder extends CardImpl {
         this.transformable = true;
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Moonrise Intruder.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);

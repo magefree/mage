@@ -59,7 +59,7 @@ public class PrimalWellspring extends CardImpl {
         this.addAbility(ability);
 
         // When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
-        Effect effect = new CopyTargetSpellEffect();
+        Effect effect = new CopyTargetSpellEffect(true);
         effect.setText("copy that spell and you may choose new targets for the copy");
         this.addAbility(new PyrimalWellspringTriggeredAbility(ability.getOriginalId(), effect));
     }
@@ -81,7 +81,7 @@ class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
     String abilityOriginalId;
 
     public PyrimalWellspringTriggeredAbility(UUID abilityOriginalId, Effect effect) {
-        super(Zone.ALL, effect, true);
+        super(Zone.ALL, effect, false);
         this.abilityOriginalId = abilityOriginalId.toString();
     }
 

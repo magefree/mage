@@ -54,8 +54,7 @@ public class SoulConduit extends CardImpl {
         // {6}, {tap}: Two target players exchange life totals.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulConduitEffect(), new GenericManaCost(6));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(2));
         this.addAbility(ability);
     }
 
@@ -87,8 +86,8 @@ class SoulConduitEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player1 = game.getPlayer(source.getFirstTarget());
-        Player player2 = game.getPlayer(source.getTargets().get(1).getFirstTarget());
+        Player player1 = game.getPlayer(source.getTargets().get(0).getTargets().get(0));
+        Player player2 = game.getPlayer(source.getTargets().get(0).getTargets().get(1));
         if (player1 != null && player2 != null) {
             int lifePlayer1 = player1.getLife();
             int lifePlayer2 = player2.getLife();

@@ -48,7 +48,7 @@ public class DerangedWhelp extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
     }
 
     public DerangedWhelp(final DerangedWhelp card) {

@@ -70,7 +70,7 @@ public class FathomFleetCaptain extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
 
         // Whenever Fathom Fleet Captain attacks, if you control another nontoken Pirate, you may pay {2}. If you do, creature a 2/2 black Pirate creature token with menace.
         this.addAbility(new ConditionalTriggeredAbility(

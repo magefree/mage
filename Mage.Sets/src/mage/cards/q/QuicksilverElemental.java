@@ -37,6 +37,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
@@ -89,14 +91,14 @@ public class QuicksilverElemental extends CardImpl {
     }
 }
 
-class QuicksilverElementalEffect extends ContinuousEffectImpl {
+class QuicksilverElementalEffect extends OneShotEffect {
 
-    public QuicksilverElementalEffect() {
-        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+    QuicksilverElementalEffect() {
+        super(Outcome.Benefit);
         staticText = "{this} gains all activated abilities of target creature until end of turn";
     }
 
-    public QuicksilverElementalEffect(final QuicksilverElementalEffect effect) {
+    QuicksilverElementalEffect(final QuicksilverElementalEffect effect) {
         super(effect);
     }
 
@@ -112,12 +114,45 @@ class QuicksilverElementalEffect extends ContinuousEffectImpl {
 
         if (permanent != null && creature != null) {
             for (ActivatedAbility ability : creature.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
-                permanent.addAbility(ability, source.getSourceId(), game);
+                Ability newAbility = ability.copy();
+                newAbility.newOriginalId();
+                game.addEffect(new GainAbilitySourceEffect(newAbility, Duration.EndOfTurn), source);
             }
+            return true;
         }
         return false;
     }
 }
+
+//class QuicksilverElementalEffect extends ContinuousEffectImpl {
+//
+//    public QuicksilverElementalEffect() {
+//        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+//        staticText = "{this} gains all activated abilities of target creature until end of turn";
+//    }
+//
+//    public QuicksilverElementalEffect(final QuicksilverElementalEffect effect) {
+//        super(effect);
+//    }
+//
+//    @Override
+//    public QuicksilverElementalEffect copy() {
+//        return new QuicksilverElementalEffect(this);
+//    }
+//
+//    @Override
+//    public boolean apply(Game game, Ability source) {
+//        Permanent permanent = game.getPermanent(source.getSourceId());
+//        Permanent creature = game.getPermanent(source.getTargets().getFirstTarget());
+//
+//        if (permanent != null && creature != null) {
+//            for (ActivatedAbility ability : creature.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
+//                permanent.addAbility(ability, source.getSourceId(), game);
+//            }
+//        }
+//        return false;
+//    }
+//}
 
 class QuickSilverElementalBlueManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 

@@ -59,6 +59,7 @@ public class MagusOfTheCandelabra extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
+        //TODO: Make ability properly copiable
         // {X}, {T}: Untap X target lands.
         Effect effect = new UntapTargetEffect();
         effect.setText("untap X target lands");

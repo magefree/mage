@@ -70,6 +70,7 @@ public class AlexiZephyrMage extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
+        //TODO: Make ability properly copiable
         // {X}{U}, {tap}, Discard two cards: Return X target creatures to their owners' hands.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{X}{U}"));
         ability.addCost(new TapSourceCost());

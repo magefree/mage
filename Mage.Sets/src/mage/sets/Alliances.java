@@ -78,6 +78,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Fevered Strength", 11, Rarity.COMMON, FeveredStrength.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Floodwater Dam", 161, Rarity.RARE, mage.cards.f.FloodwaterDam.class));
         cards.add(new SetCardInfo("Force of Will", 42, Rarity.UNCOMMON, mage.cards.f.ForceOfWill.class));
+        cards.add(new SetCardInfo("Foresight", 162, Rarity.COMMON, mage.cards.f.Foresight.class));
         cards.add(new SetCardInfo("Gorilla Berserkers", 75, Rarity.COMMON, GorillaBerserkers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gorilla Berserkers", 76, Rarity.COMMON, GorillaBerserkers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gorilla Chieftain", 77, Rarity.COMMON, mage.cards.g.GorillaChieftain.class, NON_FULL_USE_VARIOUS));

@@ -46,7 +46,7 @@ public class SwarmIntelligence extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell, you may copy that spell. You may choose new targets for the copy.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetSpellEffect().setText("you may copy that spell. You may choose new targets for the copy"), new FilterInstantOrSorcerySpell("an instant or sorcery spell"), true, true));
+                new CopyTargetSpellEffect(true).setText("you may copy that spell. You may choose new targets for the copy"), new FilterInstantOrSorcerySpell("an instant or sorcery spell"), true, true));
     }
 
     public SwarmIntelligence(final SwarmIntelligence card) {

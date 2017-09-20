@@ -62,7 +62,7 @@ public class GoblinGloryChaser extends CardImpl {
 
         // As long as Goblin Glory Chaser is renowned, it has menace.
         Effect effect = new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(MenaceAbility.getInstance(), Duration.WhileOnBattlefield),
+                new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
                 RenownedSourceCondition.instance,
                 "As long as {this} is renowned, it has menace");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);

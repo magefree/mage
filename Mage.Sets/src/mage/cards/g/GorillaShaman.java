@@ -62,6 +62,7 @@ public class GorillaShaman extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        //TODO: Make ability properly copiable
         // {X}{X}{1}: Destroy target noncreature artifact with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{1}"));
         ability.addTarget(new TargetPermanent(new FilterArtifactPermanent("noncreature artifact with converted mana cost X")));

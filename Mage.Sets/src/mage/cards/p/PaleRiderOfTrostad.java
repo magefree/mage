@@ -50,7 +50,7 @@ public class PaleRiderOfTrostad extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Skulk
-        this.addAbility(SkulkAbility.getInstance());
+        this.addAbility(new SkulkAbility());
 
         // When Pale Rider of Trostad enters the battlefield, discard a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardControllerEffect(1), false));

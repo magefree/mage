@@ -31,8 +31,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -65,8 +63,6 @@ public class SearchForAzcanta extends CardImpl {
 
         // At the beginning of your upkeep, look at the top card of your library. You may put it into your graveyard. Then if you have seven or more cards in your graveyard, you may transform Search for Azcanta.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SearchForAzcantaLookLibraryEffect(), TargetController.YOU, false);
-        ability.addEffect(new ConditionalOneShotEffect(new TransformSourceEffect(true), new CardsInControllerGraveCondition(7),
-                "Then if you have seven or more cards in your graveyard, you may transform {this}"));
         this.addAbility(ability);
         this.addAbility(new TransformAbility());
     }
@@ -85,7 +81,8 @@ class SearchForAzcantaLookLibraryEffect extends OneShotEffect {
 
     public SearchForAzcantaLookLibraryEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "look at the top card of your library. You may put that card into your graveyard";
+        this.staticText = "look at the top card of your library. You may put that card into your graveyard. "
+                + "Then if you have seven or more cards in your graveyard, you may transform {this}.";
     }
 
     public SearchForAzcantaLookLibraryEffect(final SearchForAzcantaLookLibraryEffect effect) {
@@ -109,9 +106,11 @@ class SearchForAzcantaLookLibraryEffect extends OneShotEffect {
                     cards.add(card);
                     controller.lookAtCards(sourceObject.getIdName(), cards, game);
                     if (controller.chooseUse(Outcome.Neutral, "Do you wish to put the card into your graveyard?", source, game)) {
-                        return controller.moveCards(card, Zone.GRAVEYARD, source, game);
+                        controller.moveCards(card, Zone.GRAVEYARD, source, game);
                     }
-
+                    if (controller.getGraveyard().size() > 6 && controller.chooseUse(Outcome.Neutral, "Transform " + sourceObject.getLogName() + "?", source, game)) {
+                        new TransformSourceEffect(true).apply(game, source);
+                    }
                 }
             }
             return true;

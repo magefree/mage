@@ -54,7 +54,7 @@ public class SweatworksBrawler extends CardImpl {
         addAbility(new ImproviseAbility());
 
         // Menace
-        this.addAbility(MenaceAbility.getInstance());
+        this.addAbility(new MenaceAbility());
     }
 
     public SweatworksBrawler(final SweatworksBrawler card) {
