@@ -195,6 +195,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Merfolk Raiders", 75, Rarity.COMMON, mage.cards.m.MerfolkRaiders.class));
         cards.add(new SetCardInfo("Merfolk Seer", 76, Rarity.COMMON, mage.cards.m.MerfolkSeer.class));
         cards.add(new SetCardInfo("Mind Harness", 78, Rarity.UNCOMMON, mage.cards.m.MindHarness.class));
+        cards.add(new SetCardInfo("Mire Shade", 29, Rarity.UNCOMMON, mage.cards.m.MireShade.class));
         cards.add(new SetCardInfo("Mist Dragon", 79, Rarity.RARE, mage.cards.m.MistDragon.class));
         cards.add(new SetCardInfo("Moss Diamond", 277, Rarity.UNCOMMON, mage.cards.m.MossDiamond.class));
         cards.add(new SetCardInfo("Mountain", 301, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
