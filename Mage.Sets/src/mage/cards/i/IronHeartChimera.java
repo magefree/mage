@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class IronHeartChimera extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Beast creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature you control");
 
     static {
         filter.add(new SubtypePredicate(SubType.CHIMERA));
