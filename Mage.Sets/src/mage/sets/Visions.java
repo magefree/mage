@@ -113,6 +113,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Keeper of Kookus", 85, Rarity.COMMON, mage.cards.k.KeeperOfKookus.class));
         cards.add(new SetCardInfo("King Cheetah", 60, Rarity.COMMON, mage.cards.k.KingCheetah.class));
         cards.add(new SetCardInfo("Knight of Valor", 111, Rarity.COMMON, mage.cards.k.KnightOfValor.class));
+        cards.add(new SetCardInfo("Lead-Belly Chimera", 148, Rarity.UNCOMMON, mage.cards.l.LeadBellyChimera.class));
         cards.add(new SetCardInfo("Lightning Cloud", 87, Rarity.RARE, mage.cards.l.LightningCloud.class));
         cards.add(new SetCardInfo("Longbow Archer", 112, Rarity.UNCOMMON, mage.cards.l.LongbowArcher.class));
         cards.add(new SetCardInfo("Magma Mine", 149, Rarity.UNCOMMON, mage.cards.m.MagmaMine.class));
