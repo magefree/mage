@@ -38,7 +38,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetOpponent;
 import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
@@ -60,7 +59,6 @@ public class ShipwreckLooter extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1, 1, true)),
                 RaidCondition.instance,
                 "<i>Raid</i> - When {this} enters the battlefield,if you attacked with a creature this turn, you may draw a card. If you do, discard a card.");
-        ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
