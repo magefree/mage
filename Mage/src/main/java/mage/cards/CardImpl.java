@@ -371,6 +371,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 ability.getTargets().clear();
                 ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, permanentFilter, false));
                 break;
+            case VERSE_COUNTER_TARGETS:
+                Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
+                if (sourcePermanent != null) {
+                    xValue = sourcePermanent.getCounters(game).getCount(CounterType.VERSE);
+                    permanentFilter = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
+                    ability.getTargets().clear();
+                    ability.addTarget(new TargetPermanent(0, xValue, permanentFilter, false));
+                }
+                break;
             case X_CMC_EQUAL_GY_CARD: //Geth, Lord of the Vault only
                 xValue = ability.getManaCostsToPay().getX();
                 TargetCard oldTarget = (TargetCard) ability.getTargets().get(0);
@@ -398,16 +407,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 oldTargetPermanent = new TargetPermanent(filter);
                 ability.addTarget(oldTargetPermanent);
                 break;
-            case VERSE_COUNTER_TARGETS:
-                Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
-                if (sourcePermanent != null) {
-                    xValue = sourcePermanent.getCounters(game).getCount(CounterType.VERSE);
-                    permanentFilter = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
-                    ability.getTargets().clear();
-                    ability.addTarget(new TargetPermanent(0, xValue, permanentFilter, false));
-                }
-                break;
-            case TREASURE_COUNTER_POWER:
+            case TREASURE_COUNTER_POWER: //Legacy's Allure only
                 sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
                 if (sourcePermanent != null) {
                     xValue = sourcePermanent.getCounters(game).getCount(CounterType.TREASURE);
