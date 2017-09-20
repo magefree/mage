@@ -293,7 +293,6 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Serra's Liturgy", 49, Rarity.RARE, mage.cards.s.SerrasLiturgy.class));
         cards.add(new SetCardInfo("Serra's Sanctum", 325, Rarity.RARE, mage.cards.s.SerrasSanctum.class));
         cards.add(new SetCardInfo("Serra Zealot", 46, Rarity.COMMON, mage.cards.s.SerraZealot.class));
-        cards.add(new SetCardInfo("Serra's Liturgy", 49, Rarity.RARE, mage.cards.s.SerrasLiturgy.class));
         cards.add(new SetCardInfo("Shimmering Barrier", 50, Rarity.UNCOMMON, mage.cards.s.ShimmeringBarrier.class));
         cards.add(new SetCardInfo("Shivan Gorge", 326, Rarity.RARE, mage.cards.s.ShivanGorge.class));
         cards.add(new SetCardInfo("Shivan Hellkite", 214, Rarity.RARE, mage.cards.s.ShivanHellkite.class));

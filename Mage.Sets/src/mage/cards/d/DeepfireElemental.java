@@ -53,7 +53,10 @@ public class DeepfireElemental extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature with converted mana cost X");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE)
+        ));
     }
 
     public DeepfireElemental(UUID ownerId, CardSetInfo setInfo) {
