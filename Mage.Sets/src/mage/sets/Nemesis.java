@@ -64,6 +64,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Ascendant Evincar", 51, Rarity.RARE, mage.cards.a.AscendantEvincar.class));
         cards.add(new SetCardInfo("Avenger en-Dal", 2, Rarity.RARE, mage.cards.a.AvengerEnDal.class));
         cards.add(new SetCardInfo("Battlefield Percher", 52, Rarity.UNCOMMON, mage.cards.b.BattlefieldPercher.class));
+        cards.add(new SetCardInfo("Belbe's Armor", 126, Rarity.UNCOMMON, mage.cards.b.BelbesArmor.class));
         cards.add(new SetCardInfo("Belbe's Percher", 53, Rarity.COMMON, mage.cards.b.BelbesPercher.class));
         cards.add(new SetCardInfo("Belbe's Portal", 127, Rarity.RARE, mage.cards.b.BelbesPortal.class));
         cards.add(new SetCardInfo("Blastoderm", 102, Rarity.COMMON, mage.cards.b.Blastoderm.class));
