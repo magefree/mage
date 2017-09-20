@@ -42,6 +42,7 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -394,6 +395,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
                 oldTargetPermanent = new TargetPermanent(filter);
                 ability.addTarget(oldTargetPermanent);
+                break;
+            case VERSE_COUNTER_TARGETS:
+                Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
+                if (sourcePermanent != null) {
+                    xValue = sourcePermanent.getCounters(game).getCount(CounterType.VERSE);
+                    permanentFilter = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
+                    ability.getTargets().clear();
+                    ability.addTarget(new TargetPermanent(0, xValue, permanentFilter, false));
+                }
                 break;
         }
     }

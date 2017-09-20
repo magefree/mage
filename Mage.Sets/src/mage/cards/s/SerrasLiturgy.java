@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.v;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,46 +46,46 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class VileRequiem extends CardImpl {
+public class SerrasLiturgy extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("up to X target nonblack creatures, where X is the number of verse counters on {this}");
+    private static final FilterPermanent filter = new FilterPermanent("up to X target artifacts and/or enchantments, where X is the number of verse counters on {this}");
 
     static {
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.ENCHANTMENT)
+        ));
     }
 
-    public VileRequiem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
+    public SerrasLiturgy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
-        // At the beginning of your upkeep, you may put a verse counter on Vile Requiem.
+        // At the beginning of your upkeep, you may put a verse counter on Serra's Liturgy.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
 
-        // {1}{B}, Sacrifice Vile Requiem: Destroy up to X target nonblack creatures, where X is the number of verse counters on Vile Requiem. They can't be regenerated.
+        // {W}, Sacrifice Serra's Liturgy: Destroy up to X target artifacts and/or enchantments, where X is the number of verse counters on Serra's Liturgy.
         Effect effect = new DestroyTargetEffect(true);
-        effect.setText("Destroy up to X target nonblack creatures, where X is the number of verse counters on {this}. They can't be regenerated");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
+        effect.setText("Destroy up to X target artifacts and/or enchantments, where X is the number of verse counters on {this}.");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(0, 0, filter, false));
         ability.setTargetAdjustment(TargetAdjustment.VERSE_COUNTER_TARGETS);
         this.addAbility(ability);
-
     }
 
-    public VileRequiem(final VileRequiem card) {
+    public SerrasLiturgy(final SerrasLiturgy card) {
         super(card);
     }
 
     @Override
-    public VileRequiem copy() {
-        return new VileRequiem(this);
+    public SerrasLiturgy copy() {
+        return new SerrasLiturgy(this);
     }
 }
