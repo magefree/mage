@@ -131,6 +131,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Soldevi Sage", 52, Rarity.COMMON, SoldeviSage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldier of Fortune", 117, Rarity.UNCOMMON, mage.cards.s.SoldierOfFortune.class));
         cards.add(new SetCardInfo("Sol Grail", 173, Rarity.UNCOMMON, mage.cards.s.SolGrail.class));
+        cards.add(new SetCardInfo("Stench of Decay", 27, Rarity.COMMON, mage.cards.s.StenchOfDecay.class));
         cards.add(new SetCardInfo("Storm Cauldron", 179, Rarity.RARE, mage.cards.s.StormCauldron.class));
         cards.add(new SetCardInfo("Storm Crow", 54, Rarity.COMMON, mage.cards.s.StormCrow.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm Crow", 55, Rarity.COMMON, mage.cards.s.StormCrow.class, NON_FULL_USE_VARIOUS));
