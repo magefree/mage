@@ -143,6 +143,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Thawing Glaciers", 189, Rarity.RARE, mage.cards.t.ThawingGlaciers.class));
         cards.add(new SetCardInfo("Thought Lash", 58, Rarity.RARE, mage.cards.t.ThoughtLash.class));
         cards.add(new SetCardInfo("Tornado", 86, Rarity.RARE, mage.cards.t.Tornado.class));
+        cards.add(new SetCardInfo("Unlikely Alliance", 153, Rarity.UNCOMMON, mage.cards.u.UnlikelyAlliance.class));
         cards.add(new SetCardInfo("Varchild's War-Riders", 122, Rarity.RARE, mage.cards.v.VarchildsWarRiders.class));
         cards.add(new SetCardInfo("Viscerid Armor", 60, Rarity.COMMON, mage.cards.v.VisceridArmor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Viscerid Armor", 61, Rarity.COMMON, mage.cards.v.VisceridArmor.class, NON_FULL_USE_VARIOUS));
