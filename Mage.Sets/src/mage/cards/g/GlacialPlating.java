@@ -25,58 +25,67 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.g;
 
 import java.util.UUID;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FearAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.counters.CounterType;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class SleepersRobe extends CardImpl {
+public class GlacialPlating extends CardImpl {
 
-    public SleepersRobe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}");
+    public GlacialPlating(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
+
+        this.addSuperType(SuperType.SNOW);
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature has fear.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
+        // Cumulative upkeep {snow}
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{S}")));
 
-        // Whenever enchanted creature deals combat damage to an opponent, you may draw a card.
-        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "enchanted creature", true, false, true, TargetController.OPPONENT));
+        // Enchanted creature gets +3/+3 for each age counter on Glacial Plating.
+        DynamicValue boostValue = new MultipliedValue(new CountersSourceCount(CounterType.AGE), 3);
+        Effect effect = new BoostEnchantedEffect(boostValue, boostValue, Duration.WhileOnBattlefield);
+        effect.setText("Enchanted creature gets +3/+3 for each age counter on {this}");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SleepersRobe(final SleepersRobe card) {
+    public GlacialPlating(final GlacialPlating card) {
         super(card);
     }
 
     @Override
-    public SleepersRobe copy() {
-        return new SleepersRobe(this);
+    public GlacialPlating copy() {
+        return new GlacialPlating(this);
     }
 }

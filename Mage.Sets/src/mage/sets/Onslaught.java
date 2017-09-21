@@ -128,6 +128,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Festering Goblin", 148, Rarity.COMMON, mage.cards.f.FesteringGoblin.class));
         cards.add(new SetCardInfo("Fever Charm", 202, Rarity.COMMON, mage.cards.f.FeverCharm.class));
         cards.add(new SetCardInfo("Flamestick Courier", 203, Rarity.UNCOMMON, mage.cards.f.FlamestickCourier.class));
+        cards.add(new SetCardInfo("Fleeting Aven", 83, Rarity.UNCOMMON, mage.cards.f.FleetingAven.class));
         cards.add(new SetCardInfo("Flooded Strand", 316, Rarity.RARE, mage.cards.f.FloodedStrand.class, new CardGraphicInfo(new ObjectColor("UW"), null, false)));
         cards.add(new SetCardInfo("Foothill Guide", 29, Rarity.COMMON, mage.cards.f.FoothillGuide.class));
         cards.add(new SetCardInfo("Forest", 347, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));

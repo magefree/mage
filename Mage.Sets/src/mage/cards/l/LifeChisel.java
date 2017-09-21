@@ -25,75 +25,87 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.l;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.condition.common.IsStepCondition;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class DivinerSpirit extends CardImpl {
+public class LifeChisel extends CardImpl {
 
-    public DivinerSpirit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.subtype.add(SubType.SPIRIT);
+    public LifeChisel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
-
-        // Whenever Diviner Spirit deals combat damage to a player, you and that player each draw that many cards.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DivinerSpiritEffect(), false, true));
+        // Sacrifice a creature: You gain life equal to the sacrificed creature's toughness. Activate this ability only during your upkeep.
+        Ability ability = new ConditionalActivatedAbility(
+                Zone.BATTLEFIELD,
+                new LifeChiselEffect(),
+                new SacrificeTargetCost(
+                        new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), true)
+                ),
+                new IsStepCondition(PhaseStep.UPKEEP),
+                null
+        );
+        this.addAbility(ability);
     }
 
-    public DivinerSpirit(final DivinerSpirit card) {
+    public LifeChisel(final LifeChisel card) {
         super(card);
     }
 
     @Override
-    public DivinerSpirit copy() {
-        return new DivinerSpirit(this);
+    public LifeChisel copy() {
+        return new LifeChisel(this);
     }
 }
 
-class DivinerSpiritEffect extends OneShotEffect {
+class LifeChiselEffect extends OneShotEffect {
 
-    public DivinerSpiritEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "you and that player each draw that many cards";
+    public LifeChiselEffect() {
+        super(Outcome.GainLife);
+        this.staticText = "You gain life equal to the sacrificed creature's toughness";
     }
 
-    public DivinerSpiritEffect(final DivinerSpiritEffect effect) {
+    public LifeChiselEffect(final LifeChiselEffect effect) {
         super(effect);
     }
 
     @Override
-    public DivinerSpiritEffect copy() {
-        return new DivinerSpiritEffect(this);
+    public LifeChiselEffect copy() {
+        return new LifeChiselEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player sourceController = game.getPlayer(source.getControllerId());
-        Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (sourceController != null && damagedPlayer != null) {
-            int amount = (Integer) getValue("damage");
-            if (amount > 0) {
-                sourceController.drawCards(amount, game);
-                damagedPlayer.drawCards(amount, game);
-                return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (Cost cost : source.getCosts()) {
+                if (cost instanceof SacrificeTargetCost) {
+                    int amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
+                    if (amount > 0) {
+                        controller.gainLife(amount, game);
+                    }
+                }
             }
+            return true;
         }
         return false;
     }

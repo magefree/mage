@@ -25,62 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.u;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.predicate.permanent.BlockingPredicate;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
  * @author TheElk801
  */
-public class BrassTalonChimera extends CardImpl {
+public class UnlikelyAlliance extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonattacking, nonblocking creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CHIMERA));
+        filter.add(Predicates.not(new AttackingPredicate()));
+        filter.add(Predicates.not(new BlockingPredicate()));
     }
 
-    public BrassTalonChimera(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+    public UnlikelyAlliance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
-        this.subtype.add(SubType.CHIMERA);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
-
-        // Sacrifice Brass-Talon Chimera: Put a +2/+2 counter on target Chimera creature. It gains first strike.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield));
+        // {1}{W}: Target nonattacking, nonblocking creature gets +0/+2 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
-    public BrassTalonChimera(final BrassTalonChimera card) {
+    public UnlikelyAlliance(final UnlikelyAlliance card) {
         super(card);
     }
 
     @Override
-    public BrassTalonChimera copy() {
-        return new BrassTalonChimera(this);
+    public UnlikelyAlliance copy() {
+        return new UnlikelyAlliance(this);
     }
 }

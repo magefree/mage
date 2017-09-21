@@ -105,6 +105,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Gathan Raiders", 99, Rarity.COMMON, mage.cards.g.GathanRaiders.class));
         cards.add(new SetCardInfo("Ghostfire", 115, Rarity.COMMON, mage.cards.g.Ghostfire.class));
         cards.add(new SetCardInfo("Gibbering Descent", 66, Rarity.RARE, mage.cards.g.GibberingDescent.class));
+        cards.add(new SetCardInfo("Gift of Granite", 7, Rarity.COMMON, mage.cards.g.GiftOfGranite.class));
         cards.add(new SetCardInfo("Glittering Wish", 156, Rarity.RARE, mage.cards.g.GlitteringWish.class));
         cards.add(new SetCardInfo("Goldmeadow Lookout", 22, Rarity.UNCOMMON, mage.cards.g.GoldmeadowLookout.class));
         cards.add(new SetCardInfo("Graven Cairns", 175, Rarity.RARE, mage.cards.g.GravenCairns.class));

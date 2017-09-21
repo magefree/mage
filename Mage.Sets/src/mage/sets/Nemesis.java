@@ -64,6 +64,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Ascendant Evincar", 51, Rarity.RARE, mage.cards.a.AscendantEvincar.class));
         cards.add(new SetCardInfo("Avenger en-Dal", 2, Rarity.RARE, mage.cards.a.AvengerEnDal.class));
         cards.add(new SetCardInfo("Battlefield Percher", 52, Rarity.UNCOMMON, mage.cards.b.BattlefieldPercher.class));
+        cards.add(new SetCardInfo("Belbe's Armor", 126, Rarity.UNCOMMON, mage.cards.b.BelbesArmor.class));
         cards.add(new SetCardInfo("Belbe's Percher", 53, Rarity.COMMON, mage.cards.b.BelbesPercher.class));
         cards.add(new SetCardInfo("Belbe's Portal", 127, Rarity.RARE, mage.cards.b.BelbesPortal.class));
         cards.add(new SetCardInfo("Blastoderm", 102, Rarity.COMMON, mage.cards.b.Blastoderm.class));
@@ -150,6 +151,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Skyshroud Cutter", 118, Rarity.COMMON, mage.cards.s.SkyshroudCutter.class));
         cards.add(new SetCardInfo("Skyshroud Poacher", 119, Rarity.RARE, mage.cards.s.SkyshroudPoacher.class));
         cards.add(new SetCardInfo("Skyshroud Ridgeback", 120, Rarity.COMMON, mage.cards.s.SkyshroudRidgeback.class));
+        cards.add(new SetCardInfo("Skyshroud Sentinel", 121, Rarity.COMMON, mage.cards.s.SkyshroudSentinel.class));
         cards.add(new SetCardInfo("Sneaky Homunculus", 44, Rarity.COMMON, mage.cards.s.SneakyHomunculus.class));
         cards.add(new SetCardInfo("Spineless Thug", 71, Rarity.COMMON, mage.cards.s.SpinelessThug.class));
         cards.add(new SetCardInfo("Spiritual Asylum", 23, Rarity.RARE, mage.cards.s.SpiritualAsylum.class));

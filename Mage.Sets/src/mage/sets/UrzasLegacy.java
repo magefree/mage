@@ -120,8 +120,10 @@ public class UrzasLegacy extends ExpansionSet {
         cards.add(new SetCardInfo("Miscalculation", 36, Rarity.COMMON, mage.cards.m.Miscalculation.class));
         cards.add(new SetCardInfo("Molten Hydra", 85, Rarity.RARE, mage.cards.m.MoltenHydra.class));
         cards.add(new SetCardInfo("Mother of Runes", 14, Rarity.UNCOMMON, mage.cards.m.MotherOfRunes.class));
+        cards.add(new SetCardInfo("Multani's Presence", 109, Rarity.UNCOMMON, mage.cards.m.MultanisPresence.class));
         cards.add(new SetCardInfo("Multani, Maro-Sorcerer", 107, Rarity.RARE, mage.cards.m.MultaniMaroSorcerer.class));
         cards.add(new SetCardInfo("Multani's Acolyte", 108, Rarity.COMMON, mage.cards.m.MultanisAcolyte.class));
+        cards.add(new SetCardInfo("Multani's Presence", 109, Rarity.UNCOMMON, mage.cards.m.MultanisPresence.class));
         cards.add(new SetCardInfo("No Mercy", 56, Rarity.RARE, mage.cards.n.NoMercy.class));
         cards.add(new SetCardInfo("Opal Champion", 16, Rarity.COMMON, mage.cards.o.OpalChampion.class));
         cards.add(new SetCardInfo("Opportunity", 37, Rarity.UNCOMMON, mage.cards.o.Opportunity.class));

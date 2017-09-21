@@ -25,62 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.s;
 
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import java.util.UUID;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
  * @author TheElk801
  */
-public class BrassTalonChimera extends CardImpl {
+public class StenchOfDecay extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonartifact creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CHIMERA));
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public BrassTalonChimera(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+    public StenchOfDecay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
 
-        this.subtype.add(SubType.CHIMERA);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
-
-        // Sacrifice Brass-Talon Chimera: Put a +2/+2 counter on target Chimera creature. It gains first strike.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        // Nonartifact creatures get -1/-1 until end of turn.
+        this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false));
     }
 
-    public BrassTalonChimera(final BrassTalonChimera card) {
+    public StenchOfDecay(final StenchOfDecay card) {
         super(card);
     }
 
     @Override
-    public BrassTalonChimera copy() {
-        return new BrassTalonChimera(this);
+    public StenchOfDecay copy() {
+        return new StenchOfDecay(this);
     }
 }
