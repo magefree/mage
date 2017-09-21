@@ -25,41 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SanctuaryTriggeredAbility;
-import mage.abilities.effects.common.DrawDiscardControllerEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author TheElk801
  */
-public class CetaSanctuary extends CardImpl {
+public class RakaSanctuary extends CardImpl {
 
-    public CetaSanctuary(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
+    public RakaSanctuary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
-        // At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
+        // At the beginning of your upkeep, if you control a white or blue permanent, Raka Sanctuary deals 1 damage to target creature. If you control a white permanent and a blue permanent, Raka Sanctuary deals 3 damage to that creature instead.
         Ability ability = new SanctuaryTriggeredAbility(
-                new DrawDiscardControllerEffect(1, 1), new DrawDiscardControllerEffect(2, 1), ObjectColor.GREEN, ObjectColor.RED,
-                "At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. "
-                + "If you control a red permanent and a green permanent, instead draw two cards, then discard a card."
+                new DamageTargetEffect(1), new DamageTargetEffect(3), ObjectColor.WHITE, ObjectColor.BLUE,
+                "At the beginning of your upkeep, if you control a white or blue permanent, Raka Sanctuary deals 1 damage to target creature. "
+                + "If you control a white permanent and a blue permanent, Raka Sanctuary deals 3 damage to that creature instead."
         );
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public CetaSanctuary(final CetaSanctuary card) {
+    public RakaSanctuary(final RakaSanctuary card) {
         super(card);
     }
 
     @Override
-    public CetaSanctuary copy() {
-        return new CetaSanctuary(this);
+    public RakaSanctuary copy() {
+        return new RakaSanctuary(this);
     }
 }

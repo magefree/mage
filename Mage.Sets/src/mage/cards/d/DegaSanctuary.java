@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SanctuaryTriggeredAbility;
-import mage.abilities.effects.common.DrawDiscardControllerEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -40,26 +40,26 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class CetaSanctuary extends CardImpl {
+public class DegaSanctuary extends CardImpl {
 
-    public CetaSanctuary(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
+    public DegaSanctuary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
-        // At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
+        // At the beginning of your upkeep, if you control a black or red permanent, you gain 2 life. If you control a black permanent and a red permanent, you gain 4 life instead.
         Ability ability = new SanctuaryTriggeredAbility(
-                new DrawDiscardControllerEffect(1, 1), new DrawDiscardControllerEffect(2, 1), ObjectColor.GREEN, ObjectColor.RED,
-                "At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. "
-                + "If you control a red permanent and a green permanent, instead draw two cards, then discard a card."
+                new GainLifeEffect(2), new GainLifeEffect(4), ObjectColor.BLACK, ObjectColor.RED,
+                "At the beginning of your upkeep, if you control a black or red permanent, you gain 2 life. "
+                + "If you control a black permanent and a red permanent, you gain 4 life instead."
         );
         this.addAbility(ability);
     }
 
-    public CetaSanctuary(final CetaSanctuary card) {
+    public DegaSanctuary(final DegaSanctuary card) {
         super(card);
     }
 
     @Override
-    public CetaSanctuary copy() {
-        return new CetaSanctuary(this);
+    public DegaSanctuary copy() {
+        return new DegaSanctuary(this);
     }
 }
