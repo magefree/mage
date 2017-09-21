@@ -35,6 +35,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.OrCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -65,12 +66,7 @@ public class TidalControl extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
 
         // Pay 2 life or {2}: Counter target red or green spell. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new PayLifeCost(2));
-        ability.addTarget(new TargetSpell(filter));
-        ability.setMayActivate(TargetController.ANY);
-        ability.addEffect(new InfoEffect("Any player may activate this ability"));
-        this.addAbility(ability);
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{2}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new OrCost(new PayLifeCost(2), new ManaCostsImpl("{2}"), "pay 2 life or pay {2}"));
         ability.addTarget(new TargetSpell(filter));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
