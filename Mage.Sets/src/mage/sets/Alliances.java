@@ -106,6 +106,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Lim-Dul's Vault", 192, Rarity.UNCOMMON, mage.cards.l.LimDulsVault.class));
         cards.add(new SetCardInfo("Lord of Tresserhorn", 193, Rarity.RARE, mage.cards.l.LordOfTresserhorn.class));
         cards.add(new SetCardInfo("Mystic Compass", 166, Rarity.UNCOMMON, mage.cards.m.MysticCompass.class));
+        cards.add(new SetCardInfo("Nature's Wrath", 82, Rarity.RARE, mage.cards.n.NaturesWrath.class));
         cards.add(new SetCardInfo("Phelddagrif", 196, Rarity.RARE, mage.cards.p.Phelddagrif.class));
         cards.add(new SetCardInfo("Phyrexian Devourer", 167, Rarity.RARE, mage.cards.p.PhyrexianDevourer.class));
         cards.add(new SetCardInfo("Phyrexian War Beast", 169, Rarity.COMMON, PhyrexianWarBeast.class, NON_FULL_USE_VARIOUS));
