@@ -128,6 +128,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Hazezon Tamar", 270, Rarity.RARE, mage.cards.h.HazezonTamar.class));
         cards.add(new SetCardInfo("Headless Horseman", 16, Rarity.COMMON, mage.cards.h.HeadlessHorseman.class));
         cards.add(new SetCardInfo("Heaven's Gate", 188, Rarity.UNCOMMON, mage.cards.h.HeavensGate.class));
+        cards.add(new SetCardInfo("Hell Swarm", 17, Rarity.COMMON, mage.cards.h.HellSwarm.class));
         cards.add(new SetCardInfo("Hellfire", 18, Rarity.RARE, mage.cards.h.Hellfire.class));
         cards.add(new SetCardInfo("Hell's Caretaker", 19, Rarity.RARE, mage.cards.h.HellsCaretaker.class));
         cards.add(new SetCardInfo("Holy Day", 189, Rarity.COMMON, mage.cards.h.HolyDay.class));
