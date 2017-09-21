@@ -195,6 +195,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Merfolk Raiders", 75, Rarity.COMMON, mage.cards.m.MerfolkRaiders.class));
         cards.add(new SetCardInfo("Merfolk Seer", 76, Rarity.COMMON, mage.cards.m.MerfolkSeer.class));
         cards.add(new SetCardInfo("Mind Harness", 78, Rarity.UNCOMMON, mage.cards.m.MindHarness.class));
+        cards.add(new SetCardInfo("Mire Shade", 29, Rarity.UNCOMMON, mage.cards.m.MireShade.class));
         cards.add(new SetCardInfo("Mist Dragon", 79, Rarity.RARE, mage.cards.m.MistDragon.class));
         cards.add(new SetCardInfo("Moss Diamond", 277, Rarity.UNCOMMON, mage.cards.m.MossDiamond.class));
         cards.add(new SetCardInfo("Mountain", 301, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -254,6 +255,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Shadow Guildmage", 38, Rarity.COMMON, mage.cards.s.ShadowGuildmage.class));
         cards.add(new SetCardInfo("Shallow Grave", 39, Rarity.RARE, mage.cards.s.ShallowGrave.class));
         cards.add(new SetCardInfo("Shaper Guildmage", 91, Rarity.COMMON, mage.cards.s.ShaperGuildmage.class));
+        cards.add(new SetCardInfo("Shauku's Minion", 343, Rarity.UNCOMMON, mage.cards.s.ShaukusMinion.class));
         cards.add(new SetCardInfo("Shauku, Endbringer", 40, Rarity.RARE, mage.cards.s.ShaukuEndbringer.class));
         cards.add(new SetCardInfo("Shimmer", 92, Rarity.RARE, mage.cards.s.Shimmer.class));
         cards.add(new SetCardInfo("Sidar Jabari", 243, Rarity.RARE, mage.cards.s.SidarJabari.class));
@@ -266,6 +268,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Stalking Tiger", 141, Rarity.COMMON, mage.cards.s.StalkingTiger.class));
         cards.add(new SetCardInfo("Stone Rain", 194, Rarity.COMMON, mage.cards.s.StoneRain.class));
         cards.add(new SetCardInfo("Stupor", 45, Rarity.UNCOMMON, mage.cards.s.Stupor.class));
+        cards.add(new SetCardInfo("Subterranean Spirit", 195, Rarity.RARE, mage.cards.s.SubterraneanSpirit.class));
         cards.add(new SetCardInfo("Sunweb", 246, Rarity.RARE, mage.cards.s.Sunweb.class));
         cards.add(new SetCardInfo("Suq'Ata Firewalker", 94, Rarity.UNCOMMON, mage.cards.s.SuqAtaFirewalker.class));
         cards.add(new SetCardInfo("Swamp", 311, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));

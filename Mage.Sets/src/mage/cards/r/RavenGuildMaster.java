@@ -29,7 +29,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileCardsFromTopOfLibraryTargetEffect;
 import mage.abilities.keyword.MorphAbility;
@@ -53,7 +53,7 @@ public class RavenGuildMaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Raven Guild Master deals combat damage to a player, that player exiles the top ten cards of his or her library.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new ExileCardsFromTopOfLibraryTargetEffect(10, "that player"), false, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileCardsFromTopOfLibraryTargetEffect(10, "that player"), false, true));
 
         // Morph {2}{U}{U}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}{U}")));

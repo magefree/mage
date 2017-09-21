@@ -25,62 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author TheElk801
  */
-public class BrassTalonChimera extends CardImpl {
+public class SkyshroudSentinel extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature you control");
+    private static final FilterCard filter = new FilterCard("cards named Skyshroud Sentinel");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CHIMERA));
+        filter.add(new NamePredicate("Skyshroud Sentinel"));
     }
 
-    public BrassTalonChimera(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+    public SkyshroudSentinel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.subtype.add(SubType.CHIMERA);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.subtype.add(SubType.ELF);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
-
-        // Sacrifice Brass-Talon Chimera: Put a +2/+2 counter on target Chimera creature. It gains first strike.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        // When Skyshroud Sentinel enters the battlefield, you may search your library for up to three cards named Skyshroud Sentinel, reveal them, and put them into your hand. If you do, shuffle your library.
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 3, filter);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public BrassTalonChimera(final BrassTalonChimera card) {
+    public SkyshroudSentinel(final SkyshroudSentinel card) {
         super(card);
     }
 
     @Override
-    public BrassTalonChimera copy() {
-        return new BrassTalonChimera(this);
+    public SkyshroudSentinel copy() {
+        return new SkyshroudSentinel(this);
     }
 }

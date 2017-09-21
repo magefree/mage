@@ -25,62 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
  * @author TheElk801
  */
-public class BrassTalonChimera extends CardImpl {
+public class SubterraneanSpirit extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CHIMERA));
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public BrassTalonChimera(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+    public SubterraneanSpirit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 
-        this.subtype.add(SubType.CHIMERA);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.SPIRIT);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
+        // Protection from red
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
 
-        // Sacrifice Brass-Talon Chimera: Put a +2/+2 counter on target Chimera creature. It gains first strike.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        // {tap}: Subterranean Spirit deals 1 damage to each creature without flying.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new TapSourceCost());
+        this.addAbility(ability);
     }
 
-    public BrassTalonChimera(final BrassTalonChimera card) {
+    public SubterraneanSpirit(final SubterraneanSpirit card) {
         super(card);
     }
 
     @Override
-    public BrassTalonChimera copy() {
-        return new BrassTalonChimera(this);
+    public SubterraneanSpirit copy() {
+        return new SubterraneanSpirit(this);
     }
 }
