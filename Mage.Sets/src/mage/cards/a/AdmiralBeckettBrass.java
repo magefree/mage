@@ -65,12 +65,13 @@ import mage.watchers.Watcher;
  */
 public class AdmiralBeckettBrass extends CardImpl {
 
-    private final UUID originalId;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other Pirates you control");
+    private static final FilterNonlandPermanent filter2 = new FilterNonlandPermanent("nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn");
 
     static {
         filter.add(new SubtypePredicate(SubType.PIRATE));
         filter.add(new ControllerPredicate(TargetController.YOU));
+        filter2.add(new ControllerDealtDamageByPiratesPredicate());
     }
 
     public AdmiralBeckettBrass(UUID ownerId, CardSetInfo setInfo) {
@@ -87,25 +88,12 @@ public class AdmiralBeckettBrass extends CardImpl {
 
         // At the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new GainControlTargetEffect(Duration.Custom), TargetController.YOU, false);
-        ability.addTarget(new TargetNonlandPermanent(new FilterNonlandPermanent("nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn")));
-        originalId = ability.getOriginalId();
+        ability.addTarget(new TargetNonlandPermanent(filter2));
         this.addAbility(ability, new DamagedByPiratesWatcher());
     }
 
     public AdmiralBeckettBrass(final AdmiralBeckettBrass card) {
         super(card);
-        this.originalId = card.originalId;
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            ability.getTargets().clear();
-            FilterNonlandPermanent playerFilter = new FilterNonlandPermanent("nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn");
-            playerFilter.add(new ControllerDealtDamageByPiratesPredicate());
-            TargetNonlandPermanent target = new TargetNonlandPermanent(1, 1, playerFilter, true);
-            ability.addTarget(target);
-        }
     }
 
     @Override
