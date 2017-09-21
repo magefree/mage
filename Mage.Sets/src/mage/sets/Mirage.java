@@ -255,6 +255,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Shadow Guildmage", 38, Rarity.COMMON, mage.cards.s.ShadowGuildmage.class));
         cards.add(new SetCardInfo("Shallow Grave", 39, Rarity.RARE, mage.cards.s.ShallowGrave.class));
         cards.add(new SetCardInfo("Shaper Guildmage", 91, Rarity.COMMON, mage.cards.s.ShaperGuildmage.class));
+        cards.add(new SetCardInfo("Shauku's Minion", 343, Rarity.UNCOMMON, mage.cards.s.ShaukusMinion.class));
         cards.add(new SetCardInfo("Shauku, Endbringer", 40, Rarity.RARE, mage.cards.s.ShaukuEndbringer.class));
         cards.add(new SetCardInfo("Shimmer", 92, Rarity.RARE, mage.cards.s.Shimmer.class));
         cards.add(new SetCardInfo("Sidar Jabari", 243, Rarity.RARE, mage.cards.s.SidarJabari.class));
