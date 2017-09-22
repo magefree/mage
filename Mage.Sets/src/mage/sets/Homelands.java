@@ -89,6 +89,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Aysen Bureaucrats", 105, Rarity.COMMON, mage.cards.a.AysenBureaucrats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aysen Crusader", 106, Rarity.RARE, mage.cards.a.AysenCrusader.class));
         cards.add(new SetCardInfo("Aysen Highway", 107, Rarity.RARE, mage.cards.a.AysenHighway.class));
+        cards.add(new SetCardInfo("Baki's Curse", 27, Rarity.RARE, mage.cards.b.BakisCurse.class));
         cards.add(new SetCardInfo("Baron Sengir", 1, Rarity.RARE, mage.cards.b.BaronSengir.class));
         cards.add(new SetCardInfo("Black Carriage", 2, Rarity.RARE, mage.cards.b.BlackCarriage.class));
         cards.add(new SetCardInfo("Carapace", 55, Rarity.COMMON, mage.cards.c.Carapace.class));
