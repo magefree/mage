@@ -79,7 +79,7 @@ class ThrashingMudspawnEffect extends OneShotEffect {
 
     public ThrashingMudspawnEffect() {
         super(Outcome.Damage);
-        this.staticText = "it deals that much damage to target creature or player";
+        this.staticText = "you lose that much life";
     }
 
     public ThrashingMudspawnEffect(final ThrashingMudspawnEffect effect) {
