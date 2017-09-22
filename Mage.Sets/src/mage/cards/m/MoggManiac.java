@@ -49,13 +49,13 @@ import mage.target.common.TargetOpponent;
 public class MoggManiac extends CardImpl {
 
     public MoggManiac(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Whenever Mogg Maniac is dealt damage, it deals that much damage to target opponent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new MoggManiacDealDamageEffect(), false);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new MoggManiacDealDamageEffect(), false, false, true);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
