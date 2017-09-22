@@ -24,6 +24,7 @@ public class Apocalypse extends ExpansionSet {
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Aether Mutation", 91, Rarity.UNCOMMON, mage.cards.a.AetherMutation.class));
         cards.add(new SetCardInfo("Ana Disciple", 73, Rarity.COMMON, mage.cards.a.AnaDisciple.class));
+        cards.add(new SetCardInfo("Ana Sanctuary", 74, Rarity.UNCOMMON, mage.cards.a.AnaSanctuary.class));
         cards.add(new SetCardInfo("Anavolver", 75, Rarity.RARE, mage.cards.a.Anavolver.class));
         cards.add(new SetCardInfo("Angelfire Crusader", 1, Rarity.COMMON, mage.cards.a.AngelfireCrusader.class));
         cards.add(new SetCardInfo("Battlefield Forge", 139, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
@@ -45,6 +46,7 @@ public class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Death Grasp", 95, Rarity.RARE, mage.cards.d.DeathGrasp.class));
         cards.add(new SetCardInfo("Death Mutation", 96, Rarity.UNCOMMON, mage.cards.d.DeathMutation.class));
         cards.add(new SetCardInfo("Dega Disciple", 4, Rarity.COMMON, mage.cards.d.DegaDisciple.class));
+        cards.add(new SetCardInfo("Dega Sanctuary", 5, Rarity.UNCOMMON, mage.cards.d.DegaSanctuary.class));
         cards.add(new SetCardInfo("Degavolver", 6, Rarity.RARE, mage.cards.d.Degavolver.class));
         cards.add(new SetCardInfo("Desolation Angel", 38, Rarity.RARE, mage.cards.d.DesolationAngel.class));
         cards.add(new SetCardInfo("Desolation Giant", 59, Rarity.RARE, mage.cards.d.DesolationGiant.class));
@@ -99,6 +101,7 @@ public class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Mournful Zombie", 43, Rarity.COMMON, mage.cards.m.MournfulZombie.class));
         cards.add(new SetCardInfo("Mystic Snake", 112, Rarity.RARE, mage.cards.m.MysticSnake.class));
         cards.add(new SetCardInfo("Necra Disciple", 44, Rarity.COMMON, mage.cards.n.NecraDisciple.class));
+        cards.add(new SetCardInfo("Necra Sanctuary", 45, Rarity.UNCOMMON, mage.cards.n.NecraSanctuary.class));
         cards.add(new SetCardInfo("Necravolver", 46, Rarity.RARE, mage.cards.n.Necravolver.class));
         cards.add(new SetCardInfo("Night // Day", 131, Rarity.UNCOMMON, mage.cards.n.NightDay.class));
         cards.add(new SetCardInfo("Order // Chaos", 132, Rarity.UNCOMMON, mage.cards.o.OrderChaos.class));
@@ -118,6 +121,7 @@ public class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Quagmire Druid", 51, Rarity.COMMON, mage.cards.q.QuagmireDruid.class));
         cards.add(new SetCardInfo("Quicksilver Dagger", 118, Rarity.COMMON, mage.cards.q.QuicksilverDagger.class));
         cards.add(new SetCardInfo("Raka Disciple", 66, Rarity.COMMON, mage.cards.r.RakaDisciple.class));
+        cards.add(new SetCardInfo("Raka Sanctuary", 67, Rarity.UNCOMMON, mage.cards.r.RakaSanctuary.class));
         cards.add(new SetCardInfo("Rakavolver", 68, Rarity.RARE, mage.cards.r.Rakavolver.class));
         cards.add(new SetCardInfo("Razorfin Hunter", 119, Rarity.COMMON, mage.cards.r.RazorfinHunter.class));
         cards.add(new SetCardInfo("Reef Shaman", 29, Rarity.COMMON, mage.cards.r.ReefShaman.class));
