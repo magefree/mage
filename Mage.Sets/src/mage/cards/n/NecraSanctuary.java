@@ -25,52 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.n;
 
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import java.util.UUID;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.SanctuaryTriggeredAbility;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
-
-import java.util.UUID;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author lopho
+ * @author TheElk801
  */
-public class PlagueRats extends CardImpl {
+public class NecraSanctuary extends CardImpl {
 
-    private static final FilterCreaturePermanent plagueRatsFilter = new FilterCreaturePermanent("creatures named Plague Rats on the battlefield");
-    static {
-        plagueRatsFilter.add(new NamePredicate("Plague Rats"));
-    }
-    
-    public PlagueRats(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add(SubType.RAT);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
+    public NecraSanctuary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
-        // Plague Rats's power and toughness are each equal to the number of creatures named Plague Rats on the battlefield.
-        DynamicValue amount = new PermanentsOnBattlefieldCount(plagueRatsFilter);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(amount, Duration.EndOfGame)));
+        // At the beginning of your upkeep, if you control a green or white permanent, target player loses 1 life. If you control a green permanent and a white permanent, that player loses 3 life instead.
+        Ability ability = new SanctuaryTriggeredAbility(
+                new LoseLifeTargetEffect(1), new LoseLifeTargetEffect(3), ObjectColor.GREEN, ObjectColor.WHITE,
+                "At the beginning of your upkeep, if you control a green or white permanent, "
+                + "target player loses 1 life. If you control a green permanent and a white permanent, that player loses 3 life instead."
+        );
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
-    public PlagueRats(final PlagueRats card) {
+    public NecraSanctuary(final NecraSanctuary card) {
         super(card);
     }
 
     @Override
-    public PlagueRats copy() {
-        return new PlagueRats(this);
+    public NecraSanctuary copy() {
+        return new NecraSanctuary(this);
     }
 }

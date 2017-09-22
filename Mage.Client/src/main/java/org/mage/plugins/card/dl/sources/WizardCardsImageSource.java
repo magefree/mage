@@ -257,16 +257,16 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("E01");
         supportedSets.add("HOU");
         supportedSets.add("C17");
-//        supportedSets.add("XLN");
-//        supportedSets.add("DDT");
-//        supportedSets.add("IMA");
-//        supportedSets.add("E02");
-//        supportedSets.add("V17");
-//        supportedSets.add("UST");
-//        supportedSets.add("RIX");
-//        supportedSets.add("A25");
-//        supportedSets.add("DOM");
-//        supportedSets.add("M19");
+        supportedSets.add("XLN");
+//        supportedSets.add("DDT"); // Duel Decks: Merfolk vs. Goblins
+//        supportedSets.add("IMA"); // Iconic Msters
+//        supportedSets.add("E02"); // Explorers of Ixalan
+//        supportedSets.add("V17"); // From the Vault: Transform
+//        supportedSets.add("UST"); // Unstable
+//        supportedSets.add("RIX"); // Rivals of Ixalan
+//        supportedSets.add("A25"); // Masters 25
+//        supportedSets.add("DOM"); // Dominaria
+//        supportedSets.add("M19"); // Core 2019
 
         sets = new HashMap<>();
         setsAliases = new HashMap<>();

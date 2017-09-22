@@ -25,41 +25,77 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SanctuaryTriggeredAbility;
-import mage.abilities.effects.common.DrawDiscardControllerEffect;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author TheElk801
  */
-public class CetaSanctuary extends CardImpl {
+public class AnaSanctuary extends CardImpl {
 
-    public CetaSanctuary(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
+    public AnaSanctuary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
-        // At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
+        // At the beginning of your upkeep, if you control a blue or black permanent, target creature gets +1/+1 until end of turn. If you control a blue permanent and a black permanent, that creature gets +5/+5 until end of turn instead.
         Ability ability = new SanctuaryTriggeredAbility(
-                new DrawDiscardControllerEffect(1, 1), new DrawDiscardControllerEffect(2, 1), ObjectColor.GREEN, ObjectColor.RED,
-                "At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. "
-                + "If you control a red permanent and a green permanent, instead draw two cards, then discard a card."
+                new BoostEffect(1), new BoostEffect(5), ObjectColor.BLACK, ObjectColor.BLUE,
+                "At the beginning of your upkeep, if you control a blue or black permanent, "
+                + "target creature gets +1/+1 until end of turn. If you control a blue permanent and a black permanent, that creature gets +5/+5 until end of turn instead."
         );
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public CetaSanctuary(final CetaSanctuary card) {
+    public AnaSanctuary(final AnaSanctuary card) {
         super(card);
     }
 
     @Override
-    public CetaSanctuary copy() {
-        return new CetaSanctuary(this);
+    public AnaSanctuary copy() {
+        return new AnaSanctuary(this);
+    }
+}
+
+class BoostEffect extends OneShotEffect {
+
+    private final int amount;
+
+    BoostEffect(int amount) {
+        super(Outcome.Benefit);
+        this.amount = amount;
+    }
+
+    BoostEffect(final BoostEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+    }
+
+    @Override
+    public BoostEffect copy() {
+        return new BoostEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        ContinuousEffect effect = new BoostTargetEffect(amount, amount, Duration.EndOfTurn);
+        effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+        game.addEffect(effect, source);
+        return true;
     }
 }

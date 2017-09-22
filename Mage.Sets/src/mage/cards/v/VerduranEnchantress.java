@@ -27,7 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -38,13 +37,15 @@ import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
+import java.util.UUID;
+
 /**
  *
  * @author Plopman
  */
 public class VerduranEnchantress extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an Enchantment spell");
+    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

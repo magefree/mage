@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
@@ -38,13 +37,15 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
+import java.util.UUID;
+
 /**
  *
  * @author cbt33, North (Karma)
  */
 public class BraidsCabalMinion extends CardImpl {
 
-    static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
+    static final FilterPermanent filter = new FilterPermanent("an artifact, creature, or land");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),

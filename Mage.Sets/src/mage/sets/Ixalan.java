@@ -27,7 +27,7 @@ public class Ixalan extends ExpansionSet {
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;
-        this.numBoosterCommon = 11;
+        this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;

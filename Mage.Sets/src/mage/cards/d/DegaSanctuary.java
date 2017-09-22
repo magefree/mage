@@ -25,52 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.d;
 
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import java.util.UUID;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.SanctuaryTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
-
-import java.util.UUID;
 
 /**
  *
- * @author lopho
+ * @author TheElk801
  */
-public class PlagueRats extends CardImpl {
+public class DegaSanctuary extends CardImpl {
 
-    private static final FilterCreaturePermanent plagueRatsFilter = new FilterCreaturePermanent("creatures named Plague Rats on the battlefield");
-    static {
-        plagueRatsFilter.add(new NamePredicate("Plague Rats"));
-    }
-    
-    public PlagueRats(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add(SubType.RAT);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
+    public DegaSanctuary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
-        // Plague Rats's power and toughness are each equal to the number of creatures named Plague Rats on the battlefield.
-        DynamicValue amount = new PermanentsOnBattlefieldCount(plagueRatsFilter);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(amount, Duration.EndOfGame)));
+        // At the beginning of your upkeep, if you control a black or red permanent, you gain 2 life. If you control a black permanent and a red permanent, you gain 4 life instead.
+        Ability ability = new SanctuaryTriggeredAbility(
+                new GainLifeEffect(2), new GainLifeEffect(4), ObjectColor.BLACK, ObjectColor.RED,
+                "At the beginning of your upkeep, if you control a black or red permanent, you gain 2 life. "
+                + "If you control a black permanent and a red permanent, you gain 4 life instead."
+        );
+        this.addAbility(ability);
     }
 
-    public PlagueRats(final PlagueRats card) {
+    public DegaSanctuary(final DegaSanctuary card) {
         super(card);
     }
 
     @Override
-    public PlagueRats copy() {
-        return new PlagueRats(this);
+    public DegaSanctuary copy() {
+        return new DegaSanctuary(this);
     }
 }

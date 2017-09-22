@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -43,13 +42,15 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
  */
 public class SurvivalOfTheFittest extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("creature card");
+    private static final FilterCard filter = new FilterCard("a creature card");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));

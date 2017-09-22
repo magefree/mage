@@ -108,7 +108,7 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
                 && event.getSourceId().equals(getSourceId())
                 && !event.getSourceId().equals(event.getTargetId())) {
             Permanent sacrificed = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (sacrificed != null && sacrificed.hasSubtype(SubType.FAERIE, game)) {
+            if (sacrificed != null) {// no longer checks for Faerie as LKI isn't always accurate, can't think of how that could matter anyway - TheElk801
                 return true;
             }
         }
