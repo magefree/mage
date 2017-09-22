@@ -27,7 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
@@ -35,7 +34,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public class OrcishOriflamme extends CardImpl {
 
 
         // Attacking creatures you control get +1/+0.
-        BoostControlledEffect boostEffect = new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature(), false);
+        BoostControlledEffect boostEffect = new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_ATTACKING_CREATURES, false);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect));
     }
 

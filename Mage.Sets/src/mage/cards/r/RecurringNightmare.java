@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
@@ -42,13 +41,15 @@ import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
  */
 public class RecurringNightmare extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card in your graveyard");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("creature");
 
     public RecurringNightmare(UUID ownerId, CardSetInfo setInfo) {

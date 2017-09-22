@@ -27,7 +27,6 @@
  */
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
@@ -43,13 +42,15 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author jonubuu
  */
 public class QuirionRanger extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
 
     static {
         filter.add(new SubtypePredicate(SubType.FOREST));

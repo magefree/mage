@@ -27,8 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -48,6 +46,9 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  *
@@ -120,7 +121,7 @@ class KatabaticWindsRuleModifyingEffect extends ContinuousRuleModifyingEffectImp
 
     public KatabaticWindsRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = ", and their activated abilities with {tap} in their costs can't be activated";
+        staticText = ", and their activated abilities with {T} in their costs can't be activated";
     }
 
     public KatabaticWindsRuleModifyingEffect(final KatabaticWindsRuleModifyingEffect effect) {

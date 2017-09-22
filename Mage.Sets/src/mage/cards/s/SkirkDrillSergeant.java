@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -49,13 +48,15 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
  */
 public class SkirkDrillSergeant extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Goblin");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("or another Goblin");
 
     static {
         filter.add(new SubtypePredicate(SubType.GOBLIN));
