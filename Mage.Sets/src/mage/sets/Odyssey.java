@@ -153,6 +153,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Earth Rift", 189, Rarity.COMMON, mage.cards.e.EarthRift.class));
         cards.add(new SetCardInfo("Elephant Ambush", 240, Rarity.COMMON, mage.cards.e.ElephantAmbush.class));
         cards.add(new SetCardInfo("Ember Beast", 190, Rarity.COMMON, mage.cards.e.EmberBeast.class));
+        cards.add(new SetCardInfo("Embolden", 22, Rarity.COMMON, mage.cards.e.Embolden.class));
         cards.add(new SetCardInfo("Engulfing Flames", 191, Rarity.UNCOMMON, mage.cards.e.EngulfingFlames.class));
         cards.add(new SetCardInfo("Entomb", 132, Rarity.RARE, mage.cards.e.Entomb.class));
         cards.add(new SetCardInfo("Epicenter", 192, Rarity.RARE, mage.cards.e.Epicenter.class));
