@@ -30,6 +30,7 @@ package mage.cards.o;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,10 +39,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandCard;
+import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -94,8 +95,8 @@ class OldGrowthDryadsEffect extends OneShotEffect {
         Set<Player> playersThatSearched = new HashSet<>(1);
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent != null && opponent.chooseUse(Outcome.PutCreatureInPlay, "Search your library for a creature card and put it onto the battlefield?", source, game)) {
-                TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
+            if (opponent != null && opponent.chooseUse(Outcome.PutLandInPlay, "Search your library for a basic land card and put it onto the battlefield tapped?", source, game)) {
+                TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
                 if (opponent.searchLibrary(target, game)) {
                     Card targetCard = opponent.getLibrary().getCard(target.getFirstTarget(), game);
                     if (targetCard != null) {
