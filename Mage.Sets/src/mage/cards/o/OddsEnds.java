@@ -27,7 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
@@ -38,11 +37,12 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 public class OddsEnds extends SplitCard {
 
@@ -56,7 +56,7 @@ public class OddsEnds extends SplitCard {
 
         // Ends
         // Target player sacrifices two attacking creatures.
-        getRightHalfCard().getSpellAbility().addEffect(new SacrificeEffect(new FilterAttackingCreature(), 2, "Target player"));
+        getRightHalfCard().getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_ATTACKING_CREATURES, 2, "Target player"));
         getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 
     }
