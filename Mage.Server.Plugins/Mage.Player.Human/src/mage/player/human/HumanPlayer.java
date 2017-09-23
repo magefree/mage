@@ -727,7 +727,10 @@ public class HumanPlayer extends PlayerImpl {
                             // It's end of turn phase
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
-                                    && !controllingPlayer.getUserData().getUserSkipPrioritySteps().isStopOnAllEndPhases())) {
+                                    && !controllingPlayer
+                                            .getUserData()
+                                            .getUserSkipPrioritySteps()
+                                            .isStopOnAllEndPhases())) {
                                 skippedAtLeastOnce = true;
                                 if (passWithManaPoolCheck(game)) {
                                     return false;
@@ -1060,7 +1063,9 @@ public class HumanPlayer extends PlayerImpl {
         while (!abort) {
             if (passedAllTurns
                     || passedUntilEndStepBeforeMyTurn
-                    || (!getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction()
+                    || (!getControllingPlayersUserData(game)
+                            .getUserSkipPrioritySteps()
+                            .isStopOnDeclareAttackersDuringSkipAction()
                     && (passedTurn
                     || passedTurnSkipStack
                     || passedUntilEndOfTurn
