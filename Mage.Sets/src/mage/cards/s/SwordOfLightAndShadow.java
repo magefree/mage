@@ -62,14 +62,16 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class SwordOfLightAndShadow extends CardImpl {
 
     public SwordOfLightAndShadow(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2 and has protection from white and from black.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.WHITE, ObjectColor.BLACK), AttachmentType.EQUIPMENT)));
         // Whenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.
-        this.addAbility(new SwordOfLightAndShadowAbility());
+        Ability ability = new SwordOfLightAndShadowAbility();
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, new FilterCreatureCard("creature card from your graveyard")));
+        this.addAbility(ability);
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
@@ -81,22 +83,6 @@ public class SwordOfLightAndShadow extends CardImpl {
     @Override
     public SwordOfLightAndShadow copy() {
         return new SwordOfLightAndShadow(this);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-
-        if (ability instanceof SwordOfLightAndShadowAbility) {
-            Player controller = game.getPlayer(ability.getControllerId());
-            if (controller != null) {
-                // Target may only be added if possible target exists. Else the gain life effect won't trigger, because there is no valid target for the
-                // return to hand ability
-                if (controller.getGraveyard().count(new FilterCreatureCard(), ability.getSourceId(), ability.getControllerId(), game) > 0) {
-                    ability.addTarget(new TargetCardInYourGraveyard(0, 1, new FilterCreatureCard("creature card from your graveyard")));
-                }
-            }
-        }
-
     }
 }
 

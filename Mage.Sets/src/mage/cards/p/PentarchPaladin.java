@@ -29,7 +29,6 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,23 +43,21 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.constants.TargetAdjustment;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class PentarchPaladin extends CardImpl {
-    
-    private final UUID originalId;
+
     FilterPermanent filter = new FilterPermanent("permanent of the chosen color.");
 
     public PentarchPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{W}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(3);
@@ -71,32 +68,17 @@ public class PentarchPaladin extends CardImpl {
 
         // As Pentarch Paladin enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
-        
+
         // {W}{W}, {tap}: Destroy target permanent of the chosen color.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
-        originalId = ability.getOriginalId();
+        ability.setTargetAdjustment(TargetAdjustment.CHOSEN_COLOR);
         this.addAbility(ability);
-        
-    }
-    
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ObjectColor color = (ObjectColor) game.getState().getValue(ability.getSourceId() + "_color");
-        if (ability.getOriginalId().equals(originalId)
-                && color != null) {
-            ability.getTargets().clear();
-            FilterPermanent filter = new FilterPermanent("permanent of the chosen color.");
-            filter.add(new ColorPredicate(color));
-            TargetPermanent target = new TargetPermanent(filter);
-            ability.addTarget(target);
-        }
     }
 
     public PentarchPaladin(final PentarchPaladin card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override

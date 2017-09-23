@@ -42,9 +42,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
 
@@ -53,44 +51,25 @@ import mage.target.common.TargetCardInHand;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class AlexiZephyrMage extends CardImpl {
-    
-    private final UUID originalId;
-    
-    private static final FilterPermanent filter = new FilterPermanent("Target creatures");
-    
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
 
     public AlexiZephyrMage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        //TODO: Make ability properly copiable
         // {X}{U}, {tap}, Discard two cards: Return X target creatures to their owners' hands.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{X}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
-        this.addAbility(ability);        
-        
-        originalId = ability.getOriginalId();
-    }
-    
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {          
-            ability.getTargets().clear();
-            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter));  
-        }
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.addAbility(ability);
     }
 
     public AlexiZephyrMage(final AlexiZephyrMage card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override

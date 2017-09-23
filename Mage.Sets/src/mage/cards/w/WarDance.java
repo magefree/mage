@@ -25,60 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.w;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetAdjustment;
+import mage.constants.Duration;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
+import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class DeepfireElemental extends CardImpl {
+public class WarDance extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature with converted mana cost X");
+    public WarDance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)
-        ));
-    }
+        // At the beginning of your upkeep, you may put a verse counter on War Dance.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
 
-    public DeepfireElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
-        this.subtype.add(SubType.ELEMENTAL);
-
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // {X}{X}{1}: Destroy target artifact or creature with converted mana cost X.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{1}"));
-        ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_PERM);
+        // Sacrifice War Dance: Target creature gets +X/+X until end of turn, where X is the number of verse counters on War Dance.
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new BoostTargetEffect(
+                        new CountersSourceCount(CounterType.VERSE),
+                        new CountersSourceCount(CounterType.VERSE),
+                        Duration.EndOfTurn
+                ),
+                new SacrificeSourceCost()
+        );
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public DeepfireElemental(final DeepfireElemental card) {
+    public WarDance(final WarDance card) {
         super(card);
     }
 
     @Override
-    public DeepfireElemental copy() {
-        return new DeepfireElemental(this);
+    public WarDance copy() {
+        return new WarDance(this);
     }
 }
