@@ -171,6 +171,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Minion of Leshrac", 104, Rarity.RARE, mage.cards.m.MinionOfLeshrac.class));
         cards.add(new SetCardInfo("Mudslide", 136, Rarity.RARE, mage.cards.m.Mudslide.class));
         cards.add(new SetCardInfo("Narwhal", 57, Rarity.UNCOMMON, mage.cards.n.Narwhal.class));
+        cards.add(new SetCardInfo("Nature's Wrath", 172, Rarity.RARE, mage.cards.n.NaturesWrath.class));
         cards.add(new SetCardInfo("Necrite", 106, Rarity.COMMON, Necrite.class));
         cards.add(new SetCardInfo("Necropotence", 107, Rarity.RARE, mage.cards.n.Necropotence.class));
         cards.add(new SetCardInfo("Night Soil", 173, Rarity.UNCOMMON, NightSoil.class));
@@ -194,6 +195,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Reinforcements", 28, Rarity.COMMON, mage.cards.r.Reinforcements.class));
         cards.add(new SetCardInfo("Reprisal", 29, Rarity.COMMON, mage.cards.r.Reprisal.class));
         cards.add(new SetCardInfo("Righteous Fury", 30, Rarity.RARE, mage.cards.r.RighteousFury.class));
+        cards.add(new SetCardInfo("Ritual of Subdual", 174, Rarity.RARE, mage.cards.r.RitualOfSubdual.class));
         cards.add(new SetCardInfo("Ritual of the Machine", 109, Rarity.RARE, mage.cards.r.RitualOfTheMachine.class));
         cards.add(new SetCardInfo("Roterothopter", 218, Rarity.COMMON, mage.cards.r.Roterothopter.class));
         cards.add(new SetCardInfo("Royal Trooper", 32, Rarity.COMMON, mage.cards.r.RoyalTrooper.class));
