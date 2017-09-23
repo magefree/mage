@@ -183,6 +183,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Order of the White Shield", 26, Rarity.UNCOMMON, mage.cards.o.OrderOfTheWhiteShield.class));
         cards.add(new SetCardInfo("Panic", 145, Rarity.COMMON, mage.cards.p.Panic.class));
         cards.add(new SetCardInfo("Personal Tutor", 58, Rarity.UNCOMMON, mage.cards.p.PersonalTutor.class));
+        cards.add(new SetCardInfo("Phantasmal Fiend", 108, Rarity.COMMON, mage.cards.p.PhantasmalFiend.class));
         cards.add(new SetCardInfo("Phyrexian Devourer", 216, Rarity.UNCOMMON, mage.cards.p.PhyrexianDevourer.class));
         cards.add(new SetCardInfo("Pillage", 146, Rarity.UNCOMMON, mage.cards.p.Pillage.class));
         cards.add(new SetCardInfo("Portent", 60, Rarity.COMMON, mage.cards.p.Portent.class));
