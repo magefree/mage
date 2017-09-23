@@ -34,13 +34,13 @@ import mage.game.permanent.Permanent;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
 public class DefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input.getObject().getControllerId().equals(game.getCombat().getDefendingPlayerId(input.getSourceId()));
+        return input.getObject().getControllerId().equals(game.getCombat().getDefendingPlayerId(input.getSourceId(), game));
     }
 
     @Override

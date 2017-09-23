@@ -34,13 +34,13 @@ import mage.game.Game;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
 public class DefendingPlayerOwnsCardPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        return input.getObject().getOwnerId().equals(game.getCombat().getDefendingPlayerId(input.getSourceId()));
+        return input.getObject().getOwnerId().equals(game.getCombat().getDefendingPlayerId(input.getSourceId(), game));
     }
 
     @Override
