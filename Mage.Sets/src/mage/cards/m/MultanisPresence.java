@@ -46,7 +46,6 @@ public class MultanisPresence extends CardImpl {
     public MultanisPresence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
-        // If a spell or ability you control would counter a spell, instead exile that spell and you may play that card without paying its mana cost.
         this.addAbility(new SimpleTriggeredAbility(
                                 Zone.BATTLEFIELD, EventType.COUNTERED, new DrawCardSourceControllerEffect(1), "Whenever a spell you've cast is countered, ", true, false));
 
