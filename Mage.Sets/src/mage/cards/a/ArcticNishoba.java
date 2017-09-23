@@ -30,6 +30,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.costs.OrCost;
 import mage.constants.SubType;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -61,7 +62,11 @@ public class ArcticNishoba extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Cumulative upkeep {G} or {W}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{G/W}")));
+        this.addAbility(new CumulativeUpkeepAbility(new OrCost(
+                new ManaCostsImpl("{G}"),
+                new ManaCostsImpl("{W}"),
+                "{G} or {W}"
+        )));
 
         // When Arctic Nishoba dies, you gain 2 life for each age counter on it.
         Effect effect = new GainLifeEffect(new MultipliedValue(new CountersSourceCount(CounterType.AGE), 2));

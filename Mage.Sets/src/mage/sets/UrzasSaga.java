@@ -338,6 +338,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Unworthy Dead", 163, Rarity.COMMON, mage.cards.u.UnworthyDead.class));
         cards.add(new SetCardInfo("Urza's Armor", 313, Rarity.UNCOMMON, mage.cards.u.UrzasArmor.class));
         cards.add(new SetCardInfo("Vampiric Embrace", 164, Rarity.UNCOMMON, mage.cards.v.VampiricEmbrace.class));
+        cards.add(new SetCardInfo("Vebulid", 165, Rarity.RARE, mage.cards.v.Vebulid.class));
         cards.add(new SetCardInfo("Vernal Bloom", 281, Rarity.RARE, mage.cards.v.VernalBloom.class));
         cards.add(new SetCardInfo("Viashino Outrider", 223, Rarity.COMMON, mage.cards.v.ViashinoOutrider.class));
         cards.add(new SetCardInfo("Viashino Runner", 224, Rarity.COMMON, mage.cards.v.ViashinoRunner.class));

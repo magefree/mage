@@ -25,53 +25,82 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.j;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.costs.OrCost;
+import mage.abilities.Ability;
+import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.CumulativeUpkeepAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
-import mage.game.permanent.token.BirdToken;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author TheElk801
  */
-public class JotunOwlKeeper extends CardImpl {
+public class ThrashingMudspawn extends CardImpl {
 
-    public JotunOwlKeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public ThrashingMudspawn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
 
-        this.subtype.add(SubType.GIANT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.subtype.add(SubType.BEAST);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        // Cumulative upkeep {W} or {U}
-        this.addAbility(new CumulativeUpkeepAbility(new OrCost(
-                new ManaCostsImpl("{W}"),
-                new ManaCostsImpl("{U}"),
-                "{W} or {U}"
-        )));
+        // Whenever Thrashing Mudspawn is dealt damage, you lose that much life.
+        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new ThrashingMudspawnEffect(), false);
+        this.addAbility(ability);
 
-        // When J&ouml;tun Owl Keeper dies, put a 1/1 white Bird creature token with flying onto the battlefield for each age counter on it.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new BirdToken(), new CountersSourceCount(CounterType.AGE))));
+        // Morph {1}{B}{B}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{B}{B}")));
+
     }
 
-    public JotunOwlKeeper(final JotunOwlKeeper card) {
+    public ThrashingMudspawn(final ThrashingMudspawn card) {
         super(card);
     }
 
     @Override
-    public JotunOwlKeeper copy() {
-        return new JotunOwlKeeper(this);
+    public ThrashingMudspawn copy() {
+        return new ThrashingMudspawn(this);
+    }
+}
+
+class ThrashingMudspawnEffect extends OneShotEffect {
+
+    public ThrashingMudspawnEffect() {
+        super(Outcome.Damage);
+        this.staticText = "you lose that much life";
+    }
+
+    public ThrashingMudspawnEffect(final ThrashingMudspawnEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ThrashingMudspawnEffect copy() {
+        return new ThrashingMudspawnEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int amount = (Integer) getValue("damage");
+        if (amount > 0) {
+            Player player = game.getPlayer(source.getControllerId());
+            if (player != null) {
+                player.loseLife(amount, game, false);
+                return true;
+            }
+        }
+        return false;
     }
 }

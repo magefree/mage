@@ -294,6 +294,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Pradesh Gypsies", 149, Rarity.COMMON, mage.cards.p.PradeshGypsies.class));
         cards.add(new SetCardInfo("Primal Clay", 360, Rarity.RARE, mage.cards.p.PrimalClay.class));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 94, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));
+        cards.add(new SetCardInfo("Psionic Entity", 95, Rarity.RARE, mage.cards.p.PsionicEntity.class));
         cards.add(new SetCardInfo("Psychic Venom", 96, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
         cards.add(new SetCardInfo("Purelace", 293, Rarity.RARE, mage.cards.p.Purelace.class));
         cards.add(new SetCardInfo("Pyrotechnics", 235, Rarity.UNCOMMON, mage.cards.p.Pyrotechnics.class));

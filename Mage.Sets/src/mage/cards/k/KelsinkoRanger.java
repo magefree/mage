@@ -25,53 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.j;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.costs.OrCost;
-import mage.constants.SubType;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.CumulativeUpkeepAbility;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
-import mage.game.permanent.token.BirdToken;
+import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author TheElk801
  */
-public class JotunOwlKeeper extends CardImpl {
+public class KelsinkoRanger extends CardImpl {
 
-    public JotunOwlKeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 
-        this.subtype.add(SubType.GIANT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Cumulative upkeep {W} or {U}
-        this.addAbility(new CumulativeUpkeepAbility(new OrCost(
-                new ManaCostsImpl("{W}"),
-                new ManaCostsImpl("{U}"),
-                "{W} or {U}"
-        )));
-
-        // When J&ouml;tun Owl Keeper dies, put a 1/1 white Bird creature token with flying onto the battlefield for each age counter on it.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new BirdToken(), new CountersSourceCount(CounterType.AGE))));
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public JotunOwlKeeper(final JotunOwlKeeper card) {
+    public KelsinkoRanger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
+
+        this.subtype.add(SubType.HUMAN);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {1}{W}: Target green creature gains first strike until end of turn.
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
+                new ManaCostsImpl("{1}{W}")
+        );
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public KelsinkoRanger(final KelsinkoRanger card) {
         super(card);
     }
 
     @Override
-    public JotunOwlKeeper copy() {
-        return new JotunOwlKeeper(this);
+    public KelsinkoRanger copy() {
+        return new KelsinkoRanger(this);
     }
 }

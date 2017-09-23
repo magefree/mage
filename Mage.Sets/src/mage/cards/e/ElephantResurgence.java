@@ -25,75 +25,72 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.e;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.token.ElephantResurgenceToken;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class ShinkaGatekeeper extends CardImpl {
+public class ElephantResurgence extends CardImpl {
 
-    public ShinkaGatekeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.subtype.add(SubType.OGRE);
-        this.subtype.add(SubType.WARRIOR);
+    public ElephantResurgence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
-
-        // Whenever Shinka Gatekeeper is dealt damage, it deals that much damage to you.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new ShinkaGatekeeperDealDamageEffect(), false, false, true));
+        // Each player creates a green Elephant creature token. Those creatures have "This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard."
+        this.getSpellAbility().addEffect(new ElephantResurgenceEffect());
     }
 
-    public ShinkaGatekeeper(final ShinkaGatekeeper card) {
+    public ElephantResurgence(final ElephantResurgence card) {
         super(card);
     }
 
     @Override
-    public ShinkaGatekeeper copy() {
-        return new ShinkaGatekeeper(this);
+    public ElephantResurgence copy() {
+        return new ElephantResurgence(this);
     }
 }
 
-class ShinkaGatekeeperDealDamageEffect extends OneShotEffect {
+class ElephantResurgenceEffect extends OneShotEffect {
 
-    public ShinkaGatekeeperDealDamageEffect() {
-        super(Outcome.Damage);
-        this.staticText = "it deals that much damage to you";
+    public ElephantResurgenceEffect() {
+        super(Outcome.Detriment);
+        this.staticText = "Each player creates a green Elephant creature token. Those creatures have "
+                + "\"This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard.\"";
     }
 
-    public ShinkaGatekeeperDealDamageEffect(final ShinkaGatekeeperDealDamageEffect effect) {
+    public ElephantResurgenceEffect(final ElephantResurgenceEffect effect) {
         super(effect);
     }
 
     @Override
-    public ShinkaGatekeeperDealDamageEffect copy() {
-        return new ShinkaGatekeeperDealDamageEffect(this);
+    public ElephantResurgenceEffect copy() {
+        return new ElephantResurgenceEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        if (amount > 0) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                player.damage(amount, source.getSourceId(), game, false, true);
-                return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Effect effect = new CreateTokenTargetEffect(new ElephantResurgenceToken(), 1);
+                effect.setTargetPointer(new FixedTarget(playerId));
+                effect.apply(game, source);
             }
+            return true;
         }
         return false;
     }

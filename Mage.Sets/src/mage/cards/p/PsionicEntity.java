@@ -25,53 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.j;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.costs.OrCost;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageSelfEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.SubType;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
-import mage.game.permanent.token.BirdToken;
+import mage.constants.Zone;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author TheElk801
  */
-public class JotunOwlKeeper extends CardImpl {
+public class PsionicEntity extends CardImpl {
 
-    public JotunOwlKeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public PsionicEntity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
 
-        this.subtype.add(SubType.GIANT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.subtype.add(SubType.ILLUSION);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Cumulative upkeep {W} or {U}
-        this.addAbility(new CumulativeUpkeepAbility(new OrCost(
-                new ManaCostsImpl("{W}"),
-                new ManaCostsImpl("{U}"),
-                "{W} or {U}"
-        )));
-
-        // When J&ouml;tun Owl Keeper dies, put a 1/1 white Bird creature token with flying onto the battlefield for each age counter on it.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new BirdToken(), new CountersSourceCount(CounterType.AGE))));
+        // {tap}: Psionic Entity deals 2 damage to target creature or player and 3 damage to itself.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        ability.addEffect(new DamageSelfEffect(3).setText("and 3 damage to itself"));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
-    public JotunOwlKeeper(final JotunOwlKeeper card) {
+    public PsionicEntity(final PsionicEntity card) {
         super(card);
     }
 
     @Override
-    public JotunOwlKeeper copy() {
-        return new JotunOwlKeeper(this);
+    public PsionicEntity copy() {
+        return new PsionicEntity(this);
     }
 }

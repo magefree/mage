@@ -51,7 +51,7 @@ public class AcrobaticManeuver extends CardImpl {
         Effect effect = new ExileTargetForSourceEffect();
         effect.setApplyEffectsAfter();
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true));
+        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

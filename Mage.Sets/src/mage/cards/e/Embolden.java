@@ -25,53 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.j;
+package mage.cards.e;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.costs.OrCost;
-import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.CumulativeUpkeepAbility;
+import mage.abilities.effects.common.PreventDamageToTargetMultiAmountEffect;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
-import mage.game.permanent.token.BirdToken;
+import mage.constants.Duration;
+import mage.constants.TimingRule;
+import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
  *
  * @author TheElk801
  */
-public class JotunOwlKeeper extends CardImpl {
+public class Embolden extends CardImpl {
 
-    public JotunOwlKeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public Embolden(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
-        this.subtype.add(SubType.GIANT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        // Prevent the next 4 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
+        this.getSpellAbility().addEffect(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 4));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(4));
 
-        // Cumulative upkeep {W} or {U}
-        this.addAbility(new CumulativeUpkeepAbility(new OrCost(
-                new ManaCostsImpl("{W}"),
-                new ManaCostsImpl("{U}"),
-                "{W} or {U}"
-        )));
+        // Flashback {1}{W}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{W}"), TimingRule.INSTANT));
 
-        // When J&ouml;tun Owl Keeper dies, put a 1/1 white Bird creature token with flying onto the battlefield for each age counter on it.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new BirdToken(), new CountersSourceCount(CounterType.AGE))));
     }
 
-    public JotunOwlKeeper(final JotunOwlKeeper card) {
+    public Embolden(final Embolden card) {
         super(card);
     }
 
     @Override
-    public JotunOwlKeeper copy() {
-        return new JotunOwlKeeper(this);
+    public Embolden copy() {
+        return new Embolden(this);
     }
 }

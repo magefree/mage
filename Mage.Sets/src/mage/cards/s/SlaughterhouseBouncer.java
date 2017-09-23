@@ -25,53 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.j;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.costs.OrCost;
+import mage.abilities.condition.common.HellbentCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.constants.SubType;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.counters.CounterType;
-import mage.game.permanent.token.BirdToken;
+import mage.constants.Duration;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author TheElk801
  */
-public class JotunOwlKeeper extends CardImpl {
+public class SlaughterhouseBouncer extends CardImpl {
 
-    public JotunOwlKeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public SlaughterhouseBouncer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
 
-        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Cumulative upkeep {W} or {U}
-        this.addAbility(new CumulativeUpkeepAbility(new OrCost(
-                new ManaCostsImpl("{W}"),
-                new ManaCostsImpl("{U}"),
-                "{W} or {U}"
-        )));
-
-        // When J&ouml;tun Owl Keeper dies, put a 1/1 white Bird creature token with flying onto the battlefield for each age counter on it.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new BirdToken(), new CountersSourceCount(CounterType.AGE))));
+        // Hellbent - When Slaughterhouse Bouncer dies, if you have no cards in hand, target creature gets -3/-3 until end of turn.
+        Ability ability = new ConditionalTriggeredAbility(
+                new DiesTriggeredAbility(new BoostTargetEffect(-3, -3, Duration.EndOfTurn)),
+                HellbentCondition.instance,
+                "When {this} dies, if you have no cards in hand, target creature gets -3/-3 until end of turn."
+        );
+        ability.setAbilityWord(AbilityWord.HELLBENT);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public JotunOwlKeeper(final JotunOwlKeeper card) {
+    public SlaughterhouseBouncer(final SlaughterhouseBouncer card) {
         super(card);
     }
 
     @Override
-    public JotunOwlKeeper copy() {
-        return new JotunOwlKeeper(this);
+    public SlaughterhouseBouncer copy() {
+        return new SlaughterhouseBouncer(this);
     }
 }
