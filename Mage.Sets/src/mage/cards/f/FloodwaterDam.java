@@ -38,43 +38,29 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author fireshoes
  */
 public class FloodwaterDam extends CardImpl {
-    
-    private final UUID originalId;
 
     public FloodwaterDam(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        //TODO: Make ability properly copiable
         // {X}{X}{1}, {tap}: Tap X target lands.
         Effect effect = new TapTargetEffect();
         effect.setText("tap X target lands");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}{X}{1}"));
         ability.addCost(new TapSourceCost());
-        originalId = ability.getOriginalId();
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
         this.addAbility(ability);
-    }
-    
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)){
-            int xValue = ability.getManaCostsToPay().getX();
-            ability.getTargets().clear();
-            ability.addTarget(new TargetLandPermanent(xValue, xValue, new FilterLandPermanent(), false));
-        }
     }
 
     public FloodwaterDam(final FloodwaterDam card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override

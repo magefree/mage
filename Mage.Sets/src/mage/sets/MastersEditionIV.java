@@ -224,6 +224,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Sandstorm", 164, Rarity.COMMON, mage.cards.s.Sandstorm.class));
         cards.add(new SetCardInfo("Savannah", 250, Rarity.RARE, mage.cards.s.Savannah.class));
         cards.add(new SetCardInfo("Savannah Lions", 24, Rarity.UNCOMMON, mage.cards.s.SavannahLions.class));
+        cards.add(new SetCardInfo("Scarwood Bandits", 165, Rarity.RARE, mage.cards.s.ScarwoodBandits.class));
         cards.add(new SetCardInfo("Scavenger Folk", 166, Rarity.COMMON, mage.cards.s.ScavengerFolk.class));
         cards.add(new SetCardInfo("Scavenging Ghoul", 95, Rarity.UNCOMMON, mage.cards.s.ScavengingGhoul.class));
         cards.add(new SetCardInfo("Scrubland", 251, Rarity.RARE, mage.cards.s.Scrubland.class));

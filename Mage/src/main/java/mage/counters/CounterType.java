@@ -122,6 +122,7 @@ public enum CounterType {
     TIME("time"),
     TOWER("tower"),
     TRAP("trap"),
+    TREASURE("treasure"),
     UNITY("unity"),
     VELOCITY("velocity"),
     VERSE("verse"),

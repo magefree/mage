@@ -74,6 +74,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     private UUID controllerId;
     private String name;
     private String expansionSetCode;
+    private TargetAdjustment targetAdjustment = TargetAdjustment.NONE;
 
     public StackAbility(Ability ability, UUID controllerId) {
         this.ability = ability;
@@ -86,6 +87,7 @@ public class StackAbility extends StackObjImpl implements Ability {
         this.controllerId = stackAbility.controllerId;
         this.name = stackAbility.name;
         this.expansionSetCode = stackAbility.expansionSetCode;
+        this.targetAdjustment = stackAbility.targetAdjustment;
     }
 
     @Override
@@ -537,7 +539,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public int getSourceObjectZoneChangeCounter() {
-        throw new UnsupportedOperationException("Not supported.");
+        return ability.getSourceObjectZoneChangeCounter();
     }
 
     @Override
@@ -612,4 +614,13 @@ public class StackAbility extends StackObjImpl implements Ability {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void setTargetAdjustment(TargetAdjustment targetAdjustment) {
+        this.targetAdjustment = targetAdjustment;
+    }
+
+    @Override
+    public TargetAdjustment getTargetAdjustment() {
+        return targetAdjustment;
+    }
 }

@@ -25,60 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.t;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.costs.OrCost;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetAdjustment;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author LevelX2
+ * @author L_J
  */
-public class DeepfireElemental extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature with converted mana cost X");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)
-        ));
+public class TidalControl extends CardImpl {
+    private static final FilterSpell filter = new FilterSpell("red or green spell");
+    static{
+        filter.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.GREEN)));
     }
 
-    public DeepfireElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
-        this.subtype.add(SubType.ELEMENTAL);
+    public TidalControl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
 
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        // Cumulative upkeep-Pay {2}.
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
 
-        // {X}{X}{1}: Destroy target artifact or creature with converted mana cost X.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{1}"));
-        ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_PERM);
+        // Pay 2 life or {2}: Counter target red or green spell. Any player may activate this ability.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new OrCost(new PayLifeCost(2), new ManaCostsImpl("{2}"), "pay 2 life or pay {2}"));
+        ability.addTarget(new TargetSpell(filter));
+        ability.setMayActivate(TargetController.ANY);
+        ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);
     }
 
-    public DeepfireElemental(final DeepfireElemental card) {
+    public TidalControl(final TidalControl card) {
         super(card);
     }
 
     @Override
-    public DeepfireElemental copy() {
-        return new DeepfireElemental(this);
+    public TidalControl copy() {
+        return new TidalControl(this);
     }
 }

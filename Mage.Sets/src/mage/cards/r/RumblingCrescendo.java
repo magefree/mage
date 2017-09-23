@@ -25,60 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.TargetAdjustment;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class DeepfireElemental extends CardImpl {
+public class RumblingCrescendo extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature with converted mana cost X");
+    private static final FilterPermanent filter = new FilterPermanent("up to X target lands, where X is the number of verse counters on {this}");
 
     static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)
-        ));
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
-    public DeepfireElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
-        this.subtype.add(SubType.ELEMENTAL);
+    public RumblingCrescendo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
 
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        // At the beginning of your upkeep, you may put a verse counter on Rumbling Crescendo.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
 
-        // {X}{X}{1}: Destroy target artifact or creature with converted mana cost X.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{1}"));
-        ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_PERM);
+        // {R}, Sacrifice Rumbling Crescendo: Destroy up to X target lands, where X is the number of verse counters on Rumbling Crescendo.        
+        Effect effect = new DestroyTargetEffect(true);
+        effect.setText("Destroy up to X target lands, where X is the number of verse counters on {this}.");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{R}"));
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetPermanent(0, 0, filter, false));
+        ability.setTargetAdjustment(TargetAdjustment.VERSE_COUNTER_TARGETS);
         this.addAbility(ability);
     }
 
-    public DeepfireElemental(final DeepfireElemental card) {
+    public RumblingCrescendo(final RumblingCrescendo card) {
         super(card);
     }
 
     @Override
-    public DeepfireElemental copy() {
-        return new DeepfireElemental(this);
+    public RumblingCrescendo copy() {
+        return new RumblingCrescendo(this);
     }
 }
