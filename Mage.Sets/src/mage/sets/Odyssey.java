@@ -206,6 +206,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Leaf Dancer", 249, Rarity.COMMON, mage.cards.l.LeafDancer.class));
         cards.add(new SetCardInfo("Lieutenant Kirtar", 29, Rarity.RARE, mage.cards.l.LieutenantKirtar.class));
         cards.add(new SetCardInfo("Life Burst", 30, Rarity.COMMON, mage.cards.l.LifeBurst.class));
+        cards.add(new SetCardInfo("Limestone Golem", 301, Rarity.UNCOMMON, mage.cards.l.LimestoneGolem.class));
         cards.add(new SetCardInfo("Liquid Fire", 201, Rarity.UNCOMMON, mage.cards.l.LiquidFire.class));
         cards.add(new SetCardInfo("Lithatog", 289, Rarity.UNCOMMON, mage.cards.l.Lithatog.class));
         cards.add(new SetCardInfo("Luminous Guardian", 31, Rarity.UNCOMMON, mage.cards.l.LuminousGuardian.class));
