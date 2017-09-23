@@ -293,6 +293,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Sandstone Deadfall", 307, Rarity.UNCOMMON, mage.cards.s.SandstoneDeadfall.class));
         cards.add(new SetCardInfo("Sarcatog", 293, Rarity.UNCOMMON, mage.cards.s.Sarcatog.class));
         cards.add(new SetCardInfo("Savage Firecat", 218, Rarity.RARE, mage.cards.s.SavageFirecat.class));
+        cards.add(new SetCardInfo("Scorching Missile", 219, Rarity.COMMON, mage.cards.s.ScorchingMissile.class));
         cards.add(new SetCardInfo("Screams of the Damned", 160, Rarity.UNCOMMON, mage.cards.s.ScreamsOfTheDamned.class));
         cards.add(new SetCardInfo("Scrivener", 100, Rarity.COMMON, mage.cards.s.Scrivener.class));
         cards.add(new SetCardInfo("Seafloor Debris", 325, Rarity.COMMON, mage.cards.s.SeafloorDebris.class));
