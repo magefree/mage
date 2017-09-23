@@ -537,7 +537,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public int getSourceObjectZoneChangeCounter() {
-        throw new UnsupportedOperationException("Not supported.");
+        return ability.getSourceObjectZoneChangeCounter();
     }
 
     @Override
