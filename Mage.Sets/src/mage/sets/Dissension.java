@@ -178,6 +178,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Skullmead Cauldron", 167, Rarity.UNCOMMON, mage.cards.s.SkullmeadCauldron.class));
         cards.add(new SetCardInfo("Sky Hussar", 131, Rarity.UNCOMMON, mage.cards.s.SkyHussar.class));
         cards.add(new SetCardInfo("Skyscribing", 32, Rarity.UNCOMMON, mage.cards.s.Skyscribing.class));
+        cards.add(new SetCardInfo("Slaughterhouse Bouncer", 54, Rarity.COMMON, mage.cards.s.SlaughterhouseBouncer.class));
         cards.add(new SetCardInfo("Slithering Shade", 55, Rarity.UNCOMMON, mage.cards.s.SlitheringShade.class));
         cards.add(new SetCardInfo("Soulsworn Jury", 17, Rarity.COMMON, mage.cards.s.SoulswornJury.class));
         cards.add(new SetCardInfo("Spell Snare", 33, Rarity.UNCOMMON, mage.cards.s.SpellSnare.class));

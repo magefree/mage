@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -44,6 +43,8 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -58,7 +59,7 @@ public class GuildFeud extends CardImpl {
         // then puts the rest into his or her graveyard. You do the same with the top three
         // cards of your library. If two creatures are put onto the battlefield this way,
         // those creatures fight each other.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GuildFeudEffect(), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GuildFeudEffect(), TargetController.YOU, false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

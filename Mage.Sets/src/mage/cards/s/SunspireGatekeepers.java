@@ -28,7 +28,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -42,6 +41,8 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.KnightToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +69,7 @@ public class SunspireGatekeepers extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightToken())),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1),
-                "When {this} enter the battlefield, if you control two or more Gates, create a 2/2 white Knight creature token with vigilance."));
+                "When {this} enters the battlefield, if you control two or more Gates, create a 2/2 white Knight creature token with vigilance."));
     }
 
     public SunspireGatekeepers (final SunspireGatekeepers card) {

@@ -49,7 +49,7 @@ import mage.players.Player;
 public class IllusoryAmbusher extends CardImpl {
 
     public IllusoryAmbusher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(4);
@@ -57,9 +57,9 @@ public class IllusoryAmbusher extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        
+
         // Whenever Illusory Ambusher is dealt damage, draw that many cards.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new IllusoryAmbusherDealtDamageEffect(), false));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new IllusoryAmbusherDealtDamageEffect(), false, false, true));
     }
 
     public IllusoryAmbusher(final IllusoryAmbusher card) {

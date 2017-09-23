@@ -33,7 +33,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -59,8 +59,8 @@ public class UrzasMiter extends CardImpl {
 
         Watcher watcher = new UrzasMiterWatcher();        
         // Whenever an artifact you control is put into a graveyard from the battlefield, if it wasn't sacrificed, you may pay {3}. If you do, draw a card.
-        Effect effect = new UrzasMiterDoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1));
-        effect.setText("you may pay {1}. If you do, you gain 1 life.");
+        Effect effect = new UrzasMiterDoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(3));
+        effect.setText("you may pay {3}. If you do, draw a card.");
         Ability ability = new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD,
                 effect, new FilterControlledArtifactPermanent(),
                 "Whenever an artifact you control is put into a graveyard from the battlefield, ", true);

@@ -60,6 +60,7 @@ public class KumenasSpeaker extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
 
         this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

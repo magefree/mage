@@ -53,7 +53,7 @@ import java.util.UUID;
  */
 public class BrassTalonChimera extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Beast creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature you control");
 
     static {
         filter.add(new SubtypePredicate(SubType.CHIMERA));
@@ -73,6 +73,7 @@ public class BrassTalonChimera extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
         ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield));
         ability.addTarget(new TargetCreaturePermanent(filter));
+        addAbility(ability);
     }
 
     public BrassTalonChimera(final BrassTalonChimera card) {

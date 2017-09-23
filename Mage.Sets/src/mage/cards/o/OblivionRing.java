@@ -28,7 +28,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -43,13 +42,15 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class OblivionRing extends CardImpl {
 
-    private static final FilterNonlandPermanent anotherNonlandPermanent = new FilterNonlandPermanent("another nonland permanent");
+    private static final FilterNonlandPermanent anotherNonlandPermanent = new FilterNonlandPermanent("another target nonland permanent");
 
     static {
          anotherNonlandPermanent.add(new AnotherPredicate());

@@ -106,6 +106,9 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Lim-Dul's Vault", 192, Rarity.UNCOMMON, mage.cards.l.LimDulsVault.class));
         cards.add(new SetCardInfo("Lord of Tresserhorn", 193, Rarity.RARE, mage.cards.l.LordOfTresserhorn.class));
         cards.add(new SetCardInfo("Mystic Compass", 166, Rarity.UNCOMMON, mage.cards.m.MysticCompass.class));
+        cards.add(new SetCardInfo("Nature's Wrath", 82, Rarity.RARE, mage.cards.n.NaturesWrath.class));
+        cards.add(new SetCardInfo("Noble Steeds", 140, Rarity.COMMON, mage.cards.n.NobleSteeds.class));
+        cards.add(new SetCardInfo("Phantasmal Fiend", 20, Rarity.COMMON, mage.cards.p.PhantasmalFiend.class));
         cards.add(new SetCardInfo("Phelddagrif", 196, Rarity.RARE, mage.cards.p.Phelddagrif.class));
         cards.add(new SetCardInfo("Phyrexian Devourer", 167, Rarity.RARE, mage.cards.p.PhyrexianDevourer.class));
         cards.add(new SetCardInfo("Phyrexian War Beast", 169, Rarity.COMMON, PhyrexianWarBeast.class, NON_FULL_USE_VARIOUS));
@@ -131,6 +134,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Soldevi Sage", 52, Rarity.COMMON, SoldeviSage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldier of Fortune", 117, Rarity.UNCOMMON, mage.cards.s.SoldierOfFortune.class));
         cards.add(new SetCardInfo("Sol Grail", 173, Rarity.UNCOMMON, mage.cards.s.SolGrail.class));
+        cards.add(new SetCardInfo("Stench of Decay", 27, Rarity.COMMON, mage.cards.s.StenchOfDecay.class));
         cards.add(new SetCardInfo("Storm Cauldron", 179, Rarity.RARE, mage.cards.s.StormCauldron.class));
         cards.add(new SetCardInfo("Storm Crow", 54, Rarity.COMMON, mage.cards.s.StormCrow.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm Crow", 55, Rarity.COMMON, mage.cards.s.StormCrow.class, NON_FULL_USE_VARIOUS));
@@ -141,7 +145,9 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp Mosquito", 31, Rarity.COMMON, SwampMosquito.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thawing Glaciers", 189, Rarity.RARE, mage.cards.t.ThawingGlaciers.class));
         cards.add(new SetCardInfo("Thought Lash", 58, Rarity.RARE, mage.cards.t.ThoughtLash.class));
+        cards.add(new SetCardInfo("Tidal Control", 59, Rarity.RARE, mage.cards.t.TidalControl.class));
         cards.add(new SetCardInfo("Tornado", 86, Rarity.RARE, mage.cards.t.Tornado.class));
+        cards.add(new SetCardInfo("Unlikely Alliance", 153, Rarity.UNCOMMON, mage.cards.u.UnlikelyAlliance.class));
         cards.add(new SetCardInfo("Varchild's War-Riders", 122, Rarity.RARE, mage.cards.v.VarchildsWarRiders.class));
         cards.add(new SetCardInfo("Viscerid Armor", 60, Rarity.COMMON, mage.cards.v.VisceridArmor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Viscerid Armor", 61, Rarity.COMMON, mage.cards.v.VisceridArmor.class, NON_FULL_USE_VARIOUS));

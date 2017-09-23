@@ -24,14 +24,14 @@
 *  The views and conclusions contained in the software and documentation are those of the
 *  authors and should not be interpreted as representing official policies, either expressed
 *  or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -51,23 +51,23 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
-* FAQ
-* 
-*  The card is exiled face up. All players may look at it.
-*  Playing a card exiled with Nightveil Specter follows all the normal rules for 
-*  playing that card. You must pay its costs, and you must follow all timing 
-*  restrictions, for example.
-*
-*  Nightveil Specter's last ability applies to cards exiled with that specific 
-*  Nightveil Specter, not any other creature named Nightveil Specter. You should 
-*  keep cards exiled by different Nightveil Specters separate.
-*
-* @author LevelX2
-*/
+ * FAQ
+ *
+ * The card is exiled face up. All players may look at it. Playing a card exiled
+ * with Nightveil Specter follows all the normal rules for playing that card.
+ * You must pay its costs, and you must follow all timing restrictions, for
+ * example.
+ *
+ * Nightveil Specter's last ability applies to cards exiled with that specific
+ * Nightveil Specter, not any other creature named Nightveil Specter. You should
+ * keep cards exiled by different Nightveil Specters separate.
+ *
+ * @author LevelX2
+ */
 public class NightveilSpecter extends CardImpl {
 
     public NightveilSpecter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/B}{U/B}{U/B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U/B}{U/B}{U/B}");
         this.subtype.add(SubType.SPECTER);
 
         this.power = new MageInt(2);
@@ -77,7 +77,7 @@ public class NightveilSpecter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Nightveil Specter deals combat damage to a player, that player exiles the top card of his or her library.     
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new NightveilSpecterExileEffect(),false, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new NightveilSpecterExileEffect(), false, true));
 
         // You may play cards exiled with Nightveil Specter.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NightveilSpecterEffect()));

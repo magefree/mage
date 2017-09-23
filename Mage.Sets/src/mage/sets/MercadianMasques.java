@@ -141,6 +141,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Flailing Manticore", 187, Rarity.RARE, mage.cards.f.FlailingManticore.class));
         cards.add(new SetCardInfo("Flailing Ogre", 188, Rarity.UNCOMMON, mage.cards.f.FlailingOgre.class));
         cards.add(new SetCardInfo("Flailing Soldier", 189, Rarity.COMMON, mage.cards.f.FlailingSoldier.class));
+        cards.add(new SetCardInfo("Flaming Sword", 190, Rarity.COMMON, mage.cards.f.FlamingSword.class));
         cards.add(new SetCardInfo("Food Chain", 246, Rarity.RARE, mage.cards.f.FoodChain.class));
         cards.add(new SetCardInfo("Forced March", 136, Rarity.RARE, mage.cards.f.ForcedMarch.class));
         cards.add(new SetCardInfo("Forest", 347, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));

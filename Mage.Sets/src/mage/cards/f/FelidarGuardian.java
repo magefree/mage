@@ -66,7 +66,7 @@ public class FelidarGuardian extends CardImpl {
         Effect effect = new ExileTargetForSourceEffect();
         effect.setApplyEffectsAfter();
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
 

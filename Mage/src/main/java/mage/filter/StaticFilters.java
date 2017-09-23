@@ -68,7 +68,7 @@ public final class StaticFilters {
 
     public static final FilterPermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
 
-    public static final FilterPermanent FILTER_ATTACKING_CREATURES = new FilterCreaturePermanent("attacking creatures");
+    public static final FilterCreaturePermanent FILTER_ATTACKING_CREATURES = new FilterCreaturePermanent("attacking creatures");
 
     public static final FilterPermanent FILTER_PERMANENT_AURA = new FilterPermanent();
     public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterPermanent();

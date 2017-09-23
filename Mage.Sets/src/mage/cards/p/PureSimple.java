@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardSetInfo;
@@ -41,6 +40,8 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Wehk
@@ -48,7 +49,7 @@ import mage.target.TargetPermanent;
 public class PureSimple extends SplitCard {
 
     private static final FilterPermanent filterDestroy = new FilterPermanent("Auras and Equipment");
-    private static final FilterPermanent filterMulticolor = new FilterPermanent("multicolor permanent");
+    private static final FilterPermanent filterMulticolor = new FilterPermanent("multicolored permanent");
 
     static {
         filterDestroy.add(Predicates.or(new SubtypePredicate(SubType.AURA), new SubtypePredicate(SubType.EQUIPMENT)));

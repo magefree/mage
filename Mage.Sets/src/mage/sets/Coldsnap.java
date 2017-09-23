@@ -93,6 +93,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Fury of the Horde", 81, Rarity.RARE, mage.cards.f.FuryOfTheHorde.class));
         cards.add(new SetCardInfo("Garza Zol, Plague Queen", 129, Rarity.RARE, mage.cards.g.GarzaZolPlagueQueen.class));
         cards.add(new SetCardInfo("Gelid Shackles", 6, Rarity.COMMON, mage.cards.g.GelidShackles.class));
+        cards.add(new SetCardInfo("Glacial Plating", 7, Rarity.UNCOMMON, mage.cards.g.GlacialPlating.class));
         cards.add(new SetCardInfo("Greater Stone Spirit", 84, Rarity.UNCOMMON, mage.cards.g.GreaterStoneSpirit.class));
         cards.add(new SetCardInfo("Grim Harvest", 58, Rarity.COMMON, mage.cards.g.GrimHarvest.class));
         cards.add(new SetCardInfo("Gristle Grinner", 59, Rarity.UNCOMMON, mage.cards.g.GristleGrinner.class));
@@ -133,12 +134,14 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Bloodpainter", 94, Rarity.COMMON, mage.cards.o.OrcishBloodpainter.class));
         cards.add(new SetCardInfo("Perilous Research", 41, Rarity.UNCOMMON, mage.cards.p.PerilousResearch.class));
         cards.add(new SetCardInfo("Phobian Phantasm", 66, Rarity.UNCOMMON, mage.cards.p.PhobianPhantasm.class));
+        cards.add(new SetCardInfo("Phyrexian Etchings", 67, Rarity.RARE, mage.cards.p.PhyrexianEtchings.class));
         cards.add(new SetCardInfo("Phyrexian Ironfoot", 139, Rarity.UNCOMMON, mage.cards.p.PhyrexianIronfoot.class));
         cards.add(new SetCardInfo("Phyrexian Snowcrusher", 140, Rarity.UNCOMMON, mage.cards.p.PhyrexianSnowcrusher.class));
         cards.add(new SetCardInfo("Phyrexian Soulgorger", 141, Rarity.RARE, mage.cards.p.PhyrexianSoulgorger.class));
         cards.add(new SetCardInfo("Resize", 117, Rarity.UNCOMMON, mage.cards.r.Resize.class));
         cards.add(new SetCardInfo("Rimebound Dead", 69, Rarity.COMMON, mage.cards.r.RimeboundDead.class));
         cards.add(new SetCardInfo("Rime Transfusion", 68, Rarity.UNCOMMON, mage.cards.r.RimeTransfusion.class));
+        cards.add(new SetCardInfo("Rimefeather Owl", 42, Rarity.RARE, mage.cards.r.RimefeatherOwl.class));
         cards.add(new SetCardInfo("Rimescale Dragon", 95, Rarity.RARE, mage.cards.r.RimescaleDragon.class));
         cards.add(new SetCardInfo("Rimewind Cryomancer", 43, Rarity.UNCOMMON, mage.cards.r.RimewindCryomancer.class));
         cards.add(new SetCardInfo("Rimewind Taskmage", 44, Rarity.COMMON, mage.cards.r.RimewindTaskmage.class));

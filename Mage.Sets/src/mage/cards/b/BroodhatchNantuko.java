@@ -52,13 +52,13 @@ import mage.players.Player;
 public class BroodhatchNantuko extends CardImpl {
 
     public BroodhatchNantuko(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.INSECT, SubType.DRUID);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Whenever Broodhatch Nantuko is dealt damage, you may create that many 1/1 green Insect creature tokens.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new BroodhatchNantukoDealDamageEffect(), true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new BroodhatchNantukoDealDamageEffect(), true, false, true));
         // Morph {2}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{G}")));
     }

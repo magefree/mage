@@ -153,6 +153,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Earth Rift", 189, Rarity.COMMON, mage.cards.e.EarthRift.class));
         cards.add(new SetCardInfo("Elephant Ambush", 240, Rarity.COMMON, mage.cards.e.ElephantAmbush.class));
         cards.add(new SetCardInfo("Ember Beast", 190, Rarity.COMMON, mage.cards.e.EmberBeast.class));
+        cards.add(new SetCardInfo("Embolden", 22, Rarity.COMMON, mage.cards.e.Embolden.class));
         cards.add(new SetCardInfo("Engulfing Flames", 191, Rarity.UNCOMMON, mage.cards.e.EngulfingFlames.class));
         cards.add(new SetCardInfo("Entomb", 132, Rarity.RARE, mage.cards.e.Entomb.class));
         cards.add(new SetCardInfo("Epicenter", 192, Rarity.RARE, mage.cards.e.Epicenter.class));
@@ -205,6 +206,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Leaf Dancer", 249, Rarity.COMMON, mage.cards.l.LeafDancer.class));
         cards.add(new SetCardInfo("Lieutenant Kirtar", 29, Rarity.RARE, mage.cards.l.LieutenantKirtar.class));
         cards.add(new SetCardInfo("Life Burst", 30, Rarity.COMMON, mage.cards.l.LifeBurst.class));
+        cards.add(new SetCardInfo("Limestone Golem", 301, Rarity.UNCOMMON, mage.cards.l.LimestoneGolem.class));
         cards.add(new SetCardInfo("Liquid Fire", 201, Rarity.UNCOMMON, mage.cards.l.LiquidFire.class));
         cards.add(new SetCardInfo("Lithatog", 289, Rarity.UNCOMMON, mage.cards.l.Lithatog.class));
         cards.add(new SetCardInfo("Luminous Guardian", 31, Rarity.UNCOMMON, mage.cards.l.LuminousGuardian.class));
@@ -293,6 +295,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Sandstone Deadfall", 307, Rarity.UNCOMMON, mage.cards.s.SandstoneDeadfall.class));
         cards.add(new SetCardInfo("Sarcatog", 293, Rarity.UNCOMMON, mage.cards.s.Sarcatog.class));
         cards.add(new SetCardInfo("Savage Firecat", 218, Rarity.RARE, mage.cards.s.SavageFirecat.class));
+        cards.add(new SetCardInfo("Scorching Missile", 219, Rarity.COMMON, mage.cards.s.ScorchingMissile.class));
         cards.add(new SetCardInfo("Screams of the Damned", 160, Rarity.UNCOMMON, mage.cards.s.ScreamsOfTheDamned.class));
         cards.add(new SetCardInfo("Scrivener", 100, Rarity.COMMON, mage.cards.s.Scrivener.class));
         cards.add(new SetCardInfo("Seafloor Debris", 325, Rarity.COMMON, mage.cards.s.SeafloorDebris.class));

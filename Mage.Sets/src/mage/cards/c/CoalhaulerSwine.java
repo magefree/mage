@@ -49,14 +49,14 @@ public class CoalhaulerSwine extends CardImpl {
 
     public CoalhaulerSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        
+
         this.subtype.add(SubType.BOAR);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Whenever Coalhauler Swine is dealt damage, it deals that much damage to each player.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new CoalhaulerSwineEffect(), false));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new CoalhaulerSwineEffect(), false, false, true));
     }
 
     public CoalhaulerSwine(final CoalhaulerSwine card) {
@@ -88,7 +88,7 @@ public class CoalhaulerSwine extends CardImpl {
         public boolean apply(Game game, Ability source) {
             for (UUID playerId : game.getPlayers().keySet()) {
                 Player player = game.getPlayer(playerId);
-                if(player != null) {
+                if (player != null) {
                     player.damage((Integer) this.getValue("damage"), source.getSourceId(), game, false, true);
                 }
             }

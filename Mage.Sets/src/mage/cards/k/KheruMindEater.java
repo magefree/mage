@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -70,7 +70,7 @@ public class KheruMindEater extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Whenever Kheru Mind-Eater deals combat damage to a player, that player exiles a card from his or her hand face down.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new KheruMindEaterExileEffect(), false, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new KheruMindEaterExileEffect(), false, true));
 
         // You may look at and play cards exiled with Kheru Mind-Eater.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KheruMindEaterEffect()));
