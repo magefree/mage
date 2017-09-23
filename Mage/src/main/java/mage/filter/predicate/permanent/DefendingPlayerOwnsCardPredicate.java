@@ -40,7 +40,7 @@ public class DefendingPlayerOwnsCardPredicate implements ObjectSourcePlayerPredi
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        return input.getObject().getOwnerId().equals(game.getCombat().getDefenderId(input.getSourceId()));
+        return input.getObject().getOwnerId().equals(game.getCombat().getDefendingPlayerId(input.getSourceId()));
     }
 
     @Override

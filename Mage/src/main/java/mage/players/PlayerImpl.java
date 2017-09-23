@@ -1108,6 +1108,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getId(), ability.getSourceId(), playerId))) {
                 int bookmark = game.bookmarkState();
                 ability.newId();
+                ability.setControllerId(playerId);
                 game.getStack().push(new StackAbility(ability, playerId));
                 if (ability.activate(game, false)) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
