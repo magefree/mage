@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -35,11 +36,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -62,40 +62,37 @@ public class BakisCurse extends CardImpl {
     public BakisCurse copy() {
         return new BakisCurse(this);
     }
+}
 
-    private static class BakisCurseEffect extends OneShotEffect {
-
+class BakisCurseEffect extends OneShotEffect {
+    
     public BakisCurseEffect() {
             super(Outcome.Detriment);
             staticText = "Baki's Curse deals 2 damage to each creature for each Aura attached to that creature.";
-        }
+    }
 
-        public BakisCurseEffect(final BakisCurseEffect effect) {
-            super(effect);
-        }
+    public BakisCurseEffect(final BakisCurseEffect effect) {
+        super(effect);
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
+    @Override
+    public BakisCurseEffect copy() {
+        return new BakisCurseEffect(this);
+    }
 
-            FilterPermanent filterEnchantments = new FilterPermanent();
-            filterEnchantments.add(new CardTypePredicate(CardType.ENCHANTMENT));
-            filterEnchantments.add(new SubtypePredicate(SubType.AURA));
-            for (Permanent auraEnchantment : game.getBattlefield().getActivePermanents(filterEnchantments, source.getControllerId(), source.getSourceId(), game)) {
-                if (auraEnchantment.getAttachedTo() != null) {
-                    Permanent attachedToCreature = game.getPermanent(auraEnchantment.getAttachedTo());
-                    if (attachedToCreature != null && attachedToCreature.isCreature()) {
-                        attachedToCreature.damage(2, source.getId(), game, false, true);
-                        game.informPlayers("2 damage assigned to " + attachedToCreature.getName() + " from Baki's Curse due to " + auraEnchantment.getName());
-                    }
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+            int count = 0;
+            List<UUID> attachments = creature.getAttachments();
+            for (UUID attachmentId : attachments) {
+                Permanent attached = game.getPermanent(attachmentId);
+                if (attached != null && attached.getSubtype(game).contains(SubType.AURA)) {
+                    count++;
                 }
             }
-            return true;
+            creature.damage(count * 2, source.getId(), game, false, true);
         }
-
-        @Override
-        public BakisCurseEffect copy() {
-            return new BakisCurseEffect(this);
-        }
-
+        return true;
     }
 }
