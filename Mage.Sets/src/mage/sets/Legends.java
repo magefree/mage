@@ -187,6 +187,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Pradesh Gypsies", 111, Rarity.UNCOMMON, mage.cards.p.PradeshGypsies.class));
         cards.add(new SetCardInfo("Presence of the Master", 200, Rarity.UNCOMMON, mage.cards.p.PresenceOfTheMaster.class));
         cards.add(new SetCardInfo("Princess Lucrezia", 289, Rarity.UNCOMMON, mage.cards.p.PrincessLucrezia.class));
+        cards.add(new SetCardInfo("Psionic Entity", 67, Rarity.RARE, mage.cards.p.PsionicEntity.class));
         cards.add(new SetCardInfo("Pyrotechnics", 158, Rarity.COMMON, mage.cards.p.Pyrotechnics.class));
         cards.add(new SetCardInfo("Rabid Wombat", 112, Rarity.UNCOMMON, mage.cards.r.RabidWombat.class));
         cards.add(new SetCardInfo("Radjan Spirit", 113, Rarity.UNCOMMON, mage.cards.r.RadjanSpirit.class));

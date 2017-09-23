@@ -31,56 +31,42 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageSelfEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author anonymous
- * @see mage.sets.seventhedition.RecklessEmbermage
+ * @author TheElk801
  */
-public class PsionicSliver extends CardImpl {
+public class PsionicEntity extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SLIVER, "All Sliver creatures");
-
-    public PsionicSliver(UUID ownerId, CardSetInfo setInfo) {
+    public PsionicEntity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.subtype.add(SubType.SLIVER);
+
+        this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // All Sliver creatures have "{T}: This creature deals 2 damage to target creature or player and 3 damage to itself."
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new DamageTargetEffect(2).setText("This creature deals 2 damage to target creature or player"),
-                new TapSourceCost()
-        );
-        ability.addEffect(new DamageSelfEffect(3).setText("3 damage to itself."));
+        // {tap}: Psionic Entity deals 2 damage to target creature or player and 3 damage to itself.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        ability.addEffect(new DamageSelfEffect(3).setText("and 3 damage to itself"));
         ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(
-                new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter,
-                        "All Sliver creatures have \"{T}: This creature deals 2 damage to target creature or player and 3 damage to itself.\"")
-                )
-        );
+        this.addAbility(ability);
     }
 
-    public PsionicSliver(final PsionicSliver card) {
+    public PsionicEntity(final PsionicEntity card) {
         super(card);
     }
 
     @Override
-    public PsionicSliver copy() {
-        return new PsionicSliver(this);
+    public PsionicEntity copy() {
+        return new PsionicEntity(this);
     }
 }
