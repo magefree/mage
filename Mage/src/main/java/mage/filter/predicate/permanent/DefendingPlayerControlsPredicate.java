@@ -40,7 +40,7 @@ public class DefendingPlayerControlsPredicate implements ObjectSourcePlayerPredi
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input.getObject().getControllerId().equals(game.getCombat().getDefenderId(input.getSourceId()));
+        return input.getObject().getControllerId().equals(game.getCombat().getDefendingPlayerId(input.getSourceId()));
     }
 
     @Override
