@@ -51,13 +51,18 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class TorchSong extends CardImpl {
 
     public TorchSong(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // At the beginning of your upkeep, you may put a verse counter on Torch Song.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-            new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+
         // {2}{R}, Sacrifice Torch Song: Torch Song deals X damage to target creature or player, where X is the number of verse counters on Torch Song.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new CountersSourceCount(CounterType.VERSE)), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new DamageTargetEffect(new CountersSourceCount(CounterType.VERSE)),
+                new ManaCostsImpl("{2}{R}")
+        );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);

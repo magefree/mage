@@ -35,16 +35,19 @@ public class HopeOfGhirapurTest extends CardTestPlayerBase {
     // from the battlefield and returned back.
     @Test
     public void testWhenHopeOfGhirapurWasRemovedAndReturnedBack() {
+        // Flying
+        // Sacrifice Hope of Ghirapur: Until your next turn, target player who was dealt combat damage by Hope of Ghirapur this turn can't cast noncreature spells.
         addCard(Zone.BATTLEFIELD, playerA, "Hope of Ghirapur");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        // Exile target creature you control, then return that card to the battlefield under your control.
         addCard(Zone.HAND, playerA, "Cloudshift");
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
         addCard(Zone.HAND, playerB, "Shock");
 
         attack(1, playerA, "Hope of Ghirapur");
-        castSpell(1, PhaseStep.END_COMBAT, playerA, "Cloudshift", "Hope of Ghirapur");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice", playerB);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Hope of Ghirapur");
+        activateAbility(1, PhaseStep.END_TURN, playerA, "Sacrifice", playerB);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Shock", playerA);
 

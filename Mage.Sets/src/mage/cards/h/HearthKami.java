@@ -38,12 +38,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.ComparisonType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.game.Game;
-import mage.target.Target;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -51,7 +49,11 @@ import mage.target.TargetPermanent;
  */
 public class HearthKami extends CardImpl {
 
-    private final UUID originalId;
+    private static final FilterPermanent filter = new FilterPermanent("artifact with converted mana cost X");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+    }
 
     public HearthKami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -60,30 +62,16 @@ public class HearthKami extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        //TODO: Make ability properly copiable
         // {X}, Sacrifice Hearth Kami: Destroy target artifact with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPermanent(new FilterArtifactPermanent("artifact with converted mana cost X")));
-        originalId = ability.getOriginalId();
+        ability.addTarget(new TargetPermanent(filter));
+        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_PERM);
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            int xValue = ability.getManaCostsToPay().getX();
-            ability.getTargets().clear();
-            FilterArtifactPermanent filter = new FilterArtifactPermanent(new StringBuilder("artifact with converted mana cost ").append(xValue).toString());
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-            Target target = new TargetPermanent(filter);
-            ability.addTarget(target);
-        }
     }
 
     public HearthKami(final HearthKami card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override

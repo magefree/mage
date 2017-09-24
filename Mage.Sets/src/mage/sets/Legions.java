@@ -64,6 +64,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Berserk Murlodont", 117, Rarity.COMMON, mage.cards.b.BerserkMurlodont.class));
         cards.add(new SetCardInfo("Blade Sliver", 88, Rarity.UNCOMMON, mage.cards.b.BladeSliver.class));
         cards.add(new SetCardInfo("Blood Celebrant", 61, Rarity.COMMON, mage.cards.b.BloodCelebrant.class));
+        cards.add(new SetCardInfo("Bloodstoke Howler", 89, Rarity.COMMON, mage.cards.b.BloodstokeHowler.class));
         cards.add(new SetCardInfo("Branchsnap Lorian", 118, Rarity.UNCOMMON, mage.cards.b.BranchsnapLorian.class));
         cards.add(new SetCardInfo("Brontotherium", 119, Rarity.UNCOMMON, mage.cards.b.Brontotherium.class));
         cards.add(new SetCardInfo("Brood Sliver", 120, Rarity.RARE, mage.cards.b.BroodSliver.class));

@@ -99,6 +99,7 @@ public abstract class AbilityImpl implements Ability {
     protected List<Watcher> watchers = null;
     protected List<Ability> subAbilities = null;
     protected boolean canFizzle = true;
+    protected TargetAdjustment targetAdjustment = TargetAdjustment.NONE;
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -147,6 +148,7 @@ public abstract class AbilityImpl implements Ability {
         this.sourceObject = ability.sourceObject;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
         this.canFizzle = ability.canFizzle;
+        this.targetAdjustment = ability.targetAdjustment;
     }
 
     @Override
@@ -1233,4 +1235,13 @@ public abstract class AbilityImpl implements Ability {
         this.canFizzle = canFizzle;
     }
 
+    @Override
+    public void setTargetAdjustment(TargetAdjustment targetAdjustment) {
+        this.targetAdjustment = targetAdjustment;
+    }
+
+    @Override
+    public TargetAdjustment getTargetAdjustment() {
+        return targetAdjustment;
+    }
 }
