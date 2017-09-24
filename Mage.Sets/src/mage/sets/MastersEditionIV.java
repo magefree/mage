@@ -88,6 +88,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Brass Man", 185, Rarity.COMMON, mage.cards.b.BrassMan.class));
         cards.add(new SetCardInfo("Candelabra of Tawnos", 187, Rarity.RARE, mage.cards.c.CandelabraOfTawnos.class));
         cards.add(new SetCardInfo("Celestial Sword", 188, Rarity.UNCOMMON, mage.cards.c.CelestialSword.class));
+        cards.add(new SetCardInfo("Champion Lancer", 8, Rarity.RARE, mage.cards.c.ChampionLancer.class));
         cards.add(new SetCardInfo("Channel", 145, Rarity.RARE, mage.cards.c.Channel.class));
         cards.add(new SetCardInfo("Citanul Druid", 146, Rarity.COMMON, mage.cards.c.CitanulDruid.class));
         cards.add(new SetCardInfo("City of Brass", 243, Rarity.RARE, mage.cards.c.CityOfBrass.class));

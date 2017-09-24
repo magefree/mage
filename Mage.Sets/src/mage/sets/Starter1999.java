@@ -73,6 +73,7 @@ public class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Border Guard", 9, Rarity.COMMON, mage.cards.b.BorderGuard.class));
         cards.add(new SetCardInfo("Breath of Life", 10, Rarity.UNCOMMON, mage.cards.b.BreathOfLife.class));
         cards.add(new SetCardInfo("Bull Hippo", 126, Rarity.UNCOMMON, mage.cards.b.BullHippo.class));
+        cards.add(new SetCardInfo("Champion Lancer", 11, Rarity.RARE, mage.cards.c.ChampionLancer.class));
         cards.add(new SetCardInfo("Charging Paladin", 12, Rarity.UNCOMMON, mage.cards.c.ChargingPaladin.class));
         cards.add(new SetCardInfo("Chorus of Woe", 68, Rarity.COMMON, mage.cards.c.ChorusOfWoe.class));
         cards.add(new SetCardInfo("Cinder Storm", 93, Rarity.UNCOMMON, mage.cards.c.CinderStorm.class));
