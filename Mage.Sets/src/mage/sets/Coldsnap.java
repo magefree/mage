@@ -186,6 +186,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("White Shield Crusader", 24, Rarity.UNCOMMON, mage.cards.w.WhiteShieldCrusader.class));
         cards.add(new SetCardInfo("Wilderness Elemental", 134, Rarity.UNCOMMON, mage.cards.w.WildernessElemental.class));
         cards.add(new SetCardInfo("Woolly Razorback", 25, Rarity.RARE, mage.cards.w.WoollyRazorback.class));
+        cards.add(new SetCardInfo("Zombie Musher", 75, Rarity.COMMON, mage.cards.z.ZombieMusher.class));
         cards.add(new SetCardInfo("Zur the Enchanter", 135, Rarity.RARE, mage.cards.z.ZurTheEnchanter.class));
     }
 }
