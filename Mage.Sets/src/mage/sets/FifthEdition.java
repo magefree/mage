@@ -38,6 +38,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Adarkar Wastes", 410, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Air Elemental", 71, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 278, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
+        cards.add(new SetCardInfo("Alabaster Potion", 279, Rarity.COMMON, mage.cards.a.AlabasterPotion.class));
         cards.add(new SetCardInfo("Aladdin's Ring", 346, Rarity.RARE, mage.cards.a.AladdinsRing.class));
         cards.add(new SetCardInfo("Ambush Party", 208, Rarity.COMMON, mage.cards.a.AmbushParty.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 347, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
