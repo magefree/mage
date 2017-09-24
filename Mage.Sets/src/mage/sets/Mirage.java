@@ -118,6 +118,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Ebony Charm", 18, Rarity.COMMON, mage.cards.e.EbonyCharm.class));
         cards.add(new SetCardInfo("Ekundu Griffin", 217, Rarity.COMMON, mage.cards.e.EkunduGriffin.class));
         cards.add(new SetCardInfo("Elixir of Vitality", 265, Rarity.UNCOMMON, mage.cards.e.ElixirOfVitality.class));
+        cards.add(new SetCardInfo("Energy Bolt", 323, Rarity.RARE, mage.cards.e.EnergyBolt.class));
         cards.add(new SetCardInfo("Enfeeblement", 19, Rarity.COMMON, mage.cards.e.Enfeeblement.class));
         cards.add(new SetCardInfo("Enlightened Tutor", 218, Rarity.UNCOMMON, mage.cards.e.EnlightenedTutor.class));
         cards.add(new SetCardInfo("Ersatz Gnomes", 266, Rarity.UNCOMMON, mage.cards.e.ErsatzGnomes.class));
