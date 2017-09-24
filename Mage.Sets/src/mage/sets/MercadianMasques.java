@@ -196,6 +196,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Larceny", 143, Rarity.UNCOMMON, mage.cards.l.Larceny.class));
         cards.add(new SetCardInfo("Last Breath", 27, Rarity.UNCOMMON, mage.cards.l.LastBreath.class));
         cards.add(new SetCardInfo("Lava Runner", 200, Rarity.RARE, mage.cards.l.LavaRunner.class));
+        cards.add(new SetCardInfo("Liability", 144, Rarity.RARE, mage.cards.l.Liability.class));
         cards.add(new SetCardInfo("Lightning Hounds", 201, Rarity.COMMON, mage.cards.l.LightningHounds.class));
         cards.add(new SetCardInfo("Lithophage", 202, Rarity.RARE, mage.cards.l.Lithophage.class));
         cards.add(new SetCardInfo("Lumbering Satyr", 257, Rarity.UNCOMMON, mage.cards.l.LumberingSatyr.class));
@@ -270,6 +271,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Saprazzan Legate", 100, Rarity.UNCOMMON, mage.cards.s.SaprazzanLegate.class));
         cards.add(new SetCardInfo("Saprazzan Raider", 102, Rarity.COMMON, mage.cards.s.SaprazzanRaider.class));
         cards.add(new SetCardInfo("Saprazzan Skerry", 328, Rarity.COMMON, mage.cards.s.SaprazzanSkerry.class));
+        cards.add(new SetCardInfo("Scandalmonger", 158, Rarity.UNCOMMON, mage.cards.s.Scandalmonger.class));
         cards.add(new SetCardInfo("Seismic Mage", 211, Rarity.RARE, mage.cards.s.SeismicMage.class));
         cards.add(new SetCardInfo("Sever Soul", 159, Rarity.COMMON, mage.cards.s.SeverSoul.class));
         cards.add(new SetCardInfo("Shock Troops", 212, Rarity.COMMON, mage.cards.s.ShockTroops.class));

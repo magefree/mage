@@ -114,6 +114,7 @@ public class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Krosan Constrictor", 129, Rarity.COMMON, mage.cards.k.KrosanConstrictor.class));
         cards.add(new SetCardInfo("Krosan Restorer", 130, Rarity.COMMON, mage.cards.k.KrosanRestorer.class));
         cards.add(new SetCardInfo("Laquatus's Champion", 67, Rarity.RARE, mage.cards.l.LaquatussChampion.class));
+        cards.add(new SetCardInfo("Last Laugh", 68, Rarity.RARE, mage.cards.l.LastLaugh.class));
         cards.add(new SetCardInfo("Liquify", 41, Rarity.COMMON, mage.cards.l.Liquify.class));
         cards.add(new SetCardInfo("Llawan, Cephalid Empress", 42, Rarity.RARE, mage.cards.l.LlawanCephalidEmpress.class));
         cards.add(new SetCardInfo("Major Teroh", 8, Rarity.RARE, mage.cards.m.MajorTeroh.class));
