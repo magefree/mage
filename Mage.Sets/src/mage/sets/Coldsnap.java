@@ -94,6 +94,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Garza Zol, Plague Queen", 129, Rarity.RARE, mage.cards.g.GarzaZolPlagueQueen.class));
         cards.add(new SetCardInfo("Gelid Shackles", 6, Rarity.COMMON, mage.cards.g.GelidShackles.class));
         cards.add(new SetCardInfo("Glacial Plating", 7, Rarity.UNCOMMON, mage.cards.g.GlacialPlating.class));
+        cards.add(new SetCardInfo("Goblin Rimerunner", 83, Rarity.COMMON, mage.cards.g.GoblinRimerunner.class));
         cards.add(new SetCardInfo("Greater Stone Spirit", 84, Rarity.UNCOMMON, mage.cards.g.GreaterStoneSpirit.class));
         cards.add(new SetCardInfo("Grim Harvest", 58, Rarity.COMMON, mage.cards.g.GrimHarvest.class));
         cards.add(new SetCardInfo("Gristle Grinner", 59, Rarity.UNCOMMON, mage.cards.g.GristleGrinner.class));
