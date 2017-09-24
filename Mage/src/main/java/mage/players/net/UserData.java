@@ -79,7 +79,7 @@ public class UserData implements Serializable {
     }
 
     public static UserData getDefaultUserDataView() {
-        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, getDefaultFlagName(), false, true, true, false, false, false, false, "");
+        return new UserData(UserGroup.DEFAULT, 0, false, false, true, new UserSkipPrioritySteps(), getDefaultFlagName(), false, true, true, false, false, false, false, "");
     }
 
     public void setGroupId(int groupId) {

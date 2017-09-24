@@ -163,6 +163,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Lady Orca", 281, Rarity.UNCOMMON, mage.cards.l.LadyOrca.class));
         cards.add(new SetCardInfo("Land Equilibrium", 64, Rarity.RARE, mage.cards.l.LandEquilibrium.class));
         cards.add(new SetCardInfo("Land Tax", 195, Rarity.UNCOMMON, mage.cards.l.LandTax.class));
+        cards.add(new SetCardInfo("Land's Edge", 155, Rarity.RARE, mage.cards.l.LandsEdge.class));
         cards.add(new SetCardInfo("Life Chisel", 228, Rarity.UNCOMMON, mage.cards.l.LifeChisel.class));
         cards.add(new SetCardInfo("Lifeblood", 196, Rarity.RARE, mage.cards.l.Lifeblood.class));
         cards.add(new SetCardInfo("Living Plane", 107, Rarity.RARE, mage.cards.l.LivingPlane.class));

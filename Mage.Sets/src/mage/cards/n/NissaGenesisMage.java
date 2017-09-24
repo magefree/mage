@@ -37,8 +37,8 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -63,7 +63,7 @@ public class NissaGenesisMage extends CardImpl {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
         //+2: Untap up to two target creatures and up to two target lands.
-        Ability ability = new LoyaltyAbility(new UntapTargetEffect().setText("Untap up to two target creatures and up to two target lands"), +2);
+        Ability ability = new LoyaltyAbility(new UntapTargetEffect(false).setText("Untap up to two target creatures and up to two target lands"), +2);
         ability.addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent("target creatures"), false));
         ability.addTarget(new TargetLandPermanent(0, 2, new FilterLandPermanent("target land"), false));
         this.addAbility(ability);

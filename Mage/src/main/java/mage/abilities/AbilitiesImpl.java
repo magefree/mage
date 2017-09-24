@@ -27,6 +27,8 @@
  */
 package mage.abilities;
 
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.ProtectionAbility;
@@ -36,9 +38,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @param <T>
@@ -164,7 +163,6 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 .filter(ability -> ability.getZone().match(zone))
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
 
-
     }
 
     @Override
@@ -241,7 +239,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean contains(T ability) {
-        for (Iterator<T> iterator = this.iterator(); iterator.hasNext(); ) { // simple loop can cause java.util.ConcurrentModificationException
+        for (Iterator<T> iterator = this.iterator(); iterator.hasNext();) { // simple loop can cause java.util.ConcurrentModificationException
             T test = iterator.next();
             // Checking also by getRule() without other restrictions is a problem when a triggered ability will be copied to a permanent that had the same ability
             // already before the copy. Because then it keeps the triggered ability twice and it triggers twice.
@@ -280,7 +278,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean containsKey(UUID abilityId) {
-        return stream().anyMatch(ability -> ability.getId().equals(abilityId));
+        return stream().anyMatch(ability -> abilityId.equals(ability.getId()));
     }
 
     @Override
@@ -295,7 +293,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     @Override
     public int getOutcomeTotal() {
         return stream().mapToInt(ability -> ability.getEffects().getOutcomeTotal()).sum();
-       }
+    }
 
     @Override
     public String getValue() {
