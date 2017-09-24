@@ -25,48 +25,46 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.game.permanent.token;
 
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.effects.Effect;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author TheElk801
  */
-public class SimpleActivatedAbility extends ActivatedAbilityImpl {
+public class SoundTheCallToken extends Token {
 
-    public SimpleActivatedAbility(Effect effect, ManaCosts cost) {
-        super(Zone.BATTLEFIELD, effect, cost);
+    private static final FilterCard filter = new FilterCard("card named Sound the Call");
+
+    static {
+        filter.add(new NamePredicate("Sound the Call"));
     }
 
-    public SimpleActivatedAbility(Effect effect, Cost cost) {
-        super(Zone.BATTLEFIELD, effect, cost);
-    }
+    public SoundTheCallToken() {
+        super("Wolf", "1/1 green Wolf creature token. It has \"This creature gets +1/+1 for each card named Sound the Call in each graveyard.\"");
+        cardType.add(CardType.CREATURE);
+        color.setGreen(true);
+        subtype.add(SubType.WOLF);
+        power = new MageInt(1);
+        toughness = new MageInt(1);
 
-    public SimpleActivatedAbility(Zone zone, Effect effect, ManaCosts cost) {
-        super(zone, effect, cost);
-    }
-
-    public SimpleActivatedAbility(Zone zone, Effect effect, Costs<Cost> costs) {
-        super(zone, effect, costs);
-    }
-
-    public SimpleActivatedAbility(Zone zone, Effect effect, Cost cost) {
-        super(zone, effect, cost);
-    }
-
-    public SimpleActivatedAbility(SimpleActivatedAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SimpleActivatedAbility copy() {
-        return new SimpleActivatedAbility(this);
+        DynamicValue value = new CardsInAllGraveyardsCount(filter);
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)
+                        .setText("This creature gets +1/+1 for each card named Sound the Call in each graveyard.")
+        ));
     }
 
 }

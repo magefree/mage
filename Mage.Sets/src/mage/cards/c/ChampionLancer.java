@@ -25,64 +25,77 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.CycleTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.CyclingAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class GempalmAvenger extends CardImpl {
+public class ChampionLancer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
+    public ChampionLancer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
 
-    static {
-        filter.add(new SubtypePredicate(SubType.SOLDIER));
-    }
-
-    public GempalmAvenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
         this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(3);
-        this.toughness = new MageInt(5);
+        this.toughness = new MageInt(3);
 
-        // Cycling {2}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{W}")));
-
-        // When you cycle Gempalm Avenger, Soldier creatures get +1/+1 and gain first strike until end of turn.
-        Ability ability = new CycleTriggeredAbility(
-                new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false).setText("Soldier creatures get +1/+1")
-        );
-        Effect effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter);
-        effect.setText("and gain first strike until end of turn");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // Prevent all damage that would be dealt to Champion Lancer by creatures.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect()));
     }
 
-    public GempalmAvenger(final GempalmAvenger card) {
+    public ChampionLancer(final ChampionLancer card) {
         super(card);
     }
 
     @Override
-    public GempalmAvenger copy() {
-        return new GempalmAvenger(this);
+    public ChampionLancer copy() {
+        return new ChampionLancer(this);
     }
+}
+
+class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffect {
+
+    public PreventDamageToSourceByCardTypeEffect() {
+        super(Duration.WhileOnBattlefield);
+    }
+
+    public PreventDamageToSourceByCardTypeEffect(final PreventDamageToSourceByCardTypeEffect effect) {
+        super(effect.duration);
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (super.applies(event, source, game)) {
+            MageObject sourceObject = game.getObject(event.getSourceId());
+            if (sourceObject != null && sourceObject.isCreature()) {
+                if (event.getTargetId().equals(source.getSourceId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public PreventAllDamageToSourceEffect copy() {
+        return new PreventAllDamageToSourceEffect(this);
+    }
+
 }

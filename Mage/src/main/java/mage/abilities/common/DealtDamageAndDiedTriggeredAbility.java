@@ -3,8 +3,8 @@ package mage.abilities.common;
 import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -12,16 +12,24 @@ import mage.target.targetpointer.FixedTarget;
 
 public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
 
+    private final FilterCreaturePermanent filter;
+
     public DealtDamageAndDiedTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public DealtDamageAndDiedTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, new FilterCreaturePermanent());
+    }
+
+    public DealtDamageAndDiedTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
         super(Zone.ALL, effect, optional);
+        this.filter = filter;
     }
 
     public DealtDamageAndDiedTriggeredAbility(final DealtDamageAndDiedTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
     }
 
     @Override
@@ -36,9 +44,9 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent)event).isDiesEvent()) {
+        if (((ZoneChangeEvent) event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getTarget().isCreature()) {
+            if (filter.match(zEvent.getTarget(), game)) {
                 boolean damageDealt = false;
                 for (MageObjectReference mor : zEvent.getTarget().getDealtDamageByThisTurn()) {
                     if (mor.refersTo(getSourceObject(game), game)) {
@@ -59,6 +67,6 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature dealt damage by {this} this turn dies, " + super.getRule();
+        return "Whenever a " + filter.getMessage() + " dealt damage by {this} this turn dies, " + super.getRule();
     }
 }

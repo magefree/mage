@@ -25,26 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.permanent;
+package mage.cards.f;
 
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author TheElk801
  */
-public class DefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+public class FlowstoneSurge extends CardImpl {
 
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input.getObject().getControllerId().equals(game.getCombat().getDefendingPlayerId(input.getSourceId(), game));
+    public FlowstoneSurge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+
+        // Creatures you control get +1/-1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, -1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false)));
+    }
+
+    public FlowstoneSurge(final FlowstoneSurge card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return "Another";
+    public FlowstoneSurge copy() {
+        return new FlowstoneSurge(this);
     }
 }

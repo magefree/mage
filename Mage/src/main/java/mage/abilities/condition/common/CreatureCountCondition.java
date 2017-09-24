@@ -72,10 +72,16 @@ public class CreatureCountCondition implements Condition {
                 sb.append(" are on the battlefield");
                 return sb.toString();
         }
-        sb.append(" control exactly ");
-        sb.append(creatureCount);
-        sb.append(' ');
+        sb.append(" control");
+        if (creatureCount == 0) {
+            sb.append(" no ");
+        } else {
+            sb.append(" exactly ");
+            sb.append(creatureCount);
+            sb.append(' ');
+        }
         sb.append(filter.getMessage());
+        sb.append(creatureCount != 1 ? "s" : "");
 
         return sb.toString();
     }

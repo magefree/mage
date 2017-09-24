@@ -55,6 +55,7 @@ public class FourthEdition extends ExpansionSet {
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Abomination", 1, Rarity.UNCOMMON, mage.cards.a.Abomination.class));
         cards.add(new SetCardInfo("Air Elemental", 59, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
+        cards.add(new SetCardInfo("Alabaster Potion", 251, Rarity.COMMON, mage.cards.a.AlabasterPotion.class));
         cards.add(new SetCardInfo("Aladdin's Lamp", 309, Rarity.RARE, mage.cards.a.AladdinsLamp.class));
         cards.add(new SetCardInfo("Aladdin's Ring", 310, Rarity.RARE, mage.cards.a.AladdinsRing.class));
         cards.add(new SetCardInfo("Ali Baba", 193, Rarity.UNCOMMON, mage.cards.a.AliBaba.class));

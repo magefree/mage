@@ -25,64 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.CycleTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.CyclingAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.constants.SubType;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class GempalmAvenger extends CardImpl {
+public class DriftOfTheDead extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
+    private static final FilterPermanent filter = new FilterPermanent("snow lands you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SOLDIER));
+        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public GempalmAvenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(5);
+    public DriftOfTheDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
-        // Cycling {2}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{W}")));
+        this.subtype.add(SubType.WALL);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        // When you cycle Gempalm Avenger, Soldier creatures get +1/+1 and gain first strike until end of turn.
-        Ability ability = new CycleTriggeredAbility(
-                new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false).setText("Soldier creatures get +1/+1")
-        );
-        Effect effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter);
-        effect.setText("and gain first strike until end of turn");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+
+        // Drift of the Dead's power and toughness are each equal to the number of snow lands you control.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public GempalmAvenger(final GempalmAvenger card) {
+    public DriftOfTheDead(final DriftOfTheDead card) {
         super(card);
     }
 
     @Override
-    public GempalmAvenger copy() {
-        return new GempalmAvenger(this);
+    public DriftOfTheDead copy() {
+        return new DriftOfTheDead(this);
     }
 }

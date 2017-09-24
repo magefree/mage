@@ -25,64 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.CycleTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.CyclingAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.ObjectColor;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class GempalmAvenger extends CardImpl {
+public class ReignOfChaos extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
+    private static final FilterPermanent filter1 = new FilterPermanent("Plains");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("white creature");
+    private static final FilterPermanent filter3 = new FilterPermanent("Island");
+    private static final FilterCreaturePermanent filter4 = new FilterCreaturePermanent("blue creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SOLDIER));
+        filter1.add(new SubtypePredicate(SubType.PLAINS));
+        filter2.add(new ColorPredicate(ObjectColor.WHITE));
+        filter3.add(new SubtypePredicate(SubType.ISLAND));
+        filter4.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public GempalmAvenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(5);
+    public ReignOfChaos(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
 
-        // Cycling {2}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{W}")));
-
-        // When you cycle Gempalm Avenger, Soldier creatures get +1/+1 and gain first strike until end of turn.
-        Ability ability = new CycleTriggeredAbility(
-                new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false).setText("Soldier creatures get +1/+1")
-        );
-        Effect effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter);
-        effect.setText("and gain first strike until end of turn");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // Choose one - Destroy target Plains and target white creature; or destroy target Island and target blue creature.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(false, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter1));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter2));
+        Mode mode = new Mode();
+        mode.getEffects().add(new DestroyTargetEffect(false, true));
+        mode.getTargets().add(new TargetPermanent(filter3));
+        mode.getTargets().add(new TargetPermanent(filter4));
+        this.getSpellAbility().addMode(mode);
     }
 
-    public GempalmAvenger(final GempalmAvenger card) {
+    public ReignOfChaos(final ReignOfChaos card) {
         super(card);
     }
 
     @Override
-    public GempalmAvenger copy() {
-        return new GempalmAvenger(this);
+    public ReignOfChaos copy() {
+        return new ReignOfChaos(this);
     }
 }

@@ -65,6 +65,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Ali from Cairo", 107, Rarity.RARE, mage.cards.a.AliFromCairo.class));
         cards.add(new SetCardInfo("Alluring Scent", 141, Rarity.COMMON, mage.cards.a.AlluringScent.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 179, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
+        cards.add(new SetCardInfo("Angelic Voices", 3, Rarity.UNCOMMON, mage.cards.a.AngelicVoices.class));
         cards.add(new SetCardInfo("Animate Artifact", 38, Rarity.UNCOMMON, mage.cards.a.AnimateArtifact.class));
         cards.add(new SetCardInfo("Argivian Blacksmith", 4, Rarity.UNCOMMON, mage.cards.a.ArgivianBlacksmith.class));
         cards.add(new SetCardInfo("Argothian Pixies", 142, Rarity.COMMON, mage.cards.a.ArgothianPixies.class));
@@ -88,6 +89,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Brass Man", 185, Rarity.COMMON, mage.cards.b.BrassMan.class));
         cards.add(new SetCardInfo("Candelabra of Tawnos", 187, Rarity.RARE, mage.cards.c.CandelabraOfTawnos.class));
         cards.add(new SetCardInfo("Celestial Sword", 188, Rarity.UNCOMMON, mage.cards.c.CelestialSword.class));
+        cards.add(new SetCardInfo("Champion Lancer", 8, Rarity.RARE, mage.cards.c.ChampionLancer.class));
         cards.add(new SetCardInfo("Channel", 145, Rarity.RARE, mage.cards.c.Channel.class));
         cards.add(new SetCardInfo("Citanul Druid", 146, Rarity.COMMON, mage.cards.c.CitanulDruid.class));
         cards.add(new SetCardInfo("City of Brass", 243, Rarity.RARE, mage.cards.c.CityOfBrass.class));

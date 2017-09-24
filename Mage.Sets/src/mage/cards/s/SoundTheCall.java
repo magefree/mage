@@ -25,26 +25,35 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.permanent;
+package mage.cards.s;
 
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.game.permanent.token.SoundTheCallToken;
 
 /**
  *
  * @author TheElk801
  */
-public class DefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+public class SoundTheCall extends CardImpl {
 
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input.getObject().getControllerId().equals(game.getCombat().getDefendingPlayerId(input.getSourceId(), game));
+    public SoundTheCall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
+        
+
+        // Create a 1/1 green Wolf creature token. It has "This creature gets +1/+1 for each card named Sound the Call in each graveyard."
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SoundTheCallToken()));
+    }
+
+    public SoundTheCall(final SoundTheCall card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return "Another";
+    public SoundTheCall copy() {
+        return new SoundTheCall(this);
     }
 }

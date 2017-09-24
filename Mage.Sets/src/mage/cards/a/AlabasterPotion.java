@@ -25,26 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.permanent;
+package mage.cards.a;
 
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
+import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.GainLifeTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author TheElk801
  */
-public class DefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+public class AlabasterPotion extends CardImpl {
 
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input.getObject().getControllerId().equals(game.getCombat().getDefendingPlayerId(input.getSourceId(), game));
+    public AlabasterPotion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
+
+        // Choose one - Target player gains X life; or prevent the next X damage that would be dealt to target creature or player this turn.
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        Mode mode = new Mode();
+        mode.getEffects().add(new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, new ManacostVariableValue()));
+        mode.getTargets().add(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addMode(mode);
+    }
+
+    public AlabasterPotion(final AlabasterPotion card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return "Another";
+    public AlabasterPotion copy() {
+        return new AlabasterPotion(this);
     }
 }
