@@ -128,6 +128,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 330, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Lore", 125, Rarity.UNCOMMON, mage.cards.f.ForgottenLore.class));
         cards.add(new SetCardInfo("Foul Familiar", 14, Rarity.COMMON, mage.cards.f.FoulFamiliar.class));
+        cards.add(new SetCardInfo("Freyalise's Charm", 128, Rarity.UNCOMMON, mage.cards.f.FreyalisesCharm.class));
         cards.add(new SetCardInfo("Fumarole", 369, Rarity.UNCOMMON, mage.cards.f.Fumarole.class));
         cards.add(new SetCardInfo("Fyndhorn Bow", 293, Rarity.UNCOMMON, mage.cards.f.FyndhornBow.class));
         cards.add(new SetCardInfo("Fyndhorn Brownie", 130, Rarity.COMMON, mage.cards.f.FyndhornBrownie.class));
