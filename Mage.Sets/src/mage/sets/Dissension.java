@@ -91,6 +91,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Dovescape", 143, Rarity.RARE, mage.cards.d.Dovescape.class));
         cards.add(new SetCardInfo("Dread Slag", 109, Rarity.RARE, mage.cards.d.DreadSlag.class));
         cards.add(new SetCardInfo("Drekavac", 43, Rarity.UNCOMMON, mage.cards.d.Drekavac.class));
+        cards.add(new SetCardInfo("Elemental Resonance", 83, Rarity.RARE, mage.cards.e.ElementalResonance.class));
         cards.add(new SetCardInfo("Enemy of the Guildpact", 44, Rarity.COMMON, mage.cards.e.EnemyOfTheGuildpact.class));
         cards.add(new SetCardInfo("Enigma Eidolon", 24, Rarity.COMMON, mage.cards.e.EnigmaEidolon.class));
         cards.add(new SetCardInfo("Entropic Eidolon", 45, Rarity.COMMON, mage.cards.e.EntropicEidolon.class));
