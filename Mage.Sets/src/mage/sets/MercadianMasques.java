@@ -270,6 +270,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Saprazzan Legate", 100, Rarity.UNCOMMON, mage.cards.s.SaprazzanLegate.class));
         cards.add(new SetCardInfo("Saprazzan Raider", 102, Rarity.COMMON, mage.cards.s.SaprazzanRaider.class));
         cards.add(new SetCardInfo("Saprazzan Skerry", 328, Rarity.COMMON, mage.cards.s.SaprazzanSkerry.class));
+        cards.add(new SetCardInfo("Security Detail", 47, Rarity.RARE, mage.cards.s.SecurityDetail.class));
         cards.add(new SetCardInfo("Seismic Mage", 211, Rarity.RARE, mage.cards.s.SeismicMage.class));
         cards.add(new SetCardInfo("Sever Soul", 159, Rarity.COMMON, mage.cards.s.SeverSoul.class));
         cards.add(new SetCardInfo("Shock Troops", 212, Rarity.COMMON, mage.cards.s.ShockTroops.class));
