@@ -144,6 +144,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Retribution of the Meek", 119, Rarity.RARE, mage.cards.r.RetributionOfTheMeek.class));
         cards.add(new SetCardInfo("Righteous Aura", 120, Rarity.COMMON, mage.cards.r.RighteousAura.class));
         cards.add(new SetCardInfo("River Boa", 68, Rarity.COMMON, mage.cards.r.RiverBoa.class));
+        cards.add(new SetCardInfo("Rock Slide", 92, Rarity.COMMON, mage.cards.r.RockSlide.class));
         cards.add(new SetCardInfo("Rowen", 69, Rarity.RARE, mage.cards.r.Rowen.class));
         cards.add(new SetCardInfo("Scalebane's Elite", 135, Rarity.UNCOMMON, mage.cards.s.ScalebanesElite.class));
         cards.add(new SetCardInfo("Shrieking Drake", 43, Rarity.COMMON, mage.cards.s.ShriekingDrake.class));
