@@ -131,6 +131,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Tunneler", 160, Rarity.COMMON, mage.cards.g.GoblinTunneler.class));
         cards.add(new SetCardInfo("Gods Willing", 88, Rarity.COMMON, mage.cards.g.GodsWilling.class));
         cards.add(new SetCardInfo("Gratuitous Violence", 161, Rarity.RARE, mage.cards.g.GratuitousViolence.class));
+        cards.add(new SetCardInfo("Grenzo's Ruffians", 55, Rarity.UNCOMMON, mage.cards.g.GrenzosRuffians.class));
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 54, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
         cards.add(new SetCardInfo("Gruul War Chant", 203, Rarity.UNCOMMON, mage.cards.g.GruulWarChant.class));
         cards.add(new SetCardInfo("Guardian of the Gateless", 89, Rarity.UNCOMMON, mage.cards.g.GuardianOfTheGateless.class));
