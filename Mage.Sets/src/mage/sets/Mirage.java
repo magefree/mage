@@ -146,6 +146,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Forsaken Wastes", 23, Rarity.RARE, mage.cards.f.ForsakenWastes.class));
         cards.add(new SetCardInfo("Frenetic Efreet", 324, Rarity.RARE, mage.cards.f.FreneticEfreet.class));
         cards.add(new SetCardInfo("Giant Mantis", 116, Rarity.COMMON, mage.cards.g.GiantMantis.class));
+        cards.add(new SetCardInfo("Gibbering Hyenas", 117, Rarity.COMMON, mage.cards.g.GibberingHyenas.class));
         cards.add(new SetCardInfo("Goblin Elite Infantry", 177, Rarity.COMMON, mage.cards.g.GoblinEliteInfantry.class));
         cards.add(new SetCardInfo("Goblin Scouts", 178, Rarity.UNCOMMON, mage.cards.g.GoblinScouts.class));
         cards.add(new SetCardInfo("Goblin Soothsayer", 179, Rarity.COMMON, mage.cards.g.GoblinSoothsayer.class));
