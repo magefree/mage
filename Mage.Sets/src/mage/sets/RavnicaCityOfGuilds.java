@@ -326,6 +326,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Tolsimir Wolfblood", 236, Rarity.RARE, mage.cards.t.TolsimirWolfblood.class));
         cards.add(new SetCardInfo("Torpid Moloch", 147, Rarity.COMMON, mage.cards.t.TorpidMoloch.class));
         cards.add(new SetCardInfo("Transluminant", 186, Rarity.COMMON, mage.cards.t.Transluminant.class));
+        cards.add(new SetCardInfo("Trophy Hunter", 187, Rarity.UNCOMMON, mage.cards.t.TrophyHunter.class));
         cards.add(new SetCardInfo("Tunnel Vision", 72, Rarity.RARE, mage.cards.t.TunnelVision.class));
         cards.add(new SetCardInfo("Twilight Drover", 33, Rarity.RARE, mage.cards.t.TwilightDrover.class));
         cards.add(new SetCardInfo("Twisted Justice", 237, Rarity.UNCOMMON, mage.cards.t.TwistedJustice.class));
