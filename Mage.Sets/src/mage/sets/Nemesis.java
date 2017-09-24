@@ -91,6 +91,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Flowstone Crusher", 81, Rarity.COMMON, mage.cards.f.FlowstoneCrusher.class));
         cards.add(new SetCardInfo("Flowstone Overseer", 82, Rarity.RARE, mage.cards.f.FlowstoneOverseer.class));
         cards.add(new SetCardInfo("Flowstone Slide", 83, Rarity.RARE, mage.cards.f.FlowstoneSlide.class));
+        cards.add(new SetCardInfo("Flowstone Surge", 85, Rarity.UNCOMMON, mage.cards.f.FlowstoneSurge.class));
         cards.add(new SetCardInfo("Flowstone Thopter", 132, Rarity.UNCOMMON, mage.cards.f.FlowstoneThopter.class));
         cards.add(new SetCardInfo("Flowstone Wall", 86, Rarity.COMMON, mage.cards.f.FlowstoneWall.class));
         cards.add(new SetCardInfo("Infiltrate", 33, Rarity.COMMON, mage.cards.i.Infiltrate.class));
