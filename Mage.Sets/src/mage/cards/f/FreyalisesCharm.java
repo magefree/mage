@@ -25,64 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.f;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.CycleTriggeredAbility;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.CyclingAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class GempalmAvenger extends CardImpl {
+public class FreyalisesCharm extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
+    private static final FilterSpell filter = new FilterSpell("black spell");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SOLDIER));
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public GempalmAvenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(5);
+    public FreyalisesCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
 
-        // Cycling {2}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{W}")));
+        // Whenever an opponent casts a black spell, you may pay {G}{G}. If you do, you draw a card.
+        this.addAbility(new SpellCastOpponentTriggeredAbility(
+                new DoIfCostPaid(
+                        new DrawCardSourceControllerEffect(1),
+                        new ManaCostsImpl("{G}{G}")
+                ), filter, false
+        ));
 
-        // When you cycle Gempalm Avenger, Soldier creatures get +1/+1 and gain first strike until end of turn.
-        Ability ability = new CycleTriggeredAbility(
-                new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false).setText("Soldier creatures get +1/+1")
-        );
-        Effect effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter);
-        effect.setText("and gain first strike until end of turn");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // {G}{G}: Return Freyalise's Charm to its owner's hand.
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl("{G}{G}")));
     }
 
-    public GempalmAvenger(final GempalmAvenger card) {
+    public FreyalisesCharm(final FreyalisesCharm card) {
         super(card);
     }
 
     @Override
-    public GempalmAvenger copy() {
-        return new GempalmAvenger(this);
+    public FreyalisesCharm copy() {
+        return new FreyalisesCharm(this);
     }
 }

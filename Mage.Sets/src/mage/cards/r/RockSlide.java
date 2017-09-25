@@ -25,64 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.CycleTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.CyclingAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.DamageMultiEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.predicate.permanent.BlockingPredicate;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class GempalmAvenger extends CardImpl {
+public class RockSlide extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.SOLDIER));
+        filter.add(Predicates.or(
+                new AttackingPredicate(),
+                new BlockingPredicate()
+        ));
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public GempalmAvenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(5);
+    public RockSlide(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}");
 
-        // Cycling {2}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{W}")));
-
-        // When you cycle Gempalm Avenger, Soldier creatures get +1/+1 and gain first strike until end of turn.
-        Ability ability = new CycleTriggeredAbility(
-                new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false).setText("Soldier creatures get +1/+1")
-        );
-        Effect effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter);
-        effect.setText("and gain first strike until end of turn");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // Rock Slide deals X damage divided as you choose among any number of target attacking or blocking creatures without flying.
+        DynamicValue xValue = new ManacostVariableValue();
+        this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue, filter));
     }
 
-    public GempalmAvenger(final GempalmAvenger card) {
+    public RockSlide(final RockSlide card) {
         super(card);
     }
 
     @Override
-    public GempalmAvenger copy() {
-        return new GempalmAvenger(this);
+    public RockSlide copy() {
+        return new RockSlide(this);
     }
 }

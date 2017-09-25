@@ -25,64 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CycleTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.CyclingAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.VigilanceAbility;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class GempalmAvenger extends CardImpl {
+public class SerraPaladin extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
+    public SerraPaladin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 
-    static {
-        filter.add(new SubtypePredicate(SubType.SOLDIER));
-    }
-
-    public GempalmAvenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
         this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(5);
+        this.subtype.add(SubType.KNIGHT);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Cycling {2}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{W}")));
+        // {tap}: Prevent the next 1 damage that would be dealt to target creature or player this turn.
+        Ability ability = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
 
-        // When you cycle Gempalm Avenger, Soldier creatures get +1/+1 and gain first strike until end of turn.
-        Ability ability = new CycleTriggeredAbility(
-                new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false).setText("Soldier creatures get +1/+1")
-        );
-        Effect effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter);
-        effect.setText("and gain first strike until end of turn");
-        ability.addEffect(effect);
+        // {1}{W}{W}, {tap}: Target creature gains vigilance until end of turn.
+        ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}{W}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public GempalmAvenger(final GempalmAvenger card) {
+    public SerraPaladin(final SerraPaladin card) {
         super(card);
     }
 
     @Override
-    public GempalmAvenger copy() {
-        return new GempalmAvenger(this);
+    public SerraPaladin copy() {
+        return new SerraPaladin(this);
     }
 }

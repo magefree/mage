@@ -25,26 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.permanent;
+package mage.cards.e;
 
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
+import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.GainLifeTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.target.TargetPlayer;
 
 /**
  *
  * @author TheElk801
  */
-public class DefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+public class EnergyBolt extends CardImpl {
 
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input.getObject().getControllerId().equals(game.getCombat().getDefendingPlayerId(input.getSourceId(), game));
+    public EnergyBolt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{W}");
+
+        // Choose one - Energy Bolt deals X damage to target player; or target player gains X life.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        Mode mode = new Mode();
+        mode.getEffects().add(new GainLifeTargetEffect(new ManacostVariableValue()));
+        mode.getTargets().add(new TargetPlayer());
+        this.getSpellAbility().addMode(mode);
+    }
+
+    public EnergyBolt(final EnergyBolt card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return "Another";
+    public EnergyBolt copy() {
+        return new EnergyBolt(this);
     }
 }

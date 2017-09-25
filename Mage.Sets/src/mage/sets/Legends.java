@@ -59,9 +59,11 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Aerathi Berserker", 131, Rarity.UNCOMMON, mage.cards.a.AerathiBerserker.class));
         cards.add(new SetCardInfo("Aisling Leprechaun", 87, Rarity.COMMON, mage.cards.a.AislingLeprechaun.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 170, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
+        cards.add(new SetCardInfo("Alabaster Potion", 171, Rarity.COMMON, mage.cards.a.AlabasterPotion.class));
         cards.add(new SetCardInfo("Alchor's Tomb", 214, Rarity.RARE, mage.cards.a.AlchorsTomb.class));
         cards.add(new SetCardInfo("All Hallow's Eve", 2, Rarity.RARE, mage.cards.a.AllHallowsEve.class));
         cards.add(new SetCardInfo("Amrou Kithkin", 172, Rarity.COMMON, mage.cards.a.AmrouKithkin.class));
+        cards.add(new SetCardInfo("Angelic Voices", 173, Rarity.RARE, mage.cards.a.AngelicVoices.class));
         cards.add(new SetCardInfo("Angus Mackenzie", 257, Rarity.RARE, mage.cards.a.AngusMackenzie.class));
         cards.add(new SetCardInfo("Arcades Sabboth", 258, Rarity.RARE, mage.cards.a.ArcadesSabboth.class));
         cards.add(new SetCardInfo("Arena of the Ancients", 215, Rarity.RARE, mage.cards.a.ArenaOfTheAncients.class));

@@ -25,26 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.permanent;
+package mage.cards.m;
 
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.DamageMultiEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
  *
  * @author TheElk801
  */
-public class DefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+public class MeteorShower extends CardImpl {
 
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input.getObject().getControllerId().equals(game.getCombat().getDefendingPlayerId(input.getSourceId(), game));
+    public MeteorShower(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");
+
+        // Meteor Shower deals X plus 1 damage divided as you choose among any number of target creatures and/or players.
+        DynamicValue xValue = new IntPlusDynamicValue(1, new ManacostVariableValue());
+        this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(xValue));
+    }
+
+    public MeteorShower(final MeteorShower card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return "Another";
+    public MeteorShower copy() {
+        return new MeteorShower(this);
     }
 }

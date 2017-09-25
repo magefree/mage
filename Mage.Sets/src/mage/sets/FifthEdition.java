@@ -38,6 +38,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Adarkar Wastes", 410, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Air Elemental", 71, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 278, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
+        cards.add(new SetCardInfo("Alabaster Potion", 279, Rarity.COMMON, mage.cards.a.AlabasterPotion.class));
         cards.add(new SetCardInfo("Aladdin's Ring", 346, Rarity.RARE, mage.cards.a.AladdinsRing.class));
         cards.add(new SetCardInfo("Ambush Party", 208, Rarity.COMMON, mage.cards.a.AmbushParty.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 347, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
@@ -352,6 +353,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Segovian Leviathan", 122, Rarity.UNCOMMON, mage.cards.s.SegovianLeviathan.class));
         cards.add(new SetCardInfo("Sengir Autocrat", 55, Rarity.RARE, mage.cards.s.SengirAutocrat.class));
         cards.add(new SetCardInfo("Serpent Generator", 397, Rarity.RARE, mage.cards.s.SerpentGenerator.class));
+        cards.add(new SetCardInfo("Serra Paladin", 337, Rarity.UNCOMMON, mage.cards.s.SerraPaladin.class));
         cards.add(new SetCardInfo("Shanodin Dryads", 187, Rarity.COMMON, mage.cards.s.ShanodinDryads.class));
         cards.add(new SetCardInfo("Shapeshifter", 398, Rarity.UNCOMMON, mage.cards.s.Shapeshifter.class));
         cards.add(new SetCardInfo("Shatter", 265, Rarity.COMMON, mage.cards.s.Shatter.class));

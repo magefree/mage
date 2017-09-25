@@ -94,6 +94,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Garza Zol, Plague Queen", 129, Rarity.RARE, mage.cards.g.GarzaZolPlagueQueen.class));
         cards.add(new SetCardInfo("Gelid Shackles", 6, Rarity.COMMON, mage.cards.g.GelidShackles.class));
         cards.add(new SetCardInfo("Glacial Plating", 7, Rarity.UNCOMMON, mage.cards.g.GlacialPlating.class));
+        cards.add(new SetCardInfo("Goblin Rimerunner", 83, Rarity.COMMON, mage.cards.g.GoblinRimerunner.class));
         cards.add(new SetCardInfo("Greater Stone Spirit", 84, Rarity.UNCOMMON, mage.cards.g.GreaterStoneSpirit.class));
         cards.add(new SetCardInfo("Grim Harvest", 58, Rarity.COMMON, mage.cards.g.GrimHarvest.class));
         cards.add(new SetCardInfo("Gristle Grinner", 59, Rarity.UNCOMMON, mage.cards.g.GristleGrinner.class));
@@ -160,6 +161,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Snow-Covered Plains", 151, Rarity.COMMON, mage.cards.s.SnowCoveredPlains.class));
         cards.add(new SetCardInfo("Snow-Covered Swamp", 153, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class));
         cards.add(new SetCardInfo("Soul Spike", 70, Rarity.RARE, mage.cards.s.SoulSpike.class));
+        cards.add(new SetCardInfo("Sound the Call", 123, Rarity.COMMON, mage.cards.s.SoundTheCall.class));
         cards.add(new SetCardInfo("Squall Drifter", 17, Rarity.COMMON, mage.cards.s.SquallDrifter.class));
         cards.add(new SetCardInfo("Stalking Yeti", 98, Rarity.UNCOMMON, mage.cards.s.StalkingYeti.class));
         cards.add(new SetCardInfo("Steam Spitter", 124, Rarity.UNCOMMON, mage.cards.s.SteamSpitter.class));
@@ -184,6 +186,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("White Shield Crusader", 24, Rarity.UNCOMMON, mage.cards.w.WhiteShieldCrusader.class));
         cards.add(new SetCardInfo("Wilderness Elemental", 134, Rarity.UNCOMMON, mage.cards.w.WildernessElemental.class));
         cards.add(new SetCardInfo("Woolly Razorback", 25, Rarity.RARE, mage.cards.w.WoollyRazorback.class));
+        cards.add(new SetCardInfo("Zombie Musher", 75, Rarity.COMMON, mage.cards.z.ZombieMusher.class));
         cards.add(new SetCardInfo("Zur the Enchanter", 135, Rarity.RARE, mage.cards.z.ZurTheEnchanter.class));
     }
 }
