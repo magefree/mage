@@ -128,6 +128,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Goblins of the Flarg", 98, Rarity.COMMON, mage.cards.g.GoblinsOfTheFlarg.class));
         cards.add(new SetCardInfo("Goblin Wizard", 97, Rarity.RARE, mage.cards.g.GoblinWizard.class));
         cards.add(new SetCardInfo("Granite Gargoyle", 99, Rarity.UNCOMMON, mage.cards.g.GraniteGargoyle.class));
+        cards.add(new SetCardInfo("Greater Realm of Preservation", 13, Rarity.UNCOMMON, mage.cards.g.GreaterRealmOfPreservation.class));
         cards.add(new SetCardInfo("Hallowed Ground", 14, Rarity.UNCOMMON, mage.cards.h.HallowedGround.class));
         cards.add(new SetCardInfo("Hand of Justice", 15, Rarity.RARE, mage.cards.h.HandOfJustice.class));
         cards.add(new SetCardInfo("Hecatomb", 71, Rarity.RARE, mage.cards.h.Hecatomb.class));
