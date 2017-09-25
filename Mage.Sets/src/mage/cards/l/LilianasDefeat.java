@@ -27,7 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -43,6 +42,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -93,7 +94,7 @@ class LilianasDefeatEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             permanent.destroy(source.getSourceId(), game, true);
             game.applyEffects();
-            if (permanent.isPlaneswalker() && permanent.getSubtype(game).contains(SubType.LILIANA)) {
+            if (permanent.isPlaneswalker() && permanent.hasSubtype(SubType.LILIANA, game)) {
                 Player permanentController = game.getPlayer(permanent.getControllerId());
                 if (permanentController != null) {
                     permanentController.loseLife(3, game, false);

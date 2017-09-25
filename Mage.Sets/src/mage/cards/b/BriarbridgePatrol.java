@@ -27,8 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -46,6 +44,9 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.PermanentsSacrificedWatcher;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -88,7 +89,7 @@ enum BriarbridgePatrolCondition implements Condition {
             if (sacrificedPermanents != null && !sacrificedPermanents.isEmpty()) {
                 int amountOfClues = 0;
                 for (Permanent permanent : sacrificedPermanents) {
-                    if (permanent.getSubtype(game).contains(SubType.CLUE)) {
+                    if (permanent.hasSubtype(SubType.CLUE, game)) {
                         amountOfClues++;
                     }
                 }

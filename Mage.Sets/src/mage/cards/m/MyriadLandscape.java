@@ -110,7 +110,7 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
                         if (landTypes.isEmpty()) {
                             landTypes.addAll(landCard.getSubtype(game));
                         } else {
-                            landTypes.removeIf(next -> !landCard.getSubtype(game).contains(next));
+                            landTypes.removeIf(next -> !landCard.hasSubtype(next, game));
                         }
                     }
                 }
@@ -118,7 +118,7 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
                 if (card != null && !landTypes.isEmpty()) {
                     for (Iterator<SubType> iterator = landTypes.iterator(); iterator.hasNext();) {
                         SubType next = iterator.next();
-                        if (card.getSubtype(game).contains(next)) {
+                        if (card.hasSubtype(next, game)) {
                             return true;
                         }
                     }

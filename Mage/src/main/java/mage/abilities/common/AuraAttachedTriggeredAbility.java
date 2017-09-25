@@ -58,7 +58,7 @@ public class AuraAttachedTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getSourceId())) {
             Permanent attachment = game.getPermanent(event.getSourceId());
-            if (attachment != null && attachment.getSubtype(game).contains(SubType.AURA)) {
+            if (attachment != null && attachment.hasSubtype(SubType.AURA, game)) {
                 return true;
             }
         }

@@ -120,7 +120,7 @@ public class BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect extends Co
                                         break;
                                 }
                                 for (SubType subType : token.getSubtype(game)) {
-                                    if (!permanentAttachedTo.getSubtype(game).contains(subType)) {
+                                    if (!permanentAttachedTo.hasSubtype(subType, game)) {
                                         permanentAttachedTo.getSubtype(game).add(subType);
                                     }
                                 }

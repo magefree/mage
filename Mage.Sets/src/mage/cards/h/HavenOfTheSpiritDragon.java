@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -53,6 +52,8 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -158,7 +159,7 @@ class UginPlaneswalkerCardPredicate implements Predicate<Card> {
     @Override
     public boolean apply(Card input, Game game) {
         return input.isPlaneswalker()
-                && input.getSubtype(game).contains(SubType.UGIN);
+                && input.hasSubtype(SubType.UGIN, game);
     }
 
     @Override

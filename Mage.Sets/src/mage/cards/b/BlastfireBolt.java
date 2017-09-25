@@ -95,7 +95,7 @@ class DestroyAllAttachedEquipmentEffect extends OneShotEffect {
                 List<UUID> attachments = new ArrayList<>(target.getAttachments());
                 for (UUID attachmentId : attachments) {
                     Permanent attachment = game.getPermanent(attachmentId);
-                    if (attachment != null && attachment.getSubtype(game).contains(SubType.EQUIPMENT)) {
+                    if (attachment != null && attachment.hasSubtype(SubType.EQUIPMENT, game)) {
                         attachment.destroy(source.getSourceId(), game, false);
                     }
                 }

@@ -87,7 +87,7 @@ class AshesOfTheFallenEffect extends ContinuousEffectImpl {
             SubType subtype = (SubType) game.getState().getValue(permanent.getId() + "_type");
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.isCreature() && !card.getSubtype(game).contains(subtype)) {
+                if (card != null && card.isCreature() && !card.hasSubtype(subtype, game)) {
                     game.getState().getCreateCardAttribute(card).getSubtype().add(subtype);
                 }
             }

@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
@@ -39,6 +38,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -85,7 +86,7 @@ class SirensRuseEffect extends ExileTargetForSourceEffect {
         boolean isPirate = false;
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null && permanent.getSubtype(game).contains(SubType.PIRATE)) {
+        if (permanent != null && permanent.hasSubtype(SubType.PIRATE, game)) {
             isPirate = true;
         }
         if (super.apply(game, source)) {

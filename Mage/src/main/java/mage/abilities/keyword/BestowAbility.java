@@ -188,7 +188,7 @@ class BestowEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent bestowPermanent = game.getPermanentEntering(source.getSourceId());
         if (bestowPermanent != null) {
-            if (bestowPermanent.getSubtype(game).contains(SubType.AURA)) {
+            if (bestowPermanent.hasSubtype(SubType.AURA, game)) {
                 MageObject basicObject = bestowPermanent.getBasicMageObject(game);
                 basicObject.getSubtype(null).add(SubType.AURA);
                 basicObject.getCardType().remove(CardType.CREATURE);

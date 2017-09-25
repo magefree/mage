@@ -92,7 +92,7 @@ class WitchbaneOrbEffect extends OneShotEffect {
             List<Permanent> toDestroy = new ArrayList<>();
             for (UUID attachmentId : controller.getAttachments()) {
                 Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getSubtype(game).contains(SubType.CURSE)) {
+                if (attachment != null && attachment.hasSubtype(SubType.CURSE, game)) {
                     toDestroy.add(attachment);
                 }
             }

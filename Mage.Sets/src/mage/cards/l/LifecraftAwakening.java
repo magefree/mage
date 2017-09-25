@@ -27,7 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -37,11 +36,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -50,6 +45,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -101,8 +98,8 @@ class LifecraftAwakeningEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getPermanent(source.getTargets().getFirstTarget());
-        if (!permanent.isCreature() && !permanent.getSubtype(game).contains(SubType.VEHICLE)) {
+        Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
+        if (!permanent.isCreature() && !permanent.hasSubtype(SubType.VEHICLE, game)) {
             ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new LifecraftAwakeningToken(), false, true, Duration.Custom);
             continuousEffect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(continuousEffect, source);

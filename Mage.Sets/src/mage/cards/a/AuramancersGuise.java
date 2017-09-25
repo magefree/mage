@@ -27,8 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -45,6 +43,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -101,7 +102,7 @@ class EnchantedCreatureAurasCount implements DynamicValue {
                 List<UUID> attachments = permanent.getAttachments();
                 for (UUID attachmentId : attachments) {
                     Permanent attached = game.getPermanent(attachmentId);
-                    if (attached != null && attached.getSubtype(game).contains(SubType.AURA)) {
+                    if (attached != null && attached.hasSubtype(SubType.AURA, game)) {
                         count++;
                     }
 

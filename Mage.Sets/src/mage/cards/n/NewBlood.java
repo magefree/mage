@@ -27,9 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.LinkedHashSet;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -43,12 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.TextPartSubtypePredicate;
@@ -59,6 +51,10 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.LinkedHashSet;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -187,9 +183,9 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
                             break;
                         case TypeChangingEffects_4:
                             if (sublayer == SubLayer.NA) {
-                                if (targetObject.getSubtype(game).contains(fromSubType)) {
+                                if (targetObject.hasSubtype(fromSubType, game)) {
                                     targetObject.getSubtype(game).remove(fromSubType);
-                                    if (!targetObject.getSubtype(game).contains(toSubType)) {
+                                    if (!targetObject.hasSubtype(toSubType, game)) {
                                         targetObject.getSubtype(game).add(toSubType);
                                     }
                                 }

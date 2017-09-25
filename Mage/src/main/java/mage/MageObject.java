@@ -1,9 +1,5 @@
 package mage;
 
-import java.io.Serializable;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
@@ -18,6 +14,11 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.SubTypeList;
+
+import java.io.Serializable;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 public interface MageObject extends MageItem, Serializable {
 
@@ -177,7 +178,7 @@ public interface MageObject extends MageItem, Serializable {
             }
         }
         for (SubType subtype : this.getSubtype(game)) {
-            if (otherCard.getSubtype(game).contains(subtype)) {
+            if (otherCard.hasSubtype(subtype, game)) {
                 return true;
             }
         }
