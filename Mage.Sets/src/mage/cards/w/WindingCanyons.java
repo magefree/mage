@@ -50,14 +50,14 @@ import mage.filter.common.FilterCreatureCard;
 public class WindingCanyons extends CardImpl {
 
     public WindingCanyons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        
-        // {2}, {tap}: Until end of turn, you may play creature cards as though they had flash.
+
+        // {2}, {tap}: Until end of turn, you may cast creature spells as though they had flash.
         Effect effect = new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, new FilterCreatureCard()));
-        effect.setText("Until end of turn, you may play creature cards as though they had flash");
+        effect.setText("Until end of turn, you may cast creature spells as though they had flash.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
