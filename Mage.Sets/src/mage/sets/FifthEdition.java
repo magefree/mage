@@ -177,6 +177,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 419, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 420, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forget", 89, Rarity.RARE, mage.cards.f.Forget.class));
+        cards.add(new SetCardInfo("Foxfire", 157, Rarity.COMMON, mage.cards.f.Foxfire.class));
         cards.add(new SetCardInfo("Fountain of Youth", 372, Rarity.UNCOMMON, mage.cards.f.FountainOfYouth.class));
         cards.add(new SetCardInfo("Frozen Shade", 25, Rarity.COMMON, mage.cards.f.FrozenShade.class));
         cards.add(new SetCardInfo("Fungusaur", 158, Rarity.RARE, mage.cards.f.Fungusaur.class));
@@ -196,6 +197,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin War Drums", 237, Rarity.COMMON, GoblinWarDrums.class));
         cards.add(new SetCardInfo("Goblin Warrens", 238, Rarity.RARE, mage.cards.g.GoblinWarrens.class));
         cards.add(new SetCardInfo("Grapeshot Catapult", 375, Rarity.COMMON, mage.cards.g.GrapeshotCatapult.class));
+        cards.add(new SetCardInfo("Greater Realm of Preservation", 307, Rarity.UNCOMMON, mage.cards.g.GreaterRealmOfPreservation.class));
         cards.add(new SetCardInfo("Grizzly Bears", 163, Rarity.COMMON, mage.cards.g.GrizzlyBears.class));
         cards.add(new SetCardInfo("Havenwood Battleground", 421, Rarity.UNCOMMON, mage.cards.h.HavenwoodBattleground.class));
         cards.add(new SetCardInfo("Heal", 308, Rarity.COMMON, mage.cards.h.Heal.class));
