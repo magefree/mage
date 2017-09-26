@@ -25,50 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddContinuousEffectToGame;
-import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author TheElk801
  */
-public class WindingCanyons extends CardImpl {
+public class FyndhornPollen extends CardImpl {
 
-    public WindingCanyons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures");
 
-        // {tap}: Add {C} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
+    public FyndhornPollen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
-        // {2}, {tap}: Until end of turn, you may cast creature spells as though they had flash.
-        Effect effect = new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, new FilterCreatureCard()));
-        effect.setText("Until end of turn, you may cast creature spells as though they had flash.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        // Cumulative upkeep {1}
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+
+        // All creatures get -1/-0.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, filter, false)));
+
+        // {1}{G}: All creatures get -1/-0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}{G}")));
     }
 
-    public WindingCanyons(final WindingCanyons card) {
+    public FyndhornPollen(final FyndhornPollen card) {
         super(card);
     }
 
     @Override
-    public WindingCanyons copy() {
-        return new WindingCanyons(this);
+    public FyndhornPollen copy() {
+        return new FyndhornPollen(this);
     }
 }

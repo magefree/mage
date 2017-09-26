@@ -47,23 +47,24 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 /**
  *
  * @author noxx
-
+ *
  */
 public class AlchemistsRefuge extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("nonland cards");
+    private static final FilterCard filter = new FilterCard("spells");
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
     public AlchemistsRefuge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
-        // {G}{U}, {tap}: You may cast nonland cards this turn as though they had flash.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        // {G}{U}, {tap}: You may cast spells this turn as though they had flash.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, filter)),
                 new CompositeCost(new ManaCostsImpl("{G}{U}"), new TapSourceCost(), "{G}{U}, {T}")));
     }

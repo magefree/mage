@@ -25,50 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddContinuousEffectToGame;
-import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author TheElk801
  */
-public class WindingCanyons extends CardImpl {
+public class FlowstoneStrike extends CardImpl {
 
-    public WindingCanyons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+    public FlowstoneStrike(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        // {tap}: Add {C} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-
-        // {2}, {tap}: Until end of turn, you may cast creature spells as though they had flash.
-        Effect effect = new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, new FilterCreatureCard()));
-        effect.setText("Until end of turn, you may cast creature spells as though they had flash.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        // Target creature gets +1/-1 and gains haste until end of turn.
+        Effect effect = new BoostTargetEffect(1, -1, Duration.EndOfTurn);
+        effect.setText("Target creature gets +1/-1");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains haste until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WindingCanyons(final WindingCanyons card) {
+    public FlowstoneStrike(final FlowstoneStrike card) {
         super(card);
     }
 
     @Override
-    public WindingCanyons copy() {
-        return new WindingCanyons(this);
+    public FlowstoneStrike copy() {
+        return new FlowstoneStrike(this);
     }
 }
