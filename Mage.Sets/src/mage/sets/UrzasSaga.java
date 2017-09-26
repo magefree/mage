@@ -178,6 +178,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Great Whale", 77, Rarity.RARE, mage.cards.g.GreatWhale.class));
         cards.add(new SetCardInfo("Guma", 197, Rarity.UNCOMMON, mage.cards.g.Guma.class));
         cards.add(new SetCardInfo("Hawkeater Moth", 259, Rarity.UNCOMMON, mage.cards.h.HawkeaterMoth.class));
+        cards.add(new SetCardInfo("Headlong Rush", 198, Rarity.COMMON, mage.cards.h.HeadlongRush.class));
         cards.add(new SetCardInfo("Healing Salve", 16, Rarity.COMMON, mage.cards.h.HealingSalve.class));
         cards.add(new SetCardInfo("Heat Ray", 199, Rarity.COMMON, mage.cards.h.HeatRay.class));
         cards.add(new SetCardInfo("Herald of Serra", 17, Rarity.RARE, mage.cards.h.HeraldOfSerra.class));
