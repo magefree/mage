@@ -220,6 +220,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Sir Shandlar of Eberyn", 297, Rarity.UNCOMMON, mage.cards.s.SirShandlarOfEberyn.class));
         cards.add(new SetCardInfo("Sivitri Scarzam", 298, Rarity.UNCOMMON, mage.cards.s.SivitriScarzam.class));
         cards.add(new SetCardInfo("Sol'kanar the Swamp King", 299, Rarity.RARE, mage.cards.s.SolkanarTheSwampKing.class));
+        cards.add(new SetCardInfo("Spectral Cloak", 78, Rarity.UNCOMMON, mage.cards.s.SpectralCloak.class));
         cards.add(new SetCardInfo("Spinal Villain", 161, Rarity.RARE, mage.cards.s.SpinalVillain.class));
         cards.add(new SetCardInfo("Spirit Link", 206, Rarity.UNCOMMON, mage.cards.s.SpiritLink.class));
         cards.add(new SetCardInfo("Spirit Shackle", 31, Rarity.COMMON, mage.cards.s.SpiritShackle.class));
