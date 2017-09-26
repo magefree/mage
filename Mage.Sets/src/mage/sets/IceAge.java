@@ -299,6 +299,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Tinder Wall", 158, Rarity.COMMON, mage.cards.t.TinderWall.class));
         cards.add(new SetCardInfo("Tor Giant", 220, Rarity.COMMON, mage.cards.t.TorGiant.class));
         cards.add(new SetCardInfo("Touch of Death", 55, Rarity.COMMON, mage.cards.t.TouchOfDeath.class));
+        cards.add(new SetCardInfo("Trailblazer", 160, Rarity.RARE, mage.cards.t.Trailblazer.class));
         cards.add(new SetCardInfo("Underground River", 357, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
         cards.add(new SetCardInfo("Updraft", 105, Rarity.UNCOMMON, mage.cards.u.Updraft.class));
         cards.add(new SetCardInfo("Urza's Bauble", 318, Rarity.UNCOMMON, mage.cards.u.UrzasBauble.class));
