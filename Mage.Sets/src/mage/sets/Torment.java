@@ -163,6 +163,7 @@ public class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Slithery Stalker", 84, Rarity.UNCOMMON, mage.cards.s.SlitheryStalker.class));
         cards.add(new SetCardInfo("Sonic Seizure", 115, Rarity.COMMON, mage.cards.s.SonicSeizure.class));
         cards.add(new SetCardInfo("Soul Scourge", 85, Rarity.COMMON, mage.cards.s.SoulScourge.class));
+        cards.add(new SetCardInfo("Stern Judge", 16, Rarity.UNCOMMON, mage.cards.s.SternJudge.class));
         cards.add(new SetCardInfo("Strength of Isolation", 17, Rarity.UNCOMMON, mage.cards.s.StrengthOfIsolation.class));
         cards.add(new SetCardInfo("Strength of Lunacy", 86, Rarity.UNCOMMON, mage.cards.s.StrengthOfLunacy.class));
         cards.add(new SetCardInfo("Stupefying Touch", 48, Rarity.UNCOMMON, mage.cards.s.StupefyingTouch.class));
