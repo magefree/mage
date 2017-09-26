@@ -100,6 +100,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Jolrael, Empress of Beasts", 81, Rarity.SPECIAL, mage.cards.j.JolraelEmpressOfBeasts.class));
         cards.add(new SetCardInfo("Kobold Taskmaster", 65, Rarity.SPECIAL, mage.cards.k.KoboldTaskmaster.class));
         cards.add(new SetCardInfo("Krosan Cloudscraper", 82, Rarity.SPECIAL, mage.cards.k.KrosanCloudscraper.class));
+        cards.add(new SetCardInfo("Leviathan", 23, Rarity.RARE, mage.cards.l.Leviathan.class));
         cards.add(new SetCardInfo("Lightning Angel", 94, Rarity.COMMON, mage.cards.l.LightningAngel.class));
         cards.add(new SetCardInfo("Lord of Atlantis", 24, Rarity.RARE, mage.cards.l.LordOfAtlantis.class));
         cards.add(new SetCardInfo("Merfolk Assassin", 25, Rarity.SPECIAL, mage.cards.m.MerfolkAssassin.class));
