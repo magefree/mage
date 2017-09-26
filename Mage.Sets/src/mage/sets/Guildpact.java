@@ -127,6 +127,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Leyline of the Void", 52, Rarity.RARE, mage.cards.l.LeylineOfTheVoid.class));
         cards.add(new SetCardInfo("Lionheart Maverick", 11, Rarity.COMMON, mage.cards.l.LionheartMaverick.class));
         cards.add(new SetCardInfo("Martyred Rusalka", 12, Rarity.UNCOMMON, mage.cards.m.MartyredRusalka.class));
+        cards.add(new SetCardInfo("Mimeofacture", 30, Rarity.RARE, mage.cards.m.Mimeofacture.class));
         cards.add(new SetCardInfo("Mizzium Transreliquat", 153, Rarity.RARE, mage.cards.m.MizziumTransreliquat.class));
         cards.add(new SetCardInfo("Mortify", 122, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mourning Thrull", 146, Rarity.COMMON, mage.cards.m.MourningThrull.class));
