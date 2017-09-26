@@ -25,63 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.l;
-
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
+package mage.cards.s;
 
 import java.util.UUID;
+import mage.constants.SubType;
+import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.AttachedToTappedCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.ShroudAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *
- * @author Styxo
+ * @author TheElk801
  */
-public class Lightsaber extends CardImpl {
+public class SpectralCloak extends CardImpl {
 
-    public Lightsaber(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.subtype.add(SubType.EQUIPMENT);
+    public SpectralCloak(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
 
-        // Equiped creature gets +1/+0 and has firsttrike
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.subtype.add(SubType.AURA);
 
-        // Equip 3
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
-        // Lightsaber's equip ability costs {1} if it targets a Jedi or Sith.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("{this}'s equip ability costs {1} if it targets a Jedi or Sith")));
-
+        // Enchanted creature has shroud as long as it's untapped.
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(
+                        new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA),
+                        new InvertCondition(AttachedToTappedCondition.instance),
+                        "Enchanted creature has shroud as long as it's untapped."
+                )
+        ));
     }
 
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (ability instanceof EquipAbility) {
-            Permanent targetCreature = game.getPermanent(ability.getTargets().getFirstTarget());
-            if (targetCreature != null && (targetCreature.hasSubtype(SubType.SITH, game) || targetCreature.hasSubtype(SubType.JEDI, game))) {
-                CardUtil.increaseCost(ability, 1 - ability.getManaCostsToPay().convertedManaCost());
-            }
-        }
-    }
-
-    public Lightsaber(final Lightsaber card) {
+    public SpectralCloak(final SpectralCloak card) {
         super(card);
     }
 
     @Override
-    public Lightsaber copy() {
-        return new Lightsaber(this);
+    public SpectralCloak copy() {
+        return new SpectralCloak(this);
     }
 }

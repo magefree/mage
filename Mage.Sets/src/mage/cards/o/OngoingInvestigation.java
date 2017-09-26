@@ -27,15 +27,14 @@
  */
 package mage.cards.o;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
@@ -46,7 +45,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -57,11 +55,11 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class OngoingInvestigation extends CardImpl {
 
     public OngoingInvestigation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // Whenever one or more creatures you control deal combat damage to a player, investigate.
         this.addAbility(new OngoingInvestigationTriggeredAbility());
-        
+
         // {1}{G}, Exile a creature card from your graveyard: Investigate. You gain 2 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new InvestigateEffect(), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card from your graveyard"))));
@@ -81,8 +79,7 @@ public class OngoingInvestigation extends CardImpl {
 
 class OngoingInvestigationTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean madeDamage = false;
-    private Set<UUID> damagedPlayers = new HashSet<>();
+    List<UUID> damagedPlayerIds = new ArrayList<>();
 
     public OngoingInvestigationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new InvestigateEffect(), false);
@@ -90,9 +87,6 @@ class OngoingInvestigationTriggeredAbility extends TriggeredAbilityImpl {
 
     public OngoingInvestigationTriggeredAbility(final OngoingInvestigationTriggeredAbility ability) {
         super(ability);
-        this.madeDamage = ability.madeDamage;
-        this.damagedPlayers = new HashSet<>();
-        this.damagedPlayers.addAll(ability.damagedPlayers);
     }
 
     @Override
@@ -102,36 +96,30 @@ class OngoingInvestigationTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER || event.getType() == EventType.COMBAT_DAMAGE_STEP_POST;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                || event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && p != null && p.getControllerId().equals(this.getControllerId())) {
-                madeDamage = true;
-                damagedPlayers.add(event.getPlayerId());
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
+            if (((DamagedPlayerEvent) event).isCombatDamage()) {
+                Permanent creature = game.getPermanent(event.getSourceId());
+                if (creature != null && creature.getControllerId().equals(controllerId)
+                        && !damagedPlayerIds.contains(event.getTargetId())) {
+                    damagedPlayerIds.add(event.getTargetId());
+                    return true;
+                }
             }
         }
-        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_POST) {
-            if (madeDamage) {
-                Set<UUID> damagedPlayersCopy = new HashSet<>();
-                damagedPlayersCopy.addAll(damagedPlayers);
-                for(Effect effect: this.getEffects()) {
-                    effect.setValue("damagedPlayers", damagedPlayersCopy);
-                }
-                damagedPlayers.clear();
-                madeDamage = false;
-                return true;
-            }
+        if (event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST) {
+            damagedPlayerIds.clear();
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever one or more creatures you control deal combat damage to a player, " + super.getRule();
+        return "Whenever one or more creatures you control deal combat damage to a player, investigate";
     }
 }

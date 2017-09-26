@@ -25,69 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.cards.s;
 
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
-import java.util.List;
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Zone;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
- * @author North, noxx
+ * @author TheElk801
  */
-public class EquipmentAttachedCount implements DynamicValue {
+public class Steamclaw extends CardImpl {
 
-    private Integer amount;
+    public Steamclaw(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-    public EquipmentAttachedCount() {
-        this(1);
+        // {3}, {tap}: Exile target card from a graveyard.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
+        ability.addCost(new GenericManaCost(3));
+        ability.addTarget(new TargetCardInGraveyard());
+        this.addAbility(ability);
+
+        // {1}, Sacrifice Steamclaw: Exile target card from a graveyard.
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(1));
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCardInGraveyard());
+        this.addAbility(ability);
     }
 
-    public EquipmentAttachedCount(Integer amount) {
-        this.amount = amount;
-    }
-
-    public EquipmentAttachedCount(final EquipmentAttachedCount dynamicValue) {
-        this.amount = dynamicValue.amount;
-    }
-
-    @Override
-    public int calculate(Game game, Ability source, Effect effect) {
-        int count = 0;
-        Permanent permanent = game.getPermanent(source.getSourceId()); // don't change this - may affect other cards
-        if (permanent != null) {
-            List<UUID> attachments = permanent.getAttachments();
-            for (UUID attachmentId : attachments) {
-                Permanent attached = game.getPermanent(attachmentId);
-                if (attached != null && attached.hasSubtype(SubType.EQUIPMENT, game)) {
-                    count++;
-                }
-            }
-        }
-        return amount * count;
+    public Steamclaw(final Steamclaw card) {
+        super(card);
     }
 
     @Override
-    public EquipmentAttachedCount copy() {
-        return new EquipmentAttachedCount(this);
-    }
-
-    @Override
-    public String toString() {
-        if (amount != null) {
-            return amount.toString();
-        }
-        return "";
-    }
-
-    @Override
-    public String getMessage() {
-        return "Equipment attached to it";
+    public Steamclaw copy() {
+        return new Steamclaw(this);
     }
 }

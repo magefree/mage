@@ -27,8 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -46,6 +44,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.Iterator;
+import java.util.UUID;
 
 /**
  *
@@ -115,7 +116,7 @@ class PathOfAncestryTriggeredAbility extends TriggeredAbilityImpl {
                         if (sType.getSubTypeSet() == SubTypeSet.CreatureType) {
                             for (UUID cmdr : controller.getCommandersIds()) {
                                 MageObject commander = game.getObject(cmdr);
-                                if (commander != null && commander.getSubtype(game).contains(sType)) {
+                                if (commander != null && commander.hasSubtype(sType, game)) {
                                     return true;
                                 }
                             }

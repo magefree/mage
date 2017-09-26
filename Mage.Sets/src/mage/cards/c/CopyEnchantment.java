@@ -88,7 +88,7 @@ class CopyEnchantmentEffect extends CopyPermanentEffect {
             if (super.apply(game, source)) {
                 Permanent permanentToCopy = getBluePrintPermanent();
                 if (permanentToCopy != null) {
-                    if (permanentToCopy.getSubtype(game).contains(SubType.AURA)) {
+                    if (permanentToCopy.hasSubtype(SubType.AURA, game)) {
                         Target target = getBluePrintPermanent().getSpellAbility().getTargets().get(0);
                         Outcome auraOutcome = Outcome.BoostCreature;
                         Ability:

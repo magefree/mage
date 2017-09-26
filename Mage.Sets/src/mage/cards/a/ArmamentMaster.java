@@ -27,8 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +38,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -116,7 +117,7 @@ class ArmamentMasterEffect extends ContinuousEffectImpl {
             List<UUID> attachments = p.getAttachments();
             for (UUID attachmentId : attachments) {
                 Permanent attached = game.getPermanent(attachmentId);
-                if (attached != null && attached.getSubtype(game).contains(SubType.EQUIPMENT)) {
+                if (attached != null && attached.hasSubtype(SubType.EQUIPMENT, game)) {
                     count++;
                 }
             }

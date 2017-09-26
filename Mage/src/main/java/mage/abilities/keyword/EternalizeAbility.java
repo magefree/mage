@@ -115,7 +115,7 @@ class EternalizeEffect extends OneShotEffect {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(card); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
             token.getColor(game).setColor(ObjectColor.BLACK);
-            if (!token.getSubtype(game).contains(SubType.ZOMBIE)) {
+            if (!token.hasSubtype(SubType.ZOMBIE, game)) {
                 token.getSubtype(game).add(0, SubType.ZOMBIE);
             }
             token.getManaCost().clear();

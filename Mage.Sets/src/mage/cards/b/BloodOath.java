@@ -43,6 +43,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -55,6 +56,7 @@ public class BloodOath extends CardImpl {
 
         // Choose a card type. Target opponent reveals his or her hand. Blood Oath deals 3 damage to that player for each card of the chosen type revealed this way.
         this.getSpellAbility().addEffect(new BloodOathEffect());
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     public BloodOath(final BloodOath card) {
@@ -130,13 +132,14 @@ class BloodOathEffect extends OneShotEffect {
                 Cards hand = opponent.getHand();
                 opponent.revealCards(sourceObject.getIdName(), hand, game);
                 Set<Card> cards = hand.getCards(game);
-                int count = 0;
+                int damageToDeal = 0;
                 for (Card card : cards) {
                     if (card != null && card.getCardType().contains(type)) {
-                        count += 1;
+                        damageToDeal += 3;
                     }
                 }
-                opponent.damage(count * 3, source.getSourceId(), game, false, true);
+                game.informPlayers(sourceObject.getLogName() + " deals " + (damageToDeal == 0 ? "no" : "" + damageToDeal) + " damage to " + opponent.getLogName());
+                opponent.damage(damageToDeal, source.getSourceId(), game, false, true);
                 return true;
             }
         }

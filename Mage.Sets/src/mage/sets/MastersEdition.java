@@ -184,6 +184,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Paralyze", 80, Rarity.COMMON, mage.cards.p.Paralyze.class));
         cards.add(new SetCardInfo("Phantom Monster", 43, Rarity.COMMON, mage.cards.p.PhantomMonster.class));
         cards.add(new SetCardInfo("Phelddagrif", 150, Rarity.RARE, mage.cards.p.Phelddagrif.class));
+        cards.add(new SetCardInfo("Phyrexian Boon", 81, Rarity.COMMON, mage.cards.p.PhyrexianBoon.class));
         cards.add(new SetCardInfo("Phyrexian War Beast", 162, Rarity.UNCOMMON, PhyrexianWarBeast.class));
         cards.add(new SetCardInfo("Plains", 181, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 182, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));

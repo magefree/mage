@@ -89,7 +89,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                             } else {
                                 if (!token.getSubtype(game).isEmpty()) {
                                     for (SubType subtype : token.getSubtype(game)) {
-                                        if (!permanent.getSubtype(game).contains(subtype)) {
+                                        if (!permanent.hasSubtype(subtype, game)) {
                                             permanent.getSubtype(game).add(subtype);
                                         }
                                     }

@@ -204,7 +204,7 @@ class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements Sour
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        if (!permanent.getSubtype(game).contains(SubType.AURA)) {
+                        if (!permanent.hasSubtype(SubType.AURA, game)) {
                             permanent.getSubtype(game).add(SubType.AURA);
                         }
                     }

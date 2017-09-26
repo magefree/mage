@@ -2938,6 +2938,9 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void setMonarchId(Ability source, UUID monarchId) {
+        if (monarchId == getMonarchId()) { // Nothing happens if you're already the monarch
+            return;
+        }
         Player newMonarch = getPlayer(monarchId);
         if (getMonarchId() == null) {
             getState().addDesignation(new Monarch(), this, monarchId);

@@ -25,69 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.cards.f;
 
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
-import java.util.List;
 import java.util.UUID;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.keyword.CumulativeUpkeepAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author North, noxx
+ * @author TheElk801
  */
-public class EquipmentAttachedCount implements DynamicValue {
+public class FyndhornPollen extends CardImpl {
 
-    private Integer amount;
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures");
 
-    public EquipmentAttachedCount() {
-        this(1);
+    public FyndhornPollen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+
+        // Cumulative upkeep {1}
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+
+        // All creatures get -1/-0.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, filter, false)));
+
+        // {1}{G}: All creatures get -1/-0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}{G}")));
     }
 
-    public EquipmentAttachedCount(Integer amount) {
-        this.amount = amount;
-    }
-
-    public EquipmentAttachedCount(final EquipmentAttachedCount dynamicValue) {
-        this.amount = dynamicValue.amount;
-    }
-
-    @Override
-    public int calculate(Game game, Ability source, Effect effect) {
-        int count = 0;
-        Permanent permanent = game.getPermanent(source.getSourceId()); // don't change this - may affect other cards
-        if (permanent != null) {
-            List<UUID> attachments = permanent.getAttachments();
-            for (UUID attachmentId : attachments) {
-                Permanent attached = game.getPermanent(attachmentId);
-                if (attached != null && attached.hasSubtype(SubType.EQUIPMENT, game)) {
-                    count++;
-                }
-            }
-        }
-        return amount * count;
+    public FyndhornPollen(final FyndhornPollen card) {
+        super(card);
     }
 
     @Override
-    public EquipmentAttachedCount copy() {
-        return new EquipmentAttachedCount(this);
-    }
-
-    @Override
-    public String toString() {
-        if (amount != null) {
-            return amount.toString();
-        }
-        return "";
-    }
-
-    @Override
-    public String getMessage() {
-        return "Equipment attached to it";
+    public FyndhornPollen copy() {
+        return new FyndhornPollen(this);
     }
 }

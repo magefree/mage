@@ -25,69 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.cards.m;
 
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
-import java.util.List;
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.constants.SubType;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AttachedToPredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author North, noxx
+ * @author TheElk801
  */
-public class EquipmentAttachedCount implements DynamicValue {
+public class MiracleWorker extends CardImpl {
 
-    private Integer amount;
+    private static final FilterPermanent filter = new FilterPermanent("Aura attached to a creature you control");
 
-    public EquipmentAttachedCount() {
-        this(1);
+    static {
+        filter.add(new AttachedToPredicate(new FilterControlledCreaturePermanent()));
+        filter.add(new SubtypePredicate(SubType.AURA));
     }
 
-    public EquipmentAttachedCount(Integer amount) {
-        this.amount = amount;
+    public MiracleWorker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
+
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.CLERIC);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {tap}: Destroy target Aura attached to a creature you control.
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
     }
 
-    public EquipmentAttachedCount(final EquipmentAttachedCount dynamicValue) {
-        this.amount = dynamicValue.amount;
-    }
-
-    @Override
-    public int calculate(Game game, Ability source, Effect effect) {
-        int count = 0;
-        Permanent permanent = game.getPermanent(source.getSourceId()); // don't change this - may affect other cards
-        if (permanent != null) {
-            List<UUID> attachments = permanent.getAttachments();
-            for (UUID attachmentId : attachments) {
-                Permanent attached = game.getPermanent(attachmentId);
-                if (attached != null && attached.hasSubtype(SubType.EQUIPMENT, game)) {
-                    count++;
-                }
-            }
-        }
-        return amount * count;
+    public MiracleWorker(final MiracleWorker card) {
+        super(card);
     }
 
     @Override
-    public EquipmentAttachedCount copy() {
-        return new EquipmentAttachedCount(this);
-    }
-
-    @Override
-    public String toString() {
-        if (amount != null) {
-            return amount.toString();
-        }
-        return "";
-    }
-
-    @Override
-    public String getMessage() {
-        return "Equipment attached to it";
+    public MiracleWorker copy() {
+        return new MiracleWorker(this);
     }
 }

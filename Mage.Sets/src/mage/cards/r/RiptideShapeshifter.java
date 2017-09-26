@@ -105,7 +105,7 @@ class RiptideShapeshifterEffect extends OneShotEffect {
             Cards revealedCards = new CardsImpl();
             while (controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().removeFromTop(game);
-                if (card.isCreature() && card.getSubtype(game).contains(SubType.byDescription(choice.getChoice()))) {
+                if (card.isCreature() && card.hasSubtype(SubType.byDescription(choice.getChoice()), game)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     break;
                 }

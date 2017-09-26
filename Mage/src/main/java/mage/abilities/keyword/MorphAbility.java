@@ -194,8 +194,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
     @Override
     public boolean isAvailable(Ability source, Game game) {
-        return game.isMainPhase() && game.getActivePlayerId().equals(source.getControllerId())
-                && (game.getStack().isEmpty() || (game.getStack().size() == 1 && game.getStack().getFirst().getSourceId().equals(source.getSourceId())));
+        return true;
     }
 
     @Override

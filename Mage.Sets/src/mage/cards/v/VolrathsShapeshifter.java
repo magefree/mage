@@ -27,7 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +40,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author ImperatorPrime
@@ -108,7 +109,7 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
 
         permanent.getSubtype(game).clear();
         for (SubType type : card.getSubtype(game)) {
-            if (!permanent.getSubtype(game).contains(type)) {
+            if (!permanent.hasSubtype(type, game)) {
                 permanent.getSubtype(game).add(type);
             }
         }

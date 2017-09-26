@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,13 +38,11 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.BestowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,7 +95,7 @@ class EverflameEidolonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourceObject != null) {
-            if (sourceObject.getSubtype(game).contains(SubType.AURA)) {
+            if (sourceObject.hasSubtype(SubType.AURA, game)) {
                 game.addEffect(new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), source);
             } else {
                 game.addEffect(new BoostSourceEffect(1, 0, Duration.EndOfTurn), source);

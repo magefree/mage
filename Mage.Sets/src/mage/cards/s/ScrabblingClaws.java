@@ -35,6 +35,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -55,18 +56,18 @@ import mage.target.common.TargetCardInGraveyard;
 public class ScrabblingClaws extends CardImpl {
 
     public ScrabblingClaws(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {tap}: Target player exiles a card from his or her graveyard.
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScrabblingClawsEffect(), new TapSourceCost());
         firstAbility.addTarget(new TargetPlayer());
         this.addAbility(firstAbility);
         // {1}, Sacrifice Scrabbling Claws: Exile target card from a graveyard. Draw a card.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new mage.abilities.effects.common.ExileTargetEffect(), new SacrificeSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new SacrificeSourceCost());
         ability.addCost(new GenericManaCost(1));
         ability.addTarget(new TargetCardInGraveyard());
-        this.addAbility(ability);
         ability.addEffect(new DrawCardSourceControllerEffect(1));
+        this.addAbility(ability);
     }
 
     public ScrabblingClaws(final ScrabblingClaws card) {
