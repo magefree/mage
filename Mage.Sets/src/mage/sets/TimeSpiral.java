@@ -101,6 +101,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Flamecore Elemental", 154, Rarity.COMMON, mage.cards.f.FlamecoreElemental.class));
         cards.add(new SetCardInfo("Fledgling Mawcor", 63, Rarity.UNCOMMON, mage.cards.f.FledglingMawcor.class));
         cards.add(new SetCardInfo("Flickering Spirit", 17, Rarity.COMMON, mage.cards.f.FlickeringSpirit.class));
+        cards.add(new SetCardInfo("Flowstone Channeler", 155, Rarity.COMMON, mage.cards.f.FlowstoneChanneler.class));
         cards.add(new SetCardInfo("Fool's Demise", 64, Rarity.UNCOMMON, mage.cards.f.FoolsDemise.class));
         cards.add(new SetCardInfo("Forest", 298, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 299, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
