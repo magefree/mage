@@ -117,6 +117,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Sprites", 100, Rarity.COMMON, mage.cards.f.FireSprites.class));
         cards.add(new SetCardInfo("Flash Counter", 56, Rarity.COMMON, mage.cards.f.FlashCounter.class));
         cards.add(new SetCardInfo("Flash Flood", 57, Rarity.COMMON, mage.cards.f.FlashFlood.class));
+        cards.add(new SetCardInfo("Floral Spuzzem", 101, Rarity.UNCOMMON, mage.cards.f.FloralSpuzzem.class));
         cards.add(new SetCardInfo("Force Spike", 58, Rarity.COMMON, mage.cards.f.ForceSpike.class));
         cards.add(new SetCardInfo("Frost Giant", 146, Rarity.UNCOMMON, mage.cards.f.FrostGiant.class));
         cards.add(new SetCardInfo("Gaseous Form", 59, Rarity.COMMON, mage.cards.g.GaseousForm.class));
