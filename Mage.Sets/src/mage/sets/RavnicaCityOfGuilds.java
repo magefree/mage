@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -37,6 +36,7 @@ import mage.constants.SetType;
  * @author loki
  */
 public class RavnicaCityOfGuilds extends ExpansionSet {
+
     private static final RavnicaCityOfGuilds instance = new RavnicaCityOfGuilds();
 
     public static RavnicaCityOfGuilds getInstance() {
@@ -137,7 +137,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Eye of the Storm", 48, Rarity.RARE, mage.cards.e.EyeOfTheStorm.class));
         cards.add(new SetCardInfo("Faith's Fetters", 16, Rarity.COMMON, mage.cards.f.FaithsFetters.class));
         cards.add(new SetCardInfo("Farseek", 163, Rarity.COMMON, mage.cards.f.Farseek.class));
-	cards.add(new SetCardInfo("Festival of the Guildpact", 17, Rarity.UNCOMMON, mage.cards.f.FestivalOfTheGuildpact.class));
+        cards.add(new SetCardInfo("Festival of the Guildpact", 17, Rarity.UNCOMMON, mage.cards.f.FestivalOfTheGuildpact.class));
         cards.add(new SetCardInfo("Fiery Conclusion", 122, Rarity.COMMON, mage.cards.f.FieryConclusion.class));
         cards.add(new SetCardInfo("Firemane Angel", 205, Rarity.RARE, mage.cards.f.FiremaneAngel.class));
         cards.add(new SetCardInfo("Fists of Ironwood", 164, Rarity.COMMON, mage.cards.f.FistsOfIronwood.class));

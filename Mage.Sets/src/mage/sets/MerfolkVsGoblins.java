@@ -35,6 +35,7 @@ import mage.constants.SetType;
  * @author fireshoes
  */
 public class MerfolkVsGoblins extends ExpansionSet {
+
     private static final MerfolkVsGoblins instance = new MerfolkVsGoblins();
 
     public static MerfolkVsGoblins getInstance() {

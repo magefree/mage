@@ -290,6 +290,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Thirst", 99, Rarity.COMMON, mage.cards.t.Thirst.class));
         cards.add(new SetCardInfo("Tidal Wave", 100, Rarity.UNCOMMON, mage.cards.t.TidalWave.class));
         cards.add(new SetCardInfo("Tranquil Domain", 143, Rarity.COMMON, mage.cards.t.TranquilDomain.class));
+        cards.add(new SetCardInfo("Uktabi Faerie", 145, Rarity.COMMON, mage.cards.u.UktabiFaerie.class));
         cards.add(new SetCardInfo("Uktabi Wildcats", 146, Rarity.RARE, mage.cards.u.UktabiWildcats.class));
         cards.add(new SetCardInfo("Unfulfilled Desires", 345, Rarity.RARE, mage.cards.u.UnfulfilledDesires.class));
         cards.add(new SetCardInfo("Unseen Walker", 147, Rarity.UNCOMMON, mage.cards.u.UnseenWalker.class));

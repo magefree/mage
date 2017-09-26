@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -37,6 +36,7 @@ import mage.constants.SetType;
  * @author escplan9
  */
 public class WelcomeDeck2016 extends ExpansionSet {
+
     private static final WelcomeDeck2016 instance = new WelcomeDeck2016();
 
     public static WelcomeDeck2016 getInstance() {
