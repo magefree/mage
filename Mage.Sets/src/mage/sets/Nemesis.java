@@ -108,6 +108,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Moggcatcher", 96, Rarity.RARE, mage.cards.m.Moggcatcher.class));
         cards.add(new SetCardInfo("Mogg Salvage", 94, Rarity.UNCOMMON, mage.cards.m.MoggSalvage.class));
         cards.add(new SetCardInfo("Murderous Betrayal", 61, Rarity.RARE, mage.cards.m.MurderousBetrayal.class));
+        cards.add(new SetCardInfo("Nesting Wurm", 107, Rarity.UNCOMMON, mage.cards.n.NestingWurm.class));
         cards.add(new SetCardInfo("Netter en-Dal", 13, Rarity.COMMON, mage.cards.n.NetterEnDal.class));
         cards.add(new SetCardInfo("Noble Stand", 14, Rarity.UNCOMMON, mage.cards.n.NobleStand.class));
         cards.add(new SetCardInfo("Off Balance", 15, Rarity.COMMON, mage.cards.o.OffBalance.class));
