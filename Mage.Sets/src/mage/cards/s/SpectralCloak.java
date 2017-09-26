@@ -25,50 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.s;
 
 import java.util.UUID;
+import mage.constants.SubType;
+import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddContinuousEffectToGame;
-import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.AttachedToTappedCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
 
 /**
  *
- * @author emerald000
+ * @author TheElk801
  */
-public class WindingCanyons extends CardImpl {
+public class SpectralCloak extends CardImpl {
 
-    public WindingCanyons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+    public SpectralCloak(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
 
-        // {tap}: Add {C} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
+        this.subtype.add(SubType.AURA);
 
-        // {2}, {tap}: Until end of turn, you may cast creature spells as though they had flash.
-        Effect effect = new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, new FilterCreatureCard()));
-        effect.setText("Until end of turn, you may cast creature spells as though they had flash.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // Enchanted creature has shroud as long as it's untapped.
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(
+                        new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA),
+                        new InvertCondition(AttachedToTappedCondition.instance),
+                        "Enchanted creature has shroud as long as it's untapped."
+                )
+        ));
     }
 
-    public WindingCanyons(final WindingCanyons card) {
+    public SpectralCloak(final SpectralCloak card) {
         super(card);
     }
 
     @Override
-    public WindingCanyons copy() {
-        return new WindingCanyons(this);
+    public SpectralCloak copy() {
+        return new SpectralCloak(this);
     }
 }

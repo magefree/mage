@@ -124,6 +124,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Strength", 147, Rarity.COMMON, mage.cards.g.GiantStrength.class));
         cards.add(new SetCardInfo("Gravity Sphere", 149, Rarity.RARE, mage.cards.g.GravitySphere.class));
         cards.add(new SetCardInfo("Great Defender", 185, Rarity.UNCOMMON, mage.cards.g.GreatDefender.class));
+        cards.add(new SetCardInfo("Greater Realm of Preservation", 187, Rarity.UNCOMMON, mage.cards.g.GreaterRealmOfPreservation.class));
         cards.add(new SetCardInfo("Greed", 15, Rarity.RARE, mage.cards.g.Greed.class));
         cards.add(new SetCardInfo("Green Mana Battery", 223, Rarity.UNCOMMON, mage.cards.g.GreenManaBattery.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 268, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));
@@ -219,6 +220,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Sir Shandlar of Eberyn", 297, Rarity.UNCOMMON, mage.cards.s.SirShandlarOfEberyn.class));
         cards.add(new SetCardInfo("Sivitri Scarzam", 298, Rarity.UNCOMMON, mage.cards.s.SivitriScarzam.class));
         cards.add(new SetCardInfo("Sol'kanar the Swamp King", 299, Rarity.RARE, mage.cards.s.SolkanarTheSwampKing.class));
+        cards.add(new SetCardInfo("Spectral Cloak", 78, Rarity.UNCOMMON, mage.cards.s.SpectralCloak.class));
         cards.add(new SetCardInfo("Spinal Villain", 161, Rarity.RARE, mage.cards.s.SpinalVillain.class));
         cards.add(new SetCardInfo("Spirit Link", 206, Rarity.UNCOMMON, mage.cards.s.SpiritLink.class));
         cards.add(new SetCardInfo("Spirit Shackle", 31, Rarity.COMMON, mage.cards.s.SpiritShackle.class));

@@ -25,50 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddContinuousEffectToGame;
-import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToYouEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterObject;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author emerald000
+ * @author L_J
  */
-public class WindingCanyons extends CardImpl {
+public class GreaterRealmOfPreservation extends CardImpl {
 
-    public WindingCanyons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-
-        // {tap}: Add {C} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-
-        // {2}, {tap}: Until end of turn, you may cast creature spells as though they had flash.
-        Effect effect = new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, new FilterCreatureCard()));
-        effect.setText("Until end of turn, you may cast creature spells as though they had flash.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+    private static final FilterObject filter = new FilterObject("black or red source");
+    static{
+        filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK), new ColorPredicate(ObjectColor.RED)));
     }
 
-    public WindingCanyons(final WindingCanyons card) {
+    public GreaterRealmOfPreservation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+
+
+        // {1}{W}: The next time a black or red source of your choice would deal damage to you this turn, prevent that damage.
+        Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{W}")));
+    }
+
+    public GreaterRealmOfPreservation(final GreaterRealmOfPreservation card) {
         super(card);
     }
 
     @Override
-    public WindingCanyons copy() {
-        return new WindingCanyons(this);
+    public GreaterRealmOfPreservation copy() {
+        return new GreaterRealmOfPreservation(this);
     }
 }

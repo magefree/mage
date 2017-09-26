@@ -235,6 +235,7 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Thorn Thallid", 99, Rarity.COMMON, ThornThallid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrull Champion", 29, Rarity.RARE, mage.cards.t.ThrullChampion.class));
         cards.add(new SetCardInfo("Thrull Retainer", 30, Rarity.UNCOMMON, mage.cards.t.ThrullRetainer.class));
+        cards.add(new SetCardInfo("Thrull Wizard", 31, Rarity.UNCOMMON, mage.cards.t.ThrullWizard.class));
         cards.add(new SetCardInfo("Tidal Influence", 57, Rarity.UNCOMMON, mage.cards.t.TidalInfluence.class));
         cards.add(new SetCardInfo("Vodalian Knights", 58, Rarity.RARE, mage.cards.v.VodalianKnights.class));
         cards.add(new SetCardInfo("Vodalian Mage", 59, Rarity.COMMON, VodalianMage.class, NON_FULL_USE_VARIOUS));

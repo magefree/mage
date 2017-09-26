@@ -25,50 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.m;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddContinuousEffectToGame;
-import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AttachedToPredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author emerald000
+ * @author TheElk801
  */
-public class WindingCanyons extends CardImpl {
+public class MiracleWorker extends CardImpl {
 
-    public WindingCanyons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+    private static final FilterPermanent filter = new FilterPermanent("Aura attached to a creature you control");
 
-        // {tap}: Add {C} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
+    static {
+        filter.add(new AttachedToPredicate(new FilterControlledCreaturePermanent()));
+        filter.add(new SubtypePredicate(SubType.AURA));
+    }
 
-        // {2}, {tap}: Until end of turn, you may cast creature spells as though they had flash.
-        Effect effect = new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, new FilterCreatureCard()));
-        effect.setText("Until end of turn, you may cast creature spells as though they had flash.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
+    public MiracleWorker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
+
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.CLERIC);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {tap}: Destroy target Aura attached to a creature you control.
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
-    public WindingCanyons(final WindingCanyons card) {
+    public MiracleWorker(final MiracleWorker card) {
         super(card);
     }
 
     @Override
-    public WindingCanyons copy() {
-        return new WindingCanyons(this);
+    public MiracleWorker copy() {
+        return new MiracleWorker(this);
     }
 }

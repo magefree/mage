@@ -25,50 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.p;
 
 import java.util.UUID;
+import mage.ObjectColor;
+import mage.constants.SubType;
+import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddContinuousEffectToGame;
-import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.EnchantedCreatureColorCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
 
 /**
  *
- * @author emerald000
+ * @author TheElk801
  */
-public class WindingCanyons extends CardImpl {
+public class PhyrexianBoon extends CardImpl {
 
-    public WindingCanyons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+    public PhyrexianBoon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
-        // {tap}: Add {C} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
+        this.subtype.add(SubType.AURA);
 
-        // {2}, {tap}: Until end of turn, you may cast creature spells as though they had flash.
-        Effect effect = new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, new FilterCreatureCard()));
-        effect.setText("Until end of turn, you may cast creature spells as though they had flash.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // Enchanted creature gets +2/+1 as long as it's black. Otherwise, it gets -1/-2.
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(
+                        new BoostEnchantedEffect(2, 1),
+                        new BoostEnchantedEffect(-1, -2),
+                        new EnchantedCreatureColorCondition(ObjectColor.BLACK),
+                        "Enchanted creature gets +2/+1 as long as it's black. Otherwise, it gets -1/-2."
+                )
+        ));
     }
 
-    public WindingCanyons(final WindingCanyons card) {
+    public PhyrexianBoon(final PhyrexianBoon card) {
         super(card);
     }
 
     @Override
-    public WindingCanyons copy() {
-        return new WindingCanyons(this);
+    public PhyrexianBoon copy() {
+        return new PhyrexianBoon(this);
     }
 }

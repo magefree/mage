@@ -51,7 +51,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
 public class ThopterSpyNetwork extends CardImpl {
 
     public ThopterSpyNetwork(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
 
         // At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying.
         this.addAbility(new ThopterSpyNetworkUpkeepTriggeredAbility());
@@ -149,6 +149,6 @@ class ThopterSpyNetworkDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more artifact creatures you control deals combat damage to a player, draw a card";
+        return "Whenever one or more artifact creatures you control deal combat damage to a player, draw a card";
     }
 }
