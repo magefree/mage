@@ -262,6 +262,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Ravenous Skirge", 152, Rarity.COMMON, mage.cards.r.RavenousSkirge.class));
         cards.add(new SetCardInfo("Raze", 207, Rarity.COMMON, mage.cards.r.Raze.class));
         cards.add(new SetCardInfo("Recantation", 91, Rarity.RARE, mage.cards.r.Recantation.class));
+        cards.add(new SetCardInfo("Reclusive Wight", 153, Rarity.UNCOMMON, mage.cards.r.ReclusiveWight.class));
         cards.add(new SetCardInfo("Redeem", 33, Rarity.UNCOMMON, mage.cards.r.Redeem.class));
         cards.add(new SetCardInfo("Reflexes", 208, Rarity.COMMON, mage.cards.r.Reflexes.class));
         cards.add(new SetCardInfo("Rejuvenate", 271, Rarity.COMMON, mage.cards.r.Rejuvenate.class));
