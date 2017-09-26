@@ -153,6 +153,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Varchild's War-Riders", 122, Rarity.RARE, mage.cards.v.VarchildsWarRiders.class));
         cards.add(new SetCardInfo("Viscerid Armor", 60, Rarity.COMMON, mage.cards.v.VisceridArmor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Viscerid Armor", 61, Rarity.COMMON, mage.cards.v.VisceridArmor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Viscerid Drone", 62, Rarity.UNCOMMON, mage.cards.v.VisceridDrone.class));
         cards.add(new SetCardInfo("Wandering Mage", 198, Rarity.RARE, mage.cards.w.WanderingMage.class));
         cards.add(new SetCardInfo("Whip Vine", 89, Rarity.COMMON, WhipVine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whip Vine", 90, Rarity.COMMON, WhipVine.class, NON_FULL_USE_VARIOUS));

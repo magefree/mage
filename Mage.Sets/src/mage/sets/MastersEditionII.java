@@ -245,6 +245,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Tundra", 239, Rarity.RARE, mage.cards.t.Tundra.class));
         cards.add(new SetCardInfo("Underground Sea", 240, Rarity.RARE, mage.cards.u.UndergroundSea.class));
         cards.add(new SetCardInfo("Viscerid Armor", 72, Rarity.COMMON, mage.cards.v.VisceridArmor.class));
+        cards.add(new SetCardInfo("Viscerid Drone", 73, Rarity.UNCOMMON, mage.cards.v.VisceridDrone.class));
         cards.add(new SetCardInfo("Wall of Kelp", 74, Rarity.COMMON, mage.cards.w.WallOfKelp.class));
         cards.add(new SetCardInfo("Warning", 38, Rarity.COMMON, mage.cards.w.Warning.class));
         cards.add(new SetCardInfo("Whiteout", 185, Rarity.COMMON, mage.cards.w.Whiteout.class));
