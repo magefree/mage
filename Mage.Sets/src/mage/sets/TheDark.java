@@ -106,6 +106,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Maze of Ith", 114, Rarity.UNCOMMON, mage.cards.m.MazeOfIth.class));
         cards.add(new SetCardInfo("Merfolk Assassin", 31, Rarity.UNCOMMON, mage.cards.m.MerfolkAssassin.class));
         cards.add(new SetCardInfo("Mind Bomb", 32, Rarity.RARE, mage.cards.m.MindBomb.class));
+        cards.add(new SetCardInfo("Miracle Worker", 86, Rarity.COMMON, mage.cards.m.MiracleWorker.class));
         cards.add(new SetCardInfo("Morale", 87, Rarity.COMMON, mage.cards.m.Morale.class));
         cards.add(new SetCardInfo("Murk Dwellers", 11, Rarity.COMMON, mage.cards.m.MurkDwellers.class));
         cards.add(new SetCardInfo("Niall Silvain", 45, Rarity.RARE, mage.cards.n.NiallSilvain.class));
