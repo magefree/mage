@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -14,8 +13,8 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-
 public class ElvesVsGoblins extends ExpansionSet {
+
     private static final ElvesVsGoblins instance = new ElvesVsGoblins();
 
     public static ElvesVsGoblins getInstance() {

@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -37,6 +36,7 @@ import mage.constants.SetType;
  * @author escplan9
  */
 public class WelcomeDeck2017 extends ExpansionSet {
+
     private static final WelcomeDeck2017 instance = new WelcomeDeck2017();
 
     public static WelcomeDeck2017 getInstance() {
@@ -47,7 +47,7 @@ public class WelcomeDeck2017 extends ExpansionSet {
         super("Welcome Deck 2017", "W17", ExpansionSet.buildDate(2017, 4, 15), SetType.SUPPLEMENTAL_STANDARD_LEGAL);
         this.hasBasicLands = false;
         this.hasBoosters = false;
-        
+
         cards.add(new SetCardInfo("Divine Verdict", 1, Rarity.COMMON, mage.cards.d.DivineVerdict.class));
         cards.add(new SetCardInfo("Glory Seeker", 2, Rarity.COMMON, mage.cards.g.GlorySeeker.class));
         cards.add(new SetCardInfo("Serra Angel", 3, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));

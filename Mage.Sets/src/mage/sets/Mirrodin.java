@@ -5,6 +5,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public class Mirrodin extends ExpansionSet {
+
     private static final Mirrodin instance = new Mirrodin();
 
     public static Mirrodin getInstance() {

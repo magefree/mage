@@ -31,7 +31,6 @@ package mage.sets;
  *
  * @author fireshoes
  */
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 

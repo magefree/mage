@@ -36,6 +36,7 @@ import mage.constants.SetType;
  * @author fireshoes
  */
 public class BlessedVsCursed extends ExpansionSet {
+
     private static final BlessedVsCursed instance = new BlessedVsCursed();
 
     public static BlessedVsCursed getInstance() {

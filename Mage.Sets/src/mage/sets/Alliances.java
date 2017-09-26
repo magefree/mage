@@ -22,6 +22,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public class Alliances extends ExpansionSet {
+
     private static final Alliances instance = new Alliances();
 
     public static Alliances getInstance() {

@@ -35,7 +35,6 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-
 public class Champs extends ExpansionSet {
 
     private static final Champs instance = new Champs();

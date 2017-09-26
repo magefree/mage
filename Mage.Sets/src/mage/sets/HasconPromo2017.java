@@ -36,6 +36,7 @@ import mage.constants.SetType;
  * @author Saga
  */
 public class HasconPromo2017 extends ExpansionSet {
+
     private static final HasconPromo2017 instance = new HasconPromo2017();
 
     public static HasconPromo2017 getInstance() {

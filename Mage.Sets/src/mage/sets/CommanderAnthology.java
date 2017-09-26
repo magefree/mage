@@ -36,6 +36,7 @@ import mage.constants.SetType;
  * @author fireshoes
  */
 public class CommanderAnthology extends ExpansionSet {
+
     private static final CommanderAnthology instance = new CommanderAnthology();
 
     public static CommanderAnthology getInstance() {
@@ -246,7 +247,7 @@ public class CommanderAnthology extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 290, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 291, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 292, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-         cards.add(new SetCardInfo("Polluted Mire", 265, Rarity.COMMON, mage.cards.p.PollutedMire.class));
+        cards.add(new SetCardInfo("Polluted Mire", 265, Rarity.COMMON, mage.cards.p.PollutedMire.class));
         cards.add(new SetCardInfo("Praetor's Counsel", 134, Rarity.MYTHIC, mage.cards.p.PraetorsCounsel.class));
         cards.add(new SetCardInfo("Predator, Flagship", 225, Rarity.RARE, mage.cards.p.PredatorFlagship.class));
         cards.add(new SetCardInfo("Presence of Gond", 135, Rarity.COMMON, mage.cards.p.PresenceOfGond.class));

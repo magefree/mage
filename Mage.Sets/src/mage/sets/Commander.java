@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -36,7 +35,6 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-
 public class Commander extends ExpansionSet {
 
     private static final Commander instance = new Commander();
@@ -267,7 +265,7 @@ public class Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Relic Crush", 168, Rarity.COMMON, mage.cards.r.RelicCrush.class));
         cards.add(new SetCardInfo("Repulse", 58, Rarity.COMMON, mage.cards.r.Repulse.class));
         cards.add(new SetCardInfo("Return to Dust", 28, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
-	cards.add(new SetCardInfo("Riddlekeeper", 59, Rarity.RARE, mage.cards.r.Riddlekeeper.class));
+        cards.add(new SetCardInfo("Riddlekeeper", 59, Rarity.RARE, mage.cards.r.Riddlekeeper.class));
         cards.add(new SetCardInfo("Righteous Cause", 29, Rarity.UNCOMMON, mage.cards.r.RighteousCause.class));
         cards.add(new SetCardInfo("Riku of Two Reflections", 220, Rarity.MYTHIC, mage.cards.r.RikuOfTwoReflections.class));
         cards.add(new SetCardInfo("Rise from the Grave", 96, Rarity.UNCOMMON, mage.cards.r.RiseFromTheGrave.class));
