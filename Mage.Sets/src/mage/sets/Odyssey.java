@@ -324,6 +324,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Squirrel Nest", 274, Rarity.UNCOMMON, mage.cards.s.SquirrelNest.class));
         cards.add(new SetCardInfo("Stalking Bloodsucker", 163, Rarity.RARE, mage.cards.s.StalkingBloodsucker.class));
         cards.add(new SetCardInfo("Standstill", 102, Rarity.UNCOMMON, mage.cards.s.Standstill.class));
+        cards.add(new SetCardInfo("Steamclaw", 310, Rarity.UNCOMMON, mage.cards.s.Steamclaw.class));
         cards.add(new SetCardInfo("Still Life", 275, Rarity.UNCOMMON, mage.cards.s.StillLife.class));
         cards.add(new SetCardInfo("Stone-Tongue Basilisk", 276, Rarity.RARE, mage.cards.s.StoneTongueBasilisk.class));
         cards.add(new SetCardInfo("Sungrass Egg", 311, Rarity.UNCOMMON, mage.cards.s.SungrassEgg.class));
