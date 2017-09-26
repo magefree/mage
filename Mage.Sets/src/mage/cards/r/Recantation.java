@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -46,6 +45,8 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author TheElk801
@@ -53,7 +54,7 @@ import mage.target.TargetPermanent;
 public class Recantation extends CardImpl {
 
     public Recantation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // At the beginning of your upkeep, you may put a verse counter on Recantation.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
