@@ -157,6 +157,53 @@ public final class ImageCache {
         });
     }
 
+    public static String getFilePath(CardView card, int width) {
+        String key = getKey(card, card.getName(), Integer.toString(width));
+        boolean usesVariousArt = false;
+        if (key.matches(".*#usesVariousArt.*")) {
+            usesVariousArt = true;
+            key = key.replace("#usesVariousArt", "");
+        }
+        boolean thumbnail = false;
+        if (key.matches(".*#thumb.*")) {
+            thumbnail = true;
+            key = key.replace("#thumb", "");
+        }
+        Matcher m = KEY_PATTERN.matcher(key);
+
+        if (m.matches()) {
+            String name = m.group(1);
+            String set = m.group(2);
+            Integer type = Integer.parseInt(m.group(3));
+            String collectorId = m.group(4);
+            if (collectorId.equals("null")) {
+                collectorId = "0";
+            }
+            String tokenSetCode = m.group(5);
+            String tokenDescriptor = m.group(6);
+
+            CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor);
+
+            String path;
+            if (collectorId.isEmpty() || "0".equals(collectorId)) {
+                info.setToken(true);
+                path = CardImageUtils.generateTokenImagePath(info);
+                if (path == null) {
+                    path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename;
+                }
+            } else {
+                path = CardImageUtils.generateImagePath(info);
+            }
+
+            if (thumbnail && path.endsWith(".jpg")) {
+                return buildThumbnailPath(path);
+            }
+            return path;
+        }
+
+        return "";
+    }
+
     private ImageCache() {
     }
 

@@ -91,6 +91,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_SHOW_TOOLTIPS_DELAY = "showTooltipsDelay";
     public static final String KEY_SHOW_CARD_NAMES = "showCardNames";
+    public static final String KEY_SHOW_FULL_IMAGE_PATH = "showFullImagePath";
     public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
     public static final String KEY_SHOW_PLAYER_NAMES_PERMANENTLY = "showPlayerNamesPermanently";
     public static final String KEY_SHOW_ABILITY_PICKER_FORCED = "showAbilityPicker";
@@ -399,6 +400,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabMain = new javax.swing.JPanel();
         main_card = new javax.swing.JPanel();
         showCardName = new javax.swing.JCheckBox();
+        showFullImagePath = new javax.swing.JCheckBox();
         tooltipDelayLabel = new javax.swing.JLabel();
         tooltipDelay = new javax.swing.JSlider();
         main_game = new javax.swing.JPanel();
@@ -613,27 +615,47 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tooltipDelay.setToolTipText("<HTML>The time the appearance of the tooltip window for a card is delayed.<br>\nIf set to zero, the tooltip window won't be shown at all.");
         tooltipDelay.setValue(300);
 
+        showFullImagePath.setSelected(false);
+        showFullImagePath.setToolTipText("Show the path Xmage is expecting for this card's image (only displays if missing)");
+        showFullImagePath.setActionCommand("");
+        showFullImagePath.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        showFullImagePath.setLabel("Display image path for missing images");
+        showFullImagePath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showFullImagePathActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout main_cardLayout = new org.jdesktop.layout.GroupLayout(main_card);
         main_card.setLayout(main_cardLayout);
         main_cardLayout.setHorizontalGroup(
             main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(main_cardLayout.createSequentialGroup()
                 .add(6, 6, 6)
-                .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, showCardName)
-                    .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                        .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                        .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(main_cardLayout.createSequentialGroup()
+                        .add(showCardName)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(showFullImagePath)))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         main_cardLayout.setVerticalGroup(
             main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(main_cardLayout.createSequentialGroup()
-                .add(showCardName)
+                .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(showCardName)
+                    .add(showFullImagePath))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(tooltipDelayLabel)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        showFullImagePath.getAccessibleContext().setAccessibleName("Display image path for missing images");
+        showFullImagePath.getAccessibleContext().setAccessibleDescription("Show the path Xmage is expecting for this card's image (only displays if missing)");
 
         main_game.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game"));
 
@@ -720,7 +742,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(cbAllowRequestToShowHandCards, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(cbShowStormCounter, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(cbAskMoveToGraveOrder, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
         main_gameLayout.setVerticalGroup(
             main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -2679,6 +2701,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // main
         save(prefs, dialog.tooltipDelay, KEY_SHOW_TOOLTIPS_DELAY, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.showFullImagePath, KEY_SHOW_FULL_IMAGE_PATH, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true", "false", UPDATE_CACHE_POLICY);
@@ -3119,6 +3142,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
     }//GEN-LAST:event_bttnResetControlsActionPerformed
 
+    private void showFullImagePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showFullImagePathActionPerformed
+    }//GEN-LAST:event_showFullImagePathActionPerformed
+
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
         switch (proxyType) {
@@ -3222,6 +3248,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static void loadPhases(Preferences prefs) {
         load(prefs, dialog.tooltipDelay, KEY_SHOW_TOOLTIPS_DELAY, "300");
         load(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true");
+        load(prefs, dialog.showFullImagePath, KEY_SHOW_FULL_IMAGE_PATH, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
         load(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
         load(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true");
@@ -3898,6 +3925,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton saveButton;
     private javax.swing.JCheckBox showAbilityPickerForced;
     private javax.swing.JCheckBox showCardName;
+    private javax.swing.JCheckBox showFullImagePath;
     private javax.swing.JCheckBox showPlayerNamesPermanently;
     private javax.swing.JSlider sliderCardSizeHand;
     private javax.swing.JSlider sliderCardSizeMaxBattlefield;
