@@ -230,6 +230,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Kormus Bell", 350, Rarity.RARE, mage.cards.k.KormusBell.class));
         cards.add(new SetCardInfo("Land Leeches", 139, Rarity.COMMON, mage.cards.l.LandLeeches.class));
         cards.add(new SetCardInfo("Land Tax", 284, Rarity.RARE, mage.cards.l.LandTax.class));
+        cards.add(new SetCardInfo("Leviathan", 80, Rarity.RARE, mage.cards.l.Leviathan.class));
         cards.add(new SetCardInfo("Ley Druid", 140, Rarity.UNCOMMON, mage.cards.l.LeyDruid.class));
         cards.add(new SetCardInfo("Library of Leng", 351, Rarity.UNCOMMON, mage.cards.l.LibraryOfLeng.class));
         cards.add(new SetCardInfo("Lifeforce", 141, Rarity.UNCOMMON, mage.cards.l.Lifeforce.class));

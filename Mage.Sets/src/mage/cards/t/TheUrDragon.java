@@ -53,7 +53,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public class TheUrDragon extends CardImpl {
@@ -161,7 +160,10 @@ class TheUrDragonTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         for (UUID attacker : game.getCombat().getAttackers()) {
             Permanent creature = game.getPermanent(attacker);
-            if (creature != null && creature.getControllerId() == this.getControllerId() && creature.hasSubtype(SubType.DRAGON, game)) {
+            if (creature != null
+                    && creature.getControllerId() != null
+                    && creature.getControllerId().equals(this.getControllerId())
+                    && creature.hasSubtype(SubType.DRAGON, game)) {
                 return true;
             }
         }
