@@ -252,6 +252,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Krovikan Fetish", 34, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
         cards.add(new SetCardInfo("Krovikan Sorcerer", 96, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));
         cards.add(new SetCardInfo("Leshrac's Rite", 35, Rarity.UNCOMMON, mage.cards.l.LeshracsRite.class));
+        cards.add(new SetCardInfo("Leviathan", 98, Rarity.RARE, mage.cards.l.Leviathan.class));
         cards.add(new SetCardInfo("Ley Druid", 170, Rarity.COMMON, mage.cards.l.LeyDruid.class));
         cards.add(new SetCardInfo("Lhurgoyf", 171, Rarity.RARE, mage.cards.l.Lhurgoyf.class));
         cards.add(new SetCardInfo("Library of Leng", 387, Rarity.UNCOMMON, mage.cards.l.LibraryOfLeng.class));

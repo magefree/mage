@@ -97,6 +97,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Holy Light", 83, Rarity.COMMON, mage.cards.h.HolyLight.class));
         cards.add(new SetCardInfo("Inferno", 70, Rarity.RARE, mage.cards.i.Inferno.class));
         cards.add(new SetCardInfo("Land Leeches", 42, Rarity.COMMON, mage.cards.l.LandLeeches.class));
+        cards.add(new SetCardInfo("Leviathan", 29, Rarity.RARE, mage.cards.l.Leviathan.class));
         cards.add(new SetCardInfo("Living Armor", 101, Rarity.UNCOMMON, mage.cards.l.LivingArmor.class));
         cards.add(new SetCardInfo("Mana Clash", 71, Rarity.RARE, mage.cards.m.ManaClash.class));
         cards.add(new SetCardInfo("Mana Vortex", 30, Rarity.RARE, mage.cards.m.ManaVortex.class));
