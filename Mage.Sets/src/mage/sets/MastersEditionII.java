@@ -158,6 +158,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Jeweled Amulet", 212, Rarity.UNCOMMON, mage.cards.j.JeweledAmulet.class));
         cards.add(new SetCardInfo("Johtull Wurm", 168, Rarity.UNCOMMON, mage.cards.j.JohtullWurm.class));
         cards.add(new SetCardInfo("Juniper Order Advocate", 20, Rarity.UNCOMMON, mage.cards.j.JuniperOrderAdvocate.class));
+        cards.add(new SetCardInfo("Karplusan Giant", 133, Rarity.UNCOMMON, mage.cards.k.KarplusanGiant.class));
         cards.add(new SetCardInfo("Kaysa", 170, Rarity.RARE, mage.cards.k.Kaysa.class));
         cards.add(new SetCardInfo("Kjeldoran Dead", 98, Rarity.COMMON, mage.cards.k.KjeldoranDead.class));
         cards.add(new SetCardInfo("Kjeldoran Outpost", 233, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class));
@@ -245,6 +246,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Tundra", 239, Rarity.RARE, mage.cards.t.Tundra.class));
         cards.add(new SetCardInfo("Underground Sea", 240, Rarity.RARE, mage.cards.u.UndergroundSea.class));
         cards.add(new SetCardInfo("Viscerid Armor", 72, Rarity.COMMON, mage.cards.v.VisceridArmor.class));
+        cards.add(new SetCardInfo("Viscerid Drone", 73, Rarity.UNCOMMON, mage.cards.v.VisceridDrone.class));
         cards.add(new SetCardInfo("Wall of Kelp", 74, Rarity.COMMON, mage.cards.w.WallOfKelp.class));
         cards.add(new SetCardInfo("Warning", 38, Rarity.COMMON, mage.cards.w.Warning.class));
         cards.add(new SetCardInfo("Whiteout", 185, Rarity.COMMON, mage.cards.w.Whiteout.class));
