@@ -74,7 +74,7 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
                             permanent.getSubtype(game).addAll(subtypes);
                         } else {
                             for (SubType subtype : subtypes) {
-                                if (!permanent.getSubtype(game).contains(subtype)) {
+                                if (!permanent.hasSubtype(subtype, game)) {
                                     permanent.getSubtype(game).add(subtype);
                                 }
                             }

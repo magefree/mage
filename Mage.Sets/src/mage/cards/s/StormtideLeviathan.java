@@ -114,7 +114,7 @@ class StormtideLeviathanEffect extends ContinuousEffectImpl {
         for (Permanent land : game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), game)) {
             switch (layer) {
                 case TypeChangingEffects_4:
-                    if (!land.getSubtype(game).contains(SubType.ISLAND)) {
+                    if (!land.hasSubtype(SubType.ISLAND, game)) {
                         land.getSubtype(game).add(SubType.ISLAND);
                     }
                     break;

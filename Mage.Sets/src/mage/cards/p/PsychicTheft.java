@@ -42,8 +42,6 @@ import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
@@ -57,7 +55,6 @@ import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.SpellsCastWatcher;
-
 
 /**
  *
@@ -119,16 +116,16 @@ class PsychicTheftEffect extends OneShotEffect {
                     }
                 }
                 if (chosenCard != null) {
-                    
+
                     opponent.moveCardToExileWithInfo(chosenCard, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.HAND, true);
-                
+
                     AsThoughEffect effect = new PsychicTheftCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(chosenCard.getId()));
                     game.addEffect(effect, source);
-                
+
                     OneShotEffect effect2 = new ReturnFromExileEffect(source.getSourceId(), Zone.HAND);
-                    Condition condition = new SpellWasNotCastCondition(source.getSourceId(), chosenCard.getId());
-                
+                    Condition condition = new PsychicTheftCondition(source.getSourceId(), chosenCard.getId());
+
                     ConditionalOneShotEffect effect3 = new ConditionalOneShotEffect(effect2, condition, "if you haven't cast it, return it to its owner's hand.");
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect3);
                     game.addDelayedTriggeredAbility(delayedAbility, source);
@@ -176,12 +173,12 @@ class PsychicTheftCastFromExileEffect extends AsThoughEffectImpl {
     }
 }
 
-class SpellWasNotCastCondition implements Condition {
+class PsychicTheftCondition implements Condition {
 
     protected UUID exileId;
     protected UUID cardId;
 
-    public SpellWasNotCastCondition(UUID exileId, UUID cardId) {
+    public PsychicTheftCondition(UUID exileId, UUID cardId) {
         this.exileId = exileId;
         this.cardId = cardId;
     }

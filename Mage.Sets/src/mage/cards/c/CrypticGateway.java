@@ -203,14 +203,14 @@ class CrypticGatewayEffect extends OneShotEffect {
                 List<SubtypePredicate> subtypes = new ArrayList<>();
 
                 for (SubType subtype : creature.getSubtype(game)) {
-                    if (creature2.getSubtype(game).contains(subtype) || changeling2) {
+                    if (creature2.hasSubtype(subtype, game) || changeling2) {
                         subtypes.add(new SubtypePredicate(subtype));
                         commonSubType = true;
                     }
                 }
 
                 for (SubType subtype : creature2.getSubtype(game)) {
-                    if (creature.getSubtype(game).contains(subtype) || changeling) {
+                    if (creature.hasSubtype(subtype, game) || changeling) {
                         subtypes.add(new SubtypePredicate(subtype));
                         commonSubType = true;
                     }

@@ -25,69 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.cards.f;
 
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
-import java.util.List;
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.PreventDamageByTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.target.common.TargetAttackingCreature;
 
 /**
  *
- * @author North, noxx
+ * @author L_J
  */
-public class EquipmentAttachedCount implements DynamicValue {
+public class Foxfire extends CardImpl {
 
-    private Integer amount;
+    public Foxfire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
-    public EquipmentAttachedCount() {
-        this(1);
+        // Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
+        this.getSpellAbility().addTarget(new TargetAttackingCreature());
+        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, true));
+
+        // Draw a card at the beginning of the next turn's upkeep.
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)),false));
+
+
     }
 
-    public EquipmentAttachedCount(Integer amount) {
-        this.amount = amount;
-    }
-
-    public EquipmentAttachedCount(final EquipmentAttachedCount dynamicValue) {
-        this.amount = dynamicValue.amount;
-    }
-
-    @Override
-    public int calculate(Game game, Ability source, Effect effect) {
-        int count = 0;
-        Permanent permanent = game.getPermanent(source.getSourceId()); // don't change this - may affect other cards
-        if (permanent != null) {
-            List<UUID> attachments = permanent.getAttachments();
-            for (UUID attachmentId : attachments) {
-                Permanent attached = game.getPermanent(attachmentId);
-                if (attached != null && attached.hasSubtype(SubType.EQUIPMENT, game)) {
-                    count++;
-                }
-            }
-        }
-        return amount * count;
+    public Foxfire(final Foxfire card) {
+        super(card);
     }
 
     @Override
-    public EquipmentAttachedCount copy() {
-        return new EquipmentAttachedCount(this);
-    }
-
-    @Override
-    public String toString() {
-        if (amount != null) {
-            return amount.toString();
-        }
-        return "";
-    }
-
-    @Override
-    public String getMessage() {
-        return "Equipment attached to it";
+    public Foxfire copy() {
+        return new Foxfire(this);
     }
 }

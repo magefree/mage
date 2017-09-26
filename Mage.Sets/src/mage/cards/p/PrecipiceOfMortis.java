@@ -27,23 +27,20 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.game.events.ZoneChangeEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -101,7 +98,7 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
                 if (sourceEvent.getType() == EventType.ENTERS_THE_BATTLEFIELD && sourceEvent instanceof EntersTheBattlefieldEvent) {
                     EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
                     // Only for entering Jedis
-                    if (entersTheBattlefieldEvent.getTarget().getSubtype(game).contains(SubType.JEDI)) {
+                    if (entersTheBattlefieldEvent.getTarget().hasSubtype(SubType.JEDI, game)) {
                         // Only for triggers of permanents
                         if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
                             return true;
@@ -113,7 +110,7 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
                     ZoneChangeEvent leavesTheBattlefieldEvent = (ZoneChangeEvent) sourceEvent;
                     if (leavesTheBattlefieldEvent.getFromZone() == Zone.BATTLEFIELD) {
                         // Only for leaving Jedis
-                        if (leavesTheBattlefieldEvent.getTarget().getSubtype(game).contains(SubType.JEDI)) {
+                        if (leavesTheBattlefieldEvent.getTarget().hasSubtype(SubType.JEDI, game)) {
                             // Only for triggers of permanents
                             if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
                                 return true;

@@ -83,7 +83,7 @@ class TurnToSlagEffect extends OneShotEffect {
             List<Permanent> attachments = new ArrayList<>();
             for (UUID uuid : target.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
-                if (attached.getSubtype(game).contains(SubType.EQUIPMENT)) {
+                if (attached.hasSubtype(SubType.EQUIPMENT, game)) {
                     attachments.add(attached);
                 }
             }

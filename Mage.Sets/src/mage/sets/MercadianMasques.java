@@ -255,6 +255,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Rishadan Brigand", 92, Rarity.RARE, mage.cards.r.RishadanBrigand.class));
         cards.add(new SetCardInfo("Rishadan Cutpurse", 93, Rarity.COMMON, mage.cards.r.RishadanCutpurse.class));
         cards.add(new SetCardInfo("Rishadan Footpad", 94, Rarity.UNCOMMON, mage.cards.r.RishadanFootpad.class));
+        cards.add(new SetCardInfo("Rishadan Pawnshop", 311, Rarity.RARE, mage.cards.r.RishadanPawnshop.class));
         cards.add(new SetCardInfo("Rishadan Port", 324, Rarity.RARE, mage.cards.r.RishadanPort.class));
         cards.add(new SetCardInfo("Rock Badger", 210, Rarity.UNCOMMON, mage.cards.r.RockBadger.class));
         cards.add(new SetCardInfo("Rushwood Dryad", 263, Rarity.COMMON, mage.cards.r.RushwoodDryad.class));

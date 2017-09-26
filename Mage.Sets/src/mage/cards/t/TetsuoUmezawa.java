@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -48,6 +47,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -127,9 +128,9 @@ class TetsuoUmezawaEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
+        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
         if (stackObject != null && event.getTargetId().equals(source.getSourceId())) {
-            if (stackObject.getSubtype(game).contains(SubType.AURA)) {
+            if (stackObject.hasSubtype(SubType.AURA, game)) {
                 return true;
             }
         }

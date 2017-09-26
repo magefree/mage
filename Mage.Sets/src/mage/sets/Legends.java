@@ -124,6 +124,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Strength", 147, Rarity.COMMON, mage.cards.g.GiantStrength.class));
         cards.add(new SetCardInfo("Gravity Sphere", 149, Rarity.RARE, mage.cards.g.GravitySphere.class));
         cards.add(new SetCardInfo("Great Defender", 185, Rarity.UNCOMMON, mage.cards.g.GreatDefender.class));
+        cards.add(new SetCardInfo("Greater Realm of Preservation", 187, Rarity.UNCOMMON, mage.cards.g.GreaterRealmOfPreservation.class));
         cards.add(new SetCardInfo("Greed", 15, Rarity.RARE, mage.cards.g.Greed.class));
         cards.add(new SetCardInfo("Green Mana Battery", 223, Rarity.UNCOMMON, mage.cards.g.GreenManaBattery.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 268, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));

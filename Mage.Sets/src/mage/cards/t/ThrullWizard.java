@@ -25,71 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.k;
+package mage.cards.t;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.OrCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author North
+ * @author L_J
  */
-public class KorDuelist extends CardImpl {
-
-    private static final String ruleText = "As long as Kor Duelist is equipped, it has double strike";
-
-    public KorDuelist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add(SubType.KOR);
-        this.subtype.add(SubType.SOLDIER);
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        GainAbilitySourceEffect effect = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, new SourceIsEquiped(), ruleText)));
+public class ThrullWizard extends CardImpl {
+    private static final FilterSpell filter = new FilterSpell("black spell");
+    static{
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public KorDuelist(final KorDuelist card) {
+    public ThrullWizard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        this.subtype.add(SubType.THRULL);
+        this.subtype.add(SubType.WIZARD);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        
+        // {1}{B}: Counter target black spell unless that spell's controller pays {B} or {3}.
+        Cost cost = new OrCost(new ColoredManaCost(ColoredManaSymbol.B), new GenericManaCost(3), "pay {B} or pay {3}");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(cost), new ManaCostsImpl("{1}{B}"));
+        ability.addTarget(new TargetSpell(filter));
+        this.addAbility(ability);
+    }
+
+    public ThrullWizard(final ThrullWizard card) {
         super(card);
     }
 
     @Override
-    public KorDuelist copy() {
-        return new KorDuelist(this);
-    }
-}
-
-class SourceIsEquiped implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            List<UUID> attachments = permanent.getAttachments();
-            for (UUID attachmentUUID : attachments) {
-                Permanent attachment = game.getPermanent(attachmentUUID);
-                if (attachment != null) {
-                    if (attachment.hasSubtype(SubType.EQUIPMENT, game)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+    public ThrullWizard copy() {
+        return new ThrullWizard(this);
     }
 }

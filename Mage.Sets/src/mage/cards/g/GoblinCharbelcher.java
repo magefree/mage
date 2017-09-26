@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,13 +35,15 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -102,7 +103,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
                 cards.add(card);
                 if (card.isLand()){
                     landFound = true;
-                    if(card.getSubtype(game).contains(SubType.MOUNTAIN)){
+                    if(card.hasSubtype(SubType.MOUNTAIN, game)){
                         isMountain = true;
                     }
                     break;
@@ -117,7 +118,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
         if (landFound) {
             damage--;
         }
-        if(isMountain == true){
+        if(isMountain){
             damage *= 2;
         }
         

@@ -86,7 +86,7 @@ class TrainingDroneEffect extends RestrictionEffect {
             List<UUID> attachments = permanent.getAttachments();
             for (UUID uuid : attachments) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
-                if (attached.getSubtype(game).contains(SubType.EQUIPMENT)) {
+                if (attached.hasSubtype(SubType.EQUIPMENT, game)) {
                     return false;
                 }
             }

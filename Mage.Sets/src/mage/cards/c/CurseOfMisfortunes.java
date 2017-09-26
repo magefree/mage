@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -51,6 +50,8 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -107,7 +108,7 @@ class CurseOfMisfortunesEffect extends OneShotEffect {
                 // get the names of attached Curses
                 for (UUID attachmentId: targetPlayer.getAttachments()) {
                     Permanent attachment = game.getPermanent(attachmentId);
-                    if (attachment != null && attachment.getSubtype(game).contains(SubType.CURSE)) {
+                    if (attachment != null && attachment.hasSubtype(SubType.CURSE, game)) {
                         filter.add(Predicates.not(new NamePredicate(attachment.getName())));
                     }
                 }

@@ -25,84 +25,87 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.ExileSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.WishEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
- * @author Plopman
+ * @author L_J
  */
-public class GoblinBrawler extends CardImpl {
+public class RingOfMaruf extends CardImpl {
 
-    public GoblinBrawler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add(SubType.GOBLIN);
-        this.subtype.add(SubType.WARRIOR);
+    public RingOfMaruf(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
-        // Goblin Brawler can't be equipped.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeEquippedSourceEffect()));
+        // {5}, {Tap}, Exile Ring of Maruf: The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RingOfMarufEffect(), new ManaCostsImpl("{5}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new ExileSourceCost());
+        this.addAbility(ability);
     }
 
-    public GoblinBrawler(final GoblinBrawler card) {
+    public RingOfMaruf(final RingOfMaruf card) {
         super(card);
     }
 
     @Override
-    public GoblinBrawler copy() {
-        return new GoblinBrawler(this);
+    public RingOfMaruf copy() {
+        return new RingOfMaruf(this);
     }
 }
 
-class CantBeEquippedSourceEffect extends ContinuousRuleModifyingEffectImpl {
+class RingOfMarufEffect extends ReplacementEffectImpl {
 
-    public CantBeEquippedSourceEffect(CantBeEquippedSourceEffect effect) {
+    public RingOfMarufEffect() {
+        super(Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.";
+    }
+
+    public RingOfMarufEffect(final RingOfMarufEffect effect) {
         super(effect);
     }
 
-    public CantBeEquippedSourceEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "{this} can't be equipped";
+    @Override
+    public RingOfMarufEffect copy() {
+        return new RingOfMarufEffect(this);
     }
 
     @Override
-    public CantBeEquippedSourceEffect copy() {
-        return new CantBeEquippedSourceEffect(this);
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            new WishEffect(new FilterCard(), false).apply(game, source);
+            this.discard();
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACH;
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getSourceId())) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.hasSubtype(SubType.EQUIPMENT, game)) {
-                return true;
-            }
-        }
-        return false;
+        return source.getControllerId().equals(event.getPlayerId());
     }
 }
