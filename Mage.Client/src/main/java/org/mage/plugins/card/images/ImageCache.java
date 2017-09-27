@@ -187,7 +187,7 @@ public final class ImageCache {
             String path;
             if (collectorId.isEmpty() || "0".equals(collectorId)) {
                 info.setToken(true);
-                path = CardImageUtils.generateTokenImagePath(info);
+                path = CardImageUtils.generateFullTokenImagePath(info);
                 if (path == null) {
                     path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename;
                 }
