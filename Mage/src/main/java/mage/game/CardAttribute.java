@@ -21,10 +21,10 @@ public class CardAttribute implements Serializable {
     protected ObjectColor color;
     protected SubTypeList subtype;
 
-    public CardAttribute(Card card) {
+    public CardAttribute(Card card, Game game) {
         color = card.getColor(null).copy();
         subtype = new SubTypeList();
-        subtype.addAll(subtype);
+        subtype.addAll(card.getSubtype(game));
     }
 
     public CardAttribute(CardAttribute cardAttribute) {
