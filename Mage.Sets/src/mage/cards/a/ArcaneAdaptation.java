@@ -98,38 +98,26 @@ class ConspyEffect extends ContinuousEffectImpl {
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
                 if (card.isCreature() && !card.hasSubtype(choice, game)) {
-                    for (SubType s : card.getSubtype(game)) {
-                        game.getState().getCreateCardAttribute(card).getSubtype().add(s);
-                    }
-                    game.getState().getCreateCardAttribute(card).getSubtype().add(choice);
+                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(choice);
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
                 if (card.isCreature() && !card.hasSubtype(choice, game)) {
-                    for (SubType s : card.getSubtype(game)) {
-                        game.getState().getCreateCardAttribute(card).getSubtype().add(s);
-                    }
-                    game.getState().getCreateCardAttribute(card).getSubtype().add(choice);
+                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(choice);
                 }
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
                 if (card.isCreature() && !card.hasSubtype(choice, game)) {
-                    for (SubType s : card.getSubtype(game)) {
-                        game.getState().getCreateCardAttribute(card).getSubtype().add(s);
-                    }
-                    game.getState().getCreateCardAttribute(card).getSubtype().add(choice);
+                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(choice);
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
                 if (card.getOwnerId().equals(controller.getId()) && card.isCreature() && !card.hasSubtype(choice, game)) {
-                    for (SubType s : card.getSubtype(game)) {
-                        game.getState().getCreateCardAttribute(card).getSubtype().add(s);
-                    }
-                    game.getState().getCreateCardAttribute(card).getSubtype().add(choice);
+                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(choice);
                 }
             }
             // commander in command zone
@@ -137,10 +125,7 @@ class ConspyEffect extends ContinuousEffectImpl {
                 if (game.getState().getZone(commanderId) == Zone.COMMAND) {
                     Card card = game.getCard(commanderId);
                     if (card.isCreature() && !card.hasSubtype(choice, game)) {
-                        for (SubType s : card.getSubtype(game)) {
-                            game.getState().getCreateCardAttribute(card).getSubtype().add(s);
-                        }
-                        game.getState().getCreateCardAttribute(card).getSubtype().add(choice);
+                        game.getState().getCreateCardAttribute(card, game).getSubtype().add(choice);
                     }
                 }
             }
@@ -152,10 +137,7 @@ class ConspyEffect extends ContinuousEffectImpl {
                         && stackObject.isCreature()
                         && !stackObject.hasSubtype(choice, game)) {
                     Card card = ((Spell) stackObject).getCard();
-                    for (SubType s : card.getSubtype(game)) {
-                        game.getState().getCreateCardAttribute(card).getSubtype().add(s);
-                    }
-                    game.getState().getCreateCardAttribute(card).getSubtype().add(choice);
+                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(choice);
                 }
             }
             // creatures you control

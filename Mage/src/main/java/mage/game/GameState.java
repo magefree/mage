@@ -1079,8 +1079,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         return cardAttribute.get(cardId);
     }
 
-    public CardAttribute getCreateCardAttribute(Card card) {
-        CardAttribute cardAtt = cardAttribute.computeIfAbsent(card.getId(), k -> new CardAttribute(card));
+    public CardAttribute getCreateCardAttribute(Card card, Game game) {
+        CardAttribute cardAtt = cardAttribute.computeIfAbsent(card.getId(), k -> new CardAttribute(card, game));
         return cardAtt;
     }
 

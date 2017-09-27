@@ -109,7 +109,7 @@ class PaintersServantEffect extends ContinuousEffectImpl {
             }
             // Exile
             for (Card card : game.getExile().getAllCards(game)) {
-                game.getState().getCreateCardAttribute(card).getColor().addColor(color);
+                game.getState().getCreateCardAttribute(card, game).getColor().addColor(color);
             }
             // Command
             for (CommandObject commandObject : game.getState().getCommand()) {
@@ -123,15 +123,15 @@ class PaintersServantEffect extends ContinuousEffectImpl {
                 if (player != null) {
                     // Hand
                     for (Card card : player.getHand().getCards(game)) {
-                        game.getState().getCreateCardAttribute(card).getColor().addColor(color);
+                        game.getState().getCreateCardAttribute(card, game).getColor().addColor(color);
                     }
                     // Library
                     for (Card card : player.getLibrary().getCards(game)) {
-                        game.getState().getCreateCardAttribute(card).getColor().addColor(color);
+                        game.getState().getCreateCardAttribute(card, game).getColor().addColor(color);
                     }
                     // Graveyard
                     for (Card card : player.getGraveyard().getCards(game)) {
-                        game.getState().getCreateCardAttribute(card).getColor().addColor(color);
+                        game.getState().getCreateCardAttribute(card, game).getColor().addColor(color);
                     }
                 }
             }

@@ -73,6 +73,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Deep-Sea Kraken", 56, Rarity.RARE, mage.cards.d.DeepSeaKraken.class));
         cards.add(new SetCardInfo("Dementia Sliver", 236, Rarity.UNCOMMON, mage.cards.d.DementiaSliver.class));
         cards.add(new SetCardInfo("Demonic Collusion", 103, Rarity.RARE, mage.cards.d.DemonicCollusion.class));
+        cards.add(new SetCardInfo("Detainment Spell", 12, Rarity.COMMON, mage.cards.d.DetainmentSpell.class));
         cards.add(new SetCardInfo("Divine Congregation", 13, Rarity.COMMON, mage.cards.d.DivineCongregation.class));
         cards.add(new SetCardInfo("Draining Whelk", 57, Rarity.RARE, mage.cards.d.DrainingWhelk.class));
         cards.add(new SetCardInfo("Dralnu, Lich Lord", 237, Rarity.RARE, mage.cards.d.DralnuLichLord.class));
@@ -100,6 +101,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Flamecore Elemental", 154, Rarity.COMMON, mage.cards.f.FlamecoreElemental.class));
         cards.add(new SetCardInfo("Fledgling Mawcor", 63, Rarity.UNCOMMON, mage.cards.f.FledglingMawcor.class));
         cards.add(new SetCardInfo("Flickering Spirit", 17, Rarity.COMMON, mage.cards.f.FlickeringSpirit.class));
+        cards.add(new SetCardInfo("Flowstone Channeler", 155, Rarity.COMMON, mage.cards.f.FlowstoneChanneler.class));
         cards.add(new SetCardInfo("Fool's Demise", 64, Rarity.UNCOMMON, mage.cards.f.FoolsDemise.class));
         cards.add(new SetCardInfo("Forest", 298, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 299, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
