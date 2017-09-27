@@ -140,6 +140,7 @@ public class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Putrid Raptor", 71, Rarity.UNCOMMON, mage.cards.p.PutridRaptor.class));
         cards.add(new SetCardInfo("Pyrostatic Pillar", 100, Rarity.UNCOMMON, mage.cards.p.PyrostaticPillar.class));
         cards.add(new SetCardInfo("Rain of Blades", 20, Rarity.UNCOMMON, mage.cards.r.RainOfBlades.class));
+        cards.add(new SetCardInfo("Raven Guild Initiate", 46, Rarity.COMMON, mage.cards.r.RavenGuildInitiate.class));
         cards.add(new SetCardInfo("Raven Guild Master", 47, Rarity.RARE, mage.cards.r.RavenGuildMaster.class));
         cards.add(new SetCardInfo("Reaping the Graves", 72, Rarity.COMMON, mage.cards.r.ReapingTheGraves.class));
         cards.add(new SetCardInfo("Recuperate", 21, Rarity.COMMON, mage.cards.r.Recuperate.class));
