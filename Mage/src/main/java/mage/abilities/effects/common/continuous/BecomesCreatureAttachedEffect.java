@@ -104,7 +104,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                     break;
                             }
                             for (SubType t : token.getSubtype(game)) {
-                                if (!permanent.getSubtype(game).contains(t)) {
+                                if (!permanent.hasSubtype(t, game)) {
                                     permanent.getSubtype(game).add(t);
                                 }
                             }

@@ -40,16 +40,15 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.TargetAdjustment;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -57,48 +56,33 @@ import mage.util.CardUtil;
  */
 public class VileRequiem extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("up to X target nonblack creatures, where X is the number of verse counters on {this}");
+    private static final FilterPermanent filter = new FilterPermanent("up to X target nonblack creatures, where X is the number of verse counters on {this}");
+
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
-    private final UUID originalId;
 
     public VileRequiem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
-
-        this.color.setBlack(true);
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
         // At the beginning of your upkeep, you may put a verse counter on Vile Requiem.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true ), TargetController.YOU, true));
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+
         // {1}{B}, Sacrifice Vile Requiem: Destroy up to X target nonblack creatures, where X is the number of verse counters on Vile Requiem. They can't be regenerated.
         Effect effect = new DestroyTargetEffect(true);
         effect.setText("Destroy up to X target nonblack creatures, where X is the number of verse counters on {this}. They can't be regenerated");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(0,0,filter, false));
+        ability.addTarget(new TargetPermanent(0, 0, filter, false));
+        ability.setTargetAdjustment(TargetAdjustment.VERSE_COUNTER_TARGETS);
         this.addAbility(ability);
-        originalId = ability.getOriginalId();
 
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
-            if (sourcePermanent != null) {
-                int numberCounters = sourcePermanent.getCounters(game).getCount(CounterType.VERSE);
-                ability.getTargets().clear();
-                FilterCreaturePermanent newFilter = filter.copy();
-                newFilter.setMessage(new StringBuilder("up to ").append(CardUtil.numberToText(numberCounters)).append(" target nonblack creatures").toString());
-                ability.addTarget(new TargetCreaturePermanent(0,numberCounters,newFilter, false));
-            }
-        }
     }
 
     public VileRequiem(final VileRequiem card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override

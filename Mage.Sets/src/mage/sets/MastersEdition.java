@@ -128,6 +128,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Goblins of the Flarg", 98, Rarity.COMMON, mage.cards.g.GoblinsOfTheFlarg.class));
         cards.add(new SetCardInfo("Goblin Wizard", 97, Rarity.RARE, mage.cards.g.GoblinWizard.class));
         cards.add(new SetCardInfo("Granite Gargoyle", 99, Rarity.UNCOMMON, mage.cards.g.GraniteGargoyle.class));
+        cards.add(new SetCardInfo("Greater Realm of Preservation", 13, Rarity.UNCOMMON, mage.cards.g.GreaterRealmOfPreservation.class));
         cards.add(new SetCardInfo("Hallowed Ground", 14, Rarity.UNCOMMON, mage.cards.h.HallowedGround.class));
         cards.add(new SetCardInfo("Hand of Justice", 15, Rarity.RARE, mage.cards.h.HandOfJustice.class));
         cards.add(new SetCardInfo("Hecatomb", 71, Rarity.RARE, mage.cards.h.Hecatomb.class));
@@ -183,6 +184,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Paralyze", 80, Rarity.COMMON, mage.cards.p.Paralyze.class));
         cards.add(new SetCardInfo("Phantom Monster", 43, Rarity.COMMON, mage.cards.p.PhantomMonster.class));
         cards.add(new SetCardInfo("Phelddagrif", 150, Rarity.RARE, mage.cards.p.Phelddagrif.class));
+        cards.add(new SetCardInfo("Phyrexian Boon", 81, Rarity.COMMON, mage.cards.p.PhyrexianBoon.class));
         cards.add(new SetCardInfo("Phyrexian War Beast", 162, Rarity.UNCOMMON, PhyrexianWarBeast.class));
         cards.add(new SetCardInfo("Plains", 181, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 182, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
@@ -196,6 +198,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Rabid Wombat", 126, Rarity.UNCOMMON, mage.cards.r.RabidWombat.class));
         cards.add(new SetCardInfo("Rainbow Vale", 179, Rarity.RARE, mage.cards.r.RainbowVale.class));
         cards.add(new SetCardInfo("Righteous Avengers", 25, Rarity.COMMON, mage.cards.r.RighteousAvengers.class));
+        cards.add(new SetCardInfo("Ring of Ma'rûf", 163, Rarity.RARE, mage.cards.r.RingOfMaruf.class));
         cards.add(new SetCardInfo("River Merfolk", 47, Rarity.COMMON, mage.cards.r.RiverMerfolk.class));
         cards.add(new SetCardInfo("Roots", 127, Rarity.COMMON, mage.cards.r.Roots.class));
         cards.add(new SetCardInfo("Scryb Sprites", 128, Rarity.COMMON, mage.cards.s.ScrybSprites.class));

@@ -29,11 +29,11 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
-import mage.constants.SubType;
 
 /**
  * Describes condition when creature is equipped with more than one Equipment.
@@ -51,7 +51,7 @@ public enum EquippedMultipleSourceCondition implements Condition {
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
-                if (attached != null && attached.getSubtype(game).contains(SubType.EQUIPMENT)) {
+                if (attached != null && attached.hasSubtype(SubType.EQUIPMENT, game)) {
                     countEquipped++;
                     if (countEquipped >= 2) {
                         return true;

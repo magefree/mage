@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -40,6 +39,8 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -91,7 +92,7 @@ class GuulDrazOverseerEffect extends OneShotEffect {
         Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (controller != null && land != null) {
             int boost = 1;
-            if (land.getSubtype(game).contains(SubType.SWAMP)) {
+            if (land.hasSubtype(SubType.SWAMP, game)) {
                 boost = 2;
             }
             game.addEffect(new BoostControlledEffect(boost, 0, Duration.EndOfTurn, true), source);

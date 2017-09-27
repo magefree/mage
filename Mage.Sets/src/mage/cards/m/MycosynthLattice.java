@@ -52,7 +52,7 @@ import mage.players.Player;
 public class MycosynthLattice extends CardImpl {
 
     public MycosynthLattice(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // All permanents are artifacts in addition to their other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PermanentsAreArtifactsEffect()));
@@ -121,7 +121,7 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
             }
             // exile
             for (Card card : game.getExile().getAllCards(game)) {
-                game.getState().getCreateCardAttribute(card).getColor().setColor(colorless);
+                game.getState().getCreateCardAttribute(card, game).getColor().setColor(colorless);
             }
             // command
             for (CommandObject commandObject : game.getState().getCommand()) {
@@ -132,15 +132,15 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
                 if (player != null) {
                     // hand
                     for (Card card : player.getHand().getCards(game)) {
-                        game.getState().getCreateCardAttribute(card).getColor().setColor(colorless);
+                        game.getState().getCreateCardAttribute(card, game).getColor().setColor(colorless);
                     }
                     // library
                     for (Card card : player.getLibrary().getCards(game)) {
-                        game.getState().getCreateCardAttribute(card).getColor().setColor(colorless);
+                        game.getState().getCreateCardAttribute(card, game).getColor().setColor(colorless);
                     }
                     // graveyard
                     for (Card card : player.getGraveyard().getCards(game)) {
-                        game.getState().getCreateCardAttribute(card).getColor().setColor(colorless);
+                        game.getState().getCreateCardAttribute(card, game).getColor().setColor(colorless);
                     }
                 }
             }

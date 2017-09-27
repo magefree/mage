@@ -6,6 +6,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public class ChampionsOfKamigawa extends ExpansionSet {
+
     private static final ChampionsOfKamigawa instance = new ChampionsOfKamigawa();
 
     public static ChampionsOfKamigawa getInstance() {

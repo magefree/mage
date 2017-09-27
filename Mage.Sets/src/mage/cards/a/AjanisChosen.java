@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -41,6 +40,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.CatToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +96,7 @@ class AjanisChosenEffect extends OneShotEffect {
             Token token = new CatToken();
             if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
                 Permanent enchantment = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-                if (enchantment != null && enchantment.getSubtype(game).contains(SubType.AURA)) {
+                if (enchantment != null && enchantment.hasSubtype(SubType.AURA, game)) {
                     for (UUID tokenId : token.getLastAddedTokenIds()) {
                         Permanent tokenPermanent = game.getPermanent(tokenId);
                         if (tokenPermanent != null) {

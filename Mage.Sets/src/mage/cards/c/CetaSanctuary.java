@@ -30,44 +30,28 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.SanctuaryTriggeredAbility;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
- * @author Pete Rossi
+ * @author TheElk801
  */
 public class CetaSanctuary extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a red or green permanent");
-
-    static {
-        filter.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.GREEN)));
-    }
 
     public CetaSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CetaSanctuaryEffect(), TargetController.YOU, true);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter),
-                "At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card."));
-
+        Ability ability = new SanctuaryTriggeredAbility(
+                new DrawDiscardControllerEffect(1, 1), new DrawDiscardControllerEffect(2, 1), ObjectColor.GREEN, ObjectColor.RED,
+                "At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. "
+                + "If you control a red permanent and a green permanent, instead draw two cards, then discard a card."
+        );
+        this.addAbility(ability);
     }
 
     public CetaSanctuary(final CetaSanctuary card) {
@@ -77,51 +61,5 @@ public class CetaSanctuary extends CardImpl {
     @Override
     public CetaSanctuary copy() {
         return new CetaSanctuary(this);
-    }
-}
-
-class CetaSanctuaryEffect extends OneShotEffect {
-
-    public CetaSanctuaryEffect() {
-        super(Outcome.DrawCard);
-    }
-
-    public CetaSanctuaryEffect(final CetaSanctuaryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int red = 0;
-            int green = 0;
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
-                ObjectColor color = permanent.getColor(game);
-                if (color.isRed()) {
-                    red = 1;
-                }
-                if (color.isGreen()) {
-                    green = 1;
-                }
-
-                if (red == 1 && green == 1) {
-                    break;
-                }
-            }
-
-            if (red != 0 || green != 0) {
-                controller.drawCards((red + green), game);
-                controller.discard(1, false, source, game);
-                return true;
-            }
-        }
-        return false;
-
-    }
-
-    @Override
-    public CetaSanctuaryEffect copy() {
-        return new CetaSanctuaryEffect(this);
     }
 }

@@ -87,7 +87,9 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Aysen Abbey", 137, Rarity.UNCOMMON, mage.cards.a.AysenAbbey.class));
         cards.add(new SetCardInfo("Aysen Bureaucrats", 104, Rarity.COMMON, mage.cards.a.AysenBureaucrats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aysen Bureaucrats", 105, Rarity.COMMON, mage.cards.a.AysenBureaucrats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aysen Crusader", 106, Rarity.RARE, mage.cards.a.AysenCrusader.class));
         cards.add(new SetCardInfo("Aysen Highway", 107, Rarity.RARE, mage.cards.a.AysenHighway.class));
+        cards.add(new SetCardInfo("Baki's Curse", 27, Rarity.RARE, mage.cards.b.BakisCurse.class));
         cards.add(new SetCardInfo("Baron Sengir", 1, Rarity.RARE, mage.cards.b.BaronSengir.class));
         cards.add(new SetCardInfo("Black Carriage", 2, Rarity.RARE, mage.cards.b.BlackCarriage.class));
         cards.add(new SetCardInfo("Carapace", 55, Rarity.COMMON, mage.cards.c.Carapace.class));
@@ -152,6 +154,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Sengir Bats", 20, Rarity.COMMON, SengirBats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sengir Bats", 21, Rarity.COMMON, SengirBats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serra Aviary", 118, Rarity.RARE, mage.cards.s.SerraAviary.class));
+        cards.add(new SetCardInfo("Serra Paladin", 121, Rarity.COMMON, mage.cards.s.SerraPaladin.class));
         cards.add(new SetCardInfo("Serrated Arrows", 135, Rarity.COMMON, mage.cards.s.SerratedArrows.class));
         cards.add(new SetCardInfo("Shrink", 71, Rarity.COMMON, mage.cards.s.Shrink.class));
         cards.add(new SetCardInfo("Spectral Bears", 72, Rarity.UNCOMMON, mage.cards.s.SpectralBears.class));

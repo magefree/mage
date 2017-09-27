@@ -318,6 +318,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 335, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 336, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 337, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tahngarth's Rage", 209, Rarity.UNCOMMON, mage.cards.t.TahngarthsRage.class));
         cards.add(new SetCardInfo("Talon Sliver", 262, Rarity.COMMON, mage.cards.t.TalonSliver.class));
         cards.add(new SetCardInfo("Telethopter", 301, Rarity.UNCOMMON, mage.cards.t.Telethopter.class));
         cards.add(new SetCardInfo("Thalakos Dreamsower", 92, Rarity.UNCOMMON, mage.cards.t.ThalakosDreamsower.class));

@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -36,6 +35,7 @@ import mage.constants.SetType;
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:01
  */
 public class Guildpact extends ExpansionSet {
+
     private static final Guildpact instance = new Guildpact();
 
     public static Guildpact getInstance() {
@@ -127,6 +127,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Leyline of the Void", 52, Rarity.RARE, mage.cards.l.LeylineOfTheVoid.class));
         cards.add(new SetCardInfo("Lionheart Maverick", 11, Rarity.COMMON, mage.cards.l.LionheartMaverick.class));
         cards.add(new SetCardInfo("Martyred Rusalka", 12, Rarity.UNCOMMON, mage.cards.m.MartyredRusalka.class));
+        cards.add(new SetCardInfo("Mimeofacture", 30, Rarity.RARE, mage.cards.m.Mimeofacture.class));
         cards.add(new SetCardInfo("Mizzium Transreliquat", 153, Rarity.RARE, mage.cards.m.MizziumTransreliquat.class));
         cards.add(new SetCardInfo("Mortify", 122, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mourning Thrull", 146, Rarity.COMMON, mage.cards.m.MourningThrull.class));
@@ -147,6 +148,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Pillory of the Sleepless", 125, Rarity.COMMON, mage.cards.p.PilloryOfTheSleepless.class));
         cards.add(new SetCardInfo("Plagued Rusalka", 56, Rarity.UNCOMMON, mage.cards.p.PlaguedRusalka.class));
         cards.add(new SetCardInfo("Poisonbelly Ogre", 57, Rarity.COMMON, mage.cards.p.PoisonbellyOgre.class));
+        cards.add(new SetCardInfo("Primeval Light", 93, Rarity.UNCOMMON, mage.cards.p.PrimevalLight.class));
         cards.add(new SetCardInfo("Pyromatics", 72, Rarity.COMMON, mage.cards.p.Pyromatics.class));
         cards.add(new SetCardInfo("Quicken", 31, Rarity.RARE, mage.cards.q.Quicken.class));
         cards.add(new SetCardInfo("Rabble-Rouser", 73, Rarity.UNCOMMON, mage.cards.r.RabbleRouser.class));

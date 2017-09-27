@@ -5,6 +5,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public class ElspethVsTezzeret extends ExpansionSet {
+
     private static final ElspethVsTezzeret instance = new ElspethVsTezzeret();
 
     public static ElspethVsTezzeret getInstance() {

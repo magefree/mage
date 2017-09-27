@@ -27,9 +27,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -50,6 +47,10 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -237,10 +238,10 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         if (tokenToughness != Integer.MIN_VALUE) {
             token.getToughness().modifyBaseValue(tokenToughness);
         }
-        if (additionalSubType != null && !token.getSubtype(game).contains(additionalSubType)) {
+        if (additionalSubType != null && !token.hasSubtype(additionalSubType, game)) {
             token.getSubtype(game).add(additionalSubType);
         }
-        if (onlySubType != null && !token.getSubtype(game).contains(onlySubType)) {
+        if (onlySubType != null && !token.hasSubtype(onlySubType, game)) {
             token.getSubtype(game).clear();
             token.getSubtype(game).add(onlySubType);
         }

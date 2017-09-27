@@ -71,7 +71,7 @@ public class EldraziDisplacer extends CardImpl {
         effect.setText("Exile another target creature");
         effect.setApplyEffectsAfter(); // Needed to let temporary continuous effects end if a permanent is blinked
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{C}"));
-        effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, true);
+        effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true);
         effect.setText(", then return it to the battlefield tapped under its owner's control");
         ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent(FILTER));

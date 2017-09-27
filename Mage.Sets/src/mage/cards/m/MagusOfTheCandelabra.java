@@ -39,48 +39,36 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 
 /**
  * @author duncant
  */
 public class MagusOfTheCandelabra extends CardImpl {
 
-    private final UUID originalId;
-
     public MagusOfTheCandelabra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        //TODO: Make ability properly copiable
         // {X}, {T}: Untap X target lands.
         Effect effect = new UntapTargetEffect();
         effect.setText("untap X target lands");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
-        originalId = ability.getOriginalId();
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
+        ability.setTargetAdjustment(TargetAdjustment.X_TARGETS);
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)){
-            int xValue = ability.getManaCostsToPay().getX();
-            ability.getTargets().clear();
-            ability.addTarget(new TargetLandPermanent(xValue, xValue, StaticFilters.FILTER_LANDS, false));
-        }
     }
 
     public MagusOfTheCandelabra(final MagusOfTheCandelabra card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override

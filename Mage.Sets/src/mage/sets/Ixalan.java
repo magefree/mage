@@ -27,10 +27,11 @@ public class Ixalan extends ExpansionSet {
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;
-        this.numBoosterCommon = 11;
+        this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.numBoosterDoubleFaced = -1;
         this.maxCardNumberInBooster = 279;
 
         cards.add(new SetCardInfo("Adanto, the First Fort", 22, Rarity.RARE, mage.cards.a.AdantoTheFirstFort.class));
@@ -45,7 +46,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Ashes of the Abhorrent", 2, Rarity.RARE, mage.cards.a.AshesOfTheAbhorrent.class));
         cards.add(new SetCardInfo("Atzocan Archer", 176, Rarity.UNCOMMON, mage.cards.a.AtzocanArcher.class));
         cards.add(new SetCardInfo("Axis of Mortality", 3, Rarity.MYTHIC, mage.cards.a.AxisOfMortality.class));
-        cards.add(new SetCardInfo("Azcanta, The Sunken Ruin", 74, Rarity.RARE, mage.cards.a.AzcantaTheSunkenRuin.class));
+        cards.add(new SetCardInfo("Azcanta, the Sunken Ruin", 74, Rarity.RARE, mage.cards.a.AzcantaTheSunkenRuin.class));
         cards.add(new SetCardInfo("Belligerent Brontodon", 218, Rarity.UNCOMMON, mage.cards.b.BelligerentBrontodon.class));
         cards.add(new SetCardInfo("Bellowing Aegisaur", 4, Rarity.UNCOMMON, mage.cards.b.BellowingAegisaur.class));
         cards.add(new SetCardInfo("Bishop of Rebirth", 5, Rarity.RARE, mage.cards.b.BishopOfRebirth.class));
@@ -192,7 +193,7 @@ public class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("New Horizons", 198, Rarity.COMMON, mage.cards.n.NewHorizons.class));
         cards.add(new SetCardInfo("Nest Robber", 152, Rarity.COMMON, mage.cards.n.NestRobber.class));
         cards.add(new SetCardInfo("Old-Growth Dryads", 199, Rarity.RARE, mage.cards.o.OldGrowthDryads.class));
-        cards.add(new SetCardInfo("One with the Wind", 64, Rarity.COMMON, mage.cards.o.OneWithTheWind.class));
+        cards.add(new SetCardInfo("One With the Wind", 64, Rarity.COMMON, mage.cards.o.OneWithTheWind.class));
         cards.add(new SetCardInfo("Opt", 65, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Otepec Huntmaster", 153, Rarity.UNCOMMON, mage.cards.o.OtepecHuntmaster.class));
         cards.add(new SetCardInfo("Overflowing Insight", 66, Rarity.MYTHIC, mage.cards.o.OverflowingInsight.class));

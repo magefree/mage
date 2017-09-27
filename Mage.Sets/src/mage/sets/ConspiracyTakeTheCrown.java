@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -36,7 +35,6 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-
 public class ConspiracyTakeTheCrown extends ExpansionSet {
 
     private static final ConspiracyTakeTheCrown instance = new ConspiracyTakeTheCrown();
@@ -131,6 +129,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Tunneler", 160, Rarity.COMMON, mage.cards.g.GoblinTunneler.class));
         cards.add(new SetCardInfo("Gods Willing", 88, Rarity.COMMON, mage.cards.g.GodsWilling.class));
         cards.add(new SetCardInfo("Gratuitous Violence", 161, Rarity.RARE, mage.cards.g.GratuitousViolence.class));
+        cards.add(new SetCardInfo("Grenzo's Ruffians", 55, Rarity.UNCOMMON, mage.cards.g.GrenzosRuffians.class));
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 54, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
         cards.add(new SetCardInfo("Gruul War Chant", 203, Rarity.UNCOMMON, mage.cards.g.GruulWarChant.class));
         cards.add(new SetCardInfo("Guardian of the Gateless", 89, Rarity.UNCOMMON, mage.cards.g.GuardianOfTheGateless.class));

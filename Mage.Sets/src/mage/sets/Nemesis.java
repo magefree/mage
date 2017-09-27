@@ -64,6 +64,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Ascendant Evincar", 51, Rarity.RARE, mage.cards.a.AscendantEvincar.class));
         cards.add(new SetCardInfo("Avenger en-Dal", 2, Rarity.RARE, mage.cards.a.AvengerEnDal.class));
         cards.add(new SetCardInfo("Battlefield Percher", 52, Rarity.UNCOMMON, mage.cards.b.BattlefieldPercher.class));
+        cards.add(new SetCardInfo("Belbe's Armor", 126, Rarity.UNCOMMON, mage.cards.b.BelbesArmor.class));
         cards.add(new SetCardInfo("Belbe's Percher", 53, Rarity.COMMON, mage.cards.b.BelbesPercher.class));
         cards.add(new SetCardInfo("Belbe's Portal", 127, Rarity.RARE, mage.cards.b.BelbesPortal.class));
         cards.add(new SetCardInfo("Blastoderm", 102, Rarity.COMMON, mage.cards.b.Blastoderm.class));
@@ -90,6 +91,8 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Flowstone Crusher", 81, Rarity.COMMON, mage.cards.f.FlowstoneCrusher.class));
         cards.add(new SetCardInfo("Flowstone Overseer", 82, Rarity.RARE, mage.cards.f.FlowstoneOverseer.class));
         cards.add(new SetCardInfo("Flowstone Slide", 83, Rarity.RARE, mage.cards.f.FlowstoneSlide.class));
+        cards.add(new SetCardInfo("Flowstone Strike", 84, Rarity.COMMON, mage.cards.f.FlowstoneStrike.class));
+        cards.add(new SetCardInfo("Flowstone Surge", 85, Rarity.UNCOMMON, mage.cards.f.FlowstoneSurge.class));
         cards.add(new SetCardInfo("Flowstone Thopter", 132, Rarity.UNCOMMON, mage.cards.f.FlowstoneThopter.class));
         cards.add(new SetCardInfo("Flowstone Wall", 86, Rarity.COMMON, mage.cards.f.FlowstoneWall.class));
         cards.add(new SetCardInfo("Infiltrate", 33, Rarity.COMMON, mage.cards.i.Infiltrate.class));
@@ -105,6 +108,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Moggcatcher", 96, Rarity.RARE, mage.cards.m.Moggcatcher.class));
         cards.add(new SetCardInfo("Mogg Salvage", 94, Rarity.UNCOMMON, mage.cards.m.MoggSalvage.class));
         cards.add(new SetCardInfo("Murderous Betrayal", 61, Rarity.RARE, mage.cards.m.MurderousBetrayal.class));
+        cards.add(new SetCardInfo("Nesting Wurm", 107, Rarity.UNCOMMON, mage.cards.n.NestingWurm.class));
         cards.add(new SetCardInfo("Netter en-Dal", 13, Rarity.COMMON, mage.cards.n.NetterEnDal.class));
         cards.add(new SetCardInfo("Noble Stand", 14, Rarity.UNCOMMON, mage.cards.n.NobleStand.class));
         cards.add(new SetCardInfo("Off Balance", 15, Rarity.COMMON, mage.cards.o.OffBalance.class));
@@ -150,6 +154,8 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Skyshroud Cutter", 118, Rarity.COMMON, mage.cards.s.SkyshroudCutter.class));
         cards.add(new SetCardInfo("Skyshroud Poacher", 119, Rarity.RARE, mage.cards.s.SkyshroudPoacher.class));
         cards.add(new SetCardInfo("Skyshroud Ridgeback", 120, Rarity.COMMON, mage.cards.s.SkyshroudRidgeback.class));
+        cards.add(new SetCardInfo("Skyshroud Sentinel", 121, Rarity.COMMON, mage.cards.s.SkyshroudSentinel.class));
+        cards.add(new SetCardInfo("Sliptide Serpent", 43, Rarity.RARE, mage.cards.s.SliptideSerpent.class));
         cards.add(new SetCardInfo("Sneaky Homunculus", 44, Rarity.COMMON, mage.cards.s.SneakyHomunculus.class));
         cards.add(new SetCardInfo("Spineless Thug", 71, Rarity.COMMON, mage.cards.s.SpinelessThug.class));
         cards.add(new SetCardInfo("Spiritual Asylum", 23, Rarity.RARE, mage.cards.s.SpiritualAsylum.class));

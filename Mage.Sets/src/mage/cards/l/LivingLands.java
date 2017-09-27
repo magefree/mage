@@ -27,7 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -39,13 +38,15 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 
+import java.util.UUID;
+
 /**
  *
  * @author Quercitron
  */
 public class LivingLands extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("All Forests");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Forests");
 
     static {
         filter.add(new SubtypePredicate(SubType.FOREST));

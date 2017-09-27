@@ -33,15 +33,15 @@ import java.io.Serializable;
  *
  * @author LevelX2
  */
-
 public class UserSkipPrioritySteps implements Serializable {
+
     final SkipPrioritySteps yourTurn;
     final SkipPrioritySteps opponentTurn;
 
-    boolean stopOnDeclareAttackersDuringSkipAction;
-    boolean stopOnDeclareBlockerIfNoneAvailable;
-    boolean stopOnAllMainPhases;
-    boolean stopOnAllEndPhases;
+    boolean stopOnDeclareAttackersDuringSkipAction = true;
+    boolean stopOnDeclareBlockerIfNoneAvailable = true;
+    boolean stopOnAllMainPhases = true;
+    boolean stopOnAllEndPhases = true;
 
     public UserSkipPrioritySteps() {
         yourTurn = new SkipPrioritySteps();

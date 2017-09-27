@@ -82,6 +82,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Devastate", 87, Rarity.COMMON, mage.cards.d.Devastate.class));
         cards.add(new SetCardInfo("Diving Griffin", 6, Rarity.COMMON, mage.cards.d.DivingGriffin.class));
         cards.add(new SetCardInfo("Dual Nature", 112, Rarity.RARE, mage.cards.d.DualNature.class));
+        cards.add(new SetCardInfo("Elephant Resurgence", 113, Rarity.RARE, mage.cards.e.ElephantResurgence.class));
         cards.add(new SetCardInfo("Entangler", 7, Rarity.UNCOMMON, mage.cards.e.Entangler.class));
         cards.add(new SetCardInfo("Excavation", 33, Rarity.UNCOMMON, mage.cards.e.Excavation.class));
         cards.add(new SetCardInfo("Fault Riders", 88, Rarity.COMMON, mage.cards.f.FaultRiders.class));
@@ -119,6 +120,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Pit Raptor", 72, Rarity.UNCOMMON, mage.cards.p.PitRaptor.class));
         cards.add(new SetCardInfo("Plague Fiend", 73, Rarity.COMMON, mage.cards.p.PlagueFiend.class));
         cards.add(new SetCardInfo("Plague Wind", 74, Rarity.RARE, mage.cards.p.PlagueWind.class));
+        cards.add(new SetCardInfo("Psychic Theft", 40, Rarity.RARE, mage.cards.p.PsychicTheft.class));
         cards.add(new SetCardInfo("Pygmy Razorback", 120, Rarity.COMMON, mage.cards.p.PygmyRazorback.class));
         cards.add(new SetCardInfo("Quicksilver Wall", 41, Rarity.UNCOMMON, mage.cards.q.QuicksilverWall.class));
         cards.add(new SetCardInfo("Rebel Informer", 75, Rarity.RARE, mage.cards.r.RebelInformer.class));

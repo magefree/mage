@@ -106,6 +106,11 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
+    public int getMinNumberOfTargets() {
+        return this.minNumberOfTargets;
+    }
+
+    @Override
     public int getMaxNumberOfTargets() {
         return this.maxNumberOfTargets;
     }

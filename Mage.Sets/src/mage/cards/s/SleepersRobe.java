@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class SleepersRobe extends CardImpl {
 
     public SleepersRobe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -63,12 +63,12 @@ public class SleepersRobe extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted creature has fear.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
-        
+
         // Whenever enchanted creature deals combat damage to an opponent, you may draw a card.
-        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "enchanted creature", true, false, false, TargetController.OPPONENT));
+        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "enchanted creature", true, false, true, TargetController.OPPONENT));
     }
 
     public SleepersRobe(final SleepersRobe card) {

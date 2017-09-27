@@ -51,20 +51,20 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class BorosReckoner extends CardImpl {
 
     public BorosReckoner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}{R/W}{R/W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R/W}{R/W}{R/W}");
         this.subtype.add(SubType.MINOTAUR, SubType.WIZARD);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // Whenever Boros Reckoner is dealt damage, it deals that much damage to target creature or player.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new BorosReckonerDealDamageEffect(), false);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new BorosReckonerDealDamageEffect(), false, false, true);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 
         // {R/W}: Boros Reckoner gains first strike until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(),Duration.EndOfTurn), new ManaCostsImpl("{R/W}")));
+                Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R/W}")));
     }
 
     public BorosReckoner(final BorosReckoner card) {

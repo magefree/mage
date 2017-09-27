@@ -111,7 +111,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl {
                 if (land != null) {
                     switch (layer) {
                         case TypeChangingEffects_4:
-                            if (sublayer == SubLayer.NA && !land.getSubtype(game).contains(choice)) {
+                            if (sublayer == SubLayer.NA && !land.hasSubtype(choice, game)) {
                                 land.getSubtype(game).add(choice);
                             }
                             break;

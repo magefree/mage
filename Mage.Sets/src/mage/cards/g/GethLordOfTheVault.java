@@ -39,17 +39,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 
 /**
@@ -57,7 +55,13 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  */
 public class GethLordOfTheVault extends CardImpl {
 
-    private final UUID originalId;
+    private static final FilterCard filter = new FilterCard("artifact or creature card with converted mana cost X from an opponent's graveyard");
+
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE)));
+    }
 
     public GethLordOfTheVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
@@ -69,33 +73,16 @@ public class GethLordOfTheVault extends CardImpl {
 
         // Intimidate
         this.addAbility(IntimidateAbility.getInstance());
-        //TODO: Make ability properly copiable
         // {X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped.
         // Then that player puts the top X cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
-        originalId = ability.getOriginalId();
-        ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("artifact or creature card with converted mana cost X from an opponent's graveyard")));
+        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_GY_CARD);
+        ability.addTarget(new TargetCardInOpponentsGraveyard(filter));
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            int xValue = ability.getManaCostsToPay().getX();
-            ability.getTargets().clear();
-            FilterCard filter = new FilterCard("artifact or creature card with converted mana cost " + xValue + " from an opponent's graveyard");
-            filter.add(Predicates.or(
-                    new CardTypePredicate(CardType.ARTIFACT),
-                    new CardTypePredicate(CardType.CREATURE)));
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-            Target target = new TargetCardInOpponentsGraveyard(filter);
-            ability.addTarget(target);
-        }
     }
 
     public GethLordOfTheVault(final GethLordOfTheVault card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override

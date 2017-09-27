@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -43,6 +42,8 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
+import java.util.UUID;
+
 /**
  *
  * @author jonubuu
@@ -50,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 public class GoblinWarchief extends CardImpl {
 
     private static final FilterCard filterSpells = new FilterCard("Goblin spells");
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblins");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
 
     static {
         filterSpells.add(new SubtypePredicate(SubType.GOBLIN));

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +40,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -90,7 +91,7 @@ class DauntingDefenderEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.getSubtype(game).contains(SubType.CLERIC)) {
+            if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.hasSubtype(SubType.CLERIC, game)) {
                 return super.applies(event, source, game);
             }
         }

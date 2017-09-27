@@ -27,11 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -40,13 +35,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicate;
@@ -59,18 +48,21 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetNonlandPermanent;
 import mage.watchers.Watcher;
 
+import java.util.*;
+
 /**
  *
  * @author TheElk801
  */
 public class AdmiralBeckettBrass extends CardImpl {
 
-    private final UUID originalId;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other Pirates you control");
+    private static final FilterNonlandPermanent filter2 = new FilterNonlandPermanent("nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn");
 
     static {
         filter.add(new SubtypePredicate(SubType.PIRATE));
         filter.add(new ControllerPredicate(TargetController.YOU));
+        filter2.add(new ControllerDealtDamageByPiratesPredicate());
     }
 
     public AdmiralBeckettBrass(UUID ownerId, CardSetInfo setInfo) {
@@ -87,25 +79,12 @@ public class AdmiralBeckettBrass extends CardImpl {
 
         // At the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new GainControlTargetEffect(Duration.Custom), TargetController.YOU, false);
-        ability.addTarget(new TargetNonlandPermanent(new FilterNonlandPermanent("nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn")));
-        originalId = ability.getOriginalId();
+        ability.addTarget(new TargetNonlandPermanent(filter2));
         this.addAbility(ability, new DamagedByPiratesWatcher());
     }
 
     public AdmiralBeckettBrass(final AdmiralBeckettBrass card) {
         super(card);
-        this.originalId = card.originalId;
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            ability.getTargets().clear();
-            FilterNonlandPermanent playerFilter = new FilterNonlandPermanent("nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn");
-            playerFilter.add(new ControllerDealtDamageByPiratesPredicate());
-            TargetNonlandPermanent target = new TargetNonlandPermanent(1, 1, playerFilter, true);
-            ability.addTarget(target);
-        }
     }
 
     @Override
@@ -141,11 +120,11 @@ class DamagedByPiratesWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             if (((DamagedPlayerEvent) event).isCombatDamage()) {
                 Permanent creature = game.getPermanentOrLKIBattlefield(event.getSourceId());
-                if (creature != null && creature.getSubtype(game).contains(SubType.PIRATE)) {
+                if (creature != null && creature.hasSubtype(SubType.PIRATE, game)) {
                     if (damageSourceIds.keySet().contains(event.getTargetId())) {
                         damageSourceIds.get(event.getTargetId()).add(creature.getId());
                     } else {
-                        Set<UUID> creatureSet = new HashSet();
+                        Set<UUID> creatureSet = new HashSet<>();
                         creatureSet.add(creature.getId());
                         damageSourceIds.put(event.getTargetId(), creatureSet);
                     }

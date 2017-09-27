@@ -130,6 +130,7 @@ public class ArabianNights extends ExpansionSet {
         cards.add(new SetCardInfo("Piety", 65, Rarity.COMMON, Piety.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pyramids", 81, Rarity.RARE, mage.cards.p.Pyramids.class));
         cards.add(new SetCardInfo("Repentant Blacksmith", 66, Rarity.RARE, mage.cards.r.RepentantBlacksmith.class));
+        cards.add(new SetCardInfo("Ring of Ma'rûf", 82, Rarity.RARE, mage.cards.r.RingOfMaruf.class));
         cards.add(new SetCardInfo("Rukh Egg", 52, Rarity.COMMON, RukhEgg.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rukh Egg", 53, Rarity.COMMON, RukhEgg.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sandals of Abdallah", 83, Rarity.UNCOMMON, mage.cards.s.SandalsOfAbdallah.class));

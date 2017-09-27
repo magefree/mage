@@ -156,7 +156,7 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             if (object instanceof Card) {
                 Card card = (Card) object;
                 setChosenSubtype(
-                        game.getState().getCreateCardAttribute(card).getSubtype(),
+                        game.getState().getCreateCardAttribute(card, game).getSubtype(),
                         subtype);
             } else {
                 setChosenSubtype(object.getSubtype(game), subtype);

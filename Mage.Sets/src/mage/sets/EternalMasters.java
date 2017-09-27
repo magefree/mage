@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -92,7 +91,7 @@ public class EternalMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Chain Lightning", 123, Rarity.UNCOMMON, mage.cards.c.ChainLightning.class));
         cards.add(new SetCardInfo("Chrome Mox", 219, Rarity.MYTHIC, mage.cards.c.ChromeMox.class));
         cards.add(new SetCardInfo("Civic Wayfinder", 161, Rarity.COMMON, mage.cards.c.CivicWayfinder.class));
-	cards.add(new SetCardInfo("Coalition Honor Guard", 6, Rarity.COMMON, mage.cards.c.CoalitionHonorGuard.class));
+        cards.add(new SetCardInfo("Coalition Honor Guard", 6, Rarity.COMMON, mage.cards.c.CoalitionHonorGuard.class));
         cards.add(new SetCardInfo("Commune with the Gods", 162, Rarity.COMMON, mage.cards.c.CommuneWithTheGods.class));
         cards.add(new SetCardInfo("Control Magic", 42, Rarity.RARE, mage.cards.c.ControlMagic.class));
         cards.add(new SetCardInfo("Counterspell", 43, Rarity.COMMON, mage.cards.c.Counterspell.class));

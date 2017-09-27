@@ -99,7 +99,7 @@ class CantBeEquippedSourceEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.getSubtype(game).contains(SubType.EQUIPMENT)) {
+            if (permanent != null && permanent.hasSubtype(SubType.EQUIPMENT, game)) {
                 return true;
             }
         }

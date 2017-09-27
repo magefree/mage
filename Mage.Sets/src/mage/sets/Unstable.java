@@ -36,6 +36,7 @@ import mage.constants.SetType;
  * @author fireshoes
  */
 public class Unstable extends ExpansionSet {
+
     private static final Unstable instance = new Unstable();
 
     public static Unstable getInstance() {

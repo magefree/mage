@@ -37,14 +37,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.ComparisonType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.game.Game;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -53,39 +50,29 @@ import mage.target.TargetPermanent;
  */
 public class GorillaShaman extends CardImpl {
 
-    private final UUID originalId;
+    private static final FilterPermanent filter = new FilterPermanent("noncreature artifact with converted mana cost X");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+    }
 
     public GorillaShaman(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.APE);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        //TODO: Make ability properly copiable
         // {X}{X}{1}: Destroy target noncreature artifact with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{1}"));
-        ability.addTarget(new TargetPermanent(new FilterArtifactPermanent("noncreature artifact with converted mana cost X")));
-        originalId = ability.getOriginalId();
+        ability.addTarget(new TargetPermanent(filter));
+        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_PERM);
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            int xValue = ability.getManaCostsToPay().getX();
-            ability.getTargets().clear();
-            FilterArtifactPermanent filter = new FilterArtifactPermanent(new StringBuilder("noncreature artifact with converted mana cost ").append(xValue).toString());
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-            filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-            Target target = new TargetPermanent(filter);
-            ability.addTarget(target);
-        }
     }
 
     public GorillaShaman(final GorillaShaman card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override

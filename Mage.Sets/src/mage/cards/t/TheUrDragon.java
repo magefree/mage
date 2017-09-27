@@ -27,9 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -42,13 +39,7 @@ import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -57,8 +48,11 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public class TheUrDragon extends CardImpl {
@@ -125,7 +119,7 @@ class DragonsAttackedWatcher extends Watcher {
             this.attackedThisTurnCreatures.clear();
         }
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            if (game.getPermanent(event.getSourceId()).getSubtype(game).contains(SubType.DRAGON)) {
+            if (game.getPermanent(event.getSourceId()).hasSubtype(SubType.DRAGON, game)) {
                 this.attackedThisTurnCreatures.add(new MageObjectReference(event.getSourceId(), game));
             }
         }
@@ -166,7 +160,10 @@ class TheUrDragonTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         for (UUID attacker : game.getCombat().getAttackers()) {
             Permanent creature = game.getPermanent(attacker);
-            if (creature != null && creature.getControllerId() == this.getControllerId() && creature.getSubtype(game).contains(SubType.DRAGON)) {
+            if (creature != null
+                    && creature.getControllerId() != null
+                    && creature.getControllerId().equals(this.getControllerId())
+                    && creature.hasSubtype(SubType.DRAGON, game)) {
                 return true;
             }
         }

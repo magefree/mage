@@ -110,7 +110,7 @@ class AuraAttachedPredicate implements Predicate<Permanent> {
             if (!uuid.equals(ownId)) {
                 Permanent attachment = game.getPermanent(uuid);
                 if (attachment != null
-                        && attachment.getSubtype(game).contains(SubType.AURA)) {
+                        && attachment.hasSubtype(SubType.AURA, game)) {
                     return true;
                 }
             }

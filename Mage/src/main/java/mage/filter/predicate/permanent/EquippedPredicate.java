@@ -21,7 +21,7 @@ public class EquippedPredicate implements Predicate<Permanent> {
     public boolean apply(Permanent input, Game game) {
         for (UUID attachmentId : input.getAttachments()) {
             Permanent attachment = game.getPermanent(attachmentId);
-            if (attachment != null && attachment.getSubtype(game).contains(SubType.EQUIPMENT)) {
+            if (attachment != null && attachment.hasSubtype(SubType.EQUIPMENT, game)) {
                 return true;
             }
         }

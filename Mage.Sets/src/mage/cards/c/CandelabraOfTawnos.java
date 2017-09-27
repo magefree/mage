@@ -37,10 +37,10 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -48,33 +48,21 @@ import mage.target.common.TargetLandPermanent;
  */
 public class CandelabraOfTawnos extends CardImpl {
 
-    private final UUID originalId;
-
     public CandelabraOfTawnos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        //TODO: Make ability properly copiable
         // {X}, {T}: Untap X target lands.
         Effect effect = new UntapTargetEffect();
         effect.setText("untap X target lands");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
-        originalId = ability.getOriginalId();
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
+        ability.setTargetAdjustment(TargetAdjustment.X_TARGETS);
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)){
-            int xValue = ability.getManaCostsToPay().getX();
-            ability.getTargets().clear();
-            ability.addTarget(new TargetLandPermanent(xValue, xValue, new FilterLandPermanent(), false));
-        }
     }
 
     public CandelabraOfTawnos(final CandelabraOfTawnos card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override

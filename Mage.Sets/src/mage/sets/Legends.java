@@ -59,9 +59,11 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Aerathi Berserker", 131, Rarity.UNCOMMON, mage.cards.a.AerathiBerserker.class));
         cards.add(new SetCardInfo("Aisling Leprechaun", 87, Rarity.COMMON, mage.cards.a.AislingLeprechaun.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 170, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
+        cards.add(new SetCardInfo("Alabaster Potion", 171, Rarity.COMMON, mage.cards.a.AlabasterPotion.class));
         cards.add(new SetCardInfo("Alchor's Tomb", 214, Rarity.RARE, mage.cards.a.AlchorsTomb.class));
         cards.add(new SetCardInfo("All Hallow's Eve", 2, Rarity.RARE, mage.cards.a.AllHallowsEve.class));
         cards.add(new SetCardInfo("Amrou Kithkin", 172, Rarity.COMMON, mage.cards.a.AmrouKithkin.class));
+        cards.add(new SetCardInfo("Angelic Voices", 173, Rarity.RARE, mage.cards.a.AngelicVoices.class));
         cards.add(new SetCardInfo("Angus Mackenzie", 257, Rarity.RARE, mage.cards.a.AngusMackenzie.class));
         cards.add(new SetCardInfo("Arcades Sabboth", 258, Rarity.RARE, mage.cards.a.ArcadesSabboth.class));
         cards.add(new SetCardInfo("Arena of the Ancients", 215, Rarity.RARE, mage.cards.a.ArenaOfTheAncients.class));
@@ -115,6 +117,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Sprites", 100, Rarity.COMMON, mage.cards.f.FireSprites.class));
         cards.add(new SetCardInfo("Flash Counter", 56, Rarity.COMMON, mage.cards.f.FlashCounter.class));
         cards.add(new SetCardInfo("Flash Flood", 57, Rarity.COMMON, mage.cards.f.FlashFlood.class));
+        cards.add(new SetCardInfo("Floral Spuzzem", 101, Rarity.UNCOMMON, mage.cards.f.FloralSpuzzem.class));
         cards.add(new SetCardInfo("Force Spike", 58, Rarity.COMMON, mage.cards.f.ForceSpike.class));
         cards.add(new SetCardInfo("Frost Giant", 146, Rarity.UNCOMMON, mage.cards.f.FrostGiant.class));
         cards.add(new SetCardInfo("Gaseous Form", 59, Rarity.COMMON, mage.cards.g.GaseousForm.class));
@@ -122,12 +125,14 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Strength", 147, Rarity.COMMON, mage.cards.g.GiantStrength.class));
         cards.add(new SetCardInfo("Gravity Sphere", 149, Rarity.RARE, mage.cards.g.GravitySphere.class));
         cards.add(new SetCardInfo("Great Defender", 185, Rarity.UNCOMMON, mage.cards.g.GreatDefender.class));
+        cards.add(new SetCardInfo("Greater Realm of Preservation", 187, Rarity.UNCOMMON, mage.cards.g.GreaterRealmOfPreservation.class));
         cards.add(new SetCardInfo("Greed", 15, Rarity.RARE, mage.cards.g.Greed.class));
         cards.add(new SetCardInfo("Green Mana Battery", 223, Rarity.UNCOMMON, mage.cards.g.GreenManaBattery.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 268, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));
         cards.add(new SetCardInfo("Hazezon Tamar", 270, Rarity.RARE, mage.cards.h.HazezonTamar.class));
         cards.add(new SetCardInfo("Headless Horseman", 16, Rarity.COMMON, mage.cards.h.HeadlessHorseman.class));
         cards.add(new SetCardInfo("Heaven's Gate", 188, Rarity.UNCOMMON, mage.cards.h.HeavensGate.class));
+        cards.add(new SetCardInfo("Hell Swarm", 17, Rarity.COMMON, mage.cards.h.HellSwarm.class));
         cards.add(new SetCardInfo("Hellfire", 18, Rarity.RARE, mage.cards.h.Hellfire.class));
         cards.add(new SetCardInfo("Hell's Caretaker", 19, Rarity.RARE, mage.cards.h.HellsCaretaker.class));
         cards.add(new SetCardInfo("Holy Day", 189, Rarity.COMMON, mage.cards.h.HolyDay.class));
@@ -160,6 +165,8 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Lady Orca", 281, Rarity.UNCOMMON, mage.cards.l.LadyOrca.class));
         cards.add(new SetCardInfo("Land Equilibrium", 64, Rarity.RARE, mage.cards.l.LandEquilibrium.class));
         cards.add(new SetCardInfo("Land Tax", 195, Rarity.UNCOMMON, mage.cards.l.LandTax.class));
+        cards.add(new SetCardInfo("Land's Edge", 155, Rarity.RARE, mage.cards.l.LandsEdge.class));
+        cards.add(new SetCardInfo("Life Chisel", 228, Rarity.UNCOMMON, mage.cards.l.LifeChisel.class));
         cards.add(new SetCardInfo("Lifeblood", 196, Rarity.RARE, mage.cards.l.Lifeblood.class));
         cards.add(new SetCardInfo("Living Plane", 107, Rarity.RARE, mage.cards.l.LivingPlane.class));
         cards.add(new SetCardInfo("Livonya Silone", 282, Rarity.RARE, mage.cards.l.LivonyaSilone.class));
@@ -185,6 +192,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Pradesh Gypsies", 111, Rarity.UNCOMMON, mage.cards.p.PradeshGypsies.class));
         cards.add(new SetCardInfo("Presence of the Master", 200, Rarity.UNCOMMON, mage.cards.p.PresenceOfTheMaster.class));
         cards.add(new SetCardInfo("Princess Lucrezia", 289, Rarity.UNCOMMON, mage.cards.p.PrincessLucrezia.class));
+        cards.add(new SetCardInfo("Psionic Entity", 67, Rarity.RARE, mage.cards.p.PsionicEntity.class));
         cards.add(new SetCardInfo("Pyrotechnics", 158, Rarity.COMMON, mage.cards.p.Pyrotechnics.class));
         cards.add(new SetCardInfo("Rabid Wombat", 112, Rarity.UNCOMMON, mage.cards.r.RabidWombat.class));
         cards.add(new SetCardInfo("Radjan Spirit", 113, Rarity.UNCOMMON, mage.cards.r.RadjanSpirit.class));
@@ -213,6 +221,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Sir Shandlar of Eberyn", 297, Rarity.UNCOMMON, mage.cards.s.SirShandlarOfEberyn.class));
         cards.add(new SetCardInfo("Sivitri Scarzam", 298, Rarity.UNCOMMON, mage.cards.s.SivitriScarzam.class));
         cards.add(new SetCardInfo("Sol'kanar the Swamp King", 299, Rarity.RARE, mage.cards.s.SolkanarTheSwampKing.class));
+        cards.add(new SetCardInfo("Spectral Cloak", 78, Rarity.UNCOMMON, mage.cards.s.SpectralCloak.class));
         cards.add(new SetCardInfo("Spinal Villain", 161, Rarity.RARE, mage.cards.s.SpinalVillain.class));
         cards.add(new SetCardInfo("Spirit Link", 206, Rarity.UNCOMMON, mage.cards.s.SpiritLink.class));
         cards.add(new SetCardInfo("Spirit Shackle", 31, Rarity.COMMON, mage.cards.s.SpiritShackle.class));

@@ -27,9 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
@@ -42,6 +39,10 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -70,7 +71,7 @@ class ManabondEffect extends OneShotEffect {
 
     public ManabondEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "you may reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand";
+        staticText = "reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand";
     }
 
     public ManabondEffect(final ManabondEffect effect) {

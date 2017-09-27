@@ -40,6 +40,7 @@ import mage.abilities.effects.Effects;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.EffectType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -539,4 +540,8 @@ public interface Ability extends Controllable, Serializable {
     void setCanFizzle(boolean canFizzle);
 
     boolean canFizzle();
+
+    void setTargetAdjustment(TargetAdjustment targetAdjustment);
+
+    TargetAdjustment getTargetAdjustment();
 }

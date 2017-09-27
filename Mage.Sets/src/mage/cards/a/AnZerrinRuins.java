@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -36,16 +35,13 @@ import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +91,7 @@ class AnZerrinRuinsDontUntapEffect extends DontUntapInControllersUntapStepAllEff
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && sourcePerm != null) {
                 SubType subtype = (SubType) game.getState().getValue(sourcePerm.getId() + "_type");
-                if (permanent.getSubtype(game).contains(subtype)) {
+                if (permanent.hasSubtype(subtype, game)) {
                     return true;
                 }
             }
