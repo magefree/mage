@@ -258,6 +258,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Shared Triumph", 53, Rarity.RARE, mage.cards.s.SharedTriumph.class));
         cards.add(new SetCardInfo("Shepherd of Rot", 168, Rarity.COMMON, mage.cards.s.ShepherdOfRot.class));
         cards.add(new SetCardInfo("Shock", 227, Rarity.COMMON, mage.cards.s.Shock.class));
+        cards.add(new SetCardInfo("Sigil of the New Dawn", 55, Rarity.RARE, mage.cards.s.SigilOfTheNewDawn.class));
         cards.add(new SetCardInfo("Silent Specter", 169, Rarity.RARE, mage.cards.s.SilentSpecter.class));
         cards.add(new SetCardInfo("Silklash Spider", 281, Rarity.RARE, mage.cards.s.SilklashSpider.class));
         cards.add(new SetCardInfo("Silvos, Rogue Elemental", 282, Rarity.RARE, mage.cards.s.SilvosRogueElemental.class));
