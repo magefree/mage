@@ -51,9 +51,9 @@ import mage.target.common.TargetCardInGraveyard;
 public class DrafnasRestoration extends CardImpl {
 
     public DrafnasRestoration(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
-        // Return any number of target artifact cards from target player's graveyard to the top of his or her library in any order.
+        // Put any number of target artifact cards from target player's graveyard on top of his or her library in any order.
         this.getSpellAbility().addEffect(new DrafnasRestorationEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new DrafnasRestorationTarget());
@@ -109,21 +109,21 @@ class DrafnasRestorationTarget extends TargetCardInGraveyard {
 }
 
 class DrafnasRestorationEffect extends OneShotEffect {
-    
+
     DrafnasRestorationEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Return any number of target artifact cards from target player's graveyard to the top of his or her library in any order";
+        this.staticText = "Put any number of target artifact cards from target player's graveyard on top of his or her library in any order.";
     }
-    
+
     DrafnasRestorationEffect(final DrafnasRestorationEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public DrafnasRestorationEffect copy() {
         return new DrafnasRestorationEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
