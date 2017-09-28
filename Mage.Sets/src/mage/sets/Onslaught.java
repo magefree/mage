@@ -198,6 +198,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Menacing Ogre", 219, Rarity.RARE, mage.cards.m.MenacingOgre.class));
         cards.add(new SetCardInfo("Misery Charm", 158, Rarity.COMMON, mage.cards.m.MiseryCharm.class));
         cards.add(new SetCardInfo("Mistform Dreamer", 93, Rarity.COMMON, mage.cards.m.MistformDreamer.class));
+        cards.add(new SetCardInfo("Mistform Mask", 94, Rarity.COMMON, mage.cards.m.MistformMask.class));
         cards.add(new SetCardInfo("Mistform Mutant", 95, Rarity.UNCOMMON, mage.cards.m.MistformMutant.class));
         cards.add(new SetCardInfo("Mistform Shrieker", 96, Rarity.UNCOMMON, mage.cards.m.MistformShrieker.class));
         cards.add(new SetCardInfo("Mistform Skyreaver", 97, Rarity.RARE, mage.cards.m.MistformSkyreaver.class));
