@@ -57,7 +57,7 @@ import mage.sets.Commander;
 public class CelestialDawn extends CardImpl {
 
     public CelestialDawn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
 
         // Lands you control are Plains.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CelestialDawnToPlainsEffect()));
@@ -136,7 +136,7 @@ class CelestialDawnToWhiteEffect extends ContinuousEffectImpl {
 
     public CelestialDawnToWhiteEffect() {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
-        staticText = "Nonland cards you own that aren't on the battlefield, spells you control, and nonland permanents you control are white";
+        staticText = "Nonland permanents you control are white. The same is true for spells you control and nonland cards you own that aren't on the battlefield.";
     }
 
     @Override
