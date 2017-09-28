@@ -2359,6 +2359,13 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
+        //Remove all emblems the player controls
+        for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext();) {
+            if (it.next().getControllerId().equals(playerId)) {
+                it.remove();
+            }
+        }
+
         Iterator<Entry<UUID, Card>> it = gameCards.entrySet().iterator();
 
         while (it.hasNext()) {
