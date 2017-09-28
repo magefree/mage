@@ -159,6 +159,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Gerrard's Irregulars", 192, Rarity.COMMON, mage.cards.g.GerrardsIrregulars.class));
         cards.add(new SetCardInfo("Ghoul's Feast", 137, Rarity.UNCOMMON, mage.cards.g.GhoulsFeast.class));
         cards.add(new SetCardInfo("Giant Caterpillar", 249, Rarity.COMMON, mage.cards.g.GiantCaterpillar.class));
+        cards.add(new SetCardInfo("Glowing Anemone", 81, Rarity.UNCOMMON, mage.cards.g.GlowingAnemone.class));
         cards.add(new SetCardInfo("Groundskeeper", 250, Rarity.UNCOMMON, mage.cards.g.Groundskeeper.class));
         cards.add(new SetCardInfo("Gush", 82, Rarity.COMMON, mage.cards.g.Gush.class));
         cards.add(new SetCardInfo("Hammer Mage", 193, Rarity.UNCOMMON, mage.cards.h.HammerMage.class));
