@@ -25,12 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -46,41 +44,37 @@ import mage.target.TargetPlayer;
 
 /**
  *
- * @author Quercitron
+ * @author TheElk801
  */
-public class MindWarp extends CardImpl {
+public class Extortion extends CardImpl {
 
-    public MindWarp(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{3}{B}");
+    public Extortion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
-        // Look at target player's hand and choose X cards from it. That player discards those cards.
-        this.getSpellAbility().addEffect(new MindWarpEffect(new ManacostVariableValue()));
+        // Look at target player's hand and choose up to two cards from it. That player discards those cards.
+        this.getSpellAbility().addEffect(new ExtortionEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public MindWarp(final MindWarp card) {
+    public Extortion(final Extortion card) {
         super(card);
     }
 
     @Override
-    public MindWarp copy() {
-        return new MindWarp(this);
+    public Extortion copy() {
+        return new Extortion(this);
     }
 }
 
-class MindWarpEffect extends OneShotEffect {
+class ExtortionEffect extends OneShotEffect {
 
-    private final DynamicValue xValue;
-
-    public MindWarpEffect(DynamicValue xValue) {
+    public ExtortionEffect() {
         super(Outcome.Discard);
-        this.xValue = xValue;
-        staticText = "Look at target player's hand and choose X cards from it. That player discards those card.";
+        staticText = "Look at target player's hand and choose up to two cards from it. That player discards that card.";
     }
 
-    public MindWarpEffect(final MindWarpEffect effect) {
+    public ExtortionEffect(final ExtortionEffect effect) {
         super(effect);
-        this.xValue = effect.xValue;
     }
 
     @Override
@@ -88,12 +82,8 @@ class MindWarpEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player you = game.getPlayer(source.getControllerId());
         if (targetPlayer != null && you != null) {
-            int amountToDiscard = Math.min(
-                    xValue.calculate(game, source, this),
-                    targetPlayer.getHand().size()
-            );
             you.lookAtCards("Discard", targetPlayer.getHand(), game);
-            TargetCard target = new TargetCard(amountToDiscard, Zone.HAND, new FilterCard());
+            TargetCard target = new TargetCard(0, 2, Zone.HAND, new FilterCard());
             target.setNotTarget(true);
             if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                 Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
@@ -107,7 +97,7 @@ class MindWarpEffect extends OneShotEffect {
     }
 
     @Override
-    public MindWarpEffect copy() {
-        return new MindWarpEffect(this);
+    public ExtortionEffect copy() {
+        return new ExtortionEffect(this);
     }
 }
