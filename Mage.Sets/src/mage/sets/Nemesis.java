@@ -127,6 +127,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Prowler", 65, Rarity.UNCOMMON, mage.cards.p.PhyrexianProwler.class));
         cards.add(new SetCardInfo("Plague Witch", 66, Rarity.COMMON, mage.cards.p.PlagueWitch.class));
         cards.add(new SetCardInfo("Predator, Flagship", 135, Rarity.RARE, mage.cards.p.PredatorFlagship.class));
+        cards.add(new SetCardInfo("Rackling", 136, Rarity.UNCOMMON, mage.cards.r.Rackling.class));
         cards.add(new SetCardInfo("Rathi Assassin", 67, Rarity.RARE, mage.cards.r.RathiAssassin.class));
         cards.add(new SetCardInfo("Rathi Fiend", 68, Rarity.UNCOMMON, mage.cards.r.RathiFiend.class));
         cards.add(new SetCardInfo("Rathi Intimidator", 69, Rarity.COMMON, mage.cards.r.RathiIntimidator.class));
