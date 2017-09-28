@@ -115,6 +115,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Crooked Scales", 291, Rarity.RARE, mage.cards.c.CrookedScales.class));
         cards.add(new SetCardInfo("Crossbow Infantry", 16, Rarity.COMMON, mage.cards.c.CrossbowInfantry.class));
         cards.add(new SetCardInfo("Crumbling Sanctuary", 292, Rarity.RARE, mage.cards.c.CrumblingSanctuary.class));
+        cards.add(new SetCardInfo("Customs Depot", 71, Rarity.UNCOMMON, mage.cards.c.CustomsDepot.class));
         cards.add(new SetCardInfo("Dark Ritual", 129, Rarity.COMMON, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Darting Merfolk", 72, Rarity.COMMON, mage.cards.d.DartingMerfolk.class));
         cards.add(new SetCardInfo("Dawnstrider", 237, Rarity.RARE, mage.cards.d.Dawnstrider.class));
