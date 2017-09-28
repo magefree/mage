@@ -27,18 +27,19 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.constants.SubType;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ import mage.constants.CardType;
 public class MistformShrieker extends CardImpl {
 
     public MistformShrieker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
         this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(3);
