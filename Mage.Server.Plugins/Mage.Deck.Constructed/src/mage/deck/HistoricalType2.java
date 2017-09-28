@@ -109,6 +109,15 @@ public class HistoricalType2 extends Constructed {
     @Override
     public boolean validate(Deck deck) {
 
+        // debug code for finding set info
+//        System.out.println();
+//        for (ExpansionSet set : Sets.getInstance().values()) {
+//            if (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION) {
+//                System.out.println("Set:\t" + set.getCode() + "\t" + set.getReleaseDate() + "\t" + set.getName() + "\t" + set.getBlockName());
+//            }
+//        }
+
+
         Map<String, String> leastInvalid = null;
 
         boolean valid = false;
