@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
 public class ManaWeb extends CardImpl {
 
     public ManaWeb(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a land an opponent controls is tapped for mana, tap all lands that player controls that could produce any type of mana that land could produce.
         this.addAbility(new ManaWebTriggeredAbility());
@@ -155,7 +155,7 @@ class ManaWebeffect extends OneShotEffect {
                         }
                     }
 
-                    if (mana.containsAny(opponentLandMana)) {
+                    if (mana.containsAny(opponentLandMana, true)) {
                         tappedLands = opponentPermanent.tap(game) || tappedLands;
                     }
                 }
