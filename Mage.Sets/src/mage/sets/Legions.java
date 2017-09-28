@@ -137,6 +137,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Magma Sliver", 107, Rarity.RARE, mage.cards.m.MagmaSliver.class));
         cards.add(new SetCardInfo("Master of the Veil", 43, Rarity.UNCOMMON, mage.cards.m.MasterOfTheVeil.class));
         cards.add(new SetCardInfo("Merchant of Secrets", 44, Rarity.COMMON, mage.cards.m.MerchantOfSecrets.class));
+        cards.add(new SetCardInfo("Mistform Seaswift", 45, Rarity.COMMON, mage.cards.m.MistformSeaswift.class));
         cards.add(new SetCardInfo("Mistform Sliver", 46, Rarity.COMMON, mage.cards.m.MistformSliver.class));
         cards.add(new SetCardInfo("Mistform Ultimus", 47, Rarity.RARE, mage.cards.m.MistformUltimus.class));
         cards.add(new SetCardInfo("Nantuko Vigilante", 132, Rarity.COMMON, mage.cards.n.NantukoVigilante.class));
