@@ -39,8 +39,6 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -50,8 +48,6 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -81,7 +77,7 @@ class ThranTurbineEffect extends OneShotEffect {
 
     public ThranTurbineEffect() {
         super(Outcome.Benefit);
-        staticText = "add {C} or {C}{C} to your mana pool. You can't spend this mana to cast spells";
+        staticText = "add {C}{C} to your mana pool. You can't spend this mana to cast spells";
     }
 
     public ThranTurbineEffect(final ThranTurbineEffect effect) {
@@ -98,21 +94,7 @@ class ThranTurbineEffect extends OneShotEffect {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
 
         if (player != null) {
-            Choice numberChoice = new ChoiceImpl();
-            Set<String> numbers = new HashSet<>();
-            numbers.add(Integer.toString(1));
-            numbers.add(Integer.toString(2));
-            numberChoice.setChoices(numbers);
-            numberChoice.setMessage("Choose the amount of {C} mana to add");
-
-            while (!player.choose(Outcome.Benefit, numberChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
-
-            int count = Integer.parseInt(numberChoice.getChoice());
-            new AddConditionalColorlessManaEffect(count, new ThranTurbineManaBuilder()).apply(game, source);
+            new AddConditionalColorlessManaEffect(2, new ThranTurbineManaBuilder()).apply(game, source);
             return true;
         }
         return false;
