@@ -29,7 +29,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,7 +53,7 @@ public class DauthiSlayer extends CardImpl {
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
         // Dauthi Slayer attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
     public DauthiSlayer(final DauthiSlayer card) {

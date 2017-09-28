@@ -29,7 +29,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public class ImpetuousSunchaser extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Impetuous Sunchaser attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
     public ImpetuousSunchaser(final ImpetuousSunchaser card) {

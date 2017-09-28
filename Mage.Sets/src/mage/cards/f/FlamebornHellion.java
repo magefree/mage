@@ -30,7 +30,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,7 +50,7 @@ public class FlamebornHellion extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
     public FlamebornHellion (final FlamebornHellion card) {

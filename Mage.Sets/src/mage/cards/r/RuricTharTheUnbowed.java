@@ -30,7 +30,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.ReachAbility;
@@ -69,7 +69,7 @@ public class RuricTharTheUnbowed extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
         
         // Ruric Thar, the Unbowed attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
         
         // Whenever a player casts a noncreature spell, Ruric Thar deals 6 damage to that player.
         this.addAbility(new RuricTharTheUnbowedAbility());

@@ -30,7 +30,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -48,7 +48,7 @@ public class BerserkersOfBloodRidge  extends CardImpl {
         this.subtype.add(SubType.HUMAN, SubType.BERSERKER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
     public BerserkersOfBloodRidge(final BerserkersOfBloodRidge card) {

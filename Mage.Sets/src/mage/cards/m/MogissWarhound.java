@@ -30,7 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
@@ -60,7 +60,7 @@ public class MogissWarhound extends CardImpl {
         // Bestow 2R (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
         this.addAbility(new BestowAbility(this, "{2}{R}"));
         // Mogis's Warhound attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
         // Enchanted creature gets +2/+2 and attacks each turn if able.
         Effect effect = new BoostEnchantedEffect(2,2,Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +2/+2");

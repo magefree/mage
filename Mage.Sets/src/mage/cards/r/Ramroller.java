@@ -28,7 +28,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -63,7 +63,7 @@ public class Ramroller extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ramroller attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
         // Ramroller gets +2/+0 as long as you control another artifact.
         Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(2, 0,

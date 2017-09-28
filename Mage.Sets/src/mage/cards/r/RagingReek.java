@@ -29,7 +29,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +49,7 @@ public class RagingReek extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Raging Reek attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
 
         //{5}{R}: Monstrosity 2
         this.addAbility(new MonstrosityAbility("{5}{R}", 2));

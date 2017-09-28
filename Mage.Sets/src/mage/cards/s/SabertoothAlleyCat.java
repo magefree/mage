@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
@@ -58,7 +58,7 @@ public class SabertoothAlleyCat extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sabertooth Alley Cat attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
 
         // {1}{R}: Creatures without defender can't block Sabertooth Alley Cat this turn.
         this.addAbility(new SimpleActivatedAbility(

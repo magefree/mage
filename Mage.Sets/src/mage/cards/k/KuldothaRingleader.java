@@ -30,7 +30,7 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.BattleCryAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -51,7 +51,7 @@ public class KuldothaRingleader extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(new BattleCryAbility());
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
     public KuldothaRingleader (final KuldothaRingleader card) {
