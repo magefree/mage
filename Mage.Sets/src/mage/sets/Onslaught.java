@@ -274,6 +274,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Soulless One", 171, Rarity.UNCOMMON, mage.cards.s.SoullessOne.class));
         cards.add(new SetCardInfo("Sparksmith", 235, Rarity.COMMON, mage.cards.s.Sparksmith.class));
         cards.add(new SetCardInfo("Spined Basher", 172, Rarity.COMMON, mage.cards.s.SpinedBasher.class));
+        cards.add(new SetCardInfo("Spitfire Handler", 236, Rarity.UNCOMMON, mage.cards.s.SpitfireHandler.class));
         cards.add(new SetCardInfo("Spitting Gourna", 284, Rarity.COMMON, mage.cards.s.SpittingGourna.class));
         cards.add(new SetCardInfo("Spurred Wolverine", 237, Rarity.COMMON, mage.cards.s.SpurredWolverine.class));
         cards.add(new SetCardInfo("Stag Beetle", 285, Rarity.RARE, mage.cards.s.StagBeetle.class));
