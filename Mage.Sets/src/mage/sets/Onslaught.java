@@ -202,6 +202,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Mistform Shrieker", 96, Rarity.UNCOMMON, mage.cards.m.MistformShrieker.class));
         cards.add(new SetCardInfo("Mistform Skyreaver", 97, Rarity.RARE, mage.cards.m.MistformSkyreaver.class));
         cards.add(new SetCardInfo("Mistform Stalker", 98, Rarity.UNCOMMON, mage.cards.m.MistformStalker.class));
+        cards.add(new SetCardInfo("Mistform Wall", 99, Rarity.COMMON, mage.cards.m.MistformWall.class));
         cards.add(new SetCardInfo("Mobilization", 44, Rarity.RARE, mage.cards.m.Mobilization.class));
         cards.add(new SetCardInfo("Mountain", 343, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 344, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
