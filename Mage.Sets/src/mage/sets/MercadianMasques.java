@@ -51,6 +51,7 @@ public class MercadianMasques extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        cards.add(new SetCardInfo("Aerial Caravan", 58, Rarity.RARE, mage.cards.a.AerialCaravan.class));
         cards.add(new SetCardInfo("Afterlife", 1, Rarity.UNCOMMON, mage.cards.a.Afterlife.class));
         cards.add(new SetCardInfo("Alabaster Wall", 2, Rarity.COMMON, mage.cards.a.AlabasterWall.class));
         cards.add(new SetCardInfo("Alley Grifters", 115, Rarity.COMMON, mage.cards.a.AlleyGrifters.class));
