@@ -48,6 +48,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
@@ -100,24 +101,25 @@ class LodestoneBaubleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = null;
-        boolean countered = false;
+        Player controller = game.getPlayer(source.getControllerId());
+        Player chosenPlayer = null;
         UUID targetId = this.getTargetPointer().getFirst(game, source);
+        if (targetId == null) {
+            TargetPlayer target = new TargetPlayer(1, 1, true);
+            controller.chooseTarget(outcome, target, source, game);
+            chosenPlayer = game.getPlayer(target.getFirstTarget());
+        }
         if (targetId != null) {
-            controller = game.getPlayer(game.getControllerId(targetId));
+            chosenPlayer = game.getPlayer(game.getControllerId(targetId));
         }
-        if (targetId != null
-                && game.getStack().counter(targetId, source.getSourceId(), game)) {
-            countered = true;
-        }
-        if (controller != null) {
-            Effect effect = new DrawCardTargetEffect(new StaticValue(1), false);
+        if (chosenPlayer != null) {
+            Effect effect = new DrawCardTargetEffect(1);
             effect.setTargetPointer(new FixedTarget(controller.getId()));
             effect.setText("That player draws a card");
             DelayedTriggeredAbility ability = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(effect);
             game.addDelayedTriggeredAbility(ability, source);
         }
-        return countered;
+        return true;
     }
 
 }
