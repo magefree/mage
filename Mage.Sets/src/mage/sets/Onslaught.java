@@ -245,6 +245,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Rummaging Wizard", 110, Rarity.UNCOMMON, mage.cards.r.RummagingWizard.class));
         cards.add(new SetCardInfo("Run Wild", 279, Rarity.UNCOMMON, mage.cards.r.RunWild.class));
         cards.add(new SetCardInfo("Sage Aven", 111, Rarity.COMMON, mage.cards.s.SageAven.class));
+        cards.add(new SetCardInfo("Sandskin", 52, Rarity.COMMON, mage.cards.s.Sandskin.class));
         cards.add(new SetCardInfo("Screaming Seahawk", 112, Rarity.COMMON, mage.cards.s.ScreamingSeahawk.class));
         cards.add(new SetCardInfo("Screeching Buzzard", 165, Rarity.COMMON, mage.cards.s.ScreechingBuzzard.class));
         cards.add(new SetCardInfo("Searing Flesh", 225, Rarity.UNCOMMON, mage.cards.s.SearingFlesh.class));

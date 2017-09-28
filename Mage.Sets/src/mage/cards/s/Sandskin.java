@@ -25,9 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.s;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.PreventAllDamageToAndByAttachedEffect;
@@ -38,32 +39,36 @@ import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+
+
 /**
  *
- * @author Quercitron
+ * @author TheElk801
  */
-public class GaseousForm extends CardImpl {
+public class Sandskin extends CardImpl {
 
-    public GaseousForm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
+    public Sandskin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Neutral));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
         // Prevent all combat damage that would be dealt to and dealt by enchanted creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAndByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", true)));
     }
 
-    public GaseousForm(final GaseousForm card) {
+    public Sandskin(final Sandskin card) {
         super(card);
     }
 
     @Override
-    public GaseousForm copy() {
-        return new GaseousForm(this);
+    public Sandskin copy() {
+        return new Sandskin(this);
     }
 }
