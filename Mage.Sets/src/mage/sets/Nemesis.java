@@ -105,6 +105,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Lin Sivvi, Defiant Hero", 12, Rarity.RARE, mage.cards.l.LinSivviDefiantHero.class));
         cards.add(new SetCardInfo("Massacre", 58, Rarity.UNCOMMON, mage.cards.m.Massacre.class));
         cards.add(new SetCardInfo("Mind Slash", 59, Rarity.UNCOMMON, mage.cards.m.MindSlash.class));
+        cards.add(new SetCardInfo("Mind Swords", 60, Rarity.COMMON, mage.cards.m.MindSwords.class));
         cards.add(new SetCardInfo("Mogg Alarm", 93, Rarity.UNCOMMON, mage.cards.m.MoggAlarm.class));
         cards.add(new SetCardInfo("Moggcatcher", 96, Rarity.RARE, mage.cards.m.Moggcatcher.class));
         cards.add(new SetCardInfo("Mogg Salvage", 94, Rarity.UNCOMMON, mage.cards.m.MoggSalvage.class));
