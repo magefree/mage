@@ -163,6 +163,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Hall of Gemstone", 119, Rarity.RARE, mage.cards.h.HallOfGemstone.class));
         cards.add(new SetCardInfo("Hammer of Bogardan", 181, Rarity.RARE, mage.cards.h.HammerOfBogardan.class));
         cards.add(new SetCardInfo("Harbinger of Night", 26, Rarity.RARE, mage.cards.h.HarbingerOfNight.class));
+        cards.add(new SetCardInfo("Harbor Guardian", 326, Rarity.UNCOMMON, mage.cards.h.HarborGuardian.class));
         cards.add(new SetCardInfo("Harmattan Efreet", 69, Rarity.UNCOMMON, mage.cards.h.HarmattanEfreet.class));
         cards.add(new SetCardInfo("Hazerider Drake", 328, Rarity.UNCOMMON, mage.cards.h.HazeriderDrake.class));
         cards.add(new SetCardInfo("Healing Salve", 224, Rarity.COMMON, mage.cards.h.HealingSalve.class));
