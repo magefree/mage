@@ -230,6 +230,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Notorious Assassin", 150, Rarity.RARE, mage.cards.n.NotoriousAssassin.class));
         cards.add(new SetCardInfo("Ogre Taskmaster", 206, Rarity.UNCOMMON, mage.cards.o.OgreTaskmaster.class));
         cards.add(new SetCardInfo("Overtaker", 89, Rarity.RARE, mage.cards.o.Overtaker.class));
+        cards.add(new SetCardInfo("Panacea", 308, Rarity.UNCOMMON, mage.cards.p.Panacea.class));
         cards.add(new SetCardInfo("Pangosaur", 261, Rarity.RARE, mage.cards.p.Pangosaur.class));
         cards.add(new SetCardInfo("Peat Bog", 322, Rarity.COMMON, mage.cards.p.PeatBog.class));
         cards.add(new SetCardInfo("Pious Warrior", 34, Rarity.COMMON, mage.cards.p.PiousWarrior.class));
