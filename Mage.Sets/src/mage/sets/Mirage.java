@@ -258,6 +258,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Sandstorm", 137, Rarity.COMMON, mage.cards.s.Sandstorm.class));
         cards.add(new SetCardInfo("Sapphire Charm", 89, Rarity.COMMON, mage.cards.s.SapphireCharm.class));
         cards.add(new SetCardInfo("Savage Twister", 340, Rarity.UNCOMMON, mage.cards.s.SavageTwister.class));
+        cards.add(new SetCardInfo("Sawback Manticore", 341, Rarity.RARE, mage.cards.s.SawbackManticore.class));
         cards.add(new SetCardInfo("Searing Spear Askari", 191, Rarity.COMMON, mage.cards.s.SearingSpearAskari.class));
         cards.add(new SetCardInfo("Sea Scryer", 90, Rarity.COMMON, mage.cards.s.SeaScryer.class));
         cards.add(new SetCardInfo("Seedling Charm", 138, Rarity.COMMON, mage.cards.s.SeedlingCharm.class));
