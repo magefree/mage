@@ -134,6 +134,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Final Fortune", 173, Rarity.RARE, mage.cards.f.FinalFortune.class));
         cards.add(new SetCardInfo("Firebreathing", 174, Rarity.COMMON, mage.cards.f.Firebreathing.class));
         cards.add(new SetCardInfo("Fire Diamond", 267, Rarity.UNCOMMON, mage.cards.f.FireDiamond.class));
+        cards.add(new SetCardInfo("Flame Elemental", 175, Rarity.UNCOMMON, mage.cards.f.FlameElemental.class));
         cards.add(new SetCardInfo("Flare", 176, Rarity.COMMON, mage.cards.f.Flare.class));
         cards.add(new SetCardInfo("Flash", 66, Rarity.RARE, mage.cards.f.Flash.class));
         cards.add(new SetCardInfo("Flood Plain", 291, Rarity.UNCOMMON, mage.cards.f.FloodPlain.class));
