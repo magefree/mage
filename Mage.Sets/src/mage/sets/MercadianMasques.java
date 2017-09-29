@@ -320,6 +320,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Thermal Glider", 53, Rarity.COMMON, mage.cards.t.ThermalGlider.class));
         cards.add(new SetCardInfo("Thieves' Auction", 218, Rarity.RARE, mage.cards.t.ThievesAuction.class));
         cards.add(new SetCardInfo("Thrashing Wumpus", 166, Rarity.RARE, mage.cards.t.ThrashingWumpus.class));
+        cards.add(new SetCardInfo("Thunderclap", 219, Rarity.COMMON, mage.cards.t.Thunderclap.class));
         cards.add(new SetCardInfo("Thwart", 108, Rarity.UNCOMMON, mage.cards.t.Thwart.class));
         cards.add(new SetCardInfo("Tidal Bore", 109, Rarity.COMMON, mage.cards.t.TidalBore.class));
         cards.add(new SetCardInfo("Tidal Kraken", 110, Rarity.RARE, mage.cards.t.TidalKraken.class));
