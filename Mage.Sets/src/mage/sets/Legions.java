@@ -159,6 +159,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Shaleskin Plower", 110, Rarity.COMMON, mage.cards.s.ShaleskinPlower.class));
         cards.add(new SetCardInfo("Shifting Sliver", 52, Rarity.UNCOMMON, mage.cards.s.ShiftingSliver.class));
         cards.add(new SetCardInfo("Skinthinner", 80, Rarity.COMMON, mage.cards.s.Skinthinner.class));
+        cards.add(new SetCardInfo("Skirk Alarmist", 111, Rarity.RARE, mage.cards.s.SkirkAlarmist.class));
         cards.add(new SetCardInfo("Skirk Drill Sergeant", 112, Rarity.UNCOMMON, mage.cards.s.SkirkDrillSergeant.class));
         cards.add(new SetCardInfo("Skirk Marauder", 113, Rarity.COMMON, mage.cards.s.SkirkMarauder.class));
         cards.add(new SetCardInfo("Skirk Outrider", 114, Rarity.COMMON, mage.cards.s.SkirkOutrider.class));
