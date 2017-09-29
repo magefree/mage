@@ -61,7 +61,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class AnimateDead extends CardImpl {
 
     public AnimateDead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature card in a graveyard
@@ -167,7 +167,7 @@ class AnimateDeadLeavesBattlefieldTriggeredEffect extends OneShotEffect {
         if (controller != null && sourcePermanent != null) {
             if (sourcePermanent.getAttachedTo() != null) {
                 Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
-                if (attachedTo != null) {
+                if (attachedTo != null && attachedTo.getZoneChangeCounter(game) == sourcePermanent.getAttachedToZoneChangeCounter()) {
                     attachedTo.sacrifice(source.getSourceId(), game);
                 }
             }
