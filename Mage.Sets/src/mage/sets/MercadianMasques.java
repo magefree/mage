@@ -330,6 +330,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Tonic Peddler", 54, Rarity.UNCOMMON, mage.cards.t.TonicPeddler.class));
         cards.add(new SetCardInfo("Tooth of Ramos", 313, Rarity.RARE, mage.cards.t.ToothOfRamos.class));
         cards.add(new SetCardInfo("Tower of the Magistrate", 330, Rarity.RARE, mage.cards.t.TowerOfTheMagistrate.class));
+        cards.add(new SetCardInfo("Toymaker", 314, Rarity.UNCOMMON, mage.cards.t.Toymaker.class));
         cards.add(new SetCardInfo("Trade Routes", 112, Rarity.RARE, mage.cards.t.TradeRoutes.class));
         cards.add(new SetCardInfo("Tranquility", 280, Rarity.COMMON, mage.cards.t.Tranquility.class));
         cards.add(new SetCardInfo("Tremor", 220, Rarity.COMMON, mage.cards.t.Tremor.class));
