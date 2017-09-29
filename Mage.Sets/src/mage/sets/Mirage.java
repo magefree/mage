@@ -125,6 +125,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Ersatz Gnomes", 266, Rarity.UNCOMMON, mage.cards.e.ErsatzGnomes.class));
         cards.add(new SetCardInfo("Ethereal Champion", 219, Rarity.RARE, mage.cards.e.EtherealChampion.class));
         cards.add(new SetCardInfo("Fallow Earth", 112, Rarity.UNCOMMON, mage.cards.f.FallowEarth.class));
+        cards.add(new SetCardInfo("Favorable Destiny", 220, Rarity.UNCOMMON, mage.cards.f.FavorableDestiny.class));
         cards.add(new SetCardInfo("Femeref Archers", 113, Rarity.UNCOMMON, mage.cards.f.FemerefArchers.class));
         cards.add(new SetCardInfo("Femeref Healer", 221, Rarity.COMMON, mage.cards.f.FemerefHealer.class));
         cards.add(new SetCardInfo("Femeref Knight", 222, Rarity.COMMON, mage.cards.f.FemerefKnight.class));
