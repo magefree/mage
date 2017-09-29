@@ -351,5 +351,6 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Wave of Reckoning", 56, Rarity.RARE, mage.cards.w.WaveOfReckoning.class));
         cards.add(new SetCardInfo("Wild Jhovall", 227, Rarity.COMMON, mage.cards.w.WildJhovall.class));
         cards.add(new SetCardInfo("Word of Blasting", 228, Rarity.UNCOMMON, mage.cards.w.WordOfBlasting.class));
+        cards.add(new SetCardInfo("Worry Beads", 315, Rarity.RARE, mage.cards.w.WorryBeads.class));
     }
 }
