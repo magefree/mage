@@ -177,6 +177,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Toxin Sliver", 84, Rarity.RARE, mage.cards.t.ToxinSliver.class));
         cards.add(new SetCardInfo("Tribal Forcemage", 142, Rarity.RARE, mage.cards.t.TribalForcemage.class));
         cards.add(new SetCardInfo("Unstable Hulk", 115, Rarity.RARE, mage.cards.u.UnstableHulk.class));
+        cards.add(new SetCardInfo("Vexing Beetle", 143, Rarity.RARE, mage.cards.v.VexingBeetle.class));
         cards.add(new SetCardInfo("Vile Deacon", 85, Rarity.COMMON, mage.cards.v.VileDeacon.class));
         cards.add(new SetCardInfo("Voidmage Apprentice", 54, Rarity.COMMON, mage.cards.v.VoidmageApprentice.class));
         cards.add(new SetCardInfo("Wall of Deceit", 55, Rarity.UNCOMMON, mage.cards.w.WallOfDeceit.class));
