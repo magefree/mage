@@ -302,6 +302,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Squallmonger", 276, Rarity.UNCOMMON, mage.cards.s.Squallmonger.class));
         cards.add(new SetCardInfo("Squee, Goblin Nabob", 214, Rarity.RARE, mage.cards.s.SqueeGoblinNabob.class));
         cards.add(new SetCardInfo("Squeeze", 105, Rarity.RARE, mage.cards.s.Squeeze.class));
+        cards.add(new SetCardInfo("Stamina", 277, Rarity.UNCOMMON, mage.cards.s.Stamina.class));
         cards.add(new SetCardInfo("Statecraft", 106, Rarity.RARE, mage.cards.s.Statecraft.class));
         cards.add(new SetCardInfo("Steadfast Guard", 50, Rarity.COMMON, mage.cards.s.SteadfastGuard.class));
         cards.add(new SetCardInfo("Stinging Barrier", 107, Rarity.COMMON, mage.cards.s.StingingBarrier.class));
