@@ -182,6 +182,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Hope", 24, Rarity.COMMON, mage.cards.w.WallOfHope.class));
         cards.add(new SetCardInfo("Warbreak Trumpeter", 116, Rarity.UNCOMMON, mage.cards.w.WarbreakTrumpeter.class));
         cards.add(new SetCardInfo("Ward Sliver", 25, Rarity.UNCOMMON, mage.cards.w.WardSliver.class));
+        cards.add(new SetCardInfo("Warped Researcher", 56, Rarity.UNCOMMON, mage.cards.w.WarpedResearcher.class));
         cards.add(new SetCardInfo("Weaver of Lies", 57, Rarity.RARE, mage.cards.w.WeaverOfLies.class));
         cards.add(new SetCardInfo("White Knight", 27, Rarity.UNCOMMON, mage.cards.w.WhiteKnight.class));
         cards.add(new SetCardInfo("Willbender", 58, Rarity.UNCOMMON, mage.cards.w.Willbender.class));
