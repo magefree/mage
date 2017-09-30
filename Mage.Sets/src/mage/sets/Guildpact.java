@@ -169,6 +169,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Siege of Towers", 76, Rarity.RARE, mage.cards.s.SiegeOfTowers.class));
         cards.add(new SetCardInfo("Silhana Ledgewalker", 94, Rarity.COMMON, mage.cards.s.SilhanaLedgewalker.class));
         cards.add(new SetCardInfo("Silhana Starfletcher", 95, Rarity.COMMON, mage.cards.s.SilhanaStarfletcher.class));
+        cards.add(new SetCardInfo("Sinstriker's Will", 16, Rarity.UNCOMMON, mage.cards.s.SinstrikersWill.class));
         cards.add(new SetCardInfo("Skarrgan Firebird", 77, Rarity.RARE, mage.cards.s.SkarrganFirebird.class));
         cards.add(new SetCardInfo("Skarrgan Pit-Skulk", 96, Rarity.COMMON, mage.cards.s.SkarrganPitSkulk.class));
         cards.add(new SetCardInfo("Skarrgan Skybreaker", 130, Rarity.UNCOMMON, mage.cards.s.SkarrganSkybreaker.class));
