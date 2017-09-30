@@ -112,6 +112,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Ebon Praetor", 89, Rarity.RARE, mage.cards.e.EbonPraetor.class));
         cards.add(new SetCardInfo("Ebon Stronghold", 228, Rarity.UNCOMMON, mage.cards.e.EbonStronghold.class));
         cards.add(new SetCardInfo("Elemental Augury", 193, Rarity.RARE, mage.cards.e.ElementalAugury.class));
+        cards.add(new SetCardInfo("Elkin Bottle", 207, Rarity.RARE, mage.cards.e.ElkinBottle.class));
         cards.add(new SetCardInfo("Elven Lyre", 208, Rarity.COMMON, mage.cards.e.ElvenLyre.class));
         cards.add(new SetCardInfo("Elvish Farmer", 156, Rarity.RARE, mage.cards.e.ElvishFarmer.class));
         cards.add(new SetCardInfo("Elvish Hunter", 157, Rarity.COMMON, ElvishHunter.class));
