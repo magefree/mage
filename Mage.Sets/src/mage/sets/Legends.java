@@ -144,6 +144,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Hyperion Blacksmith", 150, Rarity.UNCOMMON, mage.cards.h.HyperionBlacksmith.class));
         cards.add(new SetCardInfo("Immolation", 151, Rarity.COMMON, mage.cards.i.Immolation.class));
         cards.add(new SetCardInfo("In the Eye of Chaos", 61, Rarity.RARE, mage.cards.i.InTheEyeOfChaos.class));
+        cards.add(new SetCardInfo("Indestructible Aura", 190, Rarity.COMMON, mage.cards.i.IndestructibleAura.class));
         cards.add(new SetCardInfo("Invoke Prejudice", 62, Rarity.RARE, mage.cards.i.InvokePrejudice.class));
         cards.add(new SetCardInfo("Ivory Guardians", 192, Rarity.UNCOMMON, mage.cards.i.IvoryGuardians.class));
         cards.add(new SetCardInfo("Jacques le Vert", 272, Rarity.RARE, mage.cards.j.JacquesLeVert.class));

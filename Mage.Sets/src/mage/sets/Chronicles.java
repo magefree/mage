@@ -98,6 +98,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Hasran Ogress", 6, Rarity.COMMON, mage.cards.h.HasranOgress.class));
         cards.add(new SetCardInfo("Hell's Caretaker", 7, Rarity.RARE, mage.cards.h.HellsCaretaker.class));
         cards.add(new SetCardInfo("Horn of Deafening", 80, Rarity.RARE, mage.cards.h.HornOfDeafening.class));
+        cards.add(new SetCardInfo("Indestructible Aura", 63, Rarity.COMMON, mage.cards.i.IndestructibleAura.class));
         cards.add(new SetCardInfo("Ivory Guardians", 64, Rarity.UNCOMMON, mage.cards.i.IvoryGuardians.class));
         cards.add(new SetCardInfo("Jalum Tome", 81, Rarity.RARE, mage.cards.j.JalumTome.class));
         cards.add(new SetCardInfo("Juxtapose", 22, Rarity.RARE, mage.cards.j.Juxtapose.class));
