@@ -137,6 +137,7 @@ public class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Rootwater Alligator", 122, Rarity.COMMON, mage.cards.r.RootwaterAlligator.class));
         cards.add(new SetCardInfo("Rootwater Mystic", 44, Rarity.COMMON, mage.cards.r.RootwaterMystic.class));
         cards.add(new SetCardInfo("Sabertooth Wyvern", 99, Rarity.UNCOMMON, mage.cards.s.SabertoothWyvern.class));
+        cards.add(new SetCardInfo("Scalding Salamander", 100, Rarity.UNCOMMON, mage.cards.s.ScaldingSalamander.class));
         cards.add(new SetCardInfo("Scare Tactics", 73, Rarity.COMMON, mage.cards.s.ScareTactics.class));
         cards.add(new SetCardInfo("School of Piranha", 45, Rarity.COMMON, mage.cards.s.SchoolOfPiranha.class));
         cards.add(new SetCardInfo("Scrivener", 46, Rarity.UNCOMMON, mage.cards.s.Scrivener.class));
