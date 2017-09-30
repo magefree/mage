@@ -119,6 +119,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Homing Sliver", 118, Rarity.COMMON, mage.cards.h.HomingSliver.class));
         cards.add(new SetCardInfo("Horizon Canopy", 177, Rarity.RARE, mage.cards.h.HorizonCanopy.class));
         cards.add(new SetCardInfo("Ichor Slick", 68, Rarity.COMMON, mage.cards.i.IchorSlick.class));
+        cards.add(new SetCardInfo("Imperial Mask", 23, Rarity.RARE, mage.cards.i.ImperialMask.class));
         cards.add(new SetCardInfo("Imperiosaur", 145, Rarity.UNCOMMON, mage.cards.i.Imperiosaur.class));
         cards.add(new SetCardInfo("Infiltrator il-Kor", 37, Rarity.COMMON, mage.cards.i.InfiltratorIlKor.class));
         cards.add(new SetCardInfo("Intervention Pact", 8, Rarity.RARE, mage.cards.i.InterventionPact.class));
