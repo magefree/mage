@@ -78,6 +78,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Debtors' Knell", 141, Rarity.RARE, mage.cards.d.DebtorsKnell.class));
         cards.add(new SetCardInfo("Djinn Illuminatus", 142, Rarity.RARE, mage.cards.d.DjinnIlluminatus.class));
         cards.add(new SetCardInfo("Douse in Gloom", 49, Rarity.COMMON, mage.cards.d.DouseInGloom.class));
+        cards.add(new SetCardInfo("Droning Bureaucrats", 4, Rarity.UNCOMMON, mage.cards.d.DroningBureaucrats.class));
         cards.add(new SetCardInfo("Drowned Rusalka", 24, Rarity.UNCOMMON, mage.cards.d.DrownedRusalka.class));
         cards.add(new SetCardInfo("Dryad Sophisticate", 83, Rarity.UNCOMMON, mage.cards.d.DryadSophisticate.class));
         cards.add(new SetCardInfo("Dune-Brood Nephilim", 110, Rarity.RARE, mage.cards.d.DuneBroodNephilim.class));
