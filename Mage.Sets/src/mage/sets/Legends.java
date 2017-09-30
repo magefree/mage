@@ -123,6 +123,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Gaseous Form", 59, Rarity.COMMON, mage.cards.g.GaseousForm.class));
         cards.add(new SetCardInfo("Ghosts of the Damned", 12, Rarity.COMMON, mage.cards.g.GhostsOfTheDamned.class));
         cards.add(new SetCardInfo("Giant Strength", 147, Rarity.COMMON, mage.cards.g.GiantStrength.class));
+        cards.add(new SetCardInfo("Giant Turtle", 102, Rarity.COMMON, mage.cards.g.GiantTurtle.class));
         cards.add(new SetCardInfo("Gravity Sphere", 149, Rarity.RARE, mage.cards.g.GravitySphere.class));
         cards.add(new SetCardInfo("Great Defender", 185, Rarity.UNCOMMON, mage.cards.g.GreatDefender.class));
         cards.add(new SetCardInfo("Greater Realm of Preservation", 187, Rarity.UNCOMMON, mage.cards.g.GreaterRealmOfPreservation.class));
