@@ -41,8 +41,10 @@ public class DuelCommander extends Commander {
         banned.add("Channel");
         banned.add("Chrome Mox");
         banned.add("Dig Through Time");
+        banned.add("Eidolon of the Great Revel");
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Entomb");
+        banned.add("Fireblast");
         banned.add("Food Chain");
         banned.add("Gaea's Cradle");
         banned.add("Gifts Ungiven");
@@ -68,11 +70,13 @@ public class DuelCommander extends Commander {
         banned.add("Necrotic Ooze");
         banned.add("Oath of Druids");
         banned.add("Polymorph");
+        banned.add("Price of Progress");
         banned.add("Protean Hulk");
         banned.add("Sensei's Divining Top");
         banned.add("Shahrazad");
         banned.add("Sol Ring");
         banned.add("Strip Mine");
+        banned.add("Sulfuric Vortex");
         banned.add("The Tabernacle at Pendrell Vale");
         banned.add("Time Vault");
         banned.add("Time Walk");
@@ -84,6 +88,7 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Breya, Etherium Shaper");
         bannedCommander.add("Bruse Tarl, Boorish Herder");
         bannedCommander.add("Derevi, Empyrial Tactician");
+        bannedCommander.add("Edgar Markov");
         bannedCommander.add("Edric, Spymaster of Trest");
         bannedCommander.add("Erayo, Soratami Ascendant");
         bannedCommander.add("Geist of Saint Traft");

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -42,11 +41,11 @@ public class IsStepCondition implements Condition {
     protected PhaseStep phaseStep;
     protected boolean onlyDuringYourSteps;
 
-    public  IsStepCondition(PhaseStep phaseStep) {
+    public IsStepCondition(PhaseStep phaseStep) {
         this(phaseStep, true);
     }
-    
-    public  IsStepCondition(PhaseStep phaseStep, boolean onlyDuringYourSteps) {
+
+    public IsStepCondition(PhaseStep phaseStep, boolean onlyDuringYourSteps) {
         this.phaseStep = phaseStep;
         this.onlyDuringYourSteps = onlyDuringYourSteps;
     }
@@ -58,7 +57,15 @@ public class IsStepCondition implements Condition {
 
     @Override
     public String toString() {
-        return new StringBuilder("during ").append(onlyDuringYourSteps ? "your ":"the ").append(phaseStep.getStepText()).toString();
+        StringBuilder sb = new StringBuilder("during ");
+        if (onlyDuringYourSteps) {
+            sb.append("your ");
+        } else if (phaseStep == PhaseStep.UPKEEP) {
+            sb.append("any upkeep step");
+        } else {
+            sb.append("the ").append(phaseStep.getStepText());
+        }
+        return sb.toString();
     }
 
 }

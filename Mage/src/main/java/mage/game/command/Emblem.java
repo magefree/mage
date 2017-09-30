@@ -40,6 +40,8 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
@@ -273,6 +275,16 @@ public class Emblem implements CommandObject {
     }
 
     public void setIsAllCreatureTypes(boolean value) {
+    }
+
+    public void discardEffects() {
+        for (Ability ability : abilites) {
+            for (Effect effect : ability.getEffects()) {
+                if (effect instanceof ContinuousEffect) {
+                    ((ContinuousEffect) effect).discard();
+                }
+            }
+        }
     }
 
     @Override

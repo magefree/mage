@@ -49,11 +49,11 @@ import java.util.UUID;
 public class AshesOfTheFallen extends CardImpl {
 
     public AshesOfTheFallen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // As Ashes of the Fallen enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Benefit)));
-        
+
         // Each creature card in your graveyard has the chosen creature type in addition to its other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AshesOfTheFallenEffect()));
     }
@@ -69,7 +69,7 @@ public class AshesOfTheFallen extends CardImpl {
 }
 
 class AshesOfTheFallenEffect extends ContinuousEffectImpl {
-    
+
     AshesOfTheFallenEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "Each creature card in your graveyard has the chosen creature type in addition to its other types";
@@ -88,7 +88,7 @@ class AshesOfTheFallenEffect extends ContinuousEffectImpl {
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
                 if (card != null && card.isCreature() && !card.hasSubtype(subtype, game)) {
-                    game.getState().getCreateCardAttribute(card).getSubtype().add(subtype);
+                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(subtype);
                 }
             }
             return true;
@@ -101,4 +101,3 @@ class AshesOfTheFallenEffect extends ContinuousEffectImpl {
         return new AshesOfTheFallenEffect(this);
     }
 }
-

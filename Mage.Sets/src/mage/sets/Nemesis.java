@@ -99,11 +99,13 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Jolting Merfolk", 34, Rarity.UNCOMMON, mage.cards.j.JoltingMerfolk.class));
         cards.add(new SetCardInfo("Kill Switch", 133, Rarity.RARE, mage.cards.k.KillSwitch.class));
         cards.add(new SetCardInfo("Kor Haven", 141, Rarity.RARE, mage.cards.k.KorHaven.class));
+        cards.add(new SetCardInfo("Lashknife", 9, Rarity.COMMON, mage.cards.l.Lashknife.class));
         cards.add(new SetCardInfo("Lawbringer", 10, Rarity.COMMON, mage.cards.l.Lawbringer.class));
         cards.add(new SetCardInfo("Lightbringer", 11, Rarity.COMMON, mage.cards.l.Lightbringer.class));
         cards.add(new SetCardInfo("Lin Sivvi, Defiant Hero", 12, Rarity.RARE, mage.cards.l.LinSivviDefiantHero.class));
         cards.add(new SetCardInfo("Massacre", 58, Rarity.UNCOMMON, mage.cards.m.Massacre.class));
         cards.add(new SetCardInfo("Mind Slash", 59, Rarity.UNCOMMON, mage.cards.m.MindSlash.class));
+        cards.add(new SetCardInfo("Mind Swords", 60, Rarity.COMMON, mage.cards.m.MindSwords.class));
         cards.add(new SetCardInfo("Mogg Alarm", 93, Rarity.UNCOMMON, mage.cards.m.MoggAlarm.class));
         cards.add(new SetCardInfo("Moggcatcher", 96, Rarity.RARE, mage.cards.m.Moggcatcher.class));
         cards.add(new SetCardInfo("Mogg Salvage", 94, Rarity.UNCOMMON, mage.cards.m.MoggSalvage.class));
@@ -125,6 +127,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Prowler", 65, Rarity.UNCOMMON, mage.cards.p.PhyrexianProwler.class));
         cards.add(new SetCardInfo("Plague Witch", 66, Rarity.COMMON, mage.cards.p.PlagueWitch.class));
         cards.add(new SetCardInfo("Predator, Flagship", 135, Rarity.RARE, mage.cards.p.PredatorFlagship.class));
+        cards.add(new SetCardInfo("Rackling", 136, Rarity.UNCOMMON, mage.cards.r.Rackling.class));
         cards.add(new SetCardInfo("Rathi Assassin", 67, Rarity.RARE, mage.cards.r.RathiAssassin.class));
         cards.add(new SetCardInfo("Rathi Fiend", 68, Rarity.UNCOMMON, mage.cards.r.RathiFiend.class));
         cards.add(new SetCardInfo("Rathi Intimidator", 69, Rarity.COMMON, mage.cards.r.RathiIntimidator.class));
@@ -159,7 +162,9 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Sneaky Homunculus", 44, Rarity.COMMON, mage.cards.s.SneakyHomunculus.class));
         cards.add(new SetCardInfo("Spineless Thug", 71, Rarity.COMMON, mage.cards.s.SpinelessThug.class));
         cards.add(new SetCardInfo("Spiritual Asylum", 23, Rarity.RARE, mage.cards.s.SpiritualAsylum.class));
+        cards.add(new SetCardInfo("Spiteful Bully", 72, Rarity.COMMON, mage.cards.s.SpitefulBully.class));
         cards.add(new SetCardInfo("Stampede Driver", 122, Rarity.UNCOMMON, mage.cards.s.StampedeDriver.class));
+        cards.add(new SetCardInfo("Stronghold Biologist", 45, Rarity.UNCOMMON, mage.cards.s.StrongholdBiologist.class));
         cards.add(new SetCardInfo("Stronghold Discipline", 73, Rarity.COMMON, mage.cards.s.StrongholdDiscipline.class));
         cards.add(new SetCardInfo("Stronghold Gambit", 100, Rarity.RARE, mage.cards.s.StrongholdGambit.class));
         cards.add(new SetCardInfo("Stronghold Machinist", 46, Rarity.UNCOMMON, mage.cards.s.StrongholdMachinist.class));

@@ -117,11 +117,13 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Sprites", 100, Rarity.COMMON, mage.cards.f.FireSprites.class));
         cards.add(new SetCardInfo("Flash Counter", 56, Rarity.COMMON, mage.cards.f.FlashCounter.class));
         cards.add(new SetCardInfo("Flash Flood", 57, Rarity.COMMON, mage.cards.f.FlashFlood.class));
+        cards.add(new SetCardInfo("Floral Spuzzem", 101, Rarity.UNCOMMON, mage.cards.f.FloralSpuzzem.class));
         cards.add(new SetCardInfo("Force Spike", 58, Rarity.COMMON, mage.cards.f.ForceSpike.class));
         cards.add(new SetCardInfo("Frost Giant", 146, Rarity.UNCOMMON, mage.cards.f.FrostGiant.class));
         cards.add(new SetCardInfo("Gaseous Form", 59, Rarity.COMMON, mage.cards.g.GaseousForm.class));
         cards.add(new SetCardInfo("Ghosts of the Damned", 12, Rarity.COMMON, mage.cards.g.GhostsOfTheDamned.class));
         cards.add(new SetCardInfo("Giant Strength", 147, Rarity.COMMON, mage.cards.g.GiantStrength.class));
+        cards.add(new SetCardInfo("Giant Turtle", 102, Rarity.COMMON, mage.cards.g.GiantTurtle.class));
         cards.add(new SetCardInfo("Gravity Sphere", 149, Rarity.RARE, mage.cards.g.GravitySphere.class));
         cards.add(new SetCardInfo("Great Defender", 185, Rarity.UNCOMMON, mage.cards.g.GreatDefender.class));
         cards.add(new SetCardInfo("Greater Realm of Preservation", 187, Rarity.UNCOMMON, mage.cards.g.GreaterRealmOfPreservation.class));
@@ -142,6 +144,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Hyperion Blacksmith", 150, Rarity.UNCOMMON, mage.cards.h.HyperionBlacksmith.class));
         cards.add(new SetCardInfo("Immolation", 151, Rarity.COMMON, mage.cards.i.Immolation.class));
         cards.add(new SetCardInfo("In the Eye of Chaos", 61, Rarity.RARE, mage.cards.i.InTheEyeOfChaos.class));
+        cards.add(new SetCardInfo("Indestructible Aura", 190, Rarity.COMMON, mage.cards.i.IndestructibleAura.class));
         cards.add(new SetCardInfo("Invoke Prejudice", 62, Rarity.RARE, mage.cards.i.InvokePrejudice.class));
         cards.add(new SetCardInfo("Ivory Guardians", 192, Rarity.UNCOMMON, mage.cards.i.IvoryGuardians.class));
         cards.add(new SetCardInfo("Jacques le Vert", 272, Rarity.RARE, mage.cards.j.JacquesLeVert.class));

@@ -35,8 +35,8 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-
 public class SpeedVsCunning extends ExpansionSet {
+
     private static final SpeedVsCunning instance = new SpeedVsCunning();
 
     public static SpeedVsCunning getInstance() {

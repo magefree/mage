@@ -8,6 +8,7 @@ package mage.filter;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.TargetController;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -15,6 +16,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
@@ -40,6 +42,11 @@ public final class StaticFilters {
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT = new FilterControlledPermanent();
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT = new FilterControlledArtifactPermanent();
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("artifact or creature you control");
+
+    public static final FilterPermanent FILTER_OPPONENTS_PERMANENT = new FilterPermanent("permanent an opponent controls");
+    public static final FilterPermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterCreaturePermanent("creature an opponent controls");
+    public static final FilterPermanent FILTER_OPPONENTS_PERMANENT_ARTIFACT = new FilterPermanent("artifact an opponent controls");
+    public static final FilterPermanent FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE = new FilterPermanent("artifact or creature an opponent controls");
 
     public static final FilterPermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_ANOTHER_CREATURE = new FilterControlledCreaturePermanent("another creature");
@@ -90,7 +97,8 @@ public final class StaticFilters {
 
     static {
         FILTER_CONTROLLED_PERMANENT_NON_LAND.add(
-                Predicates.not(new CardTypePredicate(CardType.LAND)));
+                Predicates.not(new CardTypePredicate(CardType.LAND))
+        );
 
         FILTER_CREATURE_TOKENS.add(new TokenPredicate());
 
@@ -115,6 +123,20 @@ public final class StaticFilters {
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE)
         ));
+
+        FILTER_OPPONENTS_PERMANENT.add(new ControllerPredicate(TargetController.OPPONENT));
+
+        FILTER_OPPONENTS_PERMANENT_CREATURE.add(new ControllerPredicate(TargetController.OPPONENT));
+
+        FILTER_OPPONENTS_PERMANENT_ARTIFACT.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER_OPPONENTS_PERMANENT_ARTIFACT.add(new CardTypePredicate(CardType.ARTIFACT));
+
+        FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE)
+        ));
+
         FILTER_CONTROLLED_ANOTHER_CREATURE.add(new AnotherPredicate());
 
         FILTER_CARD_ARTIFACT_OR_CREATURE.add(Predicates.or(
@@ -126,11 +148,14 @@ public final class StaticFilters {
                 new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)
         ));
-        
+
         FILTER_INSTANT_OR_SORCERY_SPELLS.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)
         ));
+    }
+
+    private StaticFilters() {
     }
 
 }

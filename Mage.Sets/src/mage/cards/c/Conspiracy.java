@@ -77,7 +77,7 @@ class ConspiracyEffect extends ContinuousEffectImpl {
 
     public ConspiracyEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "Creature cards you own that aren't on the battlefield, creature spells you control, and creatures you control are the chosen type";
+        staticText = "Creatures you control are the chosen type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.";
     }
 
     public ConspiracyEffect(final ConspiracyEffect effect) {
@@ -156,7 +156,7 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             if (object instanceof Card) {
                 Card card = (Card) object;
                 setChosenSubtype(
-                        game.getState().getCreateCardAttribute(card).getSubtype(),
+                        game.getState().getCreateCardAttribute(card, game).getSubtype(),
                         subtype);
             } else {
                 setChosenSubtype(object.getSubtype(game), subtype);

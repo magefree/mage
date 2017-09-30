@@ -27,9 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,6 +40,10 @@ import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -87,7 +88,7 @@ class DjinnIlluminatusGainReplicateEffect extends ContinuousEffectImpl {
 
     public DjinnIlluminatusGainReplicateEffect(final DjinnIlluminatusGainReplicateEffect effect) {
         super(effect);
-        this.replicateAbilities.putAll(replicateAbilities);
+        this.replicateAbilities.putAll(effect.replicateAbilities);
     }
 
     @Override

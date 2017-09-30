@@ -62,7 +62,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Necromancy extends CardImpl {
 
     public Necromancy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame)));
@@ -89,7 +89,6 @@ public class Necromancy extends CardImpl {
         return new Necromancy(this);
     }
 }
-
 
 class NecromancyReAttachEffect extends OneShotEffect {
 
@@ -153,7 +152,7 @@ class NecromancyLeavesBattlefieldTriggeredEffect extends OneShotEffect {
         if (controller != null && sourcePermanent != null) {
             if (sourcePermanent.getAttachedTo() != null) {
                 Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
-                if (attachedTo != null) {
+                if (attachedTo != null && attachedTo.getZoneChangeCounter(game) == sourcePermanent.getAttachedToZoneChangeCounter()) {
                     attachedTo.sacrifice(source.getSourceId(), game);
                 }
             }
@@ -162,7 +161,6 @@ class NecromancyLeavesBattlefieldTriggeredEffect extends OneShotEffect {
         return false;
     }
 }
-
 
 class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
 

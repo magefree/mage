@@ -44,18 +44,18 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class ApothecaryInitiate extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("a white spell");
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public ApothecaryInitiate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add(SubType.KITHKIN);
         this.subtype.add(SubType.CLERIC);
 
@@ -63,8 +63,8 @@ public class ApothecaryInitiate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a player casts a white spell, you may pay {1}. If you do, you gain 1 life.
-        this.addAbility(new SpellCastAllTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1), new ManaCostsImpl("{1}")), filter, true));
-        
+        this.addAbility(new SpellCastAllTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1), new ManaCostsImpl("{1}")), filter, false));
+
     }
 
     public ApothecaryInitiate(final ApothecaryInitiate card) {

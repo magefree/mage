@@ -41,6 +41,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.players.PlayerList;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -128,8 +129,9 @@ class HiveMindEffect extends OneShotEffect {
         Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         Player player = game.getPlayer(source.getControllerId());
         if (spell != null && player != null) {
-            for (UUID playerId : game.getState().getPlayersInRange(player.getId(), game)) {
-                if (!playerId.equals(spell.getControllerId())) {
+            PlayerList range = game.getState().getPlayersInRange(player.getId(), game);
+            for (UUID playerId : game.getState().getPlayerList(spell.getControllerId())) {
+                if (!playerId.equals(spell.getControllerId()) && range.contains(playerId)) {
                     spell.createCopyOnStack(game, source, playerId, true);
                 }
             }

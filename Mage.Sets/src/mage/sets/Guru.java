@@ -5,6 +5,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public class Guru extends ExpansionSet {
+
     private static final Guru instance = new Guru();
 
     public static Guru getInstance() {

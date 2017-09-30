@@ -170,6 +170,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Serra's Blessing", 141, Rarity.UNCOMMON, mage.cards.s.SerrasBlessing.class));
         cards.add(new SetCardInfo("Serrated Biskelion", 156, Rarity.UNCOMMON, mage.cards.s.SerratedBiskelion.class));
         cards.add(new SetCardInfo("Shadow Rider", 21, Rarity.COMMON, mage.cards.s.ShadowRider.class));
+        cards.add(new SetCardInfo("Shattered Crypt", 22, Rarity.COMMON, mage.cards.s.ShatteredCrypt.class));
         cards.add(new SetCardInfo("Soul Shepherd", 142, Rarity.COMMON, mage.cards.s.SoulShepherd.class));
         cards.add(new SetCardInfo("Southern Paladin", 143, Rarity.RARE, mage.cards.s.SouthernPaladin.class));
         cards.add(new SetCardInfo("Spinning Darkness", 23, Rarity.COMMON, mage.cards.s.SpinningDarkness.class));

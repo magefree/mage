@@ -25,7 +25,6 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -36,7 +35,6 @@ import mage.constants.SetType;
  *
  * @author Plopman
  */
-
 public class PortalSecondAge extends ExpansionSet {
 
     private static final PortalSecondAge instance = new PortalSecondAge();

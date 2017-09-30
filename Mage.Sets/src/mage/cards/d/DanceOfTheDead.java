@@ -179,7 +179,7 @@ class DanceOfTheDeadLeavesBattlefieldTriggeredEffect extends OneShotEffect {
         if (controller != null && sourcePermanent != null) {
             if (sourcePermanent.getAttachedTo() != null) {
                 Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
-                if (attachedTo != null) {
+                if (attachedTo != null && attachedTo.getZoneChangeCounter(game) == sourcePermanent.getAttachedToZoneChangeCounter()) {
                     attachedTo.sacrifice(source.getSourceId(), game);
                 }
             }

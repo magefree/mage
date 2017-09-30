@@ -31,7 +31,8 @@ import java.util.UUID;
 import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 
 /**
- * Class for drawing the mage card object by using a form based JComponent approach
+ * Class for drawing the mage card object by using a form based JComponent
+ * approach
  *
  * @author arcane, nantuko, noxx, stravant
  */
@@ -68,10 +69,13 @@ public class CardPanelComponentImpl extends CardPanel {
 
     private final GlowText titleText;
     private final GlowText ptText;
+    private final JLabel fullImageText;
+    private String fullImagePath = null;
 
     private boolean hasImage = false;
 
     private boolean displayTitleAnyway;
+    private boolean displayFullImagePath;
 
     private final static Map<Key, BufferedImage> IMAGE_CACHE;
 
@@ -202,7 +206,7 @@ public class CardPanelComponentImpl extends CardPanel {
 
             counterPanel.setVisible(false);
         }
-        
+
         // Ability icon
         if (newGameCard.isAbility()) {
             if (newGameCard.getAbilityType() == AbilityType.TRIGGERED) {
@@ -211,13 +215,14 @@ public class CardPanelComponentImpl extends CardPanel {
                 setTypeIcon(ImageManagerImpl.instance.getActivatedAbilityImage(), "Activated Ability");
             }
         }
-        
+
         // Token icon
         if (this.gameCard.isToken()) {
             setTypeIcon(ImageManagerImpl.instance.getTokenIconImage(), "Token Permanent");
         }
 
         displayTitleAnyway = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_CARD_NAMES, "true").equals("true");
+        displayFullImagePath = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_FULL_IMAGE_PATH, "false").equals("true");
 
         // Title Text
         titleText = new GlowText();
@@ -228,6 +233,12 @@ public class CardPanelComponentImpl extends CardPanel {
         titleText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
         titleText.setWrap(true);
         add(titleText);
+
+        // Full path to image text 
+        fullImageText = new JLabel();
+        fullImageText.setText(fullImagePath);
+        fullImageText.setForeground(Color.BLACK);
+        add(fullImageText);
 
         // PT Text
         ptText = new GlowText();
@@ -300,10 +311,19 @@ public class CardPanelComponentImpl extends CardPanel {
         doLayout();
     }
 
+    private void setFullPath(String fullImagePath) {
+        this.fullImagePath = fullImagePath;
+        this.fullImagePath = this.fullImagePath.replaceAll("\\\\", "\\\\<br>");
+        this.fullImagePath = this.fullImagePath.replaceAll("/", "/<br>");
+        this.fullImagePath = "<html>" + this.fullImagePath + "</html>";
+        fullImageText.setText(!displayFullImagePath ? "" : this.fullImagePath);
+        doLayout();
+    }
+
     @Override
     public void transferResources(final CardPanel panelAbstract) {
         if (panelAbstract instanceof CardPanelComponentImpl) {
-            CardPanelComponentImpl panel = (CardPanelComponentImpl)panelAbstract;
+            CardPanelComponentImpl panel = (CardPanelComponentImpl) panelAbstract;
             synchronized (panel.imagePanel) {
                 if (panel.imagePanel.hasImage()) {
                     setImage(panel.imagePanel.getSrcImage());
@@ -321,7 +341,7 @@ public class CardPanelComponentImpl extends CardPanel {
             this.titleText.setGlowColor(Color.black);
         }
     }
-    
+
     @Override
     protected void paintCard(Graphics2D g2d) {
         float alpha = getAlpha();
@@ -333,9 +353,9 @@ public class CardPanelComponentImpl extends CardPanel {
         g2d.drawImage(
                 IMAGE_CACHE.get(
                         new Key(getWidth(), getHeight(), getCardWidth(), getCardHeight(), getCardXOffset(), getCardYOffset(),
-                                hasImage, isSelected(), isChoosable(), gameCard.isPlayable(), gameCard.isCanAttack())), 
+                                hasImage, isSelected(), isChoosable(), gameCard.isPlayable(), gameCard.isCanAttack())),
                 0, 0, null);
-        g2d.dispose();       
+        g2d.dispose();
     }
 
     private static BufferedImage createImage(Key key) {
@@ -414,7 +434,7 @@ public class CardPanelComponentImpl extends CardPanel {
     @Override
     public void doLayout() {
         super.doLayout();
-        
+
         int cardWidth = getCardWidth();
         int cardHeight = getCardHeight();
         int cardXOffset = getCardXOffset();
@@ -456,6 +476,7 @@ public class CardPanelComponentImpl extends CardPanel {
         boolean showText = (!isAnimationPanel() && fontHeight < 12);
         titleText.setVisible(showText);
         ptText.setVisible(showText);
+        fullImageText.setVisible(fullImagePath != null);
 
         if (showText) {
             int fontSize = cardHeight / 11;
@@ -464,6 +485,9 @@ public class CardPanelComponentImpl extends CardPanel {
             int titleX = Math.round(cardWidth * (20f / 480));
             int titleY = Math.round(cardHeight * (9f / 680)) + getTextOffset();
             titleText.setBounds(cardXOffset + titleX, cardYOffset + titleY, cardWidth - titleX, cardHeight - titleY);
+
+            fullImageText.setFont(getFont().deriveFont(Font.PLAIN, 10));
+            fullImageText.setBounds(cardXOffset, cardYOffset + titleY, cardWidth, cardHeight - titleY);
 
             ptText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
             Dimension ptSize = ptText.getPreferredSize();
@@ -486,7 +510,7 @@ public class CardPanelComponentImpl extends CardPanel {
     public void setCardBounds(int x, int y, int cardWidth, int cardHeight) {
         // Call to super
         super.setCardBounds(x, y, cardWidth, cardHeight);
-        
+
         // Update image
         if (imagePanel != null && imagePanel.getSrcImage() != null) {
             updateArtImage();
@@ -496,7 +520,7 @@ public class CardPanelComponentImpl extends CardPanel {
     @Override
     public void setAlpha(float alpha) {
         super.setAlpha(alpha);
-        
+
         // Update components
         if (alpha == 0) {
             this.ptText.setVisible(false);
@@ -528,6 +552,9 @@ public class CardPanelComponentImpl extends CardPanel {
                     srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
                 } else {
                     srcImage = ImageCache.getThumbnail(gameCard);
+                }
+                if (srcImage == null) {
+                    setFullPath(ImageCache.getFilePath(gameCard, getCardWidth()));
                 }
                 UI.invokeLater(() -> {
                     if (stamp == updateArtImageStamp) {

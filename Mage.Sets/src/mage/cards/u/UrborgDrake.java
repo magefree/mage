@@ -29,7 +29,7 @@ package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,7 +52,7 @@ public class UrborgDrake extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Urborg Drake attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
     public UrborgDrake(final UrborgDrake card) {

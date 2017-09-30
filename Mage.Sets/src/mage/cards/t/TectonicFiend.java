@@ -29,7 +29,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -51,7 +51,7 @@ public class TectonicFiend extends CardImpl {
         // Echo {4}{R}{R}
         this.addAbility(new EchoAbility("{4}{R}{R}"));
         // Tectonic Fiend attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
     public TectonicFiend(final TectonicFiend card) {

@@ -37,7 +37,6 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-
 public class MastersEditionIV extends ExpansionSet {
 
     private static final MastersEditionIV instance = new MastersEditionIV();
@@ -190,6 +189,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Maze of Ith", 246, Rarity.RARE, mage.cards.m.MazeOfIth.class));
         cards.add(new SetCardInfo("Mightstone", 215, Rarity.COMMON, mage.cards.m.Mightstone.class));
         cards.add(new SetCardInfo("Mijae Djinn", 127, Rarity.RARE, mage.cards.m.MijaeDjinn.class));
+        cards.add(new SetCardInfo("Minion of Tevesh Szat", 91, Rarity.RARE, mage.cards.m.MinionOfTeveshSzat.class));
         cards.add(new SetCardInfo("Mishra's Workshop", 247, Rarity.RARE, mage.cards.m.MishrasWorkshop.class));
         cards.add(new SetCardInfo("Mystic Decree", 53, Rarity.UNCOMMON, mage.cards.m.MysticDecree.class));
         cards.add(new SetCardInfo("Naked Singularity", 216, Rarity.RARE, mage.cards.n.NakedSingularity.class));

@@ -173,6 +173,7 @@ public class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Venerable Monk", 121, Rarity.COMMON, mage.cards.v.VenerableMonk.class));
         cards.add(new SetCardInfo("Verdant Touch", 73, Rarity.RARE, mage.cards.v.VerdantTouch.class));
         cards.add(new SetCardInfo("Victual Sliver", 143, Rarity.UNCOMMON, mage.cards.v.VictualSliver.class));
+        cards.add(new SetCardInfo("Volrath's Gardens", 74, Rarity.RARE, mage.cards.v.VolrathsGardens.class));
         cards.add(new SetCardInfo("Volrath's Laboratory", 136, Rarity.RARE, mage.cards.v.VolrathsLaboratory.class));
         cards.add(new SetCardInfo("Volrath's Shapeshifter", 48, Rarity.RARE, mage.cards.v.VolrathsShapeshifter.class));
         cards.add(new SetCardInfo("Volrath's Stronghold", 137, Rarity.RARE, mage.cards.v.VolrathsStronghold.class));

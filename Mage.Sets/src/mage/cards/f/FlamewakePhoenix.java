@@ -29,7 +29,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -62,7 +62,7 @@ public class FlamewakePhoenix extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Flamewake Phoenix attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
 
         // <i>Ferocious</i> - At the beginning of combat on your turn, if you control a creature with power 4 or greater, you may pay {R}. If you do, return Flamewake Phoenix from your graveyard to the battlefield.
         this.addAbility(new ConditionalTriggeredAbility(

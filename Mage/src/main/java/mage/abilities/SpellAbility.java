@@ -98,7 +98,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
             }
             // fix for Gitaxian Probe and casting opponent's spells
             if (!game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)
-                    && !controllerId.equals(playerId)) {
+                    && !controllerId.equals(playerId) && getZone() != Zone.HAND) {
                 return false;
             }
             // Check if rule modifying events prevent to cast the spell in check playable mode

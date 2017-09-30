@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -35,12 +34,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -76,7 +78,7 @@ public class AetherBurst extends CardImpl {
                     }
                 }
             }
-            ((DynamicTargetCreaturePermanent) target).setMaxNumberOfTargets(amount + 1);
+            target.setMaxNumberOfTargets(amount + 1);
         }
     }
 

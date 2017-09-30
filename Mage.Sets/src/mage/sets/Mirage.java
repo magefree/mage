@@ -118,12 +118,14 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Ebony Charm", 18, Rarity.COMMON, mage.cards.e.EbonyCharm.class));
         cards.add(new SetCardInfo("Ekundu Griffin", 217, Rarity.COMMON, mage.cards.e.EkunduGriffin.class));
         cards.add(new SetCardInfo("Elixir of Vitality", 265, Rarity.UNCOMMON, mage.cards.e.ElixirOfVitality.class));
+        cards.add(new SetCardInfo("Emberwilde Djinn", 172, Rarity.RARE, mage.cards.e.EmberwildeDjinn.class));
         cards.add(new SetCardInfo("Energy Bolt", 323, Rarity.RARE, mage.cards.e.EnergyBolt.class));
         cards.add(new SetCardInfo("Enfeeblement", 19, Rarity.COMMON, mage.cards.e.Enfeeblement.class));
         cards.add(new SetCardInfo("Enlightened Tutor", 218, Rarity.UNCOMMON, mage.cards.e.EnlightenedTutor.class));
         cards.add(new SetCardInfo("Ersatz Gnomes", 266, Rarity.UNCOMMON, mage.cards.e.ErsatzGnomes.class));
         cards.add(new SetCardInfo("Ethereal Champion", 219, Rarity.RARE, mage.cards.e.EtherealChampion.class));
         cards.add(new SetCardInfo("Fallow Earth", 112, Rarity.UNCOMMON, mage.cards.f.FallowEarth.class));
+        cards.add(new SetCardInfo("Favorable Destiny", 220, Rarity.UNCOMMON, mage.cards.f.FavorableDestiny.class));
         cards.add(new SetCardInfo("Femeref Archers", 113, Rarity.UNCOMMON, mage.cards.f.FemerefArchers.class));
         cards.add(new SetCardInfo("Femeref Healer", 221, Rarity.COMMON, mage.cards.f.FemerefHealer.class));
         cards.add(new SetCardInfo("Femeref Knight", 222, Rarity.COMMON, mage.cards.f.FemerefKnight.class));
@@ -133,6 +135,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Final Fortune", 173, Rarity.RARE, mage.cards.f.FinalFortune.class));
         cards.add(new SetCardInfo("Firebreathing", 174, Rarity.COMMON, mage.cards.f.Firebreathing.class));
         cards.add(new SetCardInfo("Fire Diamond", 267, Rarity.UNCOMMON, mage.cards.f.FireDiamond.class));
+        cards.add(new SetCardInfo("Flame Elemental", 175, Rarity.UNCOMMON, mage.cards.f.FlameElemental.class));
         cards.add(new SetCardInfo("Flare", 176, Rarity.COMMON, mage.cards.f.Flare.class));
         cards.add(new SetCardInfo("Flash", 66, Rarity.RARE, mage.cards.f.Flash.class));
         cards.add(new SetCardInfo("Flood Plain", 291, Rarity.UNCOMMON, mage.cards.f.FloodPlain.class));
@@ -160,6 +163,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Hall of Gemstone", 119, Rarity.RARE, mage.cards.h.HallOfGemstone.class));
         cards.add(new SetCardInfo("Hammer of Bogardan", 181, Rarity.RARE, mage.cards.h.HammerOfBogardan.class));
         cards.add(new SetCardInfo("Harbinger of Night", 26, Rarity.RARE, mage.cards.h.HarbingerOfNight.class));
+        cards.add(new SetCardInfo("Harbor Guardian", 326, Rarity.UNCOMMON, mage.cards.h.HarborGuardian.class));
         cards.add(new SetCardInfo("Harmattan Efreet", 69, Rarity.UNCOMMON, mage.cards.h.HarmattanEfreet.class));
         cards.add(new SetCardInfo("Hazerider Drake", 328, Rarity.UNCOMMON, mage.cards.h.HazeriderDrake.class));
         cards.add(new SetCardInfo("Healing Salve", 224, Rarity.COMMON, mage.cards.h.HealingSalve.class));
@@ -181,6 +185,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Patrol", 121, Rarity.RARE, mage.cards.j.JunglePatrol.class));
         cards.add(new SetCardInfo("Jungle Troll", 329, Rarity.UNCOMMON, mage.cards.j.JungleTroll.class));
         cards.add(new SetCardInfo("Jungle Wurm", 122, Rarity.COMMON, mage.cards.j.JungleWurm.class));
+        cards.add(new SetCardInfo("Kaervek's Hex", 28, Rarity.UNCOMMON, mage.cards.k.KaerveksHex.class));
         cards.add(new SetCardInfo("Kaervek's Torch", 185, Rarity.COMMON, mage.cards.k.KaerveksTorch.class));
         cards.add(new SetCardInfo("Karoo Meerkat", 123, Rarity.UNCOMMON, mage.cards.k.KarooMeerkat.class));
         cards.add(new SetCardInfo("Kukemssa Pirates", 71, Rarity.RARE, mage.cards.k.KukemssaPirates.class));
@@ -228,8 +233,10 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Political Trickery", 81, Rarity.RARE, mage.cards.p.PoliticalTrickery.class));
         cards.add(new SetCardInfo("Polymorph", 82, Rarity.RARE, mage.cards.p.Polymorph.class));
         cards.add(new SetCardInfo("Power Sink", 83, Rarity.COMMON, mage.cards.p.PowerSink.class));
+        cards.add(new SetCardInfo("Prismatic Circle", 238, Rarity.COMMON, mage.cards.p.PrismaticCircle.class));
         cards.add(new SetCardInfo("Prismatic Lace", 84, Rarity.RARE, mage.cards.p.PrismaticLace.class));
         cards.add(new SetCardInfo("Psychic Transfer", 85, Rarity.RARE, mage.cards.p.PsychicTransfer.class));
+        cards.add(new SetCardInfo("Purraj of Urborg", 33, Rarity.RARE, mage.cards.p.PurrajOfUrborg.class));
         cards.add(new SetCardInfo("Quirion Elves", 132, Rarity.COMMON, mage.cards.q.QuirionElves.class));
         cards.add(new SetCardInfo("Radiant Essence", 336, Rarity.UNCOMMON, mage.cards.r.RadiantEssence.class));
         cards.add(new SetCardInfo("Raging Spirit", 188, Rarity.COMMON, mage.cards.r.RagingSpirit.class));
@@ -251,6 +258,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Sandstorm", 137, Rarity.COMMON, mage.cards.s.Sandstorm.class));
         cards.add(new SetCardInfo("Sapphire Charm", 89, Rarity.COMMON, mage.cards.s.SapphireCharm.class));
         cards.add(new SetCardInfo("Savage Twister", 340, Rarity.UNCOMMON, mage.cards.s.SavageTwister.class));
+        cards.add(new SetCardInfo("Sawback Manticore", 341, Rarity.RARE, mage.cards.s.SawbackManticore.class));
         cards.add(new SetCardInfo("Searing Spear Askari", 191, Rarity.COMMON, mage.cards.s.SearingSpearAskari.class));
         cards.add(new SetCardInfo("Sea Scryer", 90, Rarity.COMMON, mage.cards.s.SeaScryer.class));
         cards.add(new SetCardInfo("Seedling Charm", 138, Rarity.COMMON, mage.cards.s.SeedlingCharm.class));
@@ -268,6 +276,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Sky Diamond", 284, Rarity.UNCOMMON, mage.cards.s.SkyDiamond.class));
         cards.add(new SetCardInfo("Soar", 93, Rarity.COMMON, mage.cards.s.Soar.class));
         cards.add(new SetCardInfo("Soul Rend", 42, Rarity.UNCOMMON, mage.cards.s.SoulRend.class));
+        cards.add(new SetCardInfo("Spectral Guardian", 245, Rarity.RARE, mage.cards.s.SpectralGuardian.class));
         cards.add(new SetCardInfo("Spirit of the Night", 44, Rarity.RARE, mage.cards.s.SpiritOfTheNight.class));
         cards.add(new SetCardInfo("Spitting Earth", 193, Rarity.COMMON, mage.cards.s.SpittingEarth.class));
         cards.add(new SetCardInfo("Stalking Tiger", 141, Rarity.COMMON, mage.cards.s.StalkingTiger.class));
@@ -286,10 +295,14 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Teferi's Curse", 96, Rarity.COMMON, mage.cards.t.TeferisCurse.class));
         cards.add(new SetCardInfo("Teferi's Drake", 97, Rarity.COMMON, mage.cards.t.TeferisDrake.class));
         cards.add(new SetCardInfo("Teferi's Isle", 315, Rarity.RARE, mage.cards.t.TeferisIsle.class));
+        cards.add(new SetCardInfo("Telim'Tor", 197, Rarity.RARE, mage.cards.t.TelimTor.class));
         cards.add(new SetCardInfo("Telim'Tor's Darts", 286, Rarity.UNCOMMON, mage.cards.t.TelimTorsDarts.class));
+        cards.add(new SetCardInfo("Telim'Tor's Edict", 198, Rarity.RARE, mage.cards.t.TelimTorsEdict.class));
         cards.add(new SetCardInfo("Thirst", 99, Rarity.COMMON, mage.cards.t.Thirst.class));
         cards.add(new SetCardInfo("Tidal Wave", 100, Rarity.UNCOMMON, mage.cards.t.TidalWave.class));
         cards.add(new SetCardInfo("Tranquil Domain", 143, Rarity.COMMON, mage.cards.t.TranquilDomain.class));
+        cards.add(new SetCardInfo("Tropical Storm", 144, Rarity.UNCOMMON, mage.cards.t.TropicalStorm.class));
+        cards.add(new SetCardInfo("Uktabi Faerie", 145, Rarity.COMMON, mage.cards.u.UktabiFaerie.class));
         cards.add(new SetCardInfo("Uktabi Wildcats", 146, Rarity.RARE, mage.cards.u.UktabiWildcats.class));
         cards.add(new SetCardInfo("Unfulfilled Desires", 345, Rarity.RARE, mage.cards.u.UnfulfilledDesires.class));
         cards.add(new SetCardInfo("Unseen Walker", 147, Rarity.UNCOMMON, mage.cards.u.UnseenWalker.class));
@@ -306,6 +319,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Waiting in the Weeds", 150, Rarity.RARE, mage.cards.w.WaitingInTheWeeds.class));
         cards.add(new SetCardInfo("Wall of Roots", 151, Rarity.COMMON, mage.cards.w.WallOfRoots.class));
         cards.add(new SetCardInfo("Ward of Lights", 251, Rarity.COMMON, mage.cards.w.WardOfLights.class));
+        cards.add(new SetCardInfo("Wave Elemental", 102, Rarity.UNCOMMON, mage.cards.w.WaveElemental.class));
         cards.add(new SetCardInfo("Wild Elephant", 152, Rarity.COMMON, mage.cards.w.WildElephant.class));
         cards.add(new SetCardInfo("Wildfire Emissary", 203, Rarity.UNCOMMON, mage.cards.w.WildfireEmissary.class));
         cards.add(new SetCardInfo("Windreaper Falcon", 349, Rarity.UNCOMMON, mage.cards.w.WindreaperFalcon.class));

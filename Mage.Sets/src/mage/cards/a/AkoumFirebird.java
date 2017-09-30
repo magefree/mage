@@ -30,7 +30,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -65,7 +65,7 @@ public class AkoumFirebird extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Akoum Firebird attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
 
         // <i>Landfall</i>-Whenever a land enters the battlefield under your control, you may pay {4}{R}{R}.
         // If you do, return Akoum Firebird from your graveyard to the battlefield.

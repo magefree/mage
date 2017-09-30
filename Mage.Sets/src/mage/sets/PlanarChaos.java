@@ -132,6 +132,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Magus of the Tabernacle", 8, Rarity.RARE, mage.cards.m.MagusOfTheTabernacle.class));
         cards.add(new SetCardInfo("Malach of the Dawn", 24, Rarity.UNCOMMON, mage.cards.m.MalachOfTheDawn.class));
         cards.add(new SetCardInfo("Mana Tithe", 25, Rarity.COMMON, mage.cards.m.ManaTithe.class));
+        cards.add(new SetCardInfo("Mantle of Leadership", 9, Rarity.UNCOMMON, mage.cards.m.MantleOfLeadership.class));
         cards.add(new SetCardInfo("Melancholy", 88, Rarity.COMMON, mage.cards.m.Melancholy.class));
         cards.add(new SetCardInfo("Merfolk Thaumaturgist", 56, Rarity.COMMON, mage.cards.m.MerfolkThaumaturgist.class));
         cards.add(new SetCardInfo("Mesa Enchantress", 26, Rarity.RARE, mage.cards.m.MesaEnchantress.class));

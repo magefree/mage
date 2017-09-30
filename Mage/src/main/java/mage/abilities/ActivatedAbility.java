@@ -29,6 +29,7 @@ package mage.abilities;
 
 import java.util.UUID;
 import mage.abilities.mana.ManaOptions;
+import mage.constants.TargetController;
 import mage.game.Game;
 
 /**
@@ -38,6 +39,8 @@ import mage.game.Game;
 public interface ActivatedAbility extends Ability {
 
     boolean canActivate(UUID playerId, Game game);
+
+    public void setMayActivate(TargetController mayActivate);
 
     /**
      * Returns the minimal possible cost for what the ability can be activated

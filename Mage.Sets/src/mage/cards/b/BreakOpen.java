@@ -28,18 +28,14 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TurnFaceUpTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.FaceDownPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -70,34 +66,5 @@ public class BreakOpen extends CardImpl {
     @Override
     public BreakOpen copy() {
         return new BreakOpen(this);
-    }
-}
-
-class TurnFaceUpTargetEffect extends OneShotEffect {
-
-    public TurnFaceUpTargetEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Turn target face-down creature an opponen controls face up.";
-    }
-
-    public TurnFaceUpTargetEffect(final TurnFaceUpTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TurnFaceUpTargetEffect copy() {
-        return new TurnFaceUpTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        UUID target = targetPointer.getFirst(game, source);
-        if (target != null) {
-            Permanent permanent = game.getPermanent(target);
-            if (permanent != null) {
-                return permanent.turnFaceUp(game, source.getControllerId());
-            }
-        }
-        return false;
     }
 }

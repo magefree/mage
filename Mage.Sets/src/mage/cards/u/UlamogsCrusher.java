@@ -30,7 +30,7 @@ package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +49,7 @@ public class UlamogsCrusher extends CardImpl {
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
         this.addAbility(new AnnihilatorAbility(2));
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
     public UlamogsCrusher (final UlamogsCrusher card) {
