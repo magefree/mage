@@ -134,6 +134,7 @@ public class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Reclaim", 120, Rarity.COMMON, mage.cards.r.Reclaim.class));
         cards.add(new SetCardInfo("Reconnaissance", 17, Rarity.UNCOMMON, mage.cards.r.Reconnaissance.class));
         cards.add(new SetCardInfo("Recurring Nightmare", 72, Rarity.RARE, mage.cards.r.RecurringNightmare.class));
+        cards.add(new SetCardInfo("Resuscitate", 121, Rarity.UNCOMMON, mage.cards.r.Resuscitate.class));
         cards.add(new SetCardInfo("Robe of Mirrors", 43, Rarity.COMMON, mage.cards.r.RobeOfMirrors.class));
         cards.add(new SetCardInfo("Rootwater Alligator", 122, Rarity.COMMON, mage.cards.r.RootwaterAlligator.class));
         cards.add(new SetCardInfo("Rootwater Mystic", 44, Rarity.COMMON, mage.cards.r.RootwaterMystic.class));
