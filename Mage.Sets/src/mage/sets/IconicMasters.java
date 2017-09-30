@@ -173,7 +173,7 @@ public class IconicMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Battle-Rattle Shaman", 117, Rarity.COMMON, mage.cards.b.BattleRattleShaman.class));
         cards.add(new SetCardInfo("Bogardan Hellkite", 118, Rarity.RARE, mage.cards.b.BogardanHellkite.class));
         cards.add(new SetCardInfo("Borderland Marauder", 119, Rarity.COMMON, mage.cards.b.BorderlandMarauder.class));
-        cards.add(new SetCardInfo("Charmbreaker Devils", 120, Rarity.UNCOMMON, mage.cards.c.CharmbreakerDevils.class));
+        cards.add(new SetCardInfo("Charmbreaker Devils", 120, Rarity.RARE, mage.cards.c.CharmbreakerDevils.class));
         cards.add(new SetCardInfo("Coordinated Assault", 121, Rarity.UNCOMMON, mage.cards.c.CoordinatedAssault.class));
         cards.add(new SetCardInfo("Crucible of Fire", 122, Rarity.RARE, mage.cards.c.CrucibleOfFire.class));
         cards.add(new SetCardInfo("Draconic Roar", 123, Rarity.COMMON, mage.cards.d.DraconicRoar.class));
