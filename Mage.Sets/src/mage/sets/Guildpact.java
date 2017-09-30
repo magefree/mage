@@ -121,6 +121,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Chronarch", 119, Rarity.COMMON, mage.cards.i.IzzetChronarch.class));
         cards.add(new SetCardInfo("Izzet Guildmage", 145, Rarity.UNCOMMON, mage.cards.i.IzzetGuildmage.class));
         cards.add(new SetCardInfo("Izzet Signet", 152, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Killer Instinct", 120, Rarity.RARE, mage.cards.k.KillerInstinct.class));
         cards.add(new SetCardInfo("Leap of Flame", 121, Rarity.COMMON, mage.cards.l.LeapOfFlame.class));
         cards.add(new SetCardInfo("Leyline of Lifeforce", 90, Rarity.RARE, mage.cards.l.LeylineOfLifeforce.class));
         cards.add(new SetCardInfo("Leyline of Lightning", 68, Rarity.RARE, mage.cards.l.LeylineOfLightning.class));
