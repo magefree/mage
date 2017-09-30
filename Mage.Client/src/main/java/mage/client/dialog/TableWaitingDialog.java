@@ -438,7 +438,10 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
             int current = getPlayersCount(tableView);
             if (current != count) {
                 if (count > 0) {
-                    if (current > count) {
+                    if (current == tableView.getSeats().size()) {
+                        MageTray.instance.displayMessage("The game can start.");
+                        AudioManager.playGameCanStart();
+                    } else if (current > count) {
                         MageTray.instance.displayMessage("New player joined your game.");
                         AudioManager.playPlayerJoinedTable();
                     } else {
