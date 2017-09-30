@@ -118,6 +118,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Krosan Reclamation", 122, Rarity.UNCOMMON, mage.cards.k.KrosanReclamation.class));
         cards.add(new SetCardInfo("Krosan Verge", 141, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
         cards.add(new SetCardInfo("Krosan Wayfarer", 123, Rarity.COMMON, mage.cards.k.KrosanWayfarer.class));
+        cards.add(new SetCardInfo("Laquatus's Disdain", 44, Rarity.UNCOMMON, mage.cards.l.LaquatussDisdain.class));
         cards.add(new SetCardInfo("Lava Dart", 94, Rarity.COMMON, mage.cards.l.LavaDart.class));
         cards.add(new SetCardInfo("Lead Astray", 14, Rarity.COMMON, mage.cards.l.LeadAstray.class));
         cards.add(new SetCardInfo("Liberated Dwarf", 95, Rarity.COMMON, mage.cards.l.LiberatedDwarf.class));
