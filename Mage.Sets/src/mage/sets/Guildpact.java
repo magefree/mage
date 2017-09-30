@@ -163,6 +163,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Scab-Clan Mauler", 128, Rarity.COMMON, mage.cards.s.ScabClanMauler.class));
         cards.add(new SetCardInfo("Schismotivate", 129, Rarity.UNCOMMON, mage.cards.s.Schismotivate.class));
         cards.add(new SetCardInfo("Scorched Rusalka", 74, Rarity.UNCOMMON, mage.cards.s.ScorchedRusalka.class));
+        cards.add(new SetCardInfo("Seize the Soul", 61, Rarity.RARE, mage.cards.s.SeizeTheSoul.class));
         cards.add(new SetCardInfo("Shadow Lance", 14, Rarity.UNCOMMON, mage.cards.s.ShadowLance.class));
         cards.add(new SetCardInfo("Shattering Spree", 75, Rarity.UNCOMMON, mage.cards.s.ShatteringSpree.class));
         cards.add(new SetCardInfo("Shrieking Grotesque", 15, Rarity.COMMON, mage.cards.s.ShriekingGrotesque.class));
