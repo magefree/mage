@@ -123,6 +123,7 @@ public class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Pit Spawn", 70, Rarity.RARE, mage.cards.p.PitSpawn.class));
         cards.add(new SetCardInfo("Plaguebearer", 71, Rarity.RARE, mage.cards.p.Plaguebearer.class));
         cards.add(new SetCardInfo("Plated Rootwalla", 116, Rarity.COMMON, mage.cards.p.PlatedRootwalla.class));
+        cards.add(new SetCardInfo("Predatory Hunger", 117, Rarity.COMMON, mage.cards.p.PredatoryHunger.class));
         cards.add(new SetCardInfo("Price of Progress", 95, Rarity.UNCOMMON, mage.cards.p.PriceOfProgress.class));
         cards.add(new SetCardInfo("Pygmy Troll", 118, Rarity.COMMON, mage.cards.p.PygmyTroll.class));
         cards.add(new SetCardInfo("Rabid Wolverines", 119, Rarity.COMMON, mage.cards.r.RabidWolverines.class));
