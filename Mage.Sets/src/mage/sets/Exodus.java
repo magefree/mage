@@ -76,6 +76,7 @@ public class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Dauthi Warlord", 59, Rarity.UNCOMMON, mage.cards.d.DauthiWarlord.class));
         cards.add(new SetCardInfo("Death's Duet", 60, Rarity.COMMON, mage.cards.d.DeathsDuet.class));
         cards.add(new SetCardInfo("Dominating Licid", 30, Rarity.RARE, mage.cards.d.DominatingLicid.class));
+        cards.add(new SetCardInfo("Elven Palisade", 109, Rarity.UNCOMMON, mage.cards.e.ElvenPalisade.class));
         cards.add(new SetCardInfo("Elvish Berserker", 110, Rarity.COMMON, mage.cards.e.ElvishBerserker.class));
         cards.add(new SetCardInfo("Entropic Specter", 61, Rarity.RARE, mage.cards.e.EntropicSpecter.class));
         cards.add(new SetCardInfo("Ephemeron", 31, Rarity.RARE, mage.cards.e.Ephemeron.class));
