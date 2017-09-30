@@ -131,6 +131,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Martyred Rusalka", 12, Rarity.UNCOMMON, mage.cards.m.MartyredRusalka.class));
         cards.add(new SetCardInfo("Mimeofacture", 30, Rarity.RARE, mage.cards.m.Mimeofacture.class));
         cards.add(new SetCardInfo("Mizzium Transreliquat", 153, Rarity.RARE, mage.cards.m.MizziumTransreliquat.class));
+        cards.add(new SetCardInfo("Moratorium Stone", 154, Rarity.RARE, mage.cards.m.MoratoriumStone.class));
         cards.add(new SetCardInfo("Mortify", 122, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mourning Thrull", 146, Rarity.COMMON, mage.cards.m.MourningThrull.class));
         cards.add(new SetCardInfo("Necromancer's Magemark", 53, Rarity.COMMON, mage.cards.n.NecromancersMagemark.class));
