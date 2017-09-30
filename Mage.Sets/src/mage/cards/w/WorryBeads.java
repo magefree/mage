@@ -46,7 +46,9 @@ public class WorryBeads extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+                new PutLibraryIntoGraveTargetEffect(1).setText("that player puts the top card of his or her library into his or her graveyard"),
+                TargetController.ANY, false, true));
     }
 
     public WorryBeads(final WorryBeads card) {
