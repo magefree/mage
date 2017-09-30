@@ -173,5 +173,6 @@ public class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Whiptongue Frog", 52, Rarity.COMMON, mage.cards.w.WhiptongueFrog.class));
         cards.add(new SetCardInfo("Wood Elves", 130, Rarity.COMMON, mage.cards.w.WoodElves.class));
         cards.add(new SetCardInfo("Workhorse", 142, Rarity.RARE, mage.cards.w.Workhorse.class));
+        cards.add(new SetCardInfo("Zealots en-Dal", 26, Rarity.UNCOMMON, mage.cards.z.ZealotsEnDal.class));
     }
 }
