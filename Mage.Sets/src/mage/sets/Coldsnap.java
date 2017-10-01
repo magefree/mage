@@ -84,6 +84,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Diamond Faerie", 128, Rarity.RARE, mage.cards.d.DiamondFaerie.class));
         cards.add(new SetCardInfo("Disciple of Tevesh Szat", 55, Rarity.COMMON, mage.cards.d.DiscipleOfTeveshSzat.class));
         cards.add(new SetCardInfo("Drelnoch", 32, Rarity.COMMON, mage.cards.d.Drelnoch.class));
+        cards.add(new SetCardInfo("Earthen Goo", 80, Rarity.UNCOMMON, mage.cards.e.EarthenGoo.class));
         cards.add(new SetCardInfo("Field Marshal", 5, Rarity.RARE, mage.cards.f.FieldMarshal.class));
         cards.add(new SetCardInfo("Flashfreeze", 33, Rarity.UNCOMMON, mage.cards.f.Flashfreeze.class));
         cards.add(new SetCardInfo("Freyalise's Radiance", 108, Rarity.UNCOMMON, mage.cards.f.FreyalisesRadiance.class));
