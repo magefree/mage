@@ -149,6 +149,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Rimewind Taskmage", 44, Rarity.COMMON, mage.cards.r.RimewindTaskmage.class));
         cards.add(new SetCardInfo("Rite of Flame", 96, Rarity.COMMON, mage.cards.r.RiteOfFlame.class));
         cards.add(new SetCardInfo("Ronom Hulk", 119, Rarity.COMMON, mage.cards.r.RonomHulk.class));
+        cards.add(new SetCardInfo("Ronom Serpent", 45, Rarity.COMMON, mage.cards.r.RonomSerpent.class));
         cards.add(new SetCardInfo("Ronom Unicorn", 16, Rarity.COMMON, mage.cards.r.RonomUnicorn.class));
         cards.add(new SetCardInfo("Rune Snag", 46, Rarity.COMMON, mage.cards.r.RuneSnag.class));
         cards.add(new SetCardInfo("Scrying Sheets", 149, Rarity.RARE, mage.cards.s.ScryingSheets.class));
