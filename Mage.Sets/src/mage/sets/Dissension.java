@@ -199,6 +199,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Trial // Error", 158, Rarity.UNCOMMON, mage.cards.t.TrialError.class));
         cards.add(new SetCardInfo("Trygon Predator", 133, Rarity.UNCOMMON, mage.cards.t.TrygonPredator.class));
         cards.add(new SetCardInfo("Twinstrike", 134, Rarity.UNCOMMON, mage.cards.t.Twinstrike.class));
+        cards.add(new SetCardInfo("Unliving Psychopath", 56, Rarity.RARE, mage.cards.u.UnlivingPsychopath.class));
         cards.add(new SetCardInfo("Utopia Sprawl", 99, Rarity.COMMON, mage.cards.u.UtopiaSprawl.class));
         cards.add(new SetCardInfo("Utvara Scalper", 76, Rarity.COMMON, mage.cards.u.UtvaraScalper.class));
         cards.add(new SetCardInfo("Valor Made Real", 20, Rarity.COMMON, mage.cards.v.ValorMadeReal.class));
