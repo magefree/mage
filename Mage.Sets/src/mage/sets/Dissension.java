@@ -71,6 +71,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Crypt", 171, Rarity.RARE, mage.cards.b.BloodCrypt.class));
         cards.add(new SetCardInfo("Bond of Agony", 38, Rarity.UNCOMMON, mage.cards.b.BondOfAgony.class));
         cards.add(new SetCardInfo("Bound // Determined", 149, Rarity.RARE, mage.cards.b.BoundDetermined.class));
+        cards.add(new SetCardInfo("Brace for Impact", 5, Rarity.UNCOMMON, mage.cards.b.BraceForImpact.class));
         cards.add(new SetCardInfo("Brain Pry", 39, Rarity.UNCOMMON, mage.cards.b.BrainPry.class));
         cards.add(new SetCardInfo("Breeding Pool", 172, Rarity.RARE, mage.cards.b.BreedingPool.class));
         cards.add(new SetCardInfo("Bronze Bombshell", 160, Rarity.RARE, mage.cards.b.BronzeBombshell.class));
