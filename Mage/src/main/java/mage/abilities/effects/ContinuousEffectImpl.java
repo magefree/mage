@@ -46,6 +46,7 @@ import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Layer;
 import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
@@ -79,6 +80,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected int startingTurn;
     protected UUID startingControllerId;
 
+    // Duration until next phase step of player
+    protected PhaseStep durationPhaseStep = null;
+    protected UUID durationPlayerId;
+    protected boolean sameStep;
+
     public ContinuousEffectImpl(Duration duration, Outcome outcome) {
         super(outcome);
         this.duration = duration;
@@ -110,6 +116,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.dependencyTypes = effect.dependencyTypes;
         this.dependendToTypes = effect.dependendToTypes;
         this.characterDefining = effect.characterDefining;
+        this.durationPhaseStep = effect.durationPhaseStep;
+        this.durationPlayerId = effect.durationPlayerId;
+        this.sameStep = effect.sameStep;
     }
 
     @Override
@@ -158,6 +167,17 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     /**
+     * Used to set a duration to the next durationPhaseStep of the first
+     * controller of the effect.
+     *
+     * @param phaseStep
+     */
+    @Override
+    public void setDurationToPhase(PhaseStep phaseStep) {
+        durationPhaseStep = phaseStep;
+    }
+
+    /**
      * Sets the discarded state of the effect. So it will be removed on next
      * check.
      */
@@ -193,6 +213,10 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         }
         startingTurn = game.getTurnNum();
         startingControllerId = source.getControllerId();
+        if (durationPhaseStep != null) {
+            durationPlayerId = source.getControllerId();
+            sameStep = true;
+        }
     }
 
     @Override
@@ -206,6 +230,13 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                 return player.hasReachedNextTurnAfterLeaving();
             }
             return true;
+        }
+        if (durationPhaseStep != null && durationPhaseStep == game.getPhase().getStep().getType()) {
+            if (!sameStep && game.getActivePlayerId().equals(durationPlayerId) || game.getPlayer(durationPlayerId).hasReachedNextTurnAfterLeaving()) {
+                return true;
+            }
+        } else {
+            sameStep = false;
         }
         return false;
     }

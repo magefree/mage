@@ -12,6 +12,7 @@ public enum Duration {
     WhileInGraveyard(""),
     EndOfTurn("until end of turn"),
     UntilYourNextTurn("until your next turn"),
+//    UntilYourNextUpkeep("until your next upkeep"),    
     EndOfCombat("until end of combat"),
     EndOfStep("until end of phase step"),
     Custom("");

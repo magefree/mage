@@ -36,7 +36,6 @@ import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,11 +50,6 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
     protected Ability ability;
     // shall a card gain the ability (otherwise permanent)
     private boolean onCard;
-
-    // Duration until next phase step of player
-    private PhaseStep durationPhaseStep = null;
-    private UUID durationPlayerId;
-    private boolean sameStep;
 
     public GainAbilityTargetEffect(Ability ability, Duration duration) {
         this(ability, duration, null);
@@ -82,43 +76,6 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         this.ability = effect.ability.copy();
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
         this.onCard = effect.onCard;
-        this.durationPhaseStep = effect.durationPhaseStep;
-        this.durationPlayerId = effect.durationPlayerId;
-        this.sameStep = effect.sameStep;
-    }
-
-    /**
-     * Used to set a duration to the next durationPhaseStep of the first
-     * controller of the effect.
-     *
-     * @param phaseStep
-     */
-    public void setDurationToPhase(PhaseStep phaseStep) {
-        durationPhaseStep = phaseStep;
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        if (durationPhaseStep != null) {
-            durationPlayerId = source.getControllerId();
-            sameStep = true;
-        }
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (super.isInactive(source, game)) {
-            return true;
-        }
-        if (durationPhaseStep != null && durationPhaseStep == game.getPhase().getStep().getType()) {
-            if (!sameStep && game.getActivePlayerId().equals(durationPlayerId) || game.getPlayer(durationPlayerId).hasReachedNextTurnAfterLeaving()) {
-                return true;
-            }
-        } else {
-            sameStep = false;
-        }
-        return false;
     }
 
     @Override

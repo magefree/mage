@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
+import mage.constants.PhaseStep;
 import mage.constants.SubLayer;
 import mage.game.Game;
 
@@ -62,6 +63,8 @@ public interface ContinuousEffect extends Effect {
     boolean hasLayer(Layer layer);
 
     boolean isInactive(Ability source, Game game);
+
+    public void setDurationToPhase(PhaseStep phaseStep);
 
     void init(Ability source, Game game);
 
