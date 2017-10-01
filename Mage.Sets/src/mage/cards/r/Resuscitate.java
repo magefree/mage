@@ -25,59 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- * @author Jgod
+ * @author TheElk801
  */
-public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
+public class Resuscitate extends CardImpl {
 
-    private final FilterCard filter;
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 
-    public ExileGraveyardAllPlayersEffect() {
-        this(new FilterCard("cards"));
+    public Resuscitate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
+
+        // Until end of turn, creatures you control gain "{1}: Regenerate this creature."
+        Ability ability = new SimpleActivatedAbility(new RegenerateSourceEffect().setText("Regenerate this creature"), new GenericManaCost(1));
+        this.getSpellAbility().addEffect(
+                new GainAbilityAllEffect(ability, Duration.EndOfTurn, filter,
+                        "Until end of turn, creatures you control gain \"{1}: Regenerate this creature.\""
+                )
+        );
     }
 
-    public ExileGraveyardAllPlayersEffect(FilterCard filter) {
-        super(Outcome.Detriment);
-        staticText = "exile all " + filter.getMessage() + " from all graveyards";
-        this.filter = filter;
+    public Resuscitate(final Resuscitate card) {
+        super(card);
     }
 
     @Override
-    public ExileGraveyardAllPlayersEffect copy() {
-        return new ExileGraveyardAllPlayersEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (UUID cid : player.getGraveyard().copy()) {
-                    Card card = game.getCard(cid);
-                    if (card != null && filter.match(card, game)) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
-                    }
-                }
-            }
-        }
-        return true;
+    public Resuscitate copy() {
+        return new Resuscitate(this);
     }
 }

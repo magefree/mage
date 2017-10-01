@@ -25,59 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.cards.p;
 
 import java.util.UUID;
+import mage.constants.SubType;
+import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 
 /**
  *
- * @author Jgod
+ * @author TheElk801
  */
-public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
+public class PredatoryHunger extends CardImpl {
 
-    private final FilterCard filter;
+    public PredatoryHunger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
-    public ExileGraveyardAllPlayersEffect() {
-        this(new FilterCard("cards"));
+        this.subtype.add(SubType.AURA);
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // Whenever an opponent casts a creature spell, put a +1/+1 counter on enchanted creature.
+        this.addAbility(new SpellCastOpponentTriggeredAbility(
+                new AddCountersAttachedEffect(
+                        CounterType.P1P1.createInstance(),
+                        "enchanted creature"
+                ), StaticFilters.FILTER_SPELL_A_CREATURE, false
+        ));
     }
 
-    public ExileGraveyardAllPlayersEffect(FilterCard filter) {
-        super(Outcome.Detriment);
-        staticText = "exile all " + filter.getMessage() + " from all graveyards";
-        this.filter = filter;
+    public PredatoryHunger(final PredatoryHunger card) {
+        super(card);
     }
 
     @Override
-    public ExileGraveyardAllPlayersEffect copy() {
-        return new ExileGraveyardAllPlayersEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (UUID cid : player.getGraveyard().copy()) {
-                    Card card = game.getCard(cid);
-                    if (card != null && filter.match(card, game)) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
-                    }
-                }
-            }
-        }
-        return true;
+    public PredatoryHunger copy() {
+        return new PredatoryHunger(this);
     }
 }

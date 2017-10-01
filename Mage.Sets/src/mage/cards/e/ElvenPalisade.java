@@ -25,59 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetAttackingCreature;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Jgod
+ * @author TheElk801
  */
-public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
+public class ElvenPalisade extends CardImpl {
 
-    private final FilterCard filter;
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
 
-    public ExileGraveyardAllPlayersEffect() {
-        this(new FilterCard("cards"));
+    static {
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
-    public ExileGraveyardAllPlayersEffect(FilterCard filter) {
-        super(Outcome.Detriment);
-        staticText = "exile all " + filter.getMessage() + " from all graveyards";
-        this.filter = filter;
+    public ElvenPalisade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+
+        // Sacrifice a Forest: Target attacking creature gets -3/-0 until end of turn.
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-3, 0, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addTarget(new TargetAttackingCreature());
+        this.addAbility(ability);
+    }
+
+    public ElvenPalisade(final ElvenPalisade card) {
+        super(card);
     }
 
     @Override
-    public ExileGraveyardAllPlayersEffect copy() {
-        return new ExileGraveyardAllPlayersEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (UUID cid : player.getGraveyard().copy()) {
-                    Card card = game.getCard(cid);
-                    if (card != null && filter.match(card, game)) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
-                    }
-                }
-            }
-        }
-        return true;
+    public ElvenPalisade copy() {
+        return new ElvenPalisade(this);
     }
 }

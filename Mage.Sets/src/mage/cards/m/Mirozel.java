@@ -25,59 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.MageInt;
+import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.constants.SubType;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 /**
  *
- * @author Jgod
+ * @author TheElk801
  */
-public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
+public class Mirozel extends CardImpl {
 
-    private final FilterCard filter;
+    public Mirozel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-    public ExileGraveyardAllPlayersEffect() {
-        this(new FilterCard("cards"));
+        this.subtype.add(SubType.ILLUSION);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // When Mirozel becomes the target of a spell or ability, return Mirozel to its owner's hand.
+        this.addAbility(new BecomesTargetTriggeredAbility(new ReturnToHandSourceEffect(true)));
     }
 
-    public ExileGraveyardAllPlayersEffect(FilterCard filter) {
-        super(Outcome.Detriment);
-        staticText = "exile all " + filter.getMessage() + " from all graveyards";
-        this.filter = filter;
+    public Mirozel(final Mirozel card) {
+        super(card);
     }
 
     @Override
-    public ExileGraveyardAllPlayersEffect copy() {
-        return new ExileGraveyardAllPlayersEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (UUID cid : player.getGraveyard().copy()) {
-                    Card card = game.getCard(cid);
-                    if (card != null && filter.match(card, game)) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
-                    }
-                }
-            }
-        }
-        return true;
+    public Mirozel copy() {
+        return new Mirozel(this);
     }
 }

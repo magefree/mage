@@ -61,6 +61,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Beastmaster's Magemark", 80, Rarity.COMMON, mage.cards.b.BeastmastersMagemark.class));
         cards.add(new SetCardInfo("Belfry Spirit", 2, Rarity.UNCOMMON, mage.cards.b.BelfrySpirit.class));
         cards.add(new SetCardInfo("Benediction of Moons", 3, Rarity.COMMON, mage.cards.b.BenedictionOfMoons.class));
+        cards.add(new SetCardInfo("Bioplasm", 81, Rarity.RARE, mage.cards.b.Bioplasm.class));
         cards.add(new SetCardInfo("Blind Hunter", 102, Rarity.COMMON, mage.cards.b.BlindHunter.class));
         cards.add(new SetCardInfo("Bloodscale Prowler", 64, Rarity.COMMON, mage.cards.b.BloodscaleProwler.class));
         cards.add(new SetCardInfo("Borborygmos", 103, Rarity.RARE, mage.cards.b.Borborygmos.class));
@@ -120,6 +121,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Chronarch", 119, Rarity.COMMON, mage.cards.i.IzzetChronarch.class));
         cards.add(new SetCardInfo("Izzet Guildmage", 145, Rarity.UNCOMMON, mage.cards.i.IzzetGuildmage.class));
         cards.add(new SetCardInfo("Izzet Signet", 152, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Killer Instinct", 120, Rarity.RARE, mage.cards.k.KillerInstinct.class));
         cards.add(new SetCardInfo("Leap of Flame", 121, Rarity.COMMON, mage.cards.l.LeapOfFlame.class));
         cards.add(new SetCardInfo("Leyline of Lifeforce", 90, Rarity.RARE, mage.cards.l.LeylineOfLifeforce.class));
         cards.add(new SetCardInfo("Leyline of Lightning", 68, Rarity.RARE, mage.cards.l.LeylineOfLightning.class));
@@ -130,6 +132,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Martyred Rusalka", 12, Rarity.UNCOMMON, mage.cards.m.MartyredRusalka.class));
         cards.add(new SetCardInfo("Mimeofacture", 30, Rarity.RARE, mage.cards.m.Mimeofacture.class));
         cards.add(new SetCardInfo("Mizzium Transreliquat", 153, Rarity.RARE, mage.cards.m.MizziumTransreliquat.class));
+        cards.add(new SetCardInfo("Moratorium Stone", 154, Rarity.RARE, mage.cards.m.MoratoriumStone.class));
         cards.add(new SetCardInfo("Mortify", 122, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mourning Thrull", 146, Rarity.COMMON, mage.cards.m.MourningThrull.class));
         cards.add(new SetCardInfo("Necromancer's Magemark", 53, Rarity.COMMON, mage.cards.n.NecromancersMagemark.class));
@@ -163,6 +166,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Scab-Clan Mauler", 128, Rarity.COMMON, mage.cards.s.ScabClanMauler.class));
         cards.add(new SetCardInfo("Schismotivate", 129, Rarity.UNCOMMON, mage.cards.s.Schismotivate.class));
         cards.add(new SetCardInfo("Scorched Rusalka", 74, Rarity.UNCOMMON, mage.cards.s.ScorchedRusalka.class));
+        cards.add(new SetCardInfo("Seize the Soul", 61, Rarity.RARE, mage.cards.s.SeizeTheSoul.class));
         cards.add(new SetCardInfo("Shadow Lance", 14, Rarity.UNCOMMON, mage.cards.s.ShadowLance.class));
         cards.add(new SetCardInfo("Shattering Spree", 75, Rarity.UNCOMMON, mage.cards.s.ShatteringSpree.class));
         cards.add(new SetCardInfo("Shrieking Grotesque", 15, Rarity.COMMON, mage.cards.s.ShriekingGrotesque.class));
