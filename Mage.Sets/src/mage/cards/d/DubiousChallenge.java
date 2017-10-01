@@ -53,6 +53,8 @@ public class DubiousChallenge extends CardImpl {
         // Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle your library. Target opponent may choose one of the exiled cards and put it onto the battlefield under his or her control. Put the rest onto the battlefield under your control.
         getSpellAbility().addEffect(new DubiousChallengeEffect());
         getSpellAbility().addTarget(new TargetOpponent());
+        getSpellAbility().addEffect(new DubiousChallengeMoveToBattlefieldEffect());
+        getSpellAbility().addEffect(new DubiousChallengeMoveToBattlefieldEffect());
     }
 
     public DubiousChallenge(final DubiousChallenge card) {
@@ -69,7 +71,7 @@ class DubiousChallengeEffect extends OneShotEffect {
 
     public DubiousChallengeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle your library. Target opponent may choose one of the exiled cards and put it onto the battlefield under his or her control. Put the rest onto the battlefield under your control";
+        this.staticText = "Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle your library. Target opponent may choose one of the exiled cards and put it onto the battlefield under his or her control. Put the rest onto the battlefield under your control.";
     }
 
     public DubiousChallengeEffect(final DubiousChallengeEffect effect) {
@@ -98,15 +100,17 @@ class DubiousChallengeEffect extends OneShotEffect {
                 Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
                 if (opponent != null) {
                     TargetCard targetOpponentCreature = new TargetCard(0, 1, Zone.EXILED, new FilterCreatureCard());
+                    DubiousChallengeMoveToBattlefieldEffect opponentEffect = (DubiousChallengeMoveToBattlefieldEffect) source.getEffects().get(1);
+                    DubiousChallengeMoveToBattlefieldEffect controllerEffect = (DubiousChallengeMoveToBattlefieldEffect) source.getEffects().get(2);
                     if (opponent.choose(outcome, exiledCards, targetOpponentCreature, game)) {
                         Card card = game.getCard(targetOpponentCreature.getFirstTarget());
                         if (card != null) {
-                            opponent.moveCards(card, Zone.BATTLEFIELD, source, game);
+                            opponentEffect.setPlayerAndCards(opponent, new CardsImpl(card));
                             exiledCards.remove(card);
                         }
                     }
                     if (!exiledCards.isEmpty()) {
-                        controller.moveCards(exiledCards, Zone.BATTLEFIELD, source, game);
+                        controllerEffect.setPlayerAndCards(controller, exiledCards);
                     }
                 }
             } else {
@@ -116,4 +120,37 @@ class DubiousChallengeEffect extends OneShotEffect {
         }
         return false;
     }
+}
+
+class DubiousChallengeMoveToBattlefieldEffect extends OneShotEffect {
+
+    public DubiousChallengeMoveToBattlefieldEffect() {
+        super(Outcome.Benefit);
+    }
+
+    public DubiousChallengeMoveToBattlefieldEffect(final DubiousChallengeMoveToBattlefieldEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DubiousChallengeMoveToBattlefieldEffect copy() {
+        return new DubiousChallengeMoveToBattlefieldEffect(this);
+    }
+
+    public void setPlayerAndCards(Player targetPlayer, Cards targetCards)
+    {
+        this.player = targetPlayer;
+        this.cards = targetCards;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (cards != null && player != null) {
+            return player.moveCards(cards, Zone.BATTLEFIELD, source, game);
+        }
+        return false;
+    }
+
+    private Cards cards;
+    private Player player;
 }
