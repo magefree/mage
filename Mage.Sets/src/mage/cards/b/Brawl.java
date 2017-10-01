@@ -31,17 +31,14 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageWithPowerTargetEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -55,7 +52,7 @@ public class Brawl extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
 
         // Until end of turn, all creatures gain "{T}: This creature deals damage equal to its power to target creature."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BrawlEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageWithPowerTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(
                 new GainAbilityAllEffect(ability, Duration.EndOfTurn, new FilterCreaturePermanent())
@@ -71,46 +68,4 @@ public class Brawl extends CardImpl {
     public Brawl copy() {
         return new Brawl(this);
     }
-}
-
-class BrawlEffect extends OneShotEffect {
-    public BrawlEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} deals damage equal to its power to target creature";
-    }
-
-    public BrawlEffect(final BrawlEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
-        if (sourcePermanent == null) {
-            return false;
-        }
-
-        int damage = sourcePermanent.getPower().getValue();
-
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            permanent.damage(damage, sourcePermanent.getId(), game, false, true);
-            return true;
-        }
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.damage(damage, sourcePermanent.getId(), game, false, true);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public BrawlEffect copy() {
-        return new BrawlEffect(this);
-    }
-
 }
