@@ -70,7 +70,7 @@ public class FracturedLoyalty extends CardImpl {
 
         // Whenever enchanted creature becomes the target of a spell or ability, that spell or ability's controller gains control of that creature.
         //this.addAbility(new FracturedLoyaltyTriggeredAbility());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new FracturedLoyaltyTriggeredAbility(), AttachmentType.AURA, Duration.Custom, "Whenever enchanted creature becomes the target of a spell or ability, that spell or ability's controller gains control of that creature.")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new FracturedLoyaltyTriggeredAbility(), AttachmentType.AURA, Duration.WhileOnBattlefield, "Whenever enchanted creature becomes the target of a spell or ability, that spell or ability's controller gains control of that creature.")));
     }
 
     public FracturedLoyalty(final FracturedLoyalty card) {
