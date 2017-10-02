@@ -50,7 +50,7 @@ public class ShovingMatch extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Until end of turn, all creatures gain "{tap}: Tap target creature."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(
                 new GainAbilityAllEffect(ability, Duration.EndOfTurn, new FilterCreaturePermanent())
