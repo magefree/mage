@@ -29,6 +29,7 @@ package mage;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Abilities;
@@ -38,12 +39,15 @@ import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.text.TextPart;
 import mage.abilities.text.TextPartSubType;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
+import mage.constants.SubLayer;
 import mage.constants.SubType;
 import mage.constants.SubTypeSet;
 import mage.constants.SuperType;
@@ -338,4 +342,15 @@ public abstract class MageObjectImpl implements MageObject {
         }
     }
 
+    public void removePTCDA() {
+        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext();) {
+            Ability ability = iter.next();
+            for (Effect effect : ability.getEffects()) {
+                if (effect instanceof ContinuousEffect && ((ContinuousEffect) effect).getSublayer() == SubLayer.CharacteristicDefining_7a) {
+                    iter.remove();
+                    break;
+                }
+            }
+        }
+    }
 }

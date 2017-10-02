@@ -72,6 +72,7 @@ class QuicksilverGargantuanApplyToPermanent extends ApplyToPermanent {
 
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+        permanent.removePTCDA();
         permanent.getPower().modifyBaseValue(7);
         permanent.getToughness().modifyBaseValue(7);
         return true;
@@ -79,6 +80,7 @@ class QuicksilverGargantuanApplyToPermanent extends ApplyToPermanent {
 
     @Override
     public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+        mageObject.removePTCDA();
         mageObject.getPower().modifyBaseValue(7);
         mageObject.getToughness().modifyBaseValue(7);
         return true;

@@ -103,6 +103,7 @@ class HourOfEternityEffect extends OneShotEffect {
                 if (game.getState().getZone(card.getId()) == Zone.EXILED) {
                     EmptyToken token = new EmptyToken();
                     CardUtil.copyTo(token).from(card);
+                    token.removePTCDA();
                     token.getPower().modifyBaseValue(4);
                     token.getToughness().modifyBaseValue(4);
                     token.getColor(game).setColor(ObjectColor.BLACK);
