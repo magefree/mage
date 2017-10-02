@@ -38,7 +38,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,7 +51,7 @@ public class Brawl extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
 
         // Until end of turn, all creatures gain "{T}: This creature deals damage equal to its power to target creature."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageWithPowerTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageWithPowerTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(
                 new GainAbilityAllEffect(ability, Duration.EndOfTurn, new FilterCreaturePermanent())
