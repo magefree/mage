@@ -342,6 +342,7 @@ public abstract class MageObjectImpl implements MageObject {
         }
     }
 
+    @Override
     public void removePTCDA() {
         for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext();) {
             Ability ability = iter.next();

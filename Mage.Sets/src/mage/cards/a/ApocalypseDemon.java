@@ -17,11 +17,11 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 public class ApocalypseDemon extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nother creature");
-    
-    static {       
-        filter.add(new CardTypePredicate(CardType.CREATURE));        
+
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new AnotherPredicate());
     }
 
@@ -37,10 +37,10 @@ public class ApocalypseDemon extends CardImpl {
 
         // At the beginning of your upkeep, tap Apocalypse Demon unless you sacrifice another creature.
         TapSourceUnlessPaysEffect tapEffect = new TapSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        tapEffect.setText("At the beginning of your upkeep, tap Apocalypse Demon unless you sacrifice another creature.");
+        tapEffect.setText("tap {this} unless you sacrifice another creature.");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(tapEffect, TargetController.YOU, false));
-    }   
-           
+    }
+
     public ApocalypseDemon(final ApocalypseDemon apocalypseDemon) {
         super(apocalypseDemon);
     }

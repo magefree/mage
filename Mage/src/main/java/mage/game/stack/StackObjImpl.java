@@ -268,4 +268,7 @@ public abstract class StackObjImpl implements StackObject {
         return name;
     }
 
+    @Override
+    public void removePTCDA() {
+    }
 }

@@ -17,11 +17,8 @@ import mage.util.SubTypeList;
 
 import java.io.Serializable;
 import java.util.EnumSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 
 public interface MageObject extends MageItem, Serializable {
 
@@ -201,7 +198,7 @@ public interface MageObject extends MageItem, Serializable {
 
     TextPart addTextPart(TextPart textPart);
 
-    public void removePTCDA();
+    void removePTCDA();
 
     default void changeSubType(SubType fromSubType, SubType toSubType) {
 
