@@ -139,6 +139,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Charm", 74, Rarity.COMMON, mage.cards.m.MidnightCharm.class));
         cards.add(new SetCardInfo("Mire Boa", 135, Rarity.COMMON, mage.cards.m.MireBoa.class));
         cards.add(new SetCardInfo("Mirri the Cursed", 75, Rarity.RARE, mage.cards.m.MirriTheCursed.class));
+        cards.add(new SetCardInfo("Muck Drubb", 76, Rarity.UNCOMMON, mage.cards.m.MuckDrubb.class));
         cards.add(new SetCardInfo("Mycologist", 27, Rarity.UNCOMMON, mage.cards.m.Mycologist.class));
         cards.add(new SetCardInfo("Necrotic Sliver", 159, Rarity.UNCOMMON, mage.cards.n.NecroticSliver.class));
         cards.add(new SetCardInfo("Needlepeak Spider", 105, Rarity.COMMON, mage.cards.n.NeedlepeakSpider.class));

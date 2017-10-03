@@ -96,6 +96,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 305, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 306, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forge Armor", 92, Rarity.UNCOMMON, mage.cards.f.ForgeArmor.class));
+        cards.add(new SetCardInfo("Fractured Loyalty", 93, Rarity.UNCOMMON, mage.cards.f.FracturedLoyalty.class));
         cards.add(new SetCardInfo("Frogmite", 172, Rarity.COMMON, mage.cards.f.Frogmite.class));
         cards.add(new SetCardInfo("Galvanic Key", 173, Rarity.COMMON, mage.cards.g.GalvanicKey.class));
         cards.add(new SetCardInfo("Gate to the Aether", 174, Rarity.RARE, mage.cards.g.GateToTheAether.class));
