@@ -342,6 +342,9 @@ public abstract class MageObjectImpl implements MageObject {
         }
     }
 
+    /**
+     * Remove power/toughness character defining abilities
+     */
     @Override
     public void removePTCDA() {
         for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext();) {
