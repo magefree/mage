@@ -59,7 +59,6 @@ import mage.util.SubTypeList;
 public class Emblem implements CommandObject {
 
     private static EnumSet<CardType> emptySet = EnumSet.noneOf(CardType.class);
-    private static List emptyList = new ArrayList();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts emptyCost = new ManaCostsImpl();
 
@@ -297,4 +296,7 @@ public class Emblem implements CommandObject {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void removePTCDA() {
+    }
 }
