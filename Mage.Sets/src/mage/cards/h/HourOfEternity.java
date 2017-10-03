@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -44,6 +45,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
@@ -59,6 +61,16 @@ public class HourOfEternity extends CardImpl {
         // Exile X target creature cards from your graveyard. For each card exiled this way, create a token that's a copy of that card, except it's a 4/4 black Zombie.
         this.getSpellAbility().addEffect(new HourOfEternityEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
+            int xValue = ability.getManaCostsToPay().getX();
+            Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1 ? " creature cards" : "creature card").append(" from your graveyard").toString()));
+            ability.addTarget(target);
+        }
     }
 
     public HourOfEternity(final HourOfEternity card) {
@@ -103,6 +115,7 @@ class HourOfEternityEffect extends OneShotEffect {
                 if (game.getState().getZone(card.getId()) == Zone.EXILED) {
                     EmptyToken token = new EmptyToken();
                     CardUtil.copyTo(token).from(card);
+                    token.removePTCDA();
                     token.getPower().modifyBaseValue(4);
                     token.getToughness().modifyBaseValue(4);
                     token.getColor(game).setColor(ObjectColor.BLACK);

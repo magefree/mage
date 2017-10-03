@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continuous;
 
 import mage.MageObject;
@@ -42,13 +41,16 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-
 public class SetPowerSourceEffect extends ContinuousEffectImpl {
 
     private final DynamicValue amount;
 
     public SetPowerSourceEffect(DynamicValue amount, Duration duration) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+        this(amount, duration, SubLayer.CharacteristicDefining_7a);
+    }
+
+    public SetPowerSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
+        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
         this.amount = amount;
         staticText = "{this}'s power is equal to the number of " + amount.getMessage();
     }

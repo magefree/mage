@@ -215,4 +215,7 @@ public abstract class Designation implements MageObject {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 
+    @Override
+    public void removePTCDA() {
+    }
 }

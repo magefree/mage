@@ -62,7 +62,7 @@ public class IslandOfWakWak extends CardImpl {
     public IslandOfWakWak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {tap}: The power of target creature with flying becomes 0 until end of turn.
+        // {tap}: Target creature with flying has base power 0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new IslandOfWakWakEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filterWithFlying));
         this.addAbility(ability);
@@ -82,7 +82,7 @@ class IslandOfWakWakEffect extends OneShotEffect {
 
     public IslandOfWakWakEffect() {
         super(Outcome.Detriment);
-        staticText = "The power of target creature with flying becomes 0 until end of turn";
+        staticText = "Target creature with flying has base power 0 until end of turn.";
     }
 
     public IslandOfWakWakEffect(final IslandOfWakWakEffect effect) {

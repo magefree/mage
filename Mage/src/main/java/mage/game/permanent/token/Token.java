@@ -310,8 +310,4 @@ public class Token extends MageObjectImpl {
         this.setExpansionSetCodeForImage(setCode);
         return true;
     }
-
-
-
-
 }

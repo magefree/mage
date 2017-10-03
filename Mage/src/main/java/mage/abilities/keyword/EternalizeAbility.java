@@ -119,6 +119,7 @@ class EternalizeEffect extends OneShotEffect {
                 token.getSubtype(game).add(0, SubType.ZOMBIE);
             }
             token.getManaCost().clear();
+            token.removePTCDA();
             token.getPower().modifyBaseValue(4);
             token.getToughness().modifyBaseValue(4);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ETERNALIZED_CREATURE, token.getId(), source.getSourceId(), controller.getId()));
