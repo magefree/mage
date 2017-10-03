@@ -16,6 +16,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import org.junit.Ignore;
 
 public class VerifyCardDataTest {
 
@@ -48,6 +49,7 @@ public class VerifyCardDataTest {
 
     private int failed = 0;
 
+    @Ignore
     @Test
     public void verifyCards() throws IOException {
         for (Card card : allCards()) {
@@ -152,7 +154,7 @@ public class VerifyCardDataTest {
         Collection<String> expected = ref.subtypes;
         if (expected != null && expected.contains("Urza’s")) {
             expected = new ArrayList<>(expected);
-            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext(); ) {
+            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext();) {
                 if (it.next().equals("Urza’s")) {
                     it.set("Urza's");
                 }

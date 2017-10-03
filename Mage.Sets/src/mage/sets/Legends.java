@@ -213,6 +213,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Righteous Avengers", 203, Rarity.UNCOMMON, mage.cards.r.RighteousAvengers.class));
         cards.add(new SetCardInfo("Ring of Immortals", 238, Rarity.RARE, mage.cards.r.RingOfImmortals.class));
         cards.add(new SetCardInfo("Riven Turnbull", 294, Rarity.UNCOMMON, mage.cards.r.RivenTurnbull.class));
+        cards.add(new SetCardInfo("Rohgahh of Kher Keep", 295, Rarity.RARE, mage.cards.r.RohgahhOfKherKeep.class));
         cards.add(new SetCardInfo("Rubinia Soulsinger", 296, Rarity.RARE, mage.cards.r.RubiniaSoulsinger.class));
         cards.add(new SetCardInfo("Rust", 49, Rarity.COMMON, mage.cards.r.Rust.class));
         cards.add(new SetCardInfo("Sea Kings' Blessing", 75, Rarity.UNCOMMON, mage.cards.s.SeaKingsBlessing.class));

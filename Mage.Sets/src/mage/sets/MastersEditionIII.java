@@ -200,6 +200,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Reveka, Wizard Savant", 49, Rarity.UNCOMMON, mage.cards.r.RevekaWizardSavant.class));
         cards.add(new SetCardInfo("Riding the Dilu Horse", 131, Rarity.UNCOMMON, mage.cards.r.RidingTheDiluHorse.class));
         cards.add(new SetCardInfo("Riven Turnbull", 171, Rarity.UNCOMMON, mage.cards.r.RivenTurnbull.class));
+        cards.add(new SetCardInfo("Rohgahh of Kher Keep", 172, Rarity.RARE, mage.cards.r.RohgahhOfKherKeep.class));
         cards.add(new SetCardInfo("Rolling Earthquake", 110, Rarity.RARE, mage.cards.r.RollingEarthquake.class));
         cards.add(new SetCardInfo("Rubinia Soulsinger", 173, Rarity.RARE, mage.cards.r.RubiniaSoulsinger.class));
         cards.add(new SetCardInfo("Scrubland", 210, Rarity.RARE, mage.cards.s.Scrubland.class));

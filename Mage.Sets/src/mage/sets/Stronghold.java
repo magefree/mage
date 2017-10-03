@@ -106,6 +106,7 @@ public class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Hornet Cannon", 130, Rarity.UNCOMMON, mage.cards.h.HornetCannon.class));
         cards.add(new SetCardInfo("Horn of Greed", 129, Rarity.RARE, mage.cards.h.HornOfGreed.class));
         cards.add(new SetCardInfo("Intruder Alarm", 34, Rarity.RARE, mage.cards.i.IntruderAlarm.class));
+        cards.add(new SetCardInfo("Invasion Plans", 89, Rarity.RARE, mage.cards.i.InvasionPlans.class));
         cards.add(new SetCardInfo("Jinxed Ring", 131, Rarity.RARE, mage.cards.j.JinxedRing.class));
         cards.add(new SetCardInfo("Lab Rats", 11, Rarity.COMMON, mage.cards.l.LabRats.class));
         cards.add(new SetCardInfo("Lancers en-Kor", 108, Rarity.UNCOMMON, mage.cards.l.LancersEnKor.class));

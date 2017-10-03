@@ -120,6 +120,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Krovikan Mist", 38, Rarity.COMMON, mage.cards.k.KrovikanMist.class));
         cards.add(new SetCardInfo("Krovikan Rot", 63, Rarity.UNCOMMON, mage.cards.k.KrovikanRot.class));
         cards.add(new SetCardInfo("Krovikan Scoundrel", 64, Rarity.COMMON, mage.cards.k.KrovikanScoundrel.class));
+        cards.add(new SetCardInfo("Krovikan Whispers", 39, Rarity.UNCOMMON, mage.cards.k.KrovikanWhispers.class));
         cards.add(new SetCardInfo("Lightning Serpent", 88, Rarity.RARE, mage.cards.l.LightningSerpent.class));
         cards.add(new SetCardInfo("Lightning Storm", 89, Rarity.UNCOMMON, mage.cards.l.LightningStorm.class));
         cards.add(new SetCardInfo("Lovisa Coldeyes", 90, Rarity.RARE, mage.cards.l.LovisaColdeyes.class));
