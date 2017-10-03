@@ -130,6 +130,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Greed", 15, Rarity.RARE, mage.cards.g.Greed.class));
         cards.add(new SetCardInfo("Green Mana Battery", 223, Rarity.UNCOMMON, mage.cards.g.GreenManaBattery.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 268, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));
+        cards.add(new SetCardInfo("Hammerheim", 247, Rarity.UNCOMMON, mage.cards.h.Hammerheim.class));
         cards.add(new SetCardInfo("Hazezon Tamar", 270, Rarity.RARE, mage.cards.h.HazezonTamar.class));
         cards.add(new SetCardInfo("Headless Horseman", 16, Rarity.COMMON, mage.cards.h.HeadlessHorseman.class));
         cards.add(new SetCardInfo("Heaven's Gate", 188, Rarity.UNCOMMON, mage.cards.h.HeavensGate.class));
