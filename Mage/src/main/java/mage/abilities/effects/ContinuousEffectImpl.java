@@ -231,6 +231,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             }
             return true;
         }
+        // TODO: make this work with Paradox Haze
         if (durationPhaseStep != null && durationPhaseStep == game.getPhase().getStep().getType()) {
             if (!sameStep && game.getActivePlayerId().equals(durationPlayerId) || game.getPlayer(durationPlayerId).hasReachedNextTurnAfterLeaving()) {
                 return true;

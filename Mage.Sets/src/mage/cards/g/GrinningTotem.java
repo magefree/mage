@@ -59,7 +59,7 @@ import mage.util.CardUtil;
 public class GrinningTotem extends CardImpl {
 
     public GrinningTotem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {2}, {tap}, Sacrifice Grinning Totem: Search target opponent's library for a card and exile it. Then that player shuffles his or her library.
         // Until the beginning of your next upkeep, you may play that card.
@@ -85,11 +85,11 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
 
     public GrinningTotemSearchAndExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search target opponent's library for a card and exile it. Then that player shuffles his or her library. " +
-                "Until the beginning of your next upkeep, you may play that card. " +
-                "At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard";
+        this.staticText = "Search target opponent's library for a card and exile it. Then that player shuffles his or her library. "
+                + "Until the beginning of your next upkeep, you may play that card. "
+                + "At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard";
     }
-    
+
     public GrinningTotemSearchAndExileEffect(final GrinningTotemSearchAndExileEffect effect) {
         super(effect);
     }
@@ -98,7 +98,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
     public GrinningTotemSearchAndExileEffect copy() {
         return new GrinningTotemSearchAndExileEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
@@ -125,7 +125,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
 }
 
 class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
@@ -133,8 +133,9 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
     public GrinningTotemMayPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.staticText = "Until the beginning of your next upkeep, you may play that card.";
+        this.durationPhaseStep = PhaseStep.UPKEEP;
     }
-    
+
     public GrinningTotemMayPlayEffect(final GrinningTotemMayPlayEffect effect) {
         super(effect);
     }
@@ -145,16 +146,6 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            if (game.getActivePlayerId().equals(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    @Override
     public boolean apply(Game game, Ability source) {
         return true;
     }
@@ -164,7 +155,7 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
         return source.getControllerId().equals(affectedControllerId)
                 && sourceId.equals(getTargetPointer().getFirst(game, source));
     }
-    
+
 }
 
 class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
@@ -217,7 +208,7 @@ class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect {
         this.exileZoneId = exileZoneId;
         this.staticText = "put it into its owner's graveyard";
     }
-    
+
     public GrinningTotemPutIntoGraveyardEffect(final GrinningTotemPutIntoGraveyardEffect effect) {
         super(effect);
         this.exileZoneId = effect.exileZoneId;
@@ -227,7 +218,7 @@ class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect {
     public GrinningTotemPutIntoGraveyardEffect copy() {
         return new GrinningTotemPutIntoGraveyardEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -237,5 +228,5 @@ class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
 }

@@ -96,6 +96,7 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
     public XenicPoltergeistEffect() {
         super(Duration.Custom, Outcome.BecomeCreature);
         staticText = "Until your next upkeep, target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost";
+        this.durationPhaseStep = PhaseStep.UPKEEP;
     }
 
     public XenicPoltergeistEffect(final XenicPoltergeistEffect effect) {
@@ -105,16 +106,6 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
     @Override
     public XenicPoltergeistEffect copy() {
         return new XenicPoltergeistEffect(this);
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            if (game.getActivePlayerId().equals(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
