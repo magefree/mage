@@ -53,7 +53,7 @@ import mage.abilities.common.SimpleStaticAbility;
 
 /**
  *
- * @author L_J (significantly based on code by wetterlicht)
+ * @author L_J (significantly based on wetterlicht)
  */
 public class FracturedLoyalty extends CardImpl {
 
@@ -69,8 +69,7 @@ public class FracturedLoyalty extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature becomes the target of a spell or ability, that spell or ability's controller gains control of that creature.
-        //this.addAbility(new FracturedLoyaltyTriggeredAbility());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new FracturedLoyaltyTriggeredAbility(), AttachmentType.AURA, Duration.WhileOnBattlefield, "Whenever enchanted creature becomes the target of a spell or ability, that spell or ability's controller gains control of that creature.")));
+        this.addAbility(new FracturedLoyaltyTriggeredAbility());
     }
 
     public FracturedLoyalty(final FracturedLoyalty card) {
@@ -95,16 +94,21 @@ public class FracturedLoyalty extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
+            Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+            Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
+            Player controller = game.getPlayer(enchantedCreature.getControllerId());
             Player newController = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-            if (newController != null && controller != null && !controller.equals(newController)) {
-                ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
-                effect.setTargetPointer(new FixedTarget(source.getSourceId()));
-                game.addEffect(effect, source);
-                return true;
+            if (enchantment != null && enchantment.getAttachedTo() != null) {
+                if (newController != null && controller != null && !controller.equals(newController)) {
+                    ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
+                    effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+                    game.addEffect(effect, source);
+                    return true;
+                }
             }
             return false;
         }
+
 
         @Override
         public Effect copy() {
@@ -135,16 +139,21 @@ public class FracturedLoyalty extends CardImpl {
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if(event.getTargetId().equals(this.getSourceId())) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-                return true;
+            Permanent enchantment = game.getPermanentOrLKIBattlefield(this.getSourceId());
+            if (enchantment != null && enchantment.getAttachedTo() != null) {
+                Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
+                if (enchantedCreature != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
+                    getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    return true;
+                }
             }
             return false;
         }
 
+
         @Override
         public String getRule() {
-            return "Whenever {this} becomes the target of a spell or ability, that spell or ability's controller gains control of {this}.";
+            return "Whenever enchanted creature becomes the target of a spell or ability, that spell or ability's controller gains control of that creature.";
         }
     }
 }
