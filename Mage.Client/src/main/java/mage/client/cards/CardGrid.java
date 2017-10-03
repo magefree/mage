@@ -33,22 +33,10 @@
  */
 package mage.client.cards;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 import mage.cards.MageCard;
 import mage.client.deckeditor.SortSetting;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
@@ -56,6 +44,13 @@ import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.mage.card.arcane.CardPanel;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.*;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  *
@@ -321,15 +316,15 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
             Object obj = e.getSource();
             if (obj instanceof Card) {
                 if (e.isAltDown()) {
-                    cardEventSource.altDoubleClick(((Card) obj).getOriginal(), "alt-double-click");
+                    cardEventSource.fireEvent(((Card) obj).getOriginal(), ClientEventType.ALT_DOUBLE_CLICK);
                 } else {
-                    cardEventSource.doubleClick(((Card) obj).getOriginal(), "double-click");
+                    cardEventSource.fireEvent(((Card) obj).getOriginal(), ClientEventType.DOUBLE_CLICK);
                 }
             } else if (obj instanceof MageCard) {
                 if (e.isAltDown()) {
-                    cardEventSource.altDoubleClick(((MageCard) obj).getOriginal(), "alt-double-click");
+                    cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.ALT_DOUBLE_CLICK);
                 } else {
-                    cardEventSource.doubleClick(((MageCard) obj).getOriginal(), "double-click");
+                    cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.DOUBLE_CLICK);
                 }
             }
         }

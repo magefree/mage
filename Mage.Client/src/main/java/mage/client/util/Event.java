@@ -38,27 +38,27 @@ import java.io.Serializable;
 public class Event implements Serializable {
     private final Object source;
     private final Component component;
-    private final String eventName;
+    private final ClientEventType eventType;
     private final int number;
     private final int xPos;
     private final int yPos;
 
-    public Event(Object source, String eventName) {
-        this(source, eventName, 0);
+    public Event(Object source, ClientEventType eventType) {
+        this(source, eventType, 0);
     }
     
-    public Event(Object source, String eventName, int number) {
+    public Event(Object source, ClientEventType eventType, int number) {
         this.source = source;
-        this.eventName = eventName;
+        this.eventType = eventType;
         this.number = number;
         this.xPos = 0;
         this.yPos = 0;
         this.component = null;
     }
 
-    public Event(Object source, String eventName, int xPos, int yPos, Component component) {
+    public Event(Object source, ClientEventType eventType, int xPos, int yPos, Component component) {
         this.source = source;
-        this.eventName = eventName;
+        this.eventType = eventType;
         this.number =0;
         this.xPos = xPos;
         this.yPos = yPos;
@@ -69,8 +69,8 @@ public class Event implements Serializable {
         return source;
     }
 
-    public String getEventName() {
-        return eventName;
+    public ClientEventType getEventType() {
+        return eventType;
     }
 
     public int getNumber() {

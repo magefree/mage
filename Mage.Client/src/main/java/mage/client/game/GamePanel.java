@@ -27,61 +27,6 @@
  */
 package mage.client.game;
 
-import java.awt.AWTEvent;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import static java.awt.Component.LEFT_ALIGNMENT;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLayeredPane;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.Timer;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicSplitPaneDivider;
-import javax.swing.plaf.basic.BasicSplitPaneUI;
 import mage.cards.Card;
 import mage.cards.action.ActionCallback;
 import mage.choices.Choice;
@@ -95,50 +40,42 @@ import mage.client.components.KeyboundButton;
 import mage.client.components.MageComponents;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.layout.RelativeLayout;
-import mage.client.dialog.CardInfoWindowDialog;
+import mage.client.dialog.*;
 import mage.client.dialog.CardInfoWindowDialog.ShowType;
-import mage.client.dialog.PickChoiceDialog;
-import mage.client.dialog.PickNumberDialog;
-import mage.client.dialog.PickPileDialog;
-import mage.client.dialog.PreferencesDialog;
-import static mage.client.dialog.PreferencesDialog.*;
-import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.CardsViewUtil;
+import mage.client.util.*;
 import mage.client.util.Event;
-import mage.client.util.GUISizeHelper;
-import mage.client.util.GameManager;
-import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.MageDialogState;
-import mage.constants.Constants;
-import mage.constants.EnlargeMode;
-import mage.constants.PhaseStep;
-import mage.constants.PlayerAction;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_ABILITY_FIRST;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_ABILITY_LAST;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_FIRST;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_LAST;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
-import mage.view.AbilityPickerView;
-import mage.view.CardView;
-import mage.view.CardsView;
-import mage.view.ExileView;
-import mage.view.GameView;
-import mage.view.LookedAtView;
-import mage.view.MatchView;
-import mage.view.PlayerView;
-import mage.view.RevealedView;
-import mage.view.SimpleCardsView;
-import mage.view.UserRequestMessage;
+import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.Timer;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.Serializable;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+
+import static mage.client.dialog.PreferencesDialog.*;
+import static mage.constants.PlayerAction.*;
 
 /**
  * @author BetaSteward_at_googlemail.com, nantuko8
@@ -2251,7 +2188,7 @@ public final class GamePanel extends javax.swing.JPanel {
     // Event listener for the ShowCardsDialog
     private Listener<Event> getShowCardsEventListener(final ShowCardsDialog dialog) {
         return (Listener<Event>) event -> {
-            if (event.getEventName().equals("show-popup-menu")) {
+            if (event.getEventType() == ClientEventType.SHOW_POP_UP_MENU) {
                 if (event.getComponent() != null && event.getComponent() instanceof CardPanel) {
                     JPopupMenu menu = ((CardPanel) event.getComponent()).getPopupMenu();
                     if (menu != null) {
@@ -2260,7 +2197,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     }
                 }
             }
-            if (event.getEventName().equals("action-consumed")) {
+            if (event.getEventType() == ClientEventType.ACTION_CONSUMED) {
                 dialog.removeDialog();
             }
         };

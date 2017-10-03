@@ -32,10 +32,6 @@
  */
 package mage.client.deckeditor;
 
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.swing.*;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLayout;
@@ -43,11 +39,17 @@ import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
 import mage.client.cards.DragCardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
+import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.view.CardView;
 import mage.view.CardsView;
+
+import javax.swing.*;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -124,8 +126,8 @@ public class DeckArea extends javax.swing.JPanel {
                 // Add to hidden and move to sideboard
                 for (CardView card : cards) {
                     hiddenCards.add(card.getId());
-                    maindeckVirtualEvent.removeSpecificCard(card, "remove-specific-card");
-                    sideboardVirtualEvent.addSpecificCard(card, "add-specific-card");
+                    maindeckVirtualEvent.fireEvent(card, ClientEventType.REMOVE_SPECIFIC_CARD);
+                    sideboardVirtualEvent.fireEvent(card, ClientEventType.ADD_SPECIFIC_CARD);
                 }
                 loadDeck(lastDeck, lastBigCard);
             }
