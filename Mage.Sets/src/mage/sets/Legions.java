@@ -152,6 +152,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Quick Sliver", 136, Rarity.COMMON, mage.cards.q.QuickSliver.class));
         cards.add(new SetCardInfo("Ridgetop Raptor", 108, Rarity.UNCOMMON, mage.cards.r.RidgetopRaptor.class));
         cards.add(new SetCardInfo("Riptide Director", 50, Rarity.RARE, mage.cards.r.RiptideDirector.class));
+        cards.add(new SetCardInfo("Riptide Mangler", 51, Rarity.RARE, mage.cards.r.RiptideMangler.class));
         cards.add(new SetCardInfo("Rockshard Elemental", 109, Rarity.RARE, mage.cards.r.RockshardElemental.class));
         cards.add(new SetCardInfo("Root Sliver", 137, Rarity.UNCOMMON, mage.cards.r.RootSliver.class));
         cards.add(new SetCardInfo("Scion of Darkness", 79, Rarity.RARE, mage.cards.s.ScionOfDarkness.class));
