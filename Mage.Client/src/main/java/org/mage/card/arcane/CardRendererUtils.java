@@ -5,10 +5,7 @@
  */
 package org.mage.card.arcane;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Paint;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,8 +16,8 @@ import java.util.regex.Pattern;
 
 /**
  * @author stravant@gmail.com
- *
- * Various static utilities for use in the card renderer
+ *         <p>
+ *         Various static utilities for use in the card renderer
  */
 public final class CardRendererUtils {
 
@@ -124,6 +121,8 @@ public final class CardRendererUtils {
     }
 
     public static String killReminderText(String rule) {
-        return killReminderTextPattern.matcher(rule).replaceAll("");
+        return killReminderTextPattern.matcher(rule).replaceAll("")
+                .replaceAll("<i>", "")
+                .replaceAll("</i>", "");
     }
 }
