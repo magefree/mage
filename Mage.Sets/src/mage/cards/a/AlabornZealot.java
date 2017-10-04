@@ -25,49 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.BlocksTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.effects.common.DestroySourceEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 
 /**
  *
- * @author L_J
+ * @author TheElk801
  */
-public class WallOfJunk extends CardImpl {
+public class AlabornZealot extends CardImpl {
 
-    public WallOfJunk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.subtype.add(SubType.WALL);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(7);
+    public AlabornZealot(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
 
-        // Defender (This creature can't attack.)
-        this.addAbility(DefenderAbility.getInstance());
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // When Wall of Junk blocks, return it to its owner's hand at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)));
-        effect.setText("return it to its owner's hand at end of combat");
-        this.addAbility(new BlocksTriggeredAbility(effect, false, false, true));
+        // When Alaborn Zealot blocks a creature, destroy that creature and Alaborn Zealot.
+        Ability ability = new BlocksTriggeredAbility(new DestroyTargetEffect().setText("destroy that creature"), false, true, true);
+        ability.addEffect(new DestroySourceEffect().setText("and {this}"));
+        this.addAbility(ability);
     }
 
-    public WallOfJunk(final WallOfJunk card) {
+    public AlabornZealot(final AlabornZealot card) {
         super(card);
     }
 
     @Override
-    public WallOfJunk copy() {
-        return new WallOfJunk(this);
+    public AlabornZealot copy() {
+        return new AlabornZealot(this);
     }
 }

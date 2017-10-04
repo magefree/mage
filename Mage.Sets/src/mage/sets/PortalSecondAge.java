@@ -64,6 +64,7 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Alaborn Musketeer", 123, Rarity.COMMON, mage.cards.a.AlabornMusketeer.class));
         cards.add(new SetCardInfo("Alaborn Trooper", 124, Rarity.COMMON, mage.cards.a.AlabornTrooper.class));
         cards.add(new SetCardInfo("Alaborn Veteran", 125, Rarity.RARE, mage.cards.a.AlabornVeteran.class));
+        cards.add(new SetCardInfo("Alaborn Zealot", 126, Rarity.UNCOMMON, mage.cards.a.AlabornZealot.class));
         cards.add(new SetCardInfo("Alluring Scent", 61, Rarity.RARE, mage.cards.a.AlluringScent.class));
         cards.add(new SetCardInfo("Ancient Craving", 2, Rarity.RARE, mage.cards.a.AncientCraving.class));
         cards.add(new SetCardInfo("Angelic Blessing", 129, Rarity.COMMON, mage.cards.a.AngelicBlessing.class));

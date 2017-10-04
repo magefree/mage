@@ -47,7 +47,7 @@ import mage.constants.SubType;
 public class StoicEphemera extends CardImpl {
 
     public StoicEphemera(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -57,8 +57,11 @@ public class StoicEphemera extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Stoic Ephemera blocks, sacrifice it at end of combat.
-        this.addAbility(new BlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-            new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())), false));
+        this.addAbility(new BlocksTriggeredAbility(
+                new CreateDelayedTriggeredAbilityEffect(
+                        new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())
+                ), false, false, true
+        ));
     }
 
     public StoicEphemera(final StoicEphemera card) {
