@@ -101,6 +101,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("D'Avenant Archer", 176, Rarity.COMMON, mage.cards.d.DAvenantArcher.class));
         cards.add(new SetCardInfo("Demonic Torment", 9, Rarity.UNCOMMON, mage.cards.d.DemonicTorment.class));
         cards.add(new SetCardInfo("Devouring Deep", 50, Rarity.COMMON, mage.cards.d.DevouringDeep.class));
+        cards.add(new SetCardInfo("Disharmony", 140, Rarity.RARE, mage.cards.d.Disharmony.class));
         cards.add(new SetCardInfo("Divine Intervention", 177, Rarity.RARE, mage.cards.d.DivineIntervention.class));
         cards.add(new SetCardInfo("Divine Offering", 178, Rarity.COMMON, mage.cards.d.DivineOffering.class));
         cards.add(new SetCardInfo("Divine Transformation", 179, Rarity.RARE, mage.cards.d.DivineTransformation.class));
