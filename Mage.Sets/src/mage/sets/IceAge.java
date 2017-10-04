@@ -107,6 +107,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Disenchant", 244, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Drift of the Dead", 11, Rarity.UNCOMMON, mage.cards.d.DriftOfTheDead.class));
         cards.add(new SetCardInfo("Dwarven Armory", 182, Rarity.RARE, mage.cards.d.DwarvenArmory.class));
+        cards.add(new SetCardInfo("Earthlink", 363, Rarity.RARE, mage.cards.e.Earthlink.class));
         cards.add(new SetCardInfo("Elder Druid", 120, Rarity.RARE, mage.cards.e.ElderDruid.class));
         cards.add(new SetCardInfo("Elemental Augury", 364, Rarity.RARE, mage.cards.e.ElementalAugury.class));
         cards.add(new SetCardInfo("Enduring Renewal", 247, Rarity.RARE, mage.cards.e.EnduringRenewal.class));

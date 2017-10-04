@@ -109,6 +109,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Drift of the Dead", 86, Rarity.COMMON, mage.cards.d.DriftOfTheDead.class));
         cards.add(new SetCardInfo("Dwarven Ruins", 227, Rarity.UNCOMMON, mage.cards.d.DwarvenRuins.class));
         cards.add(new SetCardInfo("Dystopia", 88, Rarity.RARE, mage.cards.d.Dystopia.class));
+        cards.add(new SetCardInfo("Earthlink", 192, Rarity.RARE, mage.cards.e.Earthlink.class));
         cards.add(new SetCardInfo("Ebon Praetor", 89, Rarity.RARE, mage.cards.e.EbonPraetor.class));
         cards.add(new SetCardInfo("Ebon Stronghold", 228, Rarity.UNCOMMON, mage.cards.e.EbonStronghold.class));
         cards.add(new SetCardInfo("Elemental Augury", 193, Rarity.RARE, mage.cards.e.ElementalAugury.class));
