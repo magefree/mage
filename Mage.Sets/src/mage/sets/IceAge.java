@@ -61,6 +61,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Arenson's Aura", 227, Rarity.COMMON, mage.cards.a.ArensonsAura.class));
         cards.add(new SetCardInfo("Armor of Faith", 228, Rarity.COMMON, mage.cards.a.ArmorOfFaith.class));
         cards.add(new SetCardInfo("Arnjlot's Ascent", 57, Rarity.COMMON, mage.cards.a.ArnjlotsAscent.class));
+        cards.add(new SetCardInfo("Ashen Ghoul", 2, Rarity.UNCOMMON, mage.cards.a.AshenGhoul.class));
         cards.add(new SetCardInfo("Aurochs", 113, Rarity.COMMON, mage.cards.a.Aurochs.class));
         cards.add(new SetCardInfo("Avalanche", 171, Rarity.UNCOMMON, mage.cards.a.Avalanche.class));
         cards.add(new SetCardInfo("Balduvian Barbarians", 172, Rarity.COMMON, mage.cards.b.BalduvianBarbarians.class));
