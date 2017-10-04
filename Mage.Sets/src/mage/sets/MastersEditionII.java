@@ -183,6 +183,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Cannoneers", 138, Rarity.UNCOMMON, mage.cards.o.OrcishCannoneers.class));
         cards.add(new SetCardInfo("Orcish Captain", 139, Rarity.UNCOMMON, mage.cards.o.OrcishCaptain.class));
         cards.add(new SetCardInfo("Orcish Lumberjack", 142, Rarity.COMMON, mage.cards.o.OrcishLumberjack.class));
+        cards.add(new SetCardInfo("Orcish Squatters", 143, Rarity.RARE, mage.cards.o.OrcishSquatters.class));
         cards.add(new SetCardInfo("Orcish Veteran", 144, Rarity.COMMON, OrcishVeteran.class));
         cards.add(new SetCardInfo("Order of the Sacred Torch", 25, Rarity.RARE, mage.cards.o.OrderOfTheSacredTorch.class));
         cards.add(new SetCardInfo("Order of the White Shield", 26, Rarity.UNCOMMON, mage.cards.o.OrderOfTheWhiteShield.class));

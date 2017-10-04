@@ -299,6 +299,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Artillery", 253, Rarity.UNCOMMON, mage.cards.o.OrcishArtillery.class));
         cards.add(new SetCardInfo("Orcish Captain", 254, Rarity.UNCOMMON, mage.cards.o.OrcishCaptain.class));
         cards.add(new SetCardInfo("Orcish Oriflamme", 257, Rarity.UNCOMMON, mage.cards.o.OrcishOriflamme.class));
+        cards.add(new SetCardInfo("Orcish Squatters", 258, Rarity.RARE, mage.cards.o.OrcishSquatters.class));
         cards.add(new SetCardInfo("Order of the Sacred Torch", 324, Rarity.RARE, mage.cards.o.OrderOfTheSacredTorch.class));
         cards.add(new SetCardInfo("Order of the White Shield", 325, Rarity.UNCOMMON, mage.cards.o.OrderOfTheWhiteShield.class));
         cards.add(new SetCardInfo("Orgg", 259, Rarity.RARE, mage.cards.o.Orgg.class));
