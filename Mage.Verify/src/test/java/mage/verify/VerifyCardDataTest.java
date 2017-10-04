@@ -16,7 +16,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import org.junit.Ignore;
 
 public class VerifyCardDataTest {
 
@@ -49,7 +48,6 @@ public class VerifyCardDataTest {
 
     private int failed = 0;
 
-    @Ignore
     @Test
     public void verifyCards() throws IOException {
         for (Card card : allCards()) {
