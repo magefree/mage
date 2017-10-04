@@ -167,6 +167,7 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Raise Dead", 26, Rarity.COMMON, mage.cards.r.RaiseDead.class));
         cards.add(new SetCardInfo("Ravenous Rats", 27, Rarity.COMMON, mage.cards.r.RavenousRats.class));
         cards.add(new SetCardInfo("Razorclaw Bear", 82, Rarity.RARE, mage.cards.r.RazorclawBear.class));
+        cards.add(new SetCardInfo("Return of the Nightstalkers", 28, Rarity.RARE, mage.cards.r.ReturnOfTheNightstalkers.class));
         cards.add(new SetCardInfo("Righteous Charge", 140, Rarity.COMMON, mage.cards.r.RighteousCharge.class));
         cards.add(new SetCardInfo("Righteous Fury", 141, Rarity.RARE, mage.cards.r.RighteousFury.class));
         cards.add(new SetCardInfo("River Bear", 84, Rarity.UNCOMMON, mage.cards.r.RiverBear.class));
