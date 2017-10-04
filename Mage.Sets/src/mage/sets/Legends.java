@@ -106,6 +106,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Divine Transformation", 179, Rarity.RARE, mage.cards.d.DivineTransformation.class));
         cards.add(new SetCardInfo("Durkwood Boars", 96, Rarity.COMMON, mage.cards.d.DurkwoodBoars.class));
         cards.add(new SetCardInfo("Dwarven Song", 141, Rarity.UNCOMMON, mage.cards.d.DwarvenSong.class));
+        cards.add(new SetCardInfo("Elder Land Wurm", 180, Rarity.RARE, mage.cards.e.ElderLandWurm.class));
         cards.add(new SetCardInfo("Elven Riders", 97, Rarity.RARE, mage.cards.e.ElvenRiders.class));
         cards.add(new SetCardInfo("Emerald Dragonfly", 98, Rarity.COMMON, mage.cards.e.EmeraldDragonfly.class));
         cards.add(new SetCardInfo("Energy Tap", 54, Rarity.COMMON, mage.cards.e.EnergyTap.class));

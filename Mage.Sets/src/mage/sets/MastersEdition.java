@@ -108,6 +108,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Dwarven Catapult", 91, Rarity.UNCOMMON, mage.cards.d.DwarvenCatapult.class));
         cards.add(new SetCardInfo("Dwarven Soldier", 92, Rarity.COMMON, DwarvenSoldier.class));
         cards.add(new SetCardInfo("Eater of the Dead", 67, Rarity.UNCOMMON, mage.cards.e.EaterOfTheDead.class));
+        cards.add(new SetCardInfo("Elder Land Wurm", 11, Rarity.UNCOMMON, mage.cards.e.ElderLandWurm.class));
         cards.add(new SetCardInfo("Erg Raiders", 68, Rarity.COMMON, mage.cards.e.ErgRaiders.class));
         cards.add(new SetCardInfo("Eureka", 117, Rarity.RARE, mage.cards.e.Eureka.class));
         cards.add(new SetCardInfo("Exile", 12, Rarity.COMMON, mage.cards.e.Exile.class));
