@@ -316,6 +316,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("True Believer", 57, Rarity.RARE, mage.cards.t.TrueBeliever.class));
         cards.add(new SetCardInfo("Undead Gladiator", 178, Rarity.RARE, mage.cards.u.UndeadGladiator.class));
         cards.add(new SetCardInfo("Unholy Grotto", 327, Rarity.RARE, mage.cards.u.UnholyGrotto.class));
+        cards.add(new SetCardInfo("Unified Strike", 58, Rarity.COMMON, mage.cards.u.UnifiedStrike.class));
         cards.add(new SetCardInfo("Venomspout Brackus", 295, Rarity.UNCOMMON, mage.cards.v.VenomspoutBrackus.class));
         cards.add(new SetCardInfo("Visara the Dreadful", 179, Rarity.RARE, mage.cards.v.VisaraTheDreadful.class));
         cards.add(new SetCardInfo("Vitality Charm", 296, Rarity.COMMON, mage.cards.v.VitalityCharm.class));
