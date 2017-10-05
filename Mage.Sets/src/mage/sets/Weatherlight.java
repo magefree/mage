@@ -183,6 +183,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Tendrils of Despair", 25, Rarity.COMMON, mage.cards.t.TendrilsOfDespair.class));
         cards.add(new SetCardInfo("Thunderbolt", 115, Rarity.COMMON, mage.cards.t.Thunderbolt.class));
         cards.add(new SetCardInfo("Thundermare", 116, Rarity.RARE, mage.cards.t.Thundermare.class));
+        cards.add(new SetCardInfo("Timid Drake", 54, Rarity.UNCOMMON, mage.cards.t.TimidDrake.class));
         cards.add(new SetCardInfo("Tolarian Drake", 55, Rarity.COMMON, mage.cards.t.TolarianDrake.class));
         cards.add(new SetCardInfo("Tolarian Entrancer", 56, Rarity.RARE, mage.cards.t.TolarianEntrancer.class));
         cards.add(new SetCardInfo("Tolarian Serpent", 57, Rarity.RARE, mage.cards.t.TolarianSerpent.class));

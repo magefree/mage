@@ -329,6 +329,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Tidal Bore", 109, Rarity.COMMON, mage.cards.t.TidalBore.class));
         cards.add(new SetCardInfo("Tidal Kraken", 110, Rarity.RARE, mage.cards.t.TidalKraken.class));
         cards.add(new SetCardInfo("Tiger Claws", 279, Rarity.COMMON, mage.cards.t.TigerClaws.class));
+        cards.add(new SetCardInfo("Timid Drake", 111, Rarity.UNCOMMON, mage.cards.t.TimidDrake.class));
         cards.add(new SetCardInfo("Tonic Peddler", 54, Rarity.UNCOMMON, mage.cards.t.TonicPeddler.class));
         cards.add(new SetCardInfo("Tooth of Ramos", 313, Rarity.RARE, mage.cards.t.ToothOfRamos.class));
         cards.add(new SetCardInfo("Tower of the Magistrate", 330, Rarity.RARE, mage.cards.t.TowerOfTheMagistrate.class));
