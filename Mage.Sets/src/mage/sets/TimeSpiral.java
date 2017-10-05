@@ -307,6 +307,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Volcanic Awakening", 186, Rarity.UNCOMMON, mage.cards.v.VolcanicAwakening.class));
         cards.add(new SetCardInfo("Walk the Aeons", 93, Rarity.RARE, mage.cards.w.WalkTheAeons.class));
         cards.add(new SetCardInfo("Watcher Sliver", 45, Rarity.COMMON, mage.cards.w.WatcherSliver.class));
+        cards.add(new SetCardInfo("Weathered Bodyguards", 46, Rarity.RARE, mage.cards.w.WeatheredBodyguards.class));
         cards.add(new SetCardInfo("Weatherseed Totem", 268, Rarity.UNCOMMON, mage.cards.w.WeatherseedTotem.class));
         cards.add(new SetCardInfo("Wheel of Fate", 187, Rarity.RARE, mage.cards.w.WheelOfFate.class));
         cards.add(new SetCardInfo("Wipe Away", 94, Rarity.UNCOMMON, mage.cards.w.WipeAway.class));

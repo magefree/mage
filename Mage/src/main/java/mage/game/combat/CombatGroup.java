@@ -655,6 +655,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         this.blocked = blocked;
     }
 
+    public boolean getBlocked() {
+        return blocked;
+    }
+
     @Override
     public CombatGroup copy() {
         return new CombatGroup(this);
