@@ -191,6 +191,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Grove", 84, Rarity.RARE, mage.cards.t.TranquilGrove.class));
         cards.add(new SetCardInfo("Uktabi Efreet", 85, Rarity.COMMON, mage.cards.u.UktabiEfreet.class));
         cards.add(new SetCardInfo("Urborg Justice", 26, Rarity.RARE, mage.cards.u.UrborgJustice.class));
+        cards.add(new SetCardInfo("Urborg Stalker", 27, Rarity.RARE, mage.cards.u.UrborgStalker.class));
         cards.add(new SetCardInfo("Veteran Explorer", 86, Rarity.UNCOMMON, mage.cards.v.VeteranExplorer.class));
         cards.add(new SetCardInfo("Vitalize", 87, Rarity.COMMON, mage.cards.v.Vitalize.class));
         cards.add(new SetCardInfo("Vodalian Illusionist", 58, Rarity.UNCOMMON, mage.cards.v.VodalianIllusionist.class));
