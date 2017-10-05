@@ -42,7 +42,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -95,17 +94,8 @@ class WeatheredBodyguardsEffect extends ReplacementEffectImpl {
         DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
         Permanent damager = game.getPermanentOrLKIBattlefield(damageEvent.getSourceId());
         Permanent p = game.getPermanent(source.getSourceId());
-        boolean applyIt = false;
-        if (p != null && !p.isTapped() && damageEvent.isCombatDamage() && damager != null && damager.isAttacking()) {
-            for (CombatGroup cg : game.getCombat().getGroups()) {
-                if (cg.getAttackers().contains(damager.getId()) && !cg.getBlocked()) {
-                    applyIt = true;
-                    break;
-                }
-            }
-            if (applyIt) {
-                p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
-            }
+        if (p != null && !p.isTapped() && damageEvent.isCombatDamage() && damager != null && damager.isAttacking() && !damager.isBlocked(game)) {
+            p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
             return true;
         }
         return true;
