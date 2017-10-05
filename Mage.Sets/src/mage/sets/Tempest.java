@@ -156,6 +156,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Humility", 236, Rarity.RARE, mage.cards.h.Humility.class));
         cards.add(new SetCardInfo("Imps' Taunt", 32, Rarity.UNCOMMON, mage.cards.i.ImpsTaunt.class));
         cards.add(new SetCardInfo("Insight", 68, Rarity.UNCOMMON, mage.cards.i.Insight.class));
+        cards.add(new SetCardInfo("Interdict", 69, Rarity.UNCOMMON, mage.cards.i.Interdict.class));
         cards.add(new SetCardInfo("Intuition", 70, Rarity.RARE, mage.cards.i.Intuition.class));
         cards.add(new SetCardInfo("Invulnerability", 237, Rarity.UNCOMMON, mage.cards.i.Invulnerability.class));
         cards.add(new SetCardInfo("Island", 313, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
