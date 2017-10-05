@@ -204,6 +204,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Urborg, Tomb of Yawgmoth", 165, Rarity.RARE, mage.cards.u.UrborgTombOfYawgmoth.class));
         cards.add(new SetCardInfo("Utopia Vow", 142, Rarity.COMMON, mage.cards.u.UtopiaVow.class));
         cards.add(new SetCardInfo("Vampiric Link", 92, Rarity.COMMON, mage.cards.v.VampiricLink.class));
+        cards.add(new SetCardInfo("Veiling Oddity", 51, Rarity.COMMON, mage.cards.v.VeilingOddity.class));
         cards.add(new SetCardInfo("Venarian Glimmer", 52, Rarity.UNCOMMON, mage.cards.v.VenarianGlimmer.class));
         cards.add(new SetCardInfo("Vitaspore Thallid", 143, Rarity.COMMON, mage.cards.v.VitasporeThallid.class));
         cards.add(new SetCardInfo("Voidstone Gargoyle", 21, Rarity.RARE, mage.cards.v.VoidstoneGargoyle.class));
