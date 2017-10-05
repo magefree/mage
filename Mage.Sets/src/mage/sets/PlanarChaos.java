@@ -123,6 +123,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Kavu Predator", 132, Rarity.UNCOMMON, mage.cards.k.KavuPredator.class));
         cards.add(new SetCardInfo("Keen Sense", 152, Rarity.UNCOMMON, mage.cards.k.KeenSense.class));
         cards.add(new SetCardInfo("Keldon Marauders", 102, Rarity.COMMON, mage.cards.k.KeldonMarauders.class));
+        cards.add(new SetCardInfo("Kor Dirge", 87, Rarity.UNCOMMON, mage.cards.k.KorDirge.class));
         cards.add(new SetCardInfo("Lavacore Elemental", 103, Rarity.UNCOMMON, mage.cards.l.LavacoreElemental.class));
         cards.add(new SetCardInfo("Life and Limb", 133, Rarity.RARE, mage.cards.l.LifeAndLimb.class));
         cards.add(new SetCardInfo("Magus of the Arena", 104, Rarity.RARE, mage.cards.m.MagusOfTheArena.class));

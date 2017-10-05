@@ -47,13 +47,13 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class KorChant extends CardImpl {
+public class KorDirge extends CardImpl {
 
-    public KorChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
+    public KorDirge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.
-        this.getSpellAbility().addEffect(new KorChantEffect());
+        this.getSpellAbility().addEffect(new KorDirgeEffect());
         TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
@@ -65,33 +65,33 @@ public class KorChant extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public KorChant(final KorChant card) {
+    public KorDirge(final KorDirge card) {
         super(card);
     }
 
     @Override
-    public KorChant copy() {
-        return new KorChant(this);
+    public KorDirge copy() {
+        return new KorDirge(this);
     }
 }
 
-class KorChantEffect extends RedirectionEffect {
+class KorDirgeEffect extends RedirectionEffect {
 
     protected TargetSource target = new TargetSource();
 
-    KorChantEffect() {
+    KorDirgeEffect() {
         super(Duration.EndOfTurn);
         staticText = "All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead";
     }
 
-    KorChantEffect(final KorChantEffect effect) {
+    KorDirgeEffect(final KorDirgeEffect effect) {
         super(effect);
         this.target = effect.target;
     }
 
     @Override
-    public KorChantEffect copy() {
-        return new KorChantEffect(this);
+    public KorDirgeEffect copy() {
+        return new KorDirgeEffect(this);
     }
 
     @Override
