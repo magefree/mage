@@ -251,6 +251,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Nomad Stadium", 322, Rarity.UNCOMMON, mage.cards.n.NomadStadium.class));
         cards.add(new SetCardInfo("Nut Collector", 259, Rarity.RARE, mage.cards.n.NutCollector.class));
         cards.add(new SetCardInfo("Obstinate Familiar", 210, Rarity.RARE, mage.cards.o.ObstinateFamiliar.class));
+        cards.add(new SetCardInfo("Otarian Juggernaut", 305, Rarity.RARE, mage.cards.o.OtarianJuggernaut.class));
         cards.add(new SetCardInfo("Overeager Apprentice", 154, Rarity.COMMON, mage.cards.o.OvereagerApprentice.class));
         cards.add(new SetCardInfo("Overrun", 260, Rarity.UNCOMMON, mage.cards.o.Overrun.class));
         cards.add(new SetCardInfo("Pardic Firecat", 211, Rarity.COMMON, mage.cards.p.PardicFirecat.class));
