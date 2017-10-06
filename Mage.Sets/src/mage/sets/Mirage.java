@@ -110,6 +110,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Disenchant", 214, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Dissipate", 61, Rarity.UNCOMMON, mage.cards.d.Dissipate.class));
         cards.add(new SetCardInfo("Divine Offering", 215, Rarity.COMMON, mage.cards.d.DivineOffering.class));
+        cards.add(new SetCardInfo("Divine Retribution", 216, Rarity.RARE, mage.cards.d.DivineRetribution.class));
         cards.add(new SetCardInfo("Drain Life", 16, Rarity.COMMON, mage.cards.d.DrainLife.class));
         cards.add(new SetCardInfo("Dread Specter", 17, Rarity.UNCOMMON, mage.cards.d.DreadSpecter.class));
         cards.add(new SetCardInfo("Dream Cache", 62, Rarity.COMMON, mage.cards.d.DreamCache.class));
