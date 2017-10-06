@@ -44,13 +44,13 @@ import mage.constants.Duration;
 public class RecklessOgre extends CardImpl {
 
     public RecklessOgre(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.OGRE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         // Whenever Reckless Ogre attacks alone, it gets +3/+0 until end of turn.
-        this.addAbility(new AttacksAloneTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn)));
+        this.addAbility(new AttacksAloneTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn).setText("it gets +3/+0 until end of turn")));
     }
 
     public RecklessOgre(final RecklessOgre card) {

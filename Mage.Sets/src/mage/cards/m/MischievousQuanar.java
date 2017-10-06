@@ -53,19 +53,19 @@ import mage.target.TargetSpell;
 public class MischievousQuanar extends CardImpl {
 
     public MischievousQuanar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // {3}{U}{U}: Turn Mischievous Quanar face down.
         Effect effect = new BecomesFaceDownCreatureEffect(Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANUAL);
-        effect.setText("Turn Michievous Quanar face down. <i>(It becomes a 2/2 creature.)</i>");
+        effect.setText("Turn {this} face down. <i>(It becomes a 2/2 creature.)</i>");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{U}{U}")));
-        
+
         // Morph {1}{U}{U}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}{U}")));
-        
+
         // When Mischievous Quanar is turned face up, copy target instant or sorcery spell. You may choose new targets for that copy.
         Effect effect2 = new CopyTargetSpellEffect();
         effect2.setText("copy target instant or sorcery spell. You may choose new targets for that copy");

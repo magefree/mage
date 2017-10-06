@@ -52,7 +52,7 @@ import mage.players.Player;
 public class EntropicSpecter extends CardImpl {
 
     public EntropicSpecter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.SPECTER);
         this.subtype.add(SubType.SPIRIT);
 
@@ -105,7 +105,7 @@ class CardsInTargetPlayerHandCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "cards in chosen opponents hand";
+        return "cards in the chosen player's hand";
     }
 
     @Override

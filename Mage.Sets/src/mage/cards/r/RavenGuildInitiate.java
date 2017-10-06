@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class RavenGuildInitiate extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Bird you control");
 
     static {
         filter.add(new SubtypePredicate(SubType.BIRD));

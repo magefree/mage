@@ -43,12 +43,11 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class ReapingTheGraves extends CardImpl {
 
     public ReapingTheGraves(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // Return target creature card from your graveyard to your hand.        
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setText("Return target creature card from your graveyard to your hand."));
         // Storm
         this.addAbility(new StormAbility());
     }

@@ -106,7 +106,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
             sb.append(CardUtil.numberToText(amount));
             sb.append(" cards ");
         } else {
-            sb.append(" card ");
+            sb.append("card ");
         }
         sb.append("of target player's library");
         if (putToGraveyard) {

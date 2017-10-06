@@ -45,7 +45,7 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterSpell;
 import mage.target.TargetSpell;
 
 /**
@@ -55,19 +55,19 @@ import mage.target.TargetSpell;
 public class DecreeOfSilence extends CardImpl {
 
     public DecreeOfSilence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{6}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{6}{U}{U}");
 
         // Whenever an opponent casts a spell, counter that spell and put a depletion counter on Decree of Silence. If there are three or more depletion counters on Decree of Silence, sacrifice it.
         Effect effect = new CounterTargetEffect();
         effect.setText("counter that spell");
-        Ability ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_SPELL,
-            false, SetTargetPointer.SPELL);
+        Ability ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, effect, new FilterSpell("a spell"),
+                false, SetTargetPointer.SPELL);
         effect = new AddCountersSourceEffect(CounterType.DEPLETION.createInstance());
         effect.setText("and put a depletion counter on {this}.");
         ability.addEffect(effect);
         ability.addEffect(new ConditionalOneShotEffect(new SacrificeSourceEffect(),
-            new SourceHasCounterCondition(CounterType.DEPLETION, 3, Integer.MAX_VALUE),
-            " If there are three or more depletion counters on {this}, sacrifice it"));
+                new SourceHasCounterCondition(CounterType.DEPLETION, 3, Integer.MAX_VALUE),
+                " If there are three or more depletion counters on {this}, sacrifice it"));
         this.addAbility(ability);
         // Cycling {4}{U}{U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{4}{U}{U}")));

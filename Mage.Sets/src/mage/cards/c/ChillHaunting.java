@@ -50,7 +50,7 @@ public class ChillHaunting extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // As an additional cost to cast Chill Haunting, exile X creature cards from your graveyard.
-        this.getSpellAbility().addCost(new ExileXFromYourGraveCost(new FilterCreatureCard("cards from your graveyard")));
+        this.getSpellAbility().addCost(new ExileXFromYourGraveCost(new FilterCreatureCard("cards from your graveyard"), true));
 
         // Target creature gets -X/-X until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
