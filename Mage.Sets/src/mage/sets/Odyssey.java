@@ -359,6 +359,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Traumatize", 110, Rarity.RARE, mage.cards.t.Traumatize.class));
         cards.add(new SetCardInfo("Treetop Sentinel", 111, Rarity.UNCOMMON, mage.cards.t.TreetopSentinel.class));
         cards.add(new SetCardInfo("Tremble", 225, Rarity.COMMON, mage.cards.t.Tremble.class));
+        cards.add(new SetCardInfo("Twigwalker", 279, Rarity.UNCOMMON, mage.cards.t.Twigwalker.class));
         cards.add(new SetCardInfo("Unifying Theory", 112, Rarity.RARE, mage.cards.u.UnifyingTheory.class));
         cards.add(new SetCardInfo("Upheaval", 113, Rarity.RARE, mage.cards.u.Upheaval.class));
         cards.add(new SetCardInfo("Vampiric Dragon", 296, Rarity.RARE, mage.cards.v.VampiricDragon.class));

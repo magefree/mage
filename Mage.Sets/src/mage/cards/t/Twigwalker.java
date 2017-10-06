@@ -25,10 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.t;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,24 +44,30 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class MischiefAndMayhem extends CardImpl {
+public class Twigwalker extends CardImpl {
 
-    public MischiefAndMayhem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
+    public Twigwalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        // Up to two target creatures each get +4/+4 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent("creatures each"), false));
+        this.subtype.add(SubType.INSECT);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // {1}{G}, Sacrifice Twigwalker: Two target creatures each get +2/+2 until end of turn.
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}"));
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(2, 2, new FilterCreaturePermanent("creatures each"), false));
+        this.addAbility(ability);
     }
 
-    public MischiefAndMayhem(final MischiefAndMayhem card) {
+    public Twigwalker(final Twigwalker card) {
         super(card);
     }
 
     @Override
-    public MischiefAndMayhem copy() {
-        return new MischiefAndMayhem(this);
+    public Twigwalker copy() {
+        return new Twigwalker(this);
     }
 }
