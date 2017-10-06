@@ -90,6 +90,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Deftblade Elite", 12, Rarity.COMMON, mage.cards.d.DeftbladeElite.class));
         cards.add(new SetCardInfo("Dermoplasm", 35, Rarity.RARE, mage.cards.d.Dermoplasm.class));
         cards.add(new SetCardInfo("Dreamborn Muse", 36, Rarity.RARE, mage.cards.d.DreambornMuse.class));
+        cards.add(new SetCardInfo("Drinker of Sorrow", 66, Rarity.RARE, mage.cards.d.DrinkerOfSorrow.class));
         cards.add(new SetCardInfo("Dripping Dead", 67, Rarity.COMMON, mage.cards.d.DrippingDead.class));
         cards.add(new SetCardInfo("Earthblighter", 68, Rarity.UNCOMMON, mage.cards.e.Earthblighter.class));
         cards.add(new SetCardInfo("Echo Tracer", 37, Rarity.COMMON, mage.cards.e.EchoTracer.class));
