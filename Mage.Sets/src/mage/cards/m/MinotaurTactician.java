@@ -52,33 +52,33 @@ import java.util.UUID;
  * @author fireshoes
  */
 public class MinotaurTactician extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filterWhite = new FilterControlledCreaturePermanent();
     private static final FilterControlledCreaturePermanent filterBlue = new FilterControlledCreaturePermanent();
-    
+
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
     }
-    
+
     static final private String ruleWhite = "{this} gets +1/+1 as long as you control another white creature";
-    
-    static final private String ruleBlue = "{this} gets +1/+1 as long as you control another white creature";
+
+    static final private String ruleBlue = "{this} gets +1/+1 as long as you control another blue creature";
 
     public MinotaurTactician(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.MINOTAUR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        
+
         // Minotaur Tactician gets +1/+1 as long as you control a white creature.
         Condition conditionWhite = new PermanentsOnTheBattlefieldCondition(filterWhite);
         Effect effectWhite = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), conditionWhite, ruleWhite);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectWhite));
-        
+
         // Minotaur Tactician gets +1/+1 as long as you control a blue creature.
         Condition conditionBlue = new PermanentsOnTheBattlefieldCondition(filterBlue);
         Effect effectBlue = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), conditionBlue, ruleBlue);

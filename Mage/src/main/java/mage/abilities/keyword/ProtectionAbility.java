@@ -32,7 +32,6 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.StaticAbility;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -90,7 +89,7 @@ public class ProtectionAbility extends StaticAbility {
     @Override
     public String getRule() {
 
-        return "Protection from " + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove auras.");
+        return "protection from " + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove auras.");
     }
 
     public boolean canTarget(MageObject source, Game game) {

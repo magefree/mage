@@ -42,13 +42,14 @@ import mage.target.TargetPermanent;
 public class SurgingAether extends CardImpl {
 
     public SurgingAether(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
-        // Ripple 4
-        this.addAbility(new RippleAbility(4));
         // Return target permanent to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
+
+        // Ripple 4
+        this.addAbility(new RippleAbility(4));
     }
 
     public SurgingAether(final SurgingAether card) {

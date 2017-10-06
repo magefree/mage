@@ -28,11 +28,9 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -59,7 +57,9 @@ public class PhyrexianEtchings extends CardImpl {
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.AGE)), false));
 
         // When Phyrexian Etchings is put into a graveyard from the battlefield, you lose 2 life for each age counter on it.
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new LoseLifeSourceControllerEffect(new MultipliedValue(new CountersSourceCount(CounterType.AGE), 2))));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new LoseLifeSourceControllerEffect(new MultipliedValue(new CountersSourceCount(CounterType.AGE), 2))
+                .setText("When {this} is put into a graveyard from the battlefield, you lose 2 life for each age counter on it")
+        ));
     }
 
     public PhyrexianEtchings(final PhyrexianEtchings card) {

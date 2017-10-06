@@ -135,6 +135,6 @@ class RimefeatherOwlEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
-        return "All nonland permanents are legendary";
+        return "Permanents with ice counters on them are snow.";
     }
 }

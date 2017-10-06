@@ -117,7 +117,7 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Reveal the top ");
+        StringBuilder sb = new StringBuilder("reveal the top ");
         sb.append(CardUtil.numberToText(amountCards.toString())).append(" cards of your library. Put all ");
         sb.append(filter.getMessage());
         sb.append(" revealed this way into your hand and the rest ");

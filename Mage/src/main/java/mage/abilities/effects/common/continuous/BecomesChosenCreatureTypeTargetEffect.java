@@ -26,7 +26,7 @@ public class BecomesChosenCreatureTypeTargetEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
         this.nonWall = nonWall;
         if(nonWall) {
-            staticText = "choose a creature type other than wall, target creature's type becomes that type until end of turn";
+            staticText = "choose a creature type other than wall. Target creature becomes that type until end of turn";
         }
         else {
             staticText = "target creature becomes the creature type of your choice until end of turn";
