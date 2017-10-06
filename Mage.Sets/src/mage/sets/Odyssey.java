@@ -319,6 +319,11 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Soulcatcher", 47, Rarity.UNCOMMON, mage.cards.s.Soulcatcher.class));
         cards.add(new SetCardInfo("Spark Mage", 222, Rarity.UNCOMMON, mage.cards.s.SparkMage.class));
         cards.add(new SetCardInfo("Spellbane Centaur", 271, Rarity.RARE, mage.cards.s.SpellbaneCentaur.class));
+        cards.add(new SetCardInfo("Sphere of Duty", 48, Rarity.UNCOMMON, mage.cards.s.SphereOfDuty.class));
+        cards.add(new SetCardInfo("Sphere of Grace", 49, Rarity.UNCOMMON, mage.cards.s.SphereOfGrace.class));
+        cards.add(new SetCardInfo("Sphere of Law", 50, Rarity.UNCOMMON, mage.cards.s.SphereOfLaw.class));
+        cards.add(new SetCardInfo("Sphere of Reason", 51, Rarity.UNCOMMON, mage.cards.s.SphereOfReason.class));
+        cards.add(new SetCardInfo("Sphere of Truth", 52, Rarity.UNCOMMON, mage.cards.s.SphereOfTruth.class));
         cards.add(new SetCardInfo("Spiritualize", 53, Rarity.UNCOMMON, mage.cards.s.Spiritualize.class));
         cards.add(new SetCardInfo("Springing Tiger", 272, Rarity.COMMON, mage.cards.s.SpringingTiger.class));
         cards.add(new SetCardInfo("Squirrel Mob", 273, Rarity.RARE, mage.cards.s.SquirrelMob.class));
