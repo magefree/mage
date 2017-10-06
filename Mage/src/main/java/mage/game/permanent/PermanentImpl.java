@@ -89,6 +89,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean controlledFromStartOfControllerTurn;
     protected int turnsOnBattlefield;
     protected boolean phasedIn = true;
+    protected boolean indirectPhase = false;
     protected boolean faceDown;
     protected boolean attacking;
     protected int blocking;
@@ -138,6 +139,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.controlledFromStartOfControllerTurn = permanent.controlledFromStartOfControllerTurn;
         this.turnsOnBattlefield = permanent.turnsOnBattlefield;
         this.phasedIn = permanent.phasedIn;
+        this.indirectPhase = permanent.indirectPhase;
         this.faceDown = permanent.faceDown;
         this.attacking = permanent.attacking;
         this.blocking = permanent.blocking;
@@ -463,6 +465,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean phaseIn(Game game) {
+        return phaseIn(game, false);
+    }
+
+    @Override
+    public boolean phaseIn(Game game, boolean indirectPhase) {
         if (!phasedIn) {
             if (!replaceEvent(EventType.PHASE_IN, game)) {
                 this.phasedIn = true;
@@ -478,6 +485,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean phaseOut(Game game) {
+        return phaseOut(game, false);
+    }
+
+    @Override
+    public boolean phaseOut(Game game, boolean indirectPhase) {
         if (phasedIn) {
             if (!replaceEvent(EventType.PHASE_OUT, game)) {
                 this.phasedIn = false;

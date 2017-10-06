@@ -80,7 +80,11 @@ public interface Permanent extends Card, Controllable {
 
     boolean phaseIn(Game game);
 
+    boolean phaseIn(Game game, boolean indirectPhase);
+
     boolean phaseOut(Game game);
+
+    boolean phaseOut(Game game, boolean indirectPhase);
 
     boolean isMonstrous();
 
