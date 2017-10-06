@@ -193,6 +193,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Kukemssa Pirates", 71, Rarity.RARE, mage.cards.k.KukemssaPirates.class));
         cards.add(new SetCardInfo("Kukemssa Serpent", 72, Rarity.COMMON, mage.cards.k.KukemssaSerpent.class));
         cards.add(new SetCardInfo("Lead Golem", 271, Rarity.UNCOMMON, mage.cards.l.LeadGolem.class));
+        cards.add(new SetCardInfo("Leering Gargoyle", 331, Rarity.RARE, mage.cards.l.LeeringGargoyle.class));
         cards.add(new SetCardInfo("Lightning Reflexes", 186, Rarity.COMMON, mage.cards.l.LightningReflexes.class));
         cards.add(new SetCardInfo("Lion's Eye Diamond", 272, Rarity.RARE, mage.cards.l.LionsEyeDiamond.class));
         cards.add(new SetCardInfo("Locust Swarm", 124, Rarity.UNCOMMON, mage.cards.l.LocustSwarm.class));
