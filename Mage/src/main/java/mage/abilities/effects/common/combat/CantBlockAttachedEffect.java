@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
+import static mage.constants.Duration.EndOfTurn;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -61,7 +62,9 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
         if (!filter.getMessage().equals("creature")) {
             sb.append(' ').append(filter.getMessage());
         }
-        if (!duration.toString().isEmpty()) {
+        if (duration == EndOfTurn) {
+            sb.append("this turn");
+        } else if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }
         staticText = sb.toString();

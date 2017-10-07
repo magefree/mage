@@ -61,9 +61,9 @@ public class MinotaurTactician extends CardImpl {
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    static final private String ruleWhite = "{this} gets +1/+1 as long as you control another white creature";
+    static final private String ruleWhite = "{this} gets +1/+1 as long as you control a white creature";
 
-    static final private String ruleBlue = "{this} gets +1/+1 as long as you control another blue creature";
+    static final private String ruleBlue = "{this} gets +1/+1 as long as you control a blue creature";
 
     public MinotaurTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

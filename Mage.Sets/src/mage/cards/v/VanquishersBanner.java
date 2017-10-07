@@ -128,6 +128,6 @@ class DrawCardIfCreatureTypeAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast a creature spell of the chosen type, draw a card";
+        return "Whenever you cast a creature spell of the chosen type, draw a card.";
     }
 }

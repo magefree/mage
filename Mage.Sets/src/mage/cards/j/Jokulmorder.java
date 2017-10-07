@@ -122,6 +122,6 @@ class JokulmorderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you play an Island, you may untap {this}";
+        return "Whenever you play an Island, you may untap {this}.";
     }
 }

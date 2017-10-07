@@ -59,18 +59,18 @@ public class MaliciousAdvice extends CardImpl {
     }
 
     public MaliciousAdvice(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{B}");
 
         // Tap X target artifacts, creatures, and/or lands. You lose X life.
         Effect effect = new TapTargetEffect();
-        effect.setText("Tap X target artifacts, creatures, and/or lands");
+        effect.setText("X target artifacts, creatures, and/or lands");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(new ManacostVariableValue()));
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if(ability instanceof SpellAbility) {
+        if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter));
         }

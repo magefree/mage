@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -61,11 +61,11 @@ public class JaceIngeniousMindMage extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1));
 
         // +1: Untap all creatures you control.
-        this.addAbility(new LoyaltyAbility(new UntapAllControllerEffect(FILTER_PERMANENT_CREATURES), 1));
+        this.addAbility(new LoyaltyAbility(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES), 1));
 
         // -9: Gain control of up to three target creatures.
         Ability ability = new LoyaltyAbility(new GainControlTargetEffect(Duration.Custom), -9);
-        ability.addTarget(new TargetCreaturePermanent(0, 3));
+        ability.addTarget(new TargetCreaturePermanent(0, 3, StaticFilters.FILTER_PERMANENT_CREATURES, false));
         this.addAbility(ability);
     }
 

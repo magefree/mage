@@ -87,7 +87,12 @@ public class RimefeatherOwl extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter2), Duration.EndOfGame)));
 
         // {1}{snow}: Put an ice counter on target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.ICE.createInstance()), new ManaCostsImpl("{1}{S}"));
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new AddCountersTargetEffect(CounterType.ICE.createInstance())
+                        .setText("Put an ice counter on target permanent."),
+                new ManaCostsImpl("{1}{S}")
+        );
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 

@@ -58,7 +58,7 @@ public class PhyrexianEtchings extends CardImpl {
 
         // When Phyrexian Etchings is put into a graveyard from the battlefield, you lose 2 life for each age counter on it.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new LoseLifeSourceControllerEffect(new MultipliedValue(new CountersSourceCount(CounterType.AGE), 2))
-                .setText("When {this} is put into a graveyard from the battlefield, you lose 2 life for each age counter on it")
+                .setText("you lose 2 life for each age counter on it")
         ));
     }
 

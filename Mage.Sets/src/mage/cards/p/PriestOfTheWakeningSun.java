@@ -59,7 +59,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class PriestOfTheWakeningSun extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a Dinosaur card");
+    private static final FilterCard filter = new FilterCard("Dinosaur card");
 
     static {
         filter.add(new SubtypePredicate(SubType.DINOSAUR));

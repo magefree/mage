@@ -74,7 +74,9 @@ public class HuatliDinosaurKnight extends CardImpl {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +2: Put two +1/+1 counters on up to one target Dinosaur you control.
-        Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), 2);
+        Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2))
+                .setText("Put two +1/+1 counters on up to one target Dinosaur you control."), 2
+        );
         ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
         this.addAbility(ability);
 

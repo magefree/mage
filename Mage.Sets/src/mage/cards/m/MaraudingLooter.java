@@ -61,7 +61,7 @@ public class MaraudingLooter extends CardImpl {
                 RaidCondition.instance,
                 "<i>Raid</i> &mdash; At the beginning of your end step, "
                 + "if you attacked with a creature this turn, "
-                + "you may draw a card. If you do, discard a card");
+                + "you may draw a card. If you do, discard a card.");
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
