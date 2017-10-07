@@ -497,7 +497,7 @@ public class ManaTest {
         String ret = mana.toString();
 
         // then
-        assertEquals("{6}{R}{G}{G}{U}{U}{U}{B}{B}{B}{Any}{Any}", ret);
+        assertEquals("{6}{U}{U}{U}{B}{B}{B}{R}{G}{G}{Any}{Any}", ret);
     }
 
     @Test

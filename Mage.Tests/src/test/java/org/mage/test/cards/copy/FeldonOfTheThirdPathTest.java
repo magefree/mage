@@ -58,7 +58,7 @@ public class FeldonOfTheThirdPathTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA,
-                "{2}{R},{T}: Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.",
+                "{2}{R}, {T}: Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.",
                 "Highway Robber");
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -82,7 +82,7 @@ public class FeldonOfTheThirdPathTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion", 1);
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA,
-                "{2}{R},{T}: Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.",
+                "{2}{R}, {T}: Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.",
                 "Sepulchral Primordial");
         addTarget(playerA, "Silvercoat Lion"); // target for ETB Sepulchral Primordial
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);

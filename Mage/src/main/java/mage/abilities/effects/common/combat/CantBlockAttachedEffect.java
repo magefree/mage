@@ -63,7 +63,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
             sb.append(' ').append(filter.getMessage());
         }
         if (duration == EndOfTurn) {
-            sb.append("this turn");
+            sb.append(" this turn");
         } else if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }

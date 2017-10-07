@@ -51,11 +51,11 @@ import mage.players.Player;
 public class ScaleBlessing extends CardImpl {
 
     public ScaleBlessing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
         // Bolster 1, then put a +1/+1 counter on each creature you control with a +1/+1 counter on it. <i.(To bolster 1, choose a creature with the least toughness among creatures you control and put +1/+1 counter on it.)</i>
         Effect effect = new BolsterEffect(1);
-        effect.setText("Bolster 1");        
+        effect.setText("Bolster 1");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new ScaleBlessingEffect());
 
@@ -98,7 +98,7 @@ class ScaleBlessingEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            for(Permanent permanent: game.getState().getBattlefield().getAllActivePermanents(filter , controller.getId(), game)) {
+            for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
                 permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
                 game.informPlayers(sourceObject.getName() + ": Put a +1/+1 counter on " + permanent.getLogName());
             }

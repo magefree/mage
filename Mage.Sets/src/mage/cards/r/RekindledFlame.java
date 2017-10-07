@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
@@ -48,22 +48,25 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author jeffwadsworth
  */
 public class RekindledFlame extends CardImpl {
-    
+
     static final String rule = "if an opponent has no cards in hand, you may return Rekindled Flame from your graveyard to your hand";
 
     public RekindledFlame(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
 
         // Rekindled Flame deals 4 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        
+
         // At the beginning of your upkeep, if an opponent has no cards in hand, you may return Rekindled Flame from your graveyard to your hand.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, new ConditionalOneShotEffect(new ReturnSourceFromGraveyardToHandEffect(), new OpponentHasNoCardsInHandCondition(), rule), TargetController.YOU, true);
+        Ability ability = new ConditionalTriggeredAbility(
+                new BeginningOfUpkeepTriggeredAbility(
+                        Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), TargetController.YOU, true
+                ),
+                new OpponentHasNoCardsInHandCondition(), rule);
         ability.setRuleVisible(true);
         this.addAbility(ability);
-        
+
     }
 
     public RekindledFlame(final RekindledFlame card) {

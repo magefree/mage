@@ -70,7 +70,9 @@ public class GleamOfAuthority extends CardImpl {
 
         // Enchanted creature gets +1/+1 for each +1/+1 counter on other creatures you control
         DynamicValue amount = new CountersOnControlledCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)
+                .setText("Enchanted creature gets +1/+1 for each +1/+1 counter on other creatures you control.")
+        ));
 
         // Enchanted creature has vigilance and "{W}, {T}: Bloster 1."
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA));

@@ -53,7 +53,7 @@ public class SoulFoundryTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Foundry");
         setChoice(playerA, "Yes");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X},{T}: Create a token");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X}, {T}: Create a token");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

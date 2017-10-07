@@ -46,7 +46,7 @@ public class GetEmblemEffect extends OneShotEffect {
     public GetEmblemEffect(Emblem emblem) {
         super(Outcome.Benefit);
         this.emblem = emblem;
-        this.staticText = "You get an emblem with \"" + +'"';
+        this.staticText = getText();
     }
 
     public GetEmblemEffect(final GetEmblemEffect effect) {
@@ -74,7 +74,9 @@ public class GetEmblemEffect extends OneShotEffect {
         sb.append("You get an emblem with \"");
         List<String> rules = emblem.getAbilities().getRules(null);
         if (rules.size() == 1) {
-            sb.append(rules.get(0));
+            for (String s : rules) {
+                sb.append(s);
+            }
             sb.append('"');
         } else if (rules.size() == 2) {
             for (String s : rules) {
@@ -83,7 +85,6 @@ public class GetEmblemEffect extends OneShotEffect {
             }
             sb.append('"');
         }
-        sb.append('.');
         return sb.toString();
     }
 }
