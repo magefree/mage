@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class OjutaiExemplars extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 
     static {
@@ -66,7 +66,7 @@ public class OjutaiExemplars extends CardImpl {
     }
 
     public OjutaiExemplars(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(4);
@@ -75,22 +75,22 @@ public class OjutaiExemplars extends CardImpl {
         // Whenever you cast a noncreature spell, choose one - Tap target creature; 
         Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
-        
+
         // Ojutai Exemplars gain first strike and lifelink until end of turn; 
         Mode mode = new Mode();
         Effect effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("{this} gains first strike");
         mode.getEffects().add(effect);
         Effect effect2 = new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
-        effect2.setText("and lifelink");
+        effect2.setText("and lifelink until end of turn");
         mode.getEffects().add(effect2);
         ability.addMode(mode);
-        
+
         // or Exile Ojutai Exemplars, then return it to the battlefield tapped under its owner's control.
         mode = new Mode();
         mode.getEffects().add(new OjutaiExemplarsEffect());
         ability.addMode(mode);
-        
+
         this.addAbility(ability);
     }
 

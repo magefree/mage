@@ -67,7 +67,7 @@ public class WhiteManaBattery extends CardImpl {
                 "Add {W} to your mana pool, then add {W} to your mana pool for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
-                "Remove X storage counters from {this}"));
+                "Remove any number of storage counters from {this}"));
         this.addAbility(ability);
     }
 

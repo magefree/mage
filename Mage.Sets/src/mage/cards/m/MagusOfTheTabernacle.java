@@ -50,7 +50,7 @@ import mage.filter.StaticFilters;
  */
 public class MagusOfTheTabernacle extends CardImpl {
 
-    static private final String rule = "All creatures have \"At the beginning of your upkeep, sacrifice this creature unless you pay {1}\"";
+    static private final String rule = "All creatures have \"At the beginning of your upkeep, sacrifice this creature unless you pay {1}.\"";
 
     public MagusOfTheTabernacle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

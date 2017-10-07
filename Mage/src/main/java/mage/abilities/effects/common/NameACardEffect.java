@@ -82,27 +82,27 @@ public class NameACardEffect extends OneShotEffect {
             switch (typeOfName) {
                 case ALL:
                     cardChoice.setChoices(CardRepository.instance.getNames());
-                    cardChoice.setMessage("Name a card");
+                    cardChoice.setMessage("Choose a card name");
                     break;
                 case NON_ARTIFACT_AND_NON_LAND_NAME:
                     cardChoice.setChoices(CardRepository.instance.getNonArtifactAndNonLandNames());
-                    cardChoice.setMessage("Name a non artifact and non land card");
+                    cardChoice.setMessage("Choose a nonartifact, nonland card name");
                     break;
                 case NON_LAND_AND_NON_CREATURE_NAME:
                     cardChoice.setChoices(CardRepository.instance.getNonLandAndNonCreatureNames());
-                    cardChoice.setMessage("Name a non land and non creature card");
+                    cardChoice.setMessage("Choose a nonland and non creature card");
                     break;
                 case NON_LAND_NAME:
                     cardChoice.setChoices(CardRepository.instance.getNonLandNames());
-                    cardChoice.setMessage("Name a non land card");
+                    cardChoice.setMessage("Choose a nonland card name");
                     break;
                 case CREATURE_NAME:
                     cardChoice.setChoices(CardRepository.instance.getCreatureNames());
-                    cardChoice.setMessage("Name a creature card");
+                    cardChoice.setMessage("Choose a creature card name");
                     break;
                 case ARTIFACT_NAME:
                     cardChoice.setChoices(CardRepository.instance.getArtifactNames());
-                    cardChoice.setMessage("Name an artifact card");
+                    cardChoice.setMessage("Choose an artifact card name");
                     break;
             }
             cardChoice.clearChoice();
@@ -130,7 +130,7 @@ public class NameACardEffect extends OneShotEffect {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("name a ");
+        StringBuilder sb = new StringBuilder("choose a ");
         switch (typeOfName) {
             case ALL:
                 sb.append("card");
@@ -139,7 +139,7 @@ public class NameACardEffect extends OneShotEffect {
                 sb.append("nonartifact, nonland card");
                 break;
             case NON_LAND_AND_NON_CREATURE_NAME:
-                sb.append("card other than a creature or a land card");
+                sb.append("noncreature, nonland card");
                 break;
             case NON_LAND_NAME:
                 sb.append("nonland card");
@@ -151,6 +151,7 @@ public class NameACardEffect extends OneShotEffect {
                 sb.append("artifact card");
                 break;
         }
+        sb.append(" name");
         return sb.toString();
     }
 }

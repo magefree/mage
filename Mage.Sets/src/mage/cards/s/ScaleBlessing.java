@@ -81,7 +81,7 @@ class ScaleBlessingEffect extends OneShotEffect {
 
     public ScaleBlessingEffect() {
         super(Outcome.Benefit);
-        this.staticText = ", then put a +1/+1 counter on each creature you control with a +1/+1 counter on it. <i.(To bolster 1, choose a creature with the least toughness among creatures you control and put +1/+1 counter on it.)</i>";
+        this.staticText = ", then put a +1/+1 counter on each creature you control with a +1/+1 counter on it. <i>(To bolster 1, choose a creature with the least toughness among creatures you control and put +1/+1 counter on it.)</i>";
     }
 
     public ScaleBlessingEffect(final ScaleBlessingEffect effect) {

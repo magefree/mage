@@ -29,12 +29,14 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
@@ -47,7 +49,7 @@ import mage.constants.Zone;
 public class KavuScout extends CardImpl {
 
     public KavuScout(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.KAVU);
         this.subtype.add(SubType.SCOUT);
 
@@ -55,7 +57,9 @@ public class KavuScout extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Domain - Kavu Scout gets +1/+0 for each basic land type among lands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), new StaticValue(0), Duration.WhileOnBattlefield)));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), new StaticValue(0), Duration.WhileOnBattlefield));
+        ability.setAbilityWord(AbilityWord.DOMAIN);
+        this.addAbility(ability);
     }
 
     public KavuScout(final KavuScout card) {

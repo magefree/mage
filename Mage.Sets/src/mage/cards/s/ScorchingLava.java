@@ -65,8 +65,9 @@ public class ScorchingLava extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 new CantRegenerateTargetEffect(Duration.EndOfTurn, "that creature"), new LockedInCondition(KickedCondition.instance)));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                (OneShotEffect) new ExileTargetIfDiesEffect().setText("and if it would die this turn, exile it instead"),
-                new LockedInCondition(KickedCondition.instance)));
+                new ExileTargetIfDiesEffect(),
+                new LockedInCondition(KickedCondition.instance)
+        ).setText("and if it would die this turn, exile it instead"));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
