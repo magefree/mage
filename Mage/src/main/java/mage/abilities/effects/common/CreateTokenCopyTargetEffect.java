@@ -277,14 +277,14 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             if (tapped && !attacking) {
                 sb.append("tapped ");
             }
-            sb.append("token");
+            sb.append("token that's a copy of target creature");
         } else {
             sb.append(number);
             sb.append(" ");
             if (tapped && !attacking) {
                 sb.append("tapped ");
             }
-            sb.append("tokens");
+            sb.append("tokens that are copies of target creature");
         }
         if (attacking) {
             sb.append(" that are");

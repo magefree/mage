@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class LimDulTheNecromancer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
     private static final FilterPermanent filter2 = new FilterPermanent("Zombie");
 
     static {
@@ -67,7 +67,7 @@ public class LimDulTheNecromancer extends CardImpl {
     }
 
     public LimDulTheNecromancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);

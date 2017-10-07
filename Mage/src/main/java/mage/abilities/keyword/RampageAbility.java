@@ -46,7 +46,7 @@ public class RampageAbility extends BecomesBlockedTriggeredAbility {
 
     public RampageAbility(int amount) {
         super(null, false);
-        rule = "rampage " + amount + "(Whenever this creature becomes blocked, it gets +"
+        rule = "rampage " + amount + " (Whenever this creature becomes blocked, it gets +"
                 + amount + "/+" + amount + " until end of turn for each creature blocking it beyond the first.)";
         RampageValue rv = new RampageValue(amount);
         this.addEffect(new BoostSourceEffect(rv, rv, Duration.EndOfTurn, true));

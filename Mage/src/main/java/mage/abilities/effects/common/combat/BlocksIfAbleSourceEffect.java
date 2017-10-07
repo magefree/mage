@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -39,7 +38,6 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-
 public class BlocksIfAbleSourceEffect extends RequirementEffect {
 
     public BlocksIfAbleSourceEffect(Duration duration) {
@@ -78,7 +76,7 @@ public class BlocksIfAbleSourceEffect extends RequirementEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "{this} blocks each turn if able.";
+        return "{this} blocks each combat if able.";
     }
 
 }

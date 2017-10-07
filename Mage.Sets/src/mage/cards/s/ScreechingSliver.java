@@ -52,7 +52,7 @@ public class ScreechingSliver extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 
     public ScreechingSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
         this.subtype.add(SubType.SLIVER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -63,7 +63,7 @@ public class ScreechingSliver extends CardImpl {
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield,
-                        filter, "All Sliver creatures have \"{T}: Target player puts the top card of his or her library into his or her graveyard.\"")));
+                        filter, "All Slivers have \"{T}: Target player puts the top card of his or her library into his or her graveyard.\"")));
     }
 
     public ScreechingSliver(final ScreechingSliver card) {

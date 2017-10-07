@@ -56,7 +56,7 @@ import mage.game.events.GameEvent.EventType;
 public class SwarmbornGiant extends CardImpl {
 
     public SwarmbornGiant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(6);
@@ -67,13 +67,13 @@ public class SwarmbornGiant extends CardImpl {
 
         // {4}{G}{G}: Monstrosity 2.
         this.addAbility(new MonstrosityAbility("{4}{G}{G}", 2));
-        
+
         // As long as Swarmborn Giant is monstrous, it has reach.
         Ability ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield),
-                MonstrousCondition.instance,
-                "As long as {this} is monstrous, it has reach"));
+                        MonstrousCondition.instance,
+                        "As long as {this} is monstrous, it has reach"));
         this.addAbility(ability);
     }
 
@@ -118,6 +118,6 @@ class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you're dealt combat damage, " + super.getRule();
+        return "When you're dealt combat damage, " + super.getRule();
     }
 }
