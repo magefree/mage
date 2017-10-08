@@ -95,6 +95,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Fodder Cannon", 131, Rarity.UNCOMMON, mage.cards.f.FodderCannon.class));
         cards.add(new SetCardInfo("Gamekeeper", 106, Rarity.UNCOMMON, mage.cards.g.Gamekeeper.class));
         cards.add(new SetCardInfo("Goblin Berserker", 82, Rarity.UNCOMMON, mage.cards.g.GoblinBerserker.class));
+        cards.add(new SetCardInfo("Goblin Festival", 83, Rarity.RARE, mage.cards.g.GoblinFestival.class));
         cards.add(new SetCardInfo("Goblin Gardener", 84, Rarity.COMMON, mage.cards.g.GoblinGardener.class));
         cards.add(new SetCardInfo("Goblin Marshal", 85, Rarity.RARE, mage.cards.g.GoblinMarshal.class));
         cards.add(new SetCardInfo("Goblin Masons", 86, Rarity.COMMON, mage.cards.g.GoblinMasons.class));
