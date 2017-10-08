@@ -252,6 +252,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of Stromgald", 33, Rarity.UNCOMMON, mage.cards.k.KnightOfStromgald.class));
         cards.add(new SetCardInfo("Krovikan Fetish", 34, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
         cards.add(new SetCardInfo("Krovikan Sorcerer", 96, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));
+        cards.add(new SetCardInfo("Labyrinth Minotaur", 97, Rarity.COMMON, mage.cards.l.LabyrinthMinotaur.class));
         cards.add(new SetCardInfo("Leshrac's Rite", 35, Rarity.UNCOMMON, mage.cards.l.LeshracsRite.class));
         cards.add(new SetCardInfo("Leviathan", 98, Rarity.RARE, mage.cards.l.Leviathan.class));
         cards.add(new SetCardInfo("Ley Druid", 170, Rarity.COMMON, mage.cards.l.LeyDruid.class));
@@ -299,6 +300,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Artillery", 253, Rarity.UNCOMMON, mage.cards.o.OrcishArtillery.class));
         cards.add(new SetCardInfo("Orcish Captain", 254, Rarity.UNCOMMON, mage.cards.o.OrcishCaptain.class));
         cards.add(new SetCardInfo("Orcish Oriflamme", 257, Rarity.UNCOMMON, mage.cards.o.OrcishOriflamme.class));
+        cards.add(new SetCardInfo("Orcish Squatters", 258, Rarity.RARE, mage.cards.o.OrcishSquatters.class));
         cards.add(new SetCardInfo("Order of the Sacred Torch", 324, Rarity.RARE, mage.cards.o.OrderOfTheSacredTorch.class));
         cards.add(new SetCardInfo("Order of the White Shield", 325, Rarity.UNCOMMON, mage.cards.o.OrderOfTheWhiteShield.class));
         cards.add(new SetCardInfo("Orgg", 259, Rarity.RARE, mage.cards.o.Orgg.class));

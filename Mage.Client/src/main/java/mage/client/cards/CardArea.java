@@ -27,20 +27,9 @@
  */
 package mage.client.cards;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.List;
-import java.util.UUID;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
 import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
@@ -49,6 +38,13 @@ import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.SimpleCardView;
 import org.mage.card.arcane.CardPanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.List;
+import java.util.UUID;
 
 public class CardArea extends JPanel implements MouseListener {
 
@@ -240,15 +236,15 @@ public class CardArea extends JPanel implements MouseListener {
                 e.consume();
                 if (obj instanceof Card) {
                     if (e.isAltDown()) {
-                        cardEventSource.altDoubleClick(((Card) obj).getOriginal(), "alt-double-click");
+                        cardEventSource.fireEvent(((Card) obj).getOriginal(), ClientEventType.ALT_DOUBLE_CLICK);
                     } else {
-                        cardEventSource.doubleClick(((Card) obj).getOriginal(), "double-click");
+                        cardEventSource.fireEvent(((Card) obj).getOriginal(), ClientEventType.DOUBLE_CLICK);
                     }
                 } else if (obj instanceof MageCard) {
                     if (e.isAltDown()) {
-                        cardEventSource.altDoubleClick(((MageCard) obj).getOriginal(), "alt-double-click");
+                        cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.ALT_DOUBLE_CLICK);
                     } else {
-                        cardEventSource.doubleClick(((MageCard) obj).getOriginal(), "double-click");
+                        cardEventSource.fireEvent(((MageCard) obj).getOriginal(),ClientEventType.DOUBLE_CLICK);
                     }
                 }
             }
@@ -270,14 +266,14 @@ public class CardArea extends JPanel implements MouseListener {
                 checkMenu(e, null);
             }
         } else {
-            cardEventSource.actionConsumedEvent("action-consumed");
+            cardEventSource.fireEvent(ClientEventType.ACTION_CONSUMED);
         }
     }
 
     private void checkMenu(MouseEvent Me, SimpleCardView card) {
         if (Me.isPopupTrigger()) {
             Me.consume();
-            cardEventSource.showPopupMenuEvent(card, Me.getComponent(), Me.getX(), Me.getY(), "show-popup-menu");
+            cardEventSource.fireEvent(card, Me.getComponent(), Me.getX(), Me.getY(), ClientEventType.SHOW_POP_UP_MENU);
         }
     }
 

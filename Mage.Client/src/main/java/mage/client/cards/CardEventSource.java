@@ -27,13 +27,12 @@
  */
 package mage.client.cards;
 
-import java.awt.Component;
-import java.io.Serializable;
+import mage.client.util.*;
 import mage.client.util.Event;
-import mage.client.util.EventDispatcher;
-import mage.client.util.EventSource;
-import mage.client.util.Listener;
 import mage.view.SimpleCardView;
+
+import java.awt.*;
+import java.io.Serializable;
 
 /**
  *
@@ -49,40 +48,20 @@ public class CardEventSource implements EventSource<Event>, Serializable {
         dispatcher.addListener(listener);
     }
 
-    public void setNumber(SimpleCardView card, String message, int number) {
-        dispatcher.fireEvent(new Event(card, message, number));
+    public void fireEvent(SimpleCardView card, ClientEventType eventType, int number){
+        dispatcher.fireEvent(new Event(card, eventType, number));
     }
 
-    public void removeSpecificCard(SimpleCardView card, String message) {
-        dispatcher.fireEvent(new Event(card, message));
+    public void fireEvent(ClientEventType eventType){
+        dispatcher.fireEvent(new Event(null, eventType));
     }
 
-    public void addSpecificCard(SimpleCardView card, String message) {
-        dispatcher.fireEvent(new Event(card, message));
+    public void fireEvent(SimpleCardView card, ClientEventType eventType){
+        dispatcher.fireEvent(new Event(card, eventType));
     }
 
-    public void doubleClick(SimpleCardView card, String message) {
-        dispatcher.fireEvent(new Event(card, message));
-    }
-
-    public void altDoubleClick(SimpleCardView card, String message) {
-        dispatcher.fireEvent(new Event(card, message));
-    }
-
-    public void removeFromMainEvent(String message) {
-        dispatcher.fireEvent(new Event(null, message));
-    }
-
-    public void removeFromSideboardEvent(String message) {
-        dispatcher.fireEvent(new Event(null, message));
-    }
-
-    public void showPopupMenuEvent(SimpleCardView card, Component component, int x, int y, String message) {
+    public void fireEvent(SimpleCardView card, Component component, int x, int y, ClientEventType message) {
         dispatcher.fireEvent(new Event(card, message, x, y, component));
-    }
-
-    public void actionConsumedEvent(String message) {
-        dispatcher.fireEvent(new Event(null, message));
     }
 
     @Override

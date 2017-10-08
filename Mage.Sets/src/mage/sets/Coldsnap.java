@@ -84,6 +84,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Diamond Faerie", 128, Rarity.RARE, mage.cards.d.DiamondFaerie.class));
         cards.add(new SetCardInfo("Disciple of Tevesh Szat", 55, Rarity.COMMON, mage.cards.d.DiscipleOfTeveshSzat.class));
         cards.add(new SetCardInfo("Drelnoch", 32, Rarity.COMMON, mage.cards.d.Drelnoch.class));
+        cards.add(new SetCardInfo("Earthen Goo", 80, Rarity.UNCOMMON, mage.cards.e.EarthenGoo.class));
         cards.add(new SetCardInfo("Field Marshal", 5, Rarity.RARE, mage.cards.f.FieldMarshal.class));
         cards.add(new SetCardInfo("Flashfreeze", 33, Rarity.UNCOMMON, mage.cards.f.Flashfreeze.class));
         cards.add(new SetCardInfo("Freyalise's Radiance", 108, Rarity.UNCOMMON, mage.cards.f.FreyalisesRadiance.class));
@@ -124,6 +125,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Storm", 89, Rarity.UNCOMMON, mage.cards.l.LightningStorm.class));
         cards.add(new SetCardInfo("Lovisa Coldeyes", 90, Rarity.RARE, mage.cards.l.LovisaColdeyes.class));
         cards.add(new SetCardInfo("Luminesce", 14, Rarity.UNCOMMON, mage.cards.l.Luminesce.class));
+        cards.add(new SetCardInfo("Magmatic Core", 91, Rarity.UNCOMMON, mage.cards.m.MagmaticCore.class));
         cards.add(new SetCardInfo("Martyr of Ashes", 92, Rarity.COMMON, mage.cards.m.MartyrOfAshes.class));
         cards.add(new SetCardInfo("Martyr of Bones", 65, Rarity.COMMON, mage.cards.m.MartyrOfBones.class));
         cards.add(new SetCardInfo("Martyr of Frost", 40, Rarity.COMMON, mage.cards.m.MartyrOfFrost.class));
@@ -150,6 +152,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Rimewind Taskmage", 44, Rarity.COMMON, mage.cards.r.RimewindTaskmage.class));
         cards.add(new SetCardInfo("Rite of Flame", 96, Rarity.COMMON, mage.cards.r.RiteOfFlame.class));
         cards.add(new SetCardInfo("Ronom Hulk", 119, Rarity.COMMON, mage.cards.r.RonomHulk.class));
+        cards.add(new SetCardInfo("Ronom Serpent", 45, Rarity.COMMON, mage.cards.r.RonomSerpent.class));
         cards.add(new SetCardInfo("Ronom Unicorn", 16, Rarity.COMMON, mage.cards.r.RonomUnicorn.class));
         cards.add(new SetCardInfo("Rune Snag", 46, Rarity.COMMON, mage.cards.r.RuneSnag.class));
         cards.add(new SetCardInfo("Scrying Sheets", 149, Rarity.RARE, mage.cards.s.ScryingSheets.class));

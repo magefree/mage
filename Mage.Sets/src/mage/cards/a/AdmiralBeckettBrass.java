@@ -56,7 +56,7 @@ import java.util.*;
  */
 public class AdmiralBeckettBrass extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other Pirates you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Pirates you control");
     private static final FilterNonlandPermanent filter2 = new FilterNonlandPermanent("nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn");
 
     static {
@@ -78,7 +78,7 @@ public class AdmiralBeckettBrass extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // At the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new GainControlTargetEffect(Duration.Custom), TargetController.YOU, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new GainControlTargetEffect(Duration.Custom, true), TargetController.YOU, false);
         ability.addTarget(new TargetNonlandPermanent(filter2));
         this.addAbility(ability, new DamagedByPiratesWatcher());
     }

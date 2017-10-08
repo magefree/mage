@@ -67,7 +67,7 @@ public class AgelessSentinels extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Ageless Sentinels blocks, it becomes a Bird Giant, and it loses defender.
-        Ability ability = new BlocksTriggeredAbility(new AgelessSentinelsEffect(), false);
+        Ability ability = new BlocksTriggeredAbility(new AgelessSentinelsEffect(), false, false, true);
         Effect effect = new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield);
         effect.setText("and it loses defender");
         ability.addEffect(effect);
@@ -87,7 +87,7 @@ public class AgelessSentinels extends CardImpl {
 
         public AgelessSentinelsEffect() {
             super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
-            staticText = "it becomes a Bird Giant, ";
+            staticText = "it becomes a Bird Giant,";
         }
 
         public AgelessSentinelsEffect(final AgelessSentinelsEffect effect) {

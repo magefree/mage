@@ -37,7 +37,7 @@ import mage.util.CardUtil;
 public class SkyshipWeatherlight extends CardImpl {
 
     public SkyshipWeatherlight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         addSuperType(SuperType.LEGENDARY);
 
         // When Skyship Weatherlight enters the battlefield, search your library for any number of artifact and/or creature cards and exile them. Then shuffle your library.
@@ -73,7 +73,7 @@ class SkyshipWeatherlightEffect extends SearchEffect {
     public SkyshipWeatherlightEffect() {
 
         super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Outcome.Neutral);
-        this.staticText = "search your library for any number of artifact and/or creature cards and remove them from the game. Then shuffle your library";
+        this.staticText = "search your library for any number of artifact and/or creature cards and exile them. Then shuffle your library";
 
     }
 
@@ -114,7 +114,7 @@ class SkyshipWeatherlightEffect2 extends OneShotEffect {
 
     public SkyshipWeatherlightEffect2() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Choose a card at random that was removed from the game with {this}. Put that card into your hand";
+        this.staticText = "Choose a card at random that was exiled with {this}. Put that card into its owner's hand";
     }
 
     public SkyshipWeatherlightEffect2(final SkyshipWeatherlightEffect2 effect) {

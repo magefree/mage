@@ -73,9 +73,7 @@ public class Standard extends Constructed {
             }
         }
         banned.add("Aetherworks Marvel");
-        banned.add("Emrakul, the Promised End");
         banned.add("Felidar Guardian");
-        banned.add("Reflector Mage");
         banned.add("Smuggler's Copter");
     }
 
@@ -83,6 +81,6 @@ public class Standard extends Constructed {
         Calendar cal = Calendar.getInstance();
         cal.setTime(set.getReleaseDate());
         // Sets from fall block are normally released in September and January
-        return cal.get(Calendar.MONTH) > 8 || cal.get(Calendar.MONTH) < 2;
+        return cal.get(Calendar.MONTH) > 7 || cal.get(Calendar.MONTH) < 2;
     }
 }

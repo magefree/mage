@@ -198,6 +198,8 @@ public interface MageObject extends MageItem, Serializable {
 
     TextPart addTextPart(TextPart textPart);
 
+    void removePTCDA();
+
     default void changeSubType(SubType fromSubType, SubType toSubType) {
 
     }

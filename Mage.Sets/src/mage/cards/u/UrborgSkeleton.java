@@ -24,7 +24,7 @@
 *  The views and conclusions contained in the software and documentation are those of the
 *  authors and should not be interpreted as representing official policies, either expressed
 *  or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 package mage.cards.u;
 
 import java.util.UUID;
@@ -45,15 +45,15 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
-*
-* @author LevelX2
-*/
+ *
+ * @author LevelX2
+ */
 public class UrborgSkeleton extends CardImpl {
 
-    private static final String staticText = "If Urborg Skeleton was kicked, it enters the battlefield with a +1/+1 counter on it";
+    private static final String staticText = "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it.";
 
     public UrborgSkeleton(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add(SubType.SKELETON);
 
         this.power = new MageInt(0);
@@ -68,7 +68,7 @@ public class UrborgSkeleton extends CardImpl {
         // If Urborg Skeleton was kicked, it enters the battlefield with a +1/+1 counter on it.
         Ability ability = new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-                KickedCondition.instance, staticText,"");
+                KickedCondition.instance, staticText, "");
         this.addAbility(ability);
     }
 

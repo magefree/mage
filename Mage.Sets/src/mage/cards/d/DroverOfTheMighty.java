@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class DroverOfTheMighty extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a Dinosaur");
+    private static final FilterPermanent filter = new FilterPermanent("Dinosaur");
 
     static {
         filter.add(new SubtypePredicate(SubType.DINOSAUR));

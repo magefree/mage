@@ -165,6 +165,7 @@ public class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Stronghold Assassin", 21, Rarity.RARE, mage.cards.s.StrongholdAssassin.class));
         cards.add(new SetCardInfo("Stronghold Taskmaster", 22, Rarity.UNCOMMON, mage.cards.s.StrongholdTaskmaster.class));
         cards.add(new SetCardInfo("Sword of the Chosen", 135, Rarity.RARE, mage.cards.s.SwordOfTheChosen.class));
+        cards.add(new SetCardInfo("Temper", 120, Rarity.UNCOMMON, mage.cards.t.Temper.class));
         cards.add(new SetCardInfo("Tempting Licid", 72, Rarity.UNCOMMON, mage.cards.t.TemptingLicid.class));
         cards.add(new SetCardInfo("Thalakos Deceiver", 45, Rarity.RARE, mage.cards.t.ThalakosDeceiver.class));
         cards.add(new SetCardInfo("Tidal Surge", 46, Rarity.COMMON, mage.cards.t.TidalSurge.class));

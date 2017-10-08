@@ -59,7 +59,7 @@ public class TradingPostTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Act of Treason", "Savannah Lions");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1},{T}, Sacrifice a creature", "Helm of Possession", "Act of Treason", StackClause.WHILE_NOT_ON_STACK);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}, Sacrifice a creature", "Helm of Possession", "Act of Treason", StackClause.WHILE_NOT_ON_STACK);
         setChoice(playerA, "Savannah Lions");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continuous;
 
 import mage.MageObject;
@@ -46,7 +45,11 @@ public class SetToughnessSourceEffect extends ContinuousEffectImpl {
     private final DynamicValue amount;
 
     public SetToughnessSourceEffect(DynamicValue amount, Duration duration) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+        this(amount, duration, SubLayer.CharacteristicDefining_7a);
+    }
+
+    public SetToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
+        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
         this.amount = amount;
         staticText = "{this}'s toughness is equal to the number of " + amount.getMessage();
     }

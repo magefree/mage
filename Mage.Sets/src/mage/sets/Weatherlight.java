@@ -181,8 +181,10 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Tariff", 144, Rarity.RARE, mage.cards.t.Tariff.class));
         cards.add(new SetCardInfo("Teferi's Veil", 53, Rarity.UNCOMMON, mage.cards.t.TeferisVeil.class));
         cards.add(new SetCardInfo("Tendrils of Despair", 25, Rarity.COMMON, mage.cards.t.TendrilsOfDespair.class));
+        cards.add(new SetCardInfo("Thran Forge", 159, Rarity.UNCOMMON, mage.cards.t.ThranForge.class));
         cards.add(new SetCardInfo("Thunderbolt", 115, Rarity.COMMON, mage.cards.t.Thunderbolt.class));
         cards.add(new SetCardInfo("Thundermare", 116, Rarity.RARE, mage.cards.t.Thundermare.class));
+        cards.add(new SetCardInfo("Timid Drake", 54, Rarity.UNCOMMON, mage.cards.t.TimidDrake.class));
         cards.add(new SetCardInfo("Tolarian Drake", 55, Rarity.COMMON, mage.cards.t.TolarianDrake.class));
         cards.add(new SetCardInfo("Tolarian Entrancer", 56, Rarity.RARE, mage.cards.t.TolarianEntrancer.class));
         cards.add(new SetCardInfo("Tolarian Serpent", 57, Rarity.RARE, mage.cards.t.TolarianSerpent.class));
@@ -190,9 +192,11 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Grove", 84, Rarity.RARE, mage.cards.t.TranquilGrove.class));
         cards.add(new SetCardInfo("Uktabi Efreet", 85, Rarity.COMMON, mage.cards.u.UktabiEfreet.class));
         cards.add(new SetCardInfo("Urborg Justice", 26, Rarity.RARE, mage.cards.u.UrborgJustice.class));
+        cards.add(new SetCardInfo("Urborg Stalker", 27, Rarity.RARE, mage.cards.u.UrborgStalker.class));
         cards.add(new SetCardInfo("Veteran Explorer", 86, Rarity.UNCOMMON, mage.cards.v.VeteranExplorer.class));
         cards.add(new SetCardInfo("Vitalize", 87, Rarity.COMMON, mage.cards.v.Vitalize.class));
         cards.add(new SetCardInfo("Vodalian Illusionist", 58, Rarity.UNCOMMON, mage.cards.v.VodalianIllusionist.class));
+        cards.add(new SetCardInfo("Wave of Terror", 28, Rarity.RARE, mage.cards.w.WaveOfTerror.class));
         cards.add(new SetCardInfo("Well of Knowledge", 162, Rarity.RARE, mage.cards.w.WellOfKnowledge.class));
         cards.add(new SetCardInfo("Winding Canyons", 167, Rarity.RARE, mage.cards.w.WindingCanyons.class));
         cards.add(new SetCardInfo("Xanthic Statue", 163, Rarity.RARE, mage.cards.x.XanthicStatue.class));

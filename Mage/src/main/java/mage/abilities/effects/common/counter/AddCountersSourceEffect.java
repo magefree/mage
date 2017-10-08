@@ -152,14 +152,20 @@ public class AddCountersSourceEffect extends OneShotEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("put ");
+        boolean plural = true;
         if (counter.getCount() > 1) {
             sb.append(CardUtil.numberToText(counter.getCount())).append(' ');
         } else if (amount.toString().equals("X") && amount.getMessage().isEmpty()) {
             sb.append("X ");
         } else {
             sb.append("a ");
+            plural = false;
         }
-        sb.append(counter.getName().toLowerCase()).append(" counter on {this}");
+        sb.append(counter.getName().toLowerCase()).append(" counter");
+        if (plural) {
+            sb.append('s');
+        }
+        sb.append(" on {this}");
         if (!amount.getMessage().isEmpty()) {
             sb.append(" for each ").append(amount.getMessage());
         }

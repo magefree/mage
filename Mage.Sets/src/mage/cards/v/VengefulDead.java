@@ -43,15 +43,15 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author fireshoes
  */
 public class VengefulDead extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Zombie");
-    
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
+
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public VengefulDead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

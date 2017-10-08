@@ -46,14 +46,14 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class DutifulAttendant extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("another creature card from your graveyard");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("another target creature card from your graveyard");
 
     static {
         filter.add(new AnotherCardPredicate());
     }
 
     public DutifulAttendant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(1);

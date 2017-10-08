@@ -48,6 +48,7 @@ import mage.game.Game;
 import mage.game.GameState;
 import mage.game.ZoneChangeInfo;
 import mage.game.ZonesHandler;
+import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
 import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
@@ -507,6 +508,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean isAttacking() {
         return attacking;
+    }
+
+    @Override
+    public boolean isBlocked(Game game) {
+        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+            if (combatGroup.getBlocked() && combatGroup.getAttackers().contains(this.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

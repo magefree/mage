@@ -47,7 +47,7 @@ import mage.constants.SubType;
 public class WallOfJunk extends CardImpl {
 
     public WallOfJunk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
         this.subtype.add(SubType.WALL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(7);
@@ -59,7 +59,7 @@ public class WallOfJunk extends CardImpl {
         Effect effect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)));
         effect.setText("return it to its owner's hand at end of combat");
-        this.addAbility(new BlocksTriggeredAbility(effect, false));
+        this.addAbility(new BlocksTriggeredAbility(effect, false, false, true));
     }
 
     public WallOfJunk(final WallOfJunk card) {

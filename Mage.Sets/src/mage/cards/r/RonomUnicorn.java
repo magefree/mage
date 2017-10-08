@@ -37,10 +37,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
-import mage.target.TargetPermanent;
 
 import java.util.UUID;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -49,14 +48,14 @@ import java.util.UUID;
 public class RonomUnicorn extends CardImpl {
 
     public RonomUnicorn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.UNICORN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Sacrifice Ronom Unicorn: Destroy target enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());
-        ability.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }
 

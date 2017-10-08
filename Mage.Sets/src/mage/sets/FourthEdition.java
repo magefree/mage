@@ -151,6 +151,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Earthquake", 207, Rarity.RARE, mage.cards.e.Earthquake.class));
         cards.add(new SetCardInfo("Ebony Horse", 336, Rarity.RARE, mage.cards.e.EbonyHorse.class));
         cards.add(new SetCardInfo("El-Hajjaj", 18, Rarity.RARE, mage.cards.e.ElHajjaj.class));
+        cards.add(new SetCardInfo("Elder Land Wurm", 274, Rarity.RARE, mage.cards.e.ElderLandWurm.class));
         cards.add(new SetCardInfo("Elven Riders", 126, Rarity.UNCOMMON, mage.cards.e.ElvenRiders.class));
         cards.add(new SetCardInfo("Elvish Archers", 127, Rarity.RARE, mage.cards.e.ElvishArchers.class));
         cards.add(new SetCardInfo("Energy Flux", 68, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));

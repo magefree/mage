@@ -233,9 +233,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.addAbility(FlyingAbility.getInstance());
         }
         if (tokenPower != Integer.MIN_VALUE) {
+            token.removePTCDA();
             token.getPower().modifyBaseValue(tokenPower);
         }
         if (tokenToughness != Integer.MIN_VALUE) {
+            token.removePTCDA();
             token.getToughness().modifyBaseValue(tokenToughness);
         }
         if (additionalSubType != null && !token.hasSubtype(additionalSubType, game)) {

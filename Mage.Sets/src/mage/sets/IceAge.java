@@ -61,6 +61,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Arenson's Aura", 227, Rarity.COMMON, mage.cards.a.ArensonsAura.class));
         cards.add(new SetCardInfo("Armor of Faith", 228, Rarity.COMMON, mage.cards.a.ArmorOfFaith.class));
         cards.add(new SetCardInfo("Arnjlot's Ascent", 57, Rarity.COMMON, mage.cards.a.ArnjlotsAscent.class));
+        cards.add(new SetCardInfo("Ashen Ghoul", 2, Rarity.UNCOMMON, mage.cards.a.AshenGhoul.class));
         cards.add(new SetCardInfo("Aurochs", 113, Rarity.COMMON, mage.cards.a.Aurochs.class));
         cards.add(new SetCardInfo("Avalanche", 171, Rarity.UNCOMMON, mage.cards.a.Avalanche.class));
         cards.add(new SetCardInfo("Balduvian Barbarians", 172, Rarity.COMMON, mage.cards.b.BalduvianBarbarians.class));
@@ -107,6 +108,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Disenchant", 244, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Drift of the Dead", 11, Rarity.UNCOMMON, mage.cards.d.DriftOfTheDead.class));
         cards.add(new SetCardInfo("Dwarven Armory", 182, Rarity.RARE, mage.cards.d.DwarvenArmory.class));
+        cards.add(new SetCardInfo("Earthlink", 363, Rarity.RARE, mage.cards.e.Earthlink.class));
         cards.add(new SetCardInfo("Elder Druid", 120, Rarity.RARE, mage.cards.e.ElderDruid.class));
         cards.add(new SetCardInfo("Elemental Augury", 364, Rarity.RARE, mage.cards.e.ElementalAugury.class));
         cards.add(new SetCardInfo("Enduring Renewal", 247, Rarity.RARE, mage.cards.e.EnduringRenewal.class));
@@ -229,6 +231,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Healer", 208, Rarity.UNCOMMON, mage.cards.o.OrcishHealer.class));
         cards.add(new SetCardInfo("Orcish Librarian", 209, Rarity.RARE, mage.cards.o.OrcishLibrarian.class));
         cards.add(new SetCardInfo("Orcish Lumberjack", 210, Rarity.COMMON, mage.cards.o.OrcishLumberjack.class));
+        cards.add(new SetCardInfo("Orcish Squatters", 211, Rarity.RARE, mage.cards.o.OrcishSquatters.class));
         cards.add(new SetCardInfo("Order of the Sacred Torch", 269, Rarity.RARE, mage.cards.o.OrderOfTheSacredTorch.class));
         cards.add(new SetCardInfo("Order of the White Shield", 270, Rarity.UNCOMMON, mage.cards.o.OrderOfTheWhiteShield.class));
         cards.add(new SetCardInfo("Pale Bears", 144, Rarity.RARE, mage.cards.p.PaleBears.class));
@@ -267,12 +270,14 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Silver Erne", 98, Rarity.UNCOMMON, mage.cards.s.SilverErne.class));
         cards.add(new SetCardInfo("Skeleton Ship", 379, Rarity.RARE, mage.cards.s.SkeletonShip.class));
         cards.add(new SetCardInfo("Skull Catapult", 311, Rarity.UNCOMMON, mage.cards.s.SkullCatapult.class));
+        cards.add(new SetCardInfo("Snow Fortress", 312, Rarity.RARE, mage.cards.s.SnowFortress.class));
         cards.add(new SetCardInfo("Snow-Covered Forest", 347, Rarity.COMMON, mage.cards.s.SnowCoveredForest.class));
         cards.add(new SetCardInfo("Snow-Covered Island", 348, Rarity.COMMON, mage.cards.s.SnowCoveredIsland.class));
         cards.add(new SetCardInfo("Snow-Covered Mountain", 349, Rarity.COMMON, mage.cards.s.SnowCoveredMountain.class));
         cards.add(new SetCardInfo("Snow-Covered Plains", 350, Rarity.COMMON, mage.cards.s.SnowCoveredPlains.class));
         cards.add(new SetCardInfo("Snow-Covered Swamp", 351, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class));
         cards.add(new SetCardInfo("Snow Hound", 277, Rarity.UNCOMMON, mage.cards.s.SnowHound.class));
+        cards.add(new SetCardInfo("Soldevi Golem", 313, Rarity.RARE, mage.cards.s.SoldeviGolem.class));
         cards.add(new SetCardInfo("Soldevi Machinist", 102, Rarity.UNCOMMON, mage.cards.s.SoldeviMachinist.class));
         cards.add(new SetCardInfo("Soldevi Simulacrum", 314, Rarity.UNCOMMON, mage.cards.s.SoldeviSimulacrum.class));
         cards.add(new SetCardInfo("Songs of the Damned", 48, Rarity.COMMON, mage.cards.s.SongsOfTheDamned.class));

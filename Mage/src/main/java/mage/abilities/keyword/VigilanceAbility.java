@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.keyword;
 
 import mage.constants.Zone;
@@ -40,7 +39,7 @@ import java.io.ObjectStreamException;
  */
 public class VigilanceAbility extends StaticAbility implements MageSingleton {
 
-    private static final VigilanceAbility instance =  new VigilanceAbility();
+    private static final VigilanceAbility instance = new VigilanceAbility();
 
     private Object readResolve() throws ObjectStreamException {
         return instance;
@@ -56,7 +55,7 @@ public class VigilanceAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Vigilance";
+        return "vigilance";
     }
 
     @Override

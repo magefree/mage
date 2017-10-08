@@ -101,11 +101,13 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("D'Avenant Archer", 176, Rarity.COMMON, mage.cards.d.DAvenantArcher.class));
         cards.add(new SetCardInfo("Demonic Torment", 9, Rarity.UNCOMMON, mage.cards.d.DemonicTorment.class));
         cards.add(new SetCardInfo("Devouring Deep", 50, Rarity.COMMON, mage.cards.d.DevouringDeep.class));
+        cards.add(new SetCardInfo("Disharmony", 140, Rarity.RARE, mage.cards.d.Disharmony.class));
         cards.add(new SetCardInfo("Divine Intervention", 177, Rarity.RARE, mage.cards.d.DivineIntervention.class));
         cards.add(new SetCardInfo("Divine Offering", 178, Rarity.COMMON, mage.cards.d.DivineOffering.class));
         cards.add(new SetCardInfo("Divine Transformation", 179, Rarity.RARE, mage.cards.d.DivineTransformation.class));
         cards.add(new SetCardInfo("Durkwood Boars", 96, Rarity.COMMON, mage.cards.d.DurkwoodBoars.class));
         cards.add(new SetCardInfo("Dwarven Song", 141, Rarity.UNCOMMON, mage.cards.d.DwarvenSong.class));
+        cards.add(new SetCardInfo("Elder Land Wurm", 180, Rarity.RARE, mage.cards.e.ElderLandWurm.class));
         cards.add(new SetCardInfo("Elven Riders", 97, Rarity.RARE, mage.cards.e.ElvenRiders.class));
         cards.add(new SetCardInfo("Emerald Dragonfly", 98, Rarity.COMMON, mage.cards.e.EmeraldDragonfly.class));
         cards.add(new SetCardInfo("Energy Tap", 54, Rarity.COMMON, mage.cards.e.EnergyTap.class));
@@ -130,6 +132,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Greed", 15, Rarity.RARE, mage.cards.g.Greed.class));
         cards.add(new SetCardInfo("Green Mana Battery", 223, Rarity.UNCOMMON, mage.cards.g.GreenManaBattery.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 268, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));
+        cards.add(new SetCardInfo("Hammerheim", 247, Rarity.UNCOMMON, mage.cards.h.Hammerheim.class));
         cards.add(new SetCardInfo("Hazezon Tamar", 270, Rarity.RARE, mage.cards.h.HazezonTamar.class));
         cards.add(new SetCardInfo("Headless Horseman", 16, Rarity.COMMON, mage.cards.h.HeadlessHorseman.class));
         cards.add(new SetCardInfo("Heaven's Gate", 188, Rarity.UNCOMMON, mage.cards.h.HeavensGate.class));
@@ -213,6 +216,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Righteous Avengers", 203, Rarity.UNCOMMON, mage.cards.r.RighteousAvengers.class));
         cards.add(new SetCardInfo("Ring of Immortals", 238, Rarity.RARE, mage.cards.r.RingOfImmortals.class));
         cards.add(new SetCardInfo("Riven Turnbull", 294, Rarity.UNCOMMON, mage.cards.r.RivenTurnbull.class));
+        cards.add(new SetCardInfo("Rohgahh of Kher Keep", 295, Rarity.RARE, mage.cards.r.RohgahhOfKherKeep.class));
         cards.add(new SetCardInfo("Rubinia Soulsinger", 296, Rarity.RARE, mage.cards.r.RubiniaSoulsinger.class));
         cards.add(new SetCardInfo("Rust", 49, Rarity.COMMON, mage.cards.r.Rust.class));
         cards.add(new SetCardInfo("Sea Kings' Blessing", 75, Rarity.UNCOMMON, mage.cards.s.SeaKingsBlessing.class));

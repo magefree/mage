@@ -43,12 +43,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class MischiefAndMayhem extends CardImpl {
 
     public MischiefAndMayhem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
         // Up to two target creatures each get +4/+4 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(4,4, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,2, new FilterCreaturePermanent("creatures each"), false));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent("creatures each"), false));
     }
 
     public MischiefAndMayhem(final MischiefAndMayhem card) {

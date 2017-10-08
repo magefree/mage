@@ -100,6 +100,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Desperate Charge", 63, Rarity.COMMON, mage.cards.d.DesperateCharge.class));
         cards.add(new SetCardInfo("Didgeridoo", 194, Rarity.UNCOMMON, mage.cards.d.Didgeridoo.class));
         cards.add(new SetCardInfo("Disenchant", 7, Rarity.COMMON, mage.cards.d.Disenchant.class));
+        cards.add(new SetCardInfo("Disharmony", 95, Rarity.UNCOMMON, mage.cards.d.Disharmony.class));
         cards.add(new SetCardInfo("Divine Intervention", 8, Rarity.RARE, mage.cards.d.DivineIntervention.class));
         cards.add(new SetCardInfo("Dong Zhou, the Tyrant", 96, Rarity.RARE, mage.cards.d.DongZhouTheTyrant.class));
         cards.add(new SetCardInfo("Elves of Deep Shadow", 116, Rarity.COMMON, mage.cards.e.ElvesOfDeepShadow.class));
@@ -128,6 +129,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Guan Yu's 1,000-Li March", 13, Rarity.RARE, mage.cards.g.GuanYus1000LiMarch.class));
         cards.add(new SetCardInfo("Guan Yu, Sainted Warrior", 12, Rarity.UNCOMMON, mage.cards.g.GuanYuSaintedWarrior.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 149, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));
+        cards.add(new SetCardInfo("Hammerheim", 207, Rarity.UNCOMMON, mage.cards.h.Hammerheim.class));
         cards.add(new SetCardInfo("Hazezon Tamar", 151, Rarity.RARE, mage.cards.h.HazezonTamar.class));
         cards.add(new SetCardInfo("Heal", 14, Rarity.COMMON, mage.cards.h.Heal.class));
         cards.add(new SetCardInfo("Hellfire", 70, Rarity.RARE, mage.cards.h.Hellfire.class));
@@ -153,6 +155,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Kobolds of Kher Keep", 107, Rarity.COMMON, mage.cards.k.KoboldsOfKherKeep.class));
         cards.add(new SetCardInfo("Kobold Taskmaster", 106, Rarity.COMMON, mage.cards.k.KoboldTaskmaster.class));
         cards.add(new SetCardInfo("Kongming, 'Sleeping Dragon'", 16, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
+        cards.add(new SetCardInfo("Labyrinth Minotaur", 39, Rarity.COMMON, mage.cards.l.LabyrinthMinotaur.class));
         cards.add(new SetCardInfo("Lady Caleria", 157, Rarity.UNCOMMON, mage.cards.l.LadyCaleria.class));
         cards.add(new SetCardInfo("Lady Evangela", 158, Rarity.UNCOMMON, mage.cards.l.LadyEvangela.class));
         cards.add(new SetCardInfo("Lady Orca", 159, Rarity.COMMON, mage.cards.l.LadyOrca.class));
@@ -200,6 +203,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Reveka, Wizard Savant", 49, Rarity.UNCOMMON, mage.cards.r.RevekaWizardSavant.class));
         cards.add(new SetCardInfo("Riding the Dilu Horse", 131, Rarity.UNCOMMON, mage.cards.r.RidingTheDiluHorse.class));
         cards.add(new SetCardInfo("Riven Turnbull", 171, Rarity.UNCOMMON, mage.cards.r.RivenTurnbull.class));
+        cards.add(new SetCardInfo("Rohgahh of Kher Keep", 172, Rarity.RARE, mage.cards.r.RohgahhOfKherKeep.class));
         cards.add(new SetCardInfo("Rolling Earthquake", 110, Rarity.RARE, mage.cards.r.RollingEarthquake.class));
         cards.add(new SetCardInfo("Rubinia Soulsinger", 173, Rarity.RARE, mage.cards.r.RubiniaSoulsinger.class));
         cards.add(new SetCardInfo("Scrubland", 210, Rarity.RARE, mage.cards.s.Scrubland.class));

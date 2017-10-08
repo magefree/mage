@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInHand;
 public class FirebrandRanger extends CardImpl {
 
     public FirebrandRanger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
@@ -80,7 +80,7 @@ public class FirebrandRanger extends CardImpl {
 }
 
 class PutLandOnBattlefieldEffect extends OneShotEffect {
-    
+
     private static final FilterCard filter = new FilterCard("basic land card");
 
     static {
@@ -91,7 +91,7 @@ class PutLandOnBattlefieldEffect extends OneShotEffect {
 
     public PutLandOnBattlefieldEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "put a basic land card from your hand onto the battlefield";
+        this.staticText = "you may put a basic land card from your hand onto the battlefield";
     }
 
     public PutLandOnBattlefieldEffect(final PutLandOnBattlefieldEffect effect) {

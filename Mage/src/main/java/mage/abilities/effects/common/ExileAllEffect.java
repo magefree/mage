@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import java.util.List;
@@ -52,6 +51,7 @@ public class ExileAllEffect extends OneShotEffect {
     public ExileAllEffect(FilterPermanent filter) {
         this(filter, null, null);
     }
+
     public ExileAllEffect(FilterPermanent filter, UUID exileId, String exileZone) {
         super(Outcome.Exile);
         this.filter = filter;
@@ -77,19 +77,18 @@ public class ExileAllEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-            for (Permanent permanent: permanents) {
+            for (Permanent permanent : permanents) {
                 controller.moveCardToExileWithInfo(permanent, exileId, exileZone, source.getSourceId(), game, Zone.BATTLEFIELD, true);
             }
             return true;
         }
         return false;
 
-
     }
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Exile all ").append(filter.getMessage());
+        sb.append("exile all ").append(filter.getMessage());
         staticText = sb.toString();
     }
 }

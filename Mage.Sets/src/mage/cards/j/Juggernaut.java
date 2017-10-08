@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.j;
 
 import java.util.UUID;
@@ -48,18 +47,20 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 public class Juggernaut extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls");
+
     static {
         filter.add(new SubtypePredicate(SubType.WALL));
     }
 
     public Juggernaut(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
         this.subtype.add(SubType.JUGGERNAUT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 
         // Juggernaut attacks each turn if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
+
         // Juggernaut can't be blocked by Walls.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }

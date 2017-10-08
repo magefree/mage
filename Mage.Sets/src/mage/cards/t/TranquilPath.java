@@ -42,13 +42,12 @@ import mage.filter.common.FilterEnchantmentPermanent;
 public class TranquilPath extends CardImpl {
 
     public TranquilPath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
         // Destroy all enchantments.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
     }
 
     public TranquilPath(final TranquilPath card) {

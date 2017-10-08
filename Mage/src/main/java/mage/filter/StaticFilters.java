@@ -69,6 +69,7 @@ public final class StaticFilters {
             = (FilterSpell) new FilterSpell("noncreature spell").add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
 
     public static final FilterSpell FILTER_SPELL = new FilterSpell();
+    public static final FilterSpell FILTER_A_SPELL = new FilterSpell("a spell");
 
     public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELL = new FilterSpell("instant or sorcery spell");
     public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELLS = new FilterSpell("instant or sorcery spells");

@@ -28,7 +28,6 @@
 package mage.cards.k;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
@@ -36,7 +35,6 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -76,7 +74,9 @@ public class KrovikanWhispers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
 
         // When Krovikan Whispers is put into a graveyard from the battlefield, you lose 2 life for each age counter on it.
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new LoseLifeSourceControllerEffect(new MultipliedValue(new CountersSourceCount(CounterType.AGE), 2))));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new LoseLifeSourceControllerEffect(new MultipliedValue(new CountersSourceCount(CounterType.AGE), 2))
+                .setText("you lose 2 life for each age counter on it.")
+        ));
     }
 
     public KrovikanWhispers(final KrovikanWhispers card) {
@@ -88,4 +88,3 @@ public class KrovikanWhispers extends CardImpl {
         return new KrovikanWhispers(this);
     }
 }
-

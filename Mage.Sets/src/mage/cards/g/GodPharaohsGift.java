@@ -111,6 +111,7 @@ class GodPharaohsGiftEffect extends OneShotEffect {
                         && cardChosen.moveToExile(exileId, sourceObject.getIdName(), source.getSourceId(), game)) {
                     EmptyToken token = new EmptyToken();
                     CardUtil.copyTo(token).from(cardChosen);
+                    token.removePTCDA();
                     token.getPower().modifyBaseValue(4);
                     token.getToughness().modifyBaseValue(4);
                     token.getColor(game).setColor(ObjectColor.BLACK);

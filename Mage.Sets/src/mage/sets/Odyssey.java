@@ -194,6 +194,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivy Elemental", 245, Rarity.RARE, mage.cards.i.IvyElemental.class));
+        cards.add(new SetCardInfo("Junk Golem", 300, Rarity.RARE, mage.cards.j.JunkGolem.class));
         cards.add(new SetCardInfo("Kamahl, Pit Fighter", 198, Rarity.RARE, mage.cards.k.KamahlPitFighter.class));
         cards.add(new SetCardInfo("Kamahl's Desire", 199, Rarity.COMMON, mage.cards.k.KamahlsDesire.class));
         cards.add(new SetCardInfo("Karmic Justice", 26, Rarity.RARE, mage.cards.k.KarmicJustice.class));
@@ -250,6 +251,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Nomad Stadium", 322, Rarity.UNCOMMON, mage.cards.n.NomadStadium.class));
         cards.add(new SetCardInfo("Nut Collector", 259, Rarity.RARE, mage.cards.n.NutCollector.class));
         cards.add(new SetCardInfo("Obstinate Familiar", 210, Rarity.RARE, mage.cards.o.ObstinateFamiliar.class));
+        cards.add(new SetCardInfo("Otarian Juggernaut", 305, Rarity.RARE, mage.cards.o.OtarianJuggernaut.class));
         cards.add(new SetCardInfo("Overeager Apprentice", 154, Rarity.COMMON, mage.cards.o.OvereagerApprentice.class));
         cards.add(new SetCardInfo("Overrun", 260, Rarity.UNCOMMON, mage.cards.o.Overrun.class));
         cards.add(new SetCardInfo("Pardic Firecat", 211, Rarity.COMMON, mage.cards.p.PardicFirecat.class));
@@ -319,6 +321,11 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Soulcatcher", 47, Rarity.UNCOMMON, mage.cards.s.Soulcatcher.class));
         cards.add(new SetCardInfo("Spark Mage", 222, Rarity.UNCOMMON, mage.cards.s.SparkMage.class));
         cards.add(new SetCardInfo("Spellbane Centaur", 271, Rarity.RARE, mage.cards.s.SpellbaneCentaur.class));
+        cards.add(new SetCardInfo("Sphere of Duty", 48, Rarity.UNCOMMON, mage.cards.s.SphereOfDuty.class));
+        cards.add(new SetCardInfo("Sphere of Grace", 49, Rarity.UNCOMMON, mage.cards.s.SphereOfGrace.class));
+        cards.add(new SetCardInfo("Sphere of Law", 50, Rarity.UNCOMMON, mage.cards.s.SphereOfLaw.class));
+        cards.add(new SetCardInfo("Sphere of Reason", 51, Rarity.UNCOMMON, mage.cards.s.SphereOfReason.class));
+        cards.add(new SetCardInfo("Sphere of Truth", 52, Rarity.UNCOMMON, mage.cards.s.SphereOfTruth.class));
         cards.add(new SetCardInfo("Spiritualize", 53, Rarity.UNCOMMON, mage.cards.s.Spiritualize.class));
         cards.add(new SetCardInfo("Springing Tiger", 272, Rarity.COMMON, mage.cards.s.SpringingTiger.class));
         cards.add(new SetCardInfo("Squirrel Mob", 273, Rarity.RARE, mage.cards.s.SquirrelMob.class));
@@ -354,6 +361,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Traumatize", 110, Rarity.RARE, mage.cards.t.Traumatize.class));
         cards.add(new SetCardInfo("Treetop Sentinel", 111, Rarity.UNCOMMON, mage.cards.t.TreetopSentinel.class));
         cards.add(new SetCardInfo("Tremble", 225, Rarity.COMMON, mage.cards.t.Tremble.class));
+        cards.add(new SetCardInfo("Twigwalker", 279, Rarity.UNCOMMON, mage.cards.t.Twigwalker.class));
         cards.add(new SetCardInfo("Unifying Theory", 112, Rarity.RARE, mage.cards.u.UnifyingTheory.class));
         cards.add(new SetCardInfo("Upheaval", 113, Rarity.RARE, mage.cards.u.Upheaval.class));
         cards.add(new SetCardInfo("Vampiric Dragon", 296, Rarity.RARE, mage.cards.v.VampiricDragon.class));

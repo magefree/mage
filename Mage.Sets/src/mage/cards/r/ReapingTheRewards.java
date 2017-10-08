@@ -44,11 +44,11 @@ import mage.target.common.TargetControlledPermanent;
 public class ReapingTheRewards extends CardImpl {
 
     public ReapingTheRewards(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Buyback-Sacrifice a land.
-        this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()))));
-        
+        this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));
+
         // You gain 2 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }

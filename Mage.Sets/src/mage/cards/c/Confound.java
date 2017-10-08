@@ -44,14 +44,14 @@ import mage.target.TargetSpell;
  */
 public class Confound extends CardImpl {
 
-    private final static FilterSpell filter = new FilterSpell("spell that targets one or more creatures");
+    private final static FilterSpell filter = new FilterSpell("spell that targets a creature");
 
     static {
         filter.add(new TargetsPermanentPredicate(new FilterCreaturePermanent()));
     }
 
     public Confound(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Counter target spell that targets one or more creatures.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

@@ -62,7 +62,7 @@ public class ScaleguardSentinels extends CardImpl {
     }
 
     public ScaleguardSentinels(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
@@ -74,7 +74,7 @@ public class ScaleguardSentinels extends CardImpl {
         // Scaleguard Sentinels enters the battlefield with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast Scaleguard Sentinels.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true),
                 ScaleguardSentinelsCondition.instance,
-                "{this} enters the battlefield with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast {this}", ""),
+                "{this} enters the battlefield with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast {this}.", ""),
                 new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
 
     }

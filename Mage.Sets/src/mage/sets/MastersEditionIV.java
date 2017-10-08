@@ -241,8 +241,10 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Sinkhole", 97, Rarity.RARE, mage.cards.s.Sinkhole.class));
         cards.add(new SetCardInfo("Sleight of Hand", 62, Rarity.COMMON, mage.cards.s.SleightOfHand.class));
         cards.add(new SetCardInfo("Smoke", 137, Rarity.RARE, mage.cards.s.Smoke.class));
+        cards.add(new SetCardInfo("Soldevi Golem", 228, Rarity.UNCOMMON, mage.cards.s.SoldeviGolem.class));
         cards.add(new SetCardInfo("Soldevi Machinist", 63, Rarity.UNCOMMON, mage.cards.s.SoldeviMachinist.class));
         cards.add(new SetCardInfo("Sol Ring", 227, Rarity.RARE, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Soldevi Golem", 228, Rarity.UNCOMMON, mage.cards.s.SoldeviGolem.class));
         cards.add(new SetCardInfo("Soul Shred", 98, Rarity.COMMON, mage.cards.s.SoulShred.class));
         cards.add(new SetCardInfo("Southern Elephant", 167, Rarity.COMMON, mage.cards.s.SouthernElephant.class));
         cards.add(new SetCardInfo("Spotted Griffin", 28, Rarity.COMMON, mage.cards.s.SpottedGriffin.class));

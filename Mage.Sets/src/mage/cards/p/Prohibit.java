@@ -29,17 +29,17 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.target.TargetSpell;
 
 /**
@@ -48,34 +48,15 @@ import mage.target.TargetSpell;
  */
 public class Prohibit extends CardImpl {
 
-    private static final FilterSpell filter2 = new FilterSpell("spell if its converted mana cost is 2 or less");
-    private static final FilterSpell filter4 = new FilterSpell("spell if its converted mana cost is 4 or less");
-
-    static {
-        filter2.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
-        filter4.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
-    }
-
     public Prohibit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Kicker {2}
         this.addAbility(new KickerAbility("{2}"));
 
         // Counter target spell if its converted mana cost is 2 or less. If Prohibit was kicked, counter that spell if its converted mana cost is 4 or less instead.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter4));
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            if (!KickedCondition.instance.apply(game, ability)) {
-                ability.getTargets().clear();
-                ability.getTargets().add(new TargetSpell(filter2));
-            }
-        }
+        this.getSpellAbility().addTarget(new TargetSpell());
     }
 
     public Prohibit(final Prohibit card) {
@@ -85,5 +66,38 @@ public class Prohibit extends CardImpl {
     @Override
     public Prohibit copy() {
         return new Prohibit(this);
+    }
+}
+
+class OverloadEffect extends OneShotEffect {
+
+    OverloadEffect() {
+        super(Outcome.DestroyPermanent);
+        this.staticText = "Counter target spell if its converted mana cost is 2 or less. If {this} was kicked, counter that spell if its converted mana cost is 4 or less instead.";
+    }
+
+    OverloadEffect(final OverloadEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OverloadEffect copy() {
+        return new OverloadEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Spell targetSpell = game.getSpell(this.getTargetPointer().getFirst(game, source));
+            if (targetSpell != null) {
+                int cmc = targetSpell.getConvertedManaCost();
+                if (cmc <= 2 || (KickedCondition.instance.apply(game, source) && cmc <= 4)) {
+                    targetSpell.counter(source.getSourceId(), game);
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }

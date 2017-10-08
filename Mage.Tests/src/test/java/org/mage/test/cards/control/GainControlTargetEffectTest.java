@@ -60,10 +60,10 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         // Persist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
         addCard(Zone.BATTLEFIELD, playerB, "Glen Elendra Archmage");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as {this} remains tapped.", "Glen Elendra Archmage");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as {this} remains tapped.", "Glen Elendra Archmage");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Strike", playerA);
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U},Sacrifice {this}: Counter target noncreature spell.", "Lightning Strike");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}, Sacrifice {this}: Counter target noncreature spell.", "Lightning Strike");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -94,7 +94,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mutavault", 1);
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}: Until end of turn {this} becomes");
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2},{T}: Gain control", "Mutavault");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}: Gain control", "Mutavault");
 
         setChoice(playerA, "No"); // Don't untap the Shackles
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);

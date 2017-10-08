@@ -46,12 +46,12 @@ import mage.constants.Zone;
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class OverbeingOfMyth extends CardImpl {
 
     public OverbeingOfMyth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/U}{G/U}{G/U}{G/U}{G/U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G/U}{G/U}{G/U}{G/U}{G/U}");
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.AVATAR);
 
@@ -60,11 +60,11 @@ public class OverbeingOfMyth extends CardImpl {
 
         // Overbeing of Myth's power and toughness are each equal to the number of cards in your hand.
         DynamicValue number = new CardsInControllerHandCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(number, Duration.WhileOnBattlefield)));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(number, Duration.EndOfGame)));
+
         // At the beginning of your draw step, draw an additional card.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false));
-        
+
     }
 
     public OverbeingOfMyth(final OverbeingOfMyth card) {

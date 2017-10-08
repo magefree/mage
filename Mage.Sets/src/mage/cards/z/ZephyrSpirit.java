@@ -51,7 +51,9 @@ public class ZephyrSpirit extends CardImpl {
 
         // When Zephyr Spirit blocks, return it to its owner's hand.
         this.addAbility(new BlocksTriggeredAbility(
-                new ReturnToHandSourceEffect(true).setText("return it to its owner's hand"), false));
+                new ReturnToHandSourceEffect(true).setText("return it to its owner's hand"),
+                false, false, true
+        ));
     }
 
     public ZephyrSpirit(final ZephyrSpirit card) {

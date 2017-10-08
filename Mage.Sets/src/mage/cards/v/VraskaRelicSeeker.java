@@ -90,7 +90,7 @@ class VraskaRelicSeekerDestroyEffect extends OneShotEffect {
 
     VraskaRelicSeekerDestroyEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Destroy target artifact, creature, or enchantment. Create a colorless Treasure artifact token with \"{T}, Sacrfice this artifact. Add one mana of any color to your mana pool.\"";
+        this.staticText = "Destroy target artifact, creature, or enchantment. Create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact. Add one mana of any color to your mana pool.\"";
     }
 
     VraskaRelicSeekerDestroyEffect(final VraskaRelicSeekerDestroyEffect effect) {

@@ -48,7 +48,7 @@ public class UntapAllThatAttackedEffect extends OneShotEffect {
 
     public UntapAllThatAttackedEffect() {
         super(Outcome.Benefit);
-        staticText = " Untap all creatures that attacked this turn";
+        staticText = "Untap all creatures that attacked this turn";
     }
 
     public UntapAllThatAttackedEffect(final UntapAllThatAttackedEffect effect) {

@@ -100,7 +100,7 @@ class PhyrexianTyrannyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player draws a card, that player loses 2 life unless he or she pays {2}";
+        return "Whenever a player draws a card, that player loses 2 life unless he or she pays {2}.";
     }
 }
 

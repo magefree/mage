@@ -76,6 +76,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Armored Griffin", 5, Rarity.COMMON, mage.cards.a.ArmoredGriffin.class));
         cards.add(new SetCardInfo("Armor of Faith", 4, Rarity.COMMON, mage.cards.a.ArmorOfFaith.class));
         cards.add(new SetCardInfo("Armor Thrull", 77, Rarity.COMMON, ArmorThrull.class));
+        cards.add(new SetCardInfo("Ashen Ghoul", 78, Rarity.UNCOMMON, mage.cards.a.AshenGhoul.class));
         cards.add(new SetCardInfo("Aurochs", 153, Rarity.COMMON, mage.cards.a.Aurochs.class));
         cards.add(new SetCardInfo("Aysen Bureaucrats", 6, Rarity.COMMON, mage.cards.a.AysenBureaucrats.class));
         cards.add(new SetCardInfo("Aysen Crusader", 7, Rarity.UNCOMMON, mage.cards.a.AysenCrusader.class));
@@ -109,6 +110,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Drift of the Dead", 86, Rarity.COMMON, mage.cards.d.DriftOfTheDead.class));
         cards.add(new SetCardInfo("Dwarven Ruins", 227, Rarity.UNCOMMON, mage.cards.d.DwarvenRuins.class));
         cards.add(new SetCardInfo("Dystopia", 88, Rarity.RARE, mage.cards.d.Dystopia.class));
+        cards.add(new SetCardInfo("Earthlink", 192, Rarity.RARE, mage.cards.e.Earthlink.class));
         cards.add(new SetCardInfo("Ebon Praetor", 89, Rarity.RARE, mage.cards.e.EbonPraetor.class));
         cards.add(new SetCardInfo("Ebon Stronghold", 228, Rarity.UNCOMMON, mage.cards.e.EbonStronghold.class));
         cards.add(new SetCardInfo("Elemental Augury", 193, Rarity.RARE, mage.cards.e.ElementalAugury.class));
@@ -161,6 +163,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Karplusan Giant", 133, Rarity.UNCOMMON, mage.cards.k.KarplusanGiant.class));
         cards.add(new SetCardInfo("Kaysa", 170, Rarity.RARE, mage.cards.k.Kaysa.class));
         cards.add(new SetCardInfo("Kjeldoran Dead", 98, Rarity.COMMON, mage.cards.k.KjeldoranDead.class));
+        cards.add(new SetCardInfo("Kjeldoran Home Guard", 22, Rarity.UNCOMMON, mage.cards.k.KjeldoranHomeGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Outpost", 233, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class));
         cards.add(new SetCardInfo("Knight of Stromgald", 99, Rarity.UNCOMMON, mage.cards.k.KnightOfStromgald.class));
         cards.add(new SetCardInfo("Krovikan Fetish", 100, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
@@ -183,6 +186,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Cannoneers", 138, Rarity.UNCOMMON, mage.cards.o.OrcishCannoneers.class));
         cards.add(new SetCardInfo("Orcish Captain", 139, Rarity.UNCOMMON, mage.cards.o.OrcishCaptain.class));
         cards.add(new SetCardInfo("Orcish Lumberjack", 142, Rarity.COMMON, mage.cards.o.OrcishLumberjack.class));
+        cards.add(new SetCardInfo("Orcish Squatters", 143, Rarity.RARE, mage.cards.o.OrcishSquatters.class));
         cards.add(new SetCardInfo("Orcish Veteran", 144, Rarity.COMMON, OrcishVeteran.class));
         cards.add(new SetCardInfo("Order of the Sacred Torch", 25, Rarity.RARE, mage.cards.o.OrderOfTheSacredTorch.class));
         cards.add(new SetCardInfo("Order of the White Shield", 26, Rarity.UNCOMMON, mage.cards.o.OrderOfTheWhiteShield.class));
@@ -212,6 +216,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Sibilant Spirit", 67, Rarity.RARE, mage.cards.s.SibilantSpirit.class));
         cards.add(new SetCardInfo("Skeleton Ship", 197, Rarity.RARE, mage.cards.s.SkeletonShip.class));
         cards.add(new SetCardInfo("Skull Catapult", 219, Rarity.UNCOMMON, mage.cards.s.SkullCatapult.class));
+        cards.add(new SetCardInfo("Snow Fortress", 220, Rarity.UNCOMMON, mage.cards.s.SnowFortress.class));
         cards.add(new SetCardInfo("Snow-Covered Forest", 245, Rarity.LAND, mage.cards.s.SnowCoveredForest.class));
         cards.add(new SetCardInfo("Snow-Covered Island", 242, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class));
         cards.add(new SetCardInfo("Snow-Covered Mountain", 244, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class));

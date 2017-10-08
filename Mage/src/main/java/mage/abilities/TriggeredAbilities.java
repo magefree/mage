@@ -30,7 +30,6 @@ package mage.abilities;
 
 import mage.MageObject;
 import mage.constants.Zone;
-import mage.designations.Designation;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
@@ -41,12 +40,11 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
- *
- * This class uses ConcurrentHashMap to avoid ConcurrentModificationExceptions.
- * See ticket https://github.com/magefree/mage/issues/966 and
- * https://github.com/magefree/mage/issues/473
+ *         <p>
+ *         This class uses ConcurrentHashMap to avoid ConcurrentModificationExceptions.
+ *         See ticket https://github.com/magefree/mage/issues/966 and
+ *         https://github.com/magefree/mage/issues/473
  */
 public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbility> {
 
@@ -65,7 +63,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     }
 
     public void checkStateTriggers(Game game) {
-        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext();) {
+        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext(); ) {
             TriggeredAbility ability = it.next();
             if (ability instanceof StateTriggeredAbility && ((StateTriggeredAbility) ability).canTrigger(game)) {
                 checkTrigger(ability, null, game);
@@ -74,7 +72,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     }
 
     public void checkTriggers(GameEvent event, Game game) {
-        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext();) {
+        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext(); ) {
             TriggeredAbility ability = it.next();
             if (ability.checkEventType(event, game)) {
                 checkTrigger(ability, event, game);
@@ -132,8 +130,8 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     /**
      * Adds a by sourceId gained triggered ability
      *
-     * @param ability - the gained ability
-     * @param sourceId - the source that assigned the ability
+     * @param ability    - the gained ability
+     * @param sourceId   - the source that assigned the ability
      * @param attachedTo - the object that gained the ability
      */
     public void add(TriggeredAbility ability, UUID sourceId, MageObject attachedTo) {
@@ -163,16 +161,9 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
         return key;
     }
 
+
     public void removeAbilitiesOfSource(UUID sourceId) {
-        List<String> keysToRemove = new ArrayList<>();
-        for (String key : this.keySet()) {
-            if (key.endsWith(sourceId.toString())) {
-                keysToRemove.add(key);
-            }
-        }
-        for (String key : keysToRemove) {
-            remove(key);
-        }
+        keySet().removeIf(key -> key.endsWith(sourceId.toString()));
     }
 
     public void removeAllGainedAbilities() {
@@ -182,19 +173,10 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
 
     public void removeAbilitiesOfNonExistingSources(Game game) {
         // e.g. Token that had triggered abilities
-        List<String> keysToRemove = new ArrayList<>();
-        Abilities:
-        for (Entry<String, TriggeredAbility> entry : this.entrySet()) {
-            if (game.getObject(entry.getValue().getSourceId()) == null) {
-                for (Designation designation : game.getState().getDesignations()) {
-                    if (designation.getId().equals(entry.getValue().getSourceId())) {
-                        continue Abilities;
-                    }
-                }
-                keysToRemove.add(entry.getKey());
-            }
-        }
-        this.keySet().removeAll(keysToRemove);
+
+        entrySet().removeIf(entry -> game.getObject(entry.getValue().getSourceId()) == null
+                && game.getState().getDesignations().stream().noneMatch(designation -> designation.getId().equals(entry.getValue().getSourceId())));
+
     }
 
     public TriggeredAbilities copy() {

@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -58,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Sentinel extends CardImpl {
 
     public Sentinel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -105,7 +106,7 @@ class SentinelEffect extends OneShotEffect {
         Permanent targetPermanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
         if (controller != null && targetPermanent != null) {
             int newToughness = targetPermanent.getPower().getValue() + 1;
-            game.addEffect(new SetToughnessSourceEffect(new StaticValue(newToughness), Duration.Custom), source);
+            game.addEffect(new SetToughnessSourceEffect(new StaticValue(newToughness), Duration.Custom, SubLayer.SetPT_7b), source);
             return true;
         }
         return false;

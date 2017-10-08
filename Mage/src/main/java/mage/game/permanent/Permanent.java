@@ -193,6 +193,8 @@ public interface Permanent extends Card, Controllable {
 
     boolean isAttacking();
 
+    boolean isBlocked(Game game);
+
     int getBlocking();
 
     void setAttacking(boolean attacking);

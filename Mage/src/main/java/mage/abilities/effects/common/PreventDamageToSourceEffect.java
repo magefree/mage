@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
+import static mage.constants.Duration.EndOfTurn;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -74,7 +75,12 @@ public class PreventDamageToSourceEffect extends PreventionEffectImpl {
         } else {
             sb.append("Prevent the next ").append(amountToPrevent).append(" damage that would be dealt to ");
         }
-        sb.append("{source} ").append(duration.toString());
+        sb.append("{source} ");
+        if (duration == EndOfTurn) {
+            sb.append("this turn");
+        } else {
+            sb.append(duration.toString());
+        }
         return sb.toString();
     }
 }

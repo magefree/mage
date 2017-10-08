@@ -55,11 +55,15 @@ import mage.target.targetpointer.FixedTarget;
 public class FatalFrenzy extends CardImpl {
 
     public FatalFrenzy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Until end of turn, target creature you control gains trample and gets +X/+0, where X is its power. Sacrifice it at the beginning of the next end step.
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(new TargetPermanentPowerCount(), new StaticValue(0), Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
+                .setText("Until end of turn, target creature you control gains trample")
+        );
+        this.getSpellAbility().addEffect(new BoostTargetEffect(new TargetPermanentPowerCount(), new StaticValue(0), Duration.EndOfTurn, true)
+                .setText("and gets +X/+0, where X is its power.")
+        );
         this.getSpellAbility().addEffect(new FatalFrenzyEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 

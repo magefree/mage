@@ -108,7 +108,7 @@ public class DiscardTargetEffect extends OneShotEffect {
         }
         sb.append(" discards ");
         if (amount.toString().equals("1")) {
-            sb.append(" a card");
+            sb.append("a card");
         } else {
             sb.append(CardUtil.numberToText(amount.toString())).append(" cards");
         }

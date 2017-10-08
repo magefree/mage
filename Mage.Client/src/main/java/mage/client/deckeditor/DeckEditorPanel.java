@@ -27,23 +27,6 @@
  */
 package mage.client.deckeditor;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.*;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import javax.swing.*;
-import javax.swing.Timer;
-import javax.swing.filechooser.FileFilter;
 import mage.cards.Card;
 import mage.cards.Sets;
 import mage.cards.decks.Deck;
@@ -71,6 +54,18 @@ import mage.remote.Session;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.filechooser.FileFilter;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -280,11 +275,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             component.clearCardEventListeners();
             component.addCardEventListener(
                     (Listener<Event>) event -> {
-                        switch (event.getEventName()) {
-                            case "double-click":
+                        switch (event.getEventType()) {
+                            case DOUBLE_CLICK:
                                 moveSelectorCardToDeck(event);
                                 break;
-                            case "alt-double-click":
+                            case ALT_DOUBLE_CLICK:
                                 if (mode == DeckEditorMode.FREE_BUILDING) {
                                     moveSelectorCardToSideboard(event);
                                 } else {
@@ -292,10 +287,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                     moveSelectorCardToDeck(event);
                                 }
                                 break;
-                            case "remove-main":
+                            case REMOVE_MAIN:
                                 DeckEditorPanel.this.deckArea.getDeckList().removeSelection();
                                 break;
-                            case "remove-sideboard":
+                            case REMOVE_SIDEBOARD:
                                 DeckEditorPanel.this.deckArea.getSideboardList().removeSelection();
                                 break;
                         }
@@ -306,8 +301,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.deckArea.addDeckEventListener(
                 (Listener<Event>) event -> {
                     if (mode == DeckEditorMode.FREE_BUILDING) {
-                        switch (event.getEventName()) {
-                            case "double-click": {
+                        switch (event.getEventType()) {
+                            case DOUBLE_CLICK: {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
                                 for (Card card : deck.getCards()) {
                                     if (card.getId().equals(cardView.getId())) {
@@ -319,7 +314,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 refreshDeck();
                                 break;
                             }
-                            case "alt-double-click": {
+                            case ALT_DOUBLE_CLICK: {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
                                 for (Card card : deck.getCards()) {
                                     if (card.getId().equals(cardView.getId())) {
@@ -332,11 +327,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 refreshDeck();
                                 break;
                             }
-                            case "set-number": {
+                            case SET_NUMBER: {
                                 setCardNumberToCardsList(event, deck.getCards());
                                 break;
                             }
-                            case "remove-specific-card": {
+                            case REMOVE_SPECIFIC_CARD: {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
                                 for (Card card : deck.getCards()) {
                                     if (card.getId().equals(cardView.getId())) {
@@ -347,7 +342,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 }
                                 break;
                             }
-                            case "add-specific-card": {
+                            case ADD_SPECIFIC_CARD: {
                                 SimpleCardView cardView = (CardView) event.getSource();
                                 deck.getCards().add(retrieveTemporaryCard(cardView));
                                 break;
@@ -355,9 +350,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         }
                     } else {
                         // constructing phase or sideboarding during match -> card goes always to sideboard
-                        switch (event.getEventName()) {
-                            case "double-click":
-                            case "alt-double-click": {
+                        switch (event.getEventType()) {
+                            case DOUBLE_CLICK:
+                            case ALT_DOUBLE_CLICK: {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
                                 for (Card card : deck.getCards()) {
                                     if (card.getId().equals(cardView.getId())) {
@@ -371,7 +366,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 refreshDeck();
                                 break;
                             }
-                            case "remove-specific-card": {
+                            case REMOVE_SPECIFIC_CARD: {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
                                 for (Card card : deck.getCards()) {
                                     if (card.getId().equals(cardView.getId())) {
@@ -382,7 +377,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 }
                                 break;
                             }
-                            case "add-specific-card": {
+                            case ADD_SPECIFIC_CARD: {
                                 SimpleCardView cardView = (CardView) event.getSource();
                                 deck.getCards().add(retrieveTemporaryCard(cardView));
                                 break;
@@ -395,8 +390,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 (Listener<Event>) event -> {
                     if (mode == DeckEditorMode.FREE_BUILDING) {
                         // normal edit mode
-                        switch (event.getEventName()) {
-                            case "double-click":
+                        switch (event.getEventType()) {
+                            case DOUBLE_CLICK:
                                 // remove card from sideboard (don't add it to deck)
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
                                 for (Card card : deck.getSideboard()) {
@@ -408,7 +403,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 hidePopup();
                                 refreshDeck();
                                 break;
-                            case "alt-double-click":
+                            case ALT_DOUBLE_CLICK:
                                 // remove card from sideboard
                                 cardView = (SimpleCardView) event.getSource();
                                 for (Card card : deck.getSideboard()) {
@@ -421,11 +416,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 hidePopup();
                                 refreshDeck();
                                 break;
-                            case "set-number": {
+                            case SET_NUMBER: {
                                 setCardNumberToCardsList(event, deck.getSideboard());
                                 break;
                             }
-                            case "remove-specific-card": {
+                            case REMOVE_SPECIFIC_CARD: {
                                 cardView = (SimpleCardView) event.getSource();
                                 for (Card card : deck.getSideboard()) {
                                     if (card.getId().equals(cardView.getId())) {
@@ -436,7 +431,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 }
                                 break;
                             }
-                            case "add-specific-card": {
+                            case ADD_SPECIFIC_CARD: {
                                 cardView = (CardView) event.getSource();
                                 deck.getSideboard().add(retrieveTemporaryCard(cardView));
                                 break;
@@ -444,8 +439,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         }
                     } else {
                         // construct phase or sideboarding during match
-                        switch (event.getEventName()) {
-                            case "remove-specific-card": {
+                        switch (event.getEventType()) {
+                            case REMOVE_SPECIFIC_CARD: {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
                                 for (Card card : deck.getSideboard()) {
                                     if (card.getId().equals(cardView.getId())) {
@@ -456,13 +451,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 }
                                 break;
                             }
-                            case "add-specific-card": {
+                            case ADD_SPECIFIC_CARD: {
                                 SimpleCardView cardView = (CardView) event.getSource();
                                 deck.getSideboard().add(retrieveTemporaryCard(cardView));
                                 break;
                             }
-                            case "double-click":
-                            case "alt-double-click":
+                            case DOUBLE_CLICK:
+                            case ALT_DOUBLE_CLICK:
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
                                 for (Card card : deck.getSideboard()) {
                                     if (card.getId().equals(cardView.getId())) {

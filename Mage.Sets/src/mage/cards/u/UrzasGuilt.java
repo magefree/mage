@@ -43,13 +43,12 @@ import mage.constants.CardType;
 public class UrzasGuilt extends CardImpl {
 
     public UrzasGuilt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
 
         // Each player draws two cards, then discards three cards, then loses 4 life.
         this.getSpellAbility().addEffect(new DrawCardAllEffect(2));
         Effect effect = new DiscardEachPlayerEffect(3, false);
-        effect.setText("then discards three cards");
+        effect.setText("then discards three cards,");
         this.getSpellAbility().addEffect(effect);
         effect = new LoseLifeAllPlayersEffect(4);
         effect.setText("then loses 4 life");

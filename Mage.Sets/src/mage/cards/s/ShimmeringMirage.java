@@ -43,13 +43,13 @@ import mage.target.common.TargetLandPermanent;
 public class ShimmeringMirage extends CardImpl {
 
     public ShimmeringMirage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Target land becomes the basic land type of your choice until end of turn.
         this.getSpellAbility().addEffect(new BecomesBasicLandTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
     }
 
     public ShimmeringMirage(final ShimmeringMirage card) {

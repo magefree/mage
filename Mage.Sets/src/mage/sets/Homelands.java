@@ -131,6 +131,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Joven", 97, Rarity.COMMON, mage.cards.j.Joven.class));
         cards.add(new SetCardInfo("Koskun Falls", 18, Rarity.RARE, mage.cards.k.KoskunFalls.class));
         cards.add(new SetCardInfo("Koskun Keep", 139, Rarity.UNCOMMON, mage.cards.k.KoskunKeep.class));
+        cards.add(new SetCardInfo("Labyrinth Minotaur", 38, Rarity.COMMON, mage.cards.l.LabyrinthMinotaur.class));
         cards.add(new SetCardInfo("Leaping Lizard", 63, Rarity.COMMON, mage.cards.l.LeapingLizard.class));
         cards.add(new SetCardInfo("Leeches", 111, Rarity.RARE, mage.cards.l.Leeches.class));
         cards.add(new SetCardInfo("Marjhan", 39, Rarity.RARE, mage.cards.m.Marjhan.class));

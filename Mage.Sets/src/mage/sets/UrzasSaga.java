@@ -190,6 +190,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Herd", 262, Rarity.RARE, mage.cards.h.HiddenHerd.class));
         cards.add(new SetCardInfo("Hidden Spider", 264, Rarity.COMMON, mage.cards.h.HiddenSpider.class));
         cards.add(new SetCardInfo("Hollow Dogs", 137, Rarity.COMMON, mage.cards.h.HollowDogs.class));
+        cards.add(new SetCardInfo("Hopping Automaton", 297, Rarity.UNCOMMON, mage.cards.h.HoppingAutomaton.class));
         cards.add(new SetCardInfo("Horseshoe Crab", 80, Rarity.COMMON, mage.cards.h.HorseshoeCrab.class));
         cards.add(new SetCardInfo("Humble", 18, Rarity.UNCOMMON, mage.cards.h.Humble.class));
         cards.add(new SetCardInfo("Hush", 266, Rarity.COMMON, mage.cards.h.Hush.class));

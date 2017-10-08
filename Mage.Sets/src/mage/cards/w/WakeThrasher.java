@@ -49,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
 public class WakeThrasher extends CardImpl {
 
     public WakeThrasher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.SOLDIER);
 
@@ -57,7 +57,7 @@ public class WakeThrasher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a permanent you control becomes untapped, Wake Thrasher gets +1/+1 until end of turn.
-        this.addAbility(new BecomesUntappedControlledPermanentTriggeredAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn), false));
+        this.addAbility(new BecomesUntappedControlledPermanentTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
 
     }
 
@@ -71,7 +71,7 @@ public class WakeThrasher extends CardImpl {
     }
 }
 
-class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilityImpl{
+class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesUntappedControlledPermanentTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
@@ -98,7 +98,7 @@ class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilit
 
     @Override
     public String getRule() {
-        return "When a permanent you control becomes untapped, " + super.getRule();
+        return "Whenever a permanent you control becomes untapped, " + super.getRule();
     }
 
 }

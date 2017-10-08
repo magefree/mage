@@ -80,7 +80,10 @@ public class DefiantVanguard extends CardImpl {
 
         // When Defiant Vanguard blocks, at end of combat, destroy it and all creatures it blocked this turn.
         this.addAbility(
-                new BlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DefiantVanguardEffect())), false),
+                new BlocksTriggeredAbility(
+                        new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DefiantVanguardEffect())),
+                        false, false, true
+                ),
                 new BlockedAttackerWatcher()
         );
 

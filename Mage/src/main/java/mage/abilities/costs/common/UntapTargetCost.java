@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs.common;
 
 import mage.constants.Outcome;
@@ -38,6 +37,7 @@ import mage.target.common.TargetControlledPermanent;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.costs.Cost;
+import mage.util.CardUtil;
 
 /**
  *
@@ -49,7 +49,7 @@ public class UntapTargetCost extends CostImpl {
 
     public UntapTargetCost(TargetControlledPermanent target) {
         this.target = target;
-        this.text = "Untap " + target.getMaxNumberOfTargets() + ' ' + target.getTargetName();
+        this.text = "Untap " + CardUtil.numberToText(target.getMaxNumberOfTargets(), "") + ' ' + target.getTargetName();
     }
 
     public UntapTargetCost(final UntapTargetCost cost) {
@@ -60,10 +60,11 @@ public class UntapTargetCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         if (target.choose(Outcome.Untap, controllerId, sourceId, game)) {
-            for (UUID targetId: (List<UUID>)target.getTargets()) {
+            for (UUID targetId : (List<UUID>) target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
-                if (permanent == null)
+                if (permanent == null) {
                     return false;
+                }
                 paid |= permanent.untap(game);
             }
         }
@@ -79,6 +80,5 @@ public class UntapTargetCost extends CostImpl {
     public UntapTargetCost copy() {
         return new UntapTargetCost(this);
     }
-
 
 }

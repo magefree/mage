@@ -66,7 +66,7 @@ public class PoulticeSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS,
-                        "Slivers have \"{2}, {T}: Regenerate target Sliver.\"")));
+                        "All Slivers have \"{2}, {T}: Regenerate target Sliver.\"")));
     }
 
     public PoulticeSliver(final PoulticeSliver card) {

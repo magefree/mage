@@ -29,7 +29,7 @@ public class FellShepherdTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Fell Shepherd");
         
         playerA.addChoice("Craw Wurm");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{B},Sacrifice another creature: Target creature gets -2/-2 until end of turn.", "Raging Goblin");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{B}, Sacrifice another creature: Target creature gets -2/-2 until end of turn.", "Raging Goblin");
         attack(3, playerA, "Fell Shepherd");
         
         setStopAt(3, PhaseStep.END_TURN);

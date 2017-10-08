@@ -52,11 +52,10 @@ import mage.players.Player;
 public class IceCave extends CardImpl {
 
     public IceCave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // Whenever a player casts a spell, any other player may pay that spell's mana cost. If a player does, counter the spell. (Mana cost includes color.)
-        this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new IceCaveEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new IceCaveEffect(), StaticFilters.FILTER_A_SPELL, false, SetTargetPointer.SPELL));
     }
 
     public IceCave(final IceCave card) {
@@ -90,17 +89,17 @@ class IceCaveEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Spell spell = (Spell) game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if(sourcePermanent != null && spell != null && controller != null) {
+        if (sourcePermanent != null && spell != null && controller != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
             Cost cost = new ManaCostsImpl(spell.getSpellAbility().getManaCosts().getText());
-            if(spellController != null) {
+            if (spellController != null) {
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player = game.getPlayer(playerId);
-                    if(player != null && player != spellController) {
+                    if (player != null && player != spellController) {
                         cost.clearPaid();
-                        if(cost.canPay(source, source.getSourceId(), player.getId(), game)
+                        if (cost.canPay(source, source.getSourceId(), player.getId(), game)
                                 && player.chooseUse(outcome, "Pay " + cost.getText() + " to counter " + spell.getIdName() + '?', source, game)) {
-                            if(cost.pay(source, game, source.getSourceId(), playerId, false, null)) {
+                            if (cost.pay(source, game, source.getSourceId(), playerId, false, null)) {
                                 game.informPlayers(player.getLogName() + " pays" + cost.getText() + " to counter " + spell.getIdName() + '.');
                                 game.getStack().counter(spell.getId(), source.getSourceId(), game);
                                 return true;

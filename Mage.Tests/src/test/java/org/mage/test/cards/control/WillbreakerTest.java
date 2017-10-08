@@ -60,7 +60,7 @@ public class WillbreakerTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{B},Remove", "Silvercoat Lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{B}, Remove", "Silvercoat Lion");
         setChoice(playerA, "X=0");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

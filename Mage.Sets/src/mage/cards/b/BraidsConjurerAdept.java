@@ -47,8 +47,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class BraidsConjurerAdept extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("artifact, creature, or land card")
-;
+    private static final FilterCard filter = new FilterCard("an artifact, creature, or land card");
+
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
@@ -57,7 +57,7 @@ public class BraidsConjurerAdept extends CardImpl {
     }
 
     public BraidsConjurerAdept(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
         this.power = new MageInt(2);

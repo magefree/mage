@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class SanctumSeeker extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Vampire you control attacks");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Vampire you control");
 
     static {
         filter.add(new SubtypePredicate(SubType.VAMPIRE));

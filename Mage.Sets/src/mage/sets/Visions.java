@@ -54,6 +54,7 @@ public class Visions extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        cards.add(new SetCardInfo("Aku Djinn", 1, Rarity.RARE, mage.cards.a.AkuDjinn.class));
         cards.add(new SetCardInfo("Anvil of Bogardan", 141, Rarity.RARE, mage.cards.a.AnvilOfBogardan.class));
         cards.add(new SetCardInfo("Archangel", 101, Rarity.RARE, mage.cards.a.Archangel.class));
         cards.add(new SetCardInfo("Army Ants", 126, Rarity.UNCOMMON, mage.cards.a.ArmyAnts.class));
@@ -113,6 +114,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Keeper of Kookus", 85, Rarity.COMMON, mage.cards.k.KeeperOfKookus.class));
         cards.add(new SetCardInfo("King Cheetah", 60, Rarity.COMMON, mage.cards.k.KingCheetah.class));
         cards.add(new SetCardInfo("Knight of Valor", 111, Rarity.COMMON, mage.cards.k.KnightOfValor.class));
+        cards.add(new SetCardInfo("Knight of the Mists", 36, Rarity.COMMON, mage.cards.k.KnightOfTheMists.class));
         cards.add(new SetCardInfo("Kookus", 85, Rarity.RARE, mage.cards.k.Kookus.class));
         cards.add(new SetCardInfo("Lead-Belly Chimera", 148, Rarity.UNCOMMON, mage.cards.l.LeadBellyChimera.class));
         cards.add(new SetCardInfo("Lichenthrope", 62, Rarity.RARE, mage.cards.l.Lichenthrope.class));

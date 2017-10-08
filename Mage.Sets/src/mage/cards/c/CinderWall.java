@@ -46,7 +46,7 @@ import mage.constants.SubType;
 public class CinderWall extends CardImpl {
 
     public CinderWall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.WALL);
 
         this.power = new MageInt(3);
@@ -55,9 +55,10 @@ public class CinderWall extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // When Cinder Wall blocks, destroy it at end of combat.
-        this.addAbility(
-                new BlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DestroySourceEffect()))
-                , false));
+        this.addAbility(new BlocksTriggeredAbility(
+                new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DestroySourceEffect())),
+                false, false, true
+        ));
     }
 
     public CinderWall(final CinderWall card) {

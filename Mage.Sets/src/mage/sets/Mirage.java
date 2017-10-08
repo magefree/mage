@@ -79,6 +79,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Boomerang", 56, Rarity.COMMON, mage.cards.b.Boomerang.class));
         cards.add(new SetCardInfo("Breathstealer", 7, Rarity.COMMON, mage.cards.b.Breathstealer.class));
         cards.add(new SetCardInfo("Brushwagg", 106, Rarity.RARE, mage.cards.b.Brushwagg.class));
+        cards.add(new SetCardInfo("Burning Palm Efreet", 161, Rarity.UNCOMMON, mage.cards.b.BurningPalmEfreet.class));
         cards.add(new SetCardInfo("Burning Shield Askari", 162, Rarity.COMMON, mage.cards.b.BurningShieldAskari.class));
         cards.add(new SetCardInfo("Cadaverous Bloom", 318, Rarity.RARE, mage.cards.c.CadaverousBloom.class));
         cards.add(new SetCardInfo("Cadaverous Knight", 8, Rarity.COMMON, mage.cards.c.CadaverousKnight.class));
@@ -109,6 +110,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Disenchant", 214, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Dissipate", 61, Rarity.UNCOMMON, mage.cards.d.Dissipate.class));
         cards.add(new SetCardInfo("Divine Offering", 215, Rarity.COMMON, mage.cards.d.DivineOffering.class));
+        cards.add(new SetCardInfo("Divine Retribution", 216, Rarity.RARE, mage.cards.d.DivineRetribution.class));
         cards.add(new SetCardInfo("Drain Life", 16, Rarity.COMMON, mage.cards.d.DrainLife.class));
         cards.add(new SetCardInfo("Dread Specter", 17, Rarity.UNCOMMON, mage.cards.d.DreadSpecter.class));
         cards.add(new SetCardInfo("Dream Cache", 62, Rarity.COMMON, mage.cards.d.DreamCache.class));
@@ -191,6 +193,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Kukemssa Pirates", 71, Rarity.RARE, mage.cards.k.KukemssaPirates.class));
         cards.add(new SetCardInfo("Kukemssa Serpent", 72, Rarity.COMMON, mage.cards.k.KukemssaSerpent.class));
         cards.add(new SetCardInfo("Lead Golem", 271, Rarity.UNCOMMON, mage.cards.l.LeadGolem.class));
+        cards.add(new SetCardInfo("Leering Gargoyle", 331, Rarity.RARE, mage.cards.l.LeeringGargoyle.class));
         cards.add(new SetCardInfo("Lightning Reflexes", 186, Rarity.COMMON, mage.cards.l.LightningReflexes.class));
         cards.add(new SetCardInfo("Lion's Eye Diamond", 272, Rarity.RARE, mage.cards.l.LionsEyeDiamond.class));
         cards.add(new SetCardInfo("Locust Swarm", 124, Rarity.UNCOMMON, mage.cards.l.LocustSwarm.class));

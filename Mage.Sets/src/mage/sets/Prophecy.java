@@ -90,6 +90,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Flameshot", 90, Rarity.UNCOMMON, mage.cards.f.Flameshot.class));
         cards.add(new SetCardInfo("Flowering Field", 9, Rarity.UNCOMMON, mage.cards.f.FloweringField.class));
         cards.add(new SetCardInfo("Foil", 34, Rarity.UNCOMMON, mage.cards.f.Foil.class));
+        cards.add(new SetCardInfo("Forgotten Harvest", 114, Rarity.RARE, mage.cards.f.ForgottenHarvest.class));
         cards.add(new SetCardInfo("Greel's Caress", 67, Rarity.COMMON, mage.cards.g.GreelsCaress.class));
         cards.add(new SetCardInfo("Greel, Mind Raker", 66, Rarity.RARE, mage.cards.g.GreelMindRaker.class));
         cards.add(new SetCardInfo("Gulf Squid", 35, Rarity.COMMON, mage.cards.g.GulfSquid.class));

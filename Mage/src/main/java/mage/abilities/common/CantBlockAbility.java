@@ -47,7 +47,7 @@ public class CantBlockAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return "{this} can't block";
+        return "{this} can't block.";
     }
 
     @Override
