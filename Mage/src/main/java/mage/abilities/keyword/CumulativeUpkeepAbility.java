@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.OrCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -70,9 +71,11 @@ public class CumulativeUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Cumulative upkeep ");
-        if (!(cumulativeCost instanceof ManaCost)) {
-            sb.append("&mdash; ");
+        StringBuilder sb = new StringBuilder("Cumulative upkeep");
+        if (!(cumulativeCost instanceof ManaCost || cumulativeCost instanceof OrCost)) {
+            sb.append("&mdash;");
+        } else {
+            sb.append(' ');
         }
         sb.append(cumulativeCost.getText());
         return sb.toString();
