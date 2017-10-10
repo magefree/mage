@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -46,16 +45,14 @@ import mage.target.common.TargetCreaturePermanent;
 public class ActOfTreason extends CardImpl {
 
     public ActOfTreason(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Gain control of target creature until end of turn. Untap that creature.
         // It gains haste until end of turn. (It can attack and {T} this turn.)
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn."));
     }
 
     public ActOfTreason(final ActOfTreason card) {

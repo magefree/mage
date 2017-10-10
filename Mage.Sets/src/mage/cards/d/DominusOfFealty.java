@@ -51,17 +51,16 @@ import mage.target.TargetPermanent;
 public class DominusOfFealty extends CardImpl {
 
     public DominusOfFealty(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/R}{U/R}{U/R}{U/R}{U/R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U/R}{U/R}{U/R}{U/R}{U/R}");
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.AVATAR);
-
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), TargetController.YOU, true);
-        ability.addEffect(new UntapTargetEffect());
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        ability.addEffect(new UntapTargetEffect().setText("If you do, untap it"));
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("and it gains haste until end of turn"));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }
