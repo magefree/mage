@@ -27,7 +27,9 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
@@ -38,6 +40,7 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
@@ -74,12 +77,15 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
+        List<UUID> copyIds = new ArrayList<>();
         Set<Card> cards = new LinkedHashSet<>();
         if (multitargetHandling) {
             for (Target target : source.getTargets()) {
                 for (UUID targetId : target.getTargets()) {
                     MageObject mageObject = game.getObject(targetId);
-                    if (mageObject instanceof Card) {
+                    if (mageObject instanceof Spell && !((Spell) mageObject).isCopy()) {
+                        copyIds.add(targetId);
+                    } else if (mageObject instanceof Card) {
                         cards.add((Card) mageObject);
                     }
                 }
@@ -88,9 +94,16 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             for (UUID targetId : targetPointer.getTargets(game, source)) {
                 MageObject mageObject = game.getObject(targetId);
                 if (mageObject != null) {
-                    cards.add((Card) mageObject);
+                    if (mageObject instanceof Spell && !((Spell) mageObject).isCopy()) {
+                        copyIds.add(targetId);
+                    } else {
+                        cards.add((Card) mageObject);
+                    }
                 }
             }
+        }
+        for (UUID copyId : copyIds) {
+            game.getStack().remove(game.getSpell(copyId));
         }
         return controller.moveCards(cards, Zone.HAND, source, game);
     }
