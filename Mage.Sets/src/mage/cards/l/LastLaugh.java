@@ -45,25 +45,22 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
-
 /**
  *
  * @author L_J
  */
 public class LastLaugh extends CardImpl {
 
-    private static final FilterPermanent filterAnotherPermanent = new FilterPermanent("a permanent other than Last Laugh");
+    private static final FilterPermanent filter = new FilterPermanent("a permanent other than Last Laugh");
     static {
-        filterAnotherPermanent.add(new AnotherPredicate());
+        filter.add(new AnotherPredicate());
     }
-    
-    public static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent();
     
     public LastLaugh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
         // Whenever a permanent other than Last Laugh is put into a graveyard from the battlefield, Last Laugh deals 1 damage to each creature and each player.
-        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new DamageEverythingEffect(1), false, filterAnotherPermanent, false));
+        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new DamageEverythingEffect(1), false, filter, false));
 
         // When no creatures are on the battlefield, sacrifice Last Laugh.
         this.addAbility(new LastLaughStateTriggeredAbility());
@@ -97,7 +94,7 @@ class LastLaughStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().count(LastLaugh.filterCreature, this.getSourceId(), this.getControllerId(), game) == 0;
+        return game.getBattlefield().count(new FilterCreaturePermanent(), this.getSourceId(), this.getControllerId(), game) == 0;
     }
 
     @Override
