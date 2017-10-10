@@ -25,71 +25,69 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.l;
+package mage.cards.t;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.common.DamageEverythingEffect;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author L_J
  */
-public class LastLaugh extends CardImpl {
+public class TaskMageAssembly extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a permanent other than Last Laugh");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-    
-    public LastLaugh(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
+    public TaskMageAssembly(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
-        // Whenever a permanent other than Last Laugh is put into a graveyard from the battlefield, Last Laugh deals 1 damage to each creature and each player.
-        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new DamageEverythingEffect(1), false, filter, false));
+        // When there are no creatures on the battlefield, sacrifice Task Mage Assembly.
+        this.addAbility(new TaskMageAssemblyStateTriggeredAbility());
 
-        // When no creatures are on the battlefield, sacrifice Last Laugh.
-        this.addAbility(new LastLaughStateTriggeredAbility());
-        
+        // {2}: Task Mage Assembly deals 1 damage to target creature. Any player may activate this ability but only any time he or she could cast a sorcery.
+        ActivateAsSorceryActivatedAbility ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}"));
+        ability.addTarget(new TargetCreaturePermanent());
+        ability.setMayActivate(TargetController.ANY);
+        ability.addEffect(new InfoEffect("Any player may activate this ability"));
+        this.addAbility(ability);
     }
 
-    public LastLaugh(final LastLaugh card) {
+    public TaskMageAssembly(final TaskMageAssembly card) {
         super(card);
     }
 
     @Override
-    public LastLaugh copy() {
-        return new LastLaugh(this);
+    public TaskMageAssembly copy() {
+        return new TaskMageAssembly(this);
     }
 }
 
-class LastLaughStateTriggeredAbility extends StateTriggeredAbility {
+class TaskMageAssemblyStateTriggeredAbility extends StateTriggeredAbility {
 
-    public LastLaughStateTriggeredAbility() {
+    public TaskMageAssemblyStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public LastLaughStateTriggeredAbility(final LastLaughStateTriggeredAbility ability) {
+    public TaskMageAssemblyStateTriggeredAbility(final TaskMageAssemblyStateTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public LastLaughStateTriggeredAbility copy() {
-        return new LastLaughStateTriggeredAbility(this);
+    public TaskMageAssemblyStateTriggeredAbility copy() {
+        return new TaskMageAssemblyStateTriggeredAbility(this);
     }
 
     @Override
@@ -99,7 +97,7 @@ class LastLaughStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return new StringBuilder("When no creatures are on the battlefield, ").append(super.getRule()).toString() ;
+        return new StringBuilder("When there are no creatures on the battlefield, ").append(super.getRule()).toString() ;
     }
 
 }

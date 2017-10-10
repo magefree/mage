@@ -85,6 +85,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Caribou Range", 235, Rarity.RARE, mage.cards.c.CaribouRange.class));
         cards.add(new SetCardInfo("Celestial Sword", 289, Rarity.RARE, mage.cards.c.CelestialSword.class));
         cards.add(new SetCardInfo("Centaur Archer", 360, Rarity.UNCOMMON, mage.cards.c.CentaurArcher.class));
+        cards.add(new SetCardInfo("Chaos Moon", 179, Rarity.RARE, mage.cards.c.ChaosMoon.class));
         cards.add(new SetCardInfo("Chub Toad", 117, Rarity.COMMON, mage.cards.c.ChubToad.class));
         cards.add(new SetCardInfo("Circle of Protection: Black", 236, Rarity.COMMON, mage.cards.c.CircleOfProtectionBlack.class));
         cards.add(new SetCardInfo("Circle of Protection: Blue", 237, Rarity.COMMON, mage.cards.c.CircleOfProtectionBlue.class));
