@@ -464,17 +464,30 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean phaseIn(Game game) {
-        return phaseIn(game, false);
+    public boolean isPhasedOutIndirectly() {
+        return !phasedIn && indirectPhase;
     }
 
     @Override
-    public boolean phaseIn(Game game, boolean indirectPhase) {
+    public boolean phaseIn(Game game) {
+        return phaseIn(game, true);
+    }
+
+    @Override
+    public boolean phaseIn(Game game, boolean onlyDirect) {
         if (!phasedIn) {
-            if (!replaceEvent(EventType.PHASE_IN, game)) {
+            if (!replaceEvent(EventType.PHASE_IN, game)
+                    && ((onlyDirect && !indirectPhase) || (!onlyDirect))) {
                 this.phasedIn = true;
+                this.indirectPhase = false;
                 if (!game.isSimulation()) {
                     game.informPlayers(getLogName() + " phased in");
+                }
+                for (UUID attachedId : this.getAttachments()) {
+                    Permanent attachedPerm = game.getPermanent(attachedId);
+                    if (attachedPerm != null) {
+                        attachedPerm.phaseIn(game, false);
+                    }
                 }
                 fireEvent(EventType.PHASED_IN, game);
                 return true;
@@ -492,7 +505,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean phaseOut(Game game, boolean indirectPhase) {
         if (phasedIn) {
             if (!replaceEvent(EventType.PHASE_OUT, game)) {
+                for (UUID attachedId : this.getAttachments()) {
+                    Permanent attachedPerm = game.getPermanent(attachedId);
+                    if (attachedPerm != null) {
+                        attachedPerm.phaseOut(game, true);
+                    }
+                }
                 this.phasedIn = false;
+                this.indirectPhase = indirectPhase;
                 if (!game.isSimulation()) {
                     game.informPlayers(getLogName() + " phased out");
                 }

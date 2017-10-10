@@ -171,7 +171,11 @@ class TeferisProtectionPhaseOutEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT, controller.getId(), game)) {
-                permanent.phaseOut(game);
+                Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
+                // don't phase out auras directly if they're attached to your stuff
+                if (!(attachedTo != null && attachedTo.getControllerId().equals(controller.getId()))) {
+                    permanent.phaseOut(game);
+                }
             }
             return true;
         }
