@@ -27,11 +27,13 @@
  */
 package mage.cards.e;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -116,12 +118,7 @@ class EquipoiseEffect extends OneShotEffect {
             filterChoose.add(new CardTypePredicate(cardType));
             Target target = new TargetPermanent(excess, excess, filterChoose, true);
             controller.chooseTarget(outcome, target, source, game);
-            for (UUID permanentId : target.getTargets()) {
-                Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null) {
-                    permanent.phaseOut(game);
-                }
-            }
+            new PhaseOutAllEffect(target.getTargets()).apply(game, source);
         }
     }
 }

@@ -27,11 +27,14 @@
  */
 package mage.cards.t;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.effects.common.continuous.LifeTotalCantChangeControllerEffect;
 import mage.abilities.keyword.ProtectionAbility;
@@ -170,14 +173,11 @@ class TeferisProtectionPhaseOutEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            List<UUID> permIds = new ArrayList<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT, controller.getId(), game)) {
-                Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
-                // don't phase out auras directly if they're attached to your stuff
-                if (!(attachedTo != null && attachedTo.getControllerId().equals(controller.getId()))) {
-                    permanent.phaseOut(game);
-                }
+                permIds.add(permanent.getId());
             }
-            return true;
+            return new PhaseOutAllEffect(permIds).apply(game, source);
         }
         return false;
     }
