@@ -100,7 +100,7 @@ public class GainControlDiedCastAgainTest extends CardTestPlayerBase {
         castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerB, "Akroma's Vengeance");
 
         // Put Elesh Norn back on library
-        activateAbility(5, PhaseStep.END_TURN, playerB, "{1}{B},{T}: Put target creature card", "Elesh Norn, Grand Cenobite");
+        activateAbility(5, PhaseStep.END_TURN, playerB, "{1}{B}, {T}: Put target creature card", "Elesh Norn, Grand Cenobite");
 
         castSpell(6, PhaseStep.PRECOMBAT_MAIN, playerB, "Elesh Norn, Grand Cenobite");
         setStopAt(6, PhaseStep.BEGIN_COMBAT);

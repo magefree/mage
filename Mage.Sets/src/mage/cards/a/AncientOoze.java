@@ -52,15 +52,17 @@ import mage.game.permanent.Permanent;
 public class AncientOoze extends CardImpl {
 
     public AncientOoze(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.subtype.add(SubType.OOZE);
 
-        this.color.setGreen(true); 
+        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-		// Ancient Ooze's power and toughness are each equal to the total converted mana cost of other creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new AncientOozePowerToughnessValue(), Duration.EndOfGame)));
+        // Ancient Ooze's power and toughness are each equal to the total converted mana cost of other creatures you control.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new AncientOozePowerToughnessValue(), Duration.EndOfGame)
+                .setText("{this}'s power and toughness are each equal to the total converted mana cost of other creatures you control.")
+        ));
     }
 
     public AncientOoze(final AncientOoze card) {
@@ -74,12 +76,12 @@ public class AncientOoze extends CardImpl {
 }
 
 class AncientOozePowerToughnessValue implements DynamicValue {
-    
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int value = 0;
-        for(Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), sourceAbility.getControllerId(), game)){
-            if(creature != null && !sourceAbility.getSourceId().equals(creature.getId())){
+        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), sourceAbility.getControllerId(), game)) {
+            if (creature != null && !sourceAbility.getSourceId().equals(creature.getId())) {
                 value += creature.getConvertedManaCost();
             }
         }

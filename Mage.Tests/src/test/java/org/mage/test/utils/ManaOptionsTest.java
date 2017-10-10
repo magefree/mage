@@ -72,9 +72,9 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
         Assert.assertEquals("{G}{G}{G}", getManaOption(0, manaOptions));
-        Assert.assertEquals("{R}{G}{G}{W}", getManaOption(1, manaOptions));
-        Assert.assertEquals("{R}{R}{G}{W}{W}", getManaOption(2, manaOptions));
-        Assert.assertEquals("{R}{R}{R}{W}{W}{W}", getManaOption(3, manaOptions));
+        Assert.assertEquals("{W}{R}{G}{G}", getManaOption(1, manaOptions));
+        Assert.assertEquals("{W}{W}{R}{R}{G}", getManaOption(2, manaOptions));
+        Assert.assertEquals("{W}{W}{W}{R}{R}{R}", getManaOption(3, manaOptions));
 
     }
 
@@ -95,11 +95,11 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         Assert.assertEquals("{C}{C}{W}", getManaOption(1, manaOptions));
         Assert.assertEquals("{C}{C}{U}", getManaOption(2, manaOptions));
         Assert.assertEquals("{C}{W}{W}", getManaOption(3, manaOptions));
-        Assert.assertEquals("{C}{U}{W}", getManaOption(4, manaOptions));
+        Assert.assertEquals("{C}{W}{U}", getManaOption(4, manaOptions));
         Assert.assertEquals("{C}{U}{U}", getManaOption(5, manaOptions));
         Assert.assertEquals("{W}{W}{W}", getManaOption(6, manaOptions));
-        Assert.assertEquals("{U}{W}{W}", getManaOption(7, manaOptions));
-        Assert.assertEquals("{U}{U}{W}", getManaOption(8, manaOptions));
+        Assert.assertEquals("{W}{W}{U}", getManaOption(7, manaOptions));
+        Assert.assertEquals("{W}{U}{U}", getManaOption(8, manaOptions));
         Assert.assertEquals("{U}{U}{U}", getManaOption(9, manaOptions));
     }
 
@@ -151,7 +151,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        Assert.assertEquals("{C}{G}{G}{W}{W}", getManaOption(0, manaOptions));
+        Assert.assertEquals("{C}{W}{W}{G}{G}", getManaOption(0, manaOptions));
     }
 
     // Crystal Quarry
@@ -169,8 +169,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
         Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
-        Assert.assertEquals("{C}{G}{G}{G}{W}{W}", getManaOption(0, manaOptions));
-        Assert.assertEquals("{R}{G}{U}{W}{B}", getManaOption(1, manaOptions));
+        Assert.assertEquals("{C}{W}{W}{G}{G}{G}", getManaOption(0, manaOptions));
+        Assert.assertEquals("{W}{U}{B}{R}{G}", getManaOption(1, manaOptions));
     }
 
     // Nykthos, Shrine to Nyx

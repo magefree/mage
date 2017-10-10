@@ -138,7 +138,6 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         if (duration.toString() != null && !duration.toString().isEmpty()) {
             sb.append(duration.toString()).append(", ");
         }
-        sb.append("all ");
         sb.append(filter.getMessage());
         if (duration.toString() != null && duration.toString().isEmpty()) {
             sb.append(" are ");
@@ -147,7 +146,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         }
         sb.append(token.getDescription());
         if (type != null && !type.isEmpty()) {
-            sb.append(". They are still ").append(type);
+            sb.append(". They're still ").append(type);
         }
         return sb.toString();
     }

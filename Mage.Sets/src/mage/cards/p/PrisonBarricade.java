@@ -46,26 +46,28 @@ import mage.counters.CounterType;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class PrisonBarricade extends CardImpl {
 
     public PrisonBarricade(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.WALL);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
         // Kicker {1}{W}
         this.addAbility(new KickerAbility("{1}{W}"));
+
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+
         // If Prison Barricade was kicked, it enters the battlefield with a +1/+1 counter on it and with "Prison Barricade can attack as though it didn't have defender."
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-            KickedCondition.instance, "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it and with \"{this} can attack as though it didn't have defender.\"", "");
+                KickedCondition.instance, "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it and with \"{this} can attack as though it didn't have defender.\"", "");
         ability.addEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield));
         this.addAbility(ability);
-   }
+    }
 
     public PrisonBarricade(final PrisonBarricade card) {
         super(card);

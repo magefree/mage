@@ -46,18 +46,18 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class DwarvenPatrol extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("nonred spell");
+    private static final FilterSpell filter = new FilterSpell("a nonred spell");
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.RED)));
     }
 
     public DwarvenPatrol(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.DWARF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

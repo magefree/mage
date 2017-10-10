@@ -61,6 +61,8 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      */
     List<String> getRules(String source);
 
+    List<String> getRules(String source, boolean capitalize);
+
     /**
      * Retrieves all activated abilities for the given {@link Zone}.
      *

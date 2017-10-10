@@ -58,7 +58,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SarkhanUnbroken extends CardImpl {
 
-    private static final FilterCard dragonFilter = new FilterCard("Dragon creature card");
+    private static final FilterCard dragonFilter = new FilterCard("Dragon creature cards");
 
     static {
         dragonFilter.add(new SubtypePredicate(SubType.DRAGON));

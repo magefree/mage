@@ -92,7 +92,12 @@ class ReveilleSquadTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getCombat().getDefenders().contains(controllerId);
+        for (UUID attackerId : game.getCombat().getAttackers()) {
+            if (game.getCombat().getDefenderId(attackerId).equals(controllerId)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

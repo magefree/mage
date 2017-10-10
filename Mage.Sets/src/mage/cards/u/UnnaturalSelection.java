@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class UnnaturalSelection extends CardImpl {
 
     public UnnaturalSelection(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenCreatureTypeTargetEffect(true), new GenericManaCost(1));

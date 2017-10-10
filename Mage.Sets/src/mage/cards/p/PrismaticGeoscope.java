@@ -29,19 +29,20 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 
 /**
  *
  * @author fireshoes
  */
-
 public class PrismaticGeoscope extends CardImpl {
 
     public PrismaticGeoscope(UUID ownerId, CardSetInfo setInfo) {
@@ -51,8 +52,13 @@ public class PrismaticGeoscope extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // <i>Domain</i> &mdash; {T}: Add X mana in any combination of colors to your mana pool, where X is the number of basic land types among lands you control.
-        this.addAbility(new DynamicManaAbility(new Mana(0,0,0,0,0,0,1, 0), new DomainValue(), new TapSourceCost(),
-        "Add X mana in any combination of colors to your mana pool, where X is the number of basic land types among lands you control."));
+        Ability ability = new DynamicManaAbility(
+                new Mana(0, 0, 0, 0, 0, 0, 1, 0), new DomainValue(), new TapSourceCost(),
+                "Add X mana in any combination of colors to your mana pool,"
+                + " where X is the number of basic land types among lands you control."
+        );
+        ability.setAbilityWord(AbilityWord.DOMAIN);
+        this.addAbility(ability);
     }
 
     public PrismaticGeoscope(final PrismaticGeoscope card) {

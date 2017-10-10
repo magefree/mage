@@ -128,7 +128,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
         activateManaAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Add {C}{C}{C}{C}");
 
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X},{T}: Untap");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}, {T}: Untap");
         setChoice(playerB, "X=4");
         addTarget(playerB, "Island");
         addTarget(playerB, "Island");

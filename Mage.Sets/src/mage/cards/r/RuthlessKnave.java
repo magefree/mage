@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class RuthlessKnave extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("three three Treasures");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Treasures");
 
     static {
         filter.add(new SubtypePredicate(SubType.TREASURE));

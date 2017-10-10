@@ -25,63 +25,73 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.target.TargetPermanent;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author LoneFox
+ * @author L_J
  */
-public class MaliciousAdvice extends CardImpl {
+public class SphereOfPurity extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, and/or lands");
+    public SphereOfPurity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)));
+        // If an artifact would deal damage to you, prevent 1 of that damage.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SphereOfPurityEffect()));
     }
 
-    public MaliciousAdvice(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{B}");
-
-        // Tap X target artifacts, creatures, and/or lands. You lose X life.
-        Effect effect = new TapTargetEffect();
-        effect.setText("X target artifacts, creatures, and/or lands");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(new ManacostVariableValue()));
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            ability.getTargets().clear();
-            ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter));
-        }
-    }
-
-    public MaliciousAdvice(final MaliciousAdvice card) {
+    public SphereOfPurity(final SphereOfPurity card) {
         super(card);
     }
 
     @Override
-    public MaliciousAdvice copy() {
-        return new MaliciousAdvice(this);
+    public SphereOfPurity copy() {
+        return new SphereOfPurity(this);
+    }
+}
+
+class SphereOfPurityEffect extends PreventionEffectImpl {
+
+    public SphereOfPurityEffect() {
+        super(Duration.WhileOnBattlefield, 1, false, false);
+        this.staticText = "If an artifact would deal damage to you, prevent 1 of that damage";
+    }
+
+    public SphereOfPurityEffect(SphereOfPurityEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getTargetId().equals(source.getControllerId())) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            if (permanent != null && permanent.isArtifact()) {
+                return super.applies(event, source, game);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public SphereOfPurityEffect copy() {
+        return new SphereOfPurityEffect(this);
     }
 }

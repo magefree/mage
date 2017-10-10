@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
 public class ClergyOfTheHolyNimbus extends CardImpl {
 
     public ClergyOfTheHolyNimbus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
@@ -61,7 +61,7 @@ public class ClergyOfTheHolyNimbus extends CardImpl {
 
         // If Clergy of the Holy Nimbus would be destroyed, regenerate it.   
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ClergyOfTheHolyNimbusReplacementEffect()));
-                
+
         // {1}: Clergy of the Holy Nimbus can't be regenerated this turn. Only any opponent may activate this ability.
         this.addAbility(new ActivateOnlyByOpponentActivatedAbility(Zone.BATTLEFIELD, new CantBeRegeneratedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}")));
     }
@@ -90,7 +90,7 @@ class ClergyOfTheHolyNimbusReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent ClergyOfTheHolyNimbus = game.getPermanent(event.getTargetId());
-        if (ClergyOfTheHolyNimbus != null 
+        if (ClergyOfTheHolyNimbus != null
                 && event.getAmount() == 0) { // 1=noRegen
             if (ClergyOfTheHolyNimbus.regenerate(source.getSourceId(), game)) {
                 game.informPlayers(source.getSourceObject(game).getName() + " has been regenerated.");

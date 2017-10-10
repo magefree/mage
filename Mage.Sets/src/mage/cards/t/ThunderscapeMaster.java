@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
 public class ThunderscapeMaster extends CardImpl {
 
     public ThunderscapeMaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -60,7 +60,7 @@ public class ThunderscapeMaster extends CardImpl {
 
         // {B}{B}, {tap}: Target player loses 2 life and you gain 2 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{B}{B}"));
-        ability.addEffect(new GainLifeEffect(2));
+        ability.addEffect(new GainLifeEffect(2).setText("and you gain 2 life"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

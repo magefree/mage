@@ -55,7 +55,7 @@ public class LaunchTheFleet extends CardImpl {
         // Until end of turn, any number of target creatures each gain "Whenever this creature attacks, create a 1/1 white Soldier token tapped and attacking."
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
         Effect effect = new GainAbilityTargetEffect(new AttacksTriggeredAbility(new CreateTokenEffect(new SoldierToken(), 1, true, true), false), Duration.EndOfTurn);
-        effect.setText("Until end of turn, any number of target creatures each gain \"Whenever this creature attacks, create a 1/1 white Soldier token tapped and attacking.\"");
+        effect.setText("Until end of turn, any number of target creatures each gain \"Whenever this creature attacks, create a 1/1 white Soldier creature token that's tapped and attacking.\"");
         this.getSpellAbility().addEffect(effect);
 
     }

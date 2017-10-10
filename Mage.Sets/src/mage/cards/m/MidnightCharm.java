@@ -47,11 +47,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class MidnightCharm extends CardImpl {
 
     public MidnightCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Choose one - Midnight Charm deals 1 damage to target creature and you gain 1 life; or target creature gains first strike until end of turn; or tap target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addEffect(new GainLifeEffect(1));
+        this.getSpellAbility().addEffect(new GainLifeEffect(1).setText("and you gain 1 life"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         Mode mode = new Mode();
         mode.getEffects().add(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));

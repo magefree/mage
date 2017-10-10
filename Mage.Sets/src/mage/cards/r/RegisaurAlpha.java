@@ -52,7 +52,7 @@ import mage.game.permanent.token.DinosaurToken;
  */
 public class RegisaurAlpha extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("other Dinosaurss you control");
+    private static final FilterPermanent filter = new FilterPermanent("Dinosaurs");
 
     static {
         filter.add(new SubtypePredicate(SubType.DINOSAUR));

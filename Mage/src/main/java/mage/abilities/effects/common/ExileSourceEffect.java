@@ -57,7 +57,7 @@ public class ExileSourceEffect extends OneShotEffect {
      */
     public ExileSourceEffect(boolean toUniqueExileZone) {
         super(Outcome.Exile);
-        staticText = "Exile {this}";
+        staticText = "exile {this}";
         this.toUniqueExileZone = toUniqueExileZone;
     }
 

@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CaptivatingCrew extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

@@ -191,7 +191,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     private String setText() {
         StringBuilder sb = new StringBuilder();
         if (chooseLandType) {
-            sb.append("Target land becomes the basic land type of your choice ");
+            sb.append("Target land becomes the basic land type of your choice");
         } else {
             sb.append("Target land becomes a ");
             int i = 1;

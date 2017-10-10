@@ -12,7 +12,7 @@ public class GrinningTotemTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Grinning Totem");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}, Sacrifice {this}: Search target opponent's library for a card and exile it", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice {this}: Search target opponent's library for a card and exile it", playerB);
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -28,7 +28,7 @@ public class GrinningTotemTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Tormod's Crypt");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}, Sacrifice {this}: Search target opponent's library for a card and exile it", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice {this}: Search target opponent's library for a card and exile it", playerB);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}, Sacrifice {this}: Exile all cards", playerA);
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);

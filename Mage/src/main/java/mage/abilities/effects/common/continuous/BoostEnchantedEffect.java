@@ -125,7 +125,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Enchanted creature gets ");
+        sb.append("enchanted creature gets ");
         String p = power.toString();
         if (!p.startsWith("-")) {
             sb.append('+');

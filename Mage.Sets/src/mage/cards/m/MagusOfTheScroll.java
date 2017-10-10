@@ -57,7 +57,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class MagusOfTheScroll extends CardImpl {
 
     public MagusOfTheScroll(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -85,7 +85,7 @@ class MagusOfTheScrollEffect extends OneShotEffect {
 
     public MagusOfTheScrollEffect() {
         super(Outcome.Neutral);
-        staticText = "Reveal a card at random from your hand. If it's the named card, {this} deals 2 damage to target creature or player";
+        staticText = ", then reveal a card at random from your hand. If it's the named card, {this} deals 2 damage to target creature or player";
     }
 
     public MagusOfTheScrollEffect(final MagusOfTheScrollEffect effect) {

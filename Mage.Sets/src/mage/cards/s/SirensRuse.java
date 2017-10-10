@@ -69,7 +69,7 @@ class SirensRuseEffect extends ExileTargetForSourceEffect {
 
     SirensRuseEffect() {
         super();
-        this.staticText = "Exile target creature you control, then return that card to the battlefield under its owner's control.  If a Pirate was exiled this way, draw a card.";
+        this.staticText = "Exile target creature you control, then return that card to the battlefield under its owner's control. If a Pirate was exiled this way, draw a card.";
     }
 
     SirensRuseEffect(final SirensRuseEffect effect) {

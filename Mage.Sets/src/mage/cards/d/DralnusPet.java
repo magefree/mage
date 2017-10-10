@@ -65,7 +65,7 @@ import mage.players.Player;
 public class DralnusPet extends CardImpl {
 
     public DralnusPet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -77,7 +77,7 @@ public class DralnusPet extends CardImpl {
         this.addAbility(new KickerAbility(kickerCosts));
         // If Dralnu's Pet was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost.
         Ability ability = new EntersBattlefieldAbility(new DralnusPetEffect(), KickedCondition.instance,
-                "If {this} was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost", "");
+                "If {this} was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost.", "");
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }

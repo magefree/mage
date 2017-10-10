@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Hubris extends CardImpl {
 
     public Hubris(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Return target creature and all Auras attached to it to their owners' hand.
         this.getSpellAbility().addEffect(new HubrisReturnEffect());
@@ -80,7 +80,7 @@ class HubrisReturnEffect extends OneShotEffect {
 
     public HubrisReturnEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Return target creature and all Auras attached to it to their owners' hand";
+        this.staticText = "Return target creature and all Auras attached to it to their owners' hands";
     }
 
     public HubrisReturnEffect(final HubrisReturnEffect effect) {

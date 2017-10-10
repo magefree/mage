@@ -66,7 +66,7 @@ public class ScaldingSalamander extends CardImpl {
         // Whenever Scalding Salamander attacks, you may have it deal 1 damage to each creature without flying defending player controls.
         this.addAbility(new AttacksTriggeredAbility(
                 new DamageAllEffect(1, filter), true,
-                "Whenever Scalding Salamander attacks, you may have it deal 1 damage to each creature without flying defending player controls"
+                "Whenever Scalding Salamander attacks, you may have it deal 1 damage to each creature without flying defending player controls."
         ));
     }
 

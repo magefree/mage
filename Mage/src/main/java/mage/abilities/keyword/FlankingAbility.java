@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -11,12 +10,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-
 /**
  * @author Plopman
  */
-
-
 public class FlankingAbility extends TriggeredAbilityImpl {
 
     public FlankingAbility() {
@@ -37,9 +33,8 @@ public class FlankingAbility extends TriggeredAbilityImpl {
         if (event.getTargetId().equals(this.getSourceId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null) {
-                boolean hasFlankingAbility =
-                        permanent.getAbilities().stream().anyMatch(ability -> ability instanceof FlankingAbility);
-
+                boolean hasFlankingAbility
+                        = permanent.getAbilities().stream().anyMatch(ability -> ability instanceof FlankingAbility);
 
                 if (!hasFlankingAbility) {
                     for (Effect effect : this.getEffects()) {
@@ -54,13 +49,12 @@ public class FlankingAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Flanking";
+        return "flanking";
     }
 
     @Override
     public FlankingAbility copy() {
         return new FlankingAbility(this);
     }
-
 
 }

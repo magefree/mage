@@ -82,7 +82,7 @@ public class SuspendTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Jhoira of the Ghitu", 1);
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},Exile a nonland card from your hand: Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, Exile a nonland card from your hand: Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend");
         setChoice(playerA, "Silvercoat Lion");
 
         setStopAt(11, PhaseStep.PRECOMBAT_MAIN);

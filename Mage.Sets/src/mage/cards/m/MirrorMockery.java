@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
 public class MirrorMockery extends CardImpl {
 
     public MirrorMockery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -83,7 +83,7 @@ class MirrorMockeryEffect extends OneShotEffect {
 
     public MirrorMockeryEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may create a token that's a copy of that creature. Exile that token at the end of combat";
+        this.staticText = "you may create a token that's a copy of that creature. Exile that token at end of combat";
     }
 
     public MirrorMockeryEffect(final MirrorMockeryEffect effect) {

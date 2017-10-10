@@ -174,13 +174,13 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("Player A should be able to create the ", "{G}{G}{G}", options.get(0).toString());
-        Assert.assertEquals("Player A should be able to create the ", "{G}{G}{W}", options.get(1).toString());
-        Assert.assertEquals("Player A should be able to create the ", "{G}{G}{W}", options.get(2).toString()); // ManaOption type optimzing seems not optimal yet
-        Assert.assertEquals("Player A should be able to create the ", "{G}{W}{W}", options.get(3).toString());
+        Assert.assertEquals("Player A should be able to create the ", "{W}{G}{G}", options.get(1).toString());
+        Assert.assertEquals("Player A should be able to create the ", "{W}{G}{G}", options.get(2).toString()); // ManaOption type optimzing seems not optimal yet
+        Assert.assertEquals("Player A should be able to create the ", "{W}{W}{G}", options.get(3).toString());
         Assert.assertEquals("Player A should be able to create only 3 different mana options", 4, options.size());
 
         options = playerB.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player B should be able to create the ", "{G}{W}", options.get(0).toString());
+        Assert.assertEquals("Player B should be able to create the ", "{W}{G}", options.get(0).toString());
         Assert.assertEquals("Player B should be able to create the ", "{W}{W}", options.get(1).toString());
         Assert.assertEquals("Player B should be able to create only 3 different mana options", 2, options.size());
 

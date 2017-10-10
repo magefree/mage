@@ -57,7 +57,7 @@ import mage.game.permanent.Permanent;
  */
 public class TemporalDistortion extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or land");
+    private static final FilterPermanent filter = new FilterPermanent("a creature or land");
     private static final FilterPermanent filter2 = new FilterPermanent("permanents with hourglass counters on them");
 
     static {

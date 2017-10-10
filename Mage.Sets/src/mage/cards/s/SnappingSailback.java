@@ -58,7 +58,7 @@ public class SnappingSailback extends CardImpl {
         // Enrage — Whenever Snapping Sailback is dealt damage, put a +1/+1 counter on it.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1))
-                        .setText("put a +1/+1 counter on it"), false));
+                        .setText("put a +1/+1 counter on it"), false, true));
     }
 
     public SnappingSailback(final SnappingSailback card) {

@@ -480,20 +480,20 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         for (int i = 0; i < colorless; i++) {
             sbMana.append("{C}");
         }
+        for (int i = 0; i < white; i++) {
+            sbMana.append("{W}");
+        }
+        for (int i = 0; i < blue; i++) {
+            sbMana.append("{U}");
+        }
+        for (int i = 0; i < black; i++) {
+            sbMana.append("{B}");
+        }
         for (int i = 0; i < red; i++) {
             sbMana.append("{R}");
         }
         for (int i = 0; i < green; i++) {
             sbMana.append("{G}");
-        }
-        for (int i = 0; i < blue; i++) {
-            sbMana.append("{U}");
-        }
-        for (int i = 0; i < white; i++) {
-            sbMana.append("{W}");
-        }
-        for (int i = 0; i < black; i++) {
-            sbMana.append("{B}");
         }
         for (int i = 0; i < any; i++) {
             sbMana.append("{Any}");

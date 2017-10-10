@@ -332,7 +332,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
         addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{B}{B},{T}: Return target creature", "Silvercoat Lion");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{B}{B}, {T}: Return target creature", "Silvercoat Lion");
 
         castSpell(2, PhaseStep.BEGIN_COMBAT, playerA, "Terror", "Silvercoat Lion");
         setStopAt(2, PhaseStep.END_COMBAT);
@@ -364,7 +364,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerB, "Swamp", 5);
         addCard(Zone.GRAVEYARD, playerB, "Jace, Vryn's Prodigy");
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{B}{B},{T}: Return target creature", "Jace, Vryn's Prodigy");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{B}{B}, {T}: Return target creature", "Jace, Vryn's Prodigy");
 
         // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
         activateAbility(2, PhaseStep.BEGIN_COMBAT, playerB, "{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard");

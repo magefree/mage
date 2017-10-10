@@ -36,17 +36,20 @@ public class MTGO1v1Commander extends Commander {
     public MTGO1v1Commander() {
         super("MTGO 1v1 Commander");
         banned.add("Ancestral Recall");
-        banned.add("Arcum Dagsson");
         banned.add("Back to Basics");
         banned.add("Balance");
+        banned.add("Baral, Chief of Compliance");
         banned.add("Bazaar of Baghdad");
         banned.add("Black Lotus");
         banned.add("Braids, Cabal Minion");
         banned.add("Brainstorm");
         banned.add("Channel");
         banned.add("Derevi, Empyrial Tactician");
+        banned.add("Demonic Tutor");
         banned.add("Dig Through Time");
         banned.add("Edric, Spymaster of Trest");
+        banned.add("Emrakul, the Aeons Torn");
+        banned.add("Enlightened Tutor");
         banned.add("Entomb");
         banned.add("Fastbond");
         banned.add("Food Chain");
@@ -55,6 +58,7 @@ public class MTGO1v1Commander extends Commander {
         banned.add("Griselbrand");
         banned.add("Hermit Druid");
         banned.add("Humility");
+        banned.add("Imperial Seal");
         banned.add("Karakas");
         banned.add("Library of Alexandria");
         banned.add("Mana Crypt");
@@ -68,6 +72,7 @@ public class MTGO1v1Commander extends Commander {
         banned.add("Mox Pearl");
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
+        banned.add("Mystical Tutor");
         banned.add("Natural Order");
         banned.add("Necropotence");
         banned.add("Oath of Druids");
@@ -88,8 +93,8 @@ public class MTGO1v1Commander extends Commander {
         banned.add("Treachery");
         banned.add("Treasure Cruise");
         banned.add("Vial Smasher the Fierce");
+        banned.add("Vampiric Tutor");
         banned.add("Yamgmoth's Bargain");
-        banned.add("Yisan, the Wanderer Bard");
         banned.add("Zur the Enchanter");
     }
 }

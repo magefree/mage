@@ -59,26 +59,26 @@ import java.util.UUID;
 public class Jokulmorder extends CardImpl {
 
     public Jokulmorder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}{U}");
         this.subtype.add(SubType.LEVIATHAN);
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // Jokulmorder enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
+
         // When Jokulmorder enters the battlefield, sacrifice it unless you sacrifice five lands.
         Effect effect = new SacrificeSourceUnlessPaysEffect(
                 new SacrificeTargetCost(new TargetControlledPermanent(5, 5, new FilterControlledLandPermanent("five lands"), true)));
         effect.setText("sacrifice it unless you sacrifice five lands");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
-        
+
         // Jokulmorder doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-        
+
         // Whenever you play an Island, you may untap Jokulmorder.
         this.addAbility(new JokulmorderTriggeredAbility());
     }
@@ -122,6 +122,6 @@ class JokulmorderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When you play an Island, you may untap {this}";
+        return "Whenever you play an Island, you may untap {this}.";
     }
 }
