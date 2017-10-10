@@ -217,6 +217,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Icatian Scout", 313, Rarity.COMMON, IcatianScout.class));
         cards.add(new SetCardInfo("Icatian Store", 423, Rarity.RARE, mage.cards.i.IcatianStore.class));
         cards.add(new SetCardInfo("Icatian Town", 314, Rarity.RARE, mage.cards.i.IcatianTown.class));
+        cards.add(new SetCardInfo("Ice Floe", 424, Rarity.UNCOMMON, mage.cards.i.IceFloe.class));
         cards.add(new SetCardInfo("Imposing Visage", 241, Rarity.COMMON, mage.cards.i.ImposingVisage.class));
         cards.add(new SetCardInfo("Incinerate", 242, Rarity.COMMON, mage.cards.i.Incinerate.class));
         cards.add(new SetCardInfo("Inferno", 243, Rarity.RARE, mage.cards.i.Inferno.class));
