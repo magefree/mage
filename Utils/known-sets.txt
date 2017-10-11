@@ -90,6 +90,7 @@ Grand Prix|GrandPrix|
 Guildpact|Guildpact|
 Guru|Guru|
 HASCON Promo 2017|HasconPromo2017|
+Heroes of the Realm|HeroesOfTheRealm|
 Homelands|Homelands|
 Hour of Devastation|HourOfDevastation|
 Ice Age|IceAge|
