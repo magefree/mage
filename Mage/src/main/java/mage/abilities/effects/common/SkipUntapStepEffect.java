@@ -40,7 +40,7 @@ import mage.players.Player;
 
 /**
  *
- * @author L_J
+ * @author jeffwadsworth
  */
  
 public class SkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
