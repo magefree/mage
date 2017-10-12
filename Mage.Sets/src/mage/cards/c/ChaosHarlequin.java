@@ -75,7 +75,7 @@ class ChaosHarlequinEffect extends OneShotEffect {
 
     public ChaosHarlequinEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Exile the top card of your library. If that card is a land card, Chaos Harlequin gets -4/-0 until end of turn. Otherwise, Chaos Harlequin gets +2/+0 until end of turn";
+        this.staticText = "Exile the top card of your library. If that card is a land card, {this} gets -4/-0 until end of turn. Otherwise, {this} gets +2/+0 until end of turn";
     }
 
     public ChaosHarlequinEffect(final ChaosHarlequinEffect effect) {
