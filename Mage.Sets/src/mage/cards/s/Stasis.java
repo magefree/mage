@@ -76,7 +76,7 @@ class SkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
 
     public SkipUntapStepEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
-        staticText = "Players skip their uptap steps";
+        staticText = "Players skip their untap steps";
     }
 
     public SkipUntapStepEffect(final SkipUntapStepEffect effect) {
