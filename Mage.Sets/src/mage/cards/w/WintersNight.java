@@ -25,51 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.f;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.PreventDamageByTargetEffect;
-import mage.abilities.effects.common.PreventDamageToTargetEffect;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.target.common.TargetAttackingCreature;
+import mage.constants.SetTargetPointer;
+import mage.constants.SuperType;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author L_J
  */
-public class Foxfire extends CardImpl {
-
-    public Foxfire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
-
-        // Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
-        this.getSpellAbility().addTarget(new TargetAttackingCreature());
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true).setText("Prevent all combat damage that would be dealt to "));
-        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, true).setText("and dealt by that creature this turn."));
-
-        // Draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)),false));
-
-
+public class WintersNight extends CardImpl {
+    
+    private static final FilterLandPermanent filter = new FilterLandPermanent("a player taps a snow land");
+    {
+        filter.add(new SupertypePredicate(SuperType.SNOW));
     }
 
-    public Foxfire(final Foxfire card) {
+    public WintersNight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{G}{W}");
+        addSuperType(SuperType.WORLD);
+
+        // Whenever a player taps a snow land for mana, that player adds one mana to his or her mana pool of any type that land produced.
+        // That land doesn't untap during its controller's next untap step.
+        ManaEffect effect = new AddManaOfAnyTypeProducedEffect();
+        effect.setText("that player adds one mana to his or her mana pool of any type that land produced");
+        Ability ability = new TapForManaAllTriggeredManaAbility(effect, filter, SetTargetPointer.PERMANENT);
+        Effect effect2 = new DontUntapInControllersNextUntapStepTargetEffect();
+        effect2.setText("That land doesn't untap during its controller's next untap step");
+        ability.addEffect(effect2);
+        this.addAbility(ability);
+    }
+
+    public WintersNight(final WintersNight card) {
         super(card);
     }
 
     @Override
-    public Foxfire copy() {
-        return new Foxfire(this);
+    public WintersNight copy() {
+        return new WintersNight(this);
     }
 }

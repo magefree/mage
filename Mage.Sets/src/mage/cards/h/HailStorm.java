@@ -25,51 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.f;
+package mage.cards.h;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.PreventDamageByTargetEffect;
-import mage.abilities.effects.common.PreventDamageToTargetEffect;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.target.common.TargetAttackingCreature;
+import mage.constants.TargetController;
+import mage.filter.common.FilterAttackingCreature;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
  * @author L_J
  */
-public class Foxfire extends CardImpl {
+public class HailStorm extends CardImpl {
 
-    public Foxfire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
+    
+    public HailStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{G}");
 
-        // Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
-        this.getSpellAbility().addTarget(new TargetAttackingCreature());
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true).setText("Prevent all combat damage that would be dealt to "));
-        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, true).setText("and dealt by that creature this turn."));
-
-        // Draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)),false));
-
-
+        // Hail Storm deals 2 damage to each attacking creature and 1 damage to you and each creature you control.
+        this.getSpellAbility().addEffect(new DamageAllEffect(2, new FilterAttackingCreature()));
+        this.getSpellAbility().addEffect(new DamageControllerEffect(1).setText("and 1 damage to you "));
+        this.getSpellAbility().addEffect(new DamageAllEffect(1, filter).setText("and each creature you control."));
     }
 
-    public Foxfire(final Foxfire card) {
+    public HailStorm(final HailStorm card) {
         super(card);
     }
 
     @Override
-    public Foxfire copy() {
-        return new Foxfire(this);
+    public HailStorm copy() {
+        return new HailStorm(this);
     }
 }

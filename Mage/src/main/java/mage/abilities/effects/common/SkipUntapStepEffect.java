@@ -1,8 +1,9 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
  *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
@@ -24,45 +25,45 @@
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
+ * 
  */
-package mage.cards.s;
 
-import java.util.UUID;
+package mage.abilities.effects.common;
+
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.effects.common.SkipUntapStepEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.players.Player;
 
 /**
  *
- * @author jeffwadsworth, edited by L_J
+ * @author jeffwadsworth
  */
-public class Stasis extends CardImpl {
+ 
+public class SkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public Stasis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
-
-        // Players skip their untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapStepEffect()));
-
-        // At the beginning of your upkeep, sacrifice Stasis unless you pay {U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}")), TargetController.YOU, false));
-
+    public SkipUntapStepEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
+        staticText = "Players skip their untap steps";
     }
 
-    public Stasis(final Stasis card) {
-        super(card);
+    public SkipUntapStepEffect(final SkipUntapStepEffect effect) {
+        super(effect);
     }
 
     @Override
-    public Stasis copy() {
-        return new Stasis(this);
+    public SkipUntapStepEffect copy() {
+        return new SkipUntapStepEffect(this);
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        return event.getType() == GameEvent.EventType.UNTAP_STEP
+                && controller != null
+                && game.getState().getPlayersInRange(controller.getId(), game).contains(event.getPlayerId());
     }
 }

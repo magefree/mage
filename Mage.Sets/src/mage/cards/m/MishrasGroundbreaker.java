@@ -25,51 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.f;
+package mage.cards.m;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.PreventDamageByTargetEffect;
-import mage.abilities.effects.common.PreventDamageToTargetEffect;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetAttackingCreature;
+import mage.game.permanent.token.Token;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author L_J
  */
-public class Foxfire extends CardImpl {
+public class MishrasGroundbreaker extends CardImpl {
 
-    public Foxfire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
+    public MishrasGroundbreaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
-        this.getSpellAbility().addTarget(new TargetAttackingCreature());
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true).setText("Prevent all combat damage that would be dealt to "));
-        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, true).setText("and dealt by that creature this turn."));
-
-        // Draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)),false));
-
-
+        // {tap}, Sacrifice Mishra's Groundbreaker: Target land becomes a 3/3 artifact creature that's still a land. (This effect lasts indefinitely.)
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new MishrasGroundbreakerToken(), false, true, Duration.Custom), new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetLandPermanent());
+        this.addAbility(ability);
     }
 
-    public Foxfire(final Foxfire card) {
+    public MishrasGroundbreaker(final MishrasGroundbreaker card) {
         super(card);
     }
 
     @Override
-    public Foxfire copy() {
-        return new Foxfire(this);
+    public MishrasGroundbreaker copy() {
+        return new MishrasGroundbreaker(this);
+    }
+
+}
+
+class MishrasGroundbreakerToken extends Token {
+
+    public MishrasGroundbreakerToken() {
+        super("", "3/3 artifact creature");
+        this.cardType.add(CardType.ARTIFACT);
+        this.cardType.add(CardType.CREATURE);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
     }
 }

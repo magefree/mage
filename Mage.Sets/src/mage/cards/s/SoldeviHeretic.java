@@ -25,51 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.f;
+package mage.cards.s;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.PreventDamageByTargetEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
-import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetAttackingCreature;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
  * @author L_J
  */
-public class Foxfire extends CardImpl {
+public class SoldeviHeretic extends CardImpl {
 
-    public Foxfire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
-
-        // Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
-        this.getSpellAbility().addTarget(new TargetAttackingCreature());
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true).setText("Prevent all combat damage that would be dealt to "));
-        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, true).setText("and dealt by that creature this turn."));
-
-        // Draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)),false));
-
-
+    public SoldeviHeretic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.CLERIC);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        
+        // {W}, {tap}: Prevent the next 2 damage that would be dealt to target creature this turn. Target opponent may draw a card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn ,2), new ManaCostsImpl("{W}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        Effect effect = new DrawCardTargetEffect(1, true);
+        effect.setTargetPointer(new SecondTargetPointer());
+        ability.addEffect(effect);
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
-    public Foxfire(final Foxfire card) {
+    public SoldeviHeretic(final SoldeviHeretic card) {
         super(card);
     }
 
     @Override
-    public Foxfire copy() {
-        return new Foxfire(this);
+    public SoldeviHeretic copy() {
+        return new SoldeviHeretic(this);
     }
 }

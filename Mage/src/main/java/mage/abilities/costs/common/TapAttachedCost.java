@@ -25,44 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.abilities.costs.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.effects.common.SkipUntapStepEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostImpl;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author jeffwadsworth, edited by L_J
+ * @author L_J
  */
-public class Stasis extends CardImpl {
+public class TapAttachedCost extends CostImpl {
 
-    public Stasis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
-
-        // Players skip their untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapStepEffect()));
-
-        // At the beginning of your upkeep, sacrifice Stasis unless you pay {U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}")), TargetController.YOU, false));
-
+    public TapAttachedCost() {
+        this.text = "Tap enchanted creature";
     }
 
-    public Stasis(final Stasis card) {
-        super(card);
+    public TapAttachedCost(TapAttachedCost cost) {
+        super(cost);
     }
 
     @Override
-    public Stasis copy() {
-        return new Stasis(this);
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+        Permanent attachment = game.getPermanentOrLKIBattlefield(sourceId);
+        Permanent permanent = game.getPermanent(attachment.getAttachedTo());
+        if (permanent != null) {
+            paid = permanent.tap(game);
+        }
+        return paid;
+    }
+
+    @Override
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+        Permanent attachment = game.getPermanentOrLKIBattlefield(sourceId);
+        Permanent permanent = game.getPermanent(attachment.getAttachedTo());
+        if (permanent != null) {
+            // return true;          // Technically the more correct implementation, but all cards using this cost also come with an "untapped" condition
+            return !permanent.isTapped();
+        }
+        return false;
+    }
+
+    @Override
+    public TapAttachedCost copy() {
+        return new TapAttachedCost(this);
     }
 }

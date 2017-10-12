@@ -111,7 +111,7 @@ class SecondSightEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        int count = Math.min(player.getLibrary().size(), 3);
+        int count = Math.min(player.getLibrary().size(), 5);
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
