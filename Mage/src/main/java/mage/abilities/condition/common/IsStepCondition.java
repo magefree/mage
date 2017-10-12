@@ -59,7 +59,7 @@ public class IsStepCondition implements Condition {
     public String toString() {
         StringBuilder sb = new StringBuilder("during ");
         if (onlyDuringYourSteps) {
-            sb.append("your ");
+            sb.append("your ").append(phaseStep.getStepText());
         } else if (phaseStep == PhaseStep.UPKEEP) {
             sb.append("any upkeep step");
         } else {

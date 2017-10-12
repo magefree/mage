@@ -43,7 +43,7 @@ import mage.constants.CardType;
 public class WheelOfFate extends CardImpl {
 
     public WheelOfFate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "");
 
         this.color.setRed(true);
 
@@ -51,7 +51,7 @@ public class WheelOfFate extends CardImpl {
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{R}"), this));
         // Each player discards his or her hand, then draws seven cards.
         this.getSpellAbility().addEffect(new DiscardHandAllEffect());
-        this.getSpellAbility().addEffect(new DrawCardAllEffect(7));
+        this.getSpellAbility().addEffect(new DrawCardAllEffect(7).setText(", then draws seven cards"));
     }
 
     public WheelOfFate(final WheelOfFate card) {

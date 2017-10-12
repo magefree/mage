@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  * @author fireshoes
  */
 public class DementiaSliver extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("All Slivers");
 
     static {
@@ -59,7 +59,7 @@ public class DementiaSliver extends CardImpl {
     }
 
     public DementiaSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
         this.subtype.add(SubType.SLIVER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -70,7 +70,12 @@ public class DementiaSliver extends CardImpl {
         gainedAbility.addTarget(new TargetOpponent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter,
-                        "All Slivers have \"{T}: Name a card. Target opponent reveals a card at random from his or her hand. If it's the named card, that player discards it\"")));
+                        "All Slivers have \"{T}: Choose a card name. "
+                        + "Target opponent reveals a card at random from his or her hand."
+                        + " If that card has the chosen name, that player discards it."
+                        + " Activate this ability only during your turn.\""
+                )
+        ));
     }
 
     public DementiaSliver(final DementiaSliver card) {
@@ -98,7 +103,7 @@ class DementiaSliverEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
         MageObject sourceObject = game.getObject(source.getSourceId());
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);        
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
         if (opponent != null && sourceObject != null && !cardName.isEmpty()) {
             if (!opponent.getHand().isEmpty()) {
                 Cards revealed = new CardsImpl();

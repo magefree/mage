@@ -69,7 +69,7 @@ public class LightningStorm extends CardImpl {
                 new LightningStormAddCounterEffect(),
                 new DiscardTargetCost(new TargetCardInHand(new FilterLandCard("a land card"))));
         ability.setMayActivate(TargetController.ANY);
-        ability.addEffect(new InfoEffect("Any player may activate this ability but only if {this} is on the stack"));
+        ability.addEffect(new InfoEffect(" Any player may activate this ability but only if {this} is on the stack"));
         this.addAbility(ability);
     }
 

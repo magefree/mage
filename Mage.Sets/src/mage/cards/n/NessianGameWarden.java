@@ -57,7 +57,7 @@ import mage.target.TargetCard;
 public class NessianGameWarden extends CardImpl {
 
     public NessianGameWarden(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(4);
@@ -87,7 +87,7 @@ class NessianGameWardenEffect extends OneShotEffect {
 
     public NessianGameWardenEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "look at the top X cards of your library, where X is the number of forests you control. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order";
+        this.staticText = "look at the top X cards of your library, where X is the number of Forests you control. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order";
     }
 
     public NessianGameWardenEffect(final NessianGameWardenEffect effect) {

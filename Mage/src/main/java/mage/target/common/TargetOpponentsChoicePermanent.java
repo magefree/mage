@@ -6,6 +6,7 @@
 package mage.target.common;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
@@ -49,7 +50,7 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
         if (opponentId != null) {
             if (permanent != null) {
                 if (source != null) {
-                    boolean canSourceControllerTarget = true; 
+                    boolean canSourceControllerTarget = true;
                     if (!isNotTarget()) {
                         if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
                                 || !permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game)) {
@@ -68,6 +69,33 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
     @Override
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
         return super.chooseTarget(outcome, getOpponentId(playerId, source, game), source, game);
+    }
+
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        MageObject sourceObject = game.getObject(sourceId);
+        Player player = game.getPlayer(sourceControllerId);
+        if (sourceObject == null || player == null) {
+            return false;
+        }
+        int counter;
+        for (UUID oppId : game.getState().getPlayersInRange(player.getId(), game)) {
+            counter = 0;
+            Player opp = game.getPlayer(oppId);
+            if (opp != null && player.hasOpponent(opp.getId(), game)) {
+                for (Permanent perm : game.getBattlefield().getActivePermanents(opp.getId(), game)) {
+                    if (!targets.containsKey(perm.getId())
+                            && filter.match(perm, sourceId, opp.getId(), game)
+                            && perm.canBeTargetedBy(sourceObject, sourceControllerId, game)) {
+                        counter++;
+                        if (counter >= minNumberOfTargets) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     @Override

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.constants.Duration;
@@ -45,23 +44,23 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
     public PreventDamageToTargetEffect(Duration duration) {
         this(duration, false);
     }
-    
+
     public PreventDamageToTargetEffect(Duration duration, boolean onlyCombat) {
         this(duration, Integer.MAX_VALUE, onlyCombat);
     }
-    
+
     public PreventDamageToTargetEffect(Duration duration, int amount) {
         this(duration, amount, false);
     }
-    
+
     public PreventDamageToTargetEffect(Duration duration, int amount, boolean onlyCombat) {
         super(duration, amount, onlyCombat);
     }
-    
+
     public PreventDamageToTargetEffect(Duration duration, boolean onlyCombat, boolean consumable, DynamicValue amountToPreventDynamic) {
         super(duration, 0, onlyCombat, consumable, amountToPreventDynamic);
     }
-    
+
     public PreventDamageToTargetEffect(final PreventDamageToTargetEffect effect) {
         super(effect);
     }
@@ -83,9 +82,9 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
         }
         StringBuilder sb = new StringBuilder();
         if (amountToPrevent == Integer.MAX_VALUE) {
-            sb.append("Prevent all damage that would be dealt to target ");
+            sb.append("prevent all damage that would be dealt to target ");
         } else {
-            sb.append("Prevent the next ").append(amountToPrevent).append(" damage that would be dealt to target ");
+            sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt to target ");
         }
         sb.append(mode.getTargets().get(0).getTargetName());
         if (!duration.toString().isEmpty()) {

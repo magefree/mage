@@ -53,18 +53,18 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class AltarGolem extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
-    
+
     static {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public AltarGolem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
         this.subtype.add(SubType.GOLEM);
 
         this.power = new MageInt(0);
@@ -72,17 +72,17 @@ public class AltarGolem extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // Altar Golem's power and toughness are each equal to the number of creatures on the battlefield.
-        DynamicValue amount = new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("creatures in play"));
+        DynamicValue amount = new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("creatures on the battlefield"));
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(amount, Duration.EndOfGame)));
-        
+
         // Altar Golem doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-        
+
         // Tap five untapped creatures you control: Untap Altar Golem.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(5, 5, filter, true))));
-        
+
     }
 
     public AltarGolem(final AltarGolem card) {

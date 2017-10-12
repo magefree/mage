@@ -45,14 +45,13 @@ import mage.target.common.TargetCreaturePermanent;
 public class ColossalHeroics extends CardImpl {
 
     public ColossalHeroics(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Strive - Colossal Heroics costs {1}{G} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}{G}"));
         // Any number of target creatures each get +2/+2 until end of turn. Untap those creatures.
-        Effect effect = new BoostTargetEffect(2,2, Duration.EndOfTurn);
-        effect.setText("Any number of target creatures each get +2/+2");
+        Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
+        effect.setText("Any number of target creatures each get +2/+2 until end of turn.");
         this.getSpellAbility().addEffect(effect);
         effect = new UntapTargetEffect();
         effect.setText("Untap those creatures");
