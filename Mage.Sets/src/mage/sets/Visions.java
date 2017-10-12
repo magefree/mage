@@ -149,6 +149,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("River Boa", 68, Rarity.COMMON, mage.cards.r.RiverBoa.class));
         cards.add(new SetCardInfo("Rock Slide", 92, Rarity.COMMON, mage.cards.r.RockSlide.class));
         cards.add(new SetCardInfo("Rowen", 69, Rarity.RARE, mage.cards.r.Rowen.class));
+        cards.add(new SetCardInfo("Sands of Time", 153, Rarity.RARE, mage.cards.s.SandsOfTime.class));
         cards.add(new SetCardInfo("Scalebane's Elite", 135, Rarity.UNCOMMON, mage.cards.s.ScalebanesElite.class));
         cards.add(new SetCardInfo("Shrieking Drake", 43, Rarity.COMMON, mage.cards.s.ShriekingDrake.class));
         cards.add(new SetCardInfo("Simoon", 136, Rarity.UNCOMMON, mage.cards.s.Simoon.class));
