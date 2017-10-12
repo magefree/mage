@@ -51,9 +51,9 @@ public class EnergyArc extends CardImpl {
 
         // Untap any number of target creatures. Prevent all combat damage that would be dealt to and dealt by those creatures this turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true));
-        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, true));
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap any number of target creatures. "));
+        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true).setText("Prevent all combat damage that would be dealt to "));
+        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, true).setText("and dealt by those creatures this turn."));
     }
 
     public EnergyArc(final EnergyArc card) {
