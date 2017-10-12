@@ -55,7 +55,7 @@ public class WintersNight extends CardImpl {
     }
 
     public WintersNight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{R}{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{G}{W}");
         addSuperType(SuperType.WORLD);
 
         // Whenever a player taps a snow land for mana, that player adds one mana to his or her mana pool of any type that land produced.
