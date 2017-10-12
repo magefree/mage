@@ -32,8 +32,8 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.SkipUntapStepEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -45,7 +45,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -72,31 +71,6 @@ public class SandsOfTime extends CardImpl {
     @Override
     public SandsOfTime copy() {
         return new SandsOfTime(this);
-    }
-}
-
-class SkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public SkipUntapStepEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
-        staticText = "Players skip their untap steps";
-    }
-
-    public SkipUntapStepEffect(final SkipUntapStepEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SkipUntapStepEffect copy() {
-        return new SkipUntapStepEffect(this);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        return event.getType() == GameEvent.EventType.UNTAP_STEP
-                && controller != null
-                && game.getState().getPlayersInRange(controller.getId(), game).contains(event.getPlayerId());
     }
 }
 
