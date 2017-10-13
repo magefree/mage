@@ -106,7 +106,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 169, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 170, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 171, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kongming, 'Sleeping Dragon'", 9, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
+        cards.add(new SetCardInfo("Kongming, \"Sleeping Dragon\"", 9, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
         cards.add(new SetCardInfo("Lady Sun", 45, Rarity.RARE, mage.cards.l.LadySun.class));
         cards.add(new SetCardInfo("Lady Zhurong, Warrior Queen", 139, Rarity.RARE, mage.cards.l.LadyZhurongWarriorQueen.class));
         cards.add(new SetCardInfo("Liu Bei, Lord of Shu", 11, Rarity.RARE, mage.cards.l.LiuBeiLordOfShu.class));
@@ -127,7 +127,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain Bandit", 117, Rarity.COMMON, mage.cards.m.MountainBandit.class));
         cards.add(new SetCardInfo("Mystic Denial", 49, Rarity.UNCOMMON, mage.cards.m.MysticDenial.class));
         cards.add(new SetCardInfo("Overwhelming Forces", 79, Rarity.RARE, mage.cards.o.OverwhelmingForces.class));
-        cards.add(new SetCardInfo("Pang Tong, 'Young Phoenix'", 14, Rarity.RARE, mage.cards.p.PangTongYoungPhoenix.class));
+        cards.add(new SetCardInfo("Pang Tong, \"Young Phoenix\"", 14, Rarity.RARE, mage.cards.p.PangTongYoungPhoenix.class));
         cards.add(new SetCardInfo("Peach Garden Oath", 15, Rarity.UNCOMMON, mage.cards.p.PeachGardenOath.class));
         cards.add(new SetCardInfo("Plains", 166, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 167, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
