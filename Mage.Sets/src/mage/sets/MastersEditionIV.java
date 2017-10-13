@@ -95,6 +95,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Clay Statue", 189, Rarity.UNCOMMON, mage.cards.c.ClayStatue.class));
         cards.add(new SetCardInfo("Clockwork Avian", 190, Rarity.UNCOMMON, mage.cards.c.ClockworkAvian.class));
         cards.add(new SetCardInfo("Clockwork Gnomes", 191, Rarity.UNCOMMON, mage.cards.c.ClockworkGnomes.class));
+        cards.add(new SetCardInfo("Clockwork Swarm", 192, Rarity.COMMON, mage.cards.c.ClockworkSwarm.class));
         cards.add(new SetCardInfo("Cloud Dragon", 41, Rarity.RARE, mage.cards.c.CloudDragon.class));
         cards.add(new SetCardInfo("Cloud Spirit", 42, Rarity.COMMON, mage.cards.c.CloudSpirit.class));
         cards.add(new SetCardInfo("Colossus of Sardia", 193, Rarity.RARE, mage.cards.c.ColossusOfSardia.class));

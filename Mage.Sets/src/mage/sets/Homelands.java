@@ -99,6 +99,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Chain Stasis", 28, Rarity.RARE, mage.cards.c.ChainStasis.class));
         cards.add(new SetCardInfo("Chandler", 88, Rarity.COMMON, mage.cards.c.Chandler.class));
         cards.add(new SetCardInfo("Clockwork Gnomes", 127, Rarity.COMMON, mage.cards.c.ClockworkGnomes.class));
+        cards.add(new SetCardInfo("Clockwork Swarm", 129, Rarity.COMMON, mage.cards.c.ClockworkSwarm.class));
         cards.add(new SetCardInfo("Coral Reef", 29, Rarity.COMMON, mage.cards.c.CoralReef.class));
         cards.add(new SetCardInfo("Dark Maze", 30, Rarity.COMMON, mage.cards.d.DarkMaze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Maze", 31, Rarity.COMMON, mage.cards.d.DarkMaze.class, NON_FULL_USE_VARIOUS));
