@@ -25,70 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.k;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.constants.SubType;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.counters.CounterType;
+import mage.target.common.TargetAttackingOrBlockingCreature;
 
 /**
  *
  * @author TheElk801
  */
-public class PipersMelody extends CardImpl {
+public class KjeldoranJavelineer extends CardImpl {
 
-    public PipersMelody(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
+    public KjeldoranJavelineer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
 
-        // Shuffle any number of target creature cards from your graveyard into your library.
-        this.getSpellAbility().addEffect(new PipersMelodyShuffleEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // Cumulative upkeep {1}
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+
+        // {T}: Kjeldoran Javelineer deals damage equal to the number of age counters on it to target attacking or blocking creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new DamageTargetEffect(new CountersSourceCount(CounterType.AGE))
+                        .setText("{this} deals damage equal to the number of age counters on it to target attacking or blocking creature."),
+                 new TapSourceCost());
+        ability.addTarget(new TargetAttackingOrBlockingCreature());
+        this.addAbility(ability);
     }
 
-    public PipersMelody(final PipersMelody card) {
+    public KjeldoranJavelineer(final KjeldoranJavelineer card) {
         super(card);
     }
 
     @Override
-    public PipersMelody copy() {
-        return new PipersMelody(this);
-    }
-}
-
-class PipersMelodyShuffleEffect extends OneShotEffect {
-
-    PipersMelodyShuffleEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "Shuffle any number of target cards from your graveyard into your library";
-    }
-
-    PipersMelodyShuffleEffect(final PipersMelodyShuffleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PipersMelodyShuffleEffect copy() {
-        return new PipersMelodyShuffleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.moveCards(new CardsImpl(this.getTargetPointer().getTargets(game, source)), Zone.LIBRARY, source, game);
-            controller.shuffleLibrary(source, game);
-            return true;
-        }
-        return false;
+    public KjeldoranJavelineer copy() {
+        return new KjeldoranJavelineer(this);
     }
 }

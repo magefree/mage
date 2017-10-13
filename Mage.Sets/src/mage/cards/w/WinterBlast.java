@@ -25,70 +25,83 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.game.permanent.Permanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author TheElk801
  */
-public class PipersMelody extends CardImpl {
+public class WinterBlast extends CardImpl {
 
-    public PipersMelody(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
+    public WinterBlast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");
 
-        // Shuffle any number of target creature cards from your graveyard into your library.
-        this.getSpellAbility().addEffect(new PipersMelodyShuffleEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
+        // Tap X target creatures. Winter Blast deals 2 damage to each of those creatures with flying.
+        this.getSpellAbility().addEffect(new WinterBlastEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PipersMelody(final PipersMelody card) {
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.addTarget(new TargetCreaturePermanent(xValue));
+        }
+    }
+
+    public WinterBlast(final WinterBlast card) {
         super(card);
     }
 
     @Override
-    public PipersMelody copy() {
-        return new PipersMelody(this);
+    public WinterBlast copy() {
+        return new WinterBlast(this);
     }
 }
 
-class PipersMelodyShuffleEffect extends OneShotEffect {
+class WinterBlastEffect extends OneShotEffect {
 
-    PipersMelodyShuffleEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "Shuffle any number of target cards from your graveyard into your library";
+    WinterBlastEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Tap X target creatures. {this} deals 2 damage to each of those creatures with flying.";
     }
 
-    PipersMelodyShuffleEffect(final PipersMelodyShuffleEffect effect) {
+    WinterBlastEffect(final WinterBlastEffect effect) {
         super(effect);
     }
 
     @Override
-    public PipersMelodyShuffleEffect copy() {
-        return new PipersMelodyShuffleEffect(this);
+    public WinterBlastEffect copy() {
+        return new WinterBlastEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.moveCards(new CardsImpl(this.getTargetPointer().getTargets(game, source)), Zone.LIBRARY, source, game);
-            controller.shuffleLibrary(source, game);
-            return true;
+        int affectedTargets = 0;
+        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent != null) {
+                permanent.tap(game);
+                if (permanent.getAbilities().contains(FlyingAbility.getInstance())) {
+                    permanent.damage(2, source.getSourceId(), game, false, true);
+                }
+                affectedTargets++;
+            }
         }
-        return false;
+        return affectedTargets > 0;
     }
 }

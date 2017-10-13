@@ -25,53 +25,70 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.target.common.TargetCardInGraveyard;
+import mage.filter.common.FilterCreatureCard;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author jeffwadsworth
+ * @author TheElk801
  */
-public class CrookOfComdemnation extends CardImpl {
-    
-    private UUID exileId = UUID.randomUUID();
+public class RenewingTouch extends CardImpl {
 
-    public CrookOfComdemnation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        
+    public RenewingTouch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
-        // {1}, {t}: Exile target card from a graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInGraveyard());
-        this.addAbility(ability);
-        
-        // {1}, Exile Crook of Condemnation: Exile all cards from all graveyards.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllPlayersEffect(), new ManaCostsImpl("{1}"));
-        ability2.addCost(new ExileSourceCost());
-        this.addAbility(ability2);
-        
+        // Shuffle any number of target creature cards from your graveyard into your library.
+        this.getSpellAbility().addEffect(new RenewingTouchEffect());
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
-    public CrookOfComdemnation(final CrookOfComdemnation card) {
+    public RenewingTouch(final RenewingTouch card) {
         super(card);
     }
 
     @Override
-    public CrookOfComdemnation copy() {
-        return new CrookOfComdemnation(this);
+    public RenewingTouch copy() {
+        return new RenewingTouch(this);
+    }
+}
+
+class RenewingTouchEffect extends OneShotEffect {
+
+    RenewingTouchEffect() {
+        super(Outcome.Neutral);
+        this.staticText = "Shuffle any number of target cards from your graveyard into your library";
+    }
+
+    RenewingTouchEffect(final RenewingTouchEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public RenewingTouchEffect copy() {
+        return new RenewingTouchEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.moveCards(new CardsImpl(this.getTargetPointer().getTargets(game, source)), Zone.LIBRARY, source, game);
+            controller.shuffleLibrary(source, game);
+            return true;
+        }
+        return false;
     }
 }
