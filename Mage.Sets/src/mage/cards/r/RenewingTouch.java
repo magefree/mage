@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -45,40 +45,40 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TheElk801
  */
-public class PipersMelody extends CardImpl {
+public class RenewingTouch extends CardImpl {
 
-    public PipersMelody(UUID ownerId, CardSetInfo setInfo) {
+    public RenewingTouch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
         // Shuffle any number of target creature cards from your graveyard into your library.
-        this.getSpellAbility().addEffect(new PipersMelodyShuffleEffect());
+        this.getSpellAbility().addEffect(new RenewingTouchEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
-    public PipersMelody(final PipersMelody card) {
+    public RenewingTouch(final RenewingTouch card) {
         super(card);
     }
 
     @Override
-    public PipersMelody copy() {
-        return new PipersMelody(this);
+    public RenewingTouch copy() {
+        return new RenewingTouch(this);
     }
 }
 
-class PipersMelodyShuffleEffect extends OneShotEffect {
+class RenewingTouchEffect extends OneShotEffect {
 
-    PipersMelodyShuffleEffect() {
+    RenewingTouchEffect() {
         super(Outcome.Neutral);
         this.staticText = "Shuffle any number of target cards from your graveyard into your library";
     }
 
-    PipersMelodyShuffleEffect(final PipersMelodyShuffleEffect effect) {
+    RenewingTouchEffect(final RenewingTouchEffect effect) {
         super(effect);
     }
 
     @Override
-    public PipersMelodyShuffleEffect copy() {
-        return new PipersMelodyShuffleEffect(this);
+    public RenewingTouchEffect copy() {
+        return new RenewingTouchEffect(this);
     }
 
     @Override
