@@ -122,6 +122,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Energy Storm", 11, Rarity.RARE, mage.cards.e.EnergyStorm.class));
         cards.add(new SetCardInfo("Enervate", 47, Rarity.COMMON, mage.cards.e.Enervate.class));
         cards.add(new SetCardInfo("Errantry", 124, Rarity.COMMON, mage.cards.e.Errantry.class));
+        cards.add(new SetCardInfo("Essence Flare", 48, Rarity.COMMON, mage.cards.e.EssenceFlare.class));
         cards.add(new SetCardInfo("Farrel's Mantle", 13, Rarity.UNCOMMON, mage.cards.f.FarrelsMantle.class));
         cards.add(new SetCardInfo("Farrel's Zealot", 14, Rarity.UNCOMMON, FarrelsZealot.class));
         cards.add(new SetCardInfo("Feral Thallid", 161, Rarity.COMMON, mage.cards.f.FeralThallid.class));
@@ -257,6 +258,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Whiteout", 185, Rarity.COMMON, mage.cards.w.Whiteout.class));
         cards.add(new SetCardInfo("Wind Spirit", 75, Rarity.UNCOMMON, mage.cards.w.WindSpirit.class));
         cards.add(new SetCardInfo("Wings of Aesthir", 199, Rarity.UNCOMMON, mage.cards.w.WingsOfAesthir.class));
+        cards.add(new SetCardInfo("Withering Wisps", 114, Rarity.UNCOMMON, mage.cards.w.WitheringWisps.class));
         cards.add(new SetCardInfo("Wolf Pack", 187, Rarity.RARE, mage.cards.w.WolfPack.class));
         cards.add(new SetCardInfo("Woolly Mammoths", 188, Rarity.COMMON, mage.cards.w.WoollyMammoths.class));
         cards.add(new SetCardInfo("Yavimaya Ancients", 190, Rarity.UNCOMMON, mage.cards.y.YavimayaAncients.class));
