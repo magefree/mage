@@ -122,6 +122,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Energy Storm", 11, Rarity.RARE, mage.cards.e.EnergyStorm.class));
         cards.add(new SetCardInfo("Enervate", 47, Rarity.COMMON, mage.cards.e.Enervate.class));
         cards.add(new SetCardInfo("Errantry", 124, Rarity.COMMON, mage.cards.e.Errantry.class));
+        cards.add(new SetCardInfo("Essence Filter", 160, Rarity.UNCOMMON, mage.cards.e.EssenceFilter.class));
         cards.add(new SetCardInfo("Essence Flare", 48, Rarity.COMMON, mage.cards.e.EssenceFlare.class));
         cards.add(new SetCardInfo("Farrel's Mantle", 13, Rarity.UNCOMMON, mage.cards.f.FarrelsMantle.class));
         cards.add(new SetCardInfo("Farrel's Zealot", 14, Rarity.UNCOMMON, FarrelsZealot.class));
