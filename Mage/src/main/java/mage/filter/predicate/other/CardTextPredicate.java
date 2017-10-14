@@ -29,10 +29,13 @@ package mage.filter.predicate.other;
 
 import mage.cards.Card;
 import mage.cards.SplitCard;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
 /**
+ *
  * @author North
  */
 public class CardTextPredicate implements Predicate<Card> {
@@ -61,31 +64,53 @@ public class CardTextPredicate implements Predicate<Card> {
 
         //separate by spaces
         String[] tokens = text.toLowerCase().split(" ");
-        boolean found = false;
         for (String token : tokens) {
+            boolean found = false;
             if (!token.isEmpty()) {
                 // then try to find in rules
                 if (inRules) {
                     if (input.isSplitCard()) {
-                        found = ((SplitCard) input).getLeftHalfCard().getRules(game).stream().anyMatch(rule -> rule.toLowerCase().contains(token.toLowerCase()));
-                        found |= ((SplitCard) input).getRightHalfCard().getRules(game).stream().anyMatch(rule -> rule.toLowerCase().contains(token.toLowerCase()));
-
-                    } else {
-                        found = input.getRules(game).stream().anyMatch(rule -> rule.toLowerCase().contains(token.toLowerCase()));
+                        for (String rule : ((SplitCard) input).getLeftHalfCard().getRules(game)) {
+                            if (rule.toLowerCase().contains(token)) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        for (String rule : ((SplitCard) input).getRightHalfCard().getRules(game)) {
+                            if (rule.toLowerCase().contains(token)) {
+                                found = true;
+                                break;
+                            }
+                        }
+                    }
+                    for (String rule : input.getRules(game)) {
+                        if (rule.toLowerCase().contains(token)) {
+                            found = true;
+                            break;
+                        }
                     }
                 }
                 if (inTypes) {
-                    found |= input.getSubtype(game).stream().anyMatch(s -> s.toString().equalsIgnoreCase(token));
-                    found |= input.getSuperType().stream().anyMatch(s -> s.toString().equalsIgnoreCase(token));
+                    for (SubType subType : input.getSubtype(game)) {
+                        if (subType.toString().equalsIgnoreCase(token)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    for (SuperType superType : input.getSuperType()) {
+                        if (superType.toString().equalsIgnoreCase(token)) {
+                            found = true;
+                            break;
+                        }
+                    }
                 }
             }
-            if (found) {
-                break;
+            if (!found) {
+                return false;
             }
-
         }
 
-        return found;
+        return true;
     }
 
     @Override
