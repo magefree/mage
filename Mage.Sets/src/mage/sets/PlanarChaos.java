@@ -200,6 +200,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Timbermare", 140, Rarity.RARE, mage.cards.t.Timbermare.class));
         cards.add(new SetCardInfo("Timecrafting", 109, Rarity.UNCOMMON, mage.cards.t.Timecrafting.class));
         cards.add(new SetCardInfo("Torchling", 110, Rarity.RARE, mage.cards.t.Torchling.class));
+        cards.add(new SetCardInfo("Treacherous Urge", 82, Rarity.UNCOMMON, mage.cards.t.TreacherousUrge.class));
         cards.add(new SetCardInfo("Uktabi Drake", 141, Rarity.COMMON, mage.cards.u.UktabiDrake.class));
         cards.add(new SetCardInfo("Urborg, Tomb of Yawgmoth", 165, Rarity.RARE, mage.cards.u.UrborgTombOfYawgmoth.class));
         cards.add(new SetCardInfo("Utopia Vow", 142, Rarity.COMMON, mage.cards.u.UtopiaVow.class));
