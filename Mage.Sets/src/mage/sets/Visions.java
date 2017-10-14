@@ -130,6 +130,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Necromancy", 14, Rarity.UNCOMMON, mage.cards.n.Necromancy.class));
         cards.add(new SetCardInfo("Necrosavant", 15, Rarity.RARE, mage.cards.n.Necrosavant.class));
         cards.add(new SetCardInfo("Nekrataal", 16, Rarity.UNCOMMON, mage.cards.n.Nekrataal.class));
+        cards.add(new SetCardInfo("Ovinomancer", 39, Rarity.UNCOMMON, mage.cards.o.Ovinomancer.class));
         cards.add(new SetCardInfo("Panther Warriors", 65, Rarity.COMMON, mage.cards.p.PantherWarriors.class));
         cards.add(new SetCardInfo("Parapet", 114, Rarity.COMMON, mage.cards.p.Parapet.class));
         cards.add(new SetCardInfo("Phyrexian Marauder", 151, Rarity.RARE, mage.cards.p.PhyrexianMarauder.class));
