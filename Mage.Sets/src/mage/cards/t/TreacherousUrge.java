@@ -41,7 +41,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -61,7 +60,6 @@ public class TreacherousUrge extends CardImpl {
 
     public TreacherousUrge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");
-        this.subtype.add(SubType.ARCANE);
 
         // Target opponent reveals his or her hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new TreacherousUrgeEffect());
