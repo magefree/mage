@@ -151,7 +151,11 @@ class BrutalHordechiefReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId());
+        Player blockController = game.getPlayer(source.getControllerId());
+        if (blockController != null) {
+            return true;
+        }
+        return false;
     }
     
     @Override
