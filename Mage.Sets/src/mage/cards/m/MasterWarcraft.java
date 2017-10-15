@@ -183,14 +183,14 @@ class MasterWarcraftCantAttackRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
+    public boolean applies(Permanent creature, Ability source, Game game) {
         for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, false, game).entrySet()) {
             RequirementEffect effect = entry.getKey();
             if (effect.mustAttack(game)) {
                 return false;
             }
         }
-        return this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
+        return this.getTargetPointer().getFirst(game, source).equals(creature.getId());
     }
 
     @Override
