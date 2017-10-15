@@ -27,7 +27,7 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
+import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
@@ -64,10 +64,10 @@ public class MasterWarcraft extends CardImpl {
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, BeforeAttackersAreDeclaredCondition.instance));
 
         // You choose which creatures attack this turn.
-        this.getSpellAbility().addEffect(new MasterWarcraftChooseAttackersEffect().setText("You choose which creatures attack this turn."));
+        this.getSpellAbility().addEffect(new MasterWarcraftChooseAttackersEffect());
 
         // You choose which creatures block this turn and how those creatures block.
-        this.getSpellAbility().addEffect(new MasterWarcraftChooseBlockersEffect().setText("You choose which creatures block this turn and how those creatures block."));
+        this.getSpellAbility().addEffect(new MasterWarcraftChooseBlockersEffect());
     }
 
     public MasterWarcraft(final MasterWarcraft card) {
@@ -84,7 +84,7 @@ class MasterWarcraftChooseAttackersEffect extends ReplacementEffectImpl {
 
     public MasterWarcraftChooseAttackersEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        this.staticText = "You choose which creatures attack this turn.";
+        this.staticText = "You choose which creatures attack this turn";
     }
 
     public MasterWarcraftChooseAttackersEffect(final MasterWarcraftChooseAttackersEffect effect) {
@@ -184,7 +184,12 @@ class MasterWarcraftCantAttackRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        // TODO: Make Master Warcraft still respect "This must attack if able" clauses
+        for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, false, game).entrySet()) {
+            RequirementEffect effect = entry.getKey();
+            if (effect.mustAttack(game)) {
+                return false;
+            }
+        }
         return this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
     }
 
@@ -203,7 +208,7 @@ class MasterWarcraftChooseBlockersEffect extends ReplacementEffectImpl {
 
     public MasterWarcraftChooseBlockersEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You choose which creatures block this turn and how those creatures block.";
+        staticText = "You choose which creatures block this turn and how those creatures block";
     }
 
     public MasterWarcraftChooseBlockersEffect(final MasterWarcraftChooseBlockersEffect effect) {
