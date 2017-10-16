@@ -27,10 +27,15 @@
  */
 package mage.cards.l;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +54,7 @@ import mage.game.permanent.Permanent;
 public class LightmineField extends CardImpl {
 
     public LightmineField(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // Whenever one or more creatures attack, Lightmine Field deals damage to each of those creatures equal to the number of attacking creatures.
         this.addAbility(new LightmineFieldTriggeredAbility());
@@ -87,7 +92,17 @@ class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return !game.getCombat().getAttackers().isEmpty();
+        Set<MageObjectReference> attackSet = new HashSet<>();
+        for (UUID attackerId : game.getCombat().getAttackers()) {
+            Permanent attacker = game.getPermanent(attackerId);
+            if (attacker != null) {
+                attackSet.add(new MageObjectReference(attacker, game));
+            }
+        }
+        for (Effect effect : getEffects()) {
+            effect.setValue("Lightmine Field", attackSet);
+        }
+        return !attackSet.isEmpty();
     }
 
     @Override
@@ -116,9 +131,11 @@ class LightmineFieldEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<UUID> attackers = game.getCombat().getAttackers();
         int damage = attackers.size();
+        Set<MageObjectReference> attackSet = (Set<MageObjectReference>) getValue("Lightmine Field");
         if (!attackers.isEmpty()) {
-            for (UUID attacker : attackers) {
-                Permanent creature = game.getPermanent(attacker);
+            for (Iterator<MageObjectReference> it = attackSet.iterator(); it.hasNext();) {
+                MageObjectReference attacker = it.next();
+                Permanent creature = attacker.getPermanent(game);
                 if (creature != null) {
                     creature.damage(damage, source.getSourceId(), game, false, true);
                 }
