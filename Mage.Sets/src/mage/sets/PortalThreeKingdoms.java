@@ -100,6 +100,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Huang Zhong, Shu General", 8, Rarity.RARE, mage.cards.h.HuangZhongShuGeneral.class));
         cards.add(new SetCardInfo("Hua Tuo, Honored Physician", 137, Rarity.RARE, mage.cards.h.HuaTuoHonoredPhysician.class));
         cards.add(new SetCardInfo("Hunting Cheetah", 138, Rarity.UNCOMMON, mage.cards.h.HuntingCheetah.class));
+        cards.add(new SetCardInfo("Imperial Edict", 77, Rarity.COMMON, mage.cards.i.ImperialEdict.class));
         cards.add(new SetCardInfo("Imperial Recruiter", 113, Rarity.UNCOMMON, mage.cards.i.ImperialRecruiter.class));
         cards.add(new SetCardInfo("Imperial Seal", 78, Rarity.RARE, mage.cards.i.ImperialSeal.class));
         cards.add(new SetCardInfo("Independent Troops", 114, Rarity.COMMON, mage.cards.i.IndependentTroops.class));
