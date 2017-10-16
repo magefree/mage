@@ -183,6 +183,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Volunteer Militia", 30, Rarity.COMMON, mage.cards.v.VolunteerMilitia.class));
         cards.add(new SetCardInfo("Warrior's Oath", 124, Rarity.RARE, mage.cards.w.WarriorsOath.class));
         cards.add(new SetCardInfo("Wei Ambush Force", 85, Rarity.COMMON, mage.cards.w.WeiAmbushForce.class));
+        cards.add(new SetCardInfo("Wei Assassins", 86, Rarity.UNCOMMON, mage.cards.w.WeiAssassins.class));
         cards.add(new SetCardInfo("Wei Elite Companions", 87, Rarity.UNCOMMON, mage.cards.w.WeiEliteCompanions.class));
         cards.add(new SetCardInfo("Wei Infantry", 88, Rarity.COMMON, mage.cards.w.WeiInfantry.class));
         cards.add(new SetCardInfo("Wei Night Raiders", 89, Rarity.UNCOMMON, mage.cards.w.WeiNightRaiders.class));
