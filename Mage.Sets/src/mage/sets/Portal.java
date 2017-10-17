@@ -102,6 +102,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Cruel Bargain", 8, Rarity.RARE, mage.cards.c.CruelBargain.class));
         cards.add(new SetCardInfo("Cruel Tutor", 9, Rarity.RARE, mage.cards.c.CruelTutor.class));
         cards.add(new SetCardInfo("Deep-Sea Serpent", 52, Rarity.UNCOMMON, mage.cards.d.DeepSeaSerpent.class));
+        cards.add(new SetCardInfo("Defiant Stand", 174, Rarity.UNCOMMON, mage.cards.d.DefiantStand.class));
         cards.add(new SetCardInfo("Deja Vu", 53, Rarity.COMMON, mage.cards.d.DejaVu.class));
         cards.add(new SetCardInfo("Desert Drake", 127, Rarity.UNCOMMON, mage.cards.d.DesertDrake.class));
         cards.add(new SetCardInfo("Devastation", 128, Rarity.RARE, mage.cards.d.Devastation.class));
