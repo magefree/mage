@@ -217,6 +217,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Sacred Knight", 186, Rarity.COMMON, mage.cards.s.SacredKnight.class));
         cards.add(new SetCardInfo("Sacred Nectar", 187, Rarity.COMMON, mage.cards.s.SacredNectar.class));
         cards.add(new SetCardInfo("Scorching Spear", 154, Rarity.COMMON, mage.cards.s.ScorchingSpear.class));
+        cards.add(new SetCardInfo("Scorching Winds", 155, Rarity.UNCOMMON, mage.cards.s.ScorchingWinds.class));
         cards.add(new SetCardInfo("Seasoned Marshal", 188, Rarity.UNCOMMON, mage.cards.s.SeasonedMarshal.class));
         cards.add(new SetCardInfo("Serpent Assassin", 31, Rarity.RARE, mage.cards.s.SerpentAssassin.class));
         cards.add(new SetCardInfo("Serpent Warrior", 32, Rarity.COMMON, mage.cards.s.SerpentWarrior.class));
