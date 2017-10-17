@@ -68,6 +68,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Cao Cao, Lord of Wei", 68, Rarity.RARE, mage.cards.c.CaoCaoLordOfWei.class));
         cards.add(new SetCardInfo("Cao Ren, Wei Commander", 69, Rarity.RARE, mage.cards.c.CaoRenWeiCommander.class));
         cards.add(new SetCardInfo("Capture of Jingzhou", 38, Rarity.RARE, mage.cards.c.CaptureOfJingzhou.class));
+        cards.add(new SetCardInfo("Champion's Victory", 39, Rarity.UNCOMMON, mage.cards.c.ChampionsVictory.class));
         cards.add(new SetCardInfo("Coercion", 70, Rarity.UNCOMMON, mage.cards.c.Coercion.class));
         cards.add(new SetCardInfo("Control of the Court", 105, Rarity.UNCOMMON, mage.cards.c.ControlOfTheCourt.class));
         cards.add(new SetCardInfo("Corrupt Court Official", 71, Rarity.UNCOMMON, mage.cards.c.CorruptCourtOfficial.class));
