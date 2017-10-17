@@ -95,6 +95,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud Dragon", 46, Rarity.RARE, mage.cards.c.CloudDragon.class));
         cards.add(new SetCardInfo("Cloud Pirates", 47, Rarity.COMMON, mage.cards.c.CloudPirates.class));
         cards.add(new SetCardInfo("Cloud Spirit", 48, Rarity.UNCOMMON, mage.cards.c.CloudSpirit.class));
+        cards.add(new SetCardInfo("Command of Unsummoning", 49, Rarity.UNCOMMON, mage.cards.c.CommandOfUnsummoning.class));
         cards.add(new SetCardInfo("Coral Eel", 50, Rarity.COMMON, mage.cards.c.CoralEel.class));
         cards.add(new SetCardInfo("Craven Giant", 126, Rarity.COMMON, mage.cards.c.CravenGiant.class));
         cards.add(new SetCardInfo("Craven Knight", 7, Rarity.COMMON, mage.cards.c.CravenKnight.class));
