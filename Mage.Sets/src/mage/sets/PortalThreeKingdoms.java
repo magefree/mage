@@ -80,6 +80,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Desperate Charge", 74, Rarity.UNCOMMON, mage.cards.d.DesperateCharge.class));
         cards.add(new SetCardInfo("Diaochan, Artful Beauty", 108, Rarity.RARE, mage.cards.d.DiaochanArtfulBeauty.class));
         cards.add(new SetCardInfo("Dong Zhou, the Tyrant", 109, Rarity.RARE, mage.cards.d.DongZhouTheTyrant.class));
+        cards.add(new SetCardInfo("Eightfold Maze", 2, Rarity.RARE, mage.cards.e.EightfoldMaze.class));
         cards.add(new SetCardInfo("Empty City Ruse", 3, Rarity.UNCOMMON, mage.cards.e.EmptyCityRuse.class));
         cards.add(new SetCardInfo("Exhaustion", 42, Rarity.RARE, mage.cards.e.Exhaustion.class));
         cards.add(new SetCardInfo("Extinguish", 43, Rarity.COMMON, mage.cards.e.Extinguish.class));
