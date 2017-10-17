@@ -104,6 +104,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Keeper of Tresserhorn", 14, Rarity.RARE, mage.cards.k.KeeperOfTresserhorn.class));
         cards.add(new SetCardInfo("Kjeldoran Home Guard", 135, Rarity.UNCOMMON, mage.cards.k.KjeldoranHomeGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Outpost", 184, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class));
+        cards.add(new SetCardInfo("Krovikan Horror", 15, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
         cards.add(new SetCardInfo("Krovikan Plague", 16, Rarity.UNCOMMON, mage.cards.k.KrovikanPlague.class));
         cards.add(new SetCardInfo("Lake of the Dead", 185, Rarity.RARE, mage.cards.l.LakeOfTheDead.class));
         cards.add(new SetCardInfo("Library of Lat-Nam", 47, Rarity.RARE, mage.cards.l.LibraryOfLatNam.class));

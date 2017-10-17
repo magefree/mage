@@ -169,6 +169,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Kjeldoran Outpost", 233, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class));
         cards.add(new SetCardInfo("Knight of Stromgald", 99, Rarity.UNCOMMON, mage.cards.k.KnightOfStromgald.class));
         cards.add(new SetCardInfo("Krovikan Fetish", 100, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
+        cards.add(new SetCardInfo("Krovikan Horror", 101, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
         cards.add(new SetCardInfo("Krovikan Sorcerer", 51, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));
         cards.add(new SetCardInfo("Leaping Lizard", 171, Rarity.COMMON, mage.cards.l.LeapingLizard.class));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", 103, Rarity.UNCOMMON, LimDulsHighGuard.class));
