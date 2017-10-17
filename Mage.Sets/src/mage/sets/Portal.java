@@ -252,6 +252,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Tidal Surge", 75, Rarity.COMMON, mage.cards.t.TidalSurge.class));
         cards.add(new SetCardInfo("Time Ebb", 76, Rarity.COMMON, mage.cards.t.TimeEbb.class));
         cards.add(new SetCardInfo("Touch of Brilliance", 77, Rarity.COMMON, mage.cards.t.TouchOfBrilliance.class));
+        cards.add(new SetCardInfo("Treetop Defense", 116, Rarity.RARE, mage.cards.t.TreetopDefense.class));
         cards.add(new SetCardInfo("Undying Beast", 36, Rarity.COMMON, mage.cards.u.UndyingBeast.class));
         cards.add(new SetCardInfo("Untamed Wilds", 117, Rarity.UNCOMMON, mage.cards.u.UntamedWilds.class));
         cards.add(new SetCardInfo("Valorous Charge", 196, Rarity.UNCOMMON, mage.cards.v.ValorousCharge.class));
