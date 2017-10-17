@@ -71,6 +71,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Armageddon", 167, Rarity.RARE, mage.cards.a.Armageddon.class));
         cards.add(new SetCardInfo("Armored Pegasus", 168, Rarity.COMMON, mage.cards.a.ArmoredPegasus.class));
         cards.add(new SetCardInfo("Arrogant Vampire", 1, Rarity.UNCOMMON, mage.cards.a.ArrogantVampire.class));
+        cards.add(new SetCardInfo("Assassin's Blade", 2, Rarity.UNCOMMON, mage.cards.a.AssassinsBlade.class));
         cards.add(new SetCardInfo("Balance of Power", 42, Rarity.RARE, mage.cards.b.BalanceOfPower.class));
         cards.add(new SetCardInfo("Baleful Stare", 43, Rarity.UNCOMMON, mage.cards.b.BalefulStare.class));
         cards.add(new SetCardInfo("Bee Sting", 83, Rarity.UNCOMMON, mage.cards.b.BeeSting.class));
