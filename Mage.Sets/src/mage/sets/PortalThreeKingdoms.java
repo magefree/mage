@@ -135,6 +135,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 168, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Poison Arrow", 80, Rarity.UNCOMMON, mage.cards.p.PoisonArrow.class));
         cards.add(new SetCardInfo("Preemptive Strike", 50, Rarity.COMMON, mage.cards.p.PreemptiveStrike.class));
+        cards.add(new SetCardInfo("Rally the Troops", 16, Rarity.UNCOMMON, mage.cards.r.RallyTheTroops.class));
         cards.add(new SetCardInfo("Ravages of War", 17, Rarity.RARE, mage.cards.r.RavagesOfWar.class));
         cards.add(new SetCardInfo("Ravaging Horde", 118, Rarity.UNCOMMON, mage.cards.r.RavagingHorde.class));
         cards.add(new SetCardInfo("Red Cliffs Armada", 51, Rarity.UNCOMMON, mage.cards.r.RedCliffsArmada.class));
