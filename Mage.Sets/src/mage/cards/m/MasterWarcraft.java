@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.BeforeAttackersAreDeclaredCondition;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.RequirementEffect;
@@ -58,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
 public class MasterWarcraft extends CardImpl {
 
     public MasterWarcraft(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R/W}{R/W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R/W}{R/W}");
 
         // Cast Master Warcraft only before attackers are declared.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, BeforeAttackersAreDeclaredCondition.instance));
@@ -80,11 +81,11 @@ public class MasterWarcraft extends CardImpl {
     }
 }
 
-class MasterWarcraftChooseAttackersEffect extends ReplacementEffectImpl {
+class MasterWarcraftChooseAttackersEffect extends ContinuousRuleModifyingEffectImpl {
 
     public MasterWarcraftChooseAttackersEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
-        this.staticText = "You choose which creatures attack this turn";
+        super(Duration.EndOfTurn, Outcome.Benefit, false, false);
+        staticText = "You choose which creatures attack this turn";
     }
 
     public MasterWarcraftChooseAttackersEffect(final MasterWarcraftChooseAttackersEffect effect) {
@@ -102,15 +103,6 @@ class MasterWarcraftChooseAttackersEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player chooser = game.getPlayer(source.getControllerId());
-        if (chooser != null) {
-            new MasterWarcraftAttackEffect().apply(game, source); // Master Warcraft imposes its effect right before the attackers being declared...
-        }
-        return false; // ...and then resumes the attack declaration
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DECLARING_ATTACKERS;
     }
@@ -120,9 +112,19 @@ class MasterWarcraftChooseAttackersEffect extends ReplacementEffectImpl {
         Player chooser = game.getPlayer(source.getControllerId());
         Player attackingPlayer = game.getPlayer(game.getCombat().getAttackingPlayerId());
         if (chooser != null && attackingPlayer != null && !attackingPlayer.getAvailableAttackers(game).isEmpty()) {
-            return true;
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+                // Clears previous instances of "should attack" effects
+                // ("shouldn't attack" effects don't need cleaning because MasterWarcraftMustAttackRequirementEffect overrides them)
+                for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(permanent, false, game).entrySet()) {
+                    RequirementEffect effect = entry.getKey();
+                    if (effect instanceof MasterWarcraftMustAttackRequirementEffect) {
+                        effect.discard();
+                    }
+                }
+            }
+            new MasterWarcraftAttackEffect().apply(game, source); // Master Warcraft imposes its effect right before the attackers being declared...
         }
-        return false;
+        return false; // ...and then resumes the attack declaration for the active player as normal
     }
 }
 
@@ -145,25 +147,57 @@ class MasterWarcraftAttackEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            // TODO: find a way to undo creature selection
             Target target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, new FilterCreaturePermanent("creatures that will attack this combat (creatures not chosen won't attack this combat)"), true);
             if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+                    
+                    // Choose creatures that will be attacking this combat
                     if (target.getTargets().contains(permanent.getId())) {
-                        RequirementEffect effect = new AttacksIfAbleTargetEffect(Duration.EndOfCombat);
+                        RequirementEffect effect = new MasterWarcraftMustAttackRequirementEffect();
                         effect.setText("");
                         effect.setTargetPointer(new FixedTarget(permanent.getId()));
                         game.addEffect(effect, source);
+                        // TODO: find a better way to report attackers to game log
+                        // game.informPlayers(controller.getLogName() + " has decided that " + permanent.getLogName() + " should attack this combat if able");
+                        
+                    // All other creatures can't attack
                     } else {
                         RestrictionEffect effect = new MasterWarcraftCantAttackRestrictionEffect();
                         effect.setText("");
                         effect.setTargetPointer(new FixedTarget(permanent.getId()));
                         game.addEffect(effect, source);
                     }
+                    
                 }
                 return true;
             }
         }
         return false;
+    }
+}
+
+class MasterWarcraftMustAttackRequirementEffect extends AttacksIfAbleTargetEffect {
+
+    MasterWarcraftMustAttackRequirementEffect() {
+        super(Duration.EndOfCombat);
+    }
+
+    MasterWarcraftMustAttackRequirementEffect(final MasterWarcraftMustAttackRequirementEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MasterWarcraftMustAttackRequirementEffect copy() {
+        return new MasterWarcraftMustAttackRequirementEffect(this);
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (discarded) {
+            return false;
+        }
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 }
 
@@ -183,18 +217,18 @@ class MasterWarcraftCantAttackRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean applies(Permanent creature, Ability source, Game game) {
-        for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, false, game).entrySet()) {
-            RequirementEffect effect = entry.getKey();
-            if (effect.mustAttack(game)) {
-                return false;
-            }
-        }
-        return this.getTargetPointer().getFirst(game, source).equals(creature.getId());
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+        for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(attacker, false, game).entrySet()) {
+            RequirementEffect effect = entry.getKey();
+            if (effect.mustAttack(game)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -204,7 +238,7 @@ class MasterWarcraftCantAttackRestrictionEffect extends RestrictionEffect {
     }
 }
 
-class MasterWarcraftChooseBlockersEffect extends ReplacementEffectImpl {
+class MasterWarcraftChooseBlockersEffect extends ReplacementEffectImpl { // TODO: replace this with ContinuousRuleModifyingEffectImpl
 
     public MasterWarcraftChooseBlockersEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
