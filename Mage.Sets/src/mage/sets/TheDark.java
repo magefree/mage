@@ -105,6 +105,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Marsh Gas", 10, Rarity.COMMON, mage.cards.m.MarshGas.class));
         cards.add(new SetCardInfo("Marsh Goblins", 118, Rarity.COMMON, mage.cards.m.MarshGoblins.class));
         cards.add(new SetCardInfo("Marsh Viper", 44, Rarity.COMMON, mage.cards.m.MarshViper.class));
+        cards.add(new SetCardInfo("Martyr's Cry", 85, Rarity.RARE, mage.cards.m.MartyrsCry.class));
         cards.add(new SetCardInfo("Maze of Ith", 114, Rarity.UNCOMMON, mage.cards.m.MazeOfIth.class));
         cards.add(new SetCardInfo("Merfolk Assassin", 31, Rarity.UNCOMMON, mage.cards.m.MerfolkAssassin.class));
         cards.add(new SetCardInfo("Mind Bomb", 32, Rarity.RARE, mage.cards.m.MindBomb.class));
