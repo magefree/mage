@@ -34,7 +34,6 @@ import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.BeforeAttackersAreDeclaredCondition;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -238,10 +237,10 @@ class MasterWarcraftCantAttackRestrictionEffect extends RestrictionEffect {
     }
 }
 
-class MasterWarcraftChooseBlockersEffect extends ReplacementEffectImpl { // TODO: replace this with ContinuousRuleModifyingEffectImpl
+class MasterWarcraftChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl { // TODO: reverse the resolution order in case of effect multiples
 
     public MasterWarcraftChooseBlockersEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
+        super(Duration.EndOfTurn, Outcome.Benefit, false, false);
         staticText = "You choose which creatures block this turn and how those creatures block";
     }
 
@@ -268,18 +267,9 @@ class MasterWarcraftChooseBlockersEffect extends ReplacementEffectImpl { // TODO
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player blockController = game.getPlayer(source.getControllerId());
         if (blockController != null) {
-            return true;
-        }
-        return false;
-    }
-    
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player blockController = game.getPlayer(source.getControllerId());
-        if (blockController != null) {
             game.getCombat().selectBlockers(blockController, game);
             return true;
         }
         return false;
-    }    
+    }
 }
