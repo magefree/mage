@@ -127,7 +127,7 @@ class BrutalHordechiefChooseBlockersEffect extends ContinuousRuleModifyingEffect
 
     public BrutalHordechiefChooseBlockersEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);
-        staticText = "You choose which creatures block this turn and how those creatures block";
+        staticText = ", and you choose how those creatures block";
     }
 
     public BrutalHordechiefChooseBlockersEffect(final BrutalHordechiefChooseBlockersEffect effect) {
@@ -153,7 +153,6 @@ class BrutalHordechiefChooseBlockersEffect extends ContinuousRuleModifyingEffect
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player blockController = game.getPlayer(source.getControllerId());
         if (blockController != null) {
-            game.informPlayers(source.getSourceObject(game).getIdName() + " applies");
             game.getCombat().selectBlockers(blockController, game);
             return true;
         }
