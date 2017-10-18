@@ -272,6 +272,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Shambling Strider", 151, Rarity.COMMON, mage.cards.s.ShamblingStrider.class));
         cards.add(new SetCardInfo("Shatter", 216, Rarity.COMMON, mage.cards.s.Shatter.class));
         cards.add(new SetCardInfo("Shield of the Ages", 310, Rarity.UNCOMMON, mage.cards.s.ShieldOfTheAges.class));
+        cards.add(new SetCardInfo("Shyft", 96, Rarity.RARE, mage.cards.s.Shyft.class));
         cards.add(new SetCardInfo("Sibilant Spirit", 97, Rarity.RARE, mage.cards.s.SibilantSpirit.class));
         cards.add(new SetCardInfo("Silver Erne", 98, Rarity.UNCOMMON, mage.cards.s.SilverErne.class));
         cards.add(new SetCardInfo("Skeleton Ship", 379, Rarity.RARE, mage.cards.s.SkeletonShip.class));

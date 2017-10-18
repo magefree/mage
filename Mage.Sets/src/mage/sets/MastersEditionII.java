@@ -216,6 +216,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Sea Drake", 64, Rarity.RARE, mage.cards.s.SeaDrake.class));
         cards.add(new SetCardInfo("Sea Spirit", 65, Rarity.UNCOMMON, mage.cards.s.SeaSpirit.class));
         cards.add(new SetCardInfo("Shrink", 175, Rarity.COMMON, mage.cards.s.Shrink.class));
+        cards.add(new SetCardInfo("Shyft", 66, Rarity.COMMON, mage.cards.s.Shyft.class));
         cards.add(new SetCardInfo("Sibilant Spirit", 67, Rarity.RARE, mage.cards.s.SibilantSpirit.class));
         cards.add(new SetCardInfo("Skeleton Ship", 197, Rarity.RARE, mage.cards.s.SkeletonShip.class));
         cards.add(new SetCardInfo("Skull Catapult", 219, Rarity.UNCOMMON, mage.cards.s.SkullCatapult.class));
