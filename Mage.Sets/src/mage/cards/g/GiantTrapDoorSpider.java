@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -42,11 +41,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.target.common.FilterCreatureAttackingYou;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -55,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GiantTrapDoorSpider extends CardImpl {
 
-    private static final HuntingKavuFilter filter = new HuntingKavuFilter();
+    private static final FilterCreatureAttackingYou filter = new FilterCreatureAttackingYou("creature without flying that's attacking you");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
@@ -71,7 +68,7 @@ public class GiantTrapDoorSpider extends CardImpl {
         // {1}{R}{G}, {tap}: Exile Giant Trap Door Spider and target creature without flying that's attacking you.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(), new ManaCostsImpl("{1}{R}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new ExileTargetEffect());
+        ability.addEffect(new ExileTargetEffect().setText("and target creature without flying that's attacking you"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -83,28 +80,5 @@ public class GiantTrapDoorSpider extends CardImpl {
     @Override
     public GiantTrapDoorSpider copy() {
         return new GiantTrapDoorSpider(this);
-    }
-}
-
-class HuntingKavuFilter extends FilterAttackingCreature {
-
-    public HuntingKavuFilter() {
-        super("creature without flying that's attacking you");
-    }
-
-    public HuntingKavuFilter(final HuntingKavuFilter filter) {
-        super(filter);
-    }
-
-    @Override
-    public HuntingKavuFilter copy() {
-        return new HuntingKavuFilter(this);
-    }
-
-    @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        return super.match(permanent, sourceId, playerId, game)
-                && permanent.isAttacking() // to prevent unneccessary combat checking if not attacking
-                && playerId.equals(game.getCombat().getDefenderId(permanent.getId()));
     }
 }
