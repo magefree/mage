@@ -33,6 +33,7 @@ import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class PromisedKannushi extends CardImpl {
 
     public PromisedKannushi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

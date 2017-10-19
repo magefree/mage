@@ -42,6 +42,7 @@ import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
@@ -64,7 +65,7 @@ public class KayaGhostAssassin extends CardImpl {
     public KayaGhostAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{B}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Kaya");
+        this.subtype.add(SubType.KAYA);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 

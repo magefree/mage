@@ -59,7 +59,7 @@ public class Rootgrapple extends CardImpl {
 
     public Rootgrapple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{4}{G}");
-        this.subtype.add("Treefolk");
+        this.subtype.add(SubType.TREEFOLK);
 
         // Destroy target noncreature permanent.
         this.getSpellAbility().addTarget(new TargetPermanent(filterNoncreature));

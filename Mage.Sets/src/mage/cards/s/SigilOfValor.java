@@ -38,6 +38,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -59,7 +60,7 @@ public class SigilOfValor extends CardImpl {
 
     public SigilOfValor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature attacks alone, it gets +1/+1 until end of turn for each other creature you control.
         this.addAbility(new SigilOfValorTriggeredAbility(new SigilOfValorCount()));

@@ -44,6 +44,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -67,12 +68,9 @@ public class VesuvanShapeshifter extends CardImpl {
 
     public VesuvanShapeshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-
-        // Morph {1}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}")));
 
         // As Vesuvan Shapeshifter turned face up, may choose another creature. If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AsTurnedFaceUpEffect(new VesuvanShapeshifterEffect(), false));
@@ -90,6 +88,9 @@ public class VesuvanShapeshifter extends CardImpl {
         effect = new VesuvanShapeshifterFaceDownEffect();
         ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, true);
         this.addAbility(ability);
+
+        // Morph {1}{U}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}")));
     }
 
     public VesuvanShapeshifter(final VesuvanShapeshifter card) {

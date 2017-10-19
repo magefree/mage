@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -56,7 +57,7 @@ public class InvocationOfSaintTraft extends CardImpl {
 
     public InvocationOfSaintTraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{U}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant Creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

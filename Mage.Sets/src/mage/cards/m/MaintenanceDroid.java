@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -67,7 +68,7 @@ public class MaintenanceDroid extends CardImpl {
 
     public MaintenanceDroid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{U}");
-        this.subtype.add("Droid");
+        this.subtype.add(SubType.DROID);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

@@ -38,6 +38,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
@@ -64,8 +65,8 @@ public class IllusoryGains extends CardImpl {
     }
 
     public IllusoryGains(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
-        this.subtype.add("Aura");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -79,7 +80,7 @@ public class IllusoryGains extends CardImpl {
 
         // Whenever a creature enters the battlefield under an opponent's control, attach Illusory Gains to that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new IllusoryGainsEffect(), filter, false, SetTargetPointer.PERMANENT, "Whenever a creature enters the battlefield under an opponent's control, you attach Illusory Gains to that creature."));
+                Zone.BATTLEFIELD, new IllusoryGainsEffect(), filter, false, SetTargetPointer.PERMANENT, "Whenever a creature enters the battlefield under an opponent's control, attach Illusory Gains to that creature."));
     }
 
     public IllusoryGains(final IllusoryGains card) {

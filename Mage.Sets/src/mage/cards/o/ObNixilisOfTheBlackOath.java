@@ -39,6 +39,7 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -55,7 +56,7 @@ public class ObNixilisOfTheBlackOath extends CardImpl {
     public ObNixilisOfTheBlackOath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Nixilis");
+        this.subtype.add(SubType.NIXILIS);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

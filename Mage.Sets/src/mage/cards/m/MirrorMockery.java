@@ -34,12 +34,13 @@ import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,8 +55,8 @@ import mage.target.targetpointer.FixedTarget;
 public class MirrorMockery extends CardImpl {
 
     public MirrorMockery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
-        this.subtype.add("Aura");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -82,7 +83,7 @@ class MirrorMockeryEffect extends OneShotEffect {
 
     public MirrorMockeryEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may create a token that's a copy of that creature. Exile that token at the end of combat";
+        this.staticText = "you may create a token that's a copy of that creature. Exile that token at end of combat";
     }
 
     public MirrorMockeryEffect(final MirrorMockeryEffect effect) {
@@ -102,7 +103,7 @@ class MirrorMockeryEffect extends OneShotEffect {
         }
         Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
         if (enchanted != null) {
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
             effect.setTargetPointer(new FixedTarget(enchanted, game));
             effect.apply(game, source);
             for (Permanent addedToken : effect.getAddedPermanent()) {

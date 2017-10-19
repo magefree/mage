@@ -37,6 +37,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,7 +55,7 @@ public class SoulsOfTheFaultless extends CardImpl {
 
     public SoulsOfTheFaultless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}{B}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);

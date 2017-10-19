@@ -35,6 +35,7 @@ import mage.abilities.keyword.ExploitAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -45,8 +46,8 @@ public class RakshasaGravecaller extends CardImpl {
 
     public RakshasaGravecaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Cat");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.DEMON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
 

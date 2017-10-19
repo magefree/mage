@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -59,9 +60,9 @@ public class MatsuTribeSniper extends CardImpl {
 
     public MatsuTribeSniper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Snake");
-        this.subtype.add("Warrior");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

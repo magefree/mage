@@ -35,6 +35,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class ItThatRidesAsOne extends CardImpl {
 
     public ItThatRidesAsOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class CrookshankKobolds extends CardImpl {
     public CrookshankKobolds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{0}");
         this.color.setRed(true);
-        this.subtype.add("Kobold");
+        this.subtype.add(SubType.KOBOLD);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
     }

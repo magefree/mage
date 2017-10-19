@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class WetlandSambar extends CardImpl {
 
     public WetlandSambar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Elk");
+        this.subtype.add(SubType.ELK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

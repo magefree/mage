@@ -60,7 +60,7 @@ public class IndulgentAristocrat extends CardImpl {
 
     public IndulgentAristocrat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

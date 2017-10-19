@@ -53,7 +53,7 @@ public class MasterworkOfIngenuity extends CardImpl {
 
     public MasterworkOfIngenuity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // You may have Masterwork of Ingenuity enter the battlefield as a copy of any Equipment on the battlefield.
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(filter), true));

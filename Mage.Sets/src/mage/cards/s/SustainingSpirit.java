@@ -50,8 +50,8 @@ public class SustainingSpirit extends CardImpl {
 
     public SustainingSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Angel");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.ANGEL);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

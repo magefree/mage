@@ -58,8 +58,8 @@ public class MasterOfEtherium extends CardImpl {
 
     public MasterOfEtherium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");
-        this.subtype.add("Vedalken");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.VEDALKEN);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

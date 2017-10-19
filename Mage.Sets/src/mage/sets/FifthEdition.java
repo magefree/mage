@@ -38,6 +38,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Adarkar Wastes", 410, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Air Elemental", 71, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 278, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
+        cards.add(new SetCardInfo("Alabaster Potion", 279, Rarity.COMMON, mage.cards.a.AlabasterPotion.class));
         cards.add(new SetCardInfo("Aladdin's Ring", 346, Rarity.RARE, mage.cards.a.AladdinsRing.class));
         cards.add(new SetCardInfo("Ambush Party", 208, Rarity.COMMON, mage.cards.a.AmbushParty.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 347, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
@@ -176,6 +177,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 419, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 420, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forget", 89, Rarity.RARE, mage.cards.f.Forget.class));
+        cards.add(new SetCardInfo("Foxfire", 157, Rarity.COMMON, mage.cards.f.Foxfire.class));
         cards.add(new SetCardInfo("Fountain of Youth", 372, Rarity.UNCOMMON, mage.cards.f.FountainOfYouth.class));
         cards.add(new SetCardInfo("Frozen Shade", 25, Rarity.COMMON, mage.cards.f.FrozenShade.class));
         cards.add(new SetCardInfo("Fungusaur", 158, Rarity.RARE, mage.cards.f.Fungusaur.class));
@@ -195,6 +197,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin War Drums", 237, Rarity.COMMON, GoblinWarDrums.class));
         cards.add(new SetCardInfo("Goblin Warrens", 238, Rarity.RARE, mage.cards.g.GoblinWarrens.class));
         cards.add(new SetCardInfo("Grapeshot Catapult", 375, Rarity.COMMON, mage.cards.g.GrapeshotCatapult.class));
+        cards.add(new SetCardInfo("Greater Realm of Preservation", 307, Rarity.UNCOMMON, mage.cards.g.GreaterRealmOfPreservation.class));
         cards.add(new SetCardInfo("Grizzly Bears", 163, Rarity.COMMON, mage.cards.g.GrizzlyBears.class));
         cards.add(new SetCardInfo("Havenwood Battleground", 421, Rarity.UNCOMMON, mage.cards.h.HavenwoodBattleground.class));
         cards.add(new SetCardInfo("Heal", 308, Rarity.COMMON, mage.cards.h.Heal.class));
@@ -217,6 +220,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Imposing Visage", 241, Rarity.COMMON, mage.cards.i.ImposingVisage.class));
         cards.add(new SetCardInfo("Incinerate", 242, Rarity.COMMON, mage.cards.i.Incinerate.class));
         cards.add(new SetCardInfo("Inferno", 243, Rarity.RARE, mage.cards.i.Inferno.class));
+        cards.add(new SetCardInfo("Infinite Hourglass", 378, Rarity.RARE, mage.cards.i.InfiniteHourglass.class));
         cards.add(new SetCardInfo("Initiates of the Ebon Hand", 31, Rarity.COMMON, InitiatesOfTheEbonHand.class));
         cards.add(new SetCardInfo("Instill Energy", 166, Rarity.UNCOMMON, mage.cards.i.InstillEnergy.class));
         cards.add(new SetCardInfo("Ironclaw Orcs", 245, Rarity.COMMON, mage.cards.i.IronclawOrcs.class));
@@ -248,7 +252,9 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of Stromgald", 33, Rarity.UNCOMMON, mage.cards.k.KnightOfStromgald.class));
         cards.add(new SetCardInfo("Krovikan Fetish", 34, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
         cards.add(new SetCardInfo("Krovikan Sorcerer", 96, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));
+        cards.add(new SetCardInfo("Labyrinth Minotaur", 97, Rarity.COMMON, mage.cards.l.LabyrinthMinotaur.class));
         cards.add(new SetCardInfo("Leshrac's Rite", 35, Rarity.UNCOMMON, mage.cards.l.LeshracsRite.class));
+        cards.add(new SetCardInfo("Leviathan", 98, Rarity.RARE, mage.cards.l.Leviathan.class));
         cards.add(new SetCardInfo("Ley Druid", 170, Rarity.COMMON, mage.cards.l.LeyDruid.class));
         cards.add(new SetCardInfo("Lhurgoyf", 171, Rarity.RARE, mage.cards.l.Lhurgoyf.class));
         cards.add(new SetCardInfo("Library of Leng", 387, Rarity.UNCOMMON, mage.cards.l.LibraryOfLeng.class));
@@ -294,6 +300,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Artillery", 253, Rarity.UNCOMMON, mage.cards.o.OrcishArtillery.class));
         cards.add(new SetCardInfo("Orcish Captain", 254, Rarity.UNCOMMON, mage.cards.o.OrcishCaptain.class));
         cards.add(new SetCardInfo("Orcish Oriflamme", 257, Rarity.UNCOMMON, mage.cards.o.OrcishOriflamme.class));
+        cards.add(new SetCardInfo("Orcish Squatters", 258, Rarity.RARE, mage.cards.o.OrcishSquatters.class));
         cards.add(new SetCardInfo("Order of the Sacred Torch", 324, Rarity.RARE, mage.cards.o.OrderOfTheSacredTorch.class));
         cards.add(new SetCardInfo("Order of the White Shield", 325, Rarity.UNCOMMON, mage.cards.o.OrderOfTheWhiteShield.class));
         cards.add(new SetCardInfo("Orgg", 259, Rarity.RARE, mage.cards.o.Orgg.class));
@@ -352,6 +359,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Segovian Leviathan", 122, Rarity.UNCOMMON, mage.cards.s.SegovianLeviathan.class));
         cards.add(new SetCardInfo("Sengir Autocrat", 55, Rarity.RARE, mage.cards.s.SengirAutocrat.class));
         cards.add(new SetCardInfo("Serpent Generator", 397, Rarity.RARE, mage.cards.s.SerpentGenerator.class));
+        cards.add(new SetCardInfo("Serra Paladin", 337, Rarity.UNCOMMON, mage.cards.s.SerraPaladin.class));
         cards.add(new SetCardInfo("Shanodin Dryads", 187, Rarity.COMMON, mage.cards.s.ShanodinDryads.class));
         cards.add(new SetCardInfo("Shapeshifter", 398, Rarity.UNCOMMON, mage.cards.s.Shapeshifter.class));
         cards.add(new SetCardInfo("Shatter", 265, Rarity.COMMON, mage.cards.s.Shatter.class));
@@ -429,6 +437,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Growth", 204, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Winds of Change", 275, Rarity.RARE, mage.cards.w.WindsOfChange.class));
         cards.add(new SetCardInfo("Wind Spirit", 136, Rarity.UNCOMMON, mage.cards.w.WindSpirit.class));
+        cards.add(new SetCardInfo("Winter Blast", 205, Rarity.UNCOMMON, mage.cards.w.WinterBlast.class));
         cards.add(new SetCardInfo("Winter Orb", 408, Rarity.RARE, mage.cards.w.WinterOrb.class));
         cards.add(new SetCardInfo("Wolverine Pack", 206, Rarity.UNCOMMON, mage.cards.w.WolverinePack.class));
         cards.add(new SetCardInfo("Wooden Sphere", 409, Rarity.UNCOMMON, mage.cards.w.WoodenSphere.class));

@@ -40,6 +40,7 @@ import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -52,8 +53,8 @@ public class DeathmaskNezumi extends CardImpl {
 
     public DeathmaskNezumi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Rat");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.RAT);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

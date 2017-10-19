@@ -40,6 +40,7 @@ import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,7 +55,7 @@ public class VoyagerDrake extends CardImpl {
 
     public VoyagerDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Drake");
+        this.subtype.add(SubType.DRAKE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

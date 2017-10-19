@@ -35,6 +35,7 @@ import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -53,8 +54,8 @@ public class TaoistMystic extends CardImpl {
 
     public TaoistMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Mystic");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.MYSTIC);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

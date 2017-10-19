@@ -52,21 +52,21 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class BlackCarriage extends CardImpl {
 
     public BlackCarriage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.HORSE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // Black Carriage doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-        
+
         // Sacrifice a creature: Untap Black Carriage. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new UntapSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))),
-                new IsStepCondition(PhaseStep.UPKEEP), null));
+                new IsStepCondition(PhaseStep.UPKEEP), "Sacrifice a creature: Untap {this}. Activate this ability only during your upkeep."));
     }
 
     public BlackCarriage(final BlackCarriage card) {

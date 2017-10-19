@@ -39,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -57,8 +58,8 @@ public class HumbleDefector extends CardImpl {
 
     public HumbleDefector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

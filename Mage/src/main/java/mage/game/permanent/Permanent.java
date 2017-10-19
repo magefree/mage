@@ -27,6 +27,9 @@
  */
 package mage.game.permanent;
 
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -36,10 +39,6 @@ import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
-
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 public interface Permanent extends Card, Controllable {
 
@@ -194,6 +193,8 @@ public interface Permanent extends Card, Controllable {
 
     boolean isAttacking();
 
+    boolean isBlocked(Game game);
+
     int getBlocking();
 
     void setAttacking(boolean attacking);
@@ -223,15 +224,23 @@ public interface Permanent extends Card, Controllable {
      */
     void setMaxBlockedBy(int maxBlockedBy);
 
-    boolean canAttack(Game game);
-
     /**
      *
-     * @param defenderId id of planeswalker or player to attack
+     * @param defenderId id of planeswalker or player to attack - can be empty
+     * to check generally
      * @param game
      * @return
      */
     boolean canAttack(UUID defenderId, Game game);
+
+    /**
+     * Checks if a creature can attack (also if it is tapped)
+     *
+     * @param defenderId
+     * @param game
+     * @return
+     */
+    boolean canAttackInPrinciple(UUID defenderId, Game game);
 
     boolean canBlock(UUID attackerId, Game game);
 

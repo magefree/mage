@@ -62,7 +62,7 @@ public class Pentavus extends CardImpl {
 
     public Pentavus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

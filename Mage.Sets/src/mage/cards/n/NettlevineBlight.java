@@ -37,6 +37,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -67,7 +68,7 @@ public class NettlevineBlight extends CardImpl {
     public NettlevineBlight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
 
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature or land
         TargetPermanent auraTarget = new TargetPermanent(filter);

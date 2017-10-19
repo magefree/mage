@@ -64,7 +64,7 @@ public class NissaWorldwaker extends CardImpl {
     public NissaWorldwaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}{G}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Nissa");
+        this.subtype.add(SubType.NISSA);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
@@ -144,7 +144,7 @@ class NissaWorldwakerToken extends Token {
         super("", "4/4 Elemental creature with trample");
         this.cardType.add(CardType.CREATURE);
 
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());

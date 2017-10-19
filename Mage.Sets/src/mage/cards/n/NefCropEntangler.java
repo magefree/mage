@@ -36,6 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -47,8 +48,8 @@ public class NefCropEntangler extends CardImpl {
     public NefCropEntangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

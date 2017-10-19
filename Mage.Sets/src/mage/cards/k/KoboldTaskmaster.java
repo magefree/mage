@@ -53,7 +53,7 @@ public class KoboldTaskmaster extends CardImpl {
 
     public KoboldTaskmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Kobold");
+        this.subtype.add(SubType.KOBOLD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

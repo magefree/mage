@@ -27,7 +27,6 @@
  */
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -39,21 +38,23 @@ import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
  *
  * @author Plopman
  */
 public class WoodElves extends CardImpl {
     
-    private static final FilterLandCard filter = new FilterLandCard("Forest");
+    private static final FilterLandCard filter = new FilterLandCard("Forest card");
     static{
         filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public WoodElves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

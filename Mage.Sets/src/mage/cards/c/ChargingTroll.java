@@ -37,6 +37,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -47,7 +48,7 @@ public class ChargingTroll extends CardImpl {
 
     public ChargingTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}");
-        this.subtype.add("Troll");
+        this.subtype.add(SubType.TROLL);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

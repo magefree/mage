@@ -34,6 +34,7 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
 /**
@@ -44,7 +45,7 @@ public class SkitteringMonstrosity extends CardImpl {
 
     public SkitteringMonstrosity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

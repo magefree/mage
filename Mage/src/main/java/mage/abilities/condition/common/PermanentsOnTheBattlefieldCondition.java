@@ -28,14 +28,14 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.condition.Condition;
+import mage.constants.ComparisonType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 
 /**
- * Battlefield checking condition.  This condition can decorate other conditions
+ * Battlefield checking condition. This condition can decorate other conditions
  * as well as be used standalone.
  *
  * @author nantuko
@@ -63,9 +63,10 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
     }
 
     /**
-     * Applies a filter, a {@link ComparisonType}, and count to permanents on the
-     * battlefield when checking the condition during the
-     * {@link #apply(mage.game.Game, mage.abilities.Ability) apply} method invocation.
+     * Applies a filter, a {@link ComparisonType}, and count to permanents on
+     * the battlefield when checking the condition during the
+     * {@link #apply(mage.game.Game, mage.abilities.Ability) apply} method
+     * invocation.
      *
      * @param filter
      * @param type
@@ -83,10 +84,10 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
     }
 
     /**
-     * Applies a filter, a {@link ComparisonType}, and count to permanents on the
-     * battlefield and calls the decorated condition to see if it
-     * {@link #apply(mage.game.Game, mage.abilities.Ability) applies}
-     * as well.  This will force both conditions to apply for this to be true.
+     * Applies a filter, a {@link ComparisonType}, and count to permanents on
+     * the battlefield and calls the decorated condition to see if it
+     * {@link #apply(mage.game.Game, mage.abilities.Ability) applies} as well.
+     * This will force both conditions to apply for this to be true.
      *
      * @param filter
      * @param type
@@ -100,7 +101,7 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean conditionApplies = false;
+        boolean conditionApplies;
 
         FilterPermanent localFilter = filter.copy();
         if (onlyControlled) {

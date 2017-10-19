@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -35,9 +34,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,13 +47,13 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class FierceEmpath extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with converted mana cost 6 or greater");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 6 or greater");
     static {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
     }
     public FierceEmpath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ELF);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

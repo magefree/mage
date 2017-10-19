@@ -37,6 +37,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -49,8 +50,8 @@ public class SelflessSpirit extends CardImpl {
 
     public SelflessSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

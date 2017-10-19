@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetOpponentsCreaturePermanent;
@@ -58,8 +59,8 @@ public class DeadeyeHarpooner extends CardImpl {
     public DeadeyeHarpooner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.subtype.add("Dwarf");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

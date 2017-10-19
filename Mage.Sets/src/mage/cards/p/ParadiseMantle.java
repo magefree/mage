@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -50,7 +51,7 @@ public class ParadiseMantle extends CardImpl {
 
     public ParadiseMantle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "{tap}: Add one mana of any color to your mana pool."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,

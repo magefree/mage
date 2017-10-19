@@ -34,6 +34,7 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -53,8 +54,8 @@ public class StoneshakerShaman extends CardImpl {
 
     public StoneshakerShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

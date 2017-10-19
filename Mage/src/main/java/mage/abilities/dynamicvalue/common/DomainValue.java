@@ -1,12 +1,13 @@
 package mage.abilities.dynamicvalue.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -62,19 +63,19 @@ public class DomainValue implements DynamicValue {
         }
         for (Permanent p : game.getBattlefield().getAllActivePermanents(targetPlayer)) {
             if (p.isLand()) {
-                if (havePlains == 0 && p.getSubtype(game).contains("Plains")) {
+                if (havePlains == 0 && p.hasSubtype(SubType.PLAINS, game)) {
                     havePlains = 1;
                 }
-                if (haveIslands == 0 && p.getSubtype(game).contains("Island")) {
+                if (haveIslands == 0 && p.hasSubtype(SubType.ISLAND, game)) {
                     haveIslands = 1;
                 }
-                if (haveMountains == 0 && p.getSubtype(game).contains("Mountain")) {
+                if (haveMountains == 0 && p.hasSubtype(SubType.MOUNTAIN, game)) {
                     haveMountains = 1;
                 }
-                if (haveSwamps == 0 && p.getSubtype(game).contains("Swamp")) {
+                if (haveSwamps == 0 && p.hasSubtype(SubType.SWAMP, game)) {
                     haveSwamps = 1;
                 }
-                if (haveForests == 0 && p.getSubtype(game).contains("Forest")) {
+                if (haveForests == 0 && p.hasSubtype(SubType.FOREST, game)) {
                     haveForests = 1;
                 }
             }

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class SpawningPitToken extends Token {
         super("Spawn", "2/2 colorless Spawn artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Spawn");
+        this.subtype.add(SubType.SPAWN);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

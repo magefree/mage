@@ -47,7 +47,7 @@ public class FodderLaunch extends CardImpl {
 
     public FodderLaunch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{B}");
-        this.subtype.add("Goblin");
+        this.subtype.add(SubType.GOBLIN);
 
         //As an additional cost to cast Fodder Launch, sacrifice a Goblin.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(SubType.GOBLIN, "a Goblin"), true)));

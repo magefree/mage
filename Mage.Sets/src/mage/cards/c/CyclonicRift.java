@@ -28,21 +28,17 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -58,14 +54,16 @@ public class CyclonicRift extends CardImpl {
     }
 
     public CyclonicRift(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Return target nonland permanent you don't control to its owner's hand.
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(filter));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
 
         // Overload {6}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new CyclonicRiftEffect(), new ManaCostsImpl("{6}{U}")));
+        Effect effect = new ReturnToHandFromBattlefieldAllEffect(filter);
+        effect.setText("Return each nonland permanent you don't control to its owner's hand");
+        this.addAbility(new OverloadAbility(this, effect, new ManaCostsImpl("{6}{U}")));
     }
 
     public CyclonicRift(final CyclonicRift card) {
@@ -75,35 +73,5 @@ public class CyclonicRift extends CardImpl {
     @Override
     public CyclonicRift copy() {
         return new CyclonicRift(this);
-    }
-}
-
-class CyclonicRiftEffect extends OneShotEffect {
-
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
-
-    public CyclonicRiftEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "Return each nonland permanent you don't control to its owner's hand";
-    }
-
-    public CyclonicRiftEffect(final CyclonicRiftEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if (!creature.getControllerId().equals(source.getControllerId())) {
-                creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-            }
-
-        }
-        return true;
-    }
-
-    @Override
-    public CyclonicRiftEffect copy() {
-        return new CyclonicRiftEffect(this);
     }
 }

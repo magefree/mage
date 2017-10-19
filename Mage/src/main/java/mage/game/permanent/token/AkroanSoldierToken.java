@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
@@ -42,7 +43,7 @@ public class AkroanSoldierToken extends Token {
         setTokenType(3);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Soldier");
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());

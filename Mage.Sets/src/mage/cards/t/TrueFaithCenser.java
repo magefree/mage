@@ -52,7 +52,7 @@ public class TrueFaithCenser extends CardImpl {
 
     public TrueFaithCenser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 and has vigilance.
         Effect effect = new BoostEquippedEffect(1, 1);

@@ -35,6 +35,7 @@ import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,9 +45,9 @@ public class VisceraDragger extends CardImpl {
 
     public VisceraDragger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Ogre");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

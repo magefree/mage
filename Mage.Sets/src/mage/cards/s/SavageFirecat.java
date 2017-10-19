@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -52,8 +53,8 @@ public class SavageFirecat extends CardImpl {
 
     public SavageFirecat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.CAT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

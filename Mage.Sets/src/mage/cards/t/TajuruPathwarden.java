@@ -34,6 +34,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,9 +44,9 @@ public class TajuruPathwarden extends CardImpl {
 
     public TajuruPathwarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Warrior");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

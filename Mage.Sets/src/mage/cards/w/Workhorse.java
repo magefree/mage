@@ -37,6 +37,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -48,7 +49,7 @@ public class Workhorse extends CardImpl {
 
     public Workhorse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
-        this.subtype.add("Horse");
+        this.subtype.add(SubType.HORSE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

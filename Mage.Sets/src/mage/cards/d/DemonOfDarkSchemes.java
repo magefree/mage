@@ -43,6 +43,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -56,7 +57,7 @@ public class DemonOfDarkSchemes extends CardImpl {
 
     public DemonOfDarkSchemes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

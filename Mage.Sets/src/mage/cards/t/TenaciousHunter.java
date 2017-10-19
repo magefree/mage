@@ -39,6 +39,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -60,7 +61,7 @@ public class TenaciousHunter extends CardImpl {
     public TenaciousHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
-        this.subtype.add("Crocodile");
+        this.subtype.add(SubType.CROCODILE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -43,8 +44,8 @@ public class JeditOjanen extends CardImpl {
     public JeditOjanen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Cat");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

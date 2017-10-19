@@ -25,9 +25,10 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -43,7 +44,7 @@ public class NissaSageAnimistToken extends Token {
         this.getPower().modifyBaseValue(4);
         this.getToughness().modifyBaseValue(4);
         this.color.setGreen(true);
-        this.getSubtype(null).add("Elemental");
+        this.getSubtype(null).add(SubType.ELEMENTAL);
         this.addCardType(CardType.CREATURE);
     }
 }

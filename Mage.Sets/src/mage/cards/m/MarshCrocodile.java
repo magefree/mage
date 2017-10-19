@@ -36,6 +36,7 @@ import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,7 +56,7 @@ public class MarshCrocodile extends CardImpl {
 
     public MarshCrocodile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
-        this.subtype.add("Crocodile");
+        this.subtype.add(SubType.CROCODILE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

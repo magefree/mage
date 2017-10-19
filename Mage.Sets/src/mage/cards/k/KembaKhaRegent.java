@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.game.permanent.token.CatToken;
@@ -48,8 +49,8 @@ public class KembaKhaRegent extends CardImpl {
     public KembaKhaRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Cat");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

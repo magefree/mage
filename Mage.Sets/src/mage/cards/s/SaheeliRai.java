@@ -37,7 +37,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.Card;
@@ -45,6 +45,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
@@ -65,7 +66,7 @@ public class SaheeliRai extends CardImpl {
     public SaheeliRai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{U}{R}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Saheeli");
+        this.subtype.add(SubType.SAHEELI);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
@@ -115,7 +116,7 @@ class SaheeliRaiCreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent copiedPermanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (copiedPermanent != null) {
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(null, CardType.ARTIFACT, true);
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, CardType.ARTIFACT, true);
             if (effect.apply(game, source)) {
                 for (Permanent copyPermanent : effect.getAddedPermanent()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();

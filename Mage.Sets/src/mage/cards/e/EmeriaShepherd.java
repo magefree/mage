@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -38,6 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
@@ -46,6 +46,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -61,7 +63,7 @@ public class EmeriaShepherd extends CardImpl {
 
     public EmeriaShepherd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -108,7 +110,7 @@ class EmeriaShepherdReturnToHandTargetEffect extends OneShotEffect {
             return false;
         }
         Zone toZone = Zone.HAND;
-        if (triggeringLand.getSubtype(game).contains("Plains")
+        if (triggeringLand.hasSubtype(SubType.PLAINS, game)
                 && controller.chooseUse(Outcome.PutCardInPlay, "Put the card to battlefield instead?", source, game)) {
             toZone = Zone.BATTLEFIELD;
         }

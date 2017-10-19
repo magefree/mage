@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class WillowElf extends CardImpl {
 
     public WillowElf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ELF);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

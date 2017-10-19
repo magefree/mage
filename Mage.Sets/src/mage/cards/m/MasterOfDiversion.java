@@ -35,6 +35,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -50,8 +51,8 @@ public class MasterOfDiversion extends CardImpl {
 
     public MasterOfDiversion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

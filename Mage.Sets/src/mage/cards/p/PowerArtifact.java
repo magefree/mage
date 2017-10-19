@@ -17,6 +17,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -36,7 +37,7 @@ public class PowerArtifact extends CardImpl {
 
     public PowerArtifact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant artifact
         TargetPermanent auraTarget = new TargetArtifactPermanent();

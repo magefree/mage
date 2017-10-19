@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Bequeathal extends CardImpl {
 
     public Bequeathal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -59,7 +59,7 @@ public class Bequeathal extends CardImpl {
         this.addAbility(ability);
 
         // When enchanted creature dies, you draw two cards.
-        this.addAbility( new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(2), "enchanted creature"));
+        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(2).setText("you draw two cards"), "enchanted creature"));
     }
 
     public Bequeathal(final Bequeathal card) {

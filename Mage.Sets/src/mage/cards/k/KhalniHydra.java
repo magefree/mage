@@ -39,6 +39,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -60,7 +61,7 @@ public class KhalniHydra extends CardImpl {
 
     public KhalniHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}{G}{G}{G}{G}{G}");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

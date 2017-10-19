@@ -36,6 +36,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,8 +49,8 @@ public class LeafCrownedElder extends CardImpl {
 
     public LeafCrownedElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);

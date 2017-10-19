@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -58,7 +59,7 @@ public class IfhBiffEfreet extends CardImpl {
 
     public IfhBiffEfreet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Efreet");
+        this.subtype.add(SubType.EFREET);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

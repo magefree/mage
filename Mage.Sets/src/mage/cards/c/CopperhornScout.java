@@ -36,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -52,8 +53,8 @@ public class CopperhornScout extends CardImpl {
 
     public CopperhornScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

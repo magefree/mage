@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -57,9 +58,9 @@ import mage.target.targetpointer.FixedTarget;
 public class PropheticFlamespeaker extends CardImpl {
 
     public PropheticFlamespeaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -86,7 +87,7 @@ class PropheticFlamespeakerExileEffect extends OneShotEffect {
 
     public PropheticFlamespeakerExileEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Exile the top card of your library. You may play it this turn";
+        this.staticText = "exile the top card of your library. You may play it this turn";
     }
 
     public PropheticFlamespeakerExileEffect(final PropheticFlamespeakerExileEffect effect) {
@@ -141,7 +142,7 @@ class PropheticFlamespeakerCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getControllerId().equals(affectedControllerId) &&
-                objectId.equals(getTargetPointer().getFirst(game, source));
+        return source.getControllerId().equals(affectedControllerId)
+                && objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }

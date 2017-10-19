@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.ManaSpentToCastWatcher;
@@ -49,7 +50,7 @@ public class SteamcoreWeird extends CardImpl {
 
     public SteamcoreWeird(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Weird");
+        this.subtype.add(SubType.WEIRD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

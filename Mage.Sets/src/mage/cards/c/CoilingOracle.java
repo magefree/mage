@@ -34,6 +34,7 @@ import mage.abilities.effects.common.RevealTopLandToBattlefieldElseHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author mluds
@@ -42,9 +43,9 @@ public class CoilingOracle extends CardImpl {
 
     public CoilingOracle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}");
-        this.subtype.add("Snake");
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

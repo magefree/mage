@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
@@ -47,8 +48,8 @@ public class NobilisOfWar extends CardImpl {
 
     public NobilisOfWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}{R/W}{R/W}{R/W}{R/W}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

@@ -35,6 +35,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,9 +45,9 @@ public class StewardOfValeron extends CardImpl {
 
     public StewardOfValeron (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.DRUID);
+        this.subtype.add(SubType.KNIGHT);
 
 
         this.power = new MageInt(2);

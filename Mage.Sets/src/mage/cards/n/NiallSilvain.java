@@ -37,6 +37,7 @@ import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,7 +49,7 @@ public class NiallSilvain extends CardImpl {
 
     public NiallSilvain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");
-        this.subtype.add("Ouphe");
+        this.subtype.add(SubType.OUPHE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

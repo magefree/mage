@@ -29,7 +29,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -75,15 +75,17 @@ public class GateToTheAfterlife extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a nontoken creature you control dies, you gain 1 life. Then you may draw a card. If you do, discard a card.
-        Ability ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(new GainLifeEffect(1), false, filter, false, true);
+        Ability ability = new DiesCreatureTriggeredAbility(new GainLifeEffect(1), false, filter, false);
         Effect effect = new DrawDiscardControllerEffect(1, 1, true);
         effect.setText("Then you may draw a card. If you do, discard a card");
         ability.addEffect(effect);
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice Gate to the Afterlife: Search your graveyard, hand, and/or library for a card named God-Pharaoh's Gift and put it onto the battlefield. If you seearch your library this way, shuffle it. Activate this ability only if there are six or more creature cards in your graveyard.
-        ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new GateToTheAfterlifeEffect(), new GenericManaCost(2), new CardsInControllerGraveCondition(6, new FilterCreatureCard()));
+        ability = new ConditionalActivatedAbility(
+                Zone.BATTLEFIELD, new GateToTheAfterlifeEffect(), new GenericManaCost(2),
+                new CardsInControllerGraveCondition(6, new FilterCreatureCard())
+        );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

@@ -67,8 +67,8 @@ public class FinalIteration extends CardImpl {
 
     public FinalIteration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.INSECT);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

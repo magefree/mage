@@ -38,6 +38,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -49,8 +50,8 @@ public class RhetCropSpearmaster extends CardImpl {
     public RhetCropSpearmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

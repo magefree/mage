@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -48,9 +49,9 @@ public class DranasEmissary extends CardImpl {
 
     public DranasEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Cleric");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.CLERIC);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

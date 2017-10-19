@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -48,7 +49,7 @@ public class MongrelPack extends CardImpl {
 
     public MongrelPack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.HOUND);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
@@ -98,7 +99,7 @@ class HoundToken extends Token {
     public HoundToken() {
         super("Hound", "1/1 green Hound creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Hound");
+        subtype.add(SubType.HOUND);
 
         color.setGreen(true);
         power = new MageInt(1);

@@ -34,6 +34,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class GiftedAetherborn extends CardImpl {
     public GiftedAetherborn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}");
         
-        this.subtype.add("Aetherborn");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.AETHERBORN);
+        this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

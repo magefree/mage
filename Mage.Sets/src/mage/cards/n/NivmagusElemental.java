@@ -36,6 +36,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -56,22 +57,21 @@ public class NivmagusElemental extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(Predicates.or(
-            new CardTypePredicate(CardType.INSTANT),
-            new CardTypePredicate(CardType.SORCERY)));
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public NivmagusElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/R}");
-        this.subtype.add("Elemental");
-
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U/R}");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
         // Exile an instant or sorcery spell you control: Put two +1/+1 counters on Nivmagus Elemental. (That spell won't resolve.)
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),new ExileFromStackCost(new TargetSpell(filter)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ExileFromStackCost(new TargetSpell(filter)));
         this.addAbility(ability);
-        
+
     }
 
     public NivmagusElemental(final NivmagusElemental card) {

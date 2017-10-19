@@ -56,8 +56,8 @@ public class CoilingWoodworm extends CardImpl {
     public CoilingWoodworm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.subtype.add("Insect");
-        this.subtype.add("Worm");
+        this.subtype.add(SubType.INSECT);
+        this.subtype.add(SubType.WORM);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
@@ -43,8 +44,8 @@ public class MausoleumGuard extends CardImpl {
 
     public MausoleumGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

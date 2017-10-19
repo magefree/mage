@@ -34,6 +34,7 @@ import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourc
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -52,7 +53,7 @@ public class Saltskitter extends CardImpl {
 
     public Saltskitter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Wurm");
+        this.subtype.add(SubType.WURM);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

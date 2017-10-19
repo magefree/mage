@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -47,9 +48,9 @@ public class RappellingScouts extends CardImpl {
 
     public RappellingScouts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Rebel");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.REBEL);
+        this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

@@ -35,6 +35,7 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author noxx
@@ -59,8 +60,12 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
         this.manaBuilder = manaBuilder;
         this.oneChoice = oneChoice;
         //
-        staticText = "Add " + amount + " mana of "
-                + (oneChoice ? "any one color" : "in any combination of colors")
+        staticText = "Add "
+                + (amount instanceof StaticValue ? (CardUtil.numberToText(((StaticValue) amount).toString())) : "")
+                + " mana "
+                + (oneChoice ? "of any"
+                        + (amount instanceof StaticValue && (((StaticValue) amount).toString()).equals("1") ? "" : " one")
+                        + " color" : "in any combination of colors")
                 + " to your mana pool. " + manaBuilder.getRule();
     }
 

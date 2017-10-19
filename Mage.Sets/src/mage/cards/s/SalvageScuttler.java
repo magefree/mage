@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -47,7 +48,7 @@ public class SalvageScuttler extends CardImpl {
     public SalvageScuttler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
 
-        this.subtype.add("Crab");
+        this.subtype.add(SubType.CRAB);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

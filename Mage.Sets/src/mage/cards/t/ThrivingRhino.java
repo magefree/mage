@@ -38,6 +38,7 @@ import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -48,7 +49,7 @@ public class ThrivingRhino extends CardImpl {
 
     public ThrivingRhino(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Rhino");
+        this.subtype.add(SubType.RHINO);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

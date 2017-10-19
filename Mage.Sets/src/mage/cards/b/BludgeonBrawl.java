@@ -113,7 +113,7 @@ class BludgeonBrawlAddSubtypeEffect extends ContinuousEffectImpl {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             if (permanent != null) {
-                permanent.getSubtype(game).add("Equipment");
+                permanent.getSubtype(game).add(SubType.EQUIPMENT);
                 affectedPermanents.add(permanent.getId());
             }
         }

@@ -56,8 +56,8 @@ public class KeldonWarlord extends CardImpl {
 
     public KeldonWarlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Barbarian");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.BARBARIAN);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

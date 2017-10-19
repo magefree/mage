@@ -37,6 +37,7 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -45,19 +46,19 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class DwarvenPatrol extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("nonred spell");
+    private static final FilterSpell filter = new FilterSpell("a nonred spell");
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.RED)));
     }
 
     public DwarvenPatrol(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Dwarf");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.subtype.add(SubType.DWARF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

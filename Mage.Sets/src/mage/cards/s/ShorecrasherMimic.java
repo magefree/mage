@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SubLayer;
 import mage.filter.FilterSpell;
@@ -57,11 +58,11 @@ public class ShorecrasherMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    private String rule = "Whenever you cast a spell that's both green and blue, {this} has base power and toughness 5/3 until end of turn and gains trample until end of turn";
+    private String rule = "Whenever you cast a spell that's both green and blue, {this} has base power and toughness 5/3 until end of turn and gains trample until end of turn.";
 
     public ShorecrasherMimic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/U}");
-        this.subtype.add("Shapeshifter");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G/U}");
+        this.subtype.add(SubType.SHAPESHIFTER);
 
         this.color.setBlue(true);
         this.color.setGreen(true);

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.target.Target;
 import mage.target.common.TargetCardInOpponentsGraveyard;
@@ -48,8 +49,8 @@ public class DisposalMummy extends CardImpl {
     public DisposalMummy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.subtype.add("Zombie");
-        this.subtype.add("Jackal");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.JACKAL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

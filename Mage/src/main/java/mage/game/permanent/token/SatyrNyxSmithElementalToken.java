@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
@@ -42,7 +43,7 @@ public class SatyrNyxSmithElementalToken extends Token {
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(3);
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());

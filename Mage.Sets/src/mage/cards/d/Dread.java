@@ -38,6 +38,7 @@ import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,8 +54,8 @@ public class Dread extends CardImpl {
 
     public Dread(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Incarnation");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.INCARNATION);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.Counter;
@@ -52,7 +53,7 @@ public class Heartmender extends CardImpl {
 
     public Heartmender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G/W}{G/W}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

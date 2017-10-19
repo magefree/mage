@@ -67,7 +67,7 @@ public class CapturedByTheConsulate extends CardImpl {
 
     public CapturedByTheConsulate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature you don't control
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);

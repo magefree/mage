@@ -34,6 +34,7 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,8 +55,8 @@ public class PoisonbellyOgre extends CardImpl {
     
     public PoisonbellyOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

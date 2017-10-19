@@ -38,6 +38,7 @@ import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -61,7 +62,7 @@ public class NotOfThisWorld extends CardImpl {
 
     public NotOfThisWorld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{7}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
 
         // Counter target spell or ability that targets a permanent you control.
         this.getSpellAbility().addTarget(

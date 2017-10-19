@@ -37,6 +37,7 @@ import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class JediBattleHealer extends CardImpl {
 
     public JediBattleHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Mirialan");
-        this.subtype.add("Jedi");
+        this.subtype.add(SubType.MIRIALAN);
+        this.subtype.add(SubType.JEDI);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

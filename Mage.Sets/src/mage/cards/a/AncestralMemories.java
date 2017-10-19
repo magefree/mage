@@ -27,8 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -39,6 +37,8 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -99,7 +99,7 @@ class AncestralMemoriesEffect extends OneShotEffect {
 
                 TargetCard target = new TargetCard(Math.min(2, cards.size()), Zone.LIBRARY, new FilterCard("two cards to put in your hand"));
                 if (player.choose(Outcome.Benefit, cards, target, game)) {
-                    for (UUID targetId : (List<UUID>)target.getTargets()) {
+                    for (UUID targetId : target.getTargets()) {
                         Card card = cards.get(targetId, game);
                         if (card != null) {
                             card.moveToZone(Zone.HAND, source.getSourceId(), game, false);

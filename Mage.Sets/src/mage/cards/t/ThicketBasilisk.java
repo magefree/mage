@@ -56,7 +56,7 @@ public class ThicketBasilisk extends CardImpl {
 
     public ThicketBasilisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.subtype.add("Basilisk");
+        this.subtype.add(SubType.BASILISK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

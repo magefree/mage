@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class SerfToken extends Token {
         super("Serf", "0/1 black Serf creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Serf");
+        subtype.add(SubType.SERF);
         power = new MageInt(0);
         toughness = new MageInt(1);
     }

@@ -58,8 +58,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class GleamOfAuthority extends CardImpl {
 
     public GleamOfAuthority(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
-        this.subtype.add("Aura");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -67,16 +67,19 @@ public class GleamOfAuthority extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted creature gets +1/+1 for each +1/+1 counter on other creatures you control
         DynamicValue amount = new CountersOnControlledCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));        
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)
+                .setText("Enchanted creature gets +1/+1 for each +1/+1 counter on other creatures you control.")
+        ));
+
         // Enchanted creature has vigilance and "{W}, {T}: Bloster 1."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA)));
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BolsterEffect(1), new ManaCostsImpl("{W}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));        
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BolsterEffect(1), new ManaCostsImpl("{W}"));
+        gainedAbility.addCost(new TapSourceCost());
+        ability.addEffect(new GainAbilityAttachedEffect(ability, AttachmentType.AURA).setText("and \"{W}, {T}: Bloster 1.\""));
+        this.addAbility(ability);
     }
 
     public GleamOfAuthority(final GleamOfAuthority card) {
@@ -92,7 +95,7 @@ public class GleamOfAuthority extends CardImpl {
 class CountersOnControlledCount implements DynamicValue {
 
     static FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    
+
     public CountersOnControlledCount() {
     }
 

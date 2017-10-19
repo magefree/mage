@@ -58,9 +58,9 @@ public class HighlandBerserker extends CardImpl {
 
     public HighlandBerserker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Berserker");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.BERSERKER);
+        this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

@@ -38,6 +38,7 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -51,7 +52,7 @@ public class GeneralGrievous extends CardImpl {
     public GeneralGrievous(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Kaleesh");
+        this.subtype.add(SubType.KALEESH);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

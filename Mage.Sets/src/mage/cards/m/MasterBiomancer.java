@@ -53,8 +53,8 @@ public class MasterBiomancer extends CardImpl {
 
     public MasterBiomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}");
-        this.subtype.add("Elf");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

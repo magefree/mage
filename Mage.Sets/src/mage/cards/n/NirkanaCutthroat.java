@@ -41,6 +41,7 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -50,8 +51,8 @@ public class NirkanaCutthroat extends LevelerCard {
 
     public NirkanaCutthroat (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.WARRIOR);
         this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

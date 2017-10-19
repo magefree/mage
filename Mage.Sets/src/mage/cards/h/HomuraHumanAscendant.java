@@ -64,8 +64,8 @@ public class HomuraHumanAscendant extends CardImpl {
     public HomuraHumanAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.MONK);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

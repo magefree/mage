@@ -34,6 +34,7 @@ import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPer
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,7 +57,7 @@ public class GodhunterOctopus extends CardImpl {
 
     public GodhunterOctopus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        this.subtype.add("Octopus");
+        this.subtype.add(SubType.OCTOPUS);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

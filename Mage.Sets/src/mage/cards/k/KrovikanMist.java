@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -47,16 +47,16 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author LevelX2
  */
 public class KrovikanMist extends CardImpl {
-    
-    private static final FilterControlledPermanent controlledIllusionsFilter = new FilterControlledPermanent("Illusions you control");
-    
+
+    private static final FilterPermanent illusionsFilter = new FilterPermanent("Illusions on the battlefield");
+
     static {
-        controlledIllusionsFilter.add(new SubtypePredicate(SubType.ILLUSION));
+        illusionsFilter.add(new SubtypePredicate(SubType.ILLUSION));
     }
 
     public KrovikanMist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Illusion");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.subtype.add(SubType.ILLUSION);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -65,7 +65,7 @@ public class KrovikanMist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Krovikan Mist's power and toughness are each equal to the number of Illusions on the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
-                new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(controlledIllusionsFilter), Duration.EndOfGame)));
+                new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(illusionsFilter), Duration.EndOfGame)));
 
     }
 

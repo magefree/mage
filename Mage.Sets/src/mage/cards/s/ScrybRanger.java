@@ -53,14 +53,15 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ScrybRanger extends CardImpl {
 
-    private static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent("Forest");
+    private static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent("a Forest");
+
     static {
         filterForest.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public ScrybRanger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Faerie");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.subtype.add(SubType.FAERIE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

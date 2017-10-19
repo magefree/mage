@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -60,7 +61,7 @@ public class GoatToken extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Goat");
+        subtype.add(SubType.GOAT);
         power = new MageInt(0);
         toughness = new MageInt(1);
     }

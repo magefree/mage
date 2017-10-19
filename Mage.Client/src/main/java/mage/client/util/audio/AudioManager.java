@@ -40,6 +40,7 @@ public class AudioManager {
     private MageClip tournamentStarted = null;
     private MageClip yourGameStarted = null;
     private MageClip playerJoinedTable = null;
+    private MageClip gameCanStart = null;
     private MageClip playerSubmittedDeck = null;
     private MageClip playerWhispered = null;
     private MageClip playerLeft = null;
@@ -217,6 +218,13 @@ public class AudioManager {
             audioManager.playerJoinedTable = new MageClip(Constants.BASE_SOUND_PATH + "OnPlayerJoined.wav", AudioGroup.OtherSounds);
         }
         checkAndPlayClip(audioManager.playerJoinedTable);
+    }
+    
+    public static void playGameCanStart() {
+        if (audioManager.gameCanStart == null) {
+            audioManager.gameCanStart = new MageClip(Constants.BASE_SOUND_PATH + "GameCanStart.wav", AudioGroup.OtherSounds);
+        }
+        checkAndPlayClip(audioManager.gameCanStart);
     }
 
     public static void playYourGameStarted() {

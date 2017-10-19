@@ -53,8 +53,8 @@ public class ParagonOfTheAmesha extends CardImpl {
 
     public ParagonOfTheAmesha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.KNIGHT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -112,7 +112,7 @@ public class ParagonOfTheAmesha extends CardImpl {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add("Angel");
+                        permanent.getSubtype(game).add(SubType.ANGEL);
                     }
                     break;
             }

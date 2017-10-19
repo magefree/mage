@@ -54,7 +54,7 @@ import mage.util.CardUtil;
 public class BomatCourier extends CardImpl {
 
     public BomatCourier(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -105,7 +105,7 @@ class BomatCourierExileEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), 0);
+                UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                 card.setFaceDown(true, game);
                 controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName());
                 card.setFaceDown(true, game);
@@ -136,7 +136,7 @@ class BomatCourierReturnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), 0));
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
             if (exileZone != null) {
                 controller.moveCards(exileZone, Zone.HAND, source, game);
             }

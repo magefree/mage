@@ -35,6 +35,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class MinotaurExplorer extends CardImpl {
 
     public MinotaurExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

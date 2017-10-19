@@ -66,7 +66,7 @@ public class ThopterSquadron extends CardImpl {
 
     public ThopterSquadron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
-        this.subtype.add("Thopter");
+        this.subtype.add(SubType.THOPTER);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -35,6 +35,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -54,8 +55,8 @@ public class LoamDryad extends CardImpl {
 
     public LoamDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Dryad");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.DRYAD);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

@@ -37,6 +37,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -49,7 +50,7 @@ public class HollowhengeScavenger extends CardImpl {
     public HollowhengeScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.color.setGreen(true);
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

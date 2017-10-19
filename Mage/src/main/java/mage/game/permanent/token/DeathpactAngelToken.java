@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -59,7 +60,7 @@ public class DeathpactAngelToken extends Token {
         color.setWhite(true);
         color.setBlack(true);
 
-        subtype.add("Cleric");
+        subtype.add(SubType.CLERIC);
 
         power = new MageInt(1);
         toughness = new MageInt(1);

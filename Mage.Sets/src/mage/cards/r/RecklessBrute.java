@@ -29,11 +29,12 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class RecklessBrute extends CardImpl {
 
     public RecklessBrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
@@ -52,7 +53,7 @@ public class RecklessBrute extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Reckless Brute attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
     public RecklessBrute(final RecklessBrute card) {

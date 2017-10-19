@@ -41,6 +41,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -63,8 +64,8 @@ public class ChampionOfStraySouls extends CardImpl {
 
     public ChampionOfStraySouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        this.subtype.add("Skeleton");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.SKELETON);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -74,6 +75,7 @@ public class ChampionOfStraySouls extends CardImpl {
          * ability, before you pay any costs. You can't target any of the
          * creatures you sacrifice.
          */
+        //TODO: Make ability properly copiable
         // {3}{B}{B}, {T}, Sacrifice X other creatures: Return X target creatures from your graveyard to the battlefield.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
         effect.setText("Return X target creatures from your graveyard to the battlefield");

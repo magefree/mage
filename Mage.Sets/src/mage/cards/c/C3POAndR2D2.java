@@ -38,6 +38,7 @@ import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 /**
@@ -49,7 +50,7 @@ public class C3POAndR2D2 extends CardImpl {
     public C3POAndR2D2(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Droid");
+        this.subtype.add(SubType.DROID);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

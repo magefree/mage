@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -54,7 +55,7 @@ public class Necrite extends CardImpl {
 
     public Necrite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Thrull");
+        this.subtype.add(SubType.THRULL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

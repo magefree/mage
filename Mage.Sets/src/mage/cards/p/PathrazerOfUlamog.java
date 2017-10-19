@@ -35,6 +35,7 @@ import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -45,7 +46,7 @@ public class PathrazerOfUlamog extends CardImpl {
 
     public PathrazerOfUlamog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{11}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
 
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);

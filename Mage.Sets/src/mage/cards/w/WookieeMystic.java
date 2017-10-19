@@ -41,6 +41,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -59,8 +60,8 @@ public class WookieeMystic extends CardImpl {
 
     public WookieeMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");
-        this.subtype.add("Wookiee");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.WOOKIEE);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

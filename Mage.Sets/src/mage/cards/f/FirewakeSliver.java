@@ -53,32 +53,32 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FirewakeSliver extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All sliver creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All Sliver creatures");
     private static final FilterCreaturePermanent targetSliverFilter = new FilterCreaturePermanent("Sliver");
 
     static {
         filter.add(new SubtypePredicate(SubType.SLIVER));
         targetSliverFilter.add(new SubtypePredicate(SubType.SLIVER));
     }
-    
+
     public FirewakeSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
-        this.subtype.add("Sliver");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // All Sliver creatures have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));        
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+
         // All Slivers have "{1}, Sacrifice this permanent: Target Sliver creature gets +2/+2 until end of turn."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2,2,Duration.EndOfTurn), new GenericManaCost(1));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new GenericManaCost(1));
         gainedAbility.addCost(new SacrificeSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent(targetSliverFilter));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
                 gainedAbility, Duration.WhileOnBattlefield,
-                filter, "All Slivers have \"{1}, Sacrifice this permanent: Target Sliver creature gets +2/+2 until end of turn.\"")));                
-        
+                filter, "All Slivers have \"{1}, Sacrifice this permanent: Target Sliver creature gets +2/+2 until end of turn.\"")));
+
     }
 
     public FirewakeSliver(final FirewakeSliver card) {

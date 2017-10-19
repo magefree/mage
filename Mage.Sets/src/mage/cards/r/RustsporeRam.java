@@ -54,7 +54,7 @@ public class RustsporeRam extends CardImpl {
 
     public RustsporeRam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
-        this.subtype.add("Sheep");
+        this.subtype.add(SubType.SHEEP);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);

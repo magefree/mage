@@ -35,6 +35,7 @@ import mage.abilities.keyword.BountyAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -45,8 +46,8 @@ public class NoviceBountyHunter extends CardImpl {
 
     public NoviceBountyHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Hunter");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.HUNTER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

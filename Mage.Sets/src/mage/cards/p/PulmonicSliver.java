@@ -55,7 +55,7 @@ public class PulmonicSliver extends CardImpl {
 
     public PulmonicSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

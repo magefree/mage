@@ -54,6 +54,7 @@ public class Visions extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        cards.add(new SetCardInfo("Aku Djinn", 1, Rarity.RARE, mage.cards.a.AkuDjinn.class));
         cards.add(new SetCardInfo("Anvil of Bogardan", 141, Rarity.RARE, mage.cards.a.AnvilOfBogardan.class));
         cards.add(new SetCardInfo("Archangel", 101, Rarity.RARE, mage.cards.a.Archangel.class));
         cards.add(new SetCardInfo("Army Ants", 126, Rarity.UNCOMMON, mage.cards.a.ArmyAnts.class));
@@ -104,6 +105,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Impulse", 34, Rarity.COMMON, mage.cards.i.Impulse.class));
         cards.add(new SetCardInfo("Infantry Veteran", 109, Rarity.COMMON, mage.cards.i.InfantryVeteran.class));
         cards.add(new SetCardInfo("Inspiration", 35, Rarity.COMMON, mage.cards.i.Inspiration.class));
+        cards.add(new SetCardInfo("Iron-Heart Chimera", 146, Rarity.UNCOMMON, mage.cards.i.IronHeartChimera.class));
         cards.add(new SetCardInfo("Jamuraan Lion", 110, Rarity.COMMON, mage.cards.j.JamuraanLion.class));
         cards.add(new SetCardInfo("Jungle Basin", 164, Rarity.UNCOMMON, mage.cards.j.JungleBasin.class));
         cards.add(new SetCardInfo("Kaervek's Spite", 13, Rarity.RARE, mage.cards.k.KaerveksSpite.class));
@@ -112,6 +114,10 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Keeper of Kookus", 85, Rarity.COMMON, mage.cards.k.KeeperOfKookus.class));
         cards.add(new SetCardInfo("King Cheetah", 60, Rarity.COMMON, mage.cards.k.KingCheetah.class));
         cards.add(new SetCardInfo("Knight of Valor", 111, Rarity.COMMON, mage.cards.k.KnightOfValor.class));
+        cards.add(new SetCardInfo("Knight of the Mists", 36, Rarity.COMMON, mage.cards.k.KnightOfTheMists.class));
+        cards.add(new SetCardInfo("Kookus", 85, Rarity.RARE, mage.cards.k.Kookus.class));
+        cards.add(new SetCardInfo("Lead-Belly Chimera", 148, Rarity.UNCOMMON, mage.cards.l.LeadBellyChimera.class));
+        cards.add(new SetCardInfo("Lichenthrope", 62, Rarity.RARE, mage.cards.l.Lichenthrope.class));
         cards.add(new SetCardInfo("Lightning Cloud", 87, Rarity.RARE, mage.cards.l.LightningCloud.class));
         cards.add(new SetCardInfo("Longbow Archer", 112, Rarity.UNCOMMON, mage.cards.l.LongbowArcher.class));
         cards.add(new SetCardInfo("Magma Mine", 149, Rarity.UNCOMMON, mage.cards.m.MagmaMine.class));
@@ -124,6 +130,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Necromancy", 14, Rarity.UNCOMMON, mage.cards.n.Necromancy.class));
         cards.add(new SetCardInfo("Necrosavant", 15, Rarity.RARE, mage.cards.n.Necrosavant.class));
         cards.add(new SetCardInfo("Nekrataal", 16, Rarity.UNCOMMON, mage.cards.n.Nekrataal.class));
+        cards.add(new SetCardInfo("Ovinomancer", 39, Rarity.UNCOMMON, mage.cards.o.Ovinomancer.class));
         cards.add(new SetCardInfo("Panther Warriors", 65, Rarity.COMMON, mage.cards.p.PantherWarriors.class));
         cards.add(new SetCardInfo("Parapet", 114, Rarity.COMMON, mage.cards.p.Parapet.class));
         cards.add(new SetCardInfo("Phyrexian Marauder", 151, Rarity.RARE, mage.cards.p.PhyrexianMarauder.class));
@@ -141,7 +148,9 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Retribution of the Meek", 119, Rarity.RARE, mage.cards.r.RetributionOfTheMeek.class));
         cards.add(new SetCardInfo("Righteous Aura", 120, Rarity.COMMON, mage.cards.r.RighteousAura.class));
         cards.add(new SetCardInfo("River Boa", 68, Rarity.COMMON, mage.cards.r.RiverBoa.class));
+        cards.add(new SetCardInfo("Rock Slide", 92, Rarity.COMMON, mage.cards.r.RockSlide.class));
         cards.add(new SetCardInfo("Rowen", 69, Rarity.RARE, mage.cards.r.Rowen.class));
+        cards.add(new SetCardInfo("Sands of Time", 153, Rarity.RARE, mage.cards.s.SandsOfTime.class));
         cards.add(new SetCardInfo("Scalebane's Elite", 135, Rarity.UNCOMMON, mage.cards.s.ScalebanesElite.class));
         cards.add(new SetCardInfo("Shrieking Drake", 43, Rarity.COMMON, mage.cards.s.ShriekingDrake.class));
         cards.add(new SetCardInfo("Simoon", 136, Rarity.UNCOMMON, mage.cards.s.Simoon.class));
@@ -164,6 +173,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Teferi's Realm", 44, Rarity.RARE, mage.cards.t.TeferisRealm.class));
         cards.add(new SetCardInfo("Tempest Drake", 139, Rarity.UNCOMMON, mage.cards.t.TempestDrake.class));
         cards.add(new SetCardInfo("Three Wishes", 45, Rarity.RARE, mage.cards.t.ThreeWishes.class));
+        cards.add(new SetCardInfo("Tin-Wing Chimera", 157, Rarity.UNCOMMON, mage.cards.t.TinWingChimera.class));
         cards.add(new SetCardInfo("Tithe", 123, Rarity.RARE, mage.cards.t.Tithe.class));
         cards.add(new SetCardInfo("Tremor", 99, Rarity.COMMON, mage.cards.t.Tremor.class));
         cards.add(new SetCardInfo("Triangle of War", 158, Rarity.RARE, mage.cards.t.TriangleOfWar.class));

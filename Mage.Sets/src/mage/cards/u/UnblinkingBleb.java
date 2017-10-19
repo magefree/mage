@@ -36,6 +36,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 
 /**
@@ -46,7 +47,7 @@ public class UnblinkingBleb extends CardImpl {
 
     public UnblinkingBleb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

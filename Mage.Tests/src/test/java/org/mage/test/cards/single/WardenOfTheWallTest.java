@@ -2,6 +2,7 @@ package org.mage.test.cards.single;
 
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import org.junit.Test;
@@ -42,7 +43,7 @@ public class WardenOfTheWallTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPowerToughness(playerA, "Warden of the Wall", 2, 3, Filter.ComparisonScope.All);
-        assertType("Warden of the Wall", CardType.CREATURE, "Gargoyle");
+        assertType("Warden of the Wall", CardType.CREATURE, SubType.GARGOYLE);
     }
 
 }

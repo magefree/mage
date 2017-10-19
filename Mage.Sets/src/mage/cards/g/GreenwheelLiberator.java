@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.watchers.common.RevoltWatcher;
 
@@ -48,8 +48,8 @@ public class GreenwheelLiberator extends CardImpl {
     public GreenwheelLiberator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.subtype.add("Elf");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
@@ -57,7 +57,7 @@ public class GreenwheelLiberator extends CardImpl {
         // permanent you controlled left the battlefield this turn.
         Ability ability = new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false, RevoltCondition.instance,
-                "<i>Revolt</i> &mdash; enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn", null);
+                "<i>Revolt</i> &mdash; {this} enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn", null);
         ability.addWatcher(new RevoltWatcher());
         this.addAbility(ability);
     }

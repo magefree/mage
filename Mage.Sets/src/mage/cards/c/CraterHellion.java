@@ -37,6 +37,7 @@ import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -50,8 +51,8 @@ public class CraterHellion extends CardImpl {
 
     public CraterHellion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.subtype.add("Hellion");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.HELLION);
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

@@ -39,6 +39,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.target.common.TargetCreaturePermanent;
@@ -53,8 +54,8 @@ public class DarthMaul extends CardImpl {
     public DarthMaul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Zabrak");
-        this.subtype.add("Sith");
+        this.subtype.add(SubType.ZABRAK);
+        this.subtype.add(SubType.SITH);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

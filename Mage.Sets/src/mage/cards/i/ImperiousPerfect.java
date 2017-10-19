@@ -57,8 +57,8 @@ public class ImperiousPerfect extends CardImpl {
 
     public ImperiousPerfect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

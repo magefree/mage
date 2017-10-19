@@ -42,6 +42,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -55,8 +56,8 @@ public class HeartlashCinder extends CardImpl {
 
     public HeartlashCinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

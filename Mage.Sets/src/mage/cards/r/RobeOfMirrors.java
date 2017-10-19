@@ -48,7 +48,7 @@ public class RobeOfMirrors extends CardImpl {
 
     public RobeOfMirrors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant creature

@@ -36,6 +36,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,7 +47,7 @@ public class SatyrHedonist extends CardImpl {
 
     public SatyrHedonist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Satyr");
+        this.subtype.add(SubType.SATYR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

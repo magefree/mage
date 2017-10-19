@@ -55,8 +55,8 @@ public class SlaveringNulls extends CardImpl {
 
     public SlaveringNulls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

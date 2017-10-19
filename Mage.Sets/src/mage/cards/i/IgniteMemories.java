@@ -28,6 +28,7 @@
 package mage.cards.i;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.StormAbility;
@@ -49,8 +50,7 @@ import mage.target.TargetPlayer;
 public class IgniteMemories extends CardImpl {
 
     public IgniteMemories(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");
 
         // Target player reveals a card at random from his or her hand. Ignite Memories deals damage to that player equal to that card's converted mana cost.
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -69,7 +69,6 @@ public class IgniteMemories extends CardImpl {
     }
 }
 
-
 class IgniteMemoriesEffect extends OneShotEffect {
 
     public IgniteMemoriesEffect() {
@@ -83,13 +82,17 @@ class IgniteMemoriesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null && !player.getHand().isEmpty()) {
-            Cards revealed = new CardsImpl();
-            Card card = player.getHand().getRandom(game);
-            revealed.add(card);
-            player.revealCards("Ignite Memories", revealed, game);
-            player.damage(card.getConvertedManaCost(), id, game, false, true);
+        Player controller = game.getPlayer(targetPointer.getFirst(game, source));
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
+            if (!controller.getHand().isEmpty()) {
+                Cards revealed = new CardsImpl();
+                Card card = controller.getHand().getRandom(game);
+                revealed.add(card);
+                controller.revealCards(sourceObject.getIdName(), revealed, game);
+                controller.damage(card.getConvertedManaCost(), source.getSourceId(), game, false, true);
+
+            }
             return true;
         }
         return false;

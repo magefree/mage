@@ -30,7 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -50,8 +51,8 @@ import mage.constants.Zone;
 public class MogissWarhound extends CardImpl {
 
     public MogissWarhound(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Hound");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}");
+        this.subtype.add(SubType.HOUND);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -59,15 +60,15 @@ public class MogissWarhound extends CardImpl {
         // Bestow 2R (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
         this.addAbility(new BestowAbility(this, "{2}{R}"));
         // Mogis's Warhound attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
         // Enchanted creature gets +2/+2 and attacks each turn if able.
-        Effect effect = new BoostEnchantedEffect(2,2,Duration.WhileOnBattlefield);
+        Effect effect = new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +2/+2");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
-        effect.setText("and attacks each turn if able");
+        effect.setText("and attacks each combat if able");
         ability.addEffect(effect);
-        this.addAbility(ability);        
+        this.addAbility(ability);
     }
 
     public MogissWarhound(final MogissWarhound card) {

@@ -58,7 +58,7 @@ public class PharikaGodOfAffliction extends CardImpl {
     public PharikaGodOfAffliction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("God");
+        this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -91,7 +91,7 @@ class PharikaExileEffect extends OneShotEffect {
 
     public PharikaExileEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Exile target creature card from a graveyard. It's owner creates a 1/1 black and green Snake enchantment creature token with deathtouch";
+        staticText = "Exile target creature card from a graveyard. Its owner creates a 1/1 black and green Snake enchantment creature token with deathtouch";
     }
 
     public PharikaExileEffect(final PharikaExileEffect effect) {

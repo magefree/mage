@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,7 +42,7 @@ public class MinorDemonToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         color.setRed(true);
-        subtype.add("Demon");
+        subtype.add(SubType.DEMON);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

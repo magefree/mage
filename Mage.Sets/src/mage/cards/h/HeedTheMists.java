@@ -34,6 +34,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -47,7 +48,7 @@ public class HeedTheMists extends CardImpl {
 
     public HeedTheMists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // Put the top card of your library into your graveyard, then draw cards equal to that card's converted mana cost.

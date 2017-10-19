@@ -97,9 +97,11 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 return false;
             }
             // fix for Gitaxian Probe and casting opponent's spells
-            if (!game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)
-                    && !controllerId.equals(playerId)) {
-                return false;
+            if (!game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)) {
+                Card card = game.getCard(sourceId);
+                if (!(card != null && card.getOwnerId() == playerId)) {
+                    return false;
+                }
             }
             // Check if rule modifying events prevent to cast the spell in check playable mode
             if (this.isCheckPlayableMode()) {

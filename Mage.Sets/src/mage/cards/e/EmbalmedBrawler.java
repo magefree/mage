@@ -37,6 +37,7 @@ import mage.abilities.keyword.AmplifyAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -47,7 +48,7 @@ public class EmbalmedBrawler extends CardImpl {
 
     public EmbalmedBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

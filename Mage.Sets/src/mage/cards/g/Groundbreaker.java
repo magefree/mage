@@ -36,6 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -46,7 +47,7 @@ public class Groundbreaker extends CardImpl {
 
     public Groundbreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(1);

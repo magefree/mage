@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -46,8 +47,8 @@ public class CarrionHowler extends CardImpl {
 
     public CarrionHowler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.WOLF);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

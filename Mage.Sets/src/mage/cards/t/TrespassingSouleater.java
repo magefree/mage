@@ -35,6 +35,7 @@ import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -47,7 +48,7 @@ public class TrespassingSouleater extends CardImpl {
 
     public TrespassingSouleater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.CONSTRUCT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

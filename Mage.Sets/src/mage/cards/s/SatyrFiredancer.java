@@ -39,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,7 +61,7 @@ public class SatyrFiredancer extends CardImpl {
 
     public SatyrFiredancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Satyr");
+        this.subtype.add(SubType.SATYR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

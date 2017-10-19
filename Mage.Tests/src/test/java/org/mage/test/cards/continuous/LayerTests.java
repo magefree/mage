@@ -30,6 +30,7 @@ package org.mage.test.cards.continuous;
 
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import org.junit.Ignore;
@@ -53,10 +54,10 @@ public class LayerTests extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertType("Urborg, Tomb of Yawgmoth", CardType.LAND, "Mountain");  // Urborg is a Mountain now
+        assertType("Urborg, Tomb of Yawgmoth", CardType.LAND, SubType.MOUNTAIN);  // Urborg is a Mountain now
         assertPermanentCount(playerA, "Swamp", 0);  // no Swamp subtypes on the battlefield
         assertPermanentCount(playerA, "Plains", 1); // the Plains is not affected by the Urborg
-        assertType("Plains", CardType.LAND, "Plains");
+        assertType("Plains", CardType.LAND, SubType.PLAINS);
 
     }
     
@@ -111,7 +112,7 @@ public class LayerTests extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertType("Urborg, Tomb of Yawgmoth", CardType.CREATURE, "Swamp");  // Urborg is a creature
+        assertType("Urborg, Tomb of Yawgmoth", CardType.CREATURE, SubType.SWAMP);  // Urborg is a creature
         assertPowerToughness(playerA, "Urborg, Tomb of Yawgmoth", 0, 1); // Urborg is a 0/1 creature
 
     }

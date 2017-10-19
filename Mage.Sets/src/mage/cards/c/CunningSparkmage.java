@@ -38,6 +38,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -49,8 +50,8 @@ public class CunningSparkmage extends CardImpl {
 
     public CunningSparkmage (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
         this.color.setRed(true);        
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

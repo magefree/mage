@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInHand;
 
@@ -47,7 +48,7 @@ public class CursedMonstrosity extends CardImpl {
 
     public CursedMonstrosity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

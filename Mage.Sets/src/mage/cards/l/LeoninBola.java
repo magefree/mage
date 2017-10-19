@@ -50,7 +50,7 @@ public class LeoninBola extends CardImpl {
 
     public LeoninBola(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "{tap}, Unattach Leonin Bola: Tap target creature."
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());

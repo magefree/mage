@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.f.FlameheartWerewolf;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 
@@ -52,9 +53,9 @@ public class KessigForgemaster extends CardImpl {
 
     public KessigForgemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -29,17 +29,17 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -48,32 +48,15 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class Overload extends CardImpl {
 
-    private static final FilterArtifactPermanent filter2 = new FilterArtifactPermanent("artifact if its converted mana cost is 2 or less");
-    private static final FilterArtifactPermanent filter5 = new FilterArtifactPermanent("artifact if its converted mana cost is 5 or less");
-
-    static {
-        filter2.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
-        filter5.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
-    }
-
     public Overload(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Kicker {2}
         this.addAbility(new KickerAbility("{2}"));
+
         // Destroy target artifact if its converted mana cost is 2 or less. If Overload was kicked, destroy that artifact if its converted mana cost is 5 or less instead.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent(filter5));
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if(ability instanceof SpellAbility) {
-            if(!KickedCondition.instance.apply(game, ability)) {
-                ability.getTargets().clear();
-                ability.getTargets().add(new TargetArtifactPermanent(filter2));
-            }
-        }
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
     public Overload(final Overload card) {
@@ -83,5 +66,38 @@ public class Overload extends CardImpl {
     @Override
     public Overload copy() {
         return new Overload(this);
+    }
+}
+
+class OverloadEffect extends OneShotEffect {
+
+    OverloadEffect() {
+        super(Outcome.DestroyPermanent);
+        this.staticText = "Destroy target artifact if its converted mana cost is 2 or less. If {this} was kicked, destroy that artifact if its converted mana cost is 5 or less instead.";
+    }
+
+    OverloadEffect(final OverloadEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OverloadEffect copy() {
+        return new OverloadEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent targetArtifact = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+            if (targetArtifact != null) {
+                int cmc = targetArtifact.getConvertedManaCost();
+                if (cmc <= 2 || (KickedCondition.instance.apply(game, source) && cmc <= 5)) {
+                    targetArtifact.destroy(source.getSourceId(), game, false);
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }

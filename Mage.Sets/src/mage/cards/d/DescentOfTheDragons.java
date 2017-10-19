@@ -72,7 +72,7 @@ class DescentOfTheDragonsEffect extends OneShotEffect {
 
     public DescentOfTheDragonsEffect() {
         super(Outcome.Benefit);
-        staticText = "Destroy any number of target creatures.  For each creature destroyed this way, its controller creates a 4/4 red Dragon creature token with flying";
+        staticText = "Destroy any number of target creatures. For each creature destroyed this way, its controller creates a 4/4 red Dragon creature token with flying";
     }
 
     public DescentOfTheDragonsEffect(final DescentOfTheDragonsEffect effect) {

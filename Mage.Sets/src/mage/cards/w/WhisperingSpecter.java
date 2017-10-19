@@ -38,6 +38,7 @@ import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -51,7 +52,7 @@ public class WhisperingSpecter extends CardImpl {
 
     public WhisperingSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Specter");
+        this.subtype.add(SubType.SPECTER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

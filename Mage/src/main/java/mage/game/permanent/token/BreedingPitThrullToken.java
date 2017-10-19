@@ -29,6 +29,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -39,7 +40,7 @@ public class BreedingPitThrullToken extends Token {
     public BreedingPitThrullToken() {
         super("Thrull", "0/1 black Thrull creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Thrull");
+        subtype.add(SubType.THRULL);
         color.setBlack(true);
         power = new MageInt(0);
         toughness = new MageInt(1);

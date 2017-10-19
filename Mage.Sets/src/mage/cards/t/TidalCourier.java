@@ -58,7 +58,7 @@ public class TidalCourier extends CardImpl {
 
     public TidalCourier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add("Merfolk");
+        this.subtype.add(SubType.MERFOLK);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

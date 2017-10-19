@@ -34,6 +34,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class WildCantor extends CardImpl {
 
     public WildCantor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}");
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.DRUID);
 
 
         this.power = new MageInt(1);

@@ -37,6 +37,7 @@ import mage.abilities.keyword.BountyAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -48,8 +49,8 @@ public class RumorMonger extends CardImpl {
 
     public RumorMonger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}{G}");
-        this.subtype.add("Arcona");
-        this.subtype.add("Hunter");
+        this.subtype.add(SubType.ARCONA);
+        this.subtype.add(SubType.HUNTER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

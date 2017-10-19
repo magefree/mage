@@ -40,6 +40,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,7 +53,7 @@ public class SpikeHatcher extends CardImpl {
 
     public SpikeHatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}");
-        this.subtype.add("Spike");
+        this.subtype.add(SubType.SPIKE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

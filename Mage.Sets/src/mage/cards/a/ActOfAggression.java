@@ -54,12 +54,11 @@ public class ActOfAggression extends CardImpl {
     }
 
     public ActOfAggression(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R/P}{R/P}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R/P}{R/P}");
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn."));
     }
 
     public ActOfAggression(final ActOfAggression card) {

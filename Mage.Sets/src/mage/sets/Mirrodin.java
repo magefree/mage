@@ -5,6 +5,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public class Mirrodin extends ExpansionSet {
+
     private static final Mirrodin instance = new Mirrodin();
 
     public static Mirrodin getInstance() {
@@ -95,6 +96,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 305, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 306, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forge Armor", 92, Rarity.UNCOMMON, mage.cards.f.ForgeArmor.class));
+        cards.add(new SetCardInfo("Fractured Loyalty", 93, Rarity.UNCOMMON, mage.cards.f.FracturedLoyalty.class));
         cards.add(new SetCardInfo("Frogmite", 172, Rarity.COMMON, mage.cards.f.Frogmite.class));
         cards.add(new SetCardInfo("Galvanic Key", 173, Rarity.COMMON, mage.cards.g.GalvanicKey.class));
         cards.add(new SetCardInfo("Gate to the Aether", 174, Rarity.RARE, mage.cards.g.GateToTheAether.class));
@@ -160,6 +162,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Mesmeric Orb", 204, Rarity.RARE, mage.cards.m.MesmericOrb.class));
         cards.add(new SetCardInfo("Mind's Eye", 205, Rarity.RARE, mage.cards.m.MindsEye.class));
         cards.add(new SetCardInfo("Mindslaver", 206, Rarity.RARE, mage.cards.m.Mindslaver.class));
+        cards.add(new SetCardInfo("Mindstorm Crown", 207, Rarity.UNCOMMON, mage.cards.m.MindstormCrown.class));
         cards.add(new SetCardInfo("Molder Slug", 125, Rarity.RARE, mage.cards.m.MolderSlug.class));
         cards.add(new SetCardInfo("Molten Rain", 101, Rarity.COMMON, mage.cards.m.MoltenRain.class));
         cards.add(new SetCardInfo("Moriok Scavenger", 68, Rarity.COMMON, mage.cards.m.MoriokScavenger.class));
@@ -245,7 +248,9 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Solemn Simulacrum", 245, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Somber Hoverguard", 51, Rarity.COMMON, mage.cards.s.SomberHoverguard.class));
         cards.add(new SetCardInfo("Soul Foundry", 246, Rarity.RARE, mage.cards.s.SoulFoundry.class));
+        cards.add(new SetCardInfo("Soul Nova", 25, Rarity.UNCOMMON, mage.cards.s.SoulNova.class));
         cards.add(new SetCardInfo("Spellweaver Helix", 247, Rarity.RARE, mage.cards.s.SpellweaverHelix.class));
+        cards.add(new SetCardInfo("Sphere of Purity", 26, Rarity.COMMON, mage.cards.s.SphereOfPurity.class));
         cards.add(new SetCardInfo("Spikeshot Goblin", 108, Rarity.COMMON, mage.cards.s.SpikeshotGoblin.class));
         cards.add(new SetCardInfo("Spoils of the Vault", 78, Rarity.RARE, mage.cards.s.SpoilsOfTheVault.class));
         cards.add(new SetCardInfo("Stalking Stones", 284, Rarity.UNCOMMON, mage.cards.s.StalkingStones.class));

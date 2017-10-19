@@ -34,6 +34,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -52,7 +53,7 @@ public class HowlingWolf extends CardImpl {
 
     public HowlingWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.WOLF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

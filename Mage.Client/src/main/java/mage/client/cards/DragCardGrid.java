@@ -70,7 +70,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         if (card.isSelected()) {
                             stack.set(i, null);
                             removeCardView(card);
-                            eventSource.removeSpecificCard(card, "remove-specific-card");
+                            eventSource.fireEvent(card, ClientEventType.REMOVE_SPECIFIC_CARD);
                         }
                     }
                 }
@@ -326,7 +326,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             for (CardView card : cards) {
                 card.setSelected(true);
                 addCardView(card, false);
-                eventSource.addSpecificCard(card, "add-specific-card");
+                eventSource.fireEvent(card, ClientEventType.ADD_SPECIFIC_CARD);
             }
             layoutGrid();
             cardContent.repaint();
@@ -381,7 +381,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 for (int i = 0; i < stack.size(); ++i) {
                     CardView card = stack.get(i);
                     if (card.isSelected()) {
-                        eventSource.removeSpecificCard(card, "remove-specific-card");
+                        eventSource.fireEvent(card, ClientEventType.REMOVE_SPECIFIC_CARD);
                         stack.set(i, null);
                         removeCardView(card);
                     }
@@ -1497,7 +1497,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                             if (acard.getName().equals(card.getName())) {
                                 CardView pimpedCard = new CardView(acard);
                                 addCardView(pimpedCard, false);
-                                eventSource.addSpecificCard(pimpedCard, "add-specific-card");
+                                eventSource.fireEvent(pimpedCard, ClientEventType.ADD_SPECIFIC_CARD);
                                 pimpedCards.put(pimpedCard, 1);
                                 didModify = true;
                             }
@@ -1748,9 +1748,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     if (e.getClickCount() == 1) {
                         cardClicked(card, e);
                     } else if (e.isAltDown()) {
-                        eventSource.altDoubleClick(card, "alt-double-click");
+                        eventSource.fireEvent(card, ClientEventType.ALT_DOUBLE_CLICK);
                     } else {
-                        eventSource.doubleClick(card, "double-click");
+                        eventSource.fireEvent(card, ClientEventType.DOUBLE_CLICK);
                     }
                 }
             }
@@ -1776,7 +1776,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         if (duplicated) {
             sortIntoGrid(card);
-            eventSource.addSpecificCard(card, "add-specific-card");
+            eventSource.fireEvent(card, ClientEventType.ADD_SPECIFIC_CARD);
             // Update layout
             layoutGrid();
             // Update draw

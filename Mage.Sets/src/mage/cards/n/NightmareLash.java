@@ -54,7 +54,7 @@ public class NightmareLash extends CardImpl {
 
     public NightmareLash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 for each Swamp you control.
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);

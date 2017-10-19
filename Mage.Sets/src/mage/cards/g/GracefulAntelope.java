@@ -50,7 +50,7 @@ public class GracefulAntelope extends CardImpl {
 
     public GracefulAntelope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
-        this.subtype.add("Antelope");
+        this.subtype.add(SubType.ANTELOPE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);

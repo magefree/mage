@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
@@ -52,7 +53,7 @@ public class DeepglowSkate extends CardImpl {
     public DeepglowSkate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
 
-        this.subtype.add("Fish");
+        this.subtype.add(SubType.FISH);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

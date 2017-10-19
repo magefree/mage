@@ -56,9 +56,9 @@ public class OnduCleric extends CardImpl {
 
     public OnduCleric(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Cleric");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.CLERIC);
+        this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

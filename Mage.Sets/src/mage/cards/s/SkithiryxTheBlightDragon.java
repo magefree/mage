@@ -40,6 +40,7 @@ import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -53,8 +54,8 @@ public class SkithiryxTheBlightDragon extends CardImpl {
     public SkithiryxTheBlightDragon (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dragon");
-        this.subtype.add("Skeleton");
+        this.subtype.add(SubType.DRAGON);
+        this.subtype.add(SubType.SKELETON);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

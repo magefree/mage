@@ -51,8 +51,8 @@ public class Smokebraider extends CardImpl {
 
     public Smokebraider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

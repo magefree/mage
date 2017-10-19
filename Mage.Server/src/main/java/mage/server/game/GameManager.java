@@ -24,13 +24,17 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.server.game;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
@@ -46,10 +50,17 @@ public enum GameManager {
     instance;
 
     private final ConcurrentHashMap<UUID, GameController> gameControllers = new ConcurrentHashMap<>();
+    private final ReadWriteLock gameControllersLock = new ReentrantReadWriteLock();
 
     public UUID createGameSession(Game game, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId, GameOptions gameOptions) {
         GameController gameController = new GameController(game, userPlayerMap, tableId, choosingPlayerId, gameOptions);
-        gameControllers.put(game.getId(), gameController);
+        final Lock w = gameControllersLock.writeLock();
+        w.lock();
+        try {
+            gameControllers.put(game.getId(), gameController);
+        } finally {
+            w.unlock();
+        }
         return gameController.getSessionId();
     }
 
@@ -109,10 +120,10 @@ public enum GameManager {
             gameController.quitMatch(userId);
         }
     }
-   
+
     public void sendPlayerAction(PlayerAction playerAction, UUID gameId, UUID userId, Object data) {
         GameController gameController = gameControllers.get(gameId);
-        if (gameController != null) {        
+        if (gameController != null) {
             gameController.sendPlayerAction(playerAction, userId, data);
         }
     }
@@ -151,7 +162,13 @@ public enum GameManager {
         GameController gameController = gameControllers.get(gameId);
         if (gameController != null) {
             gameController.cleanUp();
-            gameControllers.remove(gameId);
+            final Lock w = gameControllersLock.writeLock();
+            w.lock();
+            try {
+                gameControllers.remove(gameId);
+            } finally {
+                w.unlock();
+            }
         }
     }
 
@@ -174,8 +191,16 @@ public enum GameManager {
     public int getNumberActiveGames() {
         return gameControllers.size();
     }
-    
-    public ConcurrentHashMap<UUID, GameController> getGameController() {
-        return gameControllers;
+
+    public Map<UUID, GameController> getGameController() {
+        Map<UUID, GameController> newControllers = new HashMap<>();
+        final Lock r = gameControllersLock.readLock();
+        r.lock();
+        try {
+            newControllers.putAll(gameControllers);
+        } finally {
+            r.unlock();
+        }
+        return newControllers;
     }
 }

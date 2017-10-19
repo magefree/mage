@@ -35,6 +35,7 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,7 +54,7 @@ public class CyclopsTyrant extends CardImpl {
 
     public CyclopsTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        this.subtype.add("Cyclops");
+        this.subtype.add(SubType.CYCLOPS);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

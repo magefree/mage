@@ -62,7 +62,7 @@ public class HashepOasis extends CardImpl {
     public HashepOasis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         
-        this.subtype.add("Desert");
+        this.subtype.add(SubType.DESERT);
 
         // {t}: Add {C} to your mana pool.
         addAbility(new ColorlessManaAbility());

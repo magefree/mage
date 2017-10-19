@@ -35,6 +35,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class GoblinOutlander extends CardImpl {
 
     public GoblinOutlander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

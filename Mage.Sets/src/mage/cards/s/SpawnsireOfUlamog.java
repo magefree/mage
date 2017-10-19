@@ -58,7 +58,7 @@ public class SpawnsireOfUlamog extends CardImpl {
     
     public SpawnsireOfUlamog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{10}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(11);

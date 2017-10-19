@@ -37,6 +37,7 @@ import mage.abilities.keyword.EmergeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.target.TargetPermanent;
 
@@ -48,8 +49,8 @@ public class LashweedLurker extends CardImpl {
 
     public LashweedLurker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

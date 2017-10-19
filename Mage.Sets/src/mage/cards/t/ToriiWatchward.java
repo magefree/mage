@@ -34,6 +34,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class ToriiWatchward extends CardImpl {
 
     public ToriiWatchward(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

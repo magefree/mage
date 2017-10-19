@@ -347,7 +347,7 @@ public class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Power Plant", 329, Rarity.COMMON, mage.cards.u.UrzasPowerPlant.class));
         cards.add(new SetCardInfo("Urza's Tower", 330, Rarity.COMMON, mage.cards.u.UrzasTower.class));
         cards.add(new SetCardInfo("Vampiric Spirit", 170, Rarity.RARE, mage.cards.v.VampiricSpirit.class));
-        cards.add(new SetCardInfo("Venerable Monk", 55, Rarity.COMMON, mage.cards.v.VenerableMonk.class));        
+        cards.add(new SetCardInfo("Venerable Monk", 55, Rarity.COMMON, mage.cards.v.VenerableMonk.class));
         cards.add(new SetCardInfo("Verduran Enchantress", 285, Rarity.RARE, mage.cards.v.VerduranEnchantress.class));
         cards.add(new SetCardInfo("Vernal Bloom", 286, Rarity.RARE, mage.cards.v.VernalBloom.class));
         cards.add(new SetCardInfo("Viashino Sandstalker", 230, Rarity.UNCOMMON, mage.cards.v.ViashinoSandstalker.class));

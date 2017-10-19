@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -56,7 +57,7 @@ public class JaceTheMindSculptor extends CardImpl {
     public JaceTheMindSculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{U}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Jace");
+        this.subtype.add(SubType.JACE);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

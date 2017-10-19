@@ -57,7 +57,7 @@ public class SerpentOfTheEndlessSea extends CardImpl {
 
     public SerpentOfTheEndlessSea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Serpent");
+        this.subtype.add(SubType.SERPENT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

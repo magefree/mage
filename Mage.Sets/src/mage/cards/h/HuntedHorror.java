@@ -36,6 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.HuntedCentaurToken;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
@@ -48,7 +49,7 @@ public class HuntedHorror extends CardImpl {
 
     public HuntedHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

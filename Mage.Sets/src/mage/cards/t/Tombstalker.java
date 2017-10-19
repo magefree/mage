@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class Tombstalker extends CardImpl {
 
     public Tombstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

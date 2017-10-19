@@ -45,8 +45,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
 public class ArrowStorm extends CardImpl {
 
     public ArrowStorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // Arrow Storm deals 4 damage to target creature or player.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
@@ -58,7 +57,7 @@ public class ArrowStorm extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(5, false),
                 RaidCondition.instance,
-                "<br/><br/><i>Raid</i> - If you attacked with a creature this turn, instead {this} deals 5 damage to that creature or player and the damage can't be prevented"));
+                "<br/><br/><i>Raid</i> &mdash; If you attacked with a creature this turn, instead {this} deals 5 damage to that creature or player and the damage can't be prevented"));
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
     }
 

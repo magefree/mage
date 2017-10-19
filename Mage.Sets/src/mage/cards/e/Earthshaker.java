@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -54,7 +55,7 @@ public class Earthshaker extends CardImpl {
 
     public Earthshaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

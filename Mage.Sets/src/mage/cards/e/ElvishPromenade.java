@@ -52,7 +52,7 @@ public class ElvishPromenade extends CardImpl {
 
     public ElvishPromenade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{G}");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ELF);
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), new PermanentsOnBattlefieldCount(filter)));
     }

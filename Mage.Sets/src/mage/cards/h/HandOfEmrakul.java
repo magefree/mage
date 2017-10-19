@@ -35,6 +35,7 @@ import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -53,7 +54,7 @@ public class HandOfEmrakul extends CardImpl {
 
     public HandOfEmrakul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -48,7 +49,7 @@ public class WeldfastMonitor extends CardImpl {
 
     public WeldfastMonitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Lizard");
+        this.subtype.add(SubType.LIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

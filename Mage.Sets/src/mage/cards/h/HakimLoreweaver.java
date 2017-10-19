@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,18 +40,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
+import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -60,21 +55,28 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
  *
- * @author jeffwadsworth
+ * @author jeffwadsworth, TheElk801
  */
 public class HakimLoreweaver extends CardImpl {
 
-    private final static String rule = "Return target Aura card from your graveyard to the battlefield attached to Hakim, Loreweaver. Activate this ability only during your upkeep and only if Hakim isn't enchanted.";
-    UUID originalId;
+    private static final FilterCard filter = new FilterCard("target Aura card from your graveyard");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(new OwnerPredicate(TargetController.YOU));
+    }
 
     public HakimLoreweaver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
@@ -82,9 +84,12 @@ public class HakimLoreweaver extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {U}{U}: Return target Aura card from your graveyard to the battlefield attached to Hakim, Loreweaver. Activate this ability only during your upkeep and only if Hakim isn't enchanted.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new HakimLoreweaverEffect(), new ManaCostsImpl("{U}{U}"), new HakimLoreweaverCondition(), rule);
-        ability.addTarget(new TargetCardInYourGraveyard());
-        originalId = ability.getOriginalId();
+        Ability ability = new ConditionalActivatedAbility(
+                Zone.BATTLEFIELD,
+                new HakimLoreweaverEffect(),
+                new ManaCostsImpl("{U}{U}"),
+                new HakimLoreweaverCondition());
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 
         // {U}{U}, {tap}: Destroy all Auras attached to Hakim.
@@ -100,26 +105,8 @@ public class HakimLoreweaver extends CardImpl {
 
     }
 
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            Player controller = game.getPlayer(ability.getControllerId());
-            if (controller != null) {
-                ability.getTargets().clear();
-                FilterCard filterAuraCard = new FilterCard("target Aura card from your graveyard");
-                filterAuraCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
-                filterAuraCard.add(new SubtypePredicate(SubType.AURA));
-                filterAuraCard.add(new AuraCardCanAttachToPermanentId(ability.getSourceId()));
-                TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filterAuraCard);
-                ability.addTarget(target);
-            }
-        }
-
-    }
-
     public HakimLoreweaver(final HakimLoreweaver card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override
@@ -132,7 +119,7 @@ class HakimLoreweaverEffect extends OneShotEffect {
 
     public HakimLoreweaverEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Return target Aura card from your graveyard to the battlefield attached to {this}. Activate this ability only during your upkeep and only if Hakim isn't enchanted";
+        this.staticText = "Return target Aura card from your graveyard to the battlefield attached to {this}.";
     }
 
     public HakimLoreweaverEffect(final HakimLoreweaverEffect effect) {
@@ -152,7 +139,8 @@ class HakimLoreweaverEffect extends OneShotEffect {
         if (controller != null
                 && hakimLoreweaver != null
                 && controller.canRespond()
-                && targetAuraCard != null) {
+                && targetAuraCard != null
+                && new AuraCardCanAttachToPermanentId(hakimLoreweaver.getId()).apply(targetAuraCard, game)) {
             Target target = targetAuraCard.getSpellAbility().getTargets().get(0);
             if (target != null) {
                 game.getState().setValue("attachTo:" + targetAuraCard.getId(), hakimLoreweaver);
@@ -186,5 +174,10 @@ class HakimLoreweaverCondition implements Condition {
                     && game.getActivePlayerId().equals(source.getControllerId());
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "only during your upkeep and only if {this} isn't enchanted";
     }
 }

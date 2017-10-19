@@ -33,6 +33,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class WoollyThoctar extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");
 
 
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
     }

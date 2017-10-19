@@ -45,11 +45,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class Threaten extends CardImpl {
 
     public Threaten(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap target creature"));
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn).setText("and gain control of it until end of turn"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

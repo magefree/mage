@@ -59,8 +59,8 @@ public class ShamanOfThePack extends CardImpl {
 
     public ShamanOfThePack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

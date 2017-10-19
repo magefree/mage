@@ -37,6 +37,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -48,8 +49,8 @@ public class SalvageSquad extends CardImpl {
 
     public SalvageSquad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
-        this.subtype.add("Jawa");
-        this.subtype.add("Artificier");
+        this.subtype.add(SubType.JAWA);
+        this.subtype.add(SubType.ARTIFICIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

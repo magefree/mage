@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -39,7 +40,7 @@ public class MarathWillOfTheWildElementalToken extends Token {
     public MarathWillOfTheWildElementalToken() {
         super("Elemental", "X/X green Elemental creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         color.setGreen(true);
         power = new MageInt(0);
         toughness = new MageInt(0);

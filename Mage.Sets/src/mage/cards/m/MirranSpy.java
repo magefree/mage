@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterArtifactSpell;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,7 +47,7 @@ public class MirranSpy extends CardImpl {
     
     public MirranSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Drone");
+        this.subtype.add(SubType.DRONE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

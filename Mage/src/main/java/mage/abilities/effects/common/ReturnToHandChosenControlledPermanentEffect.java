@@ -66,7 +66,12 @@ public class ReturnToHandChosenControlledPermanentEffect extends ReturnToHandCho
     protected String getText() {
         StringBuilder sb = new StringBuilder("return ");
         if (!filter.getMessage().startsWith("another")) {
-            sb.append(CardUtil.numberToText(number, "a"));
+            if(filter.getMessage().startsWith("a")){
+                sb.append("an");
+            }
+            else {
+                sb.append(CardUtil.numberToText(number, "a"));
+            }
         }
         sb.append(' ').append(filter.getMessage());
         if (number > 1) {

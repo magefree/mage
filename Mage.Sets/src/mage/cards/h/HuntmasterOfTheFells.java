@@ -55,8 +55,8 @@ public class HuntmasterOfTheFells extends CardImpl {
 
     public HuntmasterOfTheFells(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WEREWOLF);
 
         this.transformable = true;
         this.secondSideCardClazz = RavagerOfTheFells.class;

@@ -32,13 +32,14 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -57,7 +58,7 @@ public class VolatileRig extends CardImpl {
 
     public VolatileRig(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.CONSTRUCT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -66,7 +67,7 @@ public class VolatileRig extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Volatile Rig attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
 
         // Whenever Volatile Rig is dealt damage, flip a coin. If you lose the flip, sacrifice Volatile Rig.
         this.addAbility(new VolatileRigTriggeredAbility());

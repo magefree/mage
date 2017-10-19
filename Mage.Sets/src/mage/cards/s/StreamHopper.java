@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -47,7 +48,7 @@ public class StreamHopper extends CardImpl {
 
     public StreamHopper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/R}");
-        this.subtype.add("Goblin");
+        this.subtype.add(SubType.GOBLIN);
 
 
         this.power = new MageInt(1);

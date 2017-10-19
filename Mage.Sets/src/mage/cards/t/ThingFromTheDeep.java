@@ -55,7 +55,7 @@ public class ThingFromTheDeep extends CardImpl {
 
     public ThingFromTheDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}{U}");
-        this.subtype.add("Leviathan");
+        this.subtype.add(SubType.LEVIATHAN);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
 

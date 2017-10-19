@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class GrovetenderDruidsPlantToken extends Token {
         super("Plant", "1/1 green Plant creature");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Plant");
+        subtype.add(SubType.PLANT);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.setOriginalExpansionSetCode("BFZ");

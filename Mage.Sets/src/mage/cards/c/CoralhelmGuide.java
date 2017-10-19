@@ -36,6 +36,7 @@ import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,9 +49,9 @@ public class CoralhelmGuide extends CardImpl {
 
     public CoralhelmGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Scout");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SCOUT);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

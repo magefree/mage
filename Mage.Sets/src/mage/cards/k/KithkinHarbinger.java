@@ -53,8 +53,8 @@ public class KithkinHarbinger extends CardImpl {
 
     public KithkinHarbinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.KITHKIN);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

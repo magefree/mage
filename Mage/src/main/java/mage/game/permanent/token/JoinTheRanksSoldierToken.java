@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,8 +42,8 @@ public class JoinTheRanksSoldierToken extends Token {
         this.setOriginalExpansionSetCode("WWK");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Soldier");
-        subtype.add("Ally");
+        subtype.add(SubType.SOLDIER);
+        subtype.add(SubType.ALLY);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

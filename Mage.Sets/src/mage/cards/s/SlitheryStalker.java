@@ -39,6 +39,7 @@ import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,8 +66,8 @@ public class SlitheryStalker extends CardImpl {
 
     public SlitheryStalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Nightmare");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.NIGHTMARE);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

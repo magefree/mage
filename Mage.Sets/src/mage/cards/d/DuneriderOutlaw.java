@@ -39,6 +39,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.events.GameEvent;
 
@@ -52,9 +53,9 @@ public class DuneriderOutlaw extends CardImpl {
 
     public DuneriderOutlaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rebel");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.REBEL);
+        this.subtype.add(SubType.ROGUE);
 
         this.color.setBlack(true);
         this.power = new MageInt(1);

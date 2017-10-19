@@ -49,8 +49,8 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  * @author fireshoes
  */
 public class StormwingDragon extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("each other Dragon creature you control");
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Dragon creature you control");
 
     static {
         filter.add(new AnotherPredicate());
@@ -58,20 +58,20 @@ public class StormwingDragon extends CardImpl {
     }
 
     public StormwingDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        this.subtype.add("Dragon");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
-        
+
         // Megamorph {5}{R}{R}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{R}{R}"), true));
-        
+
         // When Stormwing Dragon is turned face up, put a +1/+1 counter on each other Dragon creature you control.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false, false));
     }

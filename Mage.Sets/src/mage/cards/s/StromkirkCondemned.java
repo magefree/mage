@@ -54,8 +54,8 @@ public class StromkirkCondemned extends CardImpl {
 
     public StromkirkCondemned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

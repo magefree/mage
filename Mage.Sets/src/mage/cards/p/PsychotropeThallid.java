@@ -63,7 +63,7 @@ public class PsychotropeThallid extends CardImpl {
 
     public PsychotropeThallid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Fungus");
+        this.subtype.add(SubType.FUNGUS);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -55,7 +55,7 @@ public class FelhideBrawler extends CardImpl {
 
     public FelhideBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.subtype.add("Minotaur");
+        this.subtype.add(SubType.MINOTAUR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

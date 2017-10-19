@@ -57,11 +57,13 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Active Volcano", 43, Rarity.COMMON, mage.cards.a.ActiveVolcano.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 58, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
         cards.add(new SetCardInfo("Aladdin", 44, Rarity.RARE, mage.cards.a.Aladdin.class));
+        cards.add(new SetCardInfo("Angelic Voices", 59, Rarity.RARE, mage.cards.a.AngelicVoices.class));
         cards.add(new SetCardInfo("Arcades Sabboth", 106, Rarity.RARE, mage.cards.a.ArcadesSabboth.class));
         cards.add(new SetCardInfo("Arena of the Ancients", 71, Rarity.RARE, mage.cards.a.ArenaOfTheAncients.class));
         cards.add(new SetCardInfo("Argothian Pixies", 29, Rarity.COMMON, mage.cards.a.ArgothianPixies.class));
         cards.add(new SetCardInfo("Ashnod's Altar", 72, Rarity.COMMON, mage.cards.a.AshnodsAltar.class));
         cards.add(new SetCardInfo("Ashnod's Transmogrant", 73, Rarity.COMMON, mage.cards.a.AshnodsTransmogrant.class));
+        cards.add(new SetCardInfo("Axelrod Gunnarson", 107, Rarity.RARE, mage.cards.a.AxelrodGunnarson.class));
         cards.add(new SetCardInfo("Azure Drake", 15, Rarity.UNCOMMON, mage.cards.a.AzureDrake.class));
         cards.add(new SetCardInfo("Barl's Cage", 74, Rarity.RARE, mage.cards.b.BarlsCage.class));
         cards.add(new SetCardInfo("Beasts of Bogardan", 45, Rarity.UNCOMMON, mage.cards.b.BeastsOfBogardan.class));
@@ -96,11 +98,13 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Hasran Ogress", 6, Rarity.COMMON, mage.cards.h.HasranOgress.class));
         cards.add(new SetCardInfo("Hell's Caretaker", 7, Rarity.RARE, mage.cards.h.HellsCaretaker.class));
         cards.add(new SetCardInfo("Horn of Deafening", 80, Rarity.RARE, mage.cards.h.HornOfDeafening.class));
+        cards.add(new SetCardInfo("Indestructible Aura", 63, Rarity.COMMON, mage.cards.i.IndestructibleAura.class));
         cards.add(new SetCardInfo("Ivory Guardians", 64, Rarity.UNCOMMON, mage.cards.i.IvoryGuardians.class));
         cards.add(new SetCardInfo("Jalum Tome", 81, Rarity.RARE, mage.cards.j.JalumTome.class));
         cards.add(new SetCardInfo("Juxtapose", 22, Rarity.RARE, mage.cards.j.Juxtapose.class));
         cards.add(new SetCardInfo("Keepers of the Faith", 65, Rarity.COMMON, mage.cards.k.KeepersOfTheFaith.class));
         cards.add(new SetCardInfo("Kei Takahashi", 113, Rarity.UNCOMMON, mage.cards.k.KeiTakahashi.class));
+        cards.add(new SetCardInfo("Land's Edge", 52, Rarity.RARE, mage.cards.l.LandsEdge.class));
         cards.add(new SetCardInfo("Living Armor", 83, Rarity.COMMON, mage.cards.l.LivingArmor.class));
         cards.add(new SetCardInfo("Marhault Elsdragon", 114, Rarity.UNCOMMON, mage.cards.m.MarhaultElsdragon.class));
         cards.add(new SetCardInfo("Metamorphosis", 38, Rarity.COMMON, mage.cards.m.Metamorphosis.class));

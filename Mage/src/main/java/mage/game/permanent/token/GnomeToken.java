@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class GnomeToken extends Token {
         super("Gnome", "1/1 colorless Gnome artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Gnome");
+        subtype.add(SubType.GNOME);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

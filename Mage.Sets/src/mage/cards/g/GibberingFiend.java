@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -49,7 +50,7 @@ public class GibberingFiend extends CardImpl {
 
     public GibberingFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Devil");
+        this.subtype.add(SubType.DEVIL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

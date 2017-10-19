@@ -37,6 +37,7 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.HydraBroodmasterToken;
@@ -50,7 +51,7 @@ public class HydraBroodmaster extends CardImpl {
 
     public HydraBroodmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

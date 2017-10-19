@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.util.RandomUtil;
 
@@ -46,7 +47,7 @@ public class MetallurgicSummoningsConstructToken extends Token {
         setTokenType(RandomUtil.nextInt(2) + 1);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Construct");
+        subtype.add(SubType.CONSTRUCT);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
     }

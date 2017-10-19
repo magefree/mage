@@ -38,6 +38,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetNonBasicLandPermanent;
 
@@ -48,7 +49,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
 public class DwarvenBlastminer extends CardImpl {
     public DwarvenBlastminer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Dwarf");
+        this.subtype.add(SubType.DWARF);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

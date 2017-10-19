@@ -31,13 +31,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DestroySourceEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.SubType;
 
 /**
  *
@@ -47,14 +46,16 @@ public class LoyalSentry extends CardImpl {
 
     public LoyalSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // When Loyal Sentry blocks a creature, destroy that creature and Loyal Sentry.
-        this.addAbility(new BlocksTriggeredAbility(new LoyalSentryEffect(), false, true));
+        Ability ability = new BlocksTriggeredAbility(new DestroyTargetEffect().setText("destroy that creature"), false, true, true);
+        ability.addEffect(new DestroySourceEffect().setText("and {this}"));
+        this.addAbility(ability);
     }
 
     public LoyalSentry(final LoyalSentry card) {
@@ -65,35 +66,4 @@ public class LoyalSentry extends CardImpl {
     public LoyalSentry copy() {
         return new LoyalSentry(this);
     }
-}
-
-class LoyalSentryEffect extends OneShotEffect {
-
-    LoyalSentryEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "destroy that creature and {this}";
-    }
-
-    LoyalSentryEffect(LoyalSentryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (p != null) {
-            p.destroy(source.getSourceId(), game, false);
-        }
-        Permanent s = game.getPermanent(source.getSourceId());
-        if (s != null) {
-            s.destroy(source.getSourceId(), game, false);
-        }
-        return true;
-    }
-
-    @Override
-    public LoyalSentryEffect copy() {
-        return new LoyalSentryEffect(this);
-    }
-
 }

@@ -36,6 +36,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,7 +46,7 @@ public class UninvitedGeist extends CardImpl {
 
     public UninvitedGeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

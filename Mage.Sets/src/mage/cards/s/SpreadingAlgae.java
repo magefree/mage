@@ -58,7 +58,7 @@ public class SpreadingAlgae extends CardImpl {
 
     public SpreadingAlgae(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant Swamp
         TargetPermanent auraTarget = new TargetPermanent(filter);

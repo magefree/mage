@@ -38,6 +38,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -48,7 +49,7 @@ public class WickerWarcrawler extends CardImpl {
 
     public WickerWarcrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
-        this.subtype.add("Scarecrow");
+        this.subtype.add(SubType.SCARECROW);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

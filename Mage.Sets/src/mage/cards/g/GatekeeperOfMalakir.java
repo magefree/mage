@@ -38,6 +38,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
@@ -57,8 +58,8 @@ public class GatekeeperOfMalakir extends CardImpl {
 
     public GatekeeperOfMalakir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

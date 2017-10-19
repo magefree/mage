@@ -105,6 +105,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Gathan Raiders", 99, Rarity.COMMON, mage.cards.g.GathanRaiders.class));
         cards.add(new SetCardInfo("Ghostfire", 115, Rarity.COMMON, mage.cards.g.Ghostfire.class));
         cards.add(new SetCardInfo("Gibbering Descent", 66, Rarity.RARE, mage.cards.g.GibberingDescent.class));
+        cards.add(new SetCardInfo("Gift of Granite", 7, Rarity.COMMON, mage.cards.g.GiftOfGranite.class));
         cards.add(new SetCardInfo("Glittering Wish", 156, Rarity.RARE, mage.cards.g.GlitteringWish.class));
         cards.add(new SetCardInfo("Goldmeadow Lookout", 22, Rarity.UNCOMMON, mage.cards.g.GoldmeadowLookout.class));
         cards.add(new SetCardInfo("Graven Cairns", 175, Rarity.RARE, mage.cards.g.GravenCairns.class));
@@ -118,6 +119,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Homing Sliver", 118, Rarity.COMMON, mage.cards.h.HomingSliver.class));
         cards.add(new SetCardInfo("Horizon Canopy", 177, Rarity.RARE, mage.cards.h.HorizonCanopy.class));
         cards.add(new SetCardInfo("Ichor Slick", 68, Rarity.COMMON, mage.cards.i.IchorSlick.class));
+        cards.add(new SetCardInfo("Imperial Mask", 23, Rarity.RARE, mage.cards.i.ImperialMask.class));
         cards.add(new SetCardInfo("Imperiosaur", 145, Rarity.UNCOMMON, mage.cards.i.Imperiosaur.class));
         cards.add(new SetCardInfo("Infiltrator il-Kor", 37, Rarity.COMMON, mage.cards.i.InfiltratorIlKor.class));
         cards.add(new SetCardInfo("Intervention Pact", 8, Rarity.RARE, mage.cards.i.InterventionPact.class));

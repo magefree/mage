@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -53,7 +54,7 @@ public class Leashling extends CardImpl {
 
     public Leashling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.HOUND);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

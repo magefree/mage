@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,7 +42,7 @@ public class PatagiaViperSnakeToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setBlue(true);
-        subtype.add("Snake");
+        subtype.add(SubType.SNAKE);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

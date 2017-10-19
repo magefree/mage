@@ -40,6 +40,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -58,8 +59,8 @@ public class InkEyesServantOfOni extends CardImpl {
 
     public InkEyesServantOfOni(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        this.subtype.add("Rat");
-        this.subtype.add("Ninja");
+        this.subtype.add(SubType.RAT);
+        this.subtype.add(SubType.NINJA);
         addSuperType(SuperType.LEGENDARY);
 
         this.power = new MageInt(5);

@@ -39,6 +39,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -50,8 +51,8 @@ public class DwarvenStrikeForce extends CardImpl {
 
     public DwarvenStrikeForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add("Dwarf");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.BERSERKER);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

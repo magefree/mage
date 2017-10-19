@@ -55,8 +55,8 @@ public class ElvishEulogist extends CardImpl {
 
     public ElvishEulogist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

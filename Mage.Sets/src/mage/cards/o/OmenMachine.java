@@ -53,7 +53,7 @@ import mage.players.Player;
 public class OmenMachine extends CardImpl {
 
     public OmenMachine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // Players can't draw cards.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmenMachineEffect()));
@@ -126,9 +126,7 @@ class OmenMachineEffect2 extends OneShotEffect {
                 if (card.isLand()) {
                     player.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
-                    if (card.getSpellAbility().canChooseTarget(game)) {
-                        player.cast(card.getSpellAbility(), game, true);
-                    }
+                    player.cast(card.getSpellAbility(), game, true);
                 }
             }
             return true;

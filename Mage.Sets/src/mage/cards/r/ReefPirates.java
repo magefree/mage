@@ -35,6 +35,7 @@ import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class ReefPirates extends CardImpl {
 
     public ReefPirates(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Pirate");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

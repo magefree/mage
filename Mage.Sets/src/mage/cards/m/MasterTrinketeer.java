@@ -60,8 +60,8 @@ public class MasterTrinketeer extends CardImpl {
 
     public MasterTrinketeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Dwarf");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

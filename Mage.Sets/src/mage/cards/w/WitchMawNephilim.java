@@ -40,6 +40,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
@@ -52,7 +53,7 @@ public class WitchMawNephilim extends CardImpl {
 
     public WitchMawNephilim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}{B}");
-        this.subtype.add("Nephilim");
+        this.subtype.add(SubType.NEPHILIM);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

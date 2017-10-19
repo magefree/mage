@@ -61,8 +61,8 @@ public class SteelshaperApprentice extends CardImpl {
 
     public SteelshaperApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

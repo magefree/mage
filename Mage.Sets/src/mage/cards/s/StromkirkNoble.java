@@ -57,7 +57,7 @@ public class StromkirkNoble extends CardImpl {
 
     public StromkirkNoble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

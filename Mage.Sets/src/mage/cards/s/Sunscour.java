@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInHand;
 
@@ -47,18 +47,19 @@ import mage.target.common.TargetCardInHand;
 public class Sunscour extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("two white cards");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public Sunscour(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
 
         // You may exile two white cards from your hand rather than pay Sunscour's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(2, filter))));
 
         // Destroy all creatures.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     public Sunscour(final Sunscour card) {

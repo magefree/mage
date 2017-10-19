@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,8 +56,8 @@ public class SerpentAssassin extends CardImpl {
 
     public SerpentAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Snake");
-        this.subtype.add("Assassin");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

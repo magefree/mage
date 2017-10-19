@@ -35,6 +35,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class SimicSkySwallower extends CardImpl {
 
     public SimicSkySwallower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{U}");
-        this.subtype.add("Leviathan");
+        this.subtype.add(SubType.LEVIATHAN);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

@@ -95,7 +95,7 @@ public class EntersBattlefieldAbility extends StaticAbility {
                 return;
             }
         }
-        super.addEffect(effect); //To change body of generated methods, choose Tools | Templates.
+        super.addEffect(effect);
     }
 
     @Override
@@ -108,6 +108,7 @@ public class EntersBattlefieldAbility extends StaticAbility {
         if (abilityRule != null && !abilityRule.isEmpty()) {
             return abilityRule;
         }
-        return (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s") + " the battlefield " + super.getRule();
+        String superRule = super.getRule();
+        return (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s") + " the battlefield" + (superRule.charAt(0) == ' ' ? "" : " ") + superRule;
     }
 }

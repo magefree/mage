@@ -37,7 +37,6 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-
 public class MastersEditionIV extends ExpansionSet {
 
     private static final MastersEditionIV instance = new MastersEditionIV();
@@ -65,6 +64,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Ali from Cairo", 107, Rarity.RARE, mage.cards.a.AliFromCairo.class));
         cards.add(new SetCardInfo("Alluring Scent", 141, Rarity.COMMON, mage.cards.a.AlluringScent.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 179, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
+        cards.add(new SetCardInfo("Angelic Voices", 3, Rarity.UNCOMMON, mage.cards.a.AngelicVoices.class));
         cards.add(new SetCardInfo("Animate Artifact", 38, Rarity.UNCOMMON, mage.cards.a.AnimateArtifact.class));
         cards.add(new SetCardInfo("Argivian Blacksmith", 4, Rarity.UNCOMMON, mage.cards.a.ArgivianBlacksmith.class));
         cards.add(new SetCardInfo("Argothian Pixies", 142, Rarity.COMMON, mage.cards.a.ArgothianPixies.class));
@@ -88,12 +88,14 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Brass Man", 185, Rarity.COMMON, mage.cards.b.BrassMan.class));
         cards.add(new SetCardInfo("Candelabra of Tawnos", 187, Rarity.RARE, mage.cards.c.CandelabraOfTawnos.class));
         cards.add(new SetCardInfo("Celestial Sword", 188, Rarity.UNCOMMON, mage.cards.c.CelestialSword.class));
+        cards.add(new SetCardInfo("Champion Lancer", 8, Rarity.RARE, mage.cards.c.ChampionLancer.class));
         cards.add(new SetCardInfo("Channel", 145, Rarity.RARE, mage.cards.c.Channel.class));
         cards.add(new SetCardInfo("Citanul Druid", 146, Rarity.COMMON, mage.cards.c.CitanulDruid.class));
         cards.add(new SetCardInfo("City of Brass", 243, Rarity.RARE, mage.cards.c.CityOfBrass.class));
         cards.add(new SetCardInfo("Clay Statue", 189, Rarity.UNCOMMON, mage.cards.c.ClayStatue.class));
         cards.add(new SetCardInfo("Clockwork Avian", 190, Rarity.UNCOMMON, mage.cards.c.ClockworkAvian.class));
         cards.add(new SetCardInfo("Clockwork Gnomes", 191, Rarity.UNCOMMON, mage.cards.c.ClockworkGnomes.class));
+        cards.add(new SetCardInfo("Clockwork Swarm", 192, Rarity.COMMON, mage.cards.c.ClockworkSwarm.class));
         cards.add(new SetCardInfo("Cloud Dragon", 41, Rarity.RARE, mage.cards.c.CloudDragon.class));
         cards.add(new SetCardInfo("Cloud Spirit", 42, Rarity.COMMON, mage.cards.c.CloudSpirit.class));
         cards.add(new SetCardInfo("Colossus of Sardia", 193, Rarity.RARE, mage.cards.c.ColossusOfSardia.class));
@@ -188,6 +190,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Maze of Ith", 246, Rarity.RARE, mage.cards.m.MazeOfIth.class));
         cards.add(new SetCardInfo("Mightstone", 215, Rarity.COMMON, mage.cards.m.Mightstone.class));
         cards.add(new SetCardInfo("Mijae Djinn", 127, Rarity.RARE, mage.cards.m.MijaeDjinn.class));
+        cards.add(new SetCardInfo("Minion of Tevesh Szat", 91, Rarity.RARE, mage.cards.m.MinionOfTeveshSzat.class));
         cards.add(new SetCardInfo("Mishra's Workshop", 247, Rarity.RARE, mage.cards.m.MishrasWorkshop.class));
         cards.add(new SetCardInfo("Mystic Decree", 53, Rarity.UNCOMMON, mage.cards.m.MysticDecree.class));
         cards.add(new SetCardInfo("Naked Singularity", 216, Rarity.RARE, mage.cards.n.NakedSingularity.class));
@@ -224,6 +227,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Sandstorm", 164, Rarity.COMMON, mage.cards.s.Sandstorm.class));
         cards.add(new SetCardInfo("Savannah", 250, Rarity.RARE, mage.cards.s.Savannah.class));
         cards.add(new SetCardInfo("Savannah Lions", 24, Rarity.UNCOMMON, mage.cards.s.SavannahLions.class));
+        cards.add(new SetCardInfo("Scarwood Bandits", 165, Rarity.RARE, mage.cards.s.ScarwoodBandits.class));
         cards.add(new SetCardInfo("Scavenger Folk", 166, Rarity.COMMON, mage.cards.s.ScavengerFolk.class));
         cards.add(new SetCardInfo("Scavenging Ghoul", 95, Rarity.UNCOMMON, mage.cards.s.ScavengingGhoul.class));
         cards.add(new SetCardInfo("Scrubland", 251, Rarity.RARE, mage.cards.s.Scrubland.class));
@@ -238,8 +242,10 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Sinkhole", 97, Rarity.RARE, mage.cards.s.Sinkhole.class));
         cards.add(new SetCardInfo("Sleight of Hand", 62, Rarity.COMMON, mage.cards.s.SleightOfHand.class));
         cards.add(new SetCardInfo("Smoke", 137, Rarity.RARE, mage.cards.s.Smoke.class));
+        cards.add(new SetCardInfo("Soldevi Golem", 228, Rarity.UNCOMMON, mage.cards.s.SoldeviGolem.class));
         cards.add(new SetCardInfo("Soldevi Machinist", 63, Rarity.UNCOMMON, mage.cards.s.SoldeviMachinist.class));
         cards.add(new SetCardInfo("Sol Ring", 227, Rarity.RARE, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Soldevi Golem", 228, Rarity.UNCOMMON, mage.cards.s.SoldeviGolem.class));
         cards.add(new SetCardInfo("Soul Shred", 98, Rarity.COMMON, mage.cards.s.SoulShred.class));
         cards.add(new SetCardInfo("Southern Elephant", 167, Rarity.COMMON, mage.cards.s.SouthernElephant.class));
         cards.add(new SetCardInfo("Spotted Griffin", 28, Rarity.COMMON, mage.cards.s.SpottedGriffin.class));

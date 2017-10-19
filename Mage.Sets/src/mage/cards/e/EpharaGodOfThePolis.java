@@ -55,7 +55,7 @@ public class EpharaGodOfThePolis extends CardImpl {
     public EpharaGodOfThePolis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}{U}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("God");
+        this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);

@@ -67,7 +67,7 @@ public class RhonasTheIndomitable extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("God");
+        this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

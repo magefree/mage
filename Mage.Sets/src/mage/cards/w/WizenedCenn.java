@@ -54,8 +54,8 @@ public class WizenedCenn extends CardImpl {
 
     public WizenedCenn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.KITHKIN);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

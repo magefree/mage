@@ -27,6 +27,7 @@
  */
 package mage.game.permanent;
 
+import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -36,6 +37,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.*;
+import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.*;
@@ -46,6 +48,7 @@ import mage.game.Game;
 import mage.game.GameState;
 import mage.game.ZoneChangeInfo;
 import mage.game.ZonesHandler;
+import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
 import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
@@ -54,8 +57,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -204,6 +205,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.minBlockedBy = 1;
         this.maxBlockedBy = 0;
         this.copy = false;
+        for (TextPart textPart : textParts) {
+            textPart.reset();
+        }
     }
 
     @Override
@@ -504,6 +508,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean isAttacking() {
         return attacking;
+    }
+
+    @Override
+    public boolean isBlocked(Game game) {
+        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+            if (combatGroup.getBlocked() && combatGroup.getAttackers().contains(this.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -926,7 +940,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean cantBeAttachedBy(MageObject source, Game game) {
         for (ProtectionAbility ability : this.getAbilities(game).getProtectionAbilities()) {
-            if (!(source.getSubtype(game).contains(SubType.AURA)
+            if (!(source.hasSubtype(SubType.AURA, game)
                     && !ability.removesAuras())
                     && !source.getId().equals(ability.getAuraIdNotToBeRemoved())
                     && !ability.canTarget(source, game)) {
@@ -1027,15 +1041,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean canAttack(Game game) {
-        return canAttack(null, game);
-    }
-
-    @Override
     public boolean canAttack(UUID defenderId, Game game) {
         if (tapped) {
             return false;
         }
+        return canAttackInPrinciple(defenderId, game);
+    }
+
+    @Override
+    public boolean canAttackInPrinciple(UUID defenderId, Game game) {
         if (hasSummoningSickness() && !game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK_AS_HASTE, this.getControllerId(), game)) {
             return false;
         }
@@ -1210,7 +1224,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean imprint(UUID imprintedCard, Game game) {
-        if (!game.getExile().containsId(imprintedCard, game)){
+        if (!game.getExile().containsId(imprintedCard, game)) {
             return false;
         }
         if (connectedCards.containsKey("imprint")) {

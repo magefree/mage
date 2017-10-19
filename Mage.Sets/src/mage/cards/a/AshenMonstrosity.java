@@ -29,7 +29,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,7 +50,7 @@ public class AshenMonstrosity extends CardImpl {
         this.toughness = new MageInt(4);
         this.addAbility(HasteAbility.getInstance());
         // Ashen Monstrosity attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
     public AshenMonstrosity(final AshenMonstrosity card) {

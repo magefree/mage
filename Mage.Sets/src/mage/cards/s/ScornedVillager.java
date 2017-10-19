@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.m.MoonscarredWerewolf;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -50,8 +51,8 @@ public class ScornedVillager extends CardImpl {
 
     public ScornedVillager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WEREWOLF);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -43,7 +44,7 @@ public class MysticGenesisOozeToken extends Token {
         super("Ooze", "X/X green Ooze creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Ooze");
+        subtype.add(SubType.OOZE);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
         setOriginalExpansionSetCode("RTR");

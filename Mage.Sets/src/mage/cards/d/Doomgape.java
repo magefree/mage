@@ -36,6 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -54,7 +55,7 @@ public class Doomgape extends CardImpl {
 
     public Doomgape(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B/G}{B/G}{B/G}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);

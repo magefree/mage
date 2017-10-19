@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,8 +61,8 @@ public class SekKuarDeathkeeper extends CardImpl {
     public SekKuarDeathkeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Orc");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ORC);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

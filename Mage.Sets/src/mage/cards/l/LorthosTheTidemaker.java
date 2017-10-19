@@ -38,6 +38,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
@@ -53,7 +54,7 @@ public class LorthosTheTidemaker extends CardImpl {
     public LorthosTheTidemaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Octopus");
+        this.subtype.add(SubType.OCTOPUS);
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

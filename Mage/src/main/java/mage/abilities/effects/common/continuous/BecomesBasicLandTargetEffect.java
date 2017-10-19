@@ -149,7 +149,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                         } else {
                             landTypesToAdd.clear();
                             for (SubType subtype : landTypes) {
-                                if (!land.getSubtype(game).contains(subtype)) {
+                                if (!land.hasSubtype(subtype, game)) {
                                     land.getSubtype(game).add(subtype);
                                     landTypesToAdd.add(subtype);
                                 }
@@ -191,7 +191,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     private String setText() {
         StringBuilder sb = new StringBuilder();
         if (chooseLandType) {
-            sb.append("Target land becomes the basic land type of your choice ");
+            sb.append("Target land becomes the basic land type of your choice");
         } else {
             sb.append("Target land becomes a ");
             int i = 1;

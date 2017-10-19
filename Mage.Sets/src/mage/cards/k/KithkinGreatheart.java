@@ -58,8 +58,8 @@ public class KithkinGreatheart extends CardImpl {
 
     public KithkinGreatheart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.KITHKIN);
+        this.subtype.add(SubType.SOLDIER);
 
         this.color.setWhite(true);
         this.power = new MageInt(2);

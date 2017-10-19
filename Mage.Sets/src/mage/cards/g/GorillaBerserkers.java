@@ -36,6 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,8 +47,8 @@ public class GorillaBerserkers extends CardImpl {
 
     public GorillaBerserkers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Ape");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.APE);
+        this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

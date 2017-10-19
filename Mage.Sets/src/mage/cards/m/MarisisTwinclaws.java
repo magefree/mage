@@ -34,6 +34,7 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class MarisisTwinclaws extends CardImpl {
 
     public MarisisTwinclaws (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/W}{G}");
-        this.subtype.add("Cat");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.WARRIOR);
 
 
 

@@ -54,12 +54,12 @@ import mage.target.targetpointer.FixedTarget;
 public class SlaveOfBolas extends CardImpl {
 
     public SlaveOfBolas(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U/R}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U/R}{B}");
 
         // Gain control of target creature. Untap that creature. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn"));
         this.getSpellAbility().addEffect(new SlaveOfBolasEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

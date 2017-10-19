@@ -37,6 +37,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,7 +50,7 @@ public class Meglonoth extends CardImpl {
 
     public Meglonoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -96,7 +97,7 @@ class MeglonothEffect extends OneShotEffect {
         Permanent meglonoth = game.getPermanent(source.getSourceId());
         Permanent blocked = game.getPermanent(targetPointer.getFirst(game, source));
         if (blocked != null && meglonoth != null) {
-            game.getPlayer(blocked.getControllerId()).damage(meglonoth.getPower().getValue(), id, game, false, true);
+            game.getPlayer(blocked.getControllerId()).damage(meglonoth.getPower().getValue(), source.getSourceId(), game, false, true);
             return true;
         }
         return false;

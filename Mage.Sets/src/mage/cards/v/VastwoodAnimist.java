@@ -54,9 +54,9 @@ public class VastwoodAnimist extends CardImpl {
 
     public VastwoodAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Shaman");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -114,7 +114,7 @@ class VastwoodAnimistElementalToken extends Token {
     VastwoodAnimistElementalToken(int amount) {
         super("", "X/X Elemental creature, where X is the number of Allies you control");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(amount);
         toughness = new MageInt(amount);
     }

@@ -37,6 +37,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -48,8 +49,8 @@ public class Kezzerdrix extends CardImpl {
 
     public Kezzerdrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Rabbit");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.RABBIT);
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

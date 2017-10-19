@@ -36,6 +36,7 @@ import mage.abilities.keyword.ExertAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -56,8 +57,8 @@ public class DevotedCropMate extends CardImpl {
     public DevotedCropMate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

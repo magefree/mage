@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -58,8 +59,8 @@ public class TrustedAdvisor extends CardImpl {
 
     public TrustedAdvisor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Advisor");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ADVISOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

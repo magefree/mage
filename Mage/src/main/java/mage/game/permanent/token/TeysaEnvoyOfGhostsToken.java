@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -42,7 +43,7 @@ public class TeysaEnvoyOfGhostsToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         color.setBlack(true);
-        subtype.add("Spirit");
+        subtype.add(SubType.SPIRIT);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

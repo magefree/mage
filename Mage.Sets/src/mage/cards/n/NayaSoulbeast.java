@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
@@ -58,7 +59,7 @@ public class NayaSoulbeast extends CardImpl {
 
     public NayaSoulbeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

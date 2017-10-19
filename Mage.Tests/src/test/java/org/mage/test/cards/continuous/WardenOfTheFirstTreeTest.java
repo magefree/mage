@@ -31,6 +31,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import org.junit.Test;
@@ -58,8 +59,8 @@ public class WardenOfTheFirstTreeTest extends CardTestPlayerBase {
         execute();
 
         assertPowerToughness(playerA, "Warden of the First Tree", 3, 3, Filter.ComparisonScope.Any);
-        assertType("Warden of the First Tree", CardType.CREATURE, "Human");
-        assertType("Warden of the First Tree", CardType.CREATURE, "Warrior");
+        assertType("Warden of the First Tree", CardType.CREATURE, SubType.HUMAN);
+        assertType("Warden of the First Tree", CardType.CREATURE, SubType.WARRIOR);
         assertAbility(playerA, "Warden of the First Tree", TrampleAbility.getInstance(), false);
         assertAbility(playerA, "Warden of the First Tree", LifelinkAbility.getInstance(), false);
     }
@@ -81,9 +82,9 @@ public class WardenOfTheFirstTreeTest extends CardTestPlayerBase {
         execute();
 
         assertPowerToughness(playerA, "Warden of the First Tree", 3, 3, Filter.ComparisonScope.Any);
-        assertType("Warden of the First Tree", CardType.CREATURE, "Human");
-        assertType("Warden of the First Tree", CardType.CREATURE, "Spirit");
-        assertType("Warden of the First Tree", CardType.CREATURE, "Warrior");
+        assertType("Warden of the First Tree", CardType.CREATURE, SubType.HUMAN);
+        assertType("Warden of the First Tree", CardType.CREATURE, SubType.SPIRIT);
+        assertType("Warden of the First Tree", CardType.CREATURE, SubType.WARRIOR);
         assertAbility(playerA, "Warden of the First Tree", TrampleAbility.getInstance(), true);
         assertAbility(playerA, "Warden of the First Tree", LifelinkAbility.getInstance(), true);
     }
@@ -107,9 +108,9 @@ public class WardenOfTheFirstTreeTest extends CardTestPlayerBase {
         execute();
 
         assertPowerToughness(playerA, "Warden of the First Tree", 8, 8, Filter.ComparisonScope.Any);
-        assertType("Warden of the First Tree", CardType.CREATURE, "Human");
-        assertType("Warden of the First Tree", CardType.CREATURE, "Spirit");
-        assertType("Warden of the First Tree", CardType.CREATURE, "Warrior");
+        assertType("Warden of the First Tree", CardType.CREATURE, SubType.HUMAN);
+        assertType("Warden of the First Tree", CardType.CREATURE, SubType.SPIRIT);
+        assertType("Warden of the First Tree", CardType.CREATURE, SubType.WARRIOR);
         assertAbility(playerA, "Warden of the First Tree", TrampleAbility.getInstance(), true);
         assertAbility(playerA, "Warden of the First Tree", LifelinkAbility.getInstance(), true);
     }

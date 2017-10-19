@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.cards.s;
 
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -59,10 +58,10 @@ public class SunpetalGrove extends CardImpl {
     }
 
     public SunpetalGrove(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter));
-        String abilityText = "tap it unless you control a Forest or a Plains";
+        String abilityText = " tapped unless you control a Forest or a Plains";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());

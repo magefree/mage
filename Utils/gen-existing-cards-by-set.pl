@@ -71,6 +71,7 @@ foreach $potentialSideA (sort @setCards) {
     #print (">>$potentialSideA\n"); 
     if ($potentialSideA =~ m/.*,,,(\d+)(a)$/) {
         my $cardNumSideB = $1 . "b";
+        my $orig_cardNumSideB = $1 . "b";
         my $val;
         foreach $val (sort @setCards) {
             if ($val =~ m/$cardNumSideB$/) {
@@ -93,6 +94,7 @@ foreach $potentialSideA (sort @setCards) {
 
                 print ("Adding in: $potentialSideA \/\/ $val,,,$cardNumSideB\n");
                 $cardsFound = $cardsFound - 1;
+                $cardNumSideB = $orig_cardNumSideB;
             }
         }
     }

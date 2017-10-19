@@ -38,6 +38,7 @@ import mage.abilities.keyword.AfflictAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.game.Game;
@@ -53,9 +54,9 @@ public class NehebTheEternal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Zombie");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

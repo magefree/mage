@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -50,7 +51,7 @@ public class OrcishMechanics extends CardImpl {
 
     public OrcishMechanics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Orc");
+        this.subtype.add(SubType.ORC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

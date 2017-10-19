@@ -68,6 +68,7 @@ public class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Breath of Malfegor", 58, Rarity.COMMON, mage.cards.b.BreathOfMalfegor.class));
         cards.add(new SetCardInfo("Brion Stoutarm", 17, Rarity.RARE, mage.cards.b.BrionStoutarm.class));
         cards.add(new SetCardInfo("Broodmate Dragon", 19, Rarity.RARE, mage.cards.b.BroodmateDragon.class));
+        cards.add(new SetCardInfo("Burning Sun's Avatar", 183, Rarity.RARE, mage.cards.b.BurningSunsAvatar.class));
         cards.add(new SetCardInfo("Canopy Vista", 167, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Cathedral of War", 51, Rarity.RARE, mage.cards.c.CathedralOfWar.class));
         cards.add(new SetCardInfo("Celestial Colonnade", 23, Rarity.SPECIAL, mage.cards.c.CelestialColonnade.class));

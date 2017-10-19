@@ -39,6 +39,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
@@ -56,7 +57,7 @@ public class KalonianHydra extends CardImpl {
 
     public KalonianHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

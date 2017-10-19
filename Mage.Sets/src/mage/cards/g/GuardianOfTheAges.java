@@ -37,6 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -53,7 +54,7 @@ import mage.game.permanent.Permanent;
 public class GuardianOfTheAges extends CardImpl {
     public GuardianOfTheAges(UUID ownerId, CardSetInfo setInfo){
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE,CardType.ARTIFACT},"{7}");
-        this.subtype.add("Golem");
+        this.subtype.add(SubType.GOLEM);
         
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

@@ -27,6 +27,7 @@
  */
 package mage.cards.w;
 
+import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -47,8 +48,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.*;
-
 /**
  *
  * @author LevelX2
@@ -56,7 +55,7 @@ import java.util.*;
 public class WaveOfVitriol extends CardImpl {
 
     public WaveOfVitriol(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");
 
         // Each player sacrifices all artifacts, enchantments, and nonbasic lands he or she controls. For each land sacrificed this way, its controller may search his or her library for a basic land card and put it onto the battlefield tapped. Then each player who searched his or her library this way shuffles it.
         this.getSpellAbility().addEffect(new WaveOfVitriolEffect());
@@ -121,12 +120,11 @@ class WaveOfVitriolEffect extends OneShotEffect {
                     }
                 }
             }
-            game.getState().handleSimultaneousEvent(game);
+            game.applyEffects();
             Cards toBattlefield = new CardsImpl();
             Set<Player> playersToShuffle = new LinkedHashSet<>();
             for (Map.Entry<Player, Integer> entry : sacrificedLands.entrySet()) {
                 if (entry.getKey().chooseUse(Outcome.PutLandInPlay, "Search your library for up to " + entry.getValue() + " basic lands?", source, game)) {
-
                     TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), StaticFilters.FILTER_BASIC_LAND_CARD);
                     if (entry.getKey().searchLibrary(target, game)) {
                         if (!target.getTargets().isEmpty()) {

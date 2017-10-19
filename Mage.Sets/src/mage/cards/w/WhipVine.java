@@ -41,6 +41,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -55,8 +56,8 @@ public class WhipVine extends CardImpl {
 
     public WhipVine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Wall");
+        this.subtype.add(SubType.PLANT);
+        this.subtype.add(SubType.WALL);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

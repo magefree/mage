@@ -61,8 +61,8 @@ public class GuardianOfCloverdell extends CardImpl {
 
     public GuardianOfCloverdell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

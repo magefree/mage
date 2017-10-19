@@ -56,8 +56,8 @@ public class JwariShapeshifter extends CardImpl {
 
     public JwariShapeshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Shapeshifter");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.SHAPESHIFTER);
+        this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

@@ -46,15 +46,14 @@ import mage.target.common.TargetCreaturePermanent;
 public class TraitorousBlood extends CardImpl {
 
     public TraitorousBlood(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
         // Gain control of target creature until end of turn. Untap it. It gains trample and haste until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap it"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn).setText("It gains trample"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("and hast until end of turn"));
     }
 
     public TraitorousBlood(final TraitorousBlood card) {

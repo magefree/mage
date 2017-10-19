@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.b.BaneOfHanweir;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -49,9 +50,9 @@ public class HanweirWatchkeep extends CardImpl {
 
     public HanweirWatchkeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.WEREWOLF);
 
         this.transformable = true;
         this.secondSideCardClazz = BaneOfHanweir.class;

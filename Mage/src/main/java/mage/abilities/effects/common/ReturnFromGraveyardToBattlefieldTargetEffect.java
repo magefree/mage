@@ -75,7 +75,7 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             Set<Card> cardsToMove = new HashSet<>();
             for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Card card = game.getCard(targetId);
-                if (card != null) {
+                if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                     cardsToMove.add(card);
                 }
             }

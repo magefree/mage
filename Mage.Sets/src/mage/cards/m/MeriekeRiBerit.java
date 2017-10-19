@@ -61,7 +61,7 @@ public class MeriekeRiBerit extends CardImpl {
     public MeriekeRiBerit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
+        this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

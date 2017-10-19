@@ -35,6 +35,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -55,8 +56,8 @@ public class NoggleBandit extends CardImpl {
 
     public NoggleBandit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U/R}{U/R}");
-        this.subtype.add("Noggle");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.NOGGLE);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

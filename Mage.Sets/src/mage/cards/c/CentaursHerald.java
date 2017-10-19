@@ -37,6 +37,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.CentaurToken;
 
@@ -48,8 +49,8 @@ public class CentaursHerald extends CardImpl {
 
     public CentaursHerald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

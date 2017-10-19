@@ -45,6 +45,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -61,8 +62,8 @@ public class ShamanOfForgottenWays extends CardImpl {
 
     public ShamanOfForgottenWays(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(	2);
         this.toughness = new MageInt(3);
 

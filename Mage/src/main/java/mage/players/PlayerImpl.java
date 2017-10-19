@@ -966,8 +966,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (game == null || ability == null) {
             return false;
         }
+        ability.setControllerId(getId());
         if (ability.getSpellAbilityType() != SpellAbilityType.BASE) {
             ability = chooseSpellAbilityForCast(ability, game, noMana);
+            if (ability == null) {
+                // No ability could be cast (selected), probably because of no valid targets (happens often if a card can be cast by an effect).
+                return false;
+            }
         }
         //20091005 - 601.2a
         if (ability.getSourceId() == null) {
@@ -1103,6 +1108,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getId(), ability.getSourceId(), playerId))) {
                 int bookmark = game.bookmarkState();
                 ability.newId();
+                ability.setControllerId(playerId);
                 game.getStack().push(new StackAbility(ability, playerId));
                 if (ability.activate(game, false)) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
@@ -1241,22 +1247,35 @@ public abstract class PlayerImpl implements Player, Serializable {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         for (Ability ability : object.getAbilities()) {
             if (ability instanceof SpellAbility) {
-                if (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-                    if (zone == Zone.HAND) {
-                        // Fix so you don't need to choose Fuse twice
-                        useable.clear();
-                        useable.put(ability.getId(), (SpellAbility) ability);
+                switch (((SpellAbility) ability).getSpellAbilityType()) {
+                    case SPLIT_FUSED:
+                        if (zone == Zone.HAND) {
+                            if (((SpellAbility) ability).canChooseTarget(game)) {
+                                useable.put(ability.getId(), (SpellAbility) ability);
+                            }
+                        }
+                    case SPLIT:
+                        if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game)) {
+                            useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(), ((SplitCard) object).getLeftHalfCard().getSpellAbility());
+                        }
+                        if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game)) {
+                            useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(), ((SplitCard) object).getRightHalfCard().getSpellAbility());
+                        }
                         return useable;
-                    } else {
-                        // Fuse only allowed from hand
-                        continue;
-                    }
+                    case SPLIT_AFTERMATH:
+                        if (zone == Zone.GRAVEYARD) {
+                            if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game)) {
+                                useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(), ((SplitCard) object).getRightHalfCard().getSpellAbility());
+                            }
+                        } else {
+                            if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game)) {
+                                useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(), ((SplitCard) object).getLeftHalfCard().getSpellAbility());
+                            }
+                        }
+                        return useable;
+                    default:
+                        useable.put(ability.getId(), (SpellAbility) ability);
                 }
-                if (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
-                        || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH) {
-                    continue;
-                }
-                useable.put(ability.getId(), (SpellAbility) ability);
             }
         }
         return useable;
@@ -2941,7 +2960,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     public UserData getControllingPlayersUserData(Game game) {
-        if (isGameUnderControl()) {
+        if (!isGameUnderControl()) {
             Player player = game.getPlayer(getTurnControlledBy());
             if (player.isHuman()) {
                 return player.getUserData();
@@ -2951,8 +2970,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setUserData(UserData userData
-    ) {
+    public void setUserData(UserData userData) {
         this.userData = userData;
         getManaPool().setAutoPayment(userData.isManaPoolAutomatic());
         getManaPool().setAutoPaymentRestricted(userData.isManaPoolAutomaticRestricted());
@@ -3466,9 +3484,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean hasOpponent(UUID playerToCheckId, Game game
-    ) {
-        return !this.getId().equals(playerToCheckId) && game.isOpponent(this, playerToCheckId);
+    public boolean hasOpponent(UUID playerToCheckId, Game game) {
+        return !this.getId().equals(playerToCheckId)
+                && game.isOpponent(this, playerToCheckId)
+                && getInRange().contains(playerToCheckId);
     }
 
     @Override

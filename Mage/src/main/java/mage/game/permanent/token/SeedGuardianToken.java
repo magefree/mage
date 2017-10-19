@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -45,7 +46,7 @@ public class SeedGuardianToken extends Token {
         setOriginalExpansionSetCode("OGW");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
 

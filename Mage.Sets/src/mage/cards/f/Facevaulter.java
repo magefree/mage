@@ -55,8 +55,8 @@ public class Facevaulter extends CardImpl {
 
     public Facevaulter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

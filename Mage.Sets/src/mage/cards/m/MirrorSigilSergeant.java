@@ -35,11 +35,12 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
+import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -61,8 +62,8 @@ public class MirrorSigilSergeant extends CardImpl {
 
     public MirrorSigilSergeant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.subtype.add("Rhino");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.RHINO);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -71,7 +72,7 @@ public class MirrorSigilSergeant extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of your upkeep, if you control a blue permanent, you may create a token that's a copy of Mirror-Sigil Sergeant.
-        Effect effect = new PutTokenOntoBattlefieldCopySourceEffect();
+        Effect effect = new CreateTokenCopySourceEffect();
         effect.setText("you may create a token that's a copy of {this}");
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, true);
         this.addAbility(new ConditionalTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), rule));

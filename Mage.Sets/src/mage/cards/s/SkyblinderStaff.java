@@ -49,7 +49,7 @@ public class SkyblinderStaff extends CardImpl {
 
     public SkyblinderStaff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 and can't be blocked by creatures with flying.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0));

@@ -38,6 +38,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
@@ -53,7 +54,7 @@ public class DruidsCall extends CardImpl {
 
     public DruidsCall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant creature

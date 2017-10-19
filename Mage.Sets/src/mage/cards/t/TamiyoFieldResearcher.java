@@ -40,6 +40,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
@@ -75,7 +76,7 @@ public class TamiyoFieldResearcher extends CardImpl {
     public TamiyoFieldResearcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{W}{U}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Tamiyo");
+        this.subtype.add(SubType.TAMIYO);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 

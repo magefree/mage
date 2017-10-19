@@ -27,6 +27,10 @@
  */
 package mage.game.stack;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -39,6 +43,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.*;
@@ -51,11 +56,6 @@ import mage.target.Targets;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -74,6 +74,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     private UUID controllerId;
     private String name;
     private String expansionSetCode;
+    private TargetAdjustment targetAdjustment = TargetAdjustment.NONE;
 
     public StackAbility(Ability ability, UUID controllerId) {
         this.ability = ability;
@@ -86,6 +87,7 @@ public class StackAbility extends StackObjImpl implements Ability {
         this.controllerId = stackAbility.controllerId;
         this.name = stackAbility.name;
         this.expansionSetCode = stackAbility.expansionSetCode;
+        this.targetAdjustment = stackAbility.targetAdjustment;
     }
 
     @Override
@@ -537,7 +539,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public int getSourceObjectZoneChangeCounter() {
-        throw new UnsupportedOperationException("Not supported.");
+        return ability.getSourceObjectZoneChangeCounter();
     }
 
     @Override
@@ -593,9 +595,32 @@ public class StackAbility extends StackObjImpl implements Ability {
         return newStackAbility;
     }
 
-    public boolean isAllCreatureTypes(){
+    @Override
+    public boolean isAllCreatureTypes() {
         return false;
     }
 
-    public void setIsAllCreatureTypes(boolean value){}
+    @Override
+    public void setIsAllCreatureTypes(boolean value) {
+    }
+
+    @Override
+    public List<TextPart> getTextParts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TextPart addTextPart(TextPart textPart) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setTargetAdjustment(TargetAdjustment targetAdjustment) {
+        this.targetAdjustment = targetAdjustment;
+    }
+
+    @Override
+    public TargetAdjustment getTargetAdjustment() {
+        return targetAdjustment;
+    }
 }

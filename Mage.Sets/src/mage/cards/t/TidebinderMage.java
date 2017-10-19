@@ -37,6 +37,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -69,8 +70,8 @@ public class TidebinderMage extends CardImpl {
 
     public TidebinderMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

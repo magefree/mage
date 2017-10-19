@@ -39,6 +39,7 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -60,8 +61,8 @@ public class NayaHushblade extends CardImpl {
 
     public NayaHushblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ROGUE);
 
 
 

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.EldraziScionToken;
 
 /**
@@ -45,7 +46,7 @@ public class CarrierThrall extends CardImpl {
 
     public CarrierThrall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

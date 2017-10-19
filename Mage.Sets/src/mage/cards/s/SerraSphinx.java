@@ -34,6 +34,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class SerraSphinx extends CardImpl {
 
     public SerraSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        this.subtype.add("Sphinx");
+        this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

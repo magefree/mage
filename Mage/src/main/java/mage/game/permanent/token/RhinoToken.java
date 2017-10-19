@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 
@@ -41,7 +42,7 @@ public class RhinoToken extends Token {
         super("Rhino", "4/4 green Rhino creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Rhino");
+        subtype.add(SubType.RHINO);
         power = new MageInt(4);
         toughness = new MageInt(4);
         addAbility(TrampleAbility.getInstance());

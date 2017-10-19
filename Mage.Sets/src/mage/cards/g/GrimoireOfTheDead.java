@@ -153,7 +153,7 @@ class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
                     break;
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        permanent.getSubtype(game).add("Zombie");
+                        permanent.getSubtype(game).add(SubType.ZOMBIE);
                     }
                     break;
             }

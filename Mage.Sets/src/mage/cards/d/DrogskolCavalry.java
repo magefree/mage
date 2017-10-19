@@ -60,8 +60,8 @@ public class DrogskolCavalry extends CardImpl {
 
     public DrogskolCavalry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

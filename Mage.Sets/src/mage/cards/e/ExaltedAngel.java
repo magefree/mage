@@ -36,6 +36,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,7 +46,7 @@ public class ExaltedAngel extends CardImpl {
 
     public ExaltedAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

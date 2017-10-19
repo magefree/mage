@@ -36,6 +36,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPlayer;
@@ -50,8 +51,8 @@ public class SadisticHypnotist extends CardImpl {
 
     public SadisticHypnotist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Minion");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.MINION);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class KorChant extends CardImpl {
 
     public KorChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
         // All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.
         this.getSpellAbility().addEffect(new KorChantEffect());

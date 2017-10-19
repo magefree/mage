@@ -57,33 +57,33 @@ import mage.game.Game;
  * @author emerald000
  */
 public class KangeeAerieKeeper extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Bird creatures");
-    
+
     static {
         filter.add(new SubtypePredicate(SubType.BIRD));
         filter.add(new AnotherPredicate());
     }
 
     public KangeeAerieKeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Bird");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Kicker {X}{2}
-        this.addAbility(new KickerAbility("{X}{2}"));
-        
+        this.addAbility(new KickerAbility("{2}{X}"));
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Kangee, Aerie Keeper enters the battlefield, if it was kicked, put X feather counters on it.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.FEATHER.createInstance(), new KangeeAerieKeeperGetKickerXValue(), true));
         this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, put X feather counters on it."));
-        
+
         // Other Bird creatures get +1/+1 for each feather counter on Kangee, Aerie Keeper.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new CountersSourceCount(CounterType.FEATHER), new CountersSourceCount(CounterType.FEATHER), Duration.WhileOnBattlefield, filter, true, "Other Bird creatures get +1/+1 for each feather counter on {this}.")));
     }
@@ -108,7 +108,7 @@ class KangeeAerieKeeperGetKickerXValue implements DynamicValue {
         int count = 0;
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            for (Ability ability: card.getAbilities()) {
+            for (Ability ability : card.getAbilities()) {
                 if (ability instanceof KickerAbility) {
                     count += ((KickerAbility) ability).getXManaValue();
                 }

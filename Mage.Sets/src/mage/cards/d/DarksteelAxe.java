@@ -37,6 +37,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 
@@ -48,7 +49,7 @@ public class DarksteelAxe extends CardImpl {
 
     public DarksteelAxe (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
         this.addAbility(IndestructibleAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

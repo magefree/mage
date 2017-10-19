@@ -37,6 +37,7 @@ import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.WolfToken;
 
 /**
@@ -47,7 +48,7 @@ public class WolfbriarElemental extends CardImpl {
 
     public WolfbriarElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,9 +52,9 @@ import mage.players.Player;
 public class DakraMystic extends CardImpl {
 
     public DakraMystic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -62,8 +63,7 @@ public class DakraMystic extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DakraMysticEffect(), new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
-        
+
     }
 
     public DakraMystic(final DakraMystic card) {
@@ -77,38 +77,38 @@ public class DakraMystic extends CardImpl {
 }
 
 class DakraMysticEffect extends OneShotEffect {
-    
+
     public DakraMysticEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player reveals the top card of his or her library. You may put the revealed cards into their owners graveyard. If you don't, each player draws a card";
+        this.staticText = "Each player reveals the top card of his or her library. You may put the revealed cards into their owners' graveyard. If you don't, each player draws a card";
     }
-    
+
     public DakraMysticEffect(final DakraMysticEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public DakraMysticEffect copy() {
         return new DakraMysticEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && player.getLibrary().hasCards()) {
                     player.revealCards(player.getLogName(), new CardsImpl(player.getLibrary().getFromTop(game)), game);
                 }
             }
             if (controller.chooseUse(outcome, "Put revealed cards into graveyard?", source, game)) {
-                for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);                    
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                    Player player = game.getPlayer(playerId);
                     if (player != null && player.getLibrary().hasCards()) {
                         player.moveCards(player.getLibrary().getFromTop(game), Zone.GRAVEYARD, source, game);
                     }
-                }                
+                }
             } else {
                 new DrawCardAllEffect(1).apply(game, source);
             }

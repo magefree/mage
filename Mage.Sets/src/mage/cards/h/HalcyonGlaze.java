@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.Token;
@@ -70,7 +71,7 @@ class HalcyonGlazeToken extends Token {
     HalcyonGlazeToken() {
         super("", "4/4 Illusion creature with flying");
         cardType.add(CardType.CREATURE);
-        subtype.add("Illusion");
+        subtype.add(SubType.ILLUSION);
         power = new MageInt(4);
         toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());

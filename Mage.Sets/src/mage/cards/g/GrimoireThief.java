@@ -61,8 +61,8 @@ public class GrimoireThief extends CardImpl {
 
     public GrimoireThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

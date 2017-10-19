@@ -56,8 +56,8 @@ public class DoranTheSiegeTower extends CardImpl {
     public DoranTheSiegeTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Treefolk");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);

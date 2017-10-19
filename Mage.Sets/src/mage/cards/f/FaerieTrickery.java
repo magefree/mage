@@ -53,7 +53,7 @@ public class FaerieTrickery extends CardImpl {
 
     public FaerieTrickery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{1}{U}{U}");
-        this.subtype.add("Faerie");
+        this.subtype.add(SubType.FAERIE);
 
 
         // Counter target non-Faerie spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.

@@ -36,6 +36,7 @@ import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.InsectInfectToken;
 
@@ -47,8 +48,8 @@ public class PhyrexianSwarmlord extends CardImpl {
 
     public PhyrexianSwarmlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.INSECT);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

@@ -48,12 +48,12 @@ import mage.target.TargetPlayer;
 public class SeersVision extends CardImpl {
 
     public SeersVision(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{B}");
 
         // Your opponents play with their hands revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.OPPONENT)));
         // Sacrifice Seer's Vision: Look at target player's hand and choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardCardYouChooseTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardCardYouChooseTargetEffect(TargetController.ANY), new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

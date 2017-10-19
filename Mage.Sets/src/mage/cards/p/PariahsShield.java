@@ -36,6 +36,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -52,7 +53,7 @@ public class PariahsShield extends CardImpl {
 
     public PariahsShield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // All damage that would be dealt to you is dealt to equipped creature instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PariahEffect()));

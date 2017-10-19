@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,8 +42,8 @@ public class PantherWarriors extends CardImpl {
 
     public PantherWarriors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Cat");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(3);

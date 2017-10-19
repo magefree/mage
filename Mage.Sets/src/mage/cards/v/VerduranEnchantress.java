@@ -27,15 +27,17 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class VerduranEnchantress extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an Enchantment spell");
+    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
@@ -51,8 +53,8 @@ public class VerduranEnchantress extends CardImpl {
     
     public VerduranEnchantress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);

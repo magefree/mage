@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -55,8 +56,8 @@ public class SanguinePraetor extends CardImpl {
     public SanguinePraetor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}{B}");
 
-        this.subtype.add("Avatar");
-        this.subtype.add("Praetor");
+        this.subtype.add(SubType.AVATAR);
+        this.subtype.add(SubType.PRAETOR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
 

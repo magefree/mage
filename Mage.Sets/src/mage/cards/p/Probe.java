@@ -48,17 +48,17 @@ import mage.target.TargetPlayer;
 public class Probe extends CardImpl {
 
     public Probe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // Kicker {1}{B}
         this.addAbility(new KickerAbility("{1}{B}"));
         // Draw three cards, then discard two cards.
-        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(3,2));
+        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(3, 2));
         // If Probe was kicked, target player discards two cards.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-            new DiscardTargetEffect(2),
-            KickedCondition.instance,
-            "If {this} was kicked, target player discards two cards"));
+                new DiscardTargetEffect(2),
+                KickedCondition.instance,
+                "<br><br>If {this} was kicked, target player discards two cards"));
     }
 
     @Override
@@ -70,7 +70,7 @@ public class Probe extends CardImpl {
             }
         }
     }
-    
+
     public Probe(final Probe card) {
         super(card);
     }

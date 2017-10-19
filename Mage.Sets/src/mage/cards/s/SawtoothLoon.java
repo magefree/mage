@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -64,8 +65,8 @@ public class SawtoothLoon extends CardImpl {
     }
 
     public SawtoothLoon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}");
-        this.subtype.add("Bird");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
+        this.subtype.add(SubType.BIRD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -93,7 +94,7 @@ class SawtoothLoonEffect extends OneShotEffect {
 
     public SawtoothLoonEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Draw two cards, then put two cards from your hand on the bottom of your library";
+        this.staticText = "draw two cards, then put two cards from your hand on the bottom of your library";
     }
 
     public SawtoothLoonEffect(final SawtoothLoonEffect effect) {

@@ -52,8 +52,8 @@ public class PhyrexianDriver extends CardImpl {
 
     public PhyrexianDriver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Mercenary");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.MERCENARY);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

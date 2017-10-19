@@ -42,6 +42,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
@@ -67,10 +68,10 @@ public class YasovaDragonclaw extends CardImpl {
     }
 
     public YasovaDragonclaw(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 
@@ -82,7 +83,7 @@ public class YasovaDragonclaw extends CardImpl {
         effect2.setText(", untap that creature");
         effect.addEffect(effect2);
         effect.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, ", and it gains haste until end of turn"));
-        Ability ability = new BeginningOfCombatTriggeredAbility(effect, TargetController.YOU, false);     
+        Ability ability = new BeginningOfCombatTriggeredAbility(effect, TargetController.YOU, false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -101,7 +102,7 @@ class YasovaDragonclawPowerLessThanSourcePredicate implements ObjectSourcePlayer
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent sourcePermanent = game.getPermanent(input.getSourceId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
         return sourcePermanent != null && input.getObject().getPower().getValue() < sourcePermanent.getPower().getValue();
     }
 

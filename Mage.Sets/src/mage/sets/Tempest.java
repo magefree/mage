@@ -97,6 +97,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Dream Cache", 59, Rarity.COMMON, mage.cards.d.DreamCache.class));
         cards.add(new SetCardInfo("Dregs of Sorrow", 25, Rarity.RARE, mage.cards.d.DregsOfSorrow.class));
         cards.add(new SetCardInfo("Earthcraft", 116, Rarity.RARE, mage.cards.e.Earthcraft.class));
+        cards.add(new SetCardInfo("Echo Chamber", 272, Rarity.RARE, mage.cards.e.EchoChamber.class));
         cards.add(new SetCardInfo("Eladamri, Lord of Leaves", 117, Rarity.RARE, mage.cards.e.EladamriLordOfLeaves.class));
         cards.add(new SetCardInfo("Eladamri's Vineyard", 118, Rarity.RARE, mage.cards.e.EladamrisVineyard.class));
         cards.add(new SetCardInfo("Elite Javelineer", 229, Rarity.COMMON, mage.cards.e.EliteJavelineer.class));
@@ -156,6 +157,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Humility", 236, Rarity.RARE, mage.cards.h.Humility.class));
         cards.add(new SetCardInfo("Imps' Taunt", 32, Rarity.UNCOMMON, mage.cards.i.ImpsTaunt.class));
         cards.add(new SetCardInfo("Insight", 68, Rarity.UNCOMMON, mage.cards.i.Insight.class));
+        cards.add(new SetCardInfo("Interdict", 69, Rarity.UNCOMMON, mage.cards.i.Interdict.class));
         cards.add(new SetCardInfo("Intuition", 70, Rarity.RARE, mage.cards.i.Intuition.class));
         cards.add(new SetCardInfo("Invulnerability", 237, Rarity.UNCOMMON, mage.cards.i.Invulnerability.class));
         cards.add(new SetCardInfo("Island", 313, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -318,6 +320,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 335, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 336, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 337, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tahngarth's Rage", 209, Rarity.UNCOMMON, mage.cards.t.TahngarthsRage.class));
         cards.add(new SetCardInfo("Talon Sliver", 262, Rarity.COMMON, mage.cards.t.TalonSliver.class));
         cards.add(new SetCardInfo("Telethopter", 301, Rarity.UNCOMMON, mage.cards.t.Telethopter.class));
         cards.add(new SetCardInfo("Thalakos Dreamsower", 92, Rarity.UNCOMMON, mage.cards.t.ThalakosDreamsower.class));

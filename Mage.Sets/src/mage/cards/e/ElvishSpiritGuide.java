@@ -38,6 +38,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -50,8 +51,8 @@ public class ElvishSpiritGuide extends CardImpl {
 
     public ElvishSpiritGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

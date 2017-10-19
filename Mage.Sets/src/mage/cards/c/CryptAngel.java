@@ -38,6 +38,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,7 +58,7 @@ public class CryptAngel extends CardImpl {
 
     public CryptAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

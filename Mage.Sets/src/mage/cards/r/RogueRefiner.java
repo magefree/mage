@@ -37,6 +37,7 @@ import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -47,8 +48,8 @@ public class RogueRefiner extends CardImpl {
     public RogueRefiner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

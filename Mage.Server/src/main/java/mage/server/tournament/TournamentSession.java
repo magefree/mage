@@ -170,9 +170,11 @@ public class TournamentSession {
     }
 
     private void removeTournamentForUser() {
-        UserManager.instance.getUser(userId).ifPresent(user
-                -> user.removeTournament(playerId));
-
+        Optional<User> user = UserManager.instance.getUser(userId);
+        if (user.isPresent()) {
+            user.get().removeTable(playerId);
+            user.get().removeTournament(playerId);
+        }
     }
 
 }

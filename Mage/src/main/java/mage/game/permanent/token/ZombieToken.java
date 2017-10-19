@@ -33,6 +33,7 @@ import java.util.List;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.util.RandomUtil;
 
 /**
@@ -53,7 +54,7 @@ public class ZombieToken extends Token {
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Zombie");
+        subtype.add(SubType.ZOMBIE);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -47,15 +48,15 @@ import mage.players.Player;
 public class ShinkaGatekeeper extends CardImpl {
 
     public ShinkaGatekeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Warrior");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         // Whenever Shinka Gatekeeper is dealt damage, it deals that much damage to you.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new ShinkaGatekeeperDealDamageEffect(), false));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new ShinkaGatekeeperDealDamageEffect(), false, false, true));
     }
 
     public ShinkaGatekeeper(final ShinkaGatekeeper card) {
@@ -67,7 +68,6 @@ public class ShinkaGatekeeper extends CardImpl {
         return new ShinkaGatekeeper(this);
     }
 }
-
 
 class ShinkaGatekeeperDealDamageEffect extends OneShotEffect {
 

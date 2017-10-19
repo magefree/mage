@@ -33,6 +33,7 @@ import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class DarkTrooper extends CardImpl {
 
     public DarkTrooper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.subtype.add("Droid");
-        this.subtype.add("Trooper");
+        this.subtype.add(SubType.DROID);
+        this.subtype.add(SubType.TROOPER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,14 +52,14 @@ import mage.players.Player;
 public class VerdantSunsAvatar extends CardImpl {
 
     public VerdantSunsAvatar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
 
-        this.subtype.add("Dinosaur");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.DINOSAUR);
+        this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // When Verdant Sun's Avatar or another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
+        // Whenever Verdant Sun's Avatar or another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
         this.addAbility(new VerdantSunsAvatarTriggeredAbility());
     }
 
@@ -90,7 +91,7 @@ class VerdantSunsAvatarTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent.isCreature()
+        if (permanent != null && permanent.isCreature()
                 && permanent.getControllerId().equals(this.controllerId)) {
             Effect effect = this.getEffects().get(0);
             // Life is determined during resolution so it has to be retrieved there (e.g. Giant Growth before resolution)
@@ -103,7 +104,7 @@ class VerdantSunsAvatarTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} or another creature enters the battlefield under your control, " + super.getRule();
+        return "Whenever {this} or another creature enters the battlefield under your control, " + super.getRule();
     }
 
     @Override

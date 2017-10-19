@@ -62,7 +62,7 @@ public class PrizedElephant extends CardImpl {
 
     public PrizedElephant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Elephant");
+        this.subtype.add(SubType.ELEPHANT);
 
         this.color.setWhite(true);
         this.power = new MageInt(3);

@@ -38,6 +38,7 @@ import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,7 +56,7 @@ public class NessianWildsRavager extends CardImpl {
 
     public NessianWildsRavager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

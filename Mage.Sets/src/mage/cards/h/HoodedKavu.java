@@ -36,6 +36,7 @@ import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -48,7 +49,7 @@ public class HoodedKavu extends CardImpl {
 
     public HoodedKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Kavu");
+        this.subtype.add(SubType.KAVU);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

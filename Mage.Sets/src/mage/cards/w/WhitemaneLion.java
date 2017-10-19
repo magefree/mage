@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -45,7 +46,7 @@ public class WhitemaneLion extends CardImpl {
 
     public WhitemaneLion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.CAT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

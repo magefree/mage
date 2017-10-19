@@ -41,6 +41,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
@@ -56,7 +57,7 @@ public class TorrentElemental extends CardImpl {
 
     public TorrentElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

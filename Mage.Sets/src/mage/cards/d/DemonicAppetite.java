@@ -51,7 +51,7 @@ public class DemonicAppetite extends CardImpl {
 
     public DemonicAppetite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature you control
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();

@@ -38,6 +38,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -52,7 +53,7 @@ public class StoneforgeMasterwork extends CardImpl {
 
     public StoneforgeMasterwork(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 for each other creature you control that shares a creature type with it.
         StoneforgeMasterworkDynamicValue countEnchantments = new StoneforgeMasterworkDynamicValue();

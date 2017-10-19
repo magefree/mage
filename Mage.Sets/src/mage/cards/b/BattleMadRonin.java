@@ -28,7 +28,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -54,7 +54,7 @@ public class BattleMadRonin extends CardImpl {
         this.addAbility(new BushidoAbility(2));
 
         // Battle-Mad Ronin attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
     public BattleMadRonin(final BattleMadRonin card) {

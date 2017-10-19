@@ -39,6 +39,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
@@ -57,7 +58,7 @@ public class SoulTithe extends CardImpl {
 
     public SoulTithe (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant nonland permanent
         TargetPermanent auraTarget = new TargetNonlandPermanent();

@@ -42,6 +42,7 @@ import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -56,8 +57,8 @@ public class JushiApprentice extends CardImpl {
 
     public JushiApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
@@ -89,8 +90,8 @@ class TomoyaTheRevealer extends Token {
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Human");
-        subtype.add("Wizard");
+        subtype.add(SubType.HUMAN);
+        subtype.add(SubType.WIZARD);
         power = new MageInt(2);
         toughness = new MageInt(3);
 

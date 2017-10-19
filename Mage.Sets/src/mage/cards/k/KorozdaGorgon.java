@@ -38,6 +38,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -52,7 +53,7 @@ public class KorozdaGorgon extends CardImpl {
 
     public KorozdaGorgon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
-        this.subtype.add("Gorgon");
+        this.subtype.add(SubType.GORGON);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);

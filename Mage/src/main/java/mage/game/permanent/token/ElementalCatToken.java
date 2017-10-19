@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
@@ -41,8 +42,8 @@ public class ElementalCatToken extends Token {
         super("Elemental Cat", "1/1 red Elemental Cat creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Elemental");
-        subtype.add("Cat");
+        subtype.add(SubType.ELEMENTAL);
+        subtype.add(SubType.CAT);
         addAbility(HasteAbility.getInstance());
         power = new MageInt(1);
         toughness = new MageInt(1);

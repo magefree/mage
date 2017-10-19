@@ -30,7 +30,6 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -50,7 +49,6 @@ public class PipersMelody extends CardImpl {
 
     public PipersMelody(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
-        
 
         // Shuffle any number of target creature cards from your graveyard into your library.
         this.getSpellAbility().addEffect(new PipersMelodyShuffleEffect());
@@ -66,6 +64,7 @@ public class PipersMelody extends CardImpl {
         return new PipersMelody(this);
     }
 }
+
 class PipersMelodyShuffleEffect extends OneShotEffect {
 
     PipersMelodyShuffleEffect() {

@@ -28,6 +28,7 @@
 package mage.cards.e;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -50,8 +51,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class ExplosiveRevelation extends CardImpl {
 
     public ExplosiveRevelation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. Explosive Revelation deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new ExplosiveRevelationEffect());
@@ -86,42 +86,46 @@ class ExplosiveRevelationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().hasCards()) {
-            CardsImpl cards = new CardsImpl();
-            Library library = player.getLibrary();
-            Card card = null;
-            do {
-                card = library.removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
+            if (controller.getLibrary().hasCards()) {
+
+                CardsImpl cards = new CardsImpl();
+                Library library = controller.getLibrary();
+                Card card = null;
+                do {
+                    card = library.removeFromTop(game);
+                    if (card != null) {
+                        cards.add(card);
+                    }
+                } while (library.hasCards() && card != null && card.isLand());
+                // reveal cards
+                if (!cards.isEmpty()) {
+                    controller.revealCards(sourceObject.getIdName(), cards, game);
                 }
-            } while (library.hasCards() && card != null && card.isLand());
-            // reveal cards
-            if (!cards.isEmpty()) {
-                player.revealCards("Explosive Revelation", cards, game);
-            }
-            // the nonland card
-            int damage = card.getConvertedManaCost();
-            // assign damage to target
-            for (UUID targetId: targetPointer.getTargets(game, source)) {
-                Permanent targetedCreature = game.getPermanent(targetId);
-                if (targetedCreature != null) {
-                    targetedCreature.damage(damage, source.getSourceId(), game, false, true);
-                }
-                else {
-                    Player targetedPlayer = game.getPlayer(targetId);
-                    if (targetedPlayer != null) {
-                        targetedPlayer.damage(damage, source.getSourceId(), game, false, true);
+                // the nonland card
+                int damage = card.getConvertedManaCost();
+                // assign damage to target
+                for (UUID targetId : targetPointer.getTargets(game, source)) {
+                    Permanent targetedCreature = game.getPermanent(targetId);
+                    if (targetedCreature != null) {
+                        targetedCreature.damage(damage, source.getSourceId(), game, false, true);
+                    } else {
+                        Player targetedPlayer = game.getPlayer(targetId);
+                        if (targetedPlayer != null) {
+                            targetedPlayer.damage(damage, source.getSourceId(), game, false, true);
+                        }
                     }
                 }
+                // move nonland card to hand
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                // remove nonland card from revealed card list
+                cards.remove(card);
+                // put the rest of the cards on the bottom of the library in any order
+                return controller.putCardsOnBottomOfLibrary(cards, game, source, true);
             }
-            // move nonland card to hand
-            card.moveToZone(Zone.HAND, id, game, true);
-            // remove nonland card from revealed card list
-            cards.remove(card);
-            // put the rest of the cards on the bottom of the library in any order
-            return player.putCardsOnBottomOfLibrary(cards, game, source, true);
+            return true;
         }
         return false;
     }

@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInHand;
@@ -49,7 +50,7 @@ public class WildMongrel extends CardImpl {
 
     public WildMongrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.HOUND);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 
@@ -46,7 +47,7 @@ public class DarettiConstructToken extends Token {
         this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Construct");
+        subtype.add(SubType.CONSTRUCT);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

@@ -27,23 +27,19 @@
  */
 package mage.cards.p;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -52,14 +48,14 @@ import mage.players.Player;
 public class PsychosisCrawler extends CardImpl {
 
     public PsychosisCrawler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
-        this.subtype.add("Horror");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Duration.EndOfGame)));
-        this.addAbility(new DrawCardControllerTriggeredAbility(new LoseLifeOpponentsEffect(), false));
+        this.addAbility(new DrawCardControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
     }
 
     public PsychosisCrawler(final PsychosisCrawler card) {
@@ -70,36 +66,4 @@ public class PsychosisCrawler extends CardImpl {
     public PsychosisCrawler copy() {
         return new PsychosisCrawler(this);
     }
-}
-
-class LoseLifeOpponentsEffect extends OneShotEffect {
-
-    public LoseLifeOpponentsEffect() {
-        super(Outcome.Damage);
-        staticText = "each opponent loses 1 life";
-    }
-
-    public LoseLifeOpponentsEffect(final LoseLifeOpponentsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LoseLifeOpponentsEffect copy() {
-        return new LoseLifeOpponentsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        boolean applied = false;
-        Set<UUID> opponents = game.getOpponents(source.getControllerId());
-        for (UUID opponentUUID : opponents) {
-            Player player = game.getPlayer(opponentUUID);
-            if (player != null) {
-                player.loseLife(1, game, false);
-                applied = true;
-            }
-        }
-        return applied;
-    }
-
 }

@@ -34,6 +34,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class InsatiableHarpy extends CardImpl {
 
     public InsatiableHarpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Harpy");
+        this.subtype.add(SubType.HARPY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

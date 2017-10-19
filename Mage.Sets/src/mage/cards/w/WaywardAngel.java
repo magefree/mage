@@ -46,6 +46,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -59,8 +60,8 @@ public class WaywardAngel extends CardImpl {
 
     public WaywardAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
-        this.subtype.add("Angel");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ANGEL);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

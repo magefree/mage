@@ -35,6 +35,7 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -45,7 +46,7 @@ public class SigiledStarfish extends CardImpl {
 
     public SigiledStarfish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Starfish");
+        this.subtype.add(SubType.STARFISH);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

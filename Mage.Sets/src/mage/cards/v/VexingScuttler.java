@@ -38,6 +38,7 @@ import mage.abilities.keyword.EmergeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -59,8 +60,8 @@ public class VexingScuttler extends CardImpl {
 
     public VexingScuttler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Crab");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.CRAB);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

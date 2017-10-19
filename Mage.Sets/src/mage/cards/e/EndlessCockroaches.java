@@ -34,6 +34,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class EndlessCockroaches extends CardImpl {
 
     public EndlessCockroaches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

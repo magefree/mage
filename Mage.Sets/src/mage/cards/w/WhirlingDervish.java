@@ -39,6 +39,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.events.GameEvent;
 
@@ -52,8 +53,8 @@ public class WhirlingDervish extends CardImpl {
 
     public WhirlingDervish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.MONK);
 
         this.color.setGreen(true);
         this.power = new MageInt(1);

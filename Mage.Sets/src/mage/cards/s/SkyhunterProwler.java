@@ -34,6 +34,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class SkyhunterProwler extends CardImpl {
 
     public SkyhunterProwler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Cat");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.KNIGHT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

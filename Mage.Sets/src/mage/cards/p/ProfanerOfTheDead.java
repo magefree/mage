@@ -52,8 +52,8 @@ public class ProfanerOfTheDead extends CardImpl {
 
     public ProfanerOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add("Naga");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

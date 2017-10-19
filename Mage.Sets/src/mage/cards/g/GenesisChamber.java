@@ -29,8 +29,10 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +40,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -53,14 +54,21 @@ import mage.game.permanent.token.MyrToken;
 public class GenesisChamber extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
-    static{
+
+    static {
         filter.add(Predicates.not(new TokenPredicate()));
     }
+
     public GenesisChamber(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Whenever a nontoken creature enters the battlefield, if Genesis Chamber is untapped, that creature's controller creates a 1/1 colorless Myr artifact creature token.
-        this.addAbility(new GenesisChamberTriggeredAbility(new GenesisChamberEffect(), filter));
+        TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GenesisChamberEffect(), filter, false, SetTargetPointer.PERMANENT, "");
+        this.addAbility(new ConditionalTriggeredAbility(ability,
+                SourceUntappedCondition.instance,
+                "Whenever a nontoken creature enters the battlefield, "
+                + "if {this} is untapped, "
+                + "that creature's controller creates a 1/1 colorless Myr artifact creature token"));
     }
 
     public GenesisChamber(final GenesisChamber card) {
@@ -73,37 +81,24 @@ public class GenesisChamber extends CardImpl {
     }
 }
 
-class GenesisChamberTriggeredAbility extends EntersBattlefieldAllTriggeredAbility
-{
-    private static final String rule =  "Whenever a nontoken creature enters the battlefield, if {this} is untapped, that creature's controller creates a 1/1 colorless Myr artifact creature token";
-    public GenesisChamberTriggeredAbility(Effect effect, FilterPermanent filter)
-    {
-        super(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PERMANENT, rule);
-    }
-    
-    public GenesisChamberTriggeredAbility(final GenesisChamberTriggeredAbility ability) {
-        super(ability);
-    }
-    @Override
-    public GenesisChamberTriggeredAbility copy() {
-        return new GenesisChamberTriggeredAbility(this);
-    }
+enum SourceUntappedCondition implements Condition {
 
+    instance;
 
     @Override
-    public boolean checkInterveningIfClause(Game game) {
-        Permanent permanent = game.getPermanent(this.sourceId);
-        if(permanent == null){
-            permanent = (Permanent)game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
-        }
-        if(permanent != null){
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (permanent != null) {
             return !permanent.isTapped();
         }
         return false;
     }
-    
-}
 
+    @Override
+    public String toString() {
+        return "if {this} is untapped";
+    }
+}
 
 class GenesisChamberEffect extends OneShotEffect {
 
@@ -123,10 +118,7 @@ class GenesisChamberEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if(permanent == null){
-            permanent = (Permanent)game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
-        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
         if (permanent != null) {
             MyrToken token = new MyrToken();
             token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());

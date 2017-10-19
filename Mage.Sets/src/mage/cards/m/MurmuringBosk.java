@@ -58,7 +58,7 @@ public class MurmuringBosk extends CardImpl {
 
     public MurmuringBosk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Forest");
+        this.subtype.add(SubType.FOREST);
 
         // <i>({tap}: Add {G} to your mana pool.)</i>
         this.addAbility(new GreenManaAbility());

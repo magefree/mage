@@ -38,6 +38,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -54,7 +55,7 @@ public class SuturePriest extends CardImpl {
 
     public SuturePriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -56,7 +56,7 @@ public class GenjuOfTheCedars extends CardImpl {
 
     public GenjuOfTheCedars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant Forest
         TargetPermanent auraTarget = new TargetLandPermanent(filter);
@@ -91,7 +91,7 @@ public class GenjuOfTheCedars extends CardImpl {
             super("", "4/4 green Spirit creature");
             cardType.add(CardType.CREATURE);
             color.setGreen(true);
-            subtype.add("Spirit");
+            subtype.add(SubType.SPIRIT);
             power = new MageInt(4);
             toughness = new MageInt(4);
         }

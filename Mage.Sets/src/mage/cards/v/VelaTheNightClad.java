@@ -58,8 +58,8 @@ public class VelaTheNightClad extends CardImpl {
     public VelaTheNightClad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
 
         this.color.setBlue(true);
         this.color.setBlack(true);

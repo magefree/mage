@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,7 +52,9 @@ public class CollectiveRestraint extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Domain - Creatures can't attack you unless their controller pays {X} for each creature he or she controls that's attacking you, where X is the number of basic land types you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CollectiveRestraintPayManaToAttackAllEffect()));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CollectiveRestraintPayManaToAttackAllEffect());
+        ability.setAbilityWord(AbilityWord.DOMAIN);
+        this.addAbility(ability);
 
     }
 

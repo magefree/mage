@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 
@@ -51,13 +52,13 @@ import mage.constants.Zone;
 public class ChariotOfVictory extends CardImpl {
 
     public ChariotOfVictory(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        this.subtype.add("Equipment");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has first strike, trample, and haste.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT));
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT);
-        effect.setText(", trample");
+        effect.setText(", trample,");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and haste");

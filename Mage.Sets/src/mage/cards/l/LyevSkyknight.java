@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -55,8 +56,8 @@ public class LyevSkyknight extends CardImpl {
     
     public LyevSkyknight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.KNIGHT);
         
 
 

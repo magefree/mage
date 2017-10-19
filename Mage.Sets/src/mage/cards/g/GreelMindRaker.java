@@ -39,6 +39,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -55,8 +56,8 @@ public class GreelMindRaker extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Horror");
-        this.subtype.add("Spellshaper");
+        this.subtype.add(SubType.HORROR);
+        this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

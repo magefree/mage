@@ -38,6 +38,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -48,7 +49,7 @@ public class MistcutterHydra extends CardImpl {
 
     public MistcutterHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

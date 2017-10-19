@@ -36,6 +36,7 @@ import mage.abilities.keyword.ScavengeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -47,8 +48,8 @@ public class ThrashingMossdog extends CardImpl {
 
     public ThrashingMossdog (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.PLANT);
+        this.subtype.add(SubType.HOUND);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

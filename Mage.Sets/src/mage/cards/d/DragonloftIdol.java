@@ -60,7 +60,7 @@ public class DragonloftIdol extends CardImpl {
 
     public DragonloftIdol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
-        this.subtype.add("Gargoyle");
+        this.subtype.add(SubType.GARGOYLE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -50,7 +51,7 @@ public class DawntreaderElk extends CardImpl {
 
     public DawntreaderElk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Elk");
+        this.subtype.add(SubType.ELK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

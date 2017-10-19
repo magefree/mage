@@ -35,6 +35,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 
 /**
@@ -45,8 +46,8 @@ public class OrochiLeafcaller extends CardImpl {
 
     public OrochiLeafcaller (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Snake");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

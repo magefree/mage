@@ -36,6 +36,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -48,7 +49,7 @@ public class CrocodileOfTheCrossing extends CardImpl {
     public CrocodileOfTheCrossing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.subtype.add("Crocodile");
+        this.subtype.add(SubType.CROCODILE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

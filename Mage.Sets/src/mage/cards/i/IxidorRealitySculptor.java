@@ -33,15 +33,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TurnFaceUpTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.FaceDownPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,25 +49,25 @@ import mage.target.common.TargetCreaturePermanent;
 public class IxidorRealitySculptor extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Face-down creatures");
-    private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("Face-down creature");
+    private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("face-down creature");
 
     static {
         filter.add(new FaceDownPredicate());
         filterTarget.add(new FaceDownPredicate());
     }
-    
+
     public IxidorRealitySculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        
+
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
         // Face-down creatures get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
-        
+
         // {2}{U}: Turn target face-down creature face up.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TurnFaceUpTargetEffect(), new ManaCostsImpl("{2}{U}"));
         ability.addTarget(new TargetCreaturePermanent(filterTarget));
@@ -83,34 +81,5 @@ public class IxidorRealitySculptor extends CardImpl {
     @Override
     public IxidorRealitySculptor copy() {
         return new IxidorRealitySculptor(this);
-    }
-}
-
-class TurnFaceUpTargetEffect extends OneShotEffect {
-    
-    public TurnFaceUpTargetEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Turn target face-down creature face up.";
-    }
-    
-    public TurnFaceUpTargetEffect(final TurnFaceUpTargetEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public TurnFaceUpTargetEffect copy() {
-        return new TurnFaceUpTargetEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        UUID target = targetPointer.getFirst(game, source);
-        if (target != null) {
-            Permanent permanent = game.getPermanent(target);
-            if (permanent != null) {
-                return permanent.turnFaceUp(game, source.getControllerId());
-            }
-        }
-        return false;
     }
 }

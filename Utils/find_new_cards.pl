@@ -81,6 +81,7 @@ sub get_name_of_card_from_class
         $card_name =~ s/ Of / of /g;
         $card_name =~ s/ To / to /g;
         $card_name =~ s/ And / and /g;
+        $card_name =~ s/ For / for /g;
         return $card_name;
     }
     return "";
@@ -143,7 +144,31 @@ if (exists ($new_order{$cmd}))
     {
         if ($new_cards {$line} > 0)
         {
-            print ($line, " in ", $all_cards {$line}, "\n");
+            my $setname = $all_cards {$line};
+
+            # Check if name is correct if not try to fix with ' before the endings of first word
+            no warnings 'uninitialized';
+            if (!(length $setname)) { # setname is not set correct
+               my $firstblank = index($line, " ");
+               my $char  = substr $line, $firstblank - 1, 1;
+               if ($char eq "s") {
+                 my $fixedname = (substr $line, 0, $firstblank - 1) . "'" . (substr $line , $firstblank -1);
+                 $setname = $all_cards {$fixedname};
+                 if (length $setname) {
+                    $line = $fixedname;
+                 }
+               }
+            }
+
+
+            if (!(length $setname)){
+                print ("*** Set not found - probably card name is not exactly correct\n");
+                print ($line, "\n");
+            } else {
+                print ($line, " in ", $setname, "\n");
+            }
+
+
         }
     }
 }

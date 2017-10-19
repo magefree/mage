@@ -38,6 +38,7 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
@@ -53,7 +54,7 @@ public class MarshmistTitan extends CardImpl {
 
     public MarshmistTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

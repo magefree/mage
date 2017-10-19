@@ -39,6 +39,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
 
@@ -50,7 +51,7 @@ public class KavuTitan extends CardImpl {
 
     public KavuTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Kavu");
+        this.subtype.add(SubType.KAVU);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

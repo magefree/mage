@@ -59,11 +59,14 @@ public class FlashConscription extends CardImpl {
 
         // Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn. If {W} was spent to cast Flash Conscription, the creature gains "Whenever this creature deals combat damage, you gain that much life" until end of turn.
         this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn).setText("and gain control of it until end of turn"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("That creature gains haste until end of turn"));
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(new FlashConscriptionTriggeredAbility(), Duration.EndOfTurn),
-                new ManaWasSpentCondition(ColoredManaSymbol.W), "If {W} was spent to cast {this}, the creature gains \"Whenever this creature deals combat damage, you gain that much life\" until end of turn"));
+                new ManaWasSpentCondition(ColoredManaSymbol.W),
+                "If {W} was spent to cast {this}, the creature gains "
+                + "\"Whenever this creature deals combat damage, you gain that much life\" until end of turn"
+        ));
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

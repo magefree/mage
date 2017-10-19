@@ -57,16 +57,16 @@ public class Goatnapper extends CardImpl {
     }
 
     public Goatnapper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Rogue");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new UntapTargetEffect(), false);
         ability.addTarget(new TargetPermanent(filter));
-        ability.addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        ability.addEffect(new GainControlTargetEffect(Duration.EndOfTurn).setText("and gain control of it until end of turn"));
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn"));
         this.addAbility(ability);
     }
 

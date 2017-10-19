@@ -27,11 +27,14 @@
  */
 package mage.designations;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.BecomesMonarchTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.text.TextPart;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -39,8 +42,6 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -72,6 +73,16 @@ public class Monarch extends Designation {
     @Override
     public void setIsAllCreatureTypes(boolean value) {
 
+    }
+
+    @Override
+    public List<TextPart> getTextParts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TextPart addTextPart(TextPart textPart) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 
@@ -158,6 +169,5 @@ class MonarchDealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     public String getRule() {
         return "Whenever a creature deals combat damage to the monarch, its controller becomes the monarch.";
     }
-
 
 }

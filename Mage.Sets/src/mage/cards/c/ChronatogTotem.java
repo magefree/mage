@@ -44,6 +44,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Zone;
@@ -58,14 +59,14 @@ import mage.game.permanent.token.Token;
 public class ChronatogTotem extends CardImpl {
 
     public ChronatogTotem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {tap}: Add {U} to your mana pool.
         this.addAbility(new BlueManaAbility());
-        
+
         // {1}{U}: Chronatog Totem becomes a 1/2 blue Atog artifact creature until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ChronatogTotemToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")));
-        
+
         // {0}: Chronatog Totem gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn and only if Chronatog Totem is a creature.
         Ability ability = new ChronatogTotemAbility(
                 Zone.BATTLEFIELD,
@@ -90,8 +91,6 @@ class ChronatogTotemAbility extends LimitedTimesPerTurnActivatedAbility {
 
     private static final Effects emptyEffects = new Effects();
 
-    private final Condition condition;
-
     public ChronatogTotemAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
         this.condition = condition;
@@ -99,7 +98,6 @@ class ChronatogTotemAbility extends LimitedTimesPerTurnActivatedAbility {
 
     public ChronatogTotemAbility(ChronatogTotemAbility ability) {
         super(ability);
-        this.condition = ability.condition;
     }
 
     @Override
@@ -108,14 +106,6 @@ class ChronatogTotemAbility extends LimitedTimesPerTurnActivatedAbility {
             return emptyEffects;
         }
         return super.getEffects(game, effectType);
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (!condition.apply(game, this)) {
-            return false;
-        }
-        return super.canActivate(playerId, game);
     }
 
     @Override
@@ -138,7 +128,7 @@ class ChronatogTotemToken extends Token {
         super("Atog", "1/2 blue Atog artifact creature");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Atog");
+        subtype.add(SubType.ATOG);
         power = new MageInt(1);
         toughness = new MageInt(2);
         color.setBlue(true);

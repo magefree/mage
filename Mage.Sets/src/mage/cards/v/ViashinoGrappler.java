@@ -45,7 +45,7 @@ public class ViashinoGrappler extends CardImpl {
 
     public ViashinoGrappler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Viashino");
+        this.subtype.add(SubType.VIASHINO);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

@@ -55,7 +55,7 @@ public class SerendibDjinn extends CardImpl {
 
     public SerendibDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.subtype.add("Djinn");
+        this.subtype.add(SubType.DJINN);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

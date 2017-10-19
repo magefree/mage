@@ -34,6 +34,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class ShivanZombie extends CardImpl {
 
     public ShivanZombie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
-        this.subtype.add("Barbarian");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.BARBARIAN);
+        this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

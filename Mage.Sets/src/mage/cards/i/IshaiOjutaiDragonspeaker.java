@@ -36,6 +36,7 @@ import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 
@@ -49,8 +50,8 @@ public class IshaiOjutaiDragonspeaker extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Bird");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.MONK);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

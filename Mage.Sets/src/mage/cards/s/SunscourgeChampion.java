@@ -39,6 +39,7 @@ import mage.abilities.keyword.EternalizeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,8 +56,8 @@ public class SunscourgeChampion extends CardImpl {
     public SunscourgeChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

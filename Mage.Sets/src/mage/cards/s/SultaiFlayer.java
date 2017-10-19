@@ -34,6 +34,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,8 +56,8 @@ public class SultaiFlayer extends CardImpl {
 
     public SultaiFlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Naga");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

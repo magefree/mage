@@ -38,6 +38,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
@@ -58,8 +59,8 @@ public class MesmericFiend extends CardImpl {
 
     public MesmericFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Nightmare");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.NIGHTMARE);
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

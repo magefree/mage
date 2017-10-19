@@ -37,6 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -50,7 +51,7 @@ public class Leveler extends CardImpl {
 
     public Leveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
-        this.subtype.add("Juggernaut");
+        this.subtype.add(SubType.JUGGERNAUT);
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
 

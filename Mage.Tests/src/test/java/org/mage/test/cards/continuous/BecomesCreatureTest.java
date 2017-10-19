@@ -29,6 +29,7 @@ package org.mage.test.cards.continuous;
 
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
@@ -57,7 +58,7 @@ public class BecomesCreatureTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Chimeric Mass", 1);
         assertPowerToughness(playerA, "Chimeric Mass", 3, 3);
-        assertType("Chimeric Mass", CardType.CREATURE, "Construct");
+        assertType("Chimeric Mass", CardType.CREATURE, SubType.CONSTRUCT);
 
     }
 

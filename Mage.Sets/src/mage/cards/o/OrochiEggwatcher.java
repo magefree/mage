@@ -45,6 +45,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
@@ -62,8 +63,8 @@ public class OrochiEggwatcher extends CardImpl {
 
     public OrochiEggwatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.subtype.add("Snake");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -96,8 +97,8 @@ class ShidakoBroodmistress extends Token {
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Snake");
-        subtype.add("Shaman");
+        subtype.add(SubType.SNAKE);
+        subtype.add(SubType.SHAMAN);
         power = new MageInt(3);
         toughness = new MageInt(3);
         // {G}, Sacrifice a creature: Target creature gets +3/+3 until end of turn.

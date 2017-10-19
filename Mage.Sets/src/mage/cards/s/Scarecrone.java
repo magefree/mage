@@ -63,7 +63,7 @@ public class Scarecrone extends CardImpl {
 
     public Scarecrone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Scarecrow");
+        this.subtype.add(SubType.SCARECROW);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

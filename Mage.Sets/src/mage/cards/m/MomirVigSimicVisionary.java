@@ -39,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -70,8 +71,8 @@ public class MomirVigSimicVisionary extends CardImpl {
     public MomirVigSimicVisionary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elf");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

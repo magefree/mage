@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
@@ -49,7 +50,7 @@ public class WingsOfVelisVel extends CardImpl {
 
     public WingsOfVelisVel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{1}{U}");
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());

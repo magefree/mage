@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -48,6 +48,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,8 +68,8 @@ public class MelekIzzetParagon extends CardImpl {
     public MelekIzzetParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Weird");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.WEIRD);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
@@ -131,6 +133,6 @@ class MelekIzzetParagonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast an instant or sorcery from your library, copy it. You may choose new targets for the copy.";
+        return "Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.";
     }
 }

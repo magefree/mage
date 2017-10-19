@@ -38,6 +38,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -75,7 +76,7 @@ public class OrzhovKeyrune extends CardImpl {
             cardType.add(CardType.CREATURE);
             color.setWhite(true);
             color.setBlack(true);
-            subtype.add("Thrull");
+            subtype.add(SubType.THRULL);
             power = new MageInt(1);
             toughness = new MageInt(4);
             this.addAbility(LifelinkAbility.getInstance());

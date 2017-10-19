@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -50,7 +51,7 @@ public class PrismToken extends Token {
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Prism");
+        subtype.add(SubType.PRISM);
         power = new MageInt(0);
         toughness = new MageInt(1);
     }

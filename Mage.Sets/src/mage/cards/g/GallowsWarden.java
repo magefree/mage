@@ -54,7 +54,7 @@ public class GallowsWarden extends CardImpl {
 
     public GallowsWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -53,7 +54,7 @@ public class LuminatePrimordial extends CardImpl {
 
     public LuminatePrimordial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);

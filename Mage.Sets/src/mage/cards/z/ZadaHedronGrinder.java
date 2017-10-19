@@ -154,10 +154,7 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell == null) {
-            spell = (Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
-        }
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (spell != null && controller != null) {
             // search the target that targets source

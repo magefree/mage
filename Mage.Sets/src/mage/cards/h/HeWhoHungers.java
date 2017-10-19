@@ -67,7 +67,7 @@ public class HeWhoHungers extends CardImpl {
     public HeWhoHungers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

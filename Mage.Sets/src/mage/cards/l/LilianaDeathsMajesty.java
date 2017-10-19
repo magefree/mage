@@ -62,7 +62,7 @@ public class LilianaDeathsMajesty extends CardImpl {
     public LilianaDeathsMajesty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Liliana");
+        this.subtype.add(SubType.LILIANA);
 
         //Starting Loyalty: 5
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

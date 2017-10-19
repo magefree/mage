@@ -39,6 +39,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.WhiteElementalToken;
@@ -51,7 +52,7 @@ public class HoofprintsOfTheStag extends CardImpl {
 
     public HoofprintsOfTheStag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         // Whenever you draw a card, you may put a hoofprint counter on Hoofprints of the Stag.
         this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.HOOFPRINT.createInstance(1)), true));

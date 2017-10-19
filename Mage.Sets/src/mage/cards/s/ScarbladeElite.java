@@ -58,8 +58,8 @@ public class ScarbladeElite extends CardImpl {
 
     public ScarbladeElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Elf");
-        this.subtype.add("Assassin");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ASSASSIN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

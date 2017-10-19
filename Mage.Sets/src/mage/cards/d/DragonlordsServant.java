@@ -53,8 +53,8 @@ public class DragonlordsServant extends CardImpl {
 
     public DragonlordsServant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

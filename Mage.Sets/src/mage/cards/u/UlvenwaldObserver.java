@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,7 +56,7 @@ public class UlvenwaldObserver extends CardImpl {
 
     public UlvenwaldObserver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Treefolk");
+        this.subtype.add(SubType.TREEFOLK);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

@@ -35,6 +35,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class MantisRider extends CardImpl {
 
     public MantisRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Monk");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.MONK);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

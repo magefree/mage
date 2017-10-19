@@ -40,6 +40,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -77,7 +78,7 @@ class InkmothNexusToken extends Token {
         super("Blinkmoth", "1/1 Blinkmoth artifact creature with flying and infect");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Blinkmoth");
+        this.subtype.add(SubType.BLINKMOTH);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

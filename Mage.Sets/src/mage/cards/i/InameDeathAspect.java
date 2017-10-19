@@ -51,7 +51,7 @@ public class InameDeathAspect extends CardImpl {
     public InameDeathAspect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

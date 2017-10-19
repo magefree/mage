@@ -53,32 +53,32 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 public class RisenExecutioner extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
-    
+
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
-    
+
     public RisenExecutioner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Warrior");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
         // Risen Executioner can't block.
         this.addAbility(new CantBlockAbility());
-        
+
         // Other Zombie creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-                
+
         // You may cast Risen Executioner from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard.
         // TODO: cost increase does not happen if Risen Executioner is cast grom graveyard because of other effects
         Ability ability = new SimpleStaticAbility(Zone.ALL, new RisenExecutionerCastEffect());
         ability.addEffect(new RisenExecutionerCostIncreasingEffect());
         this.addAbility(ability);
-        
+
     }
 
     public RisenExecutioner(final RisenExecutioner card) {
@@ -92,10 +92,10 @@ public class RisenExecutioner extends CardImpl {
 }
 
 class RisenExecutionerCastEffect extends AsThoughEffectImpl {
-    
+
     RisenExecutionerCastEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may cast {this} from your graveyard";
+        staticText = "You may cast {this} from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard";
     }
 
     RisenExecutionerCastEffect(final RisenExecutionerCastEffect effect) {
@@ -116,8 +116,8 @@ class RisenExecutionerCastEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null 
-                    && card.getOwnerId().equals(affectedControllerId) 
+            if (card != null
+                    && card.getOwnerId().equals(affectedControllerId)
                     && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                 return true;
             }
@@ -129,14 +129,14 @@ class RisenExecutionerCastEffect extends AsThoughEffectImpl {
 class RisenExecutionerCostIncreasingEffect extends CostModificationEffectImpl {
 
     protected static final FilterCreatureCard filter = new FilterCreatureCard();
-    
+
     static {
         filter.add(new AnotherCardPredicate());
     }
-    
-    RisenExecutionerCostIncreasingEffect () {
+
+    RisenExecutionerCostIncreasingEffect() {
         super(Duration.EndOfGame, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "if you pay {1} more to cast it for each other creature card in your graveyard";
+        staticText = "";
     }
 
     RisenExecutionerCostIncreasingEffect(final RisenExecutionerCostIncreasingEffect effect) {

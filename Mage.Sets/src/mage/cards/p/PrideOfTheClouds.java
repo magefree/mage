@@ -40,6 +40,7 @@ import mage.abilities.keyword.ForecastAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,8 +62,8 @@ public class PrideOfTheClouds extends CardImpl {
     
     public PrideOfTheClouds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Cat");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.CAT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -93,7 +94,7 @@ public class PrideOfTheClouds extends CardImpl {
             cardType.add(CardType.CREATURE);
             color.setWhite(true);
             color.setBlue(true);
-            subtype.add("Bird");
+            subtype.add(SubType.BIRD);
             power = new MageInt(1);
             toughness = new MageInt(1);
             addAbility(FlyingAbility.getInstance());

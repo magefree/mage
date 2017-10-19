@@ -48,6 +48,19 @@ public final class CardImageUtils {
         log.warn("Token image file not found: " + card.getSet() + " - " + card.getTokenSetCode() + " - " + card.getName());
         return null;
     }
+    
+    /**
+     *
+     * @param card
+     * @return String regardless of whether image exists
+     */
+    public static String generateFullTokenImagePath(CardDownloadData card) {
+        if (card.isToken()) {
+            String filePath = getTokenImagePath(card);
+            return filePath;
+        }
+        return "";
+    }
 
     private static String getTokenImagePath(CardDownloadData card) {
         String filename = generateImagePath(card);

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class KioraKrakenToken extends Token {
         super("Kraken", "9/9 blue Kraken creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Kraken");
+        subtype.add(SubType.KRAKEN);
         power = new MageInt(9);
         toughness = new MageInt(9);
         this.setOriginalExpansionSetCode("BNG");

@@ -65,7 +65,7 @@ public class LilianaDefiantNecromancer extends CardImpl {
     public LilianaDefiantNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Liliana");
+        this.subtype.add(SubType.LILIANA);
         this.color.setBlack(true);
 
         this.nightCard = true;
@@ -75,6 +75,7 @@ public class LilianaDefiantNecromancer extends CardImpl {
         // +2: Each player discards a card.
         this.addAbility(new LoyaltyAbility(new DiscardEachPlayerEffect(1, false), 2));
 
+        //TODO: Make ability properly copiable
         // -X: Return target nonlegendary creature with converted mana cost X from your graveyard to the battlefield.
         Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
         ability2Id = ability.getOriginalId();

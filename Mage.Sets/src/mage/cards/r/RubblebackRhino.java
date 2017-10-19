@@ -33,6 +33,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class RubblebackRhino extends CardImpl {
 
     public RubblebackRhino(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.subtype.add("Rhino");
+        this.subtype.add(SubType.RHINO);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

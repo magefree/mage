@@ -24,7 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -71,6 +71,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Crypt", 171, Rarity.RARE, mage.cards.b.BloodCrypt.class));
         cards.add(new SetCardInfo("Bond of Agony", 38, Rarity.UNCOMMON, mage.cards.b.BondOfAgony.class));
         cards.add(new SetCardInfo("Bound // Determined", 149, Rarity.RARE, mage.cards.b.BoundDetermined.class));
+        cards.add(new SetCardInfo("Brace for Impact", 5, Rarity.UNCOMMON, mage.cards.b.BraceForImpact.class));
         cards.add(new SetCardInfo("Brain Pry", 39, Rarity.UNCOMMON, mage.cards.b.BrainPry.class));
         cards.add(new SetCardInfo("Breeding Pool", 172, Rarity.RARE, mage.cards.b.BreedingPool.class));
         cards.add(new SetCardInfo("Bronze Bombshell", 160, Rarity.RARE, mage.cards.b.BronzeBombshell.class));
@@ -91,6 +92,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Dovescape", 143, Rarity.RARE, mage.cards.d.Dovescape.class));
         cards.add(new SetCardInfo("Dread Slag", 109, Rarity.RARE, mage.cards.d.DreadSlag.class));
         cards.add(new SetCardInfo("Drekavac", 43, Rarity.UNCOMMON, mage.cards.d.Drekavac.class));
+        cards.add(new SetCardInfo("Elemental Resonance", 83, Rarity.RARE, mage.cards.e.ElementalResonance.class));
         cards.add(new SetCardInfo("Enemy of the Guildpact", 44, Rarity.COMMON, mage.cards.e.EnemyOfTheGuildpact.class));
         cards.add(new SetCardInfo("Enigma Eidolon", 24, Rarity.COMMON, mage.cards.e.EnigmaEidolon.class));
         cards.add(new SetCardInfo("Entropic Eidolon", 45, Rarity.COMMON, mage.cards.e.EntropicEidolon.class));
@@ -178,6 +180,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Skullmead Cauldron", 167, Rarity.UNCOMMON, mage.cards.s.SkullmeadCauldron.class));
         cards.add(new SetCardInfo("Sky Hussar", 131, Rarity.UNCOMMON, mage.cards.s.SkyHussar.class));
         cards.add(new SetCardInfo("Skyscribing", 32, Rarity.UNCOMMON, mage.cards.s.Skyscribing.class));
+        cards.add(new SetCardInfo("Slaughterhouse Bouncer", 54, Rarity.COMMON, mage.cards.s.SlaughterhouseBouncer.class));
         cards.add(new SetCardInfo("Slithering Shade", 55, Rarity.UNCOMMON, mage.cards.s.SlitheringShade.class));
         cards.add(new SetCardInfo("Soulsworn Jury", 17, Rarity.COMMON, mage.cards.s.SoulswornJury.class));
         cards.add(new SetCardInfo("Spell Snare", 33, Rarity.UNCOMMON, mage.cards.s.SpellSnare.class));
@@ -196,6 +199,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Trial // Error", 158, Rarity.UNCOMMON, mage.cards.t.TrialError.class));
         cards.add(new SetCardInfo("Trygon Predator", 133, Rarity.UNCOMMON, mage.cards.t.TrygonPredator.class));
         cards.add(new SetCardInfo("Twinstrike", 134, Rarity.UNCOMMON, mage.cards.t.Twinstrike.class));
+        cards.add(new SetCardInfo("Unliving Psychopath", 56, Rarity.RARE, mage.cards.u.UnlivingPsychopath.class));
         cards.add(new SetCardInfo("Utopia Sprawl", 99, Rarity.COMMON, mage.cards.u.UtopiaSprawl.class));
         cards.add(new SetCardInfo("Utvara Scalper", 76, Rarity.COMMON, mage.cards.u.UtvaraScalper.class));
         cards.add(new SetCardInfo("Valor Made Real", 20, Rarity.COMMON, mage.cards.v.ValorMadeReal.class));

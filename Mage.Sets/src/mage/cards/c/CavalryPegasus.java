@@ -56,7 +56,7 @@ public class CavalryPegasus extends CardImpl {
 
     public CavalryPegasus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Pegasus");
+        this.subtype.add(SubType.PEGASUS);
 
 
         this.power = new MageInt(1);

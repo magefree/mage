@@ -36,6 +36,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -47,7 +48,7 @@ public class GruulNodorog extends CardImpl {
 
     public GruulNodorog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

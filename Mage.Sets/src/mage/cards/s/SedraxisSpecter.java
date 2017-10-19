@@ -37,6 +37,7 @@ import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,7 +47,7 @@ public class SedraxisSpecter extends CardImpl {
 
     public SedraxisSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");
-        this.subtype.add("Specter");
+        this.subtype.add(SubType.SPECTER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

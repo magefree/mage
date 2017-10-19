@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,7 +50,7 @@ public class WildWurm extends CardImpl {
 
     public WildWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Wurm");
+        this.subtype.add(SubType.WURM);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
@@ -46,7 +47,7 @@ public class MyrSuperion extends CardImpl {
 
     public MyrSuperion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
-        this.subtype.add("Myr");
+        this.subtype.add(SubType.MYR);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);

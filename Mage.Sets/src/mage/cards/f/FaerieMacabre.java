@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInGraveyard;
@@ -49,8 +50,8 @@ public class FaerieMacabre extends CardImpl {
 
     public FaerieMacabre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.subtype.add("Faerie");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.FAERIE);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

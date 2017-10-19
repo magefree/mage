@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -47,8 +48,8 @@ public class DauntlessAven extends CardImpl {
     public DauntlessAven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.subtype.add("Bird");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

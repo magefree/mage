@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -54,8 +55,8 @@ public class TanaTheBloodsower extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
         
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

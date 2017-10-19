@@ -55,7 +55,7 @@ public class ShadowSliver extends CardImpl {
 
     public ShadowSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

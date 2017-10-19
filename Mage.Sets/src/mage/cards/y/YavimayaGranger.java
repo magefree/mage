@@ -34,6 +34,7 @@ import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
@@ -48,7 +49,7 @@ public class YavimayaGranger extends CardImpl {
 
     public YavimayaGranger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ELF);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

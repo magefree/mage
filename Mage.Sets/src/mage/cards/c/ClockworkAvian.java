@@ -46,6 +46,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.Counter;
@@ -62,25 +63,39 @@ public class ClockworkAvian extends CardImpl {
 
     public ClockworkAvian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.subtype.add("Bird");
+        this.subtype.add(SubType.BIRD);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Clockwork Avian enters the battlefield with four +1/+0 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P0.createInstance(4)), "{this} enters the battlefield with four +1/+0 counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P0.createInstance(4)),
+                "with four +1/+0 counters on it"
+        ));
 
         // At end of combat, if Clockwork Avian attacked or blocked this combat, remove a +1/+0 counter from it.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EndOfCombatTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P0.createInstance()), false),
                 AttackedOrBlockedThisCombatSourceCondition.instance,
                 "At end of combat, if {this} attacked or blocked this combat, remove a +1/+0 counter from it."),
-                new AttackedOrBlockedThisCombatWatcher());
+                new AttackedOrBlockedThisCombatWatcher()
+        );
 
         // {X}, {tap}: Put up to X +1/+0 counters on Clockwork Avian. This ability can't cause the total number of +1/+0 counters on Clockwork Avian to be greater than four. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new AvianAddCountersSourceEffect(CounterType.P1P0.createInstance(), new ManacostVariableValue(), true, true), new ManaCostsImpl("{X}"), new IsStepCondition(PhaseStep.UPKEEP), null);
+        Ability ability = new ConditionalActivatedAbility(
+                Zone.BATTLEFIELD,
+                new AvianAddCountersSourceEffect(
+                        CounterType.P1P0.createInstance(),
+                        new ManacostVariableValue(),
+                        true, true
+                ),
+                new ManaCostsImpl("{X}"),
+                new IsStepCondition(PhaseStep.UPKEEP),
+                null
+        );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -99,6 +114,7 @@ class AvianAddCountersSourceEffect extends AddCountersSourceEffect {
 
     public AvianAddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers, boolean putOnCard) {
         super(counter, amount, informPlayers, putOnCard);
+        staticText = "Put up to X +1/+0 counters on {this}. This ability can't cause the total number of +1/+0 counters on {this} to be greater than four.";
     }
 
     @Override

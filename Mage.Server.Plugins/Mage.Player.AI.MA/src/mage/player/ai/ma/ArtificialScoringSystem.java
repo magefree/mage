@@ -1,16 +1,16 @@
 package mage.player.ai.ma;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  * @author ubeefx, nantuko
@@ -56,7 +56,7 @@ public final class ArtificialScoringSystem {
             //score + =cardDefinition.getActivations().size()*50;
             //score += cardDefinition.getManaActivations().size()*80;
         } else {
-            if (permanent.getSubtype(game).contains("Equipment")) {
+            if (permanent.getSubtype(game).contains(SubType.EQUIPMENT)) {
                 score += 100;
             }
         }
@@ -103,7 +103,7 @@ public final class ArtificialScoringSystem {
             }
             score += equipments * 50 + enchantments * 100;
 
-            if (!permanent.canAttack(game)) {
+            if (!permanent.canAttack(null, game)) {
                 score -= 100;
             }
 

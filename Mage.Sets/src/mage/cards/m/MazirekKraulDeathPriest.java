@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -54,8 +55,8 @@ public class MazirekKraulDeathPriest extends CardImpl {
     public MazirekKraulDeathPriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Insect");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.INSECT);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

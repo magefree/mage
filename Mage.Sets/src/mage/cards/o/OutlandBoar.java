@@ -34,6 +34,7 @@ import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,7 +55,7 @@ public class OutlandBoar extends CardImpl {
     public OutlandBoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
-        this.subtype.add("Boar");
+        this.subtype.add(SubType.BOAR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

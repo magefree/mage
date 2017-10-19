@@ -34,6 +34,7 @@ import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -43,7 +44,7 @@ public class PartTheVeil extends CardImpl {
 
     public PartTheVeil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
         
         // Return all creatures you control to their owner's hand.
         Effect effect = new ReturnToHandFromBattlefieldAllEffect(new FilterControlledCreaturePermanent());

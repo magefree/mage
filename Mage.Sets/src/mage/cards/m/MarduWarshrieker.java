@@ -37,6 +37,7 @@ import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
@@ -46,16 +47,16 @@ import mage.watchers.common.PlayerAttackedWatcher;
 public class MarduWarshrieker extends CardImpl {
 
     public MarduWarshrieker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Orc");
-        this.subtype.add("Shaman");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.subtype.add(SubType.ORC);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // <em>Raid</em> - When Mardu Warshrieker enters the battlefield, if you attacked with a creature this turn, add {R}{W}{B} to your mana pool.
         this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(new Mana(1, 0, 0, 1, 1, 0, 0, 0))), RaidCondition.instance,
-                "<i>Raid</i> -  When {this} enters the battlefield, if you attacked with a creature this turn, add {R}{W}{B} to your mana pool."),
+                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, add {R}{W}{B} to your mana pool."),
                 new PlayerAttackedWatcher());
     }
 

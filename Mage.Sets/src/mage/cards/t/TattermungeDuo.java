@@ -37,6 +37,7 @@ import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,9 +58,9 @@ public class TattermungeDuo extends CardImpl {
 
     public TattermungeDuo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/G}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

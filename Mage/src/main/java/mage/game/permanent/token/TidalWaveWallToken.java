@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 
@@ -41,7 +42,7 @@ public class TidalWaveWallToken extends Token {
         super("Wall", "5/5 blue Wall creature token with defender");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Wall");
+        subtype.add(SubType.WALL);
         power = new MageInt(5);
         toughness = new MageInt(5);
         this.addAbility(DefenderAbility.getInstance());

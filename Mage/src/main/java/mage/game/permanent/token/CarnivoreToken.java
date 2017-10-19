@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class CarnivoreToken extends Token {
         super("Carnivore", "3/1 red Beast creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Beast");
+        subtype.add(SubType.BEAST);
         power = new MageInt(3);
         toughness = new MageInt(1);
     }

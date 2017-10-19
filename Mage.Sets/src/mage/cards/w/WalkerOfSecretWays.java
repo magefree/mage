@@ -27,7 +27,6 @@
  */
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -49,6 +48,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -62,8 +63,8 @@ public class WalkerOfSecretWays extends CardImpl {
 
     public WalkerOfSecretWays(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Ninja");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.NINJA);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
@@ -72,7 +73,7 @@ public class WalkerOfSecretWays extends CardImpl {
         this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{1}{U}")));
 
         // Whenever Walker of Secret Ways deals combat damage to a player, look at that player's hand.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new WalkerOfSecretWaysEffect(), true, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new WalkerOfSecretWaysEffect(), false, true));
 
         // {1}{U}: Return target Ninja you control to its owner's hand. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}"), MyTurnCondition.instance);

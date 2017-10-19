@@ -57,7 +57,7 @@ public class Shuriken extends CardImpl {
 
     public Shuriken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "{tap}, Unattach Shuriken: Shuriken deals 2 damage to target creature. That creature's controller gains control of Shuriken unless it was unattached from a Ninja."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShurikenDamageEffect(), new TapSourceCost());

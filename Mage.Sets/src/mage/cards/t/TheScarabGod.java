@@ -39,8 +39,7 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -69,7 +68,7 @@ public class TheScarabGod extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("God");
+        this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
@@ -161,9 +160,9 @@ class TheScarabGodEffect2 extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
             controller.moveCards(card, Zone.EXILED, source, game); // Also if the move to exile is replaced, the copy takes place
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, false, 1, false, false, null, 4, 4, false);
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false, 1, false, false, null, 4, 4, false);
             effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-            effect.setOnlySubType("Zombie");
+            effect.setOnlySubType(SubType.ZOMBIE);
             effect.setOnlyColor(ObjectColor.BLACK);
             effect.apply(game, source);
             return true;

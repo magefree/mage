@@ -44,6 +44,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
@@ -55,8 +56,8 @@ public class WolfOfDevilsBreach extends CardImpl {
 
     public WolfOfDevilsBreach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.WOLF);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

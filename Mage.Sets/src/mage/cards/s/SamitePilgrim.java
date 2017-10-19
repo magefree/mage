@@ -48,15 +48,16 @@ import mage.target.common.TargetCreaturePermanent;
 public class SamitePilgrim extends CardImpl {
 
     public SamitePilgrim(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Domain - {T}: Prevent the next X damage that would be dealt to target creature this turn, where X is the number of basic land types among lands you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SamitePilgrimPreventDamageToTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setAbilityWord(AbilityWord.DOMAIN);
         this.addAbility(ability);
     }
 
@@ -71,7 +72,6 @@ public class SamitePilgrim extends CardImpl {
 }
 
 class SamitePilgrimPreventDamageToTargetEffect extends PreventionEffectImpl {
-
 
     public SamitePilgrimPreventDamageToTargetEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, true);

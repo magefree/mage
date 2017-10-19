@@ -59,7 +59,7 @@ public class ConsumingBonfire extends CardImpl {
 
     public ConsumingBonfire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{R}{R}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
         // Choose one - Consuming Bonfire deals 4 damage to target non-Elemental creature; 
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -45,18 +46,18 @@ import mage.players.Player;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class SaberAnts extends CardImpl {
 
     public SaberAnts(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Insect");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.subtype.add(SubType.INSECT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
         // Whenever Saber Ants is dealt damage, you may create that many 1/1 green Insect creature tokens.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new SaberAntsEffect(), true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new SaberAntsEffect(), true, false, true));
     }
 
     public SaberAnts(final SaberAnts card) {

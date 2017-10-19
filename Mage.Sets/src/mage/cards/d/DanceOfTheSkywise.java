@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -70,8 +71,8 @@ public class DanceOfTheSkywise extends CardImpl {
             super("Dragon", "blue Dragon Illusion with base power and toughness 4/4 and with flying");
             cardType.add(CardType.CREATURE);
             color.setBlue(true);
-            subtype.add("Dragon");
-            subtype.add("Illusion");            
+            subtype.add(SubType.DRAGON);
+            subtype.add(SubType.ILLUSION);            
             power = new MageInt(4);
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());

@@ -41,6 +41,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -56,7 +57,7 @@ public class StuffyDoll extends CardImpl {
 
     public StuffyDoll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
-        this.subtype.add("Construct");
+        this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

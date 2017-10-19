@@ -60,8 +60,8 @@ public class CateranKidnappers extends CardImpl {
 
     public CateranKidnappers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Mercenary");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.MERCENARY);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 
 /**
@@ -46,7 +47,7 @@ public class RootElemental extends CardImpl {
 
     public RootElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

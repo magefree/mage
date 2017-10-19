@@ -35,6 +35,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class RecklessWurm extends CardImpl {
 
     public RecklessWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.subtype.add("Wurm");
+        this.subtype.add(SubType.WURM);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

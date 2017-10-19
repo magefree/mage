@@ -59,7 +59,7 @@ public class LordOfLineage extends CardImpl {
 
     public LordOfLineage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
 
         this.color.setBlack(true);
         this.power = new MageInt(5);

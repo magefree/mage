@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class OgreToken extends Token {
         super("Ogre", "3/3 red Ogre creature");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Ogre");
+        subtype.add(SubType.OGRE);
         power = new MageInt(3);
         toughness = new MageInt(3);
     }

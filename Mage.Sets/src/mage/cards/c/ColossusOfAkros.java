@@ -44,6 +44,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -55,7 +56,7 @@ public class ColossusOfAkros extends CardImpl {
 
     public ColossusOfAkros(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{8}");
-        this.subtype.add("Golem");
+        this.subtype.add(SubType.GOLEM);
 
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);

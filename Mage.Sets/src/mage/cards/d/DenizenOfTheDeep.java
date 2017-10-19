@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -52,7 +53,7 @@ public class DenizenOfTheDeep extends CardImpl {
 
     public DenizenOfTheDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}");
-        this.subtype.add("Serpent");
+        this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(11);
         this.toughness = new MageInt(11);
 

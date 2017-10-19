@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -53,8 +54,8 @@ public class Malignus extends CardImpl {
 
     public Malignus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

@@ -61,7 +61,7 @@ public class ThrullChampion extends CardImpl {
 
     public ThrullChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Thrull");
+        this.subtype.add(SubType.THRULL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

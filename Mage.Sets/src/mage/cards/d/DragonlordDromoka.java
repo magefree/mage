@@ -50,8 +50,8 @@ public class DragonlordDromoka extends CardImpl {
     public DragonlordDromoka(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elder");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.ELDER);
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 

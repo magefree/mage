@@ -75,11 +75,11 @@ public class UserData implements Serializable {
         this.autoOrderTrigger = userData.autoOrderTrigger;
         this.useFirstManaAbility = userData.useFirstManaAbility;
         this.userIdStr = userData.userIdStr;
-        // todo: why we don't copy user stats here?
+        // todo: why we don't update user stats here? => can't be updated from client side
     }
 
     public static UserData getDefaultUserDataView() {
-        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, getDefaultFlagName(), false, true, true, false, false, false, false, "");
+        return new UserData(UserGroup.DEFAULT, 0, false, false, true, new UserSkipPrioritySteps(), getDefaultFlagName(), false, true, true, false, false, false, false, "");
     }
 
     public void setGroupId(int groupId) {

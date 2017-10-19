@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEf
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -50,8 +51,8 @@ public class RevekaWizardSavant extends CardImpl {
     public RevekaWizardSavant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dwarf");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

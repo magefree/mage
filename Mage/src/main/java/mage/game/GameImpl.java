@@ -60,9 +60,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.combat.Combat;
@@ -445,6 +443,20 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
         return null;
+    }
+
+    @Override
+    public Spell getSpell(UUID spellId) {
+        return state.getStack().getSpell(spellId);
+    }
+
+    @Override
+    public Spell getSpellOrLKIStack(UUID spellId) {
+        Spell spell = state.getStack().getSpell(spellId);
+        if (spell == null) {
+            spell = (Spell) this.getLastKnownInformation(spellId, Zone.STACK);
+        }
+        return spell;
     }
 
     @Override
@@ -1774,7 +1786,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (perm.isWorld()) {
                 worldEnchantment.add(perm);
             }
-            if (StaticFilters.FILTER_AURA.match(perm, this)) {
+            if (StaticFilters.FILTER_PERMANENT_AURA.match(perm, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
                     Card card = this.getCard(perm.getId());
@@ -1852,10 +1864,10 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            if (this.getState().isLegendaryRuleActive() && StaticFilters.FILTER_LEGENDARY.match(perm, this)) {
+            if (this.getState().isLegendaryRuleActive() && StaticFilters.FILTER_PERMANENT_LEGENDARY.match(perm, this)) {
                 legendary.add(perm);
             }
-            if (StaticFilters.FILTER_EQUIPMENT.match(perm, this)) {
+            if (StaticFilters.FILTER_PERMANENT_EQUIPMENT.match(perm, this)) {
                 //20091005 - 704.5p, 702.14d
                 if (perm.getAttachedTo() != null) {
                     Permanent attachedTo = getPermanent(perm.getAttachedTo());
@@ -1880,7 +1892,7 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            if (StaticFilters.FILTER_FORTIFICATION.match(perm, this)) {
+            if (StaticFilters.FILTER_PERMANENT_FORTIFICATION.match(perm, this)) {
                 if (perm.getAttachedTo() != null) {
                     Permanent land = getPermanent(perm.getAttachedTo());
                     if (land == null || !land.getAttachments().contains(perm.getId())) {
@@ -1900,9 +1912,9 @@ public abstract class GameImpl implements Game, Serializable {
                     Permanent attachment = getPermanent(attachmentId);
                     if (attachment != null
                             && (attachment.isCreature()
-                            || !(attachment.getSubtype(this).contains("Aura")
-                            || attachment.getSubtype(this).contains("Equipment")
-                            || attachment.getSubtype(this).contains("Fortification")))) {
+                            || !(attachment.getSubtype(this).contains(SubType.AURA)
+                            || attachment.getSubtype(this).contains(SubType.EQUIPMENT)
+                            || attachment.getSubtype(this).contains(SubType.FORTIFICATION)))) {
                         if (perm.removeAttachment(attachment.getId(), this)) {
                             somethingHappened = true;
                             break;
@@ -1930,33 +1942,6 @@ public abstract class GameImpl implements Game, Serializable {
                     if (count > counterAbility.getAmount()) {
                         perm.removeCounters(counterAbility.getCounterType().getName(), count - counterAbility.getAmount(), this);
                         somethingHappened = true;
-                    }
-                }
-            }
-        }
-        //201300713 - 704.5j
-        // If a player controls two or more planeswalkers that share a planeswalker type, that player
-        // chooses one of them, and the rest are put into their owners' graveyards.
-        // This is called the "planeswalker uniqueness rule."
-        if (planeswalkers.size() > 1) {  //don't bother checking if less than 2 planeswalkers in play
-            for (Permanent planeswalker : planeswalkers) {
-                for (SubType planeswalkertype : planeswalker.getSubtype(this)) {
-                    FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
-                    filterPlaneswalker.add(new SubtypePredicate(planeswalkertype));
-                    filterPlaneswalker.add(new ControllerIdPredicate(planeswalker.getControllerId()));
-                    if (getBattlefield().contains(filterPlaneswalker, planeswalker.getControllerId(), this, 2)) {
-                        Player controller = this.getPlayer(planeswalker.getControllerId());
-                        if (controller != null) {
-                            Target targetPlaneswalkerToKeep = new TargetPermanent(filterPlaneswalker);
-                            targetPlaneswalkerToKeep.setTargetName(planeswalkertype.toString() + " to keep?");
-                            controller.chooseTarget(Outcome.Benefit, targetPlaneswalkerToKeep, null, this);
-                            for (Permanent dupPlaneswalker : this.getBattlefield().getActivePermanents(filterPlaneswalker, planeswalker.getControllerId(), this)) {
-                                if (!targetPlaneswalkerToKeep.getTargets().contains(dupPlaneswalker.getId())) {
-                                    movePermanentToGraveyardWithInfo(dupPlaneswalker);
-                                }
-                            }
-                        }
-                        return true;
                     }
                 }
             }
@@ -2371,6 +2356,15 @@ public abstract class GameImpl implements Game, Serializable {
                 if (card != null && card.getOwnerId().equals(playerId)) {
                     it.remove();
                 }
+            }
+        }
+
+        //Remove all emblems the player controls
+        for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext();) {
+            CommandObject obj = it.next();
+            if (obj instanceof Emblem && obj.getControllerId().equals(playerId)) {
+                ((Emblem) obj).discardEffects();// This may not be the best fix but it works
+                it.remove();
             }
         }
 
@@ -2953,6 +2947,9 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void setMonarchId(Ability source, UUID monarchId) {
+        if (monarchId == getMonarchId()) { // Nothing happens if you're already the monarch
+            return;
+        }
         Player newMonarch = getPlayer(monarchId);
         if (getMonarchId() == null) {
             getState().addDesignation(new Monarch(), this, monarchId);

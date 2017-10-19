@@ -29,6 +29,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.Token;
 
 /**
@@ -42,7 +43,7 @@ public class CentaurEnchantmentCreatureToken extends Token {
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Centaur");
+        subtype.add(SubType.CENTAUR);
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.setOriginalExpansionSetCode("BNG");

@@ -57,8 +57,8 @@ public class TheGitrogMonster extends CardImpl {
     public TheGitrogMonster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Frog");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.FROG);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

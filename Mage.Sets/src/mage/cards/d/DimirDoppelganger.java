@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -56,7 +57,7 @@ public class DimirDoppelganger extends CardImpl {
 
     public DimirDoppelganger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);

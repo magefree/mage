@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -34,8 +33,7 @@ import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
@@ -43,21 +41,18 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class CommuneWithNature extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a creature card");
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
-
-    public CommuneWithNature (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
-
+    public CommuneWithNature(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
         // Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(1), filter, false));
+        this.getSpellAbility().addEffect(
+                new LookLibraryAndPickControllerEffect(
+                        new StaticValue(5), false, new StaticValue(1), new FilterCreatureCard("a creature card"), false
+                )
+        );
     }
 
-    public CommuneWithNature (final CommuneWithNature card) {
+    public CommuneWithNature(final CommuneWithNature card) {
         super(card);
     }
 

@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -55,15 +56,15 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class GateSmasher extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with 3 or more power");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with toughness 4 or greater");
 
     static {
         filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public GateSmasher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        this.subtype.add("Equipment");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.subtype.add(SubType.EQUIPMENT);
 
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, false);
         // Gate Smasher can be attached only to a creature with toughness 4 or greater.

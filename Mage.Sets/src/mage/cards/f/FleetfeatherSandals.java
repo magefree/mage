@@ -47,7 +47,7 @@ public class FleetfeatherSandals extends CardImpl {
 
     public FleetfeatherSandals(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has flying and haste.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,

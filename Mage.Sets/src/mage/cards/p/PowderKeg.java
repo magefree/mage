@@ -38,10 +38,15 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -58,8 +63,8 @@ public class PowderKeg extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.FUSE.createInstance(), true), TargetController.YOU, true));
 
         // {T}, Sacrifice Powder Keg: Destroy each artifact and creature with converted mana cost equal to the number of fuse counters on Powder Keg.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PowderKegEffect(), new SacrificeSourceCost());
-        ability.addCost(new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PowderKegEffect(), new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
 
@@ -77,7 +82,7 @@ class PowderKegEffect extends OneShotEffect {
 
     public PowderKegEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy each artifact and creature with converted mana cost equal to the number of fuse counters on Powder Keg {this}";
+        staticText = "Destroy each artifact and creature with converted mana cost equal to the number of fuse counters on {this}";
     }
 
     public PowderKegEffect(final PowderKegEffect effect) {
@@ -86,22 +91,17 @@ class PowderKegEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getBattlefield().getPermanent(source.getSourceId());
-        if (p == null) {
-            p = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-            if (p == null) {
-                return false;
-            }
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourcePermanent == null) {
+            return false;
         }
-
-        int count = p.getCounters(game).getCount(CounterType.FUSE);
-        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
-            if (perm.getConvertedManaCost() == count && ((perm.isArtifact())
-                    || (perm.isCreature()))) {
-                perm.destroy(source.getSourceId(), game, false);
-            }
+        int count = sourcePermanent.getCounters(game).getCount(CounterType.FUSE);
+        FilterPermanent filter = new FilterPermanent();
+        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, count));
+        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            perm.destroy(source.getSourceId(), game, false);
         }
-
         return true;
     }
 

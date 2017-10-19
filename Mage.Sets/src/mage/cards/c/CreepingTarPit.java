@@ -40,6 +40,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -79,7 +80,7 @@ class CreepingTarPitToken extends Token {
     public CreepingTarPitToken() {
         super("", "3/2 blue and black Elemental creature and can't be blocked");
         cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         color.setBlue(true);
         color.setBlack(true);
         power = new MageInt(3);

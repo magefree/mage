@@ -37,6 +37,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -60,7 +61,7 @@ public class ThreadsOfDisloyalty extends CardImpl {
     public ThreadsOfDisloyalty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
 
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature with converted mana cost 2 or less
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);

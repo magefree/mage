@@ -91,7 +91,7 @@ class DovescapeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(this.getTargetPointer().getFirst(game, source));
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         int spellCMC = 0;
         UUID spellControllerID = null;
         if (spell != null) {

@@ -63,8 +63,8 @@ public class GiltLeafArchdruid extends CardImpl {
 
     public GiltLeafArchdruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

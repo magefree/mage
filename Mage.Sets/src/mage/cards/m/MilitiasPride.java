@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -53,7 +54,7 @@ public class MilitiasPride extends CardImpl {
 
     public MilitiasPride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{W}");
-        this.subtype.add("Kithkin");
+        this.subtype.add(SubType.KITHKIN);
 
         // Whenever a creature you control attacks, you may pay {W}. If you do create a 1/1 white Kithkin Soldier creature token in play tapped and attacking
         this.addAbility(new MilitiasPrideTriggerAbility());

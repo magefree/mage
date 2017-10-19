@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -74,7 +75,7 @@ class GruulWarPlowToken extends Token {
         super("Juggernaut", "4/4 Juggernaut artifact creature");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
-        subtype.add("Juggernaut");
+        subtype.add(SubType.JUGGERNAUT);
         power = new MageInt(4);
         toughness = new MageInt(4);
     }

@@ -33,6 +33,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class WarclampMastiff extends CardImpl {
 
     public WarclampMastiff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Hound");
+        this.subtype.add(SubType.HOUND);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

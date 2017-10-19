@@ -49,8 +49,7 @@ public class SmiteTheMonstrous extends CardImpl {
     }
 
     public SmiteTheMonstrous(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
         // Destroy target creature with power 4 or greater.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

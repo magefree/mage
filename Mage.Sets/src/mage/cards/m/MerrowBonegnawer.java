@@ -39,6 +39,7 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
@@ -53,16 +54,16 @@ public class MerrowBonegnawer extends CardImpl {
 
     private UUID exileId = UUID.randomUUID();
 
-    private static final FilterSpell filter = new FilterSpell("black spell");
+    private static final FilterSpell filter = new FilterSpell("a black spell");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public MerrowBonegnawer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Rogue");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

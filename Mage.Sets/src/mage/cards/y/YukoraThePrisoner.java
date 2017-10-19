@@ -60,8 +60,8 @@ public class YukoraThePrisoner extends CardImpl {
     public YukoraThePrisoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Demon");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.DEMON);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

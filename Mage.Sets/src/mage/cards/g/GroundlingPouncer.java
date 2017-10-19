@@ -43,6 +43,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Zone;
@@ -64,8 +65,8 @@ public class GroundlingPouncer extends CardImpl {
     }
 
     public GroundlingPouncer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/U}");
-        this.subtype.add("Faerie");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G/U}");
+        this.subtype.add(SubType.FAERIE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
@@ -96,7 +97,6 @@ class GroundlingPouncerAbility extends LimitedTimesPerTurnActivatedAbility {
 
     private static final Effects emptyEffects = new Effects();
 
-    private final Condition condition;
     private final String ruleText;
 
     public GroundlingPouncerAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
@@ -107,7 +107,6 @@ class GroundlingPouncerAbility extends LimitedTimesPerTurnActivatedAbility {
 
     public GroundlingPouncerAbility(GroundlingPouncerAbility ability) {
         super(ability);
-        this.condition = ability.condition;
         this.ruleText = ability.ruleText;
     }
 
@@ -117,14 +116,6 @@ class GroundlingPouncerAbility extends LimitedTimesPerTurnActivatedAbility {
             return emptyEffects;
         }
         return super.getEffects(game, effectType);
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (!condition.apply(game, this)) {
-            return false;
-        }
-        return super.canActivate(playerId, game);
     }
 
     @Override

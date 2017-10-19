@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -55,7 +56,7 @@ public class ImpetuousDevils extends CardImpl {
 
     public ImpetuousDevils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Devil");
+        this.subtype.add(SubType.DEVIL);
         this.power = new MageInt(6);
         this.toughness = new MageInt(1);
 

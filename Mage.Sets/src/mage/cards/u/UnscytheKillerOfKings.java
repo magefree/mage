@@ -62,7 +62,7 @@ public class UnscytheKillerOfKings extends CardImpl {
     public UnscytheKillerOfKings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{U}{B}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+3 and has first strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3)));

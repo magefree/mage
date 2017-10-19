@@ -56,7 +56,7 @@ public class TimberpackWolf extends CardImpl {
 
     public TimberpackWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.WOLF);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,8 +42,8 @@ public class RottingFensnake extends CardImpl {
 
     public RottingFensnake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Snake");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.SNAKE);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);

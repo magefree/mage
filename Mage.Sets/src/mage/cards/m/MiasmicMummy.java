@@ -34,6 +34,7 @@ import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class MiasmicMummy extends CardImpl {
     public MiasmicMummy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
-        this.subtype.add("Zombie");
-        this.subtype.add("Jackal");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.JACKAL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

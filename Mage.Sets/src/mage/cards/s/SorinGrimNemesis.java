@@ -45,6 +45,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -63,7 +64,7 @@ public class SorinGrimNemesis extends CardImpl {
     public SorinGrimNemesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{B}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Sorin");
+        this.subtype.add(SubType.SORIN);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 

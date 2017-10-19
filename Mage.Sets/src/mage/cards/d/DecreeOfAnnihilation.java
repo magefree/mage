@@ -1,4 +1,4 @@
-    /*
+/*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -27,7 +27,7 @@
  */
 package mage.cards.d;
 
-    import java.util.UUID;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -54,14 +54,14 @@ import mage.players.Player;
 public class DecreeOfAnnihilation extends CardImpl {
 
     public DecreeOfAnnihilation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{8}{R}{R}");
 
         // Exile all artifacts, creatures, and lands from the battlefield, all cards from all graveyards, and all cards from all hands.
         this.getSpellAbility().addEffect(new DecreeOfAnnihilationEffect());
 
         // Cycling {5}{R}{R}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{R}{R}")));
-        
+
         // When you cycle Decree of Annihilation, destroy all lands.
         Ability ability = new CycleTriggeredAbility(new DestroyAllEffect(StaticFilters.FILTER_LANDS), false);
         this.addAbility(ability);
@@ -78,16 +78,16 @@ public class DecreeOfAnnihilation extends CardImpl {
 }
 
 class DecreeOfAnnihilationEffect extends OneShotEffect {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("");
-    
+
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.LAND)));
     }
-    
+
     public DecreeOfAnnihilationEffect() {
         super(Outcome.Detriment);
         staticText = "Exile all artifacts, creatures, and lands from the battlefield, all cards from all graveyards, and all cards from all hands";
@@ -105,7 +105,7 @@ class DecreeOfAnnihilationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToExile(id, "all artifacts, creatures, and land", id, game);
+            permanent.moveToExile(null, "", source.getSourceId(), game);
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);

@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -42,7 +43,7 @@ public class HammerOfPurphorosGolemToken extends Token {
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Golem");
+        subtype.add(SubType.GOLEM);
         power = new MageInt(3);
         toughness = new MageInt(3);
     }

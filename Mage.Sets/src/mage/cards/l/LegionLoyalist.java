@@ -41,6 +41,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -55,8 +56,8 @@ public class LegionLoyalist extends CardImpl {
 
     public LegionLoyalist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.SOLDIER);
 
         
         this.power = new MageInt(1);

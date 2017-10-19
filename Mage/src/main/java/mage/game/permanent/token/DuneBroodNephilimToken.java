@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -39,7 +40,7 @@ public class DuneBroodNephilimToken extends Token {
     public DuneBroodNephilimToken() {
         super("Sand", "1/1 colorless Sand creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Sand");
+        subtype.add(SubType.SAND);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

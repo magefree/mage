@@ -46,7 +46,7 @@ public enum BuybackCondition implements Condition {
         if (card != null) {
             return card.getAbilities().stream()
                     .filter(a -> a instanceof BuybackAbility)
-                    .anyMatch(b -> ((BuybackAbility) b).isActivated());
+                    .anyMatch(Ability::isActivated);
         }
         return false;
     }

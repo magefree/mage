@@ -36,6 +36,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,8 +47,8 @@ public class IrrigatedFarmland extends CardImpl {
     public IrrigatedFarmland(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.subtype.add("Plains");
-        this.subtype.add("Island");
+        this.subtype.add(SubType.PLAINS);
+        this.subtype.add(SubType.ISLAND);
 
         // <i>({T}: Add {W} or {U} to your mana pool.)</i>
         this.addAbility(new WhiteManaAbility());

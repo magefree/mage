@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -56,7 +57,7 @@ public class OrcishLibrarian extends CardImpl {
 
     public OrcishLibrarian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Orc");
+        this.subtype.add(SubType.ORC);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

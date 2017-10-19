@@ -56,7 +56,7 @@ public class Lithophage extends CardImpl {
     
     public Lithophage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

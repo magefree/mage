@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -53,17 +54,17 @@ import mage.players.Player;
 public class FiredrinkerSatyr extends CardImpl {
 
     public FiredrinkerSatyr(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Satyr");
-        this.subtype.add("Shaman");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
+        this.subtype.add(SubType.SATYR);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         // Whenever Firedrinker Satyr is dealt damage, it deals that much damage to you.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new FiredrinkerSatyrDealDamageEffect(), false));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new FiredrinkerSatyrDealDamageEffect(), false, false, true));
         // {1}{R}: Firedrinker Satyr gets +1/+0 until end of turn and deals 1 damage to you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}"));
         Effect effect = new DamageControllerEffect(1);
         effect.setText("and deals 1 damage to you");
         ability.addEffect(effect);

@@ -41,6 +41,7 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -54,8 +55,8 @@ public class OloroAgelessAscetic extends CardImpl {
     public OloroAgelessAscetic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Giant");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

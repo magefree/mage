@@ -54,7 +54,7 @@ public class SelfAssembler extends CardImpl {
 
     public SelfAssembler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
-        this.subtype.add("Assembly-Worker");
+        this.subtype.add(SubType.ASSEMBLY_WORKER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

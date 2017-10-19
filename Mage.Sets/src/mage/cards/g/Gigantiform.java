@@ -61,7 +61,7 @@ public class Gigantiform extends CardImpl {
 
     public Gigantiform(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Kicker {4}
         this.addAbility(new KickerAbility("{4}"));

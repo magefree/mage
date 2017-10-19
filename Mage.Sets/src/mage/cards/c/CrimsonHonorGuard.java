@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
@@ -54,8 +55,8 @@ public class CrimsonHonorGuard extends CardImpl {
     public CrimsonHonorGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 
-        this.subtype.add("Vampire");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
@@ -97,7 +98,7 @@ class CrimsonHonorGuardEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {
-            int numCommanders = game.getBattlefield().getActivePermanents(filter, player.getId(), game).size();
+            int numCommanders = game.getBattlefield().getAllActivePermanents(filter, player.getId(), game).size();
             if (numCommanders == 0) {
                 player.damage(4, source.getSourceId(), game, false, true);
                 return true;

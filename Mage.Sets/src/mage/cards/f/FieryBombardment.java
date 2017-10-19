@@ -37,6 +37,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -54,15 +55,14 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class FieryBombardment extends CardImpl {
 
     public FieryBombardment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
         // Chroma - {2}, Sacrifice a creature: Fiery Bombardment deals damage to target creature or player equal to the number of red mana symbols in the sacrificed creature's mana cost.
         Effect effect = new FieryBombardmentEffect();
-        effect.setText("<i>Chroma</i> - Fiery Bombardment deals damage to target creature or player equal to the number of red mana symbols in the sacrificed creature's mana cost.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         ability.addTarget(new TargetCreatureOrPlayer());
+        ability.setAbilityWord(AbilityWord.CHROMA);
         this.addAbility(ability);
 
     }
@@ -81,6 +81,7 @@ class FieryBombardmentEffect extends OneShotEffect {
 
     public FieryBombardmentEffect() {
         super(Outcome.Benefit);
+        staticText = "{this} deals damage to target creature or player equal to the number of red mana symbols in the sacrificed creature's mana cost.";
     }
 
     public FieryBombardmentEffect(final FieryBombardmentEffect effect) {

@@ -243,7 +243,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
             sb.append(" cards ");
         }
 
-        sb.append("of your Library");
+        sb.append("of your library");
         if (numberLook == 0) {
             sb.append(", where {X} is the number of cards ").append(numberOfCards.getMessage());
         }

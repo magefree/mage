@@ -58,8 +58,8 @@ public class ShisatoWhisperingHunter extends CardImpl {
     public ShisatoWhisperingHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Snake");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

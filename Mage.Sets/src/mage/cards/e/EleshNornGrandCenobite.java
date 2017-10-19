@@ -37,6 +37,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -50,7 +51,7 @@ public class EleshNornGrandCenobite extends CardImpl {
     public EleshNornGrandCenobite (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Praetor");
+        this.subtype.add(SubType.PRAETOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);

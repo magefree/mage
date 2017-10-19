@@ -27,7 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -38,13 +37,12 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +52,7 @@ public class Lightsaber extends CardImpl {
 
     public Lightsaber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equiped creature gets +1/+0 and has firsttrike
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
@@ -72,7 +70,7 @@ public class Lightsaber extends CardImpl {
     public void adjustCosts(Ability ability, Game game) {
         if (ability instanceof EquipAbility) {
             Permanent targetCreature = game.getPermanent(ability.getTargets().getFirstTarget());
-            if (targetCreature != null && (targetCreature.getSubtype(game).contains("Sith") || targetCreature.getSubtype(game).contains("Jedi"))) {
+            if (targetCreature != null && (targetCreature.hasSubtype(SubType.SITH, game) || targetCreature.hasSubtype(SubType.JEDI, game))) {
                 CardUtil.increaseCost(ability, 1 - ability.getManaCostsToPay().convertedManaCost());
             }
         }

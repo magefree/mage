@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -55,7 +56,7 @@ public class GolemToken extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Golem");
+        subtype.add(SubType.GOLEM);
         power = new MageInt(3);
         toughness = new MageInt(3);
 

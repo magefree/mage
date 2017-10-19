@@ -56,7 +56,7 @@ public class RavenousDemon extends CardImpl {
 
     public RavenousDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.transformable = true;
         this.secondSideCardClazz = ArchdemonOfGreed.class;

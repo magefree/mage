@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -52,7 +53,7 @@ public class GobhobblerRats extends CardImpl {
 
     public GobhobblerRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
-        this.subtype.add("Rat");
+        this.subtype.add(SubType.RAT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

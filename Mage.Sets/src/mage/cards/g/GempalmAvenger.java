@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author fireshoes
  */
 public class GempalmAvenger extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 
     static {
@@ -58,18 +58,21 @@ public class GempalmAvenger extends CardImpl {
     }
 
     public GempalmAvenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 
         // Cycling {2}{W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{W}")));
-        
+
         // When you cycle Gempalm Avenger, Soldier creatures get +1/+1 and gain first strike until end of turn.
-        Ability ability = new CycleTriggeredAbility(new BoostAllEffect(1,1,Duration.EndOfTurn, filter, false));
+        Ability ability = new CycleTriggeredAbility(
+                new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false).setText("Soldier creatures get +1/+1")
+        );
         Effect effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter);
+        effect.setText("and gain first strike until end of turn");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

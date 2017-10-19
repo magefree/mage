@@ -62,7 +62,7 @@ public class MerfolkSovereign extends CardImpl {
 
     public MerfolkSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add("Merfolk");
+        this.subtype.add(SubType.MERFOLK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

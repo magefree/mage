@@ -62,8 +62,8 @@ public class WretchedCamel extends CardImpl {
     public WretchedCamel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
-        this.subtype.add("Zombie");
-        this.subtype.add("Camel");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.CAMEL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

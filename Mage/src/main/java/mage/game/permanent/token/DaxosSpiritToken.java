@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -57,7 +58,7 @@ public class DaxosSpiritToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         color.setBlack(true);
-        subtype.add("Spirit");
+        subtype.add(SubType.SPIRIT);
         power = new MageInt(0);
         toughness = new MageInt(0);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DaxosSpiritSetPTEffect()));

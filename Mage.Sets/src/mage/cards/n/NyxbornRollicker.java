@@ -35,6 +35,7 @@ import mage.abilities.keyword.BestowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -46,7 +47,7 @@ public class NyxbornRollicker extends CardImpl {
 
     public NyxbornRollicker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{R}");
-        this.subtype.add("Satyr");
+        this.subtype.add(SubType.SATYR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

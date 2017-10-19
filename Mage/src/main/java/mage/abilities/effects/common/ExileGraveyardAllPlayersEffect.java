@@ -33,6 +33,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -42,9 +43,16 @@ import mage.players.Player;
  */
 public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
 
+    private final FilterCard filter;
+
     public ExileGraveyardAllPlayersEffect() {
+        this(new FilterCard("cards"));
+    }
+
+    public ExileGraveyardAllPlayersEffect(FilterCard filter) {
         super(Outcome.Detriment);
-        staticText = "exile all cards from all graveyards";
+        staticText = "exile all " + filter.getMessage() + " from all graveyards";
+        this.filter = filter;
     }
 
     @Override
@@ -64,7 +72,7 @@ public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
             if (player != null) {
                 for (UUID cid : player.getGraveyard().copy()) {
                     Card card = game.getCard(cid);
-                    if (card != null) {
+                    if (card != null && filter.match(card, game)) {
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                     }
                 }

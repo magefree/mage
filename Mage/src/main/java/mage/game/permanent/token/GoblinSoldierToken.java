@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,8 +42,8 @@ public class GoblinSoldierToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setWhite(true);
-        subtype.add("Goblin");
-        subtype.add("Soldier");
+        subtype.add(SubType.GOBLIN);
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

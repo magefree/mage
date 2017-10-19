@@ -44,8 +44,6 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import mage.cards.action.ActionCallback;
 import mage.cards.decks.Deck;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanelBasic;
@@ -133,8 +131,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static long startTime;
 
     private final BalloonTip balloonTip;
-
-    private java.util.List<CardInfo> missingCards;
 
     /**
      * @return the session
@@ -513,18 +509,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void checkForNewImages() {
-        long beforeCall = System.currentTimeMillis();
-        missingCards = CardRepository.instance.findCards(new CardCriteria());
-        LOGGER.info("Card pool load time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
-        beforeCall = System.currentTimeMillis();
-        if (DownloadPictures.checkForMissingCardImages(missingCards)) {
-            LOGGER.info("Card images checking time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
-            UserRequestMessage message = new UserRequestMessage("New images available", "Card images are missing (" + missingCards.size() + ").  Do you want to download the images?"
-                    + "<br><br><i>You can deactivate the image download check on application start in the preferences.</i>");
-            message.setButton1("No", null);
-            message.setButton2("Yes", PlayerAction.CLIENT_DOWNLOAD_CARD_IMAGES);
-            showUserRequestDialog(message);
-        }
+        // Removed TODO: Remove related pref code
     }
 
     public static void setActive(MagePane frame) {
@@ -978,8 +963,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnImagesActionPerformed
 
     public void downloadImages() {
-        java.util.List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
-        DownloadPictures.startDownload(null, cards);
+        DownloadPictures.startDownload();
     }
 
     public void exitApp() {
@@ -1317,7 +1301,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 Plugins.instance.downloadSymbols();
                 break;
             case CLIENT_DOWNLOAD_CARD_IMAGES:
-                DownloadPictures.startDownload(null, missingCards);
+                DownloadPictures.startDownload();
                 break;
             case CLIENT_DISCONNECT:
                 if (SessionHandler.isConnected()) {

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.Ooze2Token;
 
 /**
@@ -44,7 +45,7 @@ public class MitoticSlime extends CardImpl {
 
     public MitoticSlime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.subtype.add("Ooze");
+        this.subtype.add(SubType.OOZE);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

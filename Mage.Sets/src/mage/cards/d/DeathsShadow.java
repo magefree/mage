@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -47,7 +48,7 @@ public class DeathsShadow extends CardImpl {
 
     public DeathsShadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(13);
         this.toughness = new MageInt(13);

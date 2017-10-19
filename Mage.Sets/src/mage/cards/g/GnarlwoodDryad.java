@@ -38,6 +38,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -49,8 +50,8 @@ public class GnarlwoodDryad extends CardImpl {
 
     public GnarlwoodDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Dryad");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.DRYAD);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -40,6 +40,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -54,7 +55,7 @@ public class DrakestownForgotten extends CardImpl {
 
     public DrakestownForgotten(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -36,6 +36,7 @@ import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -47,9 +48,9 @@ public class RhoxBodyguard extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");
 
 
-        this.subtype.add("Rhino");
-        this.subtype.add("Monk");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.RHINO);
+        this.subtype.add(SubType.MONK);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(new ExaltedAbility());

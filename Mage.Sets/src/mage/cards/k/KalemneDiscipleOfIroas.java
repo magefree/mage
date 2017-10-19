@@ -41,6 +41,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
@@ -68,8 +69,8 @@ public class KalemneDiscipleOfIroas extends CardImpl {
     public KalemneDiscipleOfIroas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Giant");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

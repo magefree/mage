@@ -34,6 +34,7 @@ import mage.abilities.keyword.BattleCryAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class LoxodonPartisan extends CardImpl {
 
     public LoxodonPartisan (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.subtype.add("Elephant");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.ELEPHANT);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

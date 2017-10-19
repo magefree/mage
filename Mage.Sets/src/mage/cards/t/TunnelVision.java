@@ -27,6 +27,8 @@
  */
 package mage.cards.t;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -51,10 +53,10 @@ import mage.target.TargetPlayer;
 public class TunnelVision extends CardImpl {
 
     public TunnelVision(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}");
 
-        // Name a card. Target player reveals cards from the top of his or her library until the named card is revealed. 
-        // If it is, that player puts the rest of the revealed cards into his or her graveyard and puts the named card on top of his or her library. 
+        // Name a card. Target player reveals cards from the top of his or her library until the named card is revealed.
+        // If it is, that player puts the rest of the revealed cards into his or her graveyard and puts the named card on top of his or her library.
         // Otherwise, the player shuffles his or her library.
         this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
         this.getSpellAbility().addEffect(new TunnelVisionEffect());
@@ -74,7 +76,7 @@ public class TunnelVision extends CardImpl {
 class TunnelVisionEffect extends OneShotEffect {
 
     public TunnelVisionEffect() {
-        super(Outcome.Damage);
+        super(Outcome.Benefit);
         this.staticText = "Target player reveals cards from the top of his or her library until the named card is revealed. If it is, that player puts the rest of the revealed cards into his or her graveyard and puts the named card on top of his or her library. Otherwise, the player shuffles his or her library.";
     }
 
@@ -90,16 +92,16 @@ class TunnelVisionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = game.getObject(source.getSourceId());
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
         if (sourceObject == null || targetPlayer == null || cardName == null || cardName.isEmpty()) {
             return false;
         }
 
         Cards cardsToReveal = new CardsImpl();
-        Cards cardsToBury = new CardsImpl();
+        Set<Card> cardsToBury = new HashSet<>();
         Card namedCard = null;
-                
+
         // reveal until named card found
         // if named card found, put all revealed cards in grave and put named card on top of library
         // if named card not found, shuffle library
@@ -117,15 +119,15 @@ class TunnelVisionEffect extends OneShotEffect {
                 }
             }
         }
-                
+
         targetPlayer.revealCards(sourceObject.getIdName(), cardsToReveal, game);
         if (namedCardFound) {
             targetPlayer.moveCards(cardsToBury, Zone.GRAVEYARD, source, game);
             targetPlayer.moveCards(namedCard, Zone.LIBRARY, source, game);
         } else {
+            targetPlayer.getLibrary().addAll(cardsToBury, game);
             targetPlayer.shuffleLibrary(source, game);
         }
-
         return true;
     }
 }

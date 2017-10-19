@@ -27,7 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
@@ -54,13 +53,15 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author spjspj
  */
 public class NazahnReveredBladesmith extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent equippedFilter = new FilterControlledCreaturePermanent("equipped creatures you control");
+    private static final FilterControlledCreaturePermanent equippedFilter = new FilterControlledCreaturePermanent("equipped creature you control");
 
     static {
         equippedFilter.add(new EquippedPredicate());
@@ -78,8 +79,8 @@ public class NazahnReveredBladesmith extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Cat");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
@@ -88,7 +89,7 @@ public class NazahnReveredBladesmith extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandOrOnBattlefieldEffect(target, true, true, "Hammer of Nazahn"), true));
 
         // Whenever an equipped creature you control attacks, you may tap target creature defending player controls.
-        Ability ability = new AttacksCreatureYouControlTriggeredAbility(new NazahnTapEffect(), false, equippedFilter, true);
+        Ability ability = new AttacksCreatureYouControlTriggeredAbility(new NazahnTapEffect(), true, equippedFilter, true);
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
         this.addAbility(ability);
     }

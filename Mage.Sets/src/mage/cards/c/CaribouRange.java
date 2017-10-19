@@ -66,7 +66,7 @@ public class CaribouRange extends CardImpl {
 
     public CaribouRange(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant land you control
         TargetPermanent auraTarget = new TargetPermanent(new FilterControlledLandPermanent());

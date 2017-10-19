@@ -54,7 +54,7 @@ public class RavenousBaloth extends CardImpl {
 
     public RavenousBaloth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 
 import mage.abilities.Ability;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -50,7 +51,7 @@ public class AvatarToken extends Token {
     public AvatarToken() {
         super("Avatar", "white Avatar creature token with \"This creature's power and toughness are each equal to your life total.\"");
         cardType.add(CardType.CREATURE);
-        subtype.add("Avatar");
+        subtype.add(SubType.AVATAR);
         color.setWhite(true);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AvatarTokenEffect()));
     }

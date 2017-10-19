@@ -36,6 +36,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -53,7 +54,7 @@ public class Lhurgoyf extends CardImpl {
 
     public Lhurgoyf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Lhurgoyf");
+        this.subtype.add(SubType.LHURGOYF);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

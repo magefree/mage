@@ -38,6 +38,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
@@ -51,7 +52,7 @@ public class RavingDead extends CardImpl {
 
     public RavingDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);

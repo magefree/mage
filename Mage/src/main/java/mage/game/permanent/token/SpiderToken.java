@@ -11,6 +11,7 @@ import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.ReachAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -38,7 +39,7 @@ public class SpiderToken extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Spider");
+        subtype.add(SubType.SPIDER);
         power = new MageInt(1);
         toughness = new MageInt(2);
         addAbility(ReachAbility.getInstance());

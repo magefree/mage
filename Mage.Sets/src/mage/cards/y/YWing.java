@@ -38,6 +38,7 @@ import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
@@ -48,8 +49,8 @@ public class YWing extends CardImpl {
 
     public YWing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Rebel");
-        this.subtype.add("Starship");
+        this.subtype.add(SubType.REBEL);
+        this.subtype.add(SubType.STARSHIP);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

@@ -57,7 +57,7 @@ public class GoldToken extends Token {
     }
 
     public GoldToken(String setCode, int tokenType) {
-        super("Gold", "colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
+        super("Gold", "colorless artifact token named Gold with \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);

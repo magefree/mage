@@ -53,8 +53,8 @@ public class TotemSpeaker extends CardImpl {
     
     public TotemSpeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.DRUID);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

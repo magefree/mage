@@ -52,7 +52,7 @@ public class FearsomeTemper extends CardImpl {
 
     public FearsomeTemper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant creature

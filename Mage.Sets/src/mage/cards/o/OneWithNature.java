@@ -35,6 +35,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
@@ -51,8 +52,8 @@ import java.util.UUID;
 public class OneWithNature extends CardImpl {
 
     public OneWithNature(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
-        this.subtype.add("Aura");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -60,12 +61,13 @@ public class OneWithNature extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutLandInPlay));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-                
+
         // Whenever enchanted creature deals combat damage to a player, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, Outcome.PutLandInPlay),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, Outcome.PutLandInPlay)
+                        .setText("you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library."),
                 "enchanted creature", true, false, true, TargetController.ANY);
-        this.addAbility(ability);        
+        this.addAbility(ability);
     }
 
     public OneWithNature(final OneWithNature card) {

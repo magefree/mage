@@ -74,7 +74,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Chromatic Lantern", 1);
 
-        assertType("Canopy Vista", CardType.LAND, "Mountain");
+        assertType("Canopy Vista", CardType.LAND, SubType.MOUNTAIN);
         assertAbility(playerB, "Canopy Vista", new AnyColorManaAbility(), true);
     }
 
@@ -99,7 +99,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Chromatic Lantern", 1);
         assertPermanentCount(playerA, "Magus of the Moon", 1);
 
-        assertType("Canopy Vista", CardType.LAND, "Mountain");
+        assertType("Canopy Vista", CardType.LAND, SubType.MOUNTAIN);
         assertAbility(playerB, "Canopy Vista", new AnyColorManaAbility(), true);
     }
 
@@ -131,7 +131,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Forbidding Watchtower", 1);
         assertCounterCount("Forbidding Watchtower", CounterType.FLOOD, 1);
-        assertType("Forbidding Watchtower", CardType.LAND, "Island");
+        assertType("Forbidding Watchtower", CardType.LAND, SubType.ISLAND);
         assertPowerToughness(playerB, "Forbidding Watchtower", 1, 5);
     }
 
@@ -164,11 +164,11 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, bloodmoon, 1);
         assertPermanentCount(playerA, urborgtoy, 1);
-        assertType(canopyvista, CardType.LAND, "Mountain");
-        assertNotSubtype(canopyvista, "Island");
-        assertNotSubtype(canopyvista, "Swamp");
-        assertType(urborgtoy, CardType.LAND, "Mountain");
-        assertNotSubtype(urborgtoy, "Swamp");
+        assertType(canopyvista, CardType.LAND, SubType.MOUNTAIN);
+        assertNotSubtype(canopyvista, SubType.ISLAND);
+        assertNotSubtype(canopyvista, SubType.SWAMP);
+        assertType(urborgtoy, CardType.LAND, SubType.MOUNTAIN);
+        assertNotSubtype(urborgtoy, SubType.SWAMP);
         Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
     }
 
@@ -197,11 +197,11 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, bloodmoon, 1);
         assertPermanentCount(playerA, urborgtoy, 1);
-        assertType(canopyvista, CardType.LAND, "Mountain");
-        assertNotSubtype(canopyvista, "Island");
-        assertNotSubtype(canopyvista, "Swamp");
-        assertType(urborgtoy, CardType.LAND, "Mountain");
-        assertNotSubtype(urborgtoy, "Swamp");
+        assertType(canopyvista, CardType.LAND, SubType.MOUNTAIN);
+        assertNotSubtype(canopyvista, SubType.ISLAND);
+        assertNotSubtype(canopyvista, SubType.SWAMP);
+        assertType(urborgtoy, CardType.LAND, SubType.MOUNTAIN);
+        assertNotSubtype(urborgtoy, SubType.SWAMP);
         Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
     }
 

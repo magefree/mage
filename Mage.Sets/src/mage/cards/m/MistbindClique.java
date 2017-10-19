@@ -53,8 +53,8 @@ public class MistbindClique extends CardImpl {
 
     public MistbindClique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.FAERIE);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -108,7 +108,7 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
                 && event.getSourceId().equals(getSourceId())
                 && !event.getSourceId().equals(event.getTargetId())) {
             Permanent sacrificed = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (sacrificed != null && sacrificed.hasSubtype(SubType.FAERIE, game)) {
+            if (sacrificed != null) {// no longer checks for Faerie as LKI isn't always accurate, can't think of how that could matter anyway - TheElk801
                 return true;
             }
         }

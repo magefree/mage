@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -42,7 +43,7 @@ public class GodFavoredGeneralSoldierToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
 
-        subtype.add("Soldier");
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.setOriginalExpansionSetCode("BNG");

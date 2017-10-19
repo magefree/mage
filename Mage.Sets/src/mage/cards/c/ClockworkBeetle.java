@@ -40,6 +40,7 @@ import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -54,7 +55,7 @@ public class ClockworkBeetle extends CardImpl {
 
     public ClockworkBeetle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -41,6 +41,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -61,8 +62,8 @@ public class MikaeusTheLunarch extends CardImpl {
     public MikaeusTheLunarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

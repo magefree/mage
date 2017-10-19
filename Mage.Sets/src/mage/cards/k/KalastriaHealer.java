@@ -37,6 +37,7 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -46,9 +47,9 @@ public class KalastriaHealer extends CardImpl {
 
     public KalastriaHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Cleric");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.CLERIC);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

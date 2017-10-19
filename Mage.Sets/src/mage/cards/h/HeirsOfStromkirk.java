@@ -35,6 +35,7 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -45,7 +46,7 @@ public class HeirsOfStromkirk extends CardImpl {
 
     public HeirsOfStromkirk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

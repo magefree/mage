@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.game.command.emblems.ElspethKnightErrantEmblem;
@@ -56,7 +57,7 @@ public class ElspethKnightErrant extends CardImpl {
     public ElspethKnightErrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elspeth");
+        this.subtype.add(SubType.ELSPETH);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 

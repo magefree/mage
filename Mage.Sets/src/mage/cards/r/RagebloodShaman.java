@@ -53,8 +53,8 @@ public class RagebloodShaman extends CardImpl {
     
     public RagebloodShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

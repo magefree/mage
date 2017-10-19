@@ -62,8 +62,8 @@ public class DivinersWand extends CardImpl {
 
     public DivinersWand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{3}");
-        this.subtype.add("Wizard");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn" and "{4}: Draw a card."
         Ability gainedAbility = new DrawCardControllerTriggeredAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn), false);

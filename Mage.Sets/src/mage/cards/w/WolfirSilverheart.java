@@ -35,6 +35,7 @@ import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -46,8 +47,8 @@ public class WolfirSilverheart extends CardImpl {
 
     public WolfirSilverheart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.subtype.add("Wolf");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.WOLF);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

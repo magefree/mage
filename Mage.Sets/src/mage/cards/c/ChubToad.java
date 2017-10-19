@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -46,7 +47,7 @@ public class ChubToad extends CardImpl {
 
     public ChubToad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Frog");
+        this.subtype.add(SubType.FROG);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

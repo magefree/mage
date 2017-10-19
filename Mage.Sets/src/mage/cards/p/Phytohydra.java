@@ -50,8 +50,8 @@ public class Phytohydra extends CardImpl {
 
     public Phytohydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}{W}");
-        this.subtype.add("Plant");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.PLANT);
+        this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

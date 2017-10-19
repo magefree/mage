@@ -51,7 +51,7 @@ public class DuskFeaster extends CardImpl {
 
     public DuskFeaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

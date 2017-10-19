@@ -61,7 +61,7 @@ public class KrosanWarchief extends CardImpl {
 
     public KrosanWarchief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

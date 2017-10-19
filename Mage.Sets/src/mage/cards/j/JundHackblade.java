@@ -39,6 +39,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -60,8 +61,8 @@ public class JundHackblade extends CardImpl {
 
     public JundHackblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/G}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.BERSERKER);
 
 
 

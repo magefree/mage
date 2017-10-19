@@ -14,7 +14,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class MenaceAbility extends StaticAbility {
+public class MenaceAbility extends StaticAbility { // Menace may not be a Singleton because the source ability is needed in the continuous effect
 
     public MenaceAbility() {
         super(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2));

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,7 +47,7 @@ public class CrosswayVampire extends CardImpl {
 
     public CrosswayVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

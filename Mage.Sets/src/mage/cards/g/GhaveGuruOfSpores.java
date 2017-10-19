@@ -41,6 +41,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -67,8 +68,8 @@ public class GhaveGuruOfSpores extends CardImpl {
     public GhaveGuruOfSpores(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Fungus");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.FUNGUS);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

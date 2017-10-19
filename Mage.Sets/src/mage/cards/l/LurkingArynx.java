@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,8 +51,8 @@ public class LurkingArynx extends CardImpl {
 
     public LurkingArynx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Cat");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

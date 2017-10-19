@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -49,8 +50,8 @@ public class SpiritEnKor extends CardImpl {
 
     public SpiritEnKor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

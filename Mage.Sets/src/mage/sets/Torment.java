@@ -106,6 +106,7 @@ public class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Hydromorph Guardian", 39, Rarity.COMMON, mage.cards.h.HydromorphGuardian.class));
         cards.add(new SetCardInfo("Hydromorph Gull", 40, Rarity.UNCOMMON, mage.cards.h.HydromorphGull.class));
         cards.add(new SetCardInfo("Hypochondria", 7, Rarity.UNCOMMON, mage.cards.h.Hypochondria.class));
+        cards.add(new SetCardInfo("Hypnox", 64, Rarity.RARE, mage.cards.h.Hypnox.class));
         cards.add(new SetCardInfo("Ichorid", 65, Rarity.RARE, mage.cards.i.Ichorid.class));
         cards.add(new SetCardInfo("Insidious Dreams", 66, Rarity.RARE, mage.cards.i.InsidiousDreams.class));
         cards.add(new SetCardInfo("Insist", 127, Rarity.RARE, mage.cards.i.Insist.class));
@@ -114,8 +115,10 @@ public class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Krosan Constrictor", 129, Rarity.COMMON, mage.cards.k.KrosanConstrictor.class));
         cards.add(new SetCardInfo("Krosan Restorer", 130, Rarity.COMMON, mage.cards.k.KrosanRestorer.class));
         cards.add(new SetCardInfo("Laquatus's Champion", 67, Rarity.RARE, mage.cards.l.LaquatussChampion.class));
+        cards.add(new SetCardInfo("Last Laugh", 68, Rarity.RARE, mage.cards.l.LastLaugh.class));
         cards.add(new SetCardInfo("Liquify", 41, Rarity.COMMON, mage.cards.l.Liquify.class));
         cards.add(new SetCardInfo("Llawan, Cephalid Empress", 42, Rarity.RARE, mage.cards.l.LlawanCephalidEmpress.class));
+        cards.add(new SetCardInfo("Longhorn Firebeast", 103, Rarity.COMMON, mage.cards.l.LonghornFirebeast.class));
         cards.add(new SetCardInfo("Major Teroh", 8, Rarity.RARE, mage.cards.m.MajorTeroh.class));
         cards.add(new SetCardInfo("Mesmeric Fiend", 69, Rarity.COMMON, mage.cards.m.MesmericFiend.class));
         cards.add(new SetCardInfo("Militant Monk", 9, Rarity.COMMON, mage.cards.m.MilitantMonk.class));
@@ -151,16 +154,19 @@ public class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Pyromania", 112, Rarity.UNCOMMON, mage.cards.p.Pyromania.class));
         cards.add(new SetCardInfo("Radiate", 113, Rarity.RARE, mage.cards.r.Radiate.class));
         cards.add(new SetCardInfo("Rancid Earth", 78, Rarity.COMMON, mage.cards.r.RancidEarth.class));
+        cards.add(new SetCardInfo("Reborn Hero", 14, Rarity.RARE, mage.cards.r.RebornHero.class));
         cards.add(new SetCardInfo("Restless Dreams", 79, Rarity.COMMON, mage.cards.r.RestlessDreams.class));
         cards.add(new SetCardInfo("Sengir Vampire", 80, Rarity.RARE, mage.cards.s.SengirVampire.class));
         cards.add(new SetCardInfo("Seton's Scout", 138, Rarity.UNCOMMON, mage.cards.s.SetonsScout.class));
         cards.add(new SetCardInfo("Shade's Form", 81, Rarity.COMMON, mage.cards.s.ShadesForm.class));
         cards.add(new SetCardInfo("Shambling Swarm", 82, Rarity.RARE, mage.cards.s.ShamblingSwarm.class));
         cards.add(new SetCardInfo("Sickening Dreams", 83, Rarity.UNCOMMON, mage.cards.s.SickeningDreams.class));
+        cards.add(new SetCardInfo("Skullscorch", 114, Rarity.RARE, mage.cards.s.Skullscorch.class));
         cards.add(new SetCardInfo("Skywing Aven", 47, Rarity.COMMON, mage.cards.s.SkywingAven.class));
         cards.add(new SetCardInfo("Slithery Stalker", 84, Rarity.UNCOMMON, mage.cards.s.SlitheryStalker.class));
         cards.add(new SetCardInfo("Sonic Seizure", 115, Rarity.COMMON, mage.cards.s.SonicSeizure.class));
         cards.add(new SetCardInfo("Soul Scourge", 85, Rarity.COMMON, mage.cards.s.SoulScourge.class));
+        cards.add(new SetCardInfo("Stern Judge", 16, Rarity.UNCOMMON, mage.cards.s.SternJudge.class));
         cards.add(new SetCardInfo("Strength of Isolation", 17, Rarity.UNCOMMON, mage.cards.s.StrengthOfIsolation.class));
         cards.add(new SetCardInfo("Strength of Lunacy", 86, Rarity.UNCOMMON, mage.cards.s.StrengthOfLunacy.class));
         cards.add(new SetCardInfo("Stupefying Touch", 48, Rarity.UNCOMMON, mage.cards.s.StupefyingTouch.class));

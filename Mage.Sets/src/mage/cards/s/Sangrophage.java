@@ -35,6 +35,7 @@ import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -45,7 +46,7 @@ public class Sangrophage extends CardImpl {
 
     public Sangrophage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

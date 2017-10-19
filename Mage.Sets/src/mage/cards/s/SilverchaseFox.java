@@ -37,6 +37,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -47,7 +48,7 @@ public class SilverchaseFox extends CardImpl {
 
     public SilverchaseFox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add("Fox");
+        this.subtype.add(SubType.FOX);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

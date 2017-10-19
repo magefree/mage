@@ -44,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.a.AwokenHorror;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -65,7 +66,7 @@ public class ThingInTheIce extends CardImpl {
 
     public ThingInTheIce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

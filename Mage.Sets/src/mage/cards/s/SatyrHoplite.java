@@ -34,6 +34,7 @@ import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -44,8 +45,8 @@ public class SatyrHoplite extends CardImpl {
 
     public SatyrHoplite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Satyr");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.SATYR);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

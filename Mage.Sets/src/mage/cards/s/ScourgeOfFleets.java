@@ -55,7 +55,7 @@ public class ScourgeOfFleets extends CardImpl {
 
     public ScourgeOfFleets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
-        this.subtype.add("Kraken");
+        this.subtype.add(SubType.KRAKEN);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

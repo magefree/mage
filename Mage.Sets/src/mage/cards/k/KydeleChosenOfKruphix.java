@@ -39,6 +39,7 @@ import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
@@ -55,8 +56,8 @@ public class KydeleChosenOfKruphix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
@@ -83,7 +84,7 @@ class CardsDrawnThisTurnDynamicValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         KydeleCardsDrawnThisTurnWatcher watcher = (KydeleCardsDrawnThisTurnWatcher) game.getState().getWatchers().get(KydeleCardsDrawnThisTurnWatcher.class.getSimpleName());
-        return watcher.getCardsDrawnThisTurn(sourceAbility.getControllerId()).size();
+        return watcher.getCardsDrawnThisTurn(sourceAbility.getControllerId());
     }
 
     @Override
@@ -98,13 +99,13 @@ class CardsDrawnThisTurnDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "number of cards you've drawn this turn";
+        return "card you've drawn this turn";
     }
 }
 
 class KydeleCardsDrawnThisTurnWatcher extends Watcher {
 
-    private final Map<UUID, Set<UUID>> cardsDrawnThisTurn = new HashMap<>();
+    private final Map<UUID, Integer> cardsDrawnThisTurn = new HashMap<>();
 
     public KydeleCardsDrawnThisTurnWatcher() {
         super(KydeleCardsDrawnThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
@@ -118,14 +119,13 @@ class KydeleCardsDrawnThisTurnWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
-            Set<UUID> cardsDrawn = getCardsDrawnThisTurn(event.getPlayerId());
-            cardsDrawn.add(event.getTargetId());
-            cardsDrawnThisTurn.put(event.getPlayerId(), cardsDrawn);
+            int cardsDrawn = getCardsDrawnThisTurn(event.getPlayerId());
+            cardsDrawnThisTurn.put(event.getPlayerId(), cardsDrawn + 1);
         }
     }
 
-    public Set<UUID> getCardsDrawnThisTurn(UUID playerId) {
-        return cardsDrawnThisTurn.getOrDefault(playerId, new LinkedHashSet<>());
+    public int getCardsDrawnThisTurn(UUID playerId) {
+        return cardsDrawnThisTurn.getOrDefault(playerId, 0);
     }
 
     @Override

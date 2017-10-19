@@ -27,10 +27,6 @@
  */
 package mage.game.stack;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -45,6 +41,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
+import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
 import mage.cards.FrameStyle;
@@ -62,6 +59,11 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -244,7 +246,7 @@ public class Spell extends StackObjImpl implements Card {
             }
             counter(null, game);
             return false;
-        } else if (this.isEnchantment() && this.getSubtype(game).contains("Aura")) {
+        } else if (this.isEnchantment() && this.hasSubtype(SubType.AURA, game)) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
                 boolean bestow = ability instanceof BestowAbility;
@@ -252,7 +254,7 @@ public class Spell extends StackObjImpl implements Card {
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
                     card.getCardType().remove(CardType.CREATURE);
-                    card.getSubtype(game).add("Aura");
+                    card.getSubtype(game).add(SubType.AURA);
                 }
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     if (bestow) {
@@ -481,7 +483,7 @@ public class Spell extends StackObjImpl implements Card {
     public SubTypeList getSubtype(Game game) {
         if (this.getSpellAbility() instanceof BestowAbility) {
             SubTypeList subtypes = card.getSubtype(game);
-            subtypes.add("Aura");
+            subtypes.add(SubType.AURA);
             return subtypes;
         }
         return card.getSubtype(game);
@@ -491,7 +493,7 @@ public class Spell extends StackObjImpl implements Card {
     public boolean hasSubtype(SubType subtype, Game game) {
         if (this.getSpellAbility() instanceof BestowAbility) { // workaround for Bestow (don't like it)
             SubTypeList subtypes = card.getSubtype(game);
-            subtypes.add("Aura");
+            subtypes.add(SubType.AURA);
             if (subtypes.contains(subtype)) {
                 return true;
             }
@@ -927,10 +929,23 @@ public class Spell extends StackObjImpl implements Card {
         return copy;
     }
 
+    @Override
     public boolean isAllCreatureTypes() {
         return false;
     }
 
+    @Override
     public void setIsAllCreatureTypes(boolean value) {
     }
+
+    @Override
+    public List<TextPart> getTextParts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TextPart addTextPart(TextPart textPart) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

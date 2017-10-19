@@ -69,7 +69,7 @@ public class Marjhan extends CardImpl {
 
     public Marjhan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
-        this.subtype.add("Serpent");
+        this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

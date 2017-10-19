@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -63,8 +64,8 @@ public class CrabappleCohort extends CardImpl {
 
     public CrabappleCohort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Treefolk");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.WARRIOR);
 
         this.color.setGreen(true);
         this.power = new MageInt(4);

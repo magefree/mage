@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -54,7 +55,7 @@ public class TarielReckonerOfSouls extends CardImpl {
     public TarielReckonerOfSouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
 

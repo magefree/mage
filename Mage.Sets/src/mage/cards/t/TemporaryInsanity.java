@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -42,6 +41,8 @@ import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,12 +59,12 @@ public class TemporaryInsanity extends CardImpl {
 
         // and gain control of it until end of turn.
         Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
-        effect.setText("and gain control of it until end of the turn. ");
+        effect.setText("and gain control of it until end of turn. ");
         this.getSpellAbility().addEffect(effect);
 
         // That creature gains haste until end of turn.
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("That creature gains haste until end of the turn.");
+        effect.setText("That creature gains haste until end of turn.");
         this.getSpellAbility().addEffect(effect);
     }
 

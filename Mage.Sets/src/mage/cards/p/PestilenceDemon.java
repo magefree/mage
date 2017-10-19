@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,7 +52,7 @@ public class PestilenceDemon extends CardImpl {
 
     public PestilenceDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);

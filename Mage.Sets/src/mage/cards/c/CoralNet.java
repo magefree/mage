@@ -64,7 +64,7 @@ public class CoralNet extends CardImpl {
 
     public CoralNet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant green or white creature
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);

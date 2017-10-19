@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -36,6 +35,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,15 +44,15 @@ import mage.constants.CardType;
 public class ShivanRaptor extends CardImpl {
 
     public ShivanRaptor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Lizard");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.subtype.add(SubType.DINOSAUR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-    this.addAbility(FirstStrikeAbility.getInstance());
-    this.addAbility(HasteAbility.getInstance());
-    this.addAbility(new EchoAbility("{2}{R}"));
+        this.addAbility(FirstStrikeAbility.getInstance());
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new EchoAbility("{2}{R}"));
     }
 
     public ShivanRaptor(final ShivanRaptor card) {

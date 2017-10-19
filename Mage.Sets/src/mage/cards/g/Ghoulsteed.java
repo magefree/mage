@@ -37,6 +37,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
@@ -49,8 +50,8 @@ public class Ghoulsteed extends CardImpl {
 
     public Ghoulsteed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Horse");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.HORSE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -58,8 +58,8 @@ public class LamplighterOfSelhoff extends CardImpl {
 
     public LamplighterOfSelhoff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

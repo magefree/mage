@@ -52,7 +52,7 @@ public class SkySwallower extends CardImpl {
     public SkySwallower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         
-        this.subtype.add("Leviathan");
+        this.subtype.add(SubType.LEVIATHAN);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

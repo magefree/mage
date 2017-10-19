@@ -60,7 +60,7 @@ public class KarnSilverGolem extends CardImpl {
     public KarnSilverGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Golem");
+        this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

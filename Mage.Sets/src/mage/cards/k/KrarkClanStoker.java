@@ -38,6 +38,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -49,8 +50,8 @@ public class KrarkClanStoker extends CardImpl {
 
     public KrarkClanStoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

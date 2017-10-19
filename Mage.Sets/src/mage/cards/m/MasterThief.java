@@ -25,49 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  * @author Loki
  */
 public class MasterThief extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public MasterThief(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // When Master Thief enters the battlefield, gain control of target artifact for as long as you control Master Thief.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
+        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
                 new SourceOnBattlefieldControlUnchangedCondition(),
-                "gain control of target artifact for as long as you control Master Thief");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        ability.addTarget(new TargetPermanent(filter));
+                "gain control of target artifact for as long as you control {this}"
+        ), false);
+        ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }
 

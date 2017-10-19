@@ -38,6 +38,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,8 +50,8 @@ public class NayaSojourners extends CardImpl {
 
     public NayaSojourners(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}{W}");
-        this.subtype.add("Elf");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SHAMAN);
 
 
 

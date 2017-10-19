@@ -41,6 +41,7 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -55,8 +56,8 @@ public class LordOfShatterskullPass extends LevelerCard {
 
     public LordOfShatterskullPass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.MINOTAUR);
+        this.subtype.add(SubType.SHAMAN);
 
         this.color.setRed(true);
         this.power = new MageInt(3);

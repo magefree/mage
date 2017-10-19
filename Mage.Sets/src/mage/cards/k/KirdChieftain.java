@@ -65,7 +65,7 @@ public class KirdChieftain extends CardImpl {
     
     public KirdChieftain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Ape");
+        this.subtype.add(SubType.APE);
 
         this.color.setRed(true);
         this.power = new MageInt(3);

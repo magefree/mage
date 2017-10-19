@@ -41,6 +41,7 @@ import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -56,8 +57,8 @@ public class PyrewildShaman extends CardImpl {
 
     public PyrewildShaman (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.h.HomicidalBrute;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -55,8 +56,8 @@ public class CivilizedScholar extends CardImpl {
 
     public CivilizedScholar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Advisor");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ADVISOR);
 
         this.transformable = true;
         this.secondSideCardClazz = HomicidalBrute.class;

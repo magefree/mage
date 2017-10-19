@@ -46,6 +46,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -67,7 +68,7 @@ public class TibaltTheFiendBlooded extends CardImpl {
     public TibaltTheFiendBlooded(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{R}{R}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Tibalt");
+        this.subtype.add(SubType.TIBALT);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(2));
 

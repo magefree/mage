@@ -33,6 +33,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class GorillaWarrior extends CardImpl {
 
     public GorillaWarrior (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Ape");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.APE);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

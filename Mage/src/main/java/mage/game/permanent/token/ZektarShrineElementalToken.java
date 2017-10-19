@@ -31,6 +31,7 @@ import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class ZektarShrineElementalToken extends Token {
         super("Elemental", "7/1 red Elemental creature token with trample and haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(7);
         toughness = new MageInt(1);
         addAbility(TrampleAbility.getInstance());

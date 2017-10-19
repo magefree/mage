@@ -37,6 +37,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -54,9 +55,9 @@ public class WildfireEternal extends CardImpl {
     public WildfireEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
-        this.subtype.add("Zombie");
-        this.subtype.add("Jackal");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.JACKAL);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

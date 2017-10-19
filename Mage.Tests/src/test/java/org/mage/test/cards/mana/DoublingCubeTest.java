@@ -1,12 +1,10 @@
 package org.mage.test.cards.mana;
 
-import mage.abilities.costs.mana.ColorlessManaCost;
 import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-import org.mage.test.serverside.base.impl.CardTestAPIImpl;
 
 public class DoublingCubeTest extends CardTestPlayerBase {
 
@@ -26,18 +24,16 @@ public class DoublingCubeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, cube);
         addCard(Zone.BATTLEFIELD, playerA, upwelling);
 
-
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G} to your mana pool");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G} to your mana pool");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G} to your mana pool");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}{C}");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3},{T}:");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}:");
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertManaPool(playerA, ManaType.COLORLESS, 4);
-
 
     }
 }

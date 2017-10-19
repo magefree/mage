@@ -30,7 +30,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -38,6 +38,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -55,13 +56,13 @@ public class KillSuitCultist extends CardImpl {
 
     public KillSuitCultist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Kill-Suit Cultist attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
         // {B}, Sacrifice Kill-Suit Cultist: The next time damage would be dealt to target creature this turn, destroy that creature instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KillSuitCultistEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new SacrificeSourceCost());

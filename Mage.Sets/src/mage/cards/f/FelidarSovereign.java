@@ -40,6 +40,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
 
@@ -51,8 +52,8 @@ public class FelidarSovereign extends CardImpl {
 
     public FelidarSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
-        this.subtype.add("Cat");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);

@@ -37,6 +37,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -54,7 +55,7 @@ public class ShieldOfTheAvatar extends CardImpl {
 
     public ShieldOfTheAvatar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // If a source would deal damage to equipped creature, prevent X of that damage, where X is the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShieldOfTheAvatarPreventionEffect()));

@@ -17,7 +17,7 @@ public class MagewrightStoneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, meanderer, 1, true);
         addCard(Zone.BATTLEFIELD, playerA, magewrightStone);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1},{T}: Untap target creature", meanderer);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}: Untap target creature", meanderer);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();

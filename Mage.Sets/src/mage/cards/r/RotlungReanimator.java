@@ -53,8 +53,8 @@ public class RotlungReanimator extends CardImpl {
 
     public RotlungReanimator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

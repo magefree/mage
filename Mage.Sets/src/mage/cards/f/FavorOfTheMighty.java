@@ -54,7 +54,7 @@ public class FavorOfTheMighty extends CardImpl {
 
     public FavorOfTheMighty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.GIANT);
 
         // Each creature with the highest converted mana cost has protection from all colors.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FavorOfTheMightyEffect()));

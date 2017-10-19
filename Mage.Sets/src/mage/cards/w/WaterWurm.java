@@ -51,7 +51,7 @@ public class WaterWurm extends CardImpl {
 
     public WaterWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
-        this.subtype.add("Wurm");
+        this.subtype.add(SubType.WURM);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

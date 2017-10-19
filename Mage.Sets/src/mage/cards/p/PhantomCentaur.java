@@ -38,6 +38,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -48,8 +49,8 @@ public class PhantomCentaur extends CardImpl {
 
     public PhantomCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.subtype.add("Centaur");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(0);

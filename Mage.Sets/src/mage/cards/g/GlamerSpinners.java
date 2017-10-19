@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -58,8 +59,8 @@ public class GlamerSpinners extends CardImpl {
 
     public GlamerSpinners(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W/U}");
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.FAERIE);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

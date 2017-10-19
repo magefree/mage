@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -42,7 +43,7 @@ public class HourOfNeedSphinxToken extends Token {
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Sphinx");
+        subtype.add(SubType.SPHINX);
         power = new MageInt(4);
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());

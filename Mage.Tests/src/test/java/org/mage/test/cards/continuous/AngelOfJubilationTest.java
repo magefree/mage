@@ -82,7 +82,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
         addCard(Zone.BATTLEFIELD, playerB, "Food Chain");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2},Sacrifice a permanent you control: Return target creature to its owner's hand.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}, Sacrifice a permanent you control: Return target creature to its owner's hand.");
         playerB.addChoice("Food Chain");
         playerA.addTarget("Angel of Jubilation");
 
@@ -100,7 +100,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Nantuko Husk");
         addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves", 2);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2},Sacrifice a permanent you control: Return target creature to its owner's hand.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}, Sacrifice a permanent you control: Return target creature to its owner's hand.");
         playerB.addChoice("Nantuko Husk");
         playerA.addTarget("Angel of Jubilation");
 
@@ -151,7 +151,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Tomb of Urami");
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{B}{B},{T}, Sacrifice all lands you control: Create a legendary 5/5 black Demon Spirit creature token with flying named Urami.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{B}{B}, {T}, Sacrifice all lands you control: Create a legendary 5/5 black Demon Spirit creature token with flying named Urami.");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

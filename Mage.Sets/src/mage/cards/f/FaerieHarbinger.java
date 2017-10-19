@@ -54,8 +54,8 @@ public class FaerieHarbinger extends CardImpl {
 
     public FaerieHarbinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.FAERIE);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -40,6 +40,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -55,7 +56,7 @@ public class GuardianZendikon extends CardImpl {
 
     public GuardianZendikon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant land
@@ -91,7 +92,7 @@ class WallToken extends Token {
         super("", "2/6 white wall creature with defender");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Wall");
+        subtype.add(SubType.WALL);
         power = new MageInt(2);
         toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());

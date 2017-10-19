@@ -7,6 +7,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public class Onslaught extends ExpansionSet {
+
     private static final Onslaught instance = new Onslaught();
 
     public static Onslaught getInstance() {
@@ -46,6 +47,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Aven Brigadier", 7, Rarity.RARE, mage.cards.a.AvenBrigadier.class));
         cards.add(new SetCardInfo("Aven Fateshaper", 69, Rarity.UNCOMMON, mage.cards.a.AvenFateshaper.class));
         cards.add(new SetCardInfo("Aven Soulgazer", 8, Rarity.UNCOMMON, mage.cards.a.AvenSoulgazer.class));
+        cards.add(new SetCardInfo("Backslide", 70, Rarity.COMMON, mage.cards.b.Backslide.class));
         cards.add(new SetCardInfo("Barkhide Mauler", 246, Rarity.COMMON, mage.cards.b.BarkhideMauler.class));
         cards.add(new SetCardInfo("Barren Moor", 312, Rarity.COMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Battering Craghorn", 188, Rarity.COMMON, mage.cards.b.BatteringCraghorn.class));
@@ -55,7 +57,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Blatant Thievery", 71, Rarity.RARE, mage.cards.b.BlatantThievery.class));
         cards.add(new SetCardInfo("Blistering Firecat", 189, Rarity.RARE, mage.cards.b.BlisteringFirecat.class));
         cards.add(new SetCardInfo("Bloodline Shaman", 249, Rarity.UNCOMMON, mage.cards.b.BloodlineShaman.class));
-        cards.add(new SetCardInfo("Bloodstained Mire", 313, Rarity.RARE, mage.cards.b.BloodstainedMire.class, new CardGraphicInfo(new ObjectColor("RB"), null,false)));
+        cards.add(new SetCardInfo("Bloodstained Mire", 313, Rarity.RARE, mage.cards.b.BloodstainedMire.class, new CardGraphicInfo(new ObjectColor("RB"), null, false)));
         cards.add(new SetCardInfo("Boneknitter", 128, Rarity.UNCOMMON, mage.cards.b.Boneknitter.class));
         cards.add(new SetCardInfo("Break Open", 190, Rarity.COMMON, mage.cards.b.BreakOpen.class));
         cards.add(new SetCardInfo("Brightstone Ritual", 191, Rarity.COMMON, mage.cards.b.BrightstoneRitual.class));
@@ -127,6 +129,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Festering Goblin", 148, Rarity.COMMON, mage.cards.f.FesteringGoblin.class));
         cards.add(new SetCardInfo("Fever Charm", 202, Rarity.COMMON, mage.cards.f.FeverCharm.class));
         cards.add(new SetCardInfo("Flamestick Courier", 203, Rarity.UNCOMMON, mage.cards.f.FlamestickCourier.class));
+        cards.add(new SetCardInfo("Fleeting Aven", 83, Rarity.UNCOMMON, mage.cards.f.FleetingAven.class));
         cards.add(new SetCardInfo("Flooded Strand", 316, Rarity.RARE, mage.cards.f.FloodedStrand.class, new CardGraphicInfo(new ObjectColor("UW"), null, false)));
         cards.add(new SetCardInfo("Foothill Guide", 29, Rarity.COMMON, mage.cards.f.FoothillGuide.class));
         cards.add(new SetCardInfo("Forest", 347, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
@@ -194,7 +197,13 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Mana Echoes", 218, Rarity.RARE, mage.cards.m.ManaEchoes.class));
         cards.add(new SetCardInfo("Menacing Ogre", 219, Rarity.RARE, mage.cards.m.MenacingOgre.class));
         cards.add(new SetCardInfo("Misery Charm", 158, Rarity.COMMON, mage.cards.m.MiseryCharm.class));
+        cards.add(new SetCardInfo("Mistform Dreamer", 93, Rarity.COMMON, mage.cards.m.MistformDreamer.class));
+        cards.add(new SetCardInfo("Mistform Mask", 94, Rarity.COMMON, mage.cards.m.MistformMask.class));
         cards.add(new SetCardInfo("Mistform Mutant", 95, Rarity.UNCOMMON, mage.cards.m.MistformMutant.class));
+        cards.add(new SetCardInfo("Mistform Shrieker", 96, Rarity.UNCOMMON, mage.cards.m.MistformShrieker.class));
+        cards.add(new SetCardInfo("Mistform Skyreaver", 97, Rarity.RARE, mage.cards.m.MistformSkyreaver.class));
+        cards.add(new SetCardInfo("Mistform Stalker", 98, Rarity.UNCOMMON, mage.cards.m.MistformStalker.class));
+        cards.add(new SetCardInfo("Mistform Wall", 99, Rarity.COMMON, mage.cards.m.MistformWall.class));
         cards.add(new SetCardInfo("Mobilization", 44, Rarity.RARE, mage.cards.m.Mobilization.class));
         cards.add(new SetCardInfo("Mountain", 343, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 344, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -242,6 +251,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Rummaging Wizard", 110, Rarity.UNCOMMON, mage.cards.r.RummagingWizard.class));
         cards.add(new SetCardInfo("Run Wild", 279, Rarity.UNCOMMON, mage.cards.r.RunWild.class));
         cards.add(new SetCardInfo("Sage Aven", 111, Rarity.COMMON, mage.cards.s.SageAven.class));
+        cards.add(new SetCardInfo("Sandskin", 52, Rarity.COMMON, mage.cards.s.Sandskin.class));
         cards.add(new SetCardInfo("Screaming Seahawk", 112, Rarity.COMMON, mage.cards.s.ScreamingSeahawk.class));
         cards.add(new SetCardInfo("Screeching Buzzard", 165, Rarity.COMMON, mage.cards.s.ScreechingBuzzard.class));
         cards.add(new SetCardInfo("Searing Flesh", 225, Rarity.UNCOMMON, mage.cards.s.SearingFlesh.class));
@@ -254,6 +264,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Shared Triumph", 53, Rarity.RARE, mage.cards.s.SharedTriumph.class));
         cards.add(new SetCardInfo("Shepherd of Rot", 168, Rarity.COMMON, mage.cards.s.ShepherdOfRot.class));
         cards.add(new SetCardInfo("Shock", 227, Rarity.COMMON, mage.cards.s.Shock.class));
+        cards.add(new SetCardInfo("Sigil of the New Dawn", 55, Rarity.RARE, mage.cards.s.SigilOfTheNewDawn.class));
         cards.add(new SetCardInfo("Silent Specter", 169, Rarity.RARE, mage.cards.s.SilentSpecter.class));
         cards.add(new SetCardInfo("Silklash Spider", 281, Rarity.RARE, mage.cards.s.SilklashSpider.class));
         cards.add(new SetCardInfo("Silvos, Rogue Elemental", 282, Rarity.RARE, mage.cards.s.SilvosRogueElemental.class));
@@ -269,6 +280,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Soulless One", 171, Rarity.UNCOMMON, mage.cards.s.SoullessOne.class));
         cards.add(new SetCardInfo("Sparksmith", 235, Rarity.COMMON, mage.cards.s.Sparksmith.class));
         cards.add(new SetCardInfo("Spined Basher", 172, Rarity.COMMON, mage.cards.s.SpinedBasher.class));
+        cards.add(new SetCardInfo("Spitfire Handler", 236, Rarity.UNCOMMON, mage.cards.s.SpitfireHandler.class));
         cards.add(new SetCardInfo("Spitting Gourna", 284, Rarity.COMMON, mage.cards.s.SpittingGourna.class));
         cards.add(new SetCardInfo("Spurred Wolverine", 237, Rarity.COMMON, mage.cards.s.SpurredWolverine.class));
         cards.add(new SetCardInfo("Stag Beetle", 285, Rarity.RARE, mage.cards.s.StagBeetle.class));
@@ -276,6 +288,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Starlit Sanctum", 325, Rarity.UNCOMMON, mage.cards.s.StarlitSanctum.class));
         cards.add(new SetCardInfo("Starstorm", 238, Rarity.RARE, mage.cards.s.Starstorm.class));
         cards.add(new SetCardInfo("Steely Resolve", 286, Rarity.RARE, mage.cards.s.SteelyResolve.class));
+        cards.add(new SetCardInfo("Strongarm Tactics", 173, Rarity.RARE, mage.cards.s.StrongarmTactics.class));
         cards.add(new SetCardInfo("Sunfire Balm", 56, Rarity.UNCOMMON, mage.cards.s.SunfireBalm.class));
         cards.add(new SetCardInfo("Supreme Inquisitor", 117, Rarity.RARE, mage.cards.s.SupremeInquisitor.class));
         cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
@@ -291,6 +304,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Taunting Elf", 290, Rarity.COMMON, mage.cards.t.TauntingElf.class));
         cards.add(new SetCardInfo("Tempting Wurm", 291, Rarity.RARE, mage.cards.t.TemptingWurm.class));
         cards.add(new SetCardInfo("Tephraderm", 239, Rarity.RARE, mage.cards.t.Tephraderm.class));
+        cards.add(new SetCardInfo("Thrashing Mudspawn", 177, Rarity.UNCOMMON, mage.cards.t.ThrashingMudspawn.class));
         cards.add(new SetCardInfo("Threaten", 241, Rarity.UNCOMMON, mage.cards.t.Threaten.class));
         cards.add(new SetCardInfo("Thunder of Hooves", 242, Rarity.UNCOMMON, mage.cards.t.ThunderOfHooves.class));
         cards.add(new SetCardInfo("Towering Baloth", 292, Rarity.UNCOMMON, mage.cards.t.ToweringBaloth.class));
@@ -302,6 +316,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("True Believer", 57, Rarity.RARE, mage.cards.t.TrueBeliever.class));
         cards.add(new SetCardInfo("Undead Gladiator", 178, Rarity.RARE, mage.cards.u.UndeadGladiator.class));
         cards.add(new SetCardInfo("Unholy Grotto", 327, Rarity.RARE, mage.cards.u.UnholyGrotto.class));
+        cards.add(new SetCardInfo("Unified Strike", 58, Rarity.COMMON, mage.cards.u.UnifiedStrike.class));
         cards.add(new SetCardInfo("Venomspout Brackus", 295, Rarity.UNCOMMON, mage.cards.v.VenomspoutBrackus.class));
         cards.add(new SetCardInfo("Visara the Dreadful", 179, Rarity.RARE, mage.cards.v.VisaraTheDreadful.class));
         cards.add(new SetCardInfo("Vitality Charm", 296, Rarity.COMMON, mage.cards.v.VitalityCharm.class));
@@ -321,6 +336,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Wirewood Lodge", 329, Rarity.RARE, mage.cards.w.WirewoodLodge.class));
         cards.add(new SetCardInfo("Wirewood Pride", 303, Rarity.COMMON, mage.cards.w.WirewoodPride.class));
         cards.add(new SetCardInfo("Wirewood Savage", 304, Rarity.COMMON, mage.cards.w.WirewoodSavage.class));
+        cards.add(new SetCardInfo("Withering Hex", 181, Rarity.UNCOMMON, mage.cards.w.WitheringHex.class));
         cards.add(new SetCardInfo("Wooded Foothills", 330, Rarity.RARE, mage.cards.w.WoodedFoothills.class, new CardGraphicInfo(new ObjectColor("RG"), null, false)));
         cards.add(new SetCardInfo("Words of War", 244, Rarity.RARE, mage.cards.w.WordsOfWar.class));
         cards.add(new SetCardInfo("Words of Waste", 182, Rarity.RARE, mage.cards.w.WordsOfWaste.class));

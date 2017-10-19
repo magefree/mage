@@ -34,12 +34,13 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -96,9 +97,9 @@ class SeanceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
             controller.moveCards(card, Zone.EXILED, source, game); // Also if the move to exile is replaced, the copy takes place
-            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, false);
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false);
             effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-            effect.setAdditionalSubType("Spirit");
+            effect.setAdditionalSubType(SubType.SPIRIT);
             effect.apply(game, source);
             ExileTargetEffect exileEffect = new ExileTargetEffect();
             exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanent(), game));

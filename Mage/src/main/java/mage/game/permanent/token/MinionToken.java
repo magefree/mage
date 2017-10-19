@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,7 +46,7 @@ public class MinionToken extends Token {
         super("Minion", "X/X black Minion creature token");
         this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
-        subtype.add("Minion");
+        subtype.add(SubType.MINION);
         color.setBlack(true);
         power = new MageInt(0);
         toughness = new MageInt(0);

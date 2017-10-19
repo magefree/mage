@@ -35,6 +35,7 @@ import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,7 +52,7 @@ public class SolkanarTheSwampKing extends CardImpl {
     public SolkanarTheSwampKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

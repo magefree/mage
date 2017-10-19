@@ -36,6 +36,7 @@ import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,8 +50,8 @@ public class NemesisOfReason extends CardImpl {
 
     public NemesisOfReason (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
-        this.subtype.add("Leviathan");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.LEVIATHAN);
+        this.subtype.add(SubType.HORROR);
         
         this.power = new MageInt(3);
         this.toughness = new MageInt(7);

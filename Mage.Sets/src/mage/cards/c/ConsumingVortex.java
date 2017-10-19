@@ -33,6 +33,7 @@ import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,7 +44,7 @@ public class ConsumingVortex extends CardImpl {
 
     public ConsumingVortex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
 
         // Return target creature to its owner's hand.

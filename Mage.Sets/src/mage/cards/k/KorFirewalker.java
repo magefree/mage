@@ -37,6 +37,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,8 +52,8 @@ public class KorFirewalker extends CardImpl {
 
     public KorFirewalker (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.SOLDIER);
 
         this.color.setWhite(true);        
         this.power = new MageInt(2);

@@ -40,6 +40,7 @@ import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -58,7 +59,7 @@ public class N1Starfighter extends CardImpl {
 
     public N1Starfighter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W/U}{W/U}");
-        this.subtype.add("Starship");
+        this.subtype.add(SubType.STARSHIP);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

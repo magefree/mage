@@ -39,6 +39,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -54,15 +55,15 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class ServantOfTheScale extends CardImpl {
 
     public ServantOfTheScale(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // Servant of the Scale enters the battlefield with a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-                "with a +1/+1 counters on it"));
+                "with a +1/+1 counter on it"));
 
         // When Servant of the Scale dies, put X +1/+1 counters on target creature you control, where X is the number of +1/+1 counter on Servant of the Scale.
         Ability ability = new DiesTriggeredAbility(new ServantOfTheScaleEffect(), false);
@@ -84,7 +85,7 @@ class ServantOfTheScaleEffect extends OneShotEffect {
 
     public ServantOfTheScaleEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "put X +1/+1 counters on target creature you control, where X is the number of +1/+1 counter on {this}";
+        this.staticText = "put X +1/+1 counters on target creature you control, where X is the number of +1/+1 counters on {this}";
     }
 
     public ServantOfTheScaleEffect(final ServantOfTheScaleEffect effect) {
@@ -100,8 +101,8 @@ class ServantOfTheScaleEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (sourcePermanent != null && controller != null &&
-            (sourcePermanent.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter()  // Token
+        if (sourcePermanent != null && controller != null
+                && (sourcePermanent.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter() // Token
                 || sourcePermanent.getZoneChangeCounter(game) + 1 == source.getSourceObjectZoneChangeCounter())) { // PermanentCard
             int amount = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (amount > 0) {

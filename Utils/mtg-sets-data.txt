@@ -93,6 +93,7 @@ Gatecrash|GTC|
 Guru|GUR|
 Premium Deck Series: Slivers|H09|
 Homelands|HML|
+Heroes of the Realm|HOTR|
 Planechase|HOP|
 Hour of Devastation|HOU|
 Ice Age|ICE|
@@ -204,3 +205,4 @@ Weatherlight|WTH|
 Worldwake|WWK|
 Ixalan|XLN|
 Zendikar|ZEN|
+Star Wars|SWS|

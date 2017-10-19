@@ -1,0 +1,20 @@
+package mage.client.util;
+
+public enum ClientEventType {
+    SET_NUMBER,
+    ACTION_CONSUMED,
+    DOUBLE_CLICK,
+    ALT_DOUBLE_CLICK,
+    REMOVE_MAIN,
+    REMOVE_SIDEBOARD,
+    SHOW_POP_UP_MENU,
+    REMOVE_SPECIFIC_CARD,
+    ADD_SPECIFIC_CARD,
+    PICK_A_CARD,
+    MARK_A_CARD,
+    PLAYER_TYPE_CHANGED
+
+
+
+
+}

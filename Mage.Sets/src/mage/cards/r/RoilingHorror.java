@@ -42,6 +42,7 @@ import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -58,18 +59,20 @@ import mage.target.TargetPlayer;
 public class RoilingHorror extends CardImpl {
 
     public RoilingHorror(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add("Horror");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // Roiling Horror's power and toughness are each equal to your life total minus the life total of an opponent with the most life.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new RoilingHorrorDynamicValue(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new RoilingHorrorDynamicValue(), Duration.EndOfGame)
+                .setText("{this}'s power and toughness are each equal to your life total minus the life total of an opponent with the most life.")
+        ));
 
         // Suspend X-{X}{B}{B}{B}. X can't be 0.
         this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl("{B}{B}{B}"), this, true));
-        
+
         // Whenever a time counter is removed from Roiling Horror while it's exiled, target player loses 1 life and you gain 1 life.
         this.addAbility(new RoilingHorrorTriggeredAbility());
 

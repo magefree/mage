@@ -27,19 +27,19 @@
  */
 package mage.cards.e;
 
-import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 
 /**
  *
@@ -48,10 +48,15 @@ import java.util.UUID;
 public class EvolvingWilds extends CardImpl {
 
     public EvolvingWilds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
         // {T}, Sacrifice Evolving Wilds: Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
-        this.addAbility(new EvolvingWildsAbility());
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true),
+                new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
     }
 
     public EvolvingWilds(final EvolvingWilds card) {
@@ -61,27 +66,6 @@ public class EvolvingWilds extends CardImpl {
     @Override
     public EvolvingWilds copy() {
         return new EvolvingWilds(this);
-    }
-
-}
-
-class EvolvingWildsAbility extends ActivatedAbilityImpl {
-
-    public EvolvingWildsAbility() {
-        super(Zone.BATTLEFIELD, null);
-        addCost(new TapSourceCost());
-        addCost(new SacrificeSourceCost());
-        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
-        addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
-    }
-
-    public EvolvingWildsAbility(final EvolvingWildsAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EvolvingWildsAbility copy() {
-        return new EvolvingWildsAbility(this);
     }
 
 }

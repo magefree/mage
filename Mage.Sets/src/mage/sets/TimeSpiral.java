@@ -73,6 +73,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Deep-Sea Kraken", 56, Rarity.RARE, mage.cards.d.DeepSeaKraken.class));
         cards.add(new SetCardInfo("Dementia Sliver", 236, Rarity.UNCOMMON, mage.cards.d.DementiaSliver.class));
         cards.add(new SetCardInfo("Demonic Collusion", 103, Rarity.RARE, mage.cards.d.DemonicCollusion.class));
+        cards.add(new SetCardInfo("Detainment Spell", 12, Rarity.COMMON, mage.cards.d.DetainmentSpell.class));
         cards.add(new SetCardInfo("Divine Congregation", 13, Rarity.COMMON, mage.cards.d.DivineCongregation.class));
         cards.add(new SetCardInfo("Draining Whelk", 57, Rarity.RARE, mage.cards.d.DrainingWhelk.class));
         cards.add(new SetCardInfo("Dralnu, Lich Lord", 237, Rarity.RARE, mage.cards.d.DralnuLichLord.class));
@@ -100,6 +101,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Flamecore Elemental", 154, Rarity.COMMON, mage.cards.f.FlamecoreElemental.class));
         cards.add(new SetCardInfo("Fledgling Mawcor", 63, Rarity.UNCOMMON, mage.cards.f.FledglingMawcor.class));
         cards.add(new SetCardInfo("Flickering Spirit", 17, Rarity.COMMON, mage.cards.f.FlickeringSpirit.class));
+        cards.add(new SetCardInfo("Flowstone Channeler", 155, Rarity.COMMON, mage.cards.f.FlowstoneChanneler.class));
         cards.add(new SetCardInfo("Fool's Demise", 64, Rarity.UNCOMMON, mage.cards.f.FoolsDemise.class));
         cards.add(new SetCardInfo("Forest", 298, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 299, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
@@ -244,6 +246,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Spectral Force", 217, Rarity.RARE, mage.cards.s.SpectralForce.class));
         cards.add(new SetCardInfo("Spell Burst", 79, Rarity.UNCOMMON, mage.cards.s.SpellBurst.class));
         cards.add(new SetCardInfo("Spiketail Drakeling", 80, Rarity.COMMON, mage.cards.s.SpiketailDrakeling.class));
+        cards.add(new SetCardInfo("Spike Tiller", 218, Rarity.RARE, mage.cards.s.SpikeTiller.class));
         cards.add(new SetCardInfo("Spinneret Sliver", 219, Rarity.COMMON, mage.cards.s.SpinneretSliver.class));
         cards.add(new SetCardInfo("Spirit Loop", 42, Rarity.UNCOMMON, mage.cards.s.SpiritLoop.class));
         cards.add(new SetCardInfo("Sporesower Thallid", 220, Rarity.UNCOMMON, mage.cards.s.SporesowerThallid.class));
@@ -305,6 +308,8 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Volcanic Awakening", 186, Rarity.UNCOMMON, mage.cards.v.VolcanicAwakening.class));
         cards.add(new SetCardInfo("Walk the Aeons", 93, Rarity.RARE, mage.cards.w.WalkTheAeons.class));
         cards.add(new SetCardInfo("Watcher Sliver", 45, Rarity.COMMON, mage.cards.w.WatcherSliver.class));
+        cards.add(new SetCardInfo("Weathered Bodyguards", 46, Rarity.RARE, mage.cards.w.WeatheredBodyguards.class));
+        cards.add(new SetCardInfo("Weatherseed Totem", 268, Rarity.UNCOMMON, mage.cards.w.WeatherseedTotem.class));
         cards.add(new SetCardInfo("Wheel of Fate", 187, Rarity.RARE, mage.cards.w.WheelOfFate.class));
         cards.add(new SetCardInfo("Wipe Away", 94, Rarity.UNCOMMON, mage.cards.w.WipeAway.class));
         cards.add(new SetCardInfo("Word of Seizing", 188, Rarity.RARE, mage.cards.w.WordOfSeizing.class));

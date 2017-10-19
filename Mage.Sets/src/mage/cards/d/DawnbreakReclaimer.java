@@ -40,6 +40,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -59,7 +60,7 @@ public class DawnbreakReclaimer extends CardImpl {
 
     public DawnbreakReclaimer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

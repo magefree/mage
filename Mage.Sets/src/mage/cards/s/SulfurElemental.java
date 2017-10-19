@@ -37,6 +37,7 @@ import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -47,25 +48,28 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author LevelX2
  */
 public class SulfurElemental extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public SulfurElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Elemental");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Flash
-        this.addAbility(FlashAbility.getInstance());
         // Split second
         this.addAbility(new SplitSecondAbility());
+
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+
         // White creatures get +1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,-1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, -1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     public SulfurElemental(final SulfurElemental card) {

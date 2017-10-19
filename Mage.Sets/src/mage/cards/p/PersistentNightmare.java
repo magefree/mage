@@ -35,6 +35,7 @@ import mage.abilities.keyword.SkulkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class PersistentNightmare extends CardImpl {
 
     public PersistentNightmare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Nightmare");
+        this.subtype.add(SubType.NIGHTMARE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.color.setBlue(true);

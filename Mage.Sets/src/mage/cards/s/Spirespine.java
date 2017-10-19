@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -50,8 +51,8 @@ import mage.constants.Zone;
 public class Spirespine extends CardImpl {
 
     public Spirespine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Beast");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{G}");
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
@@ -60,12 +61,12 @@ public class Spirespine extends CardImpl {
         this.addAbility(new BestowAbility(this, "{4}{G}"));
         // Spirespine blocks each turn if able.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield)));
-        // Enchanted creature gets +4/+1 and blocks each turn if able.
-        Effect effect = new BoostEnchantedEffect(4,1, Duration.WhileOnBattlefield);
+        // Enchanted creature gets +4/+1 and blocks each combat if able.
+        Effect effect = new BoostEnchantedEffect(4, 1, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +4/+1");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new BlocksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
-        effect.setText("and blocks each turn if able");
+        effect.setText("and blocks each combat if able");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

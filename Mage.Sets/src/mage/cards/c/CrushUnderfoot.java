@@ -53,7 +53,7 @@ public class CrushUnderfoot extends CardImpl {
 
     public CrushUnderfoot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{1}{R}");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.GIANT);
 
 
         // Choose a Giant creature you control. It deals damage equal to its power to target creature.

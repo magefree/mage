@@ -64,11 +64,13 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Berserk Murlodont", 117, Rarity.COMMON, mage.cards.b.BerserkMurlodont.class));
         cards.add(new SetCardInfo("Blade Sliver", 88, Rarity.UNCOMMON, mage.cards.b.BladeSliver.class));
         cards.add(new SetCardInfo("Blood Celebrant", 61, Rarity.COMMON, mage.cards.b.BloodCelebrant.class));
+        cards.add(new SetCardInfo("Bloodstoke Howler", 89, Rarity.COMMON, mage.cards.b.BloodstokeHowler.class));
         cards.add(new SetCardInfo("Branchsnap Lorian", 118, Rarity.UNCOMMON, mage.cards.b.BranchsnapLorian.class));
         cards.add(new SetCardInfo("Brontotherium", 119, Rarity.UNCOMMON, mage.cards.b.Brontotherium.class));
         cards.add(new SetCardInfo("Brood Sliver", 120, Rarity.RARE, mage.cards.b.BroodSliver.class));
         cards.add(new SetCardInfo("Caller of the Claw", 121, Rarity.RARE, mage.cards.c.CallerOfTheClaw.class));
         cards.add(new SetCardInfo("Canopy Crawler", 122, Rarity.UNCOMMON, mage.cards.c.CanopyCrawler.class));
+        cards.add(new SetCardInfo("Celestial Gatekeeper", 6, Rarity.RARE, mage.cards.c.CelestialGatekeeper.class));
         cards.add(new SetCardInfo("Cephalid Pathmage", 31, Rarity.COMMON, mage.cards.c.CephalidPathmage.class));
         cards.add(new SetCardInfo("Chromeshell Crab", 32, Rarity.RARE, mage.cards.c.ChromeshellCrab.class));
         cards.add(new SetCardInfo("Clickslither", 90, Rarity.RARE, mage.cards.c.Clickslither.class));
@@ -88,6 +90,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Deftblade Elite", 12, Rarity.COMMON, mage.cards.d.DeftbladeElite.class));
         cards.add(new SetCardInfo("Dermoplasm", 35, Rarity.RARE, mage.cards.d.Dermoplasm.class));
         cards.add(new SetCardInfo("Dreamborn Muse", 36, Rarity.RARE, mage.cards.d.DreambornMuse.class));
+        cards.add(new SetCardInfo("Drinker of Sorrow", 66, Rarity.RARE, mage.cards.d.DrinkerOfSorrow.class));
         cards.add(new SetCardInfo("Dripping Dead", 67, Rarity.COMMON, mage.cards.d.DrippingDead.class));
         cards.add(new SetCardInfo("Earthblighter", 68, Rarity.UNCOMMON, mage.cards.e.Earthblighter.class));
         cards.add(new SetCardInfo("Echo Tracer", 37, Rarity.COMMON, mage.cards.e.EchoTracer.class));
@@ -97,10 +100,12 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Essence Sliver", 13, Rarity.RARE, mage.cards.e.EssenceSliver.class));
         cards.add(new SetCardInfo("Feral Throwback", 126, Rarity.RARE, mage.cards.f.FeralThrowback.class));
         cards.add(new SetCardInfo("Flamewave Invoker", 92, Rarity.COMMON, mage.cards.f.FlamewaveInvoker.class));
+        cards.add(new SetCardInfo("Frenetic Raptor", 93, Rarity.UNCOMMON, mage.cards.f.FreneticRaptor.class));
         cards.add(new SetCardInfo("Fugitive Wizard", 38, Rarity.COMMON, mage.cards.f.FugitiveWizard.class));
         cards.add(new SetCardInfo("Gempalm Avenger", 14, Rarity.COMMON, mage.cards.g.GempalmAvenger.class));
         cards.add(new SetCardInfo("Gempalm Incinerator", 94, Rarity.UNCOMMON, mage.cards.g.GempalmIncinerator.class));
         cards.add(new SetCardInfo("Gempalm Polluter", 70, Rarity.COMMON, mage.cards.g.GempalmPolluter.class));
+        cards.add(new SetCardInfo("Gempalm Sorcerer", 39, Rarity.UNCOMMON, mage.cards.g.GempalmSorcerer.class));
         cards.add(new SetCardInfo("Gempalm Strider", 127, Rarity.UNCOMMON, mage.cards.g.GempalmStrider.class));
         cards.add(new SetCardInfo("Ghastly Remains", 71, Rarity.RARE, mage.cards.g.GhastlyRemains.class));
         cards.add(new SetCardInfo("Glintwing Invoker", 40, Rarity.COMMON, mage.cards.g.GlintwingInvoker.class));
@@ -131,7 +136,9 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Lowland Tracker", 17, Rarity.COMMON, mage.cards.l.LowlandTracker.class));
         cards.add(new SetCardInfo("Macetail Hystrodon", 106, Rarity.COMMON, mage.cards.m.MacetailHystrodon.class));
         cards.add(new SetCardInfo("Magma Sliver", 107, Rarity.RARE, mage.cards.m.MagmaSliver.class));
+        cards.add(new SetCardInfo("Master of the Veil", 43, Rarity.UNCOMMON, mage.cards.m.MasterOfTheVeil.class));
         cards.add(new SetCardInfo("Merchant of Secrets", 44, Rarity.COMMON, mage.cards.m.MerchantOfSecrets.class));
+        cards.add(new SetCardInfo("Mistform Seaswift", 45, Rarity.COMMON, mage.cards.m.MistformSeaswift.class));
         cards.add(new SetCardInfo("Mistform Sliver", 46, Rarity.COMMON, mage.cards.m.MistformSliver.class));
         cards.add(new SetCardInfo("Mistform Ultimus", 47, Rarity.RARE, mage.cards.m.MistformUltimus.class));
         cards.add(new SetCardInfo("Nantuko Vigilante", 132, Rarity.COMMON, mage.cards.n.NantukoVigilante.class));
@@ -146,6 +153,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Quick Sliver", 136, Rarity.COMMON, mage.cards.q.QuickSliver.class));
         cards.add(new SetCardInfo("Ridgetop Raptor", 108, Rarity.UNCOMMON, mage.cards.r.RidgetopRaptor.class));
         cards.add(new SetCardInfo("Riptide Director", 50, Rarity.RARE, mage.cards.r.RiptideDirector.class));
+        cards.add(new SetCardInfo("Riptide Mangler", 51, Rarity.RARE, mage.cards.r.RiptideMangler.class));
         cards.add(new SetCardInfo("Rockshard Elemental", 109, Rarity.RARE, mage.cards.r.RockshardElemental.class));
         cards.add(new SetCardInfo("Root Sliver", 137, Rarity.UNCOMMON, mage.cards.r.RootSliver.class));
         cards.add(new SetCardInfo("Scion of Darkness", 79, Rarity.RARE, mage.cards.s.ScionOfDarkness.class));
@@ -153,6 +161,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Shaleskin Plower", 110, Rarity.COMMON, mage.cards.s.ShaleskinPlower.class));
         cards.add(new SetCardInfo("Shifting Sliver", 52, Rarity.UNCOMMON, mage.cards.s.ShiftingSliver.class));
         cards.add(new SetCardInfo("Skinthinner", 80, Rarity.COMMON, mage.cards.s.Skinthinner.class));
+        cards.add(new SetCardInfo("Skirk Alarmist", 111, Rarity.RARE, mage.cards.s.SkirkAlarmist.class));
         cards.add(new SetCardInfo("Skirk Drill Sergeant", 112, Rarity.UNCOMMON, mage.cards.s.SkirkDrillSergeant.class));
         cards.add(new SetCardInfo("Skirk Marauder", 113, Rarity.COMMON, mage.cards.s.SkirkMarauder.class));
         cards.add(new SetCardInfo("Skirk Outrider", 114, Rarity.COMMON, mage.cards.s.SkirkOutrider.class));
@@ -170,12 +179,15 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Toxin Sliver", 84, Rarity.RARE, mage.cards.t.ToxinSliver.class));
         cards.add(new SetCardInfo("Tribal Forcemage", 142, Rarity.RARE, mage.cards.t.TribalForcemage.class));
         cards.add(new SetCardInfo("Unstable Hulk", 115, Rarity.RARE, mage.cards.u.UnstableHulk.class));
+        cards.add(new SetCardInfo("Vexing Beetle", 143, Rarity.RARE, mage.cards.v.VexingBeetle.class));
         cards.add(new SetCardInfo("Vile Deacon", 85, Rarity.COMMON, mage.cards.v.VileDeacon.class));
         cards.add(new SetCardInfo("Voidmage Apprentice", 54, Rarity.COMMON, mage.cards.v.VoidmageApprentice.class));
         cards.add(new SetCardInfo("Wall of Deceit", 55, Rarity.UNCOMMON, mage.cards.w.WallOfDeceit.class));
         cards.add(new SetCardInfo("Wall of Hope", 24, Rarity.COMMON, mage.cards.w.WallOfHope.class));
         cards.add(new SetCardInfo("Warbreak Trumpeter", 116, Rarity.UNCOMMON, mage.cards.w.WarbreakTrumpeter.class));
         cards.add(new SetCardInfo("Ward Sliver", 25, Rarity.UNCOMMON, mage.cards.w.WardSliver.class));
+        cards.add(new SetCardInfo("Warped Researcher", 56, Rarity.UNCOMMON, mage.cards.w.WarpedResearcher.class));
+        cards.add(new SetCardInfo("Weaver of Lies", 57, Rarity.RARE, mage.cards.w.WeaverOfLies.class));
         cards.add(new SetCardInfo("White Knight", 27, Rarity.UNCOMMON, mage.cards.w.WhiteKnight.class));
         cards.add(new SetCardInfo("Willbender", 58, Rarity.UNCOMMON, mage.cards.w.Willbender.class));
         cards.add(new SetCardInfo("Windborn Muse", 28, Rarity.RARE, mage.cards.w.WindbornMuse.class));

@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class KjeldoranGargoyle extends CardImpl {
 
     public KjeldoranGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
-        this.subtype.add("Gargoyle");
+        this.subtype.add(SubType.GARGOYLE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

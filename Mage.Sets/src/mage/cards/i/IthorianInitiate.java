@@ -35,6 +35,7 @@ import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
@@ -48,8 +49,8 @@ public class IthorianInitiate extends CardImpl {
 
     public IthorianInitiate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Ithorian");
-        this.subtype.add("Jedi");
+        this.subtype.add(SubType.ITHORIAN);
+        this.subtype.add(SubType.JEDI);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

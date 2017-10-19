@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -44,8 +45,8 @@ public class RageThrower extends CardImpl {
 
     public RageThrower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

@@ -53,7 +53,7 @@ import mage.players.Player;
 public class KyrenToy extends CardImpl {
 
     public KyrenToy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {1}, {T}: Put a charge counter on Kyren Toy.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new GenericManaCost(1));
@@ -95,7 +95,7 @@ public class KyrenToy extends CardImpl {
 
         KyrenToyManaEffect() {
             super();
-            staticText = "Add X mana of {C} to your mana pool, and then add {C} to your mana pool";
+            staticText = "Add an amount of {C} to your mana pool equal to X plus one";
         }
 
         KyrenToyManaEffect(final KyrenToyManaEffect effect) {

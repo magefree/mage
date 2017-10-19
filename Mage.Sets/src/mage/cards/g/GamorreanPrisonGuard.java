@@ -56,8 +56,8 @@ public class GamorreanPrisonGuard extends CardImpl {
 
     public GamorreanPrisonGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Gamorrean");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.GAMORREAN);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

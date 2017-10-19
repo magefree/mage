@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -40,7 +41,7 @@ public class PenumbraKavuToken extends Token {
         super("Kavu", "3/3 black Kavu creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Kavu");
+        subtype.add(SubType.KAVU);
         power = new MageInt(3);
         toughness = new MageInt(3);
     }

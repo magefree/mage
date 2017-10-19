@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.TurnPhase;
@@ -67,7 +68,7 @@ public class GideonJura extends CardImpl {
     public GideonJura(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{W}{W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Gideon");
+        this.subtype.add(SubType.GIDEON);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 
@@ -105,8 +106,8 @@ class GideonJuraToken extends Token {
     public GideonJuraToken() {
         super("", "6/6 Human Soldier creature");
         cardType.add(CardType.CREATURE);
-        subtype.add("Human");
-        subtype.add("Soldier");
+        subtype.add(SubType.HUMAN);
+        subtype.add(SubType.SOLDIER);
         power = new MageInt(6);
         toughness = new MageInt(6);
     }

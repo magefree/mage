@@ -39,6 +39,7 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -58,7 +59,7 @@ public class EldraziDisplacer extends CardImpl {
 
     public EldraziDisplacer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
@@ -70,7 +71,7 @@ public class EldraziDisplacer extends CardImpl {
         effect.setText("Exile another target creature");
         effect.setApplyEffectsAfter(); // Needed to let temporary continuous effects end if a permanent is blinked
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{C}"));
-        effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, true);
+        effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true);
         effect.setText(", then return it to the battlefield tapped under its owner's control");
         ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent(FILTER));

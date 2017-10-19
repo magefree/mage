@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -59,8 +60,8 @@ public class WardenOfTheEye extends CardImpl {
 
     public WardenOfTheEye(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}{W}");
-        this.subtype.add("Djinn");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.DJINN);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

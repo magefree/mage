@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -53,7 +54,7 @@ public class NeurokFamiliar extends CardImpl {
 
     public NeurokFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.subtype.add("Bird");
+        this.subtype.add(SubType.BIRD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

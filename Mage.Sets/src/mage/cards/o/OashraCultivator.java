@@ -37,6 +37,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
@@ -53,8 +54,8 @@ public class OashraCultivator extends CardImpl {
     public OashraCultivator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.DRUID);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

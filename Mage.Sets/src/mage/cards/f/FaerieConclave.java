@@ -38,6 +38,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -69,7 +70,7 @@ class FaerieConclaveToken extends Token {
     FaerieConclaveToken() {
         super("Faerie", "2/1 blue Faerie creature with flying");
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Faerie");
+        this.subtype.add(SubType.FAERIE);
         color.setBlue(true);
         power = new MageInt(2);
         toughness = new MageInt(1);

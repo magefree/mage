@@ -54,8 +54,8 @@ public class DarthVader extends CardImpl {
     public DarthVader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Sith");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SITH);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.color.setBlack(true);

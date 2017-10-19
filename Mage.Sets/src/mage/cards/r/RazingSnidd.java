@@ -36,6 +36,7 @@ import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -44,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class RazingSnidd extends CardImpl {
 
@@ -55,15 +56,15 @@ public class RazingSnidd extends CardImpl {
     }
 
     public RazingSnidd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");
-        this.subtype.add("Beast");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // When Razing Snidd enters the battlefield, return a black or red creature you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
         // When Razing Snidd enters the battlefield, each player sacrifices a land.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllEffect(1, new FilterControlledLandPermanent("a land")), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllEffect(1, new FilterControlledLandPermanent("land")), false));
     }
 
     public RazingSnidd(final RazingSnidd card) {

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -44,7 +45,7 @@ public class EndlessOne extends CardImpl {
 
     public EndlessOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}");
-        this.subtype.add("Eldrazi");
+        this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

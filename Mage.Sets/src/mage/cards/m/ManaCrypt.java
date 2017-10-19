@@ -73,7 +73,7 @@ class ManaCryptEffect extends OneShotEffect {
 
     ManaCryptEffect() {
         super(Outcome.Damage);
-        staticText = "flip a coin. If you lose the flip, {this} Crypt deals 3 damage to you";
+        staticText = "flip a coin. If you lose the flip, {this} deals 3 damage to you";
     }
 
     ManaCryptEffect(final ManaCryptEffect effect) {

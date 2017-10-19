@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlankingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -49,9 +50,9 @@ public class OutriderEnKor extends CardImpl {
 
     public OutriderEnKor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Rebel");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.REBEL);
+        this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

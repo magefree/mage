@@ -34,6 +34,7 @@ import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -57,7 +58,7 @@ public class ElementalToken extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(3);
         toughness = new MageInt(1);
 
@@ -71,7 +72,7 @@ public class ElementalToken extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(3);
         toughness = new MageInt(1);
         

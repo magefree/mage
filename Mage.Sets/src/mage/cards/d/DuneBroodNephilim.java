@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.DuneBroodNephilimToken;
@@ -48,7 +49,7 @@ public class DuneBroodNephilim extends CardImpl {
 
     public DuneBroodNephilim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}{W}");
-        this.subtype.add("Nephilim");
+        this.subtype.add(SubType.NEPHILIM);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

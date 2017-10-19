@@ -95,6 +95,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Fodder Cannon", 131, Rarity.UNCOMMON, mage.cards.f.FodderCannon.class));
         cards.add(new SetCardInfo("Gamekeeper", 106, Rarity.UNCOMMON, mage.cards.g.Gamekeeper.class));
         cards.add(new SetCardInfo("Goblin Berserker", 82, Rarity.UNCOMMON, mage.cards.g.GoblinBerserker.class));
+        cards.add(new SetCardInfo("Goblin Festival", 83, Rarity.RARE, mage.cards.g.GoblinFestival.class));
         cards.add(new SetCardInfo("Goblin Gardener", 84, Rarity.COMMON, mage.cards.g.GoblinGardener.class));
         cards.add(new SetCardInfo("Goblin Marshal", 85, Rarity.RARE, mage.cards.g.GoblinMarshal.class));
         cards.add(new SetCardInfo("Goblin Masons", 86, Rarity.COMMON, mage.cards.g.GoblinMasons.class));
@@ -104,6 +105,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Hunting Moa", 109, Rarity.UNCOMMON, mage.cards.h.HuntingMoa.class));
         cards.add(new SetCardInfo("Illuminated Wings", 34, Rarity.COMMON, mage.cards.i.IlluminatedWings.class));
         cards.add(new SetCardInfo("Impatience", 88, Rarity.RARE, mage.cards.i.Impatience.class));
+        cards.add(new SetCardInfo("Iridescent Drake", 35, Rarity.UNCOMMON, mage.cards.i.IridescentDrake.class));
         cards.add(new SetCardInfo("Junk Diver", 132, Rarity.RARE, mage.cards.j.JunkDiver.class));
         cards.add(new SetCardInfo("Keldon Champion", 90, Rarity.UNCOMMON, mage.cards.k.KeldonChampion.class));
         cards.add(new SetCardInfo("Keldon Vandals", 91, Rarity.COMMON, mage.cards.k.KeldonVandals.class));
@@ -139,6 +141,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Rescue", 44, Rarity.COMMON, mage.cards.r.Rescue.class));
         cards.add(new SetCardInfo("Rofellos, Llanowar Emissary", 118, Rarity.RARE, mage.cards.r.RofellosLlanowarEmissary.class));
         cards.add(new SetCardInfo("Sanctimony", 16, Rarity.UNCOMMON, mage.cards.s.Sanctimony.class));
+        cards.add(new SetCardInfo("Scent of Jasmine", 17, Rarity.COMMON, mage.cards.s.ScentOfJasmine.class));
         cards.add(new SetCardInfo("Scour", 18, Rarity.UNCOMMON, mage.cards.s.Scour.class));
         cards.add(new SetCardInfo("Serra Advocate", 19, Rarity.UNCOMMON, mage.cards.s.SerraAdvocate.class));
         cards.add(new SetCardInfo("Sigil of Sleep", 46, Rarity.COMMON, mage.cards.s.SigilOfSleep.class));

@@ -41,6 +41,7 @@ import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -62,8 +63,8 @@ import mage.target.common.TargetNonBasicLandPermanent;
 public class Detritivore extends CardImpl {
 
     public Detritivore(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Lhurgoyf");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.subtype.add(SubType.LHURGOYF);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -131,7 +132,6 @@ class NonBasicLandsInOpponentsGraveyards implements DynamicValue {
         filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
     }
 
-
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
@@ -161,6 +161,6 @@ class NonBasicLandsInOpponentsGraveyards implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the number of nonbasic land cards in your opponents' graveyards";
+        return "nonbasic land cards in your opponents' graveyards";
     }
 }

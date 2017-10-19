@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -54,8 +55,8 @@ public class NinThePainArtist extends CardImpl {
     public NinThePainArtist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Vedalken");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.VEDALKEN);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

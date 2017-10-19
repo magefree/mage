@@ -25,7 +25,6 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -36,7 +35,6 @@ import mage.constants.SetType;
  *
  * @author Plopman
  */
-
 public class PortalSecondAge extends ExpansionSet {
 
     private static final PortalSecondAge instance = new PortalSecondAge();
@@ -66,6 +64,7 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Alaborn Musketeer", 123, Rarity.COMMON, mage.cards.a.AlabornMusketeer.class));
         cards.add(new SetCardInfo("Alaborn Trooper", 124, Rarity.COMMON, mage.cards.a.AlabornTrooper.class));
         cards.add(new SetCardInfo("Alaborn Veteran", 125, Rarity.RARE, mage.cards.a.AlabornVeteran.class));
+        cards.add(new SetCardInfo("Alaborn Zealot", 126, Rarity.UNCOMMON, mage.cards.a.AlabornZealot.class));
         cards.add(new SetCardInfo("Alluring Scent", 61, Rarity.RARE, mage.cards.a.AlluringScent.class));
         cards.add(new SetCardInfo("Ancient Craving", 2, Rarity.RARE, mage.cards.a.AncientCraving.class));
         cards.add(new SetCardInfo("Angelic Blessing", 129, Rarity.COMMON, mage.cards.a.AngelicBlessing.class));
@@ -166,8 +165,12 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Raiding Nightstalker", 24, Rarity.COMMON, mage.cards.r.RaidingNightstalker.class));
         cards.add(new SetCardInfo("Rain of Daggers", 25, Rarity.RARE, mage.cards.r.RainOfDaggers.class));
         cards.add(new SetCardInfo("Raise Dead", 26, Rarity.COMMON, mage.cards.r.RaiseDead.class));
+        cards.add(new SetCardInfo("Rally the Troops", 139, Rarity.UNCOMMON, mage.cards.r.RallyTheTroops.class));
         cards.add(new SetCardInfo("Ravenous Rats", 27, Rarity.COMMON, mage.cards.r.RavenousRats.class));
         cards.add(new SetCardInfo("Razorclaw Bear", 82, Rarity.RARE, mage.cards.r.RazorclawBear.class));
+        cards.add(new SetCardInfo("Remove", 43, Rarity.UNCOMMON, mage.cards.r.Remove.class));
+        cards.add(new SetCardInfo("Renewing Touch", 83, Rarity.UNCOMMON, mage.cards.r.RenewingTouch.class));
+        cards.add(new SetCardInfo("Return of the Nightstalkers", 28, Rarity.RARE, mage.cards.r.ReturnOfTheNightstalkers.class));
         cards.add(new SetCardInfo("Righteous Charge", 140, Rarity.COMMON, mage.cards.r.RighteousCharge.class));
         cards.add(new SetCardInfo("Righteous Fury", 141, Rarity.RARE, mage.cards.r.RighteousFury.class));
         cards.add(new SetCardInfo("River Bear", 84, Rarity.UNCOMMON, mage.cards.r.RiverBear.class));

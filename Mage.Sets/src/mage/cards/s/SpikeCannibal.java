@@ -38,6 +38,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,13 +53,13 @@ import mage.game.permanent.Permanent;
 public class SpikeCannibal extends CardImpl {
 
     public SpikeCannibal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Spike");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+        this.subtype.add(SubType.SPIKE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // Spike Cannibal enters the battlefield with a +1/+1 counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), "Spike Cannibal enters the battlefield with a +1/+1 counter on it"));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), "with a +1/+1 counter on it"));
 
         // When Spike Cannibal enters the battlefield, move all +1/+1 counters from all creatures onto it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SpikeCannibalEffect()));

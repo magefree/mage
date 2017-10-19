@@ -33,6 +33,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class KeenEyedArchers extends CardImpl {
 
     public KeenEyedArchers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Elf");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

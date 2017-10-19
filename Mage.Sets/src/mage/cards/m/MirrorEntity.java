@@ -41,6 +41,7 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
@@ -57,7 +58,7 @@ public class MirrorEntity extends CardImpl {
 
     public MirrorEntity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add("Shapeshifter");
+        this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

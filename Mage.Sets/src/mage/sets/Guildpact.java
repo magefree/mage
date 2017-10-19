@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -36,6 +35,7 @@ import mage.constants.SetType;
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:01
  */
 public class Guildpact extends ExpansionSet {
+
     private static final Guildpact instance = new Guildpact();
 
     public static Guildpact getInstance() {
@@ -61,6 +61,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Beastmaster's Magemark", 80, Rarity.COMMON, mage.cards.b.BeastmastersMagemark.class));
         cards.add(new SetCardInfo("Belfry Spirit", 2, Rarity.UNCOMMON, mage.cards.b.BelfrySpirit.class));
         cards.add(new SetCardInfo("Benediction of Moons", 3, Rarity.COMMON, mage.cards.b.BenedictionOfMoons.class));
+        cards.add(new SetCardInfo("Bioplasm", 81, Rarity.RARE, mage.cards.b.Bioplasm.class));
         cards.add(new SetCardInfo("Blind Hunter", 102, Rarity.COMMON, mage.cards.b.BlindHunter.class));
         cards.add(new SetCardInfo("Bloodscale Prowler", 64, Rarity.COMMON, mage.cards.b.BloodscaleProwler.class));
         cards.add(new SetCardInfo("Borborygmos", 103, Rarity.RARE, mage.cards.b.Borborygmos.class));
@@ -78,6 +79,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Debtors' Knell", 141, Rarity.RARE, mage.cards.d.DebtorsKnell.class));
         cards.add(new SetCardInfo("Djinn Illuminatus", 142, Rarity.RARE, mage.cards.d.DjinnIlluminatus.class));
         cards.add(new SetCardInfo("Douse in Gloom", 49, Rarity.COMMON, mage.cards.d.DouseInGloom.class));
+        cards.add(new SetCardInfo("Droning Bureaucrats", 4, Rarity.UNCOMMON, mage.cards.d.DroningBureaucrats.class));
         cards.add(new SetCardInfo("Drowned Rusalka", 24, Rarity.UNCOMMON, mage.cards.d.DrownedRusalka.class));
         cards.add(new SetCardInfo("Dryad Sophisticate", 83, Rarity.UNCOMMON, mage.cards.d.DryadSophisticate.class));
         cards.add(new SetCardInfo("Dune-Brood Nephilim", 110, Rarity.RARE, mage.cards.d.DuneBroodNephilim.class));
@@ -119,6 +121,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Chronarch", 119, Rarity.COMMON, mage.cards.i.IzzetChronarch.class));
         cards.add(new SetCardInfo("Izzet Guildmage", 145, Rarity.UNCOMMON, mage.cards.i.IzzetGuildmage.class));
         cards.add(new SetCardInfo("Izzet Signet", 152, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Killer Instinct", 120, Rarity.RARE, mage.cards.k.KillerInstinct.class));
         cards.add(new SetCardInfo("Leap of Flame", 121, Rarity.COMMON, mage.cards.l.LeapOfFlame.class));
         cards.add(new SetCardInfo("Leyline of Lifeforce", 90, Rarity.RARE, mage.cards.l.LeylineOfLifeforce.class));
         cards.add(new SetCardInfo("Leyline of Lightning", 68, Rarity.RARE, mage.cards.l.LeylineOfLightning.class));
@@ -127,7 +130,9 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Leyline of the Void", 52, Rarity.RARE, mage.cards.l.LeylineOfTheVoid.class));
         cards.add(new SetCardInfo("Lionheart Maverick", 11, Rarity.COMMON, mage.cards.l.LionheartMaverick.class));
         cards.add(new SetCardInfo("Martyred Rusalka", 12, Rarity.UNCOMMON, mage.cards.m.MartyredRusalka.class));
+        cards.add(new SetCardInfo("Mimeofacture", 30, Rarity.RARE, mage.cards.m.Mimeofacture.class));
         cards.add(new SetCardInfo("Mizzium Transreliquat", 153, Rarity.RARE, mage.cards.m.MizziumTransreliquat.class));
+        cards.add(new SetCardInfo("Moratorium Stone", 154, Rarity.RARE, mage.cards.m.MoratoriumStone.class));
         cards.add(new SetCardInfo("Mortify", 122, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mourning Thrull", 146, Rarity.COMMON, mage.cards.m.MourningThrull.class));
         cards.add(new SetCardInfo("Necromancer's Magemark", 53, Rarity.COMMON, mage.cards.n.NecromancersMagemark.class));
@@ -147,6 +152,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Pillory of the Sleepless", 125, Rarity.COMMON, mage.cards.p.PilloryOfTheSleepless.class));
         cards.add(new SetCardInfo("Plagued Rusalka", 56, Rarity.UNCOMMON, mage.cards.p.PlaguedRusalka.class));
         cards.add(new SetCardInfo("Poisonbelly Ogre", 57, Rarity.COMMON, mage.cards.p.PoisonbellyOgre.class));
+        cards.add(new SetCardInfo("Primeval Light", 93, Rarity.UNCOMMON, mage.cards.p.PrimevalLight.class));
         cards.add(new SetCardInfo("Pyromatics", 72, Rarity.COMMON, mage.cards.p.Pyromatics.class));
         cards.add(new SetCardInfo("Quicken", 31, Rarity.RARE, mage.cards.q.Quicken.class));
         cards.add(new SetCardInfo("Rabble-Rouser", 73, Rarity.UNCOMMON, mage.cards.r.RabbleRouser.class));
@@ -160,12 +166,14 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Scab-Clan Mauler", 128, Rarity.COMMON, mage.cards.s.ScabClanMauler.class));
         cards.add(new SetCardInfo("Schismotivate", 129, Rarity.UNCOMMON, mage.cards.s.Schismotivate.class));
         cards.add(new SetCardInfo("Scorched Rusalka", 74, Rarity.UNCOMMON, mage.cards.s.ScorchedRusalka.class));
+        cards.add(new SetCardInfo("Seize the Soul", 61, Rarity.RARE, mage.cards.s.SeizeTheSoul.class));
         cards.add(new SetCardInfo("Shadow Lance", 14, Rarity.UNCOMMON, mage.cards.s.ShadowLance.class));
         cards.add(new SetCardInfo("Shattering Spree", 75, Rarity.UNCOMMON, mage.cards.s.ShatteringSpree.class));
         cards.add(new SetCardInfo("Shrieking Grotesque", 15, Rarity.COMMON, mage.cards.s.ShriekingGrotesque.class));
         cards.add(new SetCardInfo("Siege of Towers", 76, Rarity.RARE, mage.cards.s.SiegeOfTowers.class));
         cards.add(new SetCardInfo("Silhana Ledgewalker", 94, Rarity.COMMON, mage.cards.s.SilhanaLedgewalker.class));
         cards.add(new SetCardInfo("Silhana Starfletcher", 95, Rarity.COMMON, mage.cards.s.SilhanaStarfletcher.class));
+        cards.add(new SetCardInfo("Sinstriker's Will", 16, Rarity.UNCOMMON, mage.cards.s.SinstrikersWill.class));
         cards.add(new SetCardInfo("Skarrgan Firebird", 77, Rarity.RARE, mage.cards.s.SkarrganFirebird.class));
         cards.add(new SetCardInfo("Skarrgan Pit-Skulk", 96, Rarity.COMMON, mage.cards.s.SkarrganPitSkulk.class));
         cards.add(new SetCardInfo("Skarrgan Skybreaker", 130, Rarity.UNCOMMON, mage.cards.s.SkarrganSkybreaker.class));

@@ -39,6 +39,7 @@ import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -56,8 +57,8 @@ public class NantukoShaman extends CardImpl {
 
     public NantukoShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Insect");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.INSECT);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

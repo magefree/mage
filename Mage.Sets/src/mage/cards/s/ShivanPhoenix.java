@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class ShivanPhoenix extends CardImpl {
 
     public ShivanPhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
-        this.subtype.add("Phoenix");
+        this.subtype.add(SubType.PHOENIX);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

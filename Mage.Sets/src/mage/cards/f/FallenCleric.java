@@ -53,8 +53,8 @@ public class FallenCleric extends CardImpl {
 
     public FallenCleric(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

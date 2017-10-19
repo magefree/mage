@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,8 +45,8 @@ public class IllusoryDemon extends CardImpl {
 
     public IllusoryDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
-        this.subtype.add("Demon");
-        this.subtype.add("Illusion");
+        this.subtype.add(SubType.DEMON);
+        this.subtype.add(SubType.ILLUSION);
 
 
         

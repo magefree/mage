@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,7 +57,7 @@ public class DeadshotMinotaur extends CardImpl {
 
     public DeadshotMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
-        this.subtype.add("Minotaur");
+        this.subtype.add(SubType.MINOTAUR);
 
 
 

@@ -40,6 +40,7 @@ import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -64,7 +65,7 @@ public class ThornwatchScarecrow extends CardImpl {
 
     public ThornwatchScarecrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
-        this.subtype.add("Scarecrow");
+        this.subtype.add(SubType.SCARECROW);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

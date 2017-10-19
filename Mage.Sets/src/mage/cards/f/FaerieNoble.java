@@ -59,7 +59,7 @@ public class FaerieNoble extends CardImpl {
 
     public FaerieNoble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Faerie");
+        this.subtype.add(SubType.FAERIE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

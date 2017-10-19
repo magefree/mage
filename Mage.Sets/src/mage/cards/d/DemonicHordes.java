@@ -40,6 +40,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -61,7 +62,7 @@ public class DemonicHordes extends CardImpl {
 
     public DemonicHordes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

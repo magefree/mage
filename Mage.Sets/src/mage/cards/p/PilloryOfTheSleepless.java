@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -53,7 +54,7 @@ public class PilloryOfTheSleepless extends CardImpl {
 
     public PilloryOfTheSleepless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{B}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
 
         // Enchant creature

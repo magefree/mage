@@ -47,6 +47,7 @@ import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -65,8 +66,8 @@ public class LiciaSanguineTribune extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{W}{B}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Vampire");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -80,7 +81,7 @@ public class LiciaSanguineTribune extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Pay 5 life: Put three +1/+1 counters on Licia. Activate this ability only on your turn and only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)), new PayLifeCost(5), 1, MyTurnCondition.instance));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), new PayLifeCost(5), 1, MyTurnCondition.instance));
     }
 
     public LiciaSanguineTribune(final LiciaSanguineTribune card) {

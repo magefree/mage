@@ -35,6 +35,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 
@@ -47,7 +48,7 @@ public class RuinRat extends CardImpl {
     public RuinRat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         
-        this.subtype.add("Rat");
+        this.subtype.add(SubType.RAT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

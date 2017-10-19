@@ -41,6 +41,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -67,7 +68,7 @@ public class ObsidianFireheart extends CardImpl {
 
     public ObsidianFireheart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}{R}");
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
 
 
         this.power = new MageInt(4);

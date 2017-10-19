@@ -61,7 +61,7 @@ public class Lifespinner extends CardImpl {
 
     public Lifespinner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

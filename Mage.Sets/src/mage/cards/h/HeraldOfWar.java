@@ -52,7 +52,7 @@ public class HeraldOfWar extends CardImpl {
 
     public HeraldOfWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

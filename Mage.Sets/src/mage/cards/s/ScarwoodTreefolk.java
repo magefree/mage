@@ -34,6 +34,7 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,16 +42,14 @@ import mage.constants.CardType;
  */
 public class ScarwoodTreefolk extends CardImpl {
 
-    private static final String staticText = "{this} enters the battlefield tapped";
-
     public ScarwoodTreefolk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Treefolk");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.subtype.add(SubType.TREEFOLK);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 
         // Scarwood Treefolk enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceEffect(), staticText));
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceEffect(), "tapped"));
     }
 
     public ScarwoodTreefolk(final ScarwoodTreefolk card) {

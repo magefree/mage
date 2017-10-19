@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
 public class AtarkaWorldRender extends CardImpl {
 
     public AtarkaWorldRender(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);

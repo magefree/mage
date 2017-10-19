@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureSpell;
@@ -76,7 +77,7 @@ class OpalGargoyleToken extends Token {
     public OpalGargoyleToken() {
         super("Gargoyle", "2/2 Gargoyle creature with flying");
         cardType.add(CardType.CREATURE);
-        subtype.add("Gargoyle");
+        subtype.add(SubType.GARGOYLE);
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

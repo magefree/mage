@@ -44,6 +44,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -59,7 +60,7 @@ public class MyojinOfInfiniteRage extends CardImpl {
     public MyojinOfInfiniteRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{R}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(4);

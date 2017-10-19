@@ -33,6 +33,7 @@ import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class UnimpededTrespasser extends CardImpl {
 
     public UnimpededTrespasser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.color.setBlue(true);

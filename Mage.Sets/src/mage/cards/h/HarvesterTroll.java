@@ -36,6 +36,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,7 +57,7 @@ public class HarvesterTroll extends CardImpl {
 
     public HarvesterTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Troll");
+        this.subtype.add(SubType.TROLL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

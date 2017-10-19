@@ -25,7 +25,6 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -73,6 +72,7 @@ public class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Border Guard", 9, Rarity.COMMON, mage.cards.b.BorderGuard.class));
         cards.add(new SetCardInfo("Breath of Life", 10, Rarity.UNCOMMON, mage.cards.b.BreathOfLife.class));
         cards.add(new SetCardInfo("Bull Hippo", 126, Rarity.UNCOMMON, mage.cards.b.BullHippo.class));
+        cards.add(new SetCardInfo("Champion Lancer", 11, Rarity.RARE, mage.cards.c.ChampionLancer.class));
         cards.add(new SetCardInfo("Charging Paladin", 12, Rarity.UNCOMMON, mage.cards.c.ChargingPaladin.class));
         cards.add(new SetCardInfo("Chorus of Woe", 68, Rarity.COMMON, mage.cards.c.ChorusOfWoe.class));
         cards.add(new SetCardInfo("Cinder Storm", 93, Rarity.UNCOMMON, mage.cards.c.CinderStorm.class));
@@ -168,6 +168,7 @@ public class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Relearn", 48, Rarity.UNCOMMON, mage.cards.r.Relearn.class));
         cards.add(new SetCardInfo("Relentless Assault", 115, Rarity.RARE, mage.cards.r.RelentlessAssault.class));
         cards.add(new SetCardInfo("Remove Soul", 49, Rarity.COMMON, mage.cards.r.RemoveSoul.class));
+        cards.add(new SetCardInfo("Renewing Touch", 140, Rarity.UNCOMMON, mage.cards.r.RenewingTouch.class));
         cards.add(new SetCardInfo("Righteous Charge", 22, Rarity.UNCOMMON, mage.cards.r.RighteousCharge.class));
         cards.add(new SetCardInfo("Righteous Fury", 23, Rarity.RARE, mage.cards.r.RighteousFury.class));
         cards.add(new SetCardInfo("Royal Falcon", 24, Rarity.COMMON, mage.cards.r.RoyalFalcon.class));

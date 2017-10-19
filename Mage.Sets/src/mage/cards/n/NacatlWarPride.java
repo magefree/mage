@@ -42,6 +42,7 @@ import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -60,8 +61,8 @@ public class NacatlWarPride extends CardImpl {
 
     public NacatlWarPride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.subtype.add("Cat");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

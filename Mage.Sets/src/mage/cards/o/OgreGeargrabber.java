@@ -62,14 +62,14 @@ public class OgreGeargrabber extends CardImpl {
     }
 
     public OgreGeargrabber(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Warrior");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        Ability ability = new AttacksTriggeredAbility(new OgreGeargrabberEffect1(), false);
-        ability.addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
+        Ability ability = new AttacksTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), false);
+        ability.addEffect(new OgreGeargrabberEffect1());
         ability.addTarget(new TargetPermanent(1, 1, filter, false));
         this.addAbility(ability);
     }

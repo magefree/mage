@@ -37,6 +37,7 @@ import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -49,7 +50,7 @@ public class NeedleSpecter extends CardImpl {
 
     public NeedleSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Specter");
+        this.subtype.add(SubType.SPECTER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

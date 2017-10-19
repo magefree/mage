@@ -60,7 +60,7 @@ public class TatsumasaTheDragonsFang extends CardImpl {
     public TatsumasaTheDragonsFang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +5/+5.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(5, 5)));

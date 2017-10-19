@@ -38,6 +38,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,8 +50,8 @@ public class KorAeronaut extends CardImpl {
 
     public KorAeronaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
-        this.subtype.add("Kor");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.KOR);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

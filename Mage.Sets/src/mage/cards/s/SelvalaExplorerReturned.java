@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -56,8 +57,8 @@ public class SelvalaExplorerReturned extends CardImpl {
     public SelvalaExplorerReturned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

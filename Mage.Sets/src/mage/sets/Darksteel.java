@@ -78,6 +78,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Fireball", 60, Rarity.UNCOMMON, mage.cards.f.Fireball.class));
         cards.add(new SetCardInfo("Flamebreak", 61, Rarity.RARE, mage.cards.f.Flamebreak.class));
         cards.add(new SetCardInfo("Furnace Dragon", 62, Rarity.RARE, mage.cards.f.FurnaceDragon.class));
+        cards.add(new SetCardInfo("Gemini Engine", 121, Rarity.RARE, mage.cards.g.GeminiEngine.class));
         cards.add(new SetCardInfo("Genesis Chamber", 122, Rarity.UNCOMMON, mage.cards.g.GenesisChamber.class));
         cards.add(new SetCardInfo("Geth's Grimoire", 123, Rarity.UNCOMMON, mage.cards.g.GethsGrimoire.class));
         cards.add(new SetCardInfo("Goblin Archaeologist", 63, Rarity.UNCOMMON, mage.cards.g.GoblinArchaeologist.class));
@@ -165,7 +166,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Test of Faith", 17, Rarity.UNCOMMON, mage.cards.t.TestOfFaith.class));
         cards.add(new SetCardInfo("Thunderstaff", 153, Rarity.UNCOMMON, mage.cards.t.Thunderstaff.class));
         cards.add(new SetCardInfo("Trinisphere", 154, Rarity.RARE, mage.cards.t.Trinisphere.class));
-	cards.add(new SetCardInfo("Turn the Tables", 18, Rarity.RARE, mage.cards.t.TurnTheTables.class));
+        cards.add(new SetCardInfo("Turn the Tables", 18, Rarity.RARE, mage.cards.t.TurnTheTables.class));
         cards.add(new SetCardInfo("Unforge", 71, Rarity.COMMON, mage.cards.u.Unforge.class));
         cards.add(new SetCardInfo("Ur-Golem's Eye", 155, Rarity.COMMON, mage.cards.u.UrGolemsEye.class));
         cards.add(new SetCardInfo("Vedalken Engineer", 35, Rarity.COMMON, mage.cards.v.VedalkenEngineer.class));

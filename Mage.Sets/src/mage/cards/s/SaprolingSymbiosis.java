@@ -43,17 +43,18 @@ import mage.game.permanent.token.SaprolingToken;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class SaprolingSymbiosis extends CardImpl {
 
     public SaprolingSymbiosis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         Effect effect = new CreateTokenEffect(new SaprolingToken(), new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()));
         // You may cast Saproling Symbiosis as though it had flash if you pay {2} more to cast it.
         Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl("{2}"));
         ability.addEffect(effect);
+        ability.setRuleAtTheTop(true);
         this.addAbility(ability);
         // Create a 1/1 green Saproling creature token for each creature you control.
         this.getSpellAbility().addEffect(effect);

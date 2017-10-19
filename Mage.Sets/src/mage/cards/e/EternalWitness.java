@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -45,8 +46,8 @@ public class EternalWitness extends CardImpl {
 
     public EternalWitness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

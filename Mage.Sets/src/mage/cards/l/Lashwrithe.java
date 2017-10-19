@@ -56,7 +56,7 @@ public class Lashwrithe extends CardImpl {
 
     public Lashwrithe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         this.addAbility(new LivingWeaponAbility());
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);

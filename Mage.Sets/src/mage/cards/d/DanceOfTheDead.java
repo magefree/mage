@@ -69,7 +69,7 @@ public class DanceOfTheDead extends CardImpl {
 
     public DanceOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.subtype.add("Aura");
+        this.subtype.add(SubType.AURA);
 
         // Enchant creature card in a graveyard
         TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard"));
@@ -179,7 +179,7 @@ class DanceOfTheDeadLeavesBattlefieldTriggeredEffect extends OneShotEffect {
         if (controller != null && sourcePermanent != null) {
             if (sourcePermanent.getAttachedTo() != null) {
                 Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
-                if (attachedTo != null) {
+                if (attachedTo != null && attachedTo.getZoneChangeCounter(game) == sourcePermanent.getAttachedToZoneChangeCounter()) {
                     attachedTo.sacrifice(source.getSourceId(), game);
                 }
             }

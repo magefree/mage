@@ -32,7 +32,7 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -58,7 +58,7 @@ public class CircleOfAffliction extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // As Circle of Affliction enters the battlefield, choose a color.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
 
         // Whenever a source of the chosen color deals damage to you, you may pay {1}. If you do, target player loses 1 life and you gain 1 life.
         Ability ability = new CircleOfAfflictionTriggeredAbility();

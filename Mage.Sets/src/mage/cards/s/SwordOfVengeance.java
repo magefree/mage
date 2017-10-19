@@ -44,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 
@@ -56,7 +57,7 @@ public class SwordOfVengeance extends CardImpl {
 
     public SwordOfVengeance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
         
         
         // Equipped creature gets +2/+0 and has first strike, vigilance, trample, and haste.

@@ -38,7 +38,6 @@ import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.decks.InvalidDeckException;
 import mage.constants.RangeOfInfluence;
 import mage.constants.TableState;
 import mage.game.*;
@@ -414,7 +413,17 @@ public class TableController {
             }
         }
         if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
-            throw new InvalidDeckException("Invalid deck for this format", table.getValidator().getInvalid());
+            Optional<User> _user = UserManager.instance.getUser(userId);
+            if (!_user.isPresent()) {
+                return false;
+            }
+            StringBuilder sb = new StringBuilder("Invalid deck for the selected ").append(table.getValidator().getName()).append(" format. \n\n");
+            for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
+                sb.append(entry.getKey()).append(": ").append(entry.getValue()).append('\n');
+            }
+            sb.append("\n\nAdd enough cards and try again!");
+            _user.get().showUserMessage("Submit deck", sb.toString());
+            return false;
         }
         submitDeck(userId, playerId, deck);
         return true;

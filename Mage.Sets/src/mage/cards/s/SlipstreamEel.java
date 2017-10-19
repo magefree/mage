@@ -48,8 +48,8 @@ public class SlipstreamEel extends CardImpl {
 
     public SlipstreamEel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
-        this.subtype.add("Fish");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.FISH);
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

@@ -40,6 +40,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -60,7 +61,7 @@ public class LilianaTheLastHope extends CardImpl {
     public LilianaTheLastHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{B}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Liliana");
+        this.subtype.add(SubType.LILIANA);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

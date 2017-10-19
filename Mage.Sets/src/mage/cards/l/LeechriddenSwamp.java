@@ -41,6 +41,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -64,7 +65,7 @@ public class LeechriddenSwamp extends CardImpl {
 
     public LeechriddenSwamp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Swamp");
+        this.subtype.add(SubType.SWAMP);
 
         // ({tap}: Add {B} to your mana pool.)
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new TapSourceCost()));

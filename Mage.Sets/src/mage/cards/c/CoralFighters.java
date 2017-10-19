@@ -34,6 +34,7 @@ import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -47,8 +48,8 @@ public class CoralFighters extends CardImpl {
 
     public CoralFighters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Merfolk");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

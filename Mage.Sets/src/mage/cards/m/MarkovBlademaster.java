@@ -35,6 +35,7 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
@@ -45,8 +46,8 @@ public class MarkovBlademaster extends CardImpl {
 
     public MarkovBlademaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

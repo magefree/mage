@@ -35,6 +35,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -50,8 +51,8 @@ public class GoblinGoon extends CardImpl {
 
     public GoblinGoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Goblin");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.MUTANT);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

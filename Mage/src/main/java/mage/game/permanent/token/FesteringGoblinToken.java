@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -46,8 +47,8 @@ public class FesteringGoblinToken extends Token {
         this.setOriginalExpansionSetCode("FUT");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Zombie");
-        subtype.add("Goblin");
+        subtype.add(SubType.ZOMBIE);
+        subtype.add(SubType.GOBLIN);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

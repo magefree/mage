@@ -35,6 +35,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -54,7 +55,7 @@ public class HarvesterOfSouls extends CardImpl {
 
     public HarvesterOfSouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

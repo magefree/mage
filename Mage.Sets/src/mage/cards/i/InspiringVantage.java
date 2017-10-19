@@ -52,7 +52,7 @@ public class InspiringVantage extends CardImpl {
 
         // Inspiring Vantage enters the battlefield tapped unless you control two or fewer other lands.
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_LANDS, ComparisonType.FEWER_THAN, 3));
-        String abilityText = "tapped unless you control fewer than 3 lands";
+        String abilityText = " tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
 
         // {T}: Add {R} or {W} to your mana pool.

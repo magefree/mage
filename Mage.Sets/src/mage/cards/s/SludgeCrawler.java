@@ -38,6 +38,7 @@ import mage.abilities.keyword.IngestAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -49,8 +50,8 @@ public class SludgeCrawler extends CardImpl {
 
     public SludgeCrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Drone");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.DRONE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

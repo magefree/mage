@@ -35,6 +35,7 @@ import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,7 +56,7 @@ public class VagrantPlowbeasts extends CardImpl {
 
     public VagrantPlowbeasts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{W}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

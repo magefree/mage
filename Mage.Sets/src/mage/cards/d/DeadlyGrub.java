@@ -41,6 +41,7 @@ import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.permanent.token.DeadlyGrubToken;
 
@@ -52,7 +53,7 @@ public class DeadlyGrub extends CardImpl {
 
     public DeadlyGrub(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

@@ -60,8 +60,8 @@ public class SkyfireKirin extends CardImpl {
     public SkyfireKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Kirin");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.KIRIN);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

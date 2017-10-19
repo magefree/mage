@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -41,15 +40,16 @@ import mage.constants.SubType;
  */
 public class AlphaTyrranax extends CardImpl {
 
-    public AlphaTyrranax (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+    public AlphaTyrranax(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+        this.subtype.add(SubType.DINOSAUR);
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
     }
 
-    public AlphaTyrranax (final AlphaTyrranax card) {
+    public AlphaTyrranax(final AlphaTyrranax card) {
         super(card);
     }
 

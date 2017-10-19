@@ -55,6 +55,7 @@ public class Scourge extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Accelerated Mutation", 109, Rarity.COMMON, mage.cards.a.AcceleratedMutation.class));
+        cards.add(new SetCardInfo("Ageless Sentinels", 1, Rarity.RARE, mage.cards.a.AgelessSentinels.class));
         cards.add(new SetCardInfo("Alpha Status", 110, Rarity.UNCOMMON, mage.cards.a.AlphaStatus.class));
         cards.add(new SetCardInfo("Ambush Commander", 111, Rarity.RARE, mage.cards.a.AmbushCommander.class));
         cards.add(new SetCardInfo("Ancient Ooze", 112, Rarity.RARE, mage.cards.a.AncientOoze.class));
@@ -65,10 +66,11 @@ public class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Aven Liberator", 4, Rarity.COMMON, mage.cards.a.AvenLiberator.class));
         cards.add(new SetCardInfo("Bladewing's Thrall", 55, Rarity.UNCOMMON, mage.cards.b.BladewingsThrall.class));
         cards.add(new SetCardInfo("Bladewing the Risen", 136, Rarity.RARE, mage.cards.b.BladewingTheRisen.class));
+        cards.add(new SetCardInfo("Bonethorn Valesk", 82, Rarity.COMMON, mage.cards.b.BonethornValesk.class));
         cards.add(new SetCardInfo("Brain Freeze", 29, Rarity.UNCOMMON, mage.cards.b.BrainFreeze.class));
         cards.add(new SetCardInfo("Break Asunder", 113, Rarity.COMMON, mage.cards.b.BreakAsunder.class));
         cards.add(new SetCardInfo("Cabal Conditioning", 56, Rarity.RARE, mage.cards.c.CabalConditioning.class));
-	cards.add(new SetCardInfo("Cabal Interrogator", 57, Rarity.UNCOMMON, mage.cards.c.CabalInterrogator.class));
+        cards.add(new SetCardInfo("Cabal Interrogator", 57, Rarity.UNCOMMON, mage.cards.c.CabalInterrogator.class));
         cards.add(new SetCardInfo("Call to the Grave", 58, Rarity.RARE, mage.cards.c.CallToTheGrave.class));
         cards.add(new SetCardInfo("Carbonize", 83, Rarity.UNCOMMON, mage.cards.c.Carbonize.class));
         cards.add(new SetCardInfo("Carrion Feeder", 59, Rarity.COMMON, mage.cards.c.CarrionFeeder.class));
@@ -131,6 +133,7 @@ public class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Mind's Desire", 41, Rarity.RARE, mage.cards.m.MindsDesire.class));
         cards.add(new SetCardInfo("Mischievous Quanar", 42, Rarity.RARE, mage.cards.m.MischievousQuanar.class));
         cards.add(new SetCardInfo("Misguided Rage", 99, Rarity.COMMON, mage.cards.m.MisguidedRage.class));
+        cards.add(new SetCardInfo("Mistform Warchief", 43, Rarity.UNCOMMON, mage.cards.m.MistformWarchief.class));
         cards.add(new SetCardInfo("Nefashu", 70, Rarity.RARE, mage.cards.n.Nefashu.class));
         cards.add(new SetCardInfo("Noble Templar", 19, Rarity.COMMON, mage.cards.n.NobleTemplar.class));
         cards.add(new SetCardInfo("One with Nature", 125, Rarity.UNCOMMON, mage.cards.o.OneWithNature.class));
@@ -139,6 +142,7 @@ public class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Putrid Raptor", 71, Rarity.UNCOMMON, mage.cards.p.PutridRaptor.class));
         cards.add(new SetCardInfo("Pyrostatic Pillar", 100, Rarity.UNCOMMON, mage.cards.p.PyrostaticPillar.class));
         cards.add(new SetCardInfo("Rain of Blades", 20, Rarity.UNCOMMON, mage.cards.r.RainOfBlades.class));
+        cards.add(new SetCardInfo("Raven Guild Initiate", 46, Rarity.COMMON, mage.cards.r.RavenGuildInitiate.class));
         cards.add(new SetCardInfo("Raven Guild Master", 47, Rarity.RARE, mage.cards.r.RavenGuildMaster.class));
         cards.add(new SetCardInfo("Reaping the Graves", 72, Rarity.COMMON, mage.cards.r.ReapingTheGraves.class));
         cards.add(new SetCardInfo("Recuperate", 21, Rarity.COMMON, mage.cards.r.Recuperate.class));

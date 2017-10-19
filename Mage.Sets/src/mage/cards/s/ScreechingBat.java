@@ -41,6 +41,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -55,7 +56,7 @@ public class ScreechingBat extends CardImpl {
 
     public ScreechingBat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Bat");
+        this.subtype.add(SubType.BAT);
 
         this.transformable = true;
         this.secondSideCardClazz = StalkingVampire.class;

@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.ObjectColor;
@@ -48,7 +47,7 @@ public class Zendikar extends ExpansionSet {
     }
 
     private Zendikar() {
-        super("Zendikar", "ZEN", ExpansionSet.buildDate(2009, 8, 26), SetType.EXPANSION);
+        super("Zendikar", "ZEN", ExpansionSet.buildDate(2009, 10, 2), SetType.EXPANSION); // October 2nd, 2009
         this.blockName = "Zendikar";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

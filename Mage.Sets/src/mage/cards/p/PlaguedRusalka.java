@@ -48,7 +48,7 @@ public class PlaguedRusalka extends CardImpl {
 
     public PlaguedRusalka(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

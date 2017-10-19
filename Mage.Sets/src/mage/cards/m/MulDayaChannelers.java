@@ -30,24 +30,20 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.TopLibraryCardTypeCondition;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.Game;
 
 /**
  *
@@ -58,10 +54,10 @@ public class MulDayaChannelers extends CardImpl {
     private static final String rule1 = "As long as the top card of your library is a creature card, {this} gets +3/+3";
 
     public MulDayaChannelers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
-        this.subtype.add("Shaman");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.DRUID);
+        this.subtype.add(SubType.SHAMAN);
 
         this.color.setGreen(true);
         this.power = new MageInt(2);
@@ -80,7 +76,7 @@ public class MulDayaChannelers extends CardImpl {
                 new TopLibraryCardTypeCondition(CardType.LAND),
                 "As long as the top card of your library is a land card, Mul Daya Channelers has \"{T}: Add two mana of any one color to your mana pool.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        
+
     }
 
     public MulDayaChannelers(final MulDayaChannelers card) {
@@ -91,47 +87,4 @@ public class MulDayaChannelers extends CardImpl {
     public MulDayaChannelers copy() {
         return new MulDayaChannelers(this);
     }
-}
-
-
-class MulDayaChannelersActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
-
-    private Condition condition;
-
-    public MulDayaChannelersActivateIfConditionManaAbility(Zone zone, ManaEffect effect, Cost cost, Condition condition) {
-        super(zone, effect, cost);
-        this.condition = condition;
-    }
-
-    public MulDayaChannelersActivateIfConditionManaAbility(MulDayaChannelersActivateIfConditionManaAbility ability) {
-        super(ability);
-        this.condition = ability.condition;
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (condition.apply(game, this)) {
-            return super.canActivate(playerId, game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (canActivate(this.controllerId, game)) {
-            return super.activate(game, noMana);
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return  "As long as the top card of your library is a land card, {this} has \"{T}: Add two mana of any one color to your mana pool.";
-    }
-
-    @Override
-    public MulDayaChannelersActivateIfConditionManaAbility copy() {
-        return new MulDayaChannelersActivateIfConditionManaAbility(this);
-    }
-
 }

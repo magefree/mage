@@ -36,6 +36,7 @@ import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -58,8 +59,8 @@ public class MayaelTheAnima extends CardImpl {
     public MayaelTheAnima(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elf");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

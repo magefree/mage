@@ -40,6 +40,7 @@ import mage.abilities.mana.ActivateOncePerTurnManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -60,7 +61,7 @@ public class RamosDragonEngine extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -100,7 +101,7 @@ class RamosDragonEngineAddCountersEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (you != null && permanent != null) {
-            Spell spell = game.getStack().getSpell(this.getTargetPointer().getFirst(game, source));
+            Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
             if (spell != null) {
                 int amount = 0;
                 if (spell.getColor(game).isWhite()) {

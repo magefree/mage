@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,9 +58,9 @@ public class ThistledownDuo extends CardImpl {
 
     public ThistledownDuo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W/U}");
-        this.subtype.add("Kithkin");
-        this.subtype.add("Soldier");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.KITHKIN);
+        this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -45,6 +45,7 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.Counter;
@@ -61,23 +62,36 @@ public class ClockworkBeast extends CardImpl {
 
     public ClockworkBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.subtype.add("Beast");
+        this.subtype.add(SubType.BEAST);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
         // Clockwork Beast enters the battlefield with seven +1/+0 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P0.createInstance(7)), "{this} enters the battlefield with seven +1/+0 counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P0.createInstance(7)),
+                "with seven +1/+0 counters on it"
+        ));
 
         // At end of combat, if Clockwork Beast attacked or blocked this combat, remove a +1/+0 counter from it.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EndOfCombatTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P0.createInstance()), false),
                 AttackedOrBlockedThisCombatSourceCondition.instance,
                 "At end of combat, if {this} attacked or blocked this combat, remove a +1/+0 counter from it."),
-                new AttackedOrBlockedThisCombatWatcher());
+                new AttackedOrBlockedThisCombatWatcher()
+        );
 
         // {X}, {tap}: Put up to X +1/+0 counters on Clockwork Beast. This ability can't cause the total number of +1/+0 counters on Clockwork Beast to be greater than seven. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new BeastAddCountersSourceEffect(CounterType.P1P0.createInstance(), new ManacostVariableValue(), true, true), new ManaCostsImpl("{X}"), new IsStepCondition(PhaseStep.UPKEEP), null);
+        Ability ability = new ConditionalActivatedAbility(
+                Zone.BATTLEFIELD,
+                new BeastAddCountersSourceEffect(
+                        CounterType.P1P0.createInstance(),
+                        new ManacostVariableValue(),
+                        true, true
+                ),
+                new ManaCostsImpl("{X}"),
+                new IsStepCondition(PhaseStep.UPKEEP),
+                null
+        );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -96,6 +110,7 @@ class BeastAddCountersSourceEffect extends AddCountersSourceEffect {
 
     public BeastAddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers, boolean putOnCard) {
         super(counter, amount, informPlayers, putOnCard);
+        staticText = "Put up to X +1/+0 counters on {this}. This ability can't cause the total number of +1/+0 counters on {this} to be greater than seven.";
     }
 
     @Override

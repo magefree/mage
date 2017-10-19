@@ -61,8 +61,8 @@ public class RamunapHydra extends CardImpl {
     public RamunapHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.subtype.add("Snake");
-        this.subtype.add("Hydra");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

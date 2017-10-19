@@ -29,12 +29,13 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class MonstrousCarabid extends CardImpl {
 
     public MonstrousCarabid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");
-        this.subtype.add("Insect");
+        this.subtype.add(SubType.INSECT);
 
 
         
@@ -52,7 +53,7 @@ public class MonstrousCarabid extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Monstrous Carabid attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
         // Cycling {BR}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{B/R}")));
     }

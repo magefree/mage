@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.util.RandomUtil;
@@ -48,7 +49,7 @@ public class OviyaPashiriSageLifecrafterToken extends Token {
         super("Construct", "an X/X colorless Construct artifact creature token, where X is the number of creatures you control");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Construct");
+        subtype.add(SubType.CONSTRUCT);
         setOriginalExpansionSetCode("KLD");
         setTokenType(RandomUtil.nextInt(2) + 1);
         power = new MageInt(number);

@@ -38,6 +38,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,8 +52,8 @@ public class CarnageGladiator extends CardImpl {
 
     public CarnageGladiator (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
-        this.subtype.add("Skeleton");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.SKELETON);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

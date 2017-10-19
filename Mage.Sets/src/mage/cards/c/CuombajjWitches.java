@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -56,11 +57,12 @@ public class CuombajjWitches extends CardImpl {
 
     public CuombajjWitches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
+        //TODO: Make ability properly copiable
         // {T}: Cuombajj Witches deals 1 damage to target creature or player and 1 damage to target creature or player of an opponent's choice.
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to target creature or player and 1 damage to target creature or player of an opponent's choice");

@@ -73,14 +73,17 @@ public class DefiantVanguard extends CardImpl {
     public DefiantVanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.subtype.add("Human");
-        this.subtype.add("Rebel");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.REBEL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // When Defiant Vanguard blocks, at end of combat, destroy it and all creatures it blocked this turn.
         this.addAbility(
-                new BlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DefiantVanguardEffect())), false),
+                new BlocksTriggeredAbility(
+                        new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DefiantVanguardEffect())),
+                        false, false, true
+                ),
                 new BlockedAttackerWatcher()
         );
 

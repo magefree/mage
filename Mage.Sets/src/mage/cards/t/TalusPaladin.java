@@ -54,9 +54,9 @@ public class TalusPaladin extends CardImpl {
     
     public TalusPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.KNIGHT);
+        this.subtype.add(SubType.ALLY);
         
 
         this.power = new MageInt(2);

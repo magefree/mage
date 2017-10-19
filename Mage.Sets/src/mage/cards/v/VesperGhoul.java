@@ -37,6 +37,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -47,8 +48,8 @@ public class VesperGhoul extends CardImpl {
 
     public VesperGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Zombie");
-        this.subtype.add("Druid");
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.DRUID);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

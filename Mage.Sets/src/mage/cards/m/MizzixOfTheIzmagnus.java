@@ -64,8 +64,8 @@ public class MizzixOfTheIzmagnus extends CardImpl {
     public MizzixOfTheIzmagnus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Goblin");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

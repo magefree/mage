@@ -36,6 +36,7 @@ import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -47,8 +48,8 @@ public class SakuraTribeSpringcaller extends CardImpl {
 
     public SakuraTribeSpringcaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Snake");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.SNAKE);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

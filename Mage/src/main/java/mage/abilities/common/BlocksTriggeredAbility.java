@@ -41,19 +41,26 @@ import mage.target.targetpointer.FixedTarget;
 public class BlocksTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean setTargetPointer;
+    private boolean once = false;
 
     public BlocksTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
     }
 
     public BlocksTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
+        this(effect, optional, setTargetPointer, false);
+    }
+
+    public BlocksTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer, boolean once) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        this.once = once;
     }
 
     public BlocksTriggeredAbility(final BlocksTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
+        this.once = ability.once;
     }
 
     @Override
@@ -76,7 +83,7 @@ public class BlocksTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} blocks" + (setTargetPointer ? " a creature, " : ", ") + super.getRule();
+        return "When" + (once ? "" : "ever") + " {this} blocks" + (setTargetPointer ? " a creature, " : ", ") + super.getRule();
     }
 
     @Override

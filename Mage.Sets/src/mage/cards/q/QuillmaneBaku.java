@@ -41,6 +41,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -62,7 +63,7 @@ public class QuillmaneBaku extends CardImpl {
 
     public QuillmaneBaku(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -70,6 +71,7 @@ public class QuillmaneBaku extends CardImpl {
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Skullmane Baku.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
 
+        //TODO: Make ability properly copiable
         // {1}, Tap, Remove X ki counters from Quillmane Baku: Return target creature with converted mana cost X or less to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new QuillmaneBakuReturnEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());

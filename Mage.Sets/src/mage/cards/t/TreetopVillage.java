@@ -38,6 +38,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -69,7 +70,7 @@ class ApeToken extends Token {
     ApeToken() {
         super("Ape", "3/3 green Ape creature with trample");
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Ape");
+        this.subtype.add(SubType.APE);
         color.setGreen(true);
         power = new MageInt(3);
         toughness = new MageInt(3);

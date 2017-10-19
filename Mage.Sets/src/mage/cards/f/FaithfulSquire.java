@@ -45,6 +45,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -61,8 +62,8 @@ public class FaithfulSquire extends CardImpl {
 
     public FaithfulSquire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -97,7 +98,7 @@ class KaisoMemoryOfLoyalty extends Token {
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Spirit");
+        subtype.add(SubType.SPIRIT);
         power = new MageInt(3);
         toughness = new MageInt(4);
 

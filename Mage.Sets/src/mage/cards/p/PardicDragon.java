@@ -57,7 +57,7 @@ public class PardicDragon extends CardImpl {
 
     public PardicDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
-        this.subtype.add("Dragon");
+        this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

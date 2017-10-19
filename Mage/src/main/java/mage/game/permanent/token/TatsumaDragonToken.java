@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
@@ -41,8 +42,8 @@ public class TatsumaDragonToken extends Token {
         super("Dragon Spirit", "5/5 blue Dragon Spirit creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Dragon");
-        subtype.add("Spirit");
+        subtype.add(SubType.DRAGON);
+        subtype.add(SubType.SPIRIT);
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());

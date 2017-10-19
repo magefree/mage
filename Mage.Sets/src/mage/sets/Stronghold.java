@@ -106,6 +106,7 @@ public class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Hornet Cannon", 130, Rarity.UNCOMMON, mage.cards.h.HornetCannon.class));
         cards.add(new SetCardInfo("Horn of Greed", 129, Rarity.RARE, mage.cards.h.HornOfGreed.class));
         cards.add(new SetCardInfo("Intruder Alarm", 34, Rarity.RARE, mage.cards.i.IntruderAlarm.class));
+        cards.add(new SetCardInfo("Invasion Plans", 89, Rarity.RARE, mage.cards.i.InvasionPlans.class));
         cards.add(new SetCardInfo("Jinxed Ring", 131, Rarity.RARE, mage.cards.j.JinxedRing.class));
         cards.add(new SetCardInfo("Lab Rats", 11, Rarity.COMMON, mage.cards.l.LabRats.class));
         cards.add(new SetCardInfo("Lancers en-Kor", 108, Rarity.UNCOMMON, mage.cards.l.LancersEnKor.class));
@@ -164,6 +165,7 @@ public class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Stronghold Assassin", 21, Rarity.RARE, mage.cards.s.StrongholdAssassin.class));
         cards.add(new SetCardInfo("Stronghold Taskmaster", 22, Rarity.UNCOMMON, mage.cards.s.StrongholdTaskmaster.class));
         cards.add(new SetCardInfo("Sword of the Chosen", 135, Rarity.RARE, mage.cards.s.SwordOfTheChosen.class));
+        cards.add(new SetCardInfo("Temper", 120, Rarity.UNCOMMON, mage.cards.t.Temper.class));
         cards.add(new SetCardInfo("Tempting Licid", 72, Rarity.UNCOMMON, mage.cards.t.TemptingLicid.class));
         cards.add(new SetCardInfo("Thalakos Deceiver", 45, Rarity.RARE, mage.cards.t.ThalakosDeceiver.class));
         cards.add(new SetCardInfo("Tidal Surge", 46, Rarity.COMMON, mage.cards.t.TidalSurge.class));
@@ -173,6 +175,7 @@ public class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Venerable Monk", 121, Rarity.COMMON, mage.cards.v.VenerableMonk.class));
         cards.add(new SetCardInfo("Verdant Touch", 73, Rarity.RARE, mage.cards.v.VerdantTouch.class));
         cards.add(new SetCardInfo("Victual Sliver", 143, Rarity.UNCOMMON, mage.cards.v.VictualSliver.class));
+        cards.add(new SetCardInfo("Volrath's Gardens", 74, Rarity.RARE, mage.cards.v.VolrathsGardens.class));
         cards.add(new SetCardInfo("Volrath's Laboratory", 136, Rarity.RARE, mage.cards.v.VolrathsLaboratory.class));
         cards.add(new SetCardInfo("Volrath's Shapeshifter", 48, Rarity.RARE, mage.cards.v.VolrathsShapeshifter.class));
         cards.add(new SetCardInfo("Volrath's Stronghold", 137, Rarity.RARE, mage.cards.v.VolrathsStronghold.class));

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -47,8 +48,8 @@ public class PhantomWurm extends CardImpl {
 
     public PhantomWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.subtype.add("Wurm");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.WURM);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(0);

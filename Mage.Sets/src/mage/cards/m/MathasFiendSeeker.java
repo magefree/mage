@@ -41,6 +41,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -70,7 +71,7 @@ public class MathasFiendSeeker extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{B}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Vampire");
+        this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
@@ -82,9 +83,7 @@ public class MathasFiendSeeker extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         Ability ability2 = new DiesTriggeredAbility(new DrawCardAllEffect(1, TargetController.OPPONENT));
         ability2.addEffect(new OpponentsGainLifeEffect());
-        Effect effect = new MathasFiendSeekerGainAbilityEffect(
-                ability2,
-                Duration.Custom, rule);
+        Effect effect = new MathasFiendSeekerGainAbilityEffect(ability2, Duration.Custom, rule);
         ability.addEffect(effect);
         this.addAbility(ability);
     }
@@ -111,8 +110,8 @@ class MathasFiendSeekerGainAbilityEffect extends GainAbilityTargetEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (land != null && land.getCounters(game).getCount(CounterType.BOUNTY) < 1) {
+        Permanent creature = game.getPermanent(this.targetPointer.getFirst(game, source));
+        if (creature != null && creature.getCounters(game).getCount(CounterType.BOUNTY) < 1) {
             return true;
         }
         return false;
@@ -128,7 +127,7 @@ class OpponentsGainLifeEffect extends OneShotEffect {
 
     public OpponentsGainLifeEffect() {
         super(Outcome.GainLife);
-        staticText = "Each opponent gains 2 life.";
+        staticText = "and gains 2 life.";
     }
 
     public OpponentsGainLifeEffect(final OpponentsGainLifeEffect effect) {

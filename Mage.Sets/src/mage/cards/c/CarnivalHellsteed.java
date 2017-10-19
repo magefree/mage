@@ -35,6 +35,7 @@ import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
  
 /**
  *
@@ -44,8 +45,8 @@ public class CarnivalHellsteed extends CardImpl {
  
     public CarnivalHellsteed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");
-        this.subtype.add("Nightmare");
-        this.subtype.add("Horse");
+        this.subtype.add(SubType.NIGHTMARE);
+        this.subtype.add(SubType.HORSE);
  
 
 

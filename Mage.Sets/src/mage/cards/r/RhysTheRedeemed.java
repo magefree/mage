@@ -35,10 +35,11 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -60,8 +61,8 @@ public class RhysTheRedeemed extends CardImpl {
     public RhysTheRedeemed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G/W}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elf");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -117,7 +118,7 @@ class RhysTheRedeemedEffect extends OneShotEffect {
         if (controller != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                 if (permanent.getControllerId().equals(source.getControllerId())) {
-                    PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+                    CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                     effect.apply(game, source);
                 }

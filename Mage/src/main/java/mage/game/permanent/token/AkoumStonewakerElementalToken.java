@@ -29,6 +29,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -43,7 +44,7 @@ public class AkoumStonewakerElementalToken extends Token {
         super("Elemental", "3/1 red Elemental creature token with trample and haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Elemental");
+        subtype.add(SubType.ELEMENTAL);
         power = new MageInt(3);
         toughness = new MageInt(1);
         this.addAbility(TrampleAbility.getInstance());

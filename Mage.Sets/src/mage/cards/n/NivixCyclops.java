@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterSpell;
@@ -62,7 +63,7 @@ public class NivixCyclops extends CardImpl {
 
     public NivixCyclops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
-        this.subtype.add("Cyclops");
+        this.subtype.add(SubType.CYCLOPS);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);

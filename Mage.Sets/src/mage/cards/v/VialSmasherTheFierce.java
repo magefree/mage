@@ -40,6 +40,7 @@ import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -59,8 +60,8 @@ public class VialSmasherTheFierce extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Goblin");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

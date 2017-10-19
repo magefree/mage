@@ -29,16 +29,12 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.players.Player;
-import mage.players.Players;
+import mage.constants.SubType;
 
 /**
  *
@@ -47,14 +43,14 @@ import mage.players.Players;
 public class PulseTracker extends CardImpl {
 
     public PulseTracker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Vampire");
-        this.subtype.add("Rogue");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new AttacksTriggeredAbility(new PulseTrackerLoseLifeEffect(), false));
+        this.addAbility(new AttacksTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
     }
 
     public PulseTracker(final PulseTracker card) {
@@ -65,37 +61,4 @@ public class PulseTracker extends CardImpl {
     public PulseTracker copy() {
         return new PulseTracker(this);
     }
-}
-
-class PulseTrackerLoseLifeEffect extends OneShotEffect {
-
-    private static final String effectText = "each opponent loses 1 life";
-
-    PulseTrackerLoseLifeEffect ( ) {
-        super(Outcome.Damage);
-        staticText = effectText;
-    }
-
-    PulseTrackerLoseLifeEffect ( PulseTrackerLoseLifeEffect effect ) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Players players = game.getPlayers();
-
-        for ( Player player : players.values() ) {
-            if ( !player.getId().equals(source.getControllerId()) ) {
-                player.loseLife(1, game, false);
-            }
-        }
-
-        return true;
-    }
-
-    @Override
-    public PulseTrackerLoseLifeEffect copy() {
-        return new PulseTrackerLoseLifeEffect(this);
-    }
-
 }

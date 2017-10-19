@@ -39,6 +39,7 @@ import mage.abilities.effects.common.ReturnToLibraryPermanentEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
@@ -50,8 +51,8 @@ public class SithManipulator extends CardImpl {
 
     public SithManipulator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Human");
-        this.subtype.add("Sith");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SITH);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

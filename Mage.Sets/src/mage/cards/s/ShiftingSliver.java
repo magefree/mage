@@ -57,7 +57,7 @@ public class ShiftingSliver extends CardImpl {
 
     public ShiftingSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add("Sliver");
+        this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

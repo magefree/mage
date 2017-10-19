@@ -29,6 +29,7 @@
 package mage.game.permanent.token;
 import mage.constants.CardType;
 import mage.abilities.keyword.ForestwalkAbility;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class CatWarriorToken extends Token {
         this.getPower().modifyBaseValue(2);
         this.getToughness().modifyBaseValue(2);
         this.color.setGreen(true);
-        this.getSubtype(null).add("Cat");
-        this.getSubtype(null).add("Warrior");
+        this.getSubtype(null).add(SubType.CAT);
+        this.getSubtype(null).add(SubType.WARRIOR);
         this.addCardType(CardType.CREATURE);
         this.addAbility(new ForestwalkAbility());
     }

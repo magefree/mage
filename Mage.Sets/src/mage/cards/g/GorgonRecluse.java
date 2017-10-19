@@ -40,6 +40,7 @@ import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -58,7 +59,7 @@ public class GorgonRecluse extends CardImpl {
 
     public GorgonRecluse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.subtype.add("Gorgon");
+        this.subtype.add(SubType.GORGON);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

@@ -71,7 +71,7 @@ public class IsochronScepterTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
         addTarget(playerA, "Lightning Bolt");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2},{T}:");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:");
         setChoice(playerA, "Yes");
         setChoice(playerA, "Yes");
 
@@ -93,7 +93,7 @@ public class IsochronScepterTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
         addTarget(playerA, "Lightning Bolt");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2},{T}:");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:");
         setChoice(playerA, "Yes");
         setChoice(playerA, "No");
 
@@ -136,7 +136,7 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         attack(2, playerB, "Dross Crocodile");
         attack(2, playerB, "Dross Crocodile");
 
-        activateAbility(2, PhaseStep.DECLARE_BLOCKERS, playerA, "{2},{T}:");
+        activateAbility(2, PhaseStep.DECLARE_BLOCKERS, playerA, "{2}, {T}:");
         setChoice(playerA, "Yes");
         setChoice(playerA, "Yes");
 
@@ -180,7 +180,7 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
         addTarget(playerA, "Silence");
 
-        activateAbility(2, PhaseStep.UPKEEP, playerA, "{2},{T}:");
+        activateAbility(2, PhaseStep.UPKEEP, playerA, "{2}, {T}:");
         setChoice(playerA, "Yes");
         setChoice(playerA, "Yes");
 

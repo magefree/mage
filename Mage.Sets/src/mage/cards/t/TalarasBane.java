@@ -53,13 +53,12 @@ import mage.target.common.TargetOpponent;
 public class TalarasBane extends CardImpl {
 
     public TalarasBane(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Target opponent reveals his or her hand. You choose a green or white creature card from it. You gain life equal that creature card's toughness, then that player discards that card.
         this.getSpellAbility().addEffect(new TalarasBaneEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-        
+
     }
 
     public TalarasBane(final TalarasBane card) {
@@ -73,9 +72,9 @@ public class TalarasBane extends CardImpl {
 }
 
 class TalarasBaneEffect extends OneShotEffect {
-    
+
     private static final FilterCard filter = new FilterCard("a green or white creature card");
-    
+
     static {
         filter.add(Predicates.or(
                 new ColorPredicate(ObjectColor.GREEN),
@@ -85,7 +84,7 @@ class TalarasBaneEffect extends OneShotEffect {
 
     public TalarasBaneEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Target opponent reveals his or her hand. You choose a green or white creature card from it. You gain life equal that creature card's toughness, then that player discards that card";
+        this.staticText = "Target opponent reveals his or her hand. You choose a green or white creature card from it. You gain life equal to that creature card's toughness, then that player discards that card";
     }
 
     public TalarasBaneEffect(final TalarasBaneEffect effect) {
@@ -110,7 +109,7 @@ class TalarasBaneEffect extends OneShotEffect {
             }
             if (card != null) {
                 int lifeGain = card.getToughness().getValue();
-                you .gainLife(lifeGain, game);
+                you.gainLife(lifeGain, game);
                 return targetPlayer.discard(card, source, game);
             }
         }

@@ -40,6 +40,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -55,7 +56,7 @@ public class HauntedPlateMail extends CardImpl {
 
     public HauntedPlateMail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +4/+4.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4, 4)));
@@ -87,7 +88,7 @@ class HauntedPlateMailToken extends Token {
         super("Spirit", "4/4 Spirit artifact creature that's no longer an Equipment");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Spirit");
+        subtype.add(SubType.SPIRIT);
         power = new MageInt(4);
         toughness = new MageInt(4);
     }

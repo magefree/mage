@@ -52,6 +52,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Akroma, Angel of Wrath", 1, Rarity.COMMON, mage.cards.a.AkromaAngelOfWrath.class));
         cards.add(new SetCardInfo("Arena", 117, Rarity.SPECIAL, mage.cards.a.Arena.class));
+        cards.add(new SetCardInfo("Assault // Battery", 106, Rarity.SPECIAL, mage.cards.a.AssaultBattery.class));
         cards.add(new SetCardInfo("Auratog", 2, Rarity.COMMON, mage.cards.a.Auratog.class));
         cards.add(new SetCardInfo("Avalanche Riders", 55, Rarity.COMMON, mage.cards.a.AvalancheRiders.class));
         cards.add(new SetCardInfo("Avatar of Woe", 37, Rarity.SPECIAL, mage.cards.a.AvatarOfWoe.class));
@@ -94,12 +95,14 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Ghost Ship", 21, Rarity.SPECIAL, mage.cards.g.GhostShip.class));
         cards.add(new SetCardInfo("Goblin Snowman", 64, Rarity.UNCOMMON, mage.cards.g.GoblinSnowman.class));
         cards.add(new SetCardInfo("Grinning Totem", 110, Rarity.SPECIAL, mage.cards.g.GrinningTotem.class));
+        cards.add(new SetCardInfo("Hail Storm", 79, Rarity.SPECIAL, mage.cards.h.HailStorm.class));
         cards.add(new SetCardInfo("Hunting Moa", 80, Rarity.COMMON, mage.cards.h.HuntingMoa.class));
         cards.add(new SetCardInfo("Icatian Javelineers", 10, Rarity.SPECIAL, IcatianJavelineers.class));
         cards.add(new SetCardInfo("Jasmine Boreal", 93, Rarity.COMMON, mage.cards.j.JasmineBoreal.class));
         cards.add(new SetCardInfo("Jolrael, Empress of Beasts", 81, Rarity.SPECIAL, mage.cards.j.JolraelEmpressOfBeasts.class));
         cards.add(new SetCardInfo("Kobold Taskmaster", 65, Rarity.SPECIAL, mage.cards.k.KoboldTaskmaster.class));
         cards.add(new SetCardInfo("Krosan Cloudscraper", 82, Rarity.SPECIAL, mage.cards.k.KrosanCloudscraper.class));
+        cards.add(new SetCardInfo("Leviathan", 23, Rarity.RARE, mage.cards.l.Leviathan.class));
         cards.add(new SetCardInfo("Lightning Angel", 94, Rarity.COMMON, mage.cards.l.LightningAngel.class));
         cards.add(new SetCardInfo("Lord of Atlantis", 24, Rarity.RARE, mage.cards.l.LordOfAtlantis.class));
         cards.add(new SetCardInfo("Merfolk Assassin", 25, Rarity.SPECIAL, mage.cards.m.MerfolkAssassin.class));
@@ -113,6 +116,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Nicol Bolas", 98, Rarity.SPECIAL, mage.cards.n.NicolBolas.class));
         cards.add(new SetCardInfo("Orcish Librarian", 66, Rarity.SPECIAL, mage.cards.o.OrcishLibrarian.class));
         cards.add(new SetCardInfo("Orgg", 67, Rarity.SPECIAL, mage.cards.o.Orgg.class));
+        cards.add(new SetCardInfo("Ovinomancer", 27, Rarity.SPECIAL, mage.cards.o.Ovinomancer.class));
         cards.add(new SetCardInfo("Pandemonium", 68, Rarity.SPECIAL, mage.cards.p.Pandemonium.class));
         cards.add(new SetCardInfo("Pendelhaven", 120, Rarity.COMMON, mage.cards.p.Pendelhaven.class));
         cards.add(new SetCardInfo("Pirate Ship", 28, Rarity.SPECIAL, mage.cards.p.PirateShip.class));

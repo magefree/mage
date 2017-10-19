@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -48,14 +49,14 @@ import mage.players.Player;
 public class JackalPup extends CardImpl {
 
     public JackalPup(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Jackal");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
+        this.subtype.add(SubType.JACKAL);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         // Whenever Jackal Pup is dealt damage, it deals that much damage to you.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new JackalPupEffect(), false));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new JackalPupEffect(), false, false, true));
 
     }
 

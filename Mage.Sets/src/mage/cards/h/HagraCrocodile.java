@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -45,7 +46,7 @@ public class HagraCrocodile extends CardImpl {
 
     public HagraCrocodile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add("Crocodile");
+        this.subtype.add(SubType.CROCODILE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

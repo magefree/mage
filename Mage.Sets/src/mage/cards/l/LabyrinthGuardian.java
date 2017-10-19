@@ -37,6 +37,7 @@ import mage.abilities.keyword.EmbalmAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,8 +54,8 @@ public class LabyrinthGuardian extends CardImpl {
     public LabyrinthGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.subtype.add("Illusion");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.ILLUSION);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
@@ -99,7 +100,7 @@ class LabyrinthGuardianTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject eventSourceObject = game.getObject(event.getSourceId());
-        if (eventSourceObject != null && event.getTargetId().equals(this.getSourceId())&& eventSourceObject instanceof Spell ) {
+        if (eventSourceObject != null && event.getTargetId().equals(this.getSourceId()) && eventSourceObject instanceof Spell) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
             return true;
         }
@@ -108,7 +109,7 @@ class LabyrinthGuardianTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} becomes the target of a spell, sacrifice it.";
+        return "When {this} becomes the target of a spell, sacrifice it.";
     }
 
 }

@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -50,7 +51,7 @@ public class WurmToken3 extends Token {
         super("Wurm", "5/5 green Wurm creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Wurm");
+        subtype.add(SubType.WURM);
         power = new MageInt(5);
         toughness = new MageInt(5);
     }

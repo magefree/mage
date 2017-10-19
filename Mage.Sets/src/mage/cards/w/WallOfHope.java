@@ -36,6 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,7 +52,7 @@ public class WallOfHope extends CardImpl {
 
     public WallOfHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Wall");
+        this.subtype.add(SubType.WALL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

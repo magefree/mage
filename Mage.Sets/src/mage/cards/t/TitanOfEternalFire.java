@@ -54,7 +54,7 @@ public class TitanOfEternalFire extends CardImpl {
 
     public TitanOfEternalFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        this.subtype.add("Giant");
+        this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);

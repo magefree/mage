@@ -27,8 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -45,6 +43,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +70,7 @@ public class AuramancersGuise extends CardImpl {
         BoostEnchantedEffect effect = new BoostEnchantedEffect(ptBoost, ptBoost, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +2/+2 for each Aura attached to it");
         SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        ability2.addEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA));
+        ability2.addEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA).setText("and has vigilance"));
         this.addAbility(ability2);
     }
 
@@ -101,7 +102,7 @@ class EnchantedCreatureAurasCount implements DynamicValue {
                 List<UUID> attachments = permanent.getAttachments();
                 for (UUID attachmentId : attachments) {
                     Permanent attached = game.getPermanent(attachmentId);
-                    if (attached != null && attached.getSubtype(game).contains("Aura")) {
+                    if (attached != null && attached.hasSubtype(SubType.AURA, game)) {
                         count++;
                     }
 

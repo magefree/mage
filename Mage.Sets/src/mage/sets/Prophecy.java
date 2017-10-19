@@ -81,6 +81,8 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Despoil", 62, Rarity.COMMON, mage.cards.d.Despoil.class));
         cards.add(new SetCardInfo("Devastate", 87, Rarity.COMMON, mage.cards.d.Devastate.class));
         cards.add(new SetCardInfo("Diving Griffin", 6, Rarity.COMMON, mage.cards.d.DivingGriffin.class));
+        cards.add(new SetCardInfo("Dual Nature", 112, Rarity.RARE, mage.cards.d.DualNature.class));
+        cards.add(new SetCardInfo("Elephant Resurgence", 113, Rarity.RARE, mage.cards.e.ElephantResurgence.class));
         cards.add(new SetCardInfo("Entangler", 7, Rarity.UNCOMMON, mage.cards.e.Entangler.class));
         cards.add(new SetCardInfo("Excavation", 33, Rarity.UNCOMMON, mage.cards.e.Excavation.class));
         cards.add(new SetCardInfo("Fault Riders", 88, Rarity.COMMON, mage.cards.f.FaultRiders.class));
@@ -88,6 +90,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Flameshot", 90, Rarity.UNCOMMON, mage.cards.f.Flameshot.class));
         cards.add(new SetCardInfo("Flowering Field", 9, Rarity.UNCOMMON, mage.cards.f.FloweringField.class));
         cards.add(new SetCardInfo("Foil", 34, Rarity.UNCOMMON, mage.cards.f.Foil.class));
+        cards.add(new SetCardInfo("Forgotten Harvest", 114, Rarity.RARE, mage.cards.f.ForgottenHarvest.class));
         cards.add(new SetCardInfo("Greel's Caress", 67, Rarity.COMMON, mage.cards.g.GreelsCaress.class));
         cards.add(new SetCardInfo("Greel, Mind Raker", 66, Rarity.RARE, mage.cards.g.GreelMindRaker.class));
         cards.add(new SetCardInfo("Gulf Squid", 35, Rarity.COMMON, mage.cards.g.GulfSquid.class));
@@ -99,6 +102,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Jolrael, Empress of Beasts", 115, Rarity.RARE, mage.cards.j.JolraelEmpressOfBeasts.class));
         cards.add(new SetCardInfo("Jolrael's Favor", 116, Rarity.COMMON, mage.cards.j.JolraelsFavor.class));
         cards.add(new SetCardInfo("Keldon Arsonist", 92, Rarity.UNCOMMON, mage.cards.k.KeldonArsonist.class));
+        cards.add(new SetCardInfo("Keldon Berserker", 93, Rarity.COMMON, mage.cards.k.KeldonBerserker.class));
         cards.add(new SetCardInfo("Keldon Firebombers", 94, Rarity.RARE, mage.cards.k.KeldonFirebombers.class));
         cards.add(new SetCardInfo("Latulla, Keldon Overseer", 95, Rarity.RARE, mage.cards.l.LatullaKeldonOverseer.class));
         cards.add(new SetCardInfo("Lesser Gargadon", 97, Rarity.UNCOMMON, mage.cards.l.LesserGargadon.class));
@@ -118,10 +122,12 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Pit Raptor", 72, Rarity.UNCOMMON, mage.cards.p.PitRaptor.class));
         cards.add(new SetCardInfo("Plague Fiend", 73, Rarity.COMMON, mage.cards.p.PlagueFiend.class));
         cards.add(new SetCardInfo("Plague Wind", 74, Rarity.RARE, mage.cards.p.PlagueWind.class));
+        cards.add(new SetCardInfo("Psychic Theft", 40, Rarity.RARE, mage.cards.p.PsychicTheft.class));
         cards.add(new SetCardInfo("Pygmy Razorback", 120, Rarity.COMMON, mage.cards.p.PygmyRazorback.class));
         cards.add(new SetCardInfo("Quicksilver Wall", 41, Rarity.UNCOMMON, mage.cards.q.QuicksilverWall.class));
         cards.add(new SetCardInfo("Rebel Informer", 75, Rarity.RARE, mage.cards.r.RebelInformer.class));
         cards.add(new SetCardInfo("Rethink", 42, Rarity.COMMON, mage.cards.r.Rethink.class));
+        cards.add(new SetCardInfo("Reveille Squad", 18, Rarity.UNCOMMON, mage.cards.r.ReveilleSquad.class));
         cards.add(new SetCardInfo("Rhystic Circle", 19, Rarity.COMMON, mage.cards.r.RhysticCircle.class));
         cards.add(new SetCardInfo("Rhystic Study", 45, Rarity.COMMON, mage.cards.r.RhysticStudy.class));
         cards.add(new SetCardInfo("Rhystic Tutor", 77, Rarity.RARE, mage.cards.r.RhysticTutor.class));
@@ -129,10 +135,12 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Rib Cage Spider", 121, Rarity.COMMON, mage.cards.r.RibCageSpider.class));
         cards.add(new SetCardInfo("Ridgeline Rager", 100, Rarity.COMMON, mage.cards.r.RidgelineRager.class));
         cards.add(new SetCardInfo("Root Cage", 122, Rarity.UNCOMMON, mage.cards.r.RootCage.class));
+        cards.add(new SetCardInfo("Samite Sanctuary", 21, Rarity.RARE, mage.cards.s.SamiteSanctuary.class));
         cards.add(new SetCardInfo("Scoria Cat", 101, Rarity.UNCOMMON, mage.cards.s.ScoriaCat.class));
         cards.add(new SetCardInfo("Searing Wind", 103, Rarity.RARE, mage.cards.s.SearingWind.class));
         cards.add(new SetCardInfo("Shield Dancer", 23, Rarity.UNCOMMON, mage.cards.s.ShieldDancer.class));
         cards.add(new SetCardInfo("Silt Crawler", 123, Rarity.COMMON, mage.cards.s.SiltCrawler.class));
+        cards.add(new SetCardInfo("Snag", 124, Rarity.UNCOMMON, mage.cards.s.Snag.class));
         cards.add(new SetCardInfo("Spiketail Drake", 48, Rarity.UNCOMMON, mage.cards.s.SpiketailDrake.class));
         cards.add(new SetCardInfo("Spiketail Hatchling", 49, Rarity.COMMON, mage.cards.s.SpiketailHatchling.class));
         cards.add(new SetCardInfo("Spitting Spider", 125, Rarity.UNCOMMON, mage.cards.s.SpittingSpider.class));
@@ -143,6 +151,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Stormwatch Eagle", 50, Rarity.COMMON, mage.cards.s.StormwatchEagle.class));
         cards.add(new SetCardInfo("Sunken Field", 51, Rarity.UNCOMMON, mage.cards.s.SunkenField.class));
         cards.add(new SetCardInfo("Sword Dancer", 25, Rarity.UNCOMMON, mage.cards.s.SwordDancer.class));
+        cards.add(new SetCardInfo("Task Mage Assembly", 105, Rarity.RARE, mage.cards.t.TaskMageAssembly.class));
         cards.add(new SetCardInfo("Thrive", 129, Rarity.COMMON, mage.cards.t.Thrive.class));
         cards.add(new SetCardInfo("Trenching Steed", 26, Rarity.COMMON, mage.cards.t.TrenchingSteed.class));
         cards.add(new SetCardInfo("Troubled Healer", 27, Rarity.COMMON, mage.cards.t.TroubledHealer.class));
@@ -156,6 +165,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Whip Sergeant", 107, Rarity.UNCOMMON, mage.cards.w.WhipSergeant.class));
         cards.add(new SetCardInfo("Whipstitched Zombie", 81, Rarity.COMMON, mage.cards.w.WhipstitchedZombie.class));
         cards.add(new SetCardInfo("Wild Might", 134, Rarity.COMMON, mage.cards.w.WildMight.class));
+        cards.add(new SetCardInfo("Windscouter", 53, Rarity.UNCOMMON, mage.cards.w.Windscouter.class));
         cards.add(new SetCardInfo("Wintermoon Mesa", 143, Rarity.RARE, mage.cards.w.WintermoonMesa.class));
         cards.add(new SetCardInfo("Withdraw", 54, Rarity.COMMON, mage.cards.w.Withdraw.class));
         cards.add(new SetCardInfo("Zerapa Minotaur", 108, Rarity.COMMON, mage.cards.z.ZerapaMinotaur.class));

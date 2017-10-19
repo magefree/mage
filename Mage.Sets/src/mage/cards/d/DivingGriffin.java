@@ -34,6 +34,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class DivingGriffin extends CardImpl {
 
     public DivingGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        this.subtype.add("Griffin");
+        this.subtype.add(SubType.GRIFFIN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

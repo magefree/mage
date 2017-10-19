@@ -37,6 +37,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -52,8 +53,8 @@ public class DemigodOfRevenge extends CardImpl {
 
     public DemigodOfRevenge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/R}{B/R}{B/R}{B/R}{B/R}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

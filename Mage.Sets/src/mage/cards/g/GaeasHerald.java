@@ -35,6 +35,7 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -50,7 +51,7 @@ public class GaeasHerald extends CardImpl {
 
     public GaeasHerald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Elf");
+        this.subtype.add(SubType.ELF);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

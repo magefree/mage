@@ -38,6 +38,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -57,7 +58,7 @@ public class VengefulPharaoh extends CardImpl {
 
     public VengefulPharaoh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{B}");
-        this.subtype.add("Zombie");
+        this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

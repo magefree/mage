@@ -37,6 +37,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInASingleGraveyard;
@@ -49,8 +50,8 @@ public class RagDealer extends CardImpl {
 
     public RagDealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

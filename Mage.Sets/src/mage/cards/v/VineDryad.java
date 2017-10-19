@@ -37,6 +37,7 @@ import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -51,7 +52,7 @@ public class VineDryad extends CardImpl {
 
     public VineDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Dryad");
+        this.subtype.add(SubType.DRYAD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

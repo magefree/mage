@@ -36,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -52,8 +53,8 @@ public class SaplingOfColfenor extends CardImpl {
     public SaplingOfColfenor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B/G}{B/G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Treefolk");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.TREEFOLK);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);

@@ -51,7 +51,7 @@ public class Tarmogoyf extends CardImpl {
 
     public Tarmogoyf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Lhurgoyf");
+        this.subtype.add(SubType.LHURGOYF);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
@@ -73,7 +73,7 @@ public class Tarmogoyf extends CardImpl {
 class TarmogoyfEffect extends ContinuousEffectImpl {
 
     public TarmogoyfEffect() {
-        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
         staticText = "{this}'s power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1";
     }
 

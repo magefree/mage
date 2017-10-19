@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -55,7 +56,7 @@ public class InsectToken extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Insect");
+        subtype.add(SubType.INSECT);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

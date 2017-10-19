@@ -59,8 +59,8 @@ public class SliverOverlord extends CardImpl {
     public SliverOverlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Sliver");
-        this.subtype.add("Mutant");
+        this.subtype.add(SubType.SLIVER);
+        this.subtype.add(SubType.MUTANT);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

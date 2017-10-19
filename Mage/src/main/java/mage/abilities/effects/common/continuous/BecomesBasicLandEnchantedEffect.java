@@ -75,27 +75,27 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
                         for (SubType landType : landTypes) {
                             switch (landType) {
                                 case SWAMP:
-                                    if (permanent.getSubtype(game).contains(SubType.SWAMP)) { // type can be removed by other effect with newer timestamp, so no ability adding
+                                    if (permanent.hasSubtype(SubType.SWAMP, game)) { // type can be removed by other effect with newer timestamp, so no ability adding
                                         permanent.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                                     }
                                     break;
                                 case MOUNTAIN:
-                                    if (permanent.getSubtype(game).contains(SubType.MOUNTAIN)) {
+                                    if (permanent.hasSubtype(SubType.MOUNTAIN, game)) {
                                         permanent.addAbility(new RedManaAbility(), source.getSourceId(), game);
                                     }
                                     break;
                                 case FOREST:
-                                    if (permanent.getSubtype(game).contains(SubType.FOREST)) {
+                                    if (permanent.hasSubtype(SubType.FOREST, game)) {
                                         permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                                     }
                                     break;
                                 case ISLAND:
-                                    if (permanent.getSubtype(game).contains(SubType.ISLAND)) {
+                                    if (permanent.hasSubtype(SubType.ISLAND, game)) {
                                         permanent.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                                     }
                                     break;
                                 case PLAINS:
-                                    if (permanent.getSubtype(game).contains(SubType.PLAINS)) {
+                                    if (permanent.hasSubtype(SubType.PLAINS, game)) {
                                         permanent.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                                     }
                                     break;

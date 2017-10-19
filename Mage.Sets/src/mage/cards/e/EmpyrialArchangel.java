@@ -37,6 +37,7 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -53,7 +54,7 @@ public class EmpyrialArchangel extends CardImpl {
 
     public EmpyrialArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}{W}{U}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(8);

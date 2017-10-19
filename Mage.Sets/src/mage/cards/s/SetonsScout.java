@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -50,10 +51,10 @@ public class SetonsScout extends CardImpl {
 
     public SetonsScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Centaur");
-        this.subtype.add("Druid");
-        this.subtype.add("Scout");
-        this.subtype.add("Archer");
+        this.subtype.add(SubType.CENTAUR);
+        this.subtype.add(SubType.DRUID);
+        this.subtype.add(SubType.SCOUT);
+        this.subtype.add(SubType.ARCHER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

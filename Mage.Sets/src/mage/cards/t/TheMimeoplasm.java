@@ -54,7 +54,7 @@ public class TheMimeoplasm extends CardImpl {
     public TheMimeoplasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Ooze");
+        this.subtype.add(SubType.OOZE);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

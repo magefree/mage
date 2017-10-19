@@ -59,11 +59,11 @@ public class SightOfTheScalelords extends CardImpl {
     }
 
     public SightOfTheScalelords(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
         // At the beginning of combat on your turn, creature you control with toughness 4 or greater get +2/+2 and gain vigilance until end of turn.
-        Effect effect = new BoostControlledEffect(2,2,Duration.EndOfTurn, filter, false);
-        effect.setText("creature you control with toughness 4 or greater get +2/+2");
+        Effect effect = new BoostControlledEffect(2, 2, Duration.EndOfTurn, filter, false);
+        effect.setText("creatures you control with toughness 4 or greater get +2/+2");
         Ability ability = new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false, false);
         effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, filter);
         effect.setText("and gain vigilance until end of turn");

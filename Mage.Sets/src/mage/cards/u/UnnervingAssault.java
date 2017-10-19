@@ -45,32 +45,31 @@ import mage.watchers.common.ManaSpentToCastWatcher;
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class UnnervingAssault extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures you control");
-    
+
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
         filter2.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public UnnervingAssault(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U/R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U/R}");
 
         // Creatures your opponents control get -1/-0 until end of turn if {U} was spent to cast Unnerving Assault, and creatures you control get +1/+0 until end of turn if {R} was spent to cast it.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostAllEffect(-1, 0, Duration.EndOfTurn, filter, false),
-                new ManaWasSpentCondition(ColoredManaSymbol.U), "Creatures your opponents control get -1/0 until end of turn if {U} was spent to cast {this},"));
+                new ManaWasSpentCondition(ColoredManaSymbol.U), "Creatures your opponents control get -1/-0 until end of turn if {U} was spent to cast {this},"));
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostAllEffect(1, 0, Duration.EndOfTurn, filter2, false),
-                new ManaWasSpentCondition(ColoredManaSymbol.R), " and creatures you control get +1/0 until end of turn if {R} was spent to cast it"));
+                new ManaWasSpentCondition(ColoredManaSymbol.R), " and creatures you control get +1/+0 until end of turn if {R} was spent to cast it"));
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {U}{R} was spent.)</i>"));
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
-        
+
     }
 
     public UnnervingAssault(final UnnervingAssault card) {
@@ -82,4 +81,3 @@ public class UnnervingAssault extends CardImpl {
         return new UnnervingAssault(this);
     }
 }
-

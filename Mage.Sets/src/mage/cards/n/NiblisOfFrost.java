@@ -38,6 +38,7 @@ import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,7 +58,7 @@ public class NiblisOfFrost extends CardImpl {
 
     public NiblisOfFrost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

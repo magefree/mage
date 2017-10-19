@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -69,7 +70,7 @@ public class DeathbringerLiege extends CardImpl {
 
     public DeathbringerLiege (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W/B}{W/B}{W/B}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
 
 
         this.power = new MageInt(3);

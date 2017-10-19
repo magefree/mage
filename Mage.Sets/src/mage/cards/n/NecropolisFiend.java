@@ -47,6 +47,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -64,7 +65,7 @@ public class NecropolisFiend extends CardImpl {
 
     public NecropolisFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -73,6 +74,7 @@ public class NecropolisFiend extends CardImpl {
         this.addAbility(new DelveAbility());
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+        //TODO: Make ability properly copiable
         // {X}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn.
         DynamicValue xValue = new SignInversionDynamicValue(new ManacostVariableValue());
         Effect effect = new BoostTargetEffect(xValue,xValue,Duration.EndOfTurn);

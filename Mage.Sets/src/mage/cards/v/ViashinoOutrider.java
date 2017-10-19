@@ -34,6 +34,7 @@ import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class ViashinoOutrider extends CardImpl {
 
     public ViashinoOutrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Viashino");
+        this.subtype.add(SubType.VIASHINO);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

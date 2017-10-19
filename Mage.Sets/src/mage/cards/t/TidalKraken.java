@@ -33,6 +33,7 @@ import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class TidalKraken extends CardImpl {
 
     public TidalKraken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}{U}");
-        this.subtype.add("Kraken");
+        this.subtype.add(SubType.KRAKEN);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

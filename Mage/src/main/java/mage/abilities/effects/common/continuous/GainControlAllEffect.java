@@ -5,6 +5,7 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -22,16 +23,23 @@ import mage.game.permanent.Permanent;
  */
 public class GainControlAllEffect extends ContinuousEffectImpl {
 
-    final FilterPermanent filter;
+    private final FilterPermanent filter;
+    private final UUID controllingPlayerId;
 
     public GainControlAllEffect(Duration duration, FilterPermanent filter) {
+        this(duration, filter, null);
+    }
+
+    public GainControlAllEffect(Duration duration, FilterPermanent filter, UUID controllingPlayerId) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.filter = filter;
+        this.controllingPlayerId = controllingPlayerId;
     }
 
     public GainControlAllEffect(final GainControlAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
+        this.controllingPlayerId = effect.controllingPlayerId;
     }
 
     @Override
@@ -43,7 +51,12 @@ public class GainControlAllEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (permanent != null) {
-                permanent.changeControllerId(source.getControllerId(), game);
+                if (controllingPlayerId == null) {
+                    permanent.changeControllerId(source.getControllerId(), game);
+                } else {
+                    permanent.changeControllerId(controllingPlayerId, game);
+                }
+
             }
         }
         return true;

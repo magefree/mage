@@ -480,20 +480,20 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         for (int i = 0; i < colorless; i++) {
             sbMana.append("{C}");
         }
+        for (int i = 0; i < white; i++) {
+            sbMana.append("{W}");
+        }
+        for (int i = 0; i < blue; i++) {
+            sbMana.append("{U}");
+        }
+        for (int i = 0; i < black; i++) {
+            sbMana.append("{B}");
+        }
         for (int i = 0; i < red; i++) {
             sbMana.append("{R}");
         }
         for (int i = 0; i < green; i++) {
             sbMana.append("{G}");
-        }
-        for (int i = 0; i < blue; i++) {
-            sbMana.append("{U}");
-        }
-        for (int i = 0; i < white; i++) {
-            sbMana.append("{W}");
-        }
-        for (int i = 0; i < black; i++) {
-            sbMana.append("{B}");
         }
         for (int i = 0; i < any; i++) {
             sbMana.append("{Any}");
@@ -846,15 +846,20 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         return false;
     }
 
+    public boolean containsAny(final Mana mana) {
+        return containsAny(mana, false);
+    }
+
     /**
      * Returns if this objects mana contains any coloured mana the same as the
      * passed in {@link Mana}'s mana.
      *
      * @param mana the mana to check for
+     * @param includeColorless also check for colorless
      * @return true if this contains any of the same type of coloured mana that
      * this has
      */
-    public boolean containsAny(final Mana mana) {
+    public boolean containsAny(final Mana mana, boolean includeColorless) {
         if (mana.black > 0 && this.black > 0) {
             return true;
         } else if (mana.blue > 0 && this.blue > 0) {
@@ -864,6 +869,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         } else if (mana.white > 0 && this.white > 0) {
             return true;
         } else if (mana.green > 0 && this.green > 0) {
+            return true;
+        } else if (mana.colorless > 0 && this.colorless > 0 && includeColorless) {
             return true;
         }
 

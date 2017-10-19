@@ -38,6 +38,7 @@ import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -58,7 +59,7 @@ public class KrosanConstrictor extends CardImpl {
 
     public KrosanConstrictor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Snake");
+        this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

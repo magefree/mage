@@ -37,6 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
@@ -57,7 +58,7 @@ public class WorldQueller extends CardImpl {
 
     public WorldQueller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

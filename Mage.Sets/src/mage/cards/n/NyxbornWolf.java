@@ -35,6 +35,7 @@ import mage.abilities.keyword.BestowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -46,7 +47,7 @@ public class NyxbornWolf extends CardImpl {
 
     public NyxbornWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{G}");
-        this.subtype.add("Wolf");
+        this.subtype.add(SubType.WOLF);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

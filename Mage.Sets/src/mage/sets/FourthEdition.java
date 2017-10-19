@@ -55,6 +55,7 @@ public class FourthEdition extends ExpansionSet {
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Abomination", 1, Rarity.UNCOMMON, mage.cards.a.Abomination.class));
         cards.add(new SetCardInfo("Air Elemental", 59, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
+        cards.add(new SetCardInfo("Alabaster Potion", 251, Rarity.COMMON, mage.cards.a.AlabasterPotion.class));
         cards.add(new SetCardInfo("Aladdin's Lamp", 309, Rarity.RARE, mage.cards.a.AladdinsLamp.class));
         cards.add(new SetCardInfo("Aladdin's Ring", 310, Rarity.RARE, mage.cards.a.AladdinsRing.class));
         cards.add(new SetCardInfo("Ali Baba", 193, Rarity.UNCOMMON, mage.cards.a.AliBaba.class));
@@ -150,6 +151,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Earthquake", 207, Rarity.RARE, mage.cards.e.Earthquake.class));
         cards.add(new SetCardInfo("Ebony Horse", 336, Rarity.RARE, mage.cards.e.EbonyHorse.class));
         cards.add(new SetCardInfo("El-Hajjaj", 18, Rarity.RARE, mage.cards.e.ElHajjaj.class));
+        cards.add(new SetCardInfo("Elder Land Wurm", 274, Rarity.RARE, mage.cards.e.ElderLandWurm.class));
         cards.add(new SetCardInfo("Elven Riders", 126, Rarity.UNCOMMON, mage.cards.e.ElvenRiders.class));
         cards.add(new SetCardInfo("Elvish Archers", 127, Rarity.RARE, mage.cards.e.ElvishArchers.class));
         cards.add(new SetCardInfo("Energy Flux", 68, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));
@@ -229,6 +231,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Kormus Bell", 350, Rarity.RARE, mage.cards.k.KormusBell.class));
         cards.add(new SetCardInfo("Land Leeches", 139, Rarity.COMMON, mage.cards.l.LandLeeches.class));
         cards.add(new SetCardInfo("Land Tax", 284, Rarity.RARE, mage.cards.l.LandTax.class));
+        cards.add(new SetCardInfo("Leviathan", 80, Rarity.RARE, mage.cards.l.Leviathan.class));
         cards.add(new SetCardInfo("Ley Druid", 140, Rarity.UNCOMMON, mage.cards.l.LeyDruid.class));
         cards.add(new SetCardInfo("Library of Leng", 351, Rarity.UNCOMMON, mage.cards.l.LibraryOfLeng.class));
         cards.add(new SetCardInfo("Lifeforce", 141, Rarity.UNCOMMON, mage.cards.l.Lifeforce.class));
@@ -294,6 +297,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Pradesh Gypsies", 149, Rarity.COMMON, mage.cards.p.PradeshGypsies.class));
         cards.add(new SetCardInfo("Primal Clay", 360, Rarity.RARE, mage.cards.p.PrimalClay.class));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 94, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));
+        cards.add(new SetCardInfo("Psionic Entity", 95, Rarity.RARE, mage.cards.p.PsionicEntity.class));
         cards.add(new SetCardInfo("Psychic Venom", 96, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
         cards.add(new SetCardInfo("Purelace", 293, Rarity.RARE, mage.cards.p.Purelace.class));
         cards.add(new SetCardInfo("Pyrotechnics", 235, Rarity.UNCOMMON, mage.cards.p.Pyrotechnics.class));
@@ -395,6 +399,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Growth", 173, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Will-o'-the-Wisp", 55, Rarity.RARE, mage.cards.w.WillOTheWisp.class));
         cards.add(new SetCardInfo("Winds of Change", 250, Rarity.RARE, mage.cards.w.WindsOfChange.class));
+        cards.add(new SetCardInfo("Winter Blast", 174, Rarity.UNCOMMON, mage.cards.w.WinterBlast.class));
         cards.add(new SetCardInfo("Winter Orb", 376, Rarity.RARE, mage.cards.w.WinterOrb.class));
         cards.add(new SetCardInfo("Wooden Sphere", 377, Rarity.UNCOMMON, mage.cards.w.WoodenSphere.class));
         cards.add(new SetCardInfo("Word of Binding", 56, Rarity.COMMON, mage.cards.w.WordOfBinding.class));

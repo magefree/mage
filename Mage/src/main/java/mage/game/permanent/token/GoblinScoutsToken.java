@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.MountainwalkAbility;
 
@@ -41,8 +42,8 @@ public class GoblinScoutsToken extends Token {
         super("Goblin Scout", "1/1 red Goblin Scout creature tokens with mountainwalk");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Goblin");
-        subtype.add("Scout");
+        subtype.add(SubType.GOBLIN);
+        subtype.add(SubType.SCOUT);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

@@ -46,6 +46,7 @@ import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -57,8 +58,8 @@ public class CultivatorDrone extends CardImpl {
 
     public CultivatorDrone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Drone");
+        this.subtype.add(SubType.ELDRAZI);
+        this.subtype.add(SubType.DRONE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

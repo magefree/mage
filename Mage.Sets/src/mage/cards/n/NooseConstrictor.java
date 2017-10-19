@@ -36,6 +36,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -47,7 +48,7 @@ public class NooseConstrictor extends CardImpl {
 
     public NooseConstrictor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Snake");
+        this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

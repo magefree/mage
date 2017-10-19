@@ -34,6 +34,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -43,8 +44,8 @@ public class ScabClanMauler extends CardImpl {
 
     public ScabClanMauler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.BERSERKER);
 
 
         this.power = new MageInt(1);

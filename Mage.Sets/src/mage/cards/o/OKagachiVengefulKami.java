@@ -40,6 +40,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -63,8 +64,8 @@ public class OKagachiVengefulKami extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}{R}{G}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
+        this.subtype.add(SubType.DRAGON);
+        this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

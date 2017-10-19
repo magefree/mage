@@ -37,6 +37,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
@@ -53,7 +54,7 @@ public class MaelstromArchangel extends CardImpl {
 
     public MaelstromArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

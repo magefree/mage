@@ -38,6 +38,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -76,7 +77,7 @@ private static class ThunderTotemToken extends Token {
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setWhite(true);
-            this.subtype.add("Spirit");
+            this.subtype.add(SubType.SPIRIT);
             power = new MageInt(2);
             toughness = new MageInt(2);
             this.addAbility(FlyingAbility.getInstance());

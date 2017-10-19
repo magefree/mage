@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.game.permanent.token.PatagiaViperSnakeToken;
 import mage.watchers.common.ManaSpentToCastWatcher;
@@ -49,7 +50,7 @@ public class PatagiaViper extends CardImpl {
 
     public PatagiaViper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.subtype.add("Snake");
+        this.subtype.add(SubType.SNAKE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

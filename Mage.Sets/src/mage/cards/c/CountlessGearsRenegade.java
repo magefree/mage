@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.ServoToken;
 import mage.watchers.common.RevoltWatcher;
 
@@ -49,8 +50,8 @@ public class CountlessGearsRenegade extends CardImpl {
     public CountlessGearsRenegade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.subtype.add("Dwarf");
-        this.subtype.add("Artificer");
+        this.subtype.add(SubType.DWARF);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -40,6 +40,7 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -52,8 +53,8 @@ public class KabiraVindicator extends LevelerCard {
 
     public KabiraVindicator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.KNIGHT);
 
         this.color.setWhite(true);
         this.power = new MageInt(2);

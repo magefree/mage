@@ -38,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -56,8 +57,8 @@ public class SagesOfTheAnima extends CardImpl {
 
     public SagesOfTheAnima(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}");
-        this.subtype.add("Elf");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

@@ -53,7 +53,7 @@ public class LordOfThePit extends CardImpl {
 
     public LordOfThePit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");
-        this.subtype.add("Demon");
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

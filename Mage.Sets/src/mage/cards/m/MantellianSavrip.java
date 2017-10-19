@@ -36,6 +36,7 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,8 +50,8 @@ public class MantellianSavrip extends CardImpl {
 
     public MantellianSavrip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.subtype.add("Mantellian");
-        this.subtype.add("Berserker");
+        this.subtype.add(SubType.MANTELLIAN);
+        this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

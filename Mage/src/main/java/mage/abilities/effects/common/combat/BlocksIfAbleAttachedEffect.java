@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -38,12 +37,11 @@ import mage.game.permanent.Permanent;
 /**
  * @author LevelX2
  */
-
 public class BlocksIfAbleAttachedEffect extends RequirementEffect {
 
     public BlocksIfAbleAttachedEffect(Duration duration, AttachmentType attachmentType) {
         super(duration);
-        this.staticText = attachmentType.verb() + " creature blocks each turn if able";
+        this.staticText = attachmentType.verb() + " creature blocks each combat if able";
     }
 
     public BlocksIfAbleAttachedEffect(final BlocksIfAbleAttachedEffect effect) {

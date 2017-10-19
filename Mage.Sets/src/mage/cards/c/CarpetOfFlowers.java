@@ -34,7 +34,6 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -48,8 +47,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -145,7 +142,7 @@ class CarpetOfFlowersEffect extends ManaEffect {
 
     CarpetOfFlowersEffect() {
         super();
-        staticText = "add up to X mana of any one color to your mana pool, where X is the number of Islands target opponent controls";
+        staticText = "add X mana of any one color to your mana pool, where X is the number of Islands target opponent controls";
     }
 
     CarpetOfFlowersEffect(final CarpetOfFlowersEffect effect) {
@@ -163,19 +160,7 @@ class CarpetOfFlowersEffect extends ManaEffect {
                     return false;
                 }
             }
-            int countMax = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
-            ChoiceImpl choiceCount = new ChoiceImpl(true);
-            Set<String> set = new LinkedHashSet<>(countMax + 1);
-            for (int i = 0; i <= countMax; i++) {
-                set.add(Integer.toString(i));
-            }
-            choiceCount.setChoices(set);
-            choiceCount.setMessage("Choose number of mana");
-            controller.choose(Outcome.PutManaInPool, choiceCount, game);
-            int count = 0;
-            if (choiceCount.getChoice() != null) {
-                count = Integer.parseInt(choiceCount.getChoice());
-            }
+            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
             if (count > 0) {
                 Mana mana = new Mana();
                 switch (choice.getChoice()) {

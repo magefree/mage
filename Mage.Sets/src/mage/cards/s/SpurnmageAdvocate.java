@@ -38,6 +38,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -60,8 +61,8 @@ public class SpurnmageAdvocate extends CardImpl {
 
     public SpurnmageAdvocate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Nomad");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.NOMAD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

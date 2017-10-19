@@ -38,6 +38,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,8 +50,8 @@ public class KolaghanStormsinger extends CardImpl {
 
     public KolaghanStormsinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

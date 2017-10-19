@@ -38,6 +38,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -47,9 +48,9 @@ public class UlvenwaldMystics extends CardImpl {
 
     public UlvenwaldMystics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
-        this.subtype.add("Werewolf");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.WEREWOLF);
 
         this.transformable = true;
         this.secondSideCardClazz = UlvenwaldPrimordials.class;

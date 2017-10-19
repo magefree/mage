@@ -40,6 +40,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
@@ -53,8 +54,8 @@ public class CinderhazeWretch extends CardImpl {
 
     public CinderhazeWretch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add("Elemental");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

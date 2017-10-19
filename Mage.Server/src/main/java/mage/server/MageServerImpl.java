@@ -548,8 +548,6 @@ public class MageServerImpl implements MageServer {
                     UUID userId = session.get().getUserId();
                     ChatManager.instance.leaveChat(chatId, userId);
                 }
-            } else {
-                logger.warn("The chatId is null.  sessionId = " + sessionId);
             }
         });
     }

@@ -33,6 +33,7 @@ import mage.client.cards.CardEventSource;
 import mage.client.cards.ICardGrid;
 import mage.client.deckeditor.SortSetting;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.ClientEventType;
 import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -146,7 +147,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
             }
 
             // no easy logic for merge :)
-            for (Iterator<Entry<UUID, CardView>> i = cards.entrySet().iterator(); i.hasNext();) {
+            for (Iterator<Entry<UUID, CardView>> i = cards.entrySet().iterator(); i.hasNext(); ) {
                 Entry<UUID, CardView> entry = i.next();
                 if (!showCards.containsKey(entry.getKey())) {
                     i.remove();
@@ -306,25 +307,25 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     public void setNumber(int index, int number) {
         CardView card = view.get(index);
-        cardEventSource.setNumber(card, "set-number", number);
+        cardEventSource.fireEvent(card, ClientEventType.SET_NUMBER, number);
     }
 
     public void doubleClick(int index) {
         CardView card = view.get(index);
-        cardEventSource.doubleClick(card, "double-click");
+        cardEventSource.fireEvent(card, ClientEventType.DOUBLE_CLICK);
     }
 
     public void altDoubleClick(int index) {
         CardView card = view.get(index);
-        cardEventSource.altDoubleClick(card, "alt-double-click");
+        cardEventSource.fireEvent(card, ClientEventType.ALT_DOUBLE_CLICK);
     }
 
     public void removeFromMainEvent(int index) {
-        cardEventSource.removeFromMainEvent("remove-main");
+        cardEventSource.fireEvent(ClientEventType.REMOVE_MAIN);
     }
 
     public void removeFromSideEvent(int index) {
-        cardEventSource.removeFromSideboardEvent("remove-sideboard");
+        cardEventSource.fireEvent(ClientEventType.REMOVE_SIDEBOARD);
     }
 
     public void addListeners(final JTable table) {

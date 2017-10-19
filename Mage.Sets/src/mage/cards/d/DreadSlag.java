@@ -39,6 +39,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -50,7 +51,7 @@ public class DreadSlag extends CardImpl {
 
     public DreadSlag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
 

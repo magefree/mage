@@ -36,6 +36,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,14 +45,13 @@ import mage.constants.CardType;
 public class StompingGround extends CardImpl {
 
     public StompingGround(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.subtype.add("Mountain");
-        this.subtype.add("Forest");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
+        this.subtype.add(SubType.MOUNTAIN);
+        this.subtype.add(SubType.FOREST);
 
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)),
-                "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
     }
 
     public StompingGround(final StompingGround card) {

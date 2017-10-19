@@ -59,8 +59,8 @@ public class KazuulsTollCollector extends CardImpl {
 
     public KazuulsTollCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Ogre");
-        this.subtype.add("Warrior");
+        this.subtype.add(SubType.OGRE);
+        this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

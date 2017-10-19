@@ -33,6 +33,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -42,8 +43,8 @@ public class Plateau extends CardImpl {
 
     public Plateau(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.subtype.add("Mountain");
-        this.subtype.add("Plains");
+        this.subtype.add(SubType.MOUNTAIN);
+        this.subtype.add(SubType.PLAINS);
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());
     }

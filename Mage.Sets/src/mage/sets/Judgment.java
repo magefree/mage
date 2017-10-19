@@ -118,6 +118,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Krosan Reclamation", 122, Rarity.UNCOMMON, mage.cards.k.KrosanReclamation.class));
         cards.add(new SetCardInfo("Krosan Verge", 141, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
         cards.add(new SetCardInfo("Krosan Wayfarer", 123, Rarity.COMMON, mage.cards.k.KrosanWayfarer.class));
+        cards.add(new SetCardInfo("Laquatus's Disdain", 44, Rarity.UNCOMMON, mage.cards.l.LaquatussDisdain.class));
         cards.add(new SetCardInfo("Lava Dart", 94, Rarity.COMMON, mage.cards.l.LavaDart.class));
         cards.add(new SetCardInfo("Lead Astray", 14, Rarity.COMMON, mage.cards.l.LeadAstray.class));
         cards.add(new SetCardInfo("Liberated Dwarf", 95, Rarity.COMMON, mage.cards.l.LiberatedDwarf.class));
@@ -163,6 +164,8 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Test of Endurance", 29, Rarity.RARE, mage.cards.t.TestOfEndurance.class));
         cards.add(new SetCardInfo("Thriss, Nantuko Primus", 134, Rarity.RARE, mage.cards.t.ThrissNantukoPrimus.class));
         cards.add(new SetCardInfo("Toxic Stench", 74, Rarity.COMMON, mage.cards.t.ToxicStench.class));
+        cards.add(new SetCardInfo("Treacherous Vampire", 75, Rarity.UNCOMMON, mage.cards.t.TreacherousVampire.class));
+        cards.add(new SetCardInfo("Treacherous Werewolf", 76, Rarity.COMMON, mage.cards.t.TreacherousWerewolf.class));
         cards.add(new SetCardInfo("Tunneler Wurm", 135, Rarity.UNCOMMON, mage.cards.t.TunnelerWurm.class));
         cards.add(new SetCardInfo("Unquestioned Authority", 31, Rarity.UNCOMMON, mage.cards.u.UnquestionedAuthority.class));
         cards.add(new SetCardInfo("Valor", 32, Rarity.UNCOMMON, mage.cards.v.Valor.class));
@@ -172,5 +175,6 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Wonder", 54, Rarity.UNCOMMON, mage.cards.w.Wonder.class));
         cards.add(new SetCardInfo("Worldgorger Dragon", 103, Rarity.RARE, mage.cards.w.WorldgorgerDragon.class));
         cards.add(new SetCardInfo("Wormfang Drake", 57, Rarity.COMMON, mage.cards.w.WormfangDrake.class));
+        cards.add(new SetCardInfo("Wormfang Manta", 58, Rarity.RARE, mage.cards.w.WormfangManta.class));
     }
 }

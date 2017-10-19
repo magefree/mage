@@ -51,7 +51,7 @@ public class ScroungedScythe extends CardImpl {
 
     public ScroungedScythe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"");
-        this.subtype.add("Equipment");
+        this.subtype.add(SubType.EQUIPMENT);
 
         this.nightCard = true;
 

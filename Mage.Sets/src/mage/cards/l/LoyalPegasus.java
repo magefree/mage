@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class LoyalPegasus extends CardImpl {
 
     public LoyalPegasus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Pegasus");
+        this.subtype.add(SubType.PEGASUS);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

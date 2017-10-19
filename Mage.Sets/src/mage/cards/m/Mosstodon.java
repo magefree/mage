@@ -36,6 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -57,8 +58,8 @@ public class Mosstodon extends CardImpl {
 
     public Mosstodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Plant");
-        this.subtype.add("Elephant");
+        this.subtype.add(SubType.PLANT);
+        this.subtype.add(SubType.ELEPHANT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);

@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -56,8 +57,8 @@ public class YevaNaturesHerald extends CardImpl {
     public YevaNaturesHerald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Elf");
-        this.subtype.add("Shaman");
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

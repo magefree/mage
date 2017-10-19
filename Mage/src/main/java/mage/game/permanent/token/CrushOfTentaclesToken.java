@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -41,7 +42,7 @@ public class CrushOfTentaclesToken extends Token {
         this.setExpansionSetCodeForImage("BFZ");
         this.cardType.add(CardType.CREATURE);
         this.color.setBlue(true);
-        this.subtype.add("Octopus");
+        this.subtype.add(SubType.OCTOPUS);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
     }

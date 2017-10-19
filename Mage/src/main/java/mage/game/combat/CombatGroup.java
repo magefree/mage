@@ -105,6 +105,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         return defenderId;
     }
 
+    public UUID getDefendingPlayerId() {
+        return defendingPlayerId;
+    }
+
     public List<UUID> getAttackers() {
         return attackers;
     }
@@ -649,6 +653,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      */
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
+    }
+
+    public boolean getBlocked() {
+        return blocked;
     }
 
     @Override

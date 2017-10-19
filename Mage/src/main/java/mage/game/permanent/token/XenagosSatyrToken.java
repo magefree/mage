@@ -28,6 +28,7 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
@@ -42,7 +43,7 @@ public class XenagosSatyrToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setGreen(true);
-        subtype.add("Satyr");
+        subtype.add(SubType.SATYR);
         power = new MageInt(2);
         toughness = new MageInt(2);
 

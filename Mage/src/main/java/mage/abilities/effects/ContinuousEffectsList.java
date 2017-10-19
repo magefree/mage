@@ -78,6 +78,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     }
 
     public void removeEndOfCombatEffects() {
+
         for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
             T entry = i.next();
             if (entry.getDuration() == Duration.EndOfCombat) {

@@ -49,8 +49,8 @@ public class DeathcultRogue extends CardImpl {
 
     public DeathcultRogue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U/B}{U/B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

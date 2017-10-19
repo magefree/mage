@@ -35,6 +35,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class GoblinWarBuggy extends CardImpl {
 
     public GoblinWarBuggy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add("Goblin");
+        this.subtype.add(SubType.GOBLIN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

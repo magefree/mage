@@ -36,6 +36,7 @@ import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,8 +46,8 @@ public class SuqAtaAssassin extends CardImpl {
 
     public SuqAtaAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Assassin");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -57,8 +58,8 @@ public class GodheadOfAwe extends CardImpl {
 
     public GodheadOfAwe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/U}{W/U}{W/U}{W/U}{W/U}");
-        this.subtype.add("Spirit");
-        this.subtype.add("Avatar");
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

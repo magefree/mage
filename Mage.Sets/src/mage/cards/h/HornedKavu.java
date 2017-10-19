@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -54,7 +55,7 @@ public class HornedKavu extends CardImpl {
 
     public HornedKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
-        this.subtype.add("Kavu");
+        this.subtype.add(SubType.KAVU);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

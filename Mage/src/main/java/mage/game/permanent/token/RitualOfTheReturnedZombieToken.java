@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 
 /**
@@ -44,7 +45,7 @@ public class RitualOfTheReturnedZombieToken extends Token {
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Zombie");
+        subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
     }

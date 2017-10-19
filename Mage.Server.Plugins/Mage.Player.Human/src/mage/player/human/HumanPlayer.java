@@ -46,6 +46,7 @@ import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreatureForCombat;
@@ -726,7 +727,10 @@ public class HumanPlayer extends PlayerImpl {
                             // It's end of turn phase
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
-                                    && !controllingPlayer.getUserData().getUserSkipPrioritySteps().isStopOnAllEndPhases())) {
+                                    && !controllingPlayer
+                                            .getUserData()
+                                            .getUserSkipPrioritySteps()
+                                            .isStopOnAllEndPhases())) {
                                 skippedAtLeastOnce = true;
                                 if (passWithManaPoolCheck(game)) {
                                     return false;
@@ -834,10 +838,23 @@ public class HumanPlayer extends PlayerImpl {
                 return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
             }
         } catch (NullPointerException ex) {
-            String isNull = controllingPlayer.getUserData() == null ? "null" : "not null";
-            logger.error("null pointer exception  UserData = " + isNull);
+            if (controllingPlayer.getUserData() != null) {
+                if (controllingPlayer.getUserData().getUserSkipPrioritySteps() != null) {
+                    if (game.getStep() != null) {
+                        if (game.getStep().getType() == null) {
+                            logger.error("game.getStep().getType() == null");
+                        }
+                    } else {
+                        logger.error("game.getStep() == null");
+                    }
+                } else {
+                    logger.error("UserData.getUserSkipPrioritySteps == null");
+                }
+            } else {
+                logger.error("UserData == null");
+            }
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -1042,21 +1059,26 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("selectAttackers", game);
         FilterCreatureForCombat filter = filterCreatureForCombat.copy();
         filter.add(new ControllerIdPredicate(attackingPlayerId));
+
         while (!abort) {
             if (passedAllTurns
                     || passedUntilEndStepBeforeMyTurn
-                    || (!getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction()
+                    || (!getControllingPlayersUserData(game)
+                            .getUserSkipPrioritySteps()
+                            .isStopOnDeclareAttackersDuringSkipAction()
                     && (passedTurn
                     || passedTurnSkipStack
                     || passedUntilEndOfTurn
                     || passedUntilNextMain))) {
-                return;
+                if (checkIfAttackersValid(game)) {
+                    return;
+                }
             }
             Map<String, Serializable> options = new HashMap<>();
 
             List<UUID> possibleAttackers = new ArrayList<>();
             for (Permanent possibleAttacker : game.getBattlefield().getActivePermanents(filter, attackingPlayerId, game)) {
-                if (possibleAttacker.canAttack(game)) {
+                if (possibleAttacker.canAttack(null, game)) {
                     possibleAttackers.add(possibleAttacker.getId());
                 }
             }
@@ -1095,46 +1117,14 @@ public class HumanPlayer extends PlayerImpl {
                     // attack selected default defender
                     declareAttacker(attacker.getId(), attackedDefender, game, false);
                 }
-            } else if (response.getBoolean() != null) {
-                // check if enough attackers are declared
-                if (!game.getCombat().getCreaturesForcedToAttack().isEmpty()) {
-                    if (!game.getCombat().getAttackers().containsAll(game.getCombat().getCreaturesForcedToAttack().keySet())) {
-                        int forcedAttackers = 0;
-                        StringBuilder sb = new StringBuilder();
-                        for (UUID creatureId : game.getCombat().getCreaturesForcedToAttack().keySet()) {
-                            boolean validForcedAttacker = false;
-                            if (game.getCombat().getAttackers().contains(creatureId)) {
-                                Set<UUID> possibleDefender = game.getCombat().getCreaturesForcedToAttack().get(creatureId);
-                                if (possibleDefender.isEmpty()
-                                        || possibleDefender.contains(game.getCombat().getDefenderId(creatureId))) {
-                                    validForcedAttacker = true;
-                                }
-                            }
-                            if (validForcedAttacker) {
-                                forcedAttackers++;
-                            } else {
-                                Permanent creature = game.getPermanent(creatureId);
-                                if (creature != null) {
-                                    sb.append(creature.getIdName()).append(' ');
-                                }
-                            }
-
-                        }
-                        if (game.getCombat().getMaxAttackers() > forcedAttackers) {
-                            int requireToAttack = Math.min(game.getCombat().getMaxAttackers() - forcedAttackers, game.getCombat().getCreaturesForcedToAttack().size() - forcedAttackers);
-                            String message = (requireToAttack == 1 ? " more attacker that is " : " more attackers that are ")
-                                    + "forced to attack.\nCreature"
-                                    + (requireToAttack == 1 ? "" : "s") + " forced to attack: ";
-                            game.informPlayer(this, sb.insert(0, message)
-                                    .insert(0, requireToAttack)
-                                    .insert(0, "You have to attack with ").toString());
-                            continue;
-                        }
-                    }
+            } else if (response.getInteger() != null) { // F-Key
+                if (checkIfAttackersValid(game)) {
+                    return;
                 }
-                return;
-            } else if (response.getInteger() != null) {
-                return;
+            } else if (response.getBoolean() != null) { // ok button
+                if (checkIfAttackersValid(game)) {
+                    return;
+                }
             } else if (response.getUUID() != null) {
                 Permanent attacker = game.getPermanent(response.getUUID());
                 if (attacker != null) {
@@ -1148,8 +1138,95 @@ public class HumanPlayer extends PlayerImpl {
         }
     }
 
+    private boolean checkIfAttackersValid(Game game) {
+        if (!game.getCombat().getCreaturesForcedToAttack().isEmpty()) {
+            if (!game.getCombat().getAttackers().containsAll(game.getCombat().getCreaturesForcedToAttack().keySet())) {
+                int forcedAttackers = 0;
+                StringBuilder sb = new StringBuilder();
+                for (UUID creatureId : game.getCombat().getCreaturesForcedToAttack().keySet()) {
+                    boolean validForcedAttacker = false;
+                    if (game.getCombat().getAttackers().contains(creatureId)) {
+                        Set<UUID> possibleDefender = game.getCombat().getCreaturesForcedToAttack().get(creatureId);
+                        if (possibleDefender.isEmpty()
+                                || possibleDefender.contains(game.getCombat().getDefenderId(creatureId))) {
+                            validForcedAttacker = true;
+                        }
+                    }
+                    if (validForcedAttacker) {
+                        forcedAttackers++;
+                    } else {
+                        Permanent creature = game.getPermanent(creatureId);
+                        if (creature != null) {
+                            sb.append(creature.getIdName()).append(' ');
+                        }
+                    }
+
+                }
+                if (game.getCombat().getMaxAttackers() > forcedAttackers) {
+                    int requireToAttack = Math.min(game.getCombat().getMaxAttackers() - forcedAttackers, game.getCombat().getCreaturesForcedToAttack().size() - forcedAttackers);
+                    String message = (requireToAttack == 1 ? " more attacker that is " : " more attackers that are ")
+                            + "forced to attack.\nCreature"
+                            + (requireToAttack == 1 ? "" : "s") + " forced to attack: ";
+                    game.informPlayer(this, sb.insert(0, message)
+                            .insert(0, requireToAttack)
+                            .insert(0, "You have to attack with ").toString());
+                    return false;
+                }
+            }
+        }
+        // check if enough attackers are declared
+        // check if players have to be attacked
+        Set<UUID> playersToAttackIfAble = new HashSet<>();
+        for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(null, true, game).entrySet()) {
+            RequirementEffect effect = entry.getKey();
+            for (Ability ability : entry.getValue()) {
+                UUID playerToAttack = effect.playerMustBeAttackedIfAble(ability, game);
+                if (playerToAttack != null) {
+                    playersToAttackIfAble.add(playerToAttack);
+                }
+            }
+        }
+        if (!playersToAttackIfAble.isEmpty()) {
+            Set<UUID> checkPlayersToAttackIfAble = new HashSet<>(playersToAttackIfAble);
+            for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+                checkPlayersToAttackIfAble.remove(combatGroup.getDefendingPlayerId());
+            }
+
+            for (UUID forcedToAttackId : checkPlayersToAttackIfAble) {
+                Player forcedToAttack = game.getPlayer(forcedToAttackId);
+
+                for (Permanent attacker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getId(), game)) {
+
+                    if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
+                            GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER,
+                                    forcedToAttackId, attacker.getId(), attacker.getControllerId()), game)) {
+                        continue;
+                    }
+                    // if attacker needs a specific defender to attack so select that one instead
+                    if (game.getCombat().getCreaturesForcedToAttack().containsKey(attacker.getId())) {
+                        Set<UUID> possibleDefenders = game.getCombat().getCreaturesForcedToAttack().get(attacker.getId());
+                        if (!possibleDefenders.isEmpty() && !possibleDefenders.contains(forcedToAttackId)) {
+                            continue;
+                        }
+                    }
+                    UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(attacker.getId(), game);
+                    if (playersToAttackIfAble.contains(defendingPlayerId)) {
+                        // already attacks other player taht has to be attacked
+                        continue;
+                    }
+                    if (defendingPlayerId != null || attacker.canAttackInPrinciple(forcedToAttackId, game)) {
+                        game.informPlayer(this, "You are forced to attack " + forcedToAttack.getName() + " or a controlled planeswalker e.g. with " + attacker.getIdName() + ".");
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
     private void removeAttackerIfPossible(Game game, Permanent attacker) {
-        for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(attacker, game).entrySet()) {
+        for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(attacker, false, game).entrySet()) {
             RequirementEffect effect = (RequirementEffect) entry.getKey();
             if (effect.mustAttack(game)) {
                 if (game.getCombat().getMaxAttackers() >= game.getCombat().getCreaturesForcedToAttack().size()
@@ -1223,7 +1300,9 @@ public class HumanPlayer extends PlayerImpl {
         FilterCreatureForCombatBlock filter = filterCreatureForCombatBlock.copy();
         filter.add(new ControllerIdPredicate(defendingPlayerId));
         if (game.getBattlefield().count(filter, null, playerId, game) == 0
-                && !getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockerIfNoneAvailable()) {
+                && !getControllingPlayersUserData(game)
+                        .getUserSkipPrioritySteps()
+                        .isStopOnDeclareBlockerIfNoneAvailable()) {
             return;
         }
         while (!abort) {

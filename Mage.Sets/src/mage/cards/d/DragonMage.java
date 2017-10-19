@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -47,8 +48,8 @@ public class DragonMage extends CardImpl {
 
     public DragonMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
-        this.subtype.add("Dragon");
-        this.subtype.add("Wizard");
+        this.subtype.add(SubType.DRAGON);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

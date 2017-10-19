@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
@@ -57,8 +58,8 @@ public class DranaLiberatorOfMalakir extends CardImpl {
     public DranaLiberatorOfMalakir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
        addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Vampire");
-        this.subtype.add("Ally");
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.ALLY);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

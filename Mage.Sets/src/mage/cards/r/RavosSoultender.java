@@ -52,8 +52,8 @@ public class RavosSoultender extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
 
        addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

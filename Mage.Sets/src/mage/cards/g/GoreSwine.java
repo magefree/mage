@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class GoreSwine extends CardImpl {
 
     public GoreSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Boar");
+        this.subtype.add(SubType.BOAR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
     }

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 
@@ -48,8 +49,8 @@ public class NagaOracle extends CardImpl {
     public NagaOracle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-        this.subtype.add("Naga");
-        this.subtype.add("Cleric");
+        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

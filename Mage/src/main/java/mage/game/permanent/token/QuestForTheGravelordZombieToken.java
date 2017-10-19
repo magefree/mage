@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -40,8 +41,8 @@ public class QuestForTheGravelordZombieToken extends Token {
     public QuestForTheGravelordZombieToken() {
         super("Zombie Giant", "5/5 black Zombie Giant creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Zombie");
-        subtype.add("Giant");
+        subtype.add(SubType.ZOMBIE);
+        subtype.add(SubType.GIANT);
 
         color.setBlack(true);
         power = new MageInt(5);

@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.LinvalaAngelToken;
@@ -52,7 +53,7 @@ public class LinvalaThePreserver extends CardImpl {
     public LinvalaThePreserver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Angel");
+        this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

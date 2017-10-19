@@ -37,6 +37,7 @@ import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -47,7 +48,7 @@ public class DroidCommando extends CardImpl {
 
     public DroidCommando(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");
-        this.subtype.add("Droid");
+        this.subtype.add(SubType.DROID);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

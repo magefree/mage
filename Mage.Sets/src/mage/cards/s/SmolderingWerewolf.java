@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.e.EruptingDreadwolf;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,8 +53,8 @@ public class SmolderingWerewolf extends CardImpl {
 
     public SmolderingWerewolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add("Werewolf");
-        this.subtype.add("Horror");
+        this.subtype.add(SubType.WEREWOLF);
+        this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

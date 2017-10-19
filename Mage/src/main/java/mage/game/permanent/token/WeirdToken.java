@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -42,7 +43,7 @@ public class WeirdToken extends Token {
         super("Weird", "3/3 blue Weird create token with defender and flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
-        subtype.add("Weird");
+        subtype.add(SubType.WEIRD);
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(DefenderAbility.getInstance());

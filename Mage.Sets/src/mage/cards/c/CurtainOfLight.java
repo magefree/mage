@@ -41,7 +41,7 @@ import mage.constants.TurnPhase;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.BlockingPredicate;
+import mage.filter.predicate.permanent.BlockedPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -58,11 +58,11 @@ public class CurtainOfLight extends CardImpl {
 
     static {
         filter.add(new AttackingPredicate());
-        filter.add(Predicates.not(new BlockingPredicate()));
+        filter.add(Predicates.not(new BlockedPredicate()));
     }
 
     public CurtainOfLight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Cast Curtain of Light only during combat after blockers are declared.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, AfterBlockersAreDeclaredCondition.instance));

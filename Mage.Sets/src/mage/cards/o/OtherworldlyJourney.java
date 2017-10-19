@@ -38,6 +38,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -58,7 +59,7 @@ public class OtherworldlyJourney extends CardImpl {
 
     public OtherworldlyJourney(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.subtype.add("Arcane");
+        this.subtype.add(SubType.ARCANE);
 
         // Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
         this.getSpellAbility().addEffect(new OtherworldlyJourneyEffect());
