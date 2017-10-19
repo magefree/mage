@@ -68,6 +68,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Crystal Shard", 159, Rarity.UNCOMMON, mage.cards.c.CrystalShard.class));
         cards.add(new SetCardInfo("Culling Scales", 160, Rarity.RARE, mage.cards.c.CullingScales.class));
         cards.add(new SetCardInfo("Damping Matrix", 161, Rarity.RARE, mage.cards.d.DampingMatrix.class));
+        cards.add(new SetCardInfo("Dead-Iron Sledge", 162, Rarity.UNCOMMON, mage.cards.d.DeadIronSledge.class));
         cards.add(new SetCardInfo("Deconstruct", 118, Rarity.COMMON, mage.cards.d.Deconstruct.class));
         cards.add(new SetCardInfo("Detonate", 88, Rarity.UNCOMMON, mage.cards.d.Detonate.class));
         cards.add(new SetCardInfo("Disarm", 32, Rarity.COMMON, mage.cards.d.Disarm.class));
