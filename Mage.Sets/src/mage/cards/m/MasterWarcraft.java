@@ -28,6 +28,7 @@
 package mage.cards.m;
 
 import java.util.*;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
@@ -45,12 +46,15 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.targetpointer.FixedTarget;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -62,13 +66,18 @@ public class MasterWarcraft extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R/W}{R/W}");
 
         // Cast Master Warcraft only before attackers are declared.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, BeforeAttackersAreDeclaredCondition.instance));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, BeforeAttackersAreDeclaredCondition.instance, "Cast Master Warcraft only before attackers are declared"));
 
         // You choose which creatures attack this turn.
         this.getSpellAbility().addEffect(new MasterWarcraftChooseAttackersEffect());
 
         // You choose which creatures block this turn and how those creatures block.
         this.getSpellAbility().addEffect(new MasterWarcraftChooseBlockersEffect());
+
+
+        // (only the last resolved Master Warcraft spell's effects apply)
+        this.getSpellAbility().addWatcher(new MasterWarcraftCastWatcher());
+        this.getSpellAbility().addEffect(new MasterWarcraftCastWatcherIncrementEffect());
     }
 
     public MasterWarcraft(final MasterWarcraft card) {
@@ -82,6 +91,11 @@ public class MasterWarcraft extends CardImpl {
 }
 
 class MasterWarcraftChooseAttackersEffect extends ContinuousRuleModifyingEffectImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that will attack this combat (creatures not chosen won't attack this combat)");
+    static {
+        filter.add(new ControllerPredicate(TargetController.ACTIVE));
+    }
 
     public MasterWarcraftChooseAttackersEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);
@@ -109,61 +123,27 @@ class MasterWarcraftChooseAttackersEffect extends ContinuousRuleModifyingEffectI
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Player chooser = game.getPlayer(source.getControllerId());
-        Player attackingPlayer = game.getPlayer(game.getCombat().getAttackingPlayerId());
-        if (chooser != null && attackingPlayer != null && !attackingPlayer.getAvailableAttackers(game).isEmpty()) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-                // Clears previous instances of "should attack" effects
-                // ("shouldn't attack" effects don't need cleaning because MasterWarcraftMustAttackRequirementEffect overrides them)
-                for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(permanent, false, game).entrySet()) {
-                    RequirementEffect effect = entry.getKey();
-                    if (effect instanceof MasterWarcraftMustAttackRequirementEffect) {
-                        effect.discard();
-                    }
-                }
-            }
-            new MasterWarcraftAttackEffect().apply(game, source); // Master Warcraft imposes its effect right before the attackers being declared...
+        MasterWarcraftCastWatcher watcher = (MasterWarcraftCastWatcher) game.getState().getWatchers().get(MasterWarcraftCastWatcher.class.getSimpleName());
+        watcher.decrement();
+        if (watcher.copyCountApply > 0) {
+            game.informPlayers(source.getSourceObject(game).getIdName() + " didn't apply");
+            return false;
         }
-        return false; // ...and then resumes the attack declaration for the active player as normal
-    }
-}
-
-class MasterWarcraftAttackEffect extends OneShotEffect {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that will attack this combat (creatures not chosen won't attack this combat)");
-    static {
-        filter.add(new ControllerPredicate(TargetController.ACTIVE));
-    }    
-
-    MasterWarcraftAttackEffect() {
-        super(Outcome.Benefit);
-    }
-
-    MasterWarcraftAttackEffect(final MasterWarcraftAttackEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MasterWarcraftAttackEffect copy() {
-        return new MasterWarcraftAttackEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
+        watcher.copyCountApply = watcher.copyCount;
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        Player attackingPlayer = game.getPlayer(game.getCombat().getAttackingPlayerId());
+        if (controller != null && attackingPlayer != null && !attackingPlayer.getAvailableAttackers(game).isEmpty()) {
             Target target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
             if (controller.chooseTarget(Outcome.Benefit, target, source, game)) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
                     
                     // Choose creatures that will be attacking this combat
                     if (target.getTargets().contains(permanent.getId())) {
-                        RequirementEffect effect = new MasterWarcraftMustAttackRequirementEffect();
+                        RequirementEffect effect = new AttacksIfAbleTargetEffect(Duration.EndOfCombat);
                         effect.setText("");
                         effect.setTargetPointer(new FixedTarget(permanent.getId()));
                         game.addEffect(effect, source);
-                        // TODO: find a better way to report attackers to game log
-                        // game.informPlayers(controller.getLogName() + " has decided that " + permanent.getLogName() + " should attack this combat if able");
+                        game.informPlayers(controller.getLogName() + " has decided that " + permanent.getLogName() + " attacks this combat if able");
                         
                     // All other creatures can't attack
                     } else {
@@ -172,36 +152,10 @@ class MasterWarcraftAttackEffect extends OneShotEffect {
                         effect.setTargetPointer(new FixedTarget(permanent.getId()));
                         game.addEffect(effect, source);
                     }
-                    
                 }
-                return true;
             }
         }
-        return false;
-    }
-}
-
-class MasterWarcraftMustAttackRequirementEffect extends AttacksIfAbleTargetEffect {
-
-    MasterWarcraftMustAttackRequirementEffect() {
-        super(Duration.EndOfCombat);
-    }
-
-    MasterWarcraftMustAttackRequirementEffect(final MasterWarcraftMustAttackRequirementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MasterWarcraftMustAttackRequirementEffect copy() {
-        return new MasterWarcraftMustAttackRequirementEffect(this);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (discarded) {
-            return false;
-        }
-        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
+        return false; // the attack declaration resumes for the active player as normal
     }
 }
 
@@ -242,7 +196,7 @@ class MasterWarcraftCantAttackRestrictionEffect extends RestrictionEffect {
     }
 }
 
-class MasterWarcraftChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl { // TODO: fix sorting order in case of Master Warcraft multiples
+class MasterWarcraftChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl {
 
     public MasterWarcraftChooseBlockersEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);
@@ -270,11 +224,86 @@ class MasterWarcraftChooseBlockersEffect extends ContinuousRuleModifyingEffectIm
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        MasterWarcraftCastWatcher watcher = (MasterWarcraftCastWatcher) game.getState().getWatchers().get(MasterWarcraftCastWatcher.class.getSimpleName());
+        watcher.decrement();
+        if (watcher.copyCountApply > 0) {
+            game.informPlayers(source.getSourceObject(game).getIdName() + " didn't apply");
+            return false;
+        }
+        watcher.copyCountApply = watcher.copyCount;
         Player blockController = game.getPlayer(source.getControllerId());
         if (blockController != null) {
             game.getCombat().selectBlockers(blockController, game);
             return true;
         }
         return false;
+    }
+}
+
+class MasterWarcraftCastWatcher extends Watcher {
+
+    public int copyCount = 0;
+    public int copyCountApply = 0;
+
+    public MasterWarcraftCastWatcher() {
+        super(MasterWarcraftCastWatcher.class.getSimpleName(), WatcherScope.GAME);
+    }
+
+    public MasterWarcraftCastWatcher(final MasterWarcraftCastWatcher watcher) {
+        super(watcher);
+        this.copyCount = watcher.copyCount;
+        this.copyCountApply = watcher.copyCountApply;
+    }
+
+    @Override
+    public void reset() {
+        copyCount = 0;
+        copyCountApply = 0;
+    }
+
+    @Override
+    public MasterWarcraftCastWatcher copy() {
+        return new MasterWarcraftCastWatcher(this);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+    }
+
+    public void increment() {
+        copyCount++;
+        copyCountApply = copyCount;
+    }    
+
+    public void decrement() {
+        if (copyCountApply > 0); {
+            copyCountApply--;
+        }
+    }
+}
+
+class MasterWarcraftCastWatcherIncrementEffect extends OneShotEffect {
+
+    MasterWarcraftCastWatcherIncrementEffect() {
+        super(Outcome.Neutral);
+    }
+
+    MasterWarcraftCastWatcherIncrementEffect(final MasterWarcraftCastWatcherIncrementEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MasterWarcraftCastWatcher watcher = (MasterWarcraftCastWatcher) game.getState().getWatchers().get(MasterWarcraftCastWatcher.class.getSimpleName());
+        if (watcher != null) {
+            watcher.increment();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public MasterWarcraftCastWatcherIncrementEffect copy() {
+        return new MasterWarcraftCastWatcherIncrementEffect(this);
     }
 }
