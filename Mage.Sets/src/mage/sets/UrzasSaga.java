@@ -362,6 +362,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Vug Lizard", 227, Rarity.UNCOMMON, mage.cards.v.VugLizard.class));
         cards.add(new SetCardInfo("War Dance", 282, Rarity.UNCOMMON, mage.cards.w.WarDance.class));
         cards.add(new SetCardInfo("Wall of Junk", 315, Rarity.UNCOMMON, mage.cards.w.WallOfJunk.class));
+        cards.add(new SetCardInfo("Waylay", 56, Rarity.UNCOMMON, mage.cards.w.Waylay.class));
         cards.add(new SetCardInfo("Western Paladin", 168, Rarity.RARE, mage.cards.w.WesternPaladin.class));
         cards.add(new SetCardInfo("Whetstone", 316, Rarity.RARE, mage.cards.w.Whetstone.class));
         cards.add(new SetCardInfo("Whirlwind", 283, Rarity.RARE, mage.cards.w.Whirlwind.class));
