@@ -162,6 +162,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Spitting Drake", 95, Rarity.UNCOMMON, mage.cards.s.SpittingDrake.class));
         cards.add(new SetCardInfo("Squandered Resources", 137, Rarity.RARE, mage.cards.s.SquanderedResources.class));
         cards.add(new SetCardInfo("Stampeding Wildebeests", 71, Rarity.UNCOMMON, mage.cards.s.StampedingWildebeests.class));
+        cards.add(new SetCardInfo("Suleiman's Legacy", 138, Rarity.RARE, mage.cards.s.SuleimansLegacy.class));
         cards.add(new SetCardInfo("Summer Bloom", 72, Rarity.UNCOMMON, mage.cards.s.SummerBloom.class));
         cards.add(new SetCardInfo("Sun Clasp", 121, Rarity.COMMON, mage.cards.s.SunClasp.class));
         cards.add(new SetCardInfo("Suq'Ata Assassin", 19, Rarity.UNCOMMON, mage.cards.s.SuqAtaAssassin.class));
