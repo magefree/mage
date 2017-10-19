@@ -49,6 +49,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -128,6 +129,11 @@ class MasterWarcraftChooseAttackersEffect extends ContinuousRuleModifyingEffectI
 }
 
 class MasterWarcraftAttackEffect extends OneShotEffect {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that will attack this combat (creatures not chosen won't attack this combat)");
+    static {
+        filter.add(new ControllerPredicate(TargetController.ACTIVE));
+    }    
 
     MasterWarcraftAttackEffect() {
         super(Outcome.Benefit);
@@ -146,9 +152,8 @@ class MasterWarcraftAttackEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            // TODO: find a way to undo creature selection
-            Target target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, new FilterCreaturePermanent("creatures that will attack this combat (creatures not chosen won't attack this combat)"), true);
-            if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
+            Target target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
+            if (controller.chooseTarget(Outcome.Benefit, target, source, game)) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
                     
                     // Choose creatures that will be attacking this combat
@@ -237,7 +242,7 @@ class MasterWarcraftCantAttackRestrictionEffect extends RestrictionEffect {
     }
 }
 
-class MasterWarcraftChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl { // TODO: reverse the resolution order in case of effect multiples
+class MasterWarcraftChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl { // TODO: fix sorting order in case of Master Warcraft multiples
 
     public MasterWarcraftChooseBlockersEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);
