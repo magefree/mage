@@ -210,6 +210,7 @@ public class Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Malfegor", 208, Rarity.MYTHIC, mage.cards.m.Malfegor.class));
         cards.add(new SetCardInfo("Mana-Charged Dragon", 129, Rarity.RARE, mage.cards.m.ManaChargedDragon.class));
         cards.add(new SetCardInfo("Martyr's Bond", 19, Rarity.RARE, mage.cards.m.MartyrsBond.class));
+        cards.add(new SetCardInfo("Master Warcraft", 209, Rarity.RARE, mage.cards.m.MasterWarcraft.class));
         cards.add(new SetCardInfo("Memory Erosion", 50, Rarity.RARE, mage.cards.m.MemoryErosion.class));
         cards.add(new SetCardInfo("Minds Aglow", 51, Rarity.RARE, mage.cards.m.MindsAglow.class));
         cards.add(new SetCardInfo("Molten Slagheap", 282, Rarity.UNCOMMON, mage.cards.m.MoltenSlagheap.class));
