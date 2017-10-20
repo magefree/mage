@@ -39,6 +39,7 @@ import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
+import mage.abilities.effects.common.combat.CantAttackTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -145,54 +146,26 @@ class MasterWarcraftChooseAttackersEffect extends ContinuousRuleModifyingEffectI
                         game.addEffect(effect, source);
                         game.informPlayers(controller.getLogName() + " has decided that " + permanent.getLogName() + " attacks this combat if able");
                         
-                    // All other creatures can't attack
+                    // All other creatures can't attack (unless they must attack)
                     } else {
-                        RestrictionEffect effect = new MasterWarcraftCantAttackRestrictionEffect();
-                        effect.setText("");
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                        game.addEffect(effect, source);
+                        boolean hasToAttack = false;
+                        for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(permanent, false, game).entrySet()) {
+                            RequirementEffect effect2 = entry.getKey();
+                            if (effect2.mustAttack(game)) {
+                                hasToAttack = true;
+                            }
+                        }
+                        if (!hasToAttack) {
+                            RestrictionEffect effect = new CantAttackTargetEffect(Duration.EndOfCombat);
+                            effect.setText("");
+                            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                            game.addEffect(effect, source);
+                        }
                     }
                 }
             }
         }
         return false; // the attack declaration resumes for the active player as normal
-    }
-}
-
-class MasterWarcraftCantAttackRestrictionEffect extends RestrictionEffect {
-
-    MasterWarcraftCantAttackRestrictionEffect() {
-        super(Duration.EndOfCombat);
-    }
-
-    MasterWarcraftCantAttackRestrictionEffect(final MasterWarcraftCantAttackRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MasterWarcraftCantAttackRestrictionEffect copy() {
-        return new MasterWarcraftCantAttackRestrictionEffect(this);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
-    }
-
-    @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
-        for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(attacker, false, game).entrySet()) {
-            RequirementEffect effect = entry.getKey();
-            if (effect.mustAttack(game)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Unless {this} must attack, {this} can't attack.";
     }
 }
 
