@@ -25,52 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.d;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.common.OnOpponentsTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
+import mage.abilities.condition.common.AttackedThisStepCondition;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.Duration;
+import mage.constants.PhaseStep;
+import mage.constants.TurnPhase;
+import mage.target.common.TargetCreaturePermanent;
+import mage.watchers.common.PlayerAttackedStepWatcher;
 
 /**
  *
- * @author Markedagain
+ * @author TheElk801
  */
-public class GlenElendraPranksters extends CardImpl {
+public class DefiantStand extends CardImpl {
 
-    public GlenElendraPranksters(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add(SubType.FAERIE);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    public DefiantStand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand.
-        Ability ability = new ConditionalTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(new ReturnToHandTargetEffect(), true), OnOpponentsTurnCondition.instance,
-                "Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand."
+        // Cast Defiant Stand only during the declare attackers step and only if you've been attacked this step.
+        Ability ability = new CastOnlyDuringPhaseStepSourceAbility(
+                TurnPhase.COMBAT, PhaseStep.DECLARE_ATTACKERS, AttackedThisStepCondition.instance,
+                "Cast {this} only during the declare attackers step and only if you've been attacked this step."
         );
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addWatcher(new PlayerAttackedStepWatcher());
         this.addAbility(ability);
+
+        // Target creature gets +1/+3 until end of turn. Untap that creature.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 3, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GlenElendraPranksters(final GlenElendraPranksters card) {
+    public DefiantStand(final DefiantStand card) {
         super(card);
     }
 
     @Override
-    public GlenElendraPranksters copy() {
-        return new GlenElendraPranksters(this);
+    public DefiantStand copy() {
+        return new DefiantStand(this);
     }
 }

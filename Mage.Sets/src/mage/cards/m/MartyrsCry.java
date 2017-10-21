@@ -25,73 +25,77 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.e;
+package mage.cards.m;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
  *
- * @author Plopman
+ * @author TheElk801
  */
-public class EnsnaringBridge extends CardImpl {
+public class MartyrsCry extends CardImpl {
 
-    public EnsnaringBridge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+    public MartyrsCry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}{W}");
 
-        // Creatures with power greater than the number of cards in your hand can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnsnaringBridgeRestrictionEffect()));
+        // Exile all white creatures. For each creature exiled this way, its controller draws a card.
+        this.getSpellAbility().addEffect(new MartyrsCryEffect());
     }
 
-    public EnsnaringBridge(final EnsnaringBridge card) {
+    public MartyrsCry(final MartyrsCry card) {
         super(card);
     }
 
     @Override
-    public EnsnaringBridge copy() {
-        return new EnsnaringBridge(this);
+    public MartyrsCry copy() {
+        return new MartyrsCry(this);
     }
 }
 
-class EnsnaringBridgeRestrictionEffect extends RestrictionEffect {
+class MartyrsCryEffect extends OneShotEffect {
 
-    public EnsnaringBridgeRestrictionEffect() {
-        super(Duration.WhileOnBattlefield);
-        this.staticText = "Creatures with power greater than the number of cards in your hand can't attack";
+    MartyrsCryEffect() {
+        super(Outcome.Exile);
+        this.staticText = "Exile all white creatures. For each creature exiled this way, its controller draws a card.";
     }
 
-    public EnsnaringBridgeRestrictionEffect(final EnsnaringBridgeRestrictionEffect effect) {
+    MartyrsCryEffect(final MartyrsCryEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
+    public MartyrsCryEffect copy() {
+        return new MartyrsCryEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Map<UUID, Integer> playerCrtCount = new HashMap<>();
+        for (Iterator<Permanent> it = game.getBattlefield().getActivePermanents(source.getControllerId(), game).iterator(); it.hasNext();) {
+            Permanent perm = it.next();
+            if (perm != null && perm.isCreature() && perm.getColor(game).isWhite() && perm.moveToExile(null, null, source.getSourceId(), game)) {
+                playerCrtCount.putIfAbsent(perm.getControllerId(), 0);
+                playerCrtCount.compute(perm.getControllerId(), (p, amount) -> amount + 1);
+            }
         }
-        return controller.getInRange().contains(permanent.getControllerId())
-                && permanent.getPower().getValue() > controller.getHand().size();
+        for (UUID playerId : game.getPlayerList().toList()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.drawCards(playerCrtCount.getOrDefault(playerId, 0), game);
+            }
+        }
+        return true;
     }
-
-    @Override
-    public boolean canAttack(Game game) {
-        return false;
-    }
-
-    @Override
-    public EnsnaringBridgeRestrictionEffect copy() {
-        return new EnsnaringBridgeRestrictionEffect(this);
-    }
-
 }

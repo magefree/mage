@@ -71,6 +71,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Armageddon", 167, Rarity.RARE, mage.cards.a.Armageddon.class));
         cards.add(new SetCardInfo("Armored Pegasus", 168, Rarity.COMMON, mage.cards.a.ArmoredPegasus.class));
         cards.add(new SetCardInfo("Arrogant Vampire", 1, Rarity.UNCOMMON, mage.cards.a.ArrogantVampire.class));
+        cards.add(new SetCardInfo("Assassin's Blade", 2, Rarity.UNCOMMON, mage.cards.a.AssassinsBlade.class));
         cards.add(new SetCardInfo("Balance of Power", 42, Rarity.RARE, mage.cards.b.BalanceOfPower.class));
         cards.add(new SetCardInfo("Baleful Stare", 43, Rarity.UNCOMMON, mage.cards.b.BalefulStare.class));
         cards.add(new SetCardInfo("Bee Sting", 83, Rarity.UNCOMMON, mage.cards.b.BeeSting.class));
@@ -94,12 +95,14 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud Dragon", 46, Rarity.RARE, mage.cards.c.CloudDragon.class));
         cards.add(new SetCardInfo("Cloud Pirates", 47, Rarity.COMMON, mage.cards.c.CloudPirates.class));
         cards.add(new SetCardInfo("Cloud Spirit", 48, Rarity.UNCOMMON, mage.cards.c.CloudSpirit.class));
+        cards.add(new SetCardInfo("Command of Unsummoning", 49, Rarity.UNCOMMON, mage.cards.c.CommandOfUnsummoning.class));
         cards.add(new SetCardInfo("Coral Eel", 50, Rarity.COMMON, mage.cards.c.CoralEel.class));
         cards.add(new SetCardInfo("Craven Giant", 126, Rarity.COMMON, mage.cards.c.CravenGiant.class));
         cards.add(new SetCardInfo("Craven Knight", 7, Rarity.COMMON, mage.cards.c.CravenKnight.class));
         cards.add(new SetCardInfo("Cruel Bargain", 8, Rarity.RARE, mage.cards.c.CruelBargain.class));
         cards.add(new SetCardInfo("Cruel Tutor", 9, Rarity.RARE, mage.cards.c.CruelTutor.class));
         cards.add(new SetCardInfo("Deep-Sea Serpent", 52, Rarity.UNCOMMON, mage.cards.d.DeepSeaSerpent.class));
+        cards.add(new SetCardInfo("Defiant Stand", 174, Rarity.UNCOMMON, mage.cards.d.DefiantStand.class));
         cards.add(new SetCardInfo("Deja Vu", 53, Rarity.COMMON, mage.cards.d.DejaVu.class));
         cards.add(new SetCardInfo("Desert Drake", 127, Rarity.UNCOMMON, mage.cards.d.DesertDrake.class));
         cards.add(new SetCardInfo("Devastation", 128, Rarity.RARE, mage.cards.d.Devastation.class));
@@ -214,6 +217,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Sacred Knight", 186, Rarity.COMMON, mage.cards.s.SacredKnight.class));
         cards.add(new SetCardInfo("Sacred Nectar", 187, Rarity.COMMON, mage.cards.s.SacredNectar.class));
         cards.add(new SetCardInfo("Scorching Spear", 154, Rarity.COMMON, mage.cards.s.ScorchingSpear.class));
+        cards.add(new SetCardInfo("Scorching Winds", 155, Rarity.UNCOMMON, mage.cards.s.ScorchingWinds.class));
         cards.add(new SetCardInfo("Seasoned Marshal", 188, Rarity.UNCOMMON, mage.cards.s.SeasonedMarshal.class));
         cards.add(new SetCardInfo("Serpent Assassin", 31, Rarity.RARE, mage.cards.s.SerpentAssassin.class));
         cards.add(new SetCardInfo("Serpent Warrior", 32, Rarity.COMMON, mage.cards.s.SerpentWarrior.class));
@@ -248,6 +252,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Tidal Surge", 75, Rarity.COMMON, mage.cards.t.TidalSurge.class));
         cards.add(new SetCardInfo("Time Ebb", 76, Rarity.COMMON, mage.cards.t.TimeEbb.class));
         cards.add(new SetCardInfo("Touch of Brilliance", 77, Rarity.COMMON, mage.cards.t.TouchOfBrilliance.class));
+        cards.add(new SetCardInfo("Treetop Defense", 116, Rarity.RARE, mage.cards.t.TreetopDefense.class));
         cards.add(new SetCardInfo("Undying Beast", 36, Rarity.COMMON, mage.cards.u.UndyingBeast.class));
         cards.add(new SetCardInfo("Untamed Wilds", 117, Rarity.UNCOMMON, mage.cards.u.UntamedWilds.class));
         cards.add(new SetCardInfo("Valorous Charge", 196, Rarity.UNCOMMON, mage.cards.v.ValorousCharge.class));

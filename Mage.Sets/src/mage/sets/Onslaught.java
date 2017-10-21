@@ -311,6 +311,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Trade Secrets", 118, Rarity.RARE, mage.cards.t.TradeSecrets.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 326, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Treespring Lorian", 293, Rarity.COMMON, mage.cards.t.TreespringLorian.class));
+        cards.add(new SetCardInfo("Tribal Golem", 311, Rarity.RARE, mage.cards.t.TribalGolem.class));
         cards.add(new SetCardInfo("Tribal Unity", 294, Rarity.UNCOMMON, mage.cards.t.TribalUnity.class));
         cards.add(new SetCardInfo("Trickery Charm", 119, Rarity.COMMON, mage.cards.t.TrickeryCharm.class));
         cards.add(new SetCardInfo("True Believer", 57, Rarity.RARE, mage.cards.t.TrueBeliever.class));

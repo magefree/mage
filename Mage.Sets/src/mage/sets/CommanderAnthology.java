@@ -207,6 +207,7 @@ public class CommanderAnthology extends ExpansionSet {
         cards.add(new SetCardInfo("Malfegor", 184, Rarity.MYTHIC, mage.cards.m.Malfegor.class));
         cards.add(new SetCardInfo("Mana-Charged Dragon", 84, Rarity.RARE, mage.cards.m.ManaChargedDragon.class));
         cards.add(new SetCardInfo("Masked Admirers", 127, Rarity.UNCOMMON, mage.cards.m.MaskedAdmirers.class));
+        cards.add(new SetCardInfo("Master Warcraft", 202, Rarity.RARE, mage.cards.m.MasterWarcraft.class));
         cards.add(new SetCardInfo("Mazirek, Kraul Death Priest", 185, Rarity.MYTHIC, mage.cards.m.MazirekKraulDeathPriest.class));
         cards.add(new SetCardInfo("Meren of Clan Nel Toth", 186, Rarity.MYTHIC, mage.cards.m.MerenOfClanNelToth.class));
         cards.add(new SetCardInfo("Mirror Entity", 16, Rarity.RARE, mage.cards.m.MirrorEntity.class));

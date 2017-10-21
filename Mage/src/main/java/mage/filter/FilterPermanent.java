@@ -73,7 +73,7 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
 
     @Override
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if (!this.match(permanent, game)) {
+        if (!permanent.isPhasedIn() || !this.match(permanent, game)) {
             return false;
         }
 

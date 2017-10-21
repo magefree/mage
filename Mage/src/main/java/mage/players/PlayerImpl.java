@@ -3484,9 +3484,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean hasOpponent(UUID playerToCheckId, Game game
-    ) {
-        return !this.getId().equals(playerToCheckId) && game.isOpponent(this, playerToCheckId);
+    public boolean hasOpponent(UUID playerToCheckId, Game game) {
+        return !this.getId().equals(playerToCheckId)
+                && game.isOpponent(this, playerToCheckId)
+                && getInRange().contains(playerToCheckId);
     }
 
     @Override

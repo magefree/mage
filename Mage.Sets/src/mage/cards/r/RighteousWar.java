@@ -25,60 +25,65 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
+import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.FilterCreatureAttackingYou;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author TheElk801
  */
-public class GiantTrapDoorSpider extends CardImpl {
+public class RighteousWar extends CardImpl {
 
-    private static final FilterCreatureAttackingYou filter = new FilterCreatureAttackingYou("creature without flying that's attacking you");
+    private static final FilterCreaturePermanent whiteFilter = new FilterCreaturePermanent("white creatures you control");
+    private static final FilterCreaturePermanent blackFilter = new FilterCreaturePermanent("black creatures you control");
 
     static {
-        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+        whiteFilter.add(new ColorPredicate(ObjectColor.WHITE));
+        blackFilter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public GiantTrapDoorSpider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
+    public RighteousWar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{B}");
 
-        this.subtype.add(SubType.SPIDER);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        // White creatures you control have protection from black.
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new GainAbilityControlledEffect(
+                        ProtectionAbility.from(ObjectColor.BLACK),
+                        Duration.WhileOnBattlefield,
+                        whiteFilter
+                )
+        ));
 
-        // {1}{R}{G}, {tap}: Exile Giant Trap Door Spider and target creature without flying that's attacking you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(), new ManaCostsImpl("{1}{R}{G}"));
-        ability.addCost(new TapSourceCost());
-        ability.addEffect(new ExileTargetEffect().setText("and target creature without flying that's attacking you"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
+        // Black creatures you control have protection from white.
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new GainAbilityControlledEffect(
+                        ProtectionAbility.from(ObjectColor.WHITE),
+                        Duration.WhileOnBattlefield,
+                        blackFilter
+                )
+        ));
     }
 
-    public GiantTrapDoorSpider(final GiantTrapDoorSpider card) {
+    public RighteousWar(final RighteousWar card) {
         super(card);
     }
 
     @Override
-    public GiantTrapDoorSpider copy() {
-        return new GiantTrapDoorSpider(this);
+    public RighteousWar copy() {
+        return new RighteousWar(this);
     }
 }

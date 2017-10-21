@@ -25,52 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.common.OnOpponentsTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyAllEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Markedagain
+ * @author TheElk801
  */
-public class GlenElendraPranksters extends CardImpl {
+public class SuleimansLegacy extends CardImpl {
 
-    public GlenElendraPranksters(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add(SubType.FAERIE);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    private static final FilterPermanent filter = new FilterPermanent("Djinns and Efreets");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand.
-        Ability ability = new ConditionalTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(new ReturnToHandTargetEffect(), true), OnOpponentsTurnCondition.instance,
-                "Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand."
-        );
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+    static {
+        filter.add(Predicates.or(
+                new SubtypePredicate(SubType.DJINN),
+                new SubtypePredicate(SubType.EFREET)
+        ));
     }
 
-    public GlenElendraPranksters(final GlenElendraPranksters card) {
+    public SuleimansLegacy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{W}");
+
+        // When Suleiman's Legacy enters the battlefield, destroy all Djinns and Efreets. They can't be regenerated.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter, true)));
+
+        // Whenever a Djinn or Efreet enters the battlefield, destroy it. It can't be regenerated.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new DestroyTargetEffect(true), filter, false, SetTargetPointer.PERMANENT,
+                "Whenever a Djinn or Efreet enters the battlefield, destroy it. It can't be regenerated."
+        ));
+    }
+
+    public SuleimansLegacy(final SuleimansLegacy card) {
         super(card);
     }
 
     @Override
-    public GlenElendraPranksters copy() {
-        return new GlenElendraPranksters(this);
+    public SuleimansLegacy copy() {
+        return new SuleimansLegacy(this);
     }
 }
