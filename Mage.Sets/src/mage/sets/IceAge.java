@@ -212,6 +212,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Magus of the Unseen", 82, Rarity.RARE, mage.cards.m.MagusOfTheUnseen.class));
         cards.add(new SetCardInfo("Malachite Talisman", 303, Rarity.UNCOMMON, mage.cards.m.MalachiteTalisman.class));
         cards.add(new SetCardInfo("Marton Stromgald", 199, Rarity.RARE, mage.cards.m.MartonStromgald.class));
+        cards.add(new SetCardInfo("Melting", 201, Rarity.UNCOMMON, mage.cards.m.Melting.class));
         cards.add(new SetCardInfo("Merieke Ri Berit", 375, Rarity.RARE, mage.cards.m.MeriekeRiBerit.class));
         cards.add(new SetCardInfo("Mesmeric Trance", 83, Rarity.RARE, mage.cards.m.MesmericTrance.class));
         cards.add(new SetCardInfo("Meteor Shower", 202, Rarity.COMMON, mage.cards.m.MeteorShower.class));

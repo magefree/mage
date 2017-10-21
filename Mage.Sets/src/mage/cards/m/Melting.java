@@ -25,74 +25,76 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.l;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class LeylineOfSingularity extends CardImpl {
+public class Melting extends CardImpl {
 
-    public LeylineOfSingularity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
+    public Melting(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
-        // If Leyline of Singularity is in your opening hand, you may begin the game with it on the battlefield.
-        this.addAbility(LeylineAbility.getInstance());
-
-        // All nonland permanents are legendary.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetSupertypeAllEffect()));
+        // All lands are no longer snow.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeltingEffect()));
     }
 
-    public LeylineOfSingularity(final LeylineOfSingularity card) {
+    public Melting(final Melting card) {
         super(card);
     }
 
     @Override
-    public LeylineOfSingularity copy() {
-        return new LeylineOfSingularity(this);
+    public Melting copy() {
+        return new Melting(this);
     }
 }
 
-class SetSupertypeAllEffect extends ContinuousEffectImpl {
+class MeltingEffect extends ContinuousEffectImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-    public SetSupertypeAllEffect() {
+    public MeltingEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
     }
 
-    public SetSupertypeAllEffect(final SetSupertypeAllEffect effect) {
+    public MeltingEffect(final MeltingEffect effect) {
         super(effect);
     }
 
     @Override
-    public SetSupertypeAllEffect copy() {
-        return new SetSupertypeAllEffect(this);
+    public MeltingEffect copy() {
+        return new MeltingEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.addSuperType(SuperType.LEGENDARY);
+            permanent.getSuperType().remove(SuperType.SNOW);
         }
         return true;
     }
 
     @Override
     public String getText(Mode mode) {
-        return "All nonland permanents are legendary";
+        return "All lands are no longer snow";
     }
 }
