@@ -2039,9 +2039,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void concede(Game game) {
-        game.gameOver(playerId);
+        game.setConcedingPlayer(playerId);
         lost(game);
-        this.left = true;
+//        this.left = true;
     }
 
     @Override
@@ -2136,7 +2136,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // for draw - first all players that have lost have to be set to lost
         if (!hasLeft()) {
             logger.debug("Game over playerId: " + playerId);
-            game.gameOver(playerId);
+            game.setConcedingPlayer(playerId);
         }
     }
 
@@ -2197,7 +2197,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             this.draws = true;
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DRAW_PLAYER, null, null, playerId));
             game.informPlayers("For " + this.getLogName() + " the game is a draw.");
-            game.gameOver(playerId);
+            game.setConcedingPlayer(playerId);
         }
     }
 
@@ -3576,6 +3576,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void abortReset() {
         abort = false;
+    }
+
+    @Override
+    public void signalPlayerConcede() {
+
     }
 
     @Override

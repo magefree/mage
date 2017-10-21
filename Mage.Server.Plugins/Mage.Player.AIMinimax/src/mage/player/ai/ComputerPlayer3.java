@@ -184,7 +184,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             logger.debug(indent(node.depth) + "interrupted");
             return GameStateEvaluator.evaluate(playerId, game);
         }
-        if (node.depth > maxDepth || game.gameOver(null)) {
+        if (node.depth > maxDepth || game.checkIfGameIsOver()) {
             logger.debug(indent(node.depth) + "simulating -- reached end state");
             val = GameStateEvaluator.evaluate(playerId, game);
         }
@@ -204,7 +204,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 }
             }
 
-            if (game.gameOver(null)) {
+            if (game.checkIfGameIsOver()) {
                 val = GameStateEvaluator.evaluate(playerId, game);
             }
             else if (stepFinished) {
@@ -408,7 +408,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
                 Combat simCombat = sim.getCombat().copy();
                 finishCombat(sim);
-                if (sim.gameOver(null)) {
+                if (sim.checkIfGameIsOver()) {
                     val = GameStateEvaluator.evaluate(playerId, sim);
                 }
                 else if (!counter) {
@@ -450,7 +450,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             return GameStateEvaluator.evaluate(playerId, game);
         }
         Integer val = null;
-        if (!game.gameOver(null)) {
+        if (!game.checkIfGameIsOver()) {
             logger.debug(indent(node.depth) + "simulating -- ending turn");
             simulateToEnd(game);
             game.getState().setActivePlayerId(game.getState().getPlayerList(game.getActivePlayerId()).getNext());
@@ -478,7 +478,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             logger.debug("interrupted");
             return;
         }
-        if (!game.gameOver(null)) {
+        if (!game.checkIfGameIsOver()) {
             game.getPhase().setStep(step);
             if (!step.skipStep(game, game.getActivePlayerId())) {
                 step.beginStep(game, game.getActivePlayerId());
@@ -526,7 +526,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             logger.debug("interrupted");
             return;
         }
-        if (!game.gameOver(null)) {
+        if (!game.checkIfGameIsOver()) {
             game.getTurn().getPhase().endPhase(game, game.getActivePlayerId());
             game.getTurn().setPhase(new EndPhase());
             if (game.getTurn().getPhase().beginPhase(game, game.getActivePlayerId())) {

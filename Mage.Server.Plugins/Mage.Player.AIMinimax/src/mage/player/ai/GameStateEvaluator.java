@@ -70,7 +70,7 @@ public final class GameStateEvaluator {
     public static int evaluate(UUID playerId, Game game, boolean ignoreTapped) {
         Player player = game.getPlayer(playerId);
         Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
-        if (game.gameOver(null)) {
+        if (game.checkIfGameIsOver()) {
             if (player.hasLost() || opponent.hasWon())
                 return LOSE_SCORE;
             if (opponent.hasLost() || player.hasWon())

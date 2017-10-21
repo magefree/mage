@@ -43,6 +43,7 @@ public class PlayerResponse implements Serializable {
     private Integer responseInteger;
     private ManaType responseManaType;
     private UUID responseManaTypePlayerId;
+    private Boolean responseConcedeCheck;
 
     public PlayerResponse() {
         clear();
@@ -55,7 +56,8 @@ public class PlayerResponse implements Serializable {
                 + ',' + responseBoolean
                 + ',' + responseInteger
                 + ',' + responseManaType
-                + ',' + responseManaTypePlayerId;
+                + ',' + responseManaTypePlayerId
+                + ',' + responseConcedeCheck;
     }
 
     public PlayerResponse(PlayerResponse other) {
@@ -69,6 +71,7 @@ public class PlayerResponse implements Serializable {
         responseInteger = other.responseInteger;
         responseManaType = other.responseManaType;
         responseManaTypePlayerId = other.responseManaTypePlayerId;
+        responseConcedeCheck = other.responseConcedeCheck;
     }
 
     public void clear() {
@@ -78,6 +81,7 @@ public class PlayerResponse implements Serializable {
         responseInteger = null;
         responseManaType = null;
         responseManaTypePlayerId = null;
+        responseConcedeCheck = null;
     }
 
     public String getString() {
@@ -102,6 +106,17 @@ public class PlayerResponse implements Serializable {
 
     public void setBoolean(Boolean responseBoolean) {
         this.responseBoolean = responseBoolean;
+    }
+
+    public Boolean getResponseConcedeCheck() {
+        if (responseConcedeCheck == null) {
+            return false;
+        }
+        return responseConcedeCheck;
+    }
+
+    public void setResponseConcedeCheck() {
+        this.responseConcedeCheck = true;
     }
 
     public Integer getInteger() {
