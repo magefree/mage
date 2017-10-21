@@ -249,7 +249,7 @@ class MasterWarcraftCastWatcher extends Watcher {
     }    
 
     public void decrement() {
-        if (copyCountApply > 0); {
+        if (copyCountApply > 0) {
             copyCountApply--;
         }
     }
