@@ -25,52 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.common.OnOpponentsTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
+import mage.abilities.condition.common.AttackedThisStepCondition;
+import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.PhaseStep;
+import mage.constants.TurnPhase;
+import mage.filter.common.FilterAttackingCreature;
+import mage.watchers.common.PlayerAttackedStepWatcher;
 
 /**
  *
- * @author Markedagain
+ * @author TheElk801
  */
-public class GlenElendraPranksters extends CardImpl {
+public class ScorchingWinds extends CardImpl {
 
-    public GlenElendraPranksters(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add(SubType.FAERIE);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    public ScorchingWinds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand.
-        Ability ability = new ConditionalTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(new ReturnToHandTargetEffect(), true), OnOpponentsTurnCondition.instance,
-                "Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand."
+        // Cast Scorching Winds only during the declare attackers step and only if you've been attacked this step.
+        Ability ability = new CastOnlyDuringPhaseStepSourceAbility(
+                TurnPhase.COMBAT, PhaseStep.DECLARE_ATTACKERS, AttackedThisStepCondition.instance,
+                "Cast {this} only during the declare attackers step and only if you've been attacked this step."
         );
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addWatcher(new PlayerAttackedStepWatcher());
         this.addAbility(ability);
+
+        // Scorching Winds deals 1 damage to each attacking creature.
+        this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterAttackingCreature()));
     }
 
-    public GlenElendraPranksters(final GlenElendraPranksters card) {
+    public ScorchingWinds(final ScorchingWinds card) {
         super(card);
     }
 
     @Override
-    public GlenElendraPranksters copy() {
-        return new GlenElendraPranksters(this);
+    public ScorchingWinds copy() {
+        return new ScorchingWinds(this);
     }
 }

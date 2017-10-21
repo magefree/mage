@@ -120,6 +120,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Mental Discipline", 37, Rarity.COMMON, mage.cards.m.MentalDiscipline.class));
         cards.add(new SetCardInfo("Metalworker", 135, Rarity.RARE, mage.cards.m.Metalworker.class));
         cards.add(new SetCardInfo("Metathran Soldier", 39, Rarity.COMMON, mage.cards.m.MetathranSoldier.class));
+        cards.add(new SetCardInfo("Momentum", 113, Rarity.UNCOMMON, mage.cards.m.Momentum.class));
         cards.add(new SetCardInfo("Multani's Decree", 114, Rarity.COMMON, mage.cards.m.MultanisDecree.class));
         cards.add(new SetCardInfo("Opalescence", 13, Rarity.RARE, mage.cards.o.Opalescence.class));
         cards.add(new SetCardInfo("Opposition", 40, Rarity.RARE, mage.cards.o.Opposition.class));

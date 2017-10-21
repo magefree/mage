@@ -186,6 +186,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Mahamoti Djinn", 52, Rarity.RARE, mage.cards.m.MahamotiDjinn.class));
         cards.add(new SetCardInfo("Mana Matrix", 213, Rarity.RARE, mage.cards.m.ManaMatrix.class));
         cards.add(new SetCardInfo("Mana Vault", 214, Rarity.RARE, mage.cards.m.ManaVault.class));
+        cards.add(new SetCardInfo("Martyr's Cry", 19, Rarity.RARE, mage.cards.m.MartyrsCry.class));
         cards.add(new SetCardInfo("Martyrs of Korlis", 20, Rarity.UNCOMMON, mage.cards.m.MartyrsOfKorlis.class));
         cards.add(new SetCardInfo("Maze of Ith", 246, Rarity.RARE, mage.cards.m.MazeOfIth.class));
         cards.add(new SetCardInfo("Mightstone", 215, Rarity.COMMON, mage.cards.m.Mightstone.class));

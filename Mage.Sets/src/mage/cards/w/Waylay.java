@@ -25,74 +25,79 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.l;
+package mage.cards.w;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.keyword.LeylineAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextCleanupDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WaylayToken;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class LeylineOfSingularity extends CardImpl {
+public class Waylay extends CardImpl {
 
-    public LeylineOfSingularity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
+    public Waylay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
-        // If Leyline of Singularity is in your opening hand, you may begin the game with it on the battlefield.
-        this.addAbility(LeylineAbility.getInstance());
-
-        // All nonland permanents are legendary.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetSupertypeAllEffect()));
+        // Create three 2/2 white Knight creature tokens. Exile them at the beginning of the next cleanup step.
+        this.getSpellAbility().addEffect(new WaylayEffect());
     }
 
-    public LeylineOfSingularity(final LeylineOfSingularity card) {
+    public Waylay(final Waylay card) {
         super(card);
     }
 
     @Override
-    public LeylineOfSingularity copy() {
-        return new LeylineOfSingularity(this);
+    public Waylay copy() {
+        return new Waylay(this);
     }
 }
 
-class SetSupertypeAllEffect extends ContinuousEffectImpl {
+class WaylayEffect extends OneShotEffect {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
-
-    public SetSupertypeAllEffect() {
-        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
+    public WaylayEffect() {
+        super(Outcome.PutCreatureInPlay);
+        this.staticText = "Create three 2/2 white Knight creature tokens. Exile them at the beginning of the next cleanup step.";
     }
 
-    public SetSupertypeAllEffect(final SetSupertypeAllEffect effect) {
+    public WaylayEffect(final WaylayEffect effect) {
         super(effect);
     }
 
     @Override
-    public SetSupertypeAllEffect copy() {
-        return new SetSupertypeAllEffect(this);
+    public WaylayEffect copy() {
+        return new WaylayEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.addSuperType(SuperType.LEGENDARY);
+        Token token = new WaylayToken();
+        token.putOntoBattlefield(3, game, source.getSourceId(), source.getControllerId());
+        List<Permanent> toExile = new ArrayList<>();
+        for (UUID tokenId : token.getLastAddedTokenIds()) {
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                toExile.add(tokenPermanent);
+            }
         }
+        Effect effect = new ExileTargetEffect();
+        effect.setTargetPointer(new FixedTargets(toExile, game));
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(effect), source);
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "All nonland permanents are legendary";
     }
 }

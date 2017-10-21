@@ -25,74 +25,77 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.l;
+package mage.cards.m;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.keyword.LeylineAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class LeylineOfSingularity extends CardImpl {
+public class MartyrsCry extends CardImpl {
 
-    public LeylineOfSingularity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
+    public MartyrsCry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}{W}");
 
-        // If Leyline of Singularity is in your opening hand, you may begin the game with it on the battlefield.
-        this.addAbility(LeylineAbility.getInstance());
-
-        // All nonland permanents are legendary.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetSupertypeAllEffect()));
+        // Exile all white creatures. For each creature exiled this way, its controller draws a card.
+        this.getSpellAbility().addEffect(new MartyrsCryEffect());
     }
 
-    public LeylineOfSingularity(final LeylineOfSingularity card) {
+    public MartyrsCry(final MartyrsCry card) {
         super(card);
     }
 
     @Override
-    public LeylineOfSingularity copy() {
-        return new LeylineOfSingularity(this);
+    public MartyrsCry copy() {
+        return new MartyrsCry(this);
     }
 }
 
-class SetSupertypeAllEffect extends ContinuousEffectImpl {
+class MartyrsCryEffect extends OneShotEffect {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
-
-    public SetSupertypeAllEffect() {
-        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
+    MartyrsCryEffect() {
+        super(Outcome.Exile);
+        this.staticText = "Exile all white creatures. For each creature exiled this way, its controller draws a card.";
     }
 
-    public SetSupertypeAllEffect(final SetSupertypeAllEffect effect) {
+    MartyrsCryEffect(final MartyrsCryEffect effect) {
         super(effect);
     }
 
     @Override
-    public SetSupertypeAllEffect copy() {
-        return new SetSupertypeAllEffect(this);
+    public MartyrsCryEffect copy() {
+        return new MartyrsCryEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.addSuperType(SuperType.LEGENDARY);
+        Map<UUID, Integer> playerCrtCount = new HashMap<>();
+        for (Iterator<Permanent> it = game.getBattlefield().getActivePermanents(source.getControllerId(), game).iterator(); it.hasNext();) {
+            Permanent perm = it.next();
+            if (perm != null && perm.isCreature() && perm.getColor(game).isWhite() && perm.moveToExile(null, null, source.getSourceId(), game)) {
+                playerCrtCount.putIfAbsent(perm.getControllerId(), 0);
+                playerCrtCount.compute(perm.getControllerId(), (p, amount) -> amount + 1);
+            }
+        }
+        for (UUID playerId : game.getPlayerList().toList()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.drawCards(playerCrtCount.getOrDefault(playerId, 0), game);
+            }
         }
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "All nonland permanents are legendary";
     }
 }

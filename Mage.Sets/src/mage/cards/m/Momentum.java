@@ -25,52 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.constants.SubType;
+import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.common.OnOpponentsTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.counters.CounterType;
 
 /**
  *
- * @author Markedagain
+ * @author TheElk801
  */
-public class GlenElendraPranksters extends CardImpl {
+public class Momentum extends CardImpl {
 
-    public GlenElendraPranksters(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add(SubType.FAERIE);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    public Momentum(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand.
-        Ability ability = new ConditionalTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(new ReturnToHandTargetEffect(), true), OnOpponentsTurnCondition.instance,
-                "Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand."
-        );
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        this.subtype.add(SubType.AURA);
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // At the beginning of your upkeep, you may put a growth counter on Momentum.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.GROWTH.createInstance(), true), TargetController.YOU, true));
+
+        // Enchanted creature gets +1/+1 for each growth counter on Momentum.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new CountersSourceCount(CounterType.GROWTH), new CountersSourceCount(CounterType.GROWTH))));
     }
 
-    public GlenElendraPranksters(final GlenElendraPranksters card) {
+    public Momentum(final Momentum card) {
         super(card);
     }
 
     @Override
-    public GlenElendraPranksters copy() {
-        return new GlenElendraPranksters(this);
+    public Momentum copy() {
+        return new Momentum(this);
     }
 }

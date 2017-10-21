@@ -167,6 +167,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Hyalopterous Lemure", 21, Rarity.UNCOMMON, mage.cards.h.HyalopterousLemure.class));
         cards.add(new SetCardInfo("Hydroblast", 72, Rarity.COMMON, mage.cards.h.Hydroblast.class));
         cards.add(new SetCardInfo("Hymn of Rebirth", 373, Rarity.UNCOMMON, mage.cards.h.HymnOfRebirth.class));
+        cards.add(new SetCardInfo("Ice Floe", 333, Rarity.UNCOMMON, mage.cards.i.IceFloe.class));
         cards.add(new SetCardInfo("Iceberg", 73, Rarity.UNCOMMON, mage.cards.i.Iceberg.class));
         cards.add(new SetCardInfo("Icequake", 22, Rarity.UNCOMMON, mage.cards.i.Icequake.class));
         cards.add(new SetCardInfo("Icy Manipulator", 297, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
@@ -211,6 +212,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Magus of the Unseen", 82, Rarity.RARE, mage.cards.m.MagusOfTheUnseen.class));
         cards.add(new SetCardInfo("Malachite Talisman", 303, Rarity.UNCOMMON, mage.cards.m.MalachiteTalisman.class));
         cards.add(new SetCardInfo("Marton Stromgald", 199, Rarity.RARE, mage.cards.m.MartonStromgald.class));
+        cards.add(new SetCardInfo("Melting", 201, Rarity.UNCOMMON, mage.cards.m.Melting.class));
         cards.add(new SetCardInfo("Merieke Ri Berit", 375, Rarity.RARE, mage.cards.m.MeriekeRiBerit.class));
         cards.add(new SetCardInfo("Mesmeric Trance", 83, Rarity.RARE, mage.cards.m.MesmericTrance.class));
         cards.add(new SetCardInfo("Meteor Shower", 202, Rarity.COMMON, mage.cards.m.MeteorShower.class));
@@ -272,6 +274,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Shambling Strider", 151, Rarity.COMMON, mage.cards.s.ShamblingStrider.class));
         cards.add(new SetCardInfo("Shatter", 216, Rarity.COMMON, mage.cards.s.Shatter.class));
         cards.add(new SetCardInfo("Shield of the Ages", 310, Rarity.UNCOMMON, mage.cards.s.ShieldOfTheAges.class));
+        cards.add(new SetCardInfo("Shyft", 96, Rarity.RARE, mage.cards.s.Shyft.class));
         cards.add(new SetCardInfo("Sibilant Spirit", 97, Rarity.RARE, mage.cards.s.SibilantSpirit.class));
         cards.add(new SetCardInfo("Silver Erne", 98, Rarity.UNCOMMON, mage.cards.s.SilverErne.class));
         cards.add(new SetCardInfo("Skeleton Ship", 379, Rarity.RARE, mage.cards.s.SkeletonShip.class));

@@ -68,6 +68,7 @@ public enum CounterType {
     FURY("fury"),
     FUSE("fuse"),
     GOLD("gold"),
+    GROWTH("growth"),
     HATCHLING("hatchling"),
     HEALING("healing"),
     HOOFPRINT("hoofprint"),

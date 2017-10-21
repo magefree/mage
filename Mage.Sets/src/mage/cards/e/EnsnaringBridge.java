@@ -47,7 +47,7 @@ import mage.players.Player;
 public class EnsnaringBridge extends CardImpl {
 
     public EnsnaringBridge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Creatures with power greater than the number of cards in your hand can't attack.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnsnaringBridgeRestrictionEffect()));
@@ -63,7 +63,6 @@ public class EnsnaringBridge extends CardImpl {
     }
 }
 
-
 class EnsnaringBridgeRestrictionEffect extends RestrictionEffect {
 
     public EnsnaringBridgeRestrictionEffect() {
@@ -78,10 +77,11 @@ class EnsnaringBridgeRestrictionEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            return permanent.getPower().getValue() > controller.getHand().size();
+        if (controller == null) {
+            return false;
         }
-        return false;
+        return controller.getInRange().contains(permanent.getControllerId())
+                && permanent.getPower().getValue() > controller.getHand().size();
     }
 
     @Override

@@ -25,45 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.watchers.common;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.target.common.FilterCreatureAttackingYou;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.WatcherScope;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.watchers.Watcher;
 
 /**
- *
- * @author LoneFox
- *
+ * @author LevelX2
  */
-public class SoulSnare extends CardImpl {
+public class PlayerAttackedStepWatcher extends Watcher {
 
-    public SoulSnare(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+    // With how many creatures attacked this player this turn
+    private final Map<UUID, Integer> playerAttacked = new HashMap<>();
 
-        // {W}, Sacrifice Soul Snare: Exile target creature that's attacking you or a planeswalker you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new ExileTargetEffect(), new ManaCostsImpl("{W}"));
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreatureAttackingYou(true)));
-        this.addAbility(ability);
+    public PlayerAttackedStepWatcher() {
+        super(PlayerAttackedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
-    public SoulSnare(final SoulSnare card) {
-        super(card);
+    public PlayerAttackedStepWatcher(final PlayerAttackedStepWatcher watcher) {
+        super(watcher);
+        for (Map.Entry<UUID, Integer> entry : watcher.playerAttacked.entrySet()) {
+            this.playerAttacked.put(entry.getKey(), entry.getValue());
+        }
     }
 
     @Override
-    public SoulSnare copy() {
-        return new SoulSnare(this);
+    public PlayerAttackedStepWatcher copy() {
+        return new PlayerAttackedStepWatcher(this);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_POST) {
+            playerAttacked.clear();
+        }
+        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
+            playerAttacked.putIfAbsent(event.getTargetId(), 0);
+            playerAttacked.compute(event.getTargetId(), (p, amount) -> amount + 1);
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        playerAttacked.clear();
+    }
+
+    public int getNumberAttackingCurrentStep(UUID playerId) {
+        return playerAttacked.getOrDefault(playerId, 0);
     }
 }

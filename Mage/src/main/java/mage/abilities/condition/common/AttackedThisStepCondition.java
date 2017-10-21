@@ -25,45 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.abilities.condition.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.target.common.FilterCreatureAttackingYou;
-import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.condition.Condition;
+import mage.game.Game;
+import mage.watchers.common.PlayerAttackedStepWatcher;
 
 /**
- *
- * @author LoneFox
- *
+ * @author LevelX2
  */
-public class SoulSnare extends CardImpl {
+public enum AttackedThisStepCondition implements Condition {
 
-    public SoulSnare(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-
-        // {W}, Sacrifice Soul Snare: Exile target creature that's attacking you or a planeswalker you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new ExileTargetEffect(), new ManaCostsImpl("{W}"));
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreatureAttackingYou(true)));
-        this.addAbility(ability);
-    }
-
-    public SoulSnare(final SoulSnare card) {
-        super(card);
-    }
+    instance;
 
     @Override
-    public SoulSnare copy() {
-        return new SoulSnare(this);
+    public boolean apply(Game game, Ability source) {
+        PlayerAttackedStepWatcher watcher = (PlayerAttackedStepWatcher) game.getState().getWatchers().get(PlayerAttackedStepWatcher.class.getSimpleName());
+        return watcher != null
+                && watcher.getNumberAttackingCurrentStep(source.getControllerId()) > 0;
+    }
+
+    public String toString() {
+        return "during the declare attackers step and only if you've been attacked this step.";
     }
 }

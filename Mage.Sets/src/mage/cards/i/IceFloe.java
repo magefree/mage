@@ -25,52 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.i;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.common.OnOpponentsTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SkipUntapOptionalAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.Zone;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.common.FilterCreatureAttackingYou;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Markedagain
+ * @author TheElk801
  */
-public class GlenElendraPranksters extends CardImpl {
+public class IceFloe extends CardImpl {
 
-    public GlenElendraPranksters(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add(SubType.FAERIE);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    private static final FilterCreatureAttackingYou filter = new FilterCreatureAttackingYou("creature without flying that's attacking you");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand.
-        Ability ability = new ConditionalTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(new ReturnToHandTargetEffect(), true), OnOpponentsTurnCondition.instance,
-                "Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand."
-        );
-        ability.addTarget(new TargetControlledCreaturePermanent());
+    static {
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+    }
+
+    public IceFloe(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+
+        // You may choose not to untap Ice Floe during your untap step.
+        this.addAbility(new SkipUntapOptionalAbility());
+
+        // {tap}: Tap target creature without flying that's attacking you. It doesn't untap during its controller's untap step for as long as Ice Floe remains tapped.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
         this.addAbility(ability);
     }
 
-    public GlenElendraPranksters(final GlenElendraPranksters card) {
+    public IceFloe(final IceFloe card) {
         super(card);
     }
 
     @Override
-    public GlenElendraPranksters copy() {
-        return new GlenElendraPranksters(this);
+    public IceFloe copy() {
+        return new IceFloe(this);
     }
 }

@@ -25,52 +25,72 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.common.OnOpponentsTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BecomesColorOrColorsTargetEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.game.Game;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author Markedagain
+ * @author TheElk801
  */
-public class GlenElendraPranksters extends CardImpl {
+public class Shyft extends CardImpl {
 
-    public GlenElendraPranksters(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add(SubType.FAERIE);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    public Shyft(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand.
-        Ability ability = new ConditionalTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(new ReturnToHandTargetEffect(), true), OnOpponentsTurnCondition.instance,
-                "Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand."
-        );
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.subtype.add(SubType.SHAPESHIFTER);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(2);
+
+        // At the beginning of your upkeep, you may have Shyft become the color or colors of your choice.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShyftEffect(), TargetController.YOU, true));
     }
 
-    public GlenElendraPranksters(final GlenElendraPranksters card) {
+    public Shyft(final Shyft card) {
         super(card);
     }
 
     @Override
-    public GlenElendraPranksters copy() {
-        return new GlenElendraPranksters(this);
+    public Shyft copy() {
+        return new Shyft(this);
+    }
+}
+
+class ShyftEffect extends OneShotEffect {
+
+    ShyftEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "have {this} become the color or colors of your choice.";
+    }
+
+    ShyftEffect(final ShyftEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ShyftEffect copy() {
+        return new ShyftEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Effect effect = new BecomesColorOrColorsTargetEffect(Duration.Custom);
+        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
+        return effect.apply(game, source);
     }
 }
