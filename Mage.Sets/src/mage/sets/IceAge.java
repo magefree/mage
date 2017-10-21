@@ -253,6 +253,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Portent", 90, Rarity.COMMON, mage.cards.p.Portent.class));
         cards.add(new SetCardInfo("Power Sink", 91, Rarity.COMMON, mage.cards.p.PowerSink.class));
         cards.add(new SetCardInfo("Pox", 46, Rarity.RARE, mage.cards.p.Pox.class));
+        cards.add(new SetCardInfo("Prismatic Ward", 271, Rarity.COMMON, mage.cards.p.PrismaticWard.class));
         cards.add(new SetCardInfo("Pygmy Allosaurus", 145, Rarity.RARE, mage.cards.p.PygmyAllosaurus.class));
         cards.add(new SetCardInfo("Pyknite", 146, Rarity.COMMON, mage.cards.p.Pyknite.class));
         cards.add(new SetCardInfo("Pyroblast", 213, Rarity.COMMON, mage.cards.p.Pyroblast.class));
