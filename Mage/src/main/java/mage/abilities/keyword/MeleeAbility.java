@@ -58,6 +58,10 @@ public class MeleeAbility extends AttacksTriggeredAbility {
         super(ability);
     }
 
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return new MeleeDynamicValue().calculate(game, sourceAbility, effect);
+    }
+
     @Override
     public MeleeAbility copy() {
         return new MeleeAbility(this);
