@@ -95,14 +95,9 @@ class PetraSphinxEffect extends OneShotEffect {
         if (controller != null && sourceObject != null && player != null) {
 
 
-            //~ Players:
-            //~ for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                //~ Player player = game.getPlayer(playerId);
-            //~ if (player != null) {
             if (player.getLibrary().hasCards()) {
                 Choice cardChoice = new ChoiceImpl();
                 cardChoice.setChoices(CardRepository.instance.getNames());
-                //~ cardChoice.clearChoice();
                 cardChoice.setMessage("Name a card");
                 while (!player.choose(Outcome.DrawCard, cardChoice, game)) {
                     if (!player.canRespond()) {
@@ -119,10 +114,6 @@ class PetraSphinxEffect extends OneShotEffect {
                         player.moveCards(cards, Zone.HAND, source, game);
                     } else {
                         player.moveCards(cards, Zone.GRAVEYARD, source, game);
-                            //~ player.damage(2, source.getSourceId(), game, false, true);
-                            //~ player.putCardsOnBottomOfLibrary(cards, game, source, false);
-                            //~ }
-                        //~ }
                     }
                 }
             }
