@@ -113,15 +113,6 @@ class GeneralsRegaliaEffect extends RedirectionEffect {
         }
         this.redirectTarget = source.getTargets().get(0);
 
-        // check target
-        //   check permanent first
-        //~ Permanent permanent = game.getPermanent(event.getTargetId());
-        //~ if (permanent != null) {
-            //~ if (permanent.getControllerId().equals(source.getControllerId())) {
-                //~ // it's your permanent
-                //~ return true;
-            //~ }
-        //~ }
         //   check player
         Player player = game.getPlayer(event.getTargetId());
         if (player != null) {
