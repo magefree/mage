@@ -183,6 +183,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Order of the Ebon Hand", 78, Rarity.COMMON, OrderOfTheEbonHand.class));
         cards.add(new SetCardInfo("Oubliette", 79, Rarity.COMMON, Oubliette.class));
         cards.add(new SetCardInfo("Paralyze", 80, Rarity.COMMON, mage.cards.p.Paralyze.class));
+        cards.add(new SetCardInfo("Petra Sphinx", 23, Rarity.RARE, mage.cards.p.PetraSphinx.class));
         cards.add(new SetCardInfo("Phantom Monster", 43, Rarity.COMMON, mage.cards.p.PhantomMonster.class));
         cards.add(new SetCardInfo("Phelddagrif", 150, Rarity.RARE, mage.cards.p.Phelddagrif.class));
         cards.add(new SetCardInfo("Phyrexian Boon", 81, Rarity.COMMON, mage.cards.p.PhyrexianBoon.class));
@@ -229,6 +230,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Thrull Champion", 83, Rarity.RARE, mage.cards.t.ThrullChampion.class));
         cards.add(new SetCardInfo("Thrull Retainer", 84, Rarity.COMMON, mage.cards.t.ThrullRetainer.class));
         cards.add(new SetCardInfo("Thunder Spirit", 27, Rarity.UNCOMMON, mage.cards.t.ThunderSpirit.class));
+        cards.add(new SetCardInfo("Time Elemental", 53, Rarity.RARE, mage.cards.t.TimeElemental.class));
         cards.add(new SetCardInfo("Tivadar's Crusade", 28, Rarity.UNCOMMON, mage.cards.t.TivadarsCrusade.class));
         cards.add(new SetCardInfo("Tornado", 136, Rarity.RARE, mage.cards.t.Tornado.class));
         cards.add(new SetCardInfo("Urza's Bauble", 170, Rarity.UNCOMMON, mage.cards.u.UrzasBauble.class));
