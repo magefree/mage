@@ -93,7 +93,7 @@ class VexingArcanixEffect extends OneShotEffect {
 
             if (player.getLibrary().hasCards()) {
                 Choice cardChoice = new ChoiceImpl();
-                cardChoice.setChoices(CardRepository.instance.getNames
+                cardChoice.setChoices(CardRepository.instance.getNames());
                 cardChoice.setMessage("Name a card");
                 while (!player.choose(Outcome.DrawCard, cardChoice, game)) {
                     if (!player.canRespond()) {
