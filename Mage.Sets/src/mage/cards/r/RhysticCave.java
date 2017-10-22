@@ -50,7 +50,7 @@ import mage.players.Player;
 
 /**
  *
- * @author anonymous
+ * @author jerekwilson
  */
 public class RhysticCave extends CardImpl {
 

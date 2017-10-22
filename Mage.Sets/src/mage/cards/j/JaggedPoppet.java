@@ -49,7 +49,7 @@ import mage.players.Player;
 
 /**
  *
- * @author anonymous
+ * @author jerekwilson
  */
 public class JaggedPoppet extends CardImpl {
 

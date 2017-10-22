@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author jerekwilson
  */
 public class IceFloe extends CardImpl {
     
