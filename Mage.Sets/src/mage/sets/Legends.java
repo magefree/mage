@@ -187,6 +187,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain Yeti", 156, Rarity.UNCOMMON, mage.cards.m.MountainYeti.class));
         cards.add(new SetCardInfo("Nether Void", 27, Rarity.RARE, mage.cards.n.NetherVoid.class));
         cards.add(new SetCardInfo("Nicol Bolas", 286, Rarity.RARE, mage.cards.n.NicolBolas.class));
+        cards.add(new SetCardInfo("Nova Pentacle", 234, Rarity.RARE, mage.cards.n.NovaPentacle.class));
         cards.add(new SetCardInfo("Osai Vultures", 198, Rarity.COMMON, mage.cards.o.OsaiVultures.class));
         cards.add(new SetCardInfo("Palladia-Mors", 287, Rarity.RARE, mage.cards.p.PalladiaMors.class));
         cards.add(new SetCardInfo("Part Water", 66, Rarity.UNCOMMON, mage.cards.p.PartWater.class));
