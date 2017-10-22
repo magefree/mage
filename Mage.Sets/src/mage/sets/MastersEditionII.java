@@ -233,6 +233,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Songs of the Damned", 110, Rarity.COMMON, mage.cards.s.SongsOfTheDamned.class));
         cards.add(new SetCardInfo("Soul Exchange", 111, Rarity.UNCOMMON, mage.cards.s.SoulExchange.class));
         cards.add(new SetCardInfo("Soul Kiss", 112, Rarity.UNCOMMON, mage.cards.s.SoulKiss.class));
+        cards.add(new SetCardInfo("Spore Cloud", 176, Rarity.UNCOMMON, mage.cards.s.SporeCloud.class));
         cards.add(new SetCardInfo("Spore Flower", 177, Rarity.UNCOMMON, mage.cards.s.SporeFlower.class));
         cards.add(new SetCardInfo("Stampede", 178, Rarity.UNCOMMON, mage.cards.s.Stampede.class));
         cards.add(new SetCardInfo("Stonehands", 151, Rarity.COMMON, mage.cards.s.Stonehands.class));
