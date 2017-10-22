@@ -101,6 +101,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Indestructible Aura", 63, Rarity.COMMON, mage.cards.i.IndestructibleAura.class));
         cards.add(new SetCardInfo("Ivory Guardians", 64, Rarity.UNCOMMON, mage.cards.i.IvoryGuardians.class));
         cards.add(new SetCardInfo("Jalum Tome", 81, Rarity.RARE, mage.cards.j.JalumTome.class));
+        cards.add(new SetCardInfo("Johan", 112, Rarity.RARE, mage.cards.j.Johan.class));
         cards.add(new SetCardInfo("Juxtapose", 22, Rarity.RARE, mage.cards.j.Juxtapose.class));
         cards.add(new SetCardInfo("Keepers of the Faith", 65, Rarity.COMMON, mage.cards.k.KeepersOfTheFaith.class));
         cards.add(new SetCardInfo("Kei Takahashi", 113, Rarity.UNCOMMON, mage.cards.k.KeiTakahashi.class));
@@ -112,6 +113,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Nicol Bolas", 116, Rarity.RARE, mage.cards.n.NicolBolas.class));
         cards.add(new SetCardInfo("Obelisk of Undoing", 84, Rarity.RARE, mage.cards.o.ObeliskOfUndoing.class));
         cards.add(new SetCardInfo("Palladia-Mors", 117, Rarity.RARE, mage.cards.p.PalladiaMors.class));
+        cards.add(new SetCardInfo("Petra Sphinx", 66, Rarity.RARE, mage.cards.p.PetraSphinx.class));
         cards.add(new SetCardInfo("Rabid Wombat", 39, Rarity.UNCOMMON, mage.cards.r.RabidWombat.class));
         cards.add(new SetCardInfo("Rakalite", 85, Rarity.RARE, mage.cards.r.Rakalite.class));
         cards.add(new SetCardInfo("Recall", 24, Rarity.UNCOMMON, mage.cards.r.Recall.class));
@@ -127,6 +129,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Sivitri Scarzam", 119, Rarity.UNCOMMON, mage.cards.s.SivitriScarzam.class));
         cards.add(new SetCardInfo("Sol'kanar the Swamp King", 120, Rarity.RARE, mage.cards.s.SolkanarTheSwampKing.class));
         cards.add(new SetCardInfo("Storm Seeker", 42, Rarity.UNCOMMON, mage.cards.s.StormSeeker.class));
+        cards.add(new SetCardInfo("Teleport", 26, Rarity.RARE, mage.cards.t.Teleport.class));
         cards.add(new SetCardInfo("The Wretched", 11, Rarity.RARE, mage.cards.t.TheWretched.class));
         cards.add(new SetCardInfo("Tobias Andrion", 122, Rarity.UNCOMMON, mage.cards.t.TobiasAndrion.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 89, Rarity.COMMON, mage.cards.t.TormodsCrypt.class));
