@@ -77,6 +77,7 @@
         <gameType name="Canadian Highlander Two Player Duel" jar="mage-game-canadianhighlanderduel.jar" className="mage.game.CanadianHighlanderDuelMatch" typeName="mage.game.CanadianHighlanderDuelType"/>
         <gameType name="Penny Dreadful Commander Free For All" jar="mage-game-pennydreadfulcommanderfreeforall.jar" className="mage.game.PennyDreadfulCommanderFreeForAllMatch" typeName="mage.game.PennyDreadfulCommanderFreeForAllType"/>
         <gameType name="Momir Basic Two Player Duel" jar="mage-game-momirduel.jar" className="mage.game.MomirDuelMatch" typeName="mage.game.MomirDuelType"/>
+		<gameType name="Momir Basic Free For All" jar="mage-game-momir.jar" className="mage.game.MomirFreeForAllMatch" typeName="mage.game.MomirFreeForAllType"/>
     </gameTypes>
     <tournamentTypes>
         <tournamentType name="Constructed Elimination" jar="mage-tournament-constructed.jar" className="mage.tournament.ConstructedEliminationTournament" typeName="mage.tournament.ConstructedEliminationTournamentType"/>
