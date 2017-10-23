@@ -78,6 +78,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Diamond Kaleidoscope", 143, Rarity.RARE, mage.cards.d.DiamondKaleidoscope.class));
         cards.add(new SetCardInfo("Dormant Volcano", 161, Rarity.UNCOMMON, mage.cards.d.DormantVolcano.class));
         cards.add(new SetCardInfo("Dragon Mask", 144, Rarity.UNCOMMON, mage.cards.d.DragonMask.class));
+        cards.add(new SetCardInfo("Dream Tides", 31, Rarity.UNCOMMON, mage.cards.d.DreamTides.class));
         cards.add(new SetCardInfo("Dwarven Vigilantes", 77, Rarity.COMMON, mage.cards.d.DwarvenVigilantes.class));
         cards.add(new SetCardInfo("Elephant Grass", 54, Rarity.UNCOMMON, mage.cards.e.ElephantGrass.class));
         cards.add(new SetCardInfo("Elven Cache", 55, Rarity.COMMON, mage.cards.e.ElvenCache.class));
