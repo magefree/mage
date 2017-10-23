@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Illuminate extends CardImpl {
 
     public Illuminate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
         // Kicker {2}{R} and/or {3}{U}
         KickerAbility kickerAbility = new KickerAbility("{2}{R}");
@@ -57,13 +57,13 @@ public class Illuminate extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-            new DamageTargetControllerEffect(new ManacostVariableValue()),
-            new KickedCostCondition("{2}{R}"),
-            "If {this} was kicked with its {2}{R} kicker, it deals X damage to that creature's controller."));
+                new DamageTargetControllerEffect(new ManacostVariableValue()),
+                new KickedCostCondition("{2}{R}"),
+                "If {this} was kicked with its {2}{R} kicker, it deals X damage to that creature's controller."));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-            new DrawCardSourceControllerEffect(new ManacostVariableValue()),
-            new KickedCostCondition("{3}{U}"),
-            "If {this} was kicked with its {3}{U} kicker, you draw X cards."));
+                new DrawCardSourceControllerEffect(new ManacostVariableValue()),
+                new KickedCostCondition("{3}{U}"),
+                " If {this} was kicked with its {3}{U} kicker, you draw X cards."));
 
     }
 

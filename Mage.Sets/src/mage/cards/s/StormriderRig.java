@@ -50,20 +50,20 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 public class StormriderRig extends CardImpl {
 
     public StormriderRig(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));        
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+
         // Whenever a creature enters the battlefield under your control, you may attach Stormrider Rig to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
-                new FilterControlledCreaturePermanent(), true, SetTargetPointer.PERMANENT, null, true));
-        
+                new FilterControlledCreaturePermanent("a creature"), true, SetTargetPointer.PERMANENT, null, true));
+
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));        
-        
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+
     }
 
     public StormriderRig(final StormriderRig card) {

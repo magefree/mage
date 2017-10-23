@@ -50,10 +50,9 @@ import mage.counters.CounterType;
 public class DeityOfScars extends CardImpl {
 
     public DeityOfScars(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/G}{B/G}{B/G}{B/G}{B/G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B/G}{B/G}{B/G}{B/G}{B/G}");
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.AVATAR);
-
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
@@ -62,7 +61,7 @@ public class DeityOfScars extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Deity of Scars enters the battlefield with two -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), "with two -1/-1 counters on it"));
 
         // {B/G}, Remove a -1/-1 counter from Deity of Scars: Regenerate Deity of Scars.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B/G}"));

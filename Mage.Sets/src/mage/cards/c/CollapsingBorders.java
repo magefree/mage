@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 
@@ -47,7 +48,7 @@ import mage.constants.TargetController;
 public class CollapsingBorders extends CardImpl {
 
     public CollapsingBorders(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // Domain - At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands he or she controls. Then Collapsing Borders deals 3 damage to him or her.
         Effect effect = new GainLifeTargetEffect(new DomainValue(true));
@@ -56,6 +57,7 @@ public class CollapsingBorders extends CardImpl {
         effect = new DamageTargetEffect(3);
         effect.setText("Then {this} deals 3 damage to him or her.");
         ability.addEffect(effect);
+        ability.setAbilityWord(AbilityWord.DOMAIN);
         this.addAbility(ability);
     }
 

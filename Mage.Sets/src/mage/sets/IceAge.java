@@ -77,6 +77,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Blue Scarab", 233, Rarity.UNCOMMON, mage.cards.b.BlueScarab.class));
         cards.add(new SetCardInfo("Brainstorm", 61, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Brand of Ill Omen", 177, Rarity.RARE, mage.cards.b.BrandOfIllOmen.class));
+        cards.add(new SetCardInfo("Breath of Dreams", 62, Rarity.UNCOMMON, mage.cards.b.BreathOfDreams.class));
         cards.add(new SetCardInfo("Brine Shaman", 3, Rarity.COMMON, mage.cards.b.BrineShaman.class));
         cards.add(new SetCardInfo("Brown Ouphe", 116, Rarity.COMMON, mage.cards.b.BrownOuphe.class));
         cards.add(new SetCardInfo("Brushland", 327, Rarity.RARE, mage.cards.b.Brushland.class));
@@ -85,6 +86,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Caribou Range", 235, Rarity.RARE, mage.cards.c.CaribouRange.class));
         cards.add(new SetCardInfo("Celestial Sword", 289, Rarity.RARE, mage.cards.c.CelestialSword.class));
         cards.add(new SetCardInfo("Centaur Archer", 360, Rarity.UNCOMMON, mage.cards.c.CentaurArcher.class));
+        cards.add(new SetCardInfo("Chaos Moon", 179, Rarity.RARE, mage.cards.c.ChaosMoon.class));
         cards.add(new SetCardInfo("Chub Toad", 117, Rarity.COMMON, mage.cards.c.ChubToad.class));
         cards.add(new SetCardInfo("Circle of Protection: Black", 236, Rarity.COMMON, mage.cards.c.CircleOfProtectionBlack.class));
         cards.add(new SetCardInfo("Circle of Protection: Blue", 237, Rarity.COMMON, mage.cards.c.CircleOfProtectionBlue.class));
@@ -108,6 +110,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Disenchant", 244, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Drift of the Dead", 11, Rarity.UNCOMMON, mage.cards.d.DriftOfTheDead.class));
         cards.add(new SetCardInfo("Dwarven Armory", 182, Rarity.RARE, mage.cards.d.DwarvenArmory.class));
+        cards.add(new SetCardInfo("Earthlore", 119, Rarity.COMMON, mage.cards.e.Earthlore.class));
         cards.add(new SetCardInfo("Earthlink", 363, Rarity.RARE, mage.cards.e.Earthlink.class));
         cards.add(new SetCardInfo("Elder Druid", 120, Rarity.RARE, mage.cards.e.ElderDruid.class));
         cards.add(new SetCardInfo("Elemental Augury", 364, Rarity.RARE, mage.cards.e.ElementalAugury.class));
@@ -115,6 +118,8 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Energy Storm", 248, Rarity.RARE, mage.cards.e.EnergyStorm.class));
         cards.add(new SetCardInfo("Enervate", 67, Rarity.COMMON, mage.cards.e.Enervate.class));
         cards.add(new SetCardInfo("Errantry", 183, Rarity.COMMON, mage.cards.e.Errantry.class));
+        cards.add(new SetCardInfo("Essence Filter", 121, Rarity.COMMON, mage.cards.e.EssenceFilter.class));
+        cards.add(new SetCardInfo("Essence Flare", 69, Rarity.COMMON, mage.cards.e.EssenceFlare.class));
         cards.add(new SetCardInfo("Fanatical Fever", 122, Rarity.UNCOMMON, mage.cards.f.FanaticalFever.class));
         cards.add(new SetCardInfo("Fear", 12, Rarity.COMMON, mage.cards.f.Fear.class));
         cards.add(new SetCardInfo("Fiery Justice", 366, Rarity.RARE, mage.cards.f.FieryJustice.class));
@@ -207,6 +212,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Magus of the Unseen", 82, Rarity.RARE, mage.cards.m.MagusOfTheUnseen.class));
         cards.add(new SetCardInfo("Malachite Talisman", 303, Rarity.UNCOMMON, mage.cards.m.MalachiteTalisman.class));
         cards.add(new SetCardInfo("Marton Stromgald", 199, Rarity.RARE, mage.cards.m.MartonStromgald.class));
+        cards.add(new SetCardInfo("Melting", 201, Rarity.UNCOMMON, mage.cards.m.Melting.class));
         cards.add(new SetCardInfo("Merieke Ri Berit", 375, Rarity.RARE, mage.cards.m.MeriekeRiBerit.class));
         cards.add(new SetCardInfo("Mesmeric Trance", 83, Rarity.RARE, mage.cards.m.MesmericTrance.class));
         cards.add(new SetCardInfo("Meteor Shower", 202, Rarity.COMMON, mage.cards.m.MeteorShower.class));
@@ -254,6 +260,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Rally", 272, Rarity.COMMON, mage.cards.r.Rally.class));
         cards.add(new SetCardInfo("Ray of Command", 92, Rarity.COMMON, mage.cards.r.RayOfCommand.class));
         cards.add(new SetCardInfo("Ray of Erasure", 93, Rarity.COMMON, mage.cards.r.RayOfErasure.class));
+        cards.add(new SetCardInfo("Reality Twist", 94, Rarity.RARE, mage.cards.r.RealityTwist.class));
         cards.add(new SetCardInfo("Reclamation", 378, Rarity.RARE, mage.cards.r.Reclamation.class));
         cards.add(new SetCardInfo("Red Scarab", 273, Rarity.UNCOMMON, mage.cards.r.RedScarab.class));
         cards.add(new SetCardInfo("Regeneration", 147, Rarity.COMMON, mage.cards.r.Regeneration.class));
@@ -267,6 +274,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Shambling Strider", 151, Rarity.COMMON, mage.cards.s.ShamblingStrider.class));
         cards.add(new SetCardInfo("Shatter", 216, Rarity.COMMON, mage.cards.s.Shatter.class));
         cards.add(new SetCardInfo("Shield of the Ages", 310, Rarity.UNCOMMON, mage.cards.s.ShieldOfTheAges.class));
+        cards.add(new SetCardInfo("Shyft", 96, Rarity.RARE, mage.cards.s.Shyft.class));
         cards.add(new SetCardInfo("Sibilant Spirit", 97, Rarity.RARE, mage.cards.s.SibilantSpirit.class));
         cards.add(new SetCardInfo("Silver Erne", 98, Rarity.UNCOMMON, mage.cards.s.SilverErne.class));
         cards.add(new SetCardInfo("Skeleton Ship", 379, Rarity.RARE, mage.cards.s.SkeletonShip.class));
@@ -326,6 +334,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Growth", 165, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Wind Spirit", 106, Rarity.UNCOMMON, mage.cards.w.WindSpirit.class));
         cards.add(new SetCardInfo("Wings of Aesthir", 383, Rarity.UNCOMMON, mage.cards.w.WingsOfAesthir.class));
+        cards.add(new SetCardInfo("Withering Wisps", 56, Rarity.UNCOMMON, mage.cards.w.WitheringWisps.class));
         cards.add(new SetCardInfo("Woolly Mammoths", 166, Rarity.COMMON, mage.cards.w.WoollyMammoths.class));
         cards.add(new SetCardInfo("Word of Blasting", 224, Rarity.UNCOMMON, mage.cards.w.WordOfBlasting.class));
         cards.add(new SetCardInfo("Wrath of Marit Lage", 109, Rarity.RARE, mage.cards.w.WrathOfMaritLage.class));

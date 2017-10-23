@@ -48,7 +48,9 @@ public class GreatDefender extends CardImpl {
 
         // Target creature gets +0/+X until end of turn, where X is its converted mana cost.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(new StaticValue(0), new TargetConvertedManaCost(), Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(new StaticValue(0), new TargetConvertedManaCost(), Duration.EndOfTurn, true)
+                .setText("Target creature gets +0/+X until end of turn, where X is its converted mana cost.")
+        );
     }
 
     public GreatDefender(final GreatDefender card) {

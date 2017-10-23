@@ -97,6 +97,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Dream Cache", 59, Rarity.COMMON, mage.cards.d.DreamCache.class));
         cards.add(new SetCardInfo("Dregs of Sorrow", 25, Rarity.RARE, mage.cards.d.DregsOfSorrow.class));
         cards.add(new SetCardInfo("Earthcraft", 116, Rarity.RARE, mage.cards.e.Earthcraft.class));
+        cards.add(new SetCardInfo("Echo Chamber", 272, Rarity.RARE, mage.cards.e.EchoChamber.class));
         cards.add(new SetCardInfo("Eladamri, Lord of Leaves", 117, Rarity.RARE, mage.cards.e.EladamriLordOfLeaves.class));
         cards.add(new SetCardInfo("Eladamri's Vineyard", 118, Rarity.RARE, mage.cards.e.EladamrisVineyard.class));
         cards.add(new SetCardInfo("Elite Javelineer", 229, Rarity.COMMON, mage.cards.e.EliteJavelineer.class));

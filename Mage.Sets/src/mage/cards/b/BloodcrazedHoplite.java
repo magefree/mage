@@ -61,7 +61,7 @@ public class BloodcrazedHoplite extends CardImpl {
     }
 
     public BloodcrazedHoplite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
 
         this.power = new MageInt(2);
@@ -88,7 +88,7 @@ public class BloodcrazedHoplite extends CardImpl {
 class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
 
     public BloodcrazedHopliteTriggeredAbility() {
-        super(Zone.ALL, new RemoveCounterTargetEffect(CounterType.P1P1.createInstance()), true);
+        super(Zone.ALL, new RemoveCounterTargetEffect(CounterType.P1P1.createInstance()), false);
     }
 
     public BloodcrazedHopliteTriggeredAbility(BloodcrazedHopliteTriggeredAbility ability) {

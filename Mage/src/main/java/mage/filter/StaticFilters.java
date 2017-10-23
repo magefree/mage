@@ -59,7 +59,7 @@ public final class StaticFilters {
     public static final FilterCreaturePermanent FILTER_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature");
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURES = new FilterCreaturePermanent("creatures");
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_GOBLINS = new FilterCreaturePermanent(SubType.GOBLIN, "Goblin creatures");
-    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_SLIVERS = new FilterCreaturePermanent(SubType.SLIVER, "Sliver creatures");
+    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_SLIVERS = new FilterCreaturePermanent(SubType.SLIVER, "all Sliver creatures");
     public static final FilterPlaneswalkerPermanent FILTER_PERMANENT_PLANESWALKER = new FilterPlaneswalkerPermanent();
 
     public static final FilterPermanent FILTER_PERMANENT_NON_LAND = new FilterNonlandPermanent();
@@ -69,6 +69,7 @@ public final class StaticFilters {
             = (FilterSpell) new FilterSpell("noncreature spell").add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
 
     public static final FilterSpell FILTER_SPELL = new FilterSpell();
+    public static final FilterSpell FILTER_A_SPELL = new FilterSpell("a spell");
 
     public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELL = new FilterSpell("instant or sorcery spell");
     public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELLS = new FilterSpell("instant or sorcery spells");

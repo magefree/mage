@@ -109,6 +109,6 @@ class AlphaStatusDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "each other creature on the battlefield that shares a creature type with it";
+        return "other creature on the battlefield that shares a creature type with it";
     }
 }

@@ -66,7 +66,7 @@ public class SpinalEmbrace extends CardImpl {
     }
 
     public SpinalEmbrace(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}{B}");
 
         // Cast Spinal Embrace only during combat.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT));
@@ -77,7 +77,7 @@ public class SpinalEmbrace extends CardImpl {
         Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
         effect.setText("and gain control of it");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn"));
         this.getSpellAbility().addEffect(new SpinalEmbraceAddDelayedEffect());
     }
 

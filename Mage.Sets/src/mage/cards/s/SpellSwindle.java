@@ -69,7 +69,7 @@ class SpellSwindleEffect extends OneShotEffect {
     public SpellSwindleEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell. Create X colorless Treasure artifact tokens, where X is that spell's converted mana cost. "
-                + "They have \"{T}, Sacrifice this artifact: Add one mana of any color to your mana pool";
+                + "They have \"{T}, Sacrifice this artifact: Add one mana of any color to your mana pool.\"";
     }
 
     public SpellSwindleEffect(final SpellSwindleEffect effect) {

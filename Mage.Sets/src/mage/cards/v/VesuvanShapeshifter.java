@@ -72,9 +72,6 @@ public class VesuvanShapeshifter extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // Morph {1}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}")));
-
         // As Vesuvan Shapeshifter turned face up, may choose another creature. If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AsTurnedFaceUpEffect(new VesuvanShapeshifterEffect(), false));
         ability.setWorksFaceDown(true);
@@ -91,6 +88,9 @@ public class VesuvanShapeshifter extends CardImpl {
         effect = new VesuvanShapeshifterFaceDownEffect();
         ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, true);
         this.addAbility(ability);
+
+        // Morph {1}{U}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}")));
     }
 
     public VesuvanShapeshifter(final VesuvanShapeshifter card) {

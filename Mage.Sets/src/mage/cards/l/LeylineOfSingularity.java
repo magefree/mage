@@ -36,9 +36,7 @@ import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -48,21 +46,14 @@ import mage.game.permanent.Permanent;
  */
 public class LeylineOfSingularity extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("nonland permanents");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-    }
-
     public LeylineOfSingularity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
-    
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
+
         // If Leyline of Singularity is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
 
         // All nonland permanents are legendary.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetSupertypeAllEffect(Duration.WhileOnBattlefield, filter)));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetSupertypeAllEffect()));
     }
 
     public LeylineOfSingularity(final LeylineOfSingularity card) {
@@ -75,19 +66,16 @@ public class LeylineOfSingularity extends CardImpl {
     }
 }
 
-
 class SetSupertypeAllEffect extends ContinuousEffectImpl {
 
-    private final FilterPermanent filter;
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
 
-    public SetSupertypeAllEffect(Duration duration, FilterPermanent filter) {
-        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
-        this.filter = filter;
+    public SetSupertypeAllEffect() {
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
     }
 
     public SetSupertypeAllEffect(final SetSupertypeAllEffect effect) {
         super(effect);
-        this.filter = effect.filter;
     }
 
     @Override
@@ -97,9 +85,8 @@ class SetSupertypeAllEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                permanent.addSuperType(SuperType.LEGENDARY);
-
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            permanent.addSuperType(SuperType.LEGENDARY);
         }
         return true;
     }

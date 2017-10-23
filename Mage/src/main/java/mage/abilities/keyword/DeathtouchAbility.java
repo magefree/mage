@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.keyword;
 
 import mage.constants.Zone;
@@ -40,7 +39,7 @@ import java.io.ObjectStreamException;
  */
 public class DeathtouchAbility extends StaticAbility implements MageSingleton {
 
-    private static final DeathtouchAbility instance =  new DeathtouchAbility();
+    private static final DeathtouchAbility instance = new DeathtouchAbility();
 
     private Object readResolve() throws ObjectStreamException {
         return instance;
@@ -56,14 +55,12 @@ public class DeathtouchAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Deathtouch <i>(Any amount of damage this deals to a creature is enough to destroy it.)</i>";
+        return "deathtouch";
     }
 
     @Override
     public DeathtouchAbility copy() {
         return instance;
     }
-
-
 
 }

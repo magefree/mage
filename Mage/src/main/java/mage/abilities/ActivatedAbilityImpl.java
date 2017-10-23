@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  */
 public abstract class ActivatedAbilityImpl extends AbilityImpl implements ActivatedAbility {
 
-    static class ActivationInfo {
+    protected static class ActivationInfo {
 
         public int turnNum;
         public int activationCounter;
@@ -276,11 +276,13 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected boolean hasMoreActivationsThisTurn(Game game) {
-        if (maxActivationsPerTurn == Integer.MAX_VALUE) {
+        if (getMaxActivationsPerTurn(game) == Integer.MAX_VALUE) {
             return true;
         }
         ActivationInfo activationInfo = getActivationInfo(game);
-        return activationInfo == null || activationInfo.turnNum != game.getTurnNum() || activationInfo.activationCounter < maxActivationsPerTurn;
+        return activationInfo == null
+                || activationInfo.turnNum != game.getTurnNum()
+                || activationInfo.activationCounter < getMaxActivationsPerTurn(game);
     }
 
     @Override
@@ -307,7 +309,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         this.maxActivationsPerTurn = maxActivationsPerTurn;
     }
 
-    private ActivationInfo getActivationInfo(Game game) {
+    public int getMaxActivationsPerTurn(Game game) {
+        return maxActivationsPerTurn;
+    }
+
+    protected ActivationInfo getActivationInfo(Game game) {
         Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsTurn" + originalId, sourceId, game));
         Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsCount" + originalId, sourceId, game));
         if (turnNum == null || activationCount == null) {
@@ -316,7 +322,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         return new ActivationInfo(turnNum, activationCount);
     }
 
-    private void setActivationInfo(ActivationInfo activationInfo, Game game) {
+    protected void setActivationInfo(ActivationInfo activationInfo, Game game) {
         game.getState().setValue(CardUtil.getCardZoneString("activationsTurn" + originalId, sourceId, game), activationInfo.turnNum);
         game.getState().setValue(CardUtil.getCardZoneString("activationsCount" + originalId, sourceId, game), activationInfo.activationCounter);
     }

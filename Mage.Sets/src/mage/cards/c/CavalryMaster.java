@@ -46,15 +46,15 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  * @author Plopman
  */
 public class CavalryMaster extends CardImpl {
-    
+
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with flanking");
-    
-    static{
+
+    static {
         filter.add(new AbilityPredicate(FlankingAbility.class));
     }
-    
+
     public CavalryMaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
 
@@ -64,7 +64,10 @@ public class CavalryMaster extends CardImpl {
         // Flanking
         this.addAbility(new FlankingAbility());
         // Other creatures you control with flanking have flanking.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new FlankingAbility(), Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD, new GainAbilityAllEffect(new FlankingAbility(), Duration.WhileOnBattlefield, filter, true)
+                        .setText("Other creatures you control with flanking have flanking.")
+        ));
     }
 
     public CavalryMaster(final CavalryMaster card) {

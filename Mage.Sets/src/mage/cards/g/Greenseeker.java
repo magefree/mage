@@ -51,7 +51,7 @@ import java.util.UUID;
 public class Greenseeker extends CardImpl {
 
     public Greenseeker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(1);
@@ -59,8 +59,8 @@ public class Greenseeker extends CardImpl {
 
         // {G}, {tap}, Discard a card: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true, true),
-            new ManaCostsImpl("{G}"));
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true, true),
+                new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

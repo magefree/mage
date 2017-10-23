@@ -29,6 +29,8 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,18 +39,20 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackAbility;
+import mage.players.Player;
 
 /**
  *
- * @author MarcoMarin
+ * @author TheElk801
  */
 public class Powerleech extends CardImpl {
 
     public Powerleech(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
 
         // Whenever an artifact an opponent controls becomes tapped or an opponent activates an artifact's ability without {tap} in its activation cost, you gain 1 life.
-        this.addAbility(new AbilityActivatedTriggeredAbility3());
+        this.addAbility(new PowerleechTriggeredAbility());
     }
 
     public Powerleech(final Powerleech card) {
@@ -60,37 +64,67 @@ public class Powerleech extends CardImpl {
         return new Powerleech(this);
     }
 }
-class AbilityActivatedTriggeredAbility3 extends TriggeredAbilityImpl {
 
-    AbilityActivatedTriggeredAbility3() {
+class PowerleechTriggeredAbility extends TriggeredAbilityImpl {
+
+    PowerleechTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1));
     }
 
-    AbilityActivatedTriggeredAbility3(final AbilityActivatedTriggeredAbility3 ability) {
+    PowerleechTriggeredAbility(final PowerleechTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public AbilityActivatedTriggeredAbility3 copy() {
-        return new AbilityActivatedTriggeredAbility3(this);
+    public PowerleechTriggeredAbility copy() {
+        return new PowerleechTriggeredAbility(this);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY ||
-               event.getType() == GameEvent.EventType.TAPPED;
+        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY
+                || event.getType() == GameEvent.EventType.TAPPED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent isArtifact = game.getPermanent(event.getSourceId());
-        return isArtifact != null && isArtifact.isArtifact() &&
-                !isArtifact.getControllerId().equals(this.getControllerId());
-        
+        Player player = game.getPlayer(controllerId);
+        if (player == null) {
+            return false;
+        }
+        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            if (permanent == null || !permanent.isArtifact()) {
+                return false;
+            }
+            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+            if (stackAbility == null) {
+                return false;
+            }
+            boolean triggerable = true;
+            for (Cost cost : stackAbility.getCosts()) {
+                if (cost instanceof TapSourceCost) {
+                    triggerable = false;
+                    break;
+                }
+            }
+            if (!triggerable) {
+                return false;
+            }
+            return player.hasOpponent(permanent.getControllerId(), game);
+        }
+        if (event.getType() == GameEvent.EventType.TAPPED) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (permanent == null || !permanent.isArtifact()) {
+                return false;
+            }
+            return player.hasOpponent(permanent.getControllerId(), game);
+        }
+        return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever an artifact an opponent controls becomes tapped or an opponent activates an artifact's ability without {tap} in its activation cost, you gain 1 life.";
+        return "Whenever an artifact an opponent controls becomes tapped or an opponent activates an artifact's ability without {T} in its activation cost, you gain 1 life.";
     }
 }

@@ -251,6 +251,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Foundry", 246, Rarity.RARE, mage.cards.s.SoulFoundry.class));
         cards.add(new SetCardInfo("Soul Nova", 25, Rarity.UNCOMMON, mage.cards.s.SoulNova.class));
         cards.add(new SetCardInfo("Spellweaver Helix", 247, Rarity.RARE, mage.cards.s.SpellweaverHelix.class));
+        cards.add(new SetCardInfo("Sphere of Purity", 26, Rarity.COMMON, mage.cards.s.SphereOfPurity.class));
         cards.add(new SetCardInfo("Spikeshot Goblin", 108, Rarity.COMMON, mage.cards.s.SpikeshotGoblin.class));
         cards.add(new SetCardInfo("Spoils of the Vault", 78, Rarity.RARE, mage.cards.s.SpoilsOfTheVault.class));
         cards.add(new SetCardInfo("Stalking Stones", 284, Rarity.UNCOMMON, mage.cards.s.StalkingStones.class));

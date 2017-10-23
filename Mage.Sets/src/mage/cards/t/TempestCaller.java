@@ -54,7 +54,7 @@ public class TempestCaller extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Tempest Caller enters the battlefield, tap all creatures target opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new TapAllTargetPlayerControlsEffect(new FilterCreaturePermanent("creatures target opponent controls")));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new TapAllTargetPlayerControlsEffect(new FilterCreaturePermanent("creatures")));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

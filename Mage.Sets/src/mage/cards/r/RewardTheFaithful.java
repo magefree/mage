@@ -42,10 +42,11 @@ import mage.target.TargetPlayer;
 public class RewardTheFaithful extends CardImpl {
 
     public RewardTheFaithful(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Any number of target players each gain life equal to the highest converted mana cost among permanents you control.
-        this.getSpellAbility().addEffect(new GainLifeTargetEffect(new HighestConvertedManaCostValue()));
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(new HighestConvertedManaCostValue())
+                .setText("Any number of target players each gain life equal to the highest converted mana cost among permanents you control."));
         this.getSpellAbility().addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
     }
 

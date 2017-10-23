@@ -45,19 +45,19 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class DictateOfErebos extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public DictateOfErebos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // Whenever a creature you control dies, each opponent sacrifices a creature.
-        this.addAbility(new DiesCreatureTriggeredAbility(new SacrificeOpponentsEffect(new FilterControlledCreaturePermanent("a creature")), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new SacrificeOpponentsEffect(new FilterControlledCreaturePermanent("creature")), false, filter));
     }
 
     public DictateOfErebos(final DictateOfErebos card) {

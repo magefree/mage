@@ -33,9 +33,7 @@ import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 /**
@@ -43,23 +41,15 @@ import mage.target.TargetSpell;
  * @author fireshoes
  */
 public class Reiterate extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell();
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
 
     public Reiterate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
 
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));
-        
+
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
         this.getSpellAbility().addEffect(new CopyTargetSpellEffect());
     }
 

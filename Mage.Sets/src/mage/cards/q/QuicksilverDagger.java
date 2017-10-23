@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -55,9 +56,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class QuicksilverDagger extends CardImpl {
 
     public QuicksilverDagger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{R}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -65,12 +65,15 @@ public class QuicksilverDagger extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted creature has "{tap}: This creature deals 1 damage to target player. You draw a card."
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         gainAbility.addTarget(new TargetPlayer());
         gainAbility.addEffect(new DrawCardSourceControllerEffect(1));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
+                        "Enchanted creature has \"{tap}: This creature deals 1 damage to target player. You draw a card.\"")
+        ));
     }
 
     public QuicksilverDagger(final QuicksilverDagger card) {

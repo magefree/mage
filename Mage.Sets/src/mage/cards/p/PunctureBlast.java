@@ -41,11 +41,12 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class PunctureBlast extends CardImpl {
 
     public PunctureBlast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         this.addAbility(WitherAbility.getInstance());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().setRuleAtTheTop(false);
     }
 
     public PunctureBlast(final PunctureBlast card) {

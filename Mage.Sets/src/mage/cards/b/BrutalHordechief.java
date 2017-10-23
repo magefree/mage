@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleAllEffect;
@@ -71,7 +71,7 @@ public class BrutalHordechief extends CardImpl {
 
         // {3}{R/W}{R/W}: Creatures your opponents control block this turn if able, and you choose how those creatures block.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlocksIfAbleAllEffect(filter, Duration.EndOfTurn), new ManaCostsImpl("{3}{R/W}{R/W}"));
-        ability.addEffect(new BrutalHordechiefReplacementEffect());
+        ability.addEffect(new BrutalHordechiefChooseBlockersEffect());
         this.addAbility(ability);
     }
 
@@ -123,20 +123,20 @@ class BrutalHordechiefTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class BrutalHordechiefReplacementEffect extends ReplacementEffectImpl {
+class BrutalHordechiefChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl { // TODO: reverse the resolution order in case of effect multiples
 
-    public BrutalHordechiefReplacementEffect() {
-        super(Duration.EndOfCombat, Outcome.Benefit);
+    public BrutalHordechiefChooseBlockersEffect() {
+        super(Duration.EndOfTurn, Outcome.Benefit, false, false);
         staticText = ", and you choose how those creatures block";
     }
 
-    public BrutalHordechiefReplacementEffect(final BrutalHordechiefReplacementEffect effect) {
+    public BrutalHordechiefChooseBlockersEffect(final BrutalHordechiefChooseBlockersEffect effect) {
         super(effect);
     }
 
     @Override
-    public BrutalHordechiefReplacementEffect copy() {
-        return new BrutalHordechiefReplacementEffect(this);
+    public BrutalHordechiefChooseBlockersEffect copy() {
+        return new BrutalHordechiefChooseBlockersEffect(this);
     }
 
     @Override
@@ -151,16 +151,11 @@ class BrutalHordechiefReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId());
-    }
-    
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player blockController = game.getPlayer(source.getControllerId());
         if (blockController != null) {
             game.getCombat().selectBlockers(blockController, game);
             return true;
         }
         return false;
-    }    
+    }
 }

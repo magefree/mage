@@ -138,7 +138,11 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                 break;
             }
         }
-        sb.append(morphCosts.getText()).append(' ');
+        sb.append(morphCosts.getText());
+        if (!(morphCosts.get(morphCosts.size() - 1) instanceof ManaCosts)) {
+            sb.append('.');
+        }
+        sb.append(' ');
         if (megamorph) {
             sb.append(REMINDER_TEXT_MEGA);
         } else {

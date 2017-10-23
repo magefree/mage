@@ -78,6 +78,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom, false),
                 DashedCondition.instance, "", "");
         ability.addEffect(new DashAddDelayedTriggeredAbilityEffect());
+        ability.setRuleVisible(false);
         addSubAbility(ability);
 
     }

@@ -46,11 +46,12 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
     public CastSourceTriggeredAbility(Effect effect) {
         this(effect, false);
     }
-    
+
     public CastSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.STACK, effect, optional);
+        this.ruleAtTheTop = true;
     }
-    
+
     public CastSourceTriggeredAbility(final CastSourceTriggeredAbility ability) {
         super(ability);
     }
@@ -70,7 +71,7 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getSourceId().equals(this.getSourceId())) {
             MageObject spellObject = game.getObject(sourceId);
             if (spellObject != null && (spellObject instanceof Spell)) {
-                Spell spell = (Spell)spellObject;
+                Spell spell = (Spell) spellObject;
                 if (spell.getSpellAbility() != null) {
                     for (Effect effect : getEffects()) {
                         effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());

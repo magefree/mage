@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class EldraziObligator extends CardImpl {
 
     public EldraziObligator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
@@ -65,15 +65,15 @@ public class EldraziObligator extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
-                        
+
         DoIfCostPaid costPaidEffect = new DoIfCostPaid(new GainControlTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{C}"));
         Effect untapEffect = new UntapTargetEffect();
-        untapEffect.setText("Untap that creature");        
+        untapEffect.setText("untap that creature,");
         Effect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        hasteEffect.setText("It gains haste until end of turn");
+        hasteEffect.setText("and it gains haste until end of turn");
         costPaidEffect.addEffect(untapEffect);
-        costPaidEffect.addEffect(hasteEffect);        
-            
+        costPaidEffect.addEffect(hasteEffect);
+
         // When you cast Eldrazi Obligator, you may pay {1}{C}. If you do, gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
         Ability ability = new CastSourceTriggeredAbility(costPaidEffect);
 

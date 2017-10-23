@@ -77,7 +77,7 @@ public class JacesSentinel extends CardImpl {
         ability.addEffect(new ConditionalContinuousEffect(
                 new CantBeBlockedSourceEffect(),
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "and has can't be blocked"));
+                "and can't be blocked"));
         this.addAbility(ability);
     }
 

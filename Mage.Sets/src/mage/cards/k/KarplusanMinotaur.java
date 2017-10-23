@@ -32,20 +32,15 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -60,7 +55,7 @@ import mage.target.common.TargetOpponent;
 public class KarplusanMinotaur extends CardImpl {
 
     public KarplusanMinotaur(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -68,7 +63,7 @@ public class KarplusanMinotaur extends CardImpl {
 
         // Cumulative upkeep-Flip a coin.
         this.addAbility(new CumulativeUpkeepAbility(new KarplusanMinotaurCost()));
-        
+
         // Whenever you win a coin flip, Karplusan Minotaur deals 1 damage to target creature or player.
         Ability abilityWin = new KarplusanMinotaurFlipWinTriggeredAbility();
         abilityWin.addTarget(new TargetCreatureOrPlayer());
@@ -80,23 +75,22 @@ public class KarplusanMinotaur extends CardImpl {
         abilityLose.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(abilityLose);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof KarplusanMinotaurFlipLoseTriggeredAbility) {
             Player controller = game.getPlayer(ability.getControllerId());
-            if(controller != null) {
+            if (controller != null) {
                 UUID opponentId = null;
-                if(game.getOpponents(controller.getId()).size() > 1) {
+                if (game.getOpponents(controller.getId()).size() > 1) {
                     Target target = new TargetOpponent(true);
-                    if(controller.chooseTarget(Outcome.Neutral, target, ability, game)) {
+                    if (controller.chooseTarget(Outcome.Neutral, target, ability, game)) {
                         opponentId = target.getFirstTarget();
                     }
-                }
-                else {
+                } else {
                     opponentId = game.getOpponents(controller.getId()).iterator().next();
                 }
-                if(opponentId != null) {
+                if (opponentId != null) {
                     ability.getTargets().get(0).setTargetController(opponentId);
                 }
             }
@@ -171,12 +165,12 @@ class KarplusanMinotaurFlipLoseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you lose a coin flip, {this} deals 1 damage to target creature or player of an opponent's choice";
+        return "Whenever you lose a coin flip, {this} deals 1 damage to target creature or player of an opponent's choice.";
     }
 }
 
 class KarplusanMinotaurCost extends CostImpl {
-    
+
     KarplusanMinotaurCost() {
         this.text = "Flip a coin";
     }
@@ -188,7 +182,7 @@ class KarplusanMinotaurCost extends CostImpl {
             controller.flipCoin(game);
             this.paid = true;
             return true;
-            }
+        }
         return false;
     }
 
@@ -202,7 +196,7 @@ class KarplusanMinotaurCost extends CostImpl {
         }
         return false;
     }
-    
+
     @Override
     public KarplusanMinotaurCost copy() {
         return new KarplusanMinotaurCost();

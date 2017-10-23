@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -42,7 +41,6 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -57,14 +55,13 @@ public class BlindWithAnger extends CardImpl {
     }
 
     public BlindWithAnger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.subtype.add(SubType.ARCANE);
 
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        Target target = new TargetCreaturePermanent(filter);
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap target nonlegendary creature"));
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn).setText("and gain control of it until end of turn"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn."));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public BlindWithAnger(final BlindWithAnger card) {

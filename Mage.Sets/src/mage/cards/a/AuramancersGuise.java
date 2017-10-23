@@ -70,7 +70,7 @@ public class AuramancersGuise extends CardImpl {
         BoostEnchantedEffect effect = new BoostEnchantedEffect(ptBoost, ptBoost, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +2/+2 for each Aura attached to it");
         SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        ability2.addEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA));
+        ability2.addEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA).setText("and has vigilance"));
         this.addAbility(ability2);
     }
 

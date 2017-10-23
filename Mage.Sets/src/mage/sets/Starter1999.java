@@ -168,6 +168,7 @@ public class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Relearn", 48, Rarity.UNCOMMON, mage.cards.r.Relearn.class));
         cards.add(new SetCardInfo("Relentless Assault", 115, Rarity.RARE, mage.cards.r.RelentlessAssault.class));
         cards.add(new SetCardInfo("Remove Soul", 49, Rarity.COMMON, mage.cards.r.RemoveSoul.class));
+        cards.add(new SetCardInfo("Renewing Touch", 140, Rarity.UNCOMMON, mage.cards.r.RenewingTouch.class));
         cards.add(new SetCardInfo("Righteous Charge", 22, Rarity.UNCOMMON, mage.cards.r.RighteousCharge.class));
         cards.add(new SetCardInfo("Righteous Fury", 23, Rarity.RARE, mage.cards.r.RighteousFury.class));
         cards.add(new SetCardInfo("Royal Falcon", 24, Rarity.COMMON, mage.cards.r.RoyalFalcon.class));

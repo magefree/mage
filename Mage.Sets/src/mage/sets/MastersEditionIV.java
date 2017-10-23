@@ -95,6 +95,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Clay Statue", 189, Rarity.UNCOMMON, mage.cards.c.ClayStatue.class));
         cards.add(new SetCardInfo("Clockwork Avian", 190, Rarity.UNCOMMON, mage.cards.c.ClockworkAvian.class));
         cards.add(new SetCardInfo("Clockwork Gnomes", 191, Rarity.UNCOMMON, mage.cards.c.ClockworkGnomes.class));
+        cards.add(new SetCardInfo("Clockwork Swarm", 192, Rarity.COMMON, mage.cards.c.ClockworkSwarm.class));
         cards.add(new SetCardInfo("Cloud Dragon", 41, Rarity.RARE, mage.cards.c.CloudDragon.class));
         cards.add(new SetCardInfo("Cloud Spirit", 42, Rarity.COMMON, mage.cards.c.CloudSpirit.class));
         cards.add(new SetCardInfo("Colossus of Sardia", 193, Rarity.RARE, mage.cards.c.ColossusOfSardia.class));
@@ -185,6 +186,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Mahamoti Djinn", 52, Rarity.RARE, mage.cards.m.MahamotiDjinn.class));
         cards.add(new SetCardInfo("Mana Matrix", 213, Rarity.RARE, mage.cards.m.ManaMatrix.class));
         cards.add(new SetCardInfo("Mana Vault", 214, Rarity.RARE, mage.cards.m.ManaVault.class));
+        cards.add(new SetCardInfo("Martyr's Cry", 19, Rarity.RARE, mage.cards.m.MartyrsCry.class));
         cards.add(new SetCardInfo("Martyrs of Korlis", 20, Rarity.UNCOMMON, mage.cards.m.MartyrsOfKorlis.class));
         cards.add(new SetCardInfo("Maze of Ith", 246, Rarity.RARE, mage.cards.m.MazeOfIth.class));
         cards.add(new SetCardInfo("Mightstone", 215, Rarity.COMMON, mage.cards.m.Mightstone.class));

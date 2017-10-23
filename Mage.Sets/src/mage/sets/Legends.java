@@ -268,6 +268,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("White Mana Battery", 244, Rarity.UNCOMMON, mage.cards.w.WhiteManaBattery.class));
         cards.add(new SetCardInfo("Willow Satyr", 126, Rarity.RARE, mage.cards.w.WillowSatyr.class));
         cards.add(new SetCardInfo("Winds of Change", 169, Rarity.UNCOMMON, mage.cards.w.WindsOfChange.class));
+        cards.add(new SetCardInfo("Winter Blast", 127, Rarity.RARE, mage.cards.w.WinterBlast.class));
         cards.add(new SetCardInfo("Wolverine Pack", 128, Rarity.COMMON, mage.cards.w.WolverinePack.class));
         cards.add(new SetCardInfo("Xira Arien", 310, Rarity.RARE, mage.cards.x.XiraArien.class));
         cards.add(new SetCardInfo("Zephyr Falcon", 86, Rarity.COMMON, mage.cards.z.ZephyrFalcon.class));

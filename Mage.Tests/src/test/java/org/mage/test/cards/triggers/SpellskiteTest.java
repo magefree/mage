@@ -97,7 +97,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         // Whenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
         addCard(Zone.HAND, playerB, "Frost Titan", 1);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Gain control", "Spellskite");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}: Gain control", "Spellskite");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Frost Titan");
         addTarget(playerB, "Silvercoat Lion");

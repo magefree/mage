@@ -30,7 +30,6 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -57,7 +56,7 @@ public class MarchOfTheDrowned extends CardImpl {
 
         // Choose one —
         // &amp;bull; Return target creature card from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         // &amp;bull; Return two target Pirate cards from your graveyard to your hand.
         Mode mode = new Mode();

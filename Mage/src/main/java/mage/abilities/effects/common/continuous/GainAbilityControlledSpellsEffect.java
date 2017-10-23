@@ -53,7 +53,7 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.filter = filter;
-        staticText = filter.getMessage() + " you cast have " + ability.getRule();
+        staticText = filter.getMessage() + " you cast have " + ability.getRule() + '.';
     }
 
     public GainAbilityControlledSpellsEffect(final GainAbilityControlledSpellsEffect effect) {

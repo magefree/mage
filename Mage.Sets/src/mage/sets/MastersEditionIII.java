@@ -103,6 +103,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Disharmony", 95, Rarity.UNCOMMON, mage.cards.d.Disharmony.class));
         cards.add(new SetCardInfo("Divine Intervention", 8, Rarity.RARE, mage.cards.d.DivineIntervention.class));
         cards.add(new SetCardInfo("Dong Zhou, the Tyrant", 96, Rarity.RARE, mage.cards.d.DongZhouTheTyrant.class));
+        cards.add(new SetCardInfo("Eightfold Maze", 9, Rarity.UNCOMMON, mage.cards.e.EightfoldMaze.class));
         cards.add(new SetCardInfo("Elves of Deep Shadow", 116, Rarity.COMMON, mage.cards.e.ElvesOfDeepShadow.class));
         cards.add(new SetCardInfo("Evil Presence", 64, Rarity.COMMON, mage.cards.e.EvilPresence.class));
         cards.add(new SetCardInfo("Exorcist", 10, Rarity.UNCOMMON, mage.cards.e.Exorcist.class));

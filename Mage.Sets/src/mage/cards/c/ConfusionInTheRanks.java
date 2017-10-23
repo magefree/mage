@@ -60,21 +60,25 @@ public class ConfusionInTheRanks extends CardImpl {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
+                new CardTypePredicate(CardType.ENCHANTMENT)
+        ));
     }
     private final UUID originalId;
 
     public ConfusionInTheRanks(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
 
         // Whenever an artifact, creature, or enchantment enters the battlefield, its controller chooses target permanent another player controls that shares a card type with it. Exchange control of those permanents.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new ExchangeControlTargetEffect(Duration.EndOfGame, "its controller chooses target permanent another player controls that shares a card type with it. Exchange control of those permanents"),
-                filter,
-                false,
-                SetTargetPointer.PERMANENT,
-                null);
+                new ExchangeControlTargetEffect(
+                        Duration.EndOfGame,
+                        "its controller chooses target permanent "
+                        + "another player controls that shares a card type with it. "
+                        + "Exchange control of those permanents"
+                ),
+                filter, false, SetTargetPointer.PERMANENT, null
+        );
         ability.addTarget(new TargetPermanent());
         originalId = ability.getOriginalId();
         this.addAbility(ability);
@@ -92,28 +96,31 @@ public class ConfusionInTheRanks extends CardImpl {
             for (Effect effect : ability.getEffects()) {
                 enteringPermanentId = effect.getTargetPointer().getFirst(game, ability);
             }
-            if (enteringPermanentId != null) {
-                Permanent enteringPermanent = game.getPermanent(enteringPermanentId);
-                if (enteringPermanent != null) {
-                    ability.setControllerId(enteringPermanent.getControllerId());
-                    ability.getTargets().clear();
-                    FilterPermanent filterTarget = new FilterPermanent();
-                    String message = "";
-                    filterTarget.add(Predicates.not(new ControllerIdPredicate(enteringPermanent.getControllerId())));
-                    Set<CardTypePredicate> cardTypesPredicates = new HashSet<>(1);
-                    for (CardType cardTypeEntering : enteringPermanent.getCardType()) {
-                        cardTypesPredicates.add(new CardTypePredicate(cardTypeEntering));
-                        if (!message.isEmpty()) {
-                            message += "or ";
-                        }
-                        message += cardTypeEntering.toString().toLowerCase() + ' ';
-                    }
-                    filterTarget.add(Predicates.or(cardTypesPredicates));
-                    message += "you do not control";
-                    filterTarget.setMessage(message);
-                    ability.getTargets().add(new TargetPermanent(filterTarget));
-                }
+            if (enteringPermanentId == null) {
+                return;
             }
+            Permanent enteringPermanent = game.getPermanent(enteringPermanentId);
+            if (enteringPermanent == null) {
+                return;
+            }
+            ability.getTargets().clear();
+            FilterPermanent filterTarget = new FilterPermanent();
+            String message = "";
+            filterTarget.add(Predicates.not(new ControllerIdPredicate(enteringPermanent.getControllerId())));
+            Set<CardTypePredicate> cardTypesPredicates = new HashSet<>(1);
+            for (CardType cardTypeEntering : enteringPermanent.getCardType()) {
+                cardTypesPredicates.add(new CardTypePredicate(cardTypeEntering));
+                if (!message.isEmpty()) {
+                    message += "or ";
+                }
+                message += cardTypeEntering.toString().toLowerCase() + ' ';
+            }
+            filterTarget.add(Predicates.or(cardTypesPredicates));
+            message += "you don't control";
+            filterTarget.setMessage(message);
+            TargetPermanent target = new TargetPermanent(filterTarget);
+            target.setTargetController(enteringPermanent.getControllerId());
+            ability.getTargets().add(target);
         }
     }
 

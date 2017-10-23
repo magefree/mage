@@ -53,7 +53,7 @@ import mage.players.Player;
 public class DarienKingOfKjeldor extends CardImpl {
 
     public DarienKingOfKjeldor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
@@ -74,6 +74,7 @@ public class DarienKingOfKjeldor extends CardImpl {
         return new DarienKingOfKjeldor(this);
     }
 }
+
 class DarienKingOfKjeldorTriggeredAbility extends TriggeredAbilityImpl {
 
     public DarienKingOfKjeldorTriggeredAbility() {
@@ -105,7 +106,7 @@ class DarienKingOfKjeldorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you are dealt damage, you may create that many 1/1 white Soldier creature tokens.";
+        return "Whenever you're dealt damage, you may create that many 1/1 white Soldier creature tokens.";
     }
 }
 

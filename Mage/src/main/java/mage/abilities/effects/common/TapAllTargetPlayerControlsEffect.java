@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import java.util.List;
@@ -60,10 +59,10 @@ public class TapAllTargetPlayerControlsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if(player != null) {
+        if (player != null) {
             filter.add(new ControllerIdPredicate(player.getId()));
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-            for(Permanent p : permanents) {
+            for (Permanent p : permanents) {
                 p.tap(game);
             }
             return true;
@@ -78,9 +77,9 @@ public class TapAllTargetPlayerControlsEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "tap all " + filter.getMessage() + " target player controls";
+        return "tap all " + filter.toString() + " target " + mode.getTargets().get(0).getMessage() + " controls";
     }
 }

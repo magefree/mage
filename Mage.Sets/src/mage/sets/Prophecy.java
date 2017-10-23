@@ -136,6 +136,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Rib Cage Spider", 121, Rarity.COMMON, mage.cards.r.RibCageSpider.class));
         cards.add(new SetCardInfo("Ridgeline Rager", 100, Rarity.COMMON, mage.cards.r.RidgelineRager.class));
         cards.add(new SetCardInfo("Root Cage", 122, Rarity.UNCOMMON, mage.cards.r.RootCage.class));
+        cards.add(new SetCardInfo("Samite Sanctuary", 21, Rarity.RARE, mage.cards.s.SamiteSanctuary.class));
         cards.add(new SetCardInfo("Scoria Cat", 101, Rarity.UNCOMMON, mage.cards.s.ScoriaCat.class));
         cards.add(new SetCardInfo("Searing Wind", 103, Rarity.RARE, mage.cards.s.SearingWind.class));
         cards.add(new SetCardInfo("Shield Dancer", 23, Rarity.UNCOMMON, mage.cards.s.ShieldDancer.class));
@@ -151,6 +152,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Stormwatch Eagle", 50, Rarity.COMMON, mage.cards.s.StormwatchEagle.class));
         cards.add(new SetCardInfo("Sunken Field", 51, Rarity.UNCOMMON, mage.cards.s.SunkenField.class));
         cards.add(new SetCardInfo("Sword Dancer", 25, Rarity.UNCOMMON, mage.cards.s.SwordDancer.class));
+        cards.add(new SetCardInfo("Task Mage Assembly", 105, Rarity.RARE, mage.cards.t.TaskMageAssembly.class));
         cards.add(new SetCardInfo("Thrive", 129, Rarity.COMMON, mage.cards.t.Thrive.class));
         cards.add(new SetCardInfo("Trenching Steed", 26, Rarity.COMMON, mage.cards.t.TrenchingSteed.class));
         cards.add(new SetCardInfo("Troubled Healer", 27, Rarity.COMMON, mage.cards.t.TroubledHealer.class));

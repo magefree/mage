@@ -58,20 +58,19 @@ public class SetessanTactics extends CardImpl {
     }
 
     public SetessanTactics(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Strive - Setessan Tactics costs G more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{G}"));
         // Until end of turn, any number of target creatures each get +1/+1 and gain "T: This creature fights another target creature."
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
-        Effect effect = new BoostTargetEffect(1,1, Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setText("Until end of turn, any number of target creatures each get +1/+1");
         this.getSpellAbility().addEffect(effect);
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FightTargetSourceEffect(), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn,
-                "and gain \"T: This creature fights another target creature.\""));
+                "and gain \"{T}: This creature fights another target creature.\""));
     }
 
     public SetessanTactics(final SetessanTactics card) {

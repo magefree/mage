@@ -56,14 +56,14 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class GateSmasher extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with 3 or more power");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with toughness 4 or greater");
 
     static {
         filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public GateSmasher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.EQUIPMENT);
 
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, false);

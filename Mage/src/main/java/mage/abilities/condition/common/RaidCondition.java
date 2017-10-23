@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -44,5 +43,9 @@ public enum RaidCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         PlayerAttackedWatcher watcher = (PlayerAttackedWatcher) game.getState().getWatchers().get(PlayerAttackedWatcher.class.getSimpleName());
         return watcher != null && watcher.getNumberOfAttackersCurrentTurn(source.getControllerId()) > 0;
+    }
+
+    public String toString() {
+        return "if you attacked with a creature this turn";
     }
 }

@@ -52,8 +52,8 @@ public class HarvesterDruidTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 2 red and 1 blue mana", "{R}{R}{U}", options.get(0).toString());
-        Assert.assertEquals("Player should be able to create 1 red and 3 blue mana", "{R}{U}{U}", options.get(1).toString());
+        Assert.assertEquals("Player should be able to create 2 red and 1 blue mana", "{U}{R}{R}", options.get(0).toString());
+        Assert.assertEquals("Player should be able to create 1 red and 3 blue mana", "{U}{U}{R}", options.get(1).toString());
     }
 
     @Test
@@ -68,9 +68,9 @@ public class HarvesterDruidTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 3 red and 1 blue mana", "{R}{R}{R}{U}", options.get(0).toString());
-        Assert.assertEquals("Player should be able to create 2 red and 2 blue mana", "{R}{R}{U}{U}", options.get(1).toString());
-        Assert.assertEquals("Player should be able to create 2 red and 2 blue mana", "{R}{R}{U}{U}", options.get(2).toString());
-        Assert.assertEquals("Player should be able to create 1 red and 3 blue mana", "{R}{U}{U}{U}", options.get(3).toString());
+        Assert.assertEquals("Player should be able to create 3 red and 1 blue mana", "{U}{R}{R}{R}", options.get(0).toString());
+        Assert.assertEquals("Player should be able to create 2 red and 2 blue mana", "{U}{U}{R}{R}", options.get(1).toString());
+        Assert.assertEquals("Player should be able to create 2 red and 2 blue mana", "{U}{U}{R}{R}", options.get(2).toString());
+        Assert.assertEquals("Player should be able to create 1 red and 3 blue mana", "{U}{U}{U}{R}", options.get(3).toString());
     }
 }

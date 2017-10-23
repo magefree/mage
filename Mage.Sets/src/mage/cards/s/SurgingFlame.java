@@ -42,10 +42,11 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class SurgingFlame extends CardImpl {
 
     public SurgingFlame(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Ripple 4
-        this.addAbility(new RippleAbility(4));
+        this.addAbility(new RippleAbility(4).setRuleAtTheTop(true));
+
         // Surging Flame deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

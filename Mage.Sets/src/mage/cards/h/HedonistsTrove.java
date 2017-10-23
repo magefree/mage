@@ -54,7 +54,7 @@ import java.util.UUID;
 public class HedonistsTrove extends CardImpl {
 
     public HedonistsTrove(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}{B}");
 
         // When Hedonist's Trove enters the battlefield, exile all cards from target opponent's graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new HedonistsTroveExileEffect());
@@ -115,7 +115,7 @@ class HedonistsTrovePlayLandEffect extends AsThoughEffectImpl {
 
     public HedonistsTrovePlayLandEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may play land cards exiled by {this}";
+        staticText = "You may play land cards exiled with {this}";
     }
 
     public HedonistsTrovePlayLandEffect(final HedonistsTrovePlayLandEffect effect) {

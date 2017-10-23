@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
 public class GilderBairn extends CardImpl {
 
     public GilderBairn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/U}{G/U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G/U}{G/U}");
         this.subtype.add(SubType.OUPHE);
 
         this.power = new MageInt(1);
@@ -80,7 +80,7 @@ class GilderBairnEffect extends OneShotEffect {
 
     public GilderBairnEffect() {
         super(Outcome.Benefit);
-        this.staticText = "For each counter on target permanent, put another of those counters on that permanent";
+        this.staticText = "Double the number of each kind of counter on target permanent";
     }
 
     public GilderBairnEffect(final GilderBairnEffect effect) {

@@ -75,7 +75,7 @@ public class PutTopCardOfLibraryIntoGraveTargetEffect extends OneShotEffect {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Target player puts the top ");
+        StringBuilder sb = new StringBuilder("target player puts the top ");
         if (numberCards.toString().equals("1")) {
             sb.append(" card");
         } else {

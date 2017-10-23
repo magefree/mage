@@ -55,8 +55,8 @@ public class Foxfire extends CardImpl {
         // Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
         this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true));
-        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, true));
+        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true).setText("Prevent all combat damage that would be dealt to "));
+        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, true).setText("and dealt by that creature this turn."));
 
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)),false));

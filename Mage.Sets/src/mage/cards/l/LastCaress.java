@@ -43,12 +43,12 @@ import mage.target.TargetPlayer;
 public class LastCaress extends CardImpl {
 
     public LastCaress(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new GainLifeEffect(1));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new GainLifeEffect(1).setText("and you gain 1 life"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
     }
 
     public LastCaress(final LastCaress card) {

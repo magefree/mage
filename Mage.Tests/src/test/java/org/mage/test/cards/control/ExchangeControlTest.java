@@ -214,7 +214,7 @@ public class ExchangeControlTest extends CardTestPlayerBase {
         addTarget(playerA, "Manta Riders");
 
         // now use the activated ability to make the "Silvercoat Lions" (that became Mana Riders) flying
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}: {this} gains Flying until end of turn.");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}: {this} gains flying until end of turn.");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

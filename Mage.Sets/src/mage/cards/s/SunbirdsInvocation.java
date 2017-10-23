@@ -105,6 +105,16 @@ class SunbirdsInvocationTriggeredAbility extends SpellCastControllerTriggeredAbi
     public SunbirdsInvocationTriggeredAbility copy() {
         return new SunbirdsInvocationTriggeredAbility(this);
     }
+
+    @Override
+    public String getRule() {
+        return "Whenever you cast a spell from your hand, "
+                + "reveal the top X cards of your library, "
+                + "where X is that spell's converted mana cost. "
+                + "You may cast a card revealed this way with "
+                + "converted mana cost X or less without paying its mana cost."
+                + " Put the rest on the bottom of your library in a random order.";
+    }
 }
 
 class SunbirdsInvocationEffect extends OneShotEffect {

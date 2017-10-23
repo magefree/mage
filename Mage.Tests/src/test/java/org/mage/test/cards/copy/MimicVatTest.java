@@ -63,10 +63,10 @@ public class MimicVatTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, "Silvercoat Lion");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}, Sacrifice a creature");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice a creature");
         setChoice(playerA, "Yes");
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3},{T}: Create a token");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Create a token");
         setChoice(playerA, "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -95,10 +95,10 @@ public class MimicVatTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
         setChoice(playerA, "Yes");
         setChoice(playerA, "Silvercoat Lion");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}, Sacrifice a creature");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice a creature");
         setChoice(playerA, "Yes");
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3},{T}: Create a token that's a copy of a card exiled with ");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Create a token that's a copy of a card exiled with ");
         setChoice(playerA, "Yes");
         setChoice(playerA, "Silvercoat Lion");
 

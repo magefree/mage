@@ -60,7 +60,7 @@ public class RiggingRunner extends CardImpl {
         // Raid — Rigging Runner enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), false),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn",
+                "<i>Raid</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn.",
                 "{this} enters the battlefield with a +1/+1 counter"),
                 new PlayerAttackedWatcher());
     }

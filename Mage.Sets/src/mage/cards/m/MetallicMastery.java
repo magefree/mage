@@ -36,9 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
@@ -46,20 +44,14 @@ import mage.target.TargetPermanent;
  */
 public class MetallicMastery extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public MetallicMastery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
-
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        // Gain control of target artifact until end of turn. Untap that artifact. It gains haste until end of turn.
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that artifact"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn."));
     }
 
     public MetallicMastery(final MetallicMastery card) {

@@ -53,7 +53,6 @@ public class BlackManaBattery extends CardImpl {
 
     public BlackManaBattery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        
 
         // {2}, {tap}: Put a charge counter on Black Mana Battery.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance(1)), new GenericManaCost(2));
@@ -65,10 +64,10 @@ public class BlackManaBattery extends CardImpl {
                 Mana.BlackMana(1),
                 new IntPlusDynamicValue(1, new RemovedCountersForCostValue()),
                 new TapSourceCost(),
-                "Add {B} to your mana pool, then add {B} to your mana pool for each storage counter removed this way",
-                true, new CountersSourceCount(CounterType.STORAGE));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
-                "Remove X storage counters from {this}"));
+                "Add {B} to your mana pool, then add {B} to your mana pool for each charge counter removed this way",
+                true, new CountersSourceCount(CounterType.CHARGE));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance(),
+                "Remove any number of charge counters from {this}"));
         this.addAbility(ability);
     }
 

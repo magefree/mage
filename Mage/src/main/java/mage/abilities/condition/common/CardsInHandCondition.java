@@ -45,7 +45,6 @@ import mage.util.CardUtil;
  */
 public class CardsInHandCondition implements Condition {
 
-
     private Condition condition;
     private ComparisonType type;
     private int count;
@@ -114,7 +113,7 @@ public class CardsInHandCondition implements Condition {
     @Override
     public String toString() {
         int workCount = count;
-        StringBuilder sb = new StringBuilder("if ");
+        StringBuilder sb = new StringBuilder("if");
         switch (targetController) {
             case YOU:
                 sb.append(" you have");
