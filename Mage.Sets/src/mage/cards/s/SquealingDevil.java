@@ -33,7 +33,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -48,10 +47,8 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
@@ -105,23 +102,20 @@ class SquealingDevilEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         ManaCosts cost = new ManaCostsImpl("{X}");
-        if (player != null) {
-            if (player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
-                int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
-                cost.add(new GenericManaCost(costX));
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
-                    Permanent permanent = game.getPermanent(source.getFirstTarget());
-                    if (permanent != null && permanent.isCreature()) {
-                        ContinuousEffect effect = new BoostTargetEffect(costX, 0, Duration.EndOfTurn);
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                        game.addEffect(effect, source);
-                        return true;
-                    }
-                    return false;
-                }
-            }
+        if (player == null) {
+            return false;
         }
-        return false;
+        if (!player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
+            return false;
+        }
+        int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+        cost.setX(costX);
+        if (!cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+            return false;
+        }
+        ContinuousEffect effect = new BoostTargetEffect(costX, 0, Duration.EndOfTurn);
+        game.addEffect(effect, source);
+        return true;
     }
 
     @Override
