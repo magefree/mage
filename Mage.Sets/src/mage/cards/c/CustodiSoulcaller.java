@@ -79,7 +79,7 @@ public class CustodiSoulcaller extends CardImpl {
         if (ability.getClass().equals(AttacksTriggeredAbility.class)) {
             ability.getTargets().clear();
             CustodiSoulcallerWatcher watcher = (CustodiSoulcallerWatcher) game.getState().getWatchers().get(CustodiSoulcallerWatcher.class.getSimpleName());
-            Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
+            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
             if (watcher != null && watcher.playersAttacked != null) {
                 int xValue = watcher.getNumberOfAttackedPlayers(sourcePermanent.getControllerId());
                 FilterCard filter = new FilterCard("creature card with converted mana cost " + xValue + " or less");
