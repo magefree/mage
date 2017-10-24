@@ -40,7 +40,7 @@ import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.combat.CantAttackSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.JohanVigilanceAbility;
+import mage.abilities.keyword.special.JohanVigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
