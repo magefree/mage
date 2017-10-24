@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -47,6 +48,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -88,7 +90,7 @@ public class TalonOfPain extends CardImpl {
     private class TalonOfPainTriggeredAbility extends TriggeredAbilityImpl {
 
         public TalonOfPainTriggeredAbility() {
-            super(Zone.BATTLEFIELD, new TalonOfPainEffect());
+            super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()));
         }
 
         public TalonOfPainTriggeredAbility(final TalonOfPainTriggeredAbility ability) {
@@ -108,7 +110,9 @@ public class TalonOfPain extends CardImpl {
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             // to another player
-            if (!Objects.equals(this.getControllerId(), event.getTargetId())) {
+            Player controller = game.getPlayer(this.getControllerId());
+            if(controller==null){return false;}
+            if(controller.hasOpponent(event.getTargetId(),game)){
                 // a source you control other than Talon of Pain
                 UUID sourceControllerId = game.getControllerId(event.getSourceId());
                 if (sourceControllerId != null 
@@ -123,34 +127,7 @@ public class TalonOfPain extends CardImpl {
 
         @Override
         public String getRule() {
-            return "Whenever a source you control other than {this} deals damage to another player, " + super.getRule();
-        }
-    }
-
-    private static class TalonOfPainEffect extends OneShotEffect {
-
-        public TalonOfPainEffect() {
-            super(Outcome.Damage);
-            this.staticText = "put a charge counter on {this}.";
-        }
-
-        public TalonOfPainEffect(final TalonOfPainEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public TalonOfPainEffect copy() {
-            return new TalonOfPainEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                permanent.addCounters(CounterType.CHARGE.createInstance(), source, game);
-                return true;
-            }
-            return false;
+            return "Whenever a source you control other than {this} deals damage to an opponent, " + super.getRule();
         }
     }
 }

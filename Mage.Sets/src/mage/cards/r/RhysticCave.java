@@ -28,13 +28,16 @@
 package mage.cards.r;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.DoUnlessAnyPlayerPaysEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -43,6 +46,7 @@ import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -57,11 +61,15 @@ public class RhysticCave extends CardImpl {
     public RhysticCave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {tap}: Choose a color. Add one mana of that color to your mana pool unless any player pays {1}. 
-        // Activate this ability only any time you could cast an instant.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DoUnlessAnyPlayerPaysEffect(new RhysticCaveManaEffect(),new GenericManaCost(1)),
-                new TapSourceCost()));
+        // {tap}: Choose a color.  
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                          new ChooseColorEffect(Outcome.PutManaInPool),
+                          new TapSourceCost());
+        
+        // Add one mana of that color to your mana pool unless any player pays {1}. Activate this ability only any time you could cast an instant.
+        ability.addEffect(new DoUnlessAnyPlayerPaysEffect(new RhysticCaveManaEffect(),new GenericManaCost(1)));
+        
+        this.addAbility(ability);
         
     }
 
@@ -82,7 +90,7 @@ public class RhysticCave extends CardImpl {
         public RhysticCaveManaEffect() {
             super();
             chosenMana = new Mana();
-            this.staticText = "Choose a color. Add one mana of that color to your mana pool ";
+            this.staticText = "Add one mana of that color to your mana pool ";
         }
 
         public RhysticCaveManaEffect(final RhysticCaveManaEffect effect) {
@@ -97,29 +105,27 @@ public class RhysticCave extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
-            
-            if (controller != null) {
-                ChoiceColor choice = new ChoiceColor();
-                choice.setMessage("Choose a color to add mana of that color");
-                
-                if (controller.choose(outcome, choice, game)) {
-                    if (choice.getChoice() != null) {
-                        String color = choice.getChoice();
+            Player controller = game.getPlayer(source.getControllerId()); 
+            MageObject mageObject = game.getPermanentOrLKIBattlefield(source.getSourceId()); //get obj reference to Rhystic Cave        
+            if (controller != null) {    
+                if (mageObject != null) {
+                    ObjectColor choice = (ObjectColor) game.getState().getValue(mageObject.getId()+"_color");
+                    if (choice!= null) {
+                        String color = choice.toString();
                         switch (color) {
-                            case "Red":
+                            case "R":
                                 chosenMana.setRed(1);
                                 break;
-                            case "Blue":
+                            case "U":
                                 chosenMana.setBlue(1);
                                 break;
-                            case "White":
+                            case "W":
                                 chosenMana.setWhite(1);
                                 break;
-                            case "Black":
+                            case "B":
                                 chosenMana.setBlack(1);
                                 break;
-                            case "Green":
+                            case "G":
                                 chosenMana.setGreen(1);
                                 break;
                         }
