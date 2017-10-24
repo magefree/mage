@@ -76,7 +76,9 @@ class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
 
     public WardOfBonesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Each opponent who controls more creatures than you can't play creature cards. The same is true for artifacts, enchantments, and lands";
+        staticText = "Each opponent who controls more creatures than you can't cast creature spells. "
+                + "The same is true for artifacts and enchantments.<br><br>"
+                + "Each opponent who controls more lands than you can't play lands.";
     }
 
     public WardOfBonesEffect(final WardOfBonesEffect effect) {

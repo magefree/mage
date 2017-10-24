@@ -69,6 +69,11 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public List<String> getRules(String source) {
+        return getRules(source, true);
+    }
+
+    @Override
+    public List<String> getRules(String source, boolean capitalize) {
         List<String> rules = new ArrayList<>();
 
         for (T ability : this) {
@@ -78,7 +83,9 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
             if (!(ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
                 String rule = ability.getRule();
                 if (rule != null && rule.length() > 3) {
-                    rule = Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+                    if (capitalize) {
+                        rule = Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+                    }
                     if (ability.getRuleAtTheTop()) {
                         rules.add(0, rule);
                     } else {

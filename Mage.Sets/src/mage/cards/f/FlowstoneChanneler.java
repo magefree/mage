@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -43,7 +43,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -69,7 +68,7 @@ public class FlowstoneChanneler extends CardImpl {
         ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
+        ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }
 

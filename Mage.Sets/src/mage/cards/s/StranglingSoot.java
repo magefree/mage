@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class StranglingSoot extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughess 3 or less");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 3 or less");
 
     static {
         filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 4));

@@ -59,7 +59,7 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
         // {X}, {T}: Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.
         addCard(Zone.BATTLEFIELD, playerA, "Helm of Obedience");
 
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X},{T}: Target opponent puts cards", playerB);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X}, {T}: Target opponent puts cards", playerB);
         setChoice(playerA, "X=1");
 
         setStopAt(1, PhaseStep.END_TURN);

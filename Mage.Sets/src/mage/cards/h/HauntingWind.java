@@ -29,7 +29,10 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,19 +40,20 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackAbility;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author MarcoMarin
+ * @author TheElk801
  */
 public class HauntingWind extends CardImpl {
 
     public HauntingWind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
         // Whenever an artifact becomes tapped or a player activates an artifact's ability without {tap} in its activation cost, Haunting Wind deals 1 damage to that artifact's controller.
-        
-        this.addAbility(new AbilityActivatedTriggeredAbility2());
+        this.addAbility(new HauntingWindTriggeredAbility());
     }
 
     public HauntingWind(final HauntingWind card) {
@@ -62,36 +66,68 @@ public class HauntingWind extends CardImpl {
     }
 }
 
-class AbilityActivatedTriggeredAbility2 extends TriggeredAbilityImpl {
+class HauntingWindTriggeredAbility extends TriggeredAbilityImpl {
 
-    AbilityActivatedTriggeredAbility2() {
-        super(Zone.BATTLEFIELD, new DamageControllerEffect(1));
+    HauntingWindTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
     }
 
-    AbilityActivatedTriggeredAbility2(final AbilityActivatedTriggeredAbility2 ability) {
+    HauntingWindTriggeredAbility(final HauntingWindTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public AbilityActivatedTriggeredAbility2 copy() {
-        return new AbilityActivatedTriggeredAbility2(this);
+    public HauntingWindTriggeredAbility copy() {
+        return new HauntingWindTriggeredAbility(this);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY ||
-               event.getType() == GameEvent.EventType.TAPPED;
+        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY
+                || event.getType() == GameEvent.EventType.TAPPED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent isArtifact = game.getPermanent(event.getSourceId());
-        return isArtifact != null && isArtifact.isArtifact();
-        
+        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            if (permanent == null || !permanent.isArtifact()) {
+                return false;
+            }
+            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+            if (stackAbility == null) {
+                return false;
+            }
+            boolean triggerable = true;
+            for (Cost cost : stackAbility.getCosts()) {
+                if (cost instanceof TapSourceCost) {
+                    triggerable = false;
+                    break;
+                }
+            }
+            if (!triggerable) {
+                return false;
+            }
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(permanent.getControllerId(), game));
+            }
+            return true;
+        }
+        if (event.getType() == GameEvent.EventType.TAPPED) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (permanent == null || !permanent.isArtifact()) {
+                return false;
+            }
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(permanent.getControllerId(), game));
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever an artifact becomes tapped or a player activates an artifact's ability without {tap} in its activation cost, Haunting Wind deals 1 damage to that artifact's controller.";
+        return "Whenever an artifact becomes tapped or a player activates an artifact's ability without {T} in its activation cost, {this} deals 1 damage to that artifact's controller.";
     }
 }

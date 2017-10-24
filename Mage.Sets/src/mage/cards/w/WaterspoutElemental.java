@@ -69,7 +69,7 @@ public class WaterspoutElemental extends CardImpl {
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter));
         ability.addEffect(new SkipNextTurnSourceEffect());
         this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance,
-            "When {this} enters the battlefield, if it was kicked, return all other creatures to their owners' hands and you skip your next turn"));
+            "When {this} enters the battlefield, if it was kicked, return all other creatures to their owners' hands and you skip your next turn."));
     }
 
     public WaterspoutElemental(final WaterspoutElemental card) {

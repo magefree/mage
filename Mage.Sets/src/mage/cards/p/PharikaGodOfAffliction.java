@@ -91,7 +91,7 @@ class PharikaExileEffect extends OneShotEffect {
 
     public PharikaExileEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Exile target creature card from a graveyard. It's owner creates a 1/1 black and green Snake enchantment creature token with deathtouch";
+        staticText = "Exile target creature card from a graveyard. Its owner creates a 1/1 black and green Snake enchantment creature token with deathtouch";
     }
 
     public PharikaExileEffect(final PharikaExileEffect effect) {

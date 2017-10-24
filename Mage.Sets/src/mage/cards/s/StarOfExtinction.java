@@ -47,7 +47,7 @@ public class StarOfExtinction extends CardImpl {
 
         // Destroy target land. Star of Extinction deals 20 damage to each creature and each planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new DamageAllEffect(20, new FilterCreatureOrPlaneswalkerPermanent("each creature and each planeswalker")));
+        this.getSpellAbility().addEffect(new DamageAllEffect(20, new FilterCreatureOrPlaneswalkerPermanent("creature and each planeswalker")));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 

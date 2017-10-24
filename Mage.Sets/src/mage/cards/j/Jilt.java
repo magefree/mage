@@ -53,11 +53,11 @@ import mage.target.targetpointer.SecondTargetPointer;
 public class Jilt extends CardImpl {
 
     public Jilt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Kicker {1}{R}
         this.addAbility(new KickerAbility("{1}{R}"));
-        
+
         // Return target creature to its owner's hand. If Jilt was kicked, it deals 2 damage to another target creature.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         Effect effect = new ConditionalOneShotEffect(
@@ -66,11 +66,11 @@ public class Jilt extends CardImpl {
                 "If {this} was kicked, it deals 2 damage to another target creature");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
-        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("Target Creature: returned to Hand"));
+        Target target = new TargetCreaturePermanent();
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility && KickedCondition.instance.apply(game, ability)) {

@@ -50,7 +50,7 @@ import mage.constants.Zone;
 public class VeldraneOfSengir extends CardImpl {
 
     public VeldraneOfSengir(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
@@ -58,8 +58,8 @@ public class VeldraneOfSengir extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {1}{B}{B}: Veldrane of Sengir gets -3/-0 and gains forestwalk until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-3, -0, Duration.EndOfTurn), new ManaCostsImpl("{1}{B}{B}"));
-        ability.addEffect(new GainAbilitySourceEffect(new ForestwalkAbility(false), Duration.EndOfTurn));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-3, -0, Duration.EndOfTurn).setText("{this} gets -3/-0"), new ManaCostsImpl("{1}{B}{B}"));
+        ability.addEffect(new GainAbilitySourceEffect(new ForestwalkAbility(false), Duration.EndOfTurn).setText("and gains forestwalk until end of turn"));
         this.addAbility(ability);
     }
 

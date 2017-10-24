@@ -50,8 +50,7 @@ import mage.target.targetpointer.FixedTarget;
 public class PriceOfGlory extends CardImpl {
 
     public PriceOfGlory(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // Whenever a player taps a land for mana, if it's not that player's turn, destroy that land.
         this.addAbility(new PriceOfGloryAbility());
@@ -86,11 +85,16 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
+            return false;
         }
-        if (permanent != null && permanent.isLand()
+        Player player = game.getPlayer(controllerId);
+        if (player == null) {
+            return false;
+        }
+        if (permanent.isLand()
+                && player.getInRange().contains(permanent.getControllerId())
                 && !permanent.getControllerId().equals(game.getActivePlayerId())) { // intervening if clause
             getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
             return true;
@@ -125,7 +129,7 @@ class PriceOfGloryEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent land = game.getPermanentOrLKIBattlefield(this.targetPointer.getFirst(game, source));
-            if (land != null &&  !land.getControllerId().equals(game.getActivePlayerId())) { // intervening if clause has to be checked again
+            if (land != null && !land.getControllerId().equals(game.getActivePlayerId())) { // intervening if clause has to be checked again
                 land.destroy(source.getSourceId(), game, false);
             }
             return true;

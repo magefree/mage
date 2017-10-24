@@ -399,6 +399,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Growth", 173, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Will-o'-the-Wisp", 55, Rarity.RARE, mage.cards.w.WillOTheWisp.class));
         cards.add(new SetCardInfo("Winds of Change", 250, Rarity.RARE, mage.cards.w.WindsOfChange.class));
+        cards.add(new SetCardInfo("Winter Blast", 174, Rarity.UNCOMMON, mage.cards.w.WinterBlast.class));
         cards.add(new SetCardInfo("Winter Orb", 376, Rarity.RARE, mage.cards.w.WinterOrb.class));
         cards.add(new SetCardInfo("Wooden Sphere", 377, Rarity.UNCOMMON, mage.cards.w.WoodenSphere.class));
         cards.add(new SetCardInfo("Word of Binding", 56, Rarity.COMMON, mage.cards.w.WordOfBinding.class));

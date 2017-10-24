@@ -40,16 +40,19 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class Ovinize extends CardImpl {
 
     public Ovinize(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Target creature loses all abilities and becomes 0/1 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(
+                new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn)
+                        .setText("Until end of turn, target creature loses all abilities")
+        );
         Effect effect = new SetPowerToughnessTargetEffect(0, 1, Duration.EndOfTurn);
         effect.setText("and has base power and toughness 0/1");
         this.getSpellAbility().addEffect(effect);

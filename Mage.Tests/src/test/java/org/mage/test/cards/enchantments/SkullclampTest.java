@@ -69,7 +69,7 @@ public class SkullclampTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Silvercoat Lion");
 
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X},Sacrifice");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}, Sacrifice");
         setChoice(playerB, "X=2");
 
         setStopAt(1, PhaseStep.END_TURN);

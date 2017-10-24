@@ -37,9 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.target.common.FilterCreatureAttackingYou;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -56,7 +54,7 @@ public class SoulSnare extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new ExileTargetEffect(), new ManaCostsImpl("{W}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new SoulSnareFilter()));
+        ability.addTarget(new TargetCreaturePermanent(new FilterCreatureAttackingYou(true)));
         this.addAbility(ability);
     }
 
@@ -67,27 +65,5 @@ public class SoulSnare extends CardImpl {
     @Override
     public SoulSnare copy() {
         return new SoulSnare(this);
-    }
-}
-
-class SoulSnareFilter extends FilterAttackingCreature {
-
-    public SoulSnareFilter() {
-        super("creature that's attacking you or a planeswalker you control");
-    }
-
-    public SoulSnareFilter(final SoulSnareFilter filter) {
-        super(filter);
-    }
-
-    @Override
-    public SoulSnareFilter copy() {
-        return new SoulSnareFilter(this);
-    }
-
-    @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        return super.match(permanent, sourceId, playerId, game)
-                && playerId.equals(game.getCombat().getDefendingPlayerId(permanent.getId(), game));
     }
 }

@@ -84,7 +84,7 @@ public class CryptGhastTest extends CardTestPlayerBase {
         // {X}{U}{R},{T}: Nin, the Pain Artist deals X damage to target creature. That creature's controller draws X cards.
         addCard(Zone.BATTLEFIELD, playerB, "Nin, the Pain Artist", 1);
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{X}{U}{R},{T}: {this} deals X damage to target creature", "Crypt Ghast");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{X}{U}{R}, {T}: {this} deals X damage to target creature", "Crypt Ghast");
         setChoice(playerB, "X=2");
 
         // Crypt Ghast may no longer give additional mana

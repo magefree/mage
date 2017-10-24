@@ -53,7 +53,7 @@ import java.util.UUID;
  */
 public class BrownOuphe extends CardImpl {
 
-    private final static FilterStackObject filter = new FilterStackObject("ability from an artifact source");
+    private final static FilterStackObject filter = new FilterStackObject("activated ability from an artifact source");
 
     static {
         filter.add(new ArtifactSourcePredicate());

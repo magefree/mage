@@ -52,12 +52,13 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
 
     /**
      * Set the color of a spell or permanent
-     * 
-     * @param duration 
+     *
+     * @param duration
      */
     public BecomesColorTargetEffect(Duration duration) {
         this(null, duration, null);
     }
+
     public BecomesColorTargetEffect(ObjectColor setColor, Duration duration) {
         this(setColor, duration, null);
     }
@@ -78,7 +79,7 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return;
-        }        
+        }
         if (setColor == null) {
             ChoiceColor choice = new ChoiceColor();
             while (!choice.isChosen()) {
@@ -95,9 +96,8 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
             if (!game.isSimulation()) {
                 game.informPlayers(controller.getLogName() + " has chosen the color: " + setColor.toString());
             }
-        } 
-        
-                
+        }
+
         super.init(source, game); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -109,11 +109,11 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
         }
         if (setColor != null) {
             boolean objectFound = false;
-            for (UUID targetId :targetPointer.getTargets(game, source)) {
+            for (UUID targetId : targetPointer.getTargets(game, source)) {
                 MageObject targetObject = game.getObject(targetId);
                 if (targetObject != null) {
                     objectFound = true;
-                    targetObject.getColor(game).setColor(setColor);                        
+                    targetObject.getColor(game).setColor(setColor);
                 }
             }
             if (!objectFound && this.getDuration() == Duration.Custom) {
@@ -143,7 +143,9 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
         } else {
             sb.append(setColor.getDescription());
         }
-        sb.append(' ').append(duration.toString());
+        if (!duration.toString().equals("")) {
+            sb.append(' ').append(duration.toString());
+        }
         return sb.toString();
     }
 }

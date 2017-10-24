@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -46,7 +45,7 @@ import java.io.ObjectStreamException;
  */
 public class FlyingAbility extends EvasionAbility implements MageSingleton {
 
-    private static final FlyingAbility instance =  new FlyingAbility();
+    private static final FlyingAbility instance = new FlyingAbility();
 
     private Object readResolve() throws ObjectStreamException {
         return instance;
@@ -62,7 +61,7 @@ public class FlyingAbility extends EvasionAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Flying";
+        return "flying";
     }
 
     @Override
@@ -91,7 +90,7 @@ class FlyingEffect extends RestrictionEffect implements MageSingleton {
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
                 || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())
-                || (game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_DRAGON, source, blocker.getControllerId(), game) && attacker.hasSubtype(SubType.DRAGON, game)) ;
+                || (game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_DRAGON, source, blocker.getControllerId(), game) && attacker.hasSubtype(SubType.DRAGON, game));
     }
 
     @Override

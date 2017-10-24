@@ -42,10 +42,12 @@ import mage.target.TargetPlayer;
 public class CabalConditioning extends CardImpl {
 
     public CabalConditioning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{B}");
 
         // Any number of target players each discard a number of cards equal to the highest converted mana cost among permanents you control.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(new HighestConvertedManaCostValue()));
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(new HighestConvertedManaCostValue())
+                .setText("Any number of target players each discard a number of cards equal to the highest converted mana cost among permanents you control.")
+        );
         this.getSpellAbility().addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
     }
 

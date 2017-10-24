@@ -37,6 +37,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 /**
  *
@@ -106,9 +107,9 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
         sb.append("search your library for ");
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
-                sb.append("any number of ").append(' ');
+                sb.append("any number of ");
             } else {
-                sb.append("up to ").append(target.getMaxNumberOfTargets()).append(' ');
+                sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             }
             sb.append(target.getTargetName()).append(" and put them onto the battlefield");
         } else {

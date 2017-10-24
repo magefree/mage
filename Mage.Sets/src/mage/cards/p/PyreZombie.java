@@ -52,15 +52,15 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class PyreZombie extends CardImpl {
 
     public PyreZombie(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay {1}{B}{B}. If you do, return Pyre Zombie to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-            new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl("{1}{B}{B}")),
-            TargetController.YOU, false));
+                new DoIfCostPaid(new ReturnToHandSourceEffect().setText("return {this} to your hand"), new ManaCostsImpl("{1}{B}{B}")),
+                TargetController.YOU, false));
         // {1}{R}{R}, Sacrifice Pyre Zombie: Pyre Zombie deals 2 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{1}{R}{R}"));
         ability.addCost(new SacrificeSourceCost());

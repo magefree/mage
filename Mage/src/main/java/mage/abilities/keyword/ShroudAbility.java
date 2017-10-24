@@ -56,7 +56,7 @@ public class ShroudAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Shroud";
+        return "shroud";
     }
 
     @Override

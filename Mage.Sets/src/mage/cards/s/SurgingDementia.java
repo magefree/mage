@@ -42,10 +42,10 @@ import mage.target.TargetPlayer;
 public class SurgingDementia extends CardImpl {
 
     public SurgingDementia(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Ripple 4
-        this.addAbility(new RippleAbility(4));
+        this.addAbility(new RippleAbility(4).setRuleAtTheTop(true));
 
         // Target player discards a card.
         this.getSpellAbility().getEffects().add(new DiscardTargetEffect(1));

@@ -51,7 +51,7 @@ import mage.constants.Zone;
 public class MogissWarhound extends CardImpl {
 
     public MogissWarhound(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.HOUND);
 
         this.power = new MageInt(2);
@@ -62,13 +62,13 @@ public class MogissWarhound extends CardImpl {
         // Mogis's Warhound attacks each turn if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
         // Enchanted creature gets +2/+2 and attacks each turn if able.
-        Effect effect = new BoostEnchantedEffect(2,2,Duration.WhileOnBattlefield);
+        Effect effect = new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +2/+2");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
-        effect.setText("and attacks each turn if able");
+        effect.setText("and attacks each combat if able");
         ability.addEffect(effect);
-        this.addAbility(ability);        
+        this.addAbility(ability);
     }
 
     public MogissWarhound(final MogissWarhound card) {

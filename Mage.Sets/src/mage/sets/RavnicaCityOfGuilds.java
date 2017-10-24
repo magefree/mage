@@ -213,6 +213,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Hierarch", 214, Rarity.RARE, mage.cards.l.LoxodonHierarch.class));
         cards.add(new SetCardInfo("Lurking Informant", 249, Rarity.COMMON, mage.cards.l.LurkingInformant.class));
         cards.add(new SetCardInfo("Mark of Eviction", 58, Rarity.UNCOMMON, mage.cards.m.MarkOfEviction.class));
+        cards.add(new SetCardInfo("Master Warcraft", 250, Rarity.RARE, mage.cards.m.MasterWarcraft.class));
         cards.add(new SetCardInfo("Mausoleum Turnkey", 94, Rarity.UNCOMMON, mage.cards.m.MausoleumTurnkey.class));
         cards.add(new SetCardInfo("Mindleech Mass", 215, Rarity.RARE, mage.cards.m.MindleechMass.class));
         cards.add(new SetCardInfo("Mindmoil", 135, Rarity.RARE, mage.cards.m.Mindmoil.class));

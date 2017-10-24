@@ -53,7 +53,7 @@ public class ExileAndReturnTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tawnos's Coffin");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3},{T}", "Silvercoat Lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}", "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -83,7 +83,7 @@ public class ExileAndReturnTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tawnos's Coffin");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Battlegrowth", "Silvercoat Lion");
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3},{T}", "Silvercoat Lion");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}, {T}", "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -123,7 +123,7 @@ public class ExileAndReturnTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Battlegrowth", "Bramble Elemental");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Blanchwood Armor", "Bramble Elemental");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Frog Tongue", "Bramble Elemental");
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3},{T}", "Bramble Elemental");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}, {T}", "Bramble Elemental");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();

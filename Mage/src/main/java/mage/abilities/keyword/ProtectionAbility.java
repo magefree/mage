@@ -32,7 +32,6 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.StaticAbility;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;

@@ -129,7 +129,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Search ").append(this.searchWhatText);
+        sb.append("search ").append(this.searchWhatText);
         sb.append(" graveyard, hand, and library for ");
         sb.append(this.searchForText);
         sb.append(" and exile them. Then that player shuffles his or her library");

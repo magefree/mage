@@ -27,8 +27,10 @@
  */
 package mage.cards.r;
 
+import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
@@ -37,11 +39,7 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
-
-import java.util.*;
 
 /**
  *
@@ -50,8 +48,7 @@ import java.util.*;
 public class RiteOfRuin extends CardImpl {
 
     public RiteOfRuin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
 
         // Choose an order for artifacts, creatures, and lands. Each player sacrifices one permanent of the first type, sacrifices two of the second type, then sacrifices three of the third type.
         this.getSpellAbility().addEffect(new RiteOfRuinEffect());
@@ -97,7 +94,9 @@ class RiteOfRuinEffect extends OneShotEffect {
 
         LinkedList<CardType> order = new LinkedList<>();
         ChoiceImpl choice = new ChoiceImpl(true);
+        choice.setMessage("Choose a card type");
         choice.setChoices(choices);
+
         while (controller.canRespond() && controller.choose(Outcome.Sacrifice, choice, game) && choices.size() > 1) {
             order.add(getCardType(choice.getChoice()));
             choices.remove(choice.getChoice());
@@ -105,29 +104,11 @@ class RiteOfRuinEffect extends OneShotEffect {
         }
         order.add(getCardType(choices.iterator().next()));
 
-        List<UUID> sacrifices = new LinkedList<>();
         int count = 1;
         for (CardType cardType : order) {
-            FilterControlledPermanent filter = new FilterControlledPermanent(cardType + " permanent you control");
+            FilterControlledPermanent filter = new FilterControlledPermanent(cardType + " you control");
             filter.add(new CardTypePredicate(cardType));
-
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                int amount = Math.min(count, game.getBattlefield().countAll(filter, playerId, game));
-                TargetControlledPermanent target = new TargetControlledPermanent(amount, amount, filter, false);
-                Player player = game.getPlayer(playerId);
-                if (player != null && player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
-                    sacrifices.addAll(target.getTargets());
-                }
-            }
-
-            for (UUID targetId : sacrifices) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null) {
-                    permanent.sacrifice(source.getSourceId(), game);
-                }
-            }
-
-            sacrifices.clear();
+            new SacrificeAllEffect(count, filter).apply(game, source);
             count++;
         }
 

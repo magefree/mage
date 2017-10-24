@@ -773,7 +773,7 @@ public abstract class AbilityImpl implements Ability {
             }
             if (!costs.isEmpty()) {
                 if (sbRule.length() > 0) {
-                    sbRule.append(',');
+                    sbRule.append(", ");
                 }
                 sbRule.append(costs.getText());
             }

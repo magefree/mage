@@ -438,6 +438,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Growth", 204, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Winds of Change", 275, Rarity.RARE, mage.cards.w.WindsOfChange.class));
         cards.add(new SetCardInfo("Wind Spirit", 136, Rarity.UNCOMMON, mage.cards.w.WindSpirit.class));
+        cards.add(new SetCardInfo("Winter Blast", 205, Rarity.UNCOMMON, mage.cards.w.WinterBlast.class));
         cards.add(new SetCardInfo("Winter Orb", 408, Rarity.RARE, mage.cards.w.WinterOrb.class));
         cards.add(new SetCardInfo("Wolverine Pack", 206, Rarity.UNCOMMON, mage.cards.w.WolverinePack.class));
         cards.add(new SetCardInfo("Wooden Sphere", 409, Rarity.UNCOMMON, mage.cards.w.WoodenSphere.class));

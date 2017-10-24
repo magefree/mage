@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
+import static mage.constants.Duration.EndOfTurn;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -98,10 +99,19 @@ public class PreventAllDamageByAllPermanentsEffect extends PreventionEffectImpl 
             sb.append("combat ");
         }
         sb.append("damage ");
-        sb.append(duration.toString());
-        if (filter != null) {
-            sb.append(" dealt by ");
-            sb.append(filter.getMessage());
+        if (duration == EndOfTurn) {
+            if (filter != null) {
+                sb.append(filter.getMessage());
+                sb.append(" would deal this turn");
+            } else {
+                sb.append("that would be dealt this turn");
+            }
+        } else {
+            sb.append(duration.toString());
+            if (filter != null) {
+                sb.append(" dealt by ");
+                sb.append(filter.getMessage());
+            }
         }
         return sb.toString();
     }

@@ -63,7 +63,7 @@ import mage.util.CardUtil;
 public class Godsend extends CardImpl {
 
     public Godsend(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
@@ -195,7 +195,7 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     public GodsendRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Opponents can't cast cards with the same name as cards exiled with {this}";
+        staticText = "Your opponents can't cast cards with the same name as cards exiled with {this}";
     }
 
     public GodsendRuleModifyingEffect(final GodsendRuleModifyingEffect effect) {

@@ -55,7 +55,7 @@ import mage.util.CardUtil;
 public class BattlefieldThaumaturge extends CardImpl {
 
     public BattlefieldThaumaturge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
 
         this.power = new MageInt(2);
@@ -79,10 +79,9 @@ public class BattlefieldThaumaturge extends CardImpl {
 
 class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEffectImpl {
 
-
     public BattlefieldThaumaturgeSpellsCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.staticText = "Each instant and sorcery spell you cast costs 1 less to cast for each creature it targets";
+        this.staticText = "Each instant and sorcery spell you cast costs {1} less to cast for each creature it targets";
     }
 
     protected BattlefieldThaumaturgeSpellsCostReductionEffect(BattlefieldThaumaturgeSpellsCostReductionEffect effect) {
@@ -92,9 +91,9 @@ class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEf
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Set<UUID> creaturesTargeted = new HashSet<>();
-        for (Target target: abilityToModify.getTargets()) {
-            for (UUID uuid: target.getTargets()) {
-                Permanent permanent = game.getPermanent(uuid); 
+        for (Target target : abilityToModify.getTargets()) {
+            for (UUID uuid : target.getTargets()) {
+                Permanent permanent = game.getPermanent(uuid);
                 if (permanent != null && permanent.isCreature()) {
                     creaturesTargeted.add(permanent.getId());
                 }

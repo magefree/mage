@@ -32,6 +32,7 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.game.permanent.token.OrderedMigrationBirdToken;
 
@@ -47,6 +48,7 @@ public class OrderedMigration extends CardImpl {
 
         // Domain - Create a 1/1 blue Bird creature token with flying for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new OrderedMigrationBirdToken(), new DomainValue()));
+        this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
     }
 
     public OrderedMigration(final OrderedMigration card) {

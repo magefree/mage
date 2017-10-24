@@ -56,12 +56,10 @@ public class RippleAbility extends TriggeredAbilityImpl {
         return new RippleAbility(this);
     }
 
-
     @Override
     public String getRule() {
-        return "Ripple " + rippleNumber + " <i>(When you cast this spell, you may reveal the top " + CardUtil.numberToText(rippleNumber) + " cards of your library. You may cast any revealed cards with the same name as this spell without paying their mana costs. Put the rest on the bottom of your library.)</i>";
+        return "ripple " + rippleNumber + " <i>(When you cast this spell, you may reveal the top " + CardUtil.numberToText(rippleNumber) + " cards of your library. You may cast any revealed cards with the same name as this spell without paying their mana costs. Put the rest on the bottom of your library.)</i>";
     }
-
 
 }
 
@@ -84,13 +82,12 @@ class RippleEffect extends OneShotEffect {
         return new RippleEffect(this);
     }
 
-
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null) {
-            if (!player.chooseUse(Outcome.Neutral, "Reveal " + rippleNumber + " cards from the top of your library?", source, game)){
+            if (!player.chooseUse(Outcome.Neutral, "Reveal " + rippleNumber + " cards from the top of your library?", source, game)) {
                 return true; //fizzle
             }
             // reveal to/**/p cards from library
@@ -123,4 +120,3 @@ class RippleEffect extends OneShotEffect {
     }
 
 }
-

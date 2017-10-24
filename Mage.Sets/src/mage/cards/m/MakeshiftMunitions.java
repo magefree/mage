@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class MakeshiftMunitions extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature");
 
     static {
         filter.add(Predicates.or(

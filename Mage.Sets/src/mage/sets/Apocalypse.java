@@ -31,6 +31,7 @@ public class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Battlefield Forge", 139, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Bloodfire Colossus", 55, Rarity.RARE, mage.cards.b.BloodfireColossus.class));
         cards.add(new SetCardInfo("Bloodfire Dwarf", 56, Rarity.COMMON, mage.cards.b.BloodfireDwarf.class));
+        cards.add(new SetCardInfo("Bloodfire Infusion", 57, Rarity.COMMON, mage.cards.b.BloodfireInfusion.class));
         cards.add(new SetCardInfo("Bloodfire Kavu", 58, Rarity.UNCOMMON, mage.cards.b.BloodfireKavu.class));
         cards.add(new SetCardInfo("Bog Gnarr", 76, Rarity.COMMON, mage.cards.b.BogGnarr.class));
         cards.add(new SetCardInfo("Brass Herald", 133, Rarity.UNCOMMON, mage.cards.b.BrassHerald.class));

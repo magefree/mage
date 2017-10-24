@@ -49,7 +49,7 @@ import mage.target.TargetSpell;
  */
 public class LookoutsDispersal extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Pirate");
 
     static {
         filter.add(new SubtypePredicate(SubType.PIRATE));

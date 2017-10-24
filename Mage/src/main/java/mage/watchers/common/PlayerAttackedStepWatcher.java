@@ -25,53 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.watchers.common;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.target.common.TargetCardInGraveyard;
+import mage.constants.WatcherScope;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.watchers.Watcher;
 
 /**
- *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class CrookOfComdemnation extends CardImpl {
-    
-    private UUID exileId = UUID.randomUUID();
+public class PlayerAttackedStepWatcher extends Watcher {
 
-    public CrookOfComdemnation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        
+    // With how many creatures attacked this player this turn
+    private final Map<UUID, Integer> playerAttacked = new HashMap<>();
 
-        // {1}, {t}: Exile target card from a graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInGraveyard());
-        this.addAbility(ability);
-        
-        // {1}, Exile Crook of Condemnation: Exile all cards from all graveyards.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllPlayersEffect(), new ManaCostsImpl("{1}"));
-        ability2.addCost(new ExileSourceCost());
-        this.addAbility(ability2);
-        
+    public PlayerAttackedStepWatcher() {
+        super(PlayerAttackedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
-    public CrookOfComdemnation(final CrookOfComdemnation card) {
-        super(card);
+    public PlayerAttackedStepWatcher(final PlayerAttackedStepWatcher watcher) {
+        super(watcher);
+        for (Map.Entry<UUID, Integer> entry : watcher.playerAttacked.entrySet()) {
+            this.playerAttacked.put(entry.getKey(), entry.getValue());
+        }
     }
 
     @Override
-    public CrookOfComdemnation copy() {
-        return new CrookOfComdemnation(this);
+    public PlayerAttackedStepWatcher copy() {
+        return new PlayerAttackedStepWatcher(this);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_POST) {
+            playerAttacked.clear();
+        }
+        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
+            playerAttacked.putIfAbsent(event.getTargetId(), 0);
+            playerAttacked.compute(event.getTargetId(), (p, amount) -> amount + 1);
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        playerAttacked.clear();
+    }
+
+    public int getNumberAttackingCurrentStep(UUID playerId) {
+        return playerAttacked.getOrDefault(playerId, 0);
     }
 }

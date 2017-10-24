@@ -85,7 +85,7 @@ public class ContagionEngineTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Contagion Engine");
         addTarget(playerA, playerB);
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{4},{T}: Proliferate");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}, {T}: Proliferate");
         setChoice(playerA, "Wall of Frost^Kalonian Behemoth^Plated Slagwurm^Teysa, Envoy of Ghosts^Ajani Goldmane");
         setChoice(playerA, "Wall of Frost^Kalonian Behemoth^Plated Slagwurm^Teysa, Envoy of Ghosts^Ajani Goldmane");
 

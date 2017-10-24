@@ -87,7 +87,7 @@ public class AgelessSentinels extends CardImpl {
 
         public AgelessSentinelsEffect() {
             super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
-            staticText = "it becomes a Bird Giant, ";
+            staticText = "it becomes a Bird Giant,";
         }
 
         public AgelessSentinelsEffect(final AgelessSentinelsEffect effect) {

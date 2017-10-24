@@ -15,7 +15,6 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-
 public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
 
     public EndOfCombatTriggeredAbility(Effect effect, boolean optional) {
@@ -35,7 +34,7 @@ public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.END_COMBAT_STEP_PRE;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
@@ -43,6 +42,6 @@ public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the end of combat, " + super.getRule();
+        return "At end of combat, " + super.getRule();
     }
 }

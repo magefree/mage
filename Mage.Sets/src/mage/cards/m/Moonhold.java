@@ -55,13 +55,13 @@ import mage.watchers.common.ManaSpentToCastWatcher;
 public class Moonhold extends CardImpl {
 
     public Moonhold(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R/W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R/W}");
 
         // Target player can't play land cards this turn if {R} was spent to cast Moonhold and can't play creature cards this turn if {W} was spent to cast it.
         ContinuousRuleModifyingEffect effect = new MoonholdEffect();
         ContinuousRuleModifyingEffect effect2 = new MoonholdEffect2();
-        effect.setText("Target player can't play land cards this turn if {R} was spent to cast {this} ");
-        effect2.setText("and can't play creature cards this turn if {W} was spent to cast it.");
+        effect.setText("Target player can't play lands this turn if {R} was spent to cast {this}");
+        effect2.setText("and can't cast creature spells this turn if {W} was spent to cast it.");
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 effect,
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.R))));
@@ -69,7 +69,7 @@ public class Moonhold extends CardImpl {
                 effect2,
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.W))));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {R}{W} was spent.)</i>"));
+        this.getSpellAbility().addEffect(new InfoEffect(" <i>(Do both if {R}{W} was spent.)</i>"));
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 

@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -48,13 +49,14 @@ import mage.target.common.TargetCreaturePermanent;
 public class PowerArmor extends CardImpl {
 
     public PowerArmor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Domain - {3}, {tap}: Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(
                 new DomainValue(), new DomainValue(), Duration.EndOfTurn), new TapSourceCost());
         ability.addCost(new ManaCostsImpl("{3}"));
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setAbilityWord(AbilityWord.DOMAIN);
         this.addAbility(ability);
     }
 

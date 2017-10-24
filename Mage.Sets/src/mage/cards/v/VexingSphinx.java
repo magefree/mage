@@ -30,7 +30,7 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -40,7 +40,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -59,7 +58,7 @@ public class VexingSphinx extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Cumulative upkeep-Discard a card.
-        this.addAbility(new CumulativeUpkeepAbility(new DiscardTargetCost(new TargetCardInHand())));
+        this.addAbility(new CumulativeUpkeepAbility(new DiscardCardCost()));
 
         // When Vexing Sphinx dies, draw a card for each age counter on it.
         this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.AGE))));

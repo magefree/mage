@@ -246,6 +246,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Spectral Force", 217, Rarity.RARE, mage.cards.s.SpectralForce.class));
         cards.add(new SetCardInfo("Spell Burst", 79, Rarity.UNCOMMON, mage.cards.s.SpellBurst.class));
         cards.add(new SetCardInfo("Spiketail Drakeling", 80, Rarity.COMMON, mage.cards.s.SpiketailDrakeling.class));
+        cards.add(new SetCardInfo("Spike Tiller", 218, Rarity.RARE, mage.cards.s.SpikeTiller.class));
         cards.add(new SetCardInfo("Spinneret Sliver", 219, Rarity.COMMON, mage.cards.s.SpinneretSliver.class));
         cards.add(new SetCardInfo("Spirit Loop", 42, Rarity.UNCOMMON, mage.cards.s.SpiritLoop.class));
         cards.add(new SetCardInfo("Sporesower Thallid", 220, Rarity.UNCOMMON, mage.cards.s.SporesowerThallid.class));

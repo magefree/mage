@@ -273,7 +273,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
         addTarget(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -309,7 +309,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
         addTarget(playerB, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{5}{G}: Turn");
@@ -353,7 +353,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
         addTarget(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -431,7 +431,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
         setChoice(playerB, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice a creature");

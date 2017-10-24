@@ -72,6 +72,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Coal Golem", 96, Rarity.UNCOMMON, mage.cards.c.CoalGolem.class));
         cards.add(new SetCardInfo("Dance of Many", 21, Rarity.RARE, mage.cards.d.DanceOfMany.class));
         cards.add(new SetCardInfo("Dark Heart of the Wood", 117, Rarity.COMMON, mage.cards.d.DarkHeartOfTheWood.class));
+        cards.add(new SetCardInfo("Deep Water", 22, Rarity.COMMON, mage.cards.d.DeepWater.class));
         cards.add(new SetCardInfo("Diabolic Machine", 98, Rarity.UNCOMMON, mage.cards.d.DiabolicMachine.class));
         cards.add(new SetCardInfo("Drowned", 23, Rarity.COMMON, mage.cards.d.Drowned.class));
         cards.add(new SetCardInfo("Dust to Dust", 78, Rarity.COMMON, mage.cards.d.DustToDust.class));
@@ -104,6 +105,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Marsh Gas", 10, Rarity.COMMON, mage.cards.m.MarshGas.class));
         cards.add(new SetCardInfo("Marsh Goblins", 118, Rarity.COMMON, mage.cards.m.MarshGoblins.class));
         cards.add(new SetCardInfo("Marsh Viper", 44, Rarity.COMMON, mage.cards.m.MarshViper.class));
+        cards.add(new SetCardInfo("Martyr's Cry", 85, Rarity.RARE, mage.cards.m.MartyrsCry.class));
         cards.add(new SetCardInfo("Maze of Ith", 114, Rarity.UNCOMMON, mage.cards.m.MazeOfIth.class));
         cards.add(new SetCardInfo("Merfolk Assassin", 31, Rarity.UNCOMMON, mage.cards.m.MerfolkAssassin.class));
         cards.add(new SetCardInfo("Mind Bomb", 32, Rarity.RARE, mage.cards.m.MindBomb.class));

@@ -61,10 +61,15 @@ public class ExileFromStackCost extends CostImpl {
                 if (spellToExile == null) {
                     return false;
                 }
-                spellToExile.moveToExile(null, "", ability.getSourceId(), game);
+                String spellName = spellToExile.getName();
+                if (spellToExile.isCopy()) {
+                    game.getStack().remove(spellToExile);
+                } else {
+                    spellToExile.moveToExile(null, "", ability.getSourceId(), game);
+                }
                 paid = true;
                 if (!game.isSimulation()) {
-                    game.informPlayers(player.getLogName() + " exiles " + spellToExile.getName() + " (as costs)");
+                    game.informPlayers(player.getLogName() + " exiles " + spellName + " (as costs)");
                 }
             }
         }

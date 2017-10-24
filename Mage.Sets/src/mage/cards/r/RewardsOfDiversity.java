@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class RewardsOfDiversity extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("multicolored spell");
+    private static final FilterSpell filter = new FilterSpell("a multicolored spell");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -52,7 +52,7 @@ public class RewardsOfDiversity extends CardImpl {
     }
 
     public RewardsOfDiversity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // Whenever an opponent casts a multicolored spell, you gain 4 life.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new GainLifeEffect(4), filter, false));

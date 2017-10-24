@@ -46,14 +46,17 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class MwonvuliAcidMoss extends CardImpl {
 
-    public MwonvuliAcidMoss(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
-        
-        FilterLandCard filterForest = new FilterLandCard();
+    private static final FilterLandCard filterForest = new FilterLandCard("Forest card");
+
+    static {
         filterForest.add(new SubtypePredicate(SubType.FOREST));
-        
+    }
+
+    public MwonvuliAcidMoss(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
+
         // Destroy target land. Search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterLandPermanent()));
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterForest), true, true));
     }
@@ -67,4 +70,3 @@ public class MwonvuliAcidMoss extends CardImpl {
         return new MwonvuliAcidMoss(this);
     }
 }
-
