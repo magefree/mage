@@ -145,6 +145,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Glory Seeker", 31, Rarity.COMMON, mage.cards.g.GlorySeeker.class));
         cards.add(new SetCardInfo("Gluttonous Zombie", 151, Rarity.UNCOMMON, mage.cards.g.GluttonousZombie.class));
         cards.add(new SetCardInfo("Goblin Burrows", 318, Rarity.UNCOMMON, mage.cards.g.GoblinBurrows.class));
+        cards.add(new SetCardInfo("Goblin Machinist", 204, Rarity.UNCOMMON, mage.cards.g.GoblinMachinist.class));
         cards.add(new SetCardInfo("Goblin Piledriver", 205, Rarity.RARE, mage.cards.g.GoblinPiledriver.class));
         cards.add(new SetCardInfo("Goblin Pyromancer", 206, Rarity.RARE, mage.cards.g.GoblinPyromancer.class));
         cards.add(new SetCardInfo("Goblin Sharpshooter", 207, Rarity.RARE, mage.cards.g.GoblinSharpshooter.class));
