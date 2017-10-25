@@ -27,7 +27,6 @@ public class YouGainedLifeCondition extends IntCompareCondition {
 
     @Override
     public String toString() {
-        return String.format("if you gained %s or more life this turn ", value);
+        return String.format("if you gained %s or more life this turn ", value + 1);
     }
 }
-

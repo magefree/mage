@@ -328,6 +328,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Pradesh Gypsies", 179, Rarity.COMMON, mage.cards.p.PradeshGypsies.class));
         cards.add(new SetCardInfo("Primal Clay", 395, Rarity.RARE, mage.cards.p.PrimalClay.class));
         cards.add(new SetCardInfo("Primal Order", 180, Rarity.RARE, mage.cards.p.PrimalOrder.class));
+        cards.add(new SetCardInfo("Prismatic Ward", 329, Rarity.COMMON, mage.cards.p.PrismaticWard.class));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 112, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));
         cards.add(new SetCardInfo("Psychic Venom", 113, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
         cards.add(new SetCardInfo("Pyroblast", 262, Rarity.UNCOMMON, mage.cards.p.Pyroblast.class));
