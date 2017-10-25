@@ -29,9 +29,8 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,13 +38,15 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
 public class ManaweftSliver extends CardImpl {
+
+    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SLIVER, "Sliver creatures");
 
     public ManaweftSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -55,11 +56,11 @@ public class ManaweftSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sliver creatures you control have "{T}: Add one mana of any color to your mana pool."
-        Ability ability = new AnyColorManaAbility();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityAllEffect(ability,
-                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS,
-                        "Sliver creatures you control have \"{T}: Add one mana of any color to your mana pool.\"")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
+                new AnyColorManaAbility(),
+                Duration.WhileOnBattlefield,
+                filter
+        )));
     }
 
     public ManaweftSliver(final ManaweftSliver card) {
