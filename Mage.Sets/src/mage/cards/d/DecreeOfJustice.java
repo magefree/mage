@@ -30,6 +30,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -67,7 +68,6 @@ public class DecreeOfJustice extends CardImpl {
         
         // When you cycle Decree of Justice, you may pay {X}. If you do, create X 1/1 white Soldier creature tokens.
         Ability ability = new CycleTriggeredAbility(new DecreeOfJusticeCycleEffect(), true);
-        ability.addCost(new ManaCostsImpl<>("{X}"));
         this.addAbility(ability);
     }
 
@@ -101,12 +101,14 @@ class DecreeOfJusticeCycleEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Token token = new SoldierToken();
-            int X = new ManacostVariableValue().calculate(game, source, this);
-            token.putOntoBattlefield(X, game, source.getSourceId(), source.getControllerId());
-            return true;
-            
+            int X = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+            Cost cost = new GenericManaCost(X);
+            if(cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)){
+                Token token = new SoldierToken();
+                token.putOntoBattlefield(X, game, source.getSourceId(), source.getControllerId());
+                return true;
+            }
         }
-        return false;
+        return false;        
     }
 }
