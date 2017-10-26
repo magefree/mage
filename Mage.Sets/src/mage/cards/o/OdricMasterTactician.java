@@ -131,8 +131,8 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
 class OdricMasterTacticianChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl {
 
     public OdricMasterTacticianChooseBlockersEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit, false, false);
-        staticText = "Whenever {this} and at least three other creatures attack, you choose which creatures block this turn and how those creatures block";
+        super(Duration.EndOfCombat, Outcome.Benefit, false, false);
+        staticText = "Whenever {this} and at least three other creatures attack, you choose which creatures block this combat and how those creatures block";
     }
 
     public OdricMasterTacticianChooseBlockersEffect(final OdricMasterTacticianChooseBlockersEffect effect) {
@@ -162,6 +162,7 @@ class OdricMasterTacticianChooseBlockersEffect extends ContinuousRuleModifyingEf
             game.informPlayers(source.getSourceObject(game).getIdName() + " didn't apply");
             return false;
         }
+        watcher.copyCount--;
         watcher.copyCountApply = watcher.copyCount;
         Player blockController = game.getPlayer(source.getControllerId());
         if (blockController != null) {
