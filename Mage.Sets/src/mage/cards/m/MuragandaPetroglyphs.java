@@ -92,20 +92,16 @@ class NoAbilityPredicate implements Predicate<MageObject> {
         }
         if (isFaceDown) {
             for (Ability ability : abilities) {
-                if (!ability.getSourceId().equals(input.getId())) {
-                    if (ability.getClass().equals(JohanVigilanceAbility.class)) {
-                        return false;
-                    }
+                if (!ability.getSourceId().equals(input.getId()) && !ability.getClass().equals(JohanVigilanceAbility.class)) {
+                    return false;
                 }
             }
             return true;
         }
 
         for (Ability ability : abilities) {
-            if (!Objects.equals(ability.getClass(), SpellAbility.class)) {
-                if (!ability.getClass().equals(JohanVigilanceAbility.class)) {
-                    return false;
-                }
+            if (!Objects.equals(ability.getClass(), SpellAbility.class) && !ability.getClass().equals(JohanVigilanceAbility.class)) {
+                return false;
             }
         }
         return true;
