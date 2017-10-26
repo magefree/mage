@@ -149,6 +149,7 @@ class MeleeChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl {
             game.informPlayers(source.getSourceObject(game).getIdName() + " didn't apply");
             return false;
         }
+        watcher.copyCount--;
         watcher.copyCountApply = watcher.copyCount;
         Player blockController = game.getPlayer(source.getControllerId());
         if (blockController != null) {
