@@ -32,10 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -109,6 +106,6 @@ class DecreeOfJusticeCycleEffect extends OneShotEffect {
                 return true;
             }
         }
-        return false;        
+        return false;
     }
 }
