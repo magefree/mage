@@ -212,6 +212,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Magus of the Unseen", 82, Rarity.RARE, mage.cards.m.MagusOfTheUnseen.class));
         cards.add(new SetCardInfo("Malachite Talisman", 303, Rarity.UNCOMMON, mage.cards.m.MalachiteTalisman.class));
         cards.add(new SetCardInfo("Marton Stromgald", 199, Rarity.RARE, mage.cards.m.MartonStromgald.class));
+        cards.add(new SetCardInfo("Melee", 200, Rarity.UNCOMMON, mage.cards.m.Melee.class));
         cards.add(new SetCardInfo("Melting", 201, Rarity.UNCOMMON, mage.cards.m.Melting.class));
         cards.add(new SetCardInfo("Merieke Ri Berit", 375, Rarity.RARE, mage.cards.m.MeriekeRiBerit.class));
         cards.add(new SetCardInfo("Mesmeric Trance", 83, Rarity.RARE, mage.cards.m.MesmericTrance.class));
@@ -324,6 +325,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Bauble", 318, Rarity.UNCOMMON, mage.cards.u.UrzasBauble.class));
         cards.add(new SetCardInfo("Veldt", 358, Rarity.RARE, mage.cards.v.Veldt.class));
         cards.add(new SetCardInfo("Vertigo", 222, Rarity.UNCOMMON, mage.cards.v.Vertigo.class));
+        cards.add(new SetCardInfo("Vexing Arcanix", 319, Rarity.RARE, mage.cards.v.VexingArcanix.class));
         cards.add(new SetCardInfo("Vibrating Sphere", 320, Rarity.RARE, mage.cards.v.VibratingSphere.class));
         cards.add(new SetCardInfo("Walking Wall", 321, Rarity.UNCOMMON, mage.cards.w.WalkingWall.class));
         cards.add(new SetCardInfo("Wall of Lava", 223, Rarity.UNCOMMON, mage.cards.w.WallOfLava.class));

@@ -25,82 +25,69 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.o;
+package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
+import mage.abilities.condition.CompoundCondition;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.BeforeBlockersAreDeclaredCondition;
+import mage.abilities.condition.common.IsPhaseCondition;
+import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.RemoveFromCombatTargetEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
+import mage.watchers.Watcher;
 import mage.watchers.common.ChooseBlockersRedundancyWatcher;
 
 /**
- * @author noxx
+ *
+ * @author L_J
  */
-public class OdricMasterTactician extends CardImpl {
+public class Melee extends CardImpl {
 
-    public OdricMasterTactician(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
+    public Melee(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Cast Melee only during your turn and only during combat before blockers are declared.
+        Condition condition = new CompoundCondition(BeforeBlockersAreDeclaredCondition.instance,
+                new IsPhaseCondition(TurnPhase.COMBAT),
+                MyTurnCondition.instance);
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, condition, "Cast {this} only during your turn and only during combat before blockers are declared"));
 
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
+        // You choose which creatures block this combat and how those creatures block.
+        // (only the last resolved Melee spell's blocking effect applies)
+        this.getSpellAbility().addEffect(new MeleeChooseBlockersEffect());
+        this.getSpellAbility().addWatcher(new ChooseBlockersRedundancyWatcher());
+        this.getSpellAbility().addEffect(new ChooseBlockersRedundancyWatcherIncrementEffect());
 
-        // Whenever Odric, Master Tactician and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.
-        this.addAbility(new OdricMasterTacticianTriggeredAbility());
+        // Whenever a creature attacks and isn't blocked this combat, untap it and remove it from combat.
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new MeleeTriggeredAbility()));
     }
 
-    public OdricMasterTactician(final OdricMasterTactician card) {
+    public Melee(final Melee card) {
         super(card);
     }
 
     @Override
-    public OdricMasterTactician copy() {
-        return new OdricMasterTactician(this);
+    public Melee copy() {
+        return new Melee(this);
     }
-}
-
-class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
-
-    public OdricMasterTacticianTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new OdricMasterTacticianChooseBlockersEffect());
-        this.addWatcher(new ChooseBlockersRedundancyWatcher());
-        this.addEffect(new ChooseBlockersRedundancyWatcherIncrementEffect());
-    }
-
-    public OdricMasterTacticianTriggeredAbility(final OdricMasterTacticianTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public OdricMasterTacticianTriggeredAbility copy() {
-        return new OdricMasterTacticianTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getCombat().getAttackers().size() >= 4 && game.getCombat().getAttackers().contains(this.sourceId);
-    }
-
+    
     private class ChooseBlockersRedundancyWatcherIncrementEffect extends OneShotEffect {
     
         ChooseBlockersRedundancyWatcherIncrementEffect() {
@@ -128,20 +115,20 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class OdricMasterTacticianChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl {
+class MeleeChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OdricMasterTacticianChooseBlockersEffect() {
+    public MeleeChooseBlockersEffect() {
         super(Duration.EndOfCombat, Outcome.Benefit, false, false);
-        staticText = "Whenever {this} and at least three other creatures attack, you choose which creatures block this combat and how those creatures block";
+        staticText = "You choose which creatures block this combat and how those creatures block";
     }
 
-    public OdricMasterTacticianChooseBlockersEffect(final OdricMasterTacticianChooseBlockersEffect effect) {
+    public MeleeChooseBlockersEffect(final MeleeChooseBlockersEffect effect) {
         super(effect);
     }
 
     @Override
-    public OdricMasterTacticianChooseBlockersEffect copy() {
-        return new OdricMasterTacticianChooseBlockersEffect(this);
+    public MeleeChooseBlockersEffect copy() {
+        return new MeleeChooseBlockersEffect(this);
     }
 
     @Override
@@ -172,5 +159,46 @@ class OdricMasterTacticianChooseBlockersEffect extends ContinuousRuleModifyingEf
         }
         this.discard();
         return false;
+    }
+}
+
+class MeleeTriggeredAbility extends DelayedTriggeredAbility {
+
+    public MeleeTriggeredAbility() {
+        super(new UntapTargetEffect(), Duration.EndOfCombat, false);
+        this.addEffect(new RemoveFromCombatTargetEffect());
+    }
+
+    public MeleeTriggeredAbility(MeleeTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNBLOCKED_ATTACKER;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null) {
+            for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+                if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(event.getTargetId())) {
+                    this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public MeleeTriggeredAbility copy() {
+        return new MeleeTriggeredAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a creature attacks and isn't blocked this combat, untap it and remove it from combat.";
     }
 }

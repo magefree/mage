@@ -86,6 +86,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Coveted Peacock", 29, Rarity.UNCOMMON, mage.cards.c.CovetedPeacock.class));
         cards.add(new SetCardInfo("Crown-Hunter Hireling", 50, Rarity.COMMON, mage.cards.c.CrownHunterHireling.class));
         cards.add(new SetCardInfo("Custodi Lich", 41, Rarity.RARE, mage.cards.c.CustodiLich.class));
+        cards.add(new SetCardInfo("Custodi Soulcaller", 15, Rarity.UNCOMMON, mage.cards.c.CustodiSoulcaller.class));
         cards.add(new SetCardInfo("Daretti, Ingenious Iconoclast", 74, Rarity.MYTHIC, mage.cards.d.DarettiIngeniousIconoclast.class));
         cards.add(new SetCardInfo("Deadly Designs", 42, Rarity.UNCOMMON, mage.cards.d.DeadlyDesigns.class));
         cards.add(new SetCardInfo("Death Wind", 131, Rarity.COMMON, mage.cards.d.DeathWind.class));

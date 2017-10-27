@@ -402,6 +402,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Throne of Bone", 403, Rarity.UNCOMMON, mage.cards.t.ThroneOfBone.class));
         cards.add(new SetCardInfo("Thrull Retainer", 60, Rarity.UNCOMMON, mage.cards.t.ThrullRetainer.class));
         cards.add(new SetCardInfo("Time Bomb", 404, Rarity.RARE, mage.cards.t.TimeBomb.class));
+        cards.add(new SetCardInfo("Time Elemental", 129, Rarity.RARE, mage.cards.t.TimeElemental.class));
         cards.add(new SetCardInfo("Titania's Song", 194, Rarity.RARE, mage.cards.t.TitaniasSong.class));
         cards.add(new SetCardInfo("Torture", 61, Rarity.COMMON, Torture.class));
         cards.add(new SetCardInfo("Touch of Death", 62, Rarity.COMMON, mage.cards.t.TouchOfDeath.class));
