@@ -100,7 +100,7 @@ class PaleWayfarerEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source
+    public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
             Player player = game.getPlayer(targetCreature.getControllerId());
