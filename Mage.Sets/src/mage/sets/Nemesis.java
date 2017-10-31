@@ -85,6 +85,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Dominate", 31, Rarity.UNCOMMON, mage.cards.d.Dominate.class));
         cards.add(new SetCardInfo("Downhill Charge", 79, Rarity.COMMON, mage.cards.d.DownhillCharge.class));
         cards.add(new SetCardInfo("Ensnare", 32, Rarity.UNCOMMON, mage.cards.e.Ensnare.class));
+        cards.add(new SetCardInfo("Eye of Yawgmoth", 129, Rarity.RARE, mage.cards.e.EyeOfYawgmoth.class));
         cards.add(new SetCardInfo("Fanatical Devotion", 8, Rarity.COMMON, mage.cards.f.FanaticalDevotion.class));
         cards.add(new SetCardInfo("Flame Rift", 80, Rarity.COMMON, mage.cards.f.FlameRift.class));
         cards.add(new SetCardInfo("Flowstone Armor", 131, Rarity.UNCOMMON, mage.cards.f.FlowstoneArmor.class));
