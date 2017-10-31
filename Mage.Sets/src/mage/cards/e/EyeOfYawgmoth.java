@@ -28,24 +28,13 @@
 package mage.cards.e;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.common.PayVariableLifeCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.EntwineAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
