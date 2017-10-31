@@ -106,6 +106,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Keldon Berserker", 93, Rarity.COMMON, mage.cards.k.KeldonBerserker.class));
         cards.add(new SetCardInfo("Keldon Firebombers", 94, Rarity.RARE, mage.cards.k.KeldonFirebombers.class));
         cards.add(new SetCardInfo("Latulla, Keldon Overseer", 95, Rarity.RARE, mage.cards.l.LatullaKeldonOverseer.class));
+        cards.add(new SetCardInfo("Latulla's Orders", 96, Rarity.COMMON, mage.cards.l.LatullasOrders.class));
         cards.add(new SetCardInfo("Lesser Gargadon", 97, Rarity.UNCOMMON, mage.cards.l.LesserGargadon.class));
         cards.add(new SetCardInfo("Living Terrain", 117, Rarity.UNCOMMON, mage.cards.l.LivingTerrain.class));
         cards.add(new SetCardInfo("Mageta's Boon", 14, Rarity.COMMON, mage.cards.m.MagetasBoon.class));
