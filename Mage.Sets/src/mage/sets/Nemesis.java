@@ -101,6 +101,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Kill Switch", 133, Rarity.RARE, mage.cards.k.KillSwitch.class));
         cards.add(new SetCardInfo("Kor Haven", 141, Rarity.RARE, mage.cards.k.KorHaven.class));
         cards.add(new SetCardInfo("Laccolith Grunt", 87, Rarity.COMMON, mage.cards.l.LaccolithGrunt.class));
+        cards.add(new SetCardInfo("Laccolith Rig", 88, Rarity.COMMON, mage.cards.l.LaccolithRig.class));
         cards.add(new SetCardInfo("Laccolith Titan", 89, Rarity.RARE, mage.cards.l.LaccolithTitan.class));
         cards.add(new SetCardInfo("Laccolith Warrior", 90, Rarity.UNCOMMON, mage.cards.l.LaccolithWarrior.class));
         cards.add(new SetCardInfo("Laccolith Whelp", 91, Rarity.COMMON, mage.cards.l.LaccolithWhelp.class));
