@@ -117,6 +117,7 @@ class WishmongerEffect extends OneShotEffect {
                         game.addEffect(effect, source);
                     }
                 }
+                return true;
             }
         }
         return false;
