@@ -48,6 +48,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -110,6 +111,7 @@ class MartyrdomGainAbilityTargetEffect extends ContinuousEffectImpl {
 
 class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
     
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private UUID caster;
     
     public MartyrdomActivatedAbility(UUID caster) {
@@ -131,7 +133,12 @@ class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         if (playerId == caster) {
-            return super.canActivate(playerId, game);
+            Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
+            if (permanent != null) {
+                if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
+                    return super.canActivate(playerId, game);
+                }
+            }
         }
         return false;
     }
@@ -149,6 +156,8 @@ class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
 
 class MartyrdomRedirectDamageTargetEffect extends RedirectionEffect {
 
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
     public MartyrdomRedirectDamageTargetEffect(Duration duration, int amount) {
         super(duration, amount, true);
         staticText = "The next " + amount + " damage that would be dealt to target creature or player this turn is dealt to {this} instead";
@@ -165,12 +174,17 @@ class MartyrdomRedirectDamageTargetEffect extends RedirectionEffect {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
-            if (event.getTargetId() != null && source.getSourceId() != null) {
-                TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
-                target.add(source.getSourceId(), game);
-                redirectTarget = target;
-                return true;
+        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        if (permanent != null) {
+            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
+                if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
+                    if (event.getTargetId() != null) {
+                        TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
+                        target.add(source.getSourceId(), game);
+                        redirectTarget = target;
+                        return true;
+                    }
+                }
             }
         }
         return false;
