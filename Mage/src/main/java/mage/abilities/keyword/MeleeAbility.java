@@ -47,7 +47,7 @@ import mage.watchers.Watcher;
  *
  * @author emerald000
  */
-public class MeleeAbility extends AttacksTriggeredAbility {
+public class MeleeAbility extends AttacksTriggeredAbility { 
 
     public MeleeAbility() {
         super(new BoostSourceEffect(new MeleeDynamicValue(), new MeleeDynamicValue(), Duration.EndOfTurn), false);
@@ -71,7 +71,7 @@ public class MeleeAbility extends AttacksTriggeredAbility {
 
 class MeleeWatcher extends Watcher {
 
-    private final HashMap<UUID, Set<UUID>> playersAttacked = new HashMap<>(0);
+    private HashMap<UUID, Set<UUID>> playersAttacked = new HashMap<>(0);
 
     MeleeWatcher() {
         super("MeleeWatcher", WatcherScope.GAME);
@@ -95,7 +95,10 @@ class MeleeWatcher extends Watcher {
     }
 
     public int getNumberOfAttackedPlayers(UUID attackerId) {
-        return this.playersAttacked.get(attackerId).size();
+        if (this.playersAttacked.get(attackerId) != null) {
+            return this.playersAttacked.get(attackerId).size();
+        }
+        return 0;
     }
 
     @Override
@@ -106,11 +109,18 @@ class MeleeWatcher extends Watcher {
 
 class MeleeDynamicValue implements DynamicValue {
 
+    private boolean valueChecked = false;
+    private int lockedInValue;
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         MeleeWatcher watcher = (MeleeWatcher) game.getState().getWatchers().get(MeleeWatcher.class.getSimpleName());
         if (watcher != null) {
-            return watcher.getNumberOfAttackedPlayers(sourceAbility.getControllerId());
+            if (!valueChecked) {
+                this.lockedInValue = watcher.getNumberOfAttackedPlayers(sourceAbility.getControllerId());
+                valueChecked = true;
+            }
+            return this.lockedInValue;
         }
         return 0;
     }
