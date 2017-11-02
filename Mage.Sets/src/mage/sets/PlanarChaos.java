@@ -198,6 +198,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Teneb, the Harvester", 163, Rarity.RARE, mage.cards.t.TenebTheHarvester.class));
         cards.add(new SetCardInfo("Tidewalker", 49, Rarity.UNCOMMON, mage.cards.t.Tidewalker.class));
         cards.add(new SetCardInfo("Timbermare", 140, Rarity.RARE, mage.cards.t.Timbermare.class));
+        cards.add(new SetCardInfo("Timebender", 50, Rarity.UNCOMMON, mage.cards.t.Timebender.class));
         cards.add(new SetCardInfo("Timecrafting", 109, Rarity.UNCOMMON, mage.cards.t.Timecrafting.class));
         cards.add(new SetCardInfo("Torchling", 110, Rarity.RARE, mage.cards.t.Torchling.class));
         cards.add(new SetCardInfo("Treacherous Urge", 82, Rarity.UNCOMMON, mage.cards.t.TreacherousUrge.class));

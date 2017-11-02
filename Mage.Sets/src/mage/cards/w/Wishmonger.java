@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.UntapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -47,6 +47,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -60,42 +61,41 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth & L_J
  */
-public class PaleWayfarer extends CardImpl {
+public class Wishmonger extends CardImpl {
 
-    public PaleWayfarer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
-        this.subtype.add(SubType.SPIRIT);
-        this.subtype.add(SubType.GIANT);
+    public Wishmonger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        this.subtype.add(SubType.UNICORN);
+        this.subtype.add(SubType.MONGER);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // {2}{W}{W}, {untap}: Target creature gains protection from the color of its controller's choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PaleWayfarerEffect(), new ManaCostsImpl("{2}{W}{W}"));
-        ability.addCost(new UntapSourceCost());
+        // {2}: Target creature gains protection from the color of its controller's choice until end of turn. Any player may activate this ability.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WishmongerEffect(), new ManaCostsImpl("{2}"));
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setMayActivate(TargetController.ANY);
+        ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);
-
     }
 
-    public PaleWayfarer(final PaleWayfarer card) {
+    public Wishmonger(final Wishmonger card) {
         super(card);
     }
 
     @Override
-    public PaleWayfarer copy() {
-        return new PaleWayfarer(this);
+    public Wishmonger copy() {
+        return new Wishmonger(this);
     }
 }
 
-class PaleWayfarerEffect extends OneShotEffect {
+class WishmongerEffect extends OneShotEffect {
 
-    public PaleWayfarerEffect() {
+    public WishmongerEffect() {
         super(Outcome.BoostCreature);
         staticText = "Target creature gains protection from the color of its controller's choice until end of turn";
     }
 
-    public PaleWayfarerEffect(final PaleWayfarerEffect effect) {
+    public WishmongerEffect(final WishmongerEffect effect) {
         super(effect);
     }
 
@@ -124,8 +124,8 @@ class PaleWayfarerEffect extends OneShotEffect {
     }
 
     @Override
-    public PaleWayfarerEffect copy() {
-        return new PaleWayfarerEffect(this);
+    public WishmongerEffect copy() {
+        return new WishmongerEffect(this);
     }
 }
 

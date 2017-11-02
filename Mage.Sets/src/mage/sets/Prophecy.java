@@ -83,6 +83,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Diving Griffin", 6, Rarity.COMMON, mage.cards.d.DivingGriffin.class));
         cards.add(new SetCardInfo("Dual Nature", 112, Rarity.RARE, mage.cards.d.DualNature.class));
         cards.add(new SetCardInfo("Elephant Resurgence", 113, Rarity.RARE, mage.cards.e.ElephantResurgence.class));
+        cards.add(new SetCardInfo("Endbringer's Revel", 63, Rarity.UNCOMMON, mage.cards.e.EndbringersRevel.class));
         cards.add(new SetCardInfo("Entangler", 7, Rarity.UNCOMMON, mage.cards.e.Entangler.class));
         cards.add(new SetCardInfo("Excavation", 33, Rarity.UNCOMMON, mage.cards.e.Excavation.class));
         cards.add(new SetCardInfo("Fault Riders", 88, Rarity.COMMON, mage.cards.f.FaultRiders.class));
@@ -105,6 +106,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Keldon Berserker", 93, Rarity.COMMON, mage.cards.k.KeldonBerserker.class));
         cards.add(new SetCardInfo("Keldon Firebombers", 94, Rarity.RARE, mage.cards.k.KeldonFirebombers.class));
         cards.add(new SetCardInfo("Latulla, Keldon Overseer", 95, Rarity.RARE, mage.cards.l.LatullaKeldonOverseer.class));
+        cards.add(new SetCardInfo("Latulla's Orders", 96, Rarity.COMMON, mage.cards.l.LatullasOrders.class));
         cards.add(new SetCardInfo("Lesser Gargadon", 97, Rarity.UNCOMMON, mage.cards.l.LesserGargadon.class));
         cards.add(new SetCardInfo("Living Terrain", 117, Rarity.UNCOMMON, mage.cards.l.LivingTerrain.class));
         cards.add(new SetCardInfo("Mageta's Boon", 14, Rarity.COMMON, mage.cards.m.MagetasBoon.class));

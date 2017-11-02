@@ -186,6 +186,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Haunting Echoes", 142, Rarity.RARE, mage.cards.h.HauntingEchoes.class));
         cards.add(new SetCardInfo("Howling Gale", 244, Rarity.UNCOMMON, mage.cards.h.HowlingGale.class));
         cards.add(new SetCardInfo("Immobilizing Ink", 87, Rarity.COMMON, mage.cards.i.ImmobilizingInk.class));
+        cards.add(new SetCardInfo("Impulsive Maneuvers", 197, Rarity.RARE, mage.cards.i.ImpulsiveManeuvers.class));
         cards.add(new SetCardInfo("Infected Vermin", 144, Rarity.UNCOMMON, mage.cards.i.InfectedVermin.class));
         cards.add(new SetCardInfo("Innocent Blood", 145, Rarity.COMMON, mage.cards.i.InnocentBlood.class));
         cards.add(new SetCardInfo("Iridescent Angel", 288, Rarity.RARE, mage.cards.i.IridescentAngel.class));
