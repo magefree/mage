@@ -328,6 +328,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Pradesh Gypsies", 179, Rarity.COMMON, mage.cards.p.PradeshGypsies.class));
         cards.add(new SetCardInfo("Primal Clay", 395, Rarity.RARE, mage.cards.p.PrimalClay.class));
         cards.add(new SetCardInfo("Primal Order", 180, Rarity.RARE, mage.cards.p.PrimalOrder.class));
+        cards.add(new SetCardInfo("Prismatic Ward", 329, Rarity.COMMON, mage.cards.p.PrismaticWard.class));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 112, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));
         cards.add(new SetCardInfo("Psychic Venom", 113, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
         cards.add(new SetCardInfo("Pyroblast", 262, Rarity.UNCOMMON, mage.cards.p.Pyroblast.class));
@@ -401,6 +402,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Throne of Bone", 403, Rarity.UNCOMMON, mage.cards.t.ThroneOfBone.class));
         cards.add(new SetCardInfo("Thrull Retainer", 60, Rarity.UNCOMMON, mage.cards.t.ThrullRetainer.class));
         cards.add(new SetCardInfo("Time Bomb", 404, Rarity.RARE, mage.cards.t.TimeBomb.class));
+        cards.add(new SetCardInfo("Time Elemental", 129, Rarity.RARE, mage.cards.t.TimeElemental.class));
         cards.add(new SetCardInfo("Titania's Song", 194, Rarity.RARE, mage.cards.t.TitaniasSong.class));
         cards.add(new SetCardInfo("Torture", 61, Rarity.COMMON, Torture.class));
         cards.add(new SetCardInfo("Touch of Death", 62, Rarity.COMMON, mage.cards.t.TouchOfDeath.class));

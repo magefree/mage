@@ -350,6 +350,7 @@ public class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Venerable Monk", 55, Rarity.COMMON, mage.cards.v.VenerableMonk.class));
         cards.add(new SetCardInfo("Verduran Enchantress", 285, Rarity.RARE, mage.cards.v.VerduranEnchantress.class));
         cards.add(new SetCardInfo("Vernal Bloom", 286, Rarity.RARE, mage.cards.v.VernalBloom.class));
+        cards.add(new SetCardInfo("Vexing Arcanix", 319, Rarity.RARE, mage.cards.v.VexingArcanix.class));
         cards.add(new SetCardInfo("Viashino Sandstalker", 230, Rarity.UNCOMMON, mage.cards.v.ViashinoSandstalker.class));
         cards.add(new SetCardInfo("Vicious Hunger", 171, Rarity.COMMON, mage.cards.v.ViciousHunger.class));
         cards.add(new SetCardInfo("Vine Trellis", 287, Rarity.COMMON, mage.cards.v.VineTrellis.class));

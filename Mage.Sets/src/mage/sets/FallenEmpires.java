@@ -219,6 +219,9 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Seasinger", 52, Rarity.UNCOMMON, mage.cards.s.Seasinger.class));
         cards.add(new SetCardInfo("Soul Exchange", 28, Rarity.UNCOMMON, mage.cards.s.SoulExchange.class));
         cards.add(new SetCardInfo("Spirit Shield", 175, Rarity.RARE, mage.cards.s.SpiritShield.class));
+        cards.add(new SetCardInfo("Spore Cloud", 83, Rarity.COMMON, mage.cards.s.SporeCloud.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spore Cloud", 84, Rarity.COMMON, mage.cards.s.SporeCloud.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spore Cloud", 85, Rarity.COMMON, mage.cards.s.SporeCloud.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spore Flower", 86, Rarity.UNCOMMON, mage.cards.s.SporeFlower.class));
         cards.add(new SetCardInfo("Svyelunite Priest", 53, Rarity.UNCOMMON, mage.cards.s.SvyelunitePriest.class));
         cards.add(new SetCardInfo("Svyelunite Temple", 187, Rarity.UNCOMMON, mage.cards.s.SvyeluniteTemple.class));

@@ -60,7 +60,7 @@ import mage.target.TargetPermanent;
 public class DereviEmpyrialTactician extends CardImpl {
 
     public DereviEmpyrialTactician(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.WIZARD);
@@ -74,7 +74,7 @@ public class DereviEmpyrialTactician extends CardImpl {
         Ability ability = new DereviEmpyrialTacticianTriggeredAbility(new MayTapOrUntapTargetEffect());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
-        
+
         // {1}{G}{W}{U}: Put Derevi onto the battlefield from the command zone.
         this.addAbility(new DereviEmpyrialTacticianAbility());
     }
@@ -132,7 +132,7 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
- class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
+class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
 
     public DereviEmpyrialTacticianAbility() {
         super(Zone.COMMAND, new PutCommanderOnBattlefieldEffect(), new ManaCostsImpl("{1}{G}{W}{U}"));
@@ -182,7 +182,7 @@ class PutCommanderOnBattlefieldEffect extends OneShotEffect {
         }
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            card.putOntoBattlefield(game, Zone.COMMAND, source.getSourceId(), source.getControllerId());
+            player.moveCards(card, Zone.BATTLEFIELD, source, game);
             return true;
         }
         return false;

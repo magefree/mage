@@ -359,6 +359,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Thicket Basilisk", 158, Rarity.UNCOMMON, mage.cards.t.ThicketBasilisk.class));
         cards.add(new SetCardInfo("Thoughtlace", 107, Rarity.RARE, mage.cards.t.Thoughtlace.class));
         cards.add(new SetCardInfo("Throne of Bone", 371, Rarity.UNCOMMON, mage.cards.t.ThroneOfBone.class));
+        cards.add(new SetCardInfo("Time Elemental", 108, Rarity.RARE, mage.cards.t.TimeElemental.class));
         cards.add(new SetCardInfo("Titania's Song", 160, Rarity.RARE, mage.cards.t.TitaniasSong.class));
         cards.add(new SetCardInfo("Tranquility", 161, Rarity.COMMON, mage.cards.t.Tranquility.class));
         cards.add(new SetCardInfo("Triskelion", 372, Rarity.RARE, mage.cards.t.Triskelion.class));

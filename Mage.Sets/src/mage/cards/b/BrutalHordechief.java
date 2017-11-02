@@ -34,6 +34,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleAllEffect;
@@ -47,6 +48,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.watchers.common.ChooseBlockersRedundancyWatcher;
 
 /**
  *
@@ -72,6 +74,8 @@ public class BrutalHordechief extends CardImpl {
         // {3}{R/W}{R/W}: Creatures your opponents control block this turn if able, and you choose how those creatures block.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlocksIfAbleAllEffect(filter, Duration.EndOfTurn), new ManaCostsImpl("{3}{R/W}{R/W}"));
         ability.addEffect(new BrutalHordechiefChooseBlockersEffect());
+        ability.addWatcher(new ChooseBlockersRedundancyWatcher());
+        ability.addEffect(new ChooseBlockersRedundancyWatcherIncrementEffect());
         this.addAbility(ability);
     }
 
@@ -82,6 +86,32 @@ public class BrutalHordechief extends CardImpl {
     @Override
     public BrutalHordechief copy() {
         return new BrutalHordechief(this);
+    }
+    
+    private class ChooseBlockersRedundancyWatcherIncrementEffect extends OneShotEffect {
+    
+        ChooseBlockersRedundancyWatcherIncrementEffect() {
+            super(Outcome.Neutral);
+        }
+    
+        ChooseBlockersRedundancyWatcherIncrementEffect(final ChooseBlockersRedundancyWatcherIncrementEffect effect) {
+            super(effect);
+        }
+    
+        @Override
+        public boolean apply(Game game, Ability source) {
+            ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
+            if (watcher != null) {
+                watcher.increment();
+                return true;
+            }
+            return false;
+        }
+    
+        @Override
+        public ChooseBlockersRedundancyWatcherIncrementEffect copy() {
+            return new ChooseBlockersRedundancyWatcherIncrementEffect(this);
+        }
     }
 }
 
@@ -123,11 +153,11 @@ class BrutalHordechiefTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class BrutalHordechiefChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl { // TODO: reverse the resolution order in case of effect multiples
+class BrutalHordechiefChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl {
 
     public BrutalHordechiefChooseBlockersEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);
-        staticText = ", and you choose how those creatures block";
+        staticText = "You choose which creatures block this turn and how those creatures block";
     }
 
     public BrutalHordechiefChooseBlockersEffect(final BrutalHordechiefChooseBlockersEffect effect) {
@@ -151,6 +181,13 @@ class BrutalHordechiefChooseBlockersEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
+        watcher.decrement();
+        if (watcher.copyCountApply > 0) {
+            game.informPlayers(source.getSourceObject(game).getIdName() + " didn't apply");
+            return false;
+        }
+        watcher.copyCountApply = watcher.copyCount;
         Player blockController = game.getPlayer(source.getControllerId());
         if (blockController != null) {
             game.getCombat().selectBlockers(blockController, game);

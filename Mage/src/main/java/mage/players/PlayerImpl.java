@@ -1484,16 +1484,15 @@ public abstract class PlayerImpl implements Player, Serializable {
             // phasing out is known as phasing out "indirectly." An enchantment or Equipment
             // that phased out indirectly won't phase in by itself, but instead phases in
             // along with the card it's attached to.
-            for (UUID attachmentId : permanent.getAttachments()) {
-                Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null) {
-                    attachment.phaseOut(game);
-                }
+            Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
+            if (!(attachedTo != null && attachedTo.getControllerId().equals(this.getId()))) {
+                permanent.phaseOut(game, false);
             }
-            permanent.phaseOut(game);
         }
         for (Permanent permanent : phasedOut) {
-            permanent.phaseIn(game);
+            if (!permanent.isPhasedOutIndirectly()) {
+                permanent.phaseIn(game);
+            }
         }
     }
 
@@ -2039,9 +2038,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void concede(Game game) {
-        game.gameOver(playerId);
+        game.setConcedingPlayer(playerId);
         lost(game);
-        this.left = true;
+//        this.left = true;
     }
 
     @Override
@@ -2136,7 +2135,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // for draw - first all players that have lost have to be set to lost
         if (!hasLeft()) {
             logger.debug("Game over playerId: " + playerId);
-            game.gameOver(playerId);
+            game.setConcedingPlayer(playerId);
         }
     }
 
@@ -2197,7 +2196,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             this.draws = true;
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DRAW_PLAYER, null, null, playerId));
             game.informPlayers("For " + this.getLogName() + " the game is a draw.");
-            game.gameOver(playerId);
+            game.setConcedingPlayer(playerId);
         }
     }
 
@@ -3577,6 +3576,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void abortReset() {
         abort = false;
+    }
+
+    @Override
+    public void signalPlayerConcede() {
+
     }
 
     @Override

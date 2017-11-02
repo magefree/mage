@@ -154,6 +154,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Jasmine Boreal", 273, Rarity.UNCOMMON, mage.cards.j.JasmineBoreal.class));
         cards.add(new SetCardInfo("Jedit Ojanen", 274, Rarity.UNCOMMON, mage.cards.j.JeditOjanen.class));
         cards.add(new SetCardInfo("Jerrard of the Closed Fist", 275, Rarity.UNCOMMON, mage.cards.j.JerrardOfTheClosedFist.class));
+        cards.add(new SetCardInfo("Johan", 276, Rarity.RARE, mage.cards.j.Johan.class));
         cards.add(new SetCardInfo("Juxtapose", 63, Rarity.RARE, mage.cards.j.Juxtapose.class));
         cards.add(new SetCardInfo("Karakas", 248, Rarity.UNCOMMON, mage.cards.k.Karakas.class));
         cards.add(new SetCardInfo("Kasimir the Lone Wolf", 277, Rarity.UNCOMMON, mage.cards.k.KasimirTheLoneWolf.class));
@@ -186,11 +187,13 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain Yeti", 156, Rarity.UNCOMMON, mage.cards.m.MountainYeti.class));
         cards.add(new SetCardInfo("Nether Void", 27, Rarity.RARE, mage.cards.n.NetherVoid.class));
         cards.add(new SetCardInfo("Nicol Bolas", 286, Rarity.RARE, mage.cards.n.NicolBolas.class));
+        cards.add(new SetCardInfo("Nova Pentacle", 234, Rarity.RARE, mage.cards.n.NovaPentacle.class));
         cards.add(new SetCardInfo("Osai Vultures", 198, Rarity.COMMON, mage.cards.o.OsaiVultures.class));
         cards.add(new SetCardInfo("Palladia-Mors", 287, Rarity.RARE, mage.cards.p.PalladiaMors.class));
         cards.add(new SetCardInfo("Part Water", 66, Rarity.UNCOMMON, mage.cards.p.PartWater.class));
         cards.add(new SetCardInfo("Pavel Maliki", 288, Rarity.UNCOMMON, mage.cards.p.PavelMaliki.class));
         cards.add(new SetCardInfo("Pendelhaven", 250, Rarity.UNCOMMON, mage.cards.p.Pendelhaven.class));
+        cards.add(new SetCardInfo("Petra Sphinx", 199, Rarity.RARE, mage.cards.p.PetraSphinx.class));
         cards.add(new SetCardInfo("Pit Scorpion", 28, Rarity.COMMON, mage.cards.p.PitScorpion.class));
         cards.add(new SetCardInfo("Pixie Queen", 110, Rarity.RARE, mage.cards.p.PixieQueen.class));
         cards.add(new SetCardInfo("Planar Gate", 235, Rarity.RARE, mage.cards.p.PlanarGate.class));
@@ -237,6 +240,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Library", 121, Rarity.UNCOMMON, mage.cards.s.SylvanLibrary.class));
         cards.add(new SetCardInfo("Sylvan Paradise", 122, Rarity.UNCOMMON, mage.cards.s.SylvanParadise.class));
         cards.add(new SetCardInfo("Syphon Soul", 32, Rarity.COMMON, mage.cards.s.SyphonSoul.class));
+        cards.add(new SetCardInfo("Teleport", 80, Rarity.RARE, mage.cards.t.Teleport.class));
         cards.add(new SetCardInfo("Tetsuo Umezawa", 302, Rarity.RARE, mage.cards.t.TetsuoUmezawa.class));
         cards.add(new SetCardInfo("The Abyss", 34, Rarity.RARE, mage.cards.t.TheAbyss.class));
         cards.add(new SetCardInfo("The Brute", 164, Rarity.COMMON, mage.cards.t.TheBrute.class));
@@ -244,6 +248,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("The Tabernacle at Pendrell Vale", 252, Rarity.RARE, mage.cards.t.TheTabernacleAtPendrellVale.class));
         cards.add(new SetCardInfo("The Wretched", 35, Rarity.RARE, mage.cards.t.TheWretched.class));
         cards.add(new SetCardInfo("Thunder Spirit", 208, Rarity.RARE, mage.cards.t.ThunderSpirit.class));
+        cards.add(new SetCardInfo("Time Elemental", 81, Rarity.RARE, mage.cards.t.TimeElemental.class));
         cards.add(new SetCardInfo("Tobias Andrion", 304, Rarity.UNCOMMON, mage.cards.t.TobiasAndrion.class));
         cards.add(new SetCardInfo("Torsten Von Ursus", 306, Rarity.UNCOMMON, mage.cards.t.TorstenVonUrsus.class));
         cards.add(new SetCardInfo("Tor Wauki", 305, Rarity.UNCOMMON, mage.cards.t.TorWauki.class));

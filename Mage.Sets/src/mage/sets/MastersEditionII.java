@@ -180,6 +180,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Mesmeric Trance", 55, Rarity.RARE, mage.cards.m.MesmericTrance.class));
         cards.add(new SetCardInfo("Meteor Shower", 135, Rarity.COMMON, mage.cards.m.MeteorShower.class));
         cards.add(new SetCardInfo("Minion of Leshrac", 104, Rarity.RARE, mage.cards.m.MinionOfLeshrac.class));
+        cards.add(new SetCardInfo("Misinformation", 105, Rarity.UNCOMMON, mage.cards.m.Misinformation.class));
         cards.add(new SetCardInfo("Mudslide", 136, Rarity.RARE, mage.cards.m.Mudslide.class));
         cards.add(new SetCardInfo("Narwhal", 57, Rarity.UNCOMMON, mage.cards.n.Narwhal.class));
         cards.add(new SetCardInfo("Nature's Wrath", 172, Rarity.RARE, mage.cards.n.NaturesWrath.class));
@@ -233,6 +234,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Songs of the Damned", 110, Rarity.COMMON, mage.cards.s.SongsOfTheDamned.class));
         cards.add(new SetCardInfo("Soul Exchange", 111, Rarity.UNCOMMON, mage.cards.s.SoulExchange.class));
         cards.add(new SetCardInfo("Soul Kiss", 112, Rarity.UNCOMMON, mage.cards.s.SoulKiss.class));
+        cards.add(new SetCardInfo("Spore Cloud", 176, Rarity.UNCOMMON, mage.cards.s.SporeCloud.class));
         cards.add(new SetCardInfo("Spore Flower", 177, Rarity.UNCOMMON, mage.cards.s.SporeFlower.class));
         cards.add(new SetCardInfo("Stampede", 178, Rarity.UNCOMMON, mage.cards.s.Stampede.class));
         cards.add(new SetCardInfo("Stonehands", 151, Rarity.COMMON, mage.cards.s.Stonehands.class));

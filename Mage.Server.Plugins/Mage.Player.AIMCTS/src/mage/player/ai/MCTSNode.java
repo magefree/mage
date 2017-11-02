@@ -79,7 +79,7 @@ public class MCTSNode {
         this.game = game;
         this.stateValue = game.getState().getValue(game, targetPlayer);
         this.fullStateValue = game.getState().getValue(true, game);
-        this.terminal = game.gameOver(null);
+        this.terminal = game.checkIfGameIsOver();
         setPlayer();
         nodeCount = 1;
 //        logger.info(this.stateValue);
@@ -90,7 +90,7 @@ public class MCTSNode {
         this.game = game;
         this.stateValue = game.getState().getValue(game, targetPlayer);
         this.fullStateValue = game.getState().getValue(true, game);
-        this.terminal = game.gameOver(null);
+        this.terminal = game.checkIfGameIsOver();
         this.parent = parent;
         this.action = action;
         setPlayer();
@@ -104,7 +104,7 @@ public class MCTSNode {
         this.combat = combat;
         this.stateValue = game.getState().getValue(game, targetPlayer);
         this.fullStateValue = game.getState().getValue(true, game);
-        this.terminal = game.gameOver(null);
+        this.terminal = game.checkIfGameIsOver();
         this.parent = parent;
         setPlayer();
         nodeCount++;

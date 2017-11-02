@@ -39,11 +39,11 @@ import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,15 +56,15 @@ import mage.target.common.TargetOpponent;
 public class WitchEngine extends CardImpl {
 
     public WitchEngine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Swampwalk
         this.addAbility(new SwampwalkAbility());
-        
-        // {tap}: Add {B}{B}{B}{B} to your mana pool. Target opponent gains control of Witch Engine.
+
+        // {tap}: Add {B}{B}{B}{B} to your mana pool. Target opponent gains control of Witch Engine. (Activate this ability only any time you could cast an instant.)
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana(4)), new TapSourceCost());
         ability.addEffect(new WitchEngineEffect());
         ability.addTarget(new TargetOpponent());
