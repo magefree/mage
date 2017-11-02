@@ -1484,16 +1484,15 @@ public abstract class PlayerImpl implements Player, Serializable {
             // phasing out is known as phasing out "indirectly." An enchantment or Equipment
             // that phased out indirectly won't phase in by itself, but instead phases in
             // along with the card it's attached to.
-            for (UUID attachmentId : permanent.getAttachments()) {
-                Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null) {
-                    attachment.phaseOut(game);
-                }
+            Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
+            if (!(attachedTo != null && attachedTo.getControllerId().equals(this.getId()))) {
+                permanent.phaseOut(game, false);
             }
-            permanent.phaseOut(game);
         }
         for (Permanent permanent : phasedOut) {
-            permanent.phaseIn(game);
+            if (!permanent.isPhasedOutIndirectly()) {
+                permanent.phaseIn(game);
+            }
         }
     }
 
