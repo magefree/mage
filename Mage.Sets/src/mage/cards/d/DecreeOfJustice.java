@@ -30,9 +30,8 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
@@ -98,13 +97,13 @@ class DecreeOfJusticeCycleEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ManaCosts<ManaCost> cost = new ManaCostsImpl<>("{X}");
         if (player != null) {
-            int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
-            cost.add(new GenericManaCost(costX));
-            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+            int X = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+            Cost cost = new GenericManaCost(X);
+            if(cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)){
                 Token token = new SoldierToken();
-                token.putOntoBattlefield(costX, game, source.getSourceId(), source.getControllerId());
+                token.putOntoBattlefield(X, game, source.getSourceId(), source.getControllerId());
+                return true;
             }
         }
         return false;
