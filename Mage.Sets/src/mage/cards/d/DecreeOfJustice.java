@@ -54,15 +54,14 @@ import mage.players.Player;
 public class DecreeOfJustice extends CardImpl {
 
     public DecreeOfJustice(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{2}{W}{W}");
 
-
-        // create X 4/4 white Angel creature tokens with flying.
+        // Create X 4/4 white Angel creature tokens with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), new ManacostVariableValue()));
-        
+
         // Cycling {2}{W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{W}")));
-        
+
         // When you cycle Decree of Justice, you may pay {X}. If you do, create X 1/1 white Soldier creature tokens.
         Ability ability = new CycleTriggeredAbility(new DecreeOfJusticeCycleEffect(), true);
         this.addAbility(ability);
@@ -79,28 +78,28 @@ public class DecreeOfJustice extends CardImpl {
 }
 
 class DecreeOfJusticeCycleEffect extends OneShotEffect {
-    
+
     DecreeOfJusticeCycleEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may pay {X}. If you do, create X 1/1 white Soldier creature tokens";
     }
-    
+
     DecreeOfJusticeCycleEffect(final DecreeOfJusticeCycleEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public DecreeOfJusticeCycleEffect copy() {
         return new DecreeOfJusticeCycleEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             int X = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
             Cost cost = new GenericManaCost(X);
-            if(cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)){
+            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                 Token token = new SoldierToken();
                 token.putOntoBattlefield(X, game, source.getSourceId(), source.getControllerId());
                 return true;

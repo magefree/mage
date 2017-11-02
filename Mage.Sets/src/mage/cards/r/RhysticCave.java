@@ -30,26 +30,21 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
-import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ChooseColorEffect;
-import mage.abilities.effects.common.DoUnlessAnyPlayerPaysEffect;
+import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.common.DoUnlessAnyPlayerPaysManaEffect;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -61,16 +56,8 @@ public class RhysticCave extends CardImpl {
     public RhysticCave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {tap}: Choose a color.  
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                          new ChooseColorEffect(Outcome.PutManaInPool),
-                          new TapSourceCost());
-        
-        // Add one mana of that color to your mana pool unless any player pays {1}. Activate this ability only any time you could cast an instant.
-        ability.addEffect(new DoUnlessAnyPlayerPaysEffect(new RhysticCaveManaEffect(),new GenericManaCost(1)));
-        
-        this.addAbility(ability);
-        
+        // {T}: Choose a color. Add one mana of that color to your mana pool unless any player pays {1}. Activate this ability only any time you could cast an instant.
+        this.addAbility(new RhysticCaveManaAbility());
     }
 
     public RhysticCave(final RhysticCave card) {
@@ -81,69 +68,105 @@ public class RhysticCave extends CardImpl {
     public RhysticCave copy() {
         return new RhysticCave(this);
     }
-    
-    
-    class RhysticCaveManaEffect extends ManaEffect {
-        
-        private final Mana chosenMana;
-        
-        public RhysticCaveManaEffect() {
-            super();
-            chosenMana = new Mana();
-            this.staticText = "Add one mana of that color to your mana pool ";
-        }
+}
 
-        public RhysticCaveManaEffect(final RhysticCaveManaEffect effect) {
-            super(effect);
-            this.chosenMana = effect.chosenMana.copy();
-        }
+class RhysticCaveManaAbility extends ActivatedManaAbilityImpl {
 
-        @Override
-        public Mana getMana(Game game, Ability source) {
-            return null;
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId()); 
-            MageObject mageObject = game.getPermanentOrLKIBattlefield(source.getSourceId()); //get obj reference to Rhystic Cave        
-            if (controller != null) {    
-                if (mageObject != null) {
-                    ObjectColor choice = (ObjectColor) game.getState().getValue(mageObject.getId()+"_color");
-                    if (choice!= null) {
-                        String color = choice.toString();
-                        switch (color) {
-                            case "R":
-                                chosenMana.setRed(1);
-                                break;
-                            case "U":
-                                chosenMana.setBlue(1);
-                                break;
-                            case "W":
-                                chosenMana.setWhite(1);
-                                break;
-                            case "B":
-                                chosenMana.setBlack(1);
-                                break;
-                            case "G":
-                                chosenMana.setGreen(1);
-                                break;
-                        }
-                    }
-                    checkToFirePossibleEvents(chosenMana, game, source);
-                    controller.getManaPool().addMana(chosenMana, game, source);
-                    return true;
-                }
-                
-            }
-            
-            return false;          
-        }
-
-        @Override
-        public Effect copy() {
-            return new RhysticCaveManaEffect(this);
-        }
+    public RhysticCaveManaAbility() {
+        super(Zone.BATTLEFIELD, new DoUnlessAnyPlayerPaysManaEffect(new RhysticCaveManaEffect(), new GenericManaCost(1), "Pay {1} to prevent mana adding from {this}."), new TapSourceCost());
+        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 1, 0));
+        this.setUndoPossible(false);
     }
-    
+
+    public RhysticCaveManaAbility(Zone zone, Mana mana, Cost cost) {
+        super(zone, new BasicManaEffect(mana), cost);
+
+    }
+
+    public RhysticCaveManaAbility(final RhysticCaveManaAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        Player player = game.getPlayer(playerId);
+        if (player != null && !player.isInPayManaMode()) {
+            return super.canActivate(playerId, game);
+        }
+        return false;
+    }
+
+    @Override
+    public RhysticCaveManaAbility copy() {
+        return new RhysticCaveManaAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return super.getRule() + " Activate this ability only any time you could cast an instant.";
+    }
+}
+
+class RhysticCaveManaEffect extends ManaEffect {
+
+    private final Mana chosenMana;
+
+    public RhysticCaveManaEffect() {
+        super();
+        chosenMana = new Mana();
+        this.staticText = "Choose a color. Add one mana of that color to your mana pool ";
+    }
+
+    public RhysticCaveManaEffect(final RhysticCaveManaEffect effect) {
+        super(effect);
+        this.chosenMana = effect.chosenMana.copy();
+    }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject mageObject = game.getPermanentOrLKIBattlefield(source.getSourceId()); //get obj reference to Rhystic Cave
+        if (controller != null) {
+            if (mageObject != null) {
+                ChoiceColor choice = new ChoiceColor(true);
+                controller.choose(outcome, choice, game);
+                if (choice.getColor() != null) {
+                    String color = choice.getColor().toString();
+                    switch (color) {
+                        case "R":
+                            chosenMana.setRed(1);
+                            break;
+                        case "U":
+                            chosenMana.setBlue(1);
+                            break;
+                        case "W":
+                            chosenMana.setWhite(1);
+                            break;
+                        case "B":
+                            chosenMana.setBlack(1);
+                            break;
+                        case "G":
+                            chosenMana.setGreen(1);
+                            break;
+                    }
+                }
+                checkToFirePossibleEvents(chosenMana, game, source);
+                controller.getManaPool().addMana(chosenMana, game, source);
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
+    @Override
+    public Effect copy() {
+        return new RhysticCaveManaEffect(this);
+    }
 }

@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -47,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
-
+ *
  * @author TheElk801
  */
 public class IceFloe extends CardImpl {
@@ -64,9 +63,8 @@ public class IceFloe extends CardImpl {
         // You may choose not to untap Ice Floe during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
 
-        // {tap}: Tap target creature without flying that's attacking you. It doesn't untap during its controller's untap step for as long as Ice Floe remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
+        // {T}: Tap target creature without flying that's attacking you. It doesn't untap during its controller's untap step for as long as Ice Floe remains tapped.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
         this.addAbility(ability);
