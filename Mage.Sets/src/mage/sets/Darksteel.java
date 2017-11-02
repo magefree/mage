@@ -157,6 +157,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Sword of Fire and Ice", 148, Rarity.RARE, mage.cards.s.SwordOfFireAndIce.class));
         cards.add(new SetCardInfo("Sword of Light and Shadow", 149, Rarity.RARE, mage.cards.s.SwordOfLightAndShadow.class));
         cards.add(new SetCardInfo("Synod Artificer", 34, Rarity.RARE, mage.cards.s.SynodArtificer.class));
+        cards.add(new SetCardInfo("Talon of Pain", 150, Rarity.UNCOMMON, mage.cards.t.TalonOfPain.class));
         cards.add(new SetCardInfo("Tangle Golem", 151, Rarity.COMMON, mage.cards.t.TangleGolem.class));
         cards.add(new SetCardInfo("Tangle Spider", 85, Rarity.COMMON, mage.cards.t.TangleSpider.class));
         cards.add(new SetCardInfo("Tanglewalker", 86, Rarity.UNCOMMON, mage.cards.t.Tanglewalker.class));
