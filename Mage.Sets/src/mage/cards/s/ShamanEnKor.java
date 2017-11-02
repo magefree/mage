@@ -43,9 +43,11 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetSource;
@@ -91,6 +93,7 @@ public class ShamanEnKor extends CardImpl {
 
 class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
 
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
     protected MageObjectReference sourceObject;
 
     ShamanEnKorRedirectFromTargetEffect() {
@@ -122,10 +125,15 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (sourceObject.equals(new MageObjectReference(event.getSourceId(), game))) {
-            redirectTarget = new TargetPermanent();
-            redirectTarget.add(source.getSourceId(), game);
-            return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
+        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        if (permanent != null) {
+            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
+                if (sourceObject.equals(new MageObjectReference(event.getSourceId(), game))) {
+                    redirectTarget = new TargetPermanent();
+                    redirectTarget.add(source.getSourceId(), game);
+                    return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
+                }
+            }
         }
         return false;
     }
