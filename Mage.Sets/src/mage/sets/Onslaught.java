@@ -145,6 +145,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Glory Seeker", 31, Rarity.COMMON, mage.cards.g.GlorySeeker.class));
         cards.add(new SetCardInfo("Gluttonous Zombie", 151, Rarity.UNCOMMON, mage.cards.g.GluttonousZombie.class));
         cards.add(new SetCardInfo("Goblin Burrows", 318, Rarity.UNCOMMON, mage.cards.g.GoblinBurrows.class));
+        cards.add(new SetCardInfo("Goblin Machinist", 204, Rarity.UNCOMMON, mage.cards.g.GoblinMachinist.class));
         cards.add(new SetCardInfo("Goblin Piledriver", 205, Rarity.RARE, mage.cards.g.GoblinPiledriver.class));
         cards.add(new SetCardInfo("Goblin Pyromancer", 206, Rarity.RARE, mage.cards.g.GoblinPyromancer.class));
         cards.add(new SetCardInfo("Goblin Sharpshooter", 207, Rarity.RARE, mage.cards.g.GoblinSharpshooter.class));
@@ -260,6 +261,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Secluded Steppe", 324, Rarity.COMMON, mage.cards.s.SecludedSteppe.class));
         cards.add(new SetCardInfo("Serpentine Basilisk", 280, Rarity.UNCOMMON, mage.cards.s.SerpentineBasilisk.class));
         cards.add(new SetCardInfo("Severed Legion", 166, Rarity.COMMON, mage.cards.s.SeveredLegion.class));
+        cards.add(new SetCardInfo("Shade's Breath", 167, Rarity.UNCOMMON, mage.cards.s.ShadesBreath.class));
         cards.add(new SetCardInfo("Shaleskin Bruiser", 226, Rarity.UNCOMMON, mage.cards.s.ShaleskinBruiser.class));
         cards.add(new SetCardInfo("Shared Triumph", 53, Rarity.RARE, mage.cards.s.SharedTriumph.class));
         cards.add(new SetCardInfo("Shepherd of Rot", 168, Rarity.COMMON, mage.cards.s.ShepherdOfRot.class));

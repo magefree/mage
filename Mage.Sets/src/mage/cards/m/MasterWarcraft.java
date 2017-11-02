@@ -56,6 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
+import mage.watchers.common.ChooseBlockersRedundancyWatcher;
 
 /**
  *
@@ -67,7 +68,7 @@ public class MasterWarcraft extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R/W}{R/W}");
 
         // Cast Master Warcraft only before attackers are declared.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, BeforeAttackersAreDeclaredCondition.instance, "Cast Master Warcraft only before attackers are declared"));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, BeforeAttackersAreDeclaredCondition.instance, "Cast {this} only before attackers are declared"));
 
         // You choose which creatures attack this turn.
         this.getSpellAbility().addEffect(new MasterWarcraftChooseAttackersEffect());
@@ -79,6 +80,8 @@ public class MasterWarcraft extends CardImpl {
         // (only the last resolved Master Warcraft spell's effects apply)
         this.getSpellAbility().addWatcher(new MasterWarcraftCastWatcher());
         this.getSpellAbility().addEffect(new MasterWarcraftCastWatcherIncrementEffect());
+        this.getSpellAbility().addWatcher(new ChooseBlockersRedundancyWatcher());
+        this.getSpellAbility().addEffect(new ChooseBlockersRedundancyWatcherIncrementEffect());
     }
 
     public MasterWarcraft(final MasterWarcraft card) {
@@ -88,6 +91,58 @@ public class MasterWarcraft extends CardImpl {
     @Override
     public MasterWarcraft copy() {
         return new MasterWarcraft(this);
+    }
+    
+    private class MasterWarcraftCastWatcherIncrementEffect extends OneShotEffect {
+    
+        MasterWarcraftCastWatcherIncrementEffect() {
+            super(Outcome.Neutral);
+        }
+    
+        MasterWarcraftCastWatcherIncrementEffect(final MasterWarcraftCastWatcherIncrementEffect effect) {
+            super(effect);
+        }
+    
+        @Override
+        public boolean apply(Game game, Ability source) {
+            MasterWarcraftCastWatcher watcher = (MasterWarcraftCastWatcher) game.getState().getWatchers().get(MasterWarcraftCastWatcher.class.getSimpleName());
+            if (watcher != null) {
+                watcher.increment();
+                return true;
+            }
+            return false;
+        }
+    
+        @Override
+        public MasterWarcraftCastWatcherIncrementEffect copy() {
+            return new MasterWarcraftCastWatcherIncrementEffect(this);
+        }
+    }
+    
+    private class ChooseBlockersRedundancyWatcherIncrementEffect extends OneShotEffect {
+    
+        ChooseBlockersRedundancyWatcherIncrementEffect() {
+            super(Outcome.Neutral);
+        }
+    
+        ChooseBlockersRedundancyWatcherIncrementEffect(final ChooseBlockersRedundancyWatcherIncrementEffect effect) {
+            super(effect);
+        }
+    
+        @Override
+        public boolean apply(Game game, Ability source) {
+            ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
+            if (watcher != null) {
+                watcher.increment();
+                return true;
+            }
+            return false;
+        }
+    
+        @Override
+        public ChooseBlockersRedundancyWatcherIncrementEffect copy() {
+            return new ChooseBlockersRedundancyWatcherIncrementEffect(this);
+        }
     }
 }
 
@@ -197,7 +252,7 @@ class MasterWarcraftChooseBlockersEffect extends ContinuousRuleModifyingEffectIm
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        MasterWarcraftCastWatcher watcher = (MasterWarcraftCastWatcher) game.getState().getWatchers().get(MasterWarcraftCastWatcher.class.getSimpleName());
+        ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
         watcher.decrement();
         if (watcher.copyCountApply > 0) {
             game.informPlayers(source.getSourceObject(game).getIdName() + " didn't apply");
@@ -249,34 +304,8 @@ class MasterWarcraftCastWatcher extends Watcher {
     }    
 
     public void decrement() {
-        if (copyCountApply > 0); {
+        if (copyCountApply > 0) {
             copyCountApply--;
         }
-    }
-}
-
-class MasterWarcraftCastWatcherIncrementEffect extends OneShotEffect {
-
-    MasterWarcraftCastWatcherIncrementEffect() {
-        super(Outcome.Neutral);
-    }
-
-    MasterWarcraftCastWatcherIncrementEffect(final MasterWarcraftCastWatcherIncrementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        MasterWarcraftCastWatcher watcher = (MasterWarcraftCastWatcher) game.getState().getWatchers().get(MasterWarcraftCastWatcher.class.getSimpleName());
-        if (watcher != null) {
-            watcher.increment();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public MasterWarcraftCastWatcherIncrementEffect copy() {
-        return new MasterWarcraftCastWatcherIncrementEffect(this);
     }
 }

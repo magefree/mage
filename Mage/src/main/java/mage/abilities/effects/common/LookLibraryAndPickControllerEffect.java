@@ -270,7 +270,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 } else {
                     sb.append('P');
                 }
-                sb.append("put ").append(filter.getMessage()).append(" from among them onto the ");
+                sb.append("ut ").append(filter.getMessage()).append(" from among them onto the ");
             } else {
                 sb.append(". Put ");
                 if (numberToPick.calculate(null, null, this) > 1) {

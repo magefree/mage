@@ -219,6 +219,9 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Seasinger", 52, Rarity.UNCOMMON, mage.cards.s.Seasinger.class));
         cards.add(new SetCardInfo("Soul Exchange", 28, Rarity.UNCOMMON, mage.cards.s.SoulExchange.class));
         cards.add(new SetCardInfo("Spirit Shield", 175, Rarity.RARE, mage.cards.s.SpiritShield.class));
+        cards.add(new SetCardInfo("Spore Cloud", 83, Rarity.COMMON, mage.cards.s.SporeCloud.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spore Cloud", 84, Rarity.COMMON, mage.cards.s.SporeCloud.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spore Cloud", 85, Rarity.COMMON, mage.cards.s.SporeCloud.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spore Flower", 86, Rarity.UNCOMMON, mage.cards.s.SporeFlower.class));
         cards.add(new SetCardInfo("Svyelunite Priest", 53, Rarity.UNCOMMON, mage.cards.s.SvyelunitePriest.class));
         cards.add(new SetCardInfo("Svyelunite Temple", 187, Rarity.UNCOMMON, mage.cards.s.SvyeluniteTemple.class));
@@ -237,6 +240,7 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Thrull Retainer", 30, Rarity.UNCOMMON, mage.cards.t.ThrullRetainer.class));
         cards.add(new SetCardInfo("Thrull Wizard", 31, Rarity.UNCOMMON, mage.cards.t.ThrullWizard.class));
         cards.add(new SetCardInfo("Tidal Influence", 57, Rarity.UNCOMMON, mage.cards.t.TidalInfluence.class));
+        cards.add(new SetCardInfo("Tourach's Gate", 33, Rarity.RARE, mage.cards.t.TourachsGate.class));
         cards.add(new SetCardInfo("Vodalian Knights", 58, Rarity.RARE, mage.cards.v.VodalianKnights.class));
         cards.add(new SetCardInfo("Vodalian Mage", 59, Rarity.COMMON, VodalianMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vodalian Mage", 60, Rarity.COMMON, VodalianMage.class, NON_FULL_USE_VARIOUS));

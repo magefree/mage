@@ -31,7 +31,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,6 +41,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+import mage.watchers.common.ChooseBlockersRedundancyWatcher;
 
 /**
  * @author noxx
@@ -75,7 +77,9 @@ public class OdricMasterTactician extends CardImpl {
 class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
 
     public OdricMasterTacticianTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new OdricMasterTacticianEffect());
+        super(Zone.BATTLEFIELD, new OdricMasterTacticianChooseBlockersEffect());
+        this.addWatcher(new ChooseBlockersRedundancyWatcher());
+        this.addEffect(new ChooseBlockersRedundancyWatcherIncrementEffect());
     }
 
     public OdricMasterTacticianTriggeredAbility(final OdricMasterTacticianTriggeredAbility ability) {
@@ -89,66 +93,59 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_ATTACKERS;
+        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        resetEffect();
-        if (game.getCombat().getAttackers().size() >= 4 && game.getCombat().getAttackers().contains(this.sourceId)) {
-            enableEffect();
-            return true;
+        return game.getCombat().getAttackers().size() >= 4 && game.getCombat().getAttackers().contains(this.sourceId);
+    }
+
+    private class ChooseBlockersRedundancyWatcherIncrementEffect extends OneShotEffect {
+    
+        ChooseBlockersRedundancyWatcherIncrementEffect() {
+            super(Outcome.Neutral);
         }
-        return false;
+    
+        ChooseBlockersRedundancyWatcherIncrementEffect(final ChooseBlockersRedundancyWatcherIncrementEffect effect) {
+            super(effect);
+        }
+    
+        @Override
+        public boolean apply(Game game, Ability source) {
+            ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
+            if (watcher != null) {
+                watcher.increment();
+                return true;
+            }
+            return false;
+        }
+    
+        @Override
+        public ChooseBlockersRedundancyWatcherIncrementEffect copy() {
+            return new ChooseBlockersRedundancyWatcherIncrementEffect(this);
+        }
     }
-
-    @Override
-    public void reset(Game game) {
-        resetEffect();
-    }
-
-    private void resetEffect() {
-        getEffects().get(0).setValue("apply_" + sourceId, false);
-    }
-
-    private void enableEffect() {
-        getEffects().get(0).setValue("apply_" + sourceId, true);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.";
-    }
-
 }
 
-class OdricMasterTacticianEffect extends ReplacementEffectImpl {
+class OdricMasterTacticianChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OdricMasterTacticianEffect() {
-        super(Duration.EndOfCombat, Outcome.Benefit);
+    public OdricMasterTacticianChooseBlockersEffect() {
+        super(Duration.EndOfCombat, Outcome.Benefit, false, false);
+        staticText = "Whenever {this} and at least three other creatures attack, you choose which creatures block this combat and how those creatures block";
     }
 
-    public OdricMasterTacticianEffect(final OdricMasterTacticianEffect effect) {
+    public OdricMasterTacticianChooseBlockersEffect(final OdricMasterTacticianChooseBlockersEffect effect) {
         super(effect);
     }
 
     @Override
-    public OdricMasterTacticianEffect copy() {
-        return new OdricMasterTacticianEffect(this);
+    public OdricMasterTacticianChooseBlockersEffect copy() {
+        return new OdricMasterTacticianChooseBlockersEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player blockController = game.getPlayer(source.getControllerId());
-        if (blockController != null) {
-            game.getCombat().selectBlockers(blockController, game);
-            return true;
-        }
         return false;
     }
 
@@ -159,12 +156,21 @@ class OdricMasterTacticianEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Object object = getValue("apply_" + source.getSourceId());
-        if (object != null && object instanceof Boolean) {
-            if ((Boolean)object) {
-                return true; // replace event
-            }
+        ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
+        watcher.decrement();
+        watcher.copyCount--;
+        if (watcher.copyCountApply > 0) {
+            game.informPlayers(source.getSourceObject(game).getIdName() + " didn't apply");
+            this.discard();
+            return false;
         }
+        watcher.copyCountApply = watcher.copyCount;
+        Player blockController = game.getPlayer(source.getControllerId());
+        if (blockController != null) {
+            game.getCombat().selectBlockers(blockController, game);
+            return true;
+        }
+        this.discard();
         return false;
     }
 }

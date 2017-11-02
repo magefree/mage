@@ -29,7 +29,9 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -38,6 +40,7 @@ import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -46,17 +49,16 @@ import mage.target.common.TargetCreaturePermanent;
 public class ConsumeStrength extends CardImpl {
 
     public ConsumeStrength(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{G}");
 
         // Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
         this.getSpellAbility().addEffect(new ConsumeStrengthEffect());
-        
+
         FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature to get +2/+2");
         TargetCreaturePermanent target1 = new TargetCreaturePermanent(filter1);
         target1.setTargetTag(1);
         this.getSpellAbility().addTarget(target1);
-        
+
         FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another creature to get -2/-2");
         filter2.add(new AnotherTargetPredicate(2));
         TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter2);
@@ -74,10 +76,10 @@ public class ConsumeStrength extends CardImpl {
     }
 }
 
-class ConsumeStrengthEffect extends ContinuousEffectImpl {
+class ConsumeStrengthEffect extends OneShotEffect {
 
     public ConsumeStrengthEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         this.staticText = "Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn";
     }
 
@@ -94,13 +96,15 @@ class ConsumeStrengthEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.addPower(2);
-            permanent.addToughness(2);
+            ContinuousEffect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
+            effect.setTargetPointer(new FixedTarget(permanent, game));
+            game.addEffect(effect, source);
         }
         permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            permanent.addPower(-2);
-            permanent.addToughness(-2);
+            ContinuousEffect effect = new BoostTargetEffect(-2, -2, Duration.EndOfTurn);
+            effect.setTargetPointer(new FixedTarget(permanent, game));
+            game.addEffect(effect, source);
         }
         return true;
     }

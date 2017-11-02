@@ -183,6 +183,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 227, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nether Void", 73, Rarity.RARE, mage.cards.n.NetherVoid.class));
         cards.add(new SetCardInfo("Nicol Bolas", 163, Rarity.RARE, mage.cards.n.NicolBolas.class));
+        cards.add(new SetCardInfo("Nova Pentacle", 200, Rarity.RARE, mage.cards.n.NovaPentacle.class));
         cards.add(new SetCardInfo("Old Man of the Sea", 45, Rarity.RARE, mage.cards.o.OldManOfTheSea.class));
         cards.add(new SetCardInfo("Palladia-Mors", 164, Rarity.RARE, mage.cards.p.PalladiaMors.class));
         cards.add(new SetCardInfo("Pavel Maliki", 165, Rarity.UNCOMMON, mage.cards.p.PavelMaliki.class));

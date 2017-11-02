@@ -105,6 +105,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Daring Apprentice", 60, Rarity.RARE, mage.cards.d.DaringApprentice.class));
         cards.add(new SetCardInfo("Dark Banishing", 13, Rarity.COMMON, mage.cards.d.DarkBanishing.class));
         cards.add(new SetCardInfo("Dark Ritual", 14, Rarity.COMMON, mage.cards.d.DarkRitual.class));
+        cards.add(new SetCardInfo("Dazzling Beauty", 212, Rarity.COMMON, mage.cards.d.DazzlingBeauty.class));
         cards.add(new SetCardInfo("Dirtwater Wraith", 15, Rarity.COMMON, mage.cards.d.DirtwaterWraith.class));
         cards.add(new SetCardInfo("Disempower", 213, Rarity.COMMON, mage.cards.d.Disempower.class));
         cards.add(new SetCardInfo("Disenchant", 214, Rarity.COMMON, mage.cards.d.Disenchant.class));
