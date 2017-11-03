@@ -25,57 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.i;
+package mage.abilities.effects.common;
 
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SkipUntapOptionalAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.FilterCreatureAttackingYou;
-import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
- *
+ * This class should only be used within the application of another effect
  *
  * @author TheElk801
  */
-public class IceFloe extends CardImpl {
+public class PhaseOutAllEffect extends OneShotEffect {
 
-    private static final FilterCreatureAttackingYou filter = new FilterCreatureAttackingYou("creature without flying that's attacking you");
+    private final List<UUID> idList;
 
-    static {
-        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+    public PhaseOutAllEffect(List<UUID> idList) {
+        super(Outcome.Neutral);
+        this.idList = idList;
     }
 
-    public IceFloe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-
-        // You may choose not to untap Ice Floe during your untap step.
-        this.addAbility(new SkipUntapOptionalAbility());
-
-        // {T}: Tap target creature without flying that's attacking you. It doesn't untap during its controller's untap step for as long as Ice Floe remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
-        this.addAbility(ability);
-    }
-
-    public IceFloe(final IceFloe card) {
-        super(card);
+    public PhaseOutAllEffect(final PhaseOutAllEffect effect) {
+        super(effect);
+        this.idList = effect.idList;
     }
 
     @Override
-    public IceFloe copy() {
-        return new IceFloe(this);
+    public PhaseOutAllEffect copy() {
+        return new PhaseOutAllEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        // First we phase out everything that isn't attached to anything
+        // Anything attached to these permanents will phase out indirectly
+        for (UUID permanentId : idList) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent != null) {
+                Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
+                if (attachedTo == null) {
+                    permanent.phaseOut(game);
+                }
+            }
+        }
+        // Once this is done, we'll have permanents which are attached to something but haven't phased out
+        // These will be phased out directly
+        for (UUID permanentId : idList) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent != null && permanent.isPhasedIn()) {
+                permanent.phaseOut(game);
+            }
+        }
+        return true;
     }
 }

@@ -349,10 +349,10 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, 0);
-
         assertLife(playerA, 2);
         Assert.assertFalse("Player A is no longer in the game", playerA.isInGame());
+
+        assertPermanentCount(playerA, 0);
 
         Permanent staffPlayerD = getPermanent("Proteus Staff", playerD);
         Assert.assertFalse("Staff of player D could not be used", staffPlayerD.isTapped());

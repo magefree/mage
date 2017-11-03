@@ -444,6 +444,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void abortReset();
 
+    void signalPlayerConcede();
+
     void skip();
 
     // priority, undo, ...

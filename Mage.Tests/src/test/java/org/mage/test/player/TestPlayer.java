@@ -57,6 +57,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.SummoningSicknessPredicate;
 import mage.game.Game;
+import mage.game.GameImpl;
 import mage.game.Graveyard;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
@@ -519,6 +520,7 @@ public class TestPlayer implements Player {
                         }
                         if (groups[0].equals("Concede")) {
                             game.concede(getId());
+                            ((GameImpl) game).checkConcede();
                             actions.remove(action);
                         }
                     }
@@ -1180,6 +1182,11 @@ public class TestPlayer implements Player {
     @Override
     public void abort() {
         computerPlayer.abort();
+    }
+
+    @Override
+    public void signalPlayerConcede() {
+        computerPlayer.signalPlayerConcede();
     }
 
     @Override

@@ -33,7 +33,7 @@ public final class GameStateEvaluator2 {
     public static int evaluate(UUID playerId, Game game) {
         Player player = game.getPlayer(playerId);
         Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
-        if (game.gameOver(null)) {
+        if (game.checkIfGameIsOver()) {
             if (player.hasLost() || opponent.hasWon()) {
                 return LOSE_GAME_SCORE;
             }

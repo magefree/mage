@@ -27,6 +27,8 @@
  */
 package org.mage.test.stub;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
@@ -61,9 +63,6 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  *
@@ -699,6 +698,11 @@ public class PlayerStub implements Player {
 
     @Override
     public void abort() {
+
+    }
+
+    @Override
+    public void signalPlayerConcede() {
 
     }
 

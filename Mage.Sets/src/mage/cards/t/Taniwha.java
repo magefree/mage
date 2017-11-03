@@ -27,11 +27,14 @@
  */
 package mage.cards.t;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.abilities.keyword.PhasingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -41,6 +44,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,7 +57,7 @@ import mage.players.Player;
 public class Taniwha extends CardImpl {
 
     public Taniwha(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(7);
@@ -61,10 +65,10 @@ public class Taniwha extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // Phasing
         this.addAbility(PhasingAbility.getInstance());
-        
+
         // At the beginning of your upkeep, all lands you control phase out.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TaniwhaEffect(), TargetController.YOU, false));
     }
@@ -99,10 +103,11 @@ class TaniwhaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            List<UUID> permIds = new ArrayList<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), controller.getId(), game)) {
-                permanent.phaseOut(game);
+                permIds.add(permanent.getId());
             }
-            return true;
+            return new PhaseOutAllEffect(permIds).apply(game, source);
         }
         return false;
     }
