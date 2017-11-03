@@ -573,6 +573,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             } else {
                 // no asynchronous action so check directly
+                concedingPlayers.add(playerId);
                 checkConcede();
             }
         } else {
