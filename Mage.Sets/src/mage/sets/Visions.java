@@ -81,6 +81,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Dream Tides", 31, Rarity.UNCOMMON, mage.cards.d.DreamTides.class));
         cards.add(new SetCardInfo("Dwarven Vigilantes", 77, Rarity.COMMON, mage.cards.d.DwarvenVigilantes.class));
         cards.add(new SetCardInfo("Elephant Grass", 54, Rarity.UNCOMMON, mage.cards.e.ElephantGrass.class));
+        cards.add(new SetCardInfo("Elkin Lair", 78, Rarity.RARE, mage.cards.e.ElkinLair.class));
         cards.add(new SetCardInfo("Elven Cache", 55, Rarity.COMMON, mage.cards.e.ElvenCache.class));
         cards.add(new SetCardInfo("Emerald Charm", 56, Rarity.COMMON, mage.cards.e.EmeraldCharm.class));
         cards.add(new SetCardInfo("Equipoise", 103, Rarity.RARE, mage.cards.e.Equipoise.class));
