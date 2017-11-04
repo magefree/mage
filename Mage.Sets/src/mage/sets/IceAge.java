@@ -234,6 +234,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Naked Singularity", 305, Rarity.RARE, mage.cards.n.NakedSingularity.class));
         cards.add(new SetCardInfo("Nature's Lore", 143, Rarity.UNCOMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Necropotence", 42, Rarity.RARE, mage.cards.n.Necropotence.class));
+        cards.add(new SetCardInfo("Norritt", 43, Rarity.COMMON, mage.cards.n.Norritt.class));
         cards.add(new SetCardInfo("Onyx Talisman", 306, Rarity.UNCOMMON, mage.cards.o.OnyxTalisman.class));
         cards.add(new SetCardInfo("Orcish Cannoneers", 205, Rarity.UNCOMMON, mage.cards.o.OrcishCannoneers.class));
         cards.add(new SetCardInfo("Orcish Healer", 208, Rarity.UNCOMMON, mage.cards.o.OrcishHealer.class));
@@ -318,6 +319,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Time Bomb", 317, Rarity.RARE, mage.cards.t.TimeBomb.class));
         cards.add(new SetCardInfo("Tinder Wall", 158, Rarity.COMMON, mage.cards.t.TinderWall.class));
         cards.add(new SetCardInfo("Tor Giant", 220, Rarity.COMMON, mage.cards.t.TorGiant.class));
+        cards.add(new SetCardInfo("Total War", 221, Rarity.RARE, mage.cards.t.TotalWar.class));
         cards.add(new SetCardInfo("Touch of Death", 55, Rarity.COMMON, mage.cards.t.TouchOfDeath.class));
         cards.add(new SetCardInfo("Trailblazer", 160, Rarity.RARE, mage.cards.t.Trailblazer.class));
         cards.add(new SetCardInfo("Underground River", 357, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
