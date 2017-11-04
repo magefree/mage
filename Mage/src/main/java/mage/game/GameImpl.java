@@ -563,7 +563,12 @@ public abstract class GameImpl implements Game, Serializable {
 //    }
     @Override
     public void setConcedingPlayer(UUID playerId) {
-        Player player = getPlayer(state.getPriorityPlayerId());
+        Player player = null;
+        if (state.getChoosingPlayerId() != null) {
+            player = getPlayer(state.getChoosingPlayerId());
+        } else if (state.getPriorityPlayerId() != null) {
+            player = getPlayer(state.getPriorityPlayerId());
+        }
         if (player != null) {
             if (!player.hasLeft() && player.isHuman()) {
                 if (!concedingPlayers.contains(playerId)) {
