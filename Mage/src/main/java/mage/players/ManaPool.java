@@ -125,7 +125,7 @@ public class ManaPool implements Serializable {
         }
 
         if (getConditional(manaType, ability, filter, game, costToPay) > 0) {
-            removeConditional(manaType, ability, game, costToPay);
+            removeConditional(manaType, ability, game, costToPay, usedManaToPay);
             lockManaType(); // pay only one mana if mana payment is set to manually
             return true;
         }
@@ -437,10 +437,11 @@ public class ManaPool implements Serializable {
         return new ManaPool(this);
     }
 
-    private void removeConditional(ManaType manaType, Ability ability, Game game, Cost costToPay) {
+    private void removeConditional(ManaType manaType, Ability ability, Game game, Cost costToPay, Mana usedManaToPay) {
         for (ConditionalMana mana : getConditionalMana()) {
             if (mana.get(manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId(), costToPay)) {
                 mana.set(manaType, mana.get(manaType) - 1);
+                usedManaToPay.increase(manaType);
                 GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAID, ability.getId(), mana.getManaProducerId(), ability.getControllerId(), 0, mana.getFlag());
                 event.setData(mana.getManaProducerOriginalId().toString());
                 game.fireEvent(event);
