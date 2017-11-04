@@ -34,8 +34,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.TargetAttackedThisTurnCondition;
 import mage.abilities.condition.common.BeforeAttackersAreDeclaredCondition;
+import mage.abilities.condition.common.TargetAttackedThisTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -52,7 +52,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControlledFromStartOfControllerTurnPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.AttackedThisTurnWatcher;
@@ -62,13 +61,15 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  * @author MTGfan & L_J
  */
 public class Norritt extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filterBlue = new FilterCreaturePermanent("blue creature");
+
     static {
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("non-Wall creature");
+
     static {
         filterCreature.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
         filterCreature.add(new ControlledFromStartOfControllerTurnPredicate());
@@ -90,7 +91,7 @@ public class Norritt extends CardImpl {
 
         // {T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only before attackers are declared.
         Ability ability2 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn),
-                new TapSourceCost(), BeforeAttackersAreDeclaredCondition.instance, 
+                new TapSourceCost(), BeforeAttackersAreDeclaredCondition.instance,
                 "{T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. "
                 + "That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. "
                 + "Activate this ability only before attackers are declared.");
