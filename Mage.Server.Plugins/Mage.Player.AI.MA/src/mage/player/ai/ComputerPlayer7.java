@@ -161,10 +161,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             Game sim = createSimulation(game);
             SimulationNode2.resetCount();
             root = new SimulationNode2(null, sim, maxDepth, playerId);
-
             addActionsTimed();
-            logger.trace("After add actions timed: root.children.size = " + root.children.size());
-            if (!root.children.isEmpty()) {
+            if (root.children != null && !root.children.isEmpty()) {
+                logger.trace("After add actions timed: root.children.size = " + root.children.size());
                 root = root.children.get(0);
                 // int bestScore = root.getScore();
                 // if (bestScore > currentScore || allowBadMoves) {

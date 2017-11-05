@@ -205,7 +205,9 @@ public class HumanPlayer extends PlayerImpl {
                     return;
                 }
                 response.clear();
-                loop = true;
+                if (isInGame()) {
+                    loop = true;
+                }
             }
         }
         if (recordingMacro && !macroTriggeredSelectionFlag) {

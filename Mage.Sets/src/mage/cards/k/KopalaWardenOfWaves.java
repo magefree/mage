@@ -30,6 +30,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -111,13 +112,16 @@ class KopalaWardenOfWavesCostReductionEffect extends CostModificationEffectImpl 
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify.getAbilityType() == AbilityType.SPELL) {
             if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                for (Target target : abilityToModify.getTargets()) {
-                    for (UUID targetUUID : target.getTargets()) {
-                        Permanent creature = game.getPermanent(targetUUID);
-                        if (creature != null
-                                && filter.match(creature, game)
-                                && creature.getControllerId().equals(source.getControllerId())) {
-                            return true;
+                for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
+                    Mode mode = abilityToModify.getModes().get(modeId);
+                    for (Target target : mode.getTargets()) {
+                        for (UUID targetUUID : target.getTargets()) {
+                            Permanent creature = game.getPermanent(targetUUID);
+                            if (creature != null
+                                    && filter.match(creature, game)
+                                    && creature.getControllerId().equals(source.getControllerId())) {
+                                return true;
+                            }
                         }
                     }
                 }

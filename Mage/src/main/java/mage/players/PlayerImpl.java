@@ -1751,7 +1751,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.isSimulation()) {
                 game.informPlayers(this.getLogName() + " loses " + event.getAmount() + " life");
             }
-            game.fireEvent(new GameEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, amount, atCombat));
+            if (amount > 0) {
+                game.fireEvent(new GameEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, amount, atCombat));
+            }
             return amount;
         }
         return 0;

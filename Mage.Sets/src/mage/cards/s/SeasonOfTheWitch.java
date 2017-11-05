@@ -41,15 +41,13 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.WatcherScope;
 import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.WatcherScope;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.filter.StaticFilters;
 import mage.players.Player;
 import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
@@ -116,14 +114,14 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
                 }
                 // Creatures that attacked are safe.
                 AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
-                if (watcher != null 
-                    && watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game)) ) {
+                if (watcher != null
+                        && watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     continue;
                 }
                 // Creatures that couldn't attack are safe.
                 CouldAttackThisTurnWatcher watcher2 = (CouldAttackThisTurnWatcher) game.getState().getWatchers().get(CouldAttackThisTurnWatcher.class.getSimpleName());
-                if (watcher2 != null 
-                    && !watcher2.getCouldAttackThisTurnCreatures().contains(new MageObjectReference(permanent, game)) ) {
+                if (watcher2 != null
+                        && !watcher2.getCouldAttackThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     continue;
                 }
                 // Destroy the rest.
@@ -156,11 +154,11 @@ class CouldAttackThisTurnWatcher extends Watcher {
                 if (permanent.isCreature()) {
                     for (UUID defender : game.getCombat().getDefenders()) {
                         if (defender != activePlayer.getId()) {
-                            if (permanent.canAttack(defender, game)) { 
+                            if (permanent.canAttack(defender, game)) {
                                 // exclude Propaganda style effects
-                                if (!game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects( 
+                                if (!game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
                                         GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER,
-                                                defender, permanent.getId(), permanent.getControllerId()), game)) { 
+                                                defender, permanent.getId(), permanent.getControllerId()), game)) {
                                     this.couldAttackThisTurnCreatures.add(new MageObjectReference(permanent.getId(), game));
                                     break;
                                 }

@@ -5,19 +5,6 @@
  */
 package org.mage.card.arcane;
 
-import mage.ObjectColor;
-import mage.cards.ArtRect;
-import mage.cards.FrameStyle;
-import mage.client.dialog.PreferencesDialog;
-import mage.constants.CardType;
-import mage.constants.MageObjectType;
-import mage.constants.SubType;
-import mage.util.SubTypeList;
-import mage.view.CardView;
-import mage.view.PermanentView;
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.font.*;
 import java.awt.geom.Rectangle2D;
@@ -31,6 +18,18 @@ import java.text.CharacterIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.swing.*;
+import mage.ObjectColor;
+import mage.cards.ArtRect;
+import mage.cards.FrameStyle;
+import mage.client.dialog.PreferencesDialog;
+import mage.constants.CardType;
+import mage.constants.MageObjectType;
+import mage.constants.SubType;
+import mage.util.SubTypeList;
+import mage.view.CardView;
+import mage.view.PermanentView;
+import org.apache.log4j.Logger;
 
 
 /*
@@ -77,9 +76,9 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     private static Font loadFont(String name) {
-        try(InputStream in = ModernCardRenderer.class.getResourceAsStream("/cardrender/" + name + ".ttf")) {
+        try (InputStream in = ModernCardRenderer.class.getResourceAsStream("/cardrender/" + name + ".ttf")) {
             return Font.createFont(
-                    Font.TRUETYPE_FONT,in);
+                    Font.TRUETYPE_FONT, in);
         } catch (IOException e) {
             LOGGER.info("Failed to load font `" + name + "`, couldn't find resource.");
         } catch (FontFormatException e) {
@@ -353,7 +352,7 @@ public class ModernCardRenderer extends CardRenderer {
             if (useInventionFrame()) {
                 drawArtIntoRect(g,
                         borderWidth, borderWidth,
-                        cardWidth - 2*borderWidth, cardHeight - 2*borderWidth,
+                        cardWidth - 2 * borderWidth, cardHeight - 2 * borderWidth,
                         getArtRect(), false);
             }
 
@@ -367,11 +366,11 @@ public class ModernCardRenderer extends CardRenderer {
                     // each filling half of the art rect
                     drawArtIntoRect(g,
                             totalContentInset + 1, totalContentInset + boxHeight,
-                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight)/2,
+                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight) / 2,
                             ArtRect.SPLIT_LEFT.rect, useInventionFrame());
                     drawArtIntoRect(g,
-                            totalContentInset + 1, totalContentInset + boxHeight + (typeLineY - totalContentInset - boxHeight)/2,
-                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight)/2,
+                            totalContentInset + 1, totalContentInset + boxHeight + (typeLineY - totalContentInset - boxHeight) / 2,
+                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight) / 2,
                             ArtRect.SPLIT_RIGHT.rect, useInventionFrame());
                     return;
                 } else if (rect != ArtRect.NORMAL) {
@@ -849,6 +848,9 @@ public class ModernCardRenderer extends CardRenderer {
             inset = cardWidth / 12;
         }
         int availWidth = w - inset;
+        if (availWidth < 0) {
+            return 0;
+        }
 
         FontRenderContext frc = g.getFontRenderContext();
         AttributedCharacterIterator textIter = text.getIterator();
