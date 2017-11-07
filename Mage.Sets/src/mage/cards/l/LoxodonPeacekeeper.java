@@ -143,8 +143,7 @@ class LoxodonPeacekeeperEffect extends OneShotEffect {
                         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                             if (tiedPlayers.contains(playerId)) {
                                 newControllerId = playerId;
-                                game.informPlayers(game.getPlayer(playerId).getLogName() + " has gained control of " + sourcePermanent.getLogName());
-                                
+                                break;
                             }
                         }
                     }
@@ -152,6 +151,7 @@ class LoxodonPeacekeeperEffect extends OneShotEffect {
                         ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newControllerId);
                         effect.setTargetPointer(new FixedTarget(sourcePermanent, game));
                         game.addEffect(effect, source);
+                        game.informPlayers(game.getPlayer(newControllerId).getLogName() + " has gained control of " + sourcePermanent.getLogName());
                         return true;
                     }
                 }
