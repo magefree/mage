@@ -153,6 +153,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Peacekeeper", 13, Rarity.RARE, mage.cards.l.LoxodonPeacekeeper.class));
         cards.add(new SetCardInfo("Loxodon Punisher", 14, Rarity.RARE, mage.cards.l.LoxodonPunisher.class));
         cards.add(new SetCardInfo("Loxodon Warhammer", 201, Rarity.UNCOMMON, mage.cards.l.LoxodonWarhammer.class));
+        cards.add(new SetCardInfo("Lumengrid Augur", 39, Rarity.RARE, mage.cards.l.LumengridAugur.class));
         cards.add(new SetCardInfo("Lumengrid Sentinel", 40, Rarity.UNCOMMON, mage.cards.l.LumengridSentinel.class));
         cards.add(new SetCardInfo("Lumengrid Warden", 41, Rarity.COMMON, mage.cards.l.LumengridWarden.class));
         cards.add(new SetCardInfo("Luminous Angel", 15, Rarity.RARE, mage.cards.l.LuminousAngel.class));
@@ -176,6 +177,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Myr Enforcer", 211, Rarity.COMMON, mage.cards.m.MyrEnforcer.class));
         cards.add(new SetCardInfo("Myr Incubator", 212, Rarity.RARE, mage.cards.m.MyrIncubator.class));
         cards.add(new SetCardInfo("Myr Mindservant", 213, Rarity.UNCOMMON, mage.cards.m.MyrMindservant.class));
+        cards.add(new SetCardInfo("Myr Prototype", 214, Rarity.UNCOMMON, mage.cards.m.MyrPrototype.class));
         cards.add(new SetCardInfo("Myr Retriever", 215, Rarity.UNCOMMON, mage.cards.m.MyrRetriever.class));
         cards.add(new SetCardInfo("Necrogen Mists", 69, Rarity.RARE, mage.cards.n.NecrogenMists.class));
         cards.add(new SetCardInfo("Necrogen Spellbomb", 216, Rarity.COMMON, mage.cards.n.NecrogenSpellbomb.class));
