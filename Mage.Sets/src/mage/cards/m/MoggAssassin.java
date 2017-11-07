@@ -40,16 +40,11 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetOpponent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
@@ -83,19 +78,13 @@ public class MoggAssassin extends CardImpl {
             if (controller != null) {
                 UUID opponentId = null;
                 if (game.getOpponents(controller.getId()).size() > 1) {
-                    ability.getTargets().clear();
-                    Target target1 = new TargetOpponent(true);
-                    if (controller.chooseTarget(Outcome.Neutral, target1, ability, game)) {
-                        opponentId = target1.getFirstTarget();
+                    Target target = ability.getTargets().get(0);
+                    if (controller.chooseTarget(Outcome.DestroyPermanent, target, ability, game)) {
+                        Permanent permanent = game.getPermanent(target.getFirstTarget());
+                        opponentId = permanent.getControllerId();
                     } else {
                         opponentId = game.getOpponents(controller.getId()).iterator().next();
                     }
-                    FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature controlled by the chosen opponent");
-                    filter.add(new ChosenOpponentControlledPredicate(opponentId));
-                    Target target2 = new TargetCreaturePermanent(filter);
-                    Target target3 = new TargetCreaturePermanent();
-                    ability.addTarget(target2);
-                    ability.addTarget(target3);
                 } else {
                     opponentId = game.getOpponents(controller.getId()).iterator().next();
                 }
@@ -117,24 +106,6 @@ public class MoggAssassin extends CardImpl {
         return new MoggAssassin(this);
     }
 
-}
-
-class ChosenOpponentControlledPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
-
-    private final UUID controller;
-
-    public ChosenOpponentControlledPredicate(UUID controller) {
-        this.controller = controller;
-    }
-
-    @Override
-    public boolean apply(ObjectPlayer<Controllable> input, Game game) {
-        Controllable object = input.getObject();
-        if (object.getControllerId().equals(controller)) {
-            return true;
-        }
-        return false;
-    }
 }
 
 class MoggAssassinEffect extends OneShotEffect {
