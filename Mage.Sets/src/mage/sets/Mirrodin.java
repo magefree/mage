@@ -150,6 +150,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Lodestone Myr", 200, Rarity.RARE, mage.cards.l.LodestoneMyr.class));
         cards.add(new SetCardInfo("Looming Hoverguard", 38, Rarity.UNCOMMON, mage.cards.l.LoomingHoverguard.class));
         cards.add(new SetCardInfo("Loxodon Mender", 12, Rarity.COMMON, mage.cards.l.LoxodonMender.class));
+        cards.add(new SetCardInfo("Loxodon Peacekeeper", 13, Rarity.RARE, mage.cards.l.LoxodonPeacekeeper.class));
         cards.add(new SetCardInfo("Loxodon Punisher", 14, Rarity.RARE, mage.cards.l.LoxodonPunisher.class));
         cards.add(new SetCardInfo("Loxodon Warhammer", 201, Rarity.UNCOMMON, mage.cards.l.LoxodonWarhammer.class));
         cards.add(new SetCardInfo("Lumengrid Sentinel", 40, Rarity.UNCOMMON, mage.cards.l.LumengridSentinel.class));
