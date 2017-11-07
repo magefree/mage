@@ -345,7 +345,6 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Tsabo's Decree", 129, Rarity.RARE, mage.cards.t.TsabosDecree.class));
         cards.add(new SetCardInfo("Tsabo's Web", 317, Rarity.RARE, mage.cards.t.TsabosWeb.class));
         cards.add(new SetCardInfo("Tsabo Tavoc", 281, Rarity.RARE, mage.cards.t.TsaboTavoc.class));
-        cards.add(new SetCardInfo("Tsabo's Assassin", 128, Rarity.RARE, mage.cards.t.TsabosAssassin.class));
         cards.add(new SetCardInfo("Turf Wound", 177, Rarity.COMMON, mage.cards.t.TurfWound.class));
         cards.add(new SetCardInfo("Twilight's Call", 130, Rarity.RARE, mage.cards.t.TwilightsCall.class));
         cards.add(new SetCardInfo("Undermine", 282, Rarity.RARE, mage.cards.u.Undermine.class));
