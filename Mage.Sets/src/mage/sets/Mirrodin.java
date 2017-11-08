@@ -143,6 +143,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Leonin Skyhunter", 11, Rarity.UNCOMMON, mage.cards.l.LeoninSkyhunter.class));
         cards.add(new SetCardInfo("Leonin Sun Standard", 194, Rarity.RARE, mage.cards.l.LeoninSunStandard.class));
         cards.add(new SetCardInfo("Leveler", 195, Rarity.RARE, mage.cards.l.Leveler.class));
+        cards.add(new SetCardInfo("Liar's Pendulum", 196, Rarity.RARE, mage.cards.l.LiarsPendulum.class));
         cards.add(new SetCardInfo("Lifespark Spellbomb", 197, Rarity.COMMON, mage.cards.l.LifesparkSpellbomb.class));
         cards.add(new SetCardInfo("Lightning Coils", 198, Rarity.RARE, mage.cards.l.LightningCoils.class));
         cards.add(new SetCardInfo("Lightning Greaves", 199, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
