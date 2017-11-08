@@ -163,6 +163,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Keldon Warlord", 159, Rarity.UNCOMMON, mage.cards.k.KeldonWarlord.class));
         cards.add(new SetCardInfo("Kird Ape", 160, Rarity.COMMON, mage.cards.k.KirdApe.class));
         cards.add(new SetCardInfo("Kormus Bell", 260, Rarity.RARE, mage.cards.k.KormusBell.class));
+        cards.add(new SetCardInfo("Kudzu", 112, Rarity.RARE, mage.cards.k.Kudzu.class));
         cards.add(new SetCardInfo("Lance", 211, Rarity.UNCOMMON, mage.cards.l.Lance.class));
         cards.add(new SetCardInfo("Ley Druid", 113, Rarity.UNCOMMON, mage.cards.l.LeyDruid.class));
         cards.add(new SetCardInfo("Library of Leng", 261, Rarity.UNCOMMON, mage.cards.l.LibraryOfLeng.class));
