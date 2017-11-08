@@ -98,6 +98,7 @@ class LiarsPendulumEffect extends OneShotEffect {
             // Name a card.
             Choice choice = new ChoiceImpl();
             choice.setChoices(CardRepository.instance.getNames());
+            choice.setMessage("Choose a card name");
             while (!controller.choose(Outcome.Benefit, choice, game)) {
                 if (!controller.canRespond()) {
                     return false;
