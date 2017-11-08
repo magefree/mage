@@ -154,6 +154,7 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Karma", 211, Rarity.UNCOMMON, mage.cards.k.Karma.class));
         cards.add(new SetCardInfo("Keldon Warlord", 161, Rarity.UNCOMMON, mage.cards.k.KeldonWarlord.class));
         cards.add(new SetCardInfo("Kormus Bell", 257, Rarity.RARE, mage.cards.k.KormusBell.class));
+        cards.add(new SetCardInfo("Kudzu", 113, Rarity.RARE, mage.cards.k.Kudzu.class));
         cards.add(new SetCardInfo("Lance", 212, Rarity.UNCOMMON, mage.cards.l.Lance.class));
         cards.add(new SetCardInfo("Ley Druid", 114, Rarity.UNCOMMON, mage.cards.l.LeyDruid.class));
         cards.add(new SetCardInfo("Library of Leng", 258, Rarity.UNCOMMON, mage.cards.l.LibraryOfLeng.class));
