@@ -121,6 +121,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Pristine Angel", 9, Rarity.RARE, mage.cards.p.PristineAngel.class));
         cards.add(new SetCardInfo("Psychic Overload", 28, Rarity.UNCOMMON, mage.cards.p.PsychicOverload.class));
         cards.add(new SetCardInfo("Pteron Ghost", 10, Rarity.COMMON, mage.cards.p.PteronGhost.class));
+        cards.add(new SetCardInfo("Pulse of the Dross", 50, Rarity.RARE, mage.cards.p.PulseOfTheDross.class));
         cards.add(new SetCardInfo("Pulse of the Fields", 11, Rarity.RARE, mage.cards.p.PulseOfTheFields.class));
         cards.add(new SetCardInfo("Pulse of the Forge", 66, Rarity.RARE, mage.cards.p.PulseOfTheForge.class));
         cards.add(new SetCardInfo("Pulse of the Grid", 29, Rarity.RARE, mage.cards.p.PulseOfTheGrid.class));
@@ -137,6 +138,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Savage Beating", 67, Rarity.RARE, mage.cards.s.SavageBeating.class));
         cards.add(new SetCardInfo("Scavenging Scarab", 51, Rarity.COMMON, mage.cards.s.ScavengingScarab.class));
         cards.add(new SetCardInfo("Screams from Within", 52, Rarity.UNCOMMON, mage.cards.s.ScreamsFromWithin.class));
+        cards.add(new SetCardInfo("Scrounge", 53, Rarity.UNCOMMON, mage.cards.s.Scrounge.class));
         cards.add(new SetCardInfo("Second Sight", 33, Rarity.UNCOMMON, mage.cards.s.SecondSight.class));
         cards.add(new SetCardInfo("Serum Powder", 138, Rarity.RARE, mage.cards.s.SerumPowder.class));
         cards.add(new SetCardInfo("Shield of Kaldra", 139, Rarity.RARE, mage.cards.s.ShieldOfKaldra.class));
