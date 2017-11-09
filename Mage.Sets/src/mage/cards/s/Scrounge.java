@@ -93,14 +93,14 @@ class ScroungeEffect extends OneShotEffect {
             if (chosenCard.canChoose(opponent.getId(), game)) {
                 opponent.chooseTarget(Outcome.ReturnToHand, chosenCard, source, game);
                 Card card = game.getCard(chosenCard.getFirstTarget());
-                game.informPlayers("Scrounge: " + opponent.getLogName() + " has chosen " + card.getLogName());
                 if (card != null) {
+                    game.informPlayers ("Scrounge: " + opponent.getLogName() + " has chosen " + card.getLogName());
                     Cards cardsToMove = new CardsImpl();
                     cardsToMove.add(card);
                     controller.moveCards(cardsToMove, Zone.BATTLEFIELD, source, game);
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }
