@@ -68,7 +68,7 @@ class PulseOfTheGridReturnToHandEffect extends OneShotEffect {
 
     PulseOfTheGridReturnToHandEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return {this} to its owner's hand";
+        this.staticText = "Then if an opponent has more cards in hand than you, return {this} to its owner's hand";
     }
 
     PulseOfTheGridReturnToHandEffect(final PulseOfTheGridReturnToHandEffect effect) {
