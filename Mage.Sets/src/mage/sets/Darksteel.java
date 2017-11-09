@@ -140,6 +140,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Second Sight", 33, Rarity.UNCOMMON, mage.cards.s.SecondSight.class));
         cards.add(new SetCardInfo("Serum Powder", 138, Rarity.RARE, mage.cards.s.SerumPowder.class));
         cards.add(new SetCardInfo("Shield of Kaldra", 139, Rarity.RARE, mage.cards.s.ShieldOfKaldra.class));
+        cards.add(new SetCardInfo("Shriveling Rot", 54, Rarity.RARE, mage.cards.s.ShrivelingRot.class));
         cards.add(new SetCardInfo("Shunt", 68, Rarity.RARE, mage.cards.s.Shunt.class));
         cards.add(new SetCardInfo("Skullclamp", 140, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Slobad, Goblin Tinkerer", 69, Rarity.RARE, mage.cards.s.SlobadGoblinTinkerer.class));
