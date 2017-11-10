@@ -25,17 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.f;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -43,7 +44,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -51,42 +51,45 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class GoblinFestival extends CardImpl {
+public class FickleEfreet extends CardImpl {
 
-    public GoblinFestival(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
+    public FickleEfreet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        this.subtype.add(SubType.EFREET);
 
-        // {2}: Goblin Festival deals 1 damage to target creature or player. Flip a coin. If you lose the flip, choose one of your opponents. That player gains control of Goblin Festival.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}"));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        ability.addEffect(new GoblinFestivalChangeControlEffect());
-        this.addAbility(ability);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(2);
+
+        // Whenever Fickle Efreet attacks or blocks, flip a coin at end of combat. If you lose the flip, an opponent gains control of Fickle Efreet.
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+                new AtTheEndOfCombatDelayedTriggeredAbility(new FickleEfreetChangeControlEffect()), true), false));
     }
 
-    public GoblinFestival(final GoblinFestival card) {
+    public FickleEfreet(final FickleEfreet card) {
         super(card);
     }
 
     @Override
-    public GoblinFestival copy() {
-        return new GoblinFestival(this);
+    public FickleEfreet copy() {
+        return new FickleEfreet(this);
     }
 }
 
-class GoblinFestivalChangeControlEffect extends OneShotEffect {
 
-    public GoblinFestivalChangeControlEffect() {
+class FickleEfreetChangeControlEffect extends OneShotEffect {
+
+    public FickleEfreetChangeControlEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Flip a coin. If you lose the flip, choose one of your opponents. That player gains control of {this}";
+        this.staticText = "flip a coin at end of combat. If you lose the flip, choose one of your opponents. That player gains control of {this}";
     }
 
-    public GoblinFestivalChangeControlEffect(final GoblinFestivalChangeControlEffect effect) {
+    public FickleEfreetChangeControlEffect(final FickleEfreetChangeControlEffect effect) {
         super(effect);
     }
 
     @Override
-    public GoblinFestivalChangeControlEffect copy() {
-        return new GoblinFestivalChangeControlEffect(this);
+    public FickleEfreetChangeControlEffect copy() {
+        return new FickleEfreetChangeControlEffect(this);
     }
 
     @Override
@@ -104,7 +107,7 @@ class GoblinFestivalChangeControlEffect extends OneShotEffect {
                     }
                     Player chosenOpponent = game.getPlayer(target.getFirstTarget());
                     if (chosenOpponent != null) {
-                        ContinuousEffect effect = new GoblinFestivalGainControlEffect(Duration.Custom, chosenOpponent.getId());
+                        ContinuousEffect effect = new FickleEfreetGainControlEffect(Duration.Custom, target.getFirstTarget());
                         effect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
                         game.addEffect(effect, source);
                         game.informPlayers(chosenOpponent.getLogName() + " has gained control of " + sourcePermanent.getLogName());
@@ -117,23 +120,23 @@ class GoblinFestivalChangeControlEffect extends OneShotEffect {
     }
 }
 
-class GoblinFestivalGainControlEffect extends ContinuousEffectImpl {
+class FickleEfreetGainControlEffect extends ContinuousEffectImpl {
 
     UUID controller;
 
-    public GoblinFestivalGainControlEffect(Duration duration, UUID controller) {
+    public FickleEfreetGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
     }
 
-    public GoblinFestivalGainControlEffect(final GoblinFestivalGainControlEffect effect) {
+    public FickleEfreetGainControlEffect(final FickleEfreetGainControlEffect effect) {
         super(effect);
         this.controller = effect.controller;
     }
 
     @Override
-    public GoblinFestivalGainControlEffect copy() {
-        return new GoblinFestivalGainControlEffect(this);
+    public FickleEfreetGainControlEffect copy() {
+        return new FickleEfreetGainControlEffect(this);
     }
 
     @Override

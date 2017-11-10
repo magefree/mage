@@ -181,6 +181,7 @@ public class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Sunken Hope", 37, Rarity.RARE, mage.cards.s.SunkenHope.class));
         cards.add(new SetCardInfo("Sunscape Battlemage", 16, Rarity.UNCOMMON, mage.cards.s.SunscapeBattlemage.class));
         cards.add(new SetCardInfo("Sunscape Familiar", 17, Rarity.COMMON, mage.cards.s.SunscapeFamiliar.class));
+        cards.add(new SetCardInfo("Surprise Deployment", 18, Rarity.UNCOMMON, mage.cards.s.SurpriseDeployment.class));
         cards.add(new SetCardInfo("Tahngarth, Talruum Hero", "74a", Rarity.RARE, TahngarthTalruumHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tahngarth, Talruum Hero", "74b", Rarity.RARE, TahngarthTalruumHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terminal Moraine", 142, Rarity.UNCOMMON, mage.cards.t.TerminalMoraine.class));

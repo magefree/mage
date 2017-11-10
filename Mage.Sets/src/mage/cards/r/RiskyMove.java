@@ -63,8 +63,7 @@ public class RiskyMove extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new RiskyMoveGetControlEffect(), TargetController.ANY, false, true));
 
         // When you gain control of Risky Move from another player, choose a creature you control and an opponent. Flip a coin. If you lose the flip, that opponent gains control of that creature.
-        Ability ability = new RiskyMoveTriggeredAbility();
-        this.addAbility(ability);
+        this.addAbility(new RiskyMoveTriggeredAbility());
     }
 
     public RiskyMove(final RiskyMove card) {
@@ -194,6 +193,7 @@ class RiskyMoveFlipCoinEffect extends OneShotEffect {
                     ContinuousEffect effect = new RiskyMoveCreatureGainControlEffect(Duration.Custom, chosenOpponent.getId());
                     effect.setTargetPointer(new FixedTarget(permanent.getId()));
                     game.addEffect(effect, source);
+                    game.informPlayers(chosenOpponent.getLogName() + " has gained control of " + permanent.getLogName());
                     return true;
                 }
             }

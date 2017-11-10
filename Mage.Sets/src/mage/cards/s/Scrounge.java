@@ -25,73 +25,82 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterArtifactCard;
+import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author emerald000
+ * @author LoneFox & L_J
  */
-public class PulseOfTheGrid extends CardImpl {
+public class Scrounge extends CardImpl {
 
-    public PulseOfTheGrid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
+    public Scrounge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
-        // Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return Pulse of the Grid to its owner's hand.
-        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 1));
-        this.getSpellAbility().addEffect(new PulseOfTheGridReturnToHandEffect());
+        // Target opponent chooses an artifact card in his or her graveyard. Put that card onto the battlefield under your control.
+        this.getSpellAbility().addEffect(new ScroungeEffect());
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public PulseOfTheGrid(final PulseOfTheGrid card) {
+    public Scrounge(final Scrounge card) {
         super(card);
     }
 
     @Override
-    public PulseOfTheGrid copy() {
-        return new PulseOfTheGrid(this);
+    public Scrounge copy() {
+        return new Scrounge(this);
     }
 }
 
-class PulseOfTheGridReturnToHandEffect extends OneShotEffect {
+class ScroungeEffect extends OneShotEffect {
 
-    PulseOfTheGridReturnToHandEffect() {
+    public ScroungeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Then if an opponent has more cards in hand than you, return {this} to its owner's hand";
+        staticText = "Target opponent chooses an artifact card in his or her graveyard. Put that card onto the battlefield under your control";
     }
 
-    PulseOfTheGridReturnToHandEffect(final PulseOfTheGridReturnToHandEffect effect) {
+    public ScroungeEffect(final ScroungeEffect effect) {
         super(effect);
     }
 
     @Override
-    public PulseOfTheGridReturnToHandEffect copy() {
-        return new PulseOfTheGridReturnToHandEffect(this);
+    public ScroungeEffect copy() {
+        return new ScroungeEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null && player.getHand().size() > controller.getHand().size()) {
-                    Card card = game.getCard(source.getSourceId());
-                    controller.moveCards(card, Zone.HAND, source, game);
-                    return true;
+        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        if (controller != null && opponent != null) {
+            FilterArtifactCard filter = new FilterArtifactCard();
+            filter.add(new OwnerIdPredicate(opponent.getId()));
+            TargetCardInGraveyard chosenCard = new TargetCardInGraveyard(filter);
+            chosenCard.setNotTarget(true);
+            if (chosenCard.canChoose(opponent.getId(), game)) {
+                opponent.chooseTarget(Outcome.ReturnToHand, chosenCard, source, game);
+                Card card = game.getCard(chosenCard.getFirstTarget());
+                if (card != null) {
+                    game.informPlayers ("Scrounge: " + opponent.getLogName() + " has chosen " + card.getLogName());
+                    Cards cardsToMove = new CardsImpl();
+                    cardsToMove.add(card);
+                    controller.moveCards(cardsToMove, Zone.BATTLEFIELD, source, game);
                 }
             }
+            return true;
         }
         return false;
     }

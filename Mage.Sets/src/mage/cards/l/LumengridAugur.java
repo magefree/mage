@@ -25,73 +25,86 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.l;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author emerald000
+ * @author L_J
  */
-public class PulseOfTheGrid extends CardImpl {
+public class LumengridAugur extends CardImpl {
 
-    public PulseOfTheGrid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
+    public LumengridAugur(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        this.subtype.add(SubType.VEDALKEN);
+        this.subtype.add(SubType.WIZARD);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return Pulse of the Grid to its owner's hand.
-        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 1));
-        this.getSpellAbility().addEffect(new PulseOfTheGridReturnToHandEffect());
+        // {1}, {T}: Target player draws a card, then discards a card. If that player discards an artifact card this way, untap Lumengrid Augur.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LumengridAugurEffect(), new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
-    public PulseOfTheGrid(final PulseOfTheGrid card) {
+    public LumengridAugur(final LumengridAugur card) {
         super(card);
     }
 
     @Override
-    public PulseOfTheGrid copy() {
-        return new PulseOfTheGrid(this);
+    public LumengridAugur copy() {
+        return new LumengridAugur(this);
     }
 }
 
-class PulseOfTheGridReturnToHandEffect extends OneShotEffect {
+class LumengridAugurEffect extends OneShotEffect {
 
-    PulseOfTheGridReturnToHandEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Then if an opponent has more cards in hand than you, return {this} to its owner's hand";
+    public LumengridAugurEffect() {
+        super(Outcome.DrawCard);
+        staticText = "Target player draws a card, then discards a card. If that player discards an artifact card this way, untap {this}";
     }
 
-    PulseOfTheGridReturnToHandEffect(final PulseOfTheGridReturnToHandEffect effect) {
+    public LumengridAugurEffect(final LumengridAugurEffect effect) {
         super(effect);
     }
 
     @Override
-    public PulseOfTheGridReturnToHandEffect copy() {
-        return new PulseOfTheGridReturnToHandEffect(this);
+    public LumengridAugurEffect copy() {
+        return new LumengridAugurEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null && player.getHand().size() > controller.getHand().size()) {
-                    Card card = game.getCard(source.getSourceId());
-                    controller.moveCards(card, Zone.HAND, source, game);
-                    return true;
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (player != null) {
+            player.drawCards(1, game);
+            Card discardedCard = player.discardOne(false, source, game);
+            if (discardedCard != null && discardedCard.isArtifact()) {
+                if (sourcePermanent != null) {
+                    sourcePermanent.untap(game);
                 }
             }
+            return true;
         }
         return false;
     }

@@ -25,72 +25,80 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author emerald000
+ * @author L_J
  */
-public class PulseOfTheGrid extends CardImpl {
+public class GoblinLyre extends CardImpl {
 
-    public PulseOfTheGrid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
+    public GoblinLyre(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return Pulse of the Grid to its owner's hand.
-        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 1));
-        this.getSpellAbility().addEffect(new PulseOfTheGridReturnToHandEffect());
+        // Sacrifice Goblin Lyre: Flip a coin. If you win the flip, Goblin Lyre deals damage to target opponent equal to the number of creatures you control. If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent controls.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinLyreEffect(), new SacrificeSourceCost());
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
-    public PulseOfTheGrid(final PulseOfTheGrid card) {
+    public GoblinLyre(final GoblinLyre card) {
         super(card);
     }
 
     @Override
-    public PulseOfTheGrid copy() {
-        return new PulseOfTheGrid(this);
+    public GoblinLyre copy() {
+        return new GoblinLyre(this);
     }
 }
 
-class PulseOfTheGridReturnToHandEffect extends OneShotEffect {
+class GoblinLyreEffect extends OneShotEffect {
 
-    PulseOfTheGridReturnToHandEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Then if an opponent has more cards in hand than you, return {this} to its owner's hand";
+    public GoblinLyreEffect() {
+        super(Outcome.Damage);
+        this.staticText = "Flip a coin. If you win the flip, {this} deals damage to target opponent equal to the number of creatures you control. If you lose the flip, {this} deals damage to you equal to the number of creatures that opponent controls";
     }
 
-    PulseOfTheGridReturnToHandEffect(final PulseOfTheGridReturnToHandEffect effect) {
+    public GoblinLyreEffect(final GoblinLyreEffect effect) {
         super(effect);
     }
 
     @Override
-    public PulseOfTheGridReturnToHandEffect copy() {
-        return new PulseOfTheGridReturnToHandEffect(this);
+    public GoblinLyreEffect copy() {
+        return new GoblinLyreEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null) {
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null && player.getHand().size() > controller.getHand().size()) {
-                    Card card = game.getCard(source.getSourceId());
-                    controller.moveCards(card, Zone.HAND, source, game);
+            if (controller.flipCoin(game)) {
+                if (opponent != null) {
+                    opponent.damage(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()).calculate(game, source, this), source.getSourceId(), game, false, true);
                     return true;
                 }
+            } else {
+                controller.damage(new PermanentsTargetOpponentControlsCount(new FilterCreaturePermanent()).calculate(game, source, this), source.getSourceId(), game, false, true);
+                return true;
             }
         }
         return false;

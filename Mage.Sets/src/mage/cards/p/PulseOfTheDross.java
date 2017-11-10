@@ -25,57 +25,77 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.combat;
+package mage.cards.p;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.Duration;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author TheElk801
+ * @author emerald000 & L_J
  */
-public class GoadTargetEffect extends OneShotEffect {
+public class PulseOfTheDross extends CardImpl {
 
-    /**
-     * 701.36. Goad
-     *
-     * 701.36a Certain spells and abilities can goad a creature. Until the next
-     * turn of the controller of that spell or ability, that creature attacks
-     * each combat if able and attacks a player other than that player if able.
-     */
-    public GoadTargetEffect() {
-        super(Outcome.Benefit);
+    public PulseOfTheDross(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
+
+        // Target player reveals three cards from his or her hand and you choose one of them. That player discards that card.
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, 3));
+        this.getSpellAbility().addEffect(new PulseOfTheDrossReturnToHandEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public GoadTargetEffect(final GoadTargetEffect effect) {
+    public PulseOfTheDross(final PulseOfTheDross card) {
+        super(card);
+    }
+
+    @Override
+    public PulseOfTheDross copy() {
+        return new PulseOfTheDross(this);
+    }
+}
+
+class PulseOfTheDrossReturnToHandEffect extends OneShotEffect {
+
+    PulseOfTheDrossReturnToHandEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Then if that player has more cards in hand than you, return {this} to its owner's hand";
+    }
+
+    PulseOfTheDrossReturnToHandEffect(final PulseOfTheDrossReturnToHandEffect effect) {
         super(effect);
     }
 
     @Override
-    public GoadTargetEffect copy() {
-        return new GoadTargetEffect(this);
+    public PulseOfTheDrossReturnToHandEffect copy() {
+        return new PulseOfTheDrossReturnToHandEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (targetCreature != null && controller != null) {
-            ContinuousEffect effect = new AttacksIfAbleTargetEffect(Duration.UntilYourNextTurn);
-            effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
-            game.addEffect(effect, source);
-            effect = new CantAttackYouEffect(Duration.UntilYourNextTurn);
-            effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
-            game.addEffect(effect, source);
-            game.informPlayers(controller.getLogName() + " is goading " + targetCreature.getLogName());
+        if (controller != null) {
+            Player player = game.getPlayer(source.getFirstTarget());
+            if (player != null) { 
+                if (player.getHand().size() > controller.getHand().size()) {
+                    Card card = game.getCard(source.getSourceId());
+                    controller.moveCards(card, Zone.HAND, source, game);
+                }
+                return true;
+            }
         }
-        return true;
+        return false;
     }
 }
