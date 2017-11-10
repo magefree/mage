@@ -263,6 +263,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Patriarch's Desire", 156, Rarity.COMMON, mage.cards.p.PatriarchsDesire.class));
         cards.add(new SetCardInfo("Patrol Hound", 38, Rarity.COMMON, mage.cards.p.PatrolHound.class));
         cards.add(new SetCardInfo("Patron Wizard", 89, Rarity.RARE, mage.cards.p.PatronWizard.class));
+        cards.add(new SetCardInfo("Pedantic Learning", 90, Rarity.RARE, mage.cards.p.PedanticLearning.class));
         cards.add(new SetCardInfo("Peek", 91, Rarity.COMMON, mage.cards.p.Peek.class));
         cards.add(new SetCardInfo("Persuasion", 92, Rarity.RARE, mage.cards.p.Persuasion.class));
         cards.add(new SetCardInfo("Petrified Field", 323, Rarity.RARE, mage.cards.p.PetrifiedField.class));
