@@ -158,6 +158,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Fresh Volunteers", 20, Rarity.COMMON, mage.cards.f.FreshVolunteers.class));
         cards.add(new SetCardInfo("Furious Assault", 191, Rarity.COMMON, mage.cards.f.FuriousAssault.class));
         cards.add(new SetCardInfo("Game Preserve", 248, Rarity.RARE, mage.cards.g.GamePreserve.class));
+        cards.add(new SetCardInfo("General's Regalia", 295, Rarity.RARE, mage.cards.g.GeneralsRegalia.class));
         cards.add(new SetCardInfo("Gerrard's Irregulars", 192, Rarity.COMMON, mage.cards.g.GerrardsIrregulars.class));
         cards.add(new SetCardInfo("Ghoul's Feast", 137, Rarity.UNCOMMON, mage.cards.g.GhoulsFeast.class));
         cards.add(new SetCardInfo("Giant Caterpillar", 249, Rarity.COMMON, mage.cards.g.GiantCaterpillar.class));
@@ -274,6 +275,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Rushwood Legate", 266, Rarity.UNCOMMON, mage.cards.r.RushwoodLegate.class));
         cards.add(new SetCardInfo("Saber Ants", 267, Rarity.UNCOMMON, mage.cards.s.SaberAnts.class));
         cards.add(new SetCardInfo("Sacred Prey", 268, Rarity.COMMON, mage.cards.s.SacredPrey.class));
+        cards.add(new SetCardInfo("Sailmonger", 95, Rarity.UNCOMMON, mage.cards.s.Sailmonger.class));
         cards.add(new SetCardInfo("Sand Squid", 96, Rarity.RARE, mage.cards.s.SandSquid.class));
         cards.add(new SetCardInfo("Sandstone Needle", 326, Rarity.COMMON, mage.cards.s.SandstoneNeedle.class));
         cards.add(new SetCardInfo("Saprazzan Cove", 327, Rarity.UNCOMMON, mage.cards.s.SaprazzanCove.class));
@@ -352,6 +354,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Waterfront Bouncer", 114, Rarity.COMMON, mage.cards.w.WaterfrontBouncer.class));
         cards.add(new SetCardInfo("Wave of Reckoning", 56, Rarity.RARE, mage.cards.w.WaveOfReckoning.class));
         cards.add(new SetCardInfo("Wild Jhovall", 227, Rarity.COMMON, mage.cards.w.WildJhovall.class));
+        cards.add(new SetCardInfo("Wishmonger", 57, Rarity.UNCOMMON, mage.cards.w.Wishmonger.class));
         cards.add(new SetCardInfo("Word of Blasting", 228, Rarity.UNCOMMON, mage.cards.w.WordOfBlasting.class));
         cards.add(new SetCardInfo("Worry Beads", 315, Rarity.RARE, mage.cards.w.WorryBeads.class));
     }

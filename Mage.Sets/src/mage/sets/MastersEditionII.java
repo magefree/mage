@@ -148,6 +148,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Helm of Obedience", 210, Rarity.RARE, mage.cards.h.HelmOfObedience.class));
         cards.add(new SetCardInfo("Icatian Javelineers", 15, Rarity.COMMON, IcatianJavelineers.class));
         cards.add(new SetCardInfo("Icatian Scout", 17, Rarity.COMMON, IcatianScout.class));
+        cards.add(new SetCardInfo("Ice Floe", 232, Rarity.UNCOMMON, mage.cards.i.IceFloe.class));
         cards.add(new SetCardInfo("Iceberg", 49, Rarity.UNCOMMON, mage.cards.i.Iceberg.class));
         cards.add(new SetCardInfo("Icequake", 94, Rarity.COMMON, mage.cards.i.Icequake.class));
         cards.add(new SetCardInfo("Icy Prison", 50, Rarity.COMMON, mage.cards.i.IcyPrison.class));
@@ -169,6 +170,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Kjeldoran Outpost", 233, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class));
         cards.add(new SetCardInfo("Knight of Stromgald", 99, Rarity.UNCOMMON, mage.cards.k.KnightOfStromgald.class));
         cards.add(new SetCardInfo("Krovikan Fetish", 100, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
+        cards.add(new SetCardInfo("Krovikan Horror", 101, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
         cards.add(new SetCardInfo("Krovikan Sorcerer", 51, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));
         cards.add(new SetCardInfo("Leaping Lizard", 171, Rarity.COMMON, mage.cards.l.LeapingLizard.class));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", 103, Rarity.UNCOMMON, LimDulsHighGuard.class));
@@ -178,6 +180,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Mesmeric Trance", 55, Rarity.RARE, mage.cards.m.MesmericTrance.class));
         cards.add(new SetCardInfo("Meteor Shower", 135, Rarity.COMMON, mage.cards.m.MeteorShower.class));
         cards.add(new SetCardInfo("Minion of Leshrac", 104, Rarity.RARE, mage.cards.m.MinionOfLeshrac.class));
+        cards.add(new SetCardInfo("Misinformation", 105, Rarity.UNCOMMON, mage.cards.m.Misinformation.class));
         cards.add(new SetCardInfo("Mudslide", 136, Rarity.RARE, mage.cards.m.Mudslide.class));
         cards.add(new SetCardInfo("Narwhal", 57, Rarity.UNCOMMON, mage.cards.n.Narwhal.class));
         cards.add(new SetCardInfo("Nature's Wrath", 172, Rarity.RARE, mage.cards.n.NaturesWrath.class));
@@ -215,6 +218,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Sea Drake", 64, Rarity.RARE, mage.cards.s.SeaDrake.class));
         cards.add(new SetCardInfo("Sea Spirit", 65, Rarity.UNCOMMON, mage.cards.s.SeaSpirit.class));
         cards.add(new SetCardInfo("Shrink", 175, Rarity.COMMON, mage.cards.s.Shrink.class));
+        cards.add(new SetCardInfo("Shyft", 66, Rarity.COMMON, mage.cards.s.Shyft.class));
         cards.add(new SetCardInfo("Sibilant Spirit", 67, Rarity.RARE, mage.cards.s.SibilantSpirit.class));
         cards.add(new SetCardInfo("Skeleton Ship", 197, Rarity.RARE, mage.cards.s.SkeletonShip.class));
         cards.add(new SetCardInfo("Skull Catapult", 219, Rarity.UNCOMMON, mage.cards.s.SkullCatapult.class));
@@ -230,6 +234,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Songs of the Damned", 110, Rarity.COMMON, mage.cards.s.SongsOfTheDamned.class));
         cards.add(new SetCardInfo("Soul Exchange", 111, Rarity.UNCOMMON, mage.cards.s.SoulExchange.class));
         cards.add(new SetCardInfo("Soul Kiss", 112, Rarity.UNCOMMON, mage.cards.s.SoulKiss.class));
+        cards.add(new SetCardInfo("Spore Cloud", 176, Rarity.UNCOMMON, mage.cards.s.SporeCloud.class));
         cards.add(new SetCardInfo("Spore Flower", 177, Rarity.UNCOMMON, mage.cards.s.SporeFlower.class));
         cards.add(new SetCardInfo("Stampede", 178, Rarity.UNCOMMON, mage.cards.s.Stampede.class));
         cards.add(new SetCardInfo("Stonehands", 151, Rarity.COMMON, mage.cards.s.Stonehands.class));

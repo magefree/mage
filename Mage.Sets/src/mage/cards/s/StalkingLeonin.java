@@ -44,10 +44,10 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.FilterCreatureAttackingYou;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
@@ -72,7 +72,7 @@ public class StalkingLeonin extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new StalkingLeoninChooseOpponent(), false));
         // Reveal the player you chose: Exile target creature that's attacking you if it's controlled by the chosen player. Activate this ability only once.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StalkingLeoninEffect(), new StalkingLeoninRevealOpponentCost());
-        ability.addTarget(new TargetCreaturePermanent(new StalkingLeoninFilter()));
+        ability.addTarget(new TargetCreaturePermanent(new FilterCreatureAttackingYou()));
         this.addAbility(ability);
     }
 
@@ -215,27 +215,5 @@ class StalkingLeoninEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class StalkingLeoninFilter extends FilterAttackingCreature {
-
-    public StalkingLeoninFilter() {
-        super("creature that's attacking you");
-    }
-
-    public StalkingLeoninFilter(final StalkingLeoninFilter filter) {
-        super(filter);
-    }
-
-    @Override
-    public StalkingLeoninFilter copy() {
-        return new StalkingLeoninFilter(this);
-    }
-
-    @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        return super.match(permanent, sourceId, playerId, game)
-                && playerId.equals(game.getCombat().getDefenderId(permanent.getId()));
     }
 }

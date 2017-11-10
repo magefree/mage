@@ -121,6 +121,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Pristine Angel", 9, Rarity.RARE, mage.cards.p.PristineAngel.class));
         cards.add(new SetCardInfo("Psychic Overload", 28, Rarity.UNCOMMON, mage.cards.p.PsychicOverload.class));
         cards.add(new SetCardInfo("Pteron Ghost", 10, Rarity.COMMON, mage.cards.p.PteronGhost.class));
+        cards.add(new SetCardInfo("Pulse of the Dross", 50, Rarity.RARE, mage.cards.p.PulseOfTheDross.class));
         cards.add(new SetCardInfo("Pulse of the Fields", 11, Rarity.RARE, mage.cards.p.PulseOfTheFields.class));
         cards.add(new SetCardInfo("Pulse of the Forge", 66, Rarity.RARE, mage.cards.p.PulseOfTheForge.class));
         cards.add(new SetCardInfo("Pulse of the Grid", 29, Rarity.RARE, mage.cards.p.PulseOfTheGrid.class));
@@ -137,9 +138,11 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Savage Beating", 67, Rarity.RARE, mage.cards.s.SavageBeating.class));
         cards.add(new SetCardInfo("Scavenging Scarab", 51, Rarity.COMMON, mage.cards.s.ScavengingScarab.class));
         cards.add(new SetCardInfo("Screams from Within", 52, Rarity.UNCOMMON, mage.cards.s.ScreamsFromWithin.class));
+        cards.add(new SetCardInfo("Scrounge", 53, Rarity.UNCOMMON, mage.cards.s.Scrounge.class));
         cards.add(new SetCardInfo("Second Sight", 33, Rarity.UNCOMMON, mage.cards.s.SecondSight.class));
         cards.add(new SetCardInfo("Serum Powder", 138, Rarity.RARE, mage.cards.s.SerumPowder.class));
         cards.add(new SetCardInfo("Shield of Kaldra", 139, Rarity.RARE, mage.cards.s.ShieldOfKaldra.class));
+        cards.add(new SetCardInfo("Shriveling Rot", 54, Rarity.RARE, mage.cards.s.ShrivelingRot.class));
         cards.add(new SetCardInfo("Shunt", 68, Rarity.RARE, mage.cards.s.Shunt.class));
         cards.add(new SetCardInfo("Skullclamp", 140, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Slobad, Goblin Tinkerer", 69, Rarity.RARE, mage.cards.s.SlobadGoblinTinkerer.class));
@@ -157,6 +160,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Sword of Fire and Ice", 148, Rarity.RARE, mage.cards.s.SwordOfFireAndIce.class));
         cards.add(new SetCardInfo("Sword of Light and Shadow", 149, Rarity.RARE, mage.cards.s.SwordOfLightAndShadow.class));
         cards.add(new SetCardInfo("Synod Artificer", 34, Rarity.RARE, mage.cards.s.SynodArtificer.class));
+        cards.add(new SetCardInfo("Talon of Pain", 150, Rarity.UNCOMMON, mage.cards.t.TalonOfPain.class));
         cards.add(new SetCardInfo("Tangle Golem", 151, Rarity.COMMON, mage.cards.t.TangleGolem.class));
         cards.add(new SetCardInfo("Tangle Spider", 85, Rarity.COMMON, mage.cards.t.TangleSpider.class));
         cards.add(new SetCardInfo("Tanglewalker", 86, Rarity.UNCOMMON, mage.cards.t.Tanglewalker.class));

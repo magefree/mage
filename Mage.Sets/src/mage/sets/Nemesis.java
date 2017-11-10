@@ -85,6 +85,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Dominate", 31, Rarity.UNCOMMON, mage.cards.d.Dominate.class));
         cards.add(new SetCardInfo("Downhill Charge", 79, Rarity.COMMON, mage.cards.d.DownhillCharge.class));
         cards.add(new SetCardInfo("Ensnare", 32, Rarity.UNCOMMON, mage.cards.e.Ensnare.class));
+        cards.add(new SetCardInfo("Eye of Yawgmoth", 129, Rarity.RARE, mage.cards.e.EyeOfYawgmoth.class));
         cards.add(new SetCardInfo("Fanatical Devotion", 8, Rarity.COMMON, mage.cards.f.FanaticalDevotion.class));
         cards.add(new SetCardInfo("Flame Rift", 80, Rarity.COMMON, mage.cards.f.FlameRift.class));
         cards.add(new SetCardInfo("Flowstone Armor", 131, Rarity.UNCOMMON, mage.cards.f.FlowstoneArmor.class));
@@ -99,6 +100,11 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Jolting Merfolk", 34, Rarity.UNCOMMON, mage.cards.j.JoltingMerfolk.class));
         cards.add(new SetCardInfo("Kill Switch", 133, Rarity.RARE, mage.cards.k.KillSwitch.class));
         cards.add(new SetCardInfo("Kor Haven", 141, Rarity.RARE, mage.cards.k.KorHaven.class));
+        cards.add(new SetCardInfo("Laccolith Grunt", 87, Rarity.COMMON, mage.cards.l.LaccolithGrunt.class));
+        cards.add(new SetCardInfo("Laccolith Rig", 88, Rarity.COMMON, mage.cards.l.LaccolithRig.class));
+        cards.add(new SetCardInfo("Laccolith Titan", 89, Rarity.RARE, mage.cards.l.LaccolithTitan.class));
+        cards.add(new SetCardInfo("Laccolith Warrior", 90, Rarity.UNCOMMON, mage.cards.l.LaccolithWarrior.class));
+        cards.add(new SetCardInfo("Laccolith Whelp", 91, Rarity.COMMON, mage.cards.l.LaccolithWhelp.class));
         cards.add(new SetCardInfo("Lashknife", 9, Rarity.COMMON, mage.cards.l.Lashknife.class));
         cards.add(new SetCardInfo("Lawbringer", 10, Rarity.COMMON, mage.cards.l.Lawbringer.class));
         cards.add(new SetCardInfo("Lightbringer", 11, Rarity.COMMON, mage.cards.l.Lightbringer.class));

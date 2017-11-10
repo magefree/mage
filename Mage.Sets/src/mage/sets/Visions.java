@@ -78,8 +78,10 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Diamond Kaleidoscope", 143, Rarity.RARE, mage.cards.d.DiamondKaleidoscope.class));
         cards.add(new SetCardInfo("Dormant Volcano", 161, Rarity.UNCOMMON, mage.cards.d.DormantVolcano.class));
         cards.add(new SetCardInfo("Dragon Mask", 144, Rarity.UNCOMMON, mage.cards.d.DragonMask.class));
+        cards.add(new SetCardInfo("Dream Tides", 31, Rarity.UNCOMMON, mage.cards.d.DreamTides.class));
         cards.add(new SetCardInfo("Dwarven Vigilantes", 77, Rarity.COMMON, mage.cards.d.DwarvenVigilantes.class));
         cards.add(new SetCardInfo("Elephant Grass", 54, Rarity.UNCOMMON, mage.cards.e.ElephantGrass.class));
+        cards.add(new SetCardInfo("Elkin Lair", 78, Rarity.RARE, mage.cards.e.ElkinLair.class));
         cards.add(new SetCardInfo("Elven Cache", 55, Rarity.COMMON, mage.cards.e.ElvenCache.class));
         cards.add(new SetCardInfo("Emerald Charm", 56, Rarity.COMMON, mage.cards.e.EmeraldCharm.class));
         cards.add(new SetCardInfo("Equipoise", 103, Rarity.RARE, mage.cards.e.Equipoise.class));
@@ -115,7 +117,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("King Cheetah", 60, Rarity.COMMON, mage.cards.k.KingCheetah.class));
         cards.add(new SetCardInfo("Knight of Valor", 111, Rarity.COMMON, mage.cards.k.KnightOfValor.class));
         cards.add(new SetCardInfo("Knight of the Mists", 36, Rarity.COMMON, mage.cards.k.KnightOfTheMists.class));
-        cards.add(new SetCardInfo("Kookus", 85, Rarity.RARE, mage.cards.k.Kookus.class));
+        cards.add(new SetCardInfo("Kookus", 86, Rarity.RARE, mage.cards.k.Kookus.class));
         cards.add(new SetCardInfo("Lead-Belly Chimera", 148, Rarity.UNCOMMON, mage.cards.l.LeadBellyChimera.class));
         cards.add(new SetCardInfo("Lichenthrope", 62, Rarity.RARE, mage.cards.l.Lichenthrope.class));
         cards.add(new SetCardInfo("Lightning Cloud", 87, Rarity.RARE, mage.cards.l.LightningCloud.class));
@@ -147,6 +149,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Resistance Fighter", 118, Rarity.COMMON, mage.cards.r.ResistanceFighter.class));
         cards.add(new SetCardInfo("Retribution of the Meek", 119, Rarity.RARE, mage.cards.r.RetributionOfTheMeek.class));
         cards.add(new SetCardInfo("Righteous Aura", 120, Rarity.COMMON, mage.cards.r.RighteousAura.class));
+        cards.add(new SetCardInfo("Righteous War", 134, Rarity.RARE, mage.cards.r.RighteousWar.class));
         cards.add(new SetCardInfo("River Boa", 68, Rarity.COMMON, mage.cards.r.RiverBoa.class));
         cards.add(new SetCardInfo("Rock Slide", 92, Rarity.COMMON, mage.cards.r.RockSlide.class));
         cards.add(new SetCardInfo("Rowen", 69, Rarity.RARE, mage.cards.r.Rowen.class));
@@ -161,6 +164,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Spitting Drake", 95, Rarity.UNCOMMON, mage.cards.s.SpittingDrake.class));
         cards.add(new SetCardInfo("Squandered Resources", 137, Rarity.RARE, mage.cards.s.SquanderedResources.class));
         cards.add(new SetCardInfo("Stampeding Wildebeests", 71, Rarity.UNCOMMON, mage.cards.s.StampedingWildebeests.class));
+        cards.add(new SetCardInfo("Suleiman's Legacy", 138, Rarity.RARE, mage.cards.s.SuleimansLegacy.class));
         cards.add(new SetCardInfo("Summer Bloom", 72, Rarity.UNCOMMON, mage.cards.s.SummerBloom.class));
         cards.add(new SetCardInfo("Sun Clasp", 121, Rarity.COMMON, mage.cards.s.SunClasp.class));
         cards.add(new SetCardInfo("Suq'Ata Assassin", 19, Rarity.UNCOMMON, mage.cards.s.SuqAtaAssassin.class));

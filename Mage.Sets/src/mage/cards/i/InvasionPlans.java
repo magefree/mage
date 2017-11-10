@@ -37,10 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.players.PlayerList;
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
@@ -71,7 +68,8 @@ public class InvasionPlans extends CardImpl {
 class InvasionPlansEffect extends ContinuousRuleModifyingEffectImpl {
 
     public InvasionPlansEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, true, false);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, false, false);
+        staticText = "The attacking player chooses how each creature blocks each turn";
     }
 
     public InvasionPlansEffect(final InvasionPlansEffect effect) {
@@ -103,4 +101,3 @@ class InvasionPlansEffect extends ContinuousRuleModifyingEffectImpl {
         return false;
     }
 }
-

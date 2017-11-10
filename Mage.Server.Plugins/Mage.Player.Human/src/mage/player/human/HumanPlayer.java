@@ -53,6 +53,7 @@ import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.game.GameImpl;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
 import mage.game.events.GameEvent;
@@ -186,13 +187,27 @@ public class HumanPlayer extends PlayerImpl {
         response.clear();
         logger.debug("Waiting response from player: " + getId());
         game.resumeTimer(getTurnControlledBy());
-        synchronized (response) {
-            try {
-                response.wait();
-            } catch (InterruptedException ex) {
-                logger.error("Response error for player " + getName() + " gameId: " + game.getId(), ex);
-            } finally {
-                game.pauseTimer(getTurnControlledBy());
+        boolean loop = true;
+        while (loop) {
+            loop = false;
+            synchronized (response) {
+                try {
+                    response.wait();
+                } catch (InterruptedException ex) {
+                    logger.error("Response error for player " + getName() + " gameId: " + game.getId(), ex);
+                } finally {
+                    game.pauseTimer(getTurnControlledBy());
+                }
+            }
+            if (response.getResponseConcedeCheck()) {
+                ((GameImpl) game).checkConcede();
+                if (game.hasEnded()) {
+                    return;
+                }
+                response.clear();
+                if (isInGame()) {
+                    loop = true;
+                }
             }
         }
         if (recordingMacro && !macroTriggeredSelectionFlag) {
@@ -1703,6 +1718,15 @@ public class HumanPlayer extends PlayerImpl {
         synchronized (response) {
             response.notifyAll();
             logger.debug("Got cancel action from player: " + getId());
+        }
+    }
+
+    @Override
+    public void signalPlayerConcede() {
+        synchronized (response) {
+            response.setResponseConcedeCheck();
+            response.notifyAll();
+            logger.debug("Set check concede for waiting player: " + getId());
         }
     }
 

@@ -68,6 +68,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Cao Cao, Lord of Wei", 68, Rarity.RARE, mage.cards.c.CaoCaoLordOfWei.class));
         cards.add(new SetCardInfo("Cao Ren, Wei Commander", 69, Rarity.RARE, mage.cards.c.CaoRenWeiCommander.class));
         cards.add(new SetCardInfo("Capture of Jingzhou", 38, Rarity.RARE, mage.cards.c.CaptureOfJingzhou.class));
+        cards.add(new SetCardInfo("Champion's Victory", 39, Rarity.UNCOMMON, mage.cards.c.ChampionsVictory.class));
         cards.add(new SetCardInfo("Coercion", 70, Rarity.UNCOMMON, mage.cards.c.Coercion.class));
         cards.add(new SetCardInfo("Control of the Court", 105, Rarity.UNCOMMON, mage.cards.c.ControlOfTheCourt.class));
         cards.add(new SetCardInfo("Corrupt Court Official", 71, Rarity.UNCOMMON, mage.cards.c.CorruptCourtOfficial.class));
@@ -80,6 +81,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Desperate Charge", 74, Rarity.UNCOMMON, mage.cards.d.DesperateCharge.class));
         cards.add(new SetCardInfo("Diaochan, Artful Beauty", 108, Rarity.RARE, mage.cards.d.DiaochanArtfulBeauty.class));
         cards.add(new SetCardInfo("Dong Zhou, the Tyrant", 109, Rarity.RARE, mage.cards.d.DongZhouTheTyrant.class));
+        cards.add(new SetCardInfo("Eightfold Maze", 2, Rarity.RARE, mage.cards.e.EightfoldMaze.class));
         cards.add(new SetCardInfo("Empty City Ruse", 3, Rarity.UNCOMMON, mage.cards.e.EmptyCityRuse.class));
         cards.add(new SetCardInfo("Exhaustion", 42, Rarity.RARE, mage.cards.e.Exhaustion.class));
         cards.add(new SetCardInfo("Extinguish", 43, Rarity.COMMON, mage.cards.e.Extinguish.class));
@@ -100,6 +102,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Huang Zhong, Shu General", 8, Rarity.RARE, mage.cards.h.HuangZhongShuGeneral.class));
         cards.add(new SetCardInfo("Hua Tuo, Honored Physician", 137, Rarity.RARE, mage.cards.h.HuaTuoHonoredPhysician.class));
         cards.add(new SetCardInfo("Hunting Cheetah", 138, Rarity.UNCOMMON, mage.cards.h.HuntingCheetah.class));
+        cards.add(new SetCardInfo("Imperial Edict", 77, Rarity.COMMON, mage.cards.i.ImperialEdict.class));
         cards.add(new SetCardInfo("Imperial Recruiter", 113, Rarity.UNCOMMON, mage.cards.i.ImperialRecruiter.class));
         cards.add(new SetCardInfo("Imperial Seal", 78, Rarity.RARE, mage.cards.i.ImperialSeal.class));
         cards.add(new SetCardInfo("Independent Troops", 114, Rarity.COMMON, mage.cards.i.IndependentTroops.class));
@@ -134,6 +137,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 168, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Poison Arrow", 80, Rarity.UNCOMMON, mage.cards.p.PoisonArrow.class));
         cards.add(new SetCardInfo("Preemptive Strike", 50, Rarity.COMMON, mage.cards.p.PreemptiveStrike.class));
+        cards.add(new SetCardInfo("Rally the Troops", 16, Rarity.UNCOMMON, mage.cards.r.RallyTheTroops.class));
         cards.add(new SetCardInfo("Ravages of War", 17, Rarity.RARE, mage.cards.r.RavagesOfWar.class));
         cards.add(new SetCardInfo("Ravaging Horde", 118, Rarity.UNCOMMON, mage.cards.r.RavagingHorde.class));
         cards.add(new SetCardInfo("Red Cliffs Armada", 51, Rarity.UNCOMMON, mage.cards.r.RedCliffsArmada.class));
@@ -182,6 +186,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Volunteer Militia", 30, Rarity.COMMON, mage.cards.v.VolunteerMilitia.class));
         cards.add(new SetCardInfo("Warrior's Oath", 124, Rarity.RARE, mage.cards.w.WarriorsOath.class));
         cards.add(new SetCardInfo("Wei Ambush Force", 85, Rarity.COMMON, mage.cards.w.WeiAmbushForce.class));
+        cards.add(new SetCardInfo("Wei Assassins", 86, Rarity.UNCOMMON, mage.cards.w.WeiAssassins.class));
         cards.add(new SetCardInfo("Wei Elite Companions", 87, Rarity.UNCOMMON, mage.cards.w.WeiEliteCompanions.class));
         cards.add(new SetCardInfo("Wei Infantry", 88, Rarity.COMMON, mage.cards.w.WeiInfantry.class));
         cards.add(new SetCardInfo("Wei Night Raiders", 89, Rarity.UNCOMMON, mage.cards.w.WeiNightRaiders.class));

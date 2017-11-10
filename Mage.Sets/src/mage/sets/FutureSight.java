@@ -188,6 +188,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Seht's Tiger", 31, Rarity.RARE, mage.cards.s.SehtsTiger.class));
         cards.add(new SetCardInfo("Shapeshifter's Marrow", 58, Rarity.RARE, mage.cards.s.ShapeshiftersMarrow.class));
         cards.add(new SetCardInfo("Shimian Specter", 76, Rarity.RARE, mage.cards.s.ShimianSpecter.class));
+        cards.add(new SetCardInfo("Shivan Sand-Mage", 108, Rarity.UNCOMMON, mage.cards.s.ShivanSandMage.class));
         cards.add(new SetCardInfo("Skirk Ridge Exhumer", 77, Rarity.UNCOMMON, mage.cards.s.SkirkRidgeExhumer.class));
         cards.add(new SetCardInfo("Skizzik Surger", 120, Rarity.UNCOMMON, mage.cards.s.SkizzikSurger.class));
         cards.add(new SetCardInfo("Slaughter Pact", 78, Rarity.RARE, mage.cards.s.SlaughterPact.class));

@@ -83,10 +83,12 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Diving Griffin", 6, Rarity.COMMON, mage.cards.d.DivingGriffin.class));
         cards.add(new SetCardInfo("Dual Nature", 112, Rarity.RARE, mage.cards.d.DualNature.class));
         cards.add(new SetCardInfo("Elephant Resurgence", 113, Rarity.RARE, mage.cards.e.ElephantResurgence.class));
+        cards.add(new SetCardInfo("Endbringer's Revel", 63, Rarity.UNCOMMON, mage.cards.e.EndbringersRevel.class));
         cards.add(new SetCardInfo("Entangler", 7, Rarity.UNCOMMON, mage.cards.e.Entangler.class));
         cards.add(new SetCardInfo("Excavation", 33, Rarity.UNCOMMON, mage.cards.e.Excavation.class));
         cards.add(new SetCardInfo("Fault Riders", 88, Rarity.COMMON, mage.cards.f.FaultRiders.class));
         cards.add(new SetCardInfo("Fen Stalker", 64, Rarity.COMMON, mage.cards.f.FenStalker.class));
+        cards.add(new SetCardInfo("Fickle Efreet", 89, Rarity.RARE, mage.cards.f.FickleEfreet.class));
         cards.add(new SetCardInfo("Flameshot", 90, Rarity.UNCOMMON, mage.cards.f.Flameshot.class));
         cards.add(new SetCardInfo("Flowering Field", 9, Rarity.UNCOMMON, mage.cards.f.FloweringField.class));
         cards.add(new SetCardInfo("Foil", 34, Rarity.UNCOMMON, mage.cards.f.Foil.class));
@@ -105,6 +107,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Keldon Berserker", 93, Rarity.COMMON, mage.cards.k.KeldonBerserker.class));
         cards.add(new SetCardInfo("Keldon Firebombers", 94, Rarity.RARE, mage.cards.k.KeldonFirebombers.class));
         cards.add(new SetCardInfo("Latulla, Keldon Overseer", 95, Rarity.RARE, mage.cards.l.LatullaKeldonOverseer.class));
+        cards.add(new SetCardInfo("Latulla's Orders", 96, Rarity.COMMON, mage.cards.l.LatullasOrders.class));
         cards.add(new SetCardInfo("Lesser Gargadon", 97, Rarity.UNCOMMON, mage.cards.l.LesserGargadon.class));
         cards.add(new SetCardInfo("Living Terrain", 117, Rarity.UNCOMMON, mage.cards.l.LivingTerrain.class));
         cards.add(new SetCardInfo("Mageta's Boon", 14, Rarity.COMMON, mage.cards.m.MagetasBoon.class));
@@ -128,6 +131,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Rebel Informer", 75, Rarity.RARE, mage.cards.r.RebelInformer.class));
         cards.add(new SetCardInfo("Rethink", 42, Rarity.COMMON, mage.cards.r.Rethink.class));
         cards.add(new SetCardInfo("Reveille Squad", 18, Rarity.UNCOMMON, mage.cards.r.ReveilleSquad.class));
+        cards.add(new SetCardInfo("Rhystic Cave", 142, Rarity.UNCOMMON, mage.cards.r.RhysticCave.class));
         cards.add(new SetCardInfo("Rhystic Circle", 19, Rarity.COMMON, mage.cards.r.RhysticCircle.class));
         cards.add(new SetCardInfo("Rhystic Study", 45, Rarity.COMMON, mage.cards.r.RhysticStudy.class));
         cards.add(new SetCardInfo("Rhystic Tutor", 77, Rarity.RARE, mage.cards.r.RhysticTutor.class));

@@ -127,7 +127,7 @@ public class Turn implements Serializable {
     public boolean play(Game game, Player activePlayer) {
         activePlayer.becomesActivePlayer();
         this.setDeclareAttackersStepStarted(false);
-        if (game.isPaused() || game.gameOver(null)) {
+        if (game.isPaused() || game.checkIfGameIsOver()) {
             return false;
         }
 
@@ -143,7 +143,7 @@ public class Turn implements Serializable {
         resetCounts();
         game.getPlayer(activePlayer.getId()).beginTurn(game);
         for (Phase phase : phases) {
-            if (game.isPaused() || game.gameOver(null)) {
+            if (game.isPaused() || game.checkIfGameIsOver()) {
                 return false;
             }
             if (!isEndTurnRequested() || phase.getType() == TurnPhase.END) {
@@ -189,7 +189,7 @@ public class Turn implements Serializable {
         }
         while (it.hasNext()) {
             phase = it.next();
-            if (game.isPaused() || game.gameOver(null)) {
+            if (game.isPaused() || game.checkIfGameIsOver()) {
                 return;
             }
             currentPhase = phase;

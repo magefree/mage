@@ -89,6 +89,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean controlledFromStartOfControllerTurn;
     protected int turnsOnBattlefield;
     protected boolean phasedIn = true;
+    protected boolean indirectPhase = false;
     protected boolean faceDown;
     protected boolean attacking;
     protected int blocking;
@@ -138,6 +139,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.controlledFromStartOfControllerTurn = permanent.controlledFromStartOfControllerTurn;
         this.turnsOnBattlefield = permanent.turnsOnBattlefield;
         this.phasedIn = permanent.phasedIn;
+        this.indirectPhase = permanent.indirectPhase;
         this.faceDown = permanent.faceDown;
         this.attacking = permanent.attacking;
         this.blocking = permanent.blocking;
@@ -462,12 +464,30 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public boolean isPhasedOutIndirectly() {
+        return !phasedIn && indirectPhase;
+    }
+
+    @Override
     public boolean phaseIn(Game game) {
+        return phaseIn(game, true);
+    }
+
+    @Override
+    public boolean phaseIn(Game game, boolean onlyDirect) {
         if (!phasedIn) {
-            if (!replaceEvent(EventType.PHASE_IN, game)) {
+            if (!replaceEvent(EventType.PHASE_IN, game)
+                    && ((onlyDirect && !indirectPhase) || (!onlyDirect))) {
                 this.phasedIn = true;
+                this.indirectPhase = false;
                 if (!game.isSimulation()) {
                     game.informPlayers(getLogName() + " phased in");
+                }
+                for (UUID attachedId : this.getAttachments()) {
+                    Permanent attachedPerm = game.getPermanent(attachedId);
+                    if (attachedPerm != null) {
+                        attachedPerm.phaseIn(game, false);
+                    }
                 }
                 fireEvent(EventType.PHASED_IN, game);
                 return true;
@@ -478,9 +498,21 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean phaseOut(Game game) {
+        return phaseOut(game, false);
+    }
+
+    @Override
+    public boolean phaseOut(Game game, boolean indirectPhase) {
         if (phasedIn) {
             if (!replaceEvent(EventType.PHASE_OUT, game)) {
+                for (UUID attachedId : this.getAttachments()) {
+                    Permanent attachedPerm = game.getPermanent(attachedId);
+                    if (attachedPerm != null) {
+                        attachedPerm.phaseOut(game, true);
+                    }
+                }
                 this.phasedIn = false;
+                this.indirectPhase = indirectPhase;
                 if (!game.isSimulation()) {
                     game.informPlayers(getLogName() + " phased out");
                 }

@@ -42,12 +42,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.FilterCreatureAttackingYou;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -55,7 +53,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class SnowFortress extends CardImpl {
 
-    private static final SnowFortressFilter filter = new SnowFortressFilter();
+    private static final FilterCreatureAttackingYou filter = new FilterCreatureAttackingYou("creature without flying that's attacking you");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
@@ -79,7 +77,7 @@ public class SnowFortress extends CardImpl {
 
         // {3}: Snow Fortress deals 1 damage to target creature without flying that's attacking you.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(3));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
@@ -90,28 +88,5 @@ public class SnowFortress extends CardImpl {
     @Override
     public SnowFortress copy() {
         return new SnowFortress(this);
-    }
-}
-
-class SnowFortressFilter extends FilterAttackingCreature {
-
-    public SnowFortressFilter() {
-        super("creature without flying that's attacking you");
-    }
-
-    public SnowFortressFilter(final SnowFortressFilter filter) {
-        super(filter);
-    }
-
-    @Override
-    public SnowFortressFilter copy() {
-        return new SnowFortressFilter(this);
-    }
-
-    @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        return super.match(permanent, sourceId, playerId, game)
-                && permanent.isAttacking() // to prevent unneccessary combat checking if not attacking
-                && playerId.equals(game.getCombat().getDefenderId(permanent.getId()));
     }
 }

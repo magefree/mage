@@ -151,6 +151,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Glacial Chasm", 331, Rarity.UNCOMMON, mage.cards.g.GlacialChasm.class));
         cards.add(new SetCardInfo("Glacial Crevasses", 187, Rarity.RARE, mage.cards.g.GlacialCrevasses.class));
         cards.add(new SetCardInfo("Glacial Wall", 71, Rarity.UNCOMMON, mage.cards.g.GlacialWall.class));
+        cards.add(new SetCardInfo("Goblin Lyre", 294, Rarity.RARE, mage.cards.g.GoblinLyre.class));
         cards.add(new SetCardInfo("Goblin Mutant", 188, Rarity.UNCOMMON, mage.cards.g.GoblinMutant.class));
         cards.add(new SetCardInfo("Goblin Snowman", 191, Rarity.UNCOMMON, mage.cards.g.GoblinSnowman.class));
         cards.add(new SetCardInfo("Gorilla Pack", 135, Rarity.COMMON, mage.cards.g.GorillaPack.class));
@@ -167,6 +168,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Hyalopterous Lemure", 21, Rarity.UNCOMMON, mage.cards.h.HyalopterousLemure.class));
         cards.add(new SetCardInfo("Hydroblast", 72, Rarity.COMMON, mage.cards.h.Hydroblast.class));
         cards.add(new SetCardInfo("Hymn of Rebirth", 373, Rarity.UNCOMMON, mage.cards.h.HymnOfRebirth.class));
+        cards.add(new SetCardInfo("Ice Floe", 333, Rarity.UNCOMMON, mage.cards.i.IceFloe.class));
         cards.add(new SetCardInfo("Iceberg", 73, Rarity.UNCOMMON, mage.cards.i.Iceberg.class));
         cards.add(new SetCardInfo("Icequake", 22, Rarity.UNCOMMON, mage.cards.i.Icequake.class));
         cards.add(new SetCardInfo("Icy Manipulator", 297, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
@@ -211,6 +213,8 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Magus of the Unseen", 82, Rarity.RARE, mage.cards.m.MagusOfTheUnseen.class));
         cards.add(new SetCardInfo("Malachite Talisman", 303, Rarity.UNCOMMON, mage.cards.m.MalachiteTalisman.class));
         cards.add(new SetCardInfo("Marton Stromgald", 199, Rarity.RARE, mage.cards.m.MartonStromgald.class));
+        cards.add(new SetCardInfo("Melee", 200, Rarity.UNCOMMON, mage.cards.m.Melee.class));
+        cards.add(new SetCardInfo("Melting", 201, Rarity.UNCOMMON, mage.cards.m.Melting.class));
         cards.add(new SetCardInfo("Merieke Ri Berit", 375, Rarity.RARE, mage.cards.m.MeriekeRiBerit.class));
         cards.add(new SetCardInfo("Mesmeric Trance", 83, Rarity.RARE, mage.cards.m.MesmericTrance.class));
         cards.add(new SetCardInfo("Meteor Shower", 202, Rarity.COMMON, mage.cards.m.MeteorShower.class));
@@ -231,6 +235,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Naked Singularity", 305, Rarity.RARE, mage.cards.n.NakedSingularity.class));
         cards.add(new SetCardInfo("Nature's Lore", 143, Rarity.UNCOMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Necropotence", 42, Rarity.RARE, mage.cards.n.Necropotence.class));
+        cards.add(new SetCardInfo("Norritt", 43, Rarity.COMMON, mage.cards.n.Norritt.class));
         cards.add(new SetCardInfo("Onyx Talisman", 306, Rarity.UNCOMMON, mage.cards.o.OnyxTalisman.class));
         cards.add(new SetCardInfo("Orcish Cannoneers", 205, Rarity.UNCOMMON, mage.cards.o.OrcishCannoneers.class));
         cards.add(new SetCardInfo("Orcish Healer", 208, Rarity.UNCOMMON, mage.cards.o.OrcishHealer.class));
@@ -251,6 +256,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Portent", 90, Rarity.COMMON, mage.cards.p.Portent.class));
         cards.add(new SetCardInfo("Power Sink", 91, Rarity.COMMON, mage.cards.p.PowerSink.class));
         cards.add(new SetCardInfo("Pox", 46, Rarity.RARE, mage.cards.p.Pox.class));
+        cards.add(new SetCardInfo("Prismatic Ward", 271, Rarity.COMMON, mage.cards.p.PrismaticWard.class));
         cards.add(new SetCardInfo("Pygmy Allosaurus", 145, Rarity.RARE, mage.cards.p.PygmyAllosaurus.class));
         cards.add(new SetCardInfo("Pyknite", 146, Rarity.COMMON, mage.cards.p.Pyknite.class));
         cards.add(new SetCardInfo("Pyroblast", 213, Rarity.COMMON, mage.cards.p.Pyroblast.class));
@@ -272,6 +278,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Shambling Strider", 151, Rarity.COMMON, mage.cards.s.ShamblingStrider.class));
         cards.add(new SetCardInfo("Shatter", 216, Rarity.COMMON, mage.cards.s.Shatter.class));
         cards.add(new SetCardInfo("Shield of the Ages", 310, Rarity.UNCOMMON, mage.cards.s.ShieldOfTheAges.class));
+        cards.add(new SetCardInfo("Shyft", 96, Rarity.RARE, mage.cards.s.Shyft.class));
         cards.add(new SetCardInfo("Sibilant Spirit", 97, Rarity.RARE, mage.cards.s.SibilantSpirit.class));
         cards.add(new SetCardInfo("Silver Erne", 98, Rarity.UNCOMMON, mage.cards.s.SilverErne.class));
         cards.add(new SetCardInfo("Skeleton Ship", 379, Rarity.RARE, mage.cards.s.SkeletonShip.class));
@@ -313,6 +320,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Time Bomb", 317, Rarity.RARE, mage.cards.t.TimeBomb.class));
         cards.add(new SetCardInfo("Tinder Wall", 158, Rarity.COMMON, mage.cards.t.TinderWall.class));
         cards.add(new SetCardInfo("Tor Giant", 220, Rarity.COMMON, mage.cards.t.TorGiant.class));
+        cards.add(new SetCardInfo("Total War", 221, Rarity.RARE, mage.cards.t.TotalWar.class));
         cards.add(new SetCardInfo("Touch of Death", 55, Rarity.COMMON, mage.cards.t.TouchOfDeath.class));
         cards.add(new SetCardInfo("Trailblazer", 160, Rarity.RARE, mage.cards.t.Trailblazer.class));
         cards.add(new SetCardInfo("Underground River", 357, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
@@ -320,6 +328,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Bauble", 318, Rarity.UNCOMMON, mage.cards.u.UrzasBauble.class));
         cards.add(new SetCardInfo("Veldt", 358, Rarity.RARE, mage.cards.v.Veldt.class));
         cards.add(new SetCardInfo("Vertigo", 222, Rarity.UNCOMMON, mage.cards.v.Vertigo.class));
+        cards.add(new SetCardInfo("Vexing Arcanix", 319, Rarity.RARE, mage.cards.v.VexingArcanix.class));
         cards.add(new SetCardInfo("Vibrating Sphere", 320, Rarity.RARE, mage.cards.v.VibratingSphere.class));
         cards.add(new SetCardInfo("Walking Wall", 321, Rarity.UNCOMMON, mage.cards.w.WalkingWall.class));
         cards.add(new SetCardInfo("Wall of Lava", 223, Rarity.UNCOMMON, mage.cards.w.WallOfLava.class));

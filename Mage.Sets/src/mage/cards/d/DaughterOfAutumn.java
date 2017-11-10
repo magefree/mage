@@ -45,6 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -71,7 +72,6 @@ public class DaughterOfAutumn extends CardImpl {
         // {W}: The next 1 damage that would be dealt to target white creature this turn is dealt to Daughter of Autumn instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DaughterOfAutumnPreventDamageTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{W}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
     }
 
     public DaughterOfAutumn(final DaughterOfAutumn card) {
@@ -85,6 +85,8 @@ public class DaughterOfAutumn extends CardImpl {
 }
 
 class DaughterOfAutumnPreventDamageTargetEffect extends RedirectionEffect {
+
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public DaughterOfAutumnPreventDamageTargetEffect(Duration duration, int amount) {
         super(duration, amount, true);
@@ -102,13 +104,19 @@ class DaughterOfAutumnPreventDamageTargetEffect extends RedirectionEffect {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
-            TargetPermanent target = new TargetPermanent();
-            target.add(source.getSourceId(), game);
-            redirectTarget = target;
-            return true;
+        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        if (permanent != null) {
+            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
+                if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
+                    if (event.getTargetId() != null) {
+                        TargetPermanent target = new TargetPermanent();
+                        target.add(source.getSourceId(), game);
+                        redirectTarget = target;
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
-
 }

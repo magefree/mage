@@ -116,6 +116,7 @@ public class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Frozen Solid", 36, Rarity.COMMON, mage.cards.f.FrozenSolid.class));
         cards.add(new SetCardInfo("Gilded Light", 16, Rarity.UNCOMMON, mage.cards.g.GildedLight.class));
         cards.add(new SetCardInfo("Goblin Brigand", 94, Rarity.COMMON, mage.cards.g.GoblinBrigand.class));
+        cards.add(new SetCardInfo("Goblin Psychopath", 95, Rarity.UNCOMMON, mage.cards.g.GoblinPsychopath.class));
         cards.add(new SetCardInfo("Goblin Warchief", 97, Rarity.UNCOMMON, mage.cards.g.GoblinWarchief.class));
         cards.add(new SetCardInfo("Goblin War Strike", 96, Rarity.COMMON, mage.cards.g.GoblinWarStrike.class));
         cards.add(new SetCardInfo("Grip of Chaos", 98, Rarity.RARE, mage.cards.g.GripOfChaos.class));

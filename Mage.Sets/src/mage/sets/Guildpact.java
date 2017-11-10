@@ -73,6 +73,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Crash Landing", 82, Rarity.UNCOMMON, mage.cards.c.CrashLanding.class));
         cards.add(new SetCardInfo("Cremate", 45, Rarity.COMMON, mage.cards.c.Cremate.class));
         cards.add(new SetCardInfo("Cry of Contrition", 46, Rarity.COMMON, mage.cards.c.CryOfContrition.class));
+        cards.add(new SetCardInfo("Cryptwailing", 47, Rarity.UNCOMMON, mage.cards.c.Cryptwailing.class));
         cards.add(new SetCardInfo("Crystal Seer", 23, Rarity.UNCOMMON, mage.cards.c.CrystalSeer.class));
         cards.add(new SetCardInfo("Culling Sun", 109, Rarity.RARE, mage.cards.c.CullingSun.class));
         cards.add(new SetCardInfo("Daggerclaw Imp", 48, Rarity.UNCOMMON, mage.cards.d.DaggerclawImp.class));
@@ -129,6 +130,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Leyline of the Meek", 10, Rarity.RARE, mage.cards.l.LeylineOfTheMeek.class));
         cards.add(new SetCardInfo("Leyline of the Void", 52, Rarity.RARE, mage.cards.l.LeylineOfTheVoid.class));
         cards.add(new SetCardInfo("Lionheart Maverick", 11, Rarity.COMMON, mage.cards.l.LionheartMaverick.class));
+        cards.add(new SetCardInfo("Living Inferno", 69, Rarity.RARE, mage.cards.l.LivingInferno.class));
         cards.add(new SetCardInfo("Martyred Rusalka", 12, Rarity.UNCOMMON, mage.cards.m.MartyredRusalka.class));
         cards.add(new SetCardInfo("Mimeofacture", 30, Rarity.RARE, mage.cards.m.Mimeofacture.class));
         cards.add(new SetCardInfo("Mizzium Transreliquat", 153, Rarity.RARE, mage.cards.m.MizziumTransreliquat.class));

@@ -103,6 +103,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Disharmony", 95, Rarity.UNCOMMON, mage.cards.d.Disharmony.class));
         cards.add(new SetCardInfo("Divine Intervention", 8, Rarity.RARE, mage.cards.d.DivineIntervention.class));
         cards.add(new SetCardInfo("Dong Zhou, the Tyrant", 96, Rarity.RARE, mage.cards.d.DongZhouTheTyrant.class));
+        cards.add(new SetCardInfo("Eightfold Maze", 9, Rarity.UNCOMMON, mage.cards.e.EightfoldMaze.class));
         cards.add(new SetCardInfo("Elves of Deep Shadow", 116, Rarity.COMMON, mage.cards.e.ElvesOfDeepShadow.class));
         cards.add(new SetCardInfo("Evil Presence", 64, Rarity.COMMON, mage.cards.e.EvilPresence.class));
         cards.add(new SetCardInfo("Exorcist", 10, Rarity.UNCOMMON, mage.cards.e.Exorcist.class));
@@ -182,6 +183,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 227, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nether Void", 73, Rarity.RARE, mage.cards.n.NetherVoid.class));
         cards.add(new SetCardInfo("Nicol Bolas", 163, Rarity.RARE, mage.cards.n.NicolBolas.class));
+        cards.add(new SetCardInfo("Nova Pentacle", 200, Rarity.RARE, mage.cards.n.NovaPentacle.class));
         cards.add(new SetCardInfo("Old Man of the Sea", 45, Rarity.RARE, mage.cards.o.OldManOfTheSea.class));
         cards.add(new SetCardInfo("Palladia-Mors", 164, Rarity.RARE, mage.cards.p.PalladiaMors.class));
         cards.add(new SetCardInfo("Pavel Maliki", 165, Rarity.UNCOMMON, mage.cards.p.PavelMaliki.class));

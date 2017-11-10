@@ -105,6 +105,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Marsh Gas", 10, Rarity.COMMON, mage.cards.m.MarshGas.class));
         cards.add(new SetCardInfo("Marsh Goblins", 118, Rarity.COMMON, mage.cards.m.MarshGoblins.class));
         cards.add(new SetCardInfo("Marsh Viper", 44, Rarity.COMMON, mage.cards.m.MarshViper.class));
+        cards.add(new SetCardInfo("Martyr's Cry", 85, Rarity.RARE, mage.cards.m.MartyrsCry.class));
         cards.add(new SetCardInfo("Maze of Ith", 114, Rarity.UNCOMMON, mage.cards.m.MazeOfIth.class));
         cards.add(new SetCardInfo("Merfolk Assassin", 31, Rarity.UNCOMMON, mage.cards.m.MerfolkAssassin.class));
         cards.add(new SetCardInfo("Mind Bomb", 32, Rarity.RARE, mage.cards.m.MindBomb.class));
@@ -123,6 +124,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Scarwood Goblins", 119, Rarity.COMMON, mage.cards.s.ScarwoodGoblins.class));
         cards.add(new SetCardInfo("Scarwood Hag", 49, Rarity.UNCOMMON, mage.cards.s.ScarwoodHag.class));
         cards.add(new SetCardInfo("Scavenger Folk", 50, Rarity.COMMON, mage.cards.s.ScavengerFolk.class));
+        cards.add(new SetCardInfo("Season of the Witch", 14, Rarity.RARE, mage.cards.s.SeasonOfTheWitch.class));
         cards.add(new SetCardInfo("Sisters of the Flame", 73, Rarity.UNCOMMON, mage.cards.s.SistersOfTheFlame.class));
         cards.add(new SetCardInfo("Skull of Orm", 106, Rarity.UNCOMMON, mage.cards.s.SkullOfOrm.class));
         cards.add(new SetCardInfo("Squire", 90, Rarity.COMMON, mage.cards.s.Squire.class));

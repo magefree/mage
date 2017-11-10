@@ -184,8 +184,10 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Halberdier", 196, Rarity.COMMON, mage.cards.h.Halberdier.class));
         cards.add(new SetCardInfo("Hallowed Healer", 25, Rarity.COMMON, mage.cards.h.HallowedHealer.class));
         cards.add(new SetCardInfo("Haunting Echoes", 142, Rarity.RARE, mage.cards.h.HauntingEchoes.class));
+        cards.add(new SetCardInfo("Holistic Wisdom", 243, Rarity.RARE, mage.cards.h.HolisticWisdom.class));
         cards.add(new SetCardInfo("Howling Gale", 244, Rarity.UNCOMMON, mage.cards.h.HowlingGale.class));
         cards.add(new SetCardInfo("Immobilizing Ink", 87, Rarity.COMMON, mage.cards.i.ImmobilizingInk.class));
+        cards.add(new SetCardInfo("Impulsive Maneuvers", 197, Rarity.RARE, mage.cards.i.ImpulsiveManeuvers.class));
         cards.add(new SetCardInfo("Infected Vermin", 144, Rarity.UNCOMMON, mage.cards.i.InfectedVermin.class));
         cards.add(new SetCardInfo("Innocent Blood", 145, Rarity.COMMON, mage.cards.i.InnocentBlood.class));
         cards.add(new SetCardInfo("Iridescent Angel", 288, Rarity.RARE, mage.cards.i.IridescentAngel.class));
@@ -261,6 +263,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Patriarch's Desire", 156, Rarity.COMMON, mage.cards.p.PatriarchsDesire.class));
         cards.add(new SetCardInfo("Patrol Hound", 38, Rarity.COMMON, mage.cards.p.PatrolHound.class));
         cards.add(new SetCardInfo("Patron Wizard", 89, Rarity.RARE, mage.cards.p.PatronWizard.class));
+        cards.add(new SetCardInfo("Pedantic Learning", 90, Rarity.RARE, mage.cards.p.PedanticLearning.class));
         cards.add(new SetCardInfo("Peek", 91, Rarity.COMMON, mage.cards.p.Peek.class));
         cards.add(new SetCardInfo("Persuasion", 92, Rarity.RARE, mage.cards.p.Persuasion.class));
         cards.add(new SetCardInfo("Petrified Field", 323, Rarity.RARE, mage.cards.p.PetrifiedField.class));
@@ -273,6 +276,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Phantom Whelp", 93, Rarity.COMMON, mage.cards.p.PhantomWhelp.class));
         cards.add(new SetCardInfo("Predict", 94, Rarity.UNCOMMON, mage.cards.p.Predict.class));
         cards.add(new SetCardInfo("Price of Glory", 214, Rarity.UNCOMMON, mage.cards.p.PriceOfGlory.class));
         cards.add(new SetCardInfo("Primal Frenzy", 262, Rarity.COMMON, mage.cards.p.PrimalFrenzy.class));
@@ -332,6 +336,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Squirrel Nest", 274, Rarity.UNCOMMON, mage.cards.s.SquirrelNest.class));
         cards.add(new SetCardInfo("Stalking Bloodsucker", 163, Rarity.RARE, mage.cards.s.StalkingBloodsucker.class));
         cards.add(new SetCardInfo("Standstill", 102, Rarity.UNCOMMON, mage.cards.s.Standstill.class));
+        cards.add(new SetCardInfo("Steam Vines", 223, Rarity.UNCOMMON, mage.cards.s.SteamVines.class));
         cards.add(new SetCardInfo("Steamclaw", 310, Rarity.UNCOMMON, mage.cards.s.Steamclaw.class));
         cards.add(new SetCardInfo("Still Life", 275, Rarity.UNCOMMON, mage.cards.s.StillLife.class));
         cards.add(new SetCardInfo("Stone-Tongue Basilisk", 276, Rarity.RARE, mage.cards.s.StoneTongueBasilisk.class));
