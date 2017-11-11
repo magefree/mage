@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 public class PsychicPurge extends CardImpl {
 
     public PsychicPurge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
         // Psychic Purge deals 1 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
