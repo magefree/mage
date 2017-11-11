@@ -144,6 +144,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Earthquake", 223, Rarity.RARE, mage.cards.e.Earthquake.class));
         cards.add(new SetCardInfo("Ebon Stronghold", 416, Rarity.UNCOMMON, mage.cards.e.EbonStronghold.class));
         cards.add(new SetCardInfo("Elder Druid", 152, Rarity.RARE, mage.cards.e.ElderDruid.class));
+        cards.add(new SetCardInfo("Elkin Bottle", 367, Rarity.RARE, mage.cards.e.ElkinBottle.class));
         cards.add(new SetCardInfo("Elven Riders", 153, Rarity.UNCOMMON, mage.cards.e.ElvenRiders.class));
         cards.add(new SetCardInfo("Elvish Archers", 154, Rarity.RARE, mage.cards.e.ElvishArchers.class));
         cards.add(new SetCardInfo("Energy Flux", 83, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));
@@ -328,6 +329,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Pradesh Gypsies", 179, Rarity.COMMON, mage.cards.p.PradeshGypsies.class));
         cards.add(new SetCardInfo("Primal Clay", 395, Rarity.RARE, mage.cards.p.PrimalClay.class));
         cards.add(new SetCardInfo("Primal Order", 180, Rarity.RARE, mage.cards.p.PrimalOrder.class));
+        cards.add(new SetCardInfo("Primordial Ooze", 261, Rarity.UNCOMMON, mage.cards.p.PrimordialOoze.class));
         cards.add(new SetCardInfo("Prismatic Ward", 329, Rarity.COMMON, mage.cards.p.PrismaticWard.class));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 112, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));
         cards.add(new SetCardInfo("Psychic Venom", 113, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
