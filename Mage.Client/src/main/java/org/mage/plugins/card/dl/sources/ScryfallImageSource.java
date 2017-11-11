@@ -214,10 +214,18 @@ public enum ScryfallImageSource implements CardImageSource {
 
     @Override
     public String generateURL(CardDownloadData card) throws Exception {
-        return "https://api.scryfall.com/cards/" + formatSetName(card.getSet()) + "/"
-                + card.getCollectorId()
-                + (card.isSecondSide() ? "b" : "")
-                + "?format=image";
+
+        if (card.isTwoFacedCard()) {
+            // double faced cards do not supporte by API (need direct link for img)
+            // example: https://img.scryfall.com/cards/large/en/xln/173b.jpg
+            return "https://img.scryfall.com/cards/large/en/" + formatSetName(card.getSet()) + "/"
+                    + card.getCollectorId() + (card.isSecondSide() ? "b" : "a") + ".jpg";
+        }else {
+            // single face cards support by single API call (redirect to img link)
+            // example: https://api.scryfall.com/cards/xln/121?format=image
+            return "https://api.scryfall.com/cards/" + formatSetName(card.getSet()) + "/"
+                    + card.getCollectorId() + "?format=image";
+        }
     }
 
     @Override
