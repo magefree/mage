@@ -27,15 +27,10 @@
  */
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -43,6 +38,11 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *
@@ -105,7 +105,7 @@ class SignalTheClansEffect extends SearchEffect {
                 player.revealCards("Reveal", cards, game);
                 Card cardsArray[] = cards.getCards(game).toArray(new Card[0]);
                 //If you reveal three cards with different names
-                if(cardsArray.length == 3 && !cardsArray[0].getName().equals(cardsArray[1]) && !cardsArray[0].getName().equals(cardsArray[2]) && !cardsArray[1].getName().equals(cardsArray[2])){
+                if(Stream.of(cardsArray).map(MageObject::getName).collect(Collectors.toSet()).size() == 3){
                     //Choose one of them at random and put that card into your hand
                     Card randomCard = cards.getRandom(game);
                     randomCard.moveToZone(Zone.HAND, source.getSourceId(), game, true);
