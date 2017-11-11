@@ -59,6 +59,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Aerathi Berserker", 131, Rarity.UNCOMMON, mage.cards.a.AerathiBerserker.class));
         cards.add(new SetCardInfo("Aisling Leprechaun", 87, Rarity.COMMON, mage.cards.a.AislingLeprechaun.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 170, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
+        cards.add(new SetCardInfo("Al-abara's Carpet", 213, Rarity.RARE, mage.cards.a.AlAbarasCarpet.class));
         cards.add(new SetCardInfo("Alabaster Potion", 171, Rarity.COMMON, mage.cards.a.AlabasterPotion.class));
         cards.add(new SetCardInfo("Alchor's Tomb", 214, Rarity.RARE, mage.cards.a.AlchorsTomb.class));
         cards.add(new SetCardInfo("All Hallow's Eve", 2, Rarity.RARE, mage.cards.a.AllHallowsEve.class));
@@ -105,6 +106,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Divine Intervention", 177, Rarity.RARE, mage.cards.d.DivineIntervention.class));
         cards.add(new SetCardInfo("Divine Offering", 178, Rarity.COMMON, mage.cards.d.DivineOffering.class));
         cards.add(new SetCardInfo("Divine Transformation", 179, Rarity.RARE, mage.cards.d.DivineTransformation.class));
+        cards.add(new SetCardInfo("Dream Coat", 51, Rarity.UNCOMMON, mage.cards.d.DreamCoat.class));
         cards.add(new SetCardInfo("Durkwood Boars", 96, Rarity.COMMON, mage.cards.d.DurkwoodBoars.class));
         cards.add(new SetCardInfo("Dwarven Song", 141, Rarity.UNCOMMON, mage.cards.d.DwarvenSong.class));
         cards.add(new SetCardInfo("Elder Land Wurm", 180, Rarity.RARE, mage.cards.e.ElderLandWurm.class));
@@ -148,6 +150,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Immolation", 151, Rarity.COMMON, mage.cards.i.Immolation.class));
         cards.add(new SetCardInfo("In the Eye of Chaos", 61, Rarity.RARE, mage.cards.i.InTheEyeOfChaos.class));
         cards.add(new SetCardInfo("Indestructible Aura", 190, Rarity.COMMON, mage.cards.i.IndestructibleAura.class));
+        cards.add(new SetCardInfo("Infernal Medusa", 22, Rarity.UNCOMMON, mage.cards.i.InfernalMedusa.class));
         cards.add(new SetCardInfo("Invoke Prejudice", 62, Rarity.RARE, mage.cards.i.InvokePrejudice.class));
         cards.add(new SetCardInfo("Ivory Guardians", 192, Rarity.UNCOMMON, mage.cards.i.IvoryGuardians.class));
         cards.add(new SetCardInfo("Jacques le Vert", 272, Rarity.RARE, mage.cards.j.JacquesLeVert.class));
@@ -155,6 +158,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Jedit Ojanen", 274, Rarity.UNCOMMON, mage.cards.j.JeditOjanen.class));
         cards.add(new SetCardInfo("Jerrard of the Closed Fist", 275, Rarity.UNCOMMON, mage.cards.j.JerrardOfTheClosedFist.class));
         cards.add(new SetCardInfo("Johan", 276, Rarity.RARE, mage.cards.j.Johan.class));
+        cards.add(new SetCardInfo("Jovial Evil", 23, Rarity.RARE, mage.cards.j.JovialEvil.class));
         cards.add(new SetCardInfo("Juxtapose", 63, Rarity.RARE, mage.cards.j.Juxtapose.class));
         cards.add(new SetCardInfo("Karakas", 248, Rarity.UNCOMMON, mage.cards.k.Karakas.class));
         cards.add(new SetCardInfo("Kasimir the Lone Wolf", 277, Rarity.UNCOMMON, mage.cards.k.KasimirTheLoneWolf.class));
@@ -199,8 +203,10 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Planar Gate", 235, Rarity.RARE, mage.cards.p.PlanarGate.class));
         cards.add(new SetCardInfo("Pradesh Gypsies", 111, Rarity.UNCOMMON, mage.cards.p.PradeshGypsies.class));
         cards.add(new SetCardInfo("Presence of the Master", 200, Rarity.UNCOMMON, mage.cards.p.PresenceOfTheMaster.class));
+        cards.add(new SetCardInfo("Primordial Ooze", 157, Rarity.UNCOMMON, mage.cards.p.PrimordialOoze.class));
         cards.add(new SetCardInfo("Princess Lucrezia", 289, Rarity.UNCOMMON, mage.cards.p.PrincessLucrezia.class));
         cards.add(new SetCardInfo("Psionic Entity", 67, Rarity.RARE, mage.cards.p.PsionicEntity.class));
+        cards.add(new SetCardInfo("Psychic Purge", 68, Rarity.COMMON, mage.cards.p.PsychicPurge.class));
         cards.add(new SetCardInfo("Pyrotechnics", 158, Rarity.COMMON, mage.cards.p.Pyrotechnics.class));
         cards.add(new SetCardInfo("Rabid Wombat", 112, Rarity.UNCOMMON, mage.cards.r.RabidWombat.class));
         cards.add(new SetCardInfo("Radjan Spirit", 113, Rarity.UNCOMMON, mage.cards.r.RadjanSpirit.class));
@@ -240,6 +246,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Library", 121, Rarity.UNCOMMON, mage.cards.s.SylvanLibrary.class));
         cards.add(new SetCardInfo("Sylvan Paradise", 122, Rarity.UNCOMMON, mage.cards.s.SylvanParadise.class));
         cards.add(new SetCardInfo("Syphon Soul", 32, Rarity.COMMON, mage.cards.s.SyphonSoul.class));
+        cards.add(new SetCardInfo("Telekinesis", 79, Rarity.RARE, mage.cards.t.Telekinesis.class));
         cards.add(new SetCardInfo("Teleport", 80, Rarity.RARE, mage.cards.t.Teleport.class));
         cards.add(new SetCardInfo("Tetsuo Umezawa", 302, Rarity.RARE, mage.cards.t.TetsuoUmezawa.class));
         cards.add(new SetCardInfo("The Abyss", 34, Rarity.RARE, mage.cards.t.TheAbyss.class));
@@ -257,6 +264,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Triassic Egg", 242, Rarity.RARE, mage.cards.t.TriassicEgg.class));
         cards.add(new SetCardInfo("Tuknir Deathlock", 307, Rarity.RARE, mage.cards.t.TuknirDeathlock.class));
         cards.add(new SetCardInfo("Tundra Wolves", 209, Rarity.COMMON, mage.cards.t.TundraWolves.class));
+        cards.add(new SetCardInfo("Typhoon", 123, Rarity.RARE, mage.cards.t.Typhoon.class));
         cards.add(new SetCardInfo("Underworld Dreams", 38, Rarity.UNCOMMON, mage.cards.u.UnderworldDreams.class));
         cards.add(new SetCardInfo("Untamed Wilds", 124, Rarity.UNCOMMON, mage.cards.u.UntamedWilds.class));
         cards.add(new SetCardInfo("Urborg", 255, Rarity.UNCOMMON, mage.cards.u.Urborg.class));
