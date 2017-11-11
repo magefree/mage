@@ -278,6 +278,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Sailmonger", 95, Rarity.UNCOMMON, mage.cards.s.Sailmonger.class));
         cards.add(new SetCardInfo("Sand Squid", 96, Rarity.RARE, mage.cards.s.SandSquid.class));
         cards.add(new SetCardInfo("Sandstone Needle", 326, Rarity.COMMON, mage.cards.s.SandstoneNeedle.class));
+        cards.add(new SetCardInfo("Saprazzan Bailiff", 97, Rarity.RARE, mage.cards.s.SaprazzanBailiff.class));
         cards.add(new SetCardInfo("Saprazzan Cove", 327, Rarity.UNCOMMON, mage.cards.s.SaprazzanCove.class));
         cards.add(new SetCardInfo("Saprazzan Heir", 99, Rarity.RARE, mage.cards.s.SaprazzanHeir.class));
         cards.add(new SetCardInfo("Saprazzan Legate", 100, Rarity.UNCOMMON, mage.cards.s.SaprazzanLegate.class));
