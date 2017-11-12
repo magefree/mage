@@ -174,6 +174,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("High Market", 320, Rarity.RARE, mage.cards.h.HighMarket.class));
         cards.add(new SetCardInfo("High Seas", 83, Rarity.UNCOMMON, mage.cards.h.HighSeas.class));
         cards.add(new SetCardInfo("Highway Robber", 139, Rarity.COMMON, mage.cards.h.HighwayRobber.class));
+        cards.add(new SetCardInfo("Honor the Fallen", 21, Rarity.RARE, mage.cards.h.HonorTheFallen.class));
         cards.add(new SetCardInfo("Hoodwink", 84, Rarity.COMMON, mage.cards.h.Hoodwink.class));
         cards.add(new SetCardInfo("Horned Troll", 251, Rarity.COMMON, mage.cards.h.HornedTroll.class));
         cards.add(new SetCardInfo("Horn of Plenty", 298, Rarity.RARE, mage.cards.h.HornOfPlenty.class));
