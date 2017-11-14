@@ -6,8 +6,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
+import mage.constants.Rarity;
 import org.mage.plugins.card.dl.DownloadJob;
 
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
@@ -15,6 +17,24 @@ import static org.mage.plugins.card.dl.DownloadJob.toFile;
 import org.apache.log4j.Logger;
 
 public class GathererSets implements Iterable<DownloadJob> {
+
+    private class CheckResult {
+        String code;
+        ExpansionSet set;
+        boolean haveCommon;
+        boolean haveUncommon;
+        boolean haveRare;
+        boolean haveMyth;
+
+        private CheckResult(String ACode, ExpansionSet ASet, boolean AHaveCommon, boolean AHaveUncommon, boolean AHhaveRare, boolean AHaveMyth) {
+            code = ACode;
+            set = ASet;
+            haveCommon = AHaveCommon;
+            haveUncommon = AHaveUncommon;
+            haveRare = AHhaveRare;
+            haveMyth = AHaveMyth;
+        }
+    }
 
     private static final int DAYS_BEFORE_RELEASE_TO_DOWNLOAD = +14; // Try to load the symbols eralies 14 days before release date
     private static final Logger logger = Logger.getLogger(GathererSets.class);
@@ -132,16 +152,18 @@ public class GathererSets implements Iterable<DownloadJob> {
     }
 
     // checks for wrong card settings and support (easy to control what all good)
-    private static final HashMap<String, ExpansionSet> setsToDonwload = new HashMap<>();
+    private static final HashMap<String, CheckResult> setsToDonwload = new HashMap<>();
 
-    private void CheckSearchResult(String searchCode, ExpansionSet foundedExp, boolean canDownloadTask){
-
+    private void CheckSearchResult(String searchCode, ExpansionSet foundedExp, boolean canDownloadTask,
+                                   boolean haveCommon, boolean haveUncommon, boolean haveRare, boolean haveMyth){
         // duplicated in settings
-        ExpansionSet existsExp = setsToDonwload.get(searchCode);
-        if (existsExp != null) {
+        CheckResult res = setsToDonwload.get(searchCode);
+
+        if (res != null) {
             logger.error(String.format("Symbols: founded duplicated code: %s", searchCode));
         } else {
-            setsToDonwload.put(searchCode, foundedExp);
+            res = new CheckResult(searchCode, foundedExp, haveCommon, haveUncommon, haveRare, haveMyth);
+            setsToDonwload.put(searchCode, res);
         }
 
         // not found
@@ -164,12 +186,41 @@ public class GathererSets implements Iterable<DownloadJob> {
 
     private void AnalyseSearchResult(){
         // analyze supported sets and show wrong settings
+        Date startedDate = new Date();
+
         for (ExpansionSet set : Sets.getInstance().values()) {
-            // not configured at all
-            if (setsToDonwload.get(set.getCode()) == null) {
+
+            CheckResult res = setsToDonwload.get(set.getCode());
+
+            // 1. not configured at all
+            if (res == null) {
                 logger.warn(String.format("Symbols: set is not configured: %s (%s)", set.getCode(), set.getName()));
+                continue; // can't do other checks
+            }
+
+            // 2. do not load needed card rarity:
+            // - simple check for base type, not all
+            // - when card not implemented then download is not necessary
+            // WARNING, need too much time (60+ secs), only for debug mode, may be move to tests?
+            if (logger.isDebugEnabled()) {
+                if ((set.getCardsByRarity(Rarity.COMMON).size() > 0) && !res.haveCommon) {
+                    logger.error(String.format("Symbols: set have common cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
+                }
+                if ((set.getCardsByRarity(Rarity.UNCOMMON).size() > 0) && !res.haveUncommon) {
+                    logger.error(String.format("Symbols: set have uncommon cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
+                }
+                if ((set.getCardsByRarity(Rarity.RARE).size() > 0) && !res.haveRare) {
+                    logger.error(String.format("Symbols: set have rare cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
+                }
+                if ((set.getCardsByRarity(Rarity.MYTHIC).size() > 0) && !res.haveMyth) {
+                    logger.error(String.format("Symbols: set have mythic cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
+                }
             }
         }
+
+        Date endedDate = new Date();
+        long secs = (endedDate.getTime() - startedDate.getTime()) / 1000;
+        logger.debug(String.format("Symbols: check time: %d seconds", secs));
     }
 
     @Override
@@ -179,7 +230,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         c.add(Calendar.DATE, DAYS_BEFORE_RELEASE_TO_DOWNLOAD);
         Date compareDate = c.getTime();
         ArrayList<DownloadJob> jobs = new ArrayList<>();
-        boolean canDownload = false;
+        boolean canDownload;
 
         setsToDonwload.clear();
 
@@ -192,7 +243,7 @@ public class GathererSets implements Iterable<DownloadJob> {
                 jobs.add(generateDownloadJob(symbol, "U", "U"));
                 jobs.add(generateDownloadJob(symbol, "R", "R"));
             }
-            CheckSearchResult(symbol, exp, canDownload);
+            CheckSearchResult(symbol, exp, canDownload, true, true, true, false);
         }
 
         for (String symbol : withMythics) {
@@ -205,7 +256,7 @@ public class GathererSets implements Iterable<DownloadJob> {
                 jobs.add(generateDownloadJob(symbol, "R", "R"));
                 jobs.add(generateDownloadJob(symbol, "M", "M"));
             }
-            CheckSearchResult(symbol, exp, canDownload);
+            CheckSearchResult(symbol, exp, canDownload, true, true, true, true);
         }
 
         for (String symbol : onlyMythics) {
@@ -215,7 +266,7 @@ public class GathererSets implements Iterable<DownloadJob> {
                 canDownload = true;
                 jobs.add(generateDownloadJob(symbol, "M", "M"));
             }
-            CheckSearchResult(symbol, exp, canDownload);
+            CheckSearchResult(symbol, exp, canDownload, false, false, false, true);
         }
 
         for (String symbol : onlyMythicsAsSpecial) {
@@ -225,7 +276,7 @@ public class GathererSets implements Iterable<DownloadJob> {
                 canDownload = true;
                 jobs.add(generateDownloadJob(symbol, "M", "S"));
             }
-            CheckSearchResult(symbol, exp, canDownload);
+            CheckSearchResult(symbol, exp, canDownload, false, false, false, true);
         }
 
         // check wrong settings
