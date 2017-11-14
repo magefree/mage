@@ -9,10 +9,14 @@ import java.util.Iterator;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import org.mage.plugins.card.dl.DownloadJob;
+
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
+import org.apache.log4j.Logger;
 
 public class GathererSets implements Iterable<DownloadJob> {
+
+    private static final Logger logger = Logger.getLogger(GathererSets.class);
 
     private static final String SETS_PATH = File.separator + "sets";
     private static final File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + SETS_PATH);
@@ -60,6 +64,8 @@ public class GathererSets implements Iterable<DownloadJob> {
         "SOI", "EMN",
         "KLD", "AER",
         "AKH", "HOU",
+        "XLN", "C17",
+        "RIX", "DOM", "M19", // not released
         "E01"
     };
 
@@ -105,7 +111,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         symbolsReplacements.put("PCY", "PR");
         symbolsReplacements.put("PLS", "PS");
         symbolsReplacements.put("POR", "PO");
-        symbolsReplacements.put("PO2", "P2");
+        symbolsReplacements.put("P02", "P2");
         symbolsReplacements.put("PTK", "PK");
         symbolsReplacements.put("STH", "ST");
         symbolsReplacements.put("TMP", "TE");
@@ -124,6 +130,42 @@ public class GathererSets implements Iterable<DownloadJob> {
         }
     }
 
+    // checks for wrong card settings and support (easy to control what all good)
+    private static final HashMap<String, ExpansionSet> setsToDonwload = new HashMap<>();
+
+    private void CheckSearchResult(String searchCode, ExpansionSet foundedExp, boolean canDownloadTask){
+
+        // duplicated in settings
+        ExpansionSet existsExp = setsToDonwload.get(searchCode);
+        if (existsExp != null) {
+            logger.error(String.format("Symbols: founded duplicated code: %s", searchCode));
+        } else {
+            setsToDonwload.put(searchCode, foundedExp);
+        }
+
+        // not found
+        if (foundedExp == null) {
+            logger.error(String.format("Symbols: can't find set by code: %s", searchCode));
+            return;
+        }
+
+        // checks for founded sets only
+
+        // to early to download
+        if (!canDownloadTask){
+            logger.warn(String.format("Symbols: early to download, set is not released: %s (%s) after %s", searchCode, foundedExp.getName(), foundedExp.getReleaseDate()));
+        }
+    }
+
+    private void AnalyseSearchResult(){
+        // analyze supported sets and show wrong settings (who without symbol settings)
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            if (setsToDonwload.get(set.getCode()) == null) {
+                logger.warn(String.format("Symbols: set is not configured: %s (%s)", set.getCode(), set.getName()));
+            }
+        }
+    }
+
     @Override
     public Iterator<DownloadJob> iterator() {
         Calendar c = Calendar.getInstance();
@@ -131,35 +173,57 @@ public class GathererSets implements Iterable<DownloadJob> {
         c.add(Calendar.DATE, +14); // Try to load the symbols eralies 14 days before release date
         Date compareDate = c.getTime();
         ArrayList<DownloadJob> jobs = new ArrayList<>();
+        boolean canDownload = false;
+
+        setsToDonwload.clear();
+
         for (String symbol : symbols) {
             ExpansionSet exp = Sets.findSet(symbol);
+            canDownload = false;
             if (exp != null && exp.getReleaseDate().before(compareDate)) {
+                canDownload = true;
                 jobs.add(generateDownloadJob(symbol, "C", "C"));
                 jobs.add(generateDownloadJob(symbol, "U", "U"));
                 jobs.add(generateDownloadJob(symbol, "R", "R"));
             }
+            CheckSearchResult(symbol, exp, canDownload);
         }
+
         for (String symbol : withMythics) {
             ExpansionSet exp = Sets.findSet(symbol);
+            canDownload = false;
             if (exp != null && exp.getReleaseDate().before(compareDate)) {
+                canDownload = true;
                 jobs.add(generateDownloadJob(symbol, "C", "C"));
                 jobs.add(generateDownloadJob(symbol, "U", "U"));
                 jobs.add(generateDownloadJob(symbol, "R", "R"));
                 jobs.add(generateDownloadJob(symbol, "M", "M"));
             }
+            CheckSearchResult(symbol, exp, canDownload);
         }
+
         for (String symbol : onlyMythics) {
             ExpansionSet exp = Sets.findSet(symbol);
+            canDownload = false;
             if (exp != null && exp.getReleaseDate().before(compareDate)) {
+                canDownload = true;
                 jobs.add(generateDownloadJob(symbol, "M", "M"));
             }
         }
+
         for (String symbol : onlyMythicsAsSpecial) {
             ExpansionSet exp = Sets.findSet(symbol);
+            canDownload = false;
             if (exp != null && exp.getReleaseDate().before(compareDate)) {
+                canDownload = true;
                 jobs.add(generateDownloadJob(symbol, "M", "S"));
             }
+            CheckSearchResult(symbol, exp, canDownload);
         }
+
+        // check wrong settings
+        AnalyseSearchResult();
+
         return jobs.iterator();
     }
 
