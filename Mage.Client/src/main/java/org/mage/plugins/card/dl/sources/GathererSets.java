@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 
 public class GathererSets implements Iterable<DownloadJob> {
 
+    private static final int DAYS_BEFORE_RELEASE_TO_DOWNLOAD = +14; // Try to load the symbols eralies 14 days before release date
     private static final Logger logger = Logger.getLogger(GathererSets.class);
 
     private static final String SETS_PATH = File.separator + "sets";
@@ -40,7 +41,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         "LRW", "MOR",
         "SHM", "EVE",
         "MED", "ME2", "ME3", "ME4",
-        "POR", "PO2", "PTK",
+        "POR", "P02", "PTK",
         "ARC", "DD3EVG",
         "W16", "W17"};
 
@@ -153,13 +154,18 @@ public class GathererSets implements Iterable<DownloadJob> {
 
         // to early to download
         if (!canDownloadTask){
-            logger.warn(String.format("Symbols: early to download, set is not released: %s (%s) after %s", searchCode, foundedExp.getName(), foundedExp.getReleaseDate()));
+            Calendar c = Calendar.getInstance();
+            c.setTime(foundedExp.getReleaseDate());
+            c.add(Calendar.DATE, -1 * DAYS_BEFORE_RELEASE_TO_DOWNLOAD);
+            logger.warn(String.format("Symbols: early to download: %s (%s), available after %s",
+                    searchCode, foundedExp.getName(), c.getTime()));
         }
     }
 
     private void AnalyseSearchResult(){
-        // analyze supported sets and show wrong settings (who without symbol settings)
+        // analyze supported sets and show wrong settings
         for (ExpansionSet set : Sets.getInstance().values()) {
+            // not configured at all
             if (setsToDonwload.get(set.getCode()) == null) {
                 logger.warn(String.format("Symbols: set is not configured: %s (%s)", set.getCode(), set.getName()));
             }
@@ -170,7 +176,7 @@ public class GathererSets implements Iterable<DownloadJob> {
     public Iterator<DownloadJob> iterator() {
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
-        c.add(Calendar.DATE, +14); // Try to load the symbols eralies 14 days before release date
+        c.add(Calendar.DATE, DAYS_BEFORE_RELEASE_TO_DOWNLOAD);
         Date compareDate = c.getTime();
         ArrayList<DownloadJob> jobs = new ArrayList<>();
         boolean canDownload = false;
@@ -209,6 +215,7 @@ public class GathererSets implements Iterable<DownloadJob> {
                 canDownload = true;
                 jobs.add(generateDownloadJob(symbol, "M", "M"));
             }
+            CheckSearchResult(symbol, exp, canDownload);
         }
 
         for (String symbol : onlyMythicsAsSpecial) {
