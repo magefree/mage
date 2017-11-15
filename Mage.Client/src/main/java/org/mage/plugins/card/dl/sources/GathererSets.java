@@ -64,8 +64,10 @@ public class GathererSets implements Iterable<DownloadJob> {
         "POR", "P02", "PTK",
         "ARC", "DD3EVG",
         "W16", "W17",
-        "APAC", "ARENA", "CHR", "CLASH", "CP", "DD3GVL", "DPA", "EURO", "FNMP", "GPX", "GRC", "GUR", "H17", "JR", "MBP", "MGDC", "MLP", "MPRP", "MPS-AKH", "PTC", "S00", "S99", "SUS", "SWS", "UGIN", "UGL", "V10", "V17", "WMCQ", // need to fix
-        "H09", "PD2", "PD3", "UNH", "CM1", "E02", "V11", "M25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "DDT", "8EB", "9EB" // ok
+        //"APAC" -- gatherer do not have that set, scrly have PALP
+        //"ARENA" -- is't many set with different codes, not one
+        "CLASH", "CP", "DD3GVL", "DPA", "EURO", "FNMP", "GPX", "GRC", "GUR", "H17", "JR", "MBP", "MGDC", "MLP", "MPRP", "MPS-AKH", "PTC", "S00", "S99", "SUS", "SWS", "UGIN", "UGL", "V10", "V17", "WMCQ", // need to fix
+        "H09", "PD2", "PD3", "UNH", "CM1", "E02", "V11", "M25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "DDT", "8EB", "9EB", "CHR" // ok
              // current testing
     };
 
@@ -145,6 +147,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         codeReplacements.put("WTH", "WL");
         codeReplacements.put("8EB", "8ED"); // inner xmage set for 8th edition
         codeReplacements.put("9EB", "8ED"); // inner xmage set for 9th edition
+        codeReplacements.put("CHR", "CH");
     }
 
     public GathererSets(String path) {
@@ -156,26 +159,26 @@ public class GathererSets implements Iterable<DownloadJob> {
     }
 
     // checks for wrong card settings and support (easy to control what all good)
-    private static final HashMap<String, CheckResult> setsToDonwload = new HashMap<>();
+    private static final HashMap<String, CheckResult> setsToDownload = new HashMap<>();
     private static final HashMap<String, String> codesToIgnoreCheck = new HashMap<>();
     static {
         // xMage have inner sets for 8th and 9th Edition for booster workaround (cards from core game do not include in boosters)
         // see https://mtg.gamepedia.com/8th_Edition/Core_Game
         // check must ignore that sets
-        //codesToIgnoreCheck.put("8EB", "8th Edition Box");
-        //codesToIgnoreCheck.put("9EB", "9th Edition Box");
+        codesToIgnoreCheck.put("8EB", "8th Edition Box");
+        codesToIgnoreCheck.put("9EB", "9th Edition Box");
     }
 
     private void CheckSearchResult(String searchCode, ExpansionSet foundedExp, boolean canDownloadTask,
                                    boolean haveCommon, boolean haveUncommon, boolean haveRare, boolean haveMyth){
         // duplicated in settings
-        CheckResult res = setsToDonwload.get(searchCode);
+        CheckResult res = setsToDownload.get(searchCode);
 
         if (res != null) {
             logger.error(String.format("Symbols: founded duplicated code: %s", searchCode));
         } else {
             res = new CheckResult(searchCode, foundedExp, haveCommon, haveUncommon, haveRare, haveMyth);
-            setsToDonwload.put(searchCode, res);
+            setsToDownload.put(searchCode, res);
         }
 
         // not found
@@ -207,7 +210,7 @@ public class GathererSets implements Iterable<DownloadJob> {
                 continue;
             }
 
-            CheckResult res = setsToDonwload.get(set.getCode());
+            CheckResult res = setsToDownload.get(set.getCode());
 
             // 1. not configured at all
             if (res == null) {
@@ -215,10 +218,8 @@ public class GathererSets implements Iterable<DownloadJob> {
                 continue; // can't do other checks
             }
 
-            // 2. do not load needed card rarity:
-            // - simple check for base type, not all
-            // - when card not implemented then download is not necessary
-            // WARNING, need too much time (60+ secs), only for debug mode, may be move to tests?
+            // 2. missing rarity icon:
+            // WARNING, need too much time (60+ secs), only for debug mode
             if (logger.isDebugEnabled()) {
                 if ((set.getCardsByRarity(Rarity.COMMON).size() > 0) && !res.haveCommon) {
                     logger.error(String.format("Symbols: set have common cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
@@ -237,7 +238,7 @@ public class GathererSets implements Iterable<DownloadJob> {
 
         Date endedDate = new Date();
         long secs = (endedDate.getTime() - startedDate.getTime()) / 1000;
-        logger.debug(String.format("Symbols: check time: %d seconds", secs));
+        logger.debug(String.format("Symbols: check completed after %d seconds", secs));
     }
 
     @Override
@@ -249,7 +250,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         ArrayList<DownloadJob> jobs = new ArrayList<>();
         boolean canDownload;
 
-        setsToDonwload.clear();
+        setsToDownload.clear();
 
         for (String symbol : symbolsBasic) {
             ExpansionSet exp = Sets.findSet(symbol);
