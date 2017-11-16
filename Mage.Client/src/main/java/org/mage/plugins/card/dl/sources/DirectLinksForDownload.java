@@ -22,7 +22,7 @@ import static org.mage.plugins.card.dl.DownloadJob.toFile;
  */
 public class DirectLinksForDownload implements Iterable<DownloadJob> {
 
-    private static final String backsideUrl = "http://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg";
+    private static final String backsideUrl = "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg";
 
     private static final Map<String, String> directLinks = new LinkedHashMap<>();
 
