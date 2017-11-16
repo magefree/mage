@@ -99,7 +99,13 @@ class HubrisReturnEffect extends OneShotEffect {
             for (UUID targetId : targetPointer.getTargets(game, source)) {
                 Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {
-                    Cards cardsToHand = new CardsImpl(creature.getAttachments());
+                    Cards cardsToHand = new CardsImpl();
+                    for (UUID cardId : creature.getAttachments()) {
+                        Permanent card = game.getPermanent(cardId);
+                        if (card != null && card.hasSubtype(SubType.AURA, game)) {
+                            cardsToHand.add(card);
+                        }
+                    }
                     cardsToHand.add(creature);
                     controller.moveCards(cardsToHand, Zone.HAND, source, game);
                 }

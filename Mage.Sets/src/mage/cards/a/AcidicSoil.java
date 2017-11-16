@@ -68,7 +68,7 @@ class AcidicSoilEffect extends OneShotEffect {
 
     AcidicSoilEffect() {
         super(Outcome.Damage);
-        staticText = "Acidic Soil deals damage to each player equal to the number of lands he or she controls";
+        staticText = "{this} deals damage to each player equal to the number of lands he or she controls";
     }
 
     AcidicSoilEffect(final AcidicSoilEffect effect) {

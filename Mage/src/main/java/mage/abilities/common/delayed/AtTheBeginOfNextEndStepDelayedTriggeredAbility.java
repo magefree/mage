@@ -59,7 +59,7 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
     }
 
     public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone zone, Effect effect, TargetController targetController, Condition condition) {
-        super(effect, Duration.EndOfTurn);
+        super(effect, Duration.Custom);
         this.zone = zone;
         this.targetController = targetController;
         this.condition = condition;
