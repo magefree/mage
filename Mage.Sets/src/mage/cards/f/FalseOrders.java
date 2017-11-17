@@ -207,7 +207,7 @@ class BecameBlockedByOnlyOneCreatureWatcher extends Watcher {
                     }
                 }
                 else if (combatGroup.getBlockers().size() > 1) {
-                    blockedByOneCreature.remove(combatGroup);
+                    blockedByOneCreature.put(combatGroup, null);
                 }
             }
         }
@@ -216,9 +216,11 @@ class BecameBlockedByOnlyOneCreatureWatcher extends Watcher {
     public Set<CombatGroup> getBlockedOnlyByCreature(MageObjectReference creature) {
         Set<CombatGroup> combatGroups = new HashSet<>();
         for (Map.Entry<CombatGroup, MageObjectReference> entry : blockedByOneCreature.entrySet()) {
-          if (entry.getValue().equals(creature)) {
-            combatGroups.add(entry.getKey());
-          }
+            if (entry.getValue() != null) {
+                if (entry.getValue().equals(creature)) {
+                    combatGroups.add(entry.getKey());
+                }
+            }
         }
         if (combatGroups.size() > 0) {
             return combatGroups;
