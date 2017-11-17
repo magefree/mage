@@ -62,6 +62,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Arcum Dagsson", 27, Rarity.RARE, mage.cards.a.ArcumDagsson.class));
         cards.add(new SetCardInfo("Aurochs Herd", 103, Rarity.COMMON, mage.cards.a.AurochsHerd.class));
         cards.add(new SetCardInfo("Balduvian Rage", 76, Rarity.UNCOMMON, mage.cards.b.BalduvianRage.class));
+        cards.add(new SetCardInfo("Balduvian Warlord", 77, Rarity.UNCOMMON, mage.cards.b.BalduvianWarlord.class));
         cards.add(new SetCardInfo("Blizzard Specter", 126, Rarity.UNCOMMON, mage.cards.b.BlizzardSpecter.class));
         cards.add(new SetCardInfo("Boreal Centaur", 104, Rarity.COMMON, mage.cards.b.BorealCentaur.class));
         cards.add(new SetCardInfo("Boreal Druid", 105, Rarity.COMMON, mage.cards.b.BorealDruid.class));
