@@ -27,9 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -42,7 +39,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.WatcherScope;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.ObjectPlayer;
@@ -56,7 +52,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
-import mage.watchers.Watcher;
+import mage.watchers.common.BlockedByOnlyOneCreatureThisCombatWatcher;
 
 /**
  *
@@ -80,7 +76,7 @@ public class FalseOrders extends CardImpl {
         // Remove target creature defending player controls from combat. Creatures it was blocking that had become blocked by only that creature this combat become unblocked. You may have it block an attacking creature of your choice.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new FalseOrdersUnblockEffect());
-        this.getSpellAbility().addWatcher(new BecameBlockedByOnlyOneCreatureWatcher());
+        this.getSpellAbility().addWatcher(new BlockedByOnlyOneCreatureThisCombatWatcher());
     }
 
     public FalseOrders(final FalseOrders card) {
@@ -129,7 +125,7 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
             effect.apply(game, source);
 
             // Make blocked creatures unblocked
-            BecameBlockedByOnlyOneCreatureWatcher watcher = (BecameBlockedByOnlyOneCreatureWatcher) game.getState().getWatchers().get(BecameBlockedByOnlyOneCreatureWatcher.class.getSimpleName());
+            BlockedByOnlyOneCreatureThisCombatWatcher watcher = (BlockedByOnlyOneCreatureThisCombatWatcher) game.getState().getWatchers().get(BlockedByOnlyOneCreatureThisCombatWatcher.class.getSimpleName());
             if (watcher != null) {
                 Set<CombatGroup> combatGroups = watcher.getBlockedOnlyByCreature(permanent.getId());
                 if (combatGroups != null) {
@@ -176,62 +172,5 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class BecameBlockedByOnlyOneCreatureWatcher extends Watcher {
-
-    private final Map<CombatGroup, UUID> blockedByOneCreature = new HashMap<>();
-
-    public BecameBlockedByOnlyOneCreatureWatcher() {
-        super(BecameBlockedByOnlyOneCreatureWatcher.class.getSimpleName(), WatcherScope.GAME);
-    }
-
-    public BecameBlockedByOnlyOneCreatureWatcher(final BecameBlockedByOnlyOneCreatureWatcher watcher) {
-        super(watcher);
-        this.blockedByOneCreature.putAll(watcher.blockedByOneCreature);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BEGIN_COMBAT_STEP_PRE) {
-            this.blockedByOneCreature.clear();
-        }
-        else if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            CombatGroup combatGroup = game.getCombat().findGroup(event.getTargetId());
-            if (combatGroup != null) {
-                if (combatGroup.getBlockers().size() == 1) {
-                    if (!blockedByOneCreature.containsKey(combatGroup)) {
-                        blockedByOneCreature.put(combatGroup, event.getSourceId());
-                    }
-                    else if (blockedByOneCreature.get(combatGroup) != event.getSourceId()) {
-                        blockedByOneCreature.put(combatGroup, null);
-                    }
-                }
-                else if (combatGroup.getBlockers().size() > 1) {
-                    blockedByOneCreature.put(combatGroup, null);
-                }
-            }
-        }
-    }
-
-    public Set<CombatGroup> getBlockedOnlyByCreature(UUID creature) {
-        Set<CombatGroup> combatGroups = new HashSet<>();
-        for (Map.Entry<CombatGroup, UUID> entry : blockedByOneCreature.entrySet()) {
-            if (entry.getValue() != null) {
-                if (entry.getValue().equals(creature)) {
-                    combatGroups.add(entry.getKey());
-                }
-            }
-        }
-        if (combatGroups.size() > 0) {
-            return combatGroups;
-        }
-        return null;
-    }
-
-    @Override
-    public BecameBlockedByOnlyOneCreatureWatcher copy() {
-        return new BecameBlockedByOnlyOneCreatureWatcher(this);
     }
 }
