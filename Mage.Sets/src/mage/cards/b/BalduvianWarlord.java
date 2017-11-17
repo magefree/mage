@@ -126,33 +126,33 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
 
             // Choose new creature to block
             if (permanent.isCreature()) {
-                    TargetAttackingCreature target = new TargetAttackingCreature(1, 1, new FilterAttackingCreature(), true);
-                    if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
-                            controller.chooseTarget(outcome, target, source, game);
-                        }
-                    } else {
-                        return true;
+                TargetAttackingCreature target = new TargetAttackingCreature(1, 1, new FilterAttackingCreature(), true);
+                if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                    while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
+                        controller.chooseTarget(outcome, target, source, game);
                     }
-                    Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
-                    if (chosenPermanent != null && permanent != null && chosenPermanent.isCreature() && controller != null) {
-                        CombatGroup chosenGroup = game.getCombat().findGroup(chosenPermanent.getId());
-                        if (chosenGroup != null) {
-                            // Relevant ruling for Balduvian Warlord:
-                            // 7/15/2006 	If an attacking creature has an ability that triggers “When this creature becomes blocked,” 
-                            // it triggers when a creature blocks it due to the Warlord’s ability only if it was unblocked at that point.
-                            
-                            boolean notYetBlocked = true;
-                            if (!chosenGroup.getBlockers().isEmpty()) {
-                                notYetBlocked = false;
-                            }
-                            chosenGroup.addBlocker(permanent.getId(), controller.getId(), game);
-                            if (notYetBlocked) {
-                                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, chosenPermanent.getId(), null));
-                            }
-                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
+                } else {
+                    return true;
+                }
+                Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
+                if (chosenPermanent != null && permanent != null && chosenPermanent.isCreature() && controller != null) {
+                    CombatGroup chosenGroup = game.getCombat().findGroup(chosenPermanent.getId());
+                    if (chosenGroup != null) {
+                        // Relevant ruling for Balduvian Warlord:
+                        // 7/15/2006 	If an attacking creature has an ability that triggers “When this creature becomes blocked,” 
+                        // it triggers when a creature blocks it due to the Warlord’s ability only if it was unblocked at that point.
+                        
+                        boolean notYetBlocked = true;
+                        if (!chosenGroup.getBlockers().isEmpty()) {
+                            notYetBlocked = false;
                         }
+                        chosenGroup.addBlocker(permanent.getId(), controller.getId(), game);
+                        if (notYetBlocked) {
+                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, chosenPermanent.getId(), null));
+                        }
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
                     }
+                }
                 return true;   
             }
         }
