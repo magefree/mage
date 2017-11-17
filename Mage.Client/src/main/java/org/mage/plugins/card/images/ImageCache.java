@@ -44,6 +44,7 @@ public final class ImageCache {
     private static final Logger LOGGER = Logger.getLogger(ImageCache.class);
 
     private static final Map<String, BufferedImage> IMAGE_CACHE;
+    private static final Map<String, BufferedImage> FACE_IMAGE_CACHE;
 
     /**
      * Common pattern for keys. Format: "<cardname>#<setname>#<collectorID>"
@@ -135,6 +136,55 @@ public final class ImageCache {
                     } else {
                         throw new RuntimeException(
                                 "Requested image doesn't fit the requirement for key (<cardname>#<setname>#<collectorID>): " + key);
+                    }
+                } catch (Exception ex) {
+                    if (ex instanceof ComputationException) {
+                        throw (ComputationException) ex;
+                    } else {
+                        throw new ComputationException(ex);
+                    }
+                }
+            }
+
+            public BufferedImage makeThumbnailByFile(String key, TFile file, String thumbnailPath) {
+                BufferedImage image = loadImage(file);
+                image = getWizardsCard(image);
+                if (image == null) {
+                    return null;
+                }
+                LOGGER.debug("creating thumbnail for " + key);
+                return makeThumbnail(image, thumbnailPath);
+            }
+        });
+
+        FACE_IMAGE_CACHE = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
+            @Override
+            public BufferedImage apply(String key) {
+                try {
+
+                    Matcher m = KEY_PATTERN.matcher(key);
+
+                    if (m.matches()) {
+                        String name = m.group(1);
+                        String set = m.group(2);
+                        //Integer artid = Integer.parseInt(m.group(2));
+
+                        String path;
+                        path = CardImageUtils.generateFaceImagePath(name, set);
+
+                        if (path == null) {
+                            return null;
+                        }
+                        TFile file = getTFile(path);
+                        if (file == null) {
+                            return null;
+                        }
+
+                        BufferedImage image = loadImage(file);
+                        return image;
+                    } else {
+                        throw new RuntimeException(
+                                "Requested face image doesn't fit the requirement for key (<cardname>#<artid>#: " + key);
                     }
                 } catch (Exception ex) {
                     if (ex instanceof ComputationException) {
@@ -263,6 +313,10 @@ public final class ImageCache {
         return getImage(getKey(card, card.getName(), ""));
     }
 
+    public static BufferedImage getImageFaceOriginal(CardView card) {
+        return getFaceImage(getFaceKey(card, card.getName(), card.getExpansionSetCode()));
+    }
+
     public static BufferedImage getImageOriginalAlternateName(CardView card) {
         return getImage(getKey(card, card.getAlternateName(), ""));
     }
@@ -289,11 +343,40 @@ public final class ImageCache {
     }
 
     /**
+     * Returns the Image corresponding to the key
+     */
+    private static BufferedImage getFaceImage(String key) {
+        try {
+            return FACE_IMAGE_CACHE.get(key);
+        } catch (NullPointerException ex) {
+            // unfortunately NullOutputException, thrown when apply() returns
+            // null, is not public
+            // NullOutputException is a subclass of NullPointerException
+            // legitimate, happens when a card has no image
+            return null;
+        } catch (ComputationException ex) {
+            if (ex.getCause() instanceof NullPointerException) {
+                return null;
+            }
+            LOGGER.error(ex, ex);
+            return null;
+        }
+    }
+
+    /**
      * Returns the Image corresponding to the key only if it already exists in
      * the cache.
      */
     private static BufferedImage tryGetImage(String key) {
         return IMAGE_CACHE.containsKey(key) ? IMAGE_CACHE.get(key) : null;
+    }
+
+    /**
+     * Returns the Image corresponding to the key only if it already exists in
+     * the cache.
+     */
+    private static BufferedImage tryGetFaceImage(String key) {
+        return FACE_IMAGE_CACHE.containsKey(key) ? FACE_IMAGE_CACHE.get(key) : null;
     }
 
     /**
@@ -305,6 +388,13 @@ public final class ImageCache {
                 + suffix
                 + (card.getUsesVariousArt() ? "#usesVariousArt" : "")
                 + (card.getTokenDescriptor() != null ? '#' + card.getTokenDescriptor() : "#");
+    }
+
+    /**
+     * Returns the map key for a card, without any suffixes for the image size.
+     */
+    private static String getFaceKey(CardView card, String name, String set) {
+        return name + '#' + set + "####";
     }
 
 //    /**
@@ -407,6 +497,25 @@ public final class ImageCache {
         }
 
         return TransformedImageCache.getResizedImage(original, (int) (original.getWidth() * scale), (int) (original.getHeight() * scale));
+    }
+
+    /**
+     * Returns the image appropriate to display the card in the picture panel
+     *
+     * @param card
+     * @param width
+     * @param height
+     * @return
+     */
+    public static BufferedImage getFaceImage(CardView card, int width, int height) {
+        String key = getFaceKey(card, card.getName(), card.getExpansionSetCode());
+        BufferedImage original = getFaceImage(key);
+        if (original == null) {
+            LOGGER.debug(key + " (faceimage) not found");
+            return null;
+        }
+
+        return original;
     }
 
     /**
