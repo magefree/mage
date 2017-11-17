@@ -202,7 +202,9 @@ class BecameBlockedByOnlyOneCreatureWatcher extends Watcher {
             CombatGroup combatGroup = game.getCombat().findGroup(event.getTargetId());
             if (combatGroup != null) {
                 if (combatGroup.getBlockers().size() == 1) {
-                    blockedByOneCreature.put(combatGroup, new MageObjectReference(combatGroup.getBlockers().get(0), game));
+                    if (!blockedByOneCreature.containsKey(combatGroup)) {
+                        blockedByOneCreature.put(combatGroup, new MageObjectReference(combatGroup.getBlockers().get(0), game));
+                    }
                 }
                 else if (combatGroup.getBlockers().size() > 1) {
                     blockedByOneCreature.remove(combatGroup);
