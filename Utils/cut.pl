@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 ##
-#   File : get_all.pl
+#   File : cut.pl
 #   Author : spjspj
 ##  
 
@@ -22,6 +22,7 @@ use POSIX qw(strftime);
         print ("   cut.pl full_text.txt keys 0 filegrep\n");
         print ("   cut.pl full_text.txt 0  0 make_code_bat\n");
         print ("   dir /a /b /s *.java | cut.pl stdin 0  0 make_code_bat > bob.bat\n");
+        print ("   dir /a /b /s *.xml | cut.pl stdin 0  0 make_code_bat > bob_xml.bat\n");
         print ("   cut.pl d:\\perl_programs output.*txt  7 age_dir | cut.pl list . 0 grep\n");
         print ("   cut.pl bob.txt 0 0 uniquelines \n");
         print ("   cut.pl file 0 0 strip_http\n");
@@ -331,16 +332,27 @@ use POSIX qw(strftime);
         {
             my $i;
             {
-                my $url = $term;
-                print ("Download :$url:\n");
-                my $content = get $url;
-                print ("Saw " . length ($content) . " bytes!\n");
-                print ("Save in $helper\n");
-                open OUTPUT, "> " . $helper or die "No dice!";
-                binmode (OUTPUT);
-                print OUTPUT $content;
-                close OUTPUT;
-                print $url, " >>> ", $helper, "\n";
+                if (!(-f "$helper"))
+                {
+                    my $url = $term;
+                    print ("Download :$url:\n");
+                    my $content = get $url;
+                    print ("Saw " . length ($content) . " bytes!\n");
+                    print ("Save in $helper\n");
+                    open OUTPUT, "> " . $helper or die "No dice!";
+                    binmode (OUTPUT);
+                    print OUTPUT $content;
+                    close OUTPUT;
+                    print $url, " >>> ", $helper, "\n";
+                }
+                else
+                {
+                    print ("Found $helper existed already..\n");
+                    if (-s "$helper" == 0)
+                    {
+                        `del "$helper"`;
+                    }
+                }
             }
         }
         if ($operation eq "grep")
@@ -898,5 +910,4 @@ use POSIX qw(strftime);
             }
         }
     }
-
 }

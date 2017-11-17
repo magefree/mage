@@ -279,6 +279,8 @@ public class ModernCardRenderer extends CardRenderer {
             // Just draw a brown rectangle
             drawCardBack(g);
         } else {
+            BufferedImage bufferedImage = new BufferedImage(300, 300, BufferedImage.TYPE_INT_RGB);
+
             // Set texture to paint with
             g.setPaint(getBackgroundPaint(cardView.getColor(), cardView.getCardTypes(), cardView.getSubTypes()));
 
@@ -348,8 +350,15 @@ public class ModernCardRenderer extends CardRenderer {
     @Override
     protected void drawArt(Graphics2D g) {
         if (artImage != null && !cardView.isFaceDown()) {
+
+            boolean useFaceArt = false;
+            if (faceArtImage != null) {
+                useFaceArt = true;
+            }
+
             // Invention rendering, art fills the entire frame
             if (useInventionFrame()) {
+                useFaceArt = false;
                 drawArtIntoRect(g,
                         borderWidth, borderWidth,
                         cardWidth - 2 * borderWidth, cardHeight - 2 * borderWidth,
@@ -360,6 +369,7 @@ public class ModernCardRenderer extends CardRenderer {
             Rectangle2D sourceRect = getArtRect();
 
             if (cardView.getMageObjectType() == MageObjectType.SPELL) {
+                useFaceArt = false;
                 ArtRect rect = cardView.getArtRect();
                 if (rect == ArtRect.SPLIT_FUSED) {
                     // Special handling for fused, draw the art from both halves stacked on top of one and other
@@ -380,10 +390,17 @@ public class ModernCardRenderer extends CardRenderer {
             }
 
             // Normal drawing of art from a source part of the card frame into the rect
-            drawArtIntoRect(g,
-                    totalContentInset + 1, totalContentInset + boxHeight,
-                    contentWidth - 2, typeLineY - totalContentInset - boxHeight,
-                    sourceRect, shouldPreserveAspect);
+            if (useFaceArt) {
+                drawFaceArtIntoRect(g,
+                        totalContentInset + 1, totalContentInset + boxHeight,
+                        contentWidth - 2, typeLineY - totalContentInset - boxHeight,
+                        sourceRect, shouldPreserveAspect);
+            } else {
+                drawArtIntoRect(g,
+                        totalContentInset + 1, totalContentInset + boxHeight,
+                        contentWidth - 2, typeLineY - totalContentInset - boxHeight,
+                        sourceRect, shouldPreserveAspect);
+            }
         }
     }
 
@@ -420,6 +437,7 @@ public class ModernCardRenderer extends CardRenderer {
             g.setPaint(new Color(255, 255, 255, 150));
         } else {
             g.setPaint(textboxPaint);
+
         }
         g.fillRect(
                 totalContentInset + 1, typeLineY,
@@ -475,6 +493,9 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Draw the transform circle
         int nameOffset = drawTransformationCircle(g, borderPaint);
+
+        // Draw the transform circle
+        nameOffset = drawTransformationCircle(g, borderPaint);
 
         // Draw the name line
         drawNameLine(g, cardView.getDisplayName(), manaCostString,

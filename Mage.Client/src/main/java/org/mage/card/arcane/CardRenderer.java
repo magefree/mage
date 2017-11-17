@@ -66,6 +66,9 @@ public abstract class CardRenderer {
     // The card image
     protected BufferedImage artImage;
 
+    // The face card image
+    protected BufferedImage faceArtImage;
+
     ///////////////////////////////////////////////////////////////////////////
     // Common layout metrics between all cards
     // Polygons for counters
@@ -289,14 +292,48 @@ public abstract class CardRenderer {
         try {
             BufferedImage subImg
                     = artImage.getSubimage(
-                    (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
-                    (int) artWidth, (int) artHeight);
+                            (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
+                            (int) artWidth, (int) artHeight);
             g.drawImage(subImg,
                     x, y,
                     (int) targetWidth, (int) targetHeight,
                     null);
         } catch (RasterFormatException e) {
             // At very small card sizes we may encounter a problem with rounding error making the rect not fit
+        }
+    }
+
+    protected void drawFaceArtIntoRect(Graphics2D g, int x, int y, int w, int h, Rectangle2D artRect, boolean shouldPreserveAspect) {
+        // Perform a process to make sure that the art is scaled uniformly to fill the frame, cutting
+        // off the minimum amount necessary to make it completely fill the frame without "squashing" it.
+        double fullCardImgWidth = faceArtImage.getWidth();
+        double fullCardImgHeight = faceArtImage.getHeight();
+        double artWidth = fullCardImgWidth;
+        double artHeight = fullCardImgHeight;
+        double targetWidth = w;
+        double targetHeight = h;
+        double targetAspect = targetWidth / targetHeight;
+        if (!shouldPreserveAspect) {
+            // No adjustment to art
+        } else if (targetAspect * artHeight < artWidth) {
+            // Trim off some width
+            artWidth = targetAspect * artHeight;
+        } else {
+            // Trim off some height
+            artHeight = artWidth / targetAspect;
+        }
+        try {
+            /*BufferedImage subImg
+                    = faceArtImage.getSubimage(
+                    (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
+                    (int) artWidth, (int) artHeight);*/
+            g.drawImage(faceArtImage,
+                    x, y,
+                    (int) targetWidth, (int) targetHeight,
+                    null);
+        } catch (RasterFormatException e) {
+            // At very small card sizes we may encounter a problem with rounding error making the rect not fit
+            System.out.println(e);
         }
     }
 
@@ -441,5 +478,11 @@ public abstract class CardRenderer {
     // is loaded and ready)
     public void setArtImage(Image image) {
         artImage = CardRendererUtils.toBufferedImage(image);
+    }
+
+    // Set the card art image (CardPanel will give it to us when it
+    // is loaded and ready)
+    public void setFaceArtImage(Image image) {
+        faceArtImage = CardRendererUtils.toBufferedImage(image);
     }
 }
