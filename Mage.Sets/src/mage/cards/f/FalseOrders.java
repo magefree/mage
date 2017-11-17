@@ -27,9 +27,12 @@
  */
 package mage.cards.f;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.effects.Effect;
@@ -40,6 +43,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
+import mage.constants.WatcherScope;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.ObjectPlayer;
@@ -48,10 +52,12 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -75,6 +81,7 @@ public class FalseOrders extends CardImpl {
         // Remove target creature defending player controls from combat. Creatures it was blocking that had become blocked by only that creature this combat become unblocked. You may have it block an attacking creature of your choice.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new FalseOrdersUnblockEffect());
+        this.getSpellAbility().addWatcher(new BecameBlockedByOnlyOneCreatureWatcher());
     }
 
     public FalseOrders(final FalseOrders card) {
@@ -117,22 +124,24 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
         if (controller != null && permanent != null) {
-            List<CombatGroup> combatGroups = new ArrayList<>();
-            // Check for creatures blocked by target creature
-            for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-                if (combatGroup.getBlockers().contains(permanent.getId())) {
-                    combatGroups.add(combatGroup);
-                }
-            }
+
             // Remove target creature from combat
             Effect effect = new RemoveFromCombatTargetEffect();
             effect.apply(game, source);
+
             // Make blocked creatures unblocked
-            for (CombatGroup combatGroup: combatGroups) {
-                if (combatGroup.getBlockers().isEmpty()) {
-                    combatGroup.setBlocked(false);
+            BecameBlockedByOnlyOneCreatureWatcher watcher = (BecameBlockedByOnlyOneCreatureWatcher) game.getState().getWatchers().get(BecameBlockedByOnlyOneCreatureWatcher.class.getSimpleName());
+            if (watcher != null) {
+                Set<CombatGroup> combatGroups = watcher.getBlockedOnlyByCreature(new MageObjectReference(permanent.getId(), game));
+                if (combatGroups != null) {
+                    for (CombatGroup combatGroup : combatGroups) {
+                        if (combatGroup != null) {
+                            combatGroup.setBlocked(false);
+                        }
+                    }
                 }
             }
+
             // Choose new creature to block
             if (permanent.isCreature()) {
                 if (controller.chooseUse(Outcome.Benefit, "Do you want " + permanent.getLogName() + " to block an attacking creature?", source, game)) {
@@ -148,7 +157,19 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
                     if (chosenPermanent != null && permanent != null && chosenPermanent.isCreature() && controller != null) {
                         CombatGroup chosenGroup = game.getCombat().findGroup(chosenPermanent.getId());
                         if (chosenGroup != null) {
-                            chosenGroup.addBlockerToGroup(permanent.getId(), controller.getId(), game);
+                            // Relevant ruling for Balduvian Warlord:
+                            // 7/15/2006 	If an attacking creature has an ability that triggers “When this creature becomes blocked,” 
+                            // it triggers when a creature blocks it due to the Warlord’s ability only if it was unblocked at that point.
+                            
+                            boolean notYetBlocked = true;
+                            if (!chosenGroup.getBlockers().isEmpty()) {
+                                notYetBlocked = false;
+                            }
+                            chosenGroup.addBlocker(permanent.getId(), controller.getId(), game);
+                            if (notYetBlocked) {
+                                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, chosenPermanent.getId(), null));
+                            }
+                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
                         }
                     }
                 }    
@@ -156,5 +177,55 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
             }
         }
         return false;
+    }
+}
+
+class BecameBlockedByOnlyOneCreatureWatcher extends Watcher {
+
+    private final Map<CombatGroup, MageObjectReference> blockedByOneCreature = new HashMap<>();
+
+    public BecameBlockedByOnlyOneCreatureWatcher() {
+        super(BecameBlockedByOnlyOneCreatureWatcher.class.getSimpleName(), WatcherScope.GAME);
+    }
+
+    public BecameBlockedByOnlyOneCreatureWatcher(final BecameBlockedByOnlyOneCreatureWatcher watcher) {
+        super(watcher);
+        this.blockedByOneCreature.putAll(watcher.blockedByOneCreature);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.BEGIN_COMBAT_STEP_PRE) {
+            this.blockedByOneCreature.clear();
+        }
+        else if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
+            CombatGroup combatGroup = game.getCombat().findGroup(event.getTargetId());
+            if (combatGroup != null) {
+                if (combatGroup.getBlockers().size() == 1) {
+                    blockedByOneCreature.put(combatGroup, new MageObjectReference(combatGroup.getBlockers().get(0), game));
+                }
+                else if (combatGroup.getBlockers().size() > 1) {
+                    blockedByOneCreature.remove(combatGroup);
+                }
+            }
+        }
+    }
+
+    public Set<CombatGroup> getBlockedOnlyByCreature(MageObjectReference creature) {
+        Set<CombatGroup> combatGroups = new HashSet<>();
+        for (Map.Entry<CombatGroup, MageObjectReference> entry : blockedByOneCreature.entrySet()) {
+          if (entry.getValue().equals(creature)) {
+            combatGroups.add(entry.getKey());
+          }
+        }
+        if (combatGroups.size() > 0) {
+            return combatGroups;
+        }
+        return null;
+    }
+
+    @Override
+    public BecameBlockedByOnlyOneCreatureWatcher copy() {
+        return new BecameBlockedByOnlyOneCreatureWatcher(this);
     }
 }
