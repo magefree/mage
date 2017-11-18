@@ -174,6 +174,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("High Market", 320, Rarity.RARE, mage.cards.h.HighMarket.class));
         cards.add(new SetCardInfo("High Seas", 83, Rarity.UNCOMMON, mage.cards.h.HighSeas.class));
         cards.add(new SetCardInfo("Highway Robber", 139, Rarity.COMMON, mage.cards.h.HighwayRobber.class));
+        cards.add(new SetCardInfo("Honor the Fallen", 21, Rarity.RARE, mage.cards.h.HonorTheFallen.class));
         cards.add(new SetCardInfo("Hoodwink", 84, Rarity.COMMON, mage.cards.h.Hoodwink.class));
         cards.add(new SetCardInfo("Horned Troll", 251, Rarity.COMMON, mage.cards.h.HornedTroll.class));
         cards.add(new SetCardInfo("Horn of Plenty", 298, Rarity.RARE, mage.cards.h.HornOfPlenty.class));
@@ -278,6 +279,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Sailmonger", 95, Rarity.UNCOMMON, mage.cards.s.Sailmonger.class));
         cards.add(new SetCardInfo("Sand Squid", 96, Rarity.RARE, mage.cards.s.SandSquid.class));
         cards.add(new SetCardInfo("Sandstone Needle", 326, Rarity.COMMON, mage.cards.s.SandstoneNeedle.class));
+        cards.add(new SetCardInfo("Saprazzan Bailiff", 97, Rarity.RARE, mage.cards.s.SaprazzanBailiff.class));
         cards.add(new SetCardInfo("Saprazzan Cove", 327, Rarity.UNCOMMON, mage.cards.s.SaprazzanCove.class));
         cards.add(new SetCardInfo("Saprazzan Heir", 99, Rarity.RARE, mage.cards.s.SaprazzanHeir.class));
         cards.add(new SetCardInfo("Saprazzan Legate", 100, Rarity.UNCOMMON, mage.cards.s.SaprazzanLegate.class));

@@ -195,6 +195,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Pox", 82, Rarity.RARE, mage.cards.p.Pox.class));
         cards.add(new SetCardInfo("Preacher", 24, Rarity.RARE, mage.cards.p.Preacher.class));
         cards.add(new SetCardInfo("Primal Order", 125, Rarity.RARE, mage.cards.p.PrimalOrder.class));
+        cards.add(new SetCardInfo("Psychic Purge", 45, Rarity.UNCOMMON, mage.cards.p.PsychicPurge.class));
         cards.add(new SetCardInfo("Psychic Venom", 46, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
         cards.add(new SetCardInfo("Pyroblast", 107, Rarity.COMMON, mage.cards.p.Pyroblast.class));
         cards.add(new SetCardInfo("Rabid Wombat", 126, Rarity.UNCOMMON, mage.cards.r.RabidWombat.class));
@@ -224,6 +225,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 189, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sylvan Library", 133, Rarity.RARE, mage.cards.s.SylvanLibrary.class));
         cards.add(new SetCardInfo("Tawnos's Coffin", 169, Rarity.RARE, mage.cards.t.TawnossCoffin.class));
+        cards.add(new SetCardInfo("Telekinesis", 52, Rarity.COMMON, mage.cards.t.Telekinesis.class));
         cards.add(new SetCardInfo("Thawing Glaciers", 180, Rarity.RARE, mage.cards.t.ThawingGlaciers.class));
         cards.add(new SetCardInfo("Thicket Basilisk", 134, Rarity.UNCOMMON, mage.cards.t.ThicketBasilisk.class));
         cards.add(new SetCardInfo("Thorn Thallid", 135, Rarity.COMMON, ThornThallid.class));

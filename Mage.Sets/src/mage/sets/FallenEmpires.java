@@ -152,6 +152,7 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Warrens", 122, Rarity.RARE, mage.cards.g.GoblinWarrens.class));
         cards.add(new SetCardInfo("Hand of Justice", 142, Rarity.RARE, mage.cards.h.HandOfJustice.class));
         cards.add(new SetCardInfo("Havenwood Battleground", 181, Rarity.UNCOMMON, mage.cards.h.HavenwoodBattleground.class));
+        cards.add(new SetCardInfo("Heroism", 143, Rarity.UNCOMMON, mage.cards.h.Heroism.class));
         cards.add(new SetCardInfo("High Tide", 35, Rarity.COMMON, HighTide.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("High Tide", 36, Rarity.COMMON, HighTide.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("High Tide", 37, Rarity.COMMON, HighTide.class, NON_FULL_USE_VARIOUS));
@@ -232,6 +233,7 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Thallid Devourer", 91, Rarity.UNCOMMON, mage.cards.t.ThallidDevourer.class));
         cards.add(new SetCardInfo("Thelonite Druid", 92, Rarity.UNCOMMON, mage.cards.t.TheloniteDruid.class));
         cards.add(new SetCardInfo("Thelonite Monk", 93, Rarity.RARE, mage.cards.t.TheloniteMonk.class));
+        cards.add(new SetCardInfo("Thelon's Curse", 95, Rarity.RARE, mage.cards.t.ThelonsCurse.class));
         cards.add(new SetCardInfo("Thorn Thallid", 96, Rarity.COMMON, ThornThallid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorn Thallid", 97, Rarity.COMMON, ThornThallid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorn Thallid", 98, Rarity.COMMON, ThornThallid.class, NON_FULL_USE_VARIOUS));
