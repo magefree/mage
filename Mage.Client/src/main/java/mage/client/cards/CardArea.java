@@ -53,7 +53,7 @@ public class CardArea extends JPanel implements MouseListener {
     private boolean reloaded = false;
     private final javax.swing.JLayeredPane cardArea;
     private final javax.swing.JScrollPane scrollPane;
-    private int yTextOffset;
+    private int yCardCaptionOffsetPercent = 0; // card caption offset (use for moving card caption view center, below mana icons -- for more good UI)
     private Dimension cardDimension;
     private int verticalCardOffset;
 
@@ -68,8 +68,6 @@ public class CardArea extends JPanel implements MouseListener {
         setGUISize();
         cardArea = new JLayeredPane();
         scrollPane.setViewportView(cardArea);
-        yTextOffset = 10;
-
     }
 
     public void cleanUp() {
@@ -103,10 +101,10 @@ public class CardArea extends JPanel implements MouseListener {
         this.reloaded = true;
         cardArea.removeAll();
         if (showCards != null && showCards.size() < 10) {
-            yTextOffset = 10;
+            yCardCaptionOffsetPercent = 8; // TODO: need to test
             loadCardsFew(showCards, bigCard, gameId);
         } else {
-            yTextOffset = 0;
+            yCardCaptionOffsetPercent = 0;
             loadCardsMany(showCards, bigCard, gameId);
         }
         cardArea.revalidate();
@@ -118,8 +116,10 @@ public class CardArea extends JPanel implements MouseListener {
     public void loadCardsNarrow(CardsView showCards, BigCard bigCard, UUID gameId) {
         this.reloaded = true;
         cardArea.removeAll();
-        yTextOffset = 0;
+
+        yCardCaptionOffsetPercent = 0; // TODO: need to test
         loadCardsMany(showCards, bigCard, gameId);
+
         cardArea.revalidate();
 
         this.revalidate();
@@ -152,7 +152,10 @@ public class CardArea extends JPanel implements MouseListener {
         cardArea.moveToFront(cardPanel);
         cardPanel.update(card);
         cardPanel.setCardBounds(rectangle.x, rectangle.y, cardDimension.width, cardDimension.height);
-        cardPanel.setTextOffset(yTextOffset);
+
+        // new card have same settings as current view
+        cardPanel.setCardCaptionTopOffset(yCardCaptionOffsetPercent);
+
         cardPanel.showCardTitle();
     }
 

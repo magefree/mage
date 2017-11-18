@@ -57,6 +57,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Acid Rain", 36, Rarity.RARE, mage.cards.a.AcidRain.class));
         cards.add(new SetCardInfo("Aesthir Glider", 176, Rarity.COMMON, AesthirGlider.class));
         cards.add(new SetCardInfo("Air Elemental", 37, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
+        cards.add(new SetCardInfo("Al-abara's Carpet", 177, Rarity.RARE, mage.cards.a.AlAbarasCarpet.class));
         cards.add(new SetCardInfo("Alaborn Musketeer", 1, Rarity.COMMON, mage.cards.a.AlabornMusketeer.class));
         cards.add(new SetCardInfo("Alaborn Trooper", 2, Rarity.COMMON, mage.cards.a.AlabornTrooper.class));
         cards.add(new SetCardInfo("Aladdin", 106, Rarity.RARE, mage.cards.a.Aladdin.class));

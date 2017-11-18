@@ -46,6 +46,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.turn.Step;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
@@ -129,6 +130,8 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
 }
 
 class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
+    
+    private boolean sameStep = true;
 
     public GrinningTotemMayPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
@@ -147,9 +150,11 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            if (game.getActivePlayerId().equals(source.getControllerId())) {
+            if (!sameStep && game.getActivePlayerId().equals(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
                 return true;
             }
+        } else {
+            sameStep = false;
         }
         return false;
     }
