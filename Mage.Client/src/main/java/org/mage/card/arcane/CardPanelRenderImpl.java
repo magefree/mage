@@ -398,7 +398,7 @@ public class CardPanelRenderImpl extends CardPanel {
         } else if (this.gameCard instanceof StackAbilityView) {
             return ImageCache.getMorphImage();
         } else {
-            return ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
+            return ImageCache.getCardbackImage();
         }
     }
 

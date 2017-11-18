@@ -25,8 +25,8 @@ public abstract class MageCard extends JPanel {
 
     public abstract CardView getOriginal();
 
-    // sets the vertical text offset for the card name on the image
-    public abstract void setTextOffset(int yOffset);
+    // sets the vertical text offset for the card name on the image, use to move caption to card center
+    public abstract void setCardCaptionTopOffset(int yOffsetPercent);
 
     public abstract void setCardBounds(int x, int y, int width, int height);
 
