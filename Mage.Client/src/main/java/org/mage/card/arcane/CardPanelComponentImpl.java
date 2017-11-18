@@ -182,8 +182,11 @@ public class CardPanelComponentImpl extends CardPanel {
         IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap((Function<Key, BufferedImage>) key -> createImage(key)));
     }
 
-    static private boolean canShowCardIcons(int fullWidth){
-        return (fullWidth > 60) && (fullWidth < 200);
+    static private boolean canShowCardIcons(int cardFullWidth, boolean cardHasImage){
+        // cards without images show icons and text always
+        // TODO: apply "card names on card" setting to icon too?
+        // TODO: fix card min-max size to hide (compare to settings size, not direct 60 and 200)
+        return ((cardFullWidth > 60) && (cardFullWidth < 200)) || (!cardHasImage);
     }
 
     private static class CardSizes{
@@ -474,7 +477,7 @@ public class CardPanelComponentImpl extends CardPanel {
         g.drawRect(ptText.getX(), ptText.getY(), ptText.getBounds().width, ptText.getBounds().height);
         //*/
 
-        if (getShowCastingCost() && !isAnimationPanel() && canShowCardIcons(getCardWidth())) {
+        if (getShowCastingCost() && !isAnimationPanel() && canShowCardIcons(getCardWidth(), hasImage)) {
 
             String manaCost = ManaSymbols.getStringManaCost(gameCard.getManaCost());
             int manaWidth = getManaWidth(manaCost);
@@ -562,7 +565,7 @@ public class CardPanelComponentImpl extends CardPanel {
         //int fontHeight = Math.round(cardHeight * (26f / 672));
         //boolean showText = (!isAnimationPanel() && fontHeight < 12);
 
-        boolean showText = !isAnimationPanel() && canShowCardIcons(cardWidth);
+        boolean showText = !isAnimationPanel() && canShowCardIcons(cardWidth, hasImage);
         titleText.setVisible(showText);
         ptText.setVisible(showText);
         fullImageText.setVisible(fullImagePath != null);
