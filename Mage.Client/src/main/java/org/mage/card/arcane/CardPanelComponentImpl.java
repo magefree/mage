@@ -429,10 +429,10 @@ public class CardPanelComponentImpl extends CardPanel {
             g2d.fillRoundRect(sizes.rectBorder.x + 1, sizes.rectBorder.y + 1, sizes.rectBorder.width - 2, sizes.rectBorder.height - 2, cornerSizeBorder, cornerSizeBorder);
         }
 
-        // draw attack border (inner part of border, not selection -- must always show attack)
+        // draw attack border (inner part of selection)
         if (key.canAttack) {
             g2d.setColor(new Color(0, 0, 255, 230));
-            g2d.fillRoundRect(sizes.rectBorder.x - 1, sizes.rectBorder.y - 1, sizes.rectBorder.width + 2, sizes.rectBorder.height + 2, cornerSizeBorder, cornerSizeBorder);
+            g2d.fillRoundRect(sizes.rectBorder.x + 1, sizes.rectBorder.y + 1, sizes.rectBorder.width - 2, sizes.rectBorder.height - 2, cornerSizeBorder, cornerSizeBorder);
         }
 
         // draw real card by component (see imagePanel and other layout's items)
