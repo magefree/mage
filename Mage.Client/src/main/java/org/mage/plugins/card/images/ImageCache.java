@@ -3,7 +3,9 @@ package org.mage.plugins.card.images;
 import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
 import com.google.common.collect.MapMaker;
-import java.awt.Graphics2D;
+
+import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -82,12 +84,14 @@ public final class ImageCache {
 
                         CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor);
 
+                        boolean cardback = false;
                         String path;
                         if (collectorId.isEmpty() || "0".equals(collectorId)) {
                             info.setToken(true);
                             path = CardImageUtils.generateTokenImagePath(info);
                             if (path == null) {
-                                path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename;
+                                cardback = true;
+                                path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename; // TODO: replace empty token by other default card, not cardback
                             }
                         } else {
                             path = CardImageUtils.generateImagePath(info);
@@ -102,6 +106,7 @@ public final class ImageCache {
                         }
 
                         if (thumbnail && path.endsWith(".jpg")) {
+                            // need thumbnail image
                             String thumbnailPath = buildThumbnailPath(path);
                             TFile thumbnailFile = null;
                             try {
@@ -119,19 +124,35 @@ public final class ImageCache {
                             if (exists) {
                                 LOGGER.debug("loading thumbnail for " + key + ", path=" + thumbnailPath);
                                 BufferedImage thumbnailImage = loadImage(thumbnailFile);
+
                                 if (thumbnailImage == null) { // thumbnail exists but broken for some reason
                                     LOGGER.warn("failed loading thumbnail for " + key + ", path=" + thumbnailPath
                                             + ", thumbnail file is probably broken, attempting to recreate it...");
                                     thumbnailImage = makeThumbnailByFile(key, file, thumbnailPath);
                                 }
+
+                                if (cardback){
+                                    // unknown tokens on opponent desk
+                                    thumbnailImage = getRoundCorner(thumbnailImage);
+                                }
+
                                 return thumbnailImage;
                             } else {
                                 return makeThumbnailByFile(key, file, thumbnailPath);
                             }
                         } else {
-                            BufferedImage image = loadImage(file);
-                            image = getWizardsCard(image);
-                            return image;
+                            if (cardback){
+                                // need cardback image
+                                BufferedImage image = loadImage(file);
+                                image = getRoundCorner(image);
+                                return image;
+                            }else {
+                                // need normal card image
+                                BufferedImage image = loadImage(file);
+                                image = getWizardsCard(image);
+                                image = getRoundCorner(image);
+                                return image;
+                            }
                         }
                     } else {
                         throw new RuntimeException(
@@ -149,6 +170,7 @@ public final class ImageCache {
             public BufferedImage makeThumbnailByFile(String key, TFile file, String thumbnailPath) {
                 BufferedImage image = loadImage(file);
                 image = getWizardsCard(image);
+                image = getRoundCorner(image);
                 if (image == null) {
                     return null;
                 }
@@ -239,7 +261,7 @@ public final class ImageCache {
                 info.setToken(true);
                 path = CardImageUtils.generateFullTokenImagePath(info);
                 if (path == null) {
-                    path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename;
+                    path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename; // TODO: replace empty token by other default card, not cardback
                 }
             } else {
                 path = CardImageUtils.generateImagePath(info);
@@ -257,6 +279,12 @@ public final class ImageCache {
     private ImageCache() {
     }
 
+    public static BufferedImage getCardbackImage() {
+        BufferedImage image = ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
+        image = getRoundCorner(image);
+        return image;
+    }
+
     public static BufferedImage getMorphImage() {
         CardDownloadData info = new CardDownloadData("Morph", "KTK", "0", false, 0, "KTK", "");
         info.setToken(true);
@@ -265,7 +293,10 @@ public final class ImageCache {
             return null;
         }
         TFile file = getTFile(path);
-        return loadImage(file);
+
+        BufferedImage image = loadImage(file);
+        image = getRoundCorner(image);
+        return image;
     }
 
     public static BufferedImage getManifestImage() {
@@ -276,7 +307,10 @@ public final class ImageCache {
             return null;
         }
         TFile file = getTFile(path);
-        return loadImage(file);
+
+        BufferedImage image = loadImage(file);
+        image = getRoundCorner(image);
+        return image;
     }
 
     private static String buildThumbnailPath(String path) {
@@ -287,6 +321,32 @@ public final class ImageCache {
             thumbnailPath = path.replace(".jpg", ".thumb.jpg");
         }
         return thumbnailPath;
+    }
+
+    public static BufferedImage getRoundCorner(BufferedImage image){
+        if (image != null) {
+            BufferedImage cornerImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+
+            // corner
+            float ROUNDED_CORNER_SIZE = 0.15f; // see CardPanelComponentImpl
+            int cornerSizeBorder = Math.max(4, Math.round(image.getWidth() * ROUNDED_CORNER_SIZE));
+
+            // corner mask
+            Graphics2D gg = cornerImage.createGraphics();
+            gg.setComposite(AlphaComposite.Src);
+            gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            gg.setColor(Color.white);
+            gg.fill(new RoundRectangle2D.Float(0, 0, cornerImage.getWidth(), cornerImage.getHeight(), cornerSizeBorder, cornerSizeBorder));
+
+            // image draw to buffer
+            gg.setComposite(AlphaComposite.SrcAtop);
+            gg.drawImage(image, 0, 0, null);
+            //gg.dispose();
+
+            return cornerImage;
+        } else {
+            return image;
+        }
     }
 
     public static BufferedImage getWizardsCard(BufferedImage image) {
@@ -404,6 +464,7 @@ public final class ImageCache {
 //        return alternateName + "#" + card.getExpansionSetCode() + "#" +card.getType()+ "#" + card.getCardNumber() + "#"
 //                + (card.getTokenSetCode() == null ? "":card.getTokenSetCode());
 //    }
+
     /**
      * Load image from file
      *
