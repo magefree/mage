@@ -91,7 +91,8 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
     private JPanel cardArea;
 
-    private int yCardCaptionOffsetPercent = 0; // card caption offset (use for moving card caption view center, below mana icons -- for more good UI)
+    // default offset, e.g. for battlefield
+    private int yCardCaptionOffsetPercent = 8; // card caption offset (use for moving card caption view center, below mana icons -- for more good UI)
 
     // if this is set, it's opened if the user right clicks on the card panel
     private JPopupMenu popupMenu;
