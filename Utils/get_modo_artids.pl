@@ -84,7 +84,7 @@ $fix_set_codes {"WL"} = "WTH";
     print ("Finished reading $count names\n"); 
 
 
-    #$vals = `find /I "<" *lient*`;
+    #$vals = `find /I "<" *client*`;
     $vals = `findstr /I "CARDNAME_STRING DIGITALOBJECT ARTID CLONE FRAMESTYLE " *lient* | find /I /V "_DO.xml"`;
 
     my $current_artid = "";
@@ -177,12 +177,67 @@ $fix_set_codes {"WL"} = "WTH";
     my $current_framestyle = "";
 
     my %framestyles;
-    $framestyles {1} = "001";
-    $framestyles {3} = "010";
-    $framestyles {31} = "010";
-    $framestyles {11} = "010";
-    $framestyles {14} = "010";
-    $framestyles {15} = "010";
+    $framestyles {1} = "001";  # Pre-modern cards
+    $framestyles {2} = "010";
+    $framestyles {3} = "010";  # M15 cards
+    $framestyles {4} = "013";
+    $framestyles {5} = "020";
+    $framestyles {6} = "010";
+    $framestyles {7} = "020";
+    $framestyles {8} = "010";
+    $framestyles {9} = "010";
+    $framestyles {10} = "030"; # "040";
+    $framestyles {11} = "010"; # Avatars
+    $framestyles {12} = "010";
+    $framestyles {13} = "050";
+    $framestyles {14} = "010"; # Tokens
+    $framestyles {15} = "010"; # Tokens as well
+    $framestyles {18} = "010";
+    $framestyles {19} = "030"; # "040";
+    $framestyles {19} = "010";
+    $framestyles {20} = "030";
+    $framestyles {22} = "010";
+    $framestyles {23} = "010";
+    $framestyles {24} = "010";
+    $framestyles {25} = "050";
+    $framestyles {26} = "010";
+    $framestyles {27} = "010";
+    $framestyles {28} = "010";
+    $framestyles {30} = "050";
+    $framestyles {31} = "010"; # New cards
+    $framestyles {34} = "030"; # "040";
+    $framestyles {35} = "030"; # "040";
+    $framestyles {36} = "050";
+    $framestyles {37} = "010";
+    $framestyles {38} = "010";
+    $framestyles {39} = "050";
+    $framestyles {42} = "010";
+    $framestyles {43} = "010";
+    $framestyles {45} = "030";
+    $framestyles {45} = "030"; # "040";
+    $framestyles {46} = "050";
+    $framestyles {47} = "020"; # Expedition lands
+    $framestyles {48} = "020";
+    $framestyles {49} = "030"; # "040";
+    $framestyles {50} = "030";
+    $framestyles {51} = "050";
+    $framestyles {52} = "010";
+    $framestyles {53} = "050";
+    $framestyles {54} = "010";
+
+
+    my %types;
+    my $current_type = "reg";
+    $types {4} = "flip";
+    $types {10} = "planeswk";
+    $types {19} = "planeswk";
+    $types {20} = "planeswk";
+    $types {34} = "planeswk";
+    $types {35} = "planeswk";
+    $types {45} = "planeswk";
+    $types {49} = "planeswk";
+    $types {50} = "planeswk";
+
 
     while ($vals =~ s/^(.*)\n//im)
     {
@@ -217,8 +272,19 @@ $fix_set_codes {"WL"} = "WTH";
         }
         if ($line =~ m/FRAMESTYLE value='([^']+)'/)
         {
-            $current_framestyle = "$1";
-            $current_framestyle = $framestyles {$current_framestyle};
+            my $val = $1;
+            $current_framestyle = $framestyles {$val};
+            $current_type = $types {$val};
+
+            if ($current_framestyle =~ m/^$/)
+            {
+                print (" ERROR: $current_framestyle not known: ($line) --- ");
+                print ("  http://mtgoclientdepot.onlinegaming.wizards.com/Graphics/Cards/Pics/0000$current_artid" . "_typ_$current_type" . "_sty_$current_framestyle.jpg\n");
+            }
+            if ($current_type =~ m/^$/)
+            {
+                $current_type = "reg";
+            }
         }
 
         if ($line =~ m/<\/DigitalObject/)
@@ -246,23 +312,23 @@ $fix_set_codes {"WL"} = "WTH";
                     $seen_artids {$current_artid} = "$current_set\\$current_name.jpg";
                     if ($current_artid < 10)
                     {
-                        print ("  echo \"1\" | cut.pl stdin \"http://mtgoclientdepot.onlinegaming.wizards.com/Graphics/Cards/Pics/0000$current_artid" . "_typ_reg_sty_$current_framestyle.jpg\" \"$current_set\\$current_name.jpg\" wget_image\n");
+                        print ("  echo \"1\" | cut.pl stdin \"http://mtgoclientdepot.onlinegaming.wizards.com/Graphics/Cards/Pics/0000$current_artid" . "_typ_$current_type" . "_sty_$current_framestyle.jpg\" \"$current_set\\$current_name.jpg\" wget_image\n");
                     }
                     if ($current_artid < 100)
                     {
-                        print ("  echo \"1\" | cut.pl stdin \"http://mtgoclientdepot.onlinegaming.wizards.com/Graphics/Cards/Pics/000$current_artid" . "_typ_reg_sty_$current_framestyle.jpg\" \"$current_set\\$current_name.jpg\" wget_image\n");
+                        print ("  echo \"1\" | cut.pl stdin \"http://mtgoclientdepot.onlinegaming.wizards.com/Graphics/Cards/Pics/000$current_artid" . "_typ_$current_type" . "_sty_$current_framestyle.jpg\" \"$current_set\\$current_name.jpg\" wget_image\n");
                     }
                     elsif ($current_artid < 1000)
                     {
-                        print ("  echo \"1\" | cut.pl stdin \"http://mtgoclientdepot.onlinegaming.wizards.com/Graphics/Cards/Pics/00$current_artid" . "_typ_reg_sty_$current_framestyle.jpg\" \"$current_set\\$current_name.jpg\" wget_image\n");
+                        print ("  echo \"1\" | cut.pl stdin \"http://mtgoclientdepot.onlinegaming.wizards.com/Graphics/Cards/Pics/00$current_artid" . "_typ_$current_type" . "_sty_$current_framestyle.jpg\" \"$current_set\\$current_name.jpg\" wget_image\n");
                     }
                     elsif ($current_artid < 10000)
                     {
-                        print ("  echo \"1\" | cut.pl stdin \"http://mtgoclientdepot.onlinegaming.wizards.com/Graphics/Cards/Pics/0$current_artid" . "_typ_reg_sty_$current_framestyle.jpg\" \"$current_set\\$current_name.jpg\" wget_image\n");
+                        print ("  echo \"1\" | cut.pl stdin \"http://mtgoclientdepot.onlinegaming.wizards.com/Graphics/Cards/Pics/0$current_artid" . "_typ_$current_type" . "_sty_$current_framestyle.jpg\" \"$current_set\\$current_name.jpg\" wget_image\n");
                     }
                     else
                     {
-                        print ("  echo \"1\" | cut.pl stdin \"http://mtgoclientdepot.onlinegaming.wizards.com/Graphics/Cards/Pics/$current_artid" . "_typ_reg_sty_$current_framestyle.jpg\" \"$current_set\\$current_name.jpg\" wget_image\n");
+                        print ("  echo \"1\" | cut.pl stdin \"http://mtgoclientdepot.onlinegaming.wizards.com/Graphics/Cards/Pics/$current_artid" . "_typ_$current_type" . "_sty_$current_framestyle.jpg\" \"$current_set\\$current_name.jpg\" wget_image\n");
                     }
                 }
                 else
@@ -276,6 +342,8 @@ $fix_set_codes {"WL"} = "WTH";
             $current_doc_id = "";
             $current_line = "";
             $current_name = "";
+            $current_type = "";
+            $current_framestyle = "";
         }
     }
 }
