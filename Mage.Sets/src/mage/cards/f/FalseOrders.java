@@ -27,6 +27,8 @@
  */
 package mage.cards.f;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -43,6 +45,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -140,37 +143,66 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
             // Choose new creature to block
             if (permanent.isCreature()) {
                 if (controller.chooseUse(Outcome.Benefit, "Do you want " + permanent.getLogName() + " to block an attacking creature?", source, game)) {
-                    TargetAttackingCreature target = new TargetAttackingCreature(1, 1, new FilterAttackingCreature(), true);
-                    if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
-                            controller.chooseTarget(outcome, target, source, game);
+                    // according to the following mail response from MTG Rules Management about False Orders:
+                    // "if Player A attacks Players B and C, Player B's creatures cannot block creatures attacking Player C"
+                    // therefore we need to single out creatures attacking the target blocker's controller (disappointing, I know)
+                    
+                    List<Permanent> list = new ArrayList<>();
+                    for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+                        if (combatGroup.getDefendingPlayerId().equals(permanent.getControllerId())) {
+                            for (UUID attackingCreatureId : combatGroup.getAttackers()) {
+                                Permanent targetsControllerAttacker = game.getPermanent(attackingCreatureId);
+                                list.add(targetsControllerAttacker);
+                            }
                         }
-                    } else {
-                        return true;
                     }
-                    Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
-                    if (chosenPermanent != null && permanent != null && chosenPermanent.isCreature() && controller != null) {
-                        CombatGroup chosenGroup = game.getCombat().findGroup(chosenPermanent.getId());
-                        if (chosenGroup != null) {
-                            // Relevant ruling for Balduvian Warlord:
-                            // 7/15/2006 	If an attacking creature has an ability that triggers “When this creature becomes blocked,” 
-                            // it triggers when a creature blocks it due to the Warlord’s ability only if it was unblocked at that point.
-                            
-                            boolean notYetBlocked = true;
-                            if (!chosenGroup.getBlockers().isEmpty()) {
-                                notYetBlocked = false;
+                    Player targetsController = game.getPlayer(permanent.getControllerId());
+                    if (targetsController != null) {
+                        FilterAttackingCreature filter = new FilterAttackingCreature("creature attacking " + targetsController.getLogName());
+                        filter.add(new PermanentInListPredicate(list));
+                        TargetAttackingCreature target = new TargetAttackingCreature(1, 1, filter, true);
+                        if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                            while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
+                                controller.chooseTarget(outcome, target, source, game);
                             }
-                            chosenGroup.addBlocker(permanent.getId(), controller.getId(), game);
-                            if (notYetBlocked) {
-                                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, chosenPermanent.getId(), null));
+                        } else {
+                            return true;
+                        }
+                        Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
+                        if (chosenPermanent != null && permanent != null && chosenPermanent.isCreature() && controller != null) {
+                            CombatGroup chosenGroup = game.getCombat().findGroup(chosenPermanent.getId());
+                            if (chosenGroup != null) {
+                                // Relevant ruling for Balduvian Warlord:
+                                // 7/15/2006 	If an attacking creature has an ability that triggers “When this creature becomes blocked,” 
+                                // it triggers when a creature blocks it due to the Warlord’s ability only if it was unblocked at that point.
+                                
+                                boolean notYetBlocked = chosenGroup.getBlockers().isEmpty();
+                                chosenGroup.addBlocker(permanent.getId(), controller.getId(), game);
+                                if (notYetBlocked) {
+                                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, chosenPermanent.getId(), null));
+                                }
+                                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
                             }
-                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
                         }
                     }
                 }    
-                return true;   
+                return true;
             }
         }
         return false;
+    }
+}
+
+class PermanentInListPredicate implements Predicate<Permanent> {
+
+    private final List<Permanent> permanents;
+
+    public PermanentInListPredicate(List<Permanent> permanents) {
+        this.permanents = permanents;
+    }
+
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return permanents.contains(input);
     }
 }
