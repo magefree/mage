@@ -48,7 +48,7 @@ public final class CardImageUtils {
         log.warn("Token image file not found: " + card.getSet() + " - " + card.getTokenSetCode() + " - " + card.getName());
         return null;
     }
-    
+
     /**
      *
      * @param card
@@ -202,6 +202,14 @@ public final class CardImageUtils {
         }
 
         return imageDir + TFile.separator + imageName;
+    }
+
+    public static String generateFaceImagePath(String cardname, String set) {
+        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
+        String imagesPath = Objects.equals(useDefault, "true") ? Constants.IO.imageBaseDir : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+        String imageDir = imagesPath;
+        String imageName = set + TFile.separator + cardname + ".jpg";
+        return imageDir + TFile.separator + "FACE" + TFile.separator + imageName;
     }
 
     public static String generateTokenDescriptorImagePath(CardDownloadData card) {

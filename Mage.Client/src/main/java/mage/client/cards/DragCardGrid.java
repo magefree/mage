@@ -1726,7 +1726,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // Create the card view
         final MageCard cardPanel = Plugins.instance.getMageCard(card, lastBigCard, new Dimension(getCardWidth(), getCardHeight()), null, true, true);
         cardPanel.update(card);
-        cardPanel.setTextOffset(0);
+        cardPanel.setCardCaptionTopOffset(0);
 
         // Remove mouse wheel listeners so that scrolling works
         // Scrolling works on all areas without cards or by using the scroll bar, that's enough

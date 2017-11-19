@@ -218,12 +218,14 @@ public class CardPanelRenderImpl extends CardPanel {
         }
     }
 
-
     // Map of generated images
     private final static Map<ImageKey, BufferedImage> IMAGE_CACHE = new MapMaker().softValues().makeMap();
 
     // The art image for the card, loaded in from the disk
     private BufferedImage artImage;
+
+    // The faceart image for the card, loaded in from the disk (based on artid from mtgo)
+    private BufferedImage faceArtImage;
 
     // Factory to generate card appropriate views
     private CardRendererFactory cardRendererFactory = new CardRendererFactory();
@@ -252,6 +254,8 @@ public class CardPanelRenderImpl extends CardPanel {
             // Use the art image and current rendered image from the card
             artImage = impl.artImage;
             cardRenderer.setArtImage(artImage);
+            faceArtImage = impl.faceArtImage;
+            cardRenderer.setFaceArtImage(faceArtImage);
             cardImage = impl.cardImage;
         }
     }
@@ -263,8 +267,8 @@ public class CardPanelRenderImpl extends CardPanel {
             // Try to get card image from cache based on our card characteristics
             ImageKey key
                     = new ImageKey(gameCard, artImage,
-                    getCardWidth(), getCardHeight(),
-                    isChoosable(), isSelected());
+                            getCardWidth(), getCardHeight(),
+                            isChoosable(), isSelected());
             cardImage = IMAGE_CACHE.computeIfAbsent(key, k -> renderCard());
 
             // No cached copy exists? Render one and cache it
@@ -277,7 +281,6 @@ public class CardPanelRenderImpl extends CardPanel {
     /**
      * Create an appropriate card renderer for the
      */
-
     /**
      * Render the card to a new BufferedImage at it's current dimensions
      *
@@ -315,6 +318,7 @@ public class CardPanelRenderImpl extends CardPanel {
         artImage = null;
         cardImage = null;
         cardRenderer.setArtImage(null);
+        cardRenderer.setFaceArtImage(null);
 
         // Stop animation
         tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
@@ -332,19 +336,26 @@ public class CardPanelRenderImpl extends CardPanel {
             Util.threadPool.submit(() -> {
                 try {
                     final BufferedImage srcImage;
+                    final BufferedImage faceArtSrcImage;
                     if (gameCard.isFaceDown()) {
                         // Nothing to do
                         srcImage = null;
+                        faceArtSrcImage = null;
                     } else if (getCardWidth() > THUMBNAIL_SIZE_FULL.width) {
                         srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
+                        faceArtSrcImage = ImageCache.getFaceImage(gameCard, getCardWidth(), getCardHeight());
                     } else {
                         srcImage = ImageCache.getThumbnail(gameCard);
+                        faceArtSrcImage = ImageCache.getFaceImage(gameCard, getCardWidth(), getCardHeight());
                     }
 
                     UI.invokeLater(() -> {
                         if (stamp == updateArtImageStamp) {
                             artImage = srcImage;
                             cardRenderer.setArtImage(srcImage);
+                            faceArtImage = faceArtSrcImage;
+                            cardRenderer.setFaceArtImage(faceArtSrcImage);
+
                             if (srcImage != null) {
                                 // Invalidate and repaint
                                 cardImage = null;
@@ -370,6 +381,7 @@ public class CardPanelRenderImpl extends CardPanel {
         cardImage = null;
         cardRenderer = cardRendererFactory.create(gameCard, isTransformed());
         cardRenderer.setArtImage(artImage);
+        cardRenderer.setFaceArtImage(faceArtImage);
 
         // Repaint
         repaint();
@@ -398,7 +410,7 @@ public class CardPanelRenderImpl extends CardPanel {
         } else if (this.gameCard instanceof StackAbilityView) {
             return ImageCache.getMorphImage();
         } else {
-            return ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
+            return ImageCache.getCardbackImage();
         }
     }
 

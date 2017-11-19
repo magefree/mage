@@ -451,6 +451,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("WMCQ", "World Magic Cup Qualifier");
         setsAliases.put("WTH", "Weatherlight");
         setsAliases.put("WWK", "Worldwake");
+        setsAliases.put("XLN", "Ixalan");
         setsAliases.put("ZEN", "Zendikar");
 
         languageAliases = new HashMap<>();

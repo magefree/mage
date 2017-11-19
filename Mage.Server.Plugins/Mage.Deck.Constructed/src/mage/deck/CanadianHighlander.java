@@ -117,9 +117,9 @@ public class CanadianHighlander extends Constructed {
                     || cn.equals("Mana Crypt")
                     || cn.equals("Mystical Tutor")
                     || cn.equals("Strip Mine")
-                    || cn.equals("Summoner’s Pact")
+                    || cn.equals("Summoner's Pact")
                     || cn.equals("Survival of the Fittest")
-                    || cn.equals("Umezawa’s Jitte")) {
+                    || cn.equals("Umezawa's Jitte")) {
                 totalPoints += 2;
                 invalid.put(entry.getKey(), " 2 points " + cn);
             }

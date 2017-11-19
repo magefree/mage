@@ -236,6 +236,7 @@ public class MageBook extends JComponent {
         for (int i = 0; i < Math.min(conf.CARDS_PER_PAGE / 2, size); i++) {
             Card card = cards.get(i).getMockCard();
             addCard(new CardView(card), bigCard, null, rectangle);
+
             rectangle = CardPosition.translatePosition(i, rectangle, conf);
         }
 
@@ -340,6 +341,8 @@ public class MageBook extends JComponent {
         jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 10);
         cardImg.update(card);
         cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.frameWidth, cardDimensions.frameHeight);
+
+        cardImg.setCardCaptionTopOffset(8); // card caption below real card caption to see full name even with mana icons
 
         boolean implemented = card.getRarity() != Rarity.NA;
 
