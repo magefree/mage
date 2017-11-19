@@ -327,6 +327,10 @@ public abstract class CardRenderer {
                     = faceArtImage.getSubimage(
                     (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
                     (int) artWidth, (int) artHeight);*/
+            RenderingHints rh = new RenderingHints(
+                    RenderingHints.KEY_INTERPOLATION,
+                    RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+            g.setRenderingHints(rh);
             g.drawImage(faceArtImage,
                     x, y,
                     (int) targetWidth, (int) targetHeight,
