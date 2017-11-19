@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.keyword.ChampionAbility;
 import mage.cards.CardImpl;
@@ -48,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class WanderwineProphets extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Merfolk");
 
     static {
         filter.add(new SubtypePredicate(SubType.MERFOLK));
@@ -64,8 +65,10 @@ public class WanderwineProphets extends CardImpl {
         // Champion a Merfolk
         this.addAbility(new ChampionAbility(this, SubType.MERFOLK, false));
         // Whenever Wanderwine Prophets deals combat damage to a player, you may sacrifice a Merfolk. If you do, take an extra turn after this one.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new AddExtraTurnControllerEffect(), true);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
+                new AddExtraTurnControllerEffect(),
+                new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true))
+        ), true);
         this.addAbility(ability);
 
     }
