@@ -219,6 +219,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Red Mana Battery", 236, Rarity.UNCOMMON, mage.cards.r.RedManaBattery.class));
         cards.add(new SetCardInfo("Reincarnation", 115, Rarity.UNCOMMON, mage.cards.r.Reincarnation.class));
         cards.add(new SetCardInfo("Relic Barrier", 237, Rarity.UNCOMMON, mage.cards.r.RelicBarrier.class));
+        cards.add(new SetCardInfo("Remove Enchantments", 202, Rarity.COMMON, mage.cards.r.RemoveEnchantments.class));
         cards.add(new SetCardInfo("Remove Soul", 72, Rarity.COMMON, mage.cards.r.RemoveSoul.class));
         cards.add(new SetCardInfo("Reset", 73, Rarity.UNCOMMON, mage.cards.r.Reset.class));
         cards.add(new SetCardInfo("Revelation", 116, Rarity.RARE, mage.cards.r.Revelation.class));
