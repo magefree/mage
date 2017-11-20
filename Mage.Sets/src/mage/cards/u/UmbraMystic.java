@@ -39,15 +39,12 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.permanent.AttachedToControlledPermanentPredicate;
 
 /**
  *
- * @author North
+ * @author North & L_J
  */
 public class UmbraMystic extends CardImpl {
 
@@ -55,6 +52,7 @@ public class UmbraMystic extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(new AttachedToControlledPermanentPredicate());
     }
 
     public UmbraMystic(UUID ownerId, CardSetInfo setInfo) {
@@ -76,26 +74,5 @@ public class UmbraMystic extends CardImpl {
     @Override
     public UmbraMystic copy() {
         return new UmbraMystic(this);
-    }
-}
-
-class UmbraMysticPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
-
-    @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
-        Permanent attachement = input.getObject();
-        if (attachement != null) {
-            Permanent permanent = game.getPermanent(attachement.getAttachedTo());
-            if (permanent != null && permanent.getControllerId().equals(input.getPlayerId())) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "Attached to permanents you control";
     }
 }
