@@ -38,8 +38,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AttachedToControlledPermanentPredicate;
 import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.target.TargetPermanent;
 
@@ -52,7 +53,8 @@ public class MiracleWorker extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Aura attached to a creature you control");
 
     static {
-        filter.add(new AttachedToPredicate(new FilterControlledCreaturePermanent()));
+        filter.add(new AttachedToControlledPermanentPredicate());
+        filter.add(new AttachedToPredicate(new FilterCreaturePermanent()));
         filter.add(new SubtypePredicate(SubType.AURA));
     }
 
