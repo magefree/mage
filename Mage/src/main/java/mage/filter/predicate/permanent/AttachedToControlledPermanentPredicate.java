@@ -25,54 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.u;
+package mage.filter.predicate.permanent;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.TotemArmorAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.AttachedToControlledPermanentPredicate;
+import mage.filter.predicate.ObjectPlayer;
+import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author North & L_J
  */
-public class UmbraMystic extends CardImpl {
+public class AttachedToControlledPermanentPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
 
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Auras attached to permanents you control");
+    @Override
+    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+        Permanent attachement = input.getObject();
+        if (attachement != null) {
+            Permanent permanent = game.getPermanent(attachement.getAttachedTo());
+            if (permanent != null && permanent.getControllerId().equals(input.getPlayerId())) {
+                return true;
+            }
+        }
 
-    static {
-        filter.add(new SubtypePredicate(SubType.AURA));
-        filter.add(new AttachedToControlledPermanentPredicate());
-    }
-
-    public UmbraMystic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WIZARD);
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Auras attached to permanents you control have totem armor.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new TotemArmorAbility(), Duration.WhileOnBattlefield, filter, false)));
-    }
-
-    public UmbraMystic(final UmbraMystic card) {
-        super(card);
+        return false;
     }
 
     @Override
-    public UmbraMystic copy() {
-        return new UmbraMystic(this);
+    public String toString() {
+        return "Attached to permanents you control";
     }
 }
