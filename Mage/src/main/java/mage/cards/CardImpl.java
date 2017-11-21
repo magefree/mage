@@ -37,6 +37,8 @@ import mage.MageObjectImpl;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.*;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
@@ -416,6 +418,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     ability.getTargets().clear();
                     ability.getTargets().add(new TargetCreaturePermanent(filter2));
                 }
+                break;
+            case SIMIC_MANIPULATOR: //Simic Manipulator only
+                xValue = 0;
+                for (Cost cost : ability.getCosts()) {
+                    if (cost instanceof RemoveVariableCountersTargetCost) {
+                        xValue = ((RemoveVariableCountersTargetCost) cost).getAmount();
+                        break;
+                    }
+                }
+                ability.getTargets().clear();
+                FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with power less than or equal to " + xValue);
+                newFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+                ability.addTarget(new TargetCreaturePermanent(newFilter));
                 break;
         }
     }
