@@ -76,7 +76,7 @@ class MunghaWurmEffect extends RestrictionUntapNotMoreThanEffect {
 
     public MunghaWurmEffect() {
         super(Duration.WhileOnBattlefield, 1, filter);
-        staticText = "Players can't untap more than one land during their untap steps";
+        staticText = "You can't untap more than one land during their untap steps";
     }
 
     public MunghaWurmEffect(final MunghaWurmEffect effect) {
@@ -85,8 +85,8 @@ class MunghaWurmEffect extends RestrictionUntapNotMoreThanEffect {
 
     @Override
     public boolean applies(Player player, Ability source, Game game) {
-        // applied to all players
-        return true;
+        // applied to controller
+        return event.getPlayerId().equals(source.getControllerId());
     }
 
     @Override
