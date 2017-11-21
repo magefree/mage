@@ -156,9 +156,8 @@ class RagingRiverEffect extends OneShotEffect {
                         FilterCreaturePermanent filter = new FilterCreaturePermanent();
                         Player defender = game.getPlayer(combatGroup.getDefendingPlayerId());
                         if (defender != null) {
-                            if (left.isEmpty() && right.isEmpty() && game.getOpponents(controller.getId()).size() < 2) {
-                                // shortcut in case of a single opponent not having any creatures (since he has no further way of acquiring blockers with left/right labels, 
-                                // and Portal Mage can't potentially redirect the creature into an opponent with labeled blockers)
+                            if (left.isEmpty() && right.isEmpty()) {
+                                // shortcut in case of no labeled blockers available
                                 filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
                             } else {
                                 List<Permanent> leftLog = new ArrayList<>();
