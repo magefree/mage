@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.keyword.CantBlockAloneAbility;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -244,6 +245,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                         blocker.markDamage(damage, attacker.getId(), game, true, true);
                     } else {
                         Player player = game.getPlayer(attacker.getControllerId());
+                        for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
+                            if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
+                                player = game.getPlayer(defendingPlayerId);
+                                break;
+                            }
+                        }
                         int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
                         blocker.markDamage(damageAssigned, attacker.getId(), game, true, true);
                         damage -= damageAssigned;
@@ -270,6 +277,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             return;
         }
         Player player = game.getPlayer(attacker.getControllerId());
+        for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
+            if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
+                player = game.getPlayer(defendingPlayerId);
+                break;
+            }
+        }
         int damage = getDamageValueFromPermanent(attacker, game);
         if (canDamage(attacker, first)) {
             // must be set before attacker damage marking because of effects like Test of Faith
@@ -463,6 +476,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             return;
         }
         Player player = game.getPlayer(playerId);
+        for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
+            if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
+                player = game.getPlayer(defendingPlayerId);
+                break;
+            }
+        }
         List<UUID> blockerList = new ArrayList<>(blockers);
         blockerOrder.clear();
         while (player.canRespond()) {
