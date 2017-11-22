@@ -276,10 +276,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (attacker == null) {
             return;
         }
+        boolean oldRuleDamage = false;
         Player player = game.getPlayer(attacker.getControllerId());
         for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
             if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
                 player = game.getPlayer(defendingPlayerId);
+                oldRuleDamage = true;
                 break;
             }
         }
@@ -297,6 +299,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
             Map<UUID, Integer> assigned = new HashMap<>();
             if (blocked) {
+                boolean excessDamageToDefender = true;
                 for (UUID blockerId : blockerOrder) {
                     Permanent blocker = game.getPermanent(blockerId);
                     if (blocker != null) {
@@ -311,12 +314,20 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                             damage = 0;
                             break;
                         }
-                        int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
+                        int damageAssigned = 0;
+                        if (!oldRuleDamage) {
+                            damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
+                        } else {
+                            damageAssigned = player.getAmount(0, damage, "Assign damage to " + blocker.getName(), game);
+                            if (damageAssigned < lethalDamage) {
+                                excessDamageToDefender = false; // all blockers need to have lethal damage assigned before it can trample over to the defender
+                            }
+                        }
                         assigned.put(blockerId, damageAssigned);
                         damage -= damageAssigned;
                     }
                 }
-                if (damage > 0 && hasTrample(attacker)) {
+                if (damage > 0 && hasTrample(attacker) && excessDamageToDefender) {
                     defenderDamage(attacker, damage, game);
                 } else if (!blockerOrder.isEmpty()) {
                     // Assign the damge left to first blocker
