@@ -34,14 +34,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedLastTurnWatcher;
@@ -59,9 +57,7 @@ public class HallsOfMist extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new GenericManaCost(1)));
 
         // Creatures that attacked during their controller's last turn can't attack.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackIfAttackedLastTurnEffect());
-        ability.addWatcher(new AttackedLastTurnWatcher());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false).setText("Creatures that attacked during their controller's last turn can't attack")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackIfAttackedLastTurnAllEffect()), new AttackedLastTurnWatcher());
     }
 
     public HallsOfMist(final HallsOfMist card) {
@@ -74,19 +70,20 @@ public class HallsOfMist extends CardImpl {
     }
 }
 
-class CantAttackIfAttackedLastTurnEffect extends RestrictionEffect {
+class CantAttackIfAttackedLastTurnAllEffect extends RestrictionEffect {
 
-    public CantAttackIfAttackedLastTurnEffect() {
+    public CantAttackIfAttackedLastTurnAllEffect() {
         super(Duration.WhileOnBattlefield);
+        this.staticText = "Creatures that attacked during their controller's last turn can't attack";
     }
 
-    public CantAttackIfAttackedLastTurnEffect(final CantAttackIfAttackedLastTurnEffect effect) {
+    public CantAttackIfAttackedLastTurnAllEffect(final CantAttackIfAttackedLastTurnAllEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId());
+        return permanent.isCreature();
     }
 
     @Override
@@ -103,8 +100,8 @@ class CantAttackIfAttackedLastTurnEffect extends RestrictionEffect {
     }
 
     @Override
-    public CantAttackIfAttackedLastTurnEffect copy() {
-        return new CantAttackIfAttackedLastTurnEffect(this);
+    public CantAttackIfAttackedLastTurnAllEffect copy() {
+        return new CantAttackIfAttackedLastTurnAllEffect(this);
     }
 
 }
