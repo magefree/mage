@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -40,12 +39,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.watchers.Watcher;
+import mage.watchers.common.AttackedLastTurnWatcher;
 
 /**
  *
@@ -61,7 +58,7 @@ public class GiantTurtle extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Giant Turtle can't attack if it attacked during your last turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GiantTurtleCantAttackEffect()), new GiantTurtleWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackIfAttackedLastTurnEffect()), new AttackedLastTurnWatcher());
     }
 
     public GiantTurtle(final GiantTurtle card) {
@@ -74,14 +71,14 @@ public class GiantTurtle extends CardImpl {
     }
 }
 
-class GiantTurtleCantAttackEffect extends RestrictionEffect {
+class CantAttackIfAttackedLastTurnEffect extends RestrictionEffect {
 
-    public GiantTurtleCantAttackEffect() {
+    public CantAttackIfAttackedLastTurnEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack if it attacked during your last turn";
     }
 
-    public GiantTurtleCantAttackEffect(final GiantTurtleCantAttackEffect effect) {
+    public CantAttackIfAttackedLastTurnEffect(final CantAttackIfAttackedLastTurnEffect effect) {
         super(effect);
     }
 
@@ -92,51 +89,20 @@ class GiantTurtleCantAttackEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
-        GiantTurtleWatcher watcher = (GiantTurtleWatcher) game.getState().getWatchers().get(GiantTurtleWatcher.class.getSimpleName());
-        for (MageObjectReference mor : watcher.getAttackedLastTurnCreatures()) {
-            if (attacker.equals(mor.getPermanent(game)) && attacker.getZoneChangeCounter(game) == mor.getZoneChangeCounter()) {
+        AttackedLastTurnWatcher watcher = (AttackedLastTurnWatcher) game.getState().getWatchers().get(AttackedLastTurnWatcher.class.getSimpleName());
+        if (watcher != null) {
+            Set<MageObjectReference> attackingCreatures = watcher.getAttackedLastTurnCreatures(attacker.getControllerId());
+            MageObjectReference mor = new MageObjectReference(attacker, game);
+            if (attackingCreatures.contains(mor)) {
                 return false;
             }
         }
-        return false;
+        return true;
     }
 
     @Override
-    public GiantTurtleCantAttackEffect copy() {
-        return new GiantTurtleCantAttackEffect(this);
+    public CantAttackIfAttackedLastTurnEffect copy() {
+        return new CantAttackIfAttackedLastTurnEffect(this);
     }
 
-}
-
-class GiantTurtleWatcher extends Watcher {
-
-    public final Set<MageObjectReference> attackedLastTurnCreatures = new HashSet<>();
-
-    public GiantTurtleWatcher() {
-        super(GiantTurtleWatcher.class.getSimpleName(), WatcherScope.GAME);
-    }
-
-    public GiantTurtleWatcher(final GiantTurtleWatcher watcher) {
-        super(watcher);
-        this.attackedLastTurnCreatures.addAll(watcher.attackedLastTurnCreatures);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            this.attackedLastTurnCreatures.add(new MageObjectReference(event.getSourceId(), game));
-        }
-        if (event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE) {
-            this.attackedLastTurnCreatures.clear();
-        }
-    }
-
-    public Set<MageObjectReference> getAttackedLastTurnCreatures() {
-        return this.attackedLastTurnCreatures;
-    }
-
-    @Override
-    public GiantTurtleWatcher copy() {
-        return new GiantTurtleWatcher(this);
-    }
 }
