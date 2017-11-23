@@ -80,7 +80,7 @@ public class AttackedLastTurnWatcher extends Watcher {
                 attackedLastTurnCreatures.remove(activePlayer);
             }
         }
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
+        if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS) {
             UUID attackingPlayer = game.getCombat().getAttackingPlayerId();
             Set<MageObjectReference> attackingCreatures = getAttackedThisTurnCreatures(attackingPlayer);
             for (UUID attackerId : game.getCombat().getAttackers()) {
