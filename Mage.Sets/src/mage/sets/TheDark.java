@@ -120,6 +120,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Riptide", 34, Rarity.COMMON, mage.cards.r.Riptide.class));
         cards.add(new SetCardInfo("Safe Haven", 115, Rarity.RARE, mage.cards.s.SafeHaven.class));
         cards.add(new SetCardInfo("Savaen Elves", 47, Rarity.COMMON, mage.cards.s.SavaenElves.class));
+        cards.add(new SetCardInfo("Scarecrow", 105, Rarity.RARE, mage.cards.s.Scarecrow.class));
         cards.add(new SetCardInfo("Scarwood Bandits", 48, Rarity.RARE, mage.cards.s.ScarwoodBandits.class));
         cards.add(new SetCardInfo("Scarwood Goblins", 119, Rarity.COMMON, mage.cards.s.ScarwoodGoblins.class));
         cards.add(new SetCardInfo("Scarwood Hag", 49, Rarity.UNCOMMON, mage.cards.s.ScarwoodHag.class));
@@ -133,6 +134,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Sunken City", 35, Rarity.COMMON, mage.cards.s.SunkenCity.class));
         cards.add(new SetCardInfo("Tivadar's Crusade", 91, Rarity.UNCOMMON, mage.cards.t.TivadarsCrusade.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 109, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
+        cards.add(new SetCardInfo("Tower of Coireall", 110, Rarity.RARE, mage.cards.t.TowerOfCoireall.class));
         cards.add(new SetCardInfo("Tracker", 52, Rarity.RARE, mage.cards.t.Tracker.class));
         cards.add(new SetCardInfo("Uncle Istvan", 16, Rarity.UNCOMMON, mage.cards.u.UncleIstvan.class));
         cards.add(new SetCardInfo("Venom", 53, Rarity.COMMON, mage.cards.v.Venom.class));
