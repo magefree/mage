@@ -68,6 +68,11 @@ public final class CardRendererUtils {
         g.fillOval(x + 2, y + 2, bevel * 2 - 4, h - 4);
         g.fillOval(x + 2 + w - bevel * 2, y + 2, bevel * 2 - 4, h - 4);
         g.fillRect(x + bevel, y + 2, w - 2 * bevel, h - 4);
+        g.setPaint(border);        
+        g.setColor(g.getColor().brighter().brighter());
+        g.drawLine(x + 1 + bevel, y + 1, x + 1 + bevel + w - 2 * bevel - 2, y + 1);
+        g.setColor(g.getColor().darker().darker());
+        g.drawLine(x + 1 + bevel, y + h - 2, x + 1 + bevel + w - 2 * bevel - 2, y + h - 2);
     }
 
     // Get the width of a mana cost rendered with ManaSymbols.draw
