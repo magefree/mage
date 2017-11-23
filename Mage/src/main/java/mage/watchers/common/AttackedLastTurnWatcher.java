@@ -81,7 +81,7 @@ public class AttackedLastTurnWatcher extends Watcher {
         }
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
             UUID attackingPlayer = game.getCombat().getAttackingPlayerId();
-            Set<MageObjectReference> attackingCreatures = getAttackedLastTurnCreatures(attackingPlayer);
+            Set<MageObjectReference> attackingCreatures = getAttackedThisTurnCreatures(attackingPlayer);
             for (UUID attackerId : game.getCombat().getAttackers()) {
                 Permanent attacker = game.getPermanent(attackerId);
                 if (attacker != null) {
@@ -96,6 +96,13 @@ public class AttackedLastTurnWatcher extends Watcher {
     public Set<MageObjectReference> getAttackedLastTurnCreatures(UUID combatPlayerId) {
         if (attackedLastTurnCreatures.get(combatPlayerId) != null) {
             return attackedLastTurnCreatures.get(combatPlayerId);
+        }
+        return new HashSet<>();
+    }
+
+    public Set<MageObjectReference> getAttackedThisTurnCreatures(UUID combatPlayerId) {
+        if (attackedThisTurnCreatures.get(combatPlayerId) != null) {
+            return attackedThisTurnCreatures.get(combatPlayerId);
         }
         return new HashSet<>();
     }
