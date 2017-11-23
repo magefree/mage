@@ -71,12 +71,13 @@ public class AttackedLastTurnWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE) {
             UUID activePlayer = game.getActivePlayerId();
-            if (attackedLastTurnCreatures.containsKey(activePlayer)) {
-                if (attackedThisTurnCreatures.containsKey(activePlayer)) {
-                    attackedThisTurnCreatures.remove(activePlayer);
-                } else {
-                    attackedLastTurnCreatures.remove(activePlayer);
+            if (attackedThisTurnCreatures.containsKey(activePlayer)) {
+                if (attackedThisTurnCreatures.get(activePlayer) != null) {
+                    attackedLastTurnCreatures.put(activePlayer, getAttackedThisTurnCreatures(activePlayer));
                 }
+                attackedThisTurnCreatures.remove(activePlayer);
+            } else { // } else if (attackedLastTurnCreatures.containsKey(activePlayer)) {
+                attackedLastTurnCreatures.remove(activePlayer);
             }
         }
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
@@ -88,7 +89,6 @@ public class AttackedLastTurnWatcher extends Watcher {
                     attackingCreatures.add(new MageObjectReference(attacker, game));
                 }
             }
-            attackedLastTurnCreatures.put(attackingPlayer, attackingCreatures);
             attackedThisTurnCreatures.put(attackingPlayer, attackingCreatures);
         }
     }
