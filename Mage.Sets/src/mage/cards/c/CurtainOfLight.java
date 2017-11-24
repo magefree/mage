@@ -109,6 +109,7 @@ class CurtainOfLightEffect extends OneShotEffect {
             CombatGroup combatGroup = game.getCombat().findGroup(permanent.getId());
             if (combatGroup != null) {
                 combatGroup.setBlocked(true);
+                game.informPlayers(permanent.getLogName() + " has become blocked");
                 return true;
             }
         }
