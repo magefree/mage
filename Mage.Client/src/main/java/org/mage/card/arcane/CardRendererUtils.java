@@ -16,8 +16,8 @@ import java.util.regex.Pattern;
 
 /**
  * @author stravant@gmail.com
- *         <p>
- *         Various static utilities for use in the card renderer
+ * <p>
+ * Various static utilities for use in the card renderer
  */
 public final class CardRendererUtils {
 
@@ -51,6 +51,38 @@ public final class CardRendererUtils {
         // Return the buffered image
         return bimage;
     }
+    
+    private static Color abitbrighter(Color c) {
+        int r = c.getRed();
+        int g = c.getGreen();
+        int b = c.getBlue();
+        int alpha = c.getAlpha();
+
+        int plus_r = (int) ((255 - r) / 2);
+        int plus_g = (int) ((255 - g) / 2);
+        int plus_b = (int) ((255 - b) / 2);
+
+        return new Color(r + plus_r,
+                         g + plus_g,
+                         b + plus_b,
+                         alpha);
+    }
+    
+    private static Color abitdarker(Color c) {
+        int r = c.getRed();
+        int g = c.getGreen();
+        int b = c.getBlue();
+        int alpha = c.getAlpha();
+
+        int plus_r = (int) ((255 - r) / 2);
+        int plus_g = (int) ((255 - g) / 2);
+        int plus_b = (int) ((255 - b) / 2);
+
+        return new Color(r - plus_r,
+                         g - plus_g,
+                         b - plus_b,
+                         alpha);
+    }    
 
     // Draw a rounded box with a 2-pixel border
     // Used on various card parts.
@@ -68,10 +100,11 @@ public final class CardRendererUtils {
         g.fillOval(x + 2, y + 2, bevel * 2 - 4, h - 4);
         g.fillOval(x + 2 + w - bevel * 2, y + 2, bevel * 2 - 4, h - 4);
         g.fillRect(x + bevel, y + 2, w - 2 * bevel, h - 4);
-        g.setPaint(border);        
-        g.setColor(g.getColor().brighter().brighter());
+        g.setPaint(fill);
+        g.setColor(abitbrighter(g.getColor()));
         g.drawLine(x + 1 + bevel, y + 1, x + 1 + bevel + w - 2 * bevel - 2, y + 1);
-        g.setColor(g.getColor().darker().darker());
+        g.setPaint(fill);
+        g.setColor(abitdarker(g.getColor()));
         g.drawLine(x + 1 + bevel, y + h - 2, x + 1 + bevel + w - 2 * bevel - 2, y + h - 2);
     }
 
