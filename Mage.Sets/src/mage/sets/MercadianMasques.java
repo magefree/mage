@@ -123,6 +123,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Insect", 238, Rarity.COMMON, mage.cards.d.DeadlyInsect.class));
         cards.add(new SetCardInfo("Deathgazer", 130, Rarity.UNCOMMON, mage.cards.d.Deathgazer.class));
         cards.add(new SetCardInfo("Deepwood Drummer", 239, Rarity.COMMON, mage.cards.d.DeepwoodDrummer.class));
+        cards.add(new SetCardInfo("Deepwood Elder", 240, Rarity.RARE, mage.cards.d.DeepwoodElder.class));
         cards.add(new SetCardInfo("Deepwood Ghoul", 131, Rarity.COMMON, mage.cards.d.DeepwoodGhoul.class));
         cards.add(new SetCardInfo("Deepwood Legate", 132, Rarity.UNCOMMON, mage.cards.d.DeepwoodLegate.class));
         cards.add(new SetCardInfo("Deepwood Tantiv", 241, Rarity.UNCOMMON, mage.cards.d.DeepwoodTantiv.class));
