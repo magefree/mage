@@ -341,7 +341,7 @@ public final class ImageCache {
             // image draw to buffer
             gg.setComposite(AlphaComposite.SrcAtop);
             gg.drawImage(image, 0, 0, null);
-            //gg.dispose();
+            gg.dispose();
 
             return cornerImage;
         } else {

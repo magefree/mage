@@ -1,11 +1,10 @@
 package org.mage.card.arcane;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
@@ -16,18 +15,23 @@ import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
+
 import mage.cards.repository.ExpansionRepository;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
+import org.apache.batik.dom.svg.SVGDOMImplementation;
+import org.apache.batik.transcoder.TranscoderException;
+import org.apache.batik.transcoder.TranscoderInput;
+import org.apache.batik.transcoder.TranscoderOutput;
+import org.apache.batik.transcoder.TranscodingHints;
+import org.apache.batik.transcoder.image.ImageTranscoder;
+import org.apache.batik.util.SVGConstants;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.constants.Constants;
 
@@ -89,7 +93,7 @@ public final class ManaSymbols {
             setImages.put(set, rarityImages);
 
             for (String rarityCode : codes) {
-                File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET + set + '-' + rarityCode + ".jpg");
+                File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET + File.separator + set + '-' + rarityCode + ".jpg");
                 try {
                     Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                     int width = image.getWidth(null);
@@ -114,11 +118,11 @@ public final class ManaSymbols {
                 }
 
                 for (String code : codes) {
-                    file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL + set + '-' + code + ".png");
+                    file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL + File.separator + set + '-' + code + ".png");
                     if (file.exists()) {
                         continue;
                     }
-                    file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET + set + '-' + code + ".jpg");
+                    file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET + File.separator + set + '-' + code + ".jpg");
                     Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                     try {
                         int width = image.getWidth(null);
@@ -150,7 +154,7 @@ public final class ManaSymbols {
             if (!file.exists()) {
                 break;
             }
-            file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL + set + "-C.png");
+            file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL + File.separator + set + "-C.png");
             try {
                 Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                 int width = image.getWidth(null);
@@ -161,37 +165,179 @@ public final class ManaSymbols {
         }
     }
 
-    private static boolean loadSymbolsImages(int size) {
-        boolean fileErrors = false;
-        HashMap<String, BufferedImage> sizedSymbols = new HashMap<>();
+    public static BufferedImage loadSVG(File svgFile, int resizeToWidth, int resizeToHeight) throws IOException {
+
+        // load SVG image
+        // base loader code: https://stackoverflow.com/questions/11435671/how-to-get-a-buffererimage-from-a-svg
+        // resize code: https://vibranttechie.wordpress.com/2015/05/15/svg-loading-to-javafx-stage-and-auto-scaling-when-stage-resize/
+
+        final BufferedImage[] imagePointer = new BufferedImage[1];
+
+        // Rendering hints can't be set programatically, so
+        // we override defaults with a temporary stylesheet.
+        // These defaults emphasize quality and precision, and
+        // are more similar to the defaults of other SVG viewers.
+        // SVG documents can still override these defaults.
+        String css = "svg {" +
+                "shape-rendering: geometricPrecision;" +
+                "text-rendering:  geometricPrecision;" +
+                "color-rendering: optimizeQuality;" +
+                "image-rendering: optimizeQuality;" +
+                "}";
+        File cssFile = File.createTempFile("batik-default-override-", ".css");
+        FileWriter w = new FileWriter(cssFile);
+        w.write(css);
+        w.close();
+
+        TranscodingHints transcoderHints = new TranscodingHints();
+
+        // resize
+        if(resizeToWidth > 0){
+            transcoderHints.put(ImageTranscoder.KEY_WIDTH, (float)resizeToWidth); //your image width
+        }
+        if(resizeToHeight > 0){
+            transcoderHints.put(ImageTranscoder.KEY_HEIGHT, (float)resizeToHeight); //your image height
+        }
+
+        transcoderHints.put(ImageTranscoder.KEY_XML_PARSER_VALIDATING, Boolean.FALSE);
+        transcoderHints.put(ImageTranscoder.KEY_DOM_IMPLEMENTATION,
+                SVGDOMImplementation.getDOMImplementation());
+        transcoderHints.put(ImageTranscoder.KEY_DOCUMENT_ELEMENT_NAMESPACE_URI,
+                SVGConstants.SVG_NAMESPACE_URI);
+        transcoderHints.put(ImageTranscoder.KEY_DOCUMENT_ELEMENT, "svg");
+        transcoderHints.put(ImageTranscoder.KEY_USER_STYLESHEET_URI, cssFile.toURI().toString());
+
+        try {
+            TranscoderInput input = new TranscoderInput(new FileInputStream(svgFile));
+
+            ImageTranscoder t = new ImageTranscoder() {
+
+                @Override
+                public BufferedImage createImage(int w, int h) {
+                    return new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+                }
+
+                @Override
+                public void writeImage(BufferedImage image, TranscoderOutput out)
+                        throws TranscoderException {
+                    imagePointer[0] = image;
+                }
+            };
+            t.setTranscodingHints(transcoderHints);
+            t.transcode(input, null);
+        }
+        catch (TranscoderException ex) {
+            // Requires Java 6
+            ex.printStackTrace();
+            throw new IOException("Couldn't convert " + svgFile);
+        }
+        finally {
+            cssFile.delete();
+        }
+
+        return imagePointer[0];
+    }
+
+    private static File getSymbolFileNameAsSVG(String symbol){
+        return new File(getSymbolsPath() + Constants.RESOURCE_PATH_MANA_SVG + '/' + symbol + ".svg");
+    }
+
+    private static BufferedImage loadSymbolAsSVG(String symbol, int resizeToWidth, int resizeToHeight){
+
+        File sourceFile = getSymbolFileNameAsSVG(symbol);
+        return loadSymbolAsSVG(sourceFile, resizeToWidth, resizeToHeight);
+    }
+
+    private static BufferedImage loadSymbolAsSVG(File sourceFile, int resizeToWidth, int resizeToHeight){
+        try{
+            // no need to resize svg (lib already do it on load)
+            return loadSVG(sourceFile, resizeToWidth, resizeToHeight);
+
+        } catch (Exception e) {
+            LOGGER.error("Can't load svg symbol: " + sourceFile.getPath() + File.separator + sourceFile.getName());
+            return null;
+        }
+    }
+
+    private static File getSymbolFileNameAsGIF(String symbol, int size){
         String resourcePath = Constants.RESOURCE_PATH_MANA_SMALL;
         if (size > 25) {
             resourcePath = Constants.RESOURCE_PATH_MANA_LARGE;
         } else if (size > 15) {
             resourcePath = Constants.RESOURCE_PATH_MANA_MEDIUM;
         }
-        for (String symbol : symbols) {
-            File file = new File(getSymbolsPath() + resourcePath + '/' + symbol + ".gif");
-            try {
 
-                if (size == 15 || size == 25) {
-                    BufferedImage notResized = ImageIO.read(file);
-                    sizedSymbols.put(symbol, notResized);
-                } else {
-                    Rectangle r = new Rectangle(size, size);
-                    //Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
-                    BufferedImage image = ImageIO.read(file);
-                    //BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                    if (image != null) {
-                        BufferedImage resized = ImageHelper.getResizedImage(image, r);
-                        sizedSymbols.put(symbol, resized);
-                    }
+        return new File(getSymbolsPath() + resourcePath + '/' + symbol + ".gif");
+    }
+
+    private static BufferedImage loadSymbolAsGIF(String symbol, int resizeToWidth, int resizeToHeight){
+        File file = getSymbolFileNameAsGIF(symbol, resizeToWidth);
+        return loadSymbolAsGIF(file, resizeToWidth, resizeToHeight);
+    }
+
+    private static BufferedImage loadSymbolAsGIF(File sourceFile, int resizeToWidth, int resizeToHeight){
+
+        BufferedImage image = null;
+
+        try {
+            if ((resizeToWidth == 15) || (resizeToWidth == 25)){
+                // normal size
+                image = ImageIO.read(sourceFile);
+            }else{
+                // resize size
+                image = ImageIO.read(sourceFile);
+
+                if (image != null) {
+                    Rectangle r = new Rectangle(resizeToWidth, resizeToHeight);
+                    image = ImageHelper.getResizedImage(image, r);
                 }
-            } catch (IOException e) {
-                LOGGER.error("Error for symbol:" + symbol);
+            }
+        } catch (IOException e) {
+            LOGGER.error("Can't load gif symbol: " + sourceFile.getPath() + File.separator + sourceFile.getName());
+            return null;
+        }
+
+        return  image;
+    }
+
+    private static boolean loadSymbolsImages(int size) {
+        // load all symbols to cash
+        // priority: SVG -> GIF
+        // gif remain for backward compatibility
+
+        boolean fileErrors = false;
+
+        HashMap<String, BufferedImage> sizedSymbols = new HashMap<>();
+        for (String symbol : symbols) {
+
+            BufferedImage image = null;
+            File file = null;
+
+            // svg
+            file = getSymbolFileNameAsSVG(symbol);
+            if (file.exists()) {
+                image = loadSymbolAsSVG(file, size, size);
+            }
+
+            // gif
+            if (image == null) {
+                LOGGER.warn("SVG symbol can't be load: " + file.getPath() + File.separator + file.getName());
+
+                file = getSymbolFileNameAsGIF(symbol, size);
+                if (file.exists()) {
+                    image = loadSymbolAsGIF(file, size, size);
+                }
+            }
+
+            // save
+            if (image != null) {
+                sizedSymbols.put(symbol, image);
+            } else {
                 fileErrors = true;
+                LOGGER.warn("SVG or GIF symbol can''t be load: " + symbol);
             }
         }
+
         manaImages.put(size, sizedSymbols);
         return !fileErrors;
     }
@@ -359,3 +505,4 @@ public final class ManaSymbols {
         return sizedSymbols.get(symbol);
     }
 }
+
