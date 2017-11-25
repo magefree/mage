@@ -74,9 +74,9 @@ public final class CardRendererUtils {
         int b = c.getBlue();
         int alpha = c.getAlpha();
 
-        int plus_r = (int) ((255 - r) / 2);
-        int plus_g = (int) ((255 - g) / 2);
-        int plus_b = (int) ((255 - b) / 2);
+        int plus_r = (int) (Math.min (255 - r, r) / 2);
+        int plus_g = (int) (Math.min (255 - g, g) / 2);
+        int plus_b = (int) (Math.min (255 - b, b) / 2);
 
         return new Color(r - plus_r,
                          g - plus_g,
