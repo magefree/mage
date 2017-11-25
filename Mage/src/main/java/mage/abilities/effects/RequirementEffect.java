@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects;
 
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.Duration;
@@ -95,6 +96,10 @@ public abstract class RequirementEffect extends ContinuousEffectImpl {
     }
 
     public UUID mustBlockAttackerIfElseUnblocked(Ability source, Game game) {
+        return null;
+    }
+
+    public List<UUID> mustBlockAllAttackers(Ability source, Game game) {
         return null;
     }
 
