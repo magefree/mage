@@ -330,7 +330,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 if (damage > 0 && hasTrample(attacker) && excessDamageToDefender) {
                     defenderDamage(attacker, damage, game);
                 } else if (!blockerOrder.isEmpty()) {
-                    // Assign the damge left to first blocker
+                    // Assign the damage left to first blocker
                     assigned.put(blockerOrder.get(0), assigned.get(blockerOrder.get(0)) + damage);
                 }
             }
@@ -412,6 +412,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     assigned.put(attackerId, damageAssigned);
                     damage -= damageAssigned;
                 }
+            }
+            if (damage > 0) {
+                // Assign the damage left to first attacker
+                assigned.put(attackerOrder.get(0), assigned.get(attackerOrder.get(0)) + damage);
             }
 
             for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
