@@ -72,6 +72,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Coal Golem", 96, Rarity.UNCOMMON, mage.cards.c.CoalGolem.class));
         cards.add(new SetCardInfo("Dance of Many", 21, Rarity.RARE, mage.cards.d.DanceOfMany.class));
         cards.add(new SetCardInfo("Dark Heart of the Wood", 117, Rarity.COMMON, mage.cards.d.DarkHeartOfTheWood.class));
+        cards.add(new SetCardInfo("Dark Sphere", 97, Rarity.RARE, mage.cards.d.DarkSphere.class));
         cards.add(new SetCardInfo("Deep Water", 22, Rarity.COMMON, mage.cards.d.DeepWater.class));
         cards.add(new SetCardInfo("Diabolic Machine", 98, Rarity.UNCOMMON, mage.cards.d.DiabolicMachine.class));
         cards.add(new SetCardInfo("Drowned", 23, Rarity.COMMON, mage.cards.d.Drowned.class));
