@@ -19,8 +19,8 @@
             <artifactId>mage</artifactId>
             <version>${project.version}</version>
         </dependency>
-    </dependencies>  
-    
+    </dependencies>
+
     <build>
         <sourceDirectory>src</sourceDirectory>
         <plugins>
