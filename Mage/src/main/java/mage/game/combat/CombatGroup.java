@@ -406,6 +406,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     }
                     if (lethalDamage >= damage) {
                         assigned.put(attackerId, damage);
+                        damage = 0;
                         break;
                     }
                     int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + attacker.getName(), game);
