@@ -64,6 +64,7 @@ import mage.filter.predicate.other.CardTextPredicate;
 import mage.filter.predicate.other.ExpansionSetPredicate;
 import mage.view.CardView;
 import mage.view.CardsView;
+import org.mage.card.arcane.ManaSymbolsCellRenderer;
 
 /**
  *
@@ -132,6 +133,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         mainTable.getColumnModel().getColumn(5).setPreferredWidth(30);
         mainTable.getColumnModel().getColumn(6).setPreferredWidth(15);
         mainTable.getColumnModel().getColumn(7).setPreferredWidth(15);
+
+        // new mana render (svg support)
+        mainTable.getColumnModel().getColumn(mainModel.COLUMN_INDEX_COST).setCellRenderer(new ManaSymbolsCellRenderer());
 
         // mainTable.setToolTipText(cardSelectorScrollPane.getToolTipText());
         cardSelectorScrollPane.setViewportView(mainTable);
