@@ -566,6 +566,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (attackers.contains(creatureId)) {
             attackers.remove(creatureId);
             result = true;
+            if (attackerOrder.contains(creatureId)) {
+                attackerOrder.remove(creatureId);
+            }
         } else if (blockers.contains(creatureId)) {
             blockers.remove(creatureId);
             result = true;
