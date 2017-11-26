@@ -38,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -54,6 +55,7 @@ public class OrcishSpy extends CardImpl {
 
         // {T}: Look at the top three cards of target player's library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryTopCardTargetPlayerEffect(3), new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

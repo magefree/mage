@@ -2250,7 +2250,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
      * @return
      */
     private UUID getRandomOpponent(UUID abilityControllerId, Game game) {
-        UUID randomOpponentId = game.getOpponents(abilityControllerId).iterator().next();
+        UUID randomOpponentId = null;
         Set<UUID> opponents = game.getOpponents(abilityControllerId);
         if (opponents.size() > 1) {
             int rand = RandomUtil.nextInt(opponents.size());
