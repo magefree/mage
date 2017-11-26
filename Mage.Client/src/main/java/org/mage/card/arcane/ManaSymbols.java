@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
 import mage.cards.repository.ExpansionRepository;
 import mage.client.dialog.PreferencesDialog;
@@ -40,7 +38,6 @@ import org.apache.log4j.Logger;
 import mage.client.constants.Constants;
 import mage.client.constants.Constants.ResourceSymbolSize;
 import mage.client.constants.Constants.ResourceSetSize;
-import org.jdesktop.swingbinding.adapters.JListAdapterProvider;
 
 public final class ManaSymbols {
 
@@ -85,6 +82,31 @@ public final class ManaSymbols {
         // preload symbol images
         loadSymbolImages(15);
         loadSymbolImages(25);
+        loadSymbolImages(50);
+
+        // save symbol images in png for html replacement in texts
+        // you can add bigger size for better quality
+        Map<String, BufferedImage> pngImages = manaImages.get(50);
+        if (pngImages != null){
+
+            File pngPath = new File(getResourceSymbolsPath(ResourceSymbolSize.PNG));
+            if (!pngPath.exists()) {
+                pngPath.mkdirs();
+            }
+
+            for(String symbol: symbols){
+                try
+                {
+                    BufferedImage image = pngImages.get(symbol);
+                    if (image != null){
+                        File newFile = new File(pngPath.getPath() + File.separator + symbol + ".png");
+                        ImageIO.write(image, "png", newFile);
+                    }
+                }catch (Exception e) {
+                    LOGGER.warn("Can't generate png image for symbol:" + symbol);
+                }
+            }
+        }
 
         // preload set images
         List<String> setCodes = ExpansionRepository.instance.getSetCodes();
@@ -129,7 +151,7 @@ public final class ManaSymbols {
                 }
             }
 
-            // generate small size (TODO: delete that code (why it generate?)
+            // generate small size
             try {
                 File file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM));
                 if (!file.exists()) {
@@ -345,7 +367,7 @@ public final class ManaSymbols {
 
             // gif
             if (image == null) {
-                LOGGER.info("SVG symbol can't be load: " + file.getPath());
+                //LOGGER.info("SVG symbol can't be load: " + file.getPath());
 
                 file = getSymbolFileNameAsGIF(symbol, size);
                 if (file.exists()) {
@@ -358,7 +380,7 @@ public final class ManaSymbols {
                 sizedSymbols.put(symbol, image);
             } else {
                 fileErrors = true;
-                LOGGER.warn("SVG or GIF symbol can''t be load: " + symbol);
+                LOGGER.warn("SVG or GIF symbol can't be load: " + symbol);
             }
         }
 
@@ -389,7 +411,7 @@ public final class ManaSymbols {
         }
     }
 
-    private static String getImagesDir(){
+    public static String getImagesDir(){
         // return real images dir (path without separator)
 
         String path = null;
@@ -430,6 +452,9 @@ public final class ManaSymbols {
                 break;
             case SVG:
                 path = path + Constants.RESOURCE_SYMBOL_FOLDER_SVG;
+                break;
+            case PNG:
+                path = path + Constants.RESOURCE_SYMBOL_FOLDER_PNG;
                 break;
             default:
                 throw new java.lang.IllegalArgumentException(
@@ -600,7 +625,7 @@ public final class ManaSymbols {
         TOOLTIP,
     }
 
-    private static String filePathToURI(String path){
+    private static String filePathToUrl(String path){
         // convert file path to uri path (for html docs)
         if((path != null) && (!path.equals(""))){
             File file = new File(path);
@@ -652,8 +677,12 @@ public final class ManaSymbols {
                 .replace("{this}", "|this|");
 
 
+        // not need to add different images (width and height do the work)
+        // use best png size (generated on startup) TODO: add reload images after update
+        String htmlImagesPath = getResourceSymbolsPath(ResourceSymbolSize.PNG);
+
         replaced = REPLACE_SYMBOLS_PATTERN.matcher(replaced).replaceAll(
-                    "<img src='" + filePathToURI(getResourceSymbolsPath(needSize) + "$1$2") + ".gif' alt='$1$2' width="
+                    "<img src='" + filePathToUrl(htmlImagesPath) + "$1$2" + ".png' alt='$1$2' width="
                             + symbolSize + " height=" + symbolSize + '>');
 
         // ignore data restore
@@ -669,7 +698,7 @@ public final class ManaSymbols {
             int factor = size / 15 + 1;
             Integer width = setImagesExist.get(_set).width * factor;
             Integer height = setImagesExist.get(_set).height * factor;
-            return "<img src='" + filePathToURI(getResourceSetsPath(ResourceSetSize.SMALL)) + _set + '-' + rarity + ".png' alt='" + rarity + "' height='" + height + "' width='" + width + "' >";
+            return "<img src='" + filePathToUrl(getResourceSetsPath(ResourceSetSize.SMALL)) + _set + '-' + rarity + ".png' alt='" + rarity + "' height='" + height + "' width='" + width + "' >";
         } else {
             return set;
         }

@@ -560,6 +560,7 @@ public class CardPluginImpl implements CardPlugin {
             public void windowClosing(WindowEvent e) {
                 g.getDownloader().dispose();
                 ManaSymbols.loadImages();
+                // TODO: check reload process after download (icons do not update)
             }
         });
         d.setLayout(new BorderLayout());

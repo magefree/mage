@@ -29,6 +29,7 @@ import mage.view.PermanentView;
 import net.xeoh.plugins.base.PluginManager;
 import net.xeoh.plugins.base.impl.PluginManagerFactory;
 import org.apache.log4j.Logger;
+import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.CardPluginImpl;
 import org.mage.plugins.theme.ThemePluginImpl;
 
@@ -131,8 +132,7 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public void downloadSymbols() {
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+        String path = ManaSymbols.getImagesDir() + File.separator;
         if (this.cardPlugin != null) {
             this.cardPlugin.downloadSymbols(path);
         }

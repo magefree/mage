@@ -83,11 +83,13 @@ public final class Constants {
     public static final String RESOURCE_SYMBOL_FOLDER_MEDIUM = "medium";
     public static final String RESOURCE_SYMBOL_FOLDER_LARGE = "large";
     public static final String RESOURCE_SYMBOL_FOLDER_SVG = "svg";
+    public static final String RESOURCE_SYMBOL_FOLDER_PNG = "png";
     public enum ResourceSymbolSize {
         SMALL,
         MEDIUM,
         LARGE,
-        SVG
+        SVG,
+        PNG
     }
 
     // resources - sets
