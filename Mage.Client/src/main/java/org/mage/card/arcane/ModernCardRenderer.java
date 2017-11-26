@@ -106,7 +106,7 @@ public class ModernCardRenderer extends CardRenderer {
     public static final Color BORDER_RED = new Color(201, 71, 58);
     public static final Color BORDER_GREEN = new Color(4, 136, 69);
     public static final Color BORDER_GOLD = new Color(255, 228, 124);
-    public static final Color BORDER_COLORLESS = new Color(238, 242, 242);
+    public static final Color BORDER_COLORLESS = new Color(208, 212, 212);
     public static final Color BORDER_LAND = new Color(190, 173, 115);
 
     public static final Color BOX_WHITE = new Color(244, 245, 239);
@@ -115,7 +115,7 @@ public class ModernCardRenderer extends CardRenderer {
     public static final Color BOX_RED = new Color(246, 208, 185);
     public static final Color BOX_GREEN = new Color(205, 221, 213);
     public static final Color BOX_GOLD = new Color(223, 195, 136);
-    public static final Color BOX_COLORLESS = new Color(220, 228, 232);
+    public static final Color BOX_COLORLESS = new Color(200, 208, 212);
     public static final Color BOX_LAND = new Color(220, 215, 213);
     public static final Color BOX_INVENTION = new Color(209, 97, 33);
     public static final Color BOX_VEHICLE = new Color(155, 105, 60);
@@ -128,21 +128,21 @@ public class ModernCardRenderer extends CardRenderer {
     public static final Color BOX_GOLD_NIGHT = new Color(171, 134, 70);
     public static final Color BOX_COLORLESS_NIGHT = new Color(118, 147, 158);
 
-    public static final Color LAND_TEXTBOX_WHITE = new Color(248, 232, 188, 244);
-    public static final Color LAND_TEXTBOX_BLUE = new Color(189, 212, 236, 244);
-    public static final Color LAND_TEXTBOX_BLACK = new Color(174, 164, 162, 244);
-    public static final Color LAND_TEXTBOX_RED = new Color(242, 168, 133, 244);
-    public static final Color LAND_TEXTBOX_GREEN = new Color(198, 220, 198, 244);
-    public static final Color LAND_TEXTBOX_GOLD = new Color(236, 229, 207, 244);
+    public static final Color LAND_TEXTBOX_WHITE = new Color(248, 232, 188, 234);
+    public static final Color LAND_TEXTBOX_BLUE = new Color(189, 212, 236, 234);
+    public static final Color LAND_TEXTBOX_BLACK = new Color(174, 164, 162, 234);
+    public static final Color LAND_TEXTBOX_RED = new Color(242, 168, 133, 234);
+    public static final Color LAND_TEXTBOX_GREEN = new Color(198, 220, 198, 234);
+    public static final Color LAND_TEXTBOX_GOLD = new Color(236, 229, 207, 234);
 
-    public static final Color TEXTBOX_WHITE = new Color(252, 249, 244, 244);
-    public static final Color TEXTBOX_BLUE = new Color(229, 238, 247, 244);
-    public static final Color TEXTBOX_BLACK = new Color(241, 241, 240, 244);
-    public static final Color TEXTBOX_RED = new Color(243, 224, 217, 244);
-    public static final Color TEXTBOX_GREEN = new Color(217, 232, 223, 244);
-    public static final Color TEXTBOX_GOLD = new Color(240, 234, 209, 244);
-    public static final Color TEXTBOX_COLORLESS = new Color(219, 229, 233, 244);
-    public static final Color TEXTBOX_LAND = new Color(218, 214, 212, 244);
+    public static final Color TEXTBOX_WHITE = new Color(252, 249, 244, 234);
+    public static final Color TEXTBOX_BLUE = new Color(229, 238, 247, 234);
+    public static final Color TEXTBOX_BLACK = new Color(241, 241, 240, 234);
+    public static final Color TEXTBOX_RED = new Color(243, 224, 217, 234);
+    public static final Color TEXTBOX_GREEN = new Color(217, 232, 223, 234);
+    public static final Color TEXTBOX_GOLD = new Color(240, 234, 209, 234);
+    public static final Color TEXTBOX_COLORLESS = new Color(199, 209, 213, 234);
+    public static final Color TEXTBOX_LAND = new Color(218, 214, 212, 234);
 
     public static final Color ERROR_COLOR = new Color(255, 0, 255);
 

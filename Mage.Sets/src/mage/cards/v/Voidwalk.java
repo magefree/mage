@@ -28,19 +28,23 @@
 package mage.cards.v;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CipherEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -49,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Voidwalk extends CardImpl {
 
     public Voidwalk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new VoidwalkEffect());
@@ -71,32 +75,29 @@ public class Voidwalk extends CardImpl {
 
 class VoidwalkEffect extends OneShotEffect {
 
-    private static final String effectText = "Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step";
-
-    VoidwalkEffect() {
-        super(Outcome.Benefit);
-        staticText = effectText;
+    public VoidwalkEffect() {
+        super(Outcome.Detriment);
+        staticText = "Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    VoidwalkEffect(VoidwalkEffect effect) {
+    public VoidwalkEffect(final VoidwalkEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (getTargetPointer().getFirst(game, source) != null) {
-                Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-                if (permanent != null) {
-                    int zcc = game.getState().getZoneChangeCounter(permanent.getId());
-                    if (permanent.moveToExile(null, "", source.getSourceId(), game)) {
-                        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                                new ReturnToBattlefieldUnderOwnerControlSourceEffect(false, zcc + 1)), source);
-                    }
-                }
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && permanent != null && sourceObject != null) {
+            if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+                //create delayed triggered ability
+                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+                effect.setText("Return that card to the battlefield under its owner's control at the beginning of the next end step");
+                effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
+                return true;
             }
-            return true;
         }
         return false;
     }

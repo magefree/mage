@@ -25,46 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.o;
+
+package mage.game;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.target.TargetPlayer;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.RangeOfInfluence;
+import mage.game.match.MatchType;
 
 /**
  *
- * @author anonymous
+ * @author spjspj
  */
-public class OrcishSpy extends CardImpl {
+public class FreeformCommanderFreeForAll extends GameCommanderImpl {
 
-    public OrcishSpy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add(SubType.ORC);
-        this.subtype.add(SubType.ROGUE);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    private int numPlayers;
 
-        // {T}: Look at the top three cards of target player's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryTopCardTargetPlayerEffect(3), new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+    public FreeformCommanderFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
+        super(attackOption, range, freeMulligans, startLife);
     }
 
-    public OrcishSpy(final OrcishSpy card) {
-        super(card);
+    public FreeformCommanderFreeForAll(final FreeformCommanderFreeForAll game) {
+        super(game);
+        this.numPlayers = game.numPlayers;
     }
 
     @Override
-    public OrcishSpy copy() {
-        return new OrcishSpy(this);
+    protected void init(UUID choosingPlayerId) {
+        startingPlayerSkipsDraw = false;
+        super.init(choosingPlayerId); 
+    }
+
+    @Override
+    public MatchType getGameType() {
+        return new FreeformCommanderFreeForAllType();
+    }
+
+    @Override
+    public int getNumPlayers() {
+        return numPlayers;
+    }
+
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
+
+    @Override
+    public FreeformCommanderFreeForAll copy() {
+        return new FreeformCommanderFreeForAll(this);
     }
 }

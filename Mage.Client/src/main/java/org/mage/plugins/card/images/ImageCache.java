@@ -124,7 +124,6 @@ public final class ImageCache {
                             if (exists) {
                                 LOGGER.debug("loading thumbnail for " + key + ", path=" + thumbnailPath);
                                 BufferedImage thumbnailImage = loadImage(thumbnailFile);
-
                                 if (thumbnailImage == null) { // thumbnail exists but broken for some reason
                                     LOGGER.warn("failed loading thumbnail for " + key + ", path=" + thumbnailPath
                                             + ", thumbnail file is probably broken, attempting to recreate it...");
@@ -361,6 +360,23 @@ public final class ImageCache {
         }
     }
 
+    public static boolean isFaceImagePresent(CardView card) {
+        String path;
+        path = CardImageUtils.generateFaceImagePath(card.getName(), card.getExpansionSetCode());
+        
+        if (path == null) {
+            return false;
+        }
+        TFile file = getTFile(path);
+        if (file == null) {
+            return false;
+        }
+        if (file.exists()) {
+            return true;
+        }
+        return false;
+    }
+
     public static BufferedImage getThumbnail(CardView card) {
         return getImage(getKey(card, card.getName(), "#thumb"));
     }
@@ -464,7 +480,6 @@ public final class ImageCache {
 //        return alternateName + "#" + card.getExpansionSetCode() + "#" +card.getType()+ "#" + card.getCardNumber() + "#"
 //                + (card.getTokenSetCode() == null ? "":card.getTokenSetCode());
 //    }
-
     /**
      * Load image from file
      *

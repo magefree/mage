@@ -29,50 +29,49 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseOpponentEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.constants.SubType;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
  *
- * @author jeffwadsworth, fireshoes & L_J
+ * @author TheElk801
  */
 public class SkyshroudWarBeast extends CardImpl {
 
     public SkyshroudWarBeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
+
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // As Skyshroud War Beast enters the battlefield, choose an opponent.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
-        
-        // Skyshroud War Beast's power is equal to the number of tapped lands the chosen player controls.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new SkyshroudWarBeastCount(), Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.BoostCreature)));
+
+        // Skyshroud War Beast's power and toughness are each equal to the number of nonbasic lands the chosen player controls.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SkyshroudWarBeastEffect()));
     }
 
     public SkyshroudWarBeast(final SkyshroudWarBeast card) {
@@ -85,35 +84,37 @@ public class SkyshroudWarBeast extends CardImpl {
     }
 }
 
-class SkyshroudWarBeastCount implements DynamicValue {
+class SkyshroudWarBeastEffect extends ContinuousEffectImpl {
+
+    public SkyshroudWarBeastEffect() {
+        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
+        staticText = "{this}'s power and toughness are each equal to the number of nonbasic lands the chosen player controls";
+    }
+
+    public SkyshroudWarBeastEffect(final SkyshroudWarBeastEffect effect) {
+        super(effect);
+    }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        if (sourceAbility != null) {
-            UUID playerId = (UUID) game.getState().getValue(sourceAbility.getSourceId() + ChooseOpponentEffect.VALUE_KEY);
-            Player chosenPlayer = game.getPlayer(playerId);
-            if (chosenPlayer != null) {
-                FilterLandPermanent filter = new FilterLandPermanent("nonbasic lands the chosen player controls");
-                filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
+    public SkyshroudWarBeastEffect copy() {
+        return new SkyshroudWarBeastEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            MageObject target = game.getObject(source.getSourceId());
+            if (target != null) {
+                UUID playerId = (UUID) game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
+                FilterLandPermanent filter = new FilterLandPermanent();
                 filter.add(new ControllerIdPredicate(playerId));
-                return game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+                int number = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
+                target.getPower().setValue(number);
+                target.getToughness().setValue(number);
+                return true;
             }
         }
-        return 0;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new SkyshroudWarBeastCount();
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "nonbasic lands the chosen player controls";
+        return false;
     }
 }
