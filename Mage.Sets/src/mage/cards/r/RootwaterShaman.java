@@ -25,66 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.t;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author LevelX2
+ * @author L_J
  */
-public class Tallowisp extends CardImpl {
+public class RootwaterShaman extends CardImpl {
 
-    private static final FilterCard filterAura = new FilterCard("Aura card with enchant creature");
-
+   private static final FilterCard filter = new FilterCard("Aura spells with enchant creature");
     static {
-        filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterAura.add(new SubtypePredicate(SubType.AURA));
-        filterAura.add(new TallowispAbilityPredicate());
+        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(new RootwaterShamanAbilityPredicate());
     }
 
-    public Tallowisp(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add(SubType.SPIRIT);
+    public RootwaterShaman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SHAMAN);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-
-        // Whenever you cast a Spirit or Arcane spell, you may search your library for an Aura card with enchant creature, reveal it, and put it into your hand. If you do, shuffle your library.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterAura), true, true), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
+        // You may cast Aura spells with enchant creature as though they had flash.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public Tallowisp(final Tallowisp card) {
+    public RootwaterShaman(final RootwaterShaman card) {
         super(card);
     }
 
     @Override
-    public Tallowisp copy() {
-        return new Tallowisp(this);
+    public RootwaterShaman copy() {
+        return new RootwaterShaman(this);
     }
+
 }
 
-class TallowispAbilityPredicate implements Predicate<MageObject> {
+class RootwaterShamanAbilityPredicate implements Predicate<MageObject> {
 
-    public TallowispAbilityPredicate() {
+    public RootwaterShamanAbilityPredicate() {
     }
 
     @Override

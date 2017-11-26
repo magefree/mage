@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.keyword.CantBlockAloneAbility;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -244,6 +245,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                         blocker.markDamage(damage, attacker.getId(), game, true, true);
                     } else {
                         Player player = game.getPlayer(attacker.getControllerId());
+                        for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
+                            if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
+                                player = game.getPlayer(defendingPlayerId);
+                                break;
+                            }
+                        }
                         int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
                         blocker.markDamage(damageAssigned, attacker.getId(), game, true, true);
                         damage -= damageAssigned;
@@ -269,7 +276,15 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (attacker == null) {
             return;
         }
+        boolean oldRuleDamage = false;
         Player player = game.getPlayer(attacker.getControllerId());
+        for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
+            if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
+                player = game.getPlayer(defendingPlayerId);
+                oldRuleDamage = true;
+                break;
+            }
+        }
         int damage = getDamageValueFromPermanent(attacker, game);
         if (canDamage(attacker, first)) {
             // must be set before attacker damage marking because of effects like Test of Faith
@@ -284,6 +299,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
             Map<UUID, Integer> assigned = new HashMap<>();
             if (blocked) {
+                boolean excessDamageToDefender = true;
                 for (UUID blockerId : blockerOrder) {
                     Permanent blocker = game.getPermanent(blockerId);
                     if (blocker != null) {
@@ -298,15 +314,23 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                             damage = 0;
                             break;
                         }
-                        int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
+                        int damageAssigned = 0;
+                        if (!oldRuleDamage) {
+                            damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
+                        } else {
+                            damageAssigned = player.getAmount(0, damage, "Assign damage to " + blocker.getName(), game);
+                            if (damageAssigned < lethalDamage) {
+                                excessDamageToDefender = false; // all blockers need to have lethal damage assigned before it can trample over to the defender
+                            }
+                        }
                         assigned.put(blockerId, damageAssigned);
                         damage -= damageAssigned;
                     }
                 }
-                if (damage > 0 && hasTrample(attacker)) {
+                if (damage > 0 && hasTrample(attacker) && excessDamageToDefender) {
                     defenderDamage(attacker, damage, game);
                 } else if (!blockerOrder.isEmpty()) {
-                    // Assign the damge left to first blocker
+                    // Assign the damage left to first blocker
                     assigned.put(blockerOrder.get(0), assigned.get(blockerOrder.get(0)) + damage);
                 }
             }
@@ -382,12 +406,17 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     }
                     if (lethalDamage >= damage) {
                         assigned.put(attackerId, damage);
+                        damage = 0;
                         break;
                     }
                     int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + attacker.getName(), game);
                     assigned.put(attackerId, damageAssigned);
                     damage -= damageAssigned;
                 }
+            }
+            if (damage > 0) {
+                // Assign the damage left to first attacker
+                assigned.put(attackerOrder.get(0), assigned.get(attackerOrder.get(0)) + damage);
             }
 
             for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
@@ -463,6 +492,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             return;
         }
         Player player = game.getPlayer(playerId);
+        for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
+            if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
+                player = game.getPlayer(defendingPlayerId);
+                break;
+            }
+        }
         List<UUID> blockerList = new ArrayList<>(blockers);
         blockerOrder.clear();
         while (player.canRespond()) {
@@ -532,6 +567,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (attackers.contains(creatureId)) {
             attackers.remove(creatureId);
             result = true;
+            if (attackerOrder.contains(creatureId)) {
+                attackerOrder.remove(creatureId);
+            }
         } else if (blockers.contains(creatureId)) {
             blockers.remove(creatureId);
             result = true;

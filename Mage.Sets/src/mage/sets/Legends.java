@@ -128,6 +128,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Ghosts of the Damned", 12, Rarity.COMMON, mage.cards.g.GhostsOfTheDamned.class));
         cards.add(new SetCardInfo("Giant Strength", 147, Rarity.COMMON, mage.cards.g.GiantStrength.class));
         cards.add(new SetCardInfo("Giant Turtle", 102, Rarity.COMMON, mage.cards.g.GiantTurtle.class));
+        cards.add(new SetCardInfo("Glyph of Destruction", 148, Rarity.COMMON, mage.cards.g.GlyphOfDestruction.class));
         cards.add(new SetCardInfo("Gravity Sphere", 149, Rarity.RARE, mage.cards.g.GravitySphere.class));
         cards.add(new SetCardInfo("Great Defender", 185, Rarity.UNCOMMON, mage.cards.g.GreatDefender.class));
         cards.add(new SetCardInfo("Greater Realm of Preservation", 187, Rarity.UNCOMMON, mage.cards.g.GreaterRealmOfPreservation.class));
@@ -148,6 +149,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Hunding Gjornersen", 271, Rarity.UNCOMMON, mage.cards.h.HundingGjornersen.class));
         cards.add(new SetCardInfo("Hyperion Blacksmith", 150, Rarity.UNCOMMON, mage.cards.h.HyperionBlacksmith.class));
         cards.add(new SetCardInfo("Immolation", 151, Rarity.COMMON, mage.cards.i.Immolation.class));
+        cards.add(new SetCardInfo("Imprison", 21, Rarity.RARE, mage.cards.i.Imprison.class));
         cards.add(new SetCardInfo("In the Eye of Chaos", 61, Rarity.RARE, mage.cards.i.InTheEyeOfChaos.class));
         cards.add(new SetCardInfo("Indestructible Aura", 190, Rarity.COMMON, mage.cards.i.IndestructibleAura.class));
         cards.add(new SetCardInfo("Infernal Medusa", 22, Rarity.UNCOMMON, mage.cards.i.InfernalMedusa.class));
@@ -219,6 +221,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Red Mana Battery", 236, Rarity.UNCOMMON, mage.cards.r.RedManaBattery.class));
         cards.add(new SetCardInfo("Reincarnation", 115, Rarity.UNCOMMON, mage.cards.r.Reincarnation.class));
         cards.add(new SetCardInfo("Relic Barrier", 237, Rarity.UNCOMMON, mage.cards.r.RelicBarrier.class));
+        cards.add(new SetCardInfo("Remove Enchantments", 202, Rarity.COMMON, mage.cards.r.RemoveEnchantments.class));
         cards.add(new SetCardInfo("Remove Soul", 72, Rarity.COMMON, mage.cards.r.RemoveSoul.class));
         cards.add(new SetCardInfo("Reset", 73, Rarity.UNCOMMON, mage.cards.r.Reset.class));
         cards.add(new SetCardInfo("Revelation", 116, Rarity.RARE, mage.cards.r.Revelation.class));
