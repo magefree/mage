@@ -34,7 +34,7 @@ import org.mage.plugins.theme.ThemePluginImpl;
 
 public enum Plugins implements MagePlugins {
     instance;
-    public static final String PLUGINS_DIRECTORY = "plugins/";
+    public static final String PLUGINS_DIRECTORY = File.separator + "plugins";
 
     private static final Logger LOGGER = Logger.getLogger(Plugins.class);
     private static PluginManager pm;
@@ -50,7 +50,7 @@ public enum Plugins implements MagePlugins {
     public void loadPlugins() {
         LOGGER.info("Loading plugins...");
         pm = PluginManagerFactory.createPluginManager();
-        pm.addPluginsFrom(new File(PLUGINS_DIRECTORY).toURI());
+        pm.addPluginsFrom(new File(PLUGINS_DIRECTORY + File.separator).toURI());
         this.cardPlugin = new CardPluginImpl();
         this.counterPlugin = pm.getPlugin(CounterPlugin.class);
         this.themePlugin = new ThemePluginImpl();

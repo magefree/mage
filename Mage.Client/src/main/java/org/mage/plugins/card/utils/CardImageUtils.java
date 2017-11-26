@@ -126,7 +126,7 @@ public final class CardImageUtils {
             return "";
         }
         String set = updateSet(card.getSet(), false).toUpperCase();
-        String imagesDir = (imagesPath != null ? imagesPath : Constants.IO.imageBaseDir);
+        String imagesDir = (imagesPath != null ? imagesPath : Constants.IO.DEFAULT_IMAGES_DIR);
         if (card.isToken()) {
             return buildTokenPath(imagesDir, set);
         } else {
@@ -136,7 +136,7 @@ public final class CardImageUtils {
 
     public static String getImageBasePath() {
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String imagesPath = Objects.equals(useDefault, "true") ? Constants.IO.imageBaseDir : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+        String imagesPath = Objects.equals(useDefault, "true") ? Constants.IO.DEFAULT_IMAGES_DIR : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
 
         if (imagesPath != null && !imagesPath.endsWith(TFile.separator)) {
             imagesPath += TFile.separator;
@@ -206,7 +206,7 @@ public final class CardImageUtils {
 
     public static String generateFaceImagePath(String cardname, String set) {
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String imagesPath = Objects.equals(useDefault, "true") ? Constants.IO.imageBaseDir : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+        String imagesPath = Objects.equals(useDefault, "true") ? Constants.IO.DEFAULT_IMAGES_DIR : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
         String imageDir = imagesPath;
         String imageName = set + TFile.separator + cardname + ".jpg";
         return imageDir + TFile.separator + "FACE" + TFile.separator + imageName;

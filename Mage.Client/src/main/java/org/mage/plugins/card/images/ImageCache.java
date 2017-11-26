@@ -20,9 +20,9 @@ import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileInputStream;
 import net.java.truevfs.access.TFileOutputStream;
 import org.apache.log4j.Logger;
-import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.utils.CardImageUtils;
+import mage.client.constants.Constants;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means

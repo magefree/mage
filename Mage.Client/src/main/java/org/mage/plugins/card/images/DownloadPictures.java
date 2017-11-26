@@ -31,9 +31,6 @@ import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
-import static mage.remote.Connection.ProxyType.HTTP;
-import static mage.remote.Connection.ProxyType.NONE;
-import static mage.remote.Connection.ProxyType.SOCKS;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
@@ -544,7 +541,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     public void run() {
         this.cardIndex = 0;
 
-        File base = new File(Constants.IO.imageBaseDir);
+        File base = new File(Constants.IO.DEFAULT_IMAGES_DIR);
         if (!base.exists()) {
             base.mkdir();
         }
@@ -682,7 +679,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             File temporaryFile = null;
             TFile outputFile = null;
             try {
-                filePath.append(Constants.IO.imageBaseDir);
+                filePath.append(Constants.IO.DEFAULT_IMAGES_DIR);
                 if (!useSpecifiedPaths && card != null) {
                     filePath.append(card.hashCode()).append('.').append(card.getName().replace(":", "").replace("//", "-")).append(".jpg");
                     temporaryFile = new File(filePath.toString());
@@ -694,7 +691,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     } else if (card != null) {
                         imagePath = CardImageUtils.getImageBasePath() + actualFilename;
                     } else {
-                        imagePath = Constants.IO.imageBaseDir;
+                        imagePath = Constants.IO.DEFAULT_IMAGES_DIR;
                     }
 
                     String tmpFile = filePath + "temporary" + actualFilename;
@@ -823,7 +820,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
             iwp.setCompressionQuality(0.96f);
 
-            File tempFile = new File(Constants.IO.imageBaseDir + File.separator + image.hashCode() + file.getName());
+            File tempFile = new File(Constants.IO.DEFAULT_IMAGES_DIR + File.separator + image.hashCode() + file.getName());
             FileImageOutputStream output = new FileImageOutputStream(tempFile);
             writer.setOutput(output);
             IIOImage image2 = new IIOImage(image, null, null);

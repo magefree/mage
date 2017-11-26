@@ -27,6 +27,7 @@
  */
 package mage.client.constants;
 
+import java.awt.*;
 import java.io.File;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
@@ -72,18 +73,40 @@ public final class Constants {
 
     public static final double SCALE_FACTOR = 0.5;
 
-    public static final String PLUGINS_DIRECTORY = "plugins/";
+    // cards render
+    public static final Rectangle CARD_SIZE_FULL = new Rectangle(101, 149);
+    public static final Rectangle THUMBNAIL_SIZE_FULL = new Rectangle(102, 146);
 
-    public static final String RESOURCE_PATH_MANA_LARGE = IO.imageBaseDir + "symbols" + File.separator + "large";
-    public static final String RESOURCE_PATH_MANA_MEDIUM = IO.imageBaseDir + "symbols" + File.separator + "medium";
-    public static final String RESOURCE_PATH_SET = IO.imageBaseDir + "sets" + File.separator;
-    public static final String RESOURCE_PATH_SET_SMALL = RESOURCE_PATH_SET + File.separator + "small" + File.separator;
-    public static final String BASE_SOUND_PATH = "sounds" + File.separator;
+    // resources - symbols
+    public static final String RESOURCE_PATH_SYMBOLS = File.separator + "symbols";
+    public static final String RESOURCE_SYMBOL_FOLDER_SMALL = "small";
+    public static final String RESOURCE_SYMBOL_FOLDER_MEDIUM = "medium";
+    public static final String RESOURCE_SYMBOL_FOLDER_LARGE = "large";
+    public static final String RESOURCE_SYMBOL_FOLDER_SVG = "svg";
+    public enum ResourceSymbolSize {
+        SMALL,
+        MEDIUM,
+        LARGE,
+        SVG
+    }
+
+    // resources - sets
+    public static final String RESOURCE_PATH_SETS = File.separator + "sets";
+    public static final String RESOURCE_SET_FOLDER_SMALL = "small";
+    public static final String RESOURCE_SET_FOLDER_MEDIUM = ""; // empty, medium images laydown in "sets" folder
+    public static final String RESOURCE_SET_FOLDER_SVG = "svg";
+    public enum ResourceSetSize {
+        SMALL,
+        MEDIUM,
+        SVG
+    }
+
+    // sound
+    public static final String BASE_SOUND_PATH = "sounds" + File.separator; // TODO: check path with File.separator
     public static final String BASE_MUSICS_PATH = "music" + File.separator;
 
     public interface IO {
-
-        String imageBaseDir = "plugins" + File.separator + "images" + File.separator;
+        String DEFAULT_IMAGES_DIR = "plugins" + File.separator + "images" + File.separator;
         String IMAGE_PROPERTIES_FILE = "image.url.properties";
     }
 
