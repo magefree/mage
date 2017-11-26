@@ -25,54 +25,31 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.u;
+package mage.game;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.TotemArmorAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.AttachedToControlledPermanentPredicate;
+import mage.game.match.MatchImpl;
+import mage.game.match.MatchOptions;
 
 /**
  *
- * @author North & L_J
+ * @author spjspj
  */
-public class UmbraMystic extends CardImpl {
+public class FreeformCommanderFreeForAllMatch extends MatchImpl {
 
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Auras attached to permanents you control");
-
-    static {
-        filter.add(new SubtypePredicate(SubType.AURA));
-        filter.add(new AttachedToControlledPermanentPredicate());
-    }
-
-    public UmbraMystic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WIZARD);
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Auras attached to permanents you control have totem armor.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new TotemArmorAbility(), Duration.WhileOnBattlefield, filter, false)));
-    }
-
-    public UmbraMystic(final UmbraMystic card) {
-        super(card);
+    public FreeformCommanderFreeForAllMatch(MatchOptions options) {
+        super(options);
     }
 
     @Override
-    public UmbraMystic copy() {
-        return new UmbraMystic(this);
+    public void startGame() throws GameException {
+        int startLife = 40;
+        boolean alsoHand = true;
+        FreeformCommanderFreeForAll game = new FreeformCommanderFreeForAll(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
+        game.setStartMessage(this.createGameStartMessage());
+        game.setAlsoHand(alsoHand);
+        game.setAlsoLibrary(true);
+        initGame(game);
+        games.add(game);
     }
+
 }
