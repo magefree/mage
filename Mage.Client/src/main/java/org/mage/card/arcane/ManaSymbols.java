@@ -19,6 +19,9 @@ import java.util.*;
 import java.util.List;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import mage.cards.repository.ExpansionRepository;
 import mage.client.dialog.PreferencesDialog;
@@ -33,14 +36,16 @@ import org.apache.batik.transcoder.TranscodingHints;
 import org.apache.batik.transcoder.image.ImageTranscoder;
 import org.apache.batik.util.SVGConstants;
 import org.apache.log4j.Logger;
-import org.mage.plugins.card.constants.Constants;
+
+import mage.client.constants.Constants;
+import mage.client.constants.Constants.ResourceSymbolSize;
+import mage.client.constants.Constants.ResourceSetSize;
+import org.jdesktop.swingbinding.adapters.JListAdapterProvider;
 
 public final class ManaSymbols {
 
     private static final Logger LOGGER = Logger.getLogger(ManaSymbols.class);
     private static final Map<Integer, Map<String, BufferedImage>> manaImages = new HashMap<>();
-    private static boolean smallSymbolsFound = false;
-    private static boolean mediumSymbolsFound = false;
 
     private static final Map<String, Map<String, Image>> setImages = new HashMap<>();
 
@@ -67,11 +72,21 @@ public final class ManaSymbols {
         "BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU",
         "WP", "UP", "BP", "RP", "GP", "X", "C", "E"};
 
-    public static void loadImages() {
-        renameSymbols(getSymbolsPath() + File.separator + "symbols");
-        smallSymbolsFound = loadSymbolsImages(15);
-        mediumSymbolsFound = loadSymbolsImages(25);
+    private static final JLabel labelRender = new JLabel(); // render mana text
 
+    public static void loadImages() {
+        // TODO: delete files rename jpg->gif (it was for backward compatibility for one of the old version?)
+        renameSymbols(getResourceSymbolsPath(ResourceSymbolSize.SMALL));
+        renameSymbols(getResourceSymbolsPath(ResourceSymbolSize.MEDIUM));
+        renameSymbols(getResourceSymbolsPath(ResourceSymbolSize.LARGE));
+        //renameSymbols(getSymbolsPath(ResourceSymbolSize.SVG)); // not need
+        // TODO: remove medium sets files to "medium" folder like symbols above?
+
+        // preload symbol images
+        loadSymbolImages(15);
+        loadSymbolImages(25);
+
+        // preload set images
         List<String> setCodes = ExpansionRepository.instance.getSetCodes();
         if (setCodes == null) {
             // the cards db file is probaly not included in the client. It will be created after the first connect to a server.
@@ -79,9 +94,11 @@ public final class ManaSymbols {
             return;
         }
         for (String set : setCodes) {
+
             if (withoutSymbols.contains(set)) {
                 continue;
             }
+
             String[] codes;
             if (onlyMythics.contains(set)) {
                 codes = new String[]{"M"};
@@ -92,8 +109,9 @@ public final class ManaSymbols {
             Map<String, Image> rarityImages = new HashMap<>();
             setImages.put(set, rarityImages);
 
+            // load medium size
             for (String rarityCode : codes) {
-                File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET + File.separator + set + '-' + rarityCode + ".jpg");
+                File file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + rarityCode + ".jpg");
                 try {
                     Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                     int width = image.getWidth(null);
@@ -111,18 +129,19 @@ public final class ManaSymbols {
                 }
             }
 
+            // generate small size (TODO: delete that code (why it generate?)
             try {
-                File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL);
+                File file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM));
                 if (!file.exists()) {
                     file.mkdirs();
                 }
 
                 for (String code : codes) {
-                    file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL + File.separator + set + '-' + code + ".png");
+                    file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + code + ".png");
                     if (file.exists()) {
                         continue;
                     }
-                    file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET + File.separator + set + '-' + code + ".jpg");
+                    file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + code + ".jpg");
                     Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                     try {
                         int width = image.getWidth(null);
@@ -134,7 +153,7 @@ public final class ManaSymbols {
                             }
                             Rectangle r = new Rectangle(15 + dx, (int) (height * (15.0f + dx) / width));
                             BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                            File newFile = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL + File.separator + set + '-' + code + ".png");
+                            File newFile = new File(getResourceSetsPath(ResourceSetSize.SMALL) + set + '-' + code + ".png");
                             ImageIO.write(resized, "png", newFile);
                         }
                     } catch (Exception e) {
@@ -148,13 +167,15 @@ public final class ManaSymbols {
             }
         }
 
+        // mark loaded images
+        // TODO: delete that code, images draw-show must dynamicly
         File file;
         for (String set : ExpansionRepository.instance.getSetCodes()) {
-            file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL);
+            file = new File(getResourceSetsPath(ResourceSetSize.SMALL));
             if (!file.exists()) {
                 break;
             }
-            file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL + File.separator + set + "-C.png");
+            file = new File(getResourceSetsPath(ResourceSetSize.SMALL) + set + "-C.png");
             try {
                 Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                 int width = image.getWidth(null);
@@ -239,7 +260,7 @@ public final class ManaSymbols {
     }
 
     private static File getSymbolFileNameAsSVG(String symbol){
-        return new File(getSymbolsPath() + Constants.RESOURCE_PATH_MANA_SVG + '/' + symbol + ".svg");
+        return new File(getResourceSymbolsPath(ResourceSymbolSize.SVG) + symbol + ".svg");
     }
 
     private static BufferedImage loadSymbolAsSVG(String symbol, int resizeToWidth, int resizeToHeight){
@@ -254,20 +275,23 @@ public final class ManaSymbols {
             return loadSVG(sourceFile, resizeToWidth, resizeToHeight);
 
         } catch (Exception e) {
-            LOGGER.error("Can't load svg symbol: " + sourceFile.getPath() + File.separator + sourceFile.getName());
+            LOGGER.error("Can't load svg symbol: " + sourceFile.getPath());
             return null;
         }
     }
 
     private static File getSymbolFileNameAsGIF(String symbol, int size){
-        String resourcePath = Constants.RESOURCE_PATH_MANA_SMALL;
-        if (size > 25) {
-            resourcePath = Constants.RESOURCE_PATH_MANA_LARGE;
-        } else if (size > 15) {
-            resourcePath = Constants.RESOURCE_PATH_MANA_MEDIUM;
+
+        ResourceSymbolSize needSize = null;
+        if (size <= 15){
+            needSize = ResourceSymbolSize.SMALL;
+        }else if (size <= 25){
+            needSize = ResourceSymbolSize.MEDIUM;
+        } else {
+            needSize = ResourceSymbolSize.LARGE;
         }
 
-        return new File(getSymbolsPath() + resourcePath + '/' + symbol + ".gif");
+        return new File(getResourceSymbolsPath(needSize) + symbol + ".gif");
     }
 
     private static BufferedImage loadSymbolAsGIF(String symbol, int resizeToWidth, int resizeToHeight){
@@ -293,14 +317,14 @@ public final class ManaSymbols {
                 }
             }
         } catch (IOException e) {
-            LOGGER.error("Can't load gif symbol: " + sourceFile.getPath() + File.separator + sourceFile.getName());
+            LOGGER.error("Can't load gif symbol: " + sourceFile.getPath());
             return null;
         }
 
         return  image;
     }
 
-    private static boolean loadSymbolsImages(int size) {
+    private static boolean loadSymbolImages(int size) {
         // load all symbols to cash
         // priority: SVG -> GIF
         // gif remain for backward compatibility
@@ -321,7 +345,7 @@ public final class ManaSymbols {
 
             // gif
             if (image == null) {
-                LOGGER.warn("SVG symbol can't be load: " + file.getPath() + File.separator + file.getName());
+                LOGGER.info("SVG symbol can't be load: " + file.getPath());
 
                 file = getSymbolFileNameAsGIF(symbol, size);
                 if (file.exists()) {
@@ -343,6 +367,11 @@ public final class ManaSymbols {
     }
 
     private static void renameSymbols(String path) {
+        File file = new File(path);
+        if (!file.exists()){
+            return;
+        }
+
         final PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:**/*.jpg");
         try {
             Files.walkFileTree(Paths.get(path), new SimpleFileVisitor<Path>() {
@@ -356,60 +385,204 @@ public final class ManaSymbols {
                 }
             });
         } catch (IOException e) {
-            LOGGER.error("Couldn't rename mana symbols!");
+            LOGGER.error("Couldn't rename mana symbols on " + path, e);
         }
     }
 
-    private static String getSymbolsPath() {
-        return getSymbolsPath(false);
-    }
+    private static String getImagesDir(){
+        // return real images dir (path without separator)
 
-    private static String getSymbolsPath(boolean forHtmlCode) {
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+        String path = null;
+
+        // user path
+        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true").equals("true")){
+            path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+        }
+
+        // default path
         if (path == null) {
-            if (forHtmlCode) {
-                // for html code we need to use double '//' symbols
-                // and seems it should be hard coded - as it is not the same as using File.separator
-                return "plugins/images/";
-            } else {
-                return mage.client.constants.Constants.IO.imageBaseDir;
-            }
+            path = Constants.IO.DEFAULT_IMAGES_DIR;
         }
-        if (forHtmlCode) {
-            if (cachedPath != null) {
-                return cachedPath;
-            }
-            if (path.contains("\\")) {
-                cachedPath = path.replaceAll("[\\\\]", "/");
-                return cachedPath;
-            }
+
+        while(path.endsWith(File.separator))
+        {
+            path = path.substring(0, path.length() - 1);
         }
+
         return path;
     }
 
-    public static void draw(Graphics g, String manaCost, int x, int y, int symbolWidth) {
-        if (!manaImages.containsKey(symbolWidth)) {
-            loadSymbolsImages(symbolWidth);
+    private static String getResourceSymbolsPath(ResourceSymbolSize needSize){
+        // return real path to symbols (default or user defined)
+
+        String path = getImagesDir() + Constants.RESOURCE_PATH_SYMBOLS + File.separator;
+
+        // folder by sizes
+        switch (needSize) {
+            case SMALL:
+                path = path + Constants.RESOURCE_SYMBOL_FOLDER_SMALL;
+                break;
+            case MEDIUM:
+                path = path + Constants.RESOURCE_SYMBOL_FOLDER_MEDIUM;
+                break;
+            case LARGE:
+                path = path + Constants.RESOURCE_SYMBOL_FOLDER_LARGE;
+                break;
+            case SVG:
+                path = path + Constants.RESOURCE_SYMBOL_FOLDER_SVG;
+                break;
+            default:
+                throw new java.lang.IllegalArgumentException(
+                        "ResourceSymbolSize value is unknown");
         }
+
+        // fix double separator if size folder is not set
+        while(path.endsWith(File.separator))
+        {
+            path = path.substring(0, path.length() - 1);
+        }
+
+        return path + File.separator;
+    }
+
+    private static String getResourceSetsPath(ResourceSetSize needSize){
+        // return real path to sets icons (default or user defined)
+
+        String path = getImagesDir() + Constants.RESOURCE_PATH_SYMBOLS + File.separator;
+
+        // folder by sizes
+        switch (needSize) {
+            case SMALL:
+                path = path + Constants.RESOURCE_SET_FOLDER_SMALL;
+                break;
+            case MEDIUM:
+                path = path + Constants.RESOURCE_SET_FOLDER_MEDIUM;
+                break;
+            case SVG:
+                path = path + Constants.RESOURCE_SET_FOLDER_SVG;
+                break;
+            default:
+                throw new java.lang.IllegalArgumentException(
+                        "ResourceSetSize value is unknown");
+        }
+
+        // fix double separator if size folder is not set
+        while(path.endsWith(File.separator))
+        {
+            path = path.substring(0, path.length() - 1);
+        }
+
+        return path + File.separator;
+    }
+
+    public static void draw(Graphics g, String manaCost, int x, int y, int symbolWidth) {
+        draw(g, manaCost, x, y, symbolWidth, Color.white, 0);
+    }
+
+    public static void draw(Graphics g, String manaCost, int x, int y, int symbolWidth, Color symbolsTextColor, int symbolMarginX) {
+        if (!manaImages.containsKey(symbolWidth)) {
+            loadSymbolImages(symbolWidth);
+        }
+
+        // TODO: replace with jlabel render (look at table rendere)?
+
+        /*
+        // NEW version with component draw
+        JPanel manaPanel = new JPanel();
+
+        // icons size with margin
+        int symbolHorizontalMargin = 2;
+
+        // create each mana symbol as child label
+        manaPanel.removeAll();
+        manaPanel.setLayout(new BoxLayout(manaPanel, BoxLayout.X_AXIS));
+        StringTokenizer tok = new StringTokenizer(manaCost, " ");
+        while (tok.hasMoreTokens()) {
+            String symbol = tok.nextToken();
+
+            JLabel symbolLabel = new JLabel();
+            //symbolLabel.setBorder(new LineBorder(new Color(150, 150, 150))); // debug
+            symbolLabel.setBorder(new EmptyBorder(0, symbolHorizontalMargin,0, 0));
+
+            BufferedImage image = ManaSymbols.getSizedManaSymbol(symbol, symbolWidth);
+            if (image != null){
+                // icon
+                symbolLabel.setIcon(new ImageIcon(image));
+            }else
+            {
+                // text
+                symbolLabel.setText("{" + symbol + "}");
+                //symbolLabel.setOpaque(baseLabel.isOpaque());
+                //symbolLabel.setForeground(baseLabel.getForeground());
+                //symbolLabel.setBackground(baseLabel.getBackground());
+            }
+
+            manaPanel.add(symbolLabel);
+        }
+
+        // draw result
+        Dimension d = manaPanel.getPreferredSize();
+        BufferedImage image = new BufferedImage(d.width, d.height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D gg = image.createGraphics();
+        manaPanel.paint(gg);
+        g.drawImage(image, x, y, null);
+*/
+
+
+
+        // OLD version with custom draw
         Map<String, BufferedImage> sizedSymbols = manaImages.get(symbolWidth);
         if (manaCost.isEmpty()) {
             return;
         }
+
         manaCost = manaCost.replace("\\", "");
         manaCost = UI.getDisplayManaCost(manaCost);
         StringTokenizer tok = new StringTokenizer(manaCost, " ");
         while (tok.hasMoreTokens()) {
             String symbol = tok.nextToken();
-            // Check and load symbol in the width
             Image image = sizedSymbols.get(symbol);
+
             if (image == null) {
-                //log.error("Symbol not recognized \"" + symbol + "\" in mana cost: " + manaCost);
-                continue;
+                // TEXT draw
+
+                labelRender.setText("{" + symbol + "}");
+                labelRender.setForeground(symbolsTextColor);
+                labelRender.setSize(symbolWidth, symbolWidth);
+                labelRender.setVerticalAlignment(SwingConstants.CENTER);
+                labelRender.setHorizontalAlignment(SwingConstants.CENTER);
+                //labelRender.setBorder(new LineBorder(new Color(125, 250, 250), 1));
+
+                // fix font size for mana text
+                // work for labels WITHOUT borders
+                // https://stackoverflow.com/questions/2715118/how-to-change-the-size-of-the-font-of-a-jlabel-to-take-the-maximum-size
+                Font labelFont = labelRender.getFont();
+                String labelText = "{W}"; //labelRender.getText(); // need same font size for all -- use max symbol ever, not current text
+                int stringWidth = labelRender.getFontMetrics(labelFont).stringWidth(labelText);
+                int componentWidth = labelRender.getWidth();
+                // Find out how much the font can grow in width.
+                double widthRatio = (double)componentWidth / (double)stringWidth;
+                int newFontSize = (int)(labelFont.getSize() * widthRatio);
+                int componentHeight = labelRender.getHeight();
+                // Pick a new font size so it will not be larger than the height of label.
+                int fontSizeToUse = Math.min(newFontSize, componentHeight);
+                // Set the label's font size to the newly determined size.
+                labelRender.setFont(new Font(labelFont.getName(), Font.PLAIN + Font.BOLD, fontSizeToUse - 1)); // - for "..." fix in text
+
+                // render component to new position
+                // need to copy graphics, overvise it draw at top left corner
+                // https://stackoverflow.com/questions/4974268/java-paint-problem
+                Graphics2D labelG = (Graphics2D)g.create(x, y, symbolWidth, symbolWidth);
+                labelG.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                labelG.fillOval(x + 1, y + 1, symbolWidth - 2, symbolWidth - 2);
+                labelRender.paint(labelG);
+            }else {
+                // ICON draw
+                g.drawImage(image, x, y, null);
             }
-            g.drawImage(image, x, y, null);
-            x += symbolWidth;
+            x += symbolWidth + symbolMarginX;
         }
+
     }
 
     public static String getStringManaCost(List<String> manaCost) {
@@ -427,11 +600,21 @@ public final class ManaSymbols {
         TOOLTIP,
     }
 
+    private static String filePathToURI(String path){
+        // convert file path to uri path (for html docs)
+        if((path != null) && (!path.equals(""))){
+            File file = new File(path);
+            return file.toURI().toString();
+        }else{
+            return null;
+        }
+    }
+
     public static synchronized String replaceSymbolsWithHTML(String value, Type type) {
-        value = value.replace("{source}", "|source|");
-        value = value.replace("{this}", "|this|");
-        String replaced = value;
-        boolean symbolFilesFound;
+
+        // mana cost to HTML images (urls to files)
+        // do not use it for new code - try to suppotr svg render
+
         int symbolSize;
         switch (type) {
             case TABLE:
@@ -450,21 +633,33 @@ public final class ManaSymbols {
                 symbolSize = 11;
                 break;
         }
-        String resourcePath = "small";
-        symbolFilesFound = smallSymbolsFound;
-        if (symbolSize > 25) {
-            resourcePath = "large";
-        } else if (symbolSize > 15) {
-            resourcePath = "medium";
-            symbolFilesFound = mediumSymbolsFound;
+
+        // auto size
+        ResourceSymbolSize needSize = null;
+        if (symbolSize <= 15){
+            needSize = ResourceSymbolSize.SMALL;
+        }else if (symbolSize <= 25){
+            needSize = ResourceSymbolSize.MEDIUM;
+        } else {
+            needSize = ResourceSymbolSize.LARGE;
         }
-        if (symbolFilesFound) {
-            replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll(
-                    "<img src='file:" + getSymbolsPath(true) + "/symbols/" + resourcePath + "/$1$2.gif' alt='$1$2' width=" + symbolSize
-                    + " height=" + symbolSize + '>');
-        }
+
+        // replace every {symbol} to <img> link
+
+        // ignore data backup
+        String replaced = value
+                .replace("{source}", "|source|")
+                .replace("{this}", "|this|");
+
+
+        replaced = REPLACE_SYMBOLS_PATTERN.matcher(replaced).replaceAll(
+                    "<img src='" + filePathToURI(getResourceSymbolsPath(needSize) + "$1$2") + ".gif' alt='$1$2' width="
+                            + symbolSize + " height=" + symbolSize + '>');
+
+        // ignore data restore
         replaced = replaced.replace("|source|", "{source}");
         replaced = replaced.replace("|this|", "{this}");
+
         return replaced;
     }
 
@@ -474,7 +669,7 @@ public final class ManaSymbols {
             int factor = size / 15 + 1;
             Integer width = setImagesExist.get(_set).width * factor;
             Integer height = setImagesExist.get(_set).height * factor;
-            return "<img src='file:" + getSymbolsPath() + "/sets/small/" + _set + '-' + rarity + ".png' alt='" + rarity + "' height='" + height + "' width='" + width + "' >";
+            return "<img src='" + filePathToURI(getResourceSetsPath(ResourceSetSize.SMALL)) + _set + '-' + rarity + ".png' alt='" + rarity + "' height='" + height + "' width='" + width + "' >";
         } else {
             return set;
         }
@@ -499,7 +694,7 @@ public final class ManaSymbols {
 
     public static BufferedImage getSizedManaSymbol(String symbol, int size) {
         if (!manaImages.containsKey(size)) {
-            loadSymbolsImages(size);
+            loadSymbolImages(size);
         }
         Map<String, BufferedImage> sizedSymbols = manaImages.get(size);
         return sizedSymbols.get(symbol);
