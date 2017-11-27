@@ -141,6 +141,13 @@
             <artifactId>balloontip</artifactId>
             <version>1.2.4.1</version>
         </dependency>
+		<!-- svg support start -->
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-transcoder</artifactId>
+			<version>1.6-1</version>
+		</dependency>
+		<!-- svg support end -->
     </dependencies>
 
     <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->

@@ -204,7 +204,7 @@ public class MageBook extends JComponent {
             if (setImage != null) {
                 tab.setOverlayImage(setImage);
             } else {
-                System.out.println("Couldn't find symbol image: " + "/plugins/images/sets/" + set + "-C.jpg");
+                System.out.println("Couldn't find symbol image: " + set + "-C.jpg");
             }
             tab.setSet(set);
             tab.setBounds(0, y, 39, 120);

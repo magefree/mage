@@ -48,6 +48,7 @@ import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.SimpleCardView;
 import org.mage.card.arcane.CardPanel;
+import org.mage.card.arcane.ManaSymbolsCellRenderer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -163,6 +164,9 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         mainTable.getColumnModel().getColumn(5).setPreferredWidth(30);
         mainTable.getColumnModel().getColumn(6).setPreferredWidth(15);
         mainTable.getColumnModel().getColumn(7).setPreferredWidth(15);
+
+        // new mana render (svg support)
+        mainTable.getColumnModel().getColumn(mainModel.COLUMN_INDEX_COST).setCellRenderer(new ManaSymbolsCellRenderer());
 
         if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_VIEW, "cardView").equals("listView")) {
             jToggleListView.setSelected(true);
