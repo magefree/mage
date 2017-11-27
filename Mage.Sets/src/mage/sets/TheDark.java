@@ -59,6 +59,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Ball Lightning", 56, Rarity.RARE, mage.cards.b.BallLightning.class));
         cards.add(new SetCardInfo("Barl's Cage", 93, Rarity.RARE, mage.cards.b.BarlsCage.class));
         cards.add(new SetCardInfo("Blood Moon", 57, Rarity.RARE, mage.cards.b.BloodMoon.class));
+        cards.add(new SetCardInfo("Blood of the Martyr", 75, Rarity.RARE, mage.cards.b.BloodOfTheMartyr.class));
         cards.add(new SetCardInfo("Bog Imp", 3, Rarity.COMMON, mage.cards.b.BogImp.class));
         cards.add(new SetCardInfo("Bog Rats", 4, Rarity.COMMON, mage.cards.b.BogRats.class));
         cards.add(new SetCardInfo("Bone Flute", 94, Rarity.UNCOMMON, mage.cards.b.BoneFlute.class));
