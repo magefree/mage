@@ -20,9 +20,9 @@ import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileInputStream;
 import net.java.truevfs.access.TFileOutputStream;
 import org.apache.log4j.Logger;
-import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.utils.CardImageUtils;
+import mage.client.constants.Constants;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -94,7 +94,7 @@ public final class ImageCache {
                                 path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename; // TODO: replace empty token by other default card, not cardback
                             }
                         } else {
-                            path = CardImageUtils.generateImagePath(info);
+                            path = CardImageUtils.buildImagePathToCard(info);
                         }
 
                         if (path == null) {
@@ -263,7 +263,7 @@ public final class ImageCache {
                     path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename; // TODO: replace empty token by other default card, not cardback
                 }
             } else {
-                path = CardImageUtils.generateImagePath(info);
+                path = CardImageUtils.buildImagePathToCard(info);
             }
 
             if (thumbnail && path.endsWith(".jpg")) {
@@ -340,7 +340,7 @@ public final class ImageCache {
             // image draw to buffer
             gg.setComposite(AlphaComposite.SrcAtop);
             gg.drawImage(image, 0, 0, null);
-            //gg.dispose();
+            gg.dispose();
 
             return cornerImage;
         } else {

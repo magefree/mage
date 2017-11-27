@@ -216,6 +216,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Psionic Blast", 75, Rarity.UNCOMMON, mage.cards.p.PsionicBlast.class));
         cards.add(new SetCardInfo("Psychic Venom", 76, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
         cards.add(new SetCardInfo("Purelace", 218, Rarity.RARE, mage.cards.p.Purelace.class));
+        cards.add(new SetCardInfo("Raging River", 170, Rarity.RARE, mage.cards.r.RagingRiver.class));
         cards.add(new SetCardInfo("Raise Dead", 31, Rarity.COMMON, mage.cards.r.RaiseDead.class));
         cards.add(new SetCardInfo("Red Elemental Blast", 171, Rarity.COMMON, mage.cards.r.RedElementalBlast.class));
         cards.add(new SetCardInfo("Red Ward", 219, Rarity.UNCOMMON, mage.cards.r.RedWard.class));

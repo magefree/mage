@@ -27,6 +27,7 @@
  */
 package mage.cards.y;
 
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -38,13 +39,14 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
+import mage.watchers.common.BlockedByOnlyOneCreatureThisCombatWatcher;
 
 /**
  *
- * @author MarcoMarin
+ * @author MarcoMarin & L_J
  */
 public class YdwenEfreet extends CardImpl {
 
@@ -72,7 +74,7 @@ class YdwenEfreetEffect extends OneShotEffect {
 
     public YdwenEfreetEffect() {
         super(Outcome.Damage);
-        staticText = "flip a coin. If you lose the flip, remove {this} from combat and it can't block.";
+        staticText = "flip a coin. If you lose the flip, remove {this} from combat and it can't block. Creatures it was blocking that had become blocked by only {this} this combat become unblocked";
     }
 
     public YdwenEfreetEffect(YdwenEfreetEffect effect) {
@@ -84,14 +86,25 @@ class YdwenEfreetEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent creature = game.getPermanent(source.getSourceId());
         if (controller != null && creature != null) {
-            if (controller.flipCoin(game)) {
-                return true;
-            } else {
+            if (!controller.flipCoin(game)) {
                 creature.removeFromCombat(game);
                 creature.setMaxBlocks(0);
-                return true;
+                
+                // Make blocked creatures unblocked
+                BlockedByOnlyOneCreatureThisCombatWatcher watcher = (BlockedByOnlyOneCreatureThisCombatWatcher) game.getState().getWatchers().get(BlockedByOnlyOneCreatureThisCombatWatcher.class.getSimpleName());
+                if (watcher != null) {
+                    Set<CombatGroup> combatGroups = watcher.getBlockedOnlyByCreature(creature.getId());
+                    if (combatGroups != null) {
+                        for (CombatGroup combatGroup : combatGroups) {
+                            if (combatGroup != null) {
+                                combatGroup.setBlocked(false);
+                            }
+                        }
+                    }
                 }
             }
+            return true;
+        }
         return false;
     }
 

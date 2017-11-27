@@ -260,6 +260,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Rootwater Diver", 81, Rarity.UNCOMMON, mage.cards.r.RootwaterDiver.class));
         cards.add(new SetCardInfo("Rootwater Hunter", 82, Rarity.COMMON, mage.cards.r.RootwaterHunter.class));
         cards.add(new SetCardInfo("Rootwater Matriarch", 83, Rarity.RARE, mage.cards.r.RootwaterMatriarch.class));
+        cards.add(new SetCardInfo("Rootwater Shaman", 84, Rarity.RARE, mage.cards.r.RootwaterShaman.class));
         cards.add(new SetCardInfo("Ruby Medallion", 295, Rarity.RARE, mage.cards.r.RubyMedallion.class));
         cards.add(new SetCardInfo("Sacred Guide", 250, Rarity.RARE, mage.cards.s.SacredGuide.class));
         cards.add(new SetCardInfo("Sadistic Glee", 47, Rarity.COMMON, mage.cards.s.SadisticGlee.class));

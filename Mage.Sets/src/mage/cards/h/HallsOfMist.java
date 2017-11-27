@@ -25,20 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.h;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,45 +46,44 @@ import mage.watchers.common.AttackedLastTurnWatcher;
 
 /**
  *
- * @author TheElk801
+ * @author L_J
  */
-public class GiantTurtle extends CardImpl {
+public class HallsOfMist extends CardImpl {
 
-    public GiantTurtle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+    public HallsOfMist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.subtype.add(SubType.TURTLE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
+        // Cumulative upkeep-Pay {1}.
+        this.addAbility(new CumulativeUpkeepAbility(new GenericManaCost(1)));
 
-        // Giant Turtle can't attack if it attacked during your last turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackIfAttackedLastTurnEffect()), new AttackedLastTurnWatcher());
+        // Creatures that attacked during their controller's last turn can't attack.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackIfAttackedLastTurnAllEffect()), new AttackedLastTurnWatcher());
     }
 
-    public GiantTurtle(final GiantTurtle card) {
+    public HallsOfMist(final HallsOfMist card) {
         super(card);
     }
 
     @Override
-    public GiantTurtle copy() {
-        return new GiantTurtle(this);
+    public HallsOfMist copy() {
+        return new HallsOfMist(this);
     }
 }
 
-class CantAttackIfAttackedLastTurnEffect extends RestrictionEffect {
+class CantAttackIfAttackedLastTurnAllEffect extends RestrictionEffect {
 
-    public CantAttackIfAttackedLastTurnEffect() {
+    public CantAttackIfAttackedLastTurnAllEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "{this} can't attack if it attacked during your last turn";
+        this.staticText = "Creatures that attacked during their controller's last turn can't attack";
     }
 
-    public CantAttackIfAttackedLastTurnEffect(final CantAttackIfAttackedLastTurnEffect effect) {
+    public CantAttackIfAttackedLastTurnAllEffect(final CantAttackIfAttackedLastTurnAllEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId());
+        return permanent.isCreature();
     }
 
     @Override
@@ -101,8 +100,8 @@ class CantAttackIfAttackedLastTurnEffect extends RestrictionEffect {
     }
 
     @Override
-    public CantAttackIfAttackedLastTurnEffect copy() {
-        return new CantAttackIfAttackedLastTurnEffect(this);
+    public CantAttackIfAttackedLastTurnAllEffect copy() {
+        return new CantAttackIfAttackedLastTurnAllEffect(this);
     }
 
 }

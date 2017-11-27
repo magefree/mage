@@ -11,9 +11,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import mage.client.constants.Constants;
 import org.mage.plugins.card.dl.DownloadJob;
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
+import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
  * Used when we need to point to direct links to download resources from.
@@ -33,15 +36,13 @@ public class DirectLinksForDownload implements Iterable<DownloadJob> {
         directLinks.put(cardbackFilename, backsideUrl);
     }
 
-    private static final String DEFAULT_IMAGES_PATH =  File.separator + "default";
-    private static final File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + DEFAULT_IMAGES_PATH);
-    public static File outDir  = DEFAULT_OUT_DIR;
+    public static File outDir;
 
-    public DirectLinksForDownload(String path) {
-        if (path == null) {
-            useDefaultDir();
-        } else {
-            changeOutDir(path);
+    public DirectLinksForDownload() {
+        outDir = new File(getImagesDir() + Constants.RESOURCE_PATH_DEFAUL_IMAGES);
+
+        if (!outDir.exists()){
+            outDir.mkdirs();
         }
     }
 
@@ -54,21 +55,5 @@ public class DirectLinksForDownload implements Iterable<DownloadJob> {
             jobs.add(new DownloadJob(url.getKey(), fromURL(url.getValue()), toFile(dst)));
         }
         return jobs.iterator();
-    }
-
-    private void changeOutDir(String path) {
-        File file = new File(path + DEFAULT_IMAGES_PATH);
-        if (file.exists()) {
-            outDir = file;
-        } else {
-            file.mkdirs();
-            if (file.exists()) {
-                outDir = file;
-            }
-        }
-    }
-
-    private void useDefaultDir() {
-        outDir = DEFAULT_OUT_DIR;
     }
 }

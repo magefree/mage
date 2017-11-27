@@ -2261,6 +2261,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     break;
                 }
             }
+        } else if (opponents.size() == 1) {
+            randomOpponentId = game.getOpponents(abilityControllerId).iterator().next();
         }
         return randomOpponentId;
     }

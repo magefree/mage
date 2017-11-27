@@ -16,12 +16,18 @@ import mage.util.CardUtil;
 public class DoIfCostPaid extends OneShotEffect {
 
     protected Effects executingEffects = new Effects();
+    protected Effects otherwiseEffects = new Effects(); // used for Imprison
     private final Cost cost;
     private String chooseUseText;
     private boolean optional;
 
     public DoIfCostPaid(Effect effect, Cost cost) {
         this(effect, cost, null);
+    }
+
+    public DoIfCostPaid(Effect effect, Effect effect2, Cost cost) {
+        this(effect, cost, null, true);
+        this.otherwiseEffects.add(effect2);
     }
 
     public DoIfCostPaid(Effect effect, Cost cost, String chooseUseText) {
@@ -39,6 +45,7 @@ public class DoIfCostPaid extends OneShotEffect {
     public DoIfCostPaid(final DoIfCostPaid effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
+        this.otherwiseEffects = effect.otherwiseEffects.copy();
         this.cost = effect.cost.copy();
         this.chooseUseText = effect.chooseUseText;
         this.optional = effect.optional;
@@ -80,6 +87,26 @@ public class DoIfCostPaid extends OneShotEffect {
                     }
                     player.resetStoredBookmark(game); // otherwise you can e.g. undo card drawn with Mentor of the Meek
                 }
+                else if (!otherwiseEffects.isEmpty()) {
+                    for (Effect effect : otherwiseEffects) {
+                        effect.setTargetPointer(this.targetPointer);
+                        if (effect instanceof OneShotEffect) {
+                            result &= effect.apply(game, source);
+                        } else {
+                            game.addEffect((ContinuousEffect) effect, source);
+                        }
+                    }
+                }
+            }
+            else if (!otherwiseEffects.isEmpty()) {
+                for (Effect effect : otherwiseEffects) {
+                    effect.setTargetPointer(this.targetPointer);
+                    if (effect instanceof OneShotEffect) {
+                        result &= effect.apply(game, source);
+                    } else {
+                        game.addEffect((ContinuousEffect) effect, source);
+                    }
+                }
             }
             return result;
         }
@@ -99,7 +126,7 @@ public class DoIfCostPaid extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return (optional ? "you may " : "") + getCostText() + ". If you do, " + executingEffects.getText(mode);
+        return (optional ? "you may " : "") + getCostText() + ". If you do, " + executingEffects.getText(mode) + (!otherwiseEffects.isEmpty() ? " If you don't, " + otherwiseEffects.getText(mode) : "");
     }
 
     protected String getCostText() {

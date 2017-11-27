@@ -1201,6 +1201,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             for (CombatGroup group : groups) {
                 result |= group.remove(creatureId);
             }
+            blockingGroups.remove(creatureId);
             if (result && withInfo) {
                 game.informPlayers(creature.getLogName() + " removed from combat");
             }

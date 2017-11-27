@@ -78,6 +78,10 @@ public abstract class RequirementEffect extends ContinuousEffectImpl {
     public boolean mustBlockAny(Game game) {
         return false;
     }
+    
+    public boolean mustBlockAllAttackers(Game game) {
+        return false;
+    }
 
     /**
      * Defines the defender a attacker has to attack
