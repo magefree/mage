@@ -92,6 +92,8 @@ import org.mage.plugins.card.images.DownloadPictures;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
+import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */

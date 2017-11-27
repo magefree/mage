@@ -22,7 +22,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import mage.cards.repository.ExpansionRepository;
-import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
@@ -38,6 +37,8 @@ import org.apache.log4j.Logger;
 import mage.client.constants.Constants;
 import mage.client.constants.Constants.ResourceSymbolSize;
 import mage.client.constants.Constants.ResourceSetSize;
+
+import org.mage.plugins.card.utils.CardImageUtils;
 
 public final class ManaSymbols {
 
@@ -411,33 +412,10 @@ public final class ManaSymbols {
         }
     }
 
-    public static String getImagesDir(){
-        // return real images dir (path without separator)
-
-        String path = null;
-
-        // user path
-        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true").equals("true")){
-            path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-        }
-
-        // default path
-        if (path == null) {
-            path = Constants.IO.DEFAULT_IMAGES_DIR;
-        }
-
-        while(path.endsWith(File.separator))
-        {
-            path = path.substring(0, path.length() - 1);
-        }
-
-        return path;
-    }
-
     private static String getResourceSymbolsPath(ResourceSymbolSize needSize){
         // return real path to symbols (default or user defined)
 
-        String path = getImagesDir() + Constants.RESOURCE_PATH_SYMBOLS + File.separator;
+        String path = CardImageUtils.getImagesDir() + Constants.RESOURCE_PATH_SYMBOLS + File.separator;
 
         // folder by sizes
         switch (needSize) {
@@ -473,7 +451,7 @@ public final class ManaSymbols {
     private static String getResourceSetsPath(ResourceSetSize needSize){
         // return real path to sets icons (default or user defined)
 
-        String path = getImagesDir() + Constants.RESOURCE_PATH_SYMBOLS + File.separator;
+        String path = CardImageUtils.getImagesDir() + Constants.RESOURCE_PATH_SYMBOLS + File.separator;
 
         // folder by sizes
         switch (needSize) {

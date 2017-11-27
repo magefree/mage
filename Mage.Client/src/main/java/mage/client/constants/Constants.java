@@ -77,6 +77,9 @@ public final class Constants {
     public static final Rectangle CARD_SIZE_FULL = new Rectangle(101, 149);
     public static final Rectangle THUMBNAIL_SIZE_FULL = new Rectangle(102, 146);
 
+    // resources - default images
+    public static final String RESOURCE_PATH_DEFAUL_IMAGES = File.separator + "default";
+
     // resources - symbols
     public static final String RESOURCE_PATH_SYMBOLS = File.separator + "symbols";
     public static final String RESOURCE_SYMBOL_FOLDER_SMALL = "small";

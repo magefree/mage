@@ -29,13 +29,14 @@ import mage.view.PermanentView;
 import net.xeoh.plugins.base.PluginManager;
 import net.xeoh.plugins.base.impl.PluginManagerFactory;
 import org.apache.log4j.Logger;
-import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.CardPluginImpl;
 import org.mage.plugins.theme.ThemePluginImpl;
 
+import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
+
 public enum Plugins implements MagePlugins {
     instance;
-    public static final String PLUGINS_DIRECTORY = File.separator + "plugins";
+    public static final String PLUGINS_DIRECTORY = "plugins";
 
     private static final Logger LOGGER = Logger.getLogger(Plugins.class);
     private static PluginManager pm;
@@ -49,6 +50,7 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public void loadPlugins() {
+
         LOGGER.info("Loading plugins...");
         pm = PluginManagerFactory.createPluginManager();
         pm.addPluginsFrom(new File(PLUGINS_DIRECTORY + File.separator).toURI());
@@ -132,9 +134,8 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public void downloadSymbols() {
-        String path = ManaSymbols.getImagesDir() + File.separator;
         if (this.cardPlugin != null) {
-            this.cardPlugin.downloadSymbols(path);
+            this.cardPlugin.downloadSymbols(getImagesDir());
         }
     }
 

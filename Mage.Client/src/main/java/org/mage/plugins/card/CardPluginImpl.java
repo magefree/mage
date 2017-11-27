@@ -6,7 +6,6 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
 import mage.constants.Rarity;
 import mage.interfaces.plugin.CardPlugin;
-import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
@@ -19,7 +18,6 @@ import org.mage.card.arcane.*;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.dl.Downloader;
-import org.mage.plugins.card.dl.sources.CardFrames;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.dl.sources.GathererSets;
 import org.mage.plugins.card.dl.sources.GathererSymbols;
@@ -525,30 +523,30 @@ public class CardPluginImpl implements CardPlugin {
     /**
      * Download various symbols (mana, tap, set).
      *
-     * @param imagesPath Path to check in and store symbols to. Can be null, in
-     * such case default path should be used.
+     * @param imagesDir Path to check in and store symbols to. Can't be null.
      */
     @Override
-    public void downloadSymbols(String imagesPath) {
+    public void downloadSymbols(String imagesDir) {
         final DownloadGui g = new DownloadGui(new Downloader());
 
-        Iterable<DownloadJob> it = new GathererSymbols(imagesPath);
-
+        Iterable<DownloadJob> it = new GathererSymbols();
         for (DownloadJob job : it) {
             g.getDownloader().add(job);
         }
 
-        it = new GathererSets(imagesPath);
+        it = new GathererSets();
         for (DownloadJob job : it) {
             g.getDownloader().add(job);
         }
 
-        it = new CardFrames(imagesPath);
+        /*
+        it = new CardFrames(imagesDir); // TODO: delete frames download (not need now)
         for (DownloadJob job : it) {
             g.getDownloader().add(job);
         }
+        */
 
-        it = new DirectLinksForDownload(imagesPath);
+        it = new DirectLinksForDownload();
         for (DownloadJob job : it) {
             g.getDownloader().add(job);
         }

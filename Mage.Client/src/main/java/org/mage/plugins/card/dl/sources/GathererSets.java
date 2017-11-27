@@ -9,11 +9,14 @@ import java.util.Iterator;
 
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
+import mage.client.constants.Constants;
 import mage.constants.Rarity;
 import org.mage.plugins.card.dl.DownloadJob;
 
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
+import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
+
 import org.apache.log4j.Logger;
 
 public class GathererSets implements Iterable<DownloadJob> {
@@ -36,12 +39,10 @@ public class GathererSets implements Iterable<DownloadJob> {
         }
     }
 
+    private static File outDir;
+
     private static final int DAYS_BEFORE_RELEASE_TO_DOWNLOAD = +14; // Try to load the symbolsBasic eralies 14 days before release date
     private static final Logger logger = Logger.getLogger(GathererSets.class);
-
-    private static final String SETS_PATH = File.separator + "sets";
-    private static final File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + SETS_PATH);
-    private static File outDir = DEFAULT_OUT_DIR;
 
     private static final String[] symbolsBasic = {"10E", "9ED", "8ED", "7ED", "6ED", "5ED", "4ED", "3ED", "2ED", "LEB", "LEA",
         "HOP",
@@ -150,11 +151,12 @@ public class GathererSets implements Iterable<DownloadJob> {
         codeReplacements.put("CHR", "CH");
     }
 
-    public GathererSets(String path) {
-        if (path == null) {
-            useDefaultDir();
-        } else {
-            changeOutDir(path);
+    public GathererSets() {
+
+        outDir = new File(getImagesDir() + Constants.RESOURCE_PATH_SYMBOLS);
+
+        if (!outDir.exists()){
+            outDir.mkdirs();
         }
     }
 
@@ -310,21 +312,5 @@ public class GathererSets implements Iterable<DownloadJob> {
         }
         String url = "http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=" + set + "&size=small&rarity=" + urlRarity;
         return new DownloadJob(set + '-' + rarity, fromURL(url), toFile(dst));
-    }
-
-    private void changeOutDir(String path) {
-        File file = new File(path + SETS_PATH);
-        if (file.exists()) {
-            outDir = file;
-        } else {
-            file.mkdirs();
-            if (file.exists()) {
-                outDir = file;
-            }
-        }
-    }
-
-    private void useDefaultDir() {
-        outDir = DEFAULT_OUT_DIR;
     }
 }

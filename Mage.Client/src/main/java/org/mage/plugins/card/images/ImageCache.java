@@ -94,7 +94,7 @@ public final class ImageCache {
                                 path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename; // TODO: replace empty token by other default card, not cardback
                             }
                         } else {
-                            path = CardImageUtils.generateImagePath(info);
+                            path = CardImageUtils.buildImagePathToCard(info);
                         }
 
                         if (path == null) {
@@ -263,7 +263,7 @@ public final class ImageCache {
                     path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename; // TODO: replace empty token by other default card, not cardback
                 }
             } else {
-                path = CardImageUtils.generateImagePath(info);
+                path = CardImageUtils.buildImagePathToCard(info);
             }
 
             if (thumbnail && path.endsWith(".jpg")) {
