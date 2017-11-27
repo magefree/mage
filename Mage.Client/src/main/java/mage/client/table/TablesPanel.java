@@ -46,6 +46,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -70,6 +73,8 @@ import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
+import org.ocpsoft.prettytime.PrettyTime;
+import org.ocpsoft.prettytime.units.JustNow;
 
 /**
  *
@@ -100,6 +105,18 @@ public class TablesPanel extends javax.swing.JPanel {
 
     final JToggleButton[] filterButtons;
 
+    // time ago date time renderer
+    private PrettyTime timeAgoFormater = new PrettyTime();
+    TableCellRenderer timeAgoCellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            Date d = (Date)value;
+            label.setText(timeAgoFormater.format(d));
+            return label;
+        }
+    };
+
     /**
      * Creates new form TablesPanel
      */
@@ -116,6 +133,28 @@ public class TablesPanel extends javax.swing.JPanel {
 
         activeTablesSorter = new MageTableRowSorter(tableModel);
         tableTables.setRowSorter(activeTablesSorter);
+
+
+        // time ago column settings
+        // formater
+        timeAgoFormater.setLocale(Locale.ENGLISH);
+        JustNow jn = timeAgoFormater.getUnit(JustNow.class);
+        jn.setMaxQuantity(1000L * 30L); // 30 seconds gap (show "just now" from 0 to 30 secs)
+        // renderer
+        tableTables.getColumnModel().getColumn(TableTableModel.COLUMN_CREATED).setCellRenderer(timeAgoCellRenderer);
+        /* date sorter (not need, default is good - see getColumnClass)
+        activeTablesSorter.setComparator(TableTableModel.COLUMN_CREATED, new Comparator<Date>() {
+            @Override
+            public int compare(Date v1, Date v2) {
+                return v1.compareTo(v2);
+            }
+
+        });*/
+        // default sort by created date (last games from above)
+        ArrayList list = new ArrayList();
+        list.add(new RowSorter.SortKey(TableTableModel.COLUMN_CREATED, SortOrder.DESCENDING));
+        activeTablesSorter.setSortKeys(list);
+
 
         TableUtil.setColumnWidthAndOrder(tableTables, DEFAULT_COLUMNS_WIDTH,
                 PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, PreferencesDialog.KEY_TABLES_COLUMNS_ORDER);
@@ -1286,10 +1325,14 @@ class TableTableModel extends AbstractTableModel {
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
 
+    public void TableModel() {
+    }
+
     public void loadData(Collection<TableView> tables) throws MageRemoteException {
         this.tables = tables.toArray(new TableView[0]);
         this.fireTableDataChanged();
     }
+
 
     @Override
     public int getRowCount() {
@@ -1319,7 +1362,7 @@ class TableTableModel extends AbstractTableModel {
             case 6:
                 return tables[arg0].isPassworded() ? PASSWORDED : "";
             case 7:
-                return timeFormatter.format(tables[arg0].getCreateTime());
+                return tables[arg0].getCreateTime(); // use cell render, not format here
             case 8:
                 return tables[arg0].getSkillLevel();
             case 9:
@@ -1384,6 +1427,8 @@ class TableTableModel extends AbstractTableModel {
                 return Icon.class;
             case COLUMN_SKILL:
                 return SkillLevel.class;
+            case COLUMN_CREATED:
+                return Date.class;
             default:
                 return String.class;
         }
