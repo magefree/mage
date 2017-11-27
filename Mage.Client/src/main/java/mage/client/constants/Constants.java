@@ -98,7 +98,7 @@ public final class Constants {
     // resources - sets
     public static final String RESOURCE_PATH_SETS = File.separator + "sets";
     public static final String RESOURCE_SET_FOLDER_SMALL = "small";
-    public static final String RESOURCE_SET_FOLDER_MEDIUM = ""; // empty, medium images laydown in "sets" folder
+    public static final String RESOURCE_SET_FOLDER_MEDIUM = ""; // empty, medium images laydown in "sets" folder, TODO: delete that and auto gen, use png for html, not gif
     public static final String RESOURCE_SET_FOLDER_SVG = "svg";
     public enum ResourceSetSize {
         SMALL,

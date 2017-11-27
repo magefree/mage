@@ -27,7 +27,6 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
-import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
@@ -39,6 +38,8 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.*;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
+
+import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 
@@ -541,7 +542,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     public void run() {
         this.cardIndex = 0;
 
-        File base = new File(Constants.IO.DEFAULT_IMAGES_DIR);
+        File base = new File(getImagesDir());
         if (!base.exists()) {
             base.mkdir();
         }
@@ -694,7 +695,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 }
 
                 // gen temp file (download to images folder)
-                String tempPath = CardImageUtils.getImagesDir() + File.separator + "downloading" + File.separator;
+                String tempPath = getImagesDir() + File.separator + "downloading" + File.separator;
                 if(useSpecifiedPaths){
                     fileTempImage = new TFile(tempPath +  actualFilename + "-" + card.hashCode() + ".jpg");
                 }else{
@@ -939,7 +940,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
             iwp.setCompressionQuality(0.96f);
 
-            File tempFile = new File(Constants.IO.DEFAULT_IMAGES_DIR + File.separator + image.hashCode() + file.getName());
+            File tempFile = new File(getImagesDir() + File.separator + image.hashCode() + file.getName());
             FileImageOutputStream output = new FileImageOutputStream(tempFile);
             writer.setOutput(output);
             IIOImage image2 = new IIOImage(image, null, null);

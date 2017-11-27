@@ -237,16 +237,10 @@ public final class CardImageUtils {
     }
 
     public static String generateFaceImagePath(String cardname, String set) {
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String imagesPath = Objects.equals(useDefault, "true") ? Constants.IO.DEFAULT_IMAGES_DIR : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-        String imageDir = imagesPath;
-        String imageName = set + TFile.separator + cardname + ".jpg";
-        return imageDir + TFile.separator + "FACE" + TFile.separator + imageName;
+        return getImagesDir() + File.separator + "FACE" + File.separator + set + File.separator + prepareCardNameForFile(cardname) + File.separator + ".jpg";
     }
 
     public static String generateTokenDescriptorImagePath(CardDownloadData card) {
-        // String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        // String imagesPath = Objects.equals(useDefault, "true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
 
         String straightImageFile = buildImagePathToTokenDescriptor(card);
         TFile file = new TFile(straightImageFile);
