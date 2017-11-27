@@ -68,6 +68,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Barl's Cage", 74, Rarity.RARE, mage.cards.b.BarlsCage.class));
         cards.add(new SetCardInfo("Beasts of Bogardan", 45, Rarity.UNCOMMON, mage.cards.b.BeastsOfBogardan.class));
         cards.add(new SetCardInfo("Blood Moon", 46, Rarity.RARE, mage.cards.b.BloodMoon.class));
+        cards.add(new SetCardInfo("Blood of the Martyr", 60, Rarity.UNCOMMON, mage.cards.b.BloodOfTheMartyr.class));
         cards.add(new SetCardInfo("Bog Rats", 2, Rarity.COMMON, mage.cards.b.BogRats.class));
         cards.add(new SetCardInfo("Book of Rass", 75, Rarity.RARE, mage.cards.b.BookOfRass.class));
         cards.add(new SetCardInfo("Boomerang", 16, Rarity.COMMON, mage.cards.b.Boomerang.class));
