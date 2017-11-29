@@ -154,9 +154,9 @@ public final class CardImageUtils {
 
 
         if (PreferencesDialog.isSaveImagesToZip()) {
-            return imagesPath + "TOK.zip" + TFile.separator;
+            return imagesPath + "TOK.zip" + File.separator;
         } else {
-            return imagesPath + "TOK" + TFile.separator;
+            return imagesPath + "TOK" + File.separator;
         }
     }
 
@@ -183,7 +183,7 @@ public final class CardImageUtils {
         String imagesPath = getImagesDir() + File.separator;
 
         if (PreferencesDialog.isSaveImagesToZip()) {
-            return imagesPath + set + ".zip" + File.separator;
+            return imagesPath + set + ".zip" + File.separator + set + File.separator;
         } else {
             return imagesPath + set + File.separator;
         }
