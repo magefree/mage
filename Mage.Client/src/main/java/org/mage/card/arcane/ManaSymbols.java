@@ -2,6 +2,9 @@ package org.mage.card.arcane;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageProducer;
+import java.awt.image.RGBImageFilter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -38,6 +41,8 @@ import mage.client.constants.Constants;
 import mage.client.constants.Constants.ResourceSymbolSize;
 import mage.client.constants.Constants.ResourceSetSize;
 
+import org.jdesktop.swingx.graphics.ShadowRenderer;
+import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.mage.plugins.card.utils.CardImageUtils;
 
 public final class ManaSymbols {
@@ -209,11 +214,18 @@ public final class ManaSymbols {
         }
     }
 
-    public static BufferedImage loadSVG(File svgFile, int resizeToWidth, int resizeToHeight) throws IOException {
+    public static BufferedImage loadSVG(File svgFile, int resizeToWidth, int resizeToHeight, boolean useShadow) throws IOException {
+
+        // debug: disable shadow gen, need to test it
+        useShadow = false;
 
         // load SVG image
         // base loader code: https://stackoverflow.com/questions/11435671/how-to-get-a-buffererimage-from-a-svg
         // resize code: https://vibranttechie.wordpress.com/2015/05/15/svg-loading-to-javafx-stage-and-auto-scaling-when-stage-resize/
+
+        if (useShadow && ((resizeToWidth <= 0) || (resizeToHeight <= 0))){
+            throw new IllegalArgumentException("Must use non zero sizes for shadow.");
+        }
 
         final BufferedImage[] imagePointer = new BufferedImage[1];
 
@@ -236,6 +248,16 @@ public final class ManaSymbols {
         TranscodingHints transcoderHints = new TranscodingHints();
 
         // resize
+        int shadowX = 0;
+        int shadowY = 0;
+        if(useShadow) {
+            // shadow size (16px image: 1px left, 2px bottom)
+            shadowX = 1 * Math.round(1f / 16f * resizeToWidth);
+            shadowY = 2 * Math.round(1f / 16f * resizeToHeight);
+            resizeToWidth = resizeToWidth - shadowX;
+            resizeToHeight = resizeToHeight - shadowY;
+        };
+
         if(resizeToWidth > 0){
             transcoderHints.put(ImageTranscoder.KEY_WIDTH, (float)resizeToWidth); //your image width
         }
@@ -279,7 +301,51 @@ public final class ManaSymbols {
             cssFile.delete();
         }
 
-        return imagePointer[0];
+        BufferedImage originImage = imagePointer[0];
+
+        if(useShadow && (originImage.getWidth() > 0)){
+            // draw shadow
+            // origin image was reduces in sizes to fit shadow
+            // see https://stackoverflow.com/a/40833715/1276632
+
+            // a filter which converts all colors except 0 to black
+            ImageProducer prod = new FilteredImageSource(originImage.getSource(), new RGBImageFilter() {
+                @Override
+                public int filterRGB(int x, int y, int rgb) {
+                    if (rgb == 0)
+                        return 0;
+                    else
+                        return 0xff000000;
+                }
+            });
+            // create whe black image
+            Image shadow = Toolkit.getDefaultToolkit().createImage(prod);
+            // result
+            BufferedImage result = new BufferedImage(originImage.getWidth() + shadowX, originImage.getHeight() + shadowY, originImage.getType());
+            Graphics2D g = (Graphics2D) result.getGraphics();
+            // draw shadow with offset (left bottom)
+            g.drawImage(shadow, -1 * shadowX, shadowY, null);
+            // draw original image
+            g.drawImage(originImage, 0, 0, null);
+            return result;
+        }else{
+            // return origin image without shadow
+            return originImage;
+        }
+
+        /*
+        BufferedImage base = GraphicsUtilities.createCompatibleTranslucentImage(w, h);
+        Graphics2D g2 = base.createGraphics();
+        g2.setColor(Color.WHITE);
+        g2.fillRoundRect(0, 0, image.getWidth(), image.getHeight(), 10, 10);
+        g2.dispose();
+
+        ShadowRenderer renderer = new ShadowRenderer(shadowSize, 0.5f,
+                Color.GRAY);
+        return renderer.createShadow(base);
+        */
+
+        //imagePointer[0];
     }
 
     private static File getSymbolFileNameAsSVG(String symbol){
@@ -295,7 +361,7 @@ public final class ManaSymbols {
     private static BufferedImage loadSymbolAsSVG(File sourceFile, int resizeToWidth, int resizeToHeight){
         try{
             // no need to resize svg (lib already do it on load)
-            return loadSVG(sourceFile, resizeToWidth, resizeToHeight);
+            return loadSVG(sourceFile, resizeToWidth, resizeToHeight, true);
 
         } catch (Exception e) {
             LOGGER.error("Can't load svg symbol: " + sourceFile.getPath());
