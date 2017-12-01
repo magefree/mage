@@ -93,8 +93,9 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Caves", 63, Rarity.COMMON, mage.cards.g.GoblinCaves.class));
         cards.add(new SetCardInfo("Goblin Digging Team", 64, Rarity.COMMON, mage.cards.g.GoblinDiggingTeam.class));
         cards.add(new SetCardInfo("Goblin Hero", 65, Rarity.COMMON, mage.cards.g.GoblinHero.class));
-        cards.add(new SetCardInfo("Goblins of the Flarg", 69, Rarity.COMMON, mage.cards.g.GoblinsOfTheFlarg.class));
+        cards.add(new SetCardInfo("Goblin Rock Sled", 66, Rarity.COMMON, mage.cards.g.GoblinRockSled.class));
         cards.add(new SetCardInfo("Goblin Wizard", 68, Rarity.RARE, mage.cards.g.GoblinWizard.class));
+        cards.add(new SetCardInfo("Goblins of the Flarg", 69, Rarity.COMMON, mage.cards.g.GoblinsOfTheFlarg.class));
         cards.add(new SetCardInfo("Grave Robbers", 8, Rarity.RARE, mage.cards.g.GraveRobbers.class));
         cards.add(new SetCardInfo("Hidden Path", 41, Rarity.RARE, mage.cards.h.HiddenPath.class));
         cards.add(new SetCardInfo("Holy Light", 83, Rarity.COMMON, mage.cards.h.HolyLight.class));
@@ -134,6 +135,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Standing Stones", 107, Rarity.UNCOMMON, mage.cards.s.StandingStones.class));
         cards.add(new SetCardInfo("Stone Calendar", 108, Rarity.RARE, mage.cards.s.StoneCalendar.class));
         cards.add(new SetCardInfo("Sunken City", 35, Rarity.COMMON, mage.cards.s.SunkenCity.class));
+        cards.add(new SetCardInfo("Tangle Kelp", 36, Rarity.RARE, mage.cards.t.TangleKelp.class));
         cards.add(new SetCardInfo("Tivadar's Crusade", 91, Rarity.UNCOMMON, mage.cards.t.TivadarsCrusade.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 109, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
         cards.add(new SetCardInfo("Tower of Coireall", 110, Rarity.RARE, mage.cards.t.TowerOfCoireall.class));
