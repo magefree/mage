@@ -48,6 +48,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterOwnedCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
@@ -61,6 +63,13 @@ import mage.target.common.TargetCardInExile;
 public class IzzetChemister extends CardImpl {
 
     private static final FilterCard filter = new FilterOwnedCard("instant or sorcery card from your graveyard");
+
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY))
+        );
+    }
 
     public IzzetChemister(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
