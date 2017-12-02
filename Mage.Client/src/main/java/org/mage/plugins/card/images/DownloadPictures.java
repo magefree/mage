@@ -27,13 +27,9 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
-import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
-import static mage.remote.Connection.ProxyType.HTTP;
-import static mage.remote.Connection.ProxyType.NONE;
-import static mage.remote.Connection.ProxyType.SOCKS;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
@@ -42,6 +38,8 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.*;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
+
+import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 
@@ -462,7 +460,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
          */
         List<CardDownloadData> cardsToDownload = Collections.synchronizedList(new ArrayList<>());
         allCardsUrls.parallelStream().forEach(card -> {
-            TFile file = new TFile(CardImageUtils.generateImagePath(card));
+            File file = new TFile(CardImageUtils.buildImagePathToCard(card));
             logger.debug(card.getName() + " (is_token=" + card.isToken() + "). Image is here:" + file.getAbsolutePath() + " (exists=" + file.exists() + ')');
             if (!file.exists()) {
                 logger.debug("Missing: " + file.getAbsolutePath());
@@ -544,7 +542,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     public void run() {
         this.cardIndex = 0;
 
-        File base = new File(Constants.IO.imageBaseDir);
+        File base = new File(getImagesDir());
         if (!base.exists()) {
             base.mkdir();
         }
@@ -678,38 +676,78 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         @Override
         public void run() {
-            StringBuilder filePath = new StringBuilder();
-            File temporaryFile = null;
-            TFile outputFile = null;
+            if (cancel) {
+                synchronized (sync) {
+                    update(cardIndex + 1, count);
+                }
+                return;
+            }
+
+            TFile fileTempImage;
+            TFile destFile;
             try {
-                filePath.append(Constants.IO.imageBaseDir);
-                if (!useSpecifiedPaths && card != null) {
-                    filePath.append(card.hashCode()).append('.').append(card.getName().replace(":", "").replace("//", "-")).append(".jpg");
-                    temporaryFile = new File(filePath.toString());
-                }
-                String imagePath;
-                if (useSpecifiedPaths) {
-                    if (card != null && card.isToken()) {
-                        imagePath = CardImageUtils.getTokenBasePath() + actualFilename;
-                    } else if (card != null) {
-                        imagePath = CardImageUtils.getImageBasePath() + actualFilename;
-                    } else {
-                        imagePath = Constants.IO.imageBaseDir;
-                    }
 
-                    String tmpFile = filePath + "temporary" + actualFilename;
-                    temporaryFile = new File(tmpFile);
-                    if (!temporaryFile.exists()) {
-                        temporaryFile.getParentFile().mkdirs();
+                if (card == null){
+                    synchronized (sync) {
+                        update(cardIndex + 1, count);
                     }
-                } else {
-                    imagePath = CardImageUtils.generateImagePath(card);
+                    return;
                 }
 
-                outputFile = new TFile(imagePath);
-                if (!outputFile.exists()) {
-                    outputFile.getParentFile().mkdirs();
+                // gen temp file (download to images folder)
+                String tempPath = getImagesDir() + File.separator + "downloading" + File.separator;
+                if(useSpecifiedPaths){
+                    fileTempImage = new TFile(tempPath +  actualFilename + "-" + card.hashCode() + ".jpg");
+                }else{
+                    fileTempImage = new TFile(tempPath +  CardImageUtils.prepareCardNameForFile(card.getName()) + "-" + card.hashCode() + ".jpg");
                 }
+                if(!fileTempImage.getParentFile().exists()){
+                    fileTempImage.getParentFile().mkdirs();
+                }
+
+                // gen dest file name
+                if(useSpecifiedPaths)
+                {
+                    if(card.isToken()){
+                        destFile = new TFile(CardImageUtils.buildImagePathToSet(card) + actualFilename + ".jpg");
+                    }else{
+                        destFile = new TFile(CardImageUtils.buildImagePathToTokens() + actualFilename + ".jpg");
+                    }
+                }else{
+                    destFile = new TFile(CardImageUtils.buildImagePathToCard(card));
+                }
+
+                // FILE already exists (in zip or in dir)
+                if (destFile.exists()){
+                    synchronized (sync) {
+                        update(cardIndex + 1, count);
+                    }
+                    return;
+                }
+
+                // zip can't be read
+                TFile testArchive = destFile.getTopLevelArchive();
+                if (testArchive != null && testArchive.exists()) {
+                    try {
+                        testArchive.list();
+                    } catch (Exception e) {
+                        logger.error("Error reading archive, may be it was corrapted. Try to delete it: " + testArchive.toString());
+
+                        synchronized (sync) {
+                            update(cardIndex + 1, count);
+                        }
+                        return;
+                    }
+                }
+
+                /*
+                if(!destFile.getParentFile().exists()){
+                    destFile.getParentFile().mkdirs();
+                }
+                */
+
+                /*
+                // WTF start?! TODO: wtf
                 File existingFile = new File(imagePath.replaceFirst("\\w{3}.zip", ""));
                 if (existingFile.exists()) {
                     try {
@@ -727,7 +765,86 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
                     return;
                 }
+                // WTF end?!
+                */
 
+
+                // START to download
+                cardImageSource.doPause(url.getPath());
+                URLConnection httpConn = url.openConnection(p);
+                httpConn.connect();
+                int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
+
+                if (responseCode == 200){
+                    // download OK
+                    // save data to temp
+                    BufferedOutputStream out;
+                    try (BufferedInputStream in = new BufferedInputStream(httpConn.getInputStream())) {
+                        out = new BufferedOutputStream(new TFileOutputStream(fileTempImage));
+                        byte[] buf = new byte[1024];
+                        int len;
+                        while ((len = in.read(buf)) != -1) {
+                            // user cancelled
+                            if (cancel) {
+                                in.close();
+                                out.flush();
+                                out.close();
+
+                                // stop download, save current state and exit
+                                TFile archive = destFile.getTopLevelArchive();
+                                ///* not need to unmout/close - it's auto action
+                                if (archive != null && archive.exists()){
+                                    logger.info("User canceled download. Closing archive file: " + destFile.toString());
+                                    try {
+                                        TVFS.umount(archive);
+                                    }catch  (Exception e) {
+                                        logger.error("Can't close archive file: " + e.getMessage(), e);
+                                    }
+
+                                }//*/
+                                try {
+                                    TFile.rm(fileTempImage);
+                                }catch  (Exception e) {
+                                    logger.error("Can't delete temp file: " + e.getMessage(), e);
+                                }
+                                return;
+                            }
+                            out.write(buf, 0, len);
+                        }
+                    }
+                    // TODO: remove to finnaly section?
+                    out.flush();
+                    out.close();
+
+                    // TODO: add two faces card correction? (WTF)
+
+                    // SAVE final data
+                    if (fileTempImage.exists()) {
+                        if (!destFile.getParentFile().exists()){
+                            destFile.getParentFile().mkdirs();
+                        }
+                        new TFile(fileTempImage).cp_rp(destFile);
+                        try {
+                            TFile.rm(fileTempImage);
+                        }catch  (Exception e) {
+                            logger.error("Can't delete temp file: " + e.getMessage(), e);
+                        }
+
+                    }
+                }else{
+                    // download ERROR
+                    logger.warn("Image download for " + card.getName()
+                        + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
+                        + '(' + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString()
+                    );
+
+                    if (logger.isDebugEnabled()) {
+                        // Shows the returned html from the request to the web server
+                        logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
+                    }
+                }
+
+                /*
                 // Logger.getLogger(this.getClass()).info(url.toString());
                 boolean useTempFile = false;
                 int responseCode = 0;
@@ -736,7 +853,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (temporaryFile != null && temporaryFile.length() > 100) {
                     useTempFile = true;
                 } else {
-
                     cardImageSource.doPause(url.getPath());
                     httpConn = url.openConnection(p);
                     httpConn.connect();
@@ -768,6 +884,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         out.close();
                     }
 
+                    // TODO: WTF?! start
                     if (card != null && card.isTwoFacedCard()) {
                         BufferedImage image = ImageIO.read(temporaryFile);
                         if (image.getHeight() == 470) {
@@ -790,6 +907,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         outputFile.getParentFile().mkdirs();
                         new TFile(temporaryFile).cp_rp(outputFile);
                     }
+                    // WTF?! end
                 } else {
                     if (card != null && !useSpecifiedPaths) {
                         logger.warn("Image download for " + card.getName()
@@ -800,16 +918,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
                     }
                 }
+                */
 
             } catch (AccessDeniedException e) {
-                logger.error("The file " + (outputFile != null ? outputFile.toString() : "to add the image of " + card.getName() + '(' + card.getSet() + ')') + " can't be accessed. Try rebooting your system to remove the file lock.");
+                logger.error("Can't access to files: " + card.getName() + "(" + card.getSet() + "). Try rebooting your system to remove the file lock.");
             } catch (Exception e) {
-                logger.error(e, e);
+                logger.error(e.getMessage(), e);
             } finally {
-                if (temporaryFile != null) {
-                    temporaryFile.delete();
-                }
             }
+
             synchronized (sync) {
                 update(cardIndex + 1, count);
             }
@@ -823,7 +940,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
             iwp.setCompressionQuality(0.96f);
 
-            File tempFile = new File(Constants.IO.imageBaseDir + File.separator + image.hashCode() + file.getName());
+            File tempFile = new File(getImagesDir() + File.separator + image.hashCode() + file.getName());
             FileImageOutputStream output = new FileImageOutputStream(tempFile);
             writer.setOutput(output);
             IIOImage image2 = new IIOImage(image, null, null);
@@ -846,7 +963,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         } else {
             List<CardDownloadData> remainingCards = Collections.synchronizedList(new ArrayList<>());
             DownloadPictures.this.allCardsMissingImage.parallelStream().forEach(cardDownloadData -> {
-                TFile file = new TFile(CardImageUtils.generateImagePath(cardDownloadData));
+                TFile file = new TFile(CardImageUtils.buildImagePathToCard(cardDownloadData));
                 if (!file.exists()) {
                     remainingCards.add(cardDownloadData);
                 }

@@ -13,22 +13,20 @@ import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
-import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
-import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+import mage.client.constants.Constants;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.UUID;
-
-import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 
 /**
  * Class for drawing the mage card object by using a form based JComponent
@@ -479,8 +477,10 @@ public class CardPanelComponentImpl extends CardPanel {
 
         if (getShowCastingCost() && !isAnimationPanel() && canShowCardIcons(getCardWidth(), hasImage)) {
 
+            int symbolMarginX = 2; // 2 px between icons
+
             String manaCost = ManaSymbols.getStringManaCost(gameCard.getManaCost());
-            int manaWidth = getManaWidth(manaCost);
+            int manaWidth = getManaWidth(manaCost, symbolMarginX);
 
             // right top corner with margin (sizes from any sample card, length from black border to mana icon)
             int manaMarginRight = Math.round(22f / 672f * getCardWidth());
@@ -489,25 +489,19 @@ public class CardPanelComponentImpl extends CardPanel {
             int manaX = getCardXOffset() + getCardWidth() - manaMarginRight - manaWidth;
             int manaY = getCardYOffset() + manaMarginTop;
 
-            if (hasImage) {
-                // top right corner if have image like real card
-                ManaSymbols.draw(g, manaCost, manaX, manaY, getSymbolWidth());
-            } else {
-                // old version - bottom left corner if haven't card
-                // ManaSymbols.draw(g, manaCost, getCardXOffset() + manaMarginRight, getCardYOffset() + getCardHeight() - manaMarginTop - getSymbolWidth(), getSymbolWidth());
-
-                // new version - like a normal image (it's best to view and construct decks)
-                ManaSymbols.draw(g, manaCost, manaX, manaY, getSymbolWidth());
-            }
+            ManaSymbols.draw(g, manaCost, manaX, manaY, getSymbolWidth(), Color.black, symbolMarginX);
         }
     }
 
-    private int getManaWidth(String manaCost) {
+    private int getManaWidth(String manaCost, int symbolMarginX) {
         int width = 0;
         manaCost = manaCost.replace("\\", "");
         StringTokenizer tok = new StringTokenizer(manaCost, " ");
         while (tok.hasMoreTokens()) {
             tok.nextToken();
+            if(width != 0) {
+                width += symbolMarginX;
+            }
             width += getSymbolWidth();
         }
         return width;
@@ -654,7 +648,7 @@ public class CardPanelComponentImpl extends CardPanel {
                 final BufferedImage srcImage;
                 if (gameCard.isFaceDown()) {
                     srcImage = getFaceDownImage();
-                } else if (getCardWidth() > THUMBNAIL_SIZE_FULL.width) {
+                } else if (getCardWidth() > Constants.THUMBNAIL_SIZE_FULL.width) {
                     srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
                 } else {
                     srcImage = ImageCache.getThumbnail(gameCard);

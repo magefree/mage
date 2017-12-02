@@ -32,10 +32,9 @@ public interface CardPlugin extends Plugin {
     /**
      * Download various symbols (mana, tap, set).
      *
-     * @param imagesPath Path to check in and store symbols to. Can be null, in
-     * such case default path should be used.
+     * @param imagesDir Path to check in and store symbols to. Can't be null.
      */
-    void downloadSymbols(String imagesPath);
+    void downloadSymbols(String imagesDir);
 
     void onAddCard(MagePermanent card, int count);
 

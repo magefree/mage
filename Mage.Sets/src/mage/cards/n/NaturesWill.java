@@ -32,19 +32,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.ControlledCreaturesDealCombatDamagePlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -54,11 +49,10 @@ import mage.game.permanent.Permanent;
 public class NaturesWill extends CardImpl {
 
     public NaturesWill(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // Whenever one or more creatures you control deal combat damage to a player, tap all lands that player controls and untap all lands you control.
-        this.addAbility(new NaturesWillTriggeredAbility());
+        this.addAbility(new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(new NaturesWillEffect()));
     }
 
     public NaturesWill(final NaturesWill card) {
@@ -68,63 +62,6 @@ public class NaturesWill extends CardImpl {
     @Override
     public NaturesWill copy() {
         return new NaturesWill(this);
-    }
-}
-
-class NaturesWillTriggeredAbility extends TriggeredAbilityImpl {
-
-    private boolean madeDamge = false;
-    private Set<UUID> damagedPlayers = new HashSet<>();
-
-    public NaturesWillTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new NaturesWillEffect(), false);
-    }
-
-    public NaturesWillTriggeredAbility(final NaturesWillTriggeredAbility ability) {
-        super(ability);
-        this.madeDamge = ability.madeDamge;
-        this.damagedPlayers = new HashSet<>();
-        this.damagedPlayers.addAll(ability.damagedPlayers);
-    }
-
-    @Override
-    public NaturesWillTriggeredAbility copy() {
-        return new NaturesWillTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER || event.getType() == EventType.COMBAT_DAMAGE_STEP_POST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && p != null && p.getControllerId().equals(this.getControllerId())) {
-                madeDamge = true;
-                damagedPlayers.add(event.getPlayerId());
-            }
-        }
-        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_POST) {
-            if (madeDamge) {
-                Set<UUID> damagedPlayersCopy = new HashSet<>();
-                damagedPlayersCopy.addAll(damagedPlayers);
-                for(Effect effect: this.getEffects()) {
-                    effect.setValue("damagedPlayers", damagedPlayersCopy);
-                }
-                damagedPlayers.clear();
-                madeDamge = false;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever one or more creatures you control deal combat damage to a player, " + super.getRule();
     }
 }
 
@@ -159,7 +96,6 @@ class NaturesWillEffect extends OneShotEffect {
                 land.untap(game);
             }
         }
-
 
         return false;
     }

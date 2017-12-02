@@ -46,6 +46,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -54,7 +57,6 @@ import mage.client.components.MageComponents;
 import mage.client.dialog.*;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH;
-import static mage.client.table.TablesPanel.PASSWORDED;
 import mage.client.util.ButtonColumn;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.IgnoreList;
@@ -70,6 +72,9 @@ import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
+import org.ocpsoft.prettytime.PrettyTime;
+import org.ocpsoft.prettytime.units.JustNow;
+import org.ocpsoft.prettytime.Duration;
 
 /**
  *
@@ -80,7 +85,6 @@ public class TablesPanel extends javax.swing.JPanel {
     private static final Logger LOGGER = Logger.getLogger(TablesPanel.class);
     private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 120, 180, 80, 120, 80, 60, 40, 40, 60};
 
-    public static final String PASSWORDED = "***";
     private final TableTableModel tableModel;
     private final MatchesTableModel matchesModel;
     private UUID roomId;
@@ -94,11 +98,61 @@ public class TablesPanel extends javax.swing.JPanel {
     private java.util.List<String> messages;
     private int currentMessage;
     private final MageTableRowSorter activeTablesSorter;
+    private final MageTableRowSorter completedTablesSorter;
 
     private final ButtonColumn actionButton1;
     private final ButtonColumn actionButton2;
 
     final JToggleButton[] filterButtons;
+
+    // time formater
+    private PrettyTime timeFormater = new PrettyTime();
+
+    // time ago renderer
+    TableCellRenderer timeAgoCellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            Date d = (Date)value;
+            label.setText(timeFormater.format(d));
+            return label;
+        }
+    };
+
+    // duration renderer
+    TableCellRenderer durationCellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            Long ms = (Long)value;
+
+            if(ms != 0){
+                Duration dur = timeFormater.approximateDuration(new Date(ms));
+                label.setText((timeFormater.formatDuration(dur)));
+            }else{
+                label.setText("");
+            }
+            return label;
+        }
+    };
+
+    // datetime render
+    TableCellRenderer datetimeCellRenderer = new DefaultTableCellRenderer() {
+        DateFormat datetimeFormater = new SimpleDateFormat("HH:mm:ss");
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            Date d = (Date)value;
+            if(d != null){
+                label.setText(datetimeFormater.format(d));
+            }else{
+                label.setText("");
+            }
+
+            return label;
+        }
+    };
 
     /**
      * Creates new form TablesPanel
@@ -112,20 +166,56 @@ public class TablesPanel extends javax.swing.JPanel {
         initComponents();
         //  tableModel.setSession(session);
 
-        tableTables.createDefaultColumnsFromModel();
+        // formater
+        timeFormater.setLocale(Locale.ENGLISH);
+        JustNow jn = timeFormater.getUnit(JustNow.class);
+        jn.setMaxQuantity(1000L * 30L); // 30 seconds gap (show "just now" from 0 to 30 secs)
 
+        // 1. TABLE CURRENT
+        tableTables.createDefaultColumnsFromModel();
         activeTablesSorter = new MageTableRowSorter(tableModel);
         tableTables.setRowSorter(activeTablesSorter);
 
+        // time ago
+        tableTables.getColumnModel().getColumn(TableTableModel.COLUMN_CREATED).setCellRenderer(timeAgoCellRenderer);
+        /* date sorter (not need, default is good - see getColumnClass)
+        activeTablesSorter.setComparator(TableTableModel.COLUMN_CREATED, new Comparator<Date>() {
+            @Override
+            public int compare(Date v1, Date v2) {
+                return v1.compareTo(v2);
+            }
+
+        });*/
+        // default sort by created date (last games from above)
+        ArrayList list = new ArrayList();
+        list.add(new RowSorter.SortKey(TableTableModel.COLUMN_CREATED, SortOrder.DESCENDING));
+        activeTablesSorter.setSortKeys(list);
+
         TableUtil.setColumnWidthAndOrder(tableTables, DEFAULT_COLUMNS_WIDTH,
-                PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, PreferencesDialog.KEY_TABLES_COLUMNS_ORDER);
+                PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, PreferencesDialog.KEY_TABLES_COLUMNS_ORDER); // TODO: is sort order save and restore after app restart/window open?
 
-        tableCompleted.setRowSorter(new MageTableRowSorter(matchesModel));
 
+
+        // 2. TABLE COMPLETED
+        completedTablesSorter = new MageTableRowSorter(matchesModel);
+        tableCompleted.setRowSorter(completedTablesSorter);
+
+        // duration
+        tableCompleted.getColumnModel().getColumn(MatchesTableModel.COLUMN_DURATION).setCellRenderer(durationCellRenderer);
+        // start-end
+        tableCompleted.getColumnModel().getColumn(MatchesTableModel.COLUMN_START).setCellRenderer(datetimeCellRenderer);
+        tableCompleted.getColumnModel().getColumn(MatchesTableModel.COLUMN_END).setCellRenderer(datetimeCellRenderer);
+        // default sort by ended date (last games from above)
+        ArrayList list2 = new ArrayList();
+        list2.add(new RowSorter.SortKey(MatchesTableModel.COLUMN_END, SortOrder.DESCENDING));
+        completedTablesSorter.setSortKeys(list2);
+
+        // 3. CHAT
         chatPanelMain.getUserChatPanel().useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         chatPanelMain.getUserChatPanel().setBorder(null);
         chatPanelMain.getUserChatPanel().setChatType(ChatPanelBasic.ChatType.TABLES);
 
+        // 4. BUTTONS
         filterButtons = new JToggleButton[]{btnStateWaiting, btnStateActive, btnStateFinished,
             btnTypeMatch, btnTypeTourneyConstructed, btnTypeTourneyLimited,
             btnFormatBlock, btnFormatStandard, btnFormatModern, btnFormatLegacy, btnFormatVintage, btnFormatCommander, btnFormatTinyLeader, btnFormatLimited, btnFormatOther,
@@ -181,7 +271,7 @@ public class TablesPanel extends javax.swing.JPanel {
                         if (isTournament) {
                             LOGGER.info("Joining tournament " + tableId);
                             if (deckType.startsWith("Limited")) {
-                                if (PASSWORDED.equals(pwdColumn)) {
+                                if (TableTableModel.PASSWORD_VALUE_YES.equals(pwdColumn)) {
                                     joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
                                 } else {
                                     SessionHandler.joinTournamentTable(roomId, tableId, SessionHandler.getUserName(), PlayerType.HUMAN, 1, null, "");
@@ -225,7 +315,7 @@ public class TablesPanel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int modelRow = Integer.valueOf(e.getActionCommand());
-                String action = (String) matchesModel.getValueAt(modelRow, MatchesTableModel.ACTION_COLUMN);
+                String action = (String) matchesModel.getValueAt(modelRow, MatchesTableModel.COLUMN_ACTION);
                 switch (action) {
                     case "Replay":
                         java.util.List<UUID> gameList = matchesModel.getListofGames(modelRow);
@@ -250,7 +340,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
         // !!!! adds action buttons to the table panel (don't delete this)
         actionButton1 = new ButtonColumn(tableTables, openTableAction, tableTables.convertColumnIndexToView(TableTableModel.ACTION_COLUMN));
-        actionButton2 = new ButtonColumn(tableCompleted, closedTableAction, tableCompleted.convertColumnIndexToView(MatchesTableModel.ACTION_COLUMN));
+        actionButton2 = new ButtonColumn(tableCompleted, closedTableAction, tableCompleted.convertColumnIndexToView(MatchesTableModel.COLUMN_ACTION));
         // !!!!
     }
 
@@ -583,21 +673,27 @@ public class TablesPanel extends javax.swing.JPanel {
             skillFilterList.add(RowFilter.regexFilter(SkillLevel.SERIOUS.toString(), TableTableModel.COLUMN_SKILL));
         }
 
+        String ratedMark = TableTableModel.RATED_VALUE_YES;
         java.util.List<RowFilter<Object, Object>> ratingFilterList = new ArrayList<>();
         if (btnRated.isSelected()) {
-            ratingFilterList.add(RowFilter.regexFilter("^Rated", TableTableModel.COLUMN_RATING));
+            // yes word
+            ratingFilterList.add(RowFilter.regexFilter("^" + ratedMark, TableTableModel.COLUMN_RATING));
         }
         if (btnUnrated.isSelected()) {
-            ratingFilterList.add(RowFilter.regexFilter("^Unrated", TableTableModel.COLUMN_RATING));
+            // not yes word, see https://stackoverflow.com/a/406408/1276632
+            ratingFilterList.add(RowFilter.regexFilter("^((?!" + ratedMark + ").)*$", TableTableModel.COLUMN_RATING));
         }
 
         // Password
+        String passwordMark = TableTableModel.PASSWORD_VALUE_YES;
         java.util.List<RowFilter<Object, Object>> passwordFilterList = new ArrayList<>();
-        if (btnOpen.isSelected()) {
-            passwordFilterList.add(RowFilter.regexFilter("^$", TableTableModel.COLUMN_PASSWORD));
-        }
         if (btnPassword.isSelected()) {
-            passwordFilterList.add(RowFilter.regexFilter("^\\*\\*\\*$", TableTableModel.COLUMN_PASSWORD));
+            // yes
+            passwordFilterList.add(RowFilter.regexFilter("^" + passwordMark, TableTableModel.COLUMN_PASSWORD));
+        }
+        if (btnOpen.isSelected()) {
+            // no
+            passwordFilterList.add(RowFilter.regexFilter("^((?!" + passwordMark + ").)*$", TableTableModel.COLUMN_PASSWORD));
         }
 
         // Hide games of ignored players
@@ -1281,15 +1377,23 @@ class TableTableModel extends AbstractTableModel {
     public static final int COLUMN_QUIT_RATIO = 10;
     public static final int ACTION_COLUMN = 11; // column the action is located (starting with 0)
 
+    public static final String RATED_VALUE_YES = "YES";
+    public static final String RATED_VALUE_NO = "";
+
+    public static final String PASSWORD_VALUE_YES = "YES";
+
     private final String[] columnNames = new String[]{"M/T", "Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Password", "Created / Started", "Skill Level", "Rating", "Quit %", "Action"};
 
     private TableView[] tables = new TableView[0];
-    private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
+
+    TableTableModel() {
+    }
 
     public void loadData(Collection<TableView> tables) throws MageRemoteException {
         this.tables = tables.toArray(new TableView[0]);
         this.fireTableDataChanged();
     }
+
 
     @Override
     public int getRowCount() {
@@ -1317,13 +1421,13 @@ class TableTableModel extends AbstractTableModel {
             case 5:
                 return tables[arg0].getTableStateText();
             case 6:
-                return tables[arg0].isPassworded() ? PASSWORDED : "";
+                return tables[arg0].isPassworded() ? PASSWORD_VALUE_YES : "";
             case 7:
-                return timeFormatter.format(tables[arg0].getCreateTime());
+                return tables[arg0].getCreateTime(); // use cell render, not format here
             case 8:
                 return tables[arg0].getSkillLevel();
             case 9:
-                return tables[arg0].isRated() ? "Rated" : "Unrated";
+                return tables[arg0].isRated() ? RATED_VALUE_YES : RATED_VALUE_NO;
             case 10:
                 return tables[arg0].getQuitRatio();
             case 11:
@@ -1384,6 +1488,8 @@ class TableTableModel extends AbstractTableModel {
                 return Icon.class;
             case COLUMN_SKILL:
                 return SkillLevel.class;
+            case COLUMN_CREATED:
+                return Date.class;
             default:
                 return String.class;
         }
@@ -1486,15 +1592,20 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
 
 class MatchesTableModel extends AbstractTableModel {
 
-    public static final int ACTION_COLUMN = 7; // column the action is located (starting with 0)
-    public static final int GAMES_LIST_COLUMN = 8;
-    private final String[] columnNames = new String[]{"Deck Type", "Players", "Game Type", "Rating", "Result", "Start Time", "End Time", "Action"};
+    private final String[] columnNames = new String[]{"Deck Type", "Players", "Game Type", "Rating", "Result", "Duration", "Start Time", "End Time", "Action"};
+    public static final int COLUMN_DURATION = 5;
+    public static final int COLUMN_START = 6;
+    public static final int COLUMN_END = 7;
+    public static final int COLUMN_ACTION = 8; // column the action is located (starting with 0)
+
     private MatchView[] matches = new MatchView[0];
-    private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
     public void loadData(Collection<MatchView> matches) throws MageRemoteException {
         this.matches = matches.toArray(new MatchView[0]);
         this.fireTableDataChanged();
+    }
+
+    MatchesTableModel(){
     }
 
     @Override
@@ -1517,22 +1628,20 @@ class MatchesTableModel extends AbstractTableModel {
             case 2:
                 return matches[arg0].getGameType();
             case 3:
-                return matches[arg0].isRated() ? "Rated" : "Unrated";
+                return matches[arg0].isRated() ? TableTableModel.RATED_VALUE_YES : TableTableModel.RATED_VALUE_NO;
             case 4:
                 return matches[arg0].getResult();
             case 5:
-                if (matches[arg0].getStartTime() != null) {
-                    return timeFormatter.format(matches[arg0].getStartTime());
+                if (matches[arg0].getEndTime() != null) {
+                    return matches[arg0].getEndTime().getTime() - matches[arg0].getStartTime().getTime() + new Date().getTime();
                 } else {
-                    return "";
+                    return 0L;
                 }
             case 6:
-                if (matches[arg0].getEndTime() != null) {
-                    return timeFormatter.format(matches[arg0].getEndTime());
-                } else {
-                    return "";
-                }
+                return matches[arg0].getStartTime();
             case 7:
+                return matches[arg0].getEndTime();
+            case 8:
                 if (matches[arg0].isTournament()) {
                     return "Show";
                 } else if (matches[arg0].isReplayAvailable()) {
@@ -1540,7 +1649,7 @@ class MatchesTableModel extends AbstractTableModel {
                 } else {
                     return "None";
                 }
-            case 8:
+            case 9:
                 return matches[arg0].getGames();
         }
         return "";
@@ -1575,12 +1684,21 @@ class MatchesTableModel extends AbstractTableModel {
 
     @Override
     public Class getColumnClass(int columnIndex) {
-        return String.class;
+        switch (columnIndex) {
+            case COLUMN_DURATION:
+                return Long.class;
+            case COLUMN_START:
+                return Date.class;
+            case COLUMN_END:
+                return Date.class;
+            default:
+                return String.class;
+        }
     }
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == ACTION_COLUMN;
+        return columnIndex == COLUMN_ACTION;
     }
 
 }

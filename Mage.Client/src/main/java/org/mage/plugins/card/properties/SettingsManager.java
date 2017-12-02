@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Properties;
-import org.mage.plugins.card.constants.Constants;
+import mage.client.constants.Constants;
 
 public class SettingsManager {
 

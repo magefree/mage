@@ -46,14 +46,12 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.other.CounterCardPredicate;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -149,7 +147,6 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
 
     static {
         filter.add(new CounterCardPredicate(CounterType.CAGE));
-        filter.add(new OwnerPredicate(TargetController.YOU));
     }
 
     public MairsilThePretenderGainAbilitiesEffect() {
@@ -164,21 +161,21 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm != null) {
-            for (Card card : game.getExile().getAllCards(game)) {
-                if (filter.match(card, game)) {
-                    for (Ability ability : card.getAbilities()) {
-                        if (ability instanceof ActivatedAbility) {
-                            ActivatedAbilityImpl copyAbility = (ActivatedAbilityImpl) ability.copy();
-                            copyAbility.setMaxActivationsPerTurn(1);
-                            perm.addAbility(copyAbility, card.getId(), game);
-                        }
+        if (perm == null) {
+            return false;
+        }
+        for (Card card : game.getExile().getAllCards(game)) {
+            if (filter.match(card, game) && card.getOwnerId() == perm.getControllerId()) {
+                for (Ability ability : card.getAbilities()) {
+                    if (ability instanceof ActivatedAbility) {
+                        ActivatedAbilityImpl copyAbility = (ActivatedAbilityImpl) ability.copy();
+                        copyAbility.setMaxActivationsPerTurn(1);
+                        perm.addAbility(copyAbility, card.getId(), game);
                     }
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override

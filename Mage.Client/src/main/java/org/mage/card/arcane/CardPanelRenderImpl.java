@@ -14,14 +14,13 @@ import org.apache.log4j.Logger;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.ImageCache;
+import mage.client.constants.Constants;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Map;
 import java.util.UUID;
-
-import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 
 public class CardPanelRenderImpl extends CardPanel {
 
@@ -341,7 +340,7 @@ public class CardPanelRenderImpl extends CardPanel {
                         // Nothing to do
                         srcImage = null;
                         faceArtSrcImage = null;
-                    } else if (getCardWidth() > THUMBNAIL_SIZE_FULL.width) {
+                    } else if (getCardWidth() > Constants.THUMBNAIL_SIZE_FULL.width) {
                         srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
                         faceArtSrcImage = ImageCache.getFaceImage(gameCard, getCardWidth(), getCardHeight());
                     } else {
