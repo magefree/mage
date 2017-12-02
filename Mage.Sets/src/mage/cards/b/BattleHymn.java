@@ -34,7 +34,7 @@ import mage.abilities.effects.common.DynamicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -43,11 +43,10 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 public class BattleHymn extends CardImpl {
 
     public BattleHymn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Add {R} to your mana pool for each creature you control.
-        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));
+        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE)));
     }
 
     public BattleHymn(final BattleHymn card) {
