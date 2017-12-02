@@ -57,6 +57,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Apprentice Wizard", 20, Rarity.RARE, mage.cards.a.ApprenticeWizard.class));
         cards.add(new SetCardInfo("Ashes to Ashes", 1, Rarity.COMMON, mage.cards.a.AshesToAshes.class));
         cards.add(new SetCardInfo("Ball Lightning", 56, Rarity.RARE, mage.cards.b.BallLightning.class));
+        cards.add(new SetCardInfo("Banshee", 2, Rarity.RARE, mage.cards.b.Banshee.class));
         cards.add(new SetCardInfo("Barl's Cage", 93, Rarity.RARE, mage.cards.b.BarlsCage.class));
         cards.add(new SetCardInfo("Blood Moon", 57, Rarity.RARE, mage.cards.b.BloodMoon.class));
         cards.add(new SetCardInfo("Blood of the Martyr", 75, Rarity.RARE, mage.cards.b.BloodOfTheMartyr.class));
@@ -81,6 +82,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Eater of the Dead", 6, Rarity.UNCOMMON, mage.cards.e.EaterOfTheDead.class));
         cards.add(new SetCardInfo("Electric Eel", 24, Rarity.UNCOMMON, mage.cards.e.ElectricEel.class));
         cards.add(new SetCardInfo("Elves of Deep Shadow", 39, Rarity.UNCOMMON, mage.cards.e.ElvesOfDeepShadow.class));
+        cards.add(new SetCardInfo("Eternal Flame", 60, Rarity.RARE, mage.cards.e.EternalFlame.class));
         cards.add(new SetCardInfo("Exorcist", 79, Rarity.RARE, mage.cards.e.Exorcist.class));
         cards.add(new SetCardInfo("Fellwar Stone", 99, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Festival", 81, Rarity.COMMON, mage.cards.f.Festival.class));
@@ -94,6 +96,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Digging Team", 64, Rarity.COMMON, mage.cards.g.GoblinDiggingTeam.class));
         cards.add(new SetCardInfo("Goblin Hero", 65, Rarity.COMMON, mage.cards.g.GoblinHero.class));
         cards.add(new SetCardInfo("Goblin Rock Sled", 66, Rarity.COMMON, mage.cards.g.GoblinRockSled.class));
+        cards.add(new SetCardInfo("Goblin Shrine", 67, Rarity.COMMON, mage.cards.g.GoblinShrine.class));
         cards.add(new SetCardInfo("Goblin Wizard", 68, Rarity.RARE, mage.cards.g.GoblinWizard.class));
         cards.add(new SetCardInfo("Goblins of the Flarg", 69, Rarity.COMMON, mage.cards.g.GoblinsOfTheFlarg.class));
         cards.add(new SetCardInfo("Grave Robbers", 8, Rarity.RARE, mage.cards.g.GraveRobbers.class));
