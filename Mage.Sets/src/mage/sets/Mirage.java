@@ -279,6 +279,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Skulking Ghost", 41, Rarity.COMMON, mage.cards.s.SkulkingGhost.class));
         cards.add(new SetCardInfo("Sky Diamond", 284, Rarity.UNCOMMON, mage.cards.s.SkyDiamond.class));
         cards.add(new SetCardInfo("Soar", 93, Rarity.COMMON, mage.cards.s.Soar.class));
+        cards.add(new SetCardInfo("Soul Echo", 244, Rarity.RARE, mage.cards.s.SoulEcho.class));
         cards.add(new SetCardInfo("Soul Rend", 42, Rarity.UNCOMMON, mage.cards.s.SoulRend.class));
         cards.add(new SetCardInfo("Spectral Guardian", 245, Rarity.RARE, mage.cards.s.SpectralGuardian.class));
         cards.add(new SetCardInfo("Spirit of the Night", 44, Rarity.RARE, mage.cards.s.SpiritOfTheNight.class));
