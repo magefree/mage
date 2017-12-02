@@ -65,6 +65,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Ashnod's Transmogrant", 73, Rarity.COMMON, mage.cards.a.AshnodsTransmogrant.class));
         cards.add(new SetCardInfo("Axelrod Gunnarson", 107, Rarity.RARE, mage.cards.a.AxelrodGunnarson.class));
         cards.add(new SetCardInfo("Azure Drake", 15, Rarity.UNCOMMON, mage.cards.a.AzureDrake.class));
+        cards.add(new SetCardInfo("Banshee", 1, Rarity.UNCOMMON, mage.cards.b.Banshee.class));
         cards.add(new SetCardInfo("Barl's Cage", 74, Rarity.RARE, mage.cards.b.BarlsCage.class));
         cards.add(new SetCardInfo("Beasts of Bogardan", 45, Rarity.UNCOMMON, mage.cards.b.BeastsOfBogardan.class));
         cards.add(new SetCardInfo("Blood Moon", 46, Rarity.RARE, mage.cards.b.BloodMoon.class));
