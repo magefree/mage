@@ -28,7 +28,6 @@ import org.mage.plugins.card.utils.CardImageUtils;
 public class DownloadJob extends AbstractLaternaBean {
 
     public enum State {
-
         NEW, WORKING, FINISHED, ABORTED
     }
 
