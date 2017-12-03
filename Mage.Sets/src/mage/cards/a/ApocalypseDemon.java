@@ -39,7 +39,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -52,7 +51,6 @@ public class ApocalypseDemon extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new AnotherPredicate());
     }
 
@@ -76,6 +74,7 @@ public class ApocalypseDemon extends CardImpl {
         super(card);
     }
 
+    @Override
     public ApocalypseDemon copy() {
         return new ApocalypseDemon(this);
     }
