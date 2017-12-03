@@ -21,6 +21,7 @@ import org.mage.plugins.card.dl.Downloader;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.dl.sources.GathererSets;
 import org.mage.plugins.card.dl.sources.GathererSymbols;
+import org.mage.plugins.card.dl.sources.ScryfallSymbolsSource;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
 
@@ -529,12 +530,19 @@ public class CardPluginImpl implements CardPlugin {
     public void downloadSymbols(String imagesDir) {
         final DownloadGui g = new DownloadGui(new Downloader());
 
-        Iterable<DownloadJob> it = new GathererSymbols();
+        Iterable<DownloadJob> it;
+
+        it = new GathererSymbols();
         for (DownloadJob job : it) {
             g.getDownloader().add(job);
         }
 
         it = new GathererSets();
+        for (DownloadJob job : it) {
+            g.getDownloader().add(job);
+        }
+
+        it = new ScryfallSymbolsSource();
         for (DownloadJob job : it) {
             g.getDownloader().add(job);
         }
@@ -551,7 +559,7 @@ public class CardPluginImpl implements CardPlugin {
             g.getDownloader().add(job);
         }
 
-        JDialog d = new JDialog((Frame) null, "Download pictures", false);
+        JDialog d = new JDialog((Frame) null, "Download symbols", false);
         d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         d.addWindowListener(new WindowAdapter() {
             @Override
