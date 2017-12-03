@@ -253,6 +253,7 @@ public enum MythicspoilerComSource implements CardImageSource {
         supportedSets.add("C17");
         supportedSets.add("IMA");
         supportedSets.add("XLN");
+        supportedSets.add("RIX");
 
         sets = new LinkedHashMap<>();
         setsAliases = new HashMap<>();
@@ -293,6 +294,10 @@ public enum MythicspoilerComSource implements CardImageSource {
         links.put("adantothefirstfort", "adantothefirstport");
         links.put("spitfirebastion", "spitfirebastion");
         manualLinks.put("XLN", links);
+
+        HashMap<String, String> linksRix = new HashMap<>();
+        linksRix.put("vaultofcatlacan", "vaultofcatlacan");
+        manualLinks.put("RIX", linksRix);
 
         cardNameAliasesStart = new HashMap<>();
         HashSet<String> names = new HashSet<>();
