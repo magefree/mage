@@ -32,7 +32,6 @@ import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
