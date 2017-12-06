@@ -142,13 +142,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     public void assignDamageToBlockers(boolean first, Game game) {
         if (!attackers.isEmpty() && (!first || hasFirstOrDoubleStrike(game))) {
-            Permanent attacker = game.getPermanent(attackers.get(0));
-            if (isButcherOrgg(attacker, attacker.getControllerId(), first, game, true)) {
-                return;
-            }
             if (blockers.isEmpty()) {
                 unblockedDamage(first, game);
-            } else {
+                return;
+            }
+            Permanent attacker = game.getPermanent(attackers.get(0));
+            if (!isButcherOrgg(attacker, attacker.getControllerId(), first, game, true)) {
                 if (attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) { // for handling creatures like Thorn Elemental
                     Player player = game.getPlayer(defenderControlsDefensiveFormation(game) ? defendingPlayerId : attacker.getControllerId());
                     if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getLogName() + " as though it weren't blocked?", null, game)) {
