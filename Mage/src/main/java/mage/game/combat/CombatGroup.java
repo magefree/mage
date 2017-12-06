@@ -144,13 +144,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (!attackers.isEmpty() && (!first || hasFirstOrDoubleStrike(game))) {
             Permanent attacker = game.getPermanent(attackers.get(0));
             if (attacker.getAbilities().containsKey(ControllerDivideCombatDamageAbility.getInstance().getId())) { // for handling Butcher Orgg
-                Player player = game.getPlayer(attacker.getControllerId());
-                for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
-                    if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
-                        player = game.getPlayer(defendingPlayerId);
-                        break;
-                    }
-                }
+                Player player = game.getPlayer(defenderControlsDefensiveFormation(game) ? defendingPlayerId : attacker.getControllerId());
                 if (player.chooseUse(Outcome.Damage, "Do you wish to divide " + attacker.getLogName() + "'s combat damage among defending player and/or any number of defending creatures?", null, game)) {
                     butcherOrggDamage(attacker, player, first, game);
                     return;
@@ -160,13 +154,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 unblockedDamage(first, game);
             } else {
                 if (attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) { // for handling creatures like Thorn Elemental
-                    Player player = game.getPlayer(attacker.getControllerId());
-                    for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
-                        if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
-                            player = game.getPlayer(defendingPlayerId);
-                            break;
-                        }
-                    }
+                    Player player = game.getPlayer(defenderControlsDefensiveFormation(game) ? defendingPlayerId : attacker.getControllerId());
                     if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getLogName() + " as though it weren't blocked?", null, game)) {
                         blocked = false;
                         unblockedDamage(first, game);
@@ -188,13 +176,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             for (UUID blockerId : blockers) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (blocker.getAbilities().containsKey(ControllerDivideCombatDamageAbility.getInstance().getId())) { // for handling Butcher Orgg
-                    Player player = game.getPlayer(blocker.getControllerId());
-                    for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
-                        if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
-                            player = game.getPlayer(defendingPlayerId);
-                            break;
-                        }
-                    }
+                    Player player = game.getPlayer(defenderControlsDefensiveFormation(game) ? defendingPlayerId : blocker.getControllerId()); // the difference should only rarely come up
                     if (player.chooseUse(Outcome.Damage, "Do you wish to divide " + blocker.getLogName() + "'s combat damage among defending player and/or any number of defending creatures?", null, game)) {                    Permanent attacker = game.getPermanent(attackers.get(0));
                         butcherOrggDamage(blocker, player, first, game);
                         altDamageMethod = true;
@@ -343,13 +325,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     if (lethalDamage >= damage) {
                         blocker.markDamage(damage, attacker.getId(), game, true, true);
                     } else {
-                        Player player = game.getPlayer(attacker.getControllerId());
-                        for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
-                            if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
-                                player = game.getPlayer(defendingPlayerId);
-                                break;
-                            }
-                        }
+                        Player player = game.getPlayer(defenderControlsDefensiveFormation(game) ? defendingPlayerId : attacker.getControllerId());
                         int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
                         blocker.markDamage(damageAssigned, attacker.getId(), game, true, true);
                         damage -= damageAssigned;
@@ -377,12 +353,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
         boolean oldRuleDamage = false;
         Player player = game.getPlayer(attacker.getControllerId());
-        for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
-            if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
-                player = game.getPlayer(defendingPlayerId);
-                oldRuleDamage = true;
-                break;
-            }
+        if (defenderControlsDefensiveFormation(game)) {
+            player = game.getPlayer(defendingPlayerId);
+            oldRuleDamage = true;
         }
         int damage = getDamageValueFromPermanent(attacker, game);
         if (canDamage(attacker, first)) {
@@ -590,13 +563,14 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (blockers.isEmpty()) {
             return;
         }
-        Player player = game.getPlayer(playerId);
-        for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
-            if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
-                player = game.getPlayer(defendingPlayerId);
-                break;
-            }
-        }
+        Player player = game.getPlayer(defenderControlsDefensiveFormation(game) ? defendingPlayerId : playerId);
+        //~ Player player = game.getPlayer(playerId);
+        //~ for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
+            //~ if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
+                //~ player = game.getPlayer(defendingPlayerId);
+                //~ break;
+            //~ }
+        //~ }
         List<UUID> blockerList = new ArrayList<>(blockers);
         blockerOrder.clear();
         while (player.canRespond()) {
@@ -814,6 +788,16 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 defenderId = newDefenderId;
                 defendingPlayerId = newDefenderId;
                 defenderIsPlaneswalker = false;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean defenderControlsDefensiveFormation(Game game) {
+        // for handling Defensive Formation
+        for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) {
+            if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
                 return true;
             }
         }
