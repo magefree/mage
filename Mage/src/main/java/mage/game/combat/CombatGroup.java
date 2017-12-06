@@ -564,13 +564,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             return;
         }
         Player player = game.getPlayer(defenderControlsDefensiveFormation(game) ? defendingPlayerId : playerId);
-        //~ Player player = game.getPlayer(playerId);
-        //~ for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) { // for handling Defensive Formation
-            //~ if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
-                //~ player = game.getPlayer(defendingPlayerId);
-                //~ break;
-            //~ }
-        //~ }
         List<UUID> blockerList = new ArrayList<>(blockers);
         blockerOrder.clear();
         while (player.canRespond()) {
