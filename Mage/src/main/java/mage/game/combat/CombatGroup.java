@@ -142,23 +142,24 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     public void assignDamageToBlockers(boolean first, Game game) {
         if (!attackers.isEmpty() && (!first || hasFirstOrDoubleStrike(game))) {
-            if (blockers.isEmpty()) {
-                unblockedDamage(first, game);
-                return;
-            }
             Permanent attacker = game.getPermanent(attackers.get(0));
             if (!isButcherOrgg(attacker, attacker.getControllerId(), first, game, true)) {
-                if (attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) { // for handling creatures like Thorn Elemental
-                    Player player = game.getPlayer(defenderControlsDefensiveFormation(game) ? defendingPlayerId : attacker.getControllerId());
-                    if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getLogName() + " as though it weren't blocked?", null, game)) {
-                        blocked = false;
-                        unblockedDamage(first, game);
-                    }
-                }
-                if (blockers.size() == 1) {
-                    singleBlockerDamage(first, game);
+                if (blockers.isEmpty()) {
+                    unblockedDamage(first, game);
+                    return;
                 } else {
-                    multiBlockerDamage(first, game);
+                    Player player = game.getPlayer(defenderControlsDefensiveFormation(game) ? defendingPlayerId : attacker.getControllerId());
+                    if (attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) { // for handling creatures like Thorn Elemental
+                        if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getLogName() + " as though it weren't blocked?", null, game)) {
+                            blocked = false;
+                            unblockedDamage(first, game);
+                        }
+                    }
+                    if (blockers.size() == 1) {
+                        singleBlockerDamage(player, first, game);
+                    } else {
+                        multiBlockerDamage(player, first, game);
+                    }
                 }
             }
         }
@@ -305,7 +306,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
     }
 
-    private void singleBlockerDamage(boolean first, Game game) {
+    private void singleBlockerDamage(Player player, boolean first, Game game) {
         //TODO:  handle banding
         Permanent blocker = game.getPermanent(blockers.get(0));
         Permanent attacker = game.getPermanent(attackers.get(0));
@@ -323,7 +324,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     if (lethalDamage >= damage) {
                         blocker.markDamage(damage, attacker.getId(), game, true, true);
                     } else {
-                        Player player = game.getPlayer(defenderControlsDefensiveFormation(game) ? defendingPlayerId : attacker.getControllerId());
                         int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
                         blocker.markDamage(damageAssigned, attacker.getId(), game, true, true);
                         damage -= damageAssigned;
@@ -345,18 +345,13 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
     }
 
-    private void multiBlockerDamage(boolean first, Game game) {
+    private void multiBlockerDamage(Player player, boolean first, Game game) {
         //TODO:  handle banding
         Permanent attacker = game.getPermanent(attackers.get(0));
         if (attacker == null) {
             return;
         }
-        boolean oldRuleDamage = false;
-        Player player = game.getPlayer(attacker.getControllerId());
-        if (defenderControlsDefensiveFormation(game)) {
-            player = game.getPlayer(defendingPlayerId);
-            oldRuleDamage = true;
-        }
+        boolean oldRuleDamage = (player.getId() == defendingPlayerId);
         int damage = getDamageValueFromPermanent(attacker, game);
         if (canDamage(attacker, first)) {
             // must be set before attacker damage marking because of effects like Test of Faith
@@ -382,9 +377,13 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                             lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
                         }
                         if (lethalDamage >= damage) {
-                            assigned.put(blockerId, damage);
-                            damage = 0;
-                            break;
+                            if (!oldRuleDamage) {
+                                assigned.put(blockerId, damage);
+                                damage = 0;
+                                break;
+                            } else if (damage == 0) {
+                                break;
+                            }
                         }
                         int damageAssigned = 0;
                         if (!oldRuleDamage) {
