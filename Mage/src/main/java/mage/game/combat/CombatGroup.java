@@ -9,7 +9,7 @@
  *
  *    2. Redistributions in binary form must reproduce the above copyright notice, this list
  *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.i
+ *       provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
@@ -144,7 +144,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (!attackers.isEmpty() && (!first || hasFirstOrDoubleStrike(game))) {
             Permanent attacker = game.getPermanent(attackers.get(0));
             if (isButcherOrgg(attacker, attacker.getControllerId(), first, game, true)) {
-                game.informPlayers("test one");
                 return;
             }
             if (blockers.isEmpty()) {
@@ -173,7 +172,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             for (UUID blockerId : blockers) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (isButcherOrgg(blocker, blocker.getControllerId(), first, game, false)) {
-                    game.informPlayers("test two");
                     altDamageMethod = true;
                 }
             }
