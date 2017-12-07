@@ -143,7 +143,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     public void assignDamageToBlockers(boolean first, Game game) {
         if (!attackers.isEmpty() && (!first || hasFirstOrDoubleStrike(game))) {
             Permanent attacker = game.getPermanent(attackers.get(0));
-            if (!isButcherOrgg(attacker, attacker.getControllerId(), first, game, true)) {
+            if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(attacker, attacker.getControllerId(), first, game, true)) {
                 if (blockers.isEmpty()) {
                     unblockedDamage(first, game);
                     return;
@@ -167,11 +167,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     public void assignDamageToAttackers(boolean first, Game game) {
         if (!blockers.isEmpty() && (!first || hasFirstOrDoubleStrike(game))) {
-            // this should only come up if Butcher Orgg is granted the ability to block multiple blockers - warning: untested
+            // this should only come up if Butcher Orgg is granted the ability to block multiple blockers
             boolean altDamageMethod = false;
             for (UUID blockerId : blockers) {
                 Permanent blocker = game.getPermanent(blockerId);
-                if (isButcherOrgg(blocker, blocker.getControllerId(), first, game, false)) {
+                if (assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
                     altDamageMethod = true;
                 }
             }
@@ -243,69 +243,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
     }
 
-    private void butcherOrggDamage(Permanent attacker, Player player, boolean first, Game game, boolean isAttacking) {
-        if (!((blocked && blockers.isEmpty() && isAttacking) || (attackers.isEmpty() && !isAttacking)) && (!first || hasFirstOrDoubleStrike(game))) {
-            if (attacker == null) {
-                return;
-            }
-            int damage = getDamageValueFromPermanent(attacker, game);
-            if (canDamage(attacker, first)) {
-                // must be set before attacker damage marking because of effects like Test of Faith
-                Map<UUID, Integer> blockerPower = new HashMap<>();
-                for (UUID blockerId : blockerOrder) {
-                    Permanent blocker = game.getPermanent(blockerId);
-                    if (canDamage(blocker, first)) {
-                        if (blocker.getBlocking() == 1) { // blocking several creatures handled separately
-                            blockerPower.put(blockerId, getDamageValueFromPermanent(blocker, game));
-                        }
-                    }
-                }
-                Map<UUID, Integer> assigned = new HashMap<>();
-                for (Permanent defendingCreature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, defendingPlayerId, game)) {
-                    if (defendingCreature != null) {
-                        if (!(damage > 0)) {
-                            break;
-                        }
-                        int damageAssigned = 0;
-                        damageAssigned = player.getAmount(0, damage, "Assign damage to " + defendingCreature.getName(), game);
-                        assigned.put(defendingCreature.getId(), damageAssigned);
-                        damage -= damageAssigned;
-                    }
-                }
-                if (damage > 0) {
-                    defenderDamage(attacker, damage, game);
-                }
-                if (isAttacking) {
-                    for (UUID blockerId : blockerOrder) {
-                        Integer power = blockerPower.get(blockerId);
-                        if (power != null) {
-                            // might be missing canDamage condition?
-                            Permanent blocker = game.getPermanent(blockerId);
-                            if (!isButcherOrgg(blocker, blocker.getControllerId(), first, game, false)) {
-                                attacker.markDamage(power, blockerId, game, true, true);
-                            }
-                        }
-                    }
-                }
-                for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
-                    Permanent defendingCreature = game.getPermanent(entry.getKey());
-                    defendingCreature.markDamage(entry.getValue(), attacker.getId(), game, true, true);
-                }
-            } else {
-                if (isAttacking) {
-                    for (UUID blockerId : blockerOrder) {
-                        Permanent blocker = game.getPermanent(blockerId);
-                        if (canDamage(blocker, first)) {
-                            if (!isButcherOrgg(blocker, blocker.getControllerId(), first, game, false)) {
-                                attacker.markDamage(getDamageValueFromPermanent(blocker, game), blocker.getId(), game, true, true);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     private void singleBlockerDamage(Player player, boolean first, Game game) {
         //TODO:  handle banding
         Permanent blocker = game.getPermanent(blockers.get(0));
@@ -337,7 +274,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
             if (canDamage(blocker, first)) {
                 if (blocker.getBlocking() == 1) { // blocking several creatures handled separately
-                    if (!isButcherOrgg(blocker, blocker.getControllerId(), first, game, false)) {
+                    if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
                         attacker.markDamage(blockerDamage, blocker.getId(), game, true, true);
                     }
                 }
@@ -410,7 +347,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 if (power != null) {
                     // might be missing canDamage condition?
                     Permanent blocker = game.getPermanent(blockerId);
-                    if (!isButcherOrgg(blocker, blocker.getControllerId(), first, game, false)) {
+                    if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
                         attacker.markDamage(power, blockerId, game, true, true);
                     }
                 }
@@ -423,8 +360,75 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             for (UUID blockerId : blockerOrder) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (canDamage(blocker, first)) {
-                    if (!isButcherOrgg(blocker, blocker.getControllerId(), first, game, false)) {
+                    if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
                         attacker.markDamage(getDamageValueFromPermanent(blocker, game), blocker.getId(), game, true, true);
+                    }
+                }
+            }
+        }
+    }
+
+    private void defendingPlayerAndOrDefendingCreaturesDividedDamage(Permanent attacker, Player player, boolean first, Game game, boolean isAttacking) {
+        // for handling Butcher Orgg
+        if (!((blocked && blockers.isEmpty() && isAttacking) || (attackers.isEmpty() && !isAttacking))) {
+            if (attacker == null) {
+                return;
+            }
+            int damage = getDamageValueFromPermanent(attacker, game);
+            if (canDamage(attacker, first)) {
+                // must be set before attacker damage marking because of effects like Test of Faith
+                Map<UUID, Integer> blockerPower = new HashMap<>();
+                for (UUID blockerId : blockerOrder) {
+                    Permanent blocker = game.getPermanent(blockerId);
+                    if (canDamage(blocker, first)) {
+                        if (blocker.getBlocking() == 1) { // blocking several creatures handled separately
+                            blockerPower.put(blockerId, getDamageValueFromPermanent(blocker, game));
+                        }
+                    }
+                }
+                Map<UUID, Integer> assigned = new HashMap<>();
+                for (Permanent defendingCreature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, defendingPlayerId, game)) {
+                    if (defendingCreature != null) {
+                        if (!(damage > 0)) {
+                            break;
+                        }
+                        int damageAssigned = 0;
+                        damageAssigned = player.getAmount(0, damage, "Assign damage to " + defendingCreature.getName(), game);
+                        assigned.put(defendingCreature.getId(), damageAssigned);
+                        damage -= damageAssigned;
+                    }
+                }
+                if (damage > 0) {
+                    Player defendingPlayer = game.getPlayer(defendingPlayerId);
+                    if (defendingPlayer.isInGame()) {
+                        defendingPlayer.damage(damage, attacker.getId(), game, true, true);
+                    }
+                }
+                if (isAttacking) {
+                    for (UUID blockerId : blockerOrder) {
+                        Integer power = blockerPower.get(blockerId);
+                        if (power != null) {
+                            // might be missing canDamage condition?
+                            Permanent blocker = game.getPermanent(blockerId);
+                            if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
+                                attacker.markDamage(power, blockerId, game, true, true);
+                            }
+                        }
+                    }
+                }
+                for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
+                    Permanent defendingCreature = game.getPermanent(entry.getKey());
+                    defendingCreature.markDamage(entry.getValue(), attacker.getId(), game, true, true);
+                }
+            } else {
+                if (isAttacking) {
+                    for (UUID blockerId : blockerOrder) {
+                        Permanent blocker = game.getPermanent(blockerId);
+                        if (canDamage(blocker, first)) {
+                            if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
+                                attacker.markDamage(getDamageValueFromPermanent(blocker, game), blocker.getId(), game, true, true);
+                            }
+                        }
                     }
                 }
             }
@@ -802,14 +806,15 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         return false;
     }
 
-    public boolean isButcherOrgg(Permanent creature, UUID playerId, boolean first, Game game, boolean isAttacking) {
+    public boolean assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(Permanent creature, UUID playerId, boolean first, Game game, boolean isAttacking) {
         // for handling Butcher Orgg
         if (creature.getAbilities().containsKey(ControllerDivideCombatDamageAbility.getInstance().getId())) {
             Player player = game.getPlayer(defenderControlsDefensiveFormation(game) ? defendingPlayerId : playerId);
             // 10/4/2004 	If it is blocked but then all of its blockers are removed before combat damage is assigned, then it won’t be able to deal combat damage and you won’t be able to use its ability.
-            if (!((blocked && blockers.isEmpty() && isAttacking) || (attackers.isEmpty() && !isAttacking))) {
-                if (player.chooseUse(Outcome.Damage, "Do you wish to divide " + creature.getLogName() + "'s combat damage among defending player and/or any number of defending creatures?", null, game)) {
-                    butcherOrggDamage(creature, player, first, game, isAttacking);
+            // (same principle should apply if it's blocking and its blocked attacker is removed from combat)
+            if (!((blocked && blockers.isEmpty() && isAttacking) || (attackers.isEmpty() && !isAttacking)) && canDamage(creature, first)) {
+                if (player.chooseUse(Outcome.Damage, "Do you wish to assign " + creature.getLogName() + "'s combat damage divided among defending player and/or any number of defending creatures?", null, game)) {
+                    defendingPlayerAndOrDefendingCreaturesDividedDamage(creature, player, first, game, isAttacking);
                     return true;
                 }
             }
