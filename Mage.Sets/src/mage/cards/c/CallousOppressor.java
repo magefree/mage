@@ -51,8 +51,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -76,17 +74,15 @@ public class CallousOppressor extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // As Callous Oppressor enters the battlefield, an opponent chooses a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new OpponentChooseCreatureTypeEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new CallousOppressorChooseCreatureTypeEffect()));
 
         // {T}: Gain control of target creature that isn't of the chosen type for as long as Callous Oppressor remains tapped.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that isn't of the chosen type");
-        filter.add(Predicates.not(new ChosenSubtypePredicate(this.getId())));
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.OneUse),
                 SourceTappedCondition.instance,
-                "Gain control of target creature for as long as Callous Oppressor remains tapped");
+                "Gain control of target creature for as long as {this} remains tapped");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(new CallousOppressorFilter()));
         this.addAbility(ability);
     }
 
@@ -100,14 +96,43 @@ public class CallousOppressor extends CardImpl {
     }
 }
 
-class OpponentChooseCreatureTypeEffect extends OneShotEffect {
+class CallousOppressorFilter extends FilterCreaturePermanent {
+    
+    public CallousOppressorFilter() {
+        super("creature that isn't of the chosen type");
+    }
+    
+    public CallousOppressorFilter(final CallousOppressorFilter filter) {
+        super(filter);
+    }
+    
+    @Override
+    public CallousOppressorFilter copy() {
+        return new CallousOppressorFilter(this);
+    }
+    
+    @Override
+    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
+        if (super.match(permanent, sourceId, playerId, game)) {
+            SubType subtype = (SubType) game.getState().getValue(sourceId + "_type");
+            if (subtype != null && permanent.hasSubtype(subtype, game)) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+    
+}
 
-    public OpponentChooseCreatureTypeEffect() {
+class CallousOppressorChooseCreatureTypeEffect extends OneShotEffect {
+
+    public CallousOppressorChooseCreatureTypeEffect() {
         super(Outcome.Benefit);
         staticText = "an opponent chooses a creature type";
     }
 
-    public OpponentChooseCreatureTypeEffect(final OpponentChooseCreatureTypeEffect effect) {
+    public CallousOppressorChooseCreatureTypeEffect(final CallousOppressorChooseCreatureTypeEffect effect) {
         super(effect);
     }
 
@@ -147,14 +172,15 @@ class OpponentChooseCreatureTypeEffect extends OneShotEffect {
                 if (mageObject instanceof Permanent) {
                     ((Permanent) mageObject).addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
                 }
+                return true;
             }
         }
         return false;
     }
 
     @Override
-    public OpponentChooseCreatureTypeEffect copy() {
-        return new OpponentChooseCreatureTypeEffect(this);
+    public CallousOppressorChooseCreatureTypeEffect copy() {
+        return new CallousOppressorChooseCreatureTypeEffect(this);
     }
 
 }
