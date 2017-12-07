@@ -51,12 +51,16 @@ public final class DeckImporterUtil {
         }
     }
 
-    public static DeckCardLists importDeck(String file) {
+    public static DeckCardLists importDeck(String file, StringBuilder errorMessages) {
         DeckImporter deckImporter = getDeckImporter(file);
         if (deckImporter != null) {
-            return deckImporter.importDeck(file);
+            return deckImporter.importDeck(file, errorMessages);
         } else {
             return new DeckCardLists();
         }
+    }
+
+    public static DeckCardLists importDeck(String file) {
+        return importDeck(file, null);
     }
 }
