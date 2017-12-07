@@ -64,11 +64,13 @@ public class TxtDeckImporter extends DeckImporter {
             } else if (commentString.startsWith("//main")) {
                 sideboard = false;
 
-                // if there are commands then disable empty line switcher (see deckstats.net format)
-                if (nonEmptyLinesTotal > 0){
+                // if there are commands mode (see deckstats.net format) then disable empty line switcher
+                if (nonEmptyLinesTotal == 0){
                     switchSideboardByEmptyLine = false;
                 }
             }
+
+            // skip comment line
             return;
         }
 
