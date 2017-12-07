@@ -47,25 +47,48 @@ public class TxtDeckImporter extends DeckImporter {
     public static final Set<String> IGNORE_NAMES = new HashSet<>(Arrays.asList(SET_VALUES));
 
     private boolean sideboard = false;
+    private boolean switchSideboardByEmptyLine = true;
     private int nonEmptyLinesTotal = 0;
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
-        if (line.toLowerCase().contains("sideboard")) {
-            sideboard = true;
-            return;
-        }
-        if (line.startsWith("//")) {
+
+        line = line.trim();
+
+        // switch sideboard by commands
+        String commentString = line.toLowerCase();
+        if (commentString.startsWith("//")){
+            // use start, not contains (card names may contain commands like "Legerdemain")
+            if (commentString.startsWith("//sideboard")) {
+                sideboard = true;
+            } else if (commentString.startsWith("//main")) {
+                sideboard = false;
+
+                // if there are commands then disable empty line switcher (see deckstats.net format)
+                if (nonEmptyLinesTotal > 0){
+                    switchSideboardByEmptyLine = false;
+                }
+            }
             return;
         }
 
-        // Start the sideboard on empty line that follows
-        // at least 1 non-empty line
-        if (line.isEmpty() && nonEmptyLinesTotal > 0) {
+        // switch sideboard by empty line
+        if (switchSideboardByEmptyLine && line.isEmpty() && nonEmptyLinesTotal > 0) {
+            if(sideboard){
+                sbMessage.append("Found empty line at ").append(lineCount).append(", but sideboard already used. Use //main, //sideboard switcher OR empty line to devide your cards.").append('\n');
+            }
             sideboard = true;
             return;
         } else {
             nonEmptyLinesTotal++;
+        }
+
+        // single line sideboard cards see https://deckstats.net/
+        // SB: 3 Carnage Tyrant
+        boolean singleLineSideBoard = false;
+        if (line.startsWith("SB:")){
+           line = line.replace("SB:", "").trim();
+           singleLineSideBoard = true;
         }
 
         line = line.replace("\t", " "); // changing tabs to blanks as delimiter
@@ -87,12 +110,17 @@ public class TxtDeckImporter extends DeckImporter {
         }
         try {
             int num = Integer.parseInt(lineNum.replaceAll("\\D+", ""));
+            if ((num < 0) || (num > 100)){
+                sbMessage.append("Invalid number (too small or too big): ").append(lineNum).append(" at line ").append(lineCount).append('\n');
+                return;
+            }
+
             CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName, true);
             if (cardInfo == null) {
                 sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append('\n');
             } else {
                 for (int i = 0; i < num; i++) {
-                    if (!sideboard) {
+                    if (!sideboard && !singleLineSideBoard) {
                         deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
                     } else {
                         deckList.getSideboard().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
@@ -103,5 +131,4 @@ public class TxtDeckImporter extends DeckImporter {
             sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append('\n');
         }
     }
-
 }

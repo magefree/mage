@@ -691,8 +691,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     break;
                 case 1:
                     btnImportFromClipboardActionPerformed(evt);
+                    break;
                 case 2:
                     btnImportFromClipboardActionWAppendPerformed(evt);
+                    break;
             }
         });
 
@@ -814,9 +816,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
+                Deck newDeck = null;
                 try {
-                    deck = Deck.load(DeckImporterUtil.importDeck(dialog.getTmpPath()), true, true);
-                    refreshDeck();
+                    newDeck = Deck.load(DeckImporterUtil.importDeck(dialog.getTmpPath()), true, true);
+                    if (newDeck != null) {
+                        deck = newDeck;
+                        refreshDeck();
+                    }
                 } catch (GameException e1) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
                 }
