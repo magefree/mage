@@ -220,9 +220,10 @@ public class GathererSets implements Iterable<DownloadJob> {
                 continue; // can't do other checks
             }
 
-            // 2. missing rarity icon:
-            // WARNING, need too much time (60+ secs), only for debug mode
             if (logger.isDebugEnabled()) {
+                // 2. missing rarity icon:
+                // WARNING, need too much time (60+ secs), only for debug mode
+                ///*
                 if ((set.getCardsByRarity(Rarity.COMMON).size() > 0) && !res.haveCommon) {
                     logger.error(String.format("Symbols: set have common cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
                 }
@@ -234,6 +235,30 @@ public class GathererSets implements Iterable<DownloadJob> {
                 }
                 if ((set.getCardsByRarity(Rarity.MYTHIC).size() > 0) && !res.haveMyth) {
                     logger.error(String.format("Symbols: set have mythic cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
+                }
+                //*/
+
+                // 3. wrong sets config with alternative numbers
+                // TODO: some sets have cards above maxCardNumberInBooster, need to check it (search code for maxCardNumberInBooster), maybe delete at all after getCardNumberAsInt implement
+                if ((set.getMaxCardNumberInBooster() == 0) || (set.getMaxCardNumberInBooster() == Integer.MAX_VALUE))
+                {
+                    for(ExpansionSet.SetCardInfo card: set.getSetCardInfo()){
+                        if (String.valueOf(card.getCardNumberAsInt()).length() != card.getCardNumber().length()){
+                            logger.error(String.format("Symbols: set have alternative card but do not config to it: %s (%s)", set.getCode(), set.getName()));
+                            break;
+                        }
+                    }
+                }
+
+                // 4. have nonland card above maxboosternumber (info)
+                if (set.getMaxCardNumberInBooster() != Integer.MAX_VALUE)
+                {
+                    for(ExpansionSet.SetCardInfo card: set.getSetCardInfo()){
+                        if (card.getRarity() == Rarity.LAND) { continue; }
+                        if (card.getCardNumberAsInt() > set.getMaxCardNumberInBooster()){
+                            logger.error(String.format("Symbols: set setup to cut off cards for boosters, non land card will be missing: %s (%s), %s - %s", set.getCode(), set.getName(), card.getCardNumber(), card.getName()));
+                        }
+                    }
                 }
             }
         }

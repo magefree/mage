@@ -32,6 +32,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.io.Serializable;
@@ -80,6 +81,10 @@ public abstract class ExpansionSet implements Serializable {
 
         public String getCardNumber() {
             return this.cardNumber;
+        }
+
+        public int getCardNumberAsInt(){
+            return CardUtil.parseCardNumberAsInt(this.cardNumber);
         }
 
         public Rarity getRarity() {
@@ -388,9 +393,10 @@ public abstract class ExpansionSet implements Serializable {
                 criteria.doubleFaced(false);
             }
             savedCardsInfos = CardRepository.instance.findCards(criteria);
-            // Workaround after card number is numeric
+            // Workaround after card number is numeric (p.s. card number is not numeric for some cards)
+            // TODO: some sets have фывфывфывфывфыв
             if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                savedCardsInfos.removeIf(next -> Integer.valueOf(next.getCardNumber()) > maxCardNumberInBooster && rarity != Rarity.LAND);
+                savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster && rarity != Rarity.LAND);
             }
 
             savedCards.put(rarity, savedCardsInfos);
@@ -430,5 +436,7 @@ public abstract class ExpansionSet implements Serializable {
     public void removeSavedCards() {
         savedCards.clear();
     }
+
+    public int getMaxCardNumberInBooster() { return maxCardNumberInBooster; }
 
 }

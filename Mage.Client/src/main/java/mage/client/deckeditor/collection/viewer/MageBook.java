@@ -464,7 +464,7 @@ public class MageBook extends JComponent {
         // first run for numbers list
         LinkedList<Integer> haveNumbers = new LinkedList<>();
         for (ExpansionSet.SetCardInfo card: cards){
-            int cardNumber = Integer.parseInt(card.getCardNumber());
+            int cardNumber = card.getCardNumberAsInt();
             startNumber = min(startNumber, cardNumber);
             endNumber = Math.max(endNumber, cardNumber);
             haveNumbers.add(cardNumber);
