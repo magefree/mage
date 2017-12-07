@@ -39,10 +39,12 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -59,11 +61,9 @@ public class DoomCannon extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Sacrifice)));
 
         // {3}, {T}, Sacrifice a creature of the chosen type: Doom Cannon deals 3 damage to target creature or player.
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature of the chosen type");
-        filter.add(new ChosenSubtypePredicate(this.getId()));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new DoomCannonFilter())));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
@@ -76,4 +76,32 @@ public class DoomCannon extends CardImpl {
     public DoomCannon copy() {
         return new DoomCannon(this);
     }
+}
+
+class DoomCannonFilter extends FilterControlledCreaturePermanent {
+    
+    public DoomCannonFilter() {
+        super("a creature of the chosen type");
+    }
+    
+    public DoomCannonFilter(final DoomCannonFilter filter) {
+        super(filter);
+    }
+    
+    @Override
+    public DoomCannonFilter copy() {
+        return new DoomCannonFilter(this);
+    }
+    
+    @Override
+    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
+        if (super.match(permanent, sourceId, playerId, game)) {
+            SubType subtype = (SubType) game.getState().getValue(sourceId + "_type");
+            if (subtype != null && permanent.hasSubtype(subtype, game)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
