@@ -244,7 +244,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     private void butcherOrggDamage(Permanent attacker, Player player, boolean first, Game game, boolean isAttacking) {
-        if (!(blocked && blockers.isEmpty()) && (!first || hasFirstOrDoubleStrike(game))) {
+        if (!((blocked && blockers.isEmpty() && isAttacking) || (attackers.isEmpty() && !isAttacking)) && (!first || hasFirstOrDoubleStrike(game))) {
             if (attacker == null) {
                 return;
             }
@@ -806,9 +806,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         // for handling Butcher Orgg
         if (creature.getAbilities().containsKey(ControllerDivideCombatDamageAbility.getInstance().getId())) {
             Player player = game.getPlayer(defenderControlsDefensiveFormation(game) ? defendingPlayerId : playerId);
-            if (player.chooseUse(Outcome.Damage, "Do you wish to divide " + creature.getLogName() + "'s combat damage among defending player and/or any number of defending creatures?", null, game)) {
-                butcherOrggDamage(creature, player, first, game, isAttacking);
-                return true;
+            // 10/4/2004 	If it is blocked but then all of its blockers are removed before combat damage is assigned, then it won’t be able to deal combat damage and you won’t be able to use its ability.
+            if (!((blocked && blockers.isEmpty() && isAttacking) || (attackers.isEmpty() && !isAttacking))) {
+                if (player.chooseUse(Outcome.Damage, "Do you wish to divide " + creature.getLogName() + "'s combat damage among defending player and/or any number of defending creatures?", null, game)) {
+                    butcherOrggDamage(creature, player, first, game, isAttacking);
+                    return true;
+                }
             }
         }
         return false;
