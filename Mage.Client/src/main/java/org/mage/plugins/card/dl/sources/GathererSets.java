@@ -238,25 +238,24 @@ public class GathererSets implements Iterable<DownloadJob> {
                 }
                 //*/
 
-                // 3. wrong sets config with alternative numbers
-                // TODO: some sets have cards above maxCardNumberInBooster, need to check it (search code for maxCardNumberInBooster), maybe delete at all after getCardNumberAsInt implement
-                if ((set.getMaxCardNumberInBooster() == 0) || (set.getMaxCardNumberInBooster() == Integer.MAX_VALUE))
-                {
-                    for(ExpansionSet.SetCardInfo card: set.getSetCardInfo()){
-                        if (String.valueOf(card.getCardNumberAsInt()).length() != card.getCardNumber().length()){
-                            logger.error(String.format("Symbols: set have alternative card but do not config to it: %s (%s)", set.getCode(), set.getName()));
-                            break;
-                        }
+                // 3. info: sets with alternative numbers
+                for(ExpansionSet.SetCardInfo card: set.getSetCardInfo()){
+                    if (String.valueOf(card.getCardNumberAsInt()).length() != card.getCardNumber().length()){
+                        logger.info(String.format("Symbols: set have alternative card but do not config to it: %s (%s)", set.getCode(), set.getName()));
+                        break;
                     }
                 }
 
-                // 4. have nonland card above maxboosternumber (info)
+                // 4. info: sets with missing cards for boosters (todo: what about +20 number for alternative land arts?)
                 if (set.getMaxCardNumberInBooster() != Integer.MAX_VALUE)
                 {
                     for(ExpansionSet.SetCardInfo card: set.getSetCardInfo()){
-                        if (card.getRarity() == Rarity.LAND) { continue; }
                         if (card.getCardNumberAsInt() > set.getMaxCardNumberInBooster()){
-                            logger.error(String.format("Symbols: set setup to cut off cards for boosters, non land card will be missing: %s (%s), %s - %s", set.getCode(), set.getName(), card.getCardNumber(), card.getName()));
+                            if (card.getRarity() == Rarity.LAND) {
+                                logger.info(String.format("Symbols: set's booster have land above max card number: %s (%s), %s - %s", set.getCode(), set.getName(), card.getCardNumber(), card.getName()));
+                            }else {
+                                logger.info(String.format("Symbols: set's booster missing nonland card:: %s (%s), %s - %s", set.getCode(), set.getName(), card.getCardNumber(), card.getName()));
+                            }
                         }
                     }
                 }
