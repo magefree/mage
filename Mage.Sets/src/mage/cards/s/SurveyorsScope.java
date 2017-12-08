@@ -101,10 +101,8 @@ class SurveyorsScopeEffect extends OneShotEffect {
                 }
             }
             game.informPlayers(new StringBuilder("Surveyor's Scope: X = ").append(numberOfLands).toString());
-            if (numberOfLands > 0) {
-                return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, numberOfLands, StaticFilters.FILTER_BASIC_LAND_CARD)).apply(game, source);
-            }
-            return true;
+            // 10/17/2013 	If no players control at least two more lands than you when the ability resolves, you’ll still search and shuffle your library.
+            return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, numberOfLands, StaticFilters.FILTER_BASIC_LAND_CARD)).apply(game, source);
         }
         return false;
     }
