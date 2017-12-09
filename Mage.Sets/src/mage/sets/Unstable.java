@@ -46,5 +46,6 @@ public class Unstable extends ExpansionSet {
     private Unstable() {
         super("Unstable", "UST", ExpansionSet.buildDate(2017, 12, 8), SetType.JOKESET);
         cards.add(new SetCardInfo("Sword of Dungeons and Dragons", 1, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsAndDragons.class));
+        cards.add(new SetCardInfo("Target Minotaur", 98, Rarity.COMMON, mage.cards.t.TargetMinotaur.class));
     }
 }
