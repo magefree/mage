@@ -59,7 +59,7 @@ public class GroundPounder extends CardImpl {
     public GroundPounder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
