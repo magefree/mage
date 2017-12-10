@@ -47,45 +47,55 @@ public class TxtDeckImporter extends DeckImporter {
     public static final Set<String> IGNORE_NAMES = new HashSet<>(Arrays.asList(SET_VALUES));
 
     private boolean sideboard = false;
-    private boolean switchSideboardByEmptyLine = true;
+    private boolean switchSideboardByEmptyLine = true; // all cards after first empty line will be sideboard (like mtgo format)
     private int nonEmptyLinesTotal = 0;
+
+    public TxtDeckImporter(boolean haveSideboardSection){
+        if(haveSideboardSection){
+            switchSideboardByEmptyLine = false;
+        }
+    }
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
 
         line = line.trim();
 
-        // switch sideboard by commands
+        // process comment:
+        // skip or force to sideboard
         String commentString = line.toLowerCase();
         if (commentString.startsWith("//")){
             // use start, not contains (card names may contain commands like "Legerdemain")
+
             if (commentString.startsWith("//sideboard")) {
                 sideboard = true;
-            } else if (commentString.startsWith("//main")) {
-                sideboard = false;
-
-                // if there are commands mode (see deckstats.net format) then disable empty line switcher
-                if (nonEmptyLinesTotal == 0){
-                    switchSideboardByEmptyLine = false;
-                }
             }
 
             // skip comment line
             return;
         }
 
-        // switch sideboard by empty line
-        if (switchSideboardByEmptyLine && line.isEmpty() && nonEmptyLinesTotal > 0) {
-            if(sideboard){
-                sbMessage.append("Found empty line at ").append(lineCount).append(", but sideboard already used. Use //main, //sideboard switcher OR empty line to devide your cards.").append('\n');
-            }
-            sideboard = true;
-            return;
-        } else {
-            nonEmptyLinesTotal++;
+        // remove inner card comments from text line: 2 Blinding Fog #some text (like deckstats format)
+        int commentDelim = line.indexOf('#');
+        if(commentDelim >= 0){
+            line = line.substring(0, commentDelim).trim();
         }
 
-        // single line sideboard cards see https://deckstats.net/
+        // switch sideboard by empty line
+        if (switchSideboardByEmptyLine && line.isEmpty() && nonEmptyLinesTotal > 0) {
+            if(!sideboard){
+                sideboard = true;
+            }else{
+                sbMessage.append("Found empty line at ").append(lineCount).append(", but sideboard already used. Use //sideboard switcher OR one empty line to devide your cards.").append('\n');
+            }
+
+            // skip empty line
+            return;
+        }
+
+        nonEmptyLinesTotal++;
+
+        // single line sideboard card from deckstats.net
         // SB: 3 Carnage Tyrant
         boolean singleLineSideBoard = false;
         if (line.startsWith("SB:")){

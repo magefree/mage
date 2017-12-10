@@ -12,7 +12,7 @@ public class TxtDeckImporterTest {
 
     @Test
     public void testImportWithBlankLineAboveSideboard() {
-        TxtDeckImporter importer = new TxtDeckImporter();
+        TxtDeckImporter importer = new TxtDeckImporter(false);
 
         CardInfo card;
         DeckCardLists deck = new DeckCardLists();
