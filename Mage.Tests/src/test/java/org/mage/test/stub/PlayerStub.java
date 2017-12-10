@@ -647,6 +647,17 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public int rollDice(Game game, int numSides) {
+        return 1;
+    }
+
+    @Override
+    public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
+        return 1;
+    }
+
+
+    @Override
     public void discard(int amount, Ability source, Game game) {
 
     }

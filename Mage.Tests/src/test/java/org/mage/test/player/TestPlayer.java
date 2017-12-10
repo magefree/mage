@@ -1826,6 +1826,17 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public int rollDice(Game game, int numSides) {
+        return computerPlayer.rollDice(game, numSides);
+    }
+
+    @Override
+    public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
+        return computerPlayer.rollDice(game, appliedEffects, numSides);
+    }
+
+
+    @Override
     public List<Permanent> getAvailableAttackers(Game game) {
         return computerPlayer.getAvailableAttackers(game);
     }
