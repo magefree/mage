@@ -2312,7 +2312,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean flipCoin(Game game) {
         return this.flipCoin(game, null);
     }
-
+    
     /**
      * @param game
      * @param appliedEffects
@@ -2330,6 +2330,31 @@ public abstract class PlayerImpl implements Player, Serializable {
             game.fireEvent(new GameEvent(GameEvent.EventType.COIN_FLIPPED, playerId, null, playerId, 0, event.getFlag()));
         }
         return event.getFlag();
+    }
+    
+    @Override
+    public int rollDice(Game game, int numSides) {
+        return this.rollDice(game, null, numSides);
+    }
+
+    /**
+     * @param game
+     * @param appliedEffects
+     * @return the number that the player rolled
+     */
+    @Override
+    public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
+        int result = RandomUtil.nextInt(numSides);
+        if (!game.isSimulation()) {
+            game.informPlayers("[Roll a dice] " + getLogName() + " rolled a " + result + " on a " + numSides + " sided dice");
+        }
+        GameEvent event = new GameEvent(GameEvent.EventType.ROLL_DICE, playerId, null, playerId, result, true);
+        event.setAppliedEffects(appliedEffects);
+        event.setAmount(result);
+        if (!game.replaceEvent(event)) {
+            game.fireEvent(new GameEvent(GameEvent.EventType.DICE_ROLLED, playerId, null, playerId, result, event.getFlag()));
+        }
+        return result;
     }
 
     @Override
