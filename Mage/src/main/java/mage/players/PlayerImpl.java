@@ -2344,7 +2344,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
-        int result = RandomUtil.nextInt(numSides);
+        int result = RandomUtil.nextInt(numSides) + 1;        
         if (!game.isSimulation()) {
             game.informPlayers("[Roll a dice] " + getLogName() + " rolled a " + result + " on a " + numSides + " sided dice");
         }
