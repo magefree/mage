@@ -77,6 +77,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Armor of Faith", 4, Rarity.COMMON, mage.cards.a.ArmorOfFaith.class));
         cards.add(new SetCardInfo("Armor Thrull", 77, Rarity.COMMON, ArmorThrull.class));
         cards.add(new SetCardInfo("Ashen Ghoul", 78, Rarity.UNCOMMON, mage.cards.a.AshenGhoul.class));
+        cards.add(new SetCardInfo("Ashnod's Cylix", 203, Rarity.RARE, mage.cards.a.AshnodsCylix.class));
         cards.add(new SetCardInfo("Aurochs", 153, Rarity.COMMON, mage.cards.a.Aurochs.class));
         cards.add(new SetCardInfo("Aysen Bureaucrats", 6, Rarity.COMMON, mage.cards.a.AysenBureaucrats.class));
         cards.add(new SetCardInfo("Aysen Crusader", 7, Rarity.UNCOMMON, mage.cards.a.AysenCrusader.class));
