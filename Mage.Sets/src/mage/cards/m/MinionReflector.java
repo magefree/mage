@@ -31,19 +31,18 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -69,8 +68,15 @@ public class MinionReflector extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {2}. If you do, create a token that's a copy of that creature. That token has haste and "At the beginning of the end step, sacrifice this permanent."
-        Ability ability = new MinionReflectorTriggeredAbility();
-        ability.addCost(new ManaCostsImpl("{2}"));
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(
+                new MinionReflectorEffect(), new ManaCostsImpl("{2}"),
+                "Pay {2} to create a token that's a copy of that creature that " +
+                        "entered the battlefield?"),
+                filter, false, SetTargetPointer.PERMANENT,
+                "Whenever a nontoken creature enters the battlefield under your control, " +
+                "you may pay 2. If you do, create a token that's a copy of that creature. " +
+                "That token has haste and \"At the beginning of the end step, sacrifice this " +
+                "permanent.\"");
         this.addAbility(ability);
     }
 
@@ -84,38 +90,6 @@ public class MinionReflector extends CardImpl {
     }
 }
 
-class MinionReflectorTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
-
-    public MinionReflectorTriggeredAbility() {
-        super(new MinionReflectorEffect(), new FilterControlledCreaturePermanent(), "Whenever a nontoken creature enters the battlefield under your control, you may pay {2}. If you do, create a token that's a copy of that creature. That token has haste and \"At the beginning of the end step, sacrifice this permanent");
-        filter.add(Predicates.not(new TokenPredicate()));
-    }
-
-    public MinionReflectorTriggeredAbility(MinionReflectorTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            UUID targetId = event.getTargetId();
-            Permanent permanent = game.getPermanent(targetId);
-            if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(targetId));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public MinionReflectorTriggeredAbility copy() {
-        return new MinionReflectorTriggeredAbility(this);
-    }
-
-}
 
 class MinionReflectorEffect extends OneShotEffect {
 
@@ -141,7 +115,7 @@ class MinionReflectorEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
             for (Permanent addedToken : effect.getAddedPermanent()) {
-                ContinuousEffect continuousEffect = new GainAbilityTargetEffect(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, true), Duration.Custom);
+                ContinuousEffect continuousEffect = new GainAbilityTargetEffect(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false), Duration.Custom);
                 continuousEffect.setTargetPointer(new FixedTarget(addedToken.getId()));
                 game.addEffect(continuousEffect, source);
             }
