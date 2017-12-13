@@ -319,6 +319,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Scavenging Ghoul", 43, Rarity.UNCOMMON, mage.cards.s.ScavengingGhoul.class));
         cards.add(new SetCardInfo("Scryb Sprites", 154, Rarity.COMMON, mage.cards.s.ScrybSprites.class));
         cards.add(new SetCardInfo("Sea Serpent", 98, Rarity.COMMON, mage.cards.s.SeaSerpent.class));
+        cards.add(new SetCardInfo("Seeker", 299, Rarity.COMMON, mage.cards.s.Seeker.class));
         cards.add(new SetCardInfo("Segovian Leviathan", 99, Rarity.UNCOMMON, mage.cards.s.SegovianLeviathan.class));
         cards.add(new SetCardInfo("Sengir Vampire", 44, Rarity.UNCOMMON, mage.cards.s.SengirVampire.class));
         cards.add(new SetCardInfo("Serra Angel", 300, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
