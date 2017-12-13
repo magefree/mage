@@ -233,6 +233,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Rubinia Soulsinger", 296, Rarity.RARE, mage.cards.r.RubiniaSoulsinger.class));
         cards.add(new SetCardInfo("Rust", 49, Rarity.COMMON, mage.cards.r.Rust.class));
         cards.add(new SetCardInfo("Sea Kings' Blessing", 75, Rarity.UNCOMMON, mage.cards.s.SeaKingsBlessing.class));
+        cards.add(new SetCardInfo("Seeker", 204, Rarity.UNCOMMON, mage.cards.s.Seeker.class));
         cards.add(new SetCardInfo("Segovian Leviathan", 76, Rarity.UNCOMMON, mage.cards.s.SegovianLeviathan.class));
         cards.add(new SetCardInfo("Sentinel", 239, Rarity.RARE, mage.cards.s.Sentinel.class));
         cards.add(new SetCardInfo("Serpent Generator", 240, Rarity.RARE, mage.cards.s.SerpentGenerator.class));
