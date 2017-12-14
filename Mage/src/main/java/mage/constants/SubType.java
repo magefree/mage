@@ -72,7 +72,7 @@ public enum SubType {
     BITH("Bith", SubTypeSet.CreatureType, true), // Star Wars
     BLINKMOTH("Blinkmoth", SubTypeSet.CreatureType),
     BOAR("Boar", SubTypeSet.CreatureType),
-    BRAINIAC("Brainiac", SubTypeSet.CreatureType),
+    BRAINIAC("Brainiac", SubTypeSet.CreatureType, true), // Unstable
     BRINGER("Bringer", SubTypeSet.CreatureType),
     BRUSHWAGG("Brushwagg", SubTypeSet.CreatureType),
     // C
@@ -269,6 +269,7 @@ public enum SubType {
     SAPROLING("Saproling", SubTypeSet.CreatureType),
     SATYR("Satyr", SubTypeSet.CreatureType),
     SCARECROW("Scarecrow", SubTypeSet.CreatureType),
+    SCIENTIST("Scientist", SubTypeSet.CreatureType, true), // Unstable
     SCION("Scion", SubTypeSet.CreatureType),
     SCORPION("Scorpion", SubTypeSet.CreatureType),
     SCOUT("Scout", SubTypeSet.CreatureType),
