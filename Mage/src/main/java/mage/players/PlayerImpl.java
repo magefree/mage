@@ -2352,9 +2352,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         event.setAppliedEffects(appliedEffects);
         event.setAmount(result);
         if (!game.replaceEvent(event)) {
-            game.fireEvent(new GameEvent(GameEvent.EventType.DICE_ROLLED, playerId, null, playerId, result, event.getFlag()));
+            game.fireEvent(new GameEvent(GameEvent.EventType.DICE_ROLLED, playerId, null, playerId, event.getAmount(), event.getFlag()));
         }
-        return result;
+        return event.getAmount();
     }
 
     @Override
