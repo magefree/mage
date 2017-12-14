@@ -25,72 +25,78 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.cards.s;
 
-import mage.MageObject;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.players.Player;
+import mage.game.events.GameEvent;
 
 /**
  *
  * @author spjspj
  */
-public class RollDiceEffect extends OneShotEffect {
+public class SquirrelPoweredScheme extends CardImpl {
 
-    protected Effects executingEffects = new Effects();
-    protected int numSides;
+    public SquirrelPoweredScheme(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
-    public RollDiceEffect(Effect effect, int numSides) {
-        this(effect, Outcome.Neutral, numSides);
+        // Increase the result of each die you roll by 2.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SquirrelPoweredSchemeEffect()));
     }
 
-    public RollDiceEffect(Effect effect, Outcome outcome, int numSides) {
-        super(outcome);
-        addEffect(effect);
-        this.numSides = numSides;
-    }
-
-    public RollDiceEffect(final RollDiceEffect effect) {
-        super(effect);
-        this.executingEffects = effect.executingEffects.copy();
-        this.numSides = effect.numSides;
-    }
-
-    public void addEffect(Effect effect) {
-        if (effect != null) {
-            executingEffects.add(effect);
-        }
+    public SquirrelPoweredScheme(final SquirrelPoweredScheme card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
-        if (controller != null && mageObject != null) {
-            controller.rollDice(game, numSides);                
-            return true;
-        }
+    public SquirrelPoweredScheme copy() {
+        return new SquirrelPoweredScheme(this);
+    }
+}
+
+class SquirrelPoweredSchemeEffect extends ReplacementEffectImpl {
+
+    SquirrelPoweredSchemeEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "Increase the result of each die you roll by 2";
+    }
+
+    SquirrelPoweredSchemeEffect(final SquirrelPoweredSchemeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        event.setAmount(event.getAmount() + 2);
         return false;
     }
 
     @Override
-    public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
-            return staticText;
-        }
-        StringBuilder sb = new StringBuilder("Roll a " + numSides + " sided dice");
-        return sb.toString();
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ROLL_DICE;
     }
 
     @Override
-    public RollDiceEffect copy() {
-        return new RollDiceEffect(this);
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return source.getControllerId().equals(event.getPlayerId());
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public SquirrelPoweredSchemeEffect copy() {
+        return new SquirrelPoweredSchemeEffect(this);
     }
 }
