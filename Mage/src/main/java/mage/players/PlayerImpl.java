@@ -2346,13 +2346,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
         int result = RandomUtil.nextInt(numSides) + 1;        
         if (!game.isSimulation()) {
-            game.informPlayers("[Roll a dice] " + getLogName() + " rolled a " + result + " on a " + numSides + " sided dice");
+            game.informPlayers("[Roll a die] " + getLogName() + " rolled a " + result + " on a " + numSides + " sided dice");
         }
         GameEvent event = new GameEvent(GameEvent.EventType.ROLL_DICE, playerId, null, playerId, result, true);
         event.setAppliedEffects(appliedEffects);
         event.setAmount(result);
+        event.setData(numSides + "");
         if (!game.replaceEvent(event)) {
-            game.fireEvent(new GameEvent(GameEvent.EventType.DICE_ROLLED, playerId, null, playerId, event.getAmount(), event.getFlag()));
+            GameEvent ge = new GameEvent(GameEvent.EventType.DICE_ROLLED, playerId, null, playerId, event.getAmount(), event.getFlag());
+            ge.setData(numSides + "");
+            game.fireEvent(ge);
         }
         return event.getAmount();
     }
