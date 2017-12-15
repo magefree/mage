@@ -721,14 +721,18 @@ public final class ManaSymbols {
         // not need to add different images (width and height do the work)
         // use best png size (generated on startup) TODO: add reload images after update
         String htmlImagesPath = getResourceSymbolsPath(ResourceSymbolSize.PNG);
+        htmlImagesPath = htmlImagesPath
+                .replace("$", "@S@"); // paths with $ will rise error, need escape that
 
         replaced = REPLACE_SYMBOLS_PATTERN.matcher(replaced).replaceAll(
                     "<img src='" + filePathToUrl(htmlImagesPath) + "$1$2" + ".png' alt='$1$2' width="
                             + symbolSize + " height=" + symbolSize + '>');
 
         // ignore data restore
-        replaced = replaced.replace("|source|", "{source}");
-        replaced = replaced.replace("|this|", "{this}");
+        replaced = replaced
+                .replace("|source|", "{source}")
+                .replace("|this|", "{this}")
+                .replace("@S@", "$");
 
         return replaced;
     }
