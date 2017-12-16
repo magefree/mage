@@ -51,13 +51,17 @@ public class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Amateur Auteur", 3, Rarity.COMMON, mage.cards.a.AmateurAuteur.class));
         cards.add(new SetCardInfo("As Luck Would Have It", 102, Rarity.RARE, mage.cards.a.AsLuckWouldHaveIt.class));
         cards.add(new SetCardInfo("Box of Free-Range Goblins", 77, Rarity.COMMON, mage.cards.b.BoxOfFreerangeGoblins.class));
+        cards.add(new SetCardInfo("Buzzing Whack-a-Doodle", 141, Rarity.UNCOMMON, mage.cards.b.BuzzingWhackADoodle.class));
         cards.add(new SetCardInfo("Chittering Doom", 104, Rarity.UNCOMMON, mage.cards.c.ChitteringDoom.class));
         cards.add(new SetCardInfo("Crow Storm", 31, Rarity.UNCOMMON, mage.cards.c.CrowStorm.class));
+        cards.add(new SetCardInfo("Curious Killbot", 145, Rarity.COMMON, mage.cards.c.CuriousKillbot.class));
+        cards.add(new SetCardInfo("Earl of Squirrel", 108, Rarity.RARE, mage.cards.e.EarlOfSquirrel.class));
         cards.add(new SetCardInfo("Forest", 216, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Garbage Elemental", 82, Rarity.UNCOMMON, mage.cards.g.GarbageElemental.class));
         cards.add(new SetCardInfo("Ground Pounder", 110, Rarity.COMMON, mage.cards.g.GroundPounder.class));
         cards.add(new SetCardInfo("Hammer Helper", 85, Rarity.COMMON, mage.cards.h.HammerHelper.class));
         cards.add(new SetCardInfo("Hydradoodle", 112, Rarity.RARE, mage.cards.h.Hydradoodle.class));
+        cards.add(new SetCardInfo("Inhumaniac", 59, Rarity.UNCOMMON, mage.cards.i.Inhumaniac.class));
         cards.add(new SetCardInfo("Island", 213, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Krark's Other Thumb", 151, Rarity.UNCOMMON, mage.cards.k.KrarksOtherThumb.class));
         cards.add(new SetCardInfo("Lobe Lobber", 153, Rarity.UNCOMMON, mage.cards.l.LobeLobber.class));

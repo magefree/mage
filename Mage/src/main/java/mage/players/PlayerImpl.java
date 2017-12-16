@@ -80,6 +80,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.token.SquirrelToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -1841,6 +1842,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                             Player player = game.getPlayer(sourceControllerId);
                             player.gainLife(actualDamage, game);
                         }
+                        // Unstable ability - Earl of Squirrel
+                        if (sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
+                            Player player = game.getPlayer(sourceControllerId);
+                            new SquirrelToken().putOntoBattlefield(actualDamage, game, sourceId, player.getId());
+                        }
                         game.fireEvent(new DamagedPlayerEvent(playerId, sourceId, playerId, actualDamage, combatDamage));
                         return actualDamage;
                     }
@@ -2312,7 +2318,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean flipCoin(Game game) {
         return this.flipCoin(game, null);
     }
-    
+
     /**
      * @param game
      * @param appliedEffects
@@ -2331,7 +2337,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         return event.getFlag();
     }
-    
+
     @Override
     public int rollDice(Game game, int numSides) {
         return this.rollDice(game, null, numSides);
@@ -2344,7 +2350,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
-        int result = RandomUtil.nextInt(numSides) + 1;        
+        int result = RandomUtil.nextInt(numSides) + 1;
         if (!game.isSimulation()) {
             game.informPlayers("[Roll a die] " + getLogName() + " rolled a " + result + " on a " + numSides + " sided dice");
         }
