@@ -55,18 +55,13 @@ import mage.util.SubTypeList;
 public class EarlOfSquirrel extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens you control");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Other squirrels you control");
+
 
     static {
         filter.add(new TokenPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
-    private final static FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Other squirrels you control");
-
-    static {
         filter2.add(new SubtypePredicate(SubType.SQUIRREL));
-        filter2.add(new AnotherPredicate());
-        filter2.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public EarlOfSquirrel(UUID ownerId, CardSetInfo setInfo) {
@@ -88,7 +83,7 @@ public class EarlOfSquirrel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // Other Squirrels you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter2, true)));
     }
 
     public EarlOfSquirrel(final EarlOfSquirrel card) {
