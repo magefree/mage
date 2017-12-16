@@ -29,8 +29,6 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -98,14 +96,8 @@ class HauntingWindTriggeredAbility extends TriggeredAbilityImpl {
             if (stackAbility == null) {
                 return false;
             }
-            boolean triggerable = true;
-            for (Cost cost : stackAbility.getCosts()) {
-                if (cost instanceof TapSourceCost) {
-                    triggerable = false;
-                    break;
-                }
-            }
-            if (!triggerable) {
+            String abilityText = stackAbility.getRule(true);
+            if (abilityText.contains("{T}:") || abilityText.contains("{T},") || abilityText.contains("{T} or")) {
                 return false;
             }
             for (Effect effect : this.getEffects()) {
