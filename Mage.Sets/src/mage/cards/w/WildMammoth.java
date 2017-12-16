@@ -120,6 +120,7 @@ class WildMammothEffect extends OneShotEffect {
                                 newController = player;
                             } else {
                                 tie = true;
+                                break;
                             }
                         }
                     }
