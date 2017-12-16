@@ -61,6 +61,7 @@ public class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Ground Pounder", 110, Rarity.COMMON, mage.cards.g.GroundPounder.class));
         cards.add(new SetCardInfo("Hammer Helper", 85, Rarity.COMMON, mage.cards.h.HammerHelper.class));
         cards.add(new SetCardInfo("Hydradoodle", 112, Rarity.RARE, mage.cards.h.Hydradoodle.class));
+        cards.add(new SetCardInfo("Inhumaniac", 59, Rarity.UNCOMMON, mage.cards.i.Inhumaniac.class));
         cards.add(new SetCardInfo("Island", 213, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Krark's Other Thumb", 151, Rarity.UNCOMMON, mage.cards.k.KrarksOtherThumb.class));
         cards.add(new SetCardInfo("Lobe Lobber", 153, Rarity.UNCOMMON, mage.cards.l.LobeLobber.class));
