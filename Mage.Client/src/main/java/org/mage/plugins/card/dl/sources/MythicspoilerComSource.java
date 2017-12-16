@@ -259,6 +259,7 @@ public enum MythicspoilerComSource implements CardImageSource {
         setsAliases = new HashMap<>();
         setsAliases.put("exp", "bfz");
         setsAliases.put("xln", "ixa");
+        setsAliases.put("nem", "nms");
         cardNameAliases = new HashMap<>();
         // set+wrong name from web side => correct card name
         cardNameAliases.put("MM2-otherwordlyjourney", "otherworldlyjourney");
