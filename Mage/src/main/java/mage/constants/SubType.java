@@ -178,7 +178,8 @@ public enum SubType {
     KALEESH("Kaleesh", SubTypeSet.CreatureType, true), // Star Wars
     KAVU("Kavu", SubTypeSet.CreatureType),
     KELDOR("KelDor", SubTypeSet.CreatureType, true),
-    KIRIN("Kirin", SubTypeSet.CreatureType),
+    KILLBOT("Killbot", SubTypeSet.CreatureType, true), // Unstable
+    KIRIN("Kirin", SubTypeSet.CreatureType),    
     KITHKIN("Kithkin", SubTypeSet.CreatureType),
     KNIGHT("Knight", SubTypeSet.CreatureType),
     KOBOLD("Kobold", SubTypeSet.CreatureType),
