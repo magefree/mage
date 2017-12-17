@@ -50,6 +50,7 @@ import mage.util.CardUtil;
 public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEffect {
 
     protected Effects executingEffects = new Effects();
+    private Effect otherwiseEffect;
     private Cost cost;
     private DynamicValue genericMana;
     private String chooseUseText;
@@ -59,8 +60,13 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
     }
 
     public DoUnlessTargetPlayerOrTargetsControllerPaysEffect(Effect effect, Cost cost, String chooseUseText) {
+        this(effect, null, cost, chooseUseText);
+    }
+
+    public DoUnlessTargetPlayerOrTargetsControllerPaysEffect(Effect effect, Effect otherwiseEffect, Cost cost, String chooseUseText) {
         super(Outcome.Detriment);
         this.executingEffects.add(effect);
+        this.otherwiseEffect = otherwiseEffect;
         this.cost = cost;
         this.chooseUseText = chooseUseText;
     }
@@ -74,6 +80,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
     public DoUnlessTargetPlayerOrTargetsControllerPaysEffect(final DoUnlessTargetPlayerOrTargetsControllerPaysEffect effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
+        this.otherwiseEffect = effect.otherwiseEffect;
         if (effect.cost != null) {
             this.cost = effect.cost.copy();
         }
@@ -134,6 +141,13 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
                         } else {
                             game.addEffect((ContinuousEffect) effect, source);
                         }
+                    }
+                } else if (otherwiseEffect != null) {
+                    otherwiseEffect.setTargetPointer(this.targetPointer);
+                    if (otherwiseEffect instanceof OneShotEffect) {
+                        result &= otherwiseEffect.apply(game, source);
+                    } else {
+                        game.addEffect((ContinuousEffect) otherwiseEffect, source);
                     }
                 }
                 return result;
