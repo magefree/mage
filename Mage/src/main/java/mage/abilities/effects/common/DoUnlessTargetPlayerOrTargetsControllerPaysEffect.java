@@ -96,8 +96,8 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetController = game.getPlayer(source.getFirstTarget());
-        Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
+        Player targetController = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+        Permanent targetPermanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (targetPermanent != null) {
             targetController = game.getPlayer(targetPermanent.getControllerId());
         }
