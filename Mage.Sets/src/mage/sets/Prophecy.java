@@ -86,10 +86,12 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Endbringer's Revel", 63, Rarity.UNCOMMON, mage.cards.e.EndbringersRevel.class));
         cards.add(new SetCardInfo("Entangler", 7, Rarity.UNCOMMON, mage.cards.e.Entangler.class));
         cards.add(new SetCardInfo("Excavation", 33, Rarity.UNCOMMON, mage.cards.e.Excavation.class));
+        cards.add(new SetCardInfo("Excise", 8, Rarity.COMMON, mage.cards.e.Excise.class));
         cards.add(new SetCardInfo("Fault Riders", 88, Rarity.COMMON, mage.cards.f.FaultRiders.class));
         cards.add(new SetCardInfo("Fen Stalker", 64, Rarity.COMMON, mage.cards.f.FenStalker.class));
         cards.add(new SetCardInfo("Fickle Efreet", 89, Rarity.RARE, mage.cards.f.FickleEfreet.class));
         cards.add(new SetCardInfo("Flameshot", 90, Rarity.UNCOMMON, mage.cards.f.Flameshot.class));
+        cards.add(new SetCardInfo("Flay", 65, Rarity.COMMON, mage.cards.f.Flay.class));
         cards.add(new SetCardInfo("Flowering Field", 9, Rarity.UNCOMMON, mage.cards.f.FloweringField.class));
         cards.add(new SetCardInfo("Foil", 34, Rarity.UNCOMMON, mage.cards.f.Foil.class));
         cards.add(new SetCardInfo("Forgotten Harvest", 114, Rarity.RARE, mage.cards.f.ForgottenHarvest.class));
@@ -133,7 +135,11 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Reveille Squad", 18, Rarity.UNCOMMON, mage.cards.r.ReveilleSquad.class));
         cards.add(new SetCardInfo("Rhystic Cave", 142, Rarity.UNCOMMON, mage.cards.r.RhysticCave.class));
         cards.add(new SetCardInfo("Rhystic Circle", 19, Rarity.COMMON, mage.cards.r.RhysticCircle.class));
+        cards.add(new SetCardInfo("Rhystic Deluge", 43, Rarity.COMMON, mage.cards.r.RhysticDeluge.class));
+        cards.add(new SetCardInfo("Rhystic Scrying", 44, Rarity.UNCOMMON, mage.cards.r.RhysticScrying.class));
+        cards.add(new SetCardInfo("Rhystic Shield", 20, Rarity.COMMON, mage.cards.r.RhysticShield.class));
         cards.add(new SetCardInfo("Rhystic Study", 45, Rarity.COMMON, mage.cards.r.RhysticStudy.class));
+        cards.add(new SetCardInfo("Rhystic Syphon", 76, Rarity.UNCOMMON, mage.cards.r.RhysticSyphon.class));
         cards.add(new SetCardInfo("Rhystic Tutor", 77, Rarity.RARE, mage.cards.r.RhysticTutor.class));
         cards.add(new SetCardInfo("Ribbon Snake", 46, Rarity.COMMON, mage.cards.r.RibbonSnake.class));
         cards.add(new SetCardInfo("Rib Cage Spider", 121, Rarity.COMMON, mage.cards.r.RibCageSpider.class));
@@ -156,6 +162,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Sunken Field", 51, Rarity.UNCOMMON, mage.cards.s.SunkenField.class));
         cards.add(new SetCardInfo("Sword Dancer", 25, Rarity.UNCOMMON, mage.cards.s.SwordDancer.class));
         cards.add(new SetCardInfo("Task Mage Assembly", 105, Rarity.RARE, mage.cards.t.TaskMageAssembly.class));
+        cards.add(new SetCardInfo("Thresher Beast", 128, Rarity.COMMON, mage.cards.t.ThresherBeast.class));
         cards.add(new SetCardInfo("Thrive", 129, Rarity.COMMON, mage.cards.t.Thrive.class));
         cards.add(new SetCardInfo("Trenching Steed", 26, Rarity.COMMON, mage.cards.t.TrenchingSteed.class));
         cards.add(new SetCardInfo("Troubled Healer", 27, Rarity.COMMON, mage.cards.t.TroubledHealer.class));
@@ -170,6 +177,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Whipstitched Zombie", 81, Rarity.COMMON, mage.cards.w.WhipstitchedZombie.class));
         cards.add(new SetCardInfo("Wild Might", 134, Rarity.COMMON, mage.cards.w.WildMight.class));
         cards.add(new SetCardInfo("Windscouter", 53, Rarity.UNCOMMON, mage.cards.w.Windscouter.class));
+        cards.add(new SetCardInfo("Wing Storm", 135, Rarity.UNCOMMON, mage.cards.w.WingStorm.class));
         cards.add(new SetCardInfo("Wintermoon Mesa", 143, Rarity.RARE, mage.cards.w.WintermoonMesa.class));
         cards.add(new SetCardInfo("Withdraw", 54, Rarity.COMMON, mage.cards.w.Withdraw.class));
         cards.add(new SetCardInfo("Zerapa Minotaur", 108, Rarity.COMMON, mage.cards.z.ZerapaMinotaur.class));
