@@ -106,6 +106,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Jolrael, Empress of Beasts", 115, Rarity.RARE, mage.cards.j.JolraelEmpressOfBeasts.class));
         cards.add(new SetCardInfo("Jolrael's Favor", 116, Rarity.COMMON, mage.cards.j.JolraelsFavor.class));
         cards.add(new SetCardInfo("Keldon Arsonist", 92, Rarity.UNCOMMON, mage.cards.k.KeldonArsonist.class));
+        cards.add(new SetCardInfo("Keldon Battlewagon", 139, Rarity.RARE, mage.cards.k.KeldonBattlewagon.class));
         cards.add(new SetCardInfo("Keldon Berserker", 93, Rarity.COMMON, mage.cards.k.KeldonBerserker.class));
         cards.add(new SetCardInfo("Keldon Firebombers", 94, Rarity.RARE, mage.cards.k.KeldonFirebombers.class));
         cards.add(new SetCardInfo("Latulla, Keldon Overseer", 95, Rarity.RARE, mage.cards.l.LatullaKeldonOverseer.class));
@@ -136,6 +137,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Rhystic Cave", 142, Rarity.UNCOMMON, mage.cards.r.RhysticCave.class));
         cards.add(new SetCardInfo("Rhystic Circle", 19, Rarity.COMMON, mage.cards.r.RhysticCircle.class));
         cards.add(new SetCardInfo("Rhystic Deluge", 43, Rarity.COMMON, mage.cards.r.RhysticDeluge.class));
+        cards.add(new SetCardInfo("Rhystic Lightning", 99, Rarity.COMMON, mage.cards.r.RhysticLightning.class));
         cards.add(new SetCardInfo("Rhystic Scrying", 44, Rarity.UNCOMMON, mage.cards.r.RhysticScrying.class));
         cards.add(new SetCardInfo("Rhystic Shield", 20, Rarity.COMMON, mage.cards.r.RhysticShield.class));
         cards.add(new SetCardInfo("Rhystic Study", 45, Rarity.COMMON, mage.cards.r.RhysticStudy.class));
