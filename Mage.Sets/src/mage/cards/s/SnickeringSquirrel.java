@@ -105,7 +105,7 @@ class SnickeringSquirrelEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.getControllerId().equals(event.getPlayerId());
+        return true;
     }
 
     @Override
