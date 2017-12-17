@@ -83,7 +83,7 @@ class RhysticScryingEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             boolean result = true;
             boolean doEffect = false;
-            Cost cost = new GenericManaCost(3);
+            Cost cost = new GenericManaCost(2);
             // check if any player is willing to pay
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
