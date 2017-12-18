@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -68,6 +69,9 @@ public class GoblinRockSled extends CardImpl {
         this.subtype.add(SubType.GOBLIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
 
         // Goblin Rock Sled doesn't untap during your untap step if it attacked during your last turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapIfAttackedLastTurnSourceEffect()), new AttackedLastTurnWatcher());

@@ -69,7 +69,7 @@ public class ZendikarVsEldrazi extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 38, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 39, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 40, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forked Bolt", 60, Rarity.UNCOMMON, mage.cards.f.ForkedBolt.class));
+        cards.add(new SetCardInfo("Forked Bolt", 60, Rarity.COMMON, mage.cards.f.ForkedBolt.class));
         cards.add(new SetCardInfo("Frontier Guide", 12, Rarity.UNCOMMON, mage.cards.f.FrontierGuide.class));
         cards.add(new SetCardInfo("Graypelt Hunter", 13, Rarity.COMMON, mage.cards.g.GraypeltHunter.class));
         cards.add(new SetCardInfo("Graypelt Refuge", 32, Rarity.UNCOMMON, mage.cards.g.GraypeltRefuge.class));

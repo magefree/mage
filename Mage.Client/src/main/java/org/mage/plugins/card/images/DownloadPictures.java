@@ -43,6 +43,8 @@ import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 
+    // don't forget to remove new sets from ignore.urls to download (propeties file in resources)
+
     private static DownloadPictures instance;
 
     private static final Logger logger = Logger.getLogger(DownloadPictures.class);
@@ -772,6 +774,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 // START to download
                 cardImageSource.doPause(url.getPath());
                 URLConnection httpConn = url.openConnection(p);
+                httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
                 httpConn.connect();
                 int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
 

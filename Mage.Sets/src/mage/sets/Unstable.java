@@ -27,7 +27,9 @@
  */
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -45,6 +47,37 @@ public class Unstable extends ExpansionSet {
 
     private Unstable() {
         super("Unstable", "UST", ExpansionSet.buildDate(2017, 12, 8), SetType.JOKESET);
-        cards.add(new SetCardInfo("Sword of Dungeons and Dragons", 1, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsAndDragons.class));
+
+        cards.add(new SetCardInfo("Amateur Auteur", 3, Rarity.COMMON, mage.cards.a.AmateurAuteur.class));
+        cards.add(new SetCardInfo("As Luck Would Have It", 102, Rarity.RARE, mage.cards.a.AsLuckWouldHaveIt.class));
+        cards.add(new SetCardInfo("Box of Free-Range Goblins", 77, Rarity.COMMON, mage.cards.b.BoxOfFreerangeGoblins.class));
+        cards.add(new SetCardInfo("Buzzing Whack-a-Doodle", 141, Rarity.UNCOMMON, mage.cards.b.BuzzingWhackADoodle.class));
+        cards.add(new SetCardInfo("Chittering Doom", 104, Rarity.UNCOMMON, mage.cards.c.ChitteringDoom.class));
+        cards.add(new SetCardInfo("Crow Storm", 31, Rarity.UNCOMMON, mage.cards.c.CrowStorm.class));
+        cards.add(new SetCardInfo("Curious Killbot", 145, Rarity.COMMON, mage.cards.c.CuriousKillbot.class));
+        cards.add(new SetCardInfo("Earl of Squirrel", 108, Rarity.RARE, mage.cards.e.EarlOfSquirrel.class));
+        cards.add(new SetCardInfo("Forest", 216, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
+        cards.add(new SetCardInfo("GO TO JAIL", 8, Rarity.COMMON, mage.cards.g.GOTOJAIL.class));
+        cards.add(new SetCardInfo("Garbage Elemental", 82, Rarity.UNCOMMON, mage.cards.g.GarbageElemental.class));
+        cards.add(new SetCardInfo("Ground Pounder", 110, Rarity.COMMON, mage.cards.g.GroundPounder.class));
+        cards.add(new SetCardInfo("Hammer Helper", 85, Rarity.COMMON, mage.cards.h.HammerHelper.class));
+        cards.add(new SetCardInfo("Hydradoodle", 112, Rarity.RARE, mage.cards.h.Hydradoodle.class));
+        cards.add(new SetCardInfo("Inhumaniac", 59, Rarity.UNCOMMON, mage.cards.i.Inhumaniac.class));
+        cards.add(new SetCardInfo("Island", 213, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
+        cards.add(new SetCardInfo("Krark's Other Thumb", 151, Rarity.UNCOMMON, mage.cards.k.KrarksOtherThumb.class));
+        cards.add(new SetCardInfo("Lobe Lobber", 153, Rarity.UNCOMMON, mage.cards.l.LobeLobber.class));
+        cards.add(new SetCardInfo("Mad Science Fair Project", 154, Rarity.COMMON, mage.cards.m.MadScienceFairProject.class));
+        cards.add(new SetCardInfo("Mountain", 215, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
+        cards.add(new SetCardInfo("Painiac", 91, Rarity.COMMON, mage.cards.p.Painiac.class));
+        cards.add(new SetCardInfo("Plains", 212, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
+        cards.add(new SetCardInfo("Snickering Squirrel", 68, Rarity.COMMON, mage.cards.s.SnickeringSquirrel.class));
+        cards.add(new SetCardInfo("Squirrel-Powered Scheme", 70, Rarity.UNCOMMON, mage.cards.s.SquirrelPoweredScheme.class));
+        cards.add(new SetCardInfo("Steel Squirrel", 162, Rarity.UNCOMMON, mage.cards.s.SteelSquirrel.class));
+        cards.add(new SetCardInfo("Summon the Pack", 74, Rarity.MYTHIC, mage.cards.s.SummonThePack.class));
+        cards.add(new SetCardInfo("Swamp", 214, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
+        cards.add(new SetCardInfo("Sword of Dungeons & Dragons", 1, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsAndDragons.class));
+        cards.add(new SetCardInfo("Target Minotaur", 98, Rarity.COMMON, mage.cards.t.TargetMinotaur.class));
+        cards.add(new SetCardInfo("Time Out", 48, Rarity.COMMON, mage.cards.t.TimeOut.class));
+        cards.add(new SetCardInfo("Willing Test Subject", 126, Rarity.COMMON, mage.cards.w.WillingTestSubject.class));
     }
 }

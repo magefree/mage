@@ -1062,6 +1062,7 @@
 |Generate|TOK:USG|Minion|||MinionToken|
 |Generate|TOK:USG|Saproling|||SaprolingToken|
 |Generate|TOK:UST|Dragon|||DragonTokenGold|
+|Generate|TOK:UST|StormCrow|||StormCrowToken|
 |Generate|TOK:V10|Wolf|||WolfToken|
 |Generate|TOK:V11|Faerie Rogue|||OonaQueenFaerieToken|
 |Generate|TOK:V12|Spirit|||SpiritToken|

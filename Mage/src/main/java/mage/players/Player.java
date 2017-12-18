@@ -417,6 +417,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean flipCoin(Game game, ArrayList<UUID> appliedEffects);
 
+    int rollDice(Game game, int numSides);
+
+    int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides);
+
     @Deprecated
     void discard(int amount, Ability source, Game game);
 

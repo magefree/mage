@@ -237,7 +237,7 @@ public final class CardImageUtils {
     }
 
     public static String generateFaceImagePath(String cardname, String set) {
-        return getImagesDir() + File.separator + "FACE" + File.separator + set + File.separator + prepareCardNameForFile(cardname) + File.separator + ".jpg";
+        return getImagesDir() + File.separator + "FACE" + File.separator + set + File.separator + prepareCardNameForFile(cardname) + ".jpg";
     }
 
     public static String generateTokenDescriptorImagePath(CardDownloadData card) {

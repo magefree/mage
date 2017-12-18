@@ -382,6 +382,25 @@ public final class CardUtil {
         return true;
     }
 
+
+    /**
+     * Parse card number as int (support base [123] and alternative numbers [123b]).
+     *
+     * @param cardNumber origin card number
+     * @return int
+     */
+    public static int parseCardNumberAsInt(String cardNumber){
+
+        if (cardNumber.isEmpty()){ throw new IllegalArgumentException("Card number is empty.");}
+
+        if(Character.isDigit(cardNumber.charAt(cardNumber.length() - 1)))
+        {
+            return Integer.parseInt(cardNumber);
+        }else{
+            return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
+        }
+    }
+
     /**
      * Creates and saves a (card + zoneChangeCounter) specific exileId.
      *

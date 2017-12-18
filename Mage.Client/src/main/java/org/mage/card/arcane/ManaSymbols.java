@@ -291,11 +291,8 @@ public final class ManaSymbols {
             };
             t.setTranscodingHints(transcoderHints);
             t.transcode(input, null);
-        }
-        catch (TranscoderException ex) {
-            // Requires Java 6
-            ex.printStackTrace();
-            throw new IOException("Couldn't convert " + svgFile);
+        } catch (Exception e) {
+            throw new IOException("Couldn't convert svg file: " + svgFile + " , reason: " + e.getMessage());
         }
         finally {
             cssFile.delete();
@@ -348,7 +345,7 @@ public final class ManaSymbols {
         //imagePointer[0];
     }
 
-    private static File getSymbolFileNameAsSVG(String symbol){
+    public static File getSymbolFileNameAsSVG(String symbol){
         return new File(getResourceSymbolsPath(ResourceSymbolSize.SVG) + symbol + ".svg");
     }
 
@@ -364,7 +361,7 @@ public final class ManaSymbols {
             return loadSVG(sourceFile, resizeToWidth, resizeToHeight, true);
 
         } catch (Exception e) {
-            LOGGER.error("Can't load svg symbol: " + sourceFile.getPath());
+            LOGGER.error("Can't load svg symbol: " + sourceFile.getPath() + " , reason: " + e.getMessage());
             return null;
         }
     }
@@ -724,14 +721,18 @@ public final class ManaSymbols {
         // not need to add different images (width and height do the work)
         // use best png size (generated on startup) TODO: add reload images after update
         String htmlImagesPath = getResourceSymbolsPath(ResourceSymbolSize.PNG);
+        htmlImagesPath = htmlImagesPath
+                .replace("$", "@S@"); // paths with $ will rise error, need escape that
 
         replaced = REPLACE_SYMBOLS_PATTERN.matcher(replaced).replaceAll(
                     "<img src='" + filePathToUrl(htmlImagesPath) + "$1$2" + ".png' alt='$1$2' width="
                             + symbolSize + " height=" + symbolSize + '>');
 
         // ignore data restore
-        replaced = replaced.replace("|source|", "{source}");
-        replaced = replaced.replace("|this|", "{this}");
+        replaced = replaced
+                .replace("|source|", "{source}")
+                .replace("|this|", "{this}")
+                .replace("@S@", "$");
 
         return replaced;
     }
