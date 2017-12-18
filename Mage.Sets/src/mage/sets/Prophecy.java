@@ -68,6 +68,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Blessed Wind", 4, Rarity.RARE, mage.cards.b.BlessedWind.class));
         cards.add(new SetCardInfo("Bog Elemental", 57, Rarity.RARE, mage.cards.b.BogElemental.class));
         cards.add(new SetCardInfo("Bog Glider", 58, Rarity.COMMON, mage.cards.b.BogGlider.class));
+        cards.add(new SetCardInfo("Branded Brawlers", 84, Rarity.COMMON, mage.cards.b.BrandedBrawlers.class));
         cards.add(new SetCardInfo("Calming Verse", 110, Rarity.COMMON, mage.cards.c.CalmingVerse.class));
         cards.add(new SetCardInfo("Celestial Convergence", 5, Rarity.RARE, mage.cards.c.CelestialConvergence.class));
         cards.add(new SetCardInfo("Chilling Apparition", 59, Rarity.UNCOMMON, mage.cards.c.ChillingApparition.class));
@@ -171,6 +172,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Troubled Healer", 27, Rarity.COMMON, mage.cards.t.TroubledHealer.class));
         cards.add(new SetCardInfo("Troublesome Spirit", 52, Rarity.RARE, mage.cards.t.TroublesomeSpirit.class));
         cards.add(new SetCardInfo("Verdant Field", 130, Rarity.UNCOMMON, mage.cards.v.VerdantField.class));
+        cards.add(new SetCardInfo("Veteran Brawlers", 106, Rarity.RARE, mage.cards.v.VeteranBrawlers.class));
         cards.add(new SetCardInfo("Vintara Elephant", 131, Rarity.COMMON, mage.cards.v.VintaraElephant.class));
         cards.add(new SetCardInfo("Vintara Snapper", 132, Rarity.UNCOMMON, mage.cards.v.VintaraSnapper.class));
         cards.add(new SetCardInfo("Vitalizing Wind", 133, Rarity.RARE, mage.cards.v.VitalizingWind.class));
