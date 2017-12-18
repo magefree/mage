@@ -33,6 +33,7 @@ public class VerifyCardDataTest {
         // power-toughness
         skipListCreate("PT");
         skipListAddName("PT", "Garbage Elemental"); // UST
+        skipListAddName("PT", "Infinity Elemental"); // UST
 
         // color
         skipListCreate("COLOR");
