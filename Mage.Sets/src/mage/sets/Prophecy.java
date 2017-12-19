@@ -78,6 +78,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Coffin Puppets", 60, Rarity.RARE, mage.cards.c.CoffinPuppets.class));
         cards.add(new SetCardInfo("Copper-Leaf Angel", 137, Rarity.RARE, mage.cards.c.CopperLeafAngel.class));
         cards.add(new SetCardInfo("Darba", 111, Rarity.UNCOMMON, mage.cards.d.Darba.class));
+        cards.add(new SetCardInfo("Death Charmer", 61, Rarity.COMMON, mage.cards.d.DeathCharmer.class));
         cards.add(new SetCardInfo("Denying Wind", 32, Rarity.RARE, mage.cards.d.DenyingWind.class));
         cards.add(new SetCardInfo("Despoil", 62, Rarity.COMMON, mage.cards.d.Despoil.class));
         cards.add(new SetCardInfo("Devastate", 87, Rarity.COMMON, mage.cards.d.Devastate.class));
@@ -101,6 +102,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Gulf Squid", 35, Rarity.COMMON, mage.cards.g.GulfSquid.class));
         cards.add(new SetCardInfo("Hazy Homunculus", 36, Rarity.COMMON, mage.cards.h.HazyHomunculus.class));
         cards.add(new SetCardInfo("Heightened Awareness", 37, Rarity.RARE, mage.cards.h.HeightenedAwareness.class));
+        cards.add(new SetCardInfo("Hollow Warrior", 138, Rarity.UNCOMMON, mage.cards.h.HollowWarrior.class));
         cards.add(new SetCardInfo("Infernal Genesis", 68, Rarity.RARE, mage.cards.i.InfernalGenesis.class));
         cards.add(new SetCardInfo("Inflame", 91, Rarity.COMMON, mage.cards.i.Inflame.class));
         cards.add(new SetCardInfo("Jeweled Spirit", 12, Rarity.RARE, mage.cards.j.JeweledSpirit.class));
@@ -120,6 +122,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Marsh Boa", 118, Rarity.COMMON, mage.cards.m.MarshBoa.class));
         cards.add(new SetCardInfo("Mercenary Informer", 15, Rarity.RARE, mage.cards.m.MercenaryInformer.class));
         cards.add(new SetCardInfo("Mine Bearer", 16, Rarity.COMMON, mage.cards.m.MineBearer.class));
+        cards.add(new SetCardInfo("Mirror Strike", 17, Rarity.UNCOMMON, mage.cards.m.MirrorStrike.class));
         cards.add(new SetCardInfo("Mungha Wurm", 119, Rarity.RARE, mage.cards.m.MunghaWurm.class));
         cards.add(new SetCardInfo("Nakaya Shade", 69, Rarity.UNCOMMON, mage.cards.n.NakayaShade.class));
         cards.add(new SetCardInfo("Noxious Field", 70, Rarity.UNCOMMON, mage.cards.n.NoxiousField.class));
@@ -155,6 +158,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Shrouded Serpent", 47, Rarity.RARE, mage.cards.s.ShroudedSerpent.class));
         cards.add(new SetCardInfo("Silt Crawler", 123, Rarity.COMMON, mage.cards.s.SiltCrawler.class));
         cards.add(new SetCardInfo("Snag", 124, Rarity.UNCOMMON, mage.cards.s.Snag.class));
+        cards.add(new SetCardInfo("Soul Charmer", 24, Rarity.COMMON, mage.cards.s.SoulCharmer.class));
         cards.add(new SetCardInfo("Spiketail Drake", 48, Rarity.UNCOMMON, mage.cards.s.SpiketailDrake.class));
         cards.add(new SetCardInfo("Spiketail Hatchling", 49, Rarity.COMMON, mage.cards.s.SpiketailHatchling.class));
         cards.add(new SetCardInfo("Spitting Spider", 125, Rarity.UNCOMMON, mage.cards.s.SpittingSpider.class));
