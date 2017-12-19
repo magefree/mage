@@ -1748,7 +1748,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, atCombat);
         if (!game.replaceEvent(event)) {
-            this.life -= event.getAmount();
+            // this.life -= event.getAmount();
+            this.life = game.subtractWithOverflowCheck(this.life, event.getAmount());
             if (!game.isSimulation()) {
                 game.informPlayers(this.getLogName() + " loses " + event.getAmount() + " life");
             }
@@ -1777,7 +1778,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount, false);
         if (!game.replaceEvent(event)) {
-            this.life += event.getAmount();
+            // TODO: lock life at Integer.MAX_VALUE if reached, until it's set to a different amount
+            // (https://magic.wizards.com/en/articles/archive/news/unstable-faqawaslfaqpaftidawabiajtbt-2017-12-06 - "infinite" life total stays infinite no matter how much is gained or lost)
+            // this.life += event.getAmount();
+            this.life = game.addWithOverflowCheck(this.life, event.getAmount());
             if (!game.isSimulation()) {
                 game.informPlayers(this.getLogName() + " gains " + event.getAmount() + " life");
             }
