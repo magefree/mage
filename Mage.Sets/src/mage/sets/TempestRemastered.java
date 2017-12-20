@@ -59,8 +59,8 @@ public class TempestRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Blessing", 1, Rarity.COMMON, mage.cards.a.AngelicBlessing.class));
         cards.add(new SetCardInfo("Angelic Protector", 2, Rarity.UNCOMMON, mage.cards.a.AngelicProtector.class));
         cards.add(new SetCardInfo("Anoint", 3, Rarity.COMMON, mage.cards.a.Anoint.class));
-        cards.add(new SetCardInfo("Armored Pegasus", 5, Rarity.COMMON, mage.cards.a.ArmoredPegasus.class));
         cards.add(new SetCardInfo("Armor Sliver", 4, Rarity.COMMON, mage.cards.a.ArmorSliver.class));
+        cards.add(new SetCardInfo("Armored Pegasus", 5, Rarity.COMMON, mage.cards.a.ArmoredPegasus.class));
         cards.add(new SetCardInfo("Avenging Angel", 6, Rarity.UNCOMMON, mage.cards.a.AvengingAngel.class));
         cards.add(new SetCardInfo("Bandage", 7, Rarity.COMMON, mage.cards.b.Bandage.class));
         cards.add(new SetCardInfo("Barbed Sliver", 126, Rarity.COMMON, mage.cards.b.BarbedSliver.class));
@@ -101,8 +101,8 @@ public class TempestRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Dauthi Warlord", 98, Rarity.UNCOMMON, mage.cards.d.DauthiWarlord.class));
         cards.add(new SetCardInfo("Deadshot", 129, Rarity.UNCOMMON, mage.cards.d.Deadshot.class));
         cards.add(new SetCardInfo("Death Pits of Rath", 99, Rarity.RARE, mage.cards.d.DeathPitsOfRath.class));
-        cards.add(new SetCardInfo("Death's Duet", 101, Rarity.COMMON, mage.cards.d.DeathsDuet.class));
         cards.add(new SetCardInfo("Death Stroke", 100, Rarity.COMMON, mage.cards.d.DeathStroke.class));
+        cards.add(new SetCardInfo("Death's Duet", 101, Rarity.COMMON, mage.cards.d.DeathsDuet.class));
         cards.add(new SetCardInfo("Diabolic Edict", 102, Rarity.COMMON, mage.cards.d.DiabolicEdict.class));
         cards.add(new SetCardInfo("Disenchant", 11, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Dismiss", 45, Rarity.UNCOMMON, mage.cards.d.Dismiss.class));
@@ -159,7 +159,7 @@ public class TempestRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Kor Chant", 17, Rarity.UNCOMMON, mage.cards.k.KorChant.class));
         cards.add(new SetCardInfo("Krakilin", 177, Rarity.RARE, mage.cards.k.Krakilin.class));
         cards.add(new SetCardInfo("Lab Rats", 108, Rarity.COMMON, mage.cards.l.LabRats.class));
-        cards.add(new SetCardInfo("Legacy's Allure", 57, Rarity.RARE, mage.cards.l.LegacysAllure.class));
+        cards.add(new SetCardInfo("Legacy's Allure", 56, Rarity.RARE, mage.cards.l.LegacysAllure.class));
         cards.add(new SetCardInfo("Legerdemain", 57, Rarity.UNCOMMON, mage.cards.l.Legerdemain.class));
         cards.add(new SetCardInfo("Lightning Blast", 138, Rarity.COMMON, mage.cards.l.LightningBlast.class));
         cards.add(new SetCardInfo("Living Death", 109, Rarity.MYTHIC, mage.cards.l.LivingDeath.class));
@@ -168,8 +168,8 @@ public class TempestRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Lowland Giant", 139, Rarity.COMMON, mage.cards.l.LowlandGiant.class));
         cards.add(new SetCardInfo("Mage il-Vec", 140, Rarity.UNCOMMON, mage.cards.m.MageIlVec.class));
         cards.add(new SetCardInfo("Magmasaur", 141, Rarity.RARE, mage.cards.m.Magmasaur.class));
-        cards.add(new SetCardInfo("Manabond", 179, Rarity.RARE, mage.cards.m.Manabond.class));
         cards.add(new SetCardInfo("Mana Leak", 58, Rarity.COMMON, mage.cards.m.ManaLeak.class));
+        cards.add(new SetCardInfo("Manabond", 179, Rarity.RARE, mage.cards.m.Manabond.class));
         cards.add(new SetCardInfo("Maniacal Rage", 142, Rarity.COMMON, mage.cards.m.ManiacalRage.class));
         cards.add(new SetCardInfo("Master Decoy", 18, Rarity.COMMON, mage.cards.m.MasterDecoy.class));
         cards.add(new SetCardInfo("Mawcor", 59, Rarity.RARE, mage.cards.m.Mawcor.class));
