@@ -47,13 +47,12 @@ public class WorldMagicCupQualifier extends ExpansionSet {
         super("World Magic Cup Qualifier", "WMCQ", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
-        cards.add(new SetCardInfo("Abrupt Decay", 6, Rarity.RARE, mage.cards.a.AbruptDecay.class));
-        cards.add(new SetCardInfo("Geist of Saint Traft", 2, Rarity.MYTHIC, mage.cards.g.GeistOfSaintTraft.class));
-        cards.add(new SetCardInfo("Inkmoth Nexus", 6, Rarity.SPECIAL, mage.cards.i.InkmothNexus.class));
-        cards.add(new SetCardInfo("Liliana of the Veil", 4, Rarity.MYTHIC, mage.cards.l.LilianaOfTheVeil.class));
-        cards.add(new SetCardInfo("Snapcaster Mage", 5, Rarity.RARE, mage.cards.s.SnapcasterMage.class));
-        cards.add(new SetCardInfo("Thalia, Guardian of Thraben", 3, Rarity.RARE, mage.cards.t.ThaliaGuardianOfThraben.class));
-        cards.add(new SetCardInfo("Vengevine", 1, Rarity.MYTHIC, mage.cards.v.Vengevine.class));
+        // https://mtg.gamepedia.com/World_Magic_Cup_Qualifiers
+        cards.add(new SetCardInfo("Abrupt Decay", 2016, Rarity.RARE, mage.cards.a.AbruptDecay.class));
+        cards.add(new SetCardInfo("Geist of Saint Traft", 2014, Rarity.MYTHIC, mage.cards.g.GeistOfSaintTraft.class));
+        cards.add(new SetCardInfo("Inkmoth Nexus", 2017, Rarity.SPECIAL, mage.cards.i.InkmothNexus.class));
+        cards.add(new SetCardInfo("Thalia, Guardian of Thraben", 2015, Rarity.RARE, mage.cards.t.ThaliaGuardianOfThraben.class));
+        cards.add(new SetCardInfo("Vengevine", 2013, Rarity.MYTHIC, mage.cards.v.Vengevine.class));
     }
 
 }

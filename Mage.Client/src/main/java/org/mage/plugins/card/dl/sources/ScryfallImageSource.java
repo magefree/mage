@@ -206,6 +206,7 @@ public enum ScryfallImageSource implements CardImageSource {
 //        supportedSets.add("V17");
         supportedSets.add("UST");
         supportedSets.add("RIX");
+        supportedSets.add("WMCQ");
 //        supportedSets.add("A25");
 //        supportedSets.add("DOM");
 //        supportedSets.add("M19");
@@ -283,6 +284,7 @@ public enum ScryfallImageSource implements CardImageSource {
             put("DD3EVG", "evg");
             put("MPS-AKH", "mp2");
             put("MBP", "pmei");
+            put("WMCQ", "pwcq");
         }
     };
 
