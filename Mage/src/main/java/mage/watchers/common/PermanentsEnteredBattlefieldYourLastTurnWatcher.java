@@ -8,8 +8,6 @@ package mage.watchers.common;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
@@ -25,7 +23,7 @@ public class PermanentsEnteredBattlefieldYourLastTurnWatcher extends Watcher {
 
     private final HashMap<UUID, List<Permanent>> enteringBattlefield = new HashMap<>();
     private final HashMap<UUID, List<Permanent>> enteringBattlefieldLastTurn = new HashMap<>();
-    private final Map<UUID, Integer> activePlayer = new HashMap<>();
+    private UUID lastActivePlayer = null;
 
     public PermanentsEnteredBattlefieldYourLastTurnWatcher() {
         super(PermanentsEnteredBattlefieldYourLastTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
@@ -44,8 +42,7 @@ public class PermanentsEnteredBattlefieldYourLastTurnWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        activePlayer.clear();
-        activePlayer.putIfAbsent(game.getActivePlayerId(), 0);
+        lastActivePlayer = game.getActivePlayerId();
 
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent perm = game.getPermanentEntering(event.getTargetId());
@@ -67,16 +64,14 @@ public class PermanentsEnteredBattlefieldYourLastTurnWatcher extends Watcher {
 
     @Override
     public void reset() {
-        for (Entry<UUID, List<Permanent>> entry : enteringBattlefieldLastTurn.entrySet()) {
-            for (Entry<UUID, Integer> entry2 : activePlayer.entrySet()) {
-                if (entry2.getKey() == entry.getKey()) {
-                    enteringBattlefieldLastTurn.remove(entry.getKey());
-                }
-            }
+        if (enteringBattlefieldLastTurn != null
+                && lastActivePlayer != null
+                && enteringBattlefieldLastTurn.get(lastActivePlayer) != null) {
+            enteringBattlefieldLastTurn.remove(lastActivePlayer);
         }
         enteringBattlefieldLastTurn.putAll(enteringBattlefield);
         enteringBattlefield.clear();
-        activePlayer.clear();
+        lastActivePlayer = null;
     }
 
     public List<Permanent> getPermanentsEnteringOnPlayersLastTurn(Game game, UUID playerId) {

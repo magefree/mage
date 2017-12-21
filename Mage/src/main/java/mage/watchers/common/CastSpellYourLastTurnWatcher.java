@@ -27,7 +27,6 @@
  */
 package mage.watchers.common;
 
-import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -43,7 +42,7 @@ public class CastSpellYourLastTurnWatcher extends Watcher {
 
     private final Map<UUID, Integer> amountOfSpellsCastOnPrevTurn = new HashMap<>();
     private final Map<UUID, Integer> amountOfSpellsCastOnCurrentTurn = new HashMap<>();
-    private final Map<UUID, Integer> activePlayer = new HashMap<>();
+    private UUID lastActivePlayer = null;
 
     public CastSpellYourLastTurnWatcher() {
         super(CastSpellYourLastTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
@@ -61,12 +60,10 @@ public class CastSpellYourLastTurnWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        activePlayer.clear();
-        activePlayer.putIfAbsent(game.getActivePlayerId(), 0);
+        lastActivePlayer = game.getActivePlayerId();
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             UUID playerId = event.getPlayerId();
-            UUID activePlayerId = game.getActivePlayerId();
-            if (playerId != null && activePlayerId != null && playerId == activePlayerId) {
+            if (playerId != null && lastActivePlayer != null && playerId == lastActivePlayer) {
                 amountOfSpellsCastOnCurrentTurn.putIfAbsent(playerId, 0);
                 amountOfSpellsCastOnCurrentTurn.compute(playerId, (k, a) -> a + 1);
             }
@@ -75,16 +72,15 @@ public class CastSpellYourLastTurnWatcher extends Watcher {
 
     @Override
     public void reset() {
-        for (Entry<UUID, Integer> entry : amountOfSpellsCastOnPrevTurn.entrySet()) {
-            for (Entry<UUID, Integer> entry2 : activePlayer.entrySet()) {
-                if (entry2.getKey() == entry.getKey()) {
-                    amountOfSpellsCastOnPrevTurn.remove(entry.getKey());
-                }
-            }
+        if (amountOfSpellsCastOnPrevTurn != null
+                && lastActivePlayer != null
+                && amountOfSpellsCastOnPrevTurn.get(lastActivePlayer) != null) {
+            amountOfSpellsCastOnPrevTurn.remove(lastActivePlayer);
         }
+
         amountOfSpellsCastOnPrevTurn.putAll(amountOfSpellsCastOnCurrentTurn);
         amountOfSpellsCastOnCurrentTurn.clear();
-        activePlayer.clear();
+        lastActivePlayer = null;
     }
 
     public Integer getAmountOfSpellsCastOnPlayersTurn(UUID playerId) {
