@@ -45,6 +45,8 @@ import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.designations.Designation;
+import mage.designations.DesignationType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.Graveyard;
@@ -656,7 +658,6 @@ public class PlayerStub implements Player {
         return 1;
     }
 
-
     @Override
     public void discard(int amount, Ability source, Game game) {
 
@@ -1250,6 +1251,21 @@ public class PlayerStub implements Player {
     @Override
     public void drew(Game game) {
 
+    }
+
+    @Override
+    public boolean hasDesignation(DesignationType designationName) {
+        return false;
+    }
+
+    @Override
+    public void addDesignation(Designation designation) {
+
+    }
+
+    @Override
+    public List<Designation> getDesignations() {
+        return null;
     }
 
 }

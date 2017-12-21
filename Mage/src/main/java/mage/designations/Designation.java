@@ -5,6 +5,10 @@
  */
 package mage.designations;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -14,6 +18,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.text.TextPart;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -22,11 +27,6 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -40,26 +40,34 @@ public abstract class Designation implements MageObject {
     private static ManaCostsImpl emptyCost = new ManaCostsImpl();
 
     private String name;
+    private DesignationType designationType;
     private UUID id;
     private FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
     private String expansionSetCodeForImage;
+    private final boolean unique; // can a designation be added multiple times (false) or only once to an object (true)
 
-    public Designation(String name, String expansionSetCode) {
-        this.name = name;
+    public Designation(DesignationType designationType, String expansionSetCode) {
+        this(designationType, expansionSetCode, true);
+    }
+
+    public Designation(DesignationType designationType, String expansionSetCode, boolean unique) {
+        this.name = designationType.name();
+        this.designationType = designationType;
         this.id = UUID.randomUUID();
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCodeForImage = expansionSetCode;
+        this.unique = unique;
     }
 
     public Designation(final Designation designation) {
         this.id = designation.id;
         this.name = designation.name;
+        this.designationType = designation.designationType;
         this.frameStyle = designation.frameStyle;
         this.abilites = designation.abilites.copy();
+        this.unique = designation.unique;
     }
-
-    public abstract void start(Game game, UUID controllerId);
 
     @Override
     public FrameStyle getFrameStyle() {
@@ -108,6 +116,10 @@ public abstract class Designation implements MageObject {
     @Override
     public UUID getId() {
         return this.id;
+    }
+
+    public DesignationType getDesignationType() {
+        return designationType;
     }
 
     public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
@@ -218,4 +230,38 @@ public abstract class Designation implements MageObject {
     @Override
     public void removePTCDA() {
     }
+
+    /**
+     *
+     * @param game
+     * @param controllerId
+     */
+    public void start(Game game, UUID controllerId) {
+
+    }
+
+    @Override
+    public boolean isAllCreatureTypes() {
+        return false;
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(boolean value) {
+
+    }
+
+    @Override
+    public List<TextPart> getTextParts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TextPart addTextPart(TextPart textPart) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean isUnique() {
+        return unique;
+    }
+
 }
