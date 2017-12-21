@@ -68,6 +68,7 @@ public class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Lobe Lobber", 153, Rarity.UNCOMMON, mage.cards.l.LobeLobber.class));
         cards.add(new SetCardInfo("Mad Science Fair Project", 154, Rarity.COMMON, mage.cards.m.MadScienceFairProject.class));
         cards.add(new SetCardInfo("Mountain", 215, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
+        cards.add(new SetCardInfo("Oddly Uneven", 15, Rarity.RARE, mage.cards.o.OddlyUneven.class));
         cards.add(new SetCardInfo("Painiac", 91, Rarity.COMMON, mage.cards.p.Painiac.class));
         cards.add(new SetCardInfo("Plains", 212, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Snickering Squirrel", 68, Rarity.COMMON, mage.cards.s.SnickeringSquirrel.class));
