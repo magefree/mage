@@ -85,7 +85,7 @@ public class WallOfVipers extends CardImpl {
 class WallOfVipersFilter extends FilterCreaturePermanent {
     
     public WallOfVipersFilter() {
-        super("creature it's blocking");
+        super("creature {this} is blocking");
     }
     
     public WallOfVipersFilter(final WallOfVipersFilter filter) {
