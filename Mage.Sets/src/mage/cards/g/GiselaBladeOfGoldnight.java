@@ -124,7 +124,7 @@ class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl {
                 if (event.getTargetId().equals(source.getControllerId())) {
                     preventDamage(event, source, source.getControllerId(), game);
                 } else if (game.getOpponents(source.getControllerId()).contains(event.getTargetId())) {
-                    event.setAmount(event.getAmount() * 2);
+                    event.setAmount(game.addWithOverflowCheck(event.getAmount(), event.getAmount()));
                 }
                 break;
             case DAMAGE_CREATURE:
@@ -134,7 +134,7 @@ class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl {
                     if (permanent.getControllerId().equals(source.getControllerId())) {
                         preventDamage(event, source, permanent.getId(), game);
                     } else if (game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
-                        event.setAmount(event.getAmount() * 2);
+                        event.setAmount(game.addWithOverflowCheck(event.getAmount(), event.getAmount()));
                     }
                 }
         }
