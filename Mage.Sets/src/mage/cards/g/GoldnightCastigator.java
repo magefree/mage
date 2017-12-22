@@ -118,14 +118,14 @@ class GoldnightCastigatorDoubleDamageEffect extends ReplacementEffectImpl {
         switch (event.getType()) {
             case DAMAGE_PLAYER:
                 if (event.getTargetId().equals(source.getControllerId())) {
-                    event.setAmount(event.getAmount() * 2);
+                    event.setAmount(game.addWithOverflowCheck(event.getAmount(), event.getAmount()));
                 }
                 break;
             case DAMAGE_CREATURE:
                 Permanent permanent = game.getPermanent(event.getTargetId());
                 if (permanent != null) {
                     if (permanent.getId().equals(source.getSourceId())) {
-                        event.setAmount(event.getAmount() * 2);
+                        event.setAmount(game.addWithOverflowCheck(event.getAmount(), event.getAmount()));
                     }
                 }
         }
