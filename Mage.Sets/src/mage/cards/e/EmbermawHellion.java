@@ -120,7 +120,7 @@ class EmbermawHellionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
+        event.setAmount(game.addWithOverflowCheck(event.getAmount(), 1));
         return false;
     }
 
