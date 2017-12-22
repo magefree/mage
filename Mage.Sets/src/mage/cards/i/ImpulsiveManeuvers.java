@@ -121,7 +121,7 @@ class ImpulsiveManeuversEffect extends PreventionEffectImpl {
                 DamageEvent damageEvent = (DamageEvent) event;
                 if (damageEvent.isCombatDamage()) {
                     if (wonFlip) {
-                        event.setAmount(event.getAmount() * 2);
+                        event.setAmount(game.addWithOverflowCheck(event.getAmount(), event.getAmount()));
                         this.discard();
                     } else {
                         preventDamageAction(event, source, game);
