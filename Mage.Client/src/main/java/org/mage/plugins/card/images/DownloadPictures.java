@@ -352,6 +352,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (cardImageSource.isTokenSource() && cardImageSource.isImageProvided(data.getSet(), data.getName())) {
                     numberTokenImagesAvailable++;
                     cardsToDownload.add(data);
+                }else{
+                    //logger.warn("Source do not support token (set " + data.getSet() + ", token " + data.getName() + ")");
                 }
             } else {
                 if (selectedSetCodes != null && selectedSetCodes.contains(data.getSet())) {
@@ -838,7 +840,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     // download ERROR
                     logger.warn("Image download for " + card.getName()
                         + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
-                        + '(' + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString()
+                        + " (" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString()
                     );
 
                     if (logger.isDebugEnabled()) {

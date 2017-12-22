@@ -501,6 +501,7 @@
 |Generate|TOK:E01|Soldier|||SoldierToken|
 |Generate|TOK:E01|Spirit|||SpiritWhiteToken|
 |Generate|TOK:E01|Zombie|||ZombieToken|
+|Generate|TOK:E02|Saproling|||SaprolingToken|
 |Generate|TOK:EMA|Assembly-Worker|||AssemblyWorkerToken|
 |Generate|TOK:EMA|Beast|||CarnivoreToken|
 |Generate|TOK:EMA|Carnivore||
