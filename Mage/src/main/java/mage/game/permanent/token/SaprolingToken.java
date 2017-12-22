@@ -45,7 +45,25 @@ public class SaprolingToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("10E", "ALA", "DDE", "DDH", "DDJ", "M12", "M13", "M14", "MM2", "MMA", "RTR", "C15", "MM3", "C16", "CMA"));
+        tokenImageSets.addAll(Arrays.asList(
+                "10E",
+                "ALA",
+                "DDE",
+                "DDH",
+                "DDJ",
+                "M12",
+                "M13",
+                "M14",
+                "MM2",
+                "MM3",
+                "MMA",
+                "RTR",
+                "C15",
+                "MM3",
+                "C16", // 2 different token images...
+                "CMA",
+                "VMA", // 2 different token, one with DIFFERENT stats, "Saproling Burst" create different token, see https://scryfall.com/card/tvma/12
+                "E02"));
     }
 
     public SaprolingToken() {

@@ -27,14 +27,11 @@
  */
 package mage.designations;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.BecomesMonarchTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.text.TextPart;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -50,39 +47,9 @@ import mage.target.targetpointer.FixedTarget;
 public class Monarch extends Designation {
 
     public Monarch() {
-        super("The Monarch", "CN2");
+        super(DesignationType.THE_MONARCH, "CN2");
         addAbility(new MonarchDrawTriggeredAbility());
         addAbility(new MonarchDealsCombatDamageToAPlayerTriggeredAbility());
-    }
-
-    /**
-     *
-     * @param game
-     * @param controllerId
-     */
-    @Override
-    public void start(Game game, UUID controllerId) {
-
-    }
-
-    @Override
-    public boolean isAllCreatureTypes() {
-        return false;
-    }
-
-    @Override
-    public void setIsAllCreatureTypes(boolean value) {
-
-    }
-
-    @Override
-    public List<TextPart> getTextParts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public TextPart addTextPart(TextPart textPart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 

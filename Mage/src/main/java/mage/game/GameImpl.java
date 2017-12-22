@@ -1020,6 +1020,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         watchers.add(new MorbidWatcher());
         watchers.add(new CastSpellLastTurnWatcher());
+        watchers.add(new CastSpellYourLastTurnWatcher());
         watchers.add(new PlayerLostLifeWatcher());
         watchers.add(new BlockedAttackerWatcher());
         watchers.add(new DamageDoneWatcher());

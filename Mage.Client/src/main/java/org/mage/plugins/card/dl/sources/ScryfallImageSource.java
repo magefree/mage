@@ -200,12 +200,14 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("HOU");
         supportedSets.add("C17");
         supportedSets.add("XLN");
-//        supportedSets.add("DDT");
+        supportedSets.add("DDT");
         supportedSets.add("IMA");
-//        supportedSets.add("E02");
-//        supportedSets.add("V17");
+        supportedSets.add("E02");
+        supportedSets.add("V17");
         supportedSets.add("UST");
         supportedSets.add("RIX");
+        supportedSets.add("WMCQ");
+        supportedSets.add("PPRO");
 //        supportedSets.add("A25");
 //        supportedSets.add("DOM");
 //        supportedSets.add("M19");
@@ -283,6 +285,7 @@ public enum ScryfallImageSource implements CardImageSource {
             put("DD3EVG", "evg");
             put("MPS-AKH", "mp2");
             put("MBP", "pmei");
+            put("WMCQ", "pwcq");
         }
     };
 

@@ -62,6 +62,8 @@ import static mage.constants.Zone.LIBRARY;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
+import mage.designations.Designation;
+import mage.designations.DesignationType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -199,6 +201,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected UserData userData;
     protected MatchPlayer matchPlayer;
 
+    protected List<Designation> designations = new ArrayList<>();
+
     /**
      * During some steps we can't play anything
      */
@@ -300,6 +304,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdManaCosts = player.castSourceIdManaCosts;
         this.castSourceIdCosts = player.castSourceIdCosts;
         this.payManaMode = player.payManaMode;
+
+        this.designations.addAll(player.designations);
     }
 
     @Override
@@ -362,6 +368,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdWithAlternateMana = player.getCastSourceIdWithAlternateMana();
         this.castSourceIdManaCosts = player.getCastSourceIdManaCosts();
         this.castSourceIdCosts = player.getCastSourceIdCosts();
+
+        this.designations.clear();
+        this.designations.addAll(player.getDesignations());
 
         // Don't restore!
         // this.storedBookmark
@@ -435,6 +444,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdManaCosts = null;
         this.castSourceIdCosts = null;
         this.getManaPool().init(); // needed to remove mana that not empties on step change from previous game if left
+
+        this.designations.clear();
     }
 
     /**
@@ -3624,9 +3635,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean scry(int value, Ability source,
-            Game game
-    ) {
+    public boolean scry(int value, Ability source, Game game) {
         game.informPlayers(getLogName() + " scries " + value);
         Cards cards = new CardsImpl();
         cards.addAll(getLibrary().getTopCards(game, value));
@@ -3659,4 +3668,25 @@ public abstract class PlayerImpl implements Player, Serializable {
         return "no available";
     }
 
+    @Override
+    public boolean hasDesignation(DesignationType designationName) {
+        for (Designation designation : designations) {
+            if (designation.getDesignationType().equals(designationName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void addDesignation(Designation designation) {
+        if (!designation.isUnique() || !this.hasDesignation(designation.getDesignationType())) {
+            designations.add(designation);
+        }
+    }
+
+    @Override
+    public List<Designation> getDesignations() {
+        return designations;
+    }
 }
