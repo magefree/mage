@@ -72,7 +72,7 @@ class TargetPermanentPowerPlusToughnessCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent sourcePermanent = game.getPermanent(sourceAbility.getFirstTarget());
         if (sourcePermanent != null) {
-            return sourcePermanent.getPower().getValue() + sourcePermanent.getToughness().getValue();
+            return game.addWithOverflowCheck(sourcePermanent.getPower().getValue(), sourcePermanent.getToughness().getValue());
         }
         return 0;
     }
