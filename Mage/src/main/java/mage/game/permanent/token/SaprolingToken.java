@@ -44,7 +44,6 @@ public class SaprolingToken extends Token {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
-    /* do not used, but why it was added?
     static {
         tokenImageSets.addAll(Arrays.asList(
                 "10E",
@@ -65,7 +64,7 @@ public class SaprolingToken extends Token {
                 "CMA",
                 "VMA", // 2 different token, one with DIFFERENT stats, "Saproling Burst" create different token, see https://scryfall.com/card/tvma/12
                 "E02"));
-    }*/
+    }
 
     public SaprolingToken() {
         this(null, 0);
@@ -77,7 +76,7 @@ public class SaprolingToken extends Token {
 
     public SaprolingToken(String setCode, int tokenType) {
         super("Saproling", "1/1 green Saproling creature token");
-        //availableImageSetCodes = tokenImageSets;
+        availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1);
