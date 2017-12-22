@@ -41,13 +41,15 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.permanent.BlockedByIdPredicate;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.combat.CombatGroup;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BursegSardaukar & L_J
+ * @author L_J
  */
 public class WallOfVipers extends CardImpl {
 
@@ -62,11 +64,9 @@ public class WallOfVipers extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {3}: Destroy Wall of Vipers and target creature it's blocking. Any player may activate this ability.
-        FilterAttackingCreature filter = new FilterAttackingCreature("creature it's blocking");
-        filter.add(new BlockedByIdPredicate(this.getId()));
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroySourceEffect(), new ManaCostsImpl("{3}"));
         ability.addEffect(new DestroyTargetEffect(" and target creature it's blocking"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(new WallOfVipersFilter()));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);
@@ -80,4 +80,34 @@ public class WallOfVipers extends CardImpl {
     public WallOfVipers copy() {
         return new WallOfVipers(this);
     }
+}
+
+class WallOfVipersFilter extends FilterCreaturePermanent {
+    
+    public WallOfVipersFilter() {
+        super("creature it's blocking");
+    }
+    
+    public WallOfVipersFilter(final WallOfVipersFilter filter) {
+        super(filter);
+    }
+    
+    @Override
+    public WallOfVipersFilter copy() {
+        return new WallOfVipersFilter(this);
+    }
+    
+    @Override
+    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
+        if (super.match(permanent, sourceId, playerId, game)) {
+            SubType subtype = (SubType) game.getState().getValue(sourceId + "_type");
+            for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+                if (combatGroup.getBlockers().contains(sourceId) && combatGroup.getAttackers().contains(permanent.getId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
 }
