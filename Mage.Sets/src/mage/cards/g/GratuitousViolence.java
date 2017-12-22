@@ -106,7 +106,7 @@ class GratuitousViolenceReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(2 * event.getAmount());
+        event.setAmount(game.addWithOverflowCheck(event.getAmount(), event.getAmount()));
         return false;
     }
 }
