@@ -91,7 +91,7 @@ class PhthisisEffect extends OneShotEffect {
         if (creature != null) {
             Player controller = game.getPlayer(creature.getControllerId());
             if (controller != null) {
-                int lifeLoss = creature.getPower().getValue() + creature.getToughness().getValue();
+                int lifeLoss = game.addWithOverflowCheck(creature.getPower().getValue(), creature.getToughness().getValue());
                 creature.destroy(source.getSourceId(), game, false);
                 // the life loss happens also if the creature is indestructible or regenerated (legal targets)
                 controller.loseLife(lifeLoss, game, false);
