@@ -112,7 +112,7 @@ class CurseOfBloodlettingEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() * 2);
+        event.setAmount(game.addWithOverflowCheck(event.getAmount(), event.getAmount()));
         return false;
     }
 
