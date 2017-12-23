@@ -101,7 +101,7 @@ public class OneOrBothTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPowerToughness(playerA, "Silvercoat Lion", 3, 3);
         assertPowerToughness(playerB, "Pillarfield Ox", 1, 3);
+        assertPowerToughness(playerA, "Silvercoat Lion", 3, 3);
     }
 }

@@ -72,6 +72,7 @@ public enum SubType {
     BITH("Bith", SubTypeSet.CreatureType, true), // Star Wars
     BLINKMOTH("Blinkmoth", SubTypeSet.CreatureType),
     BOAR("Boar", SubTypeSet.CreatureType),
+    BRAINIAC("Brainiac", SubTypeSet.CreatureType, true), // Unstable
     BRINGER("Bringer", SubTypeSet.CreatureType),
     BRUSHWAGG("Brushwagg", SubTypeSet.CreatureType),
     // C
@@ -177,6 +178,7 @@ public enum SubType {
     KALEESH("Kaleesh", SubTypeSet.CreatureType, true), // Star Wars
     KAVU("Kavu", SubTypeSet.CreatureType),
     KELDOR("KelDor", SubTypeSet.CreatureType, true),
+    KILLBOT("Killbot", SubTypeSet.CreatureType, true), // Unstable
     KIRIN("Kirin", SubTypeSet.CreatureType),
     KITHKIN("Kithkin", SubTypeSet.CreatureType),
     KNIGHT("Knight", SubTypeSet.CreatureType),
@@ -268,6 +270,7 @@ public enum SubType {
     SAPROLING("Saproling", SubTypeSet.CreatureType),
     SATYR("Satyr", SubTypeSet.CreatureType),
     SCARECROW("Scarecrow", SubTypeSet.CreatureType),
+    SCIENTIST("Scientist", SubTypeSet.CreatureType, true), // Unstable
     SCION("Scion", SubTypeSet.CreatureType),
     SCORPION("Scorpion", SubTypeSet.CreatureType),
     SCOUT("Scout", SubTypeSet.CreatureType),
@@ -325,6 +328,7 @@ public enum SubType {
     VAMPIRE("Vampire", SubTypeSet.CreatureType),
     VEDALKEN("Vedalken", SubTypeSet.CreatureType),
     VIASHINO("Viashino", SubTypeSet.CreatureType),
+    VILLAIN("Villain", SubTypeSet.CreatureType, true), // Unstable
     VOLVER("Volver", SubTypeSet.CreatureType),
     //W
     WALL("Wall", SubTypeSet.CreatureType),
@@ -349,6 +353,7 @@ public enum SubType {
     ZUBERA("Zubera", SubTypeSet.CreatureType),
     // Planeswalker
     AJANI("Ajani", SubTypeSet.PlaneswalkerType),
+    ANGRATH("Angrath", SubTypeSet.PlaneswalkerType),
     ARLINN("Arlinn", SubTypeSet.PlaneswalkerType),
     ASHIOK("Ashiok", SubTypeSet.PlaneswalkerType),
     AURRA("Aurra", SubTypeSet.PlaneswalkerType, true), // Star Wars

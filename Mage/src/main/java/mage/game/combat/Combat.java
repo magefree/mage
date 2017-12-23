@@ -578,6 +578,9 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @param game
      */
     private void retrieveMustBlockAttackerRequirements(Player attackingPlayer, Game game) {
+        if (attackingPlayer == null) {
+            return;
+        }
         if (!game.getContinuousEffects().existRequirementEffects()) {
             return;
         }

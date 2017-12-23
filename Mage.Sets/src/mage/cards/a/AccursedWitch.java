@@ -37,10 +37,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.i.InfectiousCurse;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.i.InfectiousCurse;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -106,6 +106,7 @@ class AccursedWitchReturnTransformedEffect extends OneShotEffect {
                 //note: should check for null after game.getCard
                 Card card = game.getCard(source.getSourceId());
                 if (card != null) {
+                    card.removeFromZone(game, Zone.GRAVEYARD, source.getSourceId());
                     card.putOntoBattlefield(game, Zone.BATTLEFIELD, source.getSourceId(), source.getControllerId(), false);
                 }
             }

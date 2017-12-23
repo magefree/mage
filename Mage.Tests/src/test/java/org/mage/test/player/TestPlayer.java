@@ -49,6 +49,8 @@ import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.designations.Designation;
+import mage.designations.DesignationType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -1826,6 +1828,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public int rollDice(Game game, int numSides) {
+        return computerPlayer.rollDice(game, numSides);
+    }
+
+    @Override
+    public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
+        return computerPlayer.rollDice(game, appliedEffects, numSides);
+    }
+
+    @Override
     public List<Permanent> getAvailableAttackers(Game game) {
         return computerPlayer.getAvailableAttackers(game);
     }
@@ -2288,6 +2300,21 @@ public class TestPlayer implements Player {
     @Override
     public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
         return computerPlayer.moveCards(cards, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
+    }
+
+    @Override
+    public boolean hasDesignation(DesignationType designationName) {
+        return computerPlayer.hasDesignation(designationName);
+    }
+
+    @Override
+    public void addDesignation(Designation designation) {
+        computerPlayer.addDesignation(designation);
+    }
+
+    @Override
+    public List<Designation> getDesignations() {
+        return computerPlayer.getDesignations();
     }
 
     public void setAIPlayer(boolean AIPlayer) {

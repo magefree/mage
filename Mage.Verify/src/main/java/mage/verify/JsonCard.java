@@ -22,7 +22,6 @@ class JsonCard {
     public boolean starter; // only available in boxed sets and not in boosters
     public int hand; // vanguard
     public int life; // vanguard
-    public String mciNumber;
 
     // only available in AllSets.json
     public String artist;
@@ -33,6 +32,7 @@ class JsonCard {
     public boolean reserved;
     public int[] variations;
     public String number;
+    public String mciNumber;
     public String releaseDate; // promos
     public String border;
     public String watermark;

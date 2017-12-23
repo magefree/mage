@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
 public class MassMutiny extends CardImpl {
 
     public MassMutiny(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.
         this.getSpellAbility().addEffect(new MassMutinyEffect());
@@ -65,10 +65,10 @@ public class MassMutiny extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
             for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    ability.getTargets().clear();
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature from opponent " + opponent.getName());
                     filter.add(new ControllerIdPredicate(opponentId));
                     TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);

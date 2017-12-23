@@ -55,9 +55,15 @@ public class RivalsOfIxalan extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
 
+        cards.add(new SetCardInfo("Angrath's Ambusher", 202, Rarity.UNCOMMON, mage.cards.a.AngrathsAmbusher.class));
+        cards.add(new SetCardInfo("Angrath, Minotaur Pirate", 201, Rarity.MYTHIC, mage.cards.a.AngrathMinotaurPirate.class));
+        cards.add(new SetCardInfo("Brass's Bounty", 94, Rarity.RARE, mage.cards.b.BrasssBounty.class));
+        cards.add(new SetCardInfo("Cinder Barrens", 205, Rarity.RARE, mage.cards.c.CinderBarrens.class));
+        cards.add(new SetCardInfo("Evolving Wilds", 186, Rarity.RARE, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Ghalta, Primal Hunger", 130, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
         cards.add(new SetCardInfo("Silvergill Adept", 53, Rarity.UNCOMMON, mage.cards.s.SilvergillAdept.class));
         cards.add(new SetCardInfo("Storm the Vault", 173, Rarity.RARE, mage.cards.s.StormTheVault.class));
         cards.add(new SetCardInfo("Vault of Catlacan", 173, Rarity.RARE, mage.cards.v.VaultOfCatlacan.class));
+        cards.add(new SetCardInfo("Vona's Hunger", 90, Rarity.RARE, mage.cards.v.VonasHunger.class));
     }
 }

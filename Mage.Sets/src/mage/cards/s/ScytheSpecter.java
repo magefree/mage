@@ -129,7 +129,8 @@ class ScytheSpecterEffect extends OneShotEffect {
             }
 
             for (UUID playerId : game.getOpponents(controller.getId())) {//lose life equal to CMC
-                if (cardDiscarded.get(playerId).getConvertedManaCost() == highestCMC) {
+                Card card = cardDiscarded.get(playerId);
+                if ((card != null) && (card.getConvertedManaCost() == highestCMC)) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null
                             && discardedCheck.get(playerId) == 1) {//check that card was discarded
