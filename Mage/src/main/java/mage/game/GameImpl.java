@@ -3000,26 +3000,4 @@ public abstract class GameImpl implements Game, Serializable {
             fireEvent(new GameEvent(GameEvent.EventType.BECOMES_MONARCH, monarchId, source == null ? null : source.getSourceId(), monarchId));
         }
     }
-
-    @Override
-    public int addWithOverflowCheck(int base, int increment) {
-        long result = ((long) base) + increment;
-        if (result > Integer.MAX_VALUE) {
-             return Integer.MAX_VALUE;
-        } else if (result < Integer.MIN_VALUE) {
-             return Integer.MIN_VALUE;
-        }
-        return base + increment;
-    }
-
-    @Override
-    public int subtractWithOverflowCheck(int base, int decrement) {
-        long result = ((long) base) - decrement;
-        if (result > Integer.MAX_VALUE) {
-             return Integer.MAX_VALUE;
-        } else if (result < Integer.MIN_VALUE) {
-             return Integer.MIN_VALUE;
-        }
-        return base - decrement;
-    }
 }
