@@ -45,6 +45,7 @@ import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author nantuko
@@ -126,7 +127,7 @@ class InquisitorsFlailEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(game.addWithOverflowCheck(event.getAmount(), event.getAmount()));
+        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));
         return false;
     }
 
