@@ -46,6 +46,8 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -60,6 +62,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class TheBigIdea extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.BRAINIAC, "Brainiac creatures");
+
+    static {
+        filter.add(Predicates.not(new TappedPredicate()));
+    }
 
     public TheBigIdea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
@@ -124,7 +130,7 @@ class TheBigIdeaReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             discard();
             int amount = controller.rollDice(game, 6);
-            event.setAmount(event.getAmount() + amount);            
+            event.setAmount(event.getAmount() + amount);
             return true;
         }
         return false;
