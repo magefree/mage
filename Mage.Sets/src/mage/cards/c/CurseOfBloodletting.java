@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -39,8 +40,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  *
@@ -112,7 +112,7 @@ class CurseOfBloodlettingEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(game.addWithOverflowCheck(event.getAmount(), event.getAmount()));
+        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));
         return false;
     }
 
