@@ -128,7 +128,7 @@ class PersonalIncarnationLoseHalfLifeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getOwnerId(source.getSourceId()));
         if (player != null) {
-            int amount = (player.getLife() + 1) / 2;
+            Integer amount = (int) Math.ceil(player.getLife() / 2f);
             if (amount > 0) {
                 player.loseLife(amount, game, false);
                 return true;

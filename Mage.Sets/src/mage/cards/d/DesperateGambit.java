@@ -49,6 +49,7 @@ import mage.filter.FilterObject;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.players.Player;
 import mage.target.TargetSource;
+import mage.util.CardUtil;
 
 /**
  *
@@ -129,7 +130,7 @@ class DesperateGambitEffect extends PreventionEffectImpl {
         if (controller != null && object != null) {
             if (super.applies(event, source, game) && event instanceof DamageEvent && event.getAmount() > 0) {
                 if (wonFlip) {
-                    event.setAmount(event.getAmount() * 2);
+                    event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));
                     this.discard();
                 } else {
                     preventDamageAction(event, source, game);

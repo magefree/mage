@@ -44,6 +44,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -115,13 +116,13 @@ class DictateOfTheTwinGodsEffect extends ReplacementEffectImpl {
         if (damageEvent.getType() == EventType.DAMAGE_PLAYER) {
             Player targetPlayer = game.getPlayer(event.getTargetId());
             if (targetPlayer != null) {
-                targetPlayer.damage(damageEvent.getAmount() * 2, damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
+                targetPlayer.damage(CardUtil.addWithOverflowCheck(damageEvent.getAmount(), damageEvent.getAmount()), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
                 return true;
             }
         } else {
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
             if (targetPermanent != null) {
-                targetPermanent.damage(damageEvent.getAmount() * 2, damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
+                targetPermanent.damage(CardUtil.addWithOverflowCheck(damageEvent.getAmount(), damageEvent.getAmount()), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
                 return true;
             }
         }

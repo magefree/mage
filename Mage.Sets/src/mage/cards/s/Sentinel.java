@@ -51,6 +51,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -105,7 +106,7 @@ class SentinelEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetPermanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
         if (controller != null && targetPermanent != null) {
-            int newToughness = targetPermanent.getPower().getValue() + 1;
+            int newToughness = CardUtil.addWithOverflowCheck(targetPermanent.getPower().getValue(), 1);
             game.addEffect(new SetToughnessSourceEffect(new StaticValue(newToughness), Duration.Custom, SubLayer.SetPT_7b), source);
             return true;
         }

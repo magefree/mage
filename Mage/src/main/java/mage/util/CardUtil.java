@@ -509,4 +509,24 @@ public final class CardUtil {
         }
     }
 
+    public static int addWithOverflowCheck(int base, int increment) {
+        long result = ((long) base) + increment;
+        if (result > Integer.MAX_VALUE) {
+             return Integer.MAX_VALUE;
+        } else if (result < Integer.MIN_VALUE) {
+             return Integer.MIN_VALUE;
+        }
+        return base + increment;
+    }
+
+    public static int subtractWithOverflowCheck(int base, int decrement) {
+        long result = ((long) base) - decrement;
+        if (result > Integer.MAX_VALUE) {
+             return Integer.MAX_VALUE;
+        } else if (result < Integer.MIN_VALUE) {
+             return Integer.MIN_VALUE;
+        }
+        return base - decrement;
+    }
+
 }
