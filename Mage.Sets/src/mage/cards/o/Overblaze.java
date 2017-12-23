@@ -27,6 +27,7 @@
  */
 package mage.cards.o;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
@@ -39,8 +40,7 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  *
@@ -104,7 +104,7 @@ class FireServantEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(game.addWithOverflowCheck(event.getAmount(), event.getAmount()));
+        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));
         return false;
     }
 
