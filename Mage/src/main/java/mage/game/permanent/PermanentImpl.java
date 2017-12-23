@@ -56,6 +56,7 @@ import mage.game.permanent.token.SquirrelToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 
@@ -888,7 +889,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     }
                 } else {
                     // this.damage += actualDamage;
-                    this.damage = game.addWithOverflowCheck(this.damage, actualDamage);
+                    this.damage = CardUtil.addWithOverflowCheck(this.damage, actualDamage);
                 }
                 game.fireEvent(new DamagedCreatureEvent(objectId, sourceId, controllerId, actualDamage, combat));
                 return actualDamage;
