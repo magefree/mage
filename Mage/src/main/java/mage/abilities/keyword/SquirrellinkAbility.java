@@ -56,7 +56,7 @@ public class SquirrellinkAbility extends StaticAbility implements MageSingleton 
 
     @Override
     public String getRule() {
-        return "Squirrellink <i>(Damage dealt by this creature also causes you to create that many 1/1/ green Squirrel creature tokens.)</i>";
+        return "Squirrellink <i>(Damage dealt by this creature also causes you to create that many 1/1 green Squirrel creature tokens.)</i>";
     }
 
     @Override
