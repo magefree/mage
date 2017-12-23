@@ -429,17 +429,41 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
+    private boolean isChrismasTime(){
+        // from december 15 to january 15
+        Calendar cal = Calendar.getInstance();
+        int currentYear =  cal.get(Calendar.YEAR);
+        Date currentTime = cal.getTime();
+
+        Date chrisFrom = new GregorianCalendar(currentYear, Calendar.DECEMBER, 15).getTime();
+        Date chrisTo = new GregorianCalendar(currentYear + 1, Calendar.JANUARY, 15 + 1).getTime();
+
+        return currentTime.after(chrisFrom) && currentTime.before(chrisTo);
+    }
+
     private void addMageLabel() {
         if (liteMode || grayMode) {
             return;
         }
-        String filename = "/label-xmage.png";
+
+        String filename;
+        float ratio;
+        if (isChrismasTime()){
+            // chrismass logo
+            LOGGER.info("Yo Ho Ho, Merry Christmas and a Happy New Year");
+            filename = "/label-xmage-christmas.png";
+            ratio = 539.0f / 318.0f;
+        }else{
+            // standard logo
+            filename = "/label-xmage.png";
+            ratio = 509.0f / 288.0f;
+        }
+
         try {
             InputStream is = this.getClass().getResourceAsStream(filename);
-
-            float ratio = 1179.0f / 678.0f;
-            titleRectangle = new Rectangle(540, (int) (640 / ratio));
             if (is != null) {
+                titleRectangle = new Rectangle(540, (int) (640 / ratio));
+
                 BufferedImage image = ImageIO.read(is);
                 //ImageIcon resized = new ImageIcon(image.getScaledInstance(titleRectangle.width, titleRectangle.height, java.awt.Image.SCALE_SMOOTH));
                 title = new JLabel();
