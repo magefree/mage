@@ -45,6 +45,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -118,14 +119,14 @@ class GoldnightCastigatorDoubleDamageEffect extends ReplacementEffectImpl {
         switch (event.getType()) {
             case DAMAGE_PLAYER:
                 if (event.getTargetId().equals(source.getControllerId())) {
-                    event.setAmount(game.addWithOverflowCheck(event.getAmount(), event.getAmount()));
+                    event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));
                 }
                 break;
             case DAMAGE_CREATURE:
                 Permanent permanent = game.getPermanent(event.getTargetId());
                 if (permanent != null) {
                     if (permanent.getId().equals(source.getSourceId())) {
-                        event.setAmount(game.addWithOverflowCheck(event.getAmount(), event.getAmount()));
+                        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));
                     }
                 }
         }
