@@ -38,6 +38,7 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -72,7 +73,7 @@ class TargetPermanentPowerPlusToughnessCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent sourcePermanent = game.getPermanent(sourceAbility.getFirstTarget());
         if (sourcePermanent != null) {
-            return game.addWithOverflowCheck(sourcePermanent.getPower().getValue(), sourcePermanent.getToughness().getValue());
+            return CardUtil.addWithOverflowCheck(sourcePermanent.getPower().getValue(), sourcePermanent.getToughness().getValue());
         }
         return 0;
     }
