@@ -39,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -105,7 +106,7 @@ class PyromancersSwathReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(game.addWithOverflowCheck(event.getAmount(), 2));
+        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), 2));
         return false;
     }
 
