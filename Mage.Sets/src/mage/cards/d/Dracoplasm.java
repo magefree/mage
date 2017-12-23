@@ -50,6 +50,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -131,8 +132,8 @@ class DracoplasmEffect extends ReplacementEffectImpl {
                 for (UUID targetId : target.getTargets()) {
                     Permanent targetCreature = game.getPermanent(targetId);
                     if (targetCreature != null && targetCreature.sacrifice(source.getSourceId(), game)) {
-                        power = game.addWithOverflowCheck(power, targetCreature.getPower().getValue());
-                        toughness = game.addWithOverflowCheck(toughness, targetCreature.getToughness().getValue());
+                        power = CardUtil.addWithOverflowCheck(power, targetCreature.getPower().getValue());
+                        toughness = CardUtil.addWithOverflowCheck(toughness, targetCreature.getToughness().getValue());
                     }
                 }
                 ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b);
