@@ -61,6 +61,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Anaba Ancestor", 86, Rarity.COMMON, mage.cards.a.AnabaAncestor.class));
         cards.add(new SetCardInfo("Anaba Spirit Crafter", 87, Rarity.COMMON, mage.cards.a.AnabaSpiritCrafter.class));
         cards.add(new SetCardInfo("Angus Mackenzie", 141, Rarity.RARE, mage.cards.a.AngusMackenzie.class));
+        cards.add(new SetCardInfo("Arboria", 113, Rarity.RARE, mage.cards.a.Arboria.class));
         cards.add(new SetCardInfo("Arcades Sabboth", 142, Rarity.RARE, mage.cards.a.ArcadesSabboth.class));
         cards.add(new SetCardInfo("Arena of the Ancients", 188, Rarity.RARE, mage.cards.a.ArenaOfTheAncients.class));
         cards.add(new SetCardInfo("Ashes to Ashes", 58, Rarity.UNCOMMON, mage.cards.a.AshesToAshes.class));

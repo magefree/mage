@@ -199,12 +199,12 @@ public enum MagicCardsImageSource implements CardImageSource {
             add("E01");
             add("HOU");
             add("C17");
-//        add("XLN");
-//        add("DDT");
-//        add("IMA");
-//        add("E02");
-//        add("V17");
-//        add("UST");
+            add("XLN");
+            add("DDT");
+            add("IMA");
+            add("E02");
+            add("V17");
+            add("UST");
 //        add("RIX");
 //        add("A25");
 //        add("DOM");

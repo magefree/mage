@@ -258,10 +258,10 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("HOU");
         supportedSets.add("C17");
         supportedSets.add("XLN");
-//        supportedSets.add("DDT"); // Duel Decks: Merfolk vs. Goblins
-//        supportedSets.add("IMA"); // Iconic Msters
-//        supportedSets.add("E02"); // Explorers of Ixalan
-//        supportedSets.add("V17"); // From the Vault: Transform
+        supportedSets.add("DDT"); // Duel Decks: Merfolk vs. Goblins
+        supportedSets.add("IMA"); // Iconic Msters
+        supportedSets.add("E02"); // Explorers of Ixalan
+        supportedSets.add("V17"); // From the Vault: Transform
 //        supportedSets.add("UST"); // Unstable
 //        supportedSets.add("RIX"); // Rivals of Ixalan
 //        supportedSets.add("A25"); // Masters 25

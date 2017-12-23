@@ -220,9 +220,10 @@ public class GathererSets implements Iterable<DownloadJob> {
                 continue; // can't do other checks
             }
 
-            // 2. missing rarity icon:
-            // WARNING, need too much time (60+ secs), only for debug mode
             if (logger.isDebugEnabled()) {
+                // 2. missing rarity icon:
+                // WARNING, need too much time (60+ secs), only for debug mode
+                ///*
                 if ((set.getCardsByRarity(Rarity.COMMON).size() > 0) && !res.haveCommon) {
                     logger.error(String.format("Symbols: set have common cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
                 }
@@ -234,6 +235,29 @@ public class GathererSets implements Iterable<DownloadJob> {
                 }
                 if ((set.getCardsByRarity(Rarity.MYTHIC).size() > 0) && !res.haveMyth) {
                     logger.error(String.format("Symbols: set have mythic cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
+                }
+                //*/
+
+                // 3. info: sets with alternative numbers
+                for(ExpansionSet.SetCardInfo card: set.getSetCardInfo()){
+                    if (String.valueOf(card.getCardNumberAsInt()).length() != card.getCardNumber().length()){
+                        logger.info(String.format("Symbols: set have alternative card but do not config to it: %s (%s)", set.getCode(), set.getName()));
+                        break;
+                    }
+                }
+
+                // 4. info: sets with missing cards for boosters (todo: what about +20 number for alternative land arts?)
+                if (set.getMaxCardNumberInBooster() != Integer.MAX_VALUE)
+                {
+                    for(ExpansionSet.SetCardInfo card: set.getSetCardInfo()){
+                        if (card.getCardNumberAsInt() > set.getMaxCardNumberInBooster()){
+                            if (card.getRarity() == Rarity.LAND) {
+                                logger.info(String.format("Symbols: set's booster have land above max card number: %s (%s), %s - %s", set.getCode(), set.getName(), card.getCardNumber(), card.getName()));
+                            }else {
+                                logger.info(String.format("Symbols: set's booster missing nonland card:: %s (%s), %s - %s", set.getCode(), set.getName(), card.getCardNumber(), card.getName()));
+                            }
+                        }
+                    }
                 }
             }
         }

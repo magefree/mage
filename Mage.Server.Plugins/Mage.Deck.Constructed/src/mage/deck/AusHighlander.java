@@ -114,7 +114,39 @@ public class AusHighlander extends Constructed {
         int totalPoints = 0;
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             String cn = entry.getKey();
-
+            if (cn.equals("Ancestral Recall")
+                    || cn.equals("Black Lotus")
+                    || cn.equals("Time Vault")) {
+                totalPoints += 4;
+                invalid.put(cn, "4 points");
+            }
+            if (cn.equals("Demonic Tutor")
+                    || cn.equals("Imperial Seal")
+                    || cn.equals("Mox Emerald")
+                    || cn.equals("Mox Jet")
+                    || cn.equals("Mox Pearl")
+                    || cn.equals("Mox Ruby")
+                    || cn.equals("Sol Ring")
+                    || cn.equals("Time Walk")
+                    || cn.equals("Tinker")
+                    || cn.equals("Vampiric Tutor")
+                    || cn.equals("Yawgmoth's Will")
+                    || cn.equals("Mox Sapphire.")) {
+                totalPoints += 3;
+                invalid.put(cn, "3 points");
+            }
+            if (cn.equals("Channel")
+                    || cn.equals("Dig Through Time")
+                    || cn.equals("Library of Alexandria")
+                    || cn.equals("Mana Crypt")
+                    || cn.equals("Mystical Tutor")
+                    || cn.equals("Protean Hulk")
+                    || cn.equals("Skullclamp")
+                    || cn.equals("Strip Mine")
+                    || cn.equals("Tolarian Academy.")) {
+                totalPoints += 2;
+                invalid.put(cn, "2 points");
+            }
             if (cn.equals("Back to Basics")
                     || cn.equals("Balance")
                     || cn.equals("Birthing Pod")
@@ -139,8 +171,8 @@ public class AusHighlander extends Constructed {
                     || cn.equals("Natural Order")
                     || cn.equals("Oath of Druids")
                     || cn.equals("Personal Tutor")
+                    || cn.equals("Sensei's Divining Top")
                     || cn.equals("Snapcaster Mage")
-                    || cn.equals("Steelshaper's Gift")
                     || cn.equals("Stoneforge Mystic")
                     || cn.equals("Survival of the Fittest")
                     || cn.equals("Tainted Pact")
@@ -151,50 +183,15 @@ public class AusHighlander extends Constructed {
                     || cn.equals("Umezawa's Jitte")
                     || cn.equals("Wasteland")
                     || cn.equals("Wheel of Fortune")
-                    || cn.equals("Worldly Tutor")
-                    || cn.equals("Yawgmoth's Bargain")) {
+                    || cn.equals("Yawgmoth's Bargain")
+                    || cn.equals("Worldly Tutor")) {
                 totalPoints += 1;
                 invalid.put(cn, "1 point");
-            }
-
-            if (cn.equals("Channel")
-                    || cn.equals("Dig Through Time")
-                    || cn.equals("Library of Alexandria")
-                    || cn.equals("Mana Crypt")
-                    || cn.equals("Mox Emerald")
-                    || cn.equals("Mox Jet")
-                    || cn.equals("Mox Pearl")
-                    || cn.equals("Mox Ruby")
-                    || cn.equals("Mox Sapphire")
-                    || cn.equals("Mystical Tutor")
-                    || cn.equals("Protean Hulk")
-                    || cn.equals("Skullclamp")
-                    || cn.equals("Strip Mine")
-                    || cn.equals("Tolarian Academy")) {
-                totalPoints += 2;
-                invalid.put(cn, "2 points");
-            }
-
-            if (cn.equals("Demonic Tutor")
-                    || cn.equals("Imperial Seal")
-                    || cn.equals("Sol Ring")
-                    || cn.equals("Time Walk")
-                    || cn.equals("Tinker")
-                    || cn.equals("Vampiric Tutor")
-                    || cn.equals("Yawgmoth's Will")) {
-                totalPoints += 3;
-                invalid.put(cn, "3 points");
-            }
-
-            if (cn.equals("Ancestral Recall")
-                    || cn.equals("Black Lotus")
-                    || cn.equals("Time Vault")) {
-                totalPoints += 4;
-                invalid.put(cn, "4 points");
             }
         }
         if (totalPoints > 7) {
             invalid.put("Total points too high", "Your calculated point total was " + totalPoints);
+            invalid.put("Only you can see this!", "Your opponents will not be able to see this message or what cards are in your deck!");
             valid = false;
         }
         return valid;

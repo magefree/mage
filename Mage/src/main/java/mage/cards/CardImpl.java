@@ -594,6 +594,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 } else if (game.getPhase() == null) {
                     // E.g. Commander of commander game
                     removed = true;
+                } else {
+                    // Unstable - Summon the Pack
+                    removed = true;
                 }
                 break;
             case BATTLEFIELD: // for sacrificing permanents or putting to library
