@@ -466,8 +466,4 @@ public interface Game extends MageItem, Serializable {
     UUID getMonarchId();
 
     void setMonarchId(Ability source, UUID monarchId);
-
-    int addWithOverflowCheck(int base, int increment);
-
-    int subtractWithOverflowCheck(int base, int decrement);
 }
