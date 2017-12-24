@@ -33,6 +33,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -100,6 +101,12 @@ class LastRitesEffect extends OneShotEffect {
             controller.chooseTarget(outcome, cardsInHand, target, source, game);
             int discardCount = target.getTargets().size();
             if (discardCount > 0) {
+                for (UUID cardId : target.getTargets()) {
+                    Card card = game.getCard(cardId);
+                    if (card != null) {
+                        controller.discard(card, source, game);
+                    }
+                }
                 if (targetPlayer != null) {
                     FilterCard filter = new FilterCard((discardCount > 1 ? "" : "a") + " nonland card" + (discardCount > 1 ? "s" : ""));
                     filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
