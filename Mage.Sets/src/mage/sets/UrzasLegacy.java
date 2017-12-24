@@ -184,6 +184,7 @@ public class UrzasLegacy extends ExpansionSet {
         cards.add(new SetCardInfo("Viashino Heretic", 95, Rarity.UNCOMMON, mage.cards.v.ViashinoHeretic.class));
         cards.add(new SetCardInfo("Viashino Sandscout", 96, Rarity.COMMON, mage.cards.v.ViashinoSandscout.class));
         cards.add(new SetCardInfo("Vigilant Drake", 46, Rarity.COMMON, mage.cards.v.VigilantDrake.class));
+        cards.add(new SetCardInfo("Walking Sponge", 47, Rarity.UNCOMMON, mage.cards.w.WalkingSponge.class));
         cards.add(new SetCardInfo("Weatherseed Elf", 115, Rarity.COMMON, mage.cards.w.WeatherseedElf.class));
         cards.add(new SetCardInfo("Weatherseed Faeries", 48, Rarity.COMMON, mage.cards.w.WeatherseedFaeries.class));
         cards.add(new SetCardInfo("Weatherseed Treefolk", 116, Rarity.RARE, mage.cards.w.WeatherseedTreefolk.class));
