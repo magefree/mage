@@ -34,7 +34,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.mana.AnyColorManaAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,7 +43,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
@@ -55,7 +54,7 @@ import mage.target.common.TargetCardInHand;
 public class MoxDiamond extends CardImpl {
 
     public MoxDiamond(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // If Mox Diamond would enter the battlefield, you may discard a land card instead. If you do, put Mox Diamond onto the battlefield. If you don't, put it into its owner's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new MoxDiamondReplacementEffect()));
@@ -95,43 +94,36 @@ class MoxDiamondReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {        
-        Player player = game.getPlayer(source.getControllerId());        
-        if (player != null){
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
             TargetCardInHand target = new TargetCardInHand(new FilterLandCard());
             Cost cost = new DiscardTargetCost(target);
-            if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game) &&
-                    player.chooseUse(outcome, "Discard land? (Otherwise Mox Diamond goes to graveyard)", source, game) &&
-                    player.chooseTarget(Outcome.Discard, target, source, game)){
+            if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
+                    && player.chooseUse(outcome, "Discard land? (Otherwise Mox Diamond goes to graveyard)", source, game)
+                    && player.chooseTarget(Outcome.Discard, target, source, game)) {
                 player.discard(game.getCard(target.getFirstTarget()), source, game);
                 return false;
-            }
-            else{
-                Card card = game.getCard(event.getTargetId());
-                if (card != null) {
-                    player.moveCards(card, Zone.GRAVEYARD, source, game);
+            } else {
+                Permanent permanent = game.getPermanent(event.getTargetId());
+                if (permanent != null) {
+                    player.moveCards(permanent, Zone.GRAVEYARD, source, game);
                 }
                 return true;
             }
-            
+
         }
         return false;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (source.getSourceId().equals(event.getTargetId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if(zEvent.getToZone() == Zone.BATTLEFIELD){
-                return true;
-            }
-        }
-        return false;
+        return source.getSourceId().equals(event.getTargetId());
     }
 
 }
