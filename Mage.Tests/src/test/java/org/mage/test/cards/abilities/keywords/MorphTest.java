@@ -816,4 +816,41 @@ public class MorphTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "", 0);
 
     }
+
+    /**
+     * The Ur-Dragon reduces cost of face down morph Dragons Simple to reproduce
+     * - Dragons with Morph/Megamorph such as Quicksilver Dragon cost {2} to
+     * play face-down instead of the normal {3}. Other non-Dragon morph costs
+     * are unchanged.
+     */
+    @Test
+    public void testNoCostReductionOfFaceDownCastCreature() {
+        /*
+         Quicksilver Dragon {4}{U}{U}
+         Creature - Dragon
+         5/5
+         Flying
+         {U}: If target spell has only one target and that target is Quicksilver Dragon, change that spell's target to another creature.
+         Morph {4}{U}
+         */
+        addCard(Zone.HAND, playerA, "Quicksilver Dragon");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        // Eminence - As long as The Ur-Dragon is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast.
+        // Flying
+        // Whenever one or more Dragons you control attack, draw that many cards, then you may put a permanent card from your hand onto the battlefield
+        addCard(Zone.BATTLEFIELD, playerA, "The Ur-Dragon", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Dragon");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "", 1);
+        assertHandCount(playerA, 0);
+
+        assertTappedCount("Island", true, 3);
+
+    }
 }
