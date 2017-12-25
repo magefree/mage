@@ -93,7 +93,7 @@ class PatriarchsBiddingEffect extends OneShotEffect {
             Set<String> chosenTypes = new HashSet<>();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                Choice typeChoice = new ChoiceCreatureType();
+                Choice typeChoice = new ChoiceCreatureType(sourceObject);
                 while (!player.choose(Outcome.PutCreatureInPlay, typeChoice, game)) {
                     if (!player.canRespond()) {
                         break;

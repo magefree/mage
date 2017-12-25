@@ -94,7 +94,7 @@ class RiptideChronologistEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null) {
-            Choice typeChoice = new ChoiceCreatureType();
+            Choice typeChoice = new ChoiceCreatureType(sourceObject);
             while (!player.choose(outcome, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;

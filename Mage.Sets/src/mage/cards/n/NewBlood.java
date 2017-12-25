@@ -39,7 +39,7 @@ import mage.abilities.text.TextPartSubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceCreatureType;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -145,9 +145,8 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
             return;
         }
         if (fromSubType == null) {
-            Choice typeChoice = new ChoiceImpl(true);
+            Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
             typeChoice.setMessage("Choose creature type to change to Vampire");
-            typeChoice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toCollection(LinkedHashSet::new)));
             while (!controller.choose(outcome, typeChoice, game)) {
                 if (!controller.canRespond()) {
                     return;
