@@ -96,10 +96,15 @@ class OddOrEvenEffect extends OneShotEffect {
                 // Check the number of words in the name (based on number of spaces)
                 if (creature != null) {
                     String name = creature.getName();
-                    int spaces = name.length() - name.replace(" ", "").length();
-                    boolean nameIsOdd = (spaces % 2 == 0);
-                    if (this.odd && nameIsOdd || !this.odd && !nameIsOdd) {
+
+                    if (name.equalsIgnoreCase("") && this.odd == false) {
                         creature.destroy(source.getSourceId(), game, false);
+                    } else {
+                        int spaces = name.length() - name.replace(" ", "").length();
+                        boolean nameIsOdd = (spaces % 2 == 0);
+                        if (this.odd && nameIsOdd || !this.odd && !nameIsOdd) {
+                            creature.destroy(source.getSourceId(), game, false);
+                        }
                     }
                 }
             }

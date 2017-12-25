@@ -44,7 +44,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetCard;
 
 /**
@@ -113,8 +112,8 @@ class AugurOfBolasEffect extends OneShotEffect {
                         if (number == 1) {
                             card = topCards.getCards(new FilterInstantOrSorceryCard(), source.getSourceId(), source.getControllerId(), game).iterator().next();
                         } else {
-                            Target target = new TargetCard(Zone.LIBRARY, new FilterInstantOrSorceryCard());
-                            controller.chooseTarget(outcome, target, source, game);
+                            TargetCard target = new TargetCard(Zone.LIBRARY, new FilterInstantOrSorceryCard());
+                            controller.chooseTarget(outcome, topCards, target, source, game);
                             card = topCards.get(target.getFirstTarget(), game);
                         }
                         if (card != null) {

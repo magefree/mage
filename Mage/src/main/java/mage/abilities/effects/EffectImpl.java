@@ -24,20 +24,18 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects;
-
-import mage.constants.EffectType;
-import mage.constants.Outcome;
-import mage.abilities.MageSingleton;
-import mage.abilities.Mode;
-import mage.target.targetpointer.FirstTargetPointer;
-import mage.target.targetpointer.TargetPointer;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import mage.abilities.MageSingleton;
+import mage.abilities.Mode;
+import mage.constants.EffectType;
+import mage.constants.Outcome;
+import mage.target.targetpointer.FirstTargetPointer;
+import mage.target.targetpointer.TargetPointer;
 
 /**
  *
@@ -106,8 +104,9 @@ public abstract class EffectImpl implements Effect {
     }
 
     @Override
-    public void setTargetPointer(TargetPointer targetPointer) {
+    public Effect setTargetPointer(TargetPointer targetPointer) {
         this.targetPointer = targetPointer;
+        return this;
     }
 
     @Override
@@ -141,8 +140,8 @@ public abstract class EffectImpl implements Effect {
     }
 
     /**
-     * If set, the game.applyEffects() method will be called to apply the effects before the
-     * next effect (of the same ability) will resolve.
+     * If set, the game.applyEffects() method will be called to apply the
+     * effects before the next effect (of the same ability) will resolve.
      */
     @Override
     public void setApplyEffectsAfter() {

@@ -79,6 +79,7 @@ public class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Sword of Dungeons & Dragons", 1, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsAndDragons.class));
         cards.add(new SetCardInfo("Target Minotaur", 98, Rarity.COMMON, mage.cards.t.TargetMinotaur.class));
         cards.add(new SetCardInfo("Time Out", 48, Rarity.COMMON, mage.cards.t.TimeOut.class));
+        cards.add(new SetCardInfo("Very Cryptic Command", 49, Rarity.RARE, mage.cards.v.VeryCrypticCommand.class));
         cards.add(new SetCardInfo("Willing Test Subject", 126, Rarity.COMMON, mage.cards.w.WillingTestSubject.class));
         cards.add(new SetCardInfo("capital offense", 52, Rarity.COMMON, mage.cards.c.CapitalOffense.class));
     }

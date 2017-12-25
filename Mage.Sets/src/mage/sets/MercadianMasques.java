@@ -311,6 +311,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Channeling", 163, Rarity.COMMON, mage.cards.s.SoulChanneling.class));
         cards.add(new SetCardInfo("Specter's Wail", 164, Rarity.COMMON, mage.cards.s.SpectersWail.class));
         cards.add(new SetCardInfo("Spidersilk Armor", 273, Rarity.COMMON, mage.cards.s.SpidersilkArmor.class));
+        cards.add(new SetCardInfo("Spiritual Focus", 49, Rarity.RARE, mage.cards.s.SpiritualFocus.class));
         cards.add(new SetCardInfo("Spontaneous Generation", 274, Rarity.RARE, mage.cards.s.SpontaneousGeneration.class));
         cards.add(new SetCardInfo("Squall", 275, Rarity.COMMON, mage.cards.s.Squall.class));
         cards.add(new SetCardInfo("Squallmonger", 276, Rarity.UNCOMMON, mage.cards.s.Squallmonger.class));

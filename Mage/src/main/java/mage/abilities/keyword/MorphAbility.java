@@ -230,6 +230,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                         spellColor.setGreen(false);
                         spellColor.setWhite(false);
                         spellColor.setBlue(false);
+                        spell.getSubtype(game).clear();
                     } else {
                         spell.setFaceDown(false, game);
                     }

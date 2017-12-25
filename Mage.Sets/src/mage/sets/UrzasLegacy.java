@@ -175,6 +175,7 @@ public class UrzasLegacy extends ExpansionSet {
         cards.add(new SetCardInfo("Ticking Gnomes", 136, Rarity.UNCOMMON, mage.cards.t.TickingGnomes.class));
         cards.add(new SetCardInfo("Tinker", 45, Rarity.UNCOMMON, mage.cards.t.Tinker.class));
         cards.add(new SetCardInfo("Tragic Poet", 24, Rarity.COMMON, mage.cards.t.TragicPoet.class));
+        cards.add(new SetCardInfo("Treacherous Link", 71, Rarity.UNCOMMON, mage.cards.t.TreacherousLink.class));
         cards.add(new SetCardInfo("Treefolk Mystic", 114, Rarity.COMMON, mage.cards.t.TreefolkMystic.class));
         cards.add(new SetCardInfo("Treetop Village", 143, Rarity.UNCOMMON, mage.cards.t.TreetopVillage.class));
         cards.add(new SetCardInfo("Unearth", 72, Rarity.COMMON, mage.cards.u.Unearth.class));
@@ -183,6 +184,7 @@ public class UrzasLegacy extends ExpansionSet {
         cards.add(new SetCardInfo("Viashino Heretic", 95, Rarity.UNCOMMON, mage.cards.v.ViashinoHeretic.class));
         cards.add(new SetCardInfo("Viashino Sandscout", 96, Rarity.COMMON, mage.cards.v.ViashinoSandscout.class));
         cards.add(new SetCardInfo("Vigilant Drake", 46, Rarity.COMMON, mage.cards.v.VigilantDrake.class));
+        cards.add(new SetCardInfo("Walking Sponge", 47, Rarity.UNCOMMON, mage.cards.w.WalkingSponge.class));
         cards.add(new SetCardInfo("Weatherseed Elf", 115, Rarity.COMMON, mage.cards.w.WeatherseedElf.class));
         cards.add(new SetCardInfo("Weatherseed Faeries", 48, Rarity.COMMON, mage.cards.w.WeatherseedFaeries.class));
         cards.add(new SetCardInfo("Weatherseed Treefolk", 116, Rarity.RARE, mage.cards.w.WeatherseedTreefolk.class));
