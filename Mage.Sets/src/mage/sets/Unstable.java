@@ -50,6 +50,7 @@ public class Unstable extends ExpansionSet {
 
         cards.add(new SetCardInfo("Amateur Auteur", 3, Rarity.COMMON, mage.cards.a.AmateurAuteur.class));
         cards.add(new SetCardInfo("As Luck Would Have It", 102, Rarity.RARE, mage.cards.a.AsLuckWouldHaveIt.class));
+        cards.add(new SetCardInfo("Baron Von Count", 127, Rarity.MYTHIC, mage.cards.b.BaronVonCount.class));
         cards.add(new SetCardInfo("Box of Free-Range Goblins", 77, Rarity.COMMON, mage.cards.b.BoxOfFreerangeGoblins.class));
         cards.add(new SetCardInfo("Buzzing Whack-a-Doodle", 141, Rarity.UNCOMMON, mage.cards.b.BuzzingWhackADoodle.class));
         cards.add(new SetCardInfo("Chittering Doom", 104, Rarity.UNCOMMON, mage.cards.c.ChitteringDoom.class));
