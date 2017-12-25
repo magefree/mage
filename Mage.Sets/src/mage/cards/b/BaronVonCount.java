@@ -200,13 +200,12 @@ class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
             }
             Integer doomNumber = (Integer) game.getState().getValue(mageObject.getId() + "_doom");
             if (doomNumber <= 1) {
-                doomNumber = 5;
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CUSTOM_EVENT, source.getSourceId(), source.getSourceId(), controller.getId(), "DoomCounterReset", 1));
             } else {
                 doomNumber--;
+                game.getState().setValue(mageObject.getId() + "_doom", doomNumber);
+                ((Permanent) mageObject).addInfo("doom counter", CardUtil.addToolTipMarkTags("Doom counter at: " + doomNumber), game);
             }
-            game.getState().setValue(mageObject.getId() + "_doom", doomNumber);
-            ((Permanent) mageObject).addInfo("doom counter", CardUtil.addToolTipMarkTags("Doom counter at: " + doomNumber), game);
             return true;
         }
         return false;
@@ -267,6 +266,15 @@ class BaronVonCountDestroyPlayerEffect extends OneShotEffect {
         if (targetPlayer != null && targetPlayer.canLose(game)) {
             game.informPlayers(targetPlayer.getLogName() + " was destroyed");
             targetPlayer.lost(game); // double checks canLose, but seems more future-proof than lostForced
+        }
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            if (game.getState().getValue(mageObject.getId() + "_doom") == null) {
+                return false;
+            }
+            Integer doomNumber = 5;
+            game.getState().setValue(mageObject.getId() + "_doom", doomNumber);
+            ((Permanent) mageObject).addInfo("doom counter", CardUtil.addToolTipMarkTags("Doom counter at: " + doomNumber), game);
             return true;
         }
         return false;
