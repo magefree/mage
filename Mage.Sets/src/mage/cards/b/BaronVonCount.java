@@ -157,13 +157,14 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
             }
             Integer doomNumber = (Integer) game.getState().getValue(mageObject.getId() + "_doom");
             if (spell != null && sourcePermanent != null && mageObject != null) {
-                if (spell.getCard().getManaCost().getText().contains(doomNumber.toString()) 
-                        || spell.getPower().getBaseValue() == doomNumber
-                        || spell.getToughness().getBaseValue() == doomNumber) {
+                String doomString = doomNumber.toString();
+                if (spell.getCard().getManaCost().getText().contains(doomString) 
+                        || String.valueOf(spell.getPower().getBaseValue()).contains(doomString) 
+                        || String.valueOf(spell.getToughness().getBaseValue()).contains(doomString)) {
                     return true;
                 } else {
                     for (String string : spell.getCard().getRules()) {
-                        if (string.contains(doomNumber.toString())) {
+                        if (string.contains(doomString)) {
                             return true;
                         }
                     }
@@ -200,6 +201,7 @@ class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
             }
             Integer doomNumber = (Integer) game.getState().getValue(mageObject.getId() + "_doom");
             if (doomNumber <= 1) {
+                // not completely sure if counter should be moving here or not (relevant in case the second trigger gets countered)
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CUSTOM_EVENT, source.getSourceId(), source.getSourceId(), controller.getId(), "DoomCounterReset", 1));
             } else {
                 doomNumber--;
