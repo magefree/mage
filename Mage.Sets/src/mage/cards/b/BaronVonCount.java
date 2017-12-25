@@ -45,6 +45,7 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -69,8 +70,10 @@ public class BaronVonCount extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new BaronVonCountPutCounterEffect()));
 
         // Whenever you cast a spell with the indicated numeral in its mana cost, text box, power, or toughness, move the doom counter one numeral to the left.
-        // When the doom counter moves from "1," destroy target player and put that doom counter on "5."
         this.addAbility(new BaronVonCountTriggeredAbility());
+
+        // When the doom counter moves from "1," destroy target player and put that doom counter on "5."
+        this.addAbility(new BaronVonCountSecondTriggeredAbility());
     }
 
     public BaronVonCount(final BaronVonCount card) {
@@ -180,7 +183,7 @@ class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
 
     public BaronVonCountMoveDoomCounterEffect() {
         super(Outcome.Neutral);
-        staticText = "move the doom counter one numeral to the left. When the doom counter moves from \"1,\" destroy target player and put that doom counter on \"5.\"";
+        staticText = "move the doom counter one numeral to the left";
     }
 
     public BaronVonCountMoveDoomCounterEffect(final BaronVonCountMoveDoomCounterEffect effect) {
@@ -197,20 +200,8 @@ class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
             }
             Integer doomNumber = (Integer) game.getState().getValue(mageObject.getId() + "_doom");
             if (doomNumber <= 1) {
-                TargetPlayer target = new TargetPlayer();
-                if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                    while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
-                        controller.chooseTarget(outcome, target, source, game);
-                    }
-                }
-                if (target.isChosen()) {
-                    Player targetPlayer = game.getPlayer(target.getFirstTarget());
-                    if (targetPlayer != null && targetPlayer.canLose(game)) {
-                        game.informPlayers(targetPlayer.getLogName() + " was destroyed");
-                        targetPlayer.lost(game); // double checks canLose, but seems more future-proof than lostForced
-                    }
-                }
                 doomNumber = 5;
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CUSTOM_EVENT, source.getSourceId(), source.getSourceId(), controller.getId(), "DoomCounterReset", 1));
             } else {
                 doomNumber--;
             }
@@ -225,5 +216,64 @@ class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
     public BaronVonCountMoveDoomCounterEffect copy() {
         return new BaronVonCountMoveDoomCounterEffect(this);
     }
+}
 
+class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
+
+    public BaronVonCountSecondTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new BaronVonCountDestroyPlayerEffect());
+        this.addTarget(new TargetPlayer());
+    }
+
+    public BaronVonCountSecondTriggeredAbility(BaronVonCountSecondTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.CUSTOM_EVENT;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getData().equals("DoomCounterReset") && event.getTargetId().equals(this.getSourceId());
+    }
+
+    @Override
+    public BaronVonCountSecondTriggeredAbility copy() {
+        return new BaronVonCountSecondTriggeredAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "When the doom counter moves from \"1,\" " + super.getRule();
+    }
+}
+
+class BaronVonCountDestroyPlayerEffect extends OneShotEffect {
+
+    public BaronVonCountDestroyPlayerEffect() {
+        super(Outcome.Neutral);
+        staticText = "destroy target player and put that doom counter on \"5.\"";
+    }
+
+    public BaronVonCountDestroyPlayerEffect(final BaronVonCountDestroyPlayerEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        if (targetPlayer != null && targetPlayer.canLose(game)) {
+            game.informPlayers(targetPlayer.getLogName() + " was destroyed");
+            targetPlayer.lost(game); // double checks canLose, but seems more future-proof than lostForced
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public BaronVonCountDestroyPlayerEffect copy() {
+        return new BaronVonCountDestroyPlayerEffect(this);
+    }
 }
