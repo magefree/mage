@@ -42,7 +42,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -113,7 +113,7 @@ class BaronVonCountPutCounterEffect extends OneShotEffect {
                 // but it can still be proliferated to put an additional doom counter on itself (the new counters can be removed and aren't placed on the "numbers" - i.e. they don't influence the card's 
                 // functionality in any direct way). To simplify things, I merely put a do-nothing Doom counter on Baron that can be proliferated, etc., in addition to the value that tracks the 
                 // the placement of the functional "counter". This only has fringe incorrect interactions with a few cards like Thief of Blood which now gets an extra counter from Baron.
-                new AddCountersSourceEffect(new Counter("doom")).apply(game, source);
+                new AddCountersSourceEffect(CounterType.DOOM.createInstance()).apply(game, source);
             }
             return true;
         }
