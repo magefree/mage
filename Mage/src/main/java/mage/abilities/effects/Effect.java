@@ -24,16 +24,15 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects;
 
 import java.io.Serializable;
 import java.util.UUID;
-import mage.constants.EffectType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.constants.EffectType;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.target.targetpointer.TargetPointer;
 
@@ -44,18 +43,31 @@ import mage.target.targetpointer.TargetPointer;
 public interface Effect extends Serializable {
 
     UUID getId();
+
     void newId();
+
     String getText(Mode mode);
+
     Effect setText(String staticText);
+
     boolean apply(Game game, Ability source);
+
     Outcome getOutcome();
+
     void setOutcome(Outcome outcome);
+
     EffectType getEffectType();
-    void setTargetPointer(TargetPointer targetPointer);
+
+    Effect setTargetPointer(TargetPointer targetPointer);
+
     TargetPointer getTargetPointer();
+
     void setValue(String key, Object value);
+
     Object getValue(String key);
+
     void setApplyEffectsAfter();
+
     boolean applyEffectsAfter();
 
     Effect copy();

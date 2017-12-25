@@ -489,7 +489,9 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 maxSeconds = 3600;
             }
             logger.debug("maxThink: " + maxSeconds + " seconds ");
-            return task.get(maxSeconds, TimeUnit.SECONDS);
+            if (task.get(maxSeconds, TimeUnit.SECONDS) != null) {
+                return task.get(maxSeconds, TimeUnit.SECONDS);
+            }
         } catch (TimeoutException e) {
             logger.info("simulating - timed out");
             task.cancel(true);

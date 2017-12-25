@@ -3000,5 +3000,4 @@ public abstract class GameImpl implements Game, Serializable {
             fireEvent(new GameEvent(GameEvent.EventType.BECOMES_MONARCH, monarchId, source == null ? null : source.getSourceId(), monarchId));
         }
     }
-
 }

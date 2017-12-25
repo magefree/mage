@@ -46,6 +46,7 @@ import mage.game.permanent.Permanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -121,7 +122,7 @@ class ImpulsiveManeuversEffect extends PreventionEffectImpl {
                 DamageEvent damageEvent = (DamageEvent) event;
                 if (damageEvent.isCombatDamage()) {
                     if (wonFlip) {
-                        event.setAmount(event.getAmount() * 2);
+                        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));
                         this.discard();
                     } else {
                         preventDamageAction(event, source, game);

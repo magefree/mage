@@ -335,6 +335,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Righteousness", 46, Rarity.RARE, mage.cards.r.Righteousness.class));
         cards.add(new SetCardInfo("Samite Healer", 47, Rarity.COMMON, mage.cards.s.SamiteHealer.class));
         cards.add(new SetCardInfo("Savannah Lions", 48, Rarity.RARE, mage.cards.s.SavannahLions.class));
+        cards.add(new SetCardInfo("Seeker", 49, Rarity.COMMON, mage.cards.s.Seeker.class));
         cards.add(new SetCardInfo("Serra Angel", 50, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Spirit Link", 51, Rarity.UNCOMMON, mage.cards.s.SpiritLink.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 52, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));

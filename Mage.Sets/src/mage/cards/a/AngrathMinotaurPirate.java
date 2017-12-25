@@ -69,7 +69,7 @@ public class AngrathMinotaurPirate extends CardImpl {
         // +2: Angrath, Minotaur Pirate deals 1 damage to target opponent and each creature that player controls.
         Effects effects1 = new Effects();
         effects1.add(new DamageTargetEffect(1));
-        effects1.add(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent()));
+        effects1.add(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent()).setText("and each creature that player controls"));
         LoyaltyAbility ability1 = new LoyaltyAbility(effects1, +2);
         ability1.addTarget(new TargetOpponent());
         this.addAbility(ability1);
@@ -77,7 +77,8 @@ public class AngrathMinotaurPirate extends CardImpl {
         // -3: Return target Pirate card from your graveyard to the battlefield.
         FilterCard filterPirateCard = new FilterCreatureCard("pirate card from your graveyard");
         filterPirateCard.add(new SubtypePredicate(SubType.PIRATE));
-        Ability ability2 = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), -3);
+        Ability ability2 = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
+                .setText("Return target Pirate card from your graveyard to the battlefield"), -3);
         ability2.addTarget(new TargetCardInYourGraveyard(filterPirateCard));
         this.addAbility(ability2);
 
