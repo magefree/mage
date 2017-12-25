@@ -168,6 +168,7 @@ public class PickChoiceDialog extends MageDialog {
         int maxSel = this.listChoices.getModel().getSize() - 1;
         if(newSel <= maxSel){
             this.listChoices.setSelectedIndex(newSel);
+            this.listChoices.ensureIndexIsVisible(newSel);
         }
     }
     
@@ -175,6 +176,7 @@ public class PickChoiceDialog extends MageDialog {
         int newSel = this.listChoices.getSelectedIndex() - 1;        
         if(newSel >= 0){
             this.listChoices.setSelectedIndex(newSel);
+            this.listChoices.ensureIndexIsVisible(newSel);
         }
     }
 

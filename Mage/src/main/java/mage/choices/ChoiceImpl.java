@@ -40,6 +40,8 @@ import java.util.Set;
  */
 public class ChoiceImpl implements Choice, Serializable {
 
+    private int ENABLE_SEARCH_FOR_ITEMS_COUNT = 5; // enable search for choices more then X items (for non standard choices)
+
     protected boolean chosen;
     protected final boolean required;
     protected String choice;
@@ -48,7 +50,7 @@ public class ChoiceImpl implements Choice, Serializable {
     protected Map<String, String> keyChoices = new LinkedHashMap<>();
     protected String message;
     protected String subMessage;
-    protected boolean searchEnabled;
+    protected boolean searchEnabled = true;
     protected String searchText;
 
     public ChoiceImpl() {
@@ -68,6 +70,12 @@ public class ChoiceImpl implements Choice, Serializable {
         this.choices.addAll(choice.choices);
         this.choiceKey = choice.choiceKey;
         this.keyChoices = choice.keyChoices; // list should never change for the same object so copy by reference
+    }
+
+    private void autoSearchEnable(){
+        if((this.choices != null) && (this.choices.size() >= ENABLE_SEARCH_FOR_ITEMS_COUNT)){
+            this.setSearchEnabled(true);
+        }
     }
 
     @Override
@@ -106,6 +114,7 @@ public class ChoiceImpl implements Choice, Serializable {
     @Override
     public void setChoices(Set<String> choices) {
         this.choices = choices;
+        autoSearchEnable();
     }
 
     @Override
@@ -139,6 +148,7 @@ public class ChoiceImpl implements Choice, Serializable {
     @Override
     public void setKeyChoices(Map<String, String> choices) {
         keyChoices = choices;
+        autoSearchEnable();
     }
 
     @Override
