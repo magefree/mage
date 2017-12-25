@@ -1,43 +1,23 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
-/*
- * PickNumberDialog.java
- *
- * Created on Feb 25, 2010, 12:03:39 PM
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-
 package mage.client.dialog;
 
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import mage.choices.Choice;
 import mage.client.MageFrame;
 import mage.client.util.SettingsManager;
@@ -46,37 +26,103 @@ import mage.client.util.gui.MageDialogState;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author JayDi85
  */
+
 public class PickChoiceDialog extends MageDialog {
 
-    /** Creates new form PickNumberDialog */
-    public PickChoiceDialog() {
-        initComponents();
-        this.setModal(true);
-    }
     Choice choice;
-    boolean autoSelect;
-
+    ArrayList<KeyValueItem> allItems = new ArrayList<>();
+    DefaultListModel<KeyValueItem> dataModel = new DefaultListModel();
+    
+    final private static String HTML_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
+    
     public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState) {
-        this.lblMessage.setText("<html>" + choice.getMessage());
         this.choice = choice;
-        this.autoSelect = false;
-        btnAutoSelect.setVisible(choice.isKeyChoice());
         
-        if (choice.isKeyChoice()){
-
-            ComboItem[] comboItems = new ComboItem[choice.getKeyChoices().size()];
-            int count = 0;
-            for (Map.Entry<String, String> entry : choice.getKeyChoices().entrySet()) {
-                comboItems[count] = new ComboItem(entry.getKey(), entry.getValue());
-                count++;
+        setLabelText(this.labelMessage, choice.getMessage());
+        setLabelText(this.labelSubMessage, choice.getSubMessage());
+        
+        btCancel.setEnabled(!choice.isRequired());
+        
+        // 2 modes: string or key-values
+        // sore data in allItems for inremental filtering        
+        // http://logicbig.com/tutorials/core-java-tutorial/swing/list-filter/
+        this.allItems.clear();
+        if (choice.isKeyChoice()){            
+            for (Map.Entry<String, String> entry: choice.getKeyChoices().entrySet()) {
+                this.allItems.add(new KeyValueItem(entry.getKey(), entry.getValue()));                
             }
-            this.lstChoices.setListData(comboItems);
         } else {
-             this.lstChoices.setListData(choice.getChoices().toArray());
+            for (String value: choice.getChoices()){
+                this.allItems.add(new KeyValueItem(value, value));                
+            }
         }
         
+        // search
+        if(choice.isSearchEnabled())
+        {
+            panelSearch.setVisible(true);
+            this.editSearch.setText(choice.getSearchText());
+        }else{
+            panelSearch.setVisible(false);
+            this.editSearch.setText("");
+        }
+        
+        // listeners for inremental filtering        
+        editSearch.getDocument().addDocumentListener(new DocumentListener() {
+          @Override
+          public void insertUpdate(DocumentEvent e) {
+              choice.setSearchText(editSearch.getText());
+              loadData();
+          }
+
+          @Override
+          public void removeUpdate(DocumentEvent e) {
+              choice.setSearchText(editSearch.getText());
+              loadData();
+          }
+
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+              choice.setSearchText(editSearch.getText());
+              loadData();
+          }
+        });
+        
+        // listeners for select up and down without edit focus lost
+        editSearch.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                //System.out.println("types");                
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {                
+                if(e.getKeyCode() == KeyEvent.VK_UP){
+                    doPrevSelect();
+                }else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+                    doNextSelect();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                //System.out.println("released");
+            }
+        });
+        
+        // listeners double click choose
+        listChoices.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount() == 2){
+                    doChoose();
+                }
+            }
+        });
+        
+        // window settings
         MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         if (mageDialogState != null) {
             mageDialogState.setStateToDialog(this);
@@ -87,154 +133,306 @@ public class PickChoiceDialog extends MageDialog {
             GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
         }
         
+        // final load
+        loadData();
 
         this.setVisible(true);
     }
-
-    public boolean isAutoSelect() {
-        return autoSelect;
+    
+    private void loadData(){
+        // load data to datamodel after filter or on startup
+        String filter = choice.getSearchText();
+        if (filter == null){ filter = ""; }
+        filter = filter.toLowerCase();
+        
+        this.dataModel.clear();
+        for(KeyValueItem item: this.allItems){
+            if(!choice.isSearchEnabled() || item.Value.toLowerCase().contains(filter)){
+                this.dataModel.addElement(item);
+            }
+        }
+    }
+    
+    private void setLabelText(JLabel label, String text){
+        if ((text != null) && !text.equals("")){            
+            label.setText(String.format(HTML_TEMPLATE, text));
+            label.setVisible(true);
+        }else{
+            label.setText("");
+            label.setVisible(false);
+        }        
+    }
+    
+    private void doNextSelect(){
+        int newSel = this.listChoices.getSelectedIndex() + 1;
+        int maxSel = this.listChoices.getModel().getSize() - 1;
+        if(newSel <= maxSel){
+            this.listChoices.setSelectedIndex(newSel);
+        }
+    }
+    
+    private void doPrevSelect(){
+        int newSel = this.listChoices.getSelectedIndex() - 1;        
+        if(newSel >= 0){
+            this.listChoices.setSelectedIndex(newSel);
+        }
     }
 
-    public void setChoice() {
-        if (this.lstChoices.getSelectedValue() == null) {
-            choice.clearChoice();
+    private void doChoose(){
+        if(setChoice()){
+            this.hideDialog();
+        }
+    }
+    
+    private void doCancel(){
+        this.listChoices.clearSelection();
+        this.choice.clearChoice();
+        hideDialog();
+    }
+
+    /**
+     * Creates new form PickChoiceDialog
+     */
+    public PickChoiceDialog() {
+        initComponents();
+        this.listChoices.setModel(dataModel);
+        this.setModal(true);
+
+        // Close the dialog when Esc is pressed        
+        /*
+        String cancelName = "cancel";
+        InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
+        ActionMap actionMap = getRootPane().getActionMap();
+        actionMap.put(cancelName, new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {                
+                doCancel();
+            }
+        });
+        */
+    }
+    
+    public boolean setChoice() {
+        KeyValueItem item = (KeyValueItem)this.listChoices.getSelectedValue();
+        
+        // auto select one item (after incemental filtering)
+        if((item == null) && (this.listChoices.getModel().getSize() == 1)){
+            this.listChoices.setSelectedIndex(0);
+            item = (KeyValueItem)this.listChoices.getSelectedValue();
         }
         
-        if (choice.isKeyChoice()) {
-            ComboItem item = (ComboItem)this.lstChoices.getSelectedValue();
-            if (item != null) {
-                choice.setChoiceByKey(item.getValue());
-            } else {
-                choice.clearChoice();
+        if(item != null){
+            if(choice.isKeyChoice()){
+                choice.setChoiceByKey(item.getKey());
+            }else{
+                choice.setChoice(item.getKey());
             }
-        } else {
-            choice.setChoice((String)this.lstChoices.getSelectedValue());
+            return true;
+        }else{
+            choice.clearChoice();
+            return false;
         }
     }
+    
+    class KeyValueItem
+    {
+        private final String Key;
+        private final String Value;
+        
+        public KeyValueItem(String value, String label) {
+            this.Key = value;
+            this.Value = label;
+        }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+        public String getKey() {
+            return this.Key;
+        }
+
+        public String getValue() {
+            return this.Value;
+        }
+
+        @Override
+        public String toString() {
+            return this.Value;
+        }        
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAutoSelect = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
-        btnOk = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lstChoices = new javax.swing.JList();
-        lblMessage = new javax.swing.JLabel();
+        panelHeader = new javax.swing.JPanel();
+        labelMessage = new javax.swing.JLabel();
+        labelSubMessage = new javax.swing.JLabel();
+        panelSearch = new javax.swing.JPanel();
+        labelSearch = new javax.swing.JLabel();
+        editSearch = new javax.swing.JTextField();
+        scrollList = new javax.swing.JScrollPane();
+        listChoices = new javax.swing.JList();
+        panelCommands = new javax.swing.JPanel();
+        btOK = new javax.swing.JButton();
+        btCancel = new javax.swing.JButton();
 
-        setResizable(true);
-        setMinimumSize(new java.awt.Dimension(280, 200));
-        setName(""); // NOI18N
+        labelMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelMessage.setText("<html><div style='text-align: center;'>example long message example long message example long message example long message example long message</div></html>");
 
-        btnAutoSelect.setText("Auto select");
-        btnAutoSelect.setToolTipText("If you select an effect with \"Auto select\", this effect will be selected the next time automatically first.");
-        btnAutoSelect.addActionListener(evt -> btnAutoSelectActionPerformed(evt));
+        labelSubMessage.setFont(labelSubMessage.getFont().deriveFont((labelSubMessage.getFont().getStyle() | java.awt.Font.ITALIC) | java.awt.Font.BOLD));
+        labelSubMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelSubMessage.setText("<html><div style='text-align: center;'>example long message example long</div></html>");
 
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
+        javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
+        panelHeader.setLayout(panelHeaderLayout);
+        panelHeaderLayout.setHorizontalGroup(
+            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelHeaderLayout.createSequentialGroup()
+                .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(labelSubMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
+        );
+        panelHeaderLayout.setVerticalGroup(
+            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelHeaderLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(labelMessage)
+                .addGap(0, 0, 0)
+                .addComponent(labelSubMessage))
+        );
 
-        btnOk.setText("OK");
-        btnOk.addActionListener(evt -> btnOkActionPerformed(evt));
+        labelSearch.setText("Search:");
 
-        lstChoices.setModel(new javax.swing.AbstractListModel() {
-            final String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        editSearch.setText("sample search text");
+
+        javax.swing.GroupLayout panelSearchLayout = new javax.swing.GroupLayout(panelSearch);
+        panelSearch.setLayout(panelSearchLayout);
+        panelSearchLayout.setHorizontalGroup(
+            panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSearchLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(labelSearch)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editSearch)
+                .addGap(0, 0, 0))
+        );
+        panelSearchLayout.setVerticalGroup(
+            panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSearchLayout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addGroup(panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelSearch)
+                    .addComponent(editSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3))
+        );
+
+        listChoices.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "item1", "item2", "item3" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(lstChoices);
+        scrollList.setViewportView(listChoices);
 
-        lblMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMessage.setText("message");
+        btOK.setText("Choose");
+        btOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btOKActionPerformed(evt);
+            }
+        });
+
+        btCancel.setText("Cancel");
+        btCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelCommandsLayout = new javax.swing.GroupLayout(panelCommands);
+        panelCommands.setLayout(panelCommandsLayout);
+        panelCommandsLayout.setHorizontalGroup(
+            panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCommandsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btOK)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        panelCommandsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancel, btOK});
+
+        panelCommandsLayout.setVerticalGroup(
+            panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCommandsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btCancel)
+                    .addComponent(btOK))
+                .addContainerGap())
+        );
+
+        getRootPane().setDefaultButton(btOK);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAutoSelect)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnOk)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel))
-                    .addComponent(lblMessage, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollList, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelCommands, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                .addComponent(panelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancel)
-                    .addComponent(btnOk)
-                    .addComponent(btnAutoSelect))
-                .addGap(10, 10, 10))
+                .addComponent(scrollList, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        setChoice();
-        this.hideDialog();
-    }//GEN-LAST:event_btnOkActionPerformed
+    private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
+        doChoose();
+    }//GEN-LAST:event_btOKActionPerformed
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        this.lstChoices.clearSelection();
-        this.choice.clearChoice();
-        this.hideDialog();
-    }//GEN-LAST:event_btnCancelActionPerformed
+    private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelActionPerformed
+        doCancel();
+    }//GEN-LAST:event_btCancelActionPerformed
 
-    private void btnAutoSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoSelectActionPerformed
-        this.autoSelect = true;
-        setChoice();
-        this.hideDialog();
-    }//GEN-LAST:event_btnAutoSelectActionPerformed
+    /**
+     * Closes the dialog
+     */
+    private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
+        doCancel();
+    }//GEN-LAST:event_closeDialog
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAutoSelect;
-    private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnOk;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblMessage;
-    private javax.swing.JList lstChoices;
+    private javax.swing.JButton btCancel;
+    private javax.swing.JButton btOK;
+    private javax.swing.JTextField editSearch;
+    private javax.swing.JLabel labelMessage;
+    private javax.swing.JLabel labelSearch;
+    private javax.swing.JLabel labelSubMessage;
+    private javax.swing.JList listChoices;
+    private javax.swing.JPanel panelCommands;
+    private javax.swing.JPanel panelHeader;
+    private javax.swing.JPanel panelSearch;
+    private javax.swing.JScrollPane scrollList;
     // End of variables declaration//GEN-END:variables
-
 }
-  class ComboItem {
-
-        private final String value;
-        private final String label;
-
-        public ComboItem(String value, String label) {
-            this.value = value;
-            this.label = label;
-        }
-
-        public String getValue() {
-            return this.value;
-        }
-
-        public String getLabel() {
-            return this.label;
-        }
-
-        @Override
-        public String toString() {
-            return label;
-        }
-    }
