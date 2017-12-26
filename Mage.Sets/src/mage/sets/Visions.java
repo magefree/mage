@@ -69,12 +69,14 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud Elemental", 29, Rarity.COMMON, mage.cards.c.CloudElemental.class));
         cards.add(new SetCardInfo("Coercion", 4, Rarity.COMMON, mage.cards.c.Coercion.class));
         cards.add(new SetCardInfo("Coral Atoll", 160, Rarity.UNCOMMON, mage.cards.c.CoralAtoll.class));
+        cards.add(new SetCardInfo("Corrosion", 128, Rarity.RARE, mage.cards.c.Corrosion.class));
         cards.add(new SetCardInfo("Creeping Mold", 53, Rarity.UNCOMMON, mage.cards.c.CreepingMold.class));
         cards.add(new SetCardInfo("Crypt Rats", 5, Rarity.COMMON, mage.cards.c.CryptRats.class));
         cards.add(new SetCardInfo("Daraja Griffin", 102, Rarity.UNCOMMON, mage.cards.d.DarajaGriffin.class));
         cards.add(new SetCardInfo("Dark Privilege", 6, Rarity.COMMON, mage.cards.d.DarkPrivilege.class));
         cards.add(new SetCardInfo("Death Watch", 7, Rarity.COMMON, mage.cards.d.DeathWatch.class));
         cards.add(new SetCardInfo("Desertion", 30, Rarity.RARE, mage.cards.d.Desertion.class));
+        cards.add(new SetCardInfo("Desolation", 8, Rarity.UNCOMMON, mage.cards.d.Desolation.class));
         cards.add(new SetCardInfo("Diamond Kaleidoscope", 143, Rarity.RARE, mage.cards.d.DiamondKaleidoscope.class));
         cards.add(new SetCardInfo("Dormant Volcano", 161, Rarity.UNCOMMON, mage.cards.d.DormantVolcano.class));
         cards.add(new SetCardInfo("Dragon Mask", 144, Rarity.UNCOMMON, mage.cards.d.DragonMask.class));
