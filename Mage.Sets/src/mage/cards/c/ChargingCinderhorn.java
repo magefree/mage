@@ -97,7 +97,7 @@ class ChargingCinderhornCondition implements Condition {
 
     @Override
     public String toString() {
-        return "no creatures attacked this turn";
+        return "if no creatures attacked this turn";
     }
 
 }
