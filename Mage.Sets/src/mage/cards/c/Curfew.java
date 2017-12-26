@@ -79,8 +79,9 @@ class CurfewEffect extends OneShotEffect{
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                List<Permanent> liste = game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), playerId, game);
+                FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+                TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, filter, true);
+                List<Permanent> liste = game.getBattlefield().getActivePermanents(filter, playerId, game);
                 if(!liste.isEmpty()){
                     player.choose(Outcome.ReturnToHand, target, source.getSourceId(), game);
 
