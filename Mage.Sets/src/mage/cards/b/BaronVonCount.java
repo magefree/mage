@@ -156,7 +156,7 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
                 return false;
             }
             Integer doomNumber = (Integer) game.getState().getValue(mageObject.getId() + "_doom");
-            if (spell != null && sourcePermanent != null && mageObject != null) {
+            if (spell != null && sourcePermanent != null && mageObject != null && doomNumber > 0) {
                 String doomString = doomNumber.toString();
                 if (spell.getCard().getManaCost().getText().contains(doomString) 
                         || String.valueOf(spell.getPower().getBaseValue()).contains(doomString) 
