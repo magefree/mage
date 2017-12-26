@@ -200,10 +200,11 @@ class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
                 return false;
             }
             Integer doomNumber = (Integer) game.getState().getValue(mageObject.getId() + "_doom");
-            if (doomNumber <= 1) {
+            if (doomNumber == 1) {
                 // not completely sure if counter should be moving here or not (relevant in case the second trigger gets countered)
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CUSTOM_EVENT, source.getSourceId(), source.getSourceId(), controller.getId(), "DoomCounterReset", 1));
-            } else {
+            }
+            if (doomNumber > 0) {
                 doomNumber--;
                 game.getState().setValue(mageObject.getId() + "_doom", doomNumber);
                 ((Permanent) mageObject).addInfo("doom counter", CardUtil.addToolTipMarkTags("Doom counter at: " + doomNumber), game);
