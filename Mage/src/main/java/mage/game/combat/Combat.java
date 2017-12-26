@@ -1421,6 +1421,19 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             }
         }
+        boolean canRemove = false;
+        for (CombatGroup group : getBlockingGroups()) {
+            if (group.blockers.contains(blockerId)) {
+                group.blockers.remove(blockerId);
+                group.attackerOrder.clear();
+            }
+            if (group.blockers.isEmpty()) {
+                canRemove = true;
+            }
+        }
+        if (canRemove) {
+            blockingGroups.remove(blockerId);
+        }
         Permanent creature = game.getPermanent(blockerId);
         if (creature != null) {
             creature.setBlocking(0);
