@@ -327,7 +327,7 @@ public final class ImageCache {
             BufferedImage cornerImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
 
             // corner
-            float ROUNDED_CORNER_SIZE = 0.15f; // see CardPanelComponentImpl
+            float ROUNDED_CORNER_SIZE = 0.11f; // see CardPanelComponentImpl
             int cornerSizeBorder = Math.max(4, Math.round(image.getWidth() * ROUNDED_CORNER_SIZE));
 
             // corner mask
