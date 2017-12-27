@@ -69,11 +69,13 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ChoiceColor choice = new ChoiceColor(true);
+            String mes = String.format("Select color of %d mana to add it to your mana pool", this.amount);
+            ChoiceColor choice = new ChoiceColor(true, mes, game.getObject(source.getSourceId()));
 
             if (controller.choose(outcome, choice, game)) {
                 if (choice.getColor() == null) {
-                    return false; // it happens, don't know how
+                    // on user's reconnect choice dialog close and return null even with required settings
+                    return false;
                 }
                 Mana createdMana = choice.getMana(amount);
                 if (createdMana != null) {
