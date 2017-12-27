@@ -222,6 +222,19 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
+     * Creates a {@link Mana} object with the passed in {@code num} of Any
+     * mana. {@code num} can not be a negative value. Negative values will be
+     * logged and set to 0.
+     *
+     * @param num value of Any mana to create.
+     * @return a {@link Mana} object with the passed in {@code num} of Any
+     * mana.
+     */
+    public static Mana AnyMana(int num) {
+        return new Mana(0, 0, 0, 0, 0, 0, notNegative(num, "Any"), 0);
+    }
+
+    /**
      * Adds mana from the passed in {@link Mana} object to this object.
      *
      * @param mana mana to add to this object.

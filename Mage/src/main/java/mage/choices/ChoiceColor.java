@@ -27,9 +27,13 @@
  */
 package mage.choices;
 
-import java.util.ArrayList;
+import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -37,7 +41,8 @@ import mage.ObjectColor;
  */
 public class ChoiceColor extends ChoiceImpl {
 
-    public static final ArrayList<String> colorChoices = new ArrayList<>();
+    //public static final Set<String> colorChoices =  new HashSet<>(); // JayDi85: uncomment 1 of 2 to broke unit tests find wrong tests (?)
+    public static final ArrayList<String> colorChoices =  new ArrayList<>();
 
     static {
         colorChoices.add("Green");
@@ -52,9 +57,25 @@ public class ChoiceColor extends ChoiceImpl {
     }
 
     public ChoiceColor(boolean required) {
+        this(required, "Choose color");
+    }
+
+    public ChoiceColor(boolean required, String chooseMessage){
+        this(required, chooseMessage, "");
+    }
+
+    public ChoiceColor(boolean required, String chooseMessage, MageObject source){
+        this(required, chooseMessage, source.getIdName());
+    }
+
+    public ChoiceColor(boolean required, String chooseMessage, String chooseSubMessage){
         super(required);
+
         this.choices.addAll(colorChoices);
-        this.message = "Choose color";
+        //this.setChoices(colorChoices); // JayDi85: uncomment 2 of 2 to broke unit tests find wrong tests (?)
+
+        this.setMessage(chooseMessage);
+        this.setSubMessage(chooseSubMessage);
     }
 
     public ChoiceColor(final ChoiceColor choice) {

@@ -28,7 +28,10 @@
 package mage.abilities.mana;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import mage.Mana;
 import mage.game.Game;
 
@@ -325,5 +328,20 @@ public class ManaOptions extends ArrayList<Mana> {
         newMana.add(mana);
         payCombinations.add(newMana);
         payCombinationsStrings.add(newMana.toString());
+    }
+
+
+    public void removeDuplicated(){
+        Set<String> list = new HashSet<>();
+
+        for(int i = this.size() - 1; i >= 0; i--){
+            String s = this.get(i).toString();
+            if (list.contains(s)){
+                // remove duplicated
+                this.remove(i);
+            }else{
+                list.add(s);
+            }
+        }
     }
 }

@@ -33,10 +33,11 @@ import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+import static org.mage.test.utils.ManaOptionsTestUtils.*;
 
 /**
  *
- * @author LevelX2
+ * @author LevelX2, JayDi85
  */
 public class HarvesterDruidTest extends CardTestPlayerBase {
 
@@ -52,8 +53,10 @@ public class HarvesterDruidTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 2 red and 1 blue mana", "{U}{R}{R}", options.get(0).toString());
-        Assert.assertEquals("Player should be able to create 1 red and 3 blue mana", "{U}{U}{R}", options.get(1).toString());
+        assertDuplicatedManaOptions(options);
+        Assert.assertEquals(2, options.size());
+        assertManaOptions("{U}{R}{R}", options);
+        assertManaOptions("{U}{U}{R}", options);
     }
 
     @Test
@@ -68,9 +71,10 @@ public class HarvesterDruidTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 3 red and 1 blue mana", "{U}{R}{R}{R}", options.get(0).toString());
-        Assert.assertEquals("Player should be able to create 2 red and 2 blue mana", "{U}{U}{R}{R}", options.get(1).toString());
-        Assert.assertEquals("Player should be able to create 2 red and 2 blue mana", "{U}{U}{R}{R}", options.get(2).toString());
-        Assert.assertEquals("Player should be able to create 1 red and 3 blue mana", "{U}{U}{U}{R}", options.get(3).toString());
+        assertDuplicatedManaOptions(options);
+        Assert.assertEquals(3, options.size());
+        assertManaOptions("{U}{R}{R}{R}", options);
+        assertManaOptions("{U}{U}{R}{R}", options);
+        assertManaOptions("{U}{U}{U}{R}", options);
     }
 }

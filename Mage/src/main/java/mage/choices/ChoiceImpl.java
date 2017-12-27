@@ -40,6 +40,7 @@ import java.util.Set;
  */
 public class ChoiceImpl implements Choice, Serializable {
 
+    // TODO: add sorting to items
     protected boolean chosen;
     protected final boolean required;
     protected String choice;
@@ -47,6 +48,9 @@ public class ChoiceImpl implements Choice, Serializable {
     protected Set<String> choices = new LinkedHashSet<>();
     protected Map<String, String> keyChoices = new LinkedHashMap<>();
     protected String message;
+    protected String subMessage;
+    protected boolean searchEnabled = true; // enable for all windows by default
+    protected String searchText;
 
     public ChoiceImpl() {
         this(false);
@@ -61,6 +65,7 @@ public class ChoiceImpl implements Choice, Serializable {
         this.chosen = choice.chosen;
         this.required = choice.required;
         this.message = choice.message;
+        this.message = choice.subMessage;
         this.choices.addAll(choice.choices);
         this.choiceKey = choice.choiceKey;
         this.keyChoices = choice.keyChoices; // list should never change for the same object so copy by reference
@@ -87,6 +92,12 @@ public class ChoiceImpl implements Choice, Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String getSubMessage(){ return subMessage; }
+
+    @Override
+    public void setSubMessage(String subMessage){ this.subMessage = subMessage; }
 
     @Override
     public Set<String> getChoices() {
@@ -149,5 +160,25 @@ public class ChoiceImpl implements Choice, Serializable {
     public boolean isKeyChoice() {
         return !keyChoices.isEmpty();
     }
+
+    @Override
+    public boolean isSearchEnabled(){
+        return this.searchEnabled;
+    };
+
+    @Override
+    public void setSearchEnabled(boolean isEnabled){
+        this.searchEnabled = isEnabled;
+    };
+
+    @Override
+    public void setSearchText(String searchText){
+        this.searchText = searchText;
+    };
+
+    @Override
+    public String getSearchText(){
+        return this.searchText;
+    };
 
 }

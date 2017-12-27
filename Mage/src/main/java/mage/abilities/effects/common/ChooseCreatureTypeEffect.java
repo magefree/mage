@@ -33,6 +33,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.Choice;
+import mage.choices.ChoiceCreatureType;
 import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -63,9 +64,7 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
             mageObject = game.getObject(source.getSourceId());
         }
         if (controller != null && mageObject != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose creature type");
-            typeChoice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toCollection(LinkedHashSet::new)));
+            Choice typeChoice = new ChoiceCreatureType(mageObject);
             while (!controller.choose(outcome, typeChoice, game)) {
                 if (!controller.canRespond()) {
                     return false;

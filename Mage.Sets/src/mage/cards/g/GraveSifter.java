@@ -95,7 +95,7 @@ class GraveSifterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Choice typeChoice = new ChoiceCreatureType();
+        Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
         typeChoice.setMessage("Choose creature type to return cards from your graveyard");
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
