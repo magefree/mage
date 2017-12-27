@@ -28,12 +28,12 @@
 package mage.cards.p;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.OfferingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,6 +44,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 
@@ -96,10 +97,9 @@ class PatronOfTheNezumiTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD
-                && zEvent.getToZone() == Zone.GRAVEYARD) {
-            Card card = game.getCard(zEvent.getTargetId());
-            if (card != null && game.getOpponents(controllerId).contains(card.getOwnerId())) {
+        if (zEvent.isDiesEvent()) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
+            if (permanent != null && game.getOpponents(controllerId).contains(permanent.getOwnerId())) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(zEvent.getPlayerId()));
                 return true;
             }
