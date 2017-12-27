@@ -225,6 +225,9 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
         if (types.getColorless() > 0) {
             netManas.add(Mana.ColorlessMana(1));
         }
+        if (types.getAny() > 0) {
+            netManas.add(Mana.AnyMana(1));
+        }
         return netManas;
     }
 
