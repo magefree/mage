@@ -164,6 +164,7 @@ public class ConnectDialog extends MageDialog {
         btnFind1 = new javax.swing.JButton();
         btnFind2 = new javax.swing.JButton();
         btnFind3 = new javax.swing.JButton();
+        lblFastConnect = new javax.swing.JLabel();
 
         setTitle("Connect to server");
         setNormalBounds(new java.awt.Rectangle(100, 100, 410, 307));
@@ -174,7 +175,11 @@ public class ConnectDialog extends MageDialog {
         btnFind.setText("Find...");
         btnFind.setToolTipText("Shows the list of public servers");
         btnFind.setName("findServerBtn"); // NOI18N
-        btnFind.addActionListener(evt -> findPublicServerActionPerformed(evt));
+        btnFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findPublicServerActionPerformed(evt);
+            }
+        });
 
         lblPort.setLabelFor(txtPort);
         lblPort.setText("Port:");
@@ -195,63 +200,114 @@ public class ConnectDialog extends MageDialog {
         lblFlag.setText("User flag:");
 
         cbFlag.setEditable(true);
+        cbFlag.setMaximumRowCount(16);
 
         chkAutoConnect.setText("Automatically connect to this server next time");
         chkAutoConnect.setToolTipText("<HTML>If active this connect dialog will not be shown if you choose to connect.<br>\nInstead XMage tries to connect to the last server you were connected to.");
-        chkAutoConnect.addActionListener(evt -> chkAutoConnectActionPerformed(evt));
+        chkAutoConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkAutoConnectActionPerformed(evt);
+            }
+        });
 
         chkForceUpdateDB.setText("Force update of card database");
         chkForceUpdateDB.setToolTipText("<HTML>If active the comparison of the server cards database to the client database will be enforced.<br>If not, the comparison will only done if the database version of the client is lower than the version of the server.");
-        chkForceUpdateDB.addActionListener(evt -> chkForceUpdateDBActionPerformed(evt));
+        chkForceUpdateDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkForceUpdateDBActionPerformed(evt);
+            }
+        });
 
         jProxySettingsButton.setText("Proxy Settings...");
-        jProxySettingsButton.addActionListener(evt -> jProxySettingsButtonActionPerformed(evt));
+        jProxySettingsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jProxySettingsButtonActionPerformed(evt);
+            }
+        });
 
-        btnConnect.setText("Connect");
-        btnConnect.addActionListener(evt -> btnConnectActionPerformed(evt));
+        btnConnect.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnConnect.setText("Connect to server");
+        btnConnect.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConnectActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCancel.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
-        btnRegister.setText("Register new user");
+        btnRegister.setText("Register new user...");
         btnRegister.setToolTipText("<html>XMage now supports user authentication.<br>Register your account before you log in.<html>");
-        btnRegister.addActionListener(evt -> btnRegisterActionPerformed(evt));
+        btnRegister.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
-        btnForgotPassword.setText("Forgot password");
+        btnForgotPassword.setText("Forgot password...");
         btnForgotPassword.setToolTipText("<html>You can reset your password if you have registered<br>your account with an email address.</html>");
-        btnForgotPassword.addActionListener(evt -> btnForgotPasswordActionPerformed(evt));
+        btnForgotPassword.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnForgotPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnForgotPasswordActionPerformed(evt);
+            }
+        });
 
+        btnFind1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/de.png"))); // NOI18N
         btnFind1.setText("X");
-        btnFind1.setToolTipText("Connect to xmage.de");
+        btnFind1.setToolTipText("Connect to xmage.de (Europe, most popular)");
         btnFind1.setActionCommand("connectXmageDe");
         btnFind1.setAlignmentY(0.0F);
-        btnFind1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnFind1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnFind1.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnFind1.setMaximumSize(new java.awt.Dimension(42, 23));
         btnFind1.setMinimumSize(new java.awt.Dimension(42, 23));
         btnFind1.setName("connectXmageDeBtn"); // NOI18N
         btnFind1.setPreferredSize(new java.awt.Dimension(23, 23));
-        btnFind1.addActionListener(evt -> connectXmageDe(evt));
+        btnFind1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connectXmageDe(evt);
+            }
+        });
 
         btnFind2.setText("L");
-        btnFind2.setToolTipText("Connect to localhost");
+        btnFind2.setToolTipText("Connect to localhost (local server)");
         btnFind2.setActionCommand("connectLocalhost");
         btnFind2.setAlignmentY(0.0F);
-        btnFind2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnFind2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnFind2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFind2.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnFind2.setName("connectLocalhostBtn"); // NOI18N
         btnFind2.setPreferredSize(new java.awt.Dimension(23, 23));
-        btnFind2.addActionListener(evt -> connectLocalhost(evt));
+        btnFind2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connectLocalhost(evt);
+            }
+        });
 
+        btnFind3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/us.png"))); // NOI18N
         btnFind3.setText("W");
-        btnFind3.setToolTipText("Connect to woogerworks");
+        btnFind3.setToolTipText("Connect to Woogerworks (USA)");
         btnFind3.setActionCommand("connectWoogerworks");
         btnFind3.setAlignmentY(0.0F);
-        btnFind3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnFind3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnFind3.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnFind3.setName("connectWoogerworksBtn"); // NOI18N
         btnFind3.setPreferredSize(new java.awt.Dimension(23, 23));
-        btnFind3.addActionListener(evt -> connectWoogerworks(evt));
+        btnFind3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connectWoogerworks(evt);
+            }
+        });
+
+        lblFastConnect.setLabelFor(btnFind1);
+        lblFastConnect.setText("Fast connect to:");
+        lblFastConnect.setName(""); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -260,53 +316,49 @@ public class ConnectDialog extends MageDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblPort)
+                        .addComponent(lblServer)
+                        .addComponent(lblUserName)
+                        .addComponent(lblPassword))
+                    .addComponent(lblFlag, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblPort)
-                                .addComponent(lblServer)
-                                .addComponent(lblUserName)
-                                .addComponent(lblPassword))
-                            .addComponent(lblFlag, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(btnConnect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(chkForceUpdateDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
-                            .addComponent(jProxySettingsButton)
-                            .addComponent(cbFlag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtServer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                                    .addComponent(txtUserName, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnFind1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnFind3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnFind2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(69, 69, 69)))
-                                .addGap(8, 8, 8)
-                                .addComponent(btnFind, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnForgotPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jProxySettingsButton)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnRegister)
+                            .addComponent(txtServer, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbFlag, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnConnect)
+                                .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblFastConnect)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnForgotPassword)
+                                .addComponent(btnFind1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancel)))
-                        .addGap(26, 26, 26)))
+                                .addComponent(btnFind3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFind2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFind))
+                    .addComponent(lblStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chkForceUpdateDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblServer)
@@ -318,7 +370,8 @@ public class ConnectDialog extends MageDialog {
                     .addComponent(lblPort)
                     .addComponent(btnFind1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFind2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFind3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnFind3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFastConnect))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,18 +388,19 @@ public class ConnectDialog extends MageDialog {
                 .addComponent(chkAutoConnect)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkForceUpdateDB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jProxySettingsButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConnect)
-                    .addComponent(btnCancel)
-                    .addComponent(btnForgotPassword))
-                .addGap(3, 3, 3)
-                .addComponent(btnRegister)
-                .addContainerGap())
+                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnForgotPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnConnect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -661,6 +715,7 @@ public class ConnectDialog extends MageDialog {
     private javax.swing.JCheckBox chkAutoConnect;
     private javax.swing.JCheckBox chkForceUpdateDB;
     private javax.swing.JButton jProxySettingsButton;
+    private javax.swing.JLabel lblFastConnect;
     private javax.swing.JLabel lblFlag;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblPort;
