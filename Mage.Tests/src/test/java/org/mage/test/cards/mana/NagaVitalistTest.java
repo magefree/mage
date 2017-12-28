@@ -1,16 +1,11 @@
 package org.mage.test.cards.mana;
 
-import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-import org.mage.test.utils.ManaOptionsTestUtils;
-
 import static org.mage.test.utils.ManaOptionsTestUtils.manaOptionsContain;
 
 /**
@@ -32,11 +27,12 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         Enchant - Land
         When Gift of Paradise enters the battlefield, you gain 3 life.
         Enchanted land has "T: Add two mana of any one color to your mana pool."
-    */
+     */
     private final String giftParadise = "Gift of Paradise";
 
     @Test
     public void nagaVitalist_GiftOfParadiseCanAnyColor() {
+        // Mana pools don't empty as steps and phases end.
         addCard(Zone.BATTLEFIELD, playerA, "Upwelling");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.HAND, playerA, giftParadise);
@@ -54,7 +50,7 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         Assert.assertTrue("playerA must cast {Any}{Any}", manaOptionsContain(playerA.getManaAvailable(currentGame), "{Any}{Any}"));
     }
 
-    public void nagaVitalist_GiftOfParadisesLandCanGiveAnyColorToNaga_Setup(int giftCastTurn, int nagaManaTapTurn, String nagaManaTapColor){
+    public void nagaVitalist_GiftOfParadisesLandCanGiveAnyColorToNaga_Setup(int giftCastTurn, int nagaManaTapTurn, String nagaManaTapColor) {
         // test errors on enchanted ability do not apply for "any mana search" on different steps
 
         addCard(Zone.BATTLEFIELD, playerA, "Upwelling");
@@ -63,7 +59,6 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, nagaVitalist, 1);
 
-
         // cast and enchant swamp land to any color
         activateManaAbility(giftCastTurn, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
         activateManaAbility(giftCastTurn, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
@@ -71,25 +66,22 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         castSpell(giftCastTurn, PhaseStep.PRECOMBAT_MAIN, playerA, giftParadise, "Swamp");
 
         // activate red mana (by any from enchanted land)
-        activateManaAbility(nagaManaTapTurn, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add to your mana pool one mana of any");
+        activateManaAbility(nagaManaTapTurn, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add to your mana pool one mana of any");
         setChoice(playerA, nagaManaTapColor);
 
-        setStopAt(nagaManaTapTurn, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(nagaManaTapTurn, PhaseStep.POSTCOMBAT_MAIN);
         execute();
     }
 
     @Test
-    @Ignore // TODO: need to fix - on naga mana tap swamp do not have added ability "add 2 any mana" (but it have after step complete)
     public void nagaVitalist_GiftOfParadisesLandCanGiveAnyColorToNaga_SameStep1() {
         nagaVitalist_GiftOfParadisesLandCanGiveAnyColorToNaga_Setup(1, 1, "Red");
-
 
         //logger.info(playerA.getManaPool().getMana().toString());
         //logger.info(playerA.getManaAvailable(currentGame).toString());
         //for(Permanent perm: currentGame.getBattlefield().getAllActivePermanents(playerA.getId())){
         //    logger.info(perm.getIdName() + ": " + perm.getAbilities().toString());
         //}
-
         assertTapped("Forest", true);
         assertTapped(giftParadise, false);
         assertTapped("Swamp", false);
@@ -109,7 +101,6 @@ public class NagaVitalistTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: need to fix - on naga mana tap swamp do not have added ability "add 2 any mana" (but it have after step complete)
     public void nagaVitalist_GiftOfParadisesLandCanGiveAnyColorToNaga_SameStep3() {
         nagaVitalist_GiftOfParadisesLandCanGiveAnyColorToNaga_Setup(3, 3, "Red");
 
