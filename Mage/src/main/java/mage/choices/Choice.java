@@ -61,6 +61,7 @@ public interface Choice {
     Map<String,String> getKeyChoices();
     void setChoiceByKey(String choiceKey);
     String getChoiceKey();
+    String getChoiceValue();
 
     // search
     boolean isSearchEnabled();

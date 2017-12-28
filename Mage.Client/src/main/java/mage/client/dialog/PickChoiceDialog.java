@@ -23,6 +23,7 @@ import mage.client.MageFrame;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.MageDialogState;
+import org.jsoup.Connection;
 
 /**
  *
@@ -36,8 +37,20 @@ public class PickChoiceDialog extends MageDialog {
     DefaultListModel<KeyValueItem> dataModel = new DefaultListModel();
     
     final private static String HTML_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
-    
+
+    public void showDialog(Choice choice) {
+        showDialog(choice, null, null, null);
+    }
+
+    public void showDialog(Choice choice, String startSelectionValue) {
+        showDialog(choice, null, null, startSelectionValue);
+    }
+
     public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState) {
+        showDialog(choice, objectId, mageDialogState, null);
+    }
+    
+    public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState, String startSelectionValue) {
         this.choice = choice;
         
         setLabelText(this.labelMessage, choice.getMessage());
@@ -135,6 +148,23 @@ public class PickChoiceDialog extends MageDialog {
         
         // final load
         loadData();
+
+        // start selection
+        if((startSelectionValue != null)){
+            int selectIndex = -1;
+            for(int i = 0; i < this.listChoices.getModel().getSize() - 1; i++){
+                KeyValueItem listItem = (KeyValueItem)this.listChoices.getModel().getElementAt(i);
+                if (listItem.Key.equals(startSelectionValue)){
+                    selectIndex = i;
+                    break;
+                }
+            }
+
+            if(selectIndex >= 0){
+                this.listChoices.setSelectedIndex(selectIndex);
+                this.listChoices.ensureIndexIsVisible(selectIndex);
+            }
+        }
 
         this.setVisible(true);
     }

@@ -150,11 +150,21 @@ public class ChoiceImpl implements Choice, Serializable {
     }
 
     @Override
+    public String getChoiceValue() {
+        if ((keyChoices != null) && (keyChoices.containsKey(choiceKey))){
+            return keyChoices.get(choiceKey);
+        }else{
+            return null;
+        }
+    }
+
+    @Override
     public void setChoiceByKey(String choiceKey) {
         String choiceToSet = keyChoices.get(choiceKey);
         if (choiceToSet != null) {
             this.choice = choiceToSet;
             this.choiceKey = choiceKey;
+            this.chosen = true;
         }
     }
 
