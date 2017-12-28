@@ -65,7 +65,9 @@ public class ChoiceImpl implements Choice, Serializable {
         this.chosen = choice.chosen;
         this.required = choice.required;
         this.message = choice.message;
-        this.message = choice.subMessage;
+        this.subMessage = choice.subMessage;
+        this.searchEnabled = choice.searchEnabled;
+        this.searchText = choice.searchText;
         this.choices.addAll(choice.choices);
         this.choiceKey = choice.choiceKey;
         this.keyChoices = choice.keyChoices; // list should never change for the same object so copy by reference
