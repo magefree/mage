@@ -737,8 +737,8 @@ public class ConnectDialog extends MageDialog {
     }//GEN-LAST:event_btnFlagSearchActionPerformed
 
     private void doFastFlagSearch(){
-        Choice choice = new ChoiceImpl(false);        
-        
+        Choice choice = new ChoiceImpl(false);
+
         Map<String, String> choiceItems = new LinkedHashMap<>();
         DefaultComboBoxModel flagModel = (DefaultComboBoxModel)cbFlag.getModel();
         String[] flagItem;
