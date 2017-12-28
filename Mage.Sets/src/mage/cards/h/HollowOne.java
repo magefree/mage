@@ -35,17 +35,15 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.CyclingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.CardsCycledOrDiscardedThisTurnWatcher;
 
@@ -94,17 +92,9 @@ class HollowOneReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Player controller = game.getPlayer(source.getControllerId());
         CardsCycledOrDiscardedThisTurnWatcher watcher = (CardsCycledOrDiscardedThisTurnWatcher) game.getState().getWatchers().get(CardsCycledOrDiscardedThisTurnWatcher.class.getSimpleName());
-        int reductionAmount = 0;
-        if (controller != null
-                && watcher != null) {
-            for (Card card : watcher.getCardsCycledOrDiscardedThisTurn(controller.getId()).getCards(game)) {
-                if (card.getOwnerId().equals(controller.getId())) {
-                    reductionAmount++;
-                }
-            }
-            CardUtil.reduceCost(abilityToModify, reductionAmount * 2);
+        if (watcher != null) {
+            CardUtil.reduceCost(abilityToModify, watcher.getNumberOfCardsCycledOrDiscardedThisTurn(source.getControllerId()) * 2);
             return true;
         }
         return false;
