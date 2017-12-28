@@ -407,7 +407,7 @@ public abstract class AbilityImpl implements Ability {
         }
         if (!game.isSimulation()) {
             // inform about x costs now, so canceled announcements are not shown in the log
-            if (announceString != null) {
+            if ((announceString != null) && (!announceString.equals(""))) {
                 game.informPlayers(announceString);
             }
             if (variableManaCost != null) {
