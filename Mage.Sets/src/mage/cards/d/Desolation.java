@@ -63,7 +63,7 @@ public class Desolation extends CardImpl {
 
         // At the beginning of each end step, each player who tapped a land for mana this turn sacrifices a land. Desolation deals 2 damage to each player who sacrificed a Plains this way.
         BeginningOfEndStepTriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(new DesolationEffect(), TargetController.ANY, false);
-        this.addAbility(ability, new PlayerTappedForManaWatcher());
+        this.addAbility(ability, new DesolationWatcher());
     }
 
     public Desolation(final Desolation card) {
@@ -95,7 +95,7 @@ class DesolationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerTappedForManaWatcher watcher = (PlayerTappedForManaWatcher) game.getState().getWatchers().get(PlayerTappedForManaWatcher.class.getSimpleName());
+        DesolationWatcher watcher = (DesolationWatcher) game.getState().getWatchers().get(DesolationWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID playerId : watcher.getPlayersTappedForMana()) {
                 Player player = game.getPlayer(playerId);
@@ -103,7 +103,7 @@ class DesolationEffect extends OneShotEffect {
                     FilterControlledPermanent filter = new FilterControlledPermanent("land");
                     filter.add(new CardTypePredicate(CardType.LAND));
                     filter.add(new ControllerIdPredicate(playerId));
-                    TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
+                    TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
                     if (target.canChoose(player.getId(), game)) {
                         player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                         Permanent permanent = game.getPermanent(target.getFirstTarget());
@@ -127,15 +127,15 @@ class DesolationEffect extends OneShotEffect {
     }
 }
 
-class PlayerTappedForManaWatcher extends Watcher {
+class DesolationWatcher extends Watcher {
 
     private final Set<UUID> tappedForManaThisTurnPlayers = new HashSet<>();
 
-    public PlayerTappedForManaWatcher() {
-        super(PlayerTappedForManaWatcher.class.getSimpleName(), WatcherScope.GAME);
+    public DesolationWatcher() {
+        super(DesolationWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
-    public PlayerTappedForManaWatcher(final PlayerTappedForManaWatcher watcher) {
+    public DesolationWatcher(final DesolationWatcher watcher) {
         super(watcher);
         this.tappedForManaThisTurnPlayers.addAll(watcher.tappedForManaThisTurnPlayers);
     }
@@ -167,7 +167,7 @@ class PlayerTappedForManaWatcher extends Watcher {
     }
 
     @Override
-    public PlayerTappedForManaWatcher copy() {
-        return new PlayerTappedForManaWatcher(this);
+    public DesolationWatcher copy() {
+        return new DesolationWatcher(this);
     }
 }
