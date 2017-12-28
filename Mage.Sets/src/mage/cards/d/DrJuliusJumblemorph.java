@@ -42,7 +42,7 @@ import mage.constants.SuperType;
 public class DrJuliusJumblemorph extends CardImpl {
 
     public DrJuliusJumblemorph(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
         this.addSuperType(SuperType.LEGENDARY);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
