@@ -256,7 +256,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
                         lethalDamage = 1;
                     } else {
-                        lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
+                        lethalDamage = Math.max(blocker.getToughness().getValue() - blocker.getDamage(), 0);
                     }
                     if (lethalDamage >= damage) {
                         blocker.markDamage(damage, attacker.getId(), game, true, true);
