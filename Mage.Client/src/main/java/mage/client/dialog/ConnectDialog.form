@@ -26,17 +26,29 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="lblPort" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblServer" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="lblPort" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblServer" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Component id="lblFlag" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Component id="lblFlag" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPassword" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnConnect" max="32767" attributes="0"/>
@@ -48,16 +60,22 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="btnCancel" min="-2" pref="77" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jProxySettingsButton" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Component id="lblStatus" alignment="1" max="32767" attributes="0"/>
+                  <Component id="chkForceUpdateDB" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jProxySettingsButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="chkAutoConnect" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="panelFlag" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtServer" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtUserName" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtPassword" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cbFlag" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="txtPort" min="-2" pref="71" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="11" max="32767" attributes="0"/>
                               <Component id="lblFastConnect" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnFind1" min="-2" pref="70" max="-2" attributes="0"/>
@@ -67,14 +85,11 @@
                               <Component id="btnFind2" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="btnFind" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="lblStatus" alignment="1" max="32767" attributes="0"/>
-                  <Component id="chkForceUpdateDB" alignment="0" max="32767" attributes="0"/>
-                  <Component id="chkAutoConnect" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -97,29 +112,29 @@
                   <Component id="lblFastConnect" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtUserName" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtUserName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblUserName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtPassword" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="lblFlag" max="32767" attributes="0"/>
-                  <Component id="cbFlag" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="panelFlag" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="lblFlag" min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-              <Component id="chkAutoConnect" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="chkForceUpdateDB" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="chkAutoConnect" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="chkForceUpdateDB" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Component id="jProxySettingsButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="lblStatus" min="-2" pref="24" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="btnRegister" max="32767" attributes="0"/>
@@ -194,12 +209,6 @@
           <ComponentRef name="txtUserName"/>
         </Property>
         <Property name="text" type="java.lang.String" value="User flag:"/>
-      </Properties>
-    </Component>
-    <Component class="mage.client.util.gui.countryBox.CountryComboBox" name="cbFlag">
-      <Properties>
-        <Property name="editable" type="boolean" value="true"/>
-        <Property name="maximumRowCount" type="int" value="16"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="chkAutoConnect">
@@ -356,5 +365,60 @@
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
     </Component>
+    <Container class="javax.swing.JPanel" name="panelFlag">
+      <Properties>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[189, 30]"/>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+      <SubComponents>
+        <Component class="mage.client.util.gui.countryBox.CountryComboBox" name="cbFlag">
+          <Properties>
+            <Property name="editable" type="boolean" value="true"/>
+            <Property name="maximumRowCount" type="int" value="16"/>
+            <Property name="alignmentX" type="float" value="0.0"/>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[50, 18]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[278, 15]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.Box$Filler" name="filler1">
+          <Properties>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[5, 32767]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[5, 0]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[4, 0]"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.HorizontalStrut"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnFlagSearch">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/buttons/search_24.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Fast search your flag"/>
+            <Property name="alignmentX" type="float" value="1.0"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[23, 23]"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFlagSearchActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
