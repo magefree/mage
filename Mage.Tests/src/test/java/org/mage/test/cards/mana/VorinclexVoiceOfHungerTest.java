@@ -31,7 +31,6 @@ import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -68,19 +67,20 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
      * Vorinclex, Voice of Hunger is not mana doubling River of Tears.
      */
     @Test
-    @Ignore // TODO: need to fix Vorinclex, Voice of Hunger -- it's double fireup mana tap event
+    // @Ignore // TODO: need to fix Vorinclex, Voice of Hunger -- it's double fireup mana tap event
     public void testVorinclexVoiceofHungerRiverOfTearsManaMultiplier() {
         addCard(Zone.BATTLEFIELD, playerA, "Upwelling", 1);
+        addCard(Zone.HAND, playerA, "River of Tears", 1);
         // Trample
         // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
         // Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
         addCard(Zone.BATTLEFIELD, playerA, "Vorinclex, Voice of Hunger", 1);
         // {T}: Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
-        addCard(Zone.BATTLEFIELD, playerA, "River of Tears", 1);
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "River of Tears");
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U} to your mana pool");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U} to your mana pool");
 
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertManaPool(playerA, ManaType.BLUE, 2);
