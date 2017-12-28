@@ -109,6 +109,7 @@ public enum CounterType {
     PRESSURE("pressure"),
     PREY("prey"),
     REPAIR("repair"),
+    RUST("rust"),
     QUEST("quest"),
     SCREAM("scream"),
     SHELL("shell"),
