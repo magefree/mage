@@ -111,6 +111,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Counterspell", 69, Rarity.COMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Cowardice", 70, Rarity.RARE, mage.cards.c.Cowardice.class));
         cards.add(new SetCardInfo("Crackdown", 15, Rarity.RARE, mage.cards.c.Crackdown.class));
+        cards.add(new SetCardInfo("Crag Saurian", 185, Rarity.RARE, mage.cards.c.CragSaurian.class));
         cards.add(new SetCardInfo("Crash", 186, Rarity.COMMON, mage.cards.c.Crash.class));
         cards.add(new SetCardInfo("Credit Voucher", 289, Rarity.UNCOMMON, mage.cards.c.CreditVoucher.class));
         cards.add(new SetCardInfo("Crenellated Wall", 290, Rarity.UNCOMMON, mage.cards.c.CrenellatedWall.class));
@@ -364,6 +365,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("War Cadence", 224, Rarity.UNCOMMON, mage.cards.w.WarCadence.class));
         cards.add(new SetCardInfo("War Tax", 113, Rarity.UNCOMMON, mage.cards.w.WarTax.class));
         cards.add(new SetCardInfo("Warmonger", 225, Rarity.UNCOMMON, mage.cards.w.Warmonger.class));
+        cards.add(new SetCardInfo("Warpath", 226, Rarity.UNCOMMON, mage.cards.w.Warpath.class));
         cards.add(new SetCardInfo("Waterfront Bouncer", 114, Rarity.COMMON, mage.cards.w.WaterfrontBouncer.class));
         cards.add(new SetCardInfo("Wave of Reckoning", 56, Rarity.RARE, mage.cards.w.WaveOfReckoning.class));
         cards.add(new SetCardInfo("Wild Jhovall", 227, Rarity.COMMON, mage.cards.w.WildJhovall.class));
