@@ -111,6 +111,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Counterspell", 69, Rarity.COMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Cowardice", 70, Rarity.RARE, mage.cards.c.Cowardice.class));
         cards.add(new SetCardInfo("Crackdown", 15, Rarity.RARE, mage.cards.c.Crackdown.class));
+        cards.add(new SetCardInfo("Crag Saurian", 185, Rarity.RARE, mage.cards.c.CragSaurian.class));
         cards.add(new SetCardInfo("Crash", 186, Rarity.COMMON, mage.cards.c.Crash.class));
         cards.add(new SetCardInfo("Credit Voucher", 289, Rarity.UNCOMMON, mage.cards.c.CreditVoucher.class));
         cards.add(new SetCardInfo("Crenellated Wall", 290, Rarity.UNCOMMON, mage.cards.c.CrenellatedWall.class));
@@ -237,6 +238,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Noble Purpose", 32, Rarity.UNCOMMON, mage.cards.n.NoblePurpose.class));
         cards.add(new SetCardInfo("Notorious Assassin", 150, Rarity.RARE, mage.cards.n.NotoriousAssassin.class));
         cards.add(new SetCardInfo("Ogre Taskmaster", 206, Rarity.UNCOMMON, mage.cards.o.OgreTaskmaster.class));
+        cards.add(new SetCardInfo("Orim's Cure", 33, Rarity.COMMON, mage.cards.o.OrimsCure.class));
         cards.add(new SetCardInfo("Overtaker", 89, Rarity.RARE, mage.cards.o.Overtaker.class));
         cards.add(new SetCardInfo("Panacea", 308, Rarity.UNCOMMON, mage.cards.p.Panacea.class));
         cards.add(new SetCardInfo("Pangosaur", 261, Rarity.RARE, mage.cards.p.Pangosaur.class));
@@ -263,6 +265,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Rappelling Scouts", 41, Rarity.RARE, mage.cards.r.RappellingScouts.class));
         cards.add(new SetCardInfo("Remote Farm", 323, Rarity.COMMON, mage.cards.r.RemoteFarm.class));
         cards.add(new SetCardInfo("Renounce", 42, Rarity.UNCOMMON, mage.cards.r.Renounce.class));
+        cards.add(new SetCardInfo("Revered Elder", 43, Rarity.COMMON, mage.cards.r.ReveredElder.class));
         cards.add(new SetCardInfo("Reverent Mantra", 44, Rarity.RARE, mage.cards.r.ReverentMantra.class));
         cards.add(new SetCardInfo("Revive", 262, Rarity.UNCOMMON, mage.cards.r.Revive.class));
         cards.add(new SetCardInfo("Righteous Aura", 45, Rarity.UNCOMMON, mage.cards.r.RighteousAura.class));
@@ -362,6 +365,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("War Cadence", 224, Rarity.UNCOMMON, mage.cards.w.WarCadence.class));
         cards.add(new SetCardInfo("War Tax", 113, Rarity.UNCOMMON, mage.cards.w.WarTax.class));
         cards.add(new SetCardInfo("Warmonger", 225, Rarity.UNCOMMON, mage.cards.w.Warmonger.class));
+        cards.add(new SetCardInfo("Warpath", 226, Rarity.UNCOMMON, mage.cards.w.Warpath.class));
         cards.add(new SetCardInfo("Waterfront Bouncer", 114, Rarity.COMMON, mage.cards.w.WaterfrontBouncer.class));
         cards.add(new SetCardInfo("Wave of Reckoning", 56, Rarity.RARE, mage.cards.w.WaveOfReckoning.class));
         cards.add(new SetCardInfo("Wild Jhovall", 227, Rarity.COMMON, mage.cards.w.WildJhovall.class));
