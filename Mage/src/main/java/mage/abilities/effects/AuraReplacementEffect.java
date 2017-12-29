@@ -40,7 +40,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentImpl;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
@@ -99,7 +98,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         // Aura enters the battlefield attached
         Object object = game.getState().getValue("attachTo:" + card.getId());
         if (object != null) {
-            if (object instanceof PermanentImpl) {
+            if (object instanceof Permanent) {
                 // Aura is attached to a permanent on the battlefield
                 return false;
             }
