@@ -5,7 +5,9 @@
  */
 package mage.client.dialog;
 
+import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -13,9 +15,14 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.DefaultListModel;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.KeyStroke;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import mage.choices.Choice;
@@ -135,6 +142,19 @@ public class PickChoiceDialog extends MageDialog {
             }
         });
         
+        // listeners for ESC close
+        if(!choice.isRequired()){
+            String cancelName = "cancel";
+            InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+            inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
+            ActionMap actionMap = getRootPane().getActionMap();
+            actionMap.put(cancelName, new AbstractAction() {
+                public void actionPerformed(ActionEvent e) {
+                    doCancel();
+                }
+            });
+        }
+        
         // window settings
         MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         if (mageDialogState != null) {
@@ -167,6 +187,10 @@ public class PickChoiceDialog extends MageDialog {
         }
 
         this.setVisible(true);
+    }
+    
+    public void setWindowSize(int width, int heigth){
+        this.setSize(new Dimension(width, heigth));
     }
     
     private void loadData(){
@@ -229,19 +253,6 @@ public class PickChoiceDialog extends MageDialog {
         initComponents();
         this.listChoices.setModel(dataModel);
         this.setModal(true);
-
-        // Close the dialog when Esc is pressed        
-        /*
-        String cancelName = "cancel";
-        InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
-        ActionMap actionMap = getRootPane().getActionMap();
-        actionMap.put(cancelName, new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {                
-                doCancel();
-            }
-        });
-        */
     }
     
     public boolean setChoice() {

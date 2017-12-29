@@ -739,6 +739,7 @@ public class ConnectDialog extends MageDialog {
     private void doFastFlagSearch(){
         Choice choice = new ChoiceImpl(false);
 
+        // collect data from country combobox String[name][code]
         Map<String, String> choiceItems = new LinkedHashMap<>();
         DefaultComboBoxModel flagModel = (DefaultComboBoxModel)cbFlag.getModel();
         String[] flagItem;
@@ -751,14 +752,16 @@ public class ConnectDialog extends MageDialog {
         choice.setKeyChoices(choiceItems);
         choice.setMessage("Select your coutry");
         
-        // current selection restore
+        // current selection value restore
         String needSelectValue = null;
         flagItem = (String[])flagModel.getSelectedItem();
         if (flagItem != null){
             needSelectValue = flagItem[1];            
         }
-        
+
+        // ask for new value
         PickChoiceDialog dlg = new PickChoiceDialog();
+        dlg.setWindowSize(300, 500);
         dlg.showDialog(choice, needSelectValue);
         if(choice.isChosen()){
             flagItem = new String[2];
