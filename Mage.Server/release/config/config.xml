@@ -152,9 +152,11 @@
         <deckType name="Block Constructed - Amonkhet" jar="mage-deck-constructed.jar" className="mage.deck.AmonkhetBlock"/>
         <deckType name="Block Constructed - Battle for Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.BattleForZendikarBlock"/>
         <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.InnistradBlock"/>
+        <deckType name="Block Constructed - Ixalan" jar="mage-deck-constructed.jar" className="mage.deck.IxalanBlock"/>
         <deckType name="Block Constructed - Kaladesh" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.KaladeshBlock"/>
         <deckType name="Block Constructed - Kamigawa" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.KamigawaBlock"/>
         <deckType name="Block Constructed - Khans of Tarkir" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.KhansOfTarkirBlock"/>
+        <deckType name="Block Constructed - Lorwyn" jar="mage-deck-constructed.jar" className="mage.deck.LorwynBlock"/>
         <deckType name="Block Constructed - Return to Ravnica" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.ReturnToRavnicaBlock"/>
         <deckType name="Block Constructed - Scars of Mirrodin" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.ScarsOfMirrodinBlock"/>
         <deckType name="Block Constructed - Shadowmoor" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.ShadowmoorBlock"/>
