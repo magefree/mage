@@ -12,9 +12,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.DefaultListModel;
@@ -30,7 +28,6 @@ import mage.client.MageFrame;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.MageDialogState;
-import org.jsoup.Connection;
 
 /**
  *
@@ -66,7 +63,7 @@ public class PickChoiceDialog extends MageDialog {
         btCancel.setEnabled(!choice.isRequired());
         
         // 2 modes: string or key-values
-        // sore data in allItems for inremental filtering        
+        // sore data in allItems for inremental filtering
         // http://logicbig.com/tutorials/core-java-tutorial/swing/list-filter/
         this.allItems.clear();
         if (choice.isKeyChoice()){            
@@ -77,6 +74,18 @@ public class PickChoiceDialog extends MageDialog {
             for (String value: choice.getChoices()){
                 this.allItems.add(new KeyValueItem(value, value));                
             }
+        }
+
+        // sorting
+        if(choice.isSortEnabled()){
+            Collections.sort(this.allItems, new Comparator<KeyValueItem>() {
+                @Override
+                public int compare(KeyValueItem o1, KeyValueItem o2) {
+                    Integer n1 = choice.getSortData().get(o1.Key);
+                    Integer n2 = choice.getSortData().get(o2.Key);
+                    return n1.compareTo(n2);
+                }
+            });
         }
         
         // search

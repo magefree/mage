@@ -47,6 +47,7 @@ public class ChoiceImpl implements Choice, Serializable {
     protected String choiceKey;
     protected Set<String> choices = new LinkedHashSet<>();
     protected Map<String, String> keyChoices = new LinkedHashMap<>();
+    protected Map<String, Integer> sortData = new LinkedHashMap<>();
     protected String message;
     protected String subMessage;
     protected boolean searchEnabled = true; // enable for all windows by default
@@ -70,7 +71,8 @@ public class ChoiceImpl implements Choice, Serializable {
         this.searchText = choice.searchText;
         this.choices.addAll(choice.choices);
         this.choiceKey = choice.choiceKey;
-        this.keyChoices = choice.keyChoices; // list should never change for the same object so copy by reference
+        this.keyChoices = choice.keyChoices; // list should never change for the same object so copy by reference TODO: check errors with that, it that ok? Color list is static
+        this.sortData = choice.sortData;
     }
 
     @Override
@@ -191,6 +193,21 @@ public class ChoiceImpl implements Choice, Serializable {
     @Override
     public String getSearchText(){
         return this.searchText;
+    };
+
+    @Override
+    public boolean isSortEnabled(){
+        return (this.sortData != null) && !this.sortData.isEmpty();
+    };
+
+    @Override
+    public void setSortData(Map<String, Integer> sortData){
+        this.sortData = sortData;
+    };
+
+    @Override
+    public Map<String, Integer> getSortData(){
+        return this.sortData;
     };
 
 }

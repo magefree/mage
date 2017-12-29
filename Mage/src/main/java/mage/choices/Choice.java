@@ -68,4 +68,9 @@ public interface Choice {
     void setSearchEnabled(boolean isEnabled);
     void setSearchText(String searchText);
     String getSearchText();
+
+    // sorting
+    boolean isSortEnabled();
+    void setSortData(Map<String, Integer> sortData);
+    Map<String, Integer> getSortData();
 }
