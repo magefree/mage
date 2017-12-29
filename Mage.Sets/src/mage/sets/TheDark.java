@@ -134,6 +134,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Season of the Witch", 14, Rarity.RARE, mage.cards.s.SeasonOfTheWitch.class));
         cards.add(new SetCardInfo("Sisters of the Flame", 73, Rarity.UNCOMMON, mage.cards.s.SistersOfTheFlame.class));
         cards.add(new SetCardInfo("Skull of Orm", 106, Rarity.UNCOMMON, mage.cards.s.SkullOfOrm.class));
+        cards.add(new SetCardInfo("Sorrow's Path", 116, Rarity.RARE, mage.cards.s.SorrowsPath.class));
         cards.add(new SetCardInfo("Squire", 90, Rarity.COMMON, mage.cards.s.Squire.class));
         cards.add(new SetCardInfo("Standing Stones", 107, Rarity.UNCOMMON, mage.cards.s.StandingStones.class));
         cards.add(new SetCardInfo("Stone Calendar", 108, Rarity.RARE, mage.cards.s.StoneCalendar.class));
