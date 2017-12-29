@@ -262,6 +262,7 @@ public enum MagicCardsImageSource implements CardImageSource {
             put("DDQ", "duel-decks-blessed-vs-cursed");
             put("DDR", "duel-decks-nissa-vs-ob-nixilis");
             put("DDS", "duel-decks-mind-vs-might");
+            put("DDS", "duel-decks-merfolk-vs-goblin");
             put("DGM", "dragons-maze");
             put("DKA", "dark-ascension");
             put("DRB", "from-the-vault-dragons");
