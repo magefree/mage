@@ -180,6 +180,42 @@ public class VerifyCardDataTest {
         }
     }
 
+    @Test
+    public void checkMissingSets(){
+
+        Collection<String> errorsList = new ArrayList<>();
+
+        int totalMissingSets = 0;
+        int totalMissingCards = 0;
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        for(Map.Entry<String, JsonSet> refEntry: MtgJson.sets().entrySet()){
+            JsonSet refSet = refEntry.getValue();
+
+            // replace codes for aliases
+            String searchSet = MtgJson.mtgJsonToXMageCodes.getOrDefault(refSet.code, refSet.code);
+
+            ExpansionSet mageSet = Sets.findSet(searchSet);
+            if(mageSet == null){
+                totalMissingSets = totalMissingSets + 1;
+                totalMissingCards = totalMissingCards + refSet.cards.size();
+                errorsList.add("Warning: missing set " + refSet.code + " - " + refSet.name + " (cards: " + refSet.cards.size() + ")");
+            }
+        }
+        if(errorsList.size() > 0){
+            errorsList.add("Warning: total missing sets: " + totalMissingSets + ", with missing cards: " + totalMissingCards);
+        }
+
+
+        for (String error: errorsList) {
+            System.out.println(error);
+        }
+
+        if (errorsList.size() > 0){
+
+            //Assert.fail("DB have wrong card classes, founded errors: " + errorsList.size());
+        }
+    }
+
     private static final Pattern SHORT_JAVA_STRING = Pattern.compile("(?<=\")[A-Z][a-z]+(?=\")");
 
     private Set<String> findSourceTokens(Class c) throws IOException {
