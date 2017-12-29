@@ -166,30 +166,32 @@ class GeneralJarkeldSwitchBlockersEffect extends OneShotEffect {
 
     private void handleMultiBlockers(Set<Permanent> blockers, CombatGroup chosenGroup1, CombatGroup chosenGroup2, Player controller, Game game) {
         // for handling multi-blockers (Two Headed Giant of Foriys, etc.)
+        blockerIteration:
         for (Permanent blocker : blockers) {
             if (blocker.getBlocking() > 1) {
                 CombatGroup blockGroup = null;
                 for (CombatGroup group : game.getCombat().getBlockingGroups()) {
                     if (group.getBlockers().contains(blocker.getId())) {
                         blockGroup = group;
+                        break;
                     }
                 }
                 if (blockGroup != null) {
                     CombatGroup chosenGroup = null;
-                    int sameBlocked = 0;
+                    boolean sameBlocked = false;
                     for (CombatGroup group : game.getCombat().getGroups()) {
                         if (group.getBlocked() && group.getBlockers().contains(blocker.getId())) {
                             if (group == chosenGroup1 || group == chosenGroup2) {
-                                sameBlocked++;
-                                if (sameBlocked > 1) {
-                                    break;
+                                if (sameBlocked) {
+                                    continue blockerIteration;
                                 }
+                                sameBlocked = true;
                                 chosenGroup = group;
                             }
                         }
                     }
                     
-                    if (sameBlocked == 1 && chosenGroup != null) { // if none (should not happen) or all the blockers correspond to Jarkeld's targets, the blockers remain the same
+                    if (sameBlocked && chosenGroup != null) { // if none (should not happen) or all the blockers correspond to Jarkeld's targets, the blockers remain the same
                         CombatGroup otherGroup = (chosenGroup.equals(chosenGroup1) ? chosenGroup2 : chosenGroup1);
                         chosenGroup.remove(blocker.getId());
                         for (UUID attacker : chosenGroup.getAttackers()) {

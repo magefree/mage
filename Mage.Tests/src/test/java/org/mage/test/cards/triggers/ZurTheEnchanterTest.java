@@ -66,7 +66,7 @@ public class ZurTheEnchanterTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Diplomatic Immunity"); // {1}{U}
         // Enchant creature
         // Enchanted creature gets +1/+1 for each card in your hand.
-        addCard(Zone.LIBRARY, playerB, "Empyrial Armor");
+        addCard(Zone.LIBRARY, playerB, "Empyrial Armor", 2);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Diplomatic Immunity", "Zur the Enchanter");
 

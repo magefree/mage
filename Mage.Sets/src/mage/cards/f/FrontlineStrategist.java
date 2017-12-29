@@ -25,46 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.t;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DealsDamageToACreatureAllTriggeredAbility;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author cbt33
+ * @author L_J
  */
-public class ToxinSliver extends CardImpl {
+public class FrontlineStrategist extends CardImpl {
 
-    public ToxinSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.subtype.add(SubType.SLIVER);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Soldier creatures");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Whenever a Sliver deals combat damage to a creature, destroy that creature. It can't be regenerated.
-        this.addAbility(new DealsDamageToACreatureAllTriggeredAbility(
-                new DestroyTargetEffect(true), false,
-                new FilterCreaturePermanent(SubType.SLIVER, "a Sliver"),
-                SetTargetPointer.PERMANENT_TARGET, true));
-
+    static {
+        filter.add(Predicates.not(new SubtypePredicate(SubType.SOLDIER)));
     }
 
-    public ToxinSliver(final ToxinSliver card) {
+    public FrontlineStrategist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Morph {W}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}")));
+        // When Frontline Strategist is turned face up, prevent all combat damage non-Soldier creatures would deal this turn.
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true).setText("prevent all combat damage non-Soldier creatures would deal this turn")));
+    }
+
+    public FrontlineStrategist(final FrontlineStrategist card) {
         super(card);
     }
 
     @Override
-    public ToxinSliver copy() {
-        return new ToxinSliver(this);
+    public FrontlineStrategist copy() {
+        return new FrontlineStrategist(this);
     }
 }

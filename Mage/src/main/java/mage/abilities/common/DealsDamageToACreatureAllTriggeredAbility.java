@@ -19,14 +19,29 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author Ludwig.Hirth
+ * @author LevelX2
  */
 public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private final boolean combatDamageOnly;
     private final FilterPermanent filterPermanent;
     private final SetTargetPointer setTargetPointer;
-    
+
+    /**
+     * This ability works only for permanents doing damage.
+     *
+     * @param effect
+     * @param optional
+     * @param filterPermanent The filter that restricts which permanets have to
+     * trigger
+     * @param setTargetPointer The target to be set to target pointer of the
+     * effect.<br>
+     * - PLAYER = player controlling the damage source.<br>
+     * - PERMANENT = source permanent.<br>
+     * - PERMANENT_TARGET = damaged creature.
+     * @param combatDamageOnly The flag to determine if only combat damage has
+     * to trigger
+     */
     public DealsDamageToACreatureAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filterPermanent, SetTargetPointer setTargetPointer, boolean combatDamageOnly) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.combatDamageOnly = combatDamageOnly;
@@ -64,7 +79,13 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
                             effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
                             break;
                         case PERMANENT:
-                            effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
+                            effect.setTargetPointer(new FixedTarget(permanent, game));
+                            break;
+                        case PERMANENT_TARGET:
+                            Permanent permanent_target = game.getPermanentOrLKIBattlefield(event.getTargetId());
+                            if (permanent_target != null) {
+                                effect.setTargetPointer(new FixedTarget(permanent_target, game));
+                            }
                             break;
                     }
 
@@ -77,7 +98,7 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public String getRule() {
-        return "Whenever " + filterPermanent.getMessage() + " deals " 
-                + (combatDamageOnly ? "combat ":"") + "damage to a creature, " + super.getRule();
+        return "Whenever " + filterPermanent.getMessage() + " deals "
+                + (combatDamageOnly ? "combat " : "") + "damage to a creature, " + super.getRule();
     }
 }
