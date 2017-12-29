@@ -37,19 +37,20 @@ import java.util.Set;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class ChoiceColor extends ChoiceImpl {
 
-    //public static final Set<String> colorChoices =  new HashSet<>(); // JayDi85: uncomment 1 of 2 to broke unit tests find wrong tests (?)
-    public static final ArrayList<String> colorChoices =  new ArrayList<>();
+    private static final ArrayList<String> colorChoices =  getBaseColors();
 
-    static {
-        colorChoices.add("Green");
-        colorChoices.add("Blue");
-        colorChoices.add("Black");
-        colorChoices.add("Red");
-        colorChoices.add("White");
+    public static ArrayList<String> getBaseColors(){
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("Green");
+        arr.add("Blue");
+        arr.add("Black");
+        arr.add("Red");
+        arr.add("White");
+        return arr;
     }
 
     public ChoiceColor() {
@@ -72,7 +73,6 @@ public class ChoiceColor extends ChoiceImpl {
         super(required);
 
         this.choices.addAll(colorChoices);
-        //this.setChoices(colorChoices); // JayDi85: uncomment 2 of 2 to broke unit tests find wrong tests (?)
 
         this.setMessage(chooseMessage);
         this.setSubMessage(chooseSubMessage);
