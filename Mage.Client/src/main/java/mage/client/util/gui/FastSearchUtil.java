@@ -32,8 +32,8 @@ public class FastSearchUtil {
         Map<String, Integer> choiceSorting = new HashMap<>(comboModel.getSize());
         String item;
 
-        for(int i = 0; i < comboModel.getSize() - 1; i++){
-            item = (String)comboModel.getElementAt(i);
+        for(int i = 0; i < comboModel.getSize(); i++){
+            item = comboModel.getElementAt(i).toString();
             choiceItems.put(item, item);
             choiceSorting.put(item, i); // need so sorting
         }
@@ -44,7 +44,7 @@ public class FastSearchUtil {
 
         // current selection value restore
         String needSelectValue;
-        needSelectValue = (String)comboModel.getSelectedItem();
+        needSelectValue = comboModel.getSelectedItem().toString();
 
         // ask for new value
         PickChoiceDialog dlg = new PickChoiceDialog();
@@ -52,7 +52,13 @@ public class FastSearchUtil {
         dlg.showDialog(choice, needSelectValue);
         if(choice.isChosen()){
             item = choice.getChoiceKey();
-            comboModel.setSelectedItem(item);
+
+            // compatible select for object's models (use setSelectedIndex instead setSelectedObject)
+            for(int i = 0; i < comboModel.getSize(); i++){
+                if(comboModel.getElementAt(i).toString().equals(item)){
+                    combo.setSelectedIndex(i);
+                }
+            }
         }
     }
 }

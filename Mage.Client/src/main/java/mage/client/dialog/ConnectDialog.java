@@ -744,7 +744,7 @@ public class ConnectDialog extends MageDialog {
         DefaultComboBoxModel flagModel = (DefaultComboBoxModel)cbFlag.getModel();
         String[] flagItem;
         
-        for(int i = 0; i < flagModel.getSize() - 1; i++){
+        for(int i = 0; i < flagModel.getSize(); i++){
             flagItem = (String[])flagModel.getElementAt(i);
             choiceItems.put(flagItem[1], flagItem[0]);
         }

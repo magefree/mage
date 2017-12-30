@@ -181,7 +181,7 @@ public class PickChoiceDialog extends MageDialog {
         // start selection
         if((startSelectionValue != null)){
             int selectIndex = -1;
-            for(int i = 0; i < this.listChoices.getModel().getSize() - 1; i++){
+            for(int i = 0; i < this.listChoices.getModel().getSize(); i++){
                 KeyValueItem listItem = (KeyValueItem)this.listChoices.getModel().getElementAt(i);
                 if (listItem.Key.equals(startSelectionValue)){
                     selectIndex = i;
