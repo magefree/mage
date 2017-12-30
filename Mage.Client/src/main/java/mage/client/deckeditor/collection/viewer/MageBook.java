@@ -465,6 +465,12 @@ public class MageBook extends JComponent {
         LinkedList<Integer> haveNumbers = new LinkedList<>();
         for (ExpansionSet.SetCardInfo card: cards){
             int cardNumber = card.getCardNumberAsInt();
+
+            // skip xmage special numbers for cards (TODO: replace full art cards numbers from 180+20 to 180b, 180c and vice versa like scryfall)
+            if(cardNumber > 500){
+                continue;
+            }
+
             startNumber = min(startNumber, cardNumber);
             endNumber = Math.max(endNumber, cardNumber);
             haveNumbers.add(cardNumber);
