@@ -61,6 +61,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Arctic Nishoba", 102, Rarity.UNCOMMON, mage.cards.a.ArcticNishoba.class));
         cards.add(new SetCardInfo("Arcum Dagsson", 27, Rarity.RARE, mage.cards.a.ArcumDagsson.class));
         cards.add(new SetCardInfo("Aurochs Herd", 103, Rarity.COMMON, mage.cards.a.AurochsHerd.class));
+        cards.add(new SetCardInfo("Balduvian Frostwaker", 28, Rarity.UNCOMMON, mage.cards.b.BalduvianFrostwaker.class));
         cards.add(new SetCardInfo("Balduvian Rage", 76, Rarity.UNCOMMON, mage.cards.b.BalduvianRage.class));
         cards.add(new SetCardInfo("Balduvian Warlord", 77, Rarity.UNCOMMON, mage.cards.b.BalduvianWarlord.class));
         cards.add(new SetCardInfo("Blizzard Specter", 126, Rarity.UNCOMMON, mage.cards.b.BlizzardSpecter.class));
@@ -91,11 +92,14 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Freyalise's Radiance", 108, Rarity.UNCOMMON, mage.cards.f.FreyalisesRadiance.class));
         cards.add(new SetCardInfo("Frost Marsh", 146, Rarity.UNCOMMON, mage.cards.f.FrostMarsh.class));
         cards.add(new SetCardInfo("Frost Raptor", 34, Rarity.COMMON, mage.cards.f.FrostRaptor.class));
+        cards.add(new SetCardInfo("Frostweb Spider", 109, Rarity.COMMON, mage.cards.f.FrostwebSpider.class));
         cards.add(new SetCardInfo("Frozen Solid", 35, Rarity.COMMON, mage.cards.f.FrozenSolid.class));
         cards.add(new SetCardInfo("Fury of the Horde", 81, Rarity.RARE, mage.cards.f.FuryOfTheHorde.class));
         cards.add(new SetCardInfo("Garza Zol, Plague Queen", 129, Rarity.RARE, mage.cards.g.GarzaZolPlagueQueen.class));
+        cards.add(new SetCardInfo("Garza's Assassin", 57, Rarity.RARE, mage.cards.g.GarzasAssassin.class));
         cards.add(new SetCardInfo("Gelid Shackles", 6, Rarity.COMMON, mage.cards.g.GelidShackles.class));
         cards.add(new SetCardInfo("Glacial Plating", 7, Rarity.UNCOMMON, mage.cards.g.GlacialPlating.class));
+        cards.add(new SetCardInfo("Goblin Furrier", 82, Rarity.COMMON, mage.cards.g.GoblinFurrier.class));
         cards.add(new SetCardInfo("Goblin Rimerunner", 83, Rarity.COMMON, mage.cards.g.GoblinRimerunner.class));
         cards.add(new SetCardInfo("Greater Stone Spirit", 84, Rarity.UNCOMMON, mage.cards.g.GreaterStoneSpirit.class));
         cards.add(new SetCardInfo("Grim Harvest", 58, Rarity.COMMON, mage.cards.g.GrimHarvest.class));
@@ -150,6 +154,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Rimebound Dead", 69, Rarity.COMMON, mage.cards.r.RimeboundDead.class));
         cards.add(new SetCardInfo("Rime Transfusion", 68, Rarity.UNCOMMON, mage.cards.r.RimeTransfusion.class));
         cards.add(new SetCardInfo("Rimefeather Owl", 42, Rarity.RARE, mage.cards.r.RimefeatherOwl.class));
+        cards.add(new SetCardInfo("Rimehorn Aurochs", 118, Rarity.UNCOMMON, mage.cards.r.RimehornAurochs.class));
         cards.add(new SetCardInfo("Rimescale Dragon", 95, Rarity.RARE, mage.cards.r.RimescaleDragon.class));
         cards.add(new SetCardInfo("Rimewind Cryomancer", 43, Rarity.UNCOMMON, mage.cards.r.RimewindCryomancer.class));
         cards.add(new SetCardInfo("Rimewind Taskmage", 44, Rarity.COMMON, mage.cards.r.RimewindTaskmage.class));
@@ -187,6 +192,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Thermopod", 100, Rarity.COMMON, mage.cards.t.Thermopod.class));
         cards.add(new SetCardInfo("Thrumming Stone", 142, Rarity.RARE, mage.cards.t.ThrummingStone.class));
         cards.add(new SetCardInfo("Tresserhorn Sinks", 150, Rarity.UNCOMMON, mage.cards.t.TresserhornSinks.class));
+        cards.add(new SetCardInfo("Tresserhorn Skyknight", 73, Rarity.UNCOMMON, mage.cards.t.TresserhornSkyknight.class));
         cards.add(new SetCardInfo("Ursine Fylgja", 22, Rarity.UNCOMMON, mage.cards.u.UrsineFylgja.class));
         cards.add(new SetCardInfo("Vanish into Memory", 133, Rarity.UNCOMMON, mage.cards.v.VanishIntoMemory.class));
         cards.add(new SetCardInfo("Vexing Sphinx", 50, Rarity.RARE, mage.cards.v.VexingSphinx.class));
