@@ -2324,7 +2324,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (newTarget.choose(Outcome.Neutral, playerId, targetPlayerId, game)) {
                     finishedSearch = true;
                 }
-                if (!targetPlayerId.equals(playerId) || handleLibraryCastableCreatures(library, game, targetPlayerId)) { // for handling Panglacial Wurm
+                if (!targetPlayerId.equals(playerId) || handleLibraryCastableCards(library, game, targetPlayerId)) { // for handling Panglacial Wurm
                     if (finishedSearch) {
                         target.getTargets().clear();
                         for (UUID targetId : newTarget.getTargets()) {
@@ -2342,7 +2342,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
-    private boolean handleLibraryCastableCreatures(Library library, Game game, UUID targetPlayerId) {
+    private boolean handleLibraryCastableCards(Library library, Game game, UUID targetPlayerId) {
         // for handling Panglacial Wurm
         Map<UUID, String> libraryCastableCardTracker = new HashMap<>();
         for (Card card : library.getCards(game)) {
@@ -2374,55 +2374,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                                         if (player.cast(card.getSpellAbility(), game, false)) {
                                             choice.remove(chosenCard);
                                             chooseCard.setChoices(choice);
-                                        }
-                                    }
-                                }
-                            }
-                            continue;
-                        }
-                        break;
-                    }
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private boolean handleLibraryCastableCreatures(Library library, Game game, UUID targetPlayerId, TargetCardInLibrary newTarget) {
-        // for handling Panglacial Wurm
-        Map<UUID, String> libraryCastableCardTracker = new HashMap<>();
-        for (Card card : library.getCards(game)) {
-            for (Ability ability : card.getAbilities()) {
-                if (ability.getClass() == WhileSearchingPlayFromLibraryAbility.class) {
-                    libraryCastableCardTracker.put(card.getId(), card.getName() + " [" + card.getId().toString().substring(0, 3) + "]");
-                }
-            }
-        }
-        if (!libraryCastableCardTracker.isEmpty()) {
-            Player player = game.getPlayer(targetPlayerId);
-            if (player != null) {
-                if (player.isHuman() && player.chooseUse(Outcome.AIDontUseIt, "Cast a creature card from your library? (choose \"No\" to finish search)", null, game)) {
-                    ChoiceImpl chooseCard = new ChoiceImpl();
-                    chooseCard.setMessage("Which creature do you wish to cast from your library?");
-                    Set<String> choice = new LinkedHashSet<>();
-                    for (Entry<UUID, String> entry : libraryCastableCardTracker.entrySet()) {
-                        choice.add(new java.util.AbstractMap.SimpleEntry<UUID, String>(entry).getValue());
-                    }
-                    chooseCard.setChoices(choice);
-                    while (!choice.isEmpty()) {
-                        if (player.choose(Outcome.AIDontUseIt, chooseCard, game)) {
-                            String chosenCard = chooseCard.getChoice();
-                            for (Entry<UUID, String> entry : libraryCastableCardTracker.entrySet()) {
-                                if (chosenCard.equals(entry.getValue())) {
-                                    Card card = game.getCard(entry.getKey());
-                                    if (card != null) {
-                                        // TODO: fix first target being impossible to rechoose
-                                        // TODO: fix costs (why is Panglacial Wurm automatically accepting payment?)
-                                        if (player.cast(card.getSpellAbility(), game, false)) {
-                                            choice.remove(chosenCard);
-                                            chooseCard.setChoices(choice);
-                                            newTarget.remove(card.getId());
                                         }
                                     }
                                 }
