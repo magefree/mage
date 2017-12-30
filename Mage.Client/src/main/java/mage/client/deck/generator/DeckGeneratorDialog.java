@@ -42,6 +42,7 @@ import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.gui.ColorsChooser;
+import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
 
 /**
@@ -106,21 +107,38 @@ public class DeckGeneratorDialog {
         c.weightx = 0.10;
         mainPanel.add(formatSetText, c);
 
-        // Format/set dropdown
+        // Format/set dropdown with search button
+        JPanel setPanel = new JPanel();        
+        setPanel.setLayout(new javax.swing.BoxLayout(setPanel, javax.swing.BoxLayout.LINE_AXIS));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
         c.gridy = 1;
         c.ipadx = 30;
         c.insets = new Insets(5, 10, 0, 10);
-        c.weightx = 0.90;
+        c.weightx = 0.80;        
+        mainPanel.add(setPanel, c);
+        
         cbSets = new JComboBox<>(ConstructedFormats.getTypes());
         cbSets.setSelectedIndex(0);
-        mainPanel.add(cbSets, c);
+        cbSets.setAlignmentX(0.0F);
+        setPanel.add(cbSets);
 
         String prefSet = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_SET, null);
         if (prefSet != null) {
             cbSets.setSelectedItem(prefSet);
         }
+        
+        JButton btn = new JButton();
+        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_32.png")));
+        btn.setToolTipText(FastSearchUtil.DEFAULT_EXPANSION_TOOLTIP_MESSAGE);
+        btn.setAlignmentX(1.0F);                
+        btn.setPreferredSize(new java.awt.Dimension(32, 32));        
+        btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FastSearchUtil.showFastSearchForStringComboBox(cbSets, FastSearchUtil.DEFAULT_EXPANSION_SEARCH_MESSAGE);
+            }
+        });
+        //setPanel.add(btn, c); // TODO: can't show pickdialog here... need to replace standard modal dialog (JOptionPane) to internal mage dialog
 
         // Deck size label
         c.fill = GridBagConstraints.HORIZONTAL;

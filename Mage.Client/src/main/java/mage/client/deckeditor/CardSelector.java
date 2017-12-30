@@ -47,13 +47,12 @@ import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.choices.ChoiceImpl;
 import mage.client.MageFrame;
 import mage.client.cards.*;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
-import mage.client.dialog.PickChoiceDialog;
 import mage.client.util.GUISizeHelper;
+import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
@@ -215,8 +214,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             this.cards.add(card);
         }
         filterCards();
-    }
-
+    }    
+    
     public void loadCards(BigCard bigCard) {
         this.bigCard = bigCard;
         this.btnBooster.setVisible(true);
@@ -226,40 +225,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 //        cbExpansionSet.setModel(new DefaultComboBoxModel<>(ConstructedFormats.getTypes()));
         // Action event on Expansion set triggers loadCards method
         cbExpansionSet.setSelectedIndex(0);
-    }
-    
-    public void doFastExpansionSearch(){
-        mage.choices.Choice choice = new ChoiceImpl(false);
-
-        // collect data from expansion combobox (String)
-        DefaultComboBoxModel comboModel = (DefaultComboBoxModel)cbExpansionSet.getModel();        
-        Map<String, String> choiceItems = new HashMap<>(comboModel.getSize());
-        Map<String, Integer> choiceSorting = new HashMap<>(comboModel.getSize());
-        String item;
-        
-        for(int i = 0; i < comboModel.getSize() - 1; i++){
-            item = (String)comboModel.getElementAt(i);
-            choiceItems.put(item, item);
-            choiceSorting.put(item, i); // need so sorting
-        }
-        
-        choice.setKeyChoices(choiceItems);
-        choice.setSortData(choiceSorting);
-        choice.setMessage("Select set or expansion");
-        
-        // current selection value restore
-        String needSelectValue;
-        needSelectValue = (String)comboModel.getSelectedItem();        
-
-        // ask for new value
-        PickChoiceDialog dlg = new PickChoiceDialog();
-        dlg.setWindowSize(300, 500);
-        dlg.showDialog(choice, needSelectValue);
-        if(choice.isChosen()){
-            item = choice.getChoiceKey();
-            comboModel.setSelectedItem(item);
-        }
-    }
+    }       
 
     private FilterCard buildFilter() {
         FilterCard filter = new FilterCard();
@@ -1255,7 +1221,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }//GEN-LAST:event_chkRulesActionPerformed
 
     private void btnExpansionSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpansionSearchActionPerformed
-        doFastExpansionSearch();
+        FastSearchUtil.showFastSearchForStringComboBox(cbExpansionSet, "Select set or expansion");
     }//GEN-LAST:event_btnExpansionSearchActionPerformed
 
     private void toggleViewMode() {
