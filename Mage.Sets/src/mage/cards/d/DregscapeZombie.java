@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -43,16 +42,17 @@ import mage.constants.SubType;
  */
 public class DregscapeZombie extends CardImpl {
 
-    public DregscapeZombie (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+    public DregscapeZombie(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+        // Unearth {B} ({B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{B}")));
     }
 
-    public DregscapeZombie (final DregscapeZombie card) {
+    public DregscapeZombie(final DregscapeZombie card) {
         super(card);
     }
 
