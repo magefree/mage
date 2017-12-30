@@ -139,6 +139,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Ohran Viper", 115, Rarity.RARE, mage.cards.o.OhranViper.class));
         cards.add(new SetCardInfo("Ohran Yeti", 93, Rarity.COMMON, mage.cards.o.OhranYeti.class));
         cards.add(new SetCardInfo("Orcish Bloodpainter", 94, Rarity.COMMON, mage.cards.o.OrcishBloodpainter.class));
+        cards.add(new SetCardInfo("Panglacial Wurm", 116, Rarity.RARE, mage.cards.p.PanglacialWurm.class));
         cards.add(new SetCardInfo("Perilous Research", 41, Rarity.UNCOMMON, mage.cards.p.PerilousResearch.class));
         cards.add(new SetCardInfo("Phobian Phantasm", 66, Rarity.UNCOMMON, mage.cards.p.PhobianPhantasm.class));
         cards.add(new SetCardInfo("Phyrexian Etchings", 67, Rarity.RARE, mage.cards.p.PhyrexianEtchings.class));
