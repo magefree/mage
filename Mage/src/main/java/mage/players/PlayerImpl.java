@@ -2321,13 +2321,15 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             do {
                 if (newTarget.choose(Outcome.Neutral, playerId, targetPlayerId, game)) {
-                    if (!targetPlayerId.equals(playerId) || !handleLibraryCastableCreatures(library, game, targetPlayerId)) { // for handling Panglacial Wurm
-                        target.getTargets().clear();
-                        for (UUID targetId : newTarget.getTargets()) {
-                            target.add(targetId, game);
-                        }
-                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
+                    if (targetPlayerId.equals(playerId) && handleLibraryCastableCreatures(library, game, targetPlayerId)) { // for handling Panglacial Wurm
+                        newTarget.clearChosen();
+                        continue;
                     }
+                    target.getTargets().clear();
+                    for (UUID targetId : newTarget.getTargets()) {
+                        target.add(targetId, game);
+                    }
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
                 } else if (targetPlayerId.equals(playerId) && handleLibraryCastableCreatures(library, game, targetPlayerId)) {
                     newTarget.clearChosen();
                     continue;
