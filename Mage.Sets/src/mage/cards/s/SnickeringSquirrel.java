@@ -91,7 +91,10 @@ class SnickeringSquirrelEffect extends ReplacementEffectImpl {
             if (permanent != null && permanent.canTap() && !permanent.isTapped()) {
                 if (controller.chooseUse(Outcome.AIDontUseIt, "Do you want to tap this to increase the result of a die any player rolled by 1?", null, "Yes", "No", source, game)) {
                     permanent.tap(game);
-                    event.setAmount(event.getAmount() + 1);
+                    // ignore planar dies (dice roll amount of planar dies is equal to 0)
+                    if (event.getAmount() > 0) {
+                        event.setAmount(event.getAmount() + 1);
+                    }
                 }
             }
         }

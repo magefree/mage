@@ -750,7 +750,7 @@ public class ConnectDialog extends MageDialog {
         }
         
         choice.setKeyChoices(choiceItems);
-        choice.setMessage("Select your coutry");
+        choice.setMessage("Select your country");
         
         // current selection value restore
         String needSelectValue = null;
