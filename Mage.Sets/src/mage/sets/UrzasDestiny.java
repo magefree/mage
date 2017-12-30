@@ -110,6 +110,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Keldon Champion", 90, Rarity.UNCOMMON, mage.cards.k.KeldonChampion.class));
         cards.add(new SetCardInfo("Keldon Vandals", 91, Rarity.COMMON, mage.cards.k.KeldonVandals.class));
         cards.add(new SetCardInfo("Kingfisher", 36, Rarity.COMMON, mage.cards.k.Kingfisher.class));
+        cards.add(new SetCardInfo("Landslide", 92, Rarity.UNCOMMON, mage.cards.l.Landslide.class));
         cards.add(new SetCardInfo("Magnify", 111, Rarity.COMMON, mage.cards.m.Magnify.class));
         cards.add(new SetCardInfo("Mantis Engine", 133, Rarity.UNCOMMON, mage.cards.m.MantisEngine.class));
         cards.add(new SetCardInfo("Marker Beetles", 112, Rarity.COMMON, mage.cards.m.MarkerBeetles.class));
