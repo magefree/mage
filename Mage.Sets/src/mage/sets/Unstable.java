@@ -56,6 +56,7 @@ public class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Chittering Doom", 104, Rarity.UNCOMMON, mage.cards.c.ChitteringDoom.class));
         cards.add(new SetCardInfo("Crow Storm", 31, Rarity.UNCOMMON, mage.cards.c.CrowStorm.class));
         cards.add(new SetCardInfo("Curious Killbot", 145, Rarity.COMMON, mage.cards.c.CuriousKillbot.class));
+        cards.add(new SetCardInfo("Dr. Julius Jumblemorph", 130, Rarity.MYTHIC, mage.cards.d.DrJuliusJumblemorph.class));
         cards.add(new SetCardInfo("Earl of Squirrel", 108, Rarity.RARE, mage.cards.e.EarlOfSquirrel.class));
         cards.add(new SetCardInfo("Forest", 216, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("GO TO JAIL", 8, Rarity.COMMON, mage.cards.g.GOTOJAIL.class));
