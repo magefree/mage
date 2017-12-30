@@ -2321,7 +2321,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             do {
                 if (newTarget.choose(Outcome.Neutral, playerId, targetPlayerId, game)) {
-                    if (targetPlayerId.equals(playerId) && this.handleLibraryCastableCreatures(library, game, targetPlayerId)) { // for handling Panglacial Wurm
+                    if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library, game, targetPlayerId)) { // for handling Panglacial Wurm
                         newTarget.clearChosen();
                         continue;
                     }
@@ -2330,7 +2330,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         target.add(targetId, game);
                     }
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
-                } else if (targetPlayerId.equals(playerId) && this.handleLibraryCastableCreatures(library, game, targetPlayerId)) {
+                } else if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library, game, targetPlayerId)) {
                     newTarget.clearChosen();
                     continue;
                 }
