@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
@@ -48,12 +49,12 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class GarbageElemental extends CardImpl {
+public class GarbageElementalC extends CardImpl {
 
-    public GarbageElemental(UUID ownerId, CardSetInfo setInfo) {
+    public GarbageElementalC(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
 
-        this.subtype.add("Elemental");
+        this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
@@ -68,13 +69,13 @@ public class GarbageElemental extends CardImpl {
 
     }
 
-    public GarbageElemental(final GarbageElemental card) {
+    public GarbageElementalC(final GarbageElementalC card) {
         super(card);
     }
 
     @Override
-    public GarbageElemental copy() {
-        return new GarbageElemental(this);
+    public GarbageElementalC copy() {
+        return new GarbageElementalC(this);
     }
 }
 
@@ -106,7 +107,7 @@ class GarbageElementalEffect extends OneShotEffect {
         if (controller != null) {
             int thisRoll = controller.rollDice(game, 6);
             int thatRoll = controller.rollDice(game, 6);
-            
+
             Token token = new GoblinToken();
             return token.putOntoBattlefield(Math.abs(thatRoll - thisRoll), game, source.getSourceId(), source.getControllerId());
         }

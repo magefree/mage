@@ -60,7 +60,7 @@ public class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Earl of Squirrel", 108, Rarity.RARE, mage.cards.e.EarlOfSquirrel.class));
         cards.add(new SetCardInfo("Forest", 216, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("GO TO JAIL", 8, Rarity.COMMON, mage.cards.g.GOTOJAIL.class));
-        cards.add(new SetCardInfo("Garbage Elemental", 82, Rarity.UNCOMMON, mage.cards.g.GarbageElemental.class));
+        cards.add(new SetCardInfo("Garbage Elemental", "82c", Rarity.UNCOMMON, mage.cards.g.GarbageElementalC.class));
         cards.add(new SetCardInfo("Ground Pounder", 110, Rarity.COMMON, mage.cards.g.GroundPounder.class));
         cards.add(new SetCardInfo("Hammer Helper", 85, Rarity.COMMON, mage.cards.h.HammerHelper.class));
         cards.add(new SetCardInfo("Hydradoodle", 112, Rarity.RARE, mage.cards.h.Hydradoodle.class));
@@ -81,7 +81,7 @@ public class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Sword of Dungeons & Dragons", 1, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsAndDragons.class));
         cards.add(new SetCardInfo("Target Minotaur", 98, Rarity.COMMON, mage.cards.t.TargetMinotaur.class));
         cards.add(new SetCardInfo("Time Out", 48, Rarity.COMMON, mage.cards.t.TimeOut.class));
-        cards.add(new SetCardInfo("Very Cryptic Command", 49, Rarity.RARE, mage.cards.v.VeryCrypticCommand.class));
+        cards.add(new SetCardInfo("Very Cryptic Command", "49d", Rarity.RARE, mage.cards.v.VeryCrypticCommandD.class));
         cards.add(new SetCardInfo("Willing Test Subject", 126, Rarity.COMMON, mage.cards.w.WillingTestSubject.class));
         cards.add(new SetCardInfo("capital offense", 52, Rarity.COMMON, mage.cards.c.CapitalOffense.class));
     }
