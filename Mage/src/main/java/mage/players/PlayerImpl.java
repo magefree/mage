@@ -2309,17 +2309,27 @@ public abstract class PlayerImpl implements Player, Serializable {
             TargetCardInLibrary newTarget = target.copy();
             int count;
             int librarySearchLimit = event.getAmount();
-            if (librarySearchLimit == Integer.MAX_VALUE) {
-                count = searchedLibrary.count(target.getFilter(), game);
-            } else {
-                newTarget.setCardLimit(librarySearchLimit);
-                count = Math.min(searchedLibrary.count(target.getFilter(), game), librarySearchLimit);
-            }
-
-            if (count < target.getNumberOfTargets()) {
-                newTarget.setMinNumberOfTargets(count);
-            }
+            List<Card> cardsFromTop = null;
             do {
+                // TODO: prevent shuffling from moving the visualized cards
+                if (librarySearchLimit == Integer.MAX_VALUE) {
+                    count = searchedLibrary.count(target.getFilter(), game);
+                } else {
+                    Player targetPlayer = game.getPlayer(targetPlayerId);
+                    if (targetPlayer != null) {
+                        if (cardsFromTop == null) {
+                            cardsFromTop = new ArrayList<>(targetPlayer.getLibrary().getTopCards(game, librarySearchLimit));
+                        } else {
+                            cardsFromTop.retainAll(targetPlayer.getLibrary().getCards(game));
+                        }
+                    }
+                    newTarget.setCardLimit(Math.min(librarySearchLimit, cardsFromTop.size()));
+                    count = Math.min(searchedLibrary.count(target.getFilter(), game), librarySearchLimit);
+                }
+    
+                if (count < target.getNumberOfTargets()) {
+                    newTarget.setMinNumberOfTargets(count);
+                }
                 if (newTarget.choose(Outcome.Neutral, playerId, targetPlayerId, game)) {
                     if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library, game, targetPlayerId)) { // for handling Panglacial Wurm
                         newTarget.clearChosen();
@@ -2330,7 +2340,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         target.add(targetId, game);
                     }
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
-                } else if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library, game, targetPlayerId)) {
+                } else if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library, game, targetPlayerId)) { // for handling Panglacial Wurm
                     newTarget.clearChosen();
                     continue;
                 }
@@ -2343,49 +2353,55 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     private boolean handleLibraryCastableCards(Library library, Game game, UUID targetPlayerId) {
         // for handling Panglacial Wurm
+        boolean alreadyChosenUse = false;
         Map<UUID, String> libraryCastableCardTracker = new HashMap<>();
-        for (Card card : library.getCards(game)) {
-            for (Ability ability : card.getAbilities()) {
-                if (ability.getClass() == WhileSearchingPlayFromLibraryAbility.class) {
-                    libraryCastableCardTracker.put(card.getId(), card.getName() + " [" + card.getId().toString().substring(0, 3) + "]");
+        searchForCards:
+        do {
+            for (Card card : library.getCards(game)) {
+                for (Ability ability : card.getAbilities()) {
+                    if (ability.getClass() == WhileSearchingPlayFromLibraryAbility.class) {
+                        libraryCastableCardTracker.put(card.getId(), card.getName() + " [" + card.getId().toString().substring(0, 3) + "]");
+                    }
                 }
             }
-        }
-        if (!libraryCastableCardTracker.isEmpty()) {
-            Player player = game.getPlayer(targetPlayerId);
-            if (player != null) {
-                if (player.isHuman() && player.chooseUse(Outcome.AIDontUseIt, "Cast a creature card from your library? (choose \"No\" to finish search)", null, game)) {
-                    ChoiceImpl chooseCard = new ChoiceImpl();
-                    chooseCard.setMessage("Which creature do you wish to cast from your library?");
-                    Set<String> choice = new LinkedHashSet<>();
-                    for (Entry<UUID, String> entry : libraryCastableCardTracker.entrySet()) {
-                        choice.add(new AbstractMap.SimpleEntry<UUID, String>(entry).getValue());
-                    }
-                    chooseCard.setChoices(choice);
-                    while (!choice.isEmpty()) {
-                        if (player.choose(Outcome.AIDontUseIt, chooseCard, game)) {
-                            String chosenCard = chooseCard.getChoice();
-                            for (Entry<UUID, String> entry : libraryCastableCardTracker.entrySet()) {
-                                if (chosenCard.equals(entry.getValue())) {
-                                    Card card = game.getCard(entry.getKey());
-                                    if (card != null) {
-                                        // TODO: fix costs (why is Panglacial Wurm automatically accepting payment?)
-                                        if (player.cast(card.getSpellAbility(), game, false)) {
-                                            choice.remove(chosenCard);
-                                            chooseCard.setChoices(choice);
+            if (!libraryCastableCardTracker.isEmpty()) {
+                Player player = game.getPlayer(targetPlayerId);
+                if (player != null) {
+                    if (player.isHuman() && (alreadyChosenUse || player.chooseUse(Outcome.AIDontUseIt, "Cast a creature card from your library? (choose \"No\" to finish search)", null, game))) {
+                        ChoiceImpl chooseCard = new ChoiceImpl();
+                        chooseCard.setMessage("Which creature do you wish to cast from your library?");
+                        Set<String> choice = new LinkedHashSet<>();
+                        for (Entry<UUID, String> entry : libraryCastableCardTracker.entrySet()) {
+                            choice.add(new AbstractMap.SimpleEntry<UUID, String>(entry).getValue());
+                        }
+                        chooseCard.setChoices(choice);
+                        while (!choice.isEmpty()) {
+                            if (player.choose(Outcome.AIDontUseIt, chooseCard, game)) {
+                                String chosenCard = chooseCard.getChoice();
+                                for (Entry<UUID, String> entry : libraryCastableCardTracker.entrySet()) {
+                                    if (chosenCard.equals(entry.getValue())) {
+                                        Card card = game.getCard(entry.getKey());
+                                        if (card != null) {
+                                            // TODO: fix costs (why is Panglacial Wurm automatically accepting payment?)
+                                            player.cast(card.getSpellAbility(), game, false);
                                         }
+                                        chooseCard.clearChoice();
+                                        libraryCastableCardTracker.clear();
+                                        alreadyChosenUse = true;
+                                        continue searchForCards;
                                     }
                                 }
+                                continue;
                             }
-                            continue;
+                            break;
                         }
-                        break;
+                        return true;
                     }
-                    return true;
                 }
             }
-        }
-        return false;
+            break;
+        } while (alreadyChosenUse);
+        return alreadyChosenUse;
     }
 
     @Override
