@@ -98,7 +98,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         // Aura enters the battlefield attached
         Object object = game.getState().getValue("attachTo:" + card.getId());
         if (object != null) {
-            if (object instanceof PermanentCard) {
+            if (object instanceof Permanent) {
                 // Aura is attached to a permanent on the battlefield
                 return false;
             }

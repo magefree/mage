@@ -44,7 +44,7 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceCreatureType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
@@ -154,9 +154,8 @@ class CallousOppressorChooseCreatureTypeEffect extends OneShotEffect {
             }
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null && mageObject != null) {
-                Choice typeChoice = new ChoiceImpl(true);
+                Choice typeChoice = new ChoiceCreatureType(mageObject);
                 typeChoice.setMessage("Choose creature type");
-                typeChoice.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toCollection(LinkedHashSet::new)));
                 while (!opponent.choose(outcome, typeChoice, game)) {
                     if (!opponent.canRespond()) {
                         return false;

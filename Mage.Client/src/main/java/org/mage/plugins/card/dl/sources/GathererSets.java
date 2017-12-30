@@ -6,22 +6,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.client.constants.Constants;
 import mage.constants.Rarity;
+import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadJob;
-
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
-import org.apache.log4j.Logger;
-
 public class GathererSets implements Iterable<DownloadJob> {
 
     private class CheckResult {
+
         String code;
         ExpansionSet set;
         boolean haveCommon;
@@ -69,12 +67,12 @@ public class GathererSets implements Iterable<DownloadJob> {
         //"ARENA" -- is't many set with different codes, not one
         "CLASH", "CP", "DD3GVL", "DPA", "EURO", "FNMP", "GPX", "GRC", "GUR", "H17", "JR", "MBP", "MGDC", "MLP", "MPRP", "MPS-AKH", "PTC", "S00", "S99", "SUS", "SWS", "UGIN", "UGL", "V10", "V17", "WMCQ", // need to fix
         "H09", "PD2", "PD3", "UNH", "CM1", "E02", "V11", "M25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "DDT", "8EB", "9EB", "CHR" // ok
-             // current testing
+    // current testing
     };
 
     private static final String[] symbolsBasicWithMyth = {"M10", "M11", "M12", "M13", "M14", "M15", "ORI",
         "DDF", "DDG", "DDH", "DDI", "DDJ", "DDK", "DDL", "DDM", "DDN",
-        "DD3DVD", "DD3JVC", "DDO", "DDP", "DDQ", "DDR", "DDS",
+        "DD3DVD", "DD3JVC", "DDO", "DDP", "DDQ", "DDR", "DDS", "DDT",
         "ALA", "CON", "ARB",
         "ZEN", "WWK", "ROE",
         "SOM", "MBS", "NPH",
@@ -155,7 +153,7 @@ public class GathererSets implements Iterable<DownloadJob> {
 
         outDir = new File(getImagesDir() + Constants.RESOURCE_PATH_SYMBOLS);
 
-        if (!outDir.exists()){
+        if (!outDir.exists()) {
             outDir.mkdirs();
         }
     }
@@ -163,6 +161,7 @@ public class GathererSets implements Iterable<DownloadJob> {
     // checks for wrong card settings and support (easy to control what all good)
     private static final HashMap<String, CheckResult> setsToDownload = new HashMap<>();
     private static final HashMap<String, String> codesToIgnoreCheck = new HashMap<>();
+
     static {
         // xMage have inner sets for 8th and 9th Edition for booster workaround (cards from core game do not include in boosters)
         // see https://mtg.gamepedia.com/8th_Edition/Core_Game
@@ -172,7 +171,7 @@ public class GathererSets implements Iterable<DownloadJob> {
     }
 
     private void CheckSearchResult(String searchCode, ExpansionSet foundedExp, boolean canDownloadTask,
-                                   boolean haveCommon, boolean haveUncommon, boolean haveRare, boolean haveMyth){
+            boolean haveCommon, boolean haveUncommon, boolean haveRare, boolean haveMyth) {
         // duplicated in settings
         CheckResult res = setsToDownload.get(searchCode);
 
@@ -190,9 +189,8 @@ public class GathererSets implements Iterable<DownloadJob> {
         }
 
         // checks for founded sets only
-
         // to early to download
-        if (!canDownloadTask){
+        if (!canDownloadTask) {
             Calendar c = Calendar.getInstance();
             c.setTime(foundedExp.getReleaseDate());
             c.add(Calendar.DATE, -1 * DAYS_BEFORE_RELEASE_TO_DOWNLOAD);
@@ -201,14 +199,14 @@ public class GathererSets implements Iterable<DownloadJob> {
         }
     }
 
-    private void AnalyseSearchResult(){
+    private void AnalyseSearchResult() {
         // analyze supported sets and show wrong settings
         Date startedDate = new Date();
 
         for (ExpansionSet set : Sets.getInstance().values()) {
 
             // ignore some inner sets
-            if (codesToIgnoreCheck.get(set.getCode()) != null){
+            if (codesToIgnoreCheck.get(set.getCode()) != null) {
                 continue;
             }
 
@@ -239,21 +237,20 @@ public class GathererSets implements Iterable<DownloadJob> {
                 //*/
 
                 // 3. info: sets with alternative numbers
-                for(ExpansionSet.SetCardInfo card: set.getSetCardInfo()){
-                    if (String.valueOf(card.getCardNumberAsInt()).length() != card.getCardNumber().length()){
+                for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
+                    if (String.valueOf(card.getCardNumberAsInt()).length() != card.getCardNumber().length()) {
                         logger.info(String.format("Symbols: set have alternative card but do not config to it: %s (%s)", set.getCode(), set.getName()));
                         break;
                     }
                 }
 
                 // 4. info: sets with missing cards for boosters (todo: what about +20 number for alternative land arts?)
-                if (set.getMaxCardNumberInBooster() != Integer.MAX_VALUE)
-                {
-                    for(ExpansionSet.SetCardInfo card: set.getSetCardInfo()){
-                        if (card.getCardNumberAsInt() > set.getMaxCardNumberInBooster()){
+                if (set.getMaxCardNumberInBooster() != Integer.MAX_VALUE) {
+                    for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
+                        if (card.getCardNumberAsInt() > set.getMaxCardNumberInBooster()) {
                             if (card.getRarity() == Rarity.LAND) {
                                 logger.info(String.format("Symbols: set's booster have land above max card number: %s (%s), %s - %s", set.getCode(), set.getName(), card.getCardNumber(), card.getName()));
-                            }else {
+                            } else {
                                 logger.info(String.format("Symbols: set's booster missing nonland card:: %s (%s), %s - %s", set.getCode(), set.getName(), card.getCardNumber(), card.getName()));
                             }
                         }

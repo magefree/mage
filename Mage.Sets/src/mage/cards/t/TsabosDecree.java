@@ -90,7 +90,7 @@ class TsabosDecreeEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null) {
-            Choice typeChoice = new ChoiceCreatureType();
+            Choice typeChoice = new ChoiceCreatureType(sourceObject);
             while (!player.choose(outcome, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;

@@ -47,10 +47,12 @@ import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.choices.ChoiceImpl;
 import mage.client.MageFrame;
 import mage.client.cards.*;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
+import mage.client.dialog.PickChoiceDialog;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
@@ -206,6 +208,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         this.btnBooster.setVisible(false);
         this.btnClear.setVisible(false);
         this.cbExpansionSet.setVisible(false);
+        this.btnExpansionSearch.setVisible(false);
         this.limited = true;
         this.cards.clear();
         for (Card card : sideboard) {
@@ -219,9 +222,43 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         this.btnBooster.setVisible(true);
         this.btnClear.setVisible(true);
         this.cbExpansionSet.setVisible(true);
+        this.btnExpansionSearch.setVisible(true);
 //        cbExpansionSet.setModel(new DefaultComboBoxModel<>(ConstructedFormats.getTypes()));
         // Action event on Expansion set triggers loadCards method
         cbExpansionSet.setSelectedIndex(0);
+    }
+    
+    public void doFastExpansionSearch(){
+        mage.choices.Choice choice = new ChoiceImpl(false);
+
+        // collect data from expansion combobox (String)
+        DefaultComboBoxModel comboModel = (DefaultComboBoxModel)cbExpansionSet.getModel();        
+        Map<String, String> choiceItems = new HashMap<>(comboModel.getSize());
+        Map<String, Integer> choiceSorting = new HashMap<>(comboModel.getSize());
+        String item;
+        
+        for(int i = 0; i < comboModel.getSize() - 1; i++){
+            item = (String)comboModel.getElementAt(i);
+            choiceItems.put(item, item);
+            choiceSorting.put(item, i); // need so sorting
+        }
+        
+        choice.setKeyChoices(choiceItems);
+        choice.setSortData(choiceSorting);
+        choice.setMessage("Select set or expansion");
+        
+        // current selection value restore
+        String needSelectValue;
+        needSelectValue = (String)comboModel.getSelectedItem();        
+
+        // ask for new value
+        PickChoiceDialog dlg = new PickChoiceDialog();
+        dlg.setWindowSize(300, 500);
+        dlg.showDialog(choice, needSelectValue);
+        if(choice.isChosen()){
+            item = choice.getChoiceKey();
+            comboModel.setSelectedItem(item);
+        }
     }
 
     private FilterCard buildFilter() {
@@ -471,6 +508,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbColorless = new javax.swing.JToggleButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         cbExpansionSet = new javax.swing.JComboBox<>();
+        btnExpansionSearch = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         chkPennyDreadful = new javax.swing.JCheckBox();
         btnBooster = new javax.swing.JButton();
@@ -615,10 +653,23 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
         tbColor.add(cbExpansionSet);
+
+        btnExpansionSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_32.png"))); // NOI18N
+        btnExpansionSearch.setToolTipText("Fast search set or expansion");
+        btnExpansionSearch.setAlignmentX(1.0F);
+        btnExpansionSearch.setFocusable(false);
+        btnExpansionSearch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnExpansionSearch.setPreferredSize(new java.awt.Dimension(23, 23));
+        btnExpansionSearch.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnExpansionSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExpansionSearchActionPerformed(evt);
+            }
+        });
+        tbColor.add(btnExpansionSearch);
         tbColor.add(jSeparator2);
 
-
-        chkPennyDreadful.setText("Penny Dreadful");
+        chkPennyDreadful.setText("Penny Dreadful Only");
         chkPennyDreadful.setToolTipText("Will only allow Penny Dreadful legal cards to be shown.");
         chkPennyDreadful.setFocusable(false);
         chkPennyDreadful.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -628,15 +679,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 chkPilesActionPerformed(evt);
             }
         });
-        
-        JPopupMenu filterByFormatPopup = new JPopupMenu();
-        filterByFormatPopup.add(chkPennyDreadful);
-        filterByFormatPopup.setLayout(new GridBagLayout());
-
-        ButtonGroup selectByTypeModeGroup = new ButtonGroup();
-        JButton filterByFormatButton = new JButton ("Filter by Format");
-        makeButtonPopup(filterByFormatButton, filterByFormatPopup);
-        tbColor.add(filterByFormatButton);
+        tbColor.add(chkPennyDreadful);
 
         btnBooster.setText("Open Booster");
         btnBooster.setToolTipText("(CURRENTLY NOT WORKING) Generates a booster of the selected set and adds the cards to the card selector.");
@@ -1211,6 +1254,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         // TODO add your handling code here:
     }//GEN-LAST:event_chkRulesActionPerformed
 
+    private void btnExpansionSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpansionSearchActionPerformed
+        doFastExpansionSearch();
+    }//GEN-LAST:event_btnExpansionSearchActionPerformed
+
     private void toggleViewMode() {
         if (currentView instanceof CardGrid) {
             jToggleListView.setSelected(true);
@@ -1253,6 +1300,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.ButtonGroup bgView;
     private javax.swing.JButton btnBooster;
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnExpansionSearch;
     private javax.swing.JLabel cardCount;
     private javax.swing.JLabel cardCountLabel;
     private javax.swing.JPanel cardSelectorBottomPanel;

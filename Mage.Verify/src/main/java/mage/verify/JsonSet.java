@@ -10,6 +10,7 @@ class JsonSet {
     public String gathererCode;
     public String magicCardsInfoCode;
     public String[] magicRaritiesCodes;
+    public String[] alternativeNames;
     public String releaseDate;
     public String border;
     public String type;

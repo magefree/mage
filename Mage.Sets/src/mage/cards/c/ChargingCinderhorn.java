@@ -68,7 +68,7 @@ public class ChargingCinderhorn extends CardImpl {
 
         // At the beginning of each player's end step, if no creatures attacked this turn, put a fury counter on Charging Cinderhorn. Then Charging Cinderhorn deals damage equal to the number of fury counters on it to that player.
         ChargingCinderhornDamageTargetEffect effect = new ChargingCinderhornDamageTargetEffect();
-        effect.setText("if no creatures attacked this turn, put a fury counter on {this}. Then {this} deals damage equal to the number of fury counters on it to that player");
+        effect.setText("put a fury counter on {this}. Then {this} deals damage equal to the number of fury counters on it to that player");
         BeginningOfEndStepTriggeredAbility ability
                 = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, new ChargingCinderhornCondition(), false);
         this.addAbility(ability, new AttackedThisTurnWatcher());
@@ -97,7 +97,7 @@ class ChargingCinderhornCondition implements Condition {
 
     @Override
     public String toString() {
-        return "no creatures attacked this turn";
+        return "if no creatures attacked this turn";
     }
 
 }

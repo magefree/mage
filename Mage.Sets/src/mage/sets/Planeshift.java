@@ -110,6 +110,7 @@ public class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Insolence", 63, Rarity.COMMON, mage.cards.i.Insolence.class));
         cards.add(new SetCardInfo("Kavu Recluse", 64, Rarity.COMMON, mage.cards.k.KavuRecluse.class));
         cards.add(new SetCardInfo("Keldon Mantle", 65, Rarity.COMMON, mage.cards.k.KeldonMantle.class));
+        cards.add(new SetCardInfo("Keldon Twilight", 112, Rarity.RARE, mage.cards.k.KeldonTwilight.class));
         cards.add(new SetCardInfo("Lashknife Barrier", 9, Rarity.UNCOMMON, mage.cards.l.LashknifeBarrier.class));
         cards.add(new SetCardInfo("Lava Zombie", 113, Rarity.COMMON, mage.cards.l.LavaZombie.class));
         cards.add(new SetCardInfo("Lord of the Undead", 44, Rarity.RARE, mage.cards.l.LordOfTheUndead.class));

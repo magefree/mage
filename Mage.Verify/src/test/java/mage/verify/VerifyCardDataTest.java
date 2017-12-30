@@ -152,10 +152,13 @@ public class VerifyCardDataTest {
     public void checkWrongCardClasses(){
         Collection<String> errorsList = new ArrayList<>();
         Map<String, String> classesIndex = new HashMap<>();
+        int totalCards = 0;
 
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets) {
             for (ExpansionSet.SetCardInfo checkCard : set.getSetCardInfo()) {
+                totalCards = totalCards + 1;
+
                 String currentClass = checkCard.getCardClass().toString();
                 if (classesIndex.containsKey(checkCard.getName())) {
                     String needClass = classesIndex.get(checkCard.getName());
@@ -175,8 +178,42 @@ public class VerifyCardDataTest {
             System.out.println(error);
         }
 
+        // unique cards stats
+        System.out.println("Total unique cards: " + classesIndex.size() + ", total non unique cards (reprints): " + totalCards);
+
         if (errorsList.size() > 0){
             Assert.fail("DB have wrong card classes, founded errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    public void checkMissingSets(){
+
+        Collection<String> errorsList = new ArrayList<>();
+
+        int totalMissingSets = 0;
+        int totalMissingCards = 0;
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        for(Map.Entry<String, JsonSet> refEntry: MtgJson.sets().entrySet()){
+            JsonSet refSet = refEntry.getValue();
+
+            // replace codes for aliases
+            String searchSet = MtgJson.mtgJsonToXMageCodes.getOrDefault(refSet.code, refSet.code);
+
+            ExpansionSet mageSet = Sets.findSet(searchSet);
+            if(mageSet == null){
+                totalMissingSets = totalMissingSets + 1;
+                totalMissingCards = totalMissingCards + refSet.cards.size();
+                errorsList.add("Warning: missing set " + refSet.code + " - " + refSet.name + " (cards: " + refSet.cards.size() + ")");
+            }
+        }
+        if(errorsList.size() > 0){
+            errorsList.add("Warning: total missing sets: " + totalMissingSets + ", with missing cards: " + totalMissingCards);
+        }
+
+        // only warnings
+        for (String error: errorsList) {
+            System.out.println(error);
         }
     }
 

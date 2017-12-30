@@ -1220,14 +1220,17 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void getChoice(Choice choice, UUID objectId) {
         hideAll();
+        // TODO: remember last choices and search incremental for same events?
         PickChoiceDialog pickChoice = new PickChoiceDialog();
         pickChoice.showDialog(choice, objectId, choiceWindowState);
         if (choice.isKeyChoice()) {
+            SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
+            /* // old code, auto complete was for auto scripting?
             if (pickChoice.isAutoSelect()) {
                 SessionHandler.sendPlayerString(gameId, '#' + choice.getChoiceKey());
             } else {
                 SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
-            }
+            }*/
         } else {
             SessionHandler.sendPlayerString(gameId, choice.getChoice());
         }
