@@ -36,6 +36,7 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.common.PassAbility;
+import mage.abilities.common.WhileSearchingPlayFromLibraryAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCost;
@@ -53,6 +54,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
+import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import static mage.constants.Zone.BATTLEFIELD;
 import static mage.constants.Zone.EXILED;
@@ -2317,16 +2319,79 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (count < target.getNumberOfTargets()) {
                 newTarget.setMinNumberOfTargets(count);
             }
-            if (newTarget.choose(Outcome.Neutral, playerId, targetPlayerId, game)) {
-                target.getTargets().clear();
-                for (UUID targetId : newTarget.getTargets()) {
-                    target.add(targetId, game);
+            boolean finishedSearch = false;
+            while (true) {
+                if (newTarget.choose(Outcome.Neutral, playerId, targetPlayerId, game)) {
+                    target.getTargets().clear();
+                    for (UUID targetId : newTarget.getTargets()) {
+                        target.add(targetId, game);
+                    }
+                    finishedSearch = true;
                 }
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
+                Card pickedCard = game.getCard(newTarget.getTargets().get(0));
+                if (pickedCard != null) {
+                }
+                if (!targetPlayerId.equals(playerId) || handleLibraryCastableCreatures(library, game, targetPlayerId, newTarget)) { // for handling Panglacial Wurm
+                    if (finishedSearch) {
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
+                    }
+                    break;
+                }
+                newTarget.clearChosen();
+                finishedSearch = false;
             }
             return true;
         }
         return false;
+    }
+
+    private boolean handleLibraryCastableCreatures(Library library, Game game, UUID targetPlayerId, TargetCardInLibrary newTarget) {
+        // for handling Panglacial Wurm
+        Map<UUID, String> libraryCastableCardTracker = new HashMap<>();
+        for (Card card : library.getCards(game)) {
+            for (Ability ability : card.getAbilities()) {
+                if (ability.getClass() == WhileSearchingPlayFromLibraryAbility.class) {
+                    libraryCastableCardTracker.put(card.getId(), card.getName() + " [" + card.getId().toString().substring(0, 3) + "]");
+                }
+            }
+        }
+        if (!libraryCastableCardTracker.isEmpty()) {
+            Player player = game.getPlayer(targetPlayerId);
+            if (player != null) {
+                if (player.isHuman() && player.chooseUse(Outcome.AIDontUseIt, "Cast a creature card from your library? (choose \"No\" to finish search)", null, game)) {
+                    ChoiceImpl chooseCard = new ChoiceImpl();
+                    chooseCard.setMessage("Which creature do you wish to cast from your library?");
+                    Set<String> choice = new LinkedHashSet<>();
+                    for (Entry<UUID, String> entry : libraryCastableCardTracker.entrySet()) {
+                        choice.add(new java.util.AbstractMap.SimpleEntry<UUID, String>(entry).getValue());
+                    }
+                    chooseCard.setChoices(choice);
+                    while (!choice.isEmpty()) {
+                        if (player.choose(Outcome.AIDontUseIt, chooseCard, game)) {
+                            String chosenCard = chooseCard.getChoice();
+                            for (Entry<UUID, String> entry : libraryCastableCardTracker.entrySet()) {
+                                if (chosenCard.equals(entry.getValue())) {
+                                    Card card = game.getCard(entry.getKey());
+                                    if (card != null) {
+                                        // TODO: fix first target being impossible to rechoose
+                                        // TODO: fix costs (why is Panglacial Wurm automatically accepting payment?)
+                                        if (player.cast(card.getSpellAbility(), game, false)) {
+                                            choice.remove(chosenCard);
+                                            chooseCard.setChoices(choice);
+                                            newTarget.remove(card.getId());
+                                        }
+                                    }
+                                }
+                            }
+                            continue;
+                        }
+                        break;
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
