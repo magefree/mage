@@ -2319,24 +2319,21 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (count < target.getNumberOfTargets()) {
                 newTarget.setMinNumberOfTargets(count);
             }
-            boolean finishedSearch = false;
-            while (true) {
+            do {
                 if (newTarget.choose(Outcome.Neutral, playerId, targetPlayerId, game)) {
-                    finishedSearch = true;
-                }
-                if (!targetPlayerId.equals(playerId) || handleLibraryCastableCards(library, game, targetPlayerId)) { // for handling Panglacial Wurm
-                    if (finishedSearch) {
+                    if (!targetPlayerId.equals(playerId) || !handleLibraryCastableCreatures(library, game, targetPlayerId)) { // for handling Panglacial Wurm
                         target.getTargets().clear();
                         for (UUID targetId : newTarget.getTargets()) {
                             target.add(targetId, game);
                         }
                         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
                     }
-                    break;
+                } else if (targetPlayerId.equals(playerId) && handleLibraryCastableCreatures(library, game, targetPlayerId)) {
+                    newTarget.clearChosen();
+                    continue;
                 }
-                newTarget.clearChosen();
-                finishedSearch = false;
-            }
+                break;
+            } while (true);
             return true;
         }
         return false;
@@ -2382,11 +2379,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                         break;
                     }
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     @Override
