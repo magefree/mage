@@ -87,7 +87,8 @@ class SquirrelPoweredSchemeEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.getControllerId().equals(event.getPlayerId());
+        // ignore planar dies (dice roll amount of planar dies is equal to 0)
+        return event.getAmount() > 0 && source.getControllerId().equals(event.getPlayerId());
     }
 
     @Override
