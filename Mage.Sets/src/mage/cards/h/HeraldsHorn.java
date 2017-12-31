@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -35,12 +34,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionAllOfChosenSubtypeEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -49,6 +44,8 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +61,7 @@ public class HeraldsHorn extends CardImpl {
         
         // Creature spells you cast of the chosen type cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new SpellsCostReductionAllOfChosenSubtypeEffect(new FilterCreatureCard("Creature spells you cast of the chosen type"), 1)));
+                new SpellsCostReductionControllerEffect(new FilterCreatureCard("Creature spells you cast of the chosen type"), 1)));
         
         // At the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new HeraldsHornEffect(), TargetController.YOU, false));
