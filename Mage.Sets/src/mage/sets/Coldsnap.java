@@ -87,6 +87,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Disciple of Tevesh Szat", 55, Rarity.COMMON, mage.cards.d.DiscipleOfTeveshSzat.class));
         cards.add(new SetCardInfo("Drelnoch", 32, Rarity.COMMON, mage.cards.d.Drelnoch.class));
         cards.add(new SetCardInfo("Earthen Goo", 80, Rarity.UNCOMMON, mage.cards.e.EarthenGoo.class));
+        cards.add(new SetCardInfo("Feast of Flesh", 56, Rarity.COMMON, mage.cards.f.FeastOfFlesh.class));
         cards.add(new SetCardInfo("Field Marshal", 5, Rarity.RARE, mage.cards.f.FieldMarshal.class));
         cards.add(new SetCardInfo("Flashfreeze", 33, Rarity.UNCOMMON, mage.cards.f.Flashfreeze.class));
         cards.add(new SetCardInfo("Freyalise's Radiance", 108, Rarity.UNCOMMON, mage.cards.f.FreyalisesRadiance.class));
@@ -123,6 +124,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Kjeldoran Gargoyle", 10, Rarity.UNCOMMON, mage.cards.k.KjeldoranGargoyle.class));
         cards.add(new SetCardInfo("Kjeldoran Javelineer", 11, Rarity.COMMON, mage.cards.k.KjeldoranJavelineer.class));
         cards.add(new SetCardInfo("Kjeldoran Outrider", 12, Rarity.COMMON, mage.cards.k.KjeldoranOutrider.class));
+        cards.add(new SetCardInfo("Kjeldoran War Cry", 13, Rarity.COMMON, mage.cards.k.KjeldoranWarCry.class));
         cards.add(new SetCardInfo("Krovikan Mist", 38, Rarity.COMMON, mage.cards.k.KrovikanMist.class));
         cards.add(new SetCardInfo("Krovikan Rot", 63, Rarity.UNCOMMON, mage.cards.k.KrovikanRot.class));
         cards.add(new SetCardInfo("Krovikan Scoundrel", 64, Rarity.COMMON, mage.cards.k.KrovikanScoundrel.class));
@@ -189,6 +191,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Survivor of the Unseen", 48, Rarity.COMMON, mage.cards.s.SurvivorOfTheUnseen.class));
         cards.add(new SetCardInfo("Swift Maneuver", 21, Rarity.COMMON, mage.cards.s.SwiftManeuver.class));
         cards.add(new SetCardInfo("Tamanoa", 132, Rarity.RARE, mage.cards.t.Tamanoa.class));
+        cards.add(new SetCardInfo("Thermal Flux", 49, Rarity.COMMON, mage.cards.t.ThermalFlux.class));
         cards.add(new SetCardInfo("Thermopod", 100, Rarity.COMMON, mage.cards.t.Thermopod.class));
         cards.add(new SetCardInfo("Thrumming Stone", 142, Rarity.RARE, mage.cards.t.ThrummingStone.class));
         cards.add(new SetCardInfo("Tresserhorn Sinks", 150, Rarity.UNCOMMON, mage.cards.t.TresserhornSinks.class));
@@ -196,6 +199,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Ursine Fylgja", 22, Rarity.UNCOMMON, mage.cards.u.UrsineFylgja.class));
         cards.add(new SetCardInfo("Vanish into Memory", 133, Rarity.UNCOMMON, mage.cards.v.VanishIntoMemory.class));
         cards.add(new SetCardInfo("Vexing Sphinx", 50, Rarity.RARE, mage.cards.v.VexingSphinx.class));
+        cards.add(new SetCardInfo("Void Maw", 74, Rarity.RARE, mage.cards.v.VoidMaw.class));
         cards.add(new SetCardInfo("Wall of Shards", 23, Rarity.UNCOMMON, mage.cards.w.WallOfShards.class));
         cards.add(new SetCardInfo("White Shield Crusader", 24, Rarity.UNCOMMON, mage.cards.w.WhiteShieldCrusader.class));
         cards.add(new SetCardInfo("Wilderness Elemental", 134, Rarity.UNCOMMON, mage.cards.w.WildernessElemental.class));
