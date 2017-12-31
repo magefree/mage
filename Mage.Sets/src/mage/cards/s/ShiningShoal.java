@@ -34,7 +34,7 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ExileFromHandCostCardConvertedMana;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -45,7 +45,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -72,7 +71,7 @@ public class ShiningShoal extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter), true)));
 
         // The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to target creature or player instead.
-        this.getSpellAbility().addEffect(new ShiningShoalPreventDamageTargetEffect(Duration.EndOfTurn, new ExileFromHandCostCardConvertedMana()));
+        this.getSpellAbility().addEffect(new ShiningShoalRedirectDamageTargetEffect(Duration.EndOfTurn, new ExileFromHandCostCardConvertedMana()));
         this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
@@ -87,31 +86,29 @@ public class ShiningShoal extends CardImpl {
     }
 }
 
-class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl {
+class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToTargetEffect {
 
     private final DynamicValue dynamicAmount;
-    private int amount;
 
-    public ShiningShoalPreventDamageTargetEffect(Duration duration, DynamicValue dynamicAmount) {
-        super(duration);
+    public ShiningShoalRedirectDamageTargetEffect(Duration duration, DynamicValue dynamicAmount) {
+        super(duration, 0, true);
         this.dynamicAmount = dynamicAmount;
         staticText = "The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to target creature or player instead";
     }
 
-    public ShiningShoalPreventDamageTargetEffect(final ShiningShoalPreventDamageTargetEffect effect) {
+    public ShiningShoalRedirectDamageTargetEffect(final ShiningShoalRedirectDamageTargetEffect effect) {
         super(effect);
-        this.amount = effect.amount;
         this.dynamicAmount = effect.dynamicAmount;
     }
 
     @Override
-    public ShiningShoalPreventDamageTargetEffect copy() {
-        return new ShiningShoalPreventDamageTargetEffect(this);
+    public ShiningShoalRedirectDamageTargetEffect copy() {
+        return new ShiningShoalRedirectDamageTargetEffect(this);
     }
 
     @Override
     public void init(Ability source, Game game) {
-        this.amount = dynamicAmount.calculate(game, source, this);
+        amountToRedirect = dynamicAmount.calculate(game, source, this);
     }
 
     @Override
@@ -120,48 +117,8 @@ class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int prevented;
-            if (event.getAmount() >= this.amount) {
-                int damage = amount;
-                event.setAmount(event.getAmount() - amount);
-                this.used = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
-                prevented = damage;
-            } else {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                amount -= damage;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
-                prevented = damage;
-            }
-
-            // deal damage now
-            if (prevented > 0) {
-                UUID redirectTo = source.getTargets().get(1).getFirstTarget();
-                Permanent permanent = game.getPermanent(redirectTo);
-                MageObject sourceObject = game.getObject(source.getFirstTarget());
-                if (permanent != null) {
-                    game.informPlayers(sourceObject.getIdName() + "deals " + prevented + " to " + permanent.getName() + " instead");
-                    // keep the original source id as it is redirecting
-                    permanent.damage(prevented, event.getSourceId(), game, ((DamageEvent) event).isCombatDamage(), ((DamageEvent) event).isPreventable(), event.getAppliedEffects());
-                }
-                Player player = game.getPlayer(redirectTo);
-                if (player != null) {
-                    game.informPlayers(sourceObject.getIdName() + "deals " + prevented + " to " + player.getLogName() + " instead");
-                    // keep the original source id as it is redirecting
-                    player.damage(prevented, event.getSourceId(), game, ((DamageEvent) event).isCombatDamage(), ((DamageEvent) event).isPreventable(), event.getAppliedEffects());
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game)) {
+        if (!this.used && event.getFlag()) {
 
             // get source of the damage event
             MageObject sourceObject = game.getObject(event.getSourceId());
@@ -183,6 +140,7 @@ class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl {
             if (permanent != null && permanent.isCreature()) {
                 if (permanent.getControllerId().equals(source.getControllerId())) {
                     // it's your creature
+                    redirectTarget = source.getTargets().get(1);
                     return true;
                 }
             }
@@ -191,6 +149,7 @@ class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl {
             if (player != null) {
                 if (player.getId().equals(source.getControllerId())) {
                     // it is you
+                    redirectTarget = source.getTargets().get(1);
                     return true;
                 }
             }
