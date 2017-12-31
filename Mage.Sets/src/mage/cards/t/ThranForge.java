@@ -65,7 +65,7 @@ public class ThranForge extends CardImpl {
                         .setText("Until end of turn, target nonartifact creature gets +1/+0"),
                 new GenericManaCost(2));
         ability.addEffect(
-                new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfTurn)
+                new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT)
                         .setText("and becomes an artifact in addition to its other types")
         );
         ability.addTarget(new TargetPermanent(filter));

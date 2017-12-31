@@ -27,10 +27,9 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.AddCardTypeSourceEffect;
 import mage.abilities.keyword.CrewAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -41,8 +40,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 
-import java.util.UUID;
-
 /**
  *
  * @author emerald000
@@ -50,7 +47,7 @@ import java.util.UUID;
 public class FleetwheelCruiser extends CardImpl {
 
     public FleetwheelCruiser(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
@@ -62,13 +59,8 @@ public class FleetwheelCruiser extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // When Fleetwheel Cruiser enters the battlefield, it becomes an artifact creature until the end of turn.
-        Effect effect = new AddCardTypeSourceEffect(CardType.ARTIFACT, Duration.EndOfTurn);
-        effect.setText("it becomes an artifact");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        effect = new AddCardTypeSourceEffect(CardType.CREATURE, Duration.EndOfTurn);
-        effect.setText(" creature until end of turn");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE)));
 
         // Crew 2
         this.addAbility(new CrewAbility(2));
