@@ -25,39 +25,32 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.ruleModifying;
+package mage.abilities.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
+ *
  * @author LevelX2
  */
-public class CastOnlyDuringPhaseStepSourceEffect extends ContinuousRuleModifyingEffectImpl {
+public class CastOnlyIfConditionIsTrueEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private final TurnPhase turnPhase;
-    private final PhaseStep phaseStep;
     private final Condition condition;
 
-    public CastOnlyDuringPhaseStepSourceEffect(TurnPhase turnPhase, PhaseStep phaseStep, Condition condition) {
+    public CastOnlyIfConditionIsTrueEffect(Condition condition) {
         super(Duration.EndOfGame, Outcome.Detriment);
-        this.turnPhase = turnPhase;
-        this.phaseStep = phaseStep;
         this.condition = condition;
         staticText = setText();
     }
 
-    private CastOnlyDuringPhaseStepSourceEffect(final CastOnlyDuringPhaseStepSourceEffect effect) {
+    private CastOnlyIfConditionIsTrueEffect(final CastOnlyIfConditionIsTrueEffect effect) {
         super(effect);
-        this.turnPhase = effect.turnPhase;
-        this.phaseStep = effect.phaseStep;
         this.condition = effect.condition;
     }
 
@@ -70,9 +63,7 @@ public class CastOnlyDuringPhaseStepSourceEffect extends ContinuousRuleModifying
     public boolean applies(GameEvent event, Ability source, Game game) {
         // has to return true, if the spell cannot be cast in the current phase / step
         if (event.getSourceId().equals(source.getSourceId())) {
-            if ((turnPhase != null && game.getPhase().getType() != turnPhase)
-                    || (phaseStep != null && (game.getTurn().getStepType() != phaseStep))
-                    || (condition != null && !condition.apply(game, source))) {
+            if (condition != null && !condition.apply(game, source)) {
                 return true;
             }
         }
@@ -80,18 +71,12 @@ public class CastOnlyDuringPhaseStepSourceEffect extends ContinuousRuleModifying
     }
 
     @Override
-    public CastOnlyDuringPhaseStepSourceEffect copy() {
-        return new CastOnlyDuringPhaseStepSourceEffect(this);
+    public CastOnlyIfConditionIsTrueEffect copy() {
+        return new CastOnlyIfConditionIsTrueEffect(this);
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("cast {this} only during ");
-        if (turnPhase != null) {
-            sb.append(turnPhase.toString());
-        }
-        if (phaseStep != null) {
-            sb.append("the ").append(phaseStep.getStepText());
-        }
+        StringBuilder sb = new StringBuilder("cast {this} only ");
         if (condition != null) {
             sb.append(' ').append(condition.toString());
         }

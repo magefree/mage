@@ -25,54 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.cards.e;
 
-import mage.abilities.condition.Condition;
-import mage.abilities.effects.common.ruleModifying.CastOnlyDuringPhaseStepSourceEffect;
-import mage.constants.PhaseStep;
-import mage.constants.TurnPhase;
-import mage.constants.Zone;
+import java.util.UUID;
+import mage.abilities.common.CastOnlyIfConditionIsTrueAbility;
+import mage.abilities.condition.common.ControlsPermanentsComparedToOpponentsCondition;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.filter.StaticFilters;
+import mage.game.permanent.token.SoldierToken;
 
 /**
  *
  * @author LevelX2
  */
-public class CastOnlyDuringPhaseStepSourceAbility extends SimpleStaticAbility {
+public class EvenTheOdds extends CardImpl {
 
-    public CastOnlyDuringPhaseStepSourceAbility(TurnPhase turnPhase) {
-        this(turnPhase, null, null);
+    public EvenTheOdds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
+
+        // Cast Even the Odds only if you control fewer creatures than each opponent.
+        this.addAbility(new CastOnlyIfConditionIsTrueAbility(new ControlsPermanentsComparedToOpponentsCondition(ComparisonType.FEWER_THAN, StaticFilters.FILTER_PERMANENT_CREATURES)));
+
+        // Create three 1/1 white Soldier creature tokens.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), 3));
     }
 
-    public CastOnlyDuringPhaseStepSourceAbility(TurnPhase turnPhase, Condition condition) {
-        this(turnPhase, null, condition);
-    }
-
-    public CastOnlyDuringPhaseStepSourceAbility(PhaseStep phaseStep) {
-        this(null, phaseStep, null);
-    }
-
-    public CastOnlyDuringPhaseStepSourceAbility(PhaseStep phaseStep, Condition condition) {
-        this(null, phaseStep, condition);
-    }
-
-    public CastOnlyDuringPhaseStepSourceAbility(TurnPhase turnPhase, PhaseStep phaseStep, Condition condition) {
-        this(turnPhase, phaseStep, condition, null);
-    }
-
-    public CastOnlyDuringPhaseStepSourceAbility(TurnPhase turnPhase, PhaseStep phaseStep, Condition condition, String effectText) {
-        super(Zone.ALL, new CastOnlyDuringPhaseStepSourceEffect(turnPhase, phaseStep, condition));
-        this.setRuleAtTheTop(true);
-        if (effectText != null) {
-            getEffects().get(0).setText(effectText);
-        }
-    }
-
-    private CastOnlyDuringPhaseStepSourceAbility(final CastOnlyDuringPhaseStepSourceAbility ability) {
-        super(ability);
+    public EvenTheOdds(final EvenTheOdds card) {
+        super(card);
     }
 
     @Override
-    public CastOnlyDuringPhaseStepSourceAbility copy() {
-        return new CastOnlyDuringPhaseStepSourceAbility(this);
+    public EvenTheOdds copy() {
+        return new EvenTheOdds(this);
     }
 }

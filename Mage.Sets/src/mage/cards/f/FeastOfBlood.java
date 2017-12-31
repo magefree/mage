@@ -28,18 +28,16 @@
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.common.CastOnlyIfConditionIsTrueAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,11 +47,14 @@ import mage.target.common.TargetCreaturePermanent;
 public class FeastOfBlood extends CardImpl {
 
     public FeastOfBlood(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Cast Feast of Blood only if you control two or more Vampires.
-        this.getSpellAbility().addCost(new FeastOfBloodCost());
+        this.addAbility(new CastOnlyIfConditionIsTrueAbility(
+                new PermanentsOnTheBattlefieldCondition(
+                        new FilterControlledCreaturePermanent(SubType.VAMPIRE, "if you control two or more Vampires"),
+                        ComparisonType.MORE_THAN, 1)));
+
         // Destroy target creature. You gain 4 life.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -67,38 +68,5 @@ public class FeastOfBlood extends CardImpl {
     @Override
     public FeastOfBlood copy() {
         return new FeastOfBlood(this);
-    }
-}
-
-class FeastOfBloodCost extends CostImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
-    }
-
-    public FeastOfBloodCost() {
-        this.text = "you must control two or more Vampires";
-    }
-
-    public FeastOfBloodCost(final FeastOfBloodCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return game.getBattlefield().contains(filter, controllerId, 2, game);
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        this.paid = true;
-        return paid;
-    }
-
-    @Override
-    public FeastOfBloodCost copy() {
-        return new FeastOfBloodCost(this);
     }
 }

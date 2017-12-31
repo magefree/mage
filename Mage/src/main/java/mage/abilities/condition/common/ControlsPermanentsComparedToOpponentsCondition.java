@@ -25,54 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.abilities.condition.common;
 
+import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.common.ruleModifying.CastOnlyDuringPhaseStepSourceEffect;
-import mage.constants.PhaseStep;
-import mage.constants.TurnPhase;
-import mage.constants.Zone;
+import mage.constants.ComparisonType;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
-public class CastOnlyDuringPhaseStepSourceAbility extends SimpleStaticAbility {
+public class ControlsPermanentsComparedToOpponentsCondition implements Condition {
 
-    public CastOnlyDuringPhaseStepSourceAbility(TurnPhase turnPhase) {
-        this(turnPhase, null, null);
-    }
+    private final ComparisonType type;
+    private final FilterPermanent filterPermanent;
 
-    public CastOnlyDuringPhaseStepSourceAbility(TurnPhase turnPhase, Condition condition) {
-        this(turnPhase, null, condition);
-    }
-
-    public CastOnlyDuringPhaseStepSourceAbility(PhaseStep phaseStep) {
-        this(null, phaseStep, null);
-    }
-
-    public CastOnlyDuringPhaseStepSourceAbility(PhaseStep phaseStep, Condition condition) {
-        this(null, phaseStep, condition);
-    }
-
-    public CastOnlyDuringPhaseStepSourceAbility(TurnPhase turnPhase, PhaseStep phaseStep, Condition condition) {
-        this(turnPhase, phaseStep, condition, null);
-    }
-
-    public CastOnlyDuringPhaseStepSourceAbility(TurnPhase turnPhase, PhaseStep phaseStep, Condition condition, String effectText) {
-        super(Zone.ALL, new CastOnlyDuringPhaseStepSourceEffect(turnPhase, phaseStep, condition));
-        this.setRuleAtTheTop(true);
-        if (effectText != null) {
-            getEffects().get(0).setText(effectText);
-        }
-    }
-
-    private CastOnlyDuringPhaseStepSourceAbility(final CastOnlyDuringPhaseStepSourceAbility ability) {
-        super(ability);
+    public ControlsPermanentsComparedToOpponentsCondition(ComparisonType type, FilterPermanent filterPermanent) {
+        this.type = type;
+        this.filterPermanent = filterPermanent;
     }
 
     @Override
-    public CastOnlyDuringPhaseStepSourceAbility copy() {
-        return new CastOnlyDuringPhaseStepSourceAbility(this);
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int ownNumber = game.getBattlefield().countAll(filterPermanent, source.getControllerId(), game);
+            for (UUID playerId : game.getOpponents(source.getControllerId())) {
+                if (!ComparisonType.compare(ownNumber, type, game.getBattlefield().countAll(filterPermanent, playerId, game))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("if you control ");
+        sb.append(type.getText1()).append(" ");
+        sb.append(filterPermanent.getMessage()).append(" ");
+        sb.append(type.getText2());
+        sb.append(" each opponent");
+        return sb.toString();
+    }
+
 }
