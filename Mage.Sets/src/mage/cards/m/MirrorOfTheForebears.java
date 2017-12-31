@@ -103,7 +103,7 @@ class MirrorOfTheForebearsCopyEffect extends OneShotEffect {
         if (sourcePermanent != null && copyFromPermanent != null) {
             game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, sourcePermanent.getId(), source, new EmptyApplyToPermanent());
             if (!copyFromPermanent.isArtifact()) {
-                ContinuousEffect effect = new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfTurn);
+                ContinuousEffect effect = new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT);
                 effect.setTargetPointer(new FixedTarget(sourcePermanent, game));
                 game.addEffect(effect, source);
             }

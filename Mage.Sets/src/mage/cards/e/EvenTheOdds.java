@@ -25,48 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.e;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
+import mage.abilities.common.CastOnlyIfConditionIsTrueAbility;
+import mage.abilities.condition.common.ControlsPermanentsComparedToOpponentsCondition;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.constants.ComparisonType;
+import mage.filter.StaticFilters;
+import mage.game.permanent.token.SoldierToken;
 
 /**
  *
- * @author daagar
+ * @author LevelX2
  */
-public class MyrLandshaper extends CardImpl {
+public class EvenTheOdds extends CardImpl {
 
-    public MyrLandshaper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add(SubType.MYR);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public EvenTheOdds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
-        // {tap}: Target land becomes an artifact in addition to its other types until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT), new TapSourceCost());
-        Target target = new TargetLandPermanent();
-        ability.addTarget(target);
-        this.addAbility(ability);
+        // Cast Even the Odds only if you control fewer creatures than each opponent.
+        this.addAbility(new CastOnlyIfConditionIsTrueAbility(new ControlsPermanentsComparedToOpponentsCondition(ComparisonType.FEWER_THAN, StaticFilters.FILTER_PERMANENT_CREATURES)));
+
+        // Create three 1/1 white Soldier creature tokens.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), 3));
     }
 
-    public MyrLandshaper(final MyrLandshaper card) {
+    public EvenTheOdds(final EvenTheOdds card) {
         super(card);
     }
 
     @Override
-    public MyrLandshaper copy() {
-        return new MyrLandshaper(this);
+    public EvenTheOdds copy() {
+        return new EvenTheOdds(this);
     }
 }

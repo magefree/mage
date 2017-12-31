@@ -56,6 +56,7 @@ public class SydriGalvanicGenius extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact creature");
     private static final FilterArtifactPermanent filterNonCreature = new FilterArtifactPermanent("noncreature artifact");
+
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(new CardTypePredicate(CardType.CREATURE));
@@ -63,7 +64,7 @@ public class SydriGalvanicGenius extends CardImpl {
     }
 
     public SydriGalvanicGenius(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
@@ -119,6 +120,9 @@ class SydriGalvanicGeniusEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
+                    if (!artifact.isArtifact()) {
+                        artifact.addCardType(CardType.ARTIFACT);
+                    }
                     if (!artifact.isCreature()) {
                         artifact.addCardType(CardType.CREATURE);
                     }
@@ -139,7 +143,6 @@ class SydriGalvanicGeniusEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         return false;
     }
-
 
     @Override
     public boolean hasLayer(Layer layer) {

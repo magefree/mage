@@ -36,12 +36,12 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
@@ -125,7 +125,12 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
                     UUID permanentId = targetPointer.getFirst(game, source);
                     Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
                     if (permanent != null) {
-                        permanent.addCardType(CardType.CREATURE);
+                        if (!permanent.isArtifact()) {
+                            permanent.addCardType(CardType.ARTIFACT);
+                        }
+                        if (!permanent.isCreature()) {
+                            permanent.addCardType(CardType.CREATURE);
+                        }
                     }
                 }
                 break;

@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -45,21 +46,24 @@ import mage.game.permanent.Permanent;
  */
 public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
 
-    private final CardType addedCardType;
+    private final ArrayList<CardType> addedCardTypes = new ArrayList<>();
 
-    public AddCardTypeTargetEffect(CardType addedCardType, Duration duration) {
+    public AddCardTypeTargetEffect(Duration duration, CardType... addedCardType) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        this.addedCardType = addedCardType;
-        if (addedCardType == CardType.ENCHANTMENT) {
-            dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
-        } else if (addedCardType == CardType.ARTIFACT) {
-            dependencyTypes.add(DependencyType.ArtifactAddingRemoving);
+        for (CardType cardType : addedCardType) {
+            this.addedCardTypes.add(cardType);
+            if (cardType == CardType.ENCHANTMENT) {
+                dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
+            } else if (cardType == CardType.ARTIFACT) {
+                dependencyTypes.add(DependencyType.ArtifactAddingRemoving);
+            }
         }
+
     }
 
     public AddCardTypeTargetEffect(final AddCardTypeTargetEffect effect) {
         super(effect);
-        this.addedCardType = effect.addedCardType;
+        this.addedCardTypes.addAll(effect.addedCardTypes);
     }
 
     @Override
@@ -68,8 +72,10 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
         for (UUID targetId : targetPointer.getTargets(game, source)) {
             Permanent target = game.getPermanent(targetId);
             if (target != null) {
-                if (!target.getCardType().contains(addedCardType)) {
-                    target.addCardType(addedCardType);
+                for (CardType cardType : addedCardTypes) {
+                    if (!target.getCardType().contains(cardType)) {
+                        target.addCardType(cardType);
+                    }
                 }
                 result = true;
             }
@@ -93,7 +99,23 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes ").append(addedCardType.toString()).append(" in addition to its other types until end of turn");
+        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes ");
+        boolean article = false;
+        for (CardType cardType : addedCardTypes) {
+            if (!article) {
+                if (cardType.toString().startsWith("A") || cardType.toString().startsWith("E")) {
+                    sb.append("an ");
+                } else {
+                    sb.append("a ");
+                }
+                article = true;
+            }
+            sb.append(cardType.toString().toLowerCase()).append(" ");
+        }
+        sb.append("in addition to its other types");
+        if (getDuration().equals(Duration.EndOfTurn)) {
+            sb.append(" until end of turn");
+        }
         return sb.toString();
     }
 }

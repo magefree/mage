@@ -60,7 +60,7 @@ public class Memnarch extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {1}{U}{U}: Target permanent becomes an artifact in addition to its other types.
-        Effect effect = new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.WhileOnBattlefield);
+        Effect effect = new AddCardTypeTargetEffect(Duration.WhileOnBattlefield, CardType.ARTIFACT);
         effect.setText("Target permanent becomes an artifact in addition to its other types");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{U}{U}"));
         ability.addTarget(new TargetPermanent());

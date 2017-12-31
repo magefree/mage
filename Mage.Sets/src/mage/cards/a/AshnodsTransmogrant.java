@@ -65,7 +65,7 @@ public class AshnodsTransmogrant extends CardImpl {
         // {T}, Sacrifice Ashnod's Transmogrant: Put a +1/+1 counter on target nonartifact creature. That creature becomes an artifact in addition to its other types.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        Effect effect = new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.WhileOnBattlefield);
+        Effect effect = new AddCardTypeTargetEffect(Duration.WhileOnBattlefield, CardType.ARTIFACT);
         effect.setText("That creature becomes an artifact in addition to its other types");
         ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent(filter));

@@ -25,48 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.abilities.common;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
+import mage.abilities.condition.Condition;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author daagar
+ * @author LevelX2
  */
-public class MyrLandshaper extends CardImpl {
+public class CastOnlyIfConditionIsTrueEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MyrLandshaper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add(SubType.MYR);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    private final Condition condition;
 
-        // {tap}: Target land becomes an artifact in addition to its other types until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT), new TapSourceCost());
-        Target target = new TargetLandPermanent();
-        ability.addTarget(target);
-        this.addAbility(ability);
+    public CastOnlyIfConditionIsTrueEffect(Condition condition) {
+        super(Duration.EndOfGame, Outcome.Detriment);
+        this.condition = condition;
+        staticText = setText();
     }
 
-    public MyrLandshaper(final MyrLandshaper card) {
-        super(card);
+    private CastOnlyIfConditionIsTrueEffect(final CastOnlyIfConditionIsTrueEffect effect) {
+        super(effect);
+        this.condition = effect.condition;
     }
 
     @Override
-    public MyrLandshaper copy() {
-        return new MyrLandshaper(this);
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        // has to return true, if the spell cannot be cast in the current phase / step
+        if (event.getSourceId().equals(source.getSourceId())) {
+            if (condition != null && !condition.apply(game, source)) {
+                return true;
+            }
+        }
+        return false; // cast not prevented by this effect
+    }
+
+    @Override
+    public CastOnlyIfConditionIsTrueEffect copy() {
+        return new CastOnlyIfConditionIsTrueEffect(this);
+    }
+
+    private String setText() {
+        StringBuilder sb = new StringBuilder("cast {this} only ");
+        if (condition != null) {
+            sb.append(' ').append(condition.toString());
+        }
+        return sb.toString();
     }
 }

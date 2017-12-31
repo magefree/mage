@@ -25,48 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.abilities.condition.common;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.abilities.condition.Condition;
+import mage.constants.ComparisonType;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author daagar
+ * @author LevelX2
  */
-public class MyrLandshaper extends CardImpl {
+public class ControlsPermanentsComparedToOpponentsCondition implements Condition {
 
-    public MyrLandshaper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add(SubType.MYR);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    private final ComparisonType type;
+    private final FilterPermanent filterPermanent;
 
-        // {tap}: Target land becomes an artifact in addition to its other types until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT), new TapSourceCost());
-        Target target = new TargetLandPermanent();
-        ability.addTarget(target);
-        this.addAbility(ability);
-    }
-
-    public MyrLandshaper(final MyrLandshaper card) {
-        super(card);
+    public ControlsPermanentsComparedToOpponentsCondition(ComparisonType type, FilterPermanent filterPermanent) {
+        this.type = type;
+        this.filterPermanent = filterPermanent;
     }
 
     @Override
-    public MyrLandshaper copy() {
-        return new MyrLandshaper(this);
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int ownNumber = game.getBattlefield().countAll(filterPermanent, source.getControllerId(), game);
+            for (UUID playerId : game.getOpponents(source.getControllerId())) {
+                if (!ComparisonType.compare(ownNumber, type, game.getBattlefield().countAll(filterPermanent, playerId, game))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("if you control ");
+        sb.append(type.getText1()).append(" ");
+        sb.append(filterPermanent.getMessage()).append(" ");
+        sb.append(type.getText2());
+        sb.append(" each opponent");
+        return sb.toString();
+    }
+
 }
