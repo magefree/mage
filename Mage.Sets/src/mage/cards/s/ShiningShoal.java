@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -52,8 +53,6 @@ import mage.target.TargetSource;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreatureOrPlayer;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -61,7 +60,7 @@ import java.util.UUID;
 public class ShiningShoal extends CardImpl {
 
     public ShiningShoal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
         this.subtype.add(SubType.ARCANE);
 
         // You may exile a white card with converted mana cost X from your hand rather than pay Shining Shoal's mana cost
@@ -130,7 +129,7 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
                 return false;
             }
             // do the 2 objects match?
-            if (sourceObject.getId() != chosenSourceObject.getId()) {
+            if (!sourceObject.getId().equals(chosenSourceObject.getId())) {
                 return false;
             }
 
