@@ -76,11 +76,14 @@ public class TezzeretAgentOfBolas extends CardImpl {
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(5, 1, filter, true), 1));
 
         // -1: Target artifact becomes an artifact creature with base power and toughness 5/5.
-        Effect effect = new AddCardTypeTargetEffect(CardType.CREATURE, Duration.EndOfGame);
+        Effect effect = new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfGame);
         effect.setText("Target artifact becomes an artifact creature");
         LoyaltyAbility ability1 = new LoyaltyAbility(effect, -1);
         effect = new SetPowerToughnessTargetEffect(5, 5, Duration.EndOfGame);
         effect.setText("with base power and toughness 5/5");
+        ability1.addEffect(effect);
+        effect = new AddCardTypeTargetEffect(CardType.CREATURE, Duration.EndOfGame);
+        effect.setText(" ");
         ability1.addEffect(effect);
         ability1.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability1);
