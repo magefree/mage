@@ -239,10 +239,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         SessionHandler.startSession(this);
         callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
-        desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
+        desktopPane.add(connectDialog, JLayeredPane.MODAL_LAYER);
         errorDialog = new ErrorDialog();
         errorDialog.setLocation(100, 100);
-        desktopPane.add(errorDialog, JLayeredPane.POPUP_LAYER);
+        desktopPane.add(errorDialog, JLayeredPane.MODAL_LAYER);
         UI.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
         PING_TASK_EXECUTOR.scheduleAtFixedRate(() -> SessionHandler.ping(), 60, 60, TimeUnit.SECONDS);
@@ -945,7 +945,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnConnectActionPerformed
 
     public void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
-        JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.POPUP_LAYER);
+        JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.MODAL_LAYER);
         for (JInternalFrame window : windows) {
             if (window instanceof AboutDialog) {
                 // don't open the window twice.
@@ -953,7 +953,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         }
         AboutDialog aboutDialog = new AboutDialog();
-        desktopPane.add(aboutDialog, JLayeredPane.POPUP_LAYER);
+        desktopPane.add(aboutDialog, JLayeredPane.MODAL_LAYER);
         aboutDialog.showDialog(VERSION);
     }//GEN-LAST:event_btnAboutActionPerformed
 
@@ -1096,7 +1096,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public void showUserRequestDialog(final UserRequestMessage userRequestMessage) {
         final UserRequestDialog userRequestDialog = new UserRequestDialog();
         userRequestDialog.setLocation(100, 100);
-        desktopPane.add(userRequestDialog, JLayeredPane.POPUP_LAYER);
+        desktopPane.add(userRequestDialog, JLayeredPane.MODAL_LAYER);
         if (SwingUtilities.isEventDispatchThread()) {
             userRequestDialog.showDialog(userRequestMessage);
         } else {
