@@ -51,7 +51,9 @@ import javax.swing.UIManager;
 
 import mage.client.SessionHandler;
 import mage.client.components.MageTextArea;
+import mage.client.constants.Constants;
 import mage.client.game.FeedbackPanel.FeedbackMode;
+
 import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
 import mage.client.util.GUISizeHelper;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_NO;
@@ -82,7 +84,6 @@ public class HelperPanel extends JPanel {
     private javax.swing.JButton linkSpecial;
     private javax.swing.JButton linkUndo;
 
-    private final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
     private final Object tooltipBackground = UIManager.get("info");
 
     private static final String CMD_AUTO_ANSWER_ID_YES = "cmdAutoAnswerIdYes";
@@ -232,13 +233,13 @@ public class HelperPanel extends JPanel {
 
             @Override
             public void mouseEntered(MouseEvent me) {
-                ToolTipManager.sharedInstance().setDismissDelay(100000);
+                ToolTipManager.sharedInstance().setDismissDelay(100 * 1000);
                 UIManager.put("info", Color.DARK_GRAY);
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+                ToolTipManager.sharedInstance().setDismissDelay(Constants.TOOLTIPS_DELAY_MS);
                 UIManager.put("info", tooltipBackground);
             }
         });

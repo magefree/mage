@@ -50,6 +50,7 @@ import mage.client.chat.ChatPanelBasic;
 import mage.client.components.*;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.tray.MageTray;
+import mage.client.constants.Constants;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deckeditor.DeckEditorPane;
 import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
@@ -91,8 +92,6 @@ import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.images.DownloadPictures;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
-
-import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -284,6 +283,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         balloonTip = new BalloonTip(desktopPane, "", new EdgedBalloonStyle(Color.WHITE, Color.BLUE), false);
         balloonTip.setPositioner(new LeftAbovePositioner(0, 0));
         balloonTip.setVisible(false);
+
+        // tooltips delay in ms
+        ToolTipManager.sharedInstance().setDismissDelay(Constants.TOOLTIPS_DELAY_MS);
 
         mageToolbar.add(createSwitchPanelsButton(), 0);
         mageToolbar.add(new javax.swing.JToolBar.Separator(), 1);
