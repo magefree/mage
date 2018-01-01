@@ -429,16 +429,21 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    private boolean isChrismasTime(){
+    public static boolean isChrismasTime(Date currentTime){
         // from december 15 to january 15
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(currentTime);
+
         int currentYear =  cal.get(Calendar.YEAR);
-        Date currentTime = cal.getTime();
+        if (cal.get(Calendar.MONTH) == Calendar.JANUARY){
+            currentYear = currentYear - 1;
+        }
 
         Date chrisFrom = new GregorianCalendar(currentYear, Calendar.DECEMBER, 15).getTime();
-        Date chrisTo = new GregorianCalendar(currentYear + 1, Calendar.JANUARY, 15 + 1).getTime();
+        Date chrisTo = new GregorianCalendar(currentYear + 1, Calendar.JANUARY, 15 + 1).getTime(); // end of the 15 day
 
-        return currentTime.after(chrisFrom) && currentTime.before(chrisTo);
+        return ((currentTime.equals(chrisFrom) || currentTime.after(chrisFrom))
+                && currentTime.before(chrisTo));
     }
 
     private void addMageLabel() {
@@ -448,7 +453,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         String filename;
         float ratio;
-        if (isChrismasTime()){
+        if (isChrismasTime(Calendar.getInstance().getTime())){
             // chrismass logo
             LOGGER.info("Yo Ho Ho, Merry Christmas and a Happy New Year");
             filename = "/label-xmage-christmas.png";
