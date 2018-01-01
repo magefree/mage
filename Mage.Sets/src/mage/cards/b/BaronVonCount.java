@@ -157,15 +157,17 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
             }
             Integer doomNumber = (Integer) game.getState().getValue(mageObject.getId() + "_doom");
             if (spell != null && sourcePermanent != null && mageObject != null && doomNumber > 0) {
-                String doomString = doomNumber.toString();
-                if (spell.getCard().getManaCost().getText().contains(doomString) 
-                        || String.valueOf(spell.getPower().getBaseValue()).contains(doomString) 
-                        || String.valueOf(spell.getToughness().getBaseValue()).contains(doomString)) {
-                    return true;
-                } else {
-                    for (String string : spell.getCard().getRules()) {
-                        if (string.contains(doomString)) {
-                            return true;
+                if (!spell.isFaceDown(game)) {
+                    String doomString = doomNumber.toString();
+                    if (spell.getCard().getManaCost().getText().contains(doomString) 
+                            || String.valueOf(spell.getPower().getBaseValue()).contains(doomString) 
+                            || String.valueOf(spell.getToughness().getBaseValue()).contains(doomString)) {
+                        return true;
+                    } else {
+                        for (String string : spell.getCard().getRules()) {
+                            if (string.contains(doomString)) {
+                                return true;
+                            }
                         }
                     }
                 }

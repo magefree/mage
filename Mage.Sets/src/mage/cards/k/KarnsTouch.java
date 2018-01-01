@@ -99,6 +99,9 @@ class KarnsTouchEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
+                    if (!artifact.isArtifact()) {
+                        artifact.addCardType(CardType.ARTIFACT);
+                    }
                     if (!artifact.isCreature()) {
                         artifact.addCardType(CardType.CREATURE);
                     }

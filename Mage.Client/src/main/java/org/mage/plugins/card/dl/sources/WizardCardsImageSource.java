@@ -45,6 +45,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
+import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -265,7 +266,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("IMA"); // Iconic Msters
         supportedSets.add("E02"); // Explorers of Ixalan
         supportedSets.add("V17"); // From the Vault: Transform
-//        supportedSets.add("UST"); // Unstable
+        supportedSets.add("UST"); // Unstable
 //        supportedSets.add("RIX"); // Rivals of Ixalan
 //        supportedSets.add("A25"); // Masters 25
 //        supportedSets.add("DOM"); // Dominaria
@@ -363,6 +364,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("HOP", "Planechase");
         setsAliases.put("HOU", "Hour of Devastation");
         setsAliases.put("ICE", "Ice Age");
+        setsAliases.put("IMA", "Iconic Masters");
         setsAliases.put("INV", "Invasion");
         setsAliases.put("ISD", "Innistrad");
         setsAliases.put("JOU", "Journey into Nyx");
@@ -455,7 +457,6 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("WMCQ", "World Magic Cup Qualifier");
         setsAliases.put("WTH", "Weatherlight");
         setsAliases.put("WWK", "Worldwake");
-        setsAliases.put("XLN", "Ixalan");
         setsAliases.put("ZEN", "Zendikar");
 
         languageAliases = new HashMap<>();
@@ -487,43 +488,44 @@ public enum WizardCardsImageSource implements CardImageSource {
         if (card.isFlippedSide()) { //doesn't support rotated images
             return null;
         }
-        String setNames = setsAliases.get(cardSet);
-        if (setNames != null) {
-            Map<String, String> setLinks = sets.computeIfAbsent(cardSet, k -> getSetLinks(cardSet));
-            if (setLinks == null || setLinks.isEmpty()) {
-                return null;
-            }
-            String link = setLinks.get(card.getDownloadName().toLowerCase());
-            if (link == null) {
-                int length = collectorId.length();
 
-                if (Character.isLetter(collectorId.charAt(length - 1))) {
-                    length -= 1;
-                }
-                int number = Integer.parseInt(collectorId.substring(0, length));
-                if (number > 0) {
-                    String key = card.getDownloadName().toLowerCase() + number;
-                    link = setLinks.get(key);
-                }
+        Map<String, String> setLinks = sets.computeIfAbsent(cardSet, k -> getSetLinks(cardSet));
+        if (setLinks == null || setLinks.isEmpty()) {
+            return null;
+        }
+        String searchKey = card.getDownloadName().toLowerCase().replace(" ", "").replace("&", "//");
+        String link = setLinks.get(searchKey);
+        if (link == null) {
+            int length = collectorId.length();
+            // Try to find card image with added letter (e.g. from Unstable)
+            if (Character.isLetter(collectorId.charAt(length - 1))) {
+                String key = searchKey + collectorId.charAt(length - 1);
+                link = setLinks.get(key);
+            }
+            // Try to find image with added card number (e.g. basic lands)
+            if (link == null) {
+                String key = searchKey + collectorId;
+                link = setLinks.get(key);
                 if (link == null) {
-                    List<String> l = new ArrayList<>(setLinks.values());
-                    if (l.size() >= number) {
-                        link = l.get(number - 1);
-                    } else {;
-                        link = l.get(number - 21);
-                        if (link != null) {
-                            link = link.replace(Integer.toString(number - 20), (Integer.toString(number - 20) + 'a'));
+                    int number = Integer.parseInt(collectorId.substring(0, length));
+                    if (number > 0) {
+                        List<String> l = new ArrayList<>(setLinks.values());
+                        if (l.size() >= number) {
+                            link = l.get(number - 1);
+                        } else {;
+                            link = l.get(number - 21);
+                            if (link != null) {
+                                link = link.replace(Integer.toString(number - 20), (Integer.toString(number - 20) + 'a'));
+                            }
                         }
                     }
                 }
             }
-            if (link != null && !link.startsWith("http://")) {
-                link = "http://gatherer.wizards.com" + link;
-            }
-            return link;
         }
-
-        return null;
+        if (link != null && !link.startsWith("http://")) {
+            link = "http://gatherer.wizards.com" + link;
+        }
+        return link;
 
     }
 
@@ -532,6 +534,9 @@ public enum WizardCardsImageSource implements CardImageSource {
         ExecutorService executor = Executors.newFixedThreadPool(10);
         try {
             String setNames = setsAliases.get(cardSet);
+            if (setNames == null) {
+                setNames = Sets.getInstance().get(cardSet).getName();
+            }
             String preferedLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
             for (String setName : setNames.split("\\^")) {
                 // String URLSetName = URLEncoder.encode(setName, "UTF-8");
@@ -557,11 +562,21 @@ public enum WizardCardsImageSource implements CardImageSource {
                         }
                         String cardName = normalizeName(cardsImages.get(i).attr("alt"));
                         if (cardName != null && !cardName.isEmpty()) {
-                            if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
+                            if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island")
+                                    || cardName.equals("Plains") || cardName.equals("Wastes")) {
                                 getLandVariations(setLinks, cardSet, multiverseId, cardName);
                             } else {
+                                String numberChar = "";
+                                int pos1 = cardName.indexOf("(");
+                                if (pos1 > 0) {
+                                    int pos2 = cardName.indexOf("(", pos1 + 1);
+                                    if (pos2 > 0) {
+                                        numberChar = cardName.substring(pos2 + 1, pos2 + 2);
+                                        cardName = cardName.substring(0, pos1);
+                                    }
+                                }
                                 Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
-                                setLinks.put(cardName.toLowerCase(), generateLink(preferedMultiverseId));
+                                setLinks.put(cardName.toLowerCase() + numberChar, generateLink(preferedMultiverseId));
                             }
                         }
                     }
@@ -613,7 +628,7 @@ public enum WizardCardsImageSource implements CardImageSource {
 
     private void getLandVariations(LinkedHashMap<String, String> setLinks, String cardSet, int multiverseId, String cardName) throws IOException, NumberFormatException {
         CardCriteria criteria = new CardCriteria();
-        criteria.name(cardName);
+        criteria.nameExact(cardName);
         criteria.setCodes(cardSet);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
 
@@ -697,7 +712,9 @@ public enum WizardCardsImageSource implements CardImageSource {
                 .replace("\u00DB", "U").replace("\u00FB", "u")
                 .replace("\u00DC", "U").replace("\u00FC", "u")
                 .replace("\u00E9", "e").replace("&", "//")
+                .replace(" ", "")
                 .replace("Hintreland Scourge", "Hinterland Scourge");
+
     }
 
     @Override

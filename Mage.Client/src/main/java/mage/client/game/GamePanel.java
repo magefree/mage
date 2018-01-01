@@ -1115,7 +1115,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         this.feedbackPanel.getFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId);
         if (dialog != null) {
-            this.pickTarget.add(dialog);
+            this.pickTarget.add(dialog); // TODO: 01.01.2018, JayDi85: why feedbackPanel saved to pickTarget list? Need to research
         }
     }
 

@@ -59,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class VeryCrypticCommand extends CardImpl {
+public class VeryCrypticCommandD extends CardImpl {
 
     private static final FilterStackObject filter = new FilterStackObject("spell or ability with a single target");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("nontoken creature");
@@ -69,7 +69,7 @@ public class VeryCrypticCommand extends CardImpl {
         filter2.add(Predicates.not(new TokenPredicate()));
     }
 
-    public VeryCrypticCommand(UUID ownerId, CardSetInfo setInfo) {
+    public VeryCrypticCommandD(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{U}{U}");
 
         // Choose two - 
@@ -101,13 +101,13 @@ public class VeryCrypticCommand extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public VeryCrypticCommand(final VeryCrypticCommand card) {
+    public VeryCrypticCommandD(final VeryCrypticCommandD card) {
         super(card);
     }
 
     @Override
-    public VeryCrypticCommand copy() {
-        return new VeryCrypticCommand(this);
+    public VeryCrypticCommandD copy() {
+        return new VeryCrypticCommandD(this);
     }
 }
 

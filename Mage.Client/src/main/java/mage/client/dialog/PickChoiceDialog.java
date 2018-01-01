@@ -165,7 +165,11 @@ public class PickChoiceDialog extends MageDialog {
         }
         
         // window settings
-        MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+        if (this.isModal()){
+            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
+        }else{
+            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+        }
         if (mageDialogState != null) {
             mageDialogState.setStateToDialog(this);
             
@@ -174,14 +178,14 @@ public class PickChoiceDialog extends MageDialog {
             this.setLocation(centered.x, centered.y);
             GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
         }
-        
+
         // final load
         loadData();
 
         // start selection
         if((startSelectionValue != null)){
             int selectIndex = -1;
-            for(int i = 0; i < this.listChoices.getModel().getSize() - 1; i++){
+            for(int i = 0; i < this.listChoices.getModel().getSize(); i++){
                 KeyValueItem listItem = (KeyValueItem)this.listChoices.getModel().getElementAt(i);
                 if (listItem.Key.equals(startSelectionValue)){
                     selectIndex = i;

@@ -54,8 +54,8 @@ public class CrewAbility extends SimpleActivatedAbility {
     private final int value;
 
     public CrewAbility(int value) {
-        super(Zone.BATTLEFIELD, new AddCardTypeSourceEffect(CardType.ARTIFACT, Duration.EndOfTurn), new CrewCost(value));
-        this.addEffect(new AddCardTypeSourceEffect(CardType.CREATURE, Duration.EndOfTurn));
+        super(Zone.BATTLEFIELD, new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.ARTIFACT), new CrewCost(value));
+        this.addEffect(new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE));
         this.value = value;
     }
 

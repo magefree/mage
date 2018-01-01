@@ -76,7 +76,7 @@ public class XathridGorgon extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(DefenderAbility.getInstance(), Duration.Custom);
         effect.setText("It gains defender");
         ability.addEffect(effect);
-        effect = new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.Custom);
+        effect = new AddCardTypeTargetEffect(Duration.Custom, CardType.ARTIFACT);
         effect.setText("and becomes a colorless artifact in addition to its other types");
         ability.addEffect(effect);
         ability.addEffect(new BecomesColorTargetEffect(new ObjectColor(), Duration.Custom, ""));

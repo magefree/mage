@@ -46,7 +46,7 @@ public class ArgentMutation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
-        this.getSpellAbility().addEffect(new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT));
         this.getSpellAbility().addTarget(new TargetPermanent());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }

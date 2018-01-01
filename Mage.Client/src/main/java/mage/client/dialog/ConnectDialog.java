@@ -102,10 +102,10 @@ public class ConnectDialog extends MageDialog {
         this.txtPassword.addActionListener(connectAction);
 
         registerUserDialog = new RegisterUserDialog(this);
-        MageFrame.getDesktop().add(registerUserDialog, JLayeredPane.POPUP_LAYER);
+        MageFrame.getDesktop().add(registerUserDialog, JLayeredPane.MODAL_LAYER);
 
         resetPasswordDialog = new ResetPasswordDialog(this);
-        MageFrame.getDesktop().add(resetPasswordDialog, JLayeredPane.POPUP_LAYER);
+        MageFrame.getDesktop().add(resetPasswordDialog, JLayeredPane.MODAL_LAYER);
     }
 
     public void showDialog() {
@@ -744,7 +744,7 @@ public class ConnectDialog extends MageDialog {
         DefaultComboBoxModel flagModel = (DefaultComboBoxModel)cbFlag.getModel();
         String[] flagItem;
         
-        for(int i = 0; i < flagModel.getSize() - 1; i++){
+        for(int i = 0; i < flagModel.getSize(); i++){
             flagItem = (String[])flagModel.getElementAt(i);
             choiceItems.put(flagItem[1], flagItem[0]);
         }

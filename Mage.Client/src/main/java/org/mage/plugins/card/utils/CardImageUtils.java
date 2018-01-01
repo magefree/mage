@@ -4,7 +4,6 @@ import java.io.File;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.prefs.Preferences;
 import mage.client.MageFrame;
 import mage.client.constants.Constants;
@@ -122,17 +121,17 @@ public final class CardImageUtils {
         return set;
     }
 
-    public static String prepareCardNameForFile(String cardName){
+    public static String prepareCardNameForFile(String cardName) {
         return cardName.replace(":", "").replace("\"", "").replace("//", "-");
     }
 
-    public static String getImagesDir(){
+    public static String getImagesDir() {
         // return real images dir (path without separator)
 
         String path = null;
 
         // user path
-        if (!PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true").equals("true")){
+        if (!PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true").equals("true")) {
             path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
         }
 
@@ -141,8 +140,7 @@ public final class CardImageUtils {
             path = Constants.IO.DEFAULT_IMAGES_DIR;
         }
 
-        while(path.endsWith(File.separator))
-        {
+        while (path.endsWith(File.separator)) {
             path = path.substring(0, path.length() - 1);
         }
 
@@ -151,7 +149,6 @@ public final class CardImageUtils {
 
     public static String buildImagePathToTokens() {
         String imagesPath = getImagesDir() + File.separator;
-
 
         if (PreferencesDialog.isSaveImagesToZip()) {
             return imagesPath + "TOK.zip" + File.separator;
@@ -198,20 +195,25 @@ public final class CardImageUtils {
         String setPath = buildImagePathToSet(card);
 
         String prefixType = "";
-        if(card.getType() != 0){
+        if (card.getType() != 0) {
             prefixType = " " + Integer.toString(card.getType());
         }
 
         String cardName = card.getFileName();
-        if (cardName.isEmpty()){
+        if (cardName.isEmpty()) {
             cardName = prepareCardNameForFile(card.getName());
         }
 
         String finalFileName = "";
-        if (card.getUsesVariousArt()){
+        if (card.getUsesVariousArt()) {
             finalFileName = cardName + '.' + card.getCollectorId() + ".full.jpg";
-        }else{
-            finalFileName = cardName + prefixType + ".full.jpg";
+        } else {
+            int len = card.getCollectorId().length();
+            if (Character.isLetter(card.getCollectorId().charAt(len - 1))) {
+                finalFileName = cardName + card.getCollectorId().charAt(len - 1) + ".full.jpg";
+            } else {
+                finalFileName = cardName + prefixType + ".full.jpg";
+            }
         }
 
         // if image file exists, correct name (for case sensitive systems)
@@ -219,17 +221,17 @@ public final class CardImageUtils {
         TFile dirFile = new TFile(setPath);
         TFile imageFile = new TFile(setPath + finalFileName);
         // warning, zip files can be broken
-        try{
+        try {
             if (dirFile.exists() && !imageFile.exists()) {
                 // search like names
-                for (String fileName: dirFile.list()) {
+                for (String fileName : dirFile.list()) {
                     if (fileName.toLowerCase().equals(finalFileName.toLowerCase())) {
                         finalFileName = fileName;
                         break;
                     }
                 }
             }
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             log.error("Can't read card name from file, may be it broken: " + setPath);
         }
 

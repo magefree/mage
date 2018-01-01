@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -41,12 +40,12 @@ import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -66,7 +65,7 @@ public class TezzeretAgentOfBolas extends CardImpl {
     }
 
     public TezzeretAgentOfBolas(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
 
@@ -76,7 +75,7 @@ public class TezzeretAgentOfBolas extends CardImpl {
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(5, 1, filter, true), 1));
 
         // -1: Target artifact becomes an artifact creature with base power and toughness 5/5.
-        Effect effect = new AddCardTypeTargetEffect(CardType.CREATURE, Duration.EndOfGame);
+        Effect effect = new AddCardTypeTargetEffect(Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE);
         effect.setText("Target artifact becomes an artifact creature");
         LoyaltyAbility ability1 = new LoyaltyAbility(effect, -1);
         effect = new SetPowerToughnessTargetEffect(5, 5, Duration.EndOfGame);
@@ -105,12 +104,6 @@ public class TezzeretAgentOfBolas extends CardImpl {
 
 class TezzeretAgentOfBolasEffect2 extends OneShotEffect {
 
-    final static FilterControlledPermanent filter = new FilterControlledPermanent("artifacts");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public TezzeretAgentOfBolasEffect2() {
         super(Outcome.DrawCard);
         staticText = "Target player loses X life and you gain X life, where X is twice the number of artifacts you control";
@@ -127,16 +120,16 @@ class TezzeretAgentOfBolasEffect2 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DynamicValue value = new PermanentsOnBattlefieldCount(filter);
-        int count = value.calculate(game, source, this) * 2;
-
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.loseLife(count, game, false);
-        }
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.gainLife(count, game);
+        int count = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT).calculate(game, source, this) * 2;
+        if (count > 0) {
+            Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+            if (targetPlayer != null) {
+                targetPlayer.loseLife(count, game, false);
+            }
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                controller.gainLife(count, game);
+            }
         }
         return true;
     }

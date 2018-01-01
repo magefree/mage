@@ -114,6 +114,14 @@ public class PickPileDialog extends MageDialog {
         this.revalidate();
         this.repaint();
         this.setModal(true);
+
+        // window settings
+        if (this.isModal()){
+            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
+        }else{
+            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+        }
+
         this.setVisible(true);
     }
 

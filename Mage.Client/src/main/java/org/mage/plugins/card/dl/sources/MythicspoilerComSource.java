@@ -253,6 +253,7 @@ public enum MythicspoilerComSource implements CardImageSource {
         supportedSets.add("C17");
         supportedSets.add("IMA");
         supportedSets.add("XLN");
+        supportedSets.add("UST");
         supportedSets.add("RIX");
 
         sets = new LinkedHashMap<>();
@@ -280,7 +281,8 @@ public enum MythicspoilerComSource implements CardImageSource {
         cardNameAliases.put("XLN-lookoutsdecision", "lookoutsdispersal");
         cardNameAliases.put("XLN-infuriatedgladiodon", "ragingswordtooth");
         cardNameAliases.put("XLN-redoubledvolley", "repeatingbarrage");
-
+        cardNameAliases.put("UST-captialoffense", "capitaloffense");
+        cardNameAliases.put("RIX-tetzimocdeathprimordial", "tetzimocprimaldeath");
         // <card name, card link>
         manualLinks = new HashMap<>();
         HashMap<String, String> links = new HashMap<>();
@@ -417,6 +419,8 @@ public enum MythicspoilerComSource implements CardImageSource {
         Map<String, String> setLinks = sets.computeIfAbsent(cardSet, k -> getSetLinks(cardSet));
         String searchName = card.getDownloadName().toLowerCase()
                 .replaceAll(" ", "")
+                .replaceAll("\\.", "")
+                .replaceAll("&", "and")
                 .replaceAll("-", "")
                 .replaceAll("'", "")
                 .replaceAll(",", "")
