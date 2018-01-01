@@ -143,6 +143,10 @@ class RaidingPartyEffect extends OneShotEffect {
                         if (player.choose(Outcome.Benefit, plainsToSaveTarget, source.getSourceId(), game)) {
                             for (UUID plainsId : plainsToSaveTarget.getTargets()) {
                                 plainsToSave.add(plainsId);
+                                Permanent plains = game.getPermanent(plainsId);
+                                if (plains != null) {
+                                    game.informPlayers(player.getLogName() + " chose " + plains.getLogName() + " to not be destroyed by " + sourcePermanent.getLogName());
+                                }
                             }
                         }
                     }
