@@ -72,6 +72,7 @@ public class DaughterOfAutumn extends CardImpl {
         // {W}: The next 1 damage that would be dealt to target white creature this turn is dealt to Daughter of Autumn instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DaughterOfAutumnPreventDamageTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{W}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
     public DaughterOfAutumn(final DaughterOfAutumn card) {
