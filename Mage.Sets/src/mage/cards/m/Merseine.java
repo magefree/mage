@@ -69,13 +69,13 @@ public class Merseine extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Merseine enters the battlefield with three net counters on it.
-        Effect effect = new AddCountersSourceEffect(CounterType.ECHO.createInstance(3));
+        Effect effect = new AddCountersSourceEffect(CounterType.NET.createInstance(3));
         effect.setText("with three net counters on it");
         this.addAbility(new EntersBattlefieldAbility(effect));
 
         // Enchanted creature doesn't untap during its controller's untap step if Merseine has a net counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(), 
-            new SourceHasCounterCondition(CounterType.ECHO)).setText("Enchanted creature doesn't untap during its controller's untap step if Merseine has a net counter on it")));
+            new SourceHasCounterCondition(CounterType.NET)).setText("Enchanted creature doesn't untap during its controller's untap step if Merseine has a net counter on it")));
         
         // Pay enchanted creature's mana cost: Remove a net counter from Merseine. Any player may activate this ability, but only if he or she controls the enchanted creature.
         SimpleActivatedAbility ability = new MerseineActivatedAbility();
@@ -96,7 +96,7 @@ public class Merseine extends CardImpl {
 class MerseineActivatedAbility extends SimpleActivatedAbility {
     
     public MerseineActivatedAbility() {
-        super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.ECHO.createInstance()), new MerseineCost());
+        super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.NET.createInstance()), new MerseineCost());
     }
 
     private MerseineActivatedAbility(final MerseineActivatedAbility ability) {
