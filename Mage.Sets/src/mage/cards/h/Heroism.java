@@ -112,6 +112,7 @@ class HeroismEffect extends OneShotEffect {
             Cost cost = new ManaCostsImpl("{2}{R}");
             List<Permanent> permanentsToPrevent = new ArrayList<>();
             for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
+                cost.clearPaid();
                 String message = "Pay " + cost.getText() + "? If you don't, " + permanent.getLogName() + "'s combat damage will be prevented this turn.";
                 if (player != null && player.chooseUse(Outcome.Neutral, message, source, game)) {
                     if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
