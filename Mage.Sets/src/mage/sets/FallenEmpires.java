@@ -188,6 +188,10 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Initiates of the Ebon Hand", 16, Rarity.COMMON, InitiatesOfTheEbonHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Initiates of the Ebon Hand", 17, Rarity.COMMON, InitiatesOfTheEbonHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Initiates of the Ebon Hand", 18, Rarity.COMMON, InitiatesOfTheEbonHand.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Merseine", 47, Rarity.COMMON, mage.cards.m.Merseine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Merseine", 48, Rarity.COMMON, mage.cards.m.Merseine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Merseine", 49, Rarity.COMMON, mage.cards.m.Merseine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Merseine", 50, Rarity.COMMON, mage.cards.m.Merseine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mindstab Thrull", 19, Rarity.COMMON, MindstabThrull.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mindstab Thrull", 20, Rarity.COMMON, MindstabThrull.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mindstab Thrull", 21, Rarity.COMMON, MindstabThrull.class, NON_FULL_USE_VARIOUS));
@@ -212,6 +216,7 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Order of the Ebon Hand", 26, Rarity.COMMON, OrderOfTheEbonHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Order of the Ebon Hand", 27, Rarity.COMMON, OrderOfTheEbonHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orgg", 131, Rarity.RARE, mage.cards.o.Orgg.class));
+        cards.add(new SetCardInfo("Raiding Party", 132, Rarity.UNCOMMON, mage.cards.r.RaidingParty.class));
         cards.add(new SetCardInfo("Rainbow Vale", 184, Rarity.RARE, mage.cards.r.RainbowVale.class));
         cards.add(new SetCardInfo("Ring of Renewal", 174, Rarity.RARE, mage.cards.r.RingOfRenewal.class));
         cards.add(new SetCardInfo("River Merfolk", 51, Rarity.RARE, mage.cards.r.RiverMerfolk.class));
@@ -233,6 +238,7 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Thallid Devourer", 91, Rarity.UNCOMMON, mage.cards.t.ThallidDevourer.class));
         cards.add(new SetCardInfo("Thelonite Druid", 92, Rarity.UNCOMMON, mage.cards.t.TheloniteDruid.class));
         cards.add(new SetCardInfo("Thelonite Monk", 93, Rarity.RARE, mage.cards.t.TheloniteMonk.class));
+        cards.add(new SetCardInfo("Thelon's Chant", 94, Rarity.UNCOMMON, mage.cards.t.ThelonsChant.class));
         cards.add(new SetCardInfo("Thelon's Curse", 95, Rarity.RARE, mage.cards.t.ThelonsCurse.class));
         cards.add(new SetCardInfo("Thorn Thallid", 96, Rarity.COMMON, ThornThallid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorn Thallid", 97, Rarity.COMMON, ThornThallid.class, NON_FULL_USE_VARIOUS));
@@ -241,7 +247,11 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Thrull Champion", 29, Rarity.RARE, mage.cards.t.ThrullChampion.class));
         cards.add(new SetCardInfo("Thrull Retainer", 30, Rarity.UNCOMMON, mage.cards.t.ThrullRetainer.class));
         cards.add(new SetCardInfo("Thrull Wizard", 31, Rarity.UNCOMMON, mage.cards.t.ThrullWizard.class));
+        cards.add(new SetCardInfo("Tidal Flats", 54, Rarity.COMMON, mage.cards.t.TidalFlats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tidal Flats", 55, Rarity.COMMON, mage.cards.t.TidalFlats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tidal Flats", 56, Rarity.COMMON, mage.cards.t.TidalFlats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tidal Influence", 57, Rarity.UNCOMMON, mage.cards.t.TidalInfluence.class));
+        cards.add(new SetCardInfo("Tourach's Chant", 32, Rarity.UNCOMMON, mage.cards.t.TourachsChant.class));
         cards.add(new SetCardInfo("Tourach's Gate", 33, Rarity.RARE, mage.cards.t.TourachsGate.class));
         cards.add(new SetCardInfo("Vodalian Knights", 58, Rarity.RARE, mage.cards.v.VodalianKnights.class));
         cards.add(new SetCardInfo("Vodalian Mage", 59, Rarity.COMMON, VodalianMage.class, NON_FULL_USE_VARIOUS));
