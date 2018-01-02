@@ -120,14 +120,18 @@ public class ShowCardsDialog extends MageDialog {
             this.cardArea.addCardEventListener(eventListener);
         }
 
-        if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
-            MageFrame.getDesktop().add(this, JLayeredPane.DEFAULT_LAYER);
-        }
         pack();
 
         this.revalidate();
         this.repaint();
         this.setModal(modal);
+
+        // window settings
+        if (this.isModal()){
+            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
+        }else{
+            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+        }
 
         SwingUtilities.invokeLater(() -> {
             if (!positioned) {

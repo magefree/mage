@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -46,14 +45,17 @@ import mage.constants.*;
 public class ArdentRecruit extends CardImpl {
 
     public ArdentRecruit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
+        // Metalcraft — Ardent Recruit gets +2/+2 as long as you control three or more artifacts.
         ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.instance, "Ardent Recruit gets +2/+2 as long as you control three or more artifacts");
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.instance,
+                "{this} gets +2/+2 as long as you control three or more artifacts");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ability.setAbilityWord(AbilityWord.METALCRAFT);
         this.addAbility(ability);

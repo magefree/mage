@@ -965,7 +965,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
         if (source != null) {
             if (abilities.containsKey(ShroudAbility.getInstance().getId())) {
-                return false;
+                if (!game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, sourceControllerId, game)) {
+                    return false;
+                }
             }
             if (abilities.containsKey(HexproofAbility.getInstance().getId())) {
                 if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)

@@ -114,7 +114,14 @@ public class AddLandDialog extends MageDialog {
         }
         cbLandSet.setModel(new DefaultComboBoxModel(landSetNames.toArray()));
 
-        MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+
+        // windows settings
+        if (this.isModal()){
+            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
+        }else{
+            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+        }
+
         this.setVisible(true);
     }
 

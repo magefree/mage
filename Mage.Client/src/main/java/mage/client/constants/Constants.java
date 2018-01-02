@@ -69,6 +69,9 @@ public final class Constants {
     public static final int POWBOX_TEXT_MAX_LEFT = 212;
     public static final int DAMAGE_MAX_LEFT = 180;
 
+    // tooltip hints delay in ms (need more time to display long hints withour hiding)
+    public static final int TOOLTIPS_DELAY_MS = 60 * 1000;
+
     public static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(2, 2, 2, 2);
 
     public static final double SCALE_FACTOR = 0.5;
