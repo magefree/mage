@@ -43,14 +43,6 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
 /**
- * Gatecrash FAQ 21.01.2013
- *
- * Creatures your opponents control don't actually lose hexproof, although you
- * will ignore hexproof for purposes of choosing targets of spells and abilities
- * you control.
- *
- * Creatures that come under your control after Glaring Spotlight's last ability
- * resolves won't have hexproof but can't be blocked that turn.
  *
  * @author L_J
  */
