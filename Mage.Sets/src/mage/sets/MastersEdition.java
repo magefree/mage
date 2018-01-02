@@ -76,6 +76,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Armageddon", 4, Rarity.RARE, mage.cards.a.Armageddon.class));
         cards.add(new SetCardInfo("Artifact Blast", 85, Rarity.COMMON, mage.cards.a.ArtifactBlast.class));
         cards.add(new SetCardInfo("Ashnod's Transmogrant", 152, Rarity.COMMON, mage.cards.a.AshnodsTransmogrant.class));
+        cards.add(new SetCardInfo("Autumn Willow", 113, Rarity.RARE, mage.cards.a.AutumnWillow.class));
         cards.add(new SetCardInfo("Balduvian Horde", 86, Rarity.RARE, mage.cards.b.BalduvianHorde.class));
         cards.add(new SetCardInfo("Ball Lightning", 87, Rarity.RARE, mage.cards.b.BallLightning.class));
         cards.add(new SetCardInfo("Baron Sengir", 58, Rarity.RARE, mage.cards.b.BaronSengir.class));
