@@ -61,8 +61,11 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Brass's Bounty", 94, Rarity.RARE, mage.cards.b.BrasssBounty.class));
         cards.add(new SetCardInfo("Captain's Hook", 177, Rarity.RARE, mage.cards.c.CaptainsHook.class));
         cards.add(new SetCardInfo("Cinder Barrens", 205, Rarity.RARE, mage.cards.c.CinderBarrens.class));
+        cards.add(new SetCardInfo("Dusk Charger", 69, Rarity.COMMON, mage.cards.d.DuskCharger.class));
         cards.add(new SetCardInfo("Evolving Wilds", 186, Rarity.RARE, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Ghalta, Primal Hunger", 130, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
+        cards.add(new SetCardInfo("Glorious Destiny", 18, Rarity.RARE, mage.cards.g.GloriousDestiny.class));
+        cards.add(new SetCardInfo("Paladin of Atonement", 16, Rarity.RARE, mage.cards.p.PaladinOfAtonement.class));
         cards.add(new SetCardInfo("Silvergill Adept", 53, Rarity.UNCOMMON, mage.cards.s.SilvergillAdept.class));
         cards.add(new SetCardInfo("Storm the Vault", 173, Rarity.RARE, mage.cards.s.StormTheVault.class));
         cards.add(new SetCardInfo("Swab Goblin", 203, Rarity.COMMON, mage.cards.s.SwabGoblin.class));
