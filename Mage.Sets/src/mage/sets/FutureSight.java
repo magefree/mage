@@ -200,6 +200,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Snake Cult Initiation", 89, Rarity.UNCOMMON, mage.cards.s.SnakeCultInitiation.class));
         cards.add(new SetCardInfo("Soultether Golem", 164, Rarity.UNCOMMON, mage.cards.s.SoultetherGolem.class));
         cards.add(new SetCardInfo("Sparkspitter", 109, Rarity.UNCOMMON, mage.cards.s.Sparkspitter.class));
+        cards.add(new SetCardInfo("Spellweaver Volute", 59, Rarity.RARE, mage.cards.s.SpellweaverVolute.class));
         cards.add(new SetCardInfo("Spellwild Ouphe", 151, Rarity.UNCOMMON, mage.cards.s.SpellwildOuphe.class));
         cards.add(new SetCardInfo("Spin into Myth", 60, Rarity.UNCOMMON, mage.cards.s.SpinIntoMyth.class));
         cards.add(new SetCardInfo("Spirit en-Dal", 17, Rarity.UNCOMMON, mage.cards.s.SpiritEnDal.class));

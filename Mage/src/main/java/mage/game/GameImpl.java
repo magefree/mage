@@ -1901,6 +1901,15 @@ public abstract class GameImpl implements Game, Serializable {
                                     }
                                 }
                             }
+                        } else if (target instanceof TargetCard) {
+                            Card attachedTo = getCard(perm.getAttachedTo());
+                            if (attachedTo == null
+                                    || !((TargetCard) spellAbility.getTargets().get(0)).canTarget(perm.getControllerId(), perm.getAttachedTo(), spellAbility, this)) {
+                                if (movePermanentToGraveyardWithInfo(perm)) {
+                                    attachedTo.removeAttachment(perm.getId(), this);
+                                    somethingHappened = true;
+                                }
+                            }
                         }
                     }
                 }

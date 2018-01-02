@@ -116,10 +116,11 @@ public interface Permanent extends Card, Controllable {
 
     void attachTo(UUID permanentId, Game game);
 
-    boolean addAttachment(UUID permanentId, Game game);
+    void unattach(Game game);
 
-    boolean removeAttachment(UUID permanentId, Game game);
-
+//    boolean addAttachment(UUID permanentId, Game game);
+//
+//    boolean removeAttachment(UUID permanentId, Game game);
     boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
 
     boolean hasProtectionFrom(MageObject source, Game game);
