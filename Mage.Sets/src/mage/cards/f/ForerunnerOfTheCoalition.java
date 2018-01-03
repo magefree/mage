@@ -30,18 +30,15 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBySubtypeCard;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -50,46 +47,50 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author JayDi85
  */
-public class ForerunnerOfTheHeralds extends CardImpl {
+public class ForerunnerOfTheCoalition extends CardImpl {
 
-    private static final FilterPermanent filterAnotherMerfolk = new FilterPermanent(SubType.MERFOLK, SubType.MERFOLK.toString());
+    private static final FilterCreaturePermanent filterAnotherPirate = new FilterCreaturePermanent(SubType.PIRATE, "another " + SubType.PIRATE.toString());
     static {
-        filterAnotherMerfolk.add(new AnotherPredicate());
-        filterAnotherMerfolk.add(new ControllerPredicate(TargetController.YOU));
+        filterAnotherPirate.add(new AnotherPredicate());
+        filterAnotherPirate.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public ForerunnerOfTheHeralds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    public ForerunnerOfTheCoalition(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.subtype.add(SubType.MERFOLK);
-        this.subtype.add(SubType.SCOUT);
-        this.power = new MageInt(3);
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-
-        // When Forerunner of the Heralds enters the battlefield, you may search your library for a Merfolk card, reveal it, then shuffle your library and put that card on top of it.
+        // When Forerunner of the Coalition enters the battlefield, you may search your library for a Pirate card, reveal it, then shuffle your library and put that card on top of it.
         this.addAbility(
                 new EntersBattlefieldTriggeredAbility(
                         new SearchLibraryPutOnLibraryEffect(
-                                new TargetCardInLibrary(new FilterBySubtypeCard(SubType.MERFOLK)),
+                                new TargetCardInLibrary(new FilterBySubtypeCard(SubType.PIRATE)),
                                 true,
                                 true
                         ),
-                true
+                        true
                 )
         );
 
-        // Whenever another Merfolk enters the battlefield under your control, put a +1/+1 counter on Forerunner of the Heralds.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filterAnotherMerfolk);
+        // Whenever another Pirate enters the battlefield under your control, each opponent loses 1 life.
+        Ability ability = new CreatureEntersBattlefieldTriggeredAbility(
+                Zone.BATTLEFIELD,
+                new LoseLifeOpponentsEffect(1),
+                filterAnotherPirate,
+                false,
+                false);
         this.addAbility(ability);
     }
 
-    public ForerunnerOfTheHeralds(final ForerunnerOfTheHeralds card) {
+    public ForerunnerOfTheCoalition(final ForerunnerOfTheCoalition card) {
         super(card);
     }
 
     @Override
-    public ForerunnerOfTheHeralds copy() {
-        return new ForerunnerOfTheHeralds(this);
+    public ForerunnerOfTheCoalition copy() {
+        return new ForerunnerOfTheCoalition(this);
     }
 }
