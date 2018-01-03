@@ -38,7 +38,7 @@ import mage.watchers.Watcher;
 
 /*
  * Counts amount of life lost current or last turn by players.
- * This watcher is always added in gameImpl.init
+ * This watcher is automatically started in gameImpl.init for each game
  *
  * @author LevelX2
  */

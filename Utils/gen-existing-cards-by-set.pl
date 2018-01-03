@@ -58,7 +58,7 @@ while(my $line = <DATA>) {
         my $cardInfo = "$data[0],,,$data[2]";
 
         push(@setCards, $cardInfo);
-    } else { 
+    } else {
         $all_sets {$data[1]} = 1;
     }
 }
@@ -68,7 +68,7 @@ my $potentialSideA;
 my @tempSetCards;
 
 foreach $potentialSideA (sort @setCards) {
-    #print (">>$potentialSideA\n"); 
+    #print (">>$potentialSideA\n");
     if ($potentialSideA =~ m/.*,,,(\d+)(a)$/) {
         my $cardNumSideB = $1 . "b";
         my $orig_cardNumSideB = $1 . "b";
@@ -127,7 +127,7 @@ if ($cardsFound == 0) {
     if (!$foundPossibleSet) {
         print ("Couldn't find any matching set for '$setName'. \n");
     }
-    
+
     print "(Note: Looked at $numPossibleSets sets in total).\nPress the enter key to exit.";
     $setName = <STDIN>;
     exit;
@@ -155,7 +155,7 @@ $raritiesConversion{'R'} = 'RARE';
 $raritiesConversion{'M'} = 'MYTHIC';
 $raritiesConversion{'Special'} = 'SPECIAL';
 $raritiesConversion{'Bonus'} = 'BONUS';
-sub getRarity 
+sub getRarity
 {
     my $val = $_ [0];
     if (exists ($raritiesConversion {$val}))
@@ -206,7 +206,7 @@ foreach $name_collectorid (sort @setCards)
 {
     my $cardName;
     my $cardNr;
-    $name_collectorid =~ m/^(.*),,,(.*)$/; 
+    $name_collectorid =~ m/^(.*),,,(.*)$/;
     $cardName = $1;
     $cardNr = $2;
     {
@@ -258,7 +258,7 @@ foreach $name_collectorid (sort @setCards)
                 if (-e $fn) {
                     $implementedButNotInSetYet {$str} = 1;
                     $githubTask {"- [ ] Implemented but have to add to set -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
-                } else { 
+                } else {
                     $unimplemented {"$str"} = 1;
                     $githubTask {"- [ ] Not done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
                 }
@@ -266,7 +266,7 @@ foreach $name_collectorid (sort @setCards)
                 if (-e $fn) {
                     $implemented {$str} = 1;
                     $githubTask {"- [x] Done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
-                } else { 
+                } else {
                     $unimplemented {$str} = 1;
                     $githubTask {"- [ ] Not done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
                 }
@@ -274,6 +274,15 @@ foreach $name_collectorid (sort @setCards)
         }
     }
 }
+
+# Add logic to add the missing card lines to set file automatically
+#my $setFileName = "../Mage.Sets/src/mage/sets/".$knownSets{$setName}.".java";
+#print (join("","Add already implemented cards to set file: ", $setFileName,"\n"));
+#foreach my $line (sort keys (%implementedButNotInSetYet)) {
+#    - Do action to add the line
+#    print $line;
+#}
+
 
 print "Implemented cards:\n";
 print (join ("", sort keys (%implemented)));
@@ -284,5 +293,6 @@ print (join ("", sort keys (%unimplemented)));
 print "\n\n\nGithub Task:\n";
 print (join ("", sort keys (%githubTask)));
 print ("\nData from reading: ../../mage/Mage.Sets/src/mage/sets/$knownSets{$setName}.java\n");
+
 print "\n\nYou are done.  Press the enter key to exit.";
 $setName = <STDIN>;
