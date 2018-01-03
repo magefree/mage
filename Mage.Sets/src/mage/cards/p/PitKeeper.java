@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class PitKeeper extends CardImpl {
 
     public PitKeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -59,7 +60,7 @@ public class PitKeeper extends CardImpl {
 
         // When Pit Keeper enters the battlefield, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand.
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
-        triggeredAbility.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        triggeredAbility.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
                 new CreatureCardsInControllerGraveCondition(4),
@@ -77,6 +78,7 @@ public class PitKeeper extends CardImpl {
 }
 
 class CreatureCardsInControllerGraveCondition implements Condition {
+
     private int value;
 
     public CreatureCardsInControllerGraveCondition(int value) {
@@ -86,9 +88,8 @@ class CreatureCardsInControllerGraveCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player p = game.getPlayer(source.getControllerId());
-        if (p != null && p.getGraveyard().count(new FilterCreatureCard(), game) >= value)
-        {
-                    return true;
+        if (p != null && p.getGraveyard().count(new FilterCreatureCard(), game) >= value) {
+            return true;
         }
         return false;
     }

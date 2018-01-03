@@ -40,8 +40,8 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
@@ -64,7 +64,7 @@ public class LifeDeath extends SplitCard {
 
         // Death
         // Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.
-        Target target = new TargetCardInYourGraveyard(1, new FilterCreatureCard("creature card from your graveyard"));
+        Target target = new TargetCardInYourGraveyard(1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         getRightHalfCard().getSpellAbility().addTarget(target);
         getRightHalfCard().getSpellAbility().addEffect(new DeathEffect());
 

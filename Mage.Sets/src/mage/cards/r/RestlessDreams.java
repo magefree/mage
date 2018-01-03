@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class RestlessDreams extends CardImpl {
 
     public RestlessDreams(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // As an additional cost to cast Restless Dreams, discard X cards.
         this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
@@ -62,14 +62,14 @@ public class RestlessDreams extends CardImpl {
     public RestlessDreams(final RestlessDreams card) {
         super(card);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         int xValue = new GetXValue().calculate(game, ability, null);
-            Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard("creature card from your graveyard"));
-            ability.addTarget(target);
+        Target target = new TargetCardInYourGraveyard(xValue, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
+        ability.addTarget(target);
     }
-    
+
     @Override
     public RestlessDreams copy() {
         return new RestlessDreams(this);

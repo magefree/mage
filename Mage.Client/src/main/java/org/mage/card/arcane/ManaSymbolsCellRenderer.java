@@ -35,28 +35,30 @@ public final class ManaSymbolsCellRenderer extends DefaultTableCellRenderer {
         String manaCost = (String)value;
         manaPanel.removeAll();
         manaPanel.setLayout(new BoxLayout(manaPanel, BoxLayout.X_AXIS));
-        StringTokenizer tok = new StringTokenizer(manaCost, " ");
-        while (tok.hasMoreTokens()) {
-            String symbol = tok.nextToken();
+        if(manaCost != null){
+            StringTokenizer tok = new StringTokenizer(manaCost, " ");
+            while (tok.hasMoreTokens()) {
+                String symbol = tok.nextToken();
 
-            JLabel symbolLabel = new JLabel();
-            //symbolLabel.setBorder(new LineBorder(new Color(150, 150, 150))); // debug
-            symbolLabel.setBorder(new EmptyBorder(0, symbolHorizontalMargin,0, 0));
+                JLabel symbolLabel = new JLabel();
+                //symbolLabel.setBorder(new LineBorder(new Color(150, 150, 150))); // debug
+                symbolLabel.setBorder(new EmptyBorder(0, symbolHorizontalMargin,0, 0));
 
-            BufferedImage image = ManaSymbols.getSizedManaSymbol(symbol, symbolWidth);
-            if (image != null){
-                // icon
-                symbolLabel.setIcon(new ImageIcon(image));
-            }else
-            {
-                // text
-                symbolLabel.setText("{" + symbol + "}");
-                symbolLabel.setOpaque(baseLabel.isOpaque());
-                symbolLabel.setForeground(baseLabel.getForeground());
-                symbolLabel.setBackground(baseLabel.getBackground());
+                BufferedImage image = ManaSymbols.getSizedManaSymbol(symbol, symbolWidth);
+                if (image != null){
+                    // icon
+                    symbolLabel.setIcon(new ImageIcon(image));
+                }else
+                {
+                    // text
+                    symbolLabel.setText("{" + symbol + "}");
+                    symbolLabel.setOpaque(baseLabel.isOpaque());
+                    symbolLabel.setForeground(baseLabel.getForeground());
+                    symbolLabel.setBackground(baseLabel.getBackground());
+                }
+
+                manaPanel.add(symbolLabel);
             }
-
-            manaPanel.add(symbolLabel);
         }
 
         return manaPanel;

@@ -28,18 +28,15 @@
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.condition.common.LiveLostLastTurnCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.game.Game;
 import mage.game.permanent.token.SoldierToken;
-import mage.watchers.common.PlayerLostLifeWatcher;
 
 /**
  *
@@ -51,8 +48,10 @@ public class FirstResponse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // At the beginning of each upkeep, if you lost life last turn, create a 1/1 white Soldier creature token.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FirstResponseEffect(), TargetController.ANY, false), new PlayerLostLifeWatcher());
-
+        this.addAbility(new ConditionalTriggeredAbility(
+                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SoldierToken()), TargetController.ANY, false),
+                LiveLostLastTurnCondition.instance,
+                "At the beginning of each upkeep, if you lost life last turn, create a 1/1 white Soldier creature token."));
     }
 
     public FirstResponse(final FirstResponse card) {
@@ -62,34 +61,5 @@ public class FirstResponse extends CardImpl {
     @Override
     public FirstResponse copy() {
         return new FirstResponse(this);
-    }
-}
-
-class FirstResponseEffect extends OneShotEffect {
-
-    public FirstResponseEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "if you lost life last turn, create a 1/1 white Soldier creature token";
-    }
-
-    public FirstResponseEffect(final FirstResponseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FirstResponseEffect copy() {
-        return new FirstResponseEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
-        if (watcher != null) {
-            if (watcher.getLiveLostLastTurn(source.getControllerId()) > 0) {
-                return new CreateTokenEffect(new SoldierToken()).apply(game, source);
-            }
-            return true;
-        }
-        return false;
     }
 }

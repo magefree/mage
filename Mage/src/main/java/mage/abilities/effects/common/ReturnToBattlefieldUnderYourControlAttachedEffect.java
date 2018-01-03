@@ -43,8 +43,17 @@ import mage.players.Player;
 public class ReturnToBattlefieldUnderYourControlAttachedEffect extends OneShotEffect {
 
     public ReturnToBattlefieldUnderYourControlAttachedEffect() {
+        this("that card");
+    }
+
+    /**
+     *
+     * @param objectText text for the object to return (default: "that card") if
+     * you use constructor without this param
+     */
+    public ReturnToBattlefieldUnderYourControlAttachedEffect(String objectText) {
         super(Outcome.Benefit);
-        staticText = "return that card to the battlefield under your control";
+        staticText = "return " + objectText + " to the battlefield under your control";
     }
 
     public ReturnToBattlefieldUnderYourControlAttachedEffect(final ReturnToBattlefieldUnderYourControlAttachedEffect effect) {

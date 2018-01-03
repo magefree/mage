@@ -27,6 +27,8 @@
  */
 package mage.cards;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
@@ -42,18 +44,13 @@ import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
 
-import java.util.List;
-import java.util.UUID;
-
 public interface Card extends MageObject {
-
 
     final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
     final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
     final String regexRed = ".*\\x7b.{0,2}R.{0,2}\\x7d.*";
     final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
     final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
-
 
     UUID getOwnerId();
 
@@ -248,4 +245,9 @@ public interface Card extends MageObject {
         return mana;
     }
 
+    List<UUID> getAttachments();
+
+    boolean addAttachment(UUID permanentId, Game game);
+
+    boolean removeAttachment(UUID permanentId, Game game);
 }

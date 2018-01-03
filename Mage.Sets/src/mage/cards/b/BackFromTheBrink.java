@@ -40,7 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -76,7 +76,7 @@ public class BackFromTheBrink extends CardImpl {
 class BackFromTheBrinkCost extends CostImpl {
 
     public BackFromTheBrinkCost() {
-        Target target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"));
+        Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         target.setNotTarget(true);
         this.addTarget(target);
         this.text = "Exile a creature card from your graveyard and pay its mana cost";

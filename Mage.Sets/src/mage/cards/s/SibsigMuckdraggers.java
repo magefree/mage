@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class SibsigMuckdraggers extends CardImpl {
 
     public SibsigMuckdraggers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{8}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
@@ -56,7 +56,7 @@ public class SibsigMuckdraggers extends CardImpl {
         this.addAbility(new DelveAbility());
         // When Sibsig Muckdraggers enters the battlefield, return target creature card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 

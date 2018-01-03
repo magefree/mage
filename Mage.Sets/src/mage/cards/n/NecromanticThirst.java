@@ -36,10 +36,10 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class NecromanticThirst extends CardImpl {
 
     public NecromanticThirst(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -59,13 +59,13 @@ public class NecromanticThirst extends CardImpl {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        
+
         // Whenever enchanted creature deals combat damage to a player, you may return target creature card from your graveyard to your hand.
         Ability ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new ReturnFromGraveyardToHandTargetEffect(), 
+                new ReturnFromGraveyardToHandTargetEffect(),
                 "enchanted creature", true, false, true, TargetController.ANY);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        this.addAbility(ability);    
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.addAbility(ability);
     }
 
     public NecromanticThirst(final NecromanticThirst card) {

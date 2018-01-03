@@ -39,11 +39,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class SkaabRuinator extends CardImpl {
 
     public SkaabRuinator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.HORROR);
 
@@ -62,11 +62,11 @@ public class SkaabRuinator extends CardImpl {
         this.toughness = new MageInt(6);
 
         // As an additional cost to cast Skaab Ruinator, exile three creature cards from your graveyard.
-        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3, new FilterCreatureCard("creature card from your graveyard"))));
+        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // You may cast Skaab Ruinator from your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new SkaabRuinatorPlayEffect()));
     }
@@ -80,7 +80,6 @@ public class SkaabRuinator extends CardImpl {
         return new SkaabRuinator(this);
     }
 }
-
 
 class SkaabRuinatorPlayEffect extends AsThoughEffectImpl {
 
@@ -105,8 +104,8 @@ class SkaabRuinatorPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(source.getSourceId()) &&
-                affectedControllerId.equals(source.getControllerId())) {
+        if (objectId.equals(source.getSourceId())
+                && affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(source.getSourceId());
             if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                 return true;

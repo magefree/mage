@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class CorpseChurn extends CardImpl {
 
     public CorpseChurn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Put the top three cards of your library into your graveyard, then you may return a creature card from your graveyard to your hand.
         getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveControllerEffect(3));
@@ -88,7 +88,7 @@ class CorpseChurnEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"));
+        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         target.setNotTarget(true);
         if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                 && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)

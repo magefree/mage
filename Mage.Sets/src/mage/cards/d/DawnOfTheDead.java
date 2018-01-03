@@ -42,7 +42,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
 public class DawnOfTheDead extends CardImpl {
 
     public DawnOfTheDead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}{B}");
 
         // At the beginning of your upkeep, you lose 1 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(1), TargetController.YOU, false));
@@ -64,7 +64,7 @@ public class DawnOfTheDead extends CardImpl {
         // At the beginning of your upkeep, you may return target creature card from your graveyard to the battlefield.
         // That creature gains haste until end of turn. Exile it at the beginning of the next end step.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DawnOfTheDeadEffect(), TargetController.YOU, true);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 

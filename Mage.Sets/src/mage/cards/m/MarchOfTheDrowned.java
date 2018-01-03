@@ -35,7 +35,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -57,7 +57,7 @@ public class MarchOfTheDrowned extends CardImpl {
         // Choose one —
         // &amp;bull; Return target creature card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         // &amp;bull; Return two target Pirate cards from your graveyard to your hand.
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnFromGraveyardToHandTargetEffect());

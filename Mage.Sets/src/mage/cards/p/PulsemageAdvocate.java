@@ -39,12 +39,12 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -58,12 +58,13 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class PulsemageAdvocate extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("cards from an opponent's graveyard");
+
     static {
         filter.add(new OwnerPredicate(TargetController.NOT_YOU));
     }
 
     public PulsemageAdvocate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
@@ -72,7 +73,7 @@ public class PulsemageAdvocate extends CardImpl {
         // {tap}: Return three target cards from an opponent's graveyard to his or her hand. Return target creature card from your graveyard to the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PulsemageAdvocateEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(3, 3, filter));
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 
