@@ -27,17 +27,15 @@
  */
 package mage.abilities.effects.keyword;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -49,15 +47,11 @@ import mage.players.Player;
  */
 public class ExploreSourceEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("a land card");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    public static final String RULE_TEXT = "it explores. <i>(Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)</i>";
 
     public ExploreSourceEffect() {
         super(Outcome.Benefit);
-        this.staticText = "it explores. <i>(Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)</i>";
+        this.staticText = RULE_TEXT;
     }
 
     public ExploreSourceEffect(final ExploreSourceEffect effect) {
@@ -71,35 +65,39 @@ public class ExploreSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(source.getSourceId());
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        return explorePermanent(game, source.getSourceId(), source);
+    }
+
+    public static boolean explorePermanent(Game game, UUID permanentId, Ability source) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
+        if (permanent == null) {
             return false;
         }
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXPLORED, source.getSourceId(), source.getSourceId(), source.getControllerId()));
-        if (player.getLibrary().hasCards()) {
-            Card card = player.getLibrary().getFromTop(game);
+        Player permanentController = game.getPlayer(source.getControllerId());
+        if (permanentController == null) {
+            return false;
+        }
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXPLORED, permanentId, source.getSourceId(), permanent.getControllerId()));
+        if (permanentController.getLibrary().hasCards()) {
+            Card card = permanentController.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl();
             cards.add(card);
-            player.revealCards("Explored card", cards, game);
+            permanentController.revealCards("Explored card", cards, game);
 
             if (card != null) {
-                if (filter.match(card, game)) {
+                if (card.isLand()) {
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 } else {
-                    if (creature != null) {
-                        creature.addCounters(CounterType.P1P1.createInstance(), source, game);
-                    }
-                    if (player.chooseUse(Outcome.Neutral, "Put " + card.getLogName() + " in your graveyard?", source, game)) {
+                    permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+                    if (permanentController.chooseUse(Outcome.Neutral, "Put " + card.getLogName() + " in your graveyard?", source, game)) {
                         card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                        game.informPlayers(player.getLogName() + " puts " + card.getLogName() + " into their graveyard.");
+                        game.informPlayers(permanentController.getLogName() + " puts " + card.getLogName() + " into their graveyard.");
                     } else {
-                        game.informPlayers(player.getLogName() + " leaves " + card.getLogName() + " on top of their library.");
+                        game.informPlayers(permanentController.getLogName() + " leaves " + card.getLogName() + " on top of their library.");
                     }
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }

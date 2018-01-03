@@ -30,15 +30,15 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBySubtypeCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -49,7 +49,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class ForerunnerOfTheCoalition extends CardImpl {
 
-    private static final FilterCreaturePermanent filterAnotherPirate = new FilterCreaturePermanent(SubType.PIRATE, "another " + SubType.PIRATE.toString());
+    private static final FilterPermanent filterAnotherPirate = new FilterPermanent(SubType.PIRATE, "another " + SubType.PIRATE.toString());
+
     static {
         filterAnotherPirate.add(new AnotherPredicate());
         filterAnotherPirate.add(new ControllerPredicate(TargetController.YOU));
@@ -64,24 +65,15 @@ public class ForerunnerOfTheCoalition extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Forerunner of the Coalition enters the battlefield, you may search your library for a Pirate card, reveal it, then shuffle your library and put that card on top of it.
-        this.addAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new SearchLibraryPutOnLibraryEffect(
-                                new TargetCardInLibrary(new FilterBySubtypeCard(SubType.PIRATE)),
-                                true,
-                                true
-                        ),
-                        true
-                )
-        );
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SearchLibraryPutOnLibraryEffect(
+                        new TargetCardInLibrary(new FilterBySubtypeCard(SubType.PIRATE)),
+                        true, true), true));
 
         // Whenever another Pirate enters the battlefield under your control, each opponent loses 1 life.
-        Ability ability = new CreatureEntersBattlefieldTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new LoseLifeOpponentsEffect(1),
-                filterAnotherPirate,
-                false,
-                false);
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1),
+                filterAnotherPirate, false);
         this.addAbility(ability);
     }
 

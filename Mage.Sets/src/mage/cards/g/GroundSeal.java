@@ -28,21 +28,14 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.common.CantBeTargetedCardsGraveyardsEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
 
 /**
  * @author jeffwadsworth
@@ -52,12 +45,11 @@ public class GroundSeal extends CardImpl {
     public GroundSeal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
-
         // When Ground Seal enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
         // Cards in graveyards can't be the targets of spells or abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GroundSealEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedCardsGraveyardsEffect()));
     }
 
     public GroundSeal(final GroundSeal card) {
@@ -67,42 +59,5 @@ public class GroundSeal extends CardImpl {
     @Override
     public GroundSeal copy() {
         return new GroundSeal(this);
-    }
-}
-
-class GroundSealEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public GroundSealEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Cards in graveyards can't be the targets of spells or abilities";
-    }
-
-    public GroundSealEffect(final GroundSealEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GroundSealEffect copy() {
-        return new GroundSealEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.TARGET) {
-            Card targetCard = game.getCard(event.getTargetId());
-            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-            if (targetCard != null && stackObject != null) {
-                Zone zone = game.getState().getZone(targetCard.getId());
-                if (zone != null && zone == Zone.GRAVEYARD) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

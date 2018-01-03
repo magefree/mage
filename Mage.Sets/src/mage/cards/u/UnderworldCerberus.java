@@ -32,22 +32,16 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.common.CantBeTargetedCardsGraveyardsEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnToHandFromGraveyardAllEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
 
 /**
  *
@@ -56,7 +50,7 @@ import mage.game.stack.StackObject;
 public class UnderworldCerberus extends CardImpl {
 
     public UnderworldCerberus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
         this.subtype.add(SubType.HOUND);
 
         this.power = new MageInt(6);
@@ -64,10 +58,10 @@ public class UnderworldCerberus extends CardImpl {
 
         // Underworld Cerberus can't be blocked except by three or more creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(3)));
-        
+
         // Cards in graveyards can't be the targets of spells or abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnderworldCerberusEffect()));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedCardsGraveyardsEffect()));
+
         // When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.
         Ability ability = new DiesTriggeredAbility(new ExileSourceEffect());
         ability.addEffect(new ReturnToHandFromGraveyardAllEffect(new FilterCreatureCard("creature cards")));
@@ -81,45 +75,5 @@ public class UnderworldCerberus extends CardImpl {
     @Override
     public UnderworldCerberus copy() {
         return new UnderworldCerberus(this);
-    }
-}
-
-class UnderworldCerberusEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public UnderworldCerberusEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Cards in graveyards can't be the targets of spells or abilities";
-    }
-
-    public UnderworldCerberusEffect(final UnderworldCerberusEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public UnderworldCerberusEffect copy() {
-        return new UnderworldCerberusEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGET;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Card targetCard = game.getCard(event.getTargetId());
-        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-        if (targetCard != null && stackObject != null) {
-            Zone zone = game.getState().getZone(targetCard.getId());
-            if (zone != null && zone == Zone.GRAVEYARD) {
-                return true;
-            }
-        }
-        return false;
     }
 }
