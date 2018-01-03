@@ -50,8 +50,11 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
@@ -62,15 +65,16 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class VeteranWarleader extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another untapped Ally you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another untapped Ally you control");
 
     static {
         filter.add(new AnotherPredicate());
         filter.add(new SubtypePredicate(SubType.ALLY));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public VeteranWarleader(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.subtype.add(SubType.ALLY);
