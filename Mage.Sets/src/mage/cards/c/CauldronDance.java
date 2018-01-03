@@ -42,6 +42,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,14 +57,14 @@ import mage.target.targetpointer.FixedTarget;
 public class CauldronDance extends CardImpl {
 
     public CauldronDance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}{R}");
 
         // Cast Cauldron Dance only during combat.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT));
 
         // Return target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step.
         this.getSpellAbility().addEffect(new CauldronDanceReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
         // You may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new CauldronDancePutCreatureFromHandOntoBattlefieldEffect());

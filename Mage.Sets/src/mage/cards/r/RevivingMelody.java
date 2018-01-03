@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -51,16 +51,15 @@ public class RevivingMelody extends CardImpl {
     }
 
     public RevivingMelody(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
-
-        // Choose one or both - 
+        // Choose one or both -
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(2);
-        
+
         //Return target creature card from your graveyard to your hand;
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         // and/or return target enchantment card from your graveyard to your hand.
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnFromGraveyardToHandTargetEffect());

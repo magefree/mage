@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,11 +51,11 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class MorgueBurst extends CardImpl {
 
     public MorgueBurst(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{R}");
 
         // Return target creature card from your graveyard to your hand. Morgue Burst deals damage to target creature or player equal to the power of the card returned this way.
         this.getSpellAbility().addEffect(new MorgueBurstEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 

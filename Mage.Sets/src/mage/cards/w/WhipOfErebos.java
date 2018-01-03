@@ -48,7 +48,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -64,7 +63,7 @@ import mage.target.targetpointer.FixedTarget;
 public class WhipOfErebos extends CardImpl {
 
     public WhipOfErebos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.ARTIFACT},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{2}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
 
         // Creatures you control have lifelink.
@@ -75,7 +74,7 @@ public class WhipOfErebos extends CardImpl {
         // Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new WhipOfErebosEffect(), new ManaCostsImpl("{2}{B}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         ability.addEffect(new WhipOfErebosReplacementEffect());
         this.addAbility(ability);
     }

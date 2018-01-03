@@ -44,7 +44,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -59,12 +59,11 @@ import mage.target.targetpointer.FixedTarget;
 public class DiabolicServitude extends CardImpl {
 
     public DiabolicServitude(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
         // When Diabolic Servitude enters the battlefield, return target creature card from your graveyard to the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiabolicServitudeReturnCreatureEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
 
         // When the creature put onto the battlefield with Diabolic Servitude dies, exile it and return Diabolic Servitude to its owner's hand.
@@ -138,10 +137,10 @@ class DiabolicServitudeCreatureDiesTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent)event).isDiesEvent()) {
+        if (((ZoneChangeEvent) event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             Object object = game.getState().getValue(getSourceId().toString() + "returnedCreature");
-            if ((object instanceof MageObjectReference) && ((MageObjectReference)object).refersTo(zEvent.getTarget(), game)) {
+            if ((object instanceof MageObjectReference) && ((MageObjectReference) object).refersTo(zEvent.getTarget(), game)) {
                 return true;
             }
         }
@@ -175,7 +174,7 @@ class DiabolicServitudeExileCreatureEffect extends OneShotEffect {
         Object object = game.getState().getValue(source.getSourceId().toString() + "returnedCreature");
         if ((object instanceof MageObjectReference)) {
             Effect effect = new ExileTargetEffect();
-            effect.setTargetPointer(new FixedTarget(((MageObjectReference)object).getSourceId()));
+            effect.setTargetPointer(new FixedTarget(((MageObjectReference) object).getSourceId()));
             effect.apply(game, source);
             return new ReturnToHandSourceEffect(true).apply(game, source);
         }
@@ -204,7 +203,7 @@ class DiabolicServitudeSourceLeftBattlefieldEffect extends OneShotEffect {
         Object object = game.getState().getValue(source.getSourceId().toString() + "returnedCreature");
         if ((object instanceof MageObjectReference)) {
             Effect effect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-            effect.setTargetPointer(new FixedTarget(((MageObjectReference)object).getSourceId()));
+            effect.setTargetPointer(new FixedTarget(((MageObjectReference) object).getSourceId()));
             effect.apply(game, source);
         }
         return false;

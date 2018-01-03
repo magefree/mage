@@ -40,7 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -75,7 +75,7 @@ public class LilianaDeathsMajesty extends CardImpl {
         // -3: Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types.
         ability = new LoyaltyAbility(new BecomesBlackZombieAdditionEffect() // because the effect has to be active for triggered effects that e.g. check if the creature entering is a Zombie, the continuous effect needs to be added before the card moving effect is applied
                 .setText(""), -3);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         ability.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types"));
         this.addAbility(ability);

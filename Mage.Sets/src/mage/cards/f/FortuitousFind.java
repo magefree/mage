@@ -33,8 +33,8 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class FortuitousFind extends CardImpl {
 
     public FortuitousFind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Choose one or both &mdash;
         this.getSpellAbility().getModes().setMinModes(1);
@@ -57,7 +57,7 @@ public class FortuitousFind extends CardImpl {
         // or Return target creature card from your graveyard to your hand.
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        mode.getTargets().add(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addMode(mode);
     }
 

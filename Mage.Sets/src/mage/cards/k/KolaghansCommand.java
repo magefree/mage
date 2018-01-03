@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author fireshoes
  */
 public class KolaghansCommand extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
@@ -57,33 +57,33 @@ public class KolaghansCommand extends CardImpl {
     }
 
     public KolaghansCommand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
 
-        // Choose two - 
+        // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);
         this.getSpellAbility().getModes().setMaxModes(2);
-        
+
         // Return target creature card from your graveyard to your hand;
         this.getSpellAbility().getEffects().add(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().getTargets().add(new TargetCardInYourGraveyard(1, new FilterCreatureCard("creature card from your graveyard")));
-        
-        // or Target player discards a card; 
+        this.getSpellAbility().getTargets().add(new TargetCardInYourGraveyard(1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+
+        // or Target player discards a card;
         Mode mode = new Mode();
         mode.getEffects().add(new DiscardTargetEffect(1));
         mode.getTargets().add(new TargetPlayer());
-        this.getSpellAbility().getModes().addMode(mode); 
-        
+        this.getSpellAbility().getModes().addMode(mode);
+
         // or Destroy target artifact;
         mode = new Mode();
         mode.getEffects().add(new DestroyTargetEffect());
         mode.getTargets().add(new TargetPermanent(filter));
-        this.getSpellAbility().getModes().addMode(mode); 
-        
+        this.getSpellAbility().getModes().addMode(mode);
+
         // or Kolaghan's Command deals 2 damage to target creature or player.
         mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(2));
         mode.getTargets().add(new TargetCreatureOrPlayer());
-        this.getSpellAbility().getModes().addMode(mode); 
+        this.getSpellAbility().getModes().addMode(mode);
     }
 
     public KolaghansCommand(final KolaghansCommand card) {

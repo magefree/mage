@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class HeadlessSkaab extends CardImpl {
 
     public HeadlessSkaab(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WARRIOR);
 
@@ -53,7 +53,7 @@ public class HeadlessSkaab extends CardImpl {
         this.toughness = new MageInt(6);
 
         // As an additional cost to cast Headless Skaab, exile a creature card from your graveyard.
-        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"))));
+        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)));
         // Headless Skaab enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
     }

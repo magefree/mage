@@ -38,7 +38,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
@@ -50,14 +50,12 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class MidnightRitual extends CardImpl {
 
-    private final FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
-
     public MidnightRitual(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{2}{B}");
 
         // Exile X target creature cards from your graveyard.
         // For each creature card exiled this way, create a 2/2 black Zombie creature token.
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addEffect(new MidnightRitualEffect());
     }
 
@@ -65,7 +63,7 @@ public class MidnightRitual extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
-            ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), filter));
+            ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         }
     }
 

@@ -36,8 +36,8 @@ import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,12 +45,12 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class BetrayalOfFlesh extends CardImpl {
 
     public BetrayalOfFlesh(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{B}");
 
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);
@@ -61,7 +61,7 @@ public class BetrayalOfFlesh extends CardImpl {
         // or return target creature card from your graveyard to the battlefield.
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        mode.getTargets().add(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().getModes().addMode(mode);
         // Entwine-Sacrifice three lands.
         this.addAbility(new EntwineAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("three lands"), true))));
