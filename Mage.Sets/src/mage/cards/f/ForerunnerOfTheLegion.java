@@ -32,64 +32,62 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author JayDi85
  */
-public class ForerunnerOfTheHeralds extends CardImpl {
+public class ForerunnerOfTheLegion extends CardImpl {
 
-    private static final FilterPermanent filterAnotherMerfolk = new FilterPermanent(SubType.MERFOLK, SubType.MERFOLK.toString());
+    private static final FilterPermanent filterAnotherVampire = new FilterPermanent(SubType.VAMPIRE, "another " + SubType.VAMPIRE.toString());
     static {
-        filterAnotherMerfolk.add(new AnotherPredicate());
-        filterAnotherMerfolk.add(new ControllerPredicate(TargetController.YOU));
+        filterAnotherVampire.add(new AnotherPredicate());
+        filterAnotherVampire.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public ForerunnerOfTheHeralds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    public ForerunnerOfTheLegion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.subtype.add(SubType.MERFOLK);
-        this.subtype.add(SubType.SCOUT);
-        this.power = new MageInt(3);
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.KNIGHT);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-
-        // When Forerunner of the Heralds enters the battlefield, you may search your library for a Merfolk card, reveal it, then shuffle your library and put that card on top of it.
+        // When Forerunner of the Legion enters the battlefield, you may search your library for a Vampire card, reveal it, then shuffle your library and put that card on top of it.
         this.addAbility(
                 new EntersBattlefieldTriggeredAbility(
                         new SearchLibraryPutOnLibraryEffect(
-                                new TargetCardInLibrary(new FilterBySubtypeCard(SubType.MERFOLK)),
+                                new TargetCardInLibrary(new FilterBySubtypeCard(SubType.VAMPIRE)),
                                 true,
                                 true
                         ),
-                true
+                        true
                 )
         );
 
-        // Whenever another Merfolk enters the battlefield under your control, put a +1/+1 counter on Forerunner of the Heralds.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filterAnotherMerfolk);
+        // Whenever another Vampire enters the battlefield under your control, target creature gets +1/+1 until end of turn.
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new BoostTargetEffect(1,1, Duration.EndOfTurn), filterAnotherVampire);
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public ForerunnerOfTheHeralds(final ForerunnerOfTheHeralds card) {
+    public ForerunnerOfTheLegion(final ForerunnerOfTheLegion card) {
         super(card);
     }
 
     @Override
-    public ForerunnerOfTheHeralds copy() {
-        return new ForerunnerOfTheHeralds(this);
+    public ForerunnerOfTheLegion copy() {
+        return new ForerunnerOfTheLegion(this);
     }
 }
