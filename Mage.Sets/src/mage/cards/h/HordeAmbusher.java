@@ -68,7 +68,7 @@ public class HordeAmbusher extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Horde Ambusher blocks, it deals 1 damage to you.
-        this.addAbility(new BlocksTriggeredAbility(new DamageControllerEffect(1), false));
+        this.addAbility(new BlocksTriggeredAbility(new DamageControllerEffect(1, "it"), false));
         
         // Morph - Reveal a red card in your hand.
         this.addAbility(new MorphAbility(this, new RevealTargetFromHandCost(new TargetCardInHand(filter))));

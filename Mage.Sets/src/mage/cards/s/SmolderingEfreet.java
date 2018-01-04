@@ -50,7 +50,7 @@ public class SmolderingEfreet extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Smoldering Efreet dies, it deals 2 damage to you.
-        this.addAbility(new DiesTriggeredAbility(new DamageControllerEffect(2), false));
+        this.addAbility(new DiesTriggeredAbility(new DamageControllerEffect(2, "it"), false));
     }
 
     public SmolderingEfreet(final SmolderingEfreet card) {

@@ -51,15 +51,13 @@ public class FireforgersPuzzleknot extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // When Fireforger's Puzzleknot enters the battlefield, it deals 1 damage to target creature or player.
-        Effect effect = new DamageTargetEffect(1);
-        effect.setText("it deals 1 damage to target creature or player");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
+
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1, "it"));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 
         // {2}{R}, Sacrifice Fireforger's Puzzleknot: It deals 1 damage to target creature or player.
-        effect.setText("It deals 1 damage to target creature or player");
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "It"), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);

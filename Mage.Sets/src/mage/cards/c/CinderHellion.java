@@ -55,7 +55,7 @@ public class CinderHellion extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Cinder Hellion enters the battlefield, it deals 2 damage to target opponent.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

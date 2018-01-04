@@ -56,7 +56,7 @@ public class CalderaHellion extends CardImpl {
         this.addAbility(new DevourAbility(DevourFactor.Devour1));
 
         // When Caldera Hellion enters the battlefield, it deals 3 damage to each creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(3, new FilterCreaturePermanent())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(3, "it", new FilterCreaturePermanent())));
     }
 
     public CalderaHellion(final CalderaHellion card) {

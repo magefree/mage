@@ -63,7 +63,7 @@ public class Anathemancer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Anathemancer enters the battlefield, it deals damage to target player equal to the number of nonbasic lands that player controls.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new AnathemancerCount()));
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new AnathemancerCount(), "it"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Unearth {5}{B}{R}

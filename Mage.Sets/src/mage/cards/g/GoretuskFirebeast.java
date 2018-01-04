@@ -54,7 +54,7 @@ public class GoretuskFirebeast extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Goretusk Firebeast enters the battlefield, it deals 4 damage to target player.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(4), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(4, "it"), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

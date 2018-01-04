@@ -65,7 +65,7 @@ public class GalvanicArc extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // When Galvanic Arc enters the battlefield, it deals 3 damage to target creature or player.
-        Ability triggeredAbility = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3));
+        Ability triggeredAbility = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"));
         triggeredAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(triggeredAbility);
         // Enchanted creature has first strike.
