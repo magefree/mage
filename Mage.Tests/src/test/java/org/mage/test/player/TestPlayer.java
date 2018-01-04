@@ -740,7 +740,9 @@ public class TestPlayer implements Player {
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         if (!choices.isEmpty()) {
-            return  choice.setChoiceByAnswers(choices, true);
+            if(choice.setChoiceByAnswers(choices, true)){
+                return true;
+            }
         }
         return computerPlayer.choose(outcome, choice, game);
     }

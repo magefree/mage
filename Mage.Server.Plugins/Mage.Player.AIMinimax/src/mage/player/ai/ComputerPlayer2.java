@@ -478,7 +478,9 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
         }
 
         if (!choice.isChosen()) {
-            return choice.setChoiceByAnswers(choices, true);
+            if(!choice.setChoiceByAnswers(choices, true)){
+                choice.setRandomChoice();
+            }
         }
 
         return true;
