@@ -51,9 +51,15 @@ public class DamageTargetEffect extends OneShotEffect {
     protected boolean preventable;
     protected String targetDescription;
     protected boolean useOnlyTargetPointer;
+    protected String sourceName = "{source}";
 
     public DamageTargetEffect(int amount) {
         this(new StaticValue(amount), true);
+    }
+
+    public DamageTargetEffect(int amount, String whoDealDamageName) {
+        this(new StaticValue(amount), true);
+        this.sourceName = whoDealDamageName;
     }
 
     public DamageTargetEffect(int amount, boolean preventable) {
@@ -64,8 +70,18 @@ public class DamageTargetEffect extends OneShotEffect {
         this(new StaticValue(amount), preventable, targetDescription);
     }
 
+    public DamageTargetEffect(int amount, boolean preventable, String targetDescription, String whoDealDamageName) {
+        this(new StaticValue(amount), preventable, targetDescription);
+        this.sourceName = whoDealDamageName;
+    }
+
     public DamageTargetEffect(DynamicValue amount) {
         this(amount, true);
+    }
+
+    public DamageTargetEffect(DynamicValue amount, String whoDealDamageName) {
+        this(amount, true);
+        this.sourceName = whoDealDamageName;
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable) {
@@ -102,6 +118,15 @@ public class DamageTargetEffect extends OneShotEffect {
         this.preventable = effect.preventable;
         this.targetDescription = effect.targetDescription;
         this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
+        this.sourceName = effect.sourceName;
+    }
+
+    public String getSourceName() {
+        return sourceName;
+    }
+
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
     }
 
     @Override
@@ -149,7 +174,7 @@ public class DamageTargetEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
-        sb.append("{source} deals ");
+        sb.append(this.sourceName).append(" deals ");
         if (message.isEmpty() || !message.equals("1")) {
             sb.append(amount);
         }

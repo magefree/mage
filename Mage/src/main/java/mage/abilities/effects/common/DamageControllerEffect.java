@@ -45,9 +45,21 @@ public class DamageControllerEffect extends OneShotEffect {
 
     protected DynamicValue amount;
     protected boolean preventable;
+    private String sourceName = "{source}";
+
+    public DamageControllerEffect(int amount, String whoDealDamageName) {
+        this(amount, true, whoDealDamageName);
+    }
 
     public DamageControllerEffect(int amount) {
         this(amount, true);
+    }
+
+    public DamageControllerEffect(int amount, boolean preventable, String whoDealDamageName) {
+        super(Outcome.Damage);
+        this.amount = new StaticValue(amount);
+        this.preventable = preventable;
+        this.sourceName = whoDealDamageName;
     }
 
     public DamageControllerEffect(int amount, boolean preventable) {
@@ -74,6 +86,7 @@ public class DamageControllerEffect extends OneShotEffect {
         super(effect);
         this.amount = effect.amount;
         this.preventable = effect.preventable;
+        this.sourceName = effect.sourceName;
     }
 
     @Override
@@ -98,7 +111,7 @@ public class DamageControllerEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
-        sb.append("{source} deals ");
+        sb.append(this.sourceName).append(" deals ");
         if (message.isEmpty() || !message.equals("1")) {
             sb.append(amount);
         }
@@ -121,4 +134,11 @@ public class DamageControllerEffect extends OneShotEffect {
         return sb.toString();
     }
 
+    public String getSourceName() {
+        return sourceName;
+    }
+
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+    }
 }
