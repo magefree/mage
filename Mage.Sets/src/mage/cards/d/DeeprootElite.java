@@ -25,15 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.f;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,55 +39,48 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterBySubtypeCard;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author JayDi85
  */
-public class ForerunnerOfTheHeralds extends CardImpl {
+public class DeeprootElite extends CardImpl {
 
-    private static final FilterPermanent filterAnotherMerfolk = new FilterPermanent(SubType.MERFOLK, "another " + SubType.MERFOLK.toString());
+    private static final FilterPermanent filterYourAnotherMerfolk = new FilterPermanent(SubType.MERFOLK, "another " + SubType.MERFOLK.toString());
     static {
-        filterAnotherMerfolk.add(new AnotherPredicate());
-        filterAnotherMerfolk.add(new ControllerPredicate(TargetController.YOU));
+        filterYourAnotherMerfolk.add(new AnotherPredicate());
+        filterYourAnotherMerfolk.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public ForerunnerOfTheHeralds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    private static final FilterControlledCreaturePermanent filterYourAnyMerfolk = new FilterControlledCreaturePermanent(SubType.MERFOLK);
+    static {
+        filterYourAnyMerfolk.add(new ControllerPredicate(TargetController.YOU));
+    }
+
+    public DeeprootElite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
         this.subtype.add(SubType.MERFOLK);
-        this.subtype.add(SubType.SCOUT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+        this.subtype.add(SubType.WARRIOR);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-
-        // When Forerunner of the Heralds enters the battlefield, you may search your library for a Merfolk card, reveal it, then shuffle your library and put that card on top of it.
-        this.addAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new SearchLibraryPutOnLibraryEffect(
-                                new TargetCardInLibrary(new FilterBySubtypeCard(SubType.MERFOLK)),
-                                true,
-                                true
-                        ),
-                true
-                )
-        );
-
-        // Whenever another Merfolk enters the battlefield under your control, put a +1/+1 counter on Forerunner of the Heralds.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filterAnotherMerfolk);
+        // Whenever another Merfolk enters the battlefield under your control, put a +1/+1 counter on target Merfolk you control.
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), filterYourAnotherMerfolk);
+        ability.addTarget(new TargetControlledCreaturePermanent(filterYourAnyMerfolk));
         this.addAbility(ability);
     }
 
-    public ForerunnerOfTheHeralds(final ForerunnerOfTheHeralds card) {
+    public DeeprootElite(final DeeprootElite card) {
         super(card);
     }
 
     @Override
-    public ForerunnerOfTheHeralds copy() {
-        return new ForerunnerOfTheHeralds(this);
+    public DeeprootElite copy() {
+        return new DeeprootElite(this);
     }
 }

@@ -43,15 +43,20 @@ public class FilterControlledCreaturePermanent extends FilterControlledPermanent
     }
 
     public FilterControlledCreaturePermanent(String name) {
-        super(name);
-        this.add(new CardTypePredicate(CardType.CREATURE));
-        // this.add(new ControllerPredicate(TargetController.YOU));
+        this(null, name);
+    }
+
+    public FilterControlledCreaturePermanent(SubType subtype) {
+        this(subtype, subtype.toString() + " you control");
     }
 
     public FilterControlledCreaturePermanent(SubType subtype, String name) {
         super(name);
+
         this.add(new CardTypePredicate(CardType.CREATURE));
-        this.add(new SubtypePredicate(subtype));
+        if(subtype != null) {
+            this.add(new SubtypePredicate(subtype));
+        }
     }
 
     public FilterControlledCreaturePermanent(final FilterControlledCreaturePermanent filter) {
