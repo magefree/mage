@@ -66,7 +66,8 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Deeproot Elite", 127, Rarity.RARE, mage.cards.d.DeeprootElite.class));
         cards.add(new SetCardInfo("Dusk Charger", 69, Rarity.COMMON, mage.cards.d.DuskCharger.class));
         cards.add(new SetCardInfo("Elenda, the Dusk Rose", 157, Rarity.MYTHIC, mage.cards.e.ElendaTheDuskRose.class));
-        cards.add(new SetCardInfo("Evolving Wilds", 186, Rarity.RARE, mage.cards.e.EvolvingWilds.class));
+        cards.add(new SetCardInfo("Etali, Primal Storm", 100, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
+        cards.add(new SetCardInfo("Evolving Wilds", 186, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Forerunner of the Coalition", 72, Rarity.UNCOMMON, mage.cards.f.ForerunnerOfTheCoalition.class));
         cards.add(new SetCardInfo("Forerunner of the Empire", 102, Rarity.UNCOMMON, mage.cards.f.ForerunnerOfTheEmpire.class));
         cards.add(new SetCardInfo("Forerunner of the Heralds", 129, Rarity.UNCOMMON, mage.cards.f.ForerunnerOfTheHeralds.class));
