@@ -32,6 +32,7 @@ public final class StaticFilters {
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT = new FilterArtifactCard();
     public static final FilterCard FILTER_CARD_ARTIFACT_OR_CREATURE = new FilterCard("artifact or creature card");
     public static final FilterCreatureCard FILTER_CARD_CREATURE_YOUR_GRAVEYARD = new FilterCreatureCard("creature card from your graveyard");
+    public static final FilterCard FILTER_CARD_LAND = new FilterLandCard();
     public static final FilterNonlandCard FILTER_CARD_NON_LAND = new FilterNonlandCard();
     public static final FilterNonlandCard FILTER_CARD_A_NON_LAND = new FilterNonlandCard("a nonland card");
 
