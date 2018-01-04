@@ -82,6 +82,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Paladin of Atonement", 16, Rarity.RARE, mage.cards.p.PaladinOfAtonement.class));
         cards.add(new SetCardInfo("Path to Discovery", 142, Rarity.RARE, mage.cards.p.PathToDiscovery.class));
         cards.add(new SetCardInfo("Pirate's Pillage", 109, Rarity.UNCOMMON, mage.cards.p.PiratesPillage.class));
+        cards.add(new SetCardInfo("Polyraptor", 144, Rarity.MYTHIC, mage.cards.p.Polyraptor.class));
         cards.add(new SetCardInfo("Seafloor Oracle", 51, Rarity.RARE, mage.cards.s.SeafloorOracle.class));
         cards.add(new SetCardInfo("Secrets of the Golden City", 52, Rarity.COMMON, mage.cards.s.SecretsOfTheGoldenCity.class));
         cards.add(new SetCardInfo("Silent Gravestone", 182, Rarity.RARE, mage.cards.s.SilentGravestone.class));
