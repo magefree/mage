@@ -65,7 +65,7 @@ public class Sparkcaster extends CardImpl {
         // When Sparkcaster enters the battlefield, return a red or green creature you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
         // When Sparkcaster enters the battlefield, it deals 1 damage to target player.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1, "it"), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

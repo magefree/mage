@@ -63,7 +63,7 @@ public class ThunderDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Thunder Dragon enters the battlefield, it deals 3 damage to each creature without flying.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageAllEffect(3, filter));
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageAllEffect(3, "it", filter));
         this.addAbility(ability);
     }
 

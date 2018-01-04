@@ -74,7 +74,7 @@ public class SorrowsPath extends CardImpl {
         this.addAbility(ability);
         
         // Whenever Sorrow's Path becomes tapped, it deals 2 damage to you and each creature you control.
-        Ability ability2 = new BecomesTappedSourceTriggeredAbility(new DamageControllerEffect(2 ));
+        Ability ability2 = new BecomesTappedSourceTriggeredAbility(new DamageControllerEffect(2 , "it"));
         ability2.addEffect(new DamageAllEffect(2, new FilterControlledCreaturePermanent()).setText("and each creature you control"));
         this.addAbility(ability2);
     }

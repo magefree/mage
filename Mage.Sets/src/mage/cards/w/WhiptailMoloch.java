@@ -51,7 +51,7 @@ public class WhiptailMoloch extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Whiptail Moloch enters the battlefield, it deals 3 damage to target creature you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"), false);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
