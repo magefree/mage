@@ -49,7 +49,7 @@ public class DckDeckImporter extends DeckImporter {
 
     private static final Pattern layoutStackPattern = Pattern.compile("\\(([^)]*)\\)");
 
-    private static final Pattern layoutStackEntryPattern = Pattern.compile("\\[(\\w+):(\\w+)]");
+    private static final Pattern layoutStackEntryPattern = Pattern.compile("\\[(\\w+[^:]\\w+):(\\d+)]"); // [MPSAK1321:43],[MPSAKH:9],[MPS123-AKH:32],[MPS-13AKH:30],[MPS-AKH:49],[MPS-AKH:11]
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
@@ -67,22 +67,47 @@ public class DckDeckImporter extends DeckImporter {
             int count = Integer.parseInt(m.group(2));
             String setCode = m.group(3);
             String cardNum = m.group(4);
+            String cardName = m.group(5);
+
+            cardNum = cardNum == null ? "" : cardNum.trim();
+            setCode = setCode == null ? "" : setCode.trim();
+            cardName = cardName == null ? "" : cardName.trim();
+
+            // search priority: set/code -> name
+            // with bulletproof on card number or name changes
 
             DeckCardInfo deckCardInfo = null;
-            CardInfo cardInfo = CardRepository.instance.findCard(setCode, cardNum);
-            if (cardInfo == null) {
-                // Try alternate based on name
-                String cardName = m.group(5);
-                if (cardName != null && !cardName.isEmpty()) {
-                    cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, false);
-                    sbMessage.append("Could not find card '").append(cardName).append("' in set ").append(setCode).append(" of number ").append(cardNum).append(".\n");
-                    if (cardInfo != null) {
-                        sbMessage.append("Made substitution of ").append(cardInfo.getCardNumber()).append(", ").append(cardInfo.getCard().getExpansionSetCode()).append(" instead.\n");
-                    }
+
+            // search by number
+            CardInfo foundedCard = CardRepository.instance.findCard(setCode, cardNum);
+            boolean wasOutdated = false;
+            if ((foundedCard != null) && !foundedCard.getName().equals(cardName)){
+                sbMessage.append("Line ").append(lineCount).append(": ").append("founded outdated card number or name, will try to replace: ").append(line).append('\n');
+                wasOutdated = true;
+                foundedCard = null;
+            }
+
+            // search by name
+            if (foundedCard == null) {
+                if(!wasOutdated){
+                    sbMessage.append("Line ").append(lineCount).append(": ").append("can't find card by number, will try ro replace: ").append(line).append('\n');
+                }
+
+                if (!cardName.equals("")) {
+                    foundedCard = CardRepository.instance.findPreferedCoreExpansionCard(cardName, false, setCode);
+                }
+
+                if (foundedCard != null) {
+                    sbMessage.append("Line ").append(lineCount).append(": ")
+                            .append("replaced to [").append(foundedCard.getSetCode()).append(":").append(foundedCard.getCardNumberAsInt()).append("] ")
+                            .append(foundedCard.getName()).append('\n');
+                }else{
+                    sbMessage.append("Line ").append(lineCount).append(": ").append("ERROR, can't find card [").append(cardName).append("]").append('\n');
                 }
             }
-            if (cardInfo != null) {
-                deckCardInfo = new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode());
+
+            if (foundedCard != null) {
+                deckCardInfo = new DeckCardInfo(foundedCard.getName(), foundedCard.getCardNumber(), foundedCard.getSetCode());
             }
             if (deckCardInfo != null) {
                 for (int i = 0; i < count; i++) {
@@ -92,8 +117,6 @@ public class DckDeckImporter extends DeckImporter {
                         deckList.getSideboard().add(deckCardInfo);
                     }
                 }
-            } else {
-                sbMessage.append("Could not find card '").append("' at line ").append(lineCount).append(": ").append(line).append('\n');
             }
         } else if (line.startsWith("NAME:")) {
             deckList.setName(line.substring(5, line.length()));

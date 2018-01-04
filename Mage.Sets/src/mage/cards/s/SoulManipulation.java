@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -45,34 +45,30 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author jeffwadsworth
  */
 public class SoulManipulation extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("creature spell");
-    private static final FilterCreatureCard filter2 = new FilterCreatureCard("creature card from your graveyard");
-    
+
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public SoulManipulation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{B}");
-
-
-        
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{B}");
 
         // Choose one or both -
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(2);
-        
+
         // Counter target creature spell;
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));
-        
+
         // and/or return target creature card from your graveyard to your hand.
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnFromGraveyardToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(filter2));
+        mode.getTargets().add(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addMode(mode);
-        
+
     }
 
     public SoulManipulation(final SoulManipulation card) {

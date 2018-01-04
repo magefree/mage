@@ -29,10 +29,12 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetCard;
 
 /**
  *
@@ -72,9 +74,16 @@ public class AttachEffect extends OneShotEffect {
                     if (player != null) {
                         return player.addAttachment(source.getSourceId(), game);
                     }
+                    if (source.getTargets().get(0) instanceof TargetCard) { // e.g. Spellweaver Volute
+                        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+                        if (card != null) {
+                            return card.addAttachment(source.getSourceId(), game);
+                        }
+                    }
                 }
             }
         }
+
         return false;
     }
 

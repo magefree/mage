@@ -45,7 +45,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
@@ -80,7 +80,6 @@ public class GodPharaohsGift extends CardImpl {
 
 class GodPharaohsGiftEffect extends OneShotEffect {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
     private final UUID exileId = UUID.randomUUID();
 
     public GodPharaohsGiftEffect() {
@@ -102,9 +101,9 @@ class GodPharaohsGiftEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
+            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
             target.setNotTarget(true);
-            if (!controller.getGraveyard().getCards(filter, game).isEmpty()
+            if (!controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD, game).isEmpty()
                     && controller.choose(Outcome.PutCreatureInPlay, target, source.getId(), game)) {
                 Card cardChosen = game.getCard(target.getFirstTarget());
                 if (cardChosen != null

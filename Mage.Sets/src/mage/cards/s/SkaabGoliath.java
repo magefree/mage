@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class SkaabGoliath extends CardImpl {
 
     public SkaabGoliath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.GIANT);
 
@@ -53,7 +53,7 @@ public class SkaabGoliath extends CardImpl {
         this.toughness = new MageInt(9);
 
         // As an additional cost to cast Skaab Goliath, exile two creature cards from your graveyard.
-        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, 2, new FilterCreatureCard("creature card from your graveyard"))));
+        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, 2, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)));
         this.addAbility(TrampleAbility.getInstance());
     }
 

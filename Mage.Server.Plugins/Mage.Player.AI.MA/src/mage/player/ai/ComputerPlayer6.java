@@ -767,14 +767,9 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             return super.choose(outcome, choice, game);
         }
         if (!choice.isChosen()) {
-            for (String achoice : choices) {
-                choice.setChoice(achoice);
-                if (choice.isChosen()) {
-                    choices.clear();
-                    return true;
-                }
+            if(!choice.setChoiceByAnswers(choices, true)){
+                choice.setRandomChoice();
             }
-            return false;
         }
         return true;
     }

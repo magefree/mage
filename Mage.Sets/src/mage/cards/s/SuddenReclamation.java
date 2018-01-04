@@ -39,7 +39,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class SuddenReclamation extends CardImpl {
 
     public SuddenReclamation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");
 
         // Put the top four cards of your library into your graveyard, then return a creature card and a land card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveControllerEffect(4));
@@ -91,7 +91,7 @@ class SuddenReclamationEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards cardsToHand = new CardsImpl();
-            Target target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"));
+            Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
             target.setNotTarget(true);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)
                     && controller.chooseTarget(outcome, target, source, game)) {

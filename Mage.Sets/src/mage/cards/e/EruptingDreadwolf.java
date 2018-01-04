@@ -56,9 +56,7 @@ public class EruptingDreadwolf extends CardImpl {
         this.nightCard = true;
 
         // Whenever Erupting Dreadwolf attacks, it deals 2 damage to target creature or player.
-        Effect effect = new DamageTargetEffect(2);
-        effect.setText("it deals 2 damage to target creature or player");
-        Ability ability = new AttacksTriggeredAbility(effect, false);
+        Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(2, "it"), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

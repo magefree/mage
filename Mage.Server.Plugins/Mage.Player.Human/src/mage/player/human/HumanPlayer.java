@@ -371,8 +371,13 @@ public class HumanPlayer extends PlayerImpl {
                 game.fireChooseChoiceEvent(playerId, choice);
             }
             waitForResponse(game);
-            if (response.getString() != null) {
-                choice.setChoice(response.getString());
+            String val = response.getString();
+            if (val != null) {
+                if(choice.isKeyChoice()){
+                    choice.setChoiceByKey(val);
+                } else {
+                    choice.setChoice(val);
+                }
                 return true;
             } else if (!choice.isRequired()) {
                 return false;

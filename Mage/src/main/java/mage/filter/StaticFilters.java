@@ -30,9 +30,11 @@ public final class StaticFilters {
     public static final FilterEnchantmentPermanent FILTER_ENCHANTMENT_PERMANENT = new FilterEnchantmentPermanent();
 
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT = new FilterArtifactCard();
+    public static final FilterCard FILTER_CARD_ARTIFACT_OR_CREATURE = new FilterCard("artifact or creature card");
+    public static final FilterCreatureCard FILTER_CARD_CREATURE_YOUR_GRAVEYARD = new FilterCreatureCard("creature card from your graveyard");
+    public static final FilterCard FILTER_CARD_LAND = new FilterLandCard();
     public static final FilterNonlandCard FILTER_CARD_NON_LAND = new FilterNonlandCard();
     public static final FilterNonlandCard FILTER_CARD_A_NON_LAND = new FilterNonlandCard("a nonland card");
-    public static final FilterCard FILTER_CARD_ARTIFACT_OR_CREATURE = new FilterCard("artifact or creature card");
 
     public static final FilterPermanent FILTER_PERMANENT = new FilterPermanent();
     public static final FilterCreaturePermanent FILTER_ARTIFACT_CREATURE_PERMANENT = new FilterArtifactCreaturePermanent();
@@ -60,7 +62,9 @@ public final class StaticFilters {
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE = new FilterCreaturePermanent();
     public static final FilterCreaturePermanent FILTER_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature");
+    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_CONTROLLED = new FilterCreaturePermanent("creature you control");
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURES = new FilterCreaturePermanent("creatures");
+    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURES_CONTROLLED = new FilterCreaturePermanent("creatures you control");
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_GOBLINS = new FilterCreaturePermanent(SubType.GOBLIN, "Goblin creatures");
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_SLIVERS = new FilterCreaturePermanent(SubType.SLIVER, "all Sliver creatures");
     public static final FilterPlaneswalkerPermanent FILTER_PERMANENT_PLANESWALKER = new FilterPlaneswalkerPermanent();
@@ -107,6 +111,9 @@ public final class StaticFilters {
         FILTER_CREATURE_TOKENS.add(new TokenPredicate());
 
         FILTER_ATTACKING_CREATURES.add(new AttackingPredicate());
+
+        FILTER_PERMANENT_CREATURE_CONTROLLED.add(new ControllerPredicate(TargetController.YOU));
+        FILTER_PERMANENT_CREATURES_CONTROLLED.add(new ControllerPredicate(TargetController.YOU));
 
         FILTER_PERMANENT_ARTIFACT_OR_CREATURE.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),

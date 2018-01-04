@@ -29,18 +29,14 @@
 package mage.choices;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class ChoiceImpl implements Choice, Serializable {
 
-    // TODO: add sorting to items
     protected boolean chosen;
     protected final boolean required;
     protected String choice;
@@ -52,6 +48,7 @@ public class ChoiceImpl implements Choice, Serializable {
     protected String subMessage;
     protected boolean searchEnabled = true; // enable for all windows by default
     protected String searchText;
+    private static Random rnd = new Random();
 
     public ChoiceImpl() {
         this(false);
@@ -210,4 +207,52 @@ public class ChoiceImpl implements Choice, Serializable {
         return this.sortData;
     };
 
+    @Override
+    public void setRandomChoice() {
+
+        if(this.isKeyChoice()){
+            // key mode
+            String[] vals = this.getKeyChoices().keySet().toArray(new String[0]);
+            if(vals.length > 0) {
+                int choiceNum = rnd.nextInt(vals.length);
+                this.setChoiceByKey(vals[choiceNum]);
+            }
+        } else {
+            // string mode
+            String[] vals = this.getChoices().toArray(new String[0]);
+            if(vals.length > 0) {
+                int choiceNum = rnd.nextInt(vals.length);
+                this.setChoice(vals[choiceNum]);
+            }
+        }
+    }
+
+    @Override
+    public boolean setChoiceByAnswers(List<String> answers, boolean removeSelectAnswerFromList){
+        // select by answers
+        if(this.isKeyChoice()){
+            // keys mode
+            for (String needChoice : answers) {
+                for (Map.Entry<String, String> currentChoice: this.getKeyChoices().entrySet()) {
+                    if (currentChoice.getKey().equals(needChoice)) {
+                        this.setChoiceByKey(needChoice);
+                        answers.remove(needChoice);
+                        return true;
+                    }
+                }
+            }
+        } else {
+            // string mode
+            for (String needChoice : answers) {
+                for (String currentChoice : this.getChoices()) {
+                    if (currentChoice.equals(needChoice)) {
+                        this.setChoice(needChoice);
+                        answers.remove(needChoice);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false; // can't find answer
+    }
 }

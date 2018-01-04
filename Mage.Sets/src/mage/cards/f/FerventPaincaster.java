@@ -63,7 +63,7 @@ public class FerventPaincaster extends CardImpl {
         this.addAbility(ability);
         
         // {T}, Exert Fervent Paincaster: It deals 1 damage to target creature.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "It"), new TapSourceCost());
         ability2.addCost(new ExertSourceCost());
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);

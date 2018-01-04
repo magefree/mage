@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -38,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -47,20 +46,20 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class ArtisanOfKozilek extends CardImpl {
 
-    public ArtisanOfKozilek (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}");
+    public ArtisanOfKozilek(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{9}");
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(10);
         this.toughness = new MageInt(9);
         // When you cast Artisan of Kozilek, you may return target creature card from your graveyard to the battlefield.
         Ability ability = new CastSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
         // Annihilator 2
         this.addAbility(new AnnihilatorAbility(2));
     }
 
-    public ArtisanOfKozilek (final ArtisanOfKozilek card) {
+    public ArtisanOfKozilek(final ArtisanOfKozilek card) {
         super(card);
     }
 

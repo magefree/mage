@@ -62,7 +62,7 @@ public class FatalAttraction extends CardImpl {
         this.addAbility(ability);
 
         // When Fatal Attraction enters the battlefield, it deals 2 damage to enchanted creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAttachedEffect(2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAttachedEffect(2, "it")));
         // At the beginning of your upkeep, Fatal Attraction deals 4 damage to enchanted creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageAttachedEffect(4), TargetController.YOU, false));
     }

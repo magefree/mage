@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken2;
 import mage.players.Player;
@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class SoulSeparator extends CardImpl {
 
     public SoulSeparator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {5}, {T}, Sacrifice Soul Separator: Exile target creature card from your graveyard.
         // Create a token that's a copy of that card except it's 1/1, it's a Spirit in addition to its other types, and it has flying.
@@ -66,7 +66,7 @@ public class SoulSeparator extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, copyEffect, new ManaCostsImpl("{5}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         ability.addEffect(new SoulSeparatorEffect());
         this.addAbility(ability);
     }

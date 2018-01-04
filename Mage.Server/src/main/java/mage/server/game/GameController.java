@@ -668,7 +668,7 @@ public class GameController implements GameCallback {
         } catch (GameException ex) {
             logger.warn(ex.getMessage());
         }
-        addCardsForTesting(game);
+        addCardsForTesting(game, playerId);
         updateGame();
     }
 
@@ -919,8 +919,8 @@ public class GameController implements GameCallback {
     /**
      * Adds cards in player's hands that are specified in config/init.txt.
      */
-    private void addCardsForTesting(Game game) {
-        SystemUtil.addCardsForTesting(game);
+    private void addCardsForTesting(Game game, UUID playerId) {
+        SystemUtil.addCardsForTesting(game, null, game.getPlayer(playerId));
     }
 
     /**

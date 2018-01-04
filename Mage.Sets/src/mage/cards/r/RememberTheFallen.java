@@ -27,22 +27,14 @@
  */
 package mage.cards.r;
 
-import java.util.List;
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -51,26 +43,25 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class RememberTheFallen extends CardImpl {
 
-    private static final FilterCreatureCard filterCreature = new FilterCreatureCard("creature card from your graveyard");
     private static final FilterArtifactCard filterArtifact = new FilterArtifactCard("artifact card from your graveyard");
 
     public RememberTheFallen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
 
+        // Choose one or both —
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(2);
 
+        // • Return target creature card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCreature));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
+        // • Return target artifact card from your graveyard to your hand.
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnToHandTargetEffect());
         mode.getTargets().add(new TargetCardInYourGraveyard(filterArtifact));
         this.getSpellAbility().addMode(mode);
 
-        mode = new Mode();
-        mode.getTargets().add(new TargetCardInYourGraveyard(filterCreature));
-        mode.getTargets().add(new TargetCardInYourGraveyard(filterArtifact));
-        mode.getEffects().add(new RememberTheFallenEffect());
-        this.getSpellAbility().addMode(mode);
     }
 
     public RememberTheFallen(final RememberTheFallen card) {
@@ -80,36 +71,5 @@ public class RememberTheFallen extends CardImpl {
     @Override
     public RememberTheFallen copy() {
         return new RememberTheFallen(this);
-    }
-}
-
-class RememberTheFallenEffect extends OneShotEffect {
-
-    public RememberTheFallenEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "Return target creature card and target artifact card from your graveyard to your hand";
-    }
-
-    public RememberTheFallenEffect(final RememberTheFallenEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RememberTheFallenEffect copy() {
-        return new RememberTheFallenEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Target target : source.getTargets()) {
-            List<UUID> targets = target.getTargets();
-            for (UUID targetId : targets) {
-                Card card = game.getCard(targetId);
-                if (card != null) {
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-                }
-            }
-        }
-        return true;
     }
 }

@@ -62,10 +62,11 @@ public class TheImmortalSun extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
 
-        // Players can't activate loyalty abilities of planeswalkers.
+        // Players can't activate planeswalkers' loyalty abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TheImmortalSunCantActivateEffect()));
         // At the beginning of your draw step, draw an additional card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1)
+                .setText("draw an additional card"), TargetController.YOU, false));
         // Spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(new FilterCard("Spells you cast"), 1)));
         // Creatures you control get +1/+1.
@@ -86,7 +87,7 @@ class TheImmortalSunCantActivateEffect extends ContinuousRuleModifyingEffectImpl
 
     public TheImmortalSunCantActivateEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Players can't activate loyalty abilities of planeswalkers";
+        staticText = "Players can't activate planeswalkers' loyalty abilities";
     }
 
     public TheImmortalSunCantActivateEffect(final TheImmortalSunCantActivateEffect effect) {

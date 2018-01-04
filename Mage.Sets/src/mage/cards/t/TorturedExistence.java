@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -47,13 +48,13 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class TorturedExistence extends CardImpl {
 
     public TorturedExistence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
 
         // {B}, Discard a creature card: Return target creature card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new DiscardCardCost(new FilterCreatureCard()));
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        this.addAbility(ability);   
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.addAbility(ability);
     }
 
     public TorturedExistence(final TorturedExistence card) {

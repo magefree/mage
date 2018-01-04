@@ -55,7 +55,7 @@ public class SteamcoreWeird extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Steamcore Weird enters the battlefield, if {R} was spent to cast Steamcore Weird, it deals 2 damage to target creature or player.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2));
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new ConditionalTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.R),
                 "if {R} was spent to cast {this}, it deals 2 damage to target creature or player."),

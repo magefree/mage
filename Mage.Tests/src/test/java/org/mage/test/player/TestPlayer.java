@@ -740,14 +740,8 @@ public class TestPlayer implements Player {
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         if (!choices.isEmpty()) {
-            for (String choose2 : choices) {
-                for (String choose1 : choice.getChoices()) {
-                    if (choose1.equals(choose2)) {
-                        choice.setChoice(choose2);
-                        choices.remove(choose2);
-                        return true;
-                    }
-                }
+            if(choice.setChoiceByAnswers(choices, true)){
+                return true;
             }
         }
         return computerPlayer.choose(outcome, choice, game);

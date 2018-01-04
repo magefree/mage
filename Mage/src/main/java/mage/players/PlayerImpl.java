@@ -817,6 +817,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 Player attachedToPlayer = game.getPlayer(permanent.getAttachedTo());
                 if (attachedToPlayer != null) {
                     attachedToPlayer.removeAttachment(permanent, game);
+                } else {
+                    Card attachedToCard = game.getCard(permanent.getAttachedTo());
+                    if (attachedToCard != null) {
+                        attachedToCard.removeAttachment(permanent.getId(), game);
+                    }
                 }
             }
 
@@ -2326,7 +2331,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     newTarget.setCardLimit(Math.min(librarySearchLimit, cardsFromTop.size()));
                     count = Math.min(searchedLibrary.count(target.getFilter(), game), librarySearchLimit);
                 }
-    
+
                 if (count < target.getNumberOfTargets()) {
                     newTarget.setMinNumberOfTargets(count);
                 }
@@ -3278,9 +3283,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCards(Card card, Zone toZone,
-            Ability source, Game game
-    ) {
+    public boolean moveCards(Card card, Zone toZone, Ability source, Game game) {
         return moveCards(card, toZone, source, game, false, false, false, null);
     }
 

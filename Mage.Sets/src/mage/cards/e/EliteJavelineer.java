@@ -54,7 +54,7 @@ public class EliteJavelineer extends CardImpl {
         this.toughness = new MageInt(2);
         
         // Whenever Elite Javelineer blocks, it deals 1 damage to target attacking creature.
-        Ability ability = new BlocksTriggeredAbility(new DamageTargetEffect(1), false);
+        Ability ability = new BlocksTriggeredAbility(new DamageTargetEffect(1, "it"), false);
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));
         this.addAbility(ability);
     }

@@ -23,7 +23,7 @@ public class ChaosMaw extends CardImpl {
         toughness = new MageInt(6);
 
         // When Chaos Maw enters the battlefield, it deals 3 damage to each other creature
-        addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(3, filter)));
+        addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(3, "it", filter)));
     }
 
     public ChaosMaw(final ChaosMaw chaosMaw){

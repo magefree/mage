@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class KarmicGuide extends CardImpl {
 
     public KarmicGuide(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.ANGEL);
         this.subtype.add(SubType.SPIRIT);
 
@@ -64,7 +64,7 @@ public class KarmicGuide extends CardImpl {
         this.addAbility(new EchoAbility("{3}{W}{W}"));
         // When Karmic Guide enters the battlefield, return target creature card from your graveyard to the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 
