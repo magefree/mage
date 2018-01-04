@@ -27,6 +27,8 @@
  */
 package mage.cards.e;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -46,7 +48,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -108,25 +109,30 @@ class EtaliPrimalStormEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             // move cards from library to exile
+            Set<Card> currentExiledCards = new HashSet<>();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    controller.moveCardsToExile(player.getLibrary().getTopCards(game, 1), source, game, true, source.getSourceId(), sourceObject.getIdName());
+                    if (!player.getLibrary().getTopCards(game, 1).isEmpty()) {
+                        Card topCard = player.getLibrary().getTopCards(game, 1).iterator().next();
+                        if (filter.match(topCard, source.getSourceId(), source.getControllerId(), game)) {
+                            currentExiledCards.add(topCard);
+                        }
+                        controller.moveCardsToExile(topCard, source, game, true, source.getSourceId(), sourceObject.getIdName());
+                    }
                 }
             }
             // cast the possible cards without paying the mana
-            ExileZone etaliExileZone = game.getExile().getExileZone(source.getSourceId());
-            if (etaliExileZone == null) {
-                return true;
-            }
             Cards cardsToCast = new CardsImpl();
-            cardsToCast.addAll(etaliExileZone.getCards(filter, source.getSourceId(), source.getControllerId(), game));
+            cardsToCast.addAll(currentExiledCards);
+            boolean alreadyCast = false;
             while (!cardsToCast.isEmpty()) {
-                if (!controller.chooseUse(Outcome.PlayForFree, "Cast a card exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
+                if (!controller.chooseUse(Outcome.PlayForFree, "Cast a" + (alreadyCast ? "nother" : "" ) + " card exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
                     break;
                 }
                 TargetCard targetCard = new TargetCard(1, Zone.EXILED, new FilterCard("nonland card to cast for free"));
                 if (controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, game)) {
+                    alreadyCast = true;
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
                         if (controller.cast(card.getSpellAbility(), game, true)) {
