@@ -51,7 +51,7 @@ public class PitchburnDevils extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Pitchburn Devils dies, it deals 3 damage to target creature or player.
-        DiesTriggeredAbility ability = new DiesTriggeredAbility(new DamageTargetEffect(3));
+        DiesTriggeredAbility ability = new DiesTriggeredAbility(new DamageTargetEffect(3, "it"));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

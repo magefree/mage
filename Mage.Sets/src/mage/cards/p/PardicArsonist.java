@@ -58,7 +58,7 @@ public class PardicArsonist extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Threshold - As long as seven or more cards are in your graveyard, Pardic Arsonist has "When Pardic Arsonist enters the battlefield, it deals 3 damage to target creature or player."
-        Ability gainedAbility = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3));
+        Ability gainedAbility = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"));
         gainedAbility.addTarget(new TargetCreatureOrPlayer());
 
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(

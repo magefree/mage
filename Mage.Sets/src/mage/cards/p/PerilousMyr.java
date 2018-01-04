@@ -51,7 +51,7 @@ public class PerilousMyr extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Perilous Myr dies, it deals 2 damage to target creature or player.
-        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(2), false);
+        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(2, "it"), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
