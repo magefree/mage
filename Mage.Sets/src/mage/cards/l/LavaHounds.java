@@ -53,7 +53,7 @@ public class LavaHounds extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // When Lava Hounds enters the battlefield, it deals 4 damage to you.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageControllerEffect(4)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageControllerEffect(4, "it")));
     }
 
     public LavaHounds(final LavaHounds card) {

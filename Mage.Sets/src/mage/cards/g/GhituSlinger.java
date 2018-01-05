@@ -56,7 +56,7 @@ public class GhituSlinger extends CardImpl {
         // Echo {2}{R}
         this.addAbility(new EchoAbility("{2}{R}"));
         // When Ghitu Slinger enters the battlefield, it deals 2 damage to target creature or player.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

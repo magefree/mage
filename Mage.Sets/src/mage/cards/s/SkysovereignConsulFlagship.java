@@ -67,7 +67,7 @@ public class SkysovereignConsulFlagship extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Skysovereign, Consul Flagship enters the battlefield or attacks, it deals 3 damage to target creature or planeswalker an opponent controls.
-        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageTargetEffect(3));
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageTargetEffect(3, "it"));
         ability.addTarget(new TargetCreatureOrPlaneswalker(1, 1, filter, false));
         this.addAbility(ability);
 

@@ -124,6 +124,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 229, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 230, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frost Giant", 101, Rarity.UNCOMMON, mage.cards.f.FrostGiant.class));
+        cards.add(new SetCardInfo("Gabriel Angelfire", 148, Rarity.RARE, mage.cards.g.GabrielAngelfire.class));
         cards.add(new SetCardInfo("Gaea's Touch", 120, Rarity.UNCOMMON, mage.cards.g.GaeasTouch.class));
         cards.add(new SetCardInfo("Ghostly Visit", 67, Rarity.COMMON, mage.cards.g.GhostlyVisit.class));
         cards.add(new SetCardInfo("Ghosts of the Damned", 68, Rarity.COMMON, mage.cards.g.GhostsOfTheDamned.class));
@@ -132,6 +133,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Guan Yu's 1,000-Li March", 13, Rarity.RARE, mage.cards.g.GuanYus1000LiMarch.class));
         cards.add(new SetCardInfo("Guan Yu, Sainted Warrior", 12, Rarity.UNCOMMON, mage.cards.g.GuanYuSaintedWarrior.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 149, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));
+        cards.add(new SetCardInfo("Halfdane", 150, Rarity.RARE, mage.cards.h.Halfdane.class));
         cards.add(new SetCardInfo("Hammerheim", 207, Rarity.UNCOMMON, mage.cards.h.Hammerheim.class));
         cards.add(new SetCardInfo("Hazezon Tamar", 151, Rarity.RARE, mage.cards.h.HazezonTamar.class));
         cards.add(new SetCardInfo("Heal", 14, Rarity.COMMON, mage.cards.h.Heal.class));

@@ -53,13 +53,16 @@ public class DamageAllEffect extends OneShotEffect {
 
     public DamageAllEffect(int amount, String whoDealDamageName, FilterPermanent filter) {
         this(new StaticValue(amount), filter);
+
         this.sourceName = whoDealDamageName;
+        setText(); // TODO: replace to @Override public String getText()
     }
 
     public DamageAllEffect(DynamicValue amount, FilterPermanent filter) {
         super(Outcome.Damage);
         this.amount = amount;
         this.filter = filter;
+
         setText();
     }
 
@@ -84,7 +87,7 @@ public class DamageAllEffect extends OneShotEffect {
         return true;
     }
 
-    private void setText() {
+    public void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.sourceName).append(" deals ").append(amount.toString()).append(" damage to each ").append(filter.getMessage());
         String message = amount.getMessage();

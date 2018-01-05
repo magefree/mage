@@ -62,7 +62,7 @@ public class RagingSwordtooth extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Raging Swordtooth enters the battlefield, it deals 1 damage to each other creature.
-        addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(1, filter)));
+        addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(1, "it", filter)));
     }
 
     public RagingSwordtooth(final RagingSwordtooth card) {

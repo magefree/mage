@@ -65,7 +65,7 @@ public class KeldonMarauders extends CardImpl {
         this.addAbility(new VanishingSacrificeAbility());
 
         // When Keldon Marauders enters the battlefield or leaves the battlefield, it deals 1 damage to target player.
-        ability = new EntersBattlefieldOrLeavesSourceTriggeredAbility(new DamageTargetEffect(1), false);
+        ability = new EntersBattlefieldOrLeavesSourceTriggeredAbility(new DamageTargetEffect(1, "it"), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

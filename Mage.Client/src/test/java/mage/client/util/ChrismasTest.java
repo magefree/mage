@@ -13,11 +13,12 @@ public class ChrismasTest {
 
     private Date getDate(int Year, int Month, int Day){
         Calendar cal = new GregorianCalendar(Year, Month - 1, Day);
+        cal.add(Calendar.HOUR, 10);
         return cal.getTime();
     }
 
     @Test
-    public void ignoreDefaultResponse() throws Exception {
+    public void testChrismasDays() throws Exception {
         // chrismas from 15 december to 15 january
         Assert.assertEquals(false, isChrismasTime(getDate(2017, 11, 1)));
         Assert.assertEquals(false, isChrismasTime(getDate(2017, 11, 15)));

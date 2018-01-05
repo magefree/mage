@@ -61,7 +61,7 @@ public class KessigMalcontents extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Kessig Malcontents enters the battlefield, it deals damage to target player equal to the number of Humans you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter), "it"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
