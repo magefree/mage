@@ -125,6 +125,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Floral Spuzzem", 101, Rarity.UNCOMMON, mage.cards.f.FloralSpuzzem.class));
         cards.add(new SetCardInfo("Force Spike", 58, Rarity.COMMON, mage.cards.f.ForceSpike.class));
         cards.add(new SetCardInfo("Frost Giant", 146, Rarity.UNCOMMON, mage.cards.f.FrostGiant.class));
+        cards.add(new SetCardInfo("Gabriel Angelfire", 266, Rarity.RARE, mage.cards.g.GabrielAngelfire.class));
         cards.add(new SetCardInfo("Gaseous Form", 59, Rarity.COMMON, mage.cards.g.GaseousForm.class));
         cards.add(new SetCardInfo("Ghosts of the Damned", 12, Rarity.COMMON, mage.cards.g.GhostsOfTheDamned.class));
         cards.add(new SetCardInfo("Giant Strength", 147, Rarity.COMMON, mage.cards.g.GiantStrength.class));
@@ -137,6 +138,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Greed", 15, Rarity.RARE, mage.cards.g.Greed.class));
         cards.add(new SetCardInfo("Green Mana Battery", 223, Rarity.UNCOMMON, mage.cards.g.GreenManaBattery.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 268, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));
+        cards.add(new SetCardInfo("Halfdane", 269, Rarity.RARE, mage.cards.h.Halfdane.class));
         cards.add(new SetCardInfo("Hammerheim", 247, Rarity.UNCOMMON, mage.cards.h.Hammerheim.class));
         cards.add(new SetCardInfo("Hazezon Tamar", 270, Rarity.RARE, mage.cards.h.HazezonTamar.class));
         cards.add(new SetCardInfo("Headless Horseman", 16, Rarity.COMMON, mage.cards.h.HeadlessHorseman.class));
@@ -239,6 +241,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Sentinel", 239, Rarity.RARE, mage.cards.s.Sentinel.class));
         cards.add(new SetCardInfo("Serpent Generator", 240, Rarity.RARE, mage.cards.s.SerpentGenerator.class));
         cards.add(new SetCardInfo("Shield Wall", 205, Rarity.UNCOMMON, mage.cards.s.ShieldWall.class));
+        cards.add(new SetCardInfo("Shimian Night Stalker", 30, Rarity.UNCOMMON, mage.cards.s.ShimianNightStalker.class));
         cards.add(new SetCardInfo("Sir Shandlar of Eberyn", 297, Rarity.UNCOMMON, mage.cards.s.SirShandlarOfEberyn.class));
         cards.add(new SetCardInfo("Sivitri Scarzam", 298, Rarity.UNCOMMON, mage.cards.s.SivitriScarzam.class));
         cards.add(new SetCardInfo("Sol'kanar the Swamp King", 299, Rarity.RARE, mage.cards.s.SolkanarTheSwampKing.class));
