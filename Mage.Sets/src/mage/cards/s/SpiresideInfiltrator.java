@@ -51,7 +51,7 @@ public class SpiresideInfiltrator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Spireside Infiltrator becomes tapped, it deals one damage to each opponent.
-        this.addAbility(new BecomesTappedSourceTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT)));
+        this.addAbility(new BecomesTappedSourceTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT, "it")));
     }
 
     public SpiresideInfiltrator(final SpiresideInfiltrator card) {

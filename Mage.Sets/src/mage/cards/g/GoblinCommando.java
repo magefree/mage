@@ -52,7 +52,7 @@ public class GoblinCommando extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Goblin Commando enters the battlefield, it deals 2 damage to target creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

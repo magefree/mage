@@ -92,6 +92,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Drake", 47, Rarity.UNCOMMON, mage.cards.f.FireDrake.class));
         cards.add(new SetCardInfo("Flash Flood", 21, Rarity.COMMON, mage.cards.f.FlashFlood.class));
         cards.add(new SetCardInfo("Fountain of Youth", 78, Rarity.COMMON, mage.cards.f.FountainOfYouth.class));
+        cards.add(new SetCardInfo("Gabriel Angelfire", 111, Rarity.RARE, mage.cards.g.GabrielAngelfire.class));
         cards.add(new SetCardInfo("Ghazban Ogre", 37, Rarity.COMMON, mage.cards.g.GhazbanOgre.class));
         cards.add(new SetCardInfo("Goblin Artisans", 48, Rarity.UNCOMMON, mage.cards.g.GoblinArtisans.class));
         cards.add(new SetCardInfo("Goblin Digging Team", 49, Rarity.COMMON, mage.cards.g.GoblinDiggingTeam.class));
@@ -129,6 +130,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Sentinel", 281, Rarity.RARE, mage.cards.s.Sentinel.class));
         cards.add(new SetCardInfo("Serpent Generator", 88, Rarity.RARE, mage.cards.s.SerpentGenerator.class));
         cards.add(new SetCardInfo("Shield Wall", 68, Rarity.UNCOMMON, mage.cards.s.ShieldWall.class));
+        cards.add(new SetCardInfo("Shimian Night Stalker", 8, Rarity.UNCOMMON, mage.cards.s.ShimianNightStalker.class));
         cards.add(new SetCardInfo("Sivitri Scarzam", 119, Rarity.UNCOMMON, mage.cards.s.SivitriScarzam.class));
         cards.add(new SetCardInfo("Sol'kanar the Swamp King", 120, Rarity.RARE, mage.cards.s.SolkanarTheSwampKing.class));
         cards.add(new SetCardInfo("Storm Seeker", 42, Rarity.UNCOMMON, mage.cards.s.StormSeeker.class));

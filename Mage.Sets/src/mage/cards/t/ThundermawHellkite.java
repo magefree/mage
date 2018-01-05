@@ -74,7 +74,7 @@ public class ThundermawHellkite extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         
         // When Thundermaw Hellkite enters the battlefield, it deals 1 damage to each creature with flying your opponents control. Tap those creatures.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageAllEffect(1, filter));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageAllEffect(1, "it", filter));
         ability.addEffect(new TapAllEffect(filter));
         this.addAbility(ability);
     }

@@ -627,46 +627,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         return false;
     }
-//
-//    @Override
-//    public List<UUID> getAttachments() {
-//        return attachments;
-//    }
 
-//    @Override
-//    public boolean addAttachment(UUID permanentId, Game game) {
-//        if (!this.attachments.contains(permanentId)) {
-//            if (!game.replaceEvent(new GameEvent(GameEvent.EventType.ATTACH, objectId, permanentId, controllerId))) {
-//                this.attachments.add(permanentId);
-//                Permanent attachment = game.getPermanent(permanentId);
-//                if (attachment == null) {
-//                    attachment = game.getPermanentEntering(permanentId);
-//                }
-//                if (attachment != null) {
-//                    attachment.attachTo(objectId, game);
-//                    game.fireEvent(new GameEvent(GameEvent.EventType.ATTACHED, objectId, permanentId, controllerId));
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean removeAttachment(UUID permanentId, Game game) {
-//        if (this.attachments.contains(permanentId)) {
-//            if (!game.replaceEvent(new GameEvent(GameEvent.EventType.UNATTACH, objectId, permanentId, controllerId))) {
-//                this.attachments.remove(permanentId);
-//                Permanent attachment = game.getPermanent(permanentId);
-//                if (attachment != null) {
-//                    attachment.attachTo(null, game);
-//                }
-//                game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, objectId, permanentId, controllerId));
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
     @Override
     public UUID getAttachedTo() {
         return attachedTo;

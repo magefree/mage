@@ -62,7 +62,7 @@ public class ThornscapeBattlemage extends CardImpl {
         this.addAbility(kickerAbility);
 
         // When {this} enters the battlefield, if it was kicked with its {R} kicker, it deals 2 damage to target creature or player.
-        TriggeredAbility ability1 = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2));
+        TriggeredAbility ability1 = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability1.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new ConditionalTriggeredAbility(ability1, new KickedCostCondition("{R}"),
                 "When {this} enters the battlefield, if it was kicked with its {R} kicker, it deals 2 damage to target creature or player."));

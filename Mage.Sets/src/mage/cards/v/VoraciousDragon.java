@@ -68,7 +68,7 @@ public class VoraciousDragon extends CardImpl {
         this.addAbility(new DevourAbility(DevourFactor.Devour1));
 
         // When Voracious Dragon enters the battlefield, it deals damage to target creature or player equal to twice the number of Goblins it devoured.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new TwiceDevouredGoblins()), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new TwiceDevouredGoblins(), "it"), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

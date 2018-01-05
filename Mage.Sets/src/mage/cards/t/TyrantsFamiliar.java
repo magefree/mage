@@ -68,7 +68,7 @@ public class TyrantsFamiliar extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Lieutenant - As long as you control your commander, Tyrant's Familiar gets +2/+2 and has "Whenever Tyrant's Familiar attacks, it deals 7 damage to target creature defending player controls."
-        Ability gainedAbility = new AttacksTriggeredAbility(new DamageTargetEffect(7), false);
+        Ability gainedAbility = new AttacksTriggeredAbility(new DamageTargetEffect(7, "it"), false);
         gainedAbility.addTarget(new TargetCreaturePermanent());
         ContinuousEffect effect = new GainAbilitySourceEffect(gainedAbility);
         effect.setText("and has \"Whenever {this} attacks, it deals 7 damage to target creature defending player controls\"");

@@ -56,7 +56,7 @@ public class FiremawKavu extends CardImpl {
         this.addAbility(new EchoAbility("{5}{R}"));
         
         // When Firemaw Kavu enters the battlefield, it deals 2 damage to target creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
