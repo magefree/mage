@@ -57,7 +57,7 @@ public class ThorncasterSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sliver creatures you control have "Whenever this creature attacks, it deals 1 damage to target creature or player."
-        Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(1), false);
+        Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(1, "it"), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(ability,

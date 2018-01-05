@@ -62,7 +62,7 @@ public class FoundryChampion extends CardImpl {
         this.toughness = new MageInt(4);
 
         //When Foundry Champion enters the battlefield, it deals damage to target creature or player equal to the number of creatures you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), "it"));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         

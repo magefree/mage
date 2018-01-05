@@ -50,9 +50,17 @@ public class DamageEverythingEffect extends OneShotEffect {
     private DynamicValue amount;
     private FilterPermanent filter;
     private UUID damageSource;
+    private String sourceName = "{source}";
 
     public DamageEverythingEffect(int amount) {
         this(new StaticValue(amount), new FilterCreaturePermanent());
+    }
+
+    public DamageEverythingEffect(int amount, String whoDealDamageName) {
+        this(new StaticValue(amount), new FilterCreaturePermanent());
+
+        this.sourceName = whoDealDamageName;
+        setText(); // TODO: replace to @Override public String getText()
     }
 
     public DamageEverythingEffect(DynamicValue amount) {
@@ -62,6 +70,7 @@ public class DamageEverythingEffect extends OneShotEffect {
     public DamageEverythingEffect(int amount, FilterPermanent filter) {
         this(new StaticValue(amount), filter);
     }
+
     public DamageEverythingEffect(DynamicValue amount, FilterPermanent filter) {
         this(amount, filter, null);
     }
@@ -71,7 +80,11 @@ public class DamageEverythingEffect extends OneShotEffect {
         this.amount = amount;
         this.filter = filter;
         this.damageSource = damageSource;
-        staticText = "{source} deals " + amount.toString() + " damage to each " + filter.getMessage() + " and each player";   
+        setText();
+    }
+
+    private void setText() {
+        staticText = this.sourceName + " deals " + this.amount.toString() + " damage to each " + this.filter.getMessage() + " and each player";
     }
 
     public DamageEverythingEffect(final DamageEverythingEffect effect) {
@@ -79,6 +92,7 @@ public class DamageEverythingEffect extends OneShotEffect {
         this.amount = effect.amount;
         this.filter = effect.filter;
         this.damageSource = effect.damageSource;
+        this.sourceName = effect.sourceName;
     }
 
     @Override

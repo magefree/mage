@@ -73,7 +73,7 @@ public class OrdealOfPurphoros extends CardImpl {
         this.addAbility(ability);
         // When you sacrifice Ordeal of Purphoros, it deals 3 damage to target creature or player.
         ability = new SacrificeSourceTriggeredAbility(
-                new DamageTargetEffect(3),false);
+                new DamageTargetEffect(3, "it"),false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

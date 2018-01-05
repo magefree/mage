@@ -82,7 +82,7 @@ public class GoblinShrine extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // When Goblin Shrine leaves the battlefield, it deals 1 damage to each Goblin creature.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new DamageAllEffect(1, filterGoblin), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new DamageAllEffect(1, "it", filterGoblin), false));
 
     }
 
