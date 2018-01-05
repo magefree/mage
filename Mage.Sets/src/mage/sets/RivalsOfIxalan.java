@@ -56,19 +56,21 @@ public class RivalsOfIxalan extends ExpansionSet {
         this.ratioBoosterMythic = 8;
 
         cards.add(new SetCardInfo("Admiral's Order", 31, Rarity.RARE, mage.cards.a.AdmiralsOrder.class));
+        cards.add(new SetCardInfo("Angrath, Minotaur Pirate", 201, Rarity.MYTHIC, mage.cards.a.AngrathMinotaurPirate.class));
         cards.add(new SetCardInfo("Angrath's Ambusher", 202, Rarity.UNCOMMON, mage.cards.a.AngrathsAmbusher.class));
         cards.add(new SetCardInfo("Angrath's Fury", 204, Rarity.RARE, mage.cards.a.AngrathsFury.class));
-        cards.add(new SetCardInfo("Angrath, Minotaur Pirate", 201, Rarity.MYTHIC, mage.cards.a.AngrathMinotaurPirate.class));
         cards.add(new SetCardInfo("Arterial Flow", 62, Rarity.UNCOMMON, mage.cards.a.ArterialFlow.class));
         cards.add(new SetCardInfo("Atzal, Cave of Eternity", 160, Rarity.RARE, mage.cards.a.AtzalCaveOfEternity.class));
         cards.add(new SetCardInfo("Aztocan Seer", 153, Rarity.UNCOMMON, mage.cards.a.AztocanSeer.class));
-        cards.add(new SetCardInfo("Brass's Bounty", 94, Rarity.RARE, mage.cards.b.BrasssBounty.class));
         cards.add(new SetCardInfo("Baffling End", 1, Rarity.UNCOMMON, mage.cards.b.BafflingEnd.class));
         cards.add(new SetCardInfo("Bombard", 93, Rarity.COMMON, mage.cards.b.Bombard.class));
+        cards.add(new SetCardInfo("Brass's Bounty", 94, Rarity.RARE, mage.cards.b.BrasssBounty.class));
+        cards.add(new SetCardInfo("Buffling End", 1, Rarity.UNCOMMON, mage.cards.m.BafflingEnd.class));
         cards.add(new SetCardInfo("Captain's Hook", 177, Rarity.RARE, mage.cards.c.CaptainsHook.class));
         cards.add(new SetCardInfo("Champion of Dusk", 64, Rarity.RARE, mage.cards.c.ChampionOfDusk.class));
         cards.add(new SetCardInfo("Cinder Barrens", 205, Rarity.RARE, mage.cards.c.CinderBarrens.class));
         cards.add(new SetCardInfo("Deeproot Elite", 127, Rarity.RARE, mage.cards.d.DeeprootElite.class));
+        cards.add(new SetCardInfo("Dire Fleet Daredevil", 99, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Dire Fleet Neckbreaker", 156, Rarity.UNCOMMON, mage.cards.d.DireFleetNeckbreaker.class));
         cards.add(new SetCardInfo("Dire Fleet Poisoner", 68, Rarity.RARE, mage.cards.d.DireFleetPoisoner.class));
         cards.add(new SetCardInfo("Dusk Charger", 69, Rarity.COMMON, mage.cards.d.DuskCharger.class));
@@ -91,8 +93,8 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Journey to Eternity", 160, Rarity.RARE, mage.cards.j.JourneyToEternity.class));
         cards.add(new SetCardInfo("Jungle Creeper", 161, Rarity.UNCOMMON, mage.cards.j.JungleCreeper.class));
         cards.add(new SetCardInfo("Knight of the Stampede", 138, Rarity.COMMON, mage.cards.k.KnightOfTheStampede.class));
-        cards.add(new SetCardInfo("Kumena's Awakening", 42, Rarity.RARE, mage.cards.k.KumenasAwakening.class));
         cards.add(new SetCardInfo("Kumena, Tyrant of Orazca", 162, Rarity.MYTHIC, mage.cards.k.KumenaTyrantOfOrazca.class));
+        cards.add(new SetCardInfo("Kumena's Awakening", 42, Rarity.RARE, mage.cards.k.KumenasAwakening.class));
         cards.add(new SetCardInfo("Legion Lieutenant", 163, Rarity.UNCOMMON, mage.cards.l.LegionLieutenant.class));
         cards.add(new SetCardInfo("Luminous Bonds", 12, Rarity.COMMON, mage.cards.l.LuminousBonds.class));
         cards.add(new SetCardInfo("Merfolk Mistbinder", 164, Rarity.UNCOMMON, mage.cards.m.MerfolkMistbinder.class));
@@ -118,14 +120,14 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Vault of Catlacan", 173, Rarity.RARE, mage.cards.v.VaultOfCatlacan.class));
         cards.add(new SetCardInfo("Vicious Cagemaw", 29, Rarity.MYTHIC, mage.cards.v.ViciousCagemaw.class));
         cards.add(new SetCardInfo("Vona's Hunger", 90, Rarity.RARE, mage.cards.v.VonasHunger.class));
+        cards.add(new SetCardInfo("Vraska, Scheming Gorgon", 197, Rarity.MYTHIC, mage.cards.v.VraskaSchemingGorgon.class));
         cards.add(new SetCardInfo("Vraska's Conquistador", 199, Rarity.UNCOMMON, mage.cards.v.VraskasConquistador.class));
         cards.add(new SetCardInfo("Vraska's Scorn", 200, Rarity.RARE, mage.cards.v.VraskasScorn.class));
-        cards.add(new SetCardInfo("Vraska, Scheming Gorgon", 197, Rarity.MYTHIC, mage.cards.v.VraskaSchemingGorgon.class));
         cards.add(new SetCardInfo("Warkite Marauder", 60, Rarity.RARE, mage.cards.w.WarkiteMarauder.class));
         cards.add(new SetCardInfo("Waterknot", 61, Rarity.COMMON, mage.cards.w.Waterknot.class));
         cards.add(new SetCardInfo("Wayward Swordtooth", 150, Rarity.RARE, mage.cards.w.WaywardSwordtooth.class));
         cards.add(new SetCardInfo("Winged Temple of Orazca", 158, Rarity.RARE, mage.cards.w.WingedTempleOfOrazca.class));
         cards.add(new SetCardInfo("World Shaper", 151, Rarity.RARE, mage.cards.w.WorldShaper.class));
-        cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 30, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
+        cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 30, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));        
     }
 }
