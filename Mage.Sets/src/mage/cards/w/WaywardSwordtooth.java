@@ -29,48 +29,49 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.CitysBlessingCondition;
+import mage.abilities.effects.common.combat.CantAttackBlockUnlessConditionSourceEffect;
+import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
+import mage.abilities.keyword.AscendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class WarsailMarauder extends CardImpl {
+public class WaywardSwordtooth extends CardImpl {
 
-    public WarsailMarauder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
+    public WaywardSwordtooth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.PIRATE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        // Ascend
+        this.addAbility(new AscendAbility());
 
-        // Whenever Warsail Marauder attacks, target creature loses all abilities and has base power and toughness 0/1 until end of turn.
-        Ability ability = new AttacksTriggeredAbility(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn)
-                .setText("target creature loses all abilities"), false);
-        ability.addEffect(new SetPowerToughnessTargetEffect(0, 1, Duration.EndOfTurn)
-                .setText("and has base power and toughness 0/1 until end of turn"));
-        this.addAbility(ability);
+        // You may play an additional land on each of your turns.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
+
+        // Wayward Sawtooth can't attack or block unless you have the city's blessing.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessConditionSourceEffect(CitysBlessingCondition.instance)));
+
     }
 
-    public WarsailMarauder(final WarsailMarauder card) {
+    public WaywardSwordtooth(final WaywardSwordtooth card) {
         super(card);
     }
 
     @Override
-    public WarsailMarauder copy() {
-        return new WarsailMarauder(this);
+    public WaywardSwordtooth copy() {
+        return new WaywardSwordtooth(this);
     }
 }

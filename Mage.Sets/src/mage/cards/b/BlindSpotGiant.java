@@ -29,20 +29,17 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.effects.common.combat.CantAttackBlockUnlessConditionSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -50,15 +47,23 @@ import mage.game.permanent.Permanent;
  */
 public class BlindSpotGiant extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control another Giant");
+
+    static {
+        filter.add(new SubtypePredicate(SubType.GIANT));
+        filter.add(new AnotherPredicate());
+    }
+
     public BlindSpotGiant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.GIANT, SubType.WARRIOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
         // Blind-Spot Giant can't attack or block unless you control another Giant.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlindSpotGiantEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new CantAttackBlockUnlessConditionSourceEffect(new PermanentsOnTheBattlefieldCondition(filter))));
 
     }
 
@@ -69,49 +74,5 @@ public class BlindSpotGiant extends CardImpl {
     @Override
     public BlindSpotGiant copy() {
         return new BlindSpotGiant(this);
-    }
-}
-
-class BlindSpotGiantEffect extends RestrictionEffect {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Giant");
-    static {
-        filter.add(new SubtypePredicate(SubType.GIANT));
-        filter.add(new AnotherPredicate());
-    }
-
-    public BlindSpotGiantEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "{this} can't attack or block unless you control another Giant";
-    }
-
-    public BlindSpotGiantEffect(final BlindSpotGiantEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BlindSpotGiantEffect copy() {
-        return new BlindSpotGiantEffect(this);
-    }
-
-    @Override
-    public boolean canAttack(Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
-                return false;
-            }
-            return true;
-        }  // do not apply to other creatures.
-        return false;
     }
 }

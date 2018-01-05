@@ -25,28 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.designations.DesignationType;
+import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author LvelX2
+ * @author LevelX2
  */
-public enum CitysBlessingCondition implements Condition {
+public class CantAttackBlockUnlessConditionSourceEffect extends RestrictionEffect {
 
-    instance;
+    private Condition condition;
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getPlayer(source.getControllerId()).hasDesignation(DesignationType.CITYS_BLESSING);
+    public CantAttackBlockUnlessConditionSourceEffect(Condition condition) {
+        super(Duration.WhileOnBattlefield);
+        this.condition = condition;
+        staticText = "{this} can't attack or block unless " + condition.toString();
+    }
+
+    public CantAttackBlockUnlessConditionSourceEffect(final CantAttackBlockUnlessConditionSourceEffect effect) {
+        super(effect);
     }
 
     @Override
-    public String toString() {
-        return "you have the city's blessing";
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getId().equals(source.getSourceId()) && condition.apply(game, source);
+    }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
+
+    @Override
+    public CantAttackBlockUnlessConditionSourceEffect copy() {
+        return new CantAttackBlockUnlessConditionSourceEffect(this);
     }
 }
