@@ -25,58 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
-import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author L_J
+ * @author LevelX2
  */
-public class AztocanSeer extends CardImpl {
+public class TrapjawTyrant extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Dinosaur from your graveyard");
-    
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
     static {
-        filter.add(new SubtypePredicate(SubType.DINOSAUR));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public AztocanSeer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.DRUID);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+    public TrapjawTyrant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 
-        // {T}: Add one mana of any color to your mana pool.
-        this.addAbility(new AnyColorManaAbility());
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        // Sacrifice Atzocan Seer: Return target Dinosaur from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new SacrificeSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        // Enrage — Whenever Trapjaw Tyrant is dealt damage, exile target creature your opponent controls until Trapjaw Tyrant leaves the battlefield.
+        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new ExileUntilSourceLeavesEffect(filter.getMessage()), false, true);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }
 
-    public AztocanSeer(final AztocanSeer card) {
+    public TrapjawTyrant(final TrapjawTyrant card) {
         super(card);
     }
 
     @Override
-    public AztocanSeer copy() {
-        return new AztocanSeer(this);
+    public TrapjawTyrant copy() {
+        return new TrapjawTyrant(this);
     }
 }
