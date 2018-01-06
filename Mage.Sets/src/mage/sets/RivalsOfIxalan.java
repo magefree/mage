@@ -104,6 +104,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Ghalta, Primal Hunger", 130, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
         cards.add(new SetCardInfo("Giltgrove Stalker", 131, Rarity.COMMON, mage.cards.g.GiltgroveStalker.class));
         cards.add(new SetCardInfo("Goblin Trailblazer", 105, Rarity.COMMON, mage.cards.g.GoblinTrailblazer.class));
+        cards.add(new SetCardInfo("Grasping Scoundrel", 74, Rarity.COMMON, mage.cards.g.GraspingScoundrel.class));
         cards.add(new SetCardInfo("Profane Procession", 166, Rarity.RARE, mage.cards.p.ProfaneProcession.class));
         cards.add(new SetCardInfo("Radiant Destiny", 18, Rarity.RARE, mage.cards.r.RadiantDestiny.class));
         cards.add(new SetCardInfo("Hardy Veteran", 132, Rarity.COMMON, mage.cards.h.HardyVeteran.class));
