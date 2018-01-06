@@ -41,7 +41,6 @@ import mage.target.TargetPermanent;
 
 /**
  *
- *
  * @author LevelX2
  */
 public class Cacophodon extends CardImpl {
