@@ -54,7 +54,7 @@ public class CantAttackBlockUnlessConditionSourceEffect extends RestrictionEffec
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId()) && condition.apply(game, source);
+        return permanent.getId().equals(source.getSourceId()) && !condition.apply(game, source);
     }
 
     @Override

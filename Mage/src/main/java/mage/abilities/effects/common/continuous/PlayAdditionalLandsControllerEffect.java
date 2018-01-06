@@ -24,18 +24,18 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects.common.continuous;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author Viserion
@@ -80,7 +80,7 @@ public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl {
         if (additionalCards == Integer.MAX_VALUE) {
             sb.append("any number of");
         } else {
-            sb.append(Integer.toString(additionalCards));
+            sb.append(CardUtil.numberToText(additionalCards, "an"));
         }
         sb.append(" additional land").append((additionalCards == 1 ? "" : "s"))
                 .append(duration == Duration.EndOfTurn ? " this turn" : " on each of your turns");

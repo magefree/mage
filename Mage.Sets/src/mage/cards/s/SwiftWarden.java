@@ -25,38 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.e;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Viserion
+ * @author LevelX2
  */
-public class Explore extends CardImpl {
+public class SwiftWarden extends CardImpl {
 
-    public Explore(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
+    private static final FilterPermanent filter = new FilterPermanent("Merfolk you control");
 
-        // You may play an additional land this turn.
-        this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
-
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new SubtypePredicate(SubType.MERFOLK));
     }
 
-    public Explore(final Explore card) {
+    public SwiftWarden(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WARRIOR);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+
+        // When Swift Warden enters the battlefield, target Merfolk you control gains hexproof until end of turn.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public SwiftWarden(final SwiftWarden card) {
         super(card);
     }
 
     @Override
-    public Explore copy() {
-        return new Explore(this);
+    public SwiftWarden copy() {
+        return new SwiftWarden(this);
     }
 }

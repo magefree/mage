@@ -25,38 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.e;
+package mage.cards.h;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 
 /**
  *
- * @author Viserion
+ * @author LevelX2
  */
-public class Explore extends CardImpl {
+public class HardyVeteran extends CardImpl {
 
-    public Explore(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
+    public HardyVeteran(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        // You may play an additional land this turn.
-        this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WARRIOR);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        // As long as it's your turn, Hardy Veteran gets +0/+2.
+        Effect boostEffect = new ConditionalContinuousEffect(
+                new BoostSourceEffect(0, 2, Duration.WhileOnBattlefield),
+                MyTurnCondition.instance,
+                "As long as it's your turn, {this} gets +0/+2");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect);
+        this.addAbility(ability);
     }
 
-    public Explore(final Explore card) {
+    public HardyVeteran(final HardyVeteran card) {
         super(card);
     }
 
     @Override
-    public Explore copy() {
-        return new Explore(this);
+    public HardyVeteran copy() {
+        return new HardyVeteran(this);
     }
 }

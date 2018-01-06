@@ -25,38 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.e;
+package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Viserion
+ * @author LevelX2
  */
-public class Explore extends CardImpl {
+public class Cacophodon extends CardImpl {
 
-    public Explore(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
+    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        // You may play an additional land this turn.
-        this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(5);
 
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
+        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
+        ability.addTarget(new TargetPermanent());
+        this.addAbility(ability);
     }
 
-    public Explore(final Explore card) {
+    public Cacophodon(final Cacophodon card) {
         super(card);
     }
 
     @Override
-    public Explore copy() {
-        return new Explore(this);
+    public Cacophodon copy() {
+        return new Cacophodon(this);
     }
 }

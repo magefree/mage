@@ -25,38 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.e;
+package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 /**
  *
- * @author Viserion
+ * @author LevelX2
  */
-public class Explore extends CardImpl {
+public class GiltgroveStalker extends CardImpl {
 
-    public Explore(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
 
-        // You may play an additional land this turn.
-        this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
-
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+    static {
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
-    public Explore(final Explore card) {
+    public GiltgroveStalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
+
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WARRIOR);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Giltgrove Stalker can't be blocked by creatures with power 2 or less.
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+    }
+
+    public GiltgroveStalker(final GiltgroveStalker card) {
         super(card);
     }
 
     @Override
-    public Explore copy() {
-        return new Explore(this);
+    public GiltgroveStalker copy() {
+        return new GiltgroveStalker(this);
     }
 }
