@@ -91,7 +91,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Forsaken Sanctuary", 187, Rarity.UNCOMMON, mage.cards.f.ForsakenSanctuary.class));
         cards.add(new SetCardInfo("Foul Orchard", 188, Rarity.UNCOMMON, mage.cards.f.FoulOrchard.class));
         cards.add(new SetCardInfo("Ghalta, Primal Hunger", 130, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
-        cards.add(new SetCardInfo("Radiant Destiny", 18, Rarity.RARE, mage.cards.g.RadiantDestiny.class));
+        cards.add(new SetCardInfo("Radiant Destiny", 18, Rarity.RARE, mage.cards.r.RadiantDestiny.class));
         cards.add(new SetCardInfo("Hadana's Climb", 158, Rarity.RARE, mage.cards.h.HadanasClimb.class));
         cards.add(new SetCardInfo("Highland Lake", 189, Rarity.UNCOMMON, mage.cards.h.HighlandLake.class));
         cards.add(new SetCardInfo("Hunt the Weak", 133, Rarity.COMMON, mage.cards.h.HuntTheWeak.class));
