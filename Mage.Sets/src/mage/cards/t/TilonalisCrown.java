@@ -25,62 +25,65 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.t;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.SourceAttackingCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DamageAttachedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LevelX2
  */
-public class AncientHellkite extends CardImpl {
+public class TilonalisCrown extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature defending player controls");
+    public TilonalisCrown(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new DefendingPlayerControlsPredicate());
-    }
+        this.subtype.add(SubType.AURA);
 
-    public AncientHellkite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
-        this.subtype.add(SubType.DRAGON);
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        // When Tilonali's Crown enters the battlefield, it deals 1 damage to enchanted creature.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAttachedEffect(1, "it")
+                .setText("it deals 1 damage to enchanted creature")));
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // {R}: Ancient Hellkite deals 1 damage to target creature defending player controls. Activate this ability only if Ancient Hellkite is attacking.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"), SourceAttackingCondition.instance);
-        ability.addTarget(new TargetPermanent(filter));
+        // Enchanted creature gets +3/+0 and has trample.
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0));
+        Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("and has trample");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
-    public AncientHellkite(final AncientHellkite card) {
+    public TilonalisCrown(final TilonalisCrown card) {
         super(card);
     }
 
     @Override
-    public AncientHellkite copy() {
-        return new AncientHellkite(this);
+    public TilonalisCrown copy() {
+        return new TilonalisCrown(this);
     }
-
 }

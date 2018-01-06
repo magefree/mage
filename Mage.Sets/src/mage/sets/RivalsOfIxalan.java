@@ -171,11 +171,15 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 194, Rarity.COMMON, mage.cards.basiclands.Swamp.class));
         cards.add(new SetCardInfo("Swift Warden", 146, Rarity.UNCOMMON, mage.cards.s.SwiftWarden.class));
         cards.add(new SetCardInfo("Sworn Guardian", 58, Rarity.COMMON, mage.cards.s.SwornGuardian.class));
+        cards.add(new SetCardInfo("Temple Altisaur", 28, Rarity.RARE, mage.cards.t.TempleAltisaur.class));
         cards.add(new SetCardInfo("Tendershoot Dryad", 147, Rarity.RARE, mage.cards.t.TendershootDryad.class));
         cards.add(new SetCardInfo("Tetzimoc, Primal Death", 86, Rarity.RARE, mage.cards.t.TetzimocPrimalDeath.class));
         cards.add(new SetCardInfo("The Immortal Sun", 180, Rarity.MYTHIC, mage.cards.t.TheImmortalSun.class));
         cards.add(new SetCardInfo("Thrashing Brontodon", 148, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
         cards.add(new SetCardInfo("Thunderherd Migration", 149, Rarity.UNCOMMON, mage.cards.t.ThunderherdMigration.class));
+        cards.add(new SetCardInfo("Tilonali's Crown", 120, Rarity.COMMON, mage.cards.t.TilonalisCrown.class));
+        cards.add(new SetCardInfo("Tilonalli's Summoner", 121, Rarity.RARE, mage.cards.t.TilonallisSummoner.class));
+        cards.add(new SetCardInfo("Timestream Navigator", 59, Rarity.MYTHIC, mage.cards.t.TimestreamNavigator.class));
         cards.add(new SetCardInfo("Tomb of the Dusk Rose", 166, Rarity.RARE, mage.cards.t.TombOfTheDuskRose.class));
         cards.add(new SetCardInfo("Traveler's Amulet", 184, Rarity.COMMON, mage.cards.t.TravelersAmulet.class));
         cards.add(new SetCardInfo("Trapjaw Tyrant", 29, Rarity.MYTHIC, mage.cards.t.TrapjawTyrant.class));

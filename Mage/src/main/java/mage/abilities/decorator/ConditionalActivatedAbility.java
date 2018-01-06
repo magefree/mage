@@ -71,6 +71,11 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         if (ruleText != null && !ruleText.isEmpty()) {
             return ruleText;
         }
-        return super.getRule() + " Activate this ability only " + condition.toString() + ".";
+        String conditionText = condition.toString();
+        String additionalText = "if ";
+        if (conditionText.startsWith("during")) {
+            additionalText = "";
+        }
+        return super.getRule() + " Activate this ability only " + additionalText + condition.toString() + ".";
     }
 }
