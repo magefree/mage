@@ -31,16 +31,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CitysBlessingCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.AscendAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.condition.common.RaidCondition;
+import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
@@ -48,34 +45,33 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class StormFleetSwashbuckler extends CardImpl {
+public class SirenReaver extends CardImpl {
 
-    public StormFleetSwashbuckler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public SirenReaver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SIREN);
         this.subtype.add(SubType.PIRATE);
-        this.power = new MageInt(2);
+        this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Ascend
-        this.addAbility(new AscendAbility());
-
-        // Storm Fleet Swashbuckler has double strike as long as you have the city's blessing.
-        ContinuousEffect boostSource = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, CitysBlessingCondition.instance,
-                "{this} has double strike as long as you have the city's blessing");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        // <i>Raid</i> — Siren Reaver costs {1} less to cast if you attacked with a creature this turn.
+        Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(1, RaidCondition.instance));
+        ability.setAbilityWord(AbilityWord.RAID);
+        ability.setRuleAtTheTop(true);
         this.addAbility(ability);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
     }
 
-    public StormFleetSwashbuckler(final StormFleetSwashbuckler card) {
+    public SirenReaver(final SirenReaver card) {
         super(card);
     }
 
     @Override
-    public StormFleetSwashbuckler copy() {
-        return new StormFleetSwashbuckler(this);
+    public SirenReaver copy() {
+        return new SirenReaver(this);
     }
 }

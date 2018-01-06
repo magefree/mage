@@ -29,53 +29,40 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CitysBlessingCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.AscendAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 
 /**
  *
  * @author LevelX2
  */
-public class StormFleetSwashbuckler extends CardImpl {
+public class SiegehornCeratops extends CardImpl {
 
-    public StormFleetSwashbuckler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public SiegehornCeratops(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.PIRATE);
+        this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Ascend
-        this.addAbility(new AscendAbility());
-
-        // Storm Fleet Swashbuckler has double strike as long as you have the city's blessing.
-        ContinuousEffect boostSource = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, CitysBlessingCondition.instance,
-                "{this} has double strike as long as you have the city's blessing");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        this.addAbility(ability);
-
+        // <i>Enrage</i> — Whenever Siegehorn Ceratops is dealt damage, put two +1/+1 counters on it.
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2))
+                        .setText("put two +1/+1 counter on it"), false, true));
     }
 
-    public StormFleetSwashbuckler(final StormFleetSwashbuckler card) {
+    public SiegehornCeratops(final SiegehornCeratops card) {
         super(card);
     }
 
     @Override
-    public StormFleetSwashbuckler copy() {
-        return new StormFleetSwashbuckler(this);
+    public SiegehornCeratops copy() {
+        return new SiegehornCeratops(this);
     }
 }

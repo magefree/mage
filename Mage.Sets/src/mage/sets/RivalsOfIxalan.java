@@ -156,10 +156,15 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Secrets of the Golden City", 52, Rarity.COMMON, mage.cards.s.SecretsOfTheGoldenCity.class));
         cards.add(new SetCardInfo("Shake the Foundations", 113, Rarity.UNCOMMON, mage.cards.s.ShakeTheFoundations.class));
         cards.add(new SetCardInfo("Shatter", 114, Rarity.COMMON, mage.cards.s.Shatter.class));
+        cards.add(new SetCardInfo("Siegehorn Ceratops", 171, Rarity.RARE, mage.cards.s.SiegehornCeratops.class));
         cards.add(new SetCardInfo("Silent Gravestone", 182, Rarity.RARE, mage.cards.s.SilentGravestone.class));
         cards.add(new SetCardInfo("Silverclad Ferocidons", 115, Rarity.RARE, mage.cards.s.SilvercladFerocidons.class));
         cards.add(new SetCardInfo("Silvergill Adept", 53, Rarity.UNCOMMON, mage.cards.s.SilvergillAdept.class));
+        cards.add(new SetCardInfo("Siren Reaver", 54, Rarity.UNCOMMON, mage.cards.s.SirenReaver.class));
         cards.add(new SetCardInfo("Skymarcher Aspirant", 21, Rarity.UNCOMMON, mage.cards.s.SkymarcherAspirant.class));
+        cards.add(new SetCardInfo("Slaughter the Strong", 22, Rarity.RARE, mage.cards.s.SlaughterTheStrong.class));
+        cards.add(new SetCardInfo("Slippery Scoundrel", 55, Rarity.UNCOMMON, mage.cards.s.SlipperyScoundrel.class));
+        cards.add(new SetCardInfo("Snubhorn Sentry", 23, Rarity.COMMON, mage.cards.s.SnubhornSentry.class));
         cards.add(new SetCardInfo("Soul of the Rapids", 56, Rarity.COMMON, mage.cards.s.SoulOfTheRapids.class));
         cards.add(new SetCardInfo("Sphinx's Decree", 24, Rarity.RARE, mage.cards.s.SphinxsDecree.class));
         cards.add(new SetCardInfo("Spire Winder", 57, Rarity.COMMON, mage.cards.s.SpireWinder.class));

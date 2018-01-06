@@ -33,10 +33,14 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.AscendAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -48,10 +52,10 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class StormFleetSwashbuckler extends CardImpl {
+public class SlipperyScoundrel extends CardImpl {
 
-    public StormFleetSwashbuckler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public SlipperyScoundrel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.PIRATE);
@@ -61,21 +65,24 @@ public class StormFleetSwashbuckler extends CardImpl {
         // Ascend
         this.addAbility(new AscendAbility());
 
-        // Storm Fleet Swashbuckler has double strike as long as you have the city's blessing.
-        ContinuousEffect boostSource = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
+        // As long as you have the city's blessing Slippery Scoundrel has Hexproof and can't be blocked.
+        ContinuousEffect boostSource = new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, CitysBlessingCondition.instance,
-                "{this} has double strike as long as you have the city's blessing");
+                "As long as you have the city's blessing {this} has Hexproof");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        RestrictionEffect restrictionEffect = new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield);
+        Effect effect2 = new ConditionalRestrictionEffect(restrictionEffect, CitysBlessingCondition.instance)
+                .setText("and can't be blocked");
+        ability.addEffect(effect2);
         this.addAbility(ability);
-
     }
 
-    public StormFleetSwashbuckler(final StormFleetSwashbuckler card) {
+    public SlipperyScoundrel(final SlipperyScoundrel card) {
         super(card);
     }
 
     @Override
-    public StormFleetSwashbuckler copy() {
-        return new StormFleetSwashbuckler(this);
+    public SlipperyScoundrel copy() {
+        return new SlipperyScoundrel(this);
     }
 }

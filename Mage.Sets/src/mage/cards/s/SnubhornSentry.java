@@ -34,9 +34,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.AscendAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -48,34 +47,32 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class StormFleetSwashbuckler extends CardImpl {
+public class SnubhornSentry extends CardImpl {
 
-    public StormFleetSwashbuckler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public SnubhornSentry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.PIRATE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(3);
 
-        // Ascend
+        // Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)
         this.addAbility(new AscendAbility());
 
-        // Storm Fleet Swashbuckler has double strike as long as you have the city's blessing.
-        ContinuousEffect boostSource = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
+        // Snubhorn Sentry gets +3/+0 as long as you have the city's blessing.
+        ContinuousEffect boostSource = new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, CitysBlessingCondition.instance,
-                "{this} has double strike as long as you have the city's blessing");
+                "{this} gets +3/+0 as long as you have the city's blessing");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         this.addAbility(ability);
-
     }
 
-    public StormFleetSwashbuckler(final StormFleetSwashbuckler card) {
+    public SnubhornSentry(final SnubhornSentry card) {
         super(card);
     }
 
     @Override
-    public StormFleetSwashbuckler copy() {
-        return new StormFleetSwashbuckler(this);
+    public SnubhornSentry copy() {
+        return new SnubhornSentry(this);
     }
 }
