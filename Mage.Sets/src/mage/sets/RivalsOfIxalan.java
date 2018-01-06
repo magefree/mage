@@ -180,6 +180,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Vampire Revenant", 89, Rarity.COMMON, mage.cards.v.VampireRevenant.class));
         cards.add(new SetCardInfo("Vault of Catlacan", 173, Rarity.RARE, mage.cards.v.VaultOfCatlacan.class));
         cards.add(new SetCardInfo("Vona's Hunger", 90, Rarity.RARE, mage.cards.v.VonasHunger.class));
+        cards.add(new SetCardInfo("Voracious Vampire", 91, Rarity.COMMON, mage.cards.v.VoraciousVampire.class));
         cards.add(new SetCardInfo("Vraska's Conquistador", 199, Rarity.UNCOMMON, mage.cards.v.VraskasConquistador.class));
         cards.add(new SetCardInfo("Vraska's Scorn", 200, Rarity.RARE, mage.cards.v.VraskasScorn.class));
         cards.add(new SetCardInfo("Vraska, Scheming Gorgon", 197, Rarity.MYTHIC, mage.cards.v.VraskaSchemingGorgon.class));
@@ -189,6 +190,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Winged Temple of Orazca", 158, Rarity.RARE, mage.cards.w.WingedTempleOfOrazca.class));
         cards.add(new SetCardInfo("Woodland Stream", 191, Rarity.UNCOMMON, mage.cards.w.WoodlandStream.class));
         cards.add(new SetCardInfo("World Shaper", 151, Rarity.RARE, mage.cards.w.WorldShaper.class));
+        cards.add(new SetCardInfo("Zacama, Primal Calamity", 174, Rarity.MYTHIC, mage.cards.z.ZacamaPrimalCalamity.class));
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 30, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
     }
 }

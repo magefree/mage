@@ -49,7 +49,7 @@ public class ForsakeTheWorldly extends CardImpl {
 
         // Exile target artifact or enchantment.
         getSpellAbility().addEffect(new ExileTargetEffect());
-        getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

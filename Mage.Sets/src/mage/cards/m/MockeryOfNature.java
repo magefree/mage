@@ -60,7 +60,7 @@ public class MockeryOfNature extends CardImpl {
         
         // When you cast Mockery of Nature, you may destroy target artifact or enchantment.
         Ability ability = new CastSourceTriggeredAbility(new DestroyTargetEffect(), true);
-        ability.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);
     }
 

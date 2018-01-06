@@ -64,10 +64,10 @@ public class ReturnToDust extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             if (game.getActivePlayerId().equals(ability.getControllerId()) && game.isMainPhase()) {
-                ability.addTarget(new TargetPermanent(1, 2, StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT, false));
+                ability.addTarget(new TargetPermanent(1, 2, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT, false));
             }
             else {
-                ability.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+                ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
             }
         }
     }

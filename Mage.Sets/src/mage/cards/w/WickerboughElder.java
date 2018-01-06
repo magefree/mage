@@ -65,7 +65,7 @@ public class WickerboughElder extends CardImpl {
         // {G}, Remove a -1/-1 counter from Wickerbough Elder: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.G));
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance(1)));
-        ability.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);
     }
 

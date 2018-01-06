@@ -55,7 +55,7 @@ public class RendingVines extends CardImpl {
 
         // Destroy target artifact or enchantment if its converted mana cost is less than or equal to the number of cards in your hand.
         this.getSpellAbility().addEffect(new RendingVinesEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

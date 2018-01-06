@@ -58,7 +58,7 @@ public class HideSeek extends SplitCard {
         // Hide
         // Put target artifact or enchantment on the bottom of its owner's library.
         getLeftHalfCard().getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
 
         // Seek
         // Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library..

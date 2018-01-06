@@ -50,8 +50,8 @@ public class RelicCrush extends CardImpl {
         Effect effect = new DestroyTargetEffect(false, true);
         effect.setText("Destroy target artifact or enchantment and up to one other target artifact or enchantment");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
-        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT, false));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT, false));
     }
 
     public RelicCrush(final RelicCrush card) {

@@ -49,7 +49,7 @@ public class SunderingGrowth extends CardImpl {
 
         // Destroy target artifact or enchantment, then populate.
         // (Create a token that's a copy of a creature token you control.)
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new PopulateEffect("then"));
     }

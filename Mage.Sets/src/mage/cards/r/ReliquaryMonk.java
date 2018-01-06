@@ -56,7 +56,7 @@ public class ReliquaryMonk extends CardImpl {
 
         // When Reliquary Monk dies, destroy target artifact or enchantment.
         Ability ability = new DiesTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);
     }
 

@@ -25,38 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.f;
+package mage.cards.v;
 
-import mage.abilities.effects.common.ExileTargetEffect;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
-import mage.target.TargetPermanent;
-
-import java.util.UUID;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class FadeIntoAntiquity extends CardImpl {
+public class VoraciousVampire extends CardImpl {
 
-    public FadeIntoAntiquity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
+    public VoraciousVampire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
+        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.KNIGHT);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Exile target artifact or enchantment.
-        this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        // Menace
+        this.addAbility(new MenaceAbility());
+
+        // When Voracious Vampire enters the battlefield, target Vampire you control gets +1/+1 and gains menace until end of turn.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), false);
+        Effect effect = new GainAbilityTargetEffect(new MenaceAbility(), Duration.EndOfTurn);
+        effect.setText("and gains menace");
+        ability.addEffect(effect);
+        ability.addTarget(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent(SubType.VAMPIRE, "Vampire you control")));
+        this.addAbility(ability);
     }
 
-    public FadeIntoAntiquity(final FadeIntoAntiquity card) {
+    public VoraciousVampire(final VoraciousVampire card) {
         super(card);
     }
 
     @Override
-    public FadeIntoAntiquity copy() {
-        return new FadeIntoAntiquity(this);
+    public VoraciousVampire copy() {
+        return new VoraciousVampire(this);
     }
 }

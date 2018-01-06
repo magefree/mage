@@ -54,7 +54,7 @@ public class NaturesClaim extends CardImpl {
         // Destroy target artifact or enchantment. Its controller gains 4 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new NaturesClaimEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
     public NaturesClaim(final NaturesClaim card) {
