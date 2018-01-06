@@ -28,6 +28,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.o.OrazcaFrillback;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -114,7 +115,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Naturalize", 139, Rarity.COMMON, mage.cards.n.Naturalize.class));
         cards.add(new SetCardInfo("Negate", 44, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nezahal, Primal Tide", 45, Rarity.RARE, mage.cards.n.NezahalPrimalTide.class));
-        cards.add(new SetCardInfo("Orzaca Frillback", 140, Rarity.COMMON, mage.cards.o.OrzacaFrillback.class));
+        cards.add(new SetCardInfo("Orazca Frillback", 140, Rarity.COMMON, OrazcaFrillback.class));
         cards.add(new SetCardInfo("Overgrown Armasaur", 141, Rarity.COMMON, mage.cards.o.OvergrownArmasaur.class));
         cards.add(new SetCardInfo("Paladin of Atonement", 16, Rarity.RARE, mage.cards.p.PaladinOfAtonement.class));
         cards.add(new SetCardInfo("Path of Discovery", 142, Rarity.RARE, mage.cards.p.PathOfDiscovery.class));

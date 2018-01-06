@@ -39,9 +39,9 @@ import mage.constants.SubType;
  *
  * @author JayDi85
  */
-public class OrzacaFrillback extends CardImpl {
+public class OrazcaFrillback extends CardImpl {
 
-    public OrzacaFrillback(UUID ownerId, CardSetInfo setInfo) {
+    public OrazcaFrillback(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
 
         this.subtype.add(SubType.DINOSAUR);
@@ -49,12 +49,12 @@ public class OrzacaFrillback extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public OrzacaFrillback(final OrzacaFrillback card) {
+    public OrazcaFrillback(final OrazcaFrillback card) {
         super(card);
     }
 
     @Override
-    public OrzacaFrillback copy() {
-        return new OrzacaFrillback(this);
+    public OrazcaFrillback copy() {
+        return new OrazcaFrillback(this);
     }
 }
