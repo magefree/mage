@@ -61,7 +61,7 @@ public class NeedletoothRaptor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Enrage</i> &mdash; Whenever Needletooth Raptor is dealt damage, it deals 5 damage to target creature an opponent controls.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5).setText("it deals 3 damage to target creature an opponent controls"), false, true);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5).setText("it deals 5 damage to target creature an opponent controls"), false, true);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
