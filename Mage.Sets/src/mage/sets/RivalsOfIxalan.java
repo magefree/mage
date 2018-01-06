@@ -64,6 +64,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Arterial Flow", 62, Rarity.UNCOMMON, mage.cards.a.ArterialFlow.class));
         cards.add(new SetCardInfo("Atzal, Cave of Eternity", 160, Rarity.RARE, mage.cards.a.AtzalCaveOfEternity.class));
         cards.add(new SetCardInfo("Atzocan Seer", 153, Rarity.UNCOMMON, mage.cards.a.AtzocanSeer.class));
+        cards.add(new SetCardInfo("Azor's Gateway", 176, Rarity.MYTHIC, mage.cards.a.AzorsGateway.class));
         cards.add(new SetCardInfo("Baffling End", 1, Rarity.UNCOMMON, mage.cards.b.BafflingEnd.class));
         cards.add(new SetCardInfo("Bombard", 93, Rarity.COMMON, mage.cards.b.Bombard.class));
         cards.add(new SetCardInfo("Brass's Bounty", 94, Rarity.RARE, mage.cards.b.BrasssBounty.class));
@@ -151,9 +152,14 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Ravenous Chupacabra", 82, Rarity.COMMON, mage.cards.r.RavenousChupacabra.class));
         cards.add(new SetCardInfo("Reaver Ambush", 83, Rarity.UNCOMMON, mage.cards.r.ReaverAmbush.class));
         cards.add(new SetCardInfo("Recover", 84, Rarity.COMMON, mage.cards.r.Recover.class));
+        cards.add(new SetCardInfo("Sadistic Skymarcher", 85, Rarity.UNCOMMON, mage.cards.s.SadisticSkymarcher.class));
         cards.add(new SetCardInfo("Sailor of Means", 49, Rarity.COMMON, mage.cards.s.SailorOfMeans.class));
+        cards.add(new SetCardInfo("Sanctum of the Sun", 176, Rarity.MYTHIC, mage.cards.s.SanctumOfTheSun.class));
+        cards.add(new SetCardInfo("Sanguine Glorifier", 20, Rarity.COMMON, mage.cards.s.SanguineGlorifier.class));
+        cards.add(new SetCardInfo("Sea Legs", 50, Rarity.COMMON, mage.cards.s.SeaLegs.class));
         cards.add(new SetCardInfo("Seafloor Oracle", 51, Rarity.RARE, mage.cards.s.SeafloorOracle.class));
         cards.add(new SetCardInfo("Secrets of the Golden City", 52, Rarity.COMMON, mage.cards.s.SecretsOfTheGoldenCity.class));
+        cards.add(new SetCardInfo("See Red", 112, Rarity.UNCOMMON, mage.cards.s.SeeRed.class));
         cards.add(new SetCardInfo("Shake the Foundations", 113, Rarity.UNCOMMON, mage.cards.s.ShakeTheFoundations.class));
         cards.add(new SetCardInfo("Shatter", 114, Rarity.COMMON, mage.cards.s.Shatter.class));
         cards.add(new SetCardInfo("Siegehorn Ceratops", 171, Rarity.RARE, mage.cards.s.SiegehornCeratops.class));
