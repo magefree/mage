@@ -104,6 +104,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Creeper", 161, Rarity.UNCOMMON, mage.cards.j.JungleCreeper.class));
         cards.add(new SetCardInfo("Jungleborn Pioneer", 137, Rarity.COMMON, mage.cards.j.JunglebornPioneer.class));
         cards.add(new SetCardInfo("Journey to Eternity", 160, Rarity.RARE, mage.cards.j.JourneyToEternity.class));
+        cards.add(new SetCardInfo("Kitesail Corsair", 41, Rarity.COMMON, mage.cards.k.KitesailCorsair.class));
         cards.add(new SetCardInfo("Knight of the Stampede", 138, Rarity.COMMON, mage.cards.k.KnightOfTheStampede.class));
         cards.add(new SetCardInfo("Kumena's Awakening", 42, Rarity.RARE, mage.cards.k.KumenasAwakening.class));
         cards.add(new SetCardInfo("Kumena, Tyrant of Orazca", 162, Rarity.MYTHIC, mage.cards.k.KumenaTyrantOfOrazca.class));
