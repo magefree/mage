@@ -25,46 +25,35 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- *
- * @author LevelX2
+ * @author JayDi85
  */
-public class Cacophodon extends CardImpl {
+public class StrengthOfThePack extends CardImpl {
 
-    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    public StrengthOfThePack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
 
-        this.subtype.add(SubType.DINOSAUR);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
-
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
-        ability.addTarget(new TargetPermanent());
-        this.addAbility(ability);
+        // Put two +1/+1 counters on each creature you control.
+        this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(2), new FilterControlledCreaturePermanent()));
     }
 
-    public Cacophodon(final Cacophodon card) {
+    public StrengthOfThePack(final StrengthOfThePack card) {
         super(card);
     }
 
     @Override
-    public Cacophodon copy() {
-        return new Cacophodon(this);
+    public StrengthOfThePack copy() {
+        return new StrengthOfThePack(this);
     }
 }

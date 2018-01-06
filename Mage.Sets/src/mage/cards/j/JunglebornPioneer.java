@@ -25,46 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.game.permanent.token.MerfolkHexproofToken;
 
 /**
  *
- *
- * @author LevelX2
+ * @author JayDi85
  */
-public class Cacophodon extends CardImpl {
+public class JunglebornPioneer extends CardImpl {
 
-    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    public JunglebornPioneer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.subtype.add(SubType.DINOSAUR);
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+        this.toughness = new MageInt(2);
 
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
-        ability.addTarget(new TargetPermanent());
+        // When Jungleborn Pioneer enters the battlefield, create a 1/1 blue Merfolk creature token with hexproof. (It can’t be the target of spells or abilities your opponents control.)
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkHexproofToken()),false);
         this.addAbility(ability);
     }
 
-    public Cacophodon(final Cacophodon card) {
+    public JunglebornPioneer(final JunglebornPioneer card) {
         super(card);
     }
 
     @Override
-    public Cacophodon copy() {
-        return new Cacophodon(this);
+    public JunglebornPioneer copy() {
+        return new JunglebornPioneer(this);
     }
 }

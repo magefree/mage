@@ -25,46 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.constants.*;
+import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- *
- * @author LevelX2
+ * @author JayDi85
  */
-public class Cacophodon extends CardImpl {
+public class JadeBearer extends CardImpl {
 
-    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    private static final FilterCreaturePermanent filterYourAnotherMerfolk = new FilterCreaturePermanent();
+    static {
+        filterYourAnotherMerfolk.add(new AnotherPredicate());
+        filterYourAnotherMerfolk.add(new SubtypePredicate(SubType.MERFOLK));
+        filterYourAnotherMerfolk.add(new ControllerPredicate(TargetController.YOU));
+        filterYourAnotherMerfolk.setMessage("another " + SubType.MERFOLK.toString() + " you control");
+    }
 
-        this.subtype.add(SubType.DINOSAUR);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+    public JadeBearer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
 
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
-        ability.addTarget(new TargetPermanent());
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SHAMAN);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // When Jade Bearer enters the battlefield, put a +1/+1 counter on another target Merfolk you control.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
+        ability.addTarget(new TargetCreaturePermanent(filterYourAnotherMerfolk));
         this.addAbility(ability);
     }
 
-    public Cacophodon(final Cacophodon card) {
+    public JadeBearer(final JadeBearer card) {
         super(card);
     }
 
     @Override
-    public Cacophodon copy() {
-        return new Cacophodon(this);
+    public JadeBearer copy() {
+        return new JadeBearer(this);
     }
 }

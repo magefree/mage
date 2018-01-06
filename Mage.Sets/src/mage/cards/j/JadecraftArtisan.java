@@ -25,46 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- *
- * @author LevelX2
+ * @author JayDi85
  */
-public class Cacophodon extends CardImpl {
+public class JadecraftArtisan extends CardImpl {
 
-    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
+    public JadecraftArtisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.subtype.add(SubType.DINOSAUR);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.SHAMAN);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
-        ability.addTarget(new TargetPermanent());
+        // When Jadecraft Artisan enters the battlefield, target creature gets +2/+2 until end of turn.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn),false);
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public Cacophodon(final Cacophodon card) {
+    public JadecraftArtisan(final JadecraftArtisan card) {
         super(card);
     }
 
     @Override
-    public Cacophodon copy() {
-        return new Cacophodon(this);
+    public JadecraftArtisan copy() {
+        return new JadecraftArtisan(this);
     }
 }

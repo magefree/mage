@@ -25,46 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.p;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.effects.keyword.ExploreTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
- *
  * @author LevelX2
  */
-public class Cacophodon extends CardImpl {
+public class PathOfDiscovery extends CardImpl {
 
-    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    public PathOfDiscovery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
-        this.subtype.add(SubType.DINOSAUR);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+        // Whenever a creature enters the battlefield under your control, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the creature, then put the card back or put it into your graveyard.)
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD, new ExploreTargetEffect(),
+                StaticFilters.FILTER_CONTROLLED_A_CREATURE, false, SetTargetPointer.PERMANENT, null));
 
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
-        ability.addTarget(new TargetPermanent());
-        this.addAbility(ability);
     }
 
-    public Cacophodon(final Cacophodon card) {
+    public PathOfDiscovery(final PathOfDiscovery card) {
         super(card);
     }
 
     @Override
-    public Cacophodon copy() {
-        return new Cacophodon(this);
+    public PathOfDiscovery copy() {
+        return new PathOfDiscovery(this);
     }
 }

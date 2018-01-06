@@ -25,46 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- *
- * @author LevelX2
+ * @author TheElk801 & L_J
  */
-public class Cacophodon extends CardImpl {
+public class FrilledDeathspitter extends CardImpl {
 
-    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    public FrilledDeathspitter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
         this.subtype.add(SubType.DINOSAUR);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
-        ability.addTarget(new TargetPermanent());
+        // <i>Enrage</i> &mdash; Whenever Frilled Deathspitter is dealt damage, it deals 2 damage to target opponent.
+        Ability ability = new DealtDamageToSourceTriggeredAbility(
+                Zone.BATTLEFIELD, new DamageTargetEffect(2).setText("it deals 2 damage to target opponent"), false, true
+        );
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
-    public Cacophodon(final Cacophodon card) {
+    public FrilledDeathspitter(final FrilledDeathspitter card) {
         super(card);
     }
 
     @Override
-    public Cacophodon copy() {
-        return new Cacophodon(this);
+    public FrilledDeathspitter copy() {
+        return new FrilledDeathspitter(this);
     }
 }

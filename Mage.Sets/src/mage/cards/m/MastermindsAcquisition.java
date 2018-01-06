@@ -25,46 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.WishEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- *
- * @author LevelX2
+ * @author L_J
  */
-public class Cacophodon extends CardImpl {
+public class MastermindsAcquisition extends CardImpl {
 
-    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    public MastermindsAcquisition(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
-        this.subtype.add(SubType.DINOSAUR);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
-
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
-        ability.addTarget(new TargetPermanent());
-        this.addAbility(ability);
+        // Choose one - 
+        // Search your library for a card and put that card into your hand. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()));
+        
+        // Choose a card you own from outside the game and put it into your hand.
+        Mode mode = new Mode();
+        mode.getEffects().add(new WishEffect(new FilterCard(), false));
+        this.getSpellAbility().addMode(mode);
     }
 
-    public Cacophodon(final Cacophodon card) {
+    public MastermindsAcquisition(final MastermindsAcquisition card) {
         super(card);
     }
 
     @Override
-    public Cacophodon copy() {
-        return new Cacophodon(this);
+    public MastermindsAcquisition copy() {
+        return new MastermindsAcquisition(this);
     }
 }

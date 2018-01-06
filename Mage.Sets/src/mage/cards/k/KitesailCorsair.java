@@ -25,46 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.SourceAttackingCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
 
 /**
  *
- *
- * @author LevelX2
+ * @author JayDi85
  */
-public class Cacophodon extends CardImpl {
+public class KitesailCorsair extends CardImpl {
 
-    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    public KitesailCorsair(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.subtype.add(SubType.DINOSAUR);
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+        this.toughness = new MageInt(1);
 
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
-        ability.addTarget(new TargetPermanent());
-        this.addAbility(ability);
+        // Kitesail Corsair has flying as long as it’s attacking.
+        ContinuousEffect gainEffect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,  new ConditionalContinuousEffect(
+                gainEffect,
+                SourceAttackingCondition.instance,
+                "{this} has flying as long as it’s attacking."
+        )));
     }
 
-    public Cacophodon(final Cacophodon card) {
+    public KitesailCorsair(final KitesailCorsair card) {
         super(card);
     }
 
     @Override
-    public Cacophodon copy() {
-        return new Cacophodon(this);
+    public KitesailCorsair copy() {
+        return new KitesailCorsair(this);
     }
 }

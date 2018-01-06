@@ -25,46 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
 
 /**
  *
- *
- * @author LevelX2
+ * @author L_J
  */
-public class Cacophodon extends CardImpl {
+public class ImperialCeratops extends CardImpl {
 
-    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-
+    public ImperialCeratops(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.subtype.add(SubType.DINOSAUR);
-        this.power = new MageInt(2);
+        this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
-        ability.addTarget(new TargetPermanent());
-        this.addAbility(ability);
+        // <i>Enrage</i> &mdash; Whenever Imperial Ceratops is dealt damage, you gain 2 life.
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), false, true));
     }
 
-    public Cacophodon(final Cacophodon card) {
+    public ImperialCeratops(final ImperialCeratops card) {
         super(card);
     }
 
     @Override
-    public Cacophodon copy() {
-        return new Cacophodon(this);
+    public ImperialCeratops copy() {
+        return new ImperialCeratops(this);
     }
 }

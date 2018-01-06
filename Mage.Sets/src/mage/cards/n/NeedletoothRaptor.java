@@ -25,46 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- *
- * @author LevelX2
+ * @author L_J
  */
-public class Cacophodon extends CardImpl {
+public class NeedletoothRaptor extends CardImpl {
 
-    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
+
+    public NeedletoothRaptor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+        this.toughness = new MageInt(2);
 
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
-        ability.addTarget(new TargetPermanent());
+        // <i>Enrage</i> &mdash; Whenever Needletooth Raptor is dealt damage, it deals 5 damage to target creature an opponent controls.
+        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5).setText("it deals 5 damage to target creature an opponent controls"), false, true);
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
-    public Cacophodon(final Cacophodon card) {
+    public NeedletoothRaptor(final NeedletoothRaptor card) {
         super(card);
     }
 
     @Override
-    public Cacophodon copy() {
-        return new Cacophodon(this);
+    public NeedletoothRaptor copy() {
+        return new NeedletoothRaptor(this);
     }
 }

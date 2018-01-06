@@ -25,46 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.filter.FilterPermanent;
 
 /**
  *
- *
- * @author LevelX2
+ * @author L_J
  */
-public class Cacophodon extends CardImpl {
+public class SilvercladFerocidons extends CardImpl {
 
-    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-
+    public SilvercladFerocidons(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
         this.subtype.add(SubType.DINOSAUR);
-        this.power = new MageInt(2);
+        this.power = new MageInt(8);
         this.toughness = new MageInt(5);
 
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
-        ability.addTarget(new TargetPermanent());
-        this.addAbility(ability);
+        // <i>Enrage</i> &mdash; Whenever Silverclad Ferocidon is dealt damage, each opponent sacrifices a permanent.
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new SacrificeOpponentsEffect(new FilterPermanent()), false, true));
     }
 
-    public Cacophodon(final Cacophodon card) {
+    public SilvercladFerocidons(final SilvercladFerocidons card) {
         super(card);
     }
 
     @Override
-    public Cacophodon copy() {
-        return new Cacophodon(this);
+    public SilvercladFerocidons copy() {
+        return new SilvercladFerocidons(this);
     }
 }

@@ -25,46 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- *
- * @author LevelX2
+ * @author L_J
  */
-public class Cacophodon extends CardImpl {
+public class AtzocanSeer extends CardImpl {
 
-    public Cacophodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    private static final FilterCard filter = new FilterCard("Dinosaur from your graveyard");
+    
+    static {
+        filter.add(new SubtypePredicate(SubType.DINOSAUR));
+    }
 
-        this.subtype.add(SubType.DINOSAUR);
+    public AtzocanSeer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+        this.toughness = new MageInt(3);
 
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
-        ability.addTarget(new TargetPermanent());
+        // {T}: Add one mana of any color to your mana pool.
+        this.addAbility(new AnyColorManaAbility());
+
+        // Sacrifice Atzocan Seer: Return target Dinosaur from your graveyard to your hand.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new SacrificeSourceCost());
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 
-    public Cacophodon(final Cacophodon card) {
+    public AtzocanSeer(final AtzocanSeer card) {
         super(card);
     }
 
     @Override
-    public Cacophodon copy() {
-        return new Cacophodon(this);
+    public AtzocanSeer copy() {
+        return new AtzocanSeer(this);
     }
 }

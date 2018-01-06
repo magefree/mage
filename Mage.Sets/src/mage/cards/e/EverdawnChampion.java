@@ -25,58 +25,72 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
-import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInYourGraveyard;
-
+import mage.game.Game;
+import mage.game.events.GameEvent;
 /**
  *
  * @author L_J
  */
-public class AztocanSeer extends CardImpl {
+public class EverdawnChampion extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Dinosaur from your graveyard");
-    
-    static {
-        filter.add(new SubtypePredicate(SubType.DINOSAUR));
-    }
-
-    public AztocanSeer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
+    public EverdawnChampion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.DRUID);
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // {T}: Add one mana of any color to your mana pool.
-        this.addAbility(new AnyColorManaAbility());
-
-        // Sacrifice Atzocan Seer: Return target Dinosaur from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new SacrificeSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
-        this.addAbility(ability);
+        // Prevent all combat damage that would be dealt to Everdawn Champion.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EverdawnChampionEffect()));
     }
 
-    public AztocanSeer(final AztocanSeer card) {
+    public EverdawnChampion(final EverdawnChampion card) {
         super(card);
     }
 
     @Override
-    public AztocanSeer copy() {
-        return new AztocanSeer(this);
+    public EverdawnChampion copy() {
+        return new EverdawnChampion(this);
     }
+}
+
+class EverdawnChampionEffect extends PreventionEffectImpl {
+
+    public EverdawnChampionEffect() {
+        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, true);
+        staticText = "Prevent all combat damage that would be dealt to {this}";
+    }
+
+    public EverdawnChampionEffect(final EverdawnChampionEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public EverdawnChampionEffect copy() {
+        return new EverdawnChampionEffect(this);
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (super.applies(event, source, game)) {
+            if (event.getTargetId().equals(source.getSourceId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
