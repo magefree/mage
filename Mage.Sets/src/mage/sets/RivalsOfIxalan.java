@@ -102,6 +102,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Ghalta, Primal Hunger", 130, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
         cards.add(new SetCardInfo("Giltgrove Stalker", 131, Rarity.COMMON, mage.cards.g.GiltgroveStalker.class));
         cards.add(new SetCardInfo("Goblin Trailblazer", 105, Rarity.COMMON, mage.cards.g.GoblinTrailblazer.class));
+        cards.add(new SetCardInfo("Profane Procession", 166, Rarity.RARE, mage.cards.p.ProfaneProcession.class));
         cards.add(new SetCardInfo("Radiant Destiny", 18, Rarity.RARE, mage.cards.r.RadiantDestiny.class));
         cards.add(new SetCardInfo("Hardy Veteran", 132, Rarity.COMMON, mage.cards.h.HardyVeteran.class));
         cards.add(new SetCardInfo("Hadana's Climb", 158, Rarity.RARE, mage.cards.h.HadanasClimb.class));
@@ -144,6 +145,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 192, Rarity.COMMON, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Plummet", 143, Rarity.COMMON, mage.cards.p.Plummet.class));
         cards.add(new SetCardInfo("Polyraptor", 144, Rarity.MYTHIC, mage.cards.p.Polyraptor.class));
+        cards.add(new SetCardInfo("Profane Procession", 166, Rarity.RARE, mage.cards.p.ProfaneProcession.class));
         cards.add(new SetCardInfo("Raging Regisaur", 168, Rarity.UNCOMMON, mage.cards.r.RagingRegisaur.class));
         cards.add(new SetCardInfo("Raptor Companion", 19, Rarity.COMMON, mage.cards.r.RaptorCompanion.class));
         cards.add(new SetCardInfo("Ravenous Chupacabra", 82, Rarity.COMMON, mage.cards.r.RavenousChupacabra.class));
@@ -174,8 +176,10 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("The Immortal Sun", 180, Rarity.MYTHIC, mage.cards.t.TheImmortalSun.class));
         cards.add(new SetCardInfo("Thrashing Brontodon", 148, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
         cards.add(new SetCardInfo("Thunderherd Migration", 149, Rarity.UNCOMMON, mage.cards.t.ThunderherdMigration.class));
+        cards.add(new SetCardInfo("Tomb of the Dusk Rose", 166, Rarity.RARE, mage.cards.t.TombOfTheDuskRose.class));
         cards.add(new SetCardInfo("Traveler's Amulet", 184, Rarity.COMMON, mage.cards.t.TravelersAmulet.class));
         cards.add(new SetCardInfo("Trapjaw Tyrant", 29, Rarity.MYTHIC, mage.cards.t.TrapjawTyrant.class));
+        cards.add(new SetCardInfo("Twilight Prophet", 88, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
         cards.add(new SetCardInfo("Vampire Champion", 198, Rarity.COMMON, mage.cards.v.VampireChampion.class));
         cards.add(new SetCardInfo("Vampire Revenant", 89, Rarity.COMMON, mage.cards.v.VampireRevenant.class));
         cards.add(new SetCardInfo("Vault of Catlacan", 173, Rarity.RARE, mage.cards.v.VaultOfCatlacan.class));
