@@ -81,6 +81,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Fleet Daredevil", 99, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Dire Fleet Neckbreaker", 156, Rarity.UNCOMMON, mage.cards.d.DireFleetNeckbreaker.class));
         cards.add(new SetCardInfo("Dire Fleet Poisoner", 68, Rarity.RARE, mage.cards.d.DireFleetPoisoner.class));
+        cards.add(new SetCardInfo("Dinosaur Hunter", 67, Rarity.COMMON, mage.cards.d.DinosaurHunter.class));
         cards.add(new SetCardInfo("Divine Verdict", 5, Rarity.COMMON, mage.cards.d.DivineVerdict.class));
         cards.add(new SetCardInfo("Dusk Charger", 69, Rarity.COMMON, mage.cards.d.DuskCharger.class));
         cards.add(new SetCardInfo("Dusk Legion Zealot", 70, Rarity.COMMON, mage.cards.d.DuskLegionZealot.class));
@@ -147,6 +148,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 192, Rarity.COMMON, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Plummet", 143, Rarity.COMMON, mage.cards.p.Plummet.class));
         cards.add(new SetCardInfo("Polyraptor", 144, Rarity.MYTHIC, mage.cards.p.Polyraptor.class));
+        cards.add(new SetCardInfo("Protean Raider", 167, Rarity.RARE, mage.cards.p.ProteanRaider.class));
         cards.add(new SetCardInfo("Profane Procession", 166, Rarity.RARE, mage.cards.p.ProfaneProcession.class));
         cards.add(new SetCardInfo("Raging Regisaur", 168, Rarity.UNCOMMON, mage.cards.r.RagingRegisaur.class));
         cards.add(new SetCardInfo("Raptor Companion", 19, Rarity.COMMON, mage.cards.r.RaptorCompanion.class));
@@ -160,6 +162,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("River Darter", 47, Rarity.COMMON, mage.cards.r.RiverDarter.class));
         cards.add(new SetCardInfo("Riverwise Augur", 48, Rarity.UNCOMMON, mage.cards.r.RiverwiseAugur.class));
         cards.add(new SetCardInfo("Sadistic Skymarcher", 85, Rarity.UNCOMMON, mage.cards.s.SadisticSkymarcher.class));
+        cards.add(new SetCardInfo("Reckless Rage", 110, Rarity.UNCOMMON, mage.cards.r.RecklessRage.class));
         cards.add(new SetCardInfo("Sailor of Means", 49, Rarity.COMMON, mage.cards.s.SailorOfMeans.class));
         cards.add(new SetCardInfo("Sanctum of the Sun", 176, Rarity.MYTHIC, mage.cards.s.SanctumOfTheSun.class));
         cards.add(new SetCardInfo("Sanguine Glorifier", 20, Rarity.COMMON, mage.cards.s.SanguineGlorifier.class));
@@ -194,6 +197,8 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 194, Rarity.COMMON, mage.cards.basiclands.Swamp.class));
         cards.add(new SetCardInfo("Swift Warden", 146, Rarity.UNCOMMON, mage.cards.s.SwiftWarden.class));
         cards.add(new SetCardInfo("Sworn Guardian", 58, Rarity.COMMON, mage.cards.s.SwornGuardian.class));
+        cards.add(new SetCardInfo("Sun-Collared Raptor", 118, Rarity.COMMON, mage.cards.s.SunCollaredRaptor.class));
+        cards.add(new SetCardInfo("Sun-Crested Pterodon", 27, Rarity.COMMON, mage.cards.s.SunCrestedPterodon.class));
         cards.add(new SetCardInfo("Temple Altisaur", 28, Rarity.RARE, mage.cards.t.TempleAltisaur.class));
         cards.add(new SetCardInfo("Tendershoot Dryad", 147, Rarity.RARE, mage.cards.t.TendershootDryad.class));
         cards.add(new SetCardInfo("Tetzimoc, Primal Death", 86, Rarity.RARE, mage.cards.t.TetzimocPrimalDeath.class));
@@ -204,6 +209,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Tilonalli's Summoner", 121, Rarity.RARE, mage.cards.t.TilonallisSummoner.class));
         cards.add(new SetCardInfo("Timestream Navigator", 59, Rarity.MYTHIC, mage.cards.t.TimestreamNavigator.class));
         cards.add(new SetCardInfo("Tomb of the Dusk Rose", 166, Rarity.RARE, mage.cards.t.TombOfTheDuskRose.class));
+        cards.add(new SetCardInfo("Tomb Robber", 87, Rarity.RARE, mage.cards.t.TombRobber.class));
         cards.add(new SetCardInfo("Traveler's Amulet", 184, Rarity.COMMON, mage.cards.t.TravelersAmulet.class));
         cards.add(new SetCardInfo("Trapjaw Tyrant", 29, Rarity.MYTHIC, mage.cards.t.TrapjawTyrant.class));
         cards.add(new SetCardInfo("Twilight Prophet", 88, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
