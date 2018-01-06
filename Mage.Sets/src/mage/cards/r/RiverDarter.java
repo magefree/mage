@@ -25,33 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.effects.common.BrainstormEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author jonubuu
+ * @author LevelX2
  */
-public class Brainstorm extends CardImpl {
+public class RiverDarter extends CardImpl {
 
-    public Brainstorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
+    public RiverDarter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        // Draw three cards, then put two cards from your hand on top of your library in any order.
-        this.getSpellAbility().addEffect(new BrainstormEffect());
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WARRIOR);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // River Darter can't be blocked by Dinosaurs.
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(
+                new FilterCreaturePermanent(SubType.DINOSAUR, "Dinosaurs"), Duration.WhileOnBattlefield)));
     }
 
-    public Brainstorm(final Brainstorm card) {
+    public RiverDarter(final RiverDarter card) {
         super(card);
     }
 
     @Override
-    public Brainstorm copy() {
-        return new Brainstorm(this);
+    public RiverDarter copy() {
+        return new RiverDarter(this);
     }
 }

@@ -25,33 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.effects.common.BrainstormEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
+import mage.abilities.effects.common.combat.BlocksIfAbleSourceEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 
 /**
  *
- * @author jonubuu
+ * @author LevelX2
  */
-public class Brainstorm extends CardImpl {
+public class RelentlessRaptor extends CardImpl {
 
-    public Brainstorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
+    public RelentlessRaptor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
 
-        // Draw three cards, then put two cards from your hand on top of your library in any order.
-        this.getSpellAbility().addEffect(new BrainstormEffect());
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Vigilance
+        this.addAbility(VigilanceAbility.getInstance());
+
+        // Relentless Raptor attacks or blocks each combat if able.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true).setText("{this} attacks"));
+        ability.addEffect(new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield).setText("or blocks each combat if able"));
+        this.addAbility(ability);
     }
 
-    public Brainstorm(final Brainstorm card) {
+    public RelentlessRaptor(final RelentlessRaptor card) {
         super(card);
     }
 
     @Override
-    public Brainstorm copy() {
-        return new Brainstorm(this);
+    public RelentlessRaptor copy() {
+        return new RelentlessRaptor(this);
     }
 }

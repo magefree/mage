@@ -25,33 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.effects.common.BrainstormEffect;
+import mage.MageInt;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.game.permanent.token.RekindlingPhoenixToken;
 
 /**
  *
- * @author jonubuu
+ * @author LevelX2
  */
-public class Brainstorm extends CardImpl {
+public class RekindlingPhoenix extends CardImpl {
 
-    public Brainstorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
+    public RekindlingPhoenix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
 
-        // Draw three cards, then put two cards from your hand on top of your library in any order.
-        this.getSpellAbility().addEffect(new BrainstormEffect());
+        this.subtype.add(SubType.PHOENIX);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // When Rekindling Phoenix dies, create a 0/1 red Elemental creature token with "At the beginning of your upkeep, sacrifice this creature and return target card named Rekindling Phoenix from your graveyard to the battlefield. It gains haste until end of turn."
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new RekindlingPhoenixToken()), false));
     }
 
-    public Brainstorm(final Brainstorm card) {
+    public RekindlingPhoenix(final RekindlingPhoenix card) {
         super(card);
     }
 
     @Override
-    public Brainstorm copy() {
-        return new Brainstorm(this);
+    public RekindlingPhoenix copy() {
+        return new RekindlingPhoenix(this);
     }
 }

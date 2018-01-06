@@ -152,6 +152,12 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Ravenous Chupacabra", 82, Rarity.COMMON, mage.cards.r.RavenousChupacabra.class));
         cards.add(new SetCardInfo("Reaver Ambush", 83, Rarity.UNCOMMON, mage.cards.r.ReaverAmbush.class));
         cards.add(new SetCardInfo("Recover", 84, Rarity.COMMON, mage.cards.r.Recover.class));
+        cards.add(new SetCardInfo("Rekindling Phoenix", 111, Rarity.MYTHIC, mage.cards.r.RekindlingPhoenix.class));
+        cards.add(new SetCardInfo("Relentless Raptor", 169, Rarity.UNCOMMON, mage.cards.r.RelentlessRaptor.class));
+        cards.add(new SetCardInfo("Resplendent Griffin", 170, Rarity.UNCOMMON, mage.cards.r.ResplendentGriffin.class));
+        cards.add(new SetCardInfo("Return to the Wind", 46, Rarity.RARE, mage.cards.r.ReturnToTheWind.class));
+        cards.add(new SetCardInfo("River Darter", 47, Rarity.COMMON, mage.cards.r.RiverDarter.class));
+        cards.add(new SetCardInfo("Riverwise Augur", 48, Rarity.UNCOMMON, mage.cards.r.RiverwiseAugur.class));
         cards.add(new SetCardInfo("Sadistic Skymarcher", 85, Rarity.UNCOMMON, mage.cards.s.SadisticSkymarcher.class));
         cards.add(new SetCardInfo("Sailor of Means", 49, Rarity.COMMON, mage.cards.s.SailorOfMeans.class));
         cards.add(new SetCardInfo("Sanctum of the Sun", 176, Rarity.MYTHIC, mage.cards.s.SanctumOfTheSun.class));

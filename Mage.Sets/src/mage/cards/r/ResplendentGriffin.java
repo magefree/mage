@@ -25,33 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.effects.common.BrainstormEffect;
+import mage.MageInt;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.condition.common.CitysBlessingCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.AscendAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.counters.CounterType;
 
 /**
  *
- * @author jonubuu
+ * @author LevelX2
  */
-public class Brainstorm extends CardImpl {
+public class ResplendentGriffin extends CardImpl {
 
-    public Brainstorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
+    public ResplendentGriffin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
 
-        // Draw three cards, then put two cards from your hand on top of your library in any order.
-        this.getSpellAbility().addEffect(new BrainstormEffect());
+        this.subtype.add(SubType.GRIFFIN);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // Ascend
+        this.addAbility(new AscendAbility());
+
+        // Whenever Resplendent Griffin attacks, if you have the city's blessing, put a +1/+1 counter on it.
+        this.addAbility(new ConditionalTriggeredAbility(new AttacksTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false), CitysBlessingCondition.instance,
+                "Whenever {this} attacks, if you have the city's blessing, put a +1/+1 counter on it."));
     }
 
-    public Brainstorm(final Brainstorm card) {
+    public ResplendentGriffin(final ResplendentGriffin card) {
         super(card);
     }
 
     @Override
-    public Brainstorm copy() {
-        return new Brainstorm(this);
+    public ResplendentGriffin copy() {
+        return new ResplendentGriffin(this);
     }
 }
