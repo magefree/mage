@@ -160,9 +160,14 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Silverclad Ferocidons", 115, Rarity.RARE, mage.cards.s.SilvercladFerocidons.class));
         cards.add(new SetCardInfo("Silvergill Adept", 53, Rarity.UNCOMMON, mage.cards.s.SilvergillAdept.class));
         cards.add(new SetCardInfo("Skymarcher Aspirant", 21, Rarity.UNCOMMON, mage.cards.s.SkymarcherAspirant.class));
+        cards.add(new SetCardInfo("Soul of the Rapids", 56, Rarity.COMMON, mage.cards.s.SoulOfTheRapids.class));
         cards.add(new SetCardInfo("Sphinx's Decree", 24, Rarity.RARE, mage.cards.s.SphinxsDecree.class));
+        cards.add(new SetCardInfo("Spire Winder", 57, Rarity.COMMON, mage.cards.s.SpireWinder.class));
+        cards.add(new SetCardInfo("Squire's Devotion", 25, Rarity.COMMON, mage.cards.s.SquiresDevotion.class));
+        cards.add(new SetCardInfo("Stampeding Horncrest", 116, Rarity.COMMON, mage.cards.s.StampedingHorncrest.class));
         cards.add(new SetCardInfo("Stone Quarry", 190, Rarity.UNCOMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Storm Fleet Sprinter", 172, Rarity.UNCOMMON, mage.cards.s.StormFleetSprinter.class));
+        cards.add(new SetCardInfo("Storm Fleet Swashbuckler", 117, Rarity.UNCOMMON, mage.cards.s.StormFleetSwashbuckler.class));
         cards.add(new SetCardInfo("Storm the Vault", 173, Rarity.RARE, mage.cards.s.StormTheVault.class));
         cards.add(new SetCardInfo("Strength of the Pack", 145, Rarity.UNCOMMON, mage.cards.s.StrengthOfThePack.class));
         cards.add(new SetCardInfo("Strider Harness", 183, Rarity.COMMON, mage.cards.s.StriderHarness.class));
