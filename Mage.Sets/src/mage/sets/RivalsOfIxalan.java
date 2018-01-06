@@ -76,6 +76,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Cinder Barrens", 205, Rarity.COMMON, mage.cards.c.CinderBarrens.class));
         cards.add(new SetCardInfo("Colossal Dreadmaw", 125, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Crested Herdcaller", 126, Rarity.UNCOMMON, mage.cards.c.CrestedHerdcaller.class));
+        cards.add(new SetCardInfo("Daring Buccaneer", 98, Rarity.UNCOMMON, mage.cards.d.DaringBuccaneer.class));
         cards.add(new SetCardInfo("Deeproot Elite", 127, Rarity.RARE, mage.cards.d.DeeprootElite.class));
         cards.add(new SetCardInfo("Dire Fleet Daredevil", 99, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Dire Fleet Neckbreaker", 156, Rarity.UNCOMMON, mage.cards.d.DireFleetNeckbreaker.class));
