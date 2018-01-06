@@ -97,8 +97,11 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Hunt the Weak", 133, Rarity.COMMON, mage.cards.h.HuntTheWeak.class));
         cards.add(new SetCardInfo("Impale", 76, Rarity.COMMON, mage.cards.i.Impale.class));
         cards.add(new SetCardInfo("Island", 193, Rarity.COMMON, mage.cards.basiclands.Island.class));
+        cards.add(new SetCardInfo("Jade Bearer", 134, Rarity.COMMON, mage.cards.j.JadeBearer.class));
+        cards.add(new SetCardInfo("Jadecraft Artisan", 135, Rarity.COMMON, mage.cards.j.JadecraftArtisan.class));
         cards.add(new SetCardInfo("Jadelight Ranger", 136, Rarity.RARE, mage.cards.j.JadelightRanger.class));
         cards.add(new SetCardInfo("Jungle Creeper", 161, Rarity.UNCOMMON, mage.cards.j.JungleCreeper.class));
+        cards.add(new SetCardInfo("Jungleborn Pioneer", 137, Rarity.COMMON, mage.cards.j.JunglebornPioneer.class));
         cards.add(new SetCardInfo("Journey to Eternity", 160, Rarity.RARE, mage.cards.j.JourneyToEternity.class));
         cards.add(new SetCardInfo("Knight of the Stampede", 138, Rarity.COMMON, mage.cards.k.KnightOfTheStampede.class));
         cards.add(new SetCardInfo("Kumena's Awakening", 42, Rarity.RARE, mage.cards.k.KumenasAwakening.class));
@@ -111,6 +114,8 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Naturalize", 139, Rarity.COMMON, mage.cards.n.Naturalize.class));
         cards.add(new SetCardInfo("Negate", 44, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nezahal, Primal Tide", 45, Rarity.RARE, mage.cards.n.NezahalPrimalTide.class));
+        cards.add(new SetCardInfo("Orzaca Frillback", 140, Rarity.COMMON, mage.cards.o.OrzacaFrillback.class));
+        cards.add(new SetCardInfo("Overgrown Armasaur", 141, Rarity.COMMON, mage.cards.o.OvergrownArmasaur.class));
         cards.add(new SetCardInfo("Paladin of Atonement", 16, Rarity.RARE, mage.cards.p.PaladinOfAtonement.class));
         cards.add(new SetCardInfo("Path of Discovery", 142, Rarity.RARE, mage.cards.p.PathOfDiscovery.class));
         cards.add(new SetCardInfo("Pirate's Pillage", 109, Rarity.UNCOMMON, mage.cards.p.PiratesPillage.class));
@@ -131,6 +136,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Stone Quarry", 190, Rarity.UNCOMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Storm Fleet Sprinter", 172, Rarity.UNCOMMON, mage.cards.s.StormFleetSprinter.class));
         cards.add(new SetCardInfo("Storm the Vault", 173, Rarity.RARE, mage.cards.s.StormTheVault.class));
+        cards.add(new SetCardInfo("Strength of the Pack", 145, Rarity.UNCOMMON, mage.cards.s.StrengthOfThePack.class));
         cards.add(new SetCardInfo("Strider Harness", 183, Rarity.COMMON, mage.cards.s.StriderHarness.class));
         cards.add(new SetCardInfo("Swab Goblin", 203, Rarity.COMMON, mage.cards.s.SwabGoblin.class));
         cards.add(new SetCardInfo("Swamp", 194, Rarity.COMMON, mage.cards.basiclands.Swamp.class));
