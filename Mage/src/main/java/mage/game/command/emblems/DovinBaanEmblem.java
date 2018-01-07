@@ -32,7 +32,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.players.Player;
@@ -53,7 +53,7 @@ public class DovinBaanEmblem extends Emblem {
 class DovinBaanCantUntapEffect extends RestrictionUntapNotMoreThanEffect {
 
     DovinBaanCantUntapEffect() {
-        super(Duration.WhileOnBattlefield, 2, new FilterControlledPermanent());
+        super(Duration.WhileOnBattlefield, 2, StaticFilters.FILTER_CONTROLLED_PERMANENT);
         staticText = "Your opponents can't untap more than two permanents during their untap steps.";
     }
 

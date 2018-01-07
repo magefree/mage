@@ -168,12 +168,8 @@ public final class Predicates {
 
         @Override
         public boolean apply(T t, Game game) {
-            for (Predicate<? super T> component : components) {
-                if (!component.apply(t, game)) {
-                    return false;
-                }
-            }
-            return true;
+            return components.stream().allMatch(predicate -> predicate.apply(t, game));
+
         }
 
         @Override
@@ -196,12 +192,7 @@ public final class Predicates {
 
         @Override
         public boolean apply(T t, Game game) {
-            for (Predicate<? super T> component : components) {
-                if (component.apply(t, game)) {
-                    return true;
-                }
-            }
-            return false;
+            return components.stream().anyMatch(predicate -> predicate.apply(t, game));
         }
 
         @Override
