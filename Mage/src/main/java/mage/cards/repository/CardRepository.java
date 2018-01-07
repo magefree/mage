@@ -58,7 +58,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 51;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 97;
+    private static final long CARD_CONTENT_VERSION = 98;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
 
@@ -330,7 +330,6 @@ public enum CardRepository {
         return findPreferedCoreExpansionCard(name, caseInsensitive, null);
     }
 
-
     public CardInfo findPreferedCoreExpansionCard(String name, boolean caseInsensitive, String preferedSetCode) {
 
         List<CardInfo> cards;
@@ -348,7 +347,7 @@ public enum CardRepository {
                 ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
                 if (set != null) {
 
-                    if ((preferedSetCode != null) && (preferedSetCode.equals(set.getCode()))){
+                    if ((preferedSetCode != null) && (preferedSetCode.equals(set.getCode()))) {
                         return cardinfo;
                     }
 
