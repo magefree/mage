@@ -67,7 +67,7 @@ public class KumenaTyrantOfOrazca extends CardImpl {
         filter.add(new SubtypePredicate(SubType.MERFOLK));
         filter.add(Predicates.not(new TappedPredicate()));
 
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filterAll.add(new SubtypePredicate(SubType.MERFOLK));
     }
 
     public KumenaTyrantOfOrazca(UUID ownerId, CardSetInfo setInfo) {
@@ -92,7 +92,7 @@ public class KumenaTyrantOfOrazca extends CardImpl {
         // Tap five untapped Merfolk you control: Put a +1/+1 counter on each Merfolk you control.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), filterAll),
-                new TapTargetCost(new TargetControlledPermanent(5, 5, filter, true))));
+                new TapTargetCost(new TargetControlledPermanent(5, 5, filterAll, true))));
 
     }
 
