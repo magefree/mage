@@ -25,38 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetOpponent;
+import mage.constants.SubType;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Brainbite extends CardImpl {
+public class FathomFleetBoarder extends CardImpl {
 
-    public Brainbite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control another Pirate");
 
-        // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+    static {
+        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(new AnotherPredicate());
     }
 
-    public Brainbite(final Brainbite card) {
+    public FathomFleetBoarder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
+
+        this.subtype.add(SubType.ORC);
+        this.subtype.add(SubType.PIRATE);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // When Fathom Fleet Boarder enters the battlefield, you lose 2 life unless you control another Pirate.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new ConditionalOneShotEffect(new LoseLifeSourceControllerEffect(2), new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
+                        "you lose 2 life unless you control another Pirate"),
+                 false));
+    }
+
+    public FathomFleetBoarder(final FathomFleetBoarder card) {
         super(card);
     }
 
     @Override
-    public Brainbite copy() {
-        return new Brainbite(this);
+    public FathomFleetBoarder copy() {
+        return new FathomFleetBoarder(this);
     }
 }

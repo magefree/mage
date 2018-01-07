@@ -25,38 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.e;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.abilities.condition.common.CitysBlessingCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.keyword.AscendEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetNonlandPermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Brainbite extends CardImpl {
+public class ExpelFromOrazca extends CardImpl {
 
-    public Brainbite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
+    public ExpelFromOrazca(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        // Ascend
+        this.getSpellAbility().addEffect(new AscendEffect());
+
+        // Return target nonland permanent to its owner's hand. If you have the city's blessing, you may put that permanent on top of its owner's library instead.
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new PutOnLibraryTargetEffect(true),
+                new ReturnToHandTargetEffect(),
+                CitysBlessingCondition.instance,
+                "Return target nonland permanent to its owner's hand. If you have the city's blessing, you may put that permanent on top of its owner's library instead"
+        ));
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public Brainbite(final Brainbite card) {
+    public ExpelFromOrazca(final ExpelFromOrazca card) {
         super(card);
     }
 
     @Override
-    public Brainbite copy() {
-        return new Brainbite(this);
+    public ExpelFromOrazca copy() {
+        return new ExpelFromOrazca(this);
     }
 }

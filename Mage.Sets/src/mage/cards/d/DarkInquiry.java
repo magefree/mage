@@ -25,38 +25,36 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Brainbite extends CardImpl {
+public class DarkInquiry extends CardImpl {
 
-    public Brainbite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
+    public DarkInquiry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        // Target opponent reveals his or her hand. You choose a non land card from it. That player discards that card.
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_A_NON_LAND));
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Brainbite(final Brainbite card) {
+    public DarkInquiry(final DarkInquiry card) {
         super(card);
     }
 
     @Override
-    public Brainbite copy() {
-        return new Brainbite(this);
+    public DarkInquiry copy() {
+        return new DarkInquiry(this);
     }
 }

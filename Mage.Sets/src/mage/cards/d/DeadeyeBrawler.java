@@ -25,38 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.d;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.condition.common.CitysBlessingCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.constants.SubType;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.AscendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Brainbite extends CardImpl {
+public class DeadeyeBrawler extends CardImpl {
 
-    public Brainbite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
+    public DeadeyeBrawler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
+
+        // Deathtouch
+        this.addAbility(DeathtouchAbility.getInstance());
+
+        // Ascend
+        this.addAbility(new AscendAbility());
+
+        // Whenever Deadeye Brawler deals combat damage to a player, if you have the city's blessing, draw a card.
+        this.addAbility(new ConditionalTriggeredAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), false, false), CitysBlessingCondition.instance,
+                "Whenever {this} deals combat damage to a player, if you have the city's blessing, draw a card."));
+
     }
 
-    public Brainbite(final Brainbite card) {
+    public DeadeyeBrawler(final DeadeyeBrawler card) {
         super(card);
     }
 
     @Override
-    public Brainbite copy() {
-        return new Brainbite(this);
+    public DeadeyeBrawler copy() {
+        return new DeadeyeBrawler(this);
     }
 }

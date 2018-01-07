@@ -25,38 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.RaidCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetOpponent;
+import mage.constants.SubType;
+import mage.target.common.TargetCreaturePermanent;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Brainbite extends CardImpl {
+public class DeadeyeRigHauler extends CardImpl {
 
-    public Brainbite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
+    public DeadeyeRigHauler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-        // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        // <i>Raid</i>— When Deadeye Rig-Hauler enters the battlefield, if you attacked with a creature this turn, you may return target creature to its owner's hand.
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true), RaidCondition.instance,
+                "<i>Raid</i> - When {this} enters the battlefield, if you attacked with a creature this turn, you may return target creature to its owner's hand.");
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public Brainbite(final Brainbite card) {
+    public DeadeyeRigHauler(final DeadeyeRigHauler card) {
         super(card);
     }
 
     @Override
-    public Brainbite copy() {
-        return new Brainbite(this);
+    public DeadeyeRigHauler copy() {
+        return new DeadeyeRigHauler(this);
     }
 }
