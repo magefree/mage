@@ -199,6 +199,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Sworn Guardian", 58, Rarity.COMMON, mage.cards.s.SwornGuardian.class));
         cards.add(new SetCardInfo("Sun-Collared Raptor", 118, Rarity.COMMON, mage.cards.s.SunCollaredRaptor.class));
         cards.add(new SetCardInfo("Sun-Crested Pterodon", 27, Rarity.COMMON, mage.cards.s.SunCrestedPterodon.class));
+        cards.add(new SetCardInfo("Swaggering Corsair", 119, Rarity.COMMON, mage.cards.s.SwaggeringCorsair.class));
         cards.add(new SetCardInfo("Temple Altisaur", 28, Rarity.RARE, mage.cards.t.TempleAltisaur.class));
         cards.add(new SetCardInfo("Tendershoot Dryad", 147, Rarity.RARE, mage.cards.t.TendershootDryad.class));
         cards.add(new SetCardInfo("Tetzimoc, Primal Death", 86, Rarity.RARE, mage.cards.t.TetzimocPrimalDeath.class));
