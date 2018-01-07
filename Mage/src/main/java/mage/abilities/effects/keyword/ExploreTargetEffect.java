@@ -39,8 +39,12 @@ import mage.game.Game;
 public class ExploreTargetEffect extends OneShotEffect {
 
     public ExploreTargetEffect() {
+        this(true);
+    }
+
+    public ExploreTargetEffect(boolean showAbilityHint) {
         super(Outcome.Benefit);
-        this.staticText = ExploreSourceEffect.RULE_TEXT;
+        this.staticText = ExploreSourceEffect.getRuleText(showAbilityHint);
     }
 
     public ExploreTargetEffect(final ExploreTargetEffect effect) {
