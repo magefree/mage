@@ -72,10 +72,15 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Canal Monitor", 63, Rarity.COMMON, mage.cards.c.CanalMonitor.class));
         cards.add(new SetCardInfo("Captain's Hook", 177, Rarity.RARE, mage.cards.c.CaptainsHook.class));
         cards.add(new SetCardInfo("Champion of Dusk", 64, Rarity.RARE, mage.cards.c.ChampionOfDusk.class));
+        cards.add(new SetCardInfo("Charging Tuskodon", 97, Rarity.UNCOMMON, mage.cards.c.ChargingTuskodon.class));
         cards.add(new SetCardInfo("Cherished Hatchling", 124, Rarity.UNCOMMON, mage.cards.c.CherishedHatchling.class));
         cards.add(new SetCardInfo("Cinder Barrens", 205, Rarity.COMMON, mage.cards.c.CinderBarrens.class));
+        cards.add(new SetCardInfo("Cleansing Ray", 4, Rarity.COMMON, mage.cards.c.CleansingRay.class));
         cards.add(new SetCardInfo("Colossal Dreadmaw", 125, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
+        cards.add(new SetCardInfo("Crafty Cutpurse", 33, Rarity.RARE, mage.cards.c.CraftyCutpurse.class));
+        cards.add(new SetCardInfo("Crashing Tide", 34, Rarity.COMMON, mage.cards.c.CrashingTide.class));
         cards.add(new SetCardInfo("Crested Herdcaller", 126, Rarity.UNCOMMON, mage.cards.c.CrestedHerdcaller.class));
+        cards.add(new SetCardInfo("Curious Obsession", 35, Rarity.UNCOMMON, mage.cards.c.CuriousObsession.class));
         cards.add(new SetCardInfo("Daring Buccaneer", 98, Rarity.UNCOMMON, mage.cards.d.DaringBuccaneer.class));
         cards.add(new SetCardInfo("Dark Inquiry", 65, Rarity.COMMON, mage.cards.d.DarkInquiry.class));
         cards.add(new SetCardInfo("Dead Man's Chest", 66, Rarity.RARE, mage.cards.d.DeadMansChest.class));

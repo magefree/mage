@@ -25,61 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.cards.c;
 
-import mage.abilities.Ability;
+import java.util.UUID;
 import mage.abilities.Mode;
-import mage.abilities.condition.Condition;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class SacrificeSourceUnlessConditionEffect extends OneShotEffect {
+public class CleansingRay extends CardImpl {
 
-    protected Condition condition;
+    public CleansingRay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}");
 
-    public SacrificeSourceUnlessConditionEffect(Condition condition) {
-        super(Outcome.Sacrifice);
-        this.condition = condition;
+        // Choose one -
+        // - Destroy target Vampire.
+        getSpellAbility().addEffect(new DestroyTargetEffect());
+        FilterPermanent filter = new FilterPermanent("Vampire");
+        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        getSpellAbility().addTarget(new TargetPermanent(filter));
+
+        // - Destroy target enchantment.
+        Mode mode = new Mode();
+        mode.getEffects().add(new DestroyTargetEffect());
+        mode.getTargets().add(new TargetEnchantmentPermanent());
+        this.getSpellAbility().addMode(mode);
+
     }
 
-    public SacrificeSourceUnlessConditionEffect(final SacrificeSourceUnlessConditionEffect effect) {
-        super(effect);
-        this.condition = effect.condition;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            if (condition.apply(game, source)) {
-                return true;
-            }
-            permanent.sacrifice(source.getSourceId(), game);
-            return true;
-        }
-        return false;
+    public CleansingRay(final CleansingRay card) {
+        super(card);
     }
 
     @Override
-    public SacrificeSourceUnlessConditionEffect copy() {
-        return new SacrificeSourceUnlessConditionEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        StringBuilder sb = new StringBuilder("sacrifice {this} unless ");
-        sb.append(condition.toString());
-        return sb.toString();
+    public CleansingRay copy() {
+        return new CleansingRay(this);
     }
 }
