@@ -411,6 +411,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Torture", 61, Rarity.COMMON, Torture.class));
         cards.add(new SetCardInfo("Touch of Death", 62, Rarity.COMMON, mage.cards.t.TouchOfDeath.class));
         cards.add(new SetCardInfo("Tranquility", 195, Rarity.COMMON, mage.cards.t.Tranquility.class));
+        cards.add(new SetCardInfo("Truce", 341, Rarity.RARE, mage.cards.t.Truce.class));
         cards.add(new SetCardInfo("Tsunami", 196, Rarity.UNCOMMON, mage.cards.t.Tsunami.class));
         cards.add(new SetCardInfo("Tundra Wolves", 342, Rarity.COMMON, mage.cards.t.TundraWolves.class));
         cards.add(new SetCardInfo("Twiddle", 130, Rarity.COMMON, mage.cards.t.Twiddle.class));

@@ -186,6 +186,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Howling Wolf", 252, Rarity.COMMON, mage.cards.h.HowlingWolf.class));
         cards.add(new SetCardInfo("Hunted Wumpus", 253, Rarity.UNCOMMON, mage.cards.h.HuntedWumpus.class));
         cards.add(new SetCardInfo("Ignoble Soldier", 22, Rarity.UNCOMMON, mage.cards.i.IgnobleSoldier.class));
+        cards.add(new SetCardInfo("Indentured Djinn", 85, Rarity.UNCOMMON, mage.cards.i.IndenturedDjinn.class));
         cards.add(new SetCardInfo("Instigator", 140, Rarity.RARE, mage.cards.i.Instigator.class));
         cards.add(new SetCardInfo("Intimidation", 142, Rarity.UNCOMMON, mage.cards.i.Intimidation.class));
         cards.add(new SetCardInfo("Invigorate", 254, Rarity.COMMON, mage.cards.i.Invigorate.class));
