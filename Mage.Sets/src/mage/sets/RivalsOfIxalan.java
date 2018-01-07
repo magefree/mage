@@ -62,9 +62,11 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Angrath's Ambusher", 202, Rarity.UNCOMMON, mage.cards.a.AngrathsAmbusher.class));
         cards.add(new SetCardInfo("Angrath's Fury", 204, Rarity.RARE, mage.cards.a.AngrathsFury.class));
         cards.add(new SetCardInfo("Aquatic Incursion", 32, Rarity.UNCOMMON, mage.cards.a.AquaticIncursion.class));
+        cards.add(new SetCardInfo("Arch of Orazca", 185, Rarity.RARE, mage.cards.a.ArchOfOrazca.class));
         cards.add(new SetCardInfo("Arterial Flow", 62, Rarity.UNCOMMON, mage.cards.a.ArterialFlow.class));
         cards.add(new SetCardInfo("Atzal, Cave of Eternity", "160b", Rarity.RARE, mage.cards.a.AtzalCaveOfEternity.class));
         cards.add(new SetCardInfo("Atzocan Seer", "153a", Rarity.UNCOMMON, mage.cards.a.AtzocanSeer.class));
+        cards.add(new SetCardInfo("Awakened Amalgam", 175, Rarity.RARE, mage.cards.a.AwakenedAmalgam.class));
         cards.add(new SetCardInfo("Azor's Gateway", 176, Rarity.MYTHIC, mage.cards.a.AzorsGateway.class));
         cards.add(new SetCardInfo("Azor, the Lawbringer", 154, Rarity.MYTHIC, mage.cards.a.AzorTheLawbringer.class));
         cards.add(new SetCardInfo("Baffling End", 1, Rarity.UNCOMMON, mage.cards.b.BafflingEnd.class));
