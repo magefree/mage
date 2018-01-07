@@ -42,7 +42,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -84,11 +83,10 @@ public class WarkiteMarauder extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability.getOriginalId().equals(originalId)) {
             ability.getTargets().clear();
-            ability.addTarget(new TargetControlledCreaturePermanent());
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
             UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
             filter.add(new ControllerIdPredicate(defenderId));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);
+            TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, false);
             ability.addTarget(target);
         }
     }
