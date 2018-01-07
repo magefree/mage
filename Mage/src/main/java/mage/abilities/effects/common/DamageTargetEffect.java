@@ -27,18 +27,18 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-
-import java.util.UUID;
 
 /**
  *
@@ -129,6 +129,11 @@ public class DamageTargetEffect extends OneShotEffect {
         this.sourceName = sourceName;
     }
 
+    public Effect setUseOnlyTargetPointer(boolean useOnlyTargetPointer) {
+        this.useOnlyTargetPointer = useOnlyTargetPointer;
+        return this;
+    }
+
     @Override
     public DamageTargetEffect copy() {
         return new DamageTargetEffect(this);
@@ -152,7 +157,7 @@ public class DamageTargetEffect extends OneShotEffect {
             }
             return true;
         }
-        for (UUID targetId :this.getTargetPointer().getTargets(game, source)) {
+        for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
                 permanent.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);

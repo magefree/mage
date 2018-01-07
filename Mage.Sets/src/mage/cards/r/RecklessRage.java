@@ -27,42 +27,16 @@
  */
 package mage.cards.r;
 
-import java.io.ObjectStreamException;
 import java.util.UUID;
-
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.*;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.WingmateRocToken;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetOpponentsCreaturePermanent;
-import mage.watchers.common.PlayerAttackedWatcher;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  * @author JayDi85
@@ -73,9 +47,14 @@ public class RecklessRage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Reckless Rage deals 4 damage to target creature you don’t control and 2 damage to target creature you control.
-        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don’t control");
+        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(4).setUseOnlyTargetPointer(true));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(RecklessRageEffect.getInstance());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(2).setUseOnlyTargetPointer(true)
+                .setText("and 2 damage to target creature you control")
+                .setTargetPointer(new SecondTargetPointer()));
     }
 
     public RecklessRage(final RecklessRage card) {
@@ -85,51 +64,5 @@ public class RecklessRage extends CardImpl {
     @Override
     public RecklessRage copy() {
         return new RecklessRage(this);
-    }
-}
-
-class RecklessRageEffect extends OneShotEffect {
-
-    private static final RecklessRageEffect instance =  new RecklessRageEffect();
-
-    private Object readResolve() throws ObjectStreamException {
-        return instance;
-    }
-
-    public static RecklessRageEffect getInstance() {
-        return instance;
-    }
-
-    private RecklessRageEffect ( ) {
-        super(Outcome.Damage);
-        staticText = "{source} deals 4 damage to target creature you don’t control and 2 damage to target creature you control.";
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-
-        boolean completed = false;
-        int stepNumber = 1;
-
-        for ( Target target : source.getTargets() ) {
-            if (stepNumber > 2) {
-                System.out.println("ERROR: " + RecklessRage.class.toString() + " got too many targets (need 2, got " + source.getTargets().size() + ")");
-                break;
-            }
-
-            Permanent permanent = game.getPermanent(target.getFirstTarget());
-
-            if(permanent != null){
-                completed |= (permanent.damage( (stepNumber == 1) ? 2 : 4, source.getSourceId(), game, false, true ) > 0);
-            }
-
-            stepNumber = stepNumber + 1;
-        }
-        return completed;
-    }
-
-    @Override
-    public Effect copy() {
-        return instance;
     }
 }
