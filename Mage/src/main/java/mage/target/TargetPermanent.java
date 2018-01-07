@@ -200,4 +200,13 @@ public class TargetPermanent extends TargetObject {
         return new TargetPermanent(this);
     }
 
+    /**
+     * User carefully!
+     *
+     * @param filter
+     */
+    public void replaceFilter(FilterPermanent filter) {
+        this.filter = filter;
+        this.targetName = filter.getMessage();
+    }
 }

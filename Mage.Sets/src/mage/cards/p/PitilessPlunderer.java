@@ -25,51 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.combat;
+package mage.cards.p;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.abilities.effects.RestrictionEffect;
-import mage.constants.Duration;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.permanent.token.TreasureToken;
 
 /**
  *
  * @author LevelX2
  */
-public class CantAttackBlockUnlessConditionSourceEffect extends RestrictionEffect {
+public class PitilessPlunderer extends CardImpl {
 
-    private final Condition condition;
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 
-    public CantAttackBlockUnlessConditionSourceEffect(Condition condition) {
-        super(Duration.WhileOnBattlefield);
-        this.condition = condition;
-        staticText = "{this} can't attack or block unless " + condition.toString();
+    static {
+        filter.add(new AnotherPredicate());
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public CantAttackBlockUnlessConditionSourceEffect(final CantAttackBlockUnlessConditionSourceEffect effect) {
-        super(effect);
-        this.condition = effect.condition;
+    public PitilessPlunderer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
+
+        // Whenever another creature you control dies, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new TreasureToken()), false, filter));
     }
 
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId()) && !condition.apply(game, source);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean canAttack(Game game) {
-        return false;
+    public PitilessPlunderer(final PitilessPlunderer card) {
+        super(card);
     }
 
     @Override
-    public CantAttackBlockUnlessConditionSourceEffect copy() {
-        return new CantAttackBlockUnlessConditionSourceEffect(this);
+    public PitilessPlunderer copy() {
+        return new PitilessPlunderer(this);
     }
 }

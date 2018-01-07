@@ -25,51 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.combat;
+package mage.cards.p;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.abilities.effects.RestrictionEffect;
+import java.util.UUID;
+import mage.abilities.condition.common.CitysBlessingCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.keyword.AscendEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LevelX2
  */
-public class CantAttackBlockUnlessConditionSourceEffect extends RestrictionEffect {
+public class PrideOfConquerors extends CardImpl {
 
-    private final Condition condition;
+    public PrideOfConquerors(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
-    public CantAttackBlockUnlessConditionSourceEffect(Condition condition) {
-        super(Duration.WhileOnBattlefield);
-        this.condition = condition;
-        staticText = "{this} can't attack or block unless " + condition.toString();
+        // Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)
+        this.getSpellAbility().addEffect(new AscendEffect());
+
+        // Creatures you control get +1/+1 until end of turn. If you have the city's blessing, those creatures get +2/+2 until end of turn instead.
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn),
+                new BoostTargetEffect(1, 1, Duration.EndOfTurn), CitysBlessingCondition.instance,
+                "Creatures you control get +1/+1 until end of turn. If you have the city's blessing, those creatures get +2/+2 until end of turn instead"));
     }
 
-    public CantAttackBlockUnlessConditionSourceEffect(final CantAttackBlockUnlessConditionSourceEffect effect) {
-        super(effect);
-        this.condition = effect.condition;
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId()) && !condition.apply(game, source);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public PrideOfConquerors(final PrideOfConquerors card) {
+        super(card);
     }
 
     @Override
-    public boolean canAttack(Game game) {
-        return false;
-    }
-
-    @Override
-    public CantAttackBlockUnlessConditionSourceEffect copy() {
-        return new CantAttackBlockUnlessConditionSourceEffect(this);
+    public PrideOfConquerors copy() {
+        return new PrideOfConquerors(this);
     }
 }
