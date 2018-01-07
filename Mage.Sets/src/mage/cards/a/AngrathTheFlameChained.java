@@ -71,7 +71,7 @@ public class AngrathTheFlameChained extends CardImpl {
 
         // +1: Each opponent discards a card and loses 2 life.
         LoyaltyAbility ability = new LoyaltyAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), 1);
-        ability.addEffect(new LoseLifeOpponentsEffect(2));
+        ability.addEffect(new LoseLifeOpponentsEffect(2).setText("and loses 2 life"));
         this.addAbility(ability);
 
         // -3: Gain control of target creature until end of turn. Untap it. It gains haste until end of turn. Sacrifice it at the beginning of the next end step if it has converted mana cost 3 or less.
