@@ -61,6 +61,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Angrath, Minotaur Pirate", 201, Rarity.MYTHIC, mage.cards.a.AngrathMinotaurPirate.class));
         cards.add(new SetCardInfo("Angrath's Ambusher", 202, Rarity.UNCOMMON, mage.cards.a.AngrathsAmbusher.class));
         cards.add(new SetCardInfo("Angrath's Fury", 204, Rarity.RARE, mage.cards.a.AngrathsFury.class));
+        cards.add(new SetCardInfo("Angrath, the Flame-Chained", 152, Rarity.MYTHIC, mage.cards.a.AngrathTheFlameChained.class));
         cards.add(new SetCardInfo("Aquatic Incursion", 32, Rarity.UNCOMMON, mage.cards.a.AquaticIncursion.class));
         cards.add(new SetCardInfo("Arch of Orazca", 185, Rarity.RARE, mage.cards.a.ArchOfOrazca.class));
         cards.add(new SetCardInfo("Arterial Flow", 62, Rarity.UNCOMMON, mage.cards.a.ArterialFlow.class));
