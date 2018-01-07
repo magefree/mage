@@ -121,7 +121,7 @@ public class HumanPlayer extends PlayerImpl {
     public HumanPlayer(final HumanPlayer player) {
         super(player);
         this.replacementEffectChoice = player.replacementEffectChoice;
-        this.autoSelectReplacementEffects.addAll(autoSelectReplacementEffects);
+        this.autoSelectReplacementEffects.addAll(player.autoSelectReplacementEffects);
         this.currentlyUnpaidMana = player.currentlyUnpaidMana;
 
         this.triggerAutoOrderAbilityFirst.addAll(player.triggerAutoOrderAbilityFirst);
