@@ -55,17 +55,17 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class KumenaTyrantOfOrazca extends CardImpl {
 
-    private static final FilterControlledPermanent filterAnother = new FilterControlledPermanent("another untapped Merfolk you control");
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
+    private static final FilterControlledPermanent filterAnotherNotTapped = new FilterControlledPermanent("another untapped Merfolk you control");
+    private static final FilterControlledPermanent filterNotTapped = new FilterControlledPermanent("untapped Merfolk you control");
     private static final FilterControlledPermanent filterAll = new FilterControlledPermanent("Merfolk you control");
 
     static {
-        filterAnother.add(new AnotherPredicate());
-        filterAnother.add(new SubtypePredicate(SubType.MERFOLK));
-        filterAnother.add(Predicates.not(new TappedPredicate()));
+        filterAnotherNotTapped.add(new AnotherPredicate());
+        filterAnotherNotTapped.add(new SubtypePredicate(SubType.MERFOLK));
+        filterAnotherNotTapped.add(Predicates.not(new TappedPredicate()));
 
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filterNotTapped.add(new SubtypePredicate(SubType.MERFOLK));
+        filterNotTapped.add(Predicates.not(new TappedPredicate()));
 
         filterAll.add(new SubtypePredicate(SubType.MERFOLK));
     }
@@ -82,17 +82,17 @@ public class KumenaTyrantOfOrazca extends CardImpl {
         // Tap another untapped Merfolk you control: Kumena, Tyrant of Orzca can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
-                new TapTargetCost(new TargetControlledPermanent(1, 1, filterAnother, true))));
+                new TapTargetCost(new TargetControlledPermanent(1, 1, filterAnotherNotTapped, true))));
 
         // Tap three untapped Merfolk you control: Draw a card.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
-                new TapTargetCost(new TargetControlledPermanent(3, 3, filter, true))));
+                new TapTargetCost(new TargetControlledPermanent(3, 3, filterNotTapped, true))));
 
         // Tap five untapped Merfolk you control: Put a +1/+1 counter on each Merfolk you control.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), filterAll),
-                new TapTargetCost(new TargetControlledPermanent(5, 5, filterAll, true))));
+                new TapTargetCost(new TargetControlledPermanent(5, 5, filterNotTapped, true))));
 
     }
 
