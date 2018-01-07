@@ -47,8 +47,9 @@ import mage.constants.Zone;
 public class GraspingScoundrel extends CardImpl{
     public GraspingScoundrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
-        this.subtype.add(SubType.PIRATE);
 
+        this.subtype.add(SubType.PIRATE);
+        this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
