@@ -31,35 +31,15 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.common.CopyPermanentEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
-import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.WingmateRocToken;
-import mage.target.TargetPermanent;
 import mage.watchers.common.PlayerAttackedWatcher;
 
 /**

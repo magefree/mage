@@ -30,9 +30,7 @@ package mage.cards.d;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.*;
 import mage.abilities.effects.common.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,7 +39,6 @@ import mage.filter.common.*;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
