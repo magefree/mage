@@ -91,6 +91,7 @@ class OathswornVampirePlayEffect extends AsThoughEffectImpl {
 
     public OathswornVampirePlayEffect(final OathswornVampirePlayEffect effect) {
         super(effect);
+        this.condition = effect.condition;
     }
 
     @Override
