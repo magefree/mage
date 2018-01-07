@@ -68,6 +68,9 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Azor's Gateway", 176, Rarity.MYTHIC, mage.cards.a.AzorsGateway.class));
         cards.add(new SetCardInfo("Azor, the Lawbringer", 154, Rarity.MYTHIC, mage.cards.a.AzorTheLawbringer.class));
         cards.add(new SetCardInfo("Baffling End", 1, Rarity.UNCOMMON, mage.cards.b.BafflingEnd.class));
+        cards.add(new SetCardInfo("Bishop of Binding", 2, Rarity.RARE, mage.cards.b.BishopOfBinding.class));
+        cards.add(new SetCardInfo("Blazing Hope", 3, Rarity.UNCOMMON, mage.cards.b.BlazingHope.class));
+        cards.add(new SetCardInfo("Blood Sun", 92, Rarity.RARE, mage.cards.b.BloodSun.class));
         cards.add(new SetCardInfo("Bombard", 93, Rarity.COMMON, mage.cards.b.Bombard.class));
         cards.add(new SetCardInfo("Brass's Bounty", 94, Rarity.RARE, mage.cards.b.BrasssBounty.class));
         cards.add(new SetCardInfo("Brazen Freebooter", 95, Rarity.COMMON, mage.cards.b.BrazenFreebooter.class));
