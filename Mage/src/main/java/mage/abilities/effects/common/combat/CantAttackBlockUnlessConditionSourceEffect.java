@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  */
 public class CantAttackBlockUnlessConditionSourceEffect extends RestrictionEffect {
 
-    private Condition condition;
+    private final Condition condition;
 
     public CantAttackBlockUnlessConditionSourceEffect(Condition condition) {
         super(Duration.WhileOnBattlefield);
@@ -50,11 +50,12 @@ public class CantAttackBlockUnlessConditionSourceEffect extends RestrictionEffec
 
     public CantAttackBlockUnlessConditionSourceEffect(final CantAttackBlockUnlessConditionSourceEffect effect) {
         super(effect);
+        this.condition = effect.condition;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId()) && condition.apply(game, source);
+        return permanent.getId().equals(source.getSourceId()) && !condition.apply(game, source);
     }
 
     @Override

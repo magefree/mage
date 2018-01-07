@@ -39,8 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 /**
@@ -48,15 +47,9 @@ import mage.target.TargetSpell;
  * @author LevelX2
  */
 public class SilumgarSorcerer extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("creature spell");
 
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-    
     public SilumgarSorcerer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -68,11 +61,11 @@ public class SilumgarSorcerer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Exploit (When this creature enters the battlefield, you may sacrifice a creature.)
         this.addAbility(new ExploitAbility());
-        
+
         // When Silumgar Sorcerer exploits a creature, counter target creature spell.
         Ability ability = new ExploitCreatureTriggeredAbility(new CounterTargetEffect(), false);
-        ability.addTarget(new TargetSpell(filter));
-        this.addAbility(ability);        
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
+        this.addAbility(ability);
     }
 
     public SilumgarSorcerer(final SilumgarSorcerer card) {

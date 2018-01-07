@@ -40,7 +40,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -49,22 +48,17 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class StromkirkNoble extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Humans");
-
-    static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
-    }
-
     public StromkirkNoble(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Stromkirk Noble can't be blocked by Humans.
-        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
-       // Whenever Stromkirk Noble deals combat damage to a player, put a +1/+1 counter on it.
+        this.addAbility(new SimpleEvasionAbility(
+                new CantBeBlockedByCreaturesSourceEffect(new FilterCreaturePermanent(SubType.HUMAN, "Humans"), Duration.WhileOnBattlefield)));
+        // Whenever Stromkirk Noble deals combat damage to a player, put a +1/+1 counter on it.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
 
     }

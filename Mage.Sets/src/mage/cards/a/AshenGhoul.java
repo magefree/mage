@@ -34,13 +34,13 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -111,6 +111,6 @@ enum AshenGhoulCondition implements Condition {
 
     @Override
     public String toString() {
-        return "three or more creature cards are above {this}";
+        return "only during your upkeep and only if three or more creature cards are above {this}";
     }
 }

@@ -63,7 +63,7 @@ public class AdarkarValkyrie extends CardImpl {
     }
 
     public AdarkarValkyrie(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         addSuperType(SuperType.SNOW);
         this.subtype.add(SubType.ANGEL);
 
@@ -152,6 +152,6 @@ class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When target creature other than Adarkar Valkyrie dies this turn, " + super.getRule();
+        return "When target creature other than {this} dies this turn, " + super.getRule();
     }
 }

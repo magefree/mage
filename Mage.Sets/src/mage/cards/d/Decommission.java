@@ -51,7 +51,7 @@ public class Decommission extends CardImpl {
 
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
 
         // <i>Revolt</i> &mdash; If a permanent you controlled left the battlefield this turn, you gain 3 life.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new GainLifeEffect(3), RevoltCondition.instance, "<br><i>Revolt</i> &mdash; If a permanent you controlled left the battlefield this turn, you gain 3 life."));

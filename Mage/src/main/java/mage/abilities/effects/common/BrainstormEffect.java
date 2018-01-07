@@ -13,7 +13,7 @@ public class BrainstormEffect extends OneShotEffect {
 
     public BrainstormEffect() {
         super(Outcome.DrawCard);
-        staticText = "Draw three cards, then put two cards from your hand on top of your library in any order";
+        staticText = "draw three cards, then put two cards from your hand on top of your library in any order";
     }
 
     public BrainstormEffect(final BrainstormEffect effect) {

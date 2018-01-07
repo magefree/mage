@@ -46,6 +46,7 @@ public enum AttackedThisStepCondition implements Condition {
                 && watcher.getNumberAttackingCurrentStep(source.getControllerId()) > 0;
     }
 
+    @Override
     public String toString() {
         return "during the declare attackers step and only if you've been attacked this step.";
     }

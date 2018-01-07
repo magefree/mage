@@ -48,7 +48,7 @@ public class AppetiteForTheUnnatural extends CardImpl {
         // Destroy target artifact or enchantment. You gain 2 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
     public AppetiteForTheUnnatural(final AppetiteForTheUnnatural card) {

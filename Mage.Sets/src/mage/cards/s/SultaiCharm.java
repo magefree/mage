@@ -65,7 +65,7 @@ public class SultaiCharm extends CardImpl {
         // <strong>*</strong> Destroy target artifact or enchantment.
         Mode mode = new Mode();
         mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        mode.getTargets().add(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.getSpellAbility().addMode(mode);
         
         // <strong>*</strong> Draw two cards, then discard a card.

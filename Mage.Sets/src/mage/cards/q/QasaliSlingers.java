@@ -78,7 +78,7 @@ class QasaliSlingersTriggeredAbility extends TriggeredAbilityImpl {
 
     public QasaliSlingersTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
-        this.addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        this.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
     public QasaliSlingersTriggeredAbility(final QasaliSlingersTriggeredAbility ability) {
