@@ -43,19 +43,59 @@ import mage.players.Player;
 
 /**
  *
- * @author TheElk801
+ * @author TheElk801, JayDi85
  */
 public class ExploreSourceEffect extends OneShotEffect {
 
-    public static final String RULE_TEXT = "it explores. <i>(Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)</i>";
+    // "it explores. <i>(Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)</i>";
+    private static final String RULE_TEXT_START = "explores.";
+    private static final String RULE_TEXT_HINT = "<i>(Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)</i>";
+
+    public static String getRuleText(boolean showAbilityHint) {
+        return getRuleText(showAbilityHint, null);
+    }
+    public static String getRuleText(boolean showAbilityHint, String whosExplores) {
+
+        String res = whosExplores;
+        if(res == null){ res = "it"; }
+
+        res +=  " " + RULE_TEXT_START;
+
+        if (showAbilityHint) {
+            res += " " + RULE_TEXT_HINT;
+        }
+        return res;
+    }
+
+    private String sourceName = "it";
+    private boolean showAbilityHint = true;
 
     public ExploreSourceEffect() {
+        this(true);
+    }
+
+    public ExploreSourceEffect(boolean showAbilityHint) {
+        this(showAbilityHint, null);
+    }
+
+    public ExploreSourceEffect(boolean showAbilityHint, String whosExplores) {
         super(Outcome.Benefit);
-        this.staticText = RULE_TEXT;
+
+        if(whosExplores != null) {
+            this.sourceName = whosExplores;
+        }
+        setText();
     }
 
     public ExploreSourceEffect(final ExploreSourceEffect effect) {
         super(effect);
+        this.showAbilityHint = effect.showAbilityHint;
+        this.sourceName = effect.sourceName;
+        setText();
+    }
+
+    private void setText(){
+        this.staticText = getRuleText(this.showAbilityHint, this.sourceName);
     }
 
     @Override
