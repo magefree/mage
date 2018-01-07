@@ -53,6 +53,7 @@ public class DaringBuccaneer extends CardImpl {
 
     public DaringBuccaneer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.PIRATE);
 
         this.power = new MageInt(2);
