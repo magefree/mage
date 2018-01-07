@@ -8,7 +8,7 @@ import java.util.Set;
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
- * @author Quercitron
+ * @author Quercitron, JayDi85
  *
  */
 public enum ScryfallImageSource implements CardImageSource {
@@ -217,17 +217,23 @@ public enum ScryfallImageSource implements CardImageSource {
     @Override
     public String generateURL(CardDownloadData card) throws Exception {
 
+        // special card number like "103a" already compatible
+        if (card.isCollectorIdWithStr()) {
+            return "https://img.scryfall.com/cards/large/en/" + formatSetName(card.getSet()) + "/"
+                    + card.getCollectorId() + ".jpg";
+        }
+
+        // double faced cards do not supporte by API (need direct link for img)
+        // example: https://img.scryfall.com/cards/large/en/xln/173b.jpg
         if (card.isTwoFacedCard()) {
-            // double faced cards do not supporte by API (need direct link for img)
-            // example: https://img.scryfall.com/cards/large/en/xln/173b.jpg
             return "https://img.scryfall.com/cards/large/en/" + formatSetName(card.getSet()) + "/"
                     + card.getCollectorId() + (card.isSecondSide() ? "b" : "a") + ".jpg";
-        }else {
-            // single face cards support by single API call (redirect to img link)
-            // example: https://api.scryfall.com/cards/xln/121?format=image
-            return "https://api.scryfall.com/cards/" + formatSetName(card.getSet()) + "/"
-                    + card.getCollectorId() + "?format=image";
         }
+
+        // basic cards by api call (redirect to img link)
+        // example: https://api.scryfall.com/cards/xln/121?format=image
+        return "https://api.scryfall.com/cards/" + formatSetName(card.getSet()) + "/"
+                + card.getCollectorId() + "?format=image";
     }
 
     @Override
