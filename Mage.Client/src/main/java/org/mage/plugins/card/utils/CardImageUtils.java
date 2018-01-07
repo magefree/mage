@@ -208,10 +208,16 @@ public final class CardImageUtils {
         if (card.getUsesVariousArt()) {
             finalFileName = cardName + '.' + card.getCollectorId() + ".full.jpg";
         } else {
-            int len = card.getCollectorId().length();
-            if (Character.isLetter(card.getCollectorId().charAt(len - 1))) {
-                finalFileName = cardName + card.getCollectorId().charAt(len - 1) + ".full.jpg";
+            if (card.getUsesVariousArt()){
+                // only various arts can be same name, but different postfixes (a,b,c,d,e)
+                int len = card.getCollectorId().length();
+                if (Character.isLetter(card.getCollectorId().charAt(len - 1))) {
+                    finalFileName = cardName + card.getCollectorId().charAt(len - 1) + ".full.jpg";
+                } else {
+                    finalFileName = cardName + prefixType + ".full.jpg";
+                }
             } else {
+                // normal cards with same names;
                 finalFileName = cardName + prefixType + ".full.jpg";
             }
         }

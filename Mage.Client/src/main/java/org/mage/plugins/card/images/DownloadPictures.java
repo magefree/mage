@@ -432,7 +432,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             throw new IllegalStateException("Second side card can't have empty name.");
                         }
 
-                        url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), true);
+                        CardInfo secondSideCard = CardRepository.instance.findCard(card.getSecondSideName());
+                        if (secondSideCard == null){
+                            throw new IllegalStateException("Can''t find second side card in database: " + card.getSecondSideName());
+                        }
+
+                        url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), secondSideCard.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), true);
                         url.setType2(isType2);
                         allCardsUrls.add(url);
                     }
