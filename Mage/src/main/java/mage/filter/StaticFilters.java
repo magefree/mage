@@ -74,6 +74,7 @@ public final class StaticFilters {
     public static final FilterPermanent FILTER_PERMANENT_NON_LAND = new FilterNonlandPermanent();
 
     public static final FilterCreatureSpell FILTER_SPELL_A_CREATURE = new FilterCreatureSpell("a creature spell");
+    public static final FilterCreatureSpell FILTER_SPELL_CREATURE = new FilterCreatureSpell("creature spell");
     public static final FilterSpell FILTER_SPELL_NON_CREATURE
             = (FilterSpell) new FilterSpell("noncreature spell").add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
 

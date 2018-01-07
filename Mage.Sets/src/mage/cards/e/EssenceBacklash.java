@@ -34,8 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -47,18 +46,11 @@ import mage.target.TargetSpell;
  */
 public class EssenceBacklash extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("creature spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public EssenceBacklash(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{R}");
 
         // Counter target creature spell. Essence Backlash deals damage equal to that spell's power to its controller.
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
         this.getSpellAbility().addEffect(new EssenceBacklashEffect());
     }
 

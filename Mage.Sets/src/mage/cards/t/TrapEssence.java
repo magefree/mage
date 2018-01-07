@@ -35,8 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -47,24 +46,17 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class TrapEssence extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("creature spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public TrapEssence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{U}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{U}{R}");
 
         // Counter target creature spell. Put two +1/+1 counters on up to one target creature.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(2));
         effect.setText("Put two +1/+1 counters on up to one target creature");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
     }
 
     public TrapEssence(final TrapEssence card) {

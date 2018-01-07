@@ -40,8 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 /**
@@ -50,14 +49,8 @@ import mage.target.TargetSpell;
  */
 public class SoulswornJury extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("creature spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public SoulswornJury(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
@@ -67,7 +60,7 @@ public class SoulswornJury extends CardImpl {
 
         // {1}{U}, Sacrifice Soulsworn Jury: Counter target creature spell.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{1}{U}"));
-        ability.addTarget(new TargetSpell(filter));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
