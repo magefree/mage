@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
@@ -46,13 +45,16 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -84,8 +86,6 @@ public class CurseOfTheCabal extends CardImpl {
 
 class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
 
-    private static final FilterControlledPermanent FILTER = new FilterControlledPermanent(); // ggf filter.FilterPermanent
-
     public CurseOfTheCabalSacrificeEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Target player sacrifices half the permanents he or she controls, rounded down.";
@@ -104,21 +104,20 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
-            int amount = game.getBattlefield().countAll(FILTER, targetPlayer.getId(), game) / 2;
+            int amount = game.getBattlefield().countAll(StaticFilters.FILTER_CONTROLLED_PERMANENT, targetPlayer.getId(), game) / 2;
             if (amount < 1) {
                 return true;
             }
-            Target target = new TargetControlledPermanent(amount, amount, FILTER, true);
+            Target target = new TargetControlledPermanent(amount, amount, StaticFilters.FILTER_CONTROLLED_PERMANENT, true);
             if (target.canChoose(targetPlayer.getId(), game)) {
                 while (!target.isChosen() && target.canChoose(targetPlayer.getId(), game) && targetPlayer.canRespond()) {
                     targetPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 }
-                for (int idx = 0; idx < target.getTargets().size(); idx++) {
-                    Permanent permanent = game.getPermanent(target.getTargets().get(idx));
-                    if (permanent != null) {
-                        permanent.sacrifice(source.getSourceId(), game);
-                    }
-                }
+                //sacrifice all chosen (non null) permanents
+                target.getTargets().stream()
+                        .map(game::getPermanent)
+                        .filter(Objects::nonNull)
+                        .forEach(permanent -> permanent.sacrifice(source.getSourceId(), game));
             }
             return true;
         }
