@@ -63,6 +63,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Brass-Talon Chimera", 142, Rarity.UNCOMMON, mage.cards.b.BrassTalonChimera.class));
         cards.add(new SetCardInfo("Breathstealer's Crypt", 127, Rarity.RARE, mage.cards.b.BreathstealersCrypt.class));
         cards.add(new SetCardInfo("Breezekeeper", 27, Rarity.COMMON, mage.cards.b.Breezekeeper.class));
+        cards.add(new SetCardInfo("Brood of Cockroaches", 3, Rarity.UNCOMMON, mage.cards.b.BroodOfCockroaches.class));
         cards.add(new SetCardInfo("Bull Elephant", 51, Rarity.COMMON, mage.cards.b.BullElephant.class));
         cards.add(new SetCardInfo("Chronatog", 28, Rarity.RARE, mage.cards.c.Chronatog.class));
         cards.add(new SetCardInfo("City of Solitude", 52, Rarity.RARE, mage.cards.c.CityOfSolitude.class));
