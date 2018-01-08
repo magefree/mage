@@ -143,7 +143,7 @@ class AngrathTheFlameCreateDelayedTriggerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice this", source.getControllerId());
             sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
@@ -175,7 +175,7 @@ class AngrathTheFlameChainedDelayedTriggeredAbility extends DelayedTriggeredAbil
         Permanent permanent = game.getPermanent(((FixedTarget) getEffects().get(0).getTargetPointer()).getTarget());
         return permanent != null
                 && permanent.getZoneChangeCounter(game) == ((FixedTarget) getEffects().get(0).getTargetPointer()).getZoneChangeCounter()
-                && permanent.getConvertedManaCost() >= 3;
+                && permanent.getConvertedManaCost() <= 3;
     }
 
     @Override
@@ -185,6 +185,6 @@ class AngrathTheFlameChainedDelayedTriggeredAbility extends DelayedTriggeredAbil
 
     @Override
     public String getRule() {
-        return "sacrifice it at the beginning of the next end step if it has converted mana cost 3 or less.";
+        return "Sacrifice it at the beginning of the next end step if it has converted mana cost 3 or less.";
     }
 }
