@@ -28,7 +28,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.o.OrazcaFrillback;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -174,7 +173,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Negate", 44, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nezahal, Primal Tide", 45, Rarity.RARE, mage.cards.n.NezahalPrimalTide.class));
         cards.add(new SetCardInfo("Oathsworn Vampire", 80, Rarity.UNCOMMON, mage.cards.o.OathswornVampire.class));
-        cards.add(new SetCardInfo("Orazca Frillback", 140, Rarity.COMMON, OrazcaFrillback.class));
+        cards.add(new SetCardInfo("Orazca Frillback", 140, Rarity.COMMON, mage.cards.o.OrazcaFrillback.class));
         cards.add(new SetCardInfo("Orazca Raptor", 108, Rarity.COMMON, mage.cards.o.OrazcaRaptor.class));
         cards.add(new SetCardInfo("Orazca Relic", 181, Rarity.COMMON, mage.cards.o.OrazcaRelic.class));
         cards.add(new SetCardInfo("Overgrown Armasaur", 141, Rarity.COMMON, mage.cards.o.OvergrownArmasaur.class));
@@ -199,7 +198,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Rekindling Phoenix", 111, Rarity.MYTHIC, mage.cards.r.RekindlingPhoenix.class));
         cards.add(new SetCardInfo("Relentless Raptor", 169, Rarity.UNCOMMON, mage.cards.r.RelentlessRaptor.class));
         cards.add(new SetCardInfo("Resplendent Griffin", 170, Rarity.UNCOMMON, mage.cards.r.ResplendentGriffin.class));
-        cards.add(new SetCardInfo("Return to the Wind", 46, Rarity.RARE, mage.cards.r.ReturnToTheWind.class));
+        cards.add(new SetCardInfo("Release to the Wind", 46, Rarity.RARE, mage.cards.r.ReleaseToTheWind.class));
         cards.add(new SetCardInfo("River Darter", 47, Rarity.COMMON, mage.cards.r.RiverDarter.class));
         cards.add(new SetCardInfo("Riverwise Augur", 48, Rarity.UNCOMMON, mage.cards.r.RiverwiseAugur.class));
         cards.add(new SetCardInfo("Sadistic Skymarcher", 85, Rarity.UNCOMMON, mage.cards.s.SadisticSkymarcher.class));
