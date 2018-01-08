@@ -95,7 +95,7 @@ class BroodOfCockroachesEffect extends OneShotEffect {
         game.addDelayedTriggeredAbility(delayedLifeLost, source);
 
         Effect effect = new ReturnToHandTargetEffect();
-        effect.setText("return Brood of Cockroaches to your hand.");
+        effect.setText("return {this} to your hand.");
         effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
