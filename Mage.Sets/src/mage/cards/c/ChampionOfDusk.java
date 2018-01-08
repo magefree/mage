@@ -27,10 +27,9 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -41,6 +40,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +64,7 @@ public class ChampionOfDusk extends CardImpl {
 
         // When Champion of Dusk enters the battlefield, you draw X cards and you lose X life, where X is the number of Vampires you control.
         DynamicValue xCount = new PermanentsOnBattlefieldCount(filter);
-        Ability ability = new EntersBattlefieldAbility(new DrawCardSourceControllerEffect(xCount));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(xCount));
         ability.addEffect(new LoseLifeSourceControllerEffect(xCount));
         this.addAbility(ability);
     }
