@@ -52,9 +52,9 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TilonalisCrown extends CardImpl {
+public class TilonallisCrown extends CardImpl {
 
-    public TilonalisCrown(UUID ownerId, CardSetInfo setInfo) {
+    public TilonallisCrown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
         this.subtype.add(SubType.AURA);
@@ -66,7 +66,7 @@ public class TilonalisCrown extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When Tilonali's Crown enters the battlefield, it deals 1 damage to enchanted creature.
+        // When Tilonalli's Crown enters the battlefield, it deals 1 damage to enchanted creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAttachedEffect(1, "it")
                 .setText("it deals 1 damage to enchanted creature")));
 
@@ -78,12 +78,12 @@ public class TilonalisCrown extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TilonalisCrown(final TilonalisCrown card) {
+    public TilonallisCrown(final TilonallisCrown card) {
         super(card);
     }
 
     @Override
-    public TilonalisCrown copy() {
-        return new TilonalisCrown(this);
+    public TilonallisCrown copy() {
+        return new TilonallisCrown(this);
     }
 }

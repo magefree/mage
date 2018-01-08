@@ -245,7 +245,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("The Immortal Sun", 180, Rarity.MYTHIC, mage.cards.t.TheImmortalSun.class));
         cards.add(new SetCardInfo("Thrashing Brontodon", 148, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
         cards.add(new SetCardInfo("Thunderherd Migration", 149, Rarity.UNCOMMON, mage.cards.t.ThunderherdMigration.class));
-        cards.add(new SetCardInfo("Tilonali's Crown", 120, Rarity.COMMON, mage.cards.t.TilonalisCrown.class));
+        cards.add(new SetCardInfo("Tilonalli's Crown", 120, Rarity.COMMON, mage.cards.t.TilonallisCrown.class));
         cards.add(new SetCardInfo("Tilonalli's Summoner", 121, Rarity.RARE, mage.cards.t.TilonallisSummoner.class));
         cards.add(new SetCardInfo("Timestream Navigator", 59, Rarity.MYTHIC, mage.cards.t.TimestreamNavigator.class));
         cards.add(new SetCardInfo("Tomb of the Dusk Rose", "166b", Rarity.RARE, mage.cards.t.TombOfTheDuskRose.class));
