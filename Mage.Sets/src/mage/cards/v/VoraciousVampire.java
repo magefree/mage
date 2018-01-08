@@ -63,7 +63,7 @@ public class VoraciousVampire extends CardImpl {
         // When Voracious Vampire enters the battlefield, target Vampire you control gets +1/+1 and gains menace until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), false);
         Effect effect = new GainAbilityTargetEffect(new MenaceAbility(), Duration.EndOfTurn);
-        effect.setText("and gains menace");
+        effect.setText("and gains menace until end of turn.");
         ability.addEffect(effect);
         ability.addTarget(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent(SubType.VAMPIRE, "Vampire you control")));
         this.addAbility(ability);
