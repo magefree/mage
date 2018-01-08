@@ -102,6 +102,7 @@ class TempleAltisaurPreventEffect extends PreventionEffectImpl {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null
                     && !permanent.getId().equals(source.getSourceId())
+                    && permanent.hasSubtype(SubType.DINOSAUR, game)
                     && permanent.getControllerId().equals(source.getControllerId())) {
                 return super.applies(event, source, game);
             }
