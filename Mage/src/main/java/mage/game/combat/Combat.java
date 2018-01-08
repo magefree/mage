@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.keyword.special.JohanVigilanceAbility;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -264,7 +265,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     player.selectAttackers(game, attackingPlayerId);
                 }
                 firstTime = false;
-                if (game.isPaused() || game.gameOver(null) || game.executingRollback()) {
+                if (game.isPaused() || game.checkIfGameIsOver() || game.executingRollback()) {
                     return;
                 }
                 // because of possible undo during declare attackers it's neccassary to call here the methods with "game.getCombat()." to get the current combat object!!!
@@ -461,7 +462,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
                 while (choose) {
                     controller.selectBlockers(game, defenderId);
-                    if (game.isPaused() || game.gameOver(null) || game.executingRollback()) {
+                    if (game.isPaused() || game.checkIfGameIsOver() || game.executingRollback()) {
                         return;
                     }
                     if (!game.getCombat().checkBlockRestrictions(defender, game)) {
@@ -577,6 +578,9 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @param game
      */
     private void retrieveMustBlockAttackerRequirements(Player attackingPlayer, Game game) {
+        if (attackingPlayer == null) {
+            return;
+        }
         if (!game.getContinuousEffects().existRequirementEffects()) {
             return;
         }
@@ -1091,7 +1095,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     @SuppressWarnings("deprecation")
     public boolean declareAttacker(UUID creatureId, UUID defenderId, UUID playerId, Game game) {
         Permanent attacker = game.getPermanent(creatureId);
-        if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId())) {
+        if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId()) && !attacker.getAbilities().containsKey(JohanVigilanceAbility.getInstance().getId())) {
             if (!attacker.isTapped()) {
                 attacker.setTapped(true);
                 attackersTappedByAttack.add(attacker.getId());
@@ -1200,6 +1204,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             for (CombatGroup group : groups) {
                 result |= group.remove(creatureId);
             }
+            blockingGroups.remove(creatureId);
             if (result && withInfo) {
                 game.informPlayers(creature.getLogName() + " removed from combat");
             }
@@ -1415,6 +1420,19 @@ public class Combat implements Serializable, Copyable<Combat> {
                     group.blocked = false;
                 }
             }
+        }
+        boolean canRemove = false;
+        for (CombatGroup group : getBlockingGroups()) {
+            if (group.blockers.contains(blockerId)) {
+                group.blockers.remove(blockerId);
+                group.attackerOrder.clear();
+            }
+            if (group.blockers.isEmpty()) {
+                canRemove = true;
+            }
+        }
+        if (canRemove) {
+            blockingGroups.remove(blockerId);
         }
         Permanent creature = game.getPermanent(blockerId);
         if (creature != null) {

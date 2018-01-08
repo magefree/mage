@@ -45,7 +45,7 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.counters.Counters;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -59,11 +59,11 @@ import mage.target.targetpointer.FixedTarget;
 public class MakeshiftMannequin extends CardImpl {
 
     public MakeshiftMannequin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
 
         // Return target creature card from your graveyard to the battlefield with a mannequin counter on it. For as long as that creature has a mannequin counter on it, it has "When this creature becomes the target of a spell or ability, sacrifice it."
         this.getSpellAbility().addEffect(new MakeshiftMannequinEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
     public MakeshiftMannequin(final MakeshiftMannequin card) {

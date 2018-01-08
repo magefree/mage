@@ -91,7 +91,7 @@ class TribalUnityEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         int boost = amount.calculate(game, source, this);
         if (player != null) {
-            Choice typeChoice = new ChoiceCreatureType();
+            Choice typeChoice = new ChoiceCreatureType(sourceObject);
             while (!player.choose(outcome, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;

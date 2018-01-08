@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class Genesis extends CardImpl {
 
     public Genesis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add(SubType.INCARNATION);
 
         this.power = new MageInt(4);
@@ -58,8 +58,8 @@ public class Genesis extends CardImpl {
 
         // At the beginning of your upkeep, if Genesis is in your graveyard, you may pay {2}{G}. If you do, return target creature card from your graveyard to your hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                Zone.GRAVEYARD, new DoIfCostPaid(new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{2}{G}")),TargetController.YOU, false, false);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+                Zone.GRAVEYARD, new DoIfCostPaid(new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{2}{G}")), TargetController.YOU, false, false);
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 

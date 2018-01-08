@@ -94,7 +94,7 @@ class NykthosShrineToNyxManaAbility extends ActivatedManaAbilityImpl {
     public List<Mana> getNetMana(Game game) {
         netMana.clear();
         if (game != null) {
-            for (String colorChoice : ChoiceColor.colorChoices) {
+            for (String colorChoice : ChoiceColor.getBaseColors()) {
                 netMana.add(((NykthosDynamicManaEffect) this.getEffects().get(0)).computeMana(colorChoice, game, this));
             }
         }

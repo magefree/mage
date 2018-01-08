@@ -37,6 +37,8 @@ import mage.MageObjectImpl;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.*;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
@@ -91,6 +93,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean splitCard;
     protected boolean morphCard;
     protected boolean allCreatureTypes;
+
+    protected List<UUID> attachments = new ArrayList<>();
 
     public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         this(ownerId, setInfo, cardTypes, costs, SpellAbilityType.BASE);
@@ -167,6 +171,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         flipCardName = card.flipCardName;
         splitCard = card.splitCard;
         usesVariousArt = card.usesVariousArt;
+        this.attachments.addAll(card.attachments);
     }
 
     @Override
@@ -417,6 +422,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     ability.getTargets().add(new TargetCreaturePermanent(filter2));
                 }
                 break;
+            case SIMIC_MANIPULATOR: //Simic Manipulator only
+                xValue = 0;
+                for (Cost cost : ability.getCosts()) {
+                    if (cost instanceof RemoveVariableCountersTargetCost) {
+                        xValue = ((RemoveVariableCountersTargetCost) cost).getAmount();
+                        break;
+                    }
+                }
+                ability.getTargets().clear();
+                FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with power less than or equal to " + xValue);
+                newFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+                ability.addTarget(new TargetCreaturePermanent(newFilter));
+                break;
         }
     }
 
@@ -578,6 +596,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     removed = true;
                 } else if (game.getPhase() == null) {
                     // E.g. Commander of commander game
+                    removed = true;
+                } else {
+                    // Unstable - Summon the Pack
                     removed = true;
                 }
                 break;
@@ -822,11 +843,53 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return super.getSubtype(game);
     }
 
+    @Override
     public boolean isAllCreatureTypes() {
         return allCreatureTypes;
     }
 
+    @Override
     public void setIsAllCreatureTypes(boolean value) {
         allCreatureTypes = value;
+    }
+
+    @Override
+    public List<UUID> getAttachments() {
+        return attachments;
+    }
+
+    @Override
+    public boolean addAttachment(UUID permanentId, Game game) {
+        if (!this.attachments.contains(permanentId)) {
+            Permanent attachment = game.getPermanent(permanentId);
+            if (attachment == null) {
+                attachment = game.getPermanentEntering(permanentId);
+            }
+            if (attachment != null) {
+                if (!game.replaceEvent(new GameEvent(GameEvent.EventType.ATTACH, objectId, permanentId, attachment.getControllerId()))) {
+                    this.attachments.add(permanentId);
+                    attachment.attachTo(objectId, game);
+                    game.fireEvent(new GameEvent(GameEvent.EventType.ATTACHED, objectId, permanentId, attachment.getControllerId()));
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removeAttachment(UUID permanentId, Game game) {
+        if (this.attachments.contains(permanentId)) {
+            Permanent attachment = game.getPermanent(permanentId);
+            if (attachment != null) {
+                attachment.unattach(game);
+            }
+            if (!game.replaceEvent(new GameEvent(GameEvent.EventType.UNATTACH, objectId, permanentId, attachment != null ? attachment.getControllerId() : null))) {
+                this.attachments.remove(permanentId);
+                game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, objectId, permanentId, attachment != null ? attachment.getControllerId() : null));
+                return true;
+            }
+        }
+        return false;
     }
 }

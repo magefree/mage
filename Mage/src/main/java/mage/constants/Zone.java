@@ -43,9 +43,9 @@ public enum Zone {
     OUTSIDE(false),
     COMMAND(true);
 
-    private boolean isPublic;
+    private final boolean isPublic;
 
-    Zone(boolean isPublic){
+    Zone(boolean isPublic) {
         this.isPublic = isPublic;
     }
 
@@ -61,7 +61,7 @@ public enum Zone {
         return super.toString();
     }
 
-    public boolean isPublicZone(){
+    public boolean isPublicZone() {
         return isPublic;
     }
 }

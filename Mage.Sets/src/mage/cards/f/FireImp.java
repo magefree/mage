@@ -52,7 +52,7 @@ public class FireImp extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Fire Imp enters the battlefield, it deals 2 damage to target creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

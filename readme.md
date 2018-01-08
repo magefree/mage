@@ -2,11 +2,15 @@
 
 [![Join the chat at https://gitter.im/magefree/mage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/magefree/mage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/magefree/mage.svg?branch=master)](https://travis-ci.org/magefree/mage)
 
-XMage allows you to play Magic against one or more online players or computer opponents. It includes full rules enforcement for over **14 000** unique cards (over 27 000 counting all cards from different editions). Starting with *Morningtide*, all regular sets have nearly all the cards implemented ([detailed overview](http://ct-magefree.rhcloud.com/stats)).
+XMage allows you to play Magic against one or more online players or computer opponents. It includes full rules enforcement for over **16 700** unique cards (over 32 000 counting all cards from different editions). Starting with *Morningtide*, all regular sets have nearly all the cards implemented ([detailed overview](http://ct-magefree.rhcloud.com/stats)).
 
 There are public servers where you can play XMage against other players. You can also host your own server to play against the AI and/or your friends.
 
-You can visit the XMage forum [here](http://www.slightlymagic.net/forum/viewforum.php?f=70).
+XMage community:
+* [Official XMage forum](http://www.slightlymagic.net/forum/viewforum.php?f=70);
+* [Official XMage support and feature request on github](https://github.com/magefree/mage/issues);
+* [Reddit XMage group](https://www.reddit.com/r/XMage/);
+* [Reddit XMage discord channel](https://discord.gg/Pqf42yn).
 
 ## Features
 

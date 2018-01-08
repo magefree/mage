@@ -78,9 +78,15 @@ public interface Permanent extends Card, Controllable {
 
     boolean isPhasedIn();
 
+    boolean isPhasedOutIndirectly();
+
     boolean phaseIn(Game game);
 
+    boolean phaseIn(Game game, boolean onlyDirect);
+
     boolean phaseOut(Game game);
+
+    boolean phaseOut(Game game, boolean indirectPhase);
 
     boolean isMonstrous();
 
@@ -110,10 +116,11 @@ public interface Permanent extends Card, Controllable {
 
     void attachTo(UUID permanentId, Game game);
 
-    boolean addAttachment(UUID permanentId, Game game);
+    void unattach(Game game);
 
-    boolean removeAttachment(UUID permanentId, Game game);
-
+//    boolean addAttachment(UUID permanentId, Game game);
+//
+//    boolean removeAttachment(UUID permanentId, Game game);
     boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
 
     boolean hasProtectionFrom(MageObject source, Game game);

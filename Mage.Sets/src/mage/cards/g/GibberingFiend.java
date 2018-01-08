@@ -55,7 +55,7 @@ public class GibberingFiend extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Gibbering Fiend enters the battlefield, it deals 1 damage to each opponent.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT, "it"), false));
 
         // <i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard,
         // Gibbering Fiend deals 1 damage to that player.

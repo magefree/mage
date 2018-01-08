@@ -128,11 +128,11 @@ public abstract class TargetImpl implements Target {
     @Override
     public String getMessage() {
         String suffix = "";
-        if (targetController != null) {
-            // Hint for the selecting player that the targets must be valid from the point of the ability controller
-            // e.g. select opponent text may be misleading otherwise
-            suffix = " (target controlling!)";
-        }
+//        if (targetController != null) {
+//            // Hint for the selecting player that the targets must be valid from the point of the ability controller
+//            // e.g. select opponent text may be misleading otherwise
+//            suffix = " (target controlling!)";
+//        }
         if (getMaxNumberOfTargets() != 1) {
             StringBuilder sb = new StringBuilder();
             sb.append("Select ").append(targetName);

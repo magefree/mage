@@ -62,6 +62,8 @@ import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.designations.Designation;
+import mage.designations.DesignationType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.Graveyard;
@@ -417,6 +419,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean flipCoin(Game game, ArrayList<UUID> appliedEffects);
 
+    int rollDice(Game game, int numSides);
+
+    int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides);
+
     @Deprecated
     void discard(int amount, Ability source, Game game);
 
@@ -443,6 +449,8 @@ public interface Player extends MageItem, Copyable<Player> {
     void abort();
 
     void abortReset();
+
+    void signalPlayerConcede();
 
     void skip();
 
@@ -834,4 +842,11 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean addTargets(Ability ability, Game game);
 
     String getHistory();
+
+    boolean hasDesignation(DesignationType designationName);
+
+    void addDesignation(Designation designation);
+
+    List<Designation> getDesignations();
+
 }

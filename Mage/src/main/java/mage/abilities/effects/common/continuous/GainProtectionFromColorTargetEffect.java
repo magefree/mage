@@ -55,7 +55,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
 
     public GainProtectionFromColorTargetEffect(Duration duration, ObjectColor protectColor) {
         super(new ProtectionAbility(new FilterCard()), duration);
-        choice = new ChoiceColor(true);
+        choice = new ChoiceColor(true, "Choose a color to gain protection against it");
         if (protectColor != null) {
             choice.setChoice(protectColor.toString());
         }

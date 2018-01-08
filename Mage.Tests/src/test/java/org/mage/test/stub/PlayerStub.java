@@ -27,6 +27,8 @@
  */
 package org.mage.test.stub;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
@@ -43,6 +45,8 @@ import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.designations.Designation;
+import mage.designations.DesignationType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.Graveyard;
@@ -61,9 +65,6 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  *
@@ -648,6 +649,16 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public int rollDice(Game game, int numSides) {
+        return 1;
+    }
+
+    @Override
+    public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
+        return 1;
+    }
+
+    @Override
     public void discard(int amount, Ability source, Game game) {
 
     }
@@ -699,6 +710,11 @@ public class PlayerStub implements Player {
 
     @Override
     public void abort() {
+
+    }
+
+    @Override
+    public void signalPlayerConcede() {
 
     }
 
@@ -1235,6 +1251,21 @@ public class PlayerStub implements Player {
     @Override
     public void drew(Game game) {
 
+    }
+
+    @Override
+    public boolean hasDesignation(DesignationType designationName) {
+        return false;
+    }
+
+    @Override
+    public void addDesignation(Designation designation) {
+
+    }
+
+    @Override
+    public List<Designation> getDesignations() {
+        return null;
     }
 
 }

@@ -50,7 +50,7 @@ public class RayOfDistortion extends CardImpl {
 
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         // Flashback {4}{W}{W}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{W}{W}"), TimingRule.INSTANT));
     }

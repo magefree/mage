@@ -34,8 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.SpiritBlueToken;
 import mage.game.permanent.token.Token;
@@ -47,17 +46,11 @@ import mage.target.TargetSpell;
  */
 public class GeistSnatch extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("creature spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public GeistSnatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
 
         // Counter target creature spell. Create a 1/1 blue Spirit creature token with flying.
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
         this.getSpellAbility().addEffect(new GeistSnatchCounterTargetEffect());
     }
 

@@ -62,9 +62,11 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Break Open", 190, Rarity.COMMON, mage.cards.b.BreakOpen.class));
         cards.add(new SetCardInfo("Brightstone Ritual", 191, Rarity.COMMON, mage.cards.b.BrightstoneRitual.class));
         cards.add(new SetCardInfo("Broodhatch Nantuko", 250, Rarity.UNCOMMON, mage.cards.b.BroodhatchNantuko.class));
+        cards.add(new SetCardInfo("Butcher Orgg", 192, Rarity.RARE, mage.cards.b.ButcherOrgg.class));
         cards.add(new SetCardInfo("Cabal Archon", 129, Rarity.UNCOMMON, mage.cards.c.CabalArchon.class));
         cards.add(new SetCardInfo("Cabal Executioner", 130, Rarity.UNCOMMON, mage.cards.c.CabalExecutioner.class));
         cards.add(new SetCardInfo("Cabal Slaver", 131, Rarity.UNCOMMON, mage.cards.c.CabalSlaver.class));
+        cards.add(new SetCardInfo("Callous Oppressor", 72, Rarity.RARE, mage.cards.c.CallousOppressor.class));
         cards.add(new SetCardInfo("Catapult Master", 10, Rarity.RARE, mage.cards.c.CatapultMaster.class));
         cards.add(new SetCardInfo("Catapult Squad", 11, Rarity.UNCOMMON, mage.cards.c.CatapultSquad.class));
         cards.add(new SetCardInfo("Centaur Glade", 251, Rarity.UNCOMMON, mage.cards.c.CentaurGlade.class));
@@ -102,6 +104,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Dispersing Orb", 80, Rarity.UNCOMMON, mage.cards.d.DispersingOrb.class));
         cards.add(new SetCardInfo("Disruptive Pitmage", 81, Rarity.COMMON, mage.cards.d.DisruptivePitmage.class));
         cards.add(new SetCardInfo("Dive Bomber", 26, Rarity.COMMON, mage.cards.d.DiveBomber.class));
+        cards.add(new SetCardInfo("Doom Cannon", 307, Rarity.RARE, mage.cards.d.DoomCannon.class));
         cards.add(new SetCardInfo("Doomed Necromancer", 140, Rarity.RARE, mage.cards.d.DoomedNecromancer.class));
         cards.add(new SetCardInfo("Doubtless One", 27, Rarity.UNCOMMON, mage.cards.d.DoubtlessOne.class));
         cards.add(new SetCardInfo("Dragon Roost", 198, Rarity.RARE, mage.cards.d.DragonRoost.class));
@@ -117,6 +120,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Warrior", 260, Rarity.COMMON, mage.cards.e.ElvishWarrior.class));
         cards.add(new SetCardInfo("Embermage Goblin", 200, Rarity.UNCOMMON, mage.cards.e.EmbermageGoblin.class));
         cards.add(new SetCardInfo("Enchantress's Presence", 261, Rarity.RARE, mage.cards.e.EnchantresssPresence.class));
+        cards.add(new SetCardInfo("Entrails Feaster", 143, Rarity.RARE, mage.cards.e.EntrailsFeaster.class));
         cards.add(new SetCardInfo("Erratic Explosion", 201, Rarity.COMMON, mage.cards.e.ErraticExplosion.class));
         cards.add(new SetCardInfo("Essence Fracture", 82, Rarity.UNCOMMON, mage.cards.e.EssenceFracture.class));
         cards.add(new SetCardInfo("Everglove Courier", 262, Rarity.UNCOMMON, mage.cards.e.EvergloveCourier.class));
@@ -145,6 +149,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Glory Seeker", 31, Rarity.COMMON, mage.cards.g.GlorySeeker.class));
         cards.add(new SetCardInfo("Gluttonous Zombie", 151, Rarity.UNCOMMON, mage.cards.g.GluttonousZombie.class));
         cards.add(new SetCardInfo("Goblin Burrows", 318, Rarity.UNCOMMON, mage.cards.g.GoblinBurrows.class));
+        cards.add(new SetCardInfo("Goblin Machinist", 204, Rarity.UNCOMMON, mage.cards.g.GoblinMachinist.class));
         cards.add(new SetCardInfo("Goblin Piledriver", 205, Rarity.RARE, mage.cards.g.GoblinPiledriver.class));
         cards.add(new SetCardInfo("Goblin Pyromancer", 206, Rarity.RARE, mage.cards.g.GoblinPyromancer.class));
         cards.add(new SetCardInfo("Goblin Sharpshooter", 207, Rarity.RARE, mage.cards.g.GoblinSharpshooter.class));
@@ -185,6 +190,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Ixidor, Reality Sculptor", 89, Rarity.RARE, mage.cards.i.IxidorRealitySculptor.class));
         cards.add(new SetCardInfo("Jareth, Leonine Titan", 43, Rarity.RARE, mage.cards.j.JarethLeonineTitan.class));
         cards.add(new SetCardInfo("Kamahl, Fist of Krosa", 268, Rarity.RARE, mage.cards.k.KamahlFistOfKrosa.class));
+        cards.add(new SetCardInfo("Kamahl's Summons", 269, Rarity.UNCOMMON, mage.cards.k.KamahlsSummons.class));
         cards.add(new SetCardInfo("Krosan Colossus", 270, Rarity.RARE, mage.cards.k.KrosanColossus.class));
         cards.add(new SetCardInfo("Krosan Groundshaker", 271, Rarity.UNCOMMON, mage.cards.k.KrosanGroundshaker.class));
         cards.add(new SetCardInfo("Krosan Tusker", 272, Rarity.COMMON, mage.cards.k.KrosanTusker.class));
@@ -246,6 +252,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Riptide Laboratory", 322, Rarity.RARE, mage.cards.r.RiptideLaboratory.class));
         cards.add(new SetCardInfo("Riptide Replicator", 309, Rarity.RARE, mage.cards.r.RiptideReplicator.class));
         cards.add(new SetCardInfo("Riptide Shapeshifter", 109, Rarity.UNCOMMON, mage.cards.r.RiptideShapeshifter.class));
+        cards.add(new SetCardInfo("Risky Move", 223, Rarity.RARE, mage.cards.r.RiskyMove.class));
         cards.add(new SetCardInfo("Rorix Bladewing", 224, Rarity.RARE, mage.cards.r.RorixBladewing.class));
         cards.add(new SetCardInfo("Rotlung Reanimator", 164, Rarity.RARE, mage.cards.r.RotlungReanimator.class));
         cards.add(new SetCardInfo("Rummaging Wizard", 110, Rarity.UNCOMMON, mage.cards.r.RummagingWizard.class));
@@ -260,9 +267,11 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Secluded Steppe", 324, Rarity.COMMON, mage.cards.s.SecludedSteppe.class));
         cards.add(new SetCardInfo("Serpentine Basilisk", 280, Rarity.UNCOMMON, mage.cards.s.SerpentineBasilisk.class));
         cards.add(new SetCardInfo("Severed Legion", 166, Rarity.COMMON, mage.cards.s.SeveredLegion.class));
+        cards.add(new SetCardInfo("Shade's Breath", 167, Rarity.UNCOMMON, mage.cards.s.ShadesBreath.class));
         cards.add(new SetCardInfo("Shaleskin Bruiser", 226, Rarity.UNCOMMON, mage.cards.s.ShaleskinBruiser.class));
         cards.add(new SetCardInfo("Shared Triumph", 53, Rarity.RARE, mage.cards.s.SharedTriumph.class));
         cards.add(new SetCardInfo("Shepherd of Rot", 168, Rarity.COMMON, mage.cards.s.ShepherdOfRot.class));
+        cards.add(new SetCardInfo("Shieldmage Elder", 54, Rarity.UNCOMMON, mage.cards.s.ShieldmageElder.class));
         cards.add(new SetCardInfo("Shock", 227, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Sigil of the New Dawn", 55, Rarity.RARE, mage.cards.s.SigilOfTheNewDawn.class));
         cards.add(new SetCardInfo("Silent Specter", 169, Rarity.RARE, mage.cards.s.SilentSpecter.class));
@@ -311,6 +320,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Trade Secrets", 118, Rarity.RARE, mage.cards.t.TradeSecrets.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 326, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Treespring Lorian", 293, Rarity.COMMON, mage.cards.t.TreespringLorian.class));
+        cards.add(new SetCardInfo("Tribal Golem", 311, Rarity.RARE, mage.cards.t.TribalGolem.class));
         cards.add(new SetCardInfo("Tribal Unity", 294, Rarity.UNCOMMON, mage.cards.t.TribalUnity.class));
         cards.add(new SetCardInfo("Trickery Charm", 119, Rarity.COMMON, mage.cards.t.TrickeryCharm.class));
         cards.add(new SetCardInfo("True Believer", 57, Rarity.RARE, mage.cards.t.TrueBeliever.class));

@@ -382,6 +382,25 @@ public final class CardUtil {
         return true;
     }
 
+
+    /**
+     * Parse card number as int (support base [123] and alternative numbers [123b]).
+     *
+     * @param cardNumber origin card number
+     * @return int
+     */
+    public static int parseCardNumberAsInt(String cardNumber){
+
+        if (cardNumber.isEmpty()){ throw new IllegalArgumentException("Card number is empty.");}
+
+        if(Character.isDigit(cardNumber.charAt(cardNumber.length() - 1)))
+        {
+            return Integer.parseInt(cardNumber);
+        }else{
+            return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
+        }
+    }
+
     /**
      * Creates and saves a (card + zoneChangeCounter) specific exileId.
      *
@@ -488,6 +507,26 @@ public final class CardUtil {
         } else {
             return card.getSpellAbility() != null && card.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game);
         }
+    }
+
+    public static int addWithOverflowCheck(int base, int increment) {
+        long result = ((long) base) + increment;
+        if (result > Integer.MAX_VALUE) {
+             return Integer.MAX_VALUE;
+        } else if (result < Integer.MIN_VALUE) {
+             return Integer.MIN_VALUE;
+        }
+        return base + increment;
+    }
+
+    public static int subtractWithOverflowCheck(int base, int decrement) {
+        long result = ((long) base) - decrement;
+        if (result > Integer.MAX_VALUE) {
+             return Integer.MAX_VALUE;
+        } else if (result < Integer.MIN_VALUE) {
+             return Integer.MIN_VALUE;
+        }
+        return base - decrement;
     }
 
 }

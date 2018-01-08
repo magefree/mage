@@ -54,7 +54,7 @@ public class ResoundingThunder extends CardImpl {
         // Cycling {5}{B}{R}{G}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{B}{R}{G}")));
         // When you cycle Resounding Thunder, it deals 6 damage to target creature or player.
-        Ability ability = new CycleTriggeredAbility(new DamageTargetEffect(6));
+        Ability ability = new CycleTriggeredAbility(new DamageTargetEffect(6, "it"));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

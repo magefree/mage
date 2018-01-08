@@ -64,7 +64,7 @@ public class SubterraneanShambler extends CardImpl {
         this.addAbility(new EchoAbility("{3}{R}"));
 
         // When Subterranean Shambler enters the battlefield or leaves the battlefield, it deals 1 damage to each creature without flying.
-        this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new DamageAllEffect(1, filter), false));
+        this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new DamageAllEffect(1, "it", filter), false));
 
     }
 

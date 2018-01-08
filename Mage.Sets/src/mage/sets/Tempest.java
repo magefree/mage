@@ -182,6 +182,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Lobotomy", 342, Rarity.UNCOMMON, mage.cards.l.Lobotomy.class));
         cards.add(new SetCardInfo("Lotus Petal", 284, Rarity.COMMON, mage.cards.l.LotusPetal.class));
         cards.add(new SetCardInfo("Lowland Giant", 187, Rarity.COMMON, mage.cards.l.LowlandGiant.class));
+        cards.add(new SetCardInfo("Maddening Imp", 37, Rarity.RARE, mage.cards.m.MaddeningImp.class));
         cards.add(new SetCardInfo("Magmasaur", 188, Rarity.RARE, mage.cards.m.Magmasaur.class));
         cards.add(new SetCardInfo("Manakin", 286, Rarity.COMMON, mage.cards.m.Manakin.class));
         cards.add(new SetCardInfo("Mana Severance", 73, Rarity.RARE, mage.cards.m.ManaSeverance.class));
@@ -244,6 +245,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Rats of Rath", 44, Rarity.COMMON, mage.cards.r.RatsOfRath.class));
         cards.add(new SetCardInfo("Reality Anchor", 140, Rarity.COMMON, mage.cards.r.RealityAnchor.class));
         cards.add(new SetCardInfo("Reanimate", 45, Rarity.UNCOMMON, mage.cards.r.Reanimate.class));
+        cards.add(new SetCardInfo("Reap", 141, Rarity.UNCOMMON, mage.cards.r.Reap.class));
         cards.add(new SetCardInfo("Reckless Spite", 46, Rarity.UNCOMMON, mage.cards.r.RecklessSpite.class));
         cards.add(new SetCardInfo("Recycle", 142, Rarity.RARE, mage.cards.r.Recycle.class));
         cards.add(new SetCardInfo("Reflecting Pool", 328, Rarity.RARE, mage.cards.r.ReflectingPool.class));
@@ -258,6 +260,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Rootwater Diver", 81, Rarity.UNCOMMON, mage.cards.r.RootwaterDiver.class));
         cards.add(new SetCardInfo("Rootwater Hunter", 82, Rarity.COMMON, mage.cards.r.RootwaterHunter.class));
         cards.add(new SetCardInfo("Rootwater Matriarch", 83, Rarity.RARE, mage.cards.r.RootwaterMatriarch.class));
+        cards.add(new SetCardInfo("Rootwater Shaman", 84, Rarity.RARE, mage.cards.r.RootwaterShaman.class));
         cards.add(new SetCardInfo("Ruby Medallion", 295, Rarity.RARE, mage.cards.r.RubyMedallion.class));
         cards.add(new SetCardInfo("Sacred Guide", 250, Rarity.RARE, mage.cards.s.SacredGuide.class));
         cards.add(new SetCardInfo("Sadistic Glee", 47, Rarity.COMMON, mage.cards.s.SadisticGlee.class));

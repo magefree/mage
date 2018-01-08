@@ -41,6 +41,7 @@ import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -90,11 +91,14 @@ class ChannelHarmEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player sourceController = game.getPlayer(source.getControllerId());
         PreventionEffectData preventionData = preventDamageAction(event, source, game);
         if (preventionData.getPreventedDamage() > 0) {
             Permanent targetCreature = game.getPermanent(source.getFirstTarget());
             if (targetCreature != null) {
-                targetCreature.damage(preventionData.getPreventedDamage(), source.getSourceId(), game, false, true);
+                if (sourceController != null && sourceController.chooseUse(outcome, "Would you like to have " + preventionData.getPreventedDamage() + " damage dealt to " + targetCreature.getLogName() + "?", source, game)) {
+                    targetCreature.damage(preventionData.getPreventedDamage(), source.getSourceId(), game, false, true);
+                }
             }
         }
         return true;

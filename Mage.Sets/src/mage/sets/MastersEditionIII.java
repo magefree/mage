@@ -61,11 +61,13 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Anaba Ancestor", 86, Rarity.COMMON, mage.cards.a.AnabaAncestor.class));
         cards.add(new SetCardInfo("Anaba Spirit Crafter", 87, Rarity.COMMON, mage.cards.a.AnabaSpiritCrafter.class));
         cards.add(new SetCardInfo("Angus Mackenzie", 141, Rarity.RARE, mage.cards.a.AngusMackenzie.class));
+        cards.add(new SetCardInfo("Arboria", 113, Rarity.RARE, mage.cards.a.Arboria.class));
         cards.add(new SetCardInfo("Arcades Sabboth", 142, Rarity.RARE, mage.cards.a.ArcadesSabboth.class));
         cards.add(new SetCardInfo("Arena of the Ancients", 188, Rarity.RARE, mage.cards.a.ArenaOfTheAncients.class));
         cards.add(new SetCardInfo("Ashes to Ashes", 58, Rarity.UNCOMMON, mage.cards.a.AshesToAshes.class));
         cards.add(new SetCardInfo("Astrolabe", 189, Rarity.COMMON, mage.cards.a.Astrolabe.class));
         cards.add(new SetCardInfo("Axelrod Gunnarson", 143, Rarity.UNCOMMON, mage.cards.a.AxelrodGunnarson.class));
+        cards.add(new SetCardInfo("Banshee", 59, Rarity.UNCOMMON, mage.cards.b.Banshee.class));
         cards.add(new SetCardInfo("Barktooth Warbeard", 144, Rarity.COMMON, mage.cards.b.BarktoothWarbeard.class));
         cards.add(new SetCardInfo("Barl's Cage", 190, Rarity.RARE, mage.cards.b.BarlsCage.class));
         cards.add(new SetCardInfo("Bartel Runeaxe", 145, Rarity.UNCOMMON, mage.cards.b.BartelRuneaxe.class));
@@ -103,6 +105,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Disharmony", 95, Rarity.UNCOMMON, mage.cards.d.Disharmony.class));
         cards.add(new SetCardInfo("Divine Intervention", 8, Rarity.RARE, mage.cards.d.DivineIntervention.class));
         cards.add(new SetCardInfo("Dong Zhou, the Tyrant", 96, Rarity.RARE, mage.cards.d.DongZhouTheTyrant.class));
+        cards.add(new SetCardInfo("Eightfold Maze", 9, Rarity.UNCOMMON, mage.cards.e.EightfoldMaze.class));
         cards.add(new SetCardInfo("Elves of Deep Shadow", 116, Rarity.COMMON, mage.cards.e.ElvesOfDeepShadow.class));
         cards.add(new SetCardInfo("Evil Presence", 64, Rarity.COMMON, mage.cards.e.EvilPresence.class));
         cards.add(new SetCardInfo("Exorcist", 10, Rarity.UNCOMMON, mage.cards.e.Exorcist.class));
@@ -121,6 +124,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 229, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 230, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frost Giant", 101, Rarity.UNCOMMON, mage.cards.f.FrostGiant.class));
+        cards.add(new SetCardInfo("Gabriel Angelfire", 148, Rarity.RARE, mage.cards.g.GabrielAngelfire.class));
         cards.add(new SetCardInfo("Gaea's Touch", 120, Rarity.UNCOMMON, mage.cards.g.GaeasTouch.class));
         cards.add(new SetCardInfo("Ghostly Visit", 67, Rarity.COMMON, mage.cards.g.GhostlyVisit.class));
         cards.add(new SetCardInfo("Ghosts of the Damned", 68, Rarity.COMMON, mage.cards.g.GhostsOfTheDamned.class));
@@ -129,6 +133,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Guan Yu's 1,000-Li March", 13, Rarity.RARE, mage.cards.g.GuanYus1000LiMarch.class));
         cards.add(new SetCardInfo("Guan Yu, Sainted Warrior", 12, Rarity.UNCOMMON, mage.cards.g.GuanYuSaintedWarrior.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 149, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));
+        cards.add(new SetCardInfo("Halfdane", 150, Rarity.RARE, mage.cards.h.Halfdane.class));
         cards.add(new SetCardInfo("Hammerheim", 207, Rarity.UNCOMMON, mage.cards.h.Hammerheim.class));
         cards.add(new SetCardInfo("Hazezon Tamar", 151, Rarity.RARE, mage.cards.h.HazezonTamar.class));
         cards.add(new SetCardInfo("Heal", 14, Rarity.COMMON, mage.cards.h.Heal.class));
@@ -182,6 +187,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 227, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nether Void", 73, Rarity.RARE, mage.cards.n.NetherVoid.class));
         cards.add(new SetCardInfo("Nicol Bolas", 163, Rarity.RARE, mage.cards.n.NicolBolas.class));
+        cards.add(new SetCardInfo("Nova Pentacle", 200, Rarity.RARE, mage.cards.n.NovaPentacle.class));
         cards.add(new SetCardInfo("Old Man of the Sea", 45, Rarity.RARE, mage.cards.o.OldManOfTheSea.class));
         cards.add(new SetCardInfo("Palladia-Mors", 164, Rarity.RARE, mage.cards.p.PalladiaMors.class));
         cards.add(new SetCardInfo("Pavel Maliki", 165, Rarity.UNCOMMON, mage.cards.p.PavelMaliki.class));
@@ -216,6 +222,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Sivitri Scarzam", 175, Rarity.COMMON, mage.cards.s.SivitriScarzam.class));
         cards.add(new SetCardInfo("Slashing Tiger", 133, Rarity.COMMON, mage.cards.s.SlashingTiger.class));
         cards.add(new SetCardInfo("Sol Grail", 201, Rarity.COMMON, mage.cards.s.SolGrail.class));
+        cards.add(new SetCardInfo("Sorrow's Path", 211, Rarity.RARE, mage.cards.s.SorrowsPath.class));
         cards.add(new SetCardInfo("Spirit Shackle", 74, Rarity.COMMON, mage.cards.s.SpiritShackle.class));
         cards.add(new SetCardInfo("Spoils of Victory", 134, Rarity.COMMON, mage.cards.s.SpoilsOfVictory.class));
         cards.add(new SetCardInfo("Stolen Grain", 75, Rarity.UNCOMMON, mage.cards.s.StolenGrain.class));

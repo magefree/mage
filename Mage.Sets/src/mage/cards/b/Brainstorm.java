@@ -40,8 +40,7 @@ import mage.constants.CardType;
 public class Brainstorm extends CardImpl {
 
     public Brainstorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Draw three cards, then put two cards from your hand on top of your library in any order.
         this.getSpellAbility().addEffect(new BrainstormEffect());

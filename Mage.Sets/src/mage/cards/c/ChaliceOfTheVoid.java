@@ -28,16 +28,14 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -53,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 public class ChaliceOfTheVoid extends CardImpl {
 
     public ChaliceOfTheVoid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{X}{X}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{X}{X}");
 
         // Chalice of the Void enters the battlefield with X charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
@@ -75,7 +73,7 @@ public class ChaliceOfTheVoid extends CardImpl {
 class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
 
     public ChaliceOfTheVoidTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CounterEffect());
+        super(Zone.BATTLEFIELD, new CounterTargetEffect());
     }
 
     public ChaliceOfTheVoidTriggeredAbility(final ChaliceOfTheVoidTriggeredAbility abiltity) {
@@ -109,26 +107,4 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever a player casts a spell with converted mana cost equal to the number of charge counters on {this}, counter that spell.";
     }
-}
-
-class CounterEffect extends OneShotEffect {
-
-    public CounterEffect() {
-        super(Outcome.Detriment);
-    }
-
-    public CounterEffect(final CounterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CounterEffect copy() {
-        return new CounterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getStack().counter(this.getTargetPointer().getFirst(game, source), source.getSourceId(), game);
-    }
-
 }

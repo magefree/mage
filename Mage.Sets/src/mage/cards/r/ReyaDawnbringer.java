@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class ReyaDawnbringer extends CardImpl {
 
     public ReyaDawnbringer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{W}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
 
@@ -57,7 +57,7 @@ public class ReyaDawnbringer extends CardImpl {
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.YOU, true);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 

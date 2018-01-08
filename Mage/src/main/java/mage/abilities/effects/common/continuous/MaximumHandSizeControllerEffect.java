@@ -170,7 +170,7 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
             sb.append(" is increased by ");
         } else if (handSizeModification == HandSizeModification.REDUCE) {
             sb.append(" is reduced by ");
-        } else if ((handSize instanceof StaticValue && ((StaticValue) handSize).getValue() == Integer.MAX_VALUE) || !(handSize instanceof StaticValue)) {
+        } else if (!((handSize instanceof StaticValue) && ((StaticValue) handSize).getValue() != Integer.MAX_VALUE) || !(handSize instanceof StaticValue)) {
             sb.append(" is ");
         }
         if ((handSize instanceof StaticValue && ((StaticValue) handSize).getValue() != Integer.MAX_VALUE)) {

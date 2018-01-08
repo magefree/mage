@@ -42,28 +42,37 @@ import mage.players.Player;
  */
 public class ExileReturnBattlefieldOwnerNextEndStepSourceEffect extends OneShotEffect {
 
-    private static final String effectText = "exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
     private boolean returnAlways;
+    private boolean returnTapped;
 
     public ExileReturnBattlefieldOwnerNextEndStepSourceEffect() {
         this(false);
     }
 
+    public ExileReturnBattlefieldOwnerNextEndStepSourceEffect(boolean returnAlways) {
+        this(returnAlways, false);
+    }
+
     /**
      *
-     * @param returnAlways return the permanent also if it does not go to exile
+     * @param returnAlways Return the permanent also if it does not go to exile
      * but is moved to another zone (e.g. command zone by commander replacement
      * effect)
+     * @param returnTapped Does the source return tapped to the battlefield
      */
-    public ExileReturnBattlefieldOwnerNextEndStepSourceEffect(boolean returnAlways) {
+    public ExileReturnBattlefieldOwnerNextEndStepSourceEffect(boolean returnAlways, boolean returnTapped) {
         super(Outcome.Benefit);
-        staticText = effectText;
+        this.returnTapped = returnTapped;
         this.returnAlways = returnAlways;
+        staticText = "exile {this}. Return it to the battlefield "
+                + (returnTapped ? "tapped " : "")
+                + "under its owner's control at the beginning of the next end step";
     }
 
     public ExileReturnBattlefieldOwnerNextEndStepSourceEffect(ExileReturnBattlefieldOwnerNextEndStepSourceEffect effect) {
         super(effect);
         this.returnAlways = effect.returnAlways;
+        this.returnTapped = effect.returnTapped;
     }
 
     @Override
@@ -77,7 +86,7 @@ public class ExileReturnBattlefieldOwnerNextEndStepSourceEffect extends OneShotE
                 if (exiled || (returnAlways && (zcc == game.getState().getZoneChangeCounter(permanent.getId()) - 1))) {
                     //create delayed triggered ability and return it from every public zone he was next moved to
                     AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                            new ReturnToBattlefieldUnderOwnerControlSourceEffect(false, zcc + 1));
+                            new ReturnToBattlefieldUnderOwnerControlSourceEffect(returnTapped, zcc + 1));
                     game.addDelayedTriggeredAbility(delayedAbility, source);
                 }
             }

@@ -47,7 +47,7 @@ public class ArtisansSorrow extends CardImpl {
 
         // Destroy target artifact or enchantment. Scry 2.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 

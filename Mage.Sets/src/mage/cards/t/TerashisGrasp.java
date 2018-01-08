@@ -54,7 +54,7 @@ public class TerashisGrasp extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
         // Destroy target artifact or enchantment. 
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         // You gain life equal to its converted mana cost.
         this.getSpellAbility().addEffect(new TerashisGraspEffect());

@@ -229,10 +229,12 @@ public class GameEvent implements Serializable {
         ENCHANT_PLAYER, ENCHANTED_PLAYER,
         CAN_TAKE_MULLIGAN,
         FLIP_COIN, COIN_FLIPPED, SCRY, FATESEAL,
+        ROLL_DICE, DICE_ROLLED,
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,
         //permanent events
-        ENTERS_THE_BATTLEFIELD_SELF, // 616.1a If any of the replacement and/or prevention effects are self-replacement effects (see rule 614.15), one of them must be chosen. If not, proceed to rule 616.1b.
+        ENTERS_THE_BATTLEFIELD_SELF, /* 616.1a If any of the replacement and/or prevention effects are self-replacement effects (see rule 614.15),
+                                        one of them must be chosen. If not, proceed to rule 616.1b. */
         ENTERS_THE_BATTLEFIELD_CONTROL, // 616.1b
         ENTERS_THE_BATTLEFIELD_COPY, // 616.1c
         ENTERS_THE_BATTLEFIELD, // 616.1d

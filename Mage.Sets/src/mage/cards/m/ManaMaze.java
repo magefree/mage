@@ -53,11 +53,10 @@ import mage.watchers.Watcher;
 public class ManaMaze extends CardImpl {
 
     public ManaMaze(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // Players can't cast spells that share a color with the spell most recently cast this turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaMazeEffect()), new LastSpellCastWatcher());
-
     }
 
     public ManaMaze(final ManaMaze card) {
@@ -91,9 +90,8 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
         Card card = game.getCard(event.getSourceId());
         if (card != null) {
             LastSpellCastWatcher watcher = (LastSpellCastWatcher) game.getState().getWatchers().get(LastSpellCastWatcher.class.getSimpleName());
-            if (watcher != null 
-                    && watcher.lastSpellCast != null) {
-                return card.getColor(game).contains(watcher.lastSpellCast.getColor(game));
+            if (watcher != null && watcher.lastSpellCast != null) {
+                return !card.getColor(game).intersection(watcher.lastSpellCast.getColor(game)).isColorless();
             }
         }
         return false;

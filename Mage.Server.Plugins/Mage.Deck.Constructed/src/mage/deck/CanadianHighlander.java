@@ -92,15 +92,14 @@ public class CanadianHighlander extends Constructed {
             String cn = entry.getKey();
             if (cn.equals("Balance")
                     || cn.equals("Dig Through Time")
+                    || cn.equals("Doomsday")
                     || cn.equals("Enlightened Tutor")
                     || cn.equals("Fastbond")
                     || cn.equals("Intuition")
                     || cn.equals("Library of Alexandria")
-                    || cn.equals("Lim-Dul's Vault")
                     || cn.equals("Mana Vault")
                     || cn.equals("Merchant Scroll")
                     || cn.equals("Mind Twist")
-                    || cn.equals("Oath of Druids")
                     || cn.equals("Personal Tutor")
                     || cn.equals("Stoneforge Mystic")
                     || cn.equals("Tainted Pact")
@@ -112,8 +111,8 @@ public class CanadianHighlander extends Constructed {
                 totalPoints += 1;
                 invalid.put(entry.getKey(), " 1 point " + cn);
             }
-            if (cn.equals("Doomsday")
-                    || cn.equals("Gifts Ungiven")
+            if (cn.equals("Gifts Ungiven")
+                    || cn.equals("Hermit Druid")
                     || cn.equals("Imperial Seal")
                     || cn.equals("Mana Crypt")
                     || cn.equals("Mystical Tutor")
@@ -125,19 +124,19 @@ public class CanadianHighlander extends Constructed {
                 invalid.put(entry.getKey(), " 2 points " + cn);
             }
             if (cn.equals("Birthing Pod")
-                    || cn.equals("Hermit Druid")
                     || cn.equals("Mox Emerald")
                     || cn.equals("Mox Jet")
                     || cn.equals("Mox Pearl")
                     || cn.equals("Mox Ruby")
                     || cn.equals("Mox Sapphire")
                     || cn.equals("Protean Hulk")
+                    || cn.equals("Sol Ring")
                     || cn.equals("Vampiric Tutor")) {
                 totalPoints += 3;
                 invalid.put(entry.getKey(), " 3 points " + cn);
             }
             if (cn.equals("Demonic Tutor")
-                    || cn.equals("Sol Ring")) {
+                    || cn.equals("Tinker")) {
                 totalPoints += 4;
                 invalid.put(entry.getKey(), " 4 points " + cn);
             }
@@ -147,13 +146,12 @@ public class CanadianHighlander extends Constructed {
                 invalid.put(entry.getKey(), " 5 points " + cn);
             }
             if (cn.equals("Ancestral Recall")
-                    || cn.equals("Time Walk")) {
+                    || cn.equals("Time Vault")) {
                 totalPoints += 6;
-                invalid.put(entry.getKey(), " 5 points " + cn);
+                invalid.put(entry.getKey(), " 6 points " + cn);
             }
             if (cn.equals("Black Lotus")
-                    || cn.equals("Flash")
-                    || cn.equals("Time Vault")) {
+                    || cn.equals("Flash")) {
                 totalPoints += 7;
                 invalid.put(entry.getKey(), " 7 points " + cn);
             }

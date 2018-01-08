@@ -44,6 +44,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -55,29 +56,29 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class TriassicEgg extends CardImpl {
 
     public TriassicEgg(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {3}, {tap}: Put a hatchling counter on Triassic Egg.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new AddCountersSourceEffect(CounterType.HATCHLING.createInstance(), true), 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.HATCHLING.createInstance(), true),
                 new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
+
         // Sacrifice Triassic Egg: Choose one - You may put a creature card from your hand onto the battlefield;
         ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new PutPermanentOnBattlefieldEffect(new FilterCreatureCard("a creature card")),
                 new SacrificeSourceCost(),
                 new SourceHasCounterCondition(CounterType.HATCHLING, 2, Integer.MAX_VALUE),
                 "Sacrifice Triassic Egg: Choose one - You may put a creature card from your hand onto the battlefield; or return target creature card from your graveyard to the battlefield. Activate this ability only if two or more hatchling counters are on {this}.");
-        
+
         // or return target creature card from your graveyard to the battlefield. Activate this ability only if two or more hatchling counters are on Triassic Egg.
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        Target target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"));
+        Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         mode.getTargets().add(target);
         ability.addMode(mode);
-        
+
         this.addAbility(ability);
     }
 

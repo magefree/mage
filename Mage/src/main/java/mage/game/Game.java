@@ -173,7 +173,7 @@ public interface Game extends MageItem, Serializable {
 
     UUID getPriorityPlayerId();
 
-    boolean gameOver(UUID playerId);
+    boolean checkIfGameIsOver();
 
     boolean hasEnded();
 
@@ -346,6 +346,8 @@ public interface Game extends MageItem, Serializable {
     void idleTimeout(UUID playerId);
 
     void concede(UUID playerId);
+
+    void setConcedingPlayer(UUID playerId);
 
     void setManaPaymentMode(UUID playerId, boolean autoPayment);
 

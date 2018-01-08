@@ -4,7 +4,7 @@ syntax: glob
 Mage.Client/*.dck
 Mage.Client/db
 Mage.Client/gamelogs
-Mage.Client/mageclient.log
+Mage.Client/*.log
 Mage.Client/plugins/images
 Mage.Client/plugins/plugin.data
 Mage.Client/target
@@ -44,6 +44,7 @@ Mage.Server.Plugins/Mage.Game.CommanderDuel/target
 Mage.Server.Plugins/Mage.Game.CommanderFreeForAll/target/
 Mage.Server.Plugins/Mage.Game.FreeForAll/target
 Mage.Server.Plugins/Mage.Game.MomirDuel/target
+Mage.Server.Plugins/Mage.Game.MomirGame/target/
 Mage.Server.Plugins/Mage.Game.PennyDreadfulCommanderFreeForAll/target
 Mage.Server.Plugins/Mage.Game.TinyLeadersDuel/target
 Mage.Server.Plugins/Mage.Game.TwoPlayerDuel/target
@@ -132,3 +133,4 @@ Mage.Client/serverlist.txt
 client_secrets.json
 
 dependency-reduced-pom.xml
+mage-bundle

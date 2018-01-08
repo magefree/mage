@@ -136,7 +136,7 @@ public class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Dual Shot", 153, Rarity.COMMON, mage.cards.d.DualShot.class));
         cards.add(new SetCardInfo("Duskwatch Recruiter", 203, Rarity.UNCOMMON, mage.cards.d.DuskwatchRecruiter.class));
         cards.add(new SetCardInfo("Eerie Interlude", 16, Rarity.RARE, mage.cards.e.EerieInterlude.class));
-        cards.add(new SetCardInfo("Elusive Tormentor", 108, Rarity.RARE, mage.cards.e.ElusiveTormentor.class));
+        cards.add(new SetCardInfo("Elusive Tormentor", "108a", Rarity.RARE, mage.cards.e.ElusiveTormentor.class));
         cards.add(new SetCardInfo("Ember-Eye Wolf", 154, Rarity.COMMON, mage.cards.e.EmberEyeWolf.class));
         cards.add(new SetCardInfo("Emissary of the Sleepless", 17, Rarity.COMMON, mage.cards.e.EmissaryOfTheSleepless.class));
         cards.add(new SetCardInfo("Engulf the Shore", 58, Rarity.RARE, mage.cards.e.EngulfTheShore.class));
@@ -207,7 +207,7 @@ public class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Infectious Curse", 97, Rarity.UNCOMMON, mage.cards.i.InfectiousCurse.class));
         cards.add(new SetCardInfo("Inner Struggle", 167, Rarity.UNCOMMON, mage.cards.i.InnerStruggle.class));
         cards.add(new SetCardInfo("Inquisitor's Ox", 24, Rarity.COMMON, mage.cards.i.InquisitorsOx.class));
-        cards.add(new SetCardInfo("Insidious Mist", 108, Rarity.RARE, mage.cards.i.InsidiousMist.class));
+        cards.add(new SetCardInfo("Insidious Mist", "108b", Rarity.RARE, mage.cards.i.InsidiousMist.class));
         cards.add(new SetCardInfo("Insolent Neonate", 168, Rarity.COMMON, mage.cards.i.InsolentNeonate.class));
         cards.add(new SetCardInfo("Inspiring Captain", 25, Rarity.COMMON, mage.cards.i.InspiringCaptain.class));
         cards.add(new SetCardInfo("Intrepid Provisioner", 213, Rarity.COMMON, mage.cards.i.IntrepidProvisioner.class));

@@ -55,11 +55,11 @@ import mage.game.permanent.Permanent;
 public class TitaniasSong extends CardImpl {
 
     public TitaniasSong(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // Each noncreature artifact loses all abilities and becomes an artifact creature with power and toughness each equal to its converted mana cost. If Titania's Song leaves the battlefield, this effect continues until end of turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TitaniasSongEffect(Duration.WhileOnBattlefield)));
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new TitaniasSongEffect(Duration.EndOfTurn), false));       
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new TitaniasSongEffect(Duration.EndOfTurn), false));
     }
 
     public TitaniasSong(final TitaniasSong card) {
@@ -71,12 +71,15 @@ public class TitaniasSong extends CardImpl {
         return new TitaniasSong(this);
     }
 }
+
 class TitaniasSongEffect extends ContinuousEffectImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent();
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
+
     public TitaniasSongEffect(Duration duration) {
         super(duration, Outcome.BecomeCreature);
         staticText = "Each noncreature artifact loses its abilities and is an artifact creature with power and toughness each equal to its converted mana cost";
@@ -97,8 +100,8 @@ class TitaniasSongEffect extends ContinuousEffectImpl {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
                     affectedObjectList.clear();
-                    for(Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)){
-                        if(permanent != null){
+                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                        if (permanent != null) {
                             affectedObjectList.add(new MageObjectReference(permanent, game));
                             permanent.addCardType(CardType.CREATURE);
                         }
@@ -106,18 +109,18 @@ class TitaniasSongEffect extends ContinuousEffectImpl {
                 }
                 break;
             case AbilityAddingRemovingEffects_6:
-                    for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
-                        Permanent permanent = it.next().getPermanent(game);
-                        if (permanent != null){
-                            permanent.removeAllAbilities(source.getSourceId(), game);
-                        }
+                for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+                    Permanent permanent = it.next().getPermanent(game);
+                    if (permanent != null) {
+                        permanent.removeAllAbilities(source.getSourceId(), game);
                     }
-                    break;
+                }
+                break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
                     for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
                         Permanent permanent = it.next().getPermanent(game);
-                        if (permanent != null){
+                        if (permanent != null) {
                             int manaCost = permanent.getConvertedManaCost();
                             permanent.getPower().setValue(manaCost);
                             permanent.getToughness().setValue(manaCost);
@@ -132,7 +135,6 @@ class TitaniasSongEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         return false;
     }
-
 
     @Override
     public boolean hasLayer(Layer layer) {

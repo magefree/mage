@@ -27,11 +27,9 @@
  */
 package mage.cards.o;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.ControlledCreaturesDealCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -42,10 +40,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -58,7 +52,7 @@ public class OngoingInvestigation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // Whenever one or more creatures you control deal combat damage to a player, investigate.
-        this.addAbility(new OngoingInvestigationTriggeredAbility());
+        this.addAbility(new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(new InvestigateEffect()));
 
         // {1}{G}, Exile a creature card from your graveyard: Investigate. You gain 2 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new InvestigateEffect(), new ManaCostsImpl("{1}{G}"));
@@ -74,52 +68,5 @@ public class OngoingInvestigation extends CardImpl {
     @Override
     public OngoingInvestigation copy() {
         return new OngoingInvestigation(this);
-    }
-}
-
-class OngoingInvestigationTriggeredAbility extends TriggeredAbilityImpl {
-
-    List<UUID> damagedPlayerIds = new ArrayList<>();
-
-    public OngoingInvestigationTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new InvestigateEffect(), false);
-    }
-
-    public OngoingInvestigationTriggeredAbility(final OngoingInvestigationTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public OngoingInvestigationTriggeredAbility copy() {
-        return new OngoingInvestigationTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            if (((DamagedPlayerEvent) event).isCombatDamage()) {
-                Permanent creature = game.getPermanent(event.getSourceId());
-                if (creature != null && creature.getControllerId().equals(controllerId)
-                        && !damagedPlayerIds.contains(event.getTargetId())) {
-                    damagedPlayerIds.add(event.getTargetId());
-                    return true;
-                }
-            }
-        }
-        if (event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST) {
-            damagedPlayerIds.clear();
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever one or more creatures you control deal combat damage to a player, investigate";
     }
 }

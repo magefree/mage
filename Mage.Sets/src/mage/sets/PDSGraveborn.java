@@ -62,6 +62,7 @@ public class PDSGraveborn extends ExpansionSet {
         cards.add(new SetCardInfo("Faceless Butcher", 3, Rarity.COMMON, mage.cards.f.FacelessButcher.class));
         cards.add(new SetCardInfo("Hidden Horror", 2, Rarity.UNCOMMON, mage.cards.h.HiddenHorror.class));
         cards.add(new SetCardInfo("Inkwell Leviathan", 10, Rarity.RARE, mage.cards.i.InkwellLeviathan.class));
+        cards.add(new SetCardInfo("Last Rites", 21, Rarity.COMMON, mage.cards.l.LastRites.class));
         cards.add(new SetCardInfo("Polluted Mire", 26, Rarity.COMMON, mage.cards.p.PollutedMire.class));
         cards.add(new SetCardInfo("Putrid Imp", 1, Rarity.COMMON, mage.cards.p.PutridImp.class));
         cards.add(new SetCardInfo("Reanimate", 15, Rarity.UNCOMMON, mage.cards.r.Reanimate.class));

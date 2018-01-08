@@ -152,7 +152,7 @@ class KaronaFalseGodEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && controller != null) {
-            Choice typeChoice = new ChoiceCreatureType();
+            Choice typeChoice = new ChoiceCreatureType(sourceObject);
             while (!controller.choose(Outcome.BoostCreature, typeChoice, game)) {
                 if (!controller.canRespond()) {
                     return false;

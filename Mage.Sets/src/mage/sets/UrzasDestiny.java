@@ -110,6 +110,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Keldon Champion", 90, Rarity.UNCOMMON, mage.cards.k.KeldonChampion.class));
         cards.add(new SetCardInfo("Keldon Vandals", 91, Rarity.COMMON, mage.cards.k.KeldonVandals.class));
         cards.add(new SetCardInfo("Kingfisher", 36, Rarity.COMMON, mage.cards.k.Kingfisher.class));
+        cards.add(new SetCardInfo("Landslide", 92, Rarity.UNCOMMON, mage.cards.l.Landslide.class));
         cards.add(new SetCardInfo("Magnify", 111, Rarity.COMMON, mage.cards.m.Magnify.class));
         cards.add(new SetCardInfo("Mantis Engine", 133, Rarity.UNCOMMON, mage.cards.m.MantisEngine.class));
         cards.add(new SetCardInfo("Marker Beetles", 112, Rarity.COMMON, mage.cards.m.MarkerBeetles.class));
@@ -120,6 +121,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Mental Discipline", 37, Rarity.COMMON, mage.cards.m.MentalDiscipline.class));
         cards.add(new SetCardInfo("Metalworker", 135, Rarity.RARE, mage.cards.m.Metalworker.class));
         cards.add(new SetCardInfo("Metathran Soldier", 39, Rarity.COMMON, mage.cards.m.MetathranSoldier.class));
+        cards.add(new SetCardInfo("Momentum", 113, Rarity.UNCOMMON, mage.cards.m.Momentum.class));
         cards.add(new SetCardInfo("Multani's Decree", 114, Rarity.COMMON, mage.cards.m.MultanisDecree.class));
         cards.add(new SetCardInfo("Opalescence", 13, Rarity.RARE, mage.cards.o.Opalescence.class));
         cards.add(new SetCardInfo("Opposition", 40, Rarity.RARE, mage.cards.o.Opposition.class));

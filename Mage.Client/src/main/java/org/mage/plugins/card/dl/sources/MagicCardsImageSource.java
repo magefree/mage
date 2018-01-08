@@ -199,12 +199,12 @@ public enum MagicCardsImageSource implements CardImageSource {
             add("E01");
             add("HOU");
             add("C17");
-//        add("XLN");
-//        add("DDT");
-//        add("IMA");
-//        add("E02");
-//        add("V17");
-//        add("UST");
+            add("XLN");
+            add("DDT");
+            add("IMA");
+            add("E02");
+            add("V17");
+            add("UST");
 //        add("RIX");
 //        add("A25");
 //        add("DOM");
@@ -262,6 +262,7 @@ public enum MagicCardsImageSource implements CardImageSource {
             put("DDQ", "duel-decks-blessed-vs-cursed");
             put("DDR", "duel-decks-nissa-vs-ob-nixilis");
             put("DDS", "duel-decks-mind-vs-might");
+            put("DDS", "duel-decks-merfolk-vs-goblin");
             put("DGM", "dragons-maze");
             put("DKA", "dark-ascension");
             put("DRB", "from-the-vault-dragons");

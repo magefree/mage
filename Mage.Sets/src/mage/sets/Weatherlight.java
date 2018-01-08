@@ -90,6 +90,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Cone of Flame", 95, Rarity.UNCOMMON, mage.cards.c.ConeOfFlame.class));
         cards.add(new SetCardInfo("Debt of Loyalty", 127, Rarity.RARE, mage.cards.d.DebtOfLoyalty.class));
         cards.add(new SetCardInfo("Dense Foliage", 66, Rarity.RARE, mage.cards.d.DenseFoliage.class));
+        cards.add(new SetCardInfo("Desperate Gambit", 96, Rarity.UNCOMMON, mage.cards.d.DesperateGambit.class));
         cards.add(new SetCardInfo("Dingus Staff", 149, Rarity.UNCOMMON, mage.cards.d.DingusStaff.class));
         cards.add(new SetCardInfo("Disrupt", 37, Rarity.COMMON, mage.cards.d.Disrupt.class));
         cards.add(new SetCardInfo("Doomsday", 8, Rarity.RARE, mage.cards.d.Doomsday.class));
@@ -120,6 +121,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Guided Strike", 132, Rarity.COMMON, mage.cards.g.GuidedStrike.class));
         cards.add(new SetCardInfo("Harvest Wurm", 72, Rarity.COMMON, mage.cards.h.HarvestWurm.class));
         cards.add(new SetCardInfo("Haunting Misery", 13, Rarity.COMMON, mage.cards.h.HauntingMisery.class));
+        cards.add(new SetCardInfo("Heart of Bogardan", 106, Rarity.RARE, mage.cards.h.HeartOfBogardan.class));
         cards.add(new SetCardInfo("Heat Stroke", 107, Rarity.RARE, mage.cards.h.HeatStroke.class));
         cards.add(new SetCardInfo("Heavy Ballista", 133, Rarity.COMMON, mage.cards.h.HeavyBallista.class));
         cards.add(new SetCardInfo("Hidden Horror", 14, Rarity.UNCOMMON, mage.cards.h.HiddenHorror.class));

@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Tallowisp extends CardImpl {
 
-    private static final FilterCard filterAura = new FilterCard("Aura card");
+    private static final FilterCard filterAura = new FilterCard("Aura card with enchant creature");
 
     static {
         filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
@@ -93,7 +93,7 @@ class TallowispAbilityPredicate implements Predicate<MageObject> {
         for (int i = 0; i < abilities.size(); i++) {
             if (abilities.get(i) instanceof EnchantAbility) {
                 String enchantText = abilities.get(i).getRule();
-                if (enchantText.startsWith("Enchant") && enchantText.contains("creature")) {
+                if (enchantText.contentEquals("Enchant creature")) {
                     return true;
                 }
             }

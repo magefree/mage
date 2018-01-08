@@ -85,8 +85,10 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Dominate", 31, Rarity.UNCOMMON, mage.cards.d.Dominate.class));
         cards.add(new SetCardInfo("Downhill Charge", 79, Rarity.COMMON, mage.cards.d.DownhillCharge.class));
         cards.add(new SetCardInfo("Ensnare", 32, Rarity.UNCOMMON, mage.cards.e.Ensnare.class));
+        cards.add(new SetCardInfo("Eye of Yawgmoth", 129, Rarity.RARE, mage.cards.e.EyeOfYawgmoth.class));
         cards.add(new SetCardInfo("Fanatical Devotion", 8, Rarity.COMMON, mage.cards.f.FanaticalDevotion.class));
         cards.add(new SetCardInfo("Flame Rift", 80, Rarity.COMMON, mage.cards.f.FlameRift.class));
+        cards.add(new SetCardInfo("Flint Golem", 130, Rarity.UNCOMMON, mage.cards.f.FlintGolem.class));
         cards.add(new SetCardInfo("Flowstone Armor", 131, Rarity.UNCOMMON, mage.cards.f.FlowstoneArmor.class));
         cards.add(new SetCardInfo("Flowstone Crusher", 81, Rarity.COMMON, mage.cards.f.FlowstoneCrusher.class));
         cards.add(new SetCardInfo("Flowstone Overseer", 82, Rarity.RARE, mage.cards.f.FlowstoneOverseer.class));
@@ -95,20 +97,30 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Flowstone Surge", 85, Rarity.UNCOMMON, mage.cards.f.FlowstoneSurge.class));
         cards.add(new SetCardInfo("Flowstone Thopter", 132, Rarity.UNCOMMON, mage.cards.f.FlowstoneThopter.class));
         cards.add(new SetCardInfo("Flowstone Wall", 86, Rarity.COMMON, mage.cards.f.FlowstoneWall.class));
+        cards.add(new SetCardInfo("Fog Patch", 104, Rarity.COMMON, mage.cards.f.FogPatch.class));
+        cards.add(new SetCardInfo("Harvest Mage", 105, Rarity.COMMON, mage.cards.h.HarvestMage.class));
         cards.add(new SetCardInfo("Infiltrate", 33, Rarity.COMMON, mage.cards.i.Infiltrate.class));
         cards.add(new SetCardInfo("Jolting Merfolk", 34, Rarity.UNCOMMON, mage.cards.j.JoltingMerfolk.class));
         cards.add(new SetCardInfo("Kill Switch", 133, Rarity.RARE, mage.cards.k.KillSwitch.class));
         cards.add(new SetCardInfo("Kor Haven", 141, Rarity.RARE, mage.cards.k.KorHaven.class));
+        cards.add(new SetCardInfo("Laccolith Grunt", 87, Rarity.COMMON, mage.cards.l.LaccolithGrunt.class));
+        cards.add(new SetCardInfo("Laccolith Rig", 88, Rarity.COMMON, mage.cards.l.LaccolithRig.class));
+        cards.add(new SetCardInfo("Laccolith Titan", 89, Rarity.RARE, mage.cards.l.LaccolithTitan.class));
+        cards.add(new SetCardInfo("Laccolith Warrior", 90, Rarity.UNCOMMON, mage.cards.l.LaccolithWarrior.class));
+        cards.add(new SetCardInfo("Laccolith Whelp", 91, Rarity.COMMON, mage.cards.l.LaccolithWhelp.class));
         cards.add(new SetCardInfo("Lashknife", 9, Rarity.COMMON, mage.cards.l.Lashknife.class));
         cards.add(new SetCardInfo("Lawbringer", 10, Rarity.COMMON, mage.cards.l.Lawbringer.class));
         cards.add(new SetCardInfo("Lightbringer", 11, Rarity.COMMON, mage.cards.l.Lightbringer.class));
         cards.add(new SetCardInfo("Lin Sivvi, Defiant Hero", 12, Rarity.RARE, mage.cards.l.LinSivviDefiantHero.class));
+        cards.add(new SetCardInfo("Mana Cache", 92, Rarity.RARE, mage.cards.m.ManaCache.class));
         cards.add(new SetCardInfo("Massacre", 58, Rarity.UNCOMMON, mage.cards.m.Massacre.class));
         cards.add(new SetCardInfo("Mind Slash", 59, Rarity.UNCOMMON, mage.cards.m.MindSlash.class));
         cards.add(new SetCardInfo("Mind Swords", 60, Rarity.COMMON, mage.cards.m.MindSwords.class));
         cards.add(new SetCardInfo("Mogg Alarm", 93, Rarity.UNCOMMON, mage.cards.m.MoggAlarm.class));
-        cards.add(new SetCardInfo("Moggcatcher", 96, Rarity.RARE, mage.cards.m.Moggcatcher.class));
         cards.add(new SetCardInfo("Mogg Salvage", 94, Rarity.UNCOMMON, mage.cards.m.MoggSalvage.class));
+        cards.add(new SetCardInfo("Mogg Toady", 95, Rarity.COMMON, mage.cards.m.MoggToady.class));
+        cards.add(new SetCardInfo("Moggcatcher", 96, Rarity.RARE, mage.cards.m.Moggcatcher.class));
+        cards.add(new SetCardInfo("Mossdog", 106, Rarity.COMMON, mage.cards.m.Mossdog.class));
         cards.add(new SetCardInfo("Murderous Betrayal", 61, Rarity.RARE, mage.cards.m.MurderousBetrayal.class));
         cards.add(new SetCardInfo("Nesting Wurm", 107, Rarity.UNCOMMON, mage.cards.n.NestingWurm.class));
         cards.add(new SetCardInfo("Netter en-Dal", 13, Rarity.COMMON, mage.cards.n.NetterEnDal.class));
@@ -140,6 +152,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Rising Waters", 38, Rarity.RARE, mage.cards.r.RisingWaters.class));
         cards.add(new SetCardInfo("Rootwater Commando", 39, Rarity.COMMON, mage.cards.r.RootwaterCommando.class));
         cards.add(new SetCardInfo("Rootwater Thief", 40, Rarity.RARE, mage.cards.r.RootwaterThief.class));
+        cards.add(new SetCardInfo("Rupture", 97, Rarity.UNCOMMON, mage.cards.r.Rupture.class));
         cards.add(new SetCardInfo("Rusting Golem", 138, Rarity.UNCOMMON, mage.cards.r.RustingGolem.class));
         cards.add(new SetCardInfo("Saproling Burst", 113, Rarity.RARE, mage.cards.s.SaprolingBurst.class));
         cards.add(new SetCardInfo("Saproling Cluster", 114, Rarity.RARE, mage.cards.s.SaprolingCluster.class));
@@ -153,6 +166,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Silkenfist Fighter", 19, Rarity.COMMON, mage.cards.s.SilkenfistFighter.class));
         cards.add(new SetCardInfo("Silkenfist Order", 20, Rarity.UNCOMMON, mage.cards.s.SilkenfistOrder.class));
         cards.add(new SetCardInfo("Sivvi's Ruse", 21, Rarity.UNCOMMON, mage.cards.s.SivvisRuse.class));
+        cards.add(new SetCardInfo("Sivvi's Valor", 22, Rarity.RARE, mage.cards.s.SivvisValor.class));
         cards.add(new SetCardInfo("Skyshroud Behemoth", 116, Rarity.RARE, mage.cards.s.SkyshroudBehemoth.class));
         cards.add(new SetCardInfo("Skyshroud Claim", 117, Rarity.COMMON, mage.cards.s.SkyshroudClaim.class));
         cards.add(new SetCardInfo("Skyshroud Cutter", 118, Rarity.COMMON, mage.cards.s.SkyshroudCutter.class));
@@ -173,6 +187,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Submerge", 48, Rarity.UNCOMMON, mage.cards.s.Submerge.class));
         cards.add(new SetCardInfo("Tangle Wire", 139, Rarity.RARE, mage.cards.t.TangleWire.class));
         cards.add(new SetCardInfo("Terrain Generator", 143, Rarity.UNCOMMON, mage.cards.t.TerrainGenerator.class));
+        cards.add(new SetCardInfo("Topple", 24, Rarity.COMMON, mage.cards.t.Topple.class));
         cards.add(new SetCardInfo("Treetop Bracers", 123, Rarity.COMMON, mage.cards.t.TreetopBracers.class));
         cards.add(new SetCardInfo("Trickster Mage", 49, Rarity.COMMON, mage.cards.t.TricksterMage.class));
         cards.add(new SetCardInfo("Vicious Hunger", 74, Rarity.COMMON, mage.cards.v.ViciousHunger.class));
@@ -180,6 +195,7 @@ public class Nemesis extends ExpansionSet {
         cards.add(new SetCardInfo("Voice of Truth", 25, Rarity.UNCOMMON, mage.cards.v.VoiceOfTruth.class));
         cards.add(new SetCardInfo("Volrath the Fallen", 75, Rarity.RARE, mage.cards.v.VolrathTheFallen.class));
         cards.add(new SetCardInfo("Wandering Eye", 50, Rarity.COMMON, mage.cards.w.WanderingEye.class));
+        cards.add(new SetCardInfo("Wild Mammoth", 124, Rarity.UNCOMMON, mage.cards.w.WildMammoth.class));
         cards.add(new SetCardInfo("Woodripper", 125, Rarity.UNCOMMON, mage.cards.w.Woodripper.class));
     }
 }

@@ -93,6 +93,7 @@ public class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Earthquake", 147, Rarity.RARE, mage.cards.e.Earthquake.class));
         cards.add(new SetCardInfo("Elvish Archers", 100, Rarity.RARE, mage.cards.e.ElvishArchers.class));
         cards.add(new SetCardInfo("Evil Presence", 16, Rarity.UNCOMMON, mage.cards.e.EvilPresence.class));
+        cards.add(new SetCardInfo("False Orders", 148, Rarity.COMMON, mage.cards.f.FalseOrders.class));
         cards.add(new SetCardInfo("Farmstead", 203, Rarity.RARE, mage.cards.f.Farmstead.class));
         cards.add(new SetCardInfo("Fastbond", 101, Rarity.RARE, mage.cards.f.Fastbond.class));
         cards.add(new SetCardInfo("Fear", 17, Rarity.COMMON, mage.cards.f.Fear.class));
@@ -210,6 +211,7 @@ public class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Psionic Blast", 75, Rarity.UNCOMMON, mage.cards.p.PsionicBlast.class));
         cards.add(new SetCardInfo("Psychic Venom", 76, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
         cards.add(new SetCardInfo("Purelace", 216, Rarity.RARE, mage.cards.p.Purelace.class));
+        cards.add(new SetCardInfo("Raging River", 169, Rarity.RARE, mage.cards.r.RagingRiver.class));
         cards.add(new SetCardInfo("Raise Dead", 31, Rarity.COMMON, mage.cards.r.RaiseDead.class));
         cards.add(new SetCardInfo("Red Elemental Blast", 170, Rarity.COMMON, mage.cards.r.RedElementalBlast.class));
         cards.add(new SetCardInfo("Red Ward", 217, Rarity.UNCOMMON, mage.cards.r.RedWard.class));

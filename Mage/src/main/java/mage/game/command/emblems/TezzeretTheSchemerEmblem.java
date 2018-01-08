@@ -36,7 +36,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledArtifactPermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT;
 import mage.game.command.Emblem;
 import mage.target.TargetPermanent;
 
@@ -49,13 +49,13 @@ public class TezzeretTheSchemerEmblem extends Emblem {
     public TezzeretTheSchemerEmblem() {
         this.setName("Emblem Tezzeret");
 
-        Effect effect = new AddCardTypeTargetEffect(CardType.CREATURE, Duration.EndOfGame);
+        Effect effect = new AddCardTypeTargetEffect(Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE);
         effect.setText("target artifact you control becomes an artifact creature");
         Ability ability = new BeginningOfCombatTriggeredAbility(Zone.COMMAND, effect, TargetController.YOU, false, true);
         effect = new SetPowerToughnessTargetEffect(5, 5, Duration.EndOfGame);
         effect.setText("with base power and toughness 5/5");
         ability.addEffect(effect);
-        ability.addTarget(new TargetPermanent(new FilterControlledArtifactPermanent()));
+        ability.addTarget(new TargetPermanent(FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         this.getAbilities().add(ability);
     }
 }

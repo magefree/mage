@@ -65,7 +65,7 @@ public class AphettoDredging extends CardImpl {
         if (ability instanceof SpellAbility) {
             Player controller = game.getPlayer(ability.getControllerId());
             if (controller != null) {
-                Choice typeChoice = new ChoiceCreatureType();
+                Choice typeChoice = new ChoiceCreatureType(game.getObject(ability.getSourceId()));
                 while (!controller.choose(Outcome.PutCreatureInPlay, typeChoice, game)) {
                     if (!controller.canRespond()) {
                         return;

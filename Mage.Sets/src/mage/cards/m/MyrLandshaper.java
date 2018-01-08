@@ -55,7 +55,7 @@ public class MyrLandshaper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target land becomes an artifact in addition to its other types until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT), new TapSourceCost());
         Target target = new TargetLandPermanent();
         ability.addTarget(target);
         this.addAbility(ability);

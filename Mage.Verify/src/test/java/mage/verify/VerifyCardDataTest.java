@@ -22,6 +22,39 @@ public class VerifyCardDataTest {
     // right now this is very noisy, and not useful enough to make any assertions on
     private static final boolean CHECK_SOURCE_TOKENS = false;
 
+    private static final HashMap<String, Set<String>> skipCheckLists = new HashMap<>();
+    private static void skipListCreate(String listName){ skipCheckLists.put(listName, new LinkedHashSet<>()); }
+    private static void skipListAddName(String listName, String name){ skipCheckLists.get(listName).add(name); }
+    private static boolean skipListHaveName(String listName, String name){ return skipCheckLists.get(listName).contains(name); }
+
+    static {
+        // skip lists for checks (example: unstable cards with same name may have different stats)
+
+        // power-toughness
+        skipListCreate("PT");
+        skipListAddName("PT", "Garbage Elemental"); // UST
+        skipListAddName("PT", "Infinity Elemental"); // UST
+
+        // color
+        skipListCreate("COLOR");
+        //skipListAddName("COLOR", "Ulrich, Uncontested Alpha"); // gatherer is missing the color indicator on one card and json has wrong data (16.12.2017: not actual)
+
+        // cost
+        skipListCreate("COST");
+
+        // supertype
+        skipListCreate("SUPERTYPE");
+
+        // type
+        skipListCreate("TYPE");
+
+        // subtype
+        skipListCreate("SUBTYPE");
+
+        // number
+        skipListCreate("NUMBER");
+    }
+
     public static List<Card> allCards() {
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         List<Card> cards = new ArrayList<>();
@@ -38,7 +71,7 @@ public class VerifyCardDataTest {
     }
 
     private void warn(Card card, String message) {
-        System.out.println("Warning: " + message + " for " + card.getName());
+        System.out.println("Warning: " + message + " for " + card.getName() + " (" + card.getExpansionSetCode() + ")");
     }
 
     private void fail(Card card, String category, String message) {
@@ -61,6 +94,126 @@ public class VerifyCardDataTest {
         }
         if (failed > 0) {
             Assert.fail(failed + " Errors");
+        }
+    }
+
+    @Test
+    public void checkDuplicateCardNumbersInDB(){
+        Collection<String> doubleErrors = new ArrayList<>();
+
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        for (ExpansionSet set : sets) {
+            Map<String, ExpansionSet.SetCardInfo> cardsList = new HashMap<>();
+            for (ExpansionSet.SetCardInfo checkCard: set.getSetCardInfo()) {
+                String cardNumber = checkCard.getCardNumber();
+
+                // ignore double faced
+                Card realCard = CardImpl.createCard(checkCard.getCardClass(), new CardSetInfo(checkCard.getName(), set.getCode(),
+                        checkCard.getCardNumber(), checkCard.getRarity(), checkCard.getGraphicInfo()));
+                if (realCard.isNightCard()){
+                    continue;
+                }
+
+                if (cardsList.containsKey(cardNumber)){
+                    ExpansionSet.SetCardInfo prevCard = cardsList.get(cardNumber);
+
+                    String errorType;
+                    if (checkCard.getName().equals(prevCard.getName())){
+                        errorType = " founded DUPLICATED cards"
+                                + " set (" + set.getCode() + " - " + set.getName() + ")"
+                                + " (" + checkCard.getCardNumber() + " - " + checkCard.getName() + ")";
+                    }else{
+                        errorType = " founded TYPOS in card numbers"
+                                + " set (" + set.getCode() + " - " + set.getName() + ")"
+                                + " (" + prevCard.getCardNumber() + " - " + prevCard.getName() + ")"
+                                + " and"
+                                + " (" + checkCard.getCardNumber() + " - " + checkCard.getName() + ")";
+                    }
+
+                    String error = "Error: " + errorType;
+
+                    doubleErrors.add(error);
+                }else{
+                    cardsList.put(cardNumber, checkCard);
+                }
+            }
+        }
+
+        for (String error: doubleErrors) {
+            System.out.println(error);
+        }
+
+        if (doubleErrors.size() > 0){
+            Assert.fail("DB have duplicated card numbers, founded errors: " + doubleErrors.size());
+        }
+    }
+
+    @Test
+    public void checkWrongCardClasses(){
+        Collection<String> errorsList = new ArrayList<>();
+        Map<String, String> classesIndex = new HashMap<>();
+        int totalCards = 0;
+
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        for (ExpansionSet set : sets) {
+            for (ExpansionSet.SetCardInfo checkCard : set.getSetCardInfo()) {
+                totalCards = totalCards + 1;
+
+                String currentClass = checkCard.getCardClass().toString();
+                if (classesIndex.containsKey(checkCard.getName())) {
+                    String needClass = classesIndex.get(checkCard.getName());
+                    if (!needClass.equals(currentClass)) {
+                        // workaround to star wars set with same card names
+                        if(!checkCard.getName().equals("Syndicate Enforcer")) {
+                            errorsList.add("Error: founded wrong class in set " + set.getCode() + " - " + checkCard.getName() + " (" + currentClass + " <> " + needClass + ")");
+                        }
+                    }
+                } else {
+                    classesIndex.put(checkCard.getName(), currentClass);
+                }
+            }
+        }
+
+        for (String error: errorsList) {
+            System.out.println(error);
+        }
+
+        // unique cards stats
+        System.out.println("Total unique cards: " + classesIndex.size() + ", total non unique cards (reprints): " + totalCards);
+
+        if (errorsList.size() > 0){
+            Assert.fail("DB have wrong card classes, founded errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    public void checkMissingSets(){
+
+        Collection<String> errorsList = new ArrayList<>();
+
+        int totalMissingSets = 0;
+        int totalMissingCards = 0;
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        for(Map.Entry<String, JsonSet> refEntry: MtgJson.sets().entrySet()){
+            JsonSet refSet = refEntry.getValue();
+
+            // replace codes for aliases
+            String searchSet = MtgJson.mtgJsonToXMageCodes.getOrDefault(refSet.code, refSet.code);
+
+            ExpansionSet mageSet = Sets.findSet(searchSet);
+            if(mageSet == null){
+                totalMissingSets = totalMissingSets + 1;
+                totalMissingCards = totalMissingCards + refSet.cards.size();
+                errorsList.add("Warning: missing set " + refSet.code + " - " + refSet.name + " (cards: " + refSet.cards.size() + ")");
+            }
+        }
+        if(errorsList.size() > 0){
+            errorsList.add("Warning: total missing sets: " + totalMissingSets + ", with missing cards: " + totalMissingCards);
+        }
+
+        // only warnings
+        for (String error: errorsList) {
+            System.out.println(error);
         }
     }
 
@@ -126,13 +279,12 @@ public class VerifyCardDataTest {
         checkSupertypes(card, ref);
         checkTypes(card, ref);
         checkColors(card, ref);
+        //checkNumbers(card, ref); // TODO: load data from allsets.json and check it (allcards.json do not have card numbers)
     }
 
     private void checkColors(Card card, JsonCard ref) {
-        // gatherer is missing the color indicator on one card:
-        if ("Ulrich, Uncontested Alpha".equals(ref.name)) {
-            return;
-        }
+        if (skipListHaveName("COLOR", card.getName())){ return; }
+
         Collection<String> expected = ref.colors;
         ObjectColor color = card.getColor(null);
         if (expected == null) {
@@ -149,7 +301,11 @@ public class VerifyCardDataTest {
     }
 
     private void checkSubtypes(Card card, JsonCard ref) {
+        if (skipListHaveName("SUBTYPE", card.getName())){ return; }
+
         Collection<String> expected = ref.subtypes;
+
+        // fix names (e.g. Urza’s to Urza's)
         if (expected != null && expected.contains("Urza’s")) {
             expected = new ArrayList<>(expected);
             for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext();) {
@@ -158,12 +314,15 @@ public class VerifyCardDataTest {
                 }
             }
         }
+
         if (!eqSet(card.getSubtype(null).stream().map(p -> p.toString()).collect(Collectors.toSet()), expected)) {
             fail(card, "subtypes", card.getSubtype(null) + " != " + expected);
         }
     }
 
     private void checkSupertypes(Card card, JsonCard ref) {
+        if (skipListHaveName("SUPERTYPE", card.getName())){ return; }
+
         Collection<String> expected = ref.supertypes;
         if (!eqSet(card.getSuperType().stream().map(s -> s.toString()).collect(Collectors.toList()), expected)) {
             fail(card, "supertypes", card.getSuperType() + " != " + expected);
@@ -171,6 +330,8 @@ public class VerifyCardDataTest {
     }
 
     private void checkTypes(Card card, JsonCard ref) {
+        if (skipListHaveName("TYPE", card.getName())){ return; }
+
         Collection<String> expected = ref.types;
         List<String> type = new ArrayList<>();
         for (CardType cardType : card.getCardType()) {
@@ -189,6 +350,8 @@ public class VerifyCardDataTest {
     }
 
     private void checkPT(Card card, JsonCard ref) {
+        if (skipListHaveName("PT", card.getName())){ return; }
+
         if (!eqPT(card.getPower().toString(), ref.power) || !eqPT(card.getToughness().toString(), ref.toughness)) {
             String pt = card.getPower() + "/" + card.getToughness();
             String expected = ref.power + '/' + ref.toughness;
@@ -205,6 +368,8 @@ public class VerifyCardDataTest {
     }
 
     private void checkCost(Card card, JsonCard ref) {
+        if (skipListHaveName("COST", card.getName())){ return; }
+
         String expected = ref.manaCost;
         String cost = join(card.getManaCost().getSymbols());
         if (cost != null && cost.isEmpty()) {
@@ -215,6 +380,16 @@ public class VerifyCardDataTest {
         }
         if (!Objects.equals(cost, expected)) {
             fail(card, "cost", cost + " != " + expected);
+        }
+    }
+
+    private void checkNumbers(Card card, JsonCard ref) {
+        if (skipListHaveName("NUMBER", card.getName())){ return; }
+
+        String expected = ref.number;
+        String current = card.getCardNumber();
+        if (!eqPT(current, expected)) {
+            warn(card, "card number " + current + " != " + expected);
         }
     }
 

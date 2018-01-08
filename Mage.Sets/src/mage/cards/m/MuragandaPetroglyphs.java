@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.keyword.special.JohanVigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -91,7 +92,7 @@ class NoAbilityPredicate implements Predicate<MageObject> {
         }
         if (isFaceDown) {
             for (Ability ability : abilities) {
-                if (!ability.getSourceId().equals(input.getId())) {
+                if (!ability.getSourceId().equals(input.getId()) && !ability.getClass().equals(JohanVigilanceAbility.class)) {
                     return false;
                 }
             }
@@ -99,8 +100,7 @@ class NoAbilityPredicate implements Predicate<MageObject> {
         }
 
         for (Ability ability : abilities) {
-            if (!Objects.equals(ability.getClass(), SpellAbility.class)) {
-
+            if (!Objects.equals(ability.getClass(), SpellAbility.class) && !ability.getClass().equals(JohanVigilanceAbility.class)) {
                 return false;
             }
         }

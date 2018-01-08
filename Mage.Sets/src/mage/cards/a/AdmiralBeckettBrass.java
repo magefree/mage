@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -47,8 +48,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetNonlandPermanent;
 import mage.watchers.Watcher;
-
-import java.util.*;
 
 /**
  *

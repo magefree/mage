@@ -30,7 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -42,7 +42,7 @@ import mage.constants.Duration;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
- * @author Loki
+ * @author Loki, JayDi85
  */
 public class MasterThief extends CardImpl {
 
@@ -55,11 +55,12 @@ public class MasterThief extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Master Thief enters the battlefield, gain control of target artifact for as long as you control Master Thief.
-        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new ConditionalContinuousEffect(
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
                 new SourceOnBattlefieldControlUnchangedCondition(),
-                "gain control of target artifact for as long as you control {this}"
-        ), false);
+                "gain control of target artifact for as long as you control {this}"),
+        false);
+
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }

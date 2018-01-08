@@ -42,6 +42,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 
 /**
  *
@@ -103,7 +104,7 @@ class PyromancersGauntletReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 2);
+        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), 2));
         return false;
     }
 

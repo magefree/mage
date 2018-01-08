@@ -213,6 +213,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Hierarch", 214, Rarity.RARE, mage.cards.l.LoxodonHierarch.class));
         cards.add(new SetCardInfo("Lurking Informant", 249, Rarity.COMMON, mage.cards.l.LurkingInformant.class));
         cards.add(new SetCardInfo("Mark of Eviction", 58, Rarity.UNCOMMON, mage.cards.m.MarkOfEviction.class));
+        cards.add(new SetCardInfo("Master Warcraft", 250, Rarity.RARE, mage.cards.m.MasterWarcraft.class));
         cards.add(new SetCardInfo("Mausoleum Turnkey", 94, Rarity.UNCOMMON, mage.cards.m.MausoleumTurnkey.class));
         cards.add(new SetCardInfo("Mindleech Mass", 215, Rarity.RARE, mage.cards.m.MindleechMass.class));
         cards.add(new SetCardInfo("Mindmoil", 135, Rarity.RARE, mage.cards.m.Mindmoil.class));
@@ -295,6 +296,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Smash", 143, Rarity.COMMON, mage.cards.s.Smash.class));
         cards.add(new SetCardInfo("Snapping Drake", 64, Rarity.COMMON, mage.cards.s.SnappingDrake.class));
         cards.add(new SetCardInfo("Sparkmage Apprentice", 144, Rarity.COMMON, mage.cards.s.SparkmageApprentice.class));
+        cards.add(new SetCardInfo("Spawnbroker", 65, Rarity.RARE, mage.cards.s.Spawnbroker.class));
         cards.add(new SetCardInfo("Spectral Searchlight", 271, Rarity.UNCOMMON, mage.cards.s.SpectralSearchlight.class));
         cards.add(new SetCardInfo("Stasis Cell", 66, Rarity.COMMON, mage.cards.s.StasisCell.class));
         cards.add(new SetCardInfo("Stinkweed Imp", 107, Rarity.COMMON, mage.cards.s.StinkweedImp.class));

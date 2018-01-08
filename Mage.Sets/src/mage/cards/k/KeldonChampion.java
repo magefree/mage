@@ -58,7 +58,7 @@ public class KeldonChampion extends CardImpl {
         // Echo {2}{R}{R}
         this.addAbility(new EchoAbility("{2}{R}{R}"));
         // When Keldon Champion enters the battlefield, it deals 3 damage to target player.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

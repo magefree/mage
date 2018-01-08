@@ -51,7 +51,7 @@ Duel Decks: Izzet vs. Golgari|IzzetVsGolgari|
 Duel Decks: Jace vs. Chandra|JaceVsChandra|
 Duel Decks: Jace vs. Vraska|JaceVsVraska|
 Duel Decks: Knights vs. Dragons|KnightsVsDragons|
-Duel Decks: Merfolk vs Goblins|MerfolkVsGoblins|
+Duel Decks: Merfolk vs. Goblins|MerfolkVsGoblins|
 Duel Decks: Mind vs. Might|MindVsMight|
 Duel Decks: Nissa vs. Ob Nixilis|NissaVsObNixilis|
 Duel Decks: Phyrexia vs. the Coalition|PhyrexiaVsTheCoalition|

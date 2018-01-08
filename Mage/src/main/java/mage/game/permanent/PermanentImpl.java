@@ -52,9 +52,12 @@ import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
 import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.token.SquirrelToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.target.TargetCard;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 
@@ -89,6 +92,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean controlledFromStartOfControllerTurn;
     protected int turnsOnBattlefield;
     protected boolean phasedIn = true;
+    protected boolean indirectPhase = false;
     protected boolean faceDown;
     protected boolean attacking;
     protected int blocking;
@@ -100,7 +104,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int maxBlockedBy = 0;
     protected boolean removedFromCombat;
     protected boolean deathtouched;
-    protected List<UUID> attachments = new ArrayList<>();
+
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
     protected Set<MageObjectReference> dealtDamageByThisTurn;
     protected UUID attachedTo;
@@ -138,12 +142,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.controlledFromStartOfControllerTurn = permanent.controlledFromStartOfControllerTurn;
         this.turnsOnBattlefield = permanent.turnsOnBattlefield;
         this.phasedIn = permanent.phasedIn;
+        this.indirectPhase = permanent.indirectPhase;
         this.faceDown = permanent.faceDown;
         this.attacking = permanent.attacking;
         this.blocking = permanent.blocking;
         this.maxBlocks = permanent.maxBlocks;
         this.deathtouched = permanent.deathtouched;
-        this.attachments.addAll(permanent.attachments);
+//        this.attachments.addAll(permanent.attachments);
         for (Map.Entry<String, List<UUID>> entry : permanent.connectedCards.entrySet()) {
             this.connectedCards.put(entry.getKey(), entry.getValue());
         }
@@ -462,12 +467,30 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public boolean isPhasedOutIndirectly() {
+        return !phasedIn && indirectPhase;
+    }
+
+    @Override
     public boolean phaseIn(Game game) {
+        return phaseIn(game, true);
+    }
+
+    @Override
+    public boolean phaseIn(Game game, boolean onlyDirect) {
         if (!phasedIn) {
-            if (!replaceEvent(EventType.PHASE_IN, game)) {
+            if (!replaceEvent(EventType.PHASE_IN, game)
+                    && ((onlyDirect && !indirectPhase) || (!onlyDirect))) {
                 this.phasedIn = true;
+                this.indirectPhase = false;
                 if (!game.isSimulation()) {
                     game.informPlayers(getLogName() + " phased in");
+                }
+                for (UUID attachedId : this.getAttachments()) {
+                    Permanent attachedPerm = game.getPermanent(attachedId);
+                    if (attachedPerm != null) {
+                        attachedPerm.phaseIn(game, false);
+                    }
                 }
                 fireEvent(EventType.PHASED_IN, game);
                 return true;
@@ -478,9 +501,21 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean phaseOut(Game game) {
+        return phaseOut(game, false);
+    }
+
+    @Override
+    public boolean phaseOut(Game game, boolean indirectPhase) {
         if (phasedIn) {
             if (!replaceEvent(EventType.PHASE_OUT, game)) {
+                for (UUID attachedId : this.getAttachments()) {
+                    Permanent attachedPerm = game.getPermanent(attachedId);
+                    if (attachedPerm != null) {
+                        attachedPerm.phaseOut(game, true);
+                    }
+                }
                 this.phasedIn = false;
+                this.indirectPhase = indirectPhase;
                 if (!game.isSimulation()) {
                     game.informPlayers(getLogName() + " phased out");
                 }
@@ -594,46 +629,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public List<UUID> getAttachments() {
-        return attachments;
-    }
-
-    @Override
-    public boolean addAttachment(UUID permanentId, Game game) {
-        if (!this.attachments.contains(permanentId)) {
-            if (!game.replaceEvent(new GameEvent(GameEvent.EventType.ATTACH, objectId, permanentId, controllerId))) {
-                this.attachments.add(permanentId);
-                Permanent attachment = game.getPermanent(permanentId);
-                if (attachment == null) {
-                    attachment = game.getPermanentEntering(permanentId);
-                }
-                if (attachment != null) {
-                    attachment.attachTo(objectId, game);
-                    game.fireEvent(new GameEvent(GameEvent.EventType.ATTACHED, objectId, permanentId, controllerId));
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean removeAttachment(UUID permanentId, Game game) {
-        if (this.attachments.contains(permanentId)) {
-            if (!game.replaceEvent(new GameEvent(GameEvent.EventType.UNATTACH, objectId, permanentId, controllerId))) {
-                this.attachments.remove(permanentId);
-                Permanent attachment = game.getPermanent(permanentId);
-                if (attachment != null) {
-                    attachment.attachTo(null, game);
-                }
-                game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, objectId, permanentId, controllerId));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public UUID getAttachedTo() {
         return attachedTo;
     }
@@ -671,15 +666,27 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void attachTo(UUID permanentId, Game game) {
-        if (this.attachedTo != null && !Objects.equals(this.attachedTo, permanentId)) {
-            Permanent attachment = game.getPermanent(this.attachedTo);
-            if (attachment != null) {
-                attachment.removeAttachment(this.objectId, game);
+    public void unattach(Game game) {
+        this.attachedTo = null;
+        this.addInfo("attachedToCard", null, game);
+    }
+
+    @Override
+    public void attachTo(UUID attachToObjectId, Game game) {
+        if (this.attachedTo != null && !Objects.equals(this.attachedTo, attachToObjectId)) {
+            Permanent attachedToUntilNowObject = game.getPermanent(this.attachedTo);
+            if (attachedToUntilNowObject != null) {
+                attachedToUntilNowObject.removeAttachment(this.objectId, game);
+            } else {
+                Card attachedToUntilNowCard = game.getCard(this.attachedTo);
+                if (attachedToUntilNowCard != null) {
+                    attachedToUntilNowCard.removeAttachment(this.objectId, game);
+                }
             }
+
         }
-        this.attachedTo = permanentId;
-        this.attachedToZoneChangeCounter = game.getState().getZoneChangeCounter(permanentId);
+        this.attachedTo = attachToObjectId;
+        this.attachedToZoneChangeCounter = game.getState().getZoneChangeCounter(attachToObjectId);
         for (Ability ability : this.getAbilities()) {
             for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
                 ContinuousEffect effect = (ContinuousEffect) ite.next();
@@ -690,6 +697,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         game.getContinuousEffects().setOrder(conEffect);
                     }
                 }
+            }
+        }
+        if (!getSpellAbility().getTargets().isEmpty() && (getSpellAbility().getTargets().get(0) instanceof TargetCard)) {
+            Card attachedToCard = game.getCard(this.getAttachedTo());
+            if (attachedToCard != null) {
+                // Because cards are not on the battlefield, the relation has to be shown in the card tooltip (e.g. the enchanted card in graveyard)
+                this.addInfo("attachedToCard", CardUtil.addToolTipMarkTags("Enchanted card: " + attachedToCard.getIdName()), game);
             }
         }
     }
@@ -770,6 +784,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     if (dealtDamageByThisTurn == null) {
                         dealtDamageByThisTurn = new HashSet<>();
                     }
+                    // Unstable ability - Earl of Squirrel
+                    if (sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
+                        Player player = game.getPlayer(sourceControllerId);
+                        new SquirrelToken().putOntoBattlefield(damageDone, game, sourceId, player.getId());
+                    }
                     dealtDamageByThisTurn.add(new MageObjectReference(source, game));
                 }
                 if (source == null) {
@@ -849,7 +868,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         addCounters(CounterType.M1M1.createInstance(actualDamage), damageSourceAbility, game);
                     }
                 } else {
-                    this.damage += actualDamage;
+                    // this.damage += actualDamage;
+                    this.damage = CardUtil.addWithOverflowCheck(this.damage, actualDamage);
                 }
                 game.fireEvent(new DamagedCreatureEvent(objectId, sourceId, controllerId, actualDamage, combat));
                 return actualDamage;
@@ -906,7 +926,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
         if (source != null) {
             if (abilities.containsKey(ShroudAbility.getInstance().getId())) {
-                return false;
+                if (!game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, sourceControllerId, game)) {
+                    return false;
+                }
             }
             if (abilities.containsKey(HexproofAbility.getInstance().getId())) {
                 if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)

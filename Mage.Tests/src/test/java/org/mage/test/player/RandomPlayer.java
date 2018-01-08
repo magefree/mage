@@ -367,13 +367,7 @@ public class RandomPlayer extends ComputerPlayer {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
-        Iterator<String> it = choice.getChoices().iterator();
-        String sChoice = it.next();
-        int choiceNum = rnd.nextInt(choice.getChoices().size());
-        for (int i = 0; i < choiceNum; i++) {
-            sChoice = it.next();
-        }
-        choice.setChoice(sChoice);
+        choice.setRandomChoice();
         return true;
     }
 

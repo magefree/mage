@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -93,15 +92,24 @@ class GoblinFestivalChangeControlEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (controller != null) {
             if (!controller.flipCoin(game)) {
-                Target target = new TargetOpponent();
-                target.setNotTarget(true);
-                if (controller.chooseTarget(outcome, target, source, game)) {
-                    ContinuousEffect effect = new GoblinFestivalGainControlEffect(Duration.Custom, target.getFirstTarget());
-                    effect.setTargetPointer(new FixedTarget(source.getSourceId()));
-                    game.addEffect(effect, source);
-                    return true;
+                if (sourcePermanent != null) {
+                    Target target = new TargetOpponent(true);
+                    if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                        while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
+                            controller.chooseTarget(outcome, target, source, game);
+                        }
+                    }
+                    Player chosenOpponent = game.getPlayer(target.getFirstTarget());
+                    if (chosenOpponent != null) {
+                        ContinuousEffect effect = new GoblinFestivalGainControlEffect(Duration.Custom, chosenOpponent.getId());
+                        effect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
+                        game.addEffect(effect, source);
+                        game.informPlayers(chosenOpponent.getLogName() + " has gained control of " + sourcePermanent.getLogName());
+                        return true;
+                    }
                 }
             }
         }

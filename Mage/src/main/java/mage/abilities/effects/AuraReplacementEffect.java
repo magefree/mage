@@ -89,6 +89,9 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
 
         if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null) {
             card = card.getSecondCardFace();
+            if (!card.isEnchantment() || !card.hasSubtype(SubType.AURA, game)) {
+                return false;
+            }
         }
 
         // Aura cards that go to battlefield face down (Manifest) don't have to select targets
@@ -98,7 +101,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         // Aura enters the battlefield attached
         Object object = game.getState().getValue("attachTo:" + card.getId());
         if (object != null) {
-            if (object instanceof PermanentCard) {
+            if (object instanceof Permanent) {
                 // Aura is attached to a permanent on the battlefield
                 return false;
             }
@@ -210,9 +213,9 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             if (card != null && (card.isEnchantment() && card.hasSubtype(SubType.AURA, game)
                     || // in case of transformable enchantments
                     (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null
-                            && card.getSecondCardFace() != null
-                            && card.getSecondCardFace().isEnchantment()
-                            && card.getSecondCardFace().hasSubtype(SubType.AURA, game)))) {
+                    && card.getSecondCardFace() != null
+                    && card.getSecondCardFace().isEnchantment()
+                    && card.getSecondCardFace().hasSubtype(SubType.AURA, game)))) {
                 return true;
             }
         }

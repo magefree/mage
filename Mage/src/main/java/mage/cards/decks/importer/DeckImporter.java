@@ -45,7 +45,14 @@ public abstract class DeckImporter {
     protected StringBuilder sbMessage = new StringBuilder(); //TODO we should stop using this not garbage collectable StringBuilder. It just bloats
     protected int lineCount;
 
-    public DeckCardLists importDeck(String file) {
+
+    /**
+     *
+     * @param file file to import
+     * @param errorMessages you can setup output messages to showup to user (set null for fatal exception on messages.count > 0)
+     * @return decks list
+     */
+    public DeckCardLists importDeck(String file, StringBuilder errorMessages) {
         File f = new File(file);
         DeckCardLists deckList = new DeckCardLists();
         if (!f.exists()) {
@@ -62,8 +69,15 @@ public abstract class DeckImporter {
                     lineCount++;
                     readLine(line, deckList);
                 }
+
                 if (sbMessage.length() > 0) {
-                    logger.fatal(sbMessage);
+                    if(errorMessages != null) {
+                        // normal output for user
+                        errorMessages.append(sbMessage);
+                    }else{
+                        // fatal error
+                        logger.fatal(sbMessage);
+                    }
                 }
             } catch (Exception ex) {
                 logger.fatal(null, ex);
@@ -72,6 +86,10 @@ public abstract class DeckImporter {
             logger.fatal(null, ex);
         }
         return deckList;
+    }
+
+    public DeckCardLists importDeck(String file) {
+        return importDeck(file, null);
     }
 
     public String getErrors(){

@@ -83,6 +83,8 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("An-Havva Inn", 52, Rarity.UNCOMMON, mage.cards.a.AnHavvaInn.class));
         cards.add(new SetCardInfo("An-Havva Township", 136, Rarity.UNCOMMON, mage.cards.a.AnHavvaTownship.class));
         cards.add(new SetCardInfo("An-Zerrin Ruins", 87, Rarity.RARE, mage.cards.a.AnZerrinRuins.class));
+        cards.add(new SetCardInfo("Apocalypse Chime", 126, Rarity.RARE, mage.cards.a.ApocalypseChime.class));
+        cards.add(new SetCardInfo("Autumn Willow", 53, Rarity.RARE, mage.cards.a.AutumnWillow.class));
         cards.add(new SetCardInfo("Aysen Abbey", 137, Rarity.UNCOMMON, mage.cards.a.AysenAbbey.class));
         cards.add(new SetCardInfo("Aysen Bureaucrats", 104, Rarity.COMMON, mage.cards.a.AysenBureaucrats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aysen Bureaucrats", 105, Rarity.COMMON, mage.cards.a.AysenBureaucrats.class, NON_FULL_USE_VARIOUS));
@@ -91,6 +93,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Baki's Curse", 27, Rarity.RARE, mage.cards.b.BakisCurse.class));
         cards.add(new SetCardInfo("Baron Sengir", 1, Rarity.RARE, mage.cards.b.BaronSengir.class));
         cards.add(new SetCardInfo("Black Carriage", 2, Rarity.RARE, mage.cards.b.BlackCarriage.class));
+        cards.add(new SetCardInfo("Broken Visage", 3, Rarity.RARE, mage.cards.b.BrokenVisage.class));
         cards.add(new SetCardInfo("Carapace", 54, Rarity.COMMON, mage.cards.c.Carapace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Carapace", 55, Rarity.COMMON, mage.cards.c.Carapace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Castle Sengir", 138, Rarity.UNCOMMON, mage.cards.c.CastleSengir.class));
@@ -124,6 +127,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Forget", 32, Rarity.RARE, mage.cards.f.Forget.class));
         cards.add(new SetCardInfo("Ghost Hounds", 12, Rarity.UNCOMMON, mage.cards.g.GhostHounds.class));
         cards.add(new SetCardInfo("Grandmother Sengir", 13, Rarity.RARE, mage.cards.g.GrandmotherSengir.class));
+        cards.add(new SetCardInfo("Hazduhr the Abbot", 110, Rarity.RARE, mage.cards.h.HazduhrTheAbbot.class));
         cards.add(new SetCardInfo("Headstone", 15, Rarity.COMMON, mage.cards.h.Headstone.class));
         cards.add(new SetCardInfo("Hungry Mist", 60, Rarity.COMMON, mage.cards.h.HungryMist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hungry Mist", 61, Rarity.COMMON, mage.cards.h.HungryMist.class, NON_FULL_USE_VARIOUS));
@@ -131,11 +135,13 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Irini Sengir", 17, Rarity.UNCOMMON, mage.cards.i.IriniSengir.class));
         cards.add(new SetCardInfo("Jinx", 36, Rarity.COMMON, mage.cards.j.Jinx.class));
         cards.add(new SetCardInfo("Joven", 97, Rarity.COMMON, mage.cards.j.Joven.class));
+        cards.add(new SetCardInfo("Joven's Tools", 133, Rarity.UNCOMMON, mage.cards.j.JovensTools.class));
         cards.add(new SetCardInfo("Koskun Falls", 18, Rarity.RARE, mage.cards.k.KoskunFalls.class));
         cards.add(new SetCardInfo("Koskun Keep", 139, Rarity.UNCOMMON, mage.cards.k.KoskunKeep.class));
         cards.add(new SetCardInfo("Labyrinth Minotaur", 38, Rarity.COMMON, mage.cards.l.LabyrinthMinotaur.class));
         cards.add(new SetCardInfo("Leaping Lizard", 63, Rarity.COMMON, mage.cards.l.LeapingLizard.class));
         cards.add(new SetCardInfo("Leeches", 111, Rarity.RARE, mage.cards.l.Leeches.class));
+        cards.add(new SetCardInfo("Mammoth Harness", 64, Rarity.RARE, mage.cards.m.MammothHarness.class));
         cards.add(new SetCardInfo("Marjhan", 39, Rarity.RARE, mage.cards.m.Marjhan.class));
         cards.add(new SetCardInfo("Memory Lapse", 40, Rarity.COMMON, mage.cards.m.MemoryLapse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Memory Lapse", 41, Rarity.COMMON, mage.cards.m.MemoryLapse.class, NON_FULL_USE_VARIOUS));
@@ -145,6 +151,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Decree", 43, Rarity.RARE, mage.cards.m.MysticDecree.class));
         cards.add(new SetCardInfo("Narwhal", 44, Rarity.RARE, mage.cards.n.Narwhal.class));
         cards.add(new SetCardInfo("Primal Order", 65, Rarity.RARE, mage.cards.p.PrimalOrder.class));
+        cards.add(new SetCardInfo("Rashka the Slayer", 115, Rarity.RARE, mage.cards.r.RashkaTheSlayer.class));
         cards.add(new SetCardInfo("Reef Pirates", 45, Rarity.COMMON, ReefPirates.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reef Pirates", 46, Rarity.COMMON, ReefPirates.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Renewal", 66, Rarity.COMMON, mage.cards.r.Renewal.class));
@@ -164,6 +171,9 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Spectral Bears", 72, Rarity.UNCOMMON, mage.cards.s.SpectralBears.class));
         cards.add(new SetCardInfo("Torture", 23, Rarity.COMMON, Torture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Torture", 24, Rarity.COMMON, Torture.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trade Caravan", 123, Rarity.COMMON, mage.cards.t.TradeCaravan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trade Caravan", 124, Rarity.COMMON, mage.cards.t.TradeCaravan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Truce", 125, Rarity.RARE, mage.cards.t.Truce.class));
         cards.add(new SetCardInfo("Veldrane of Sengir", 25, Rarity.RARE, mage.cards.v.VeldraneOfSengir.class));
         cards.add(new SetCardInfo("Wall of Kelp", 50, Rarity.RARE, mage.cards.w.WallOfKelp.class));
         cards.add(new SetCardInfo("Willow Faerie", 73, Rarity.COMMON, WillowFaerie.class, NON_FULL_USE_VARIOUS));

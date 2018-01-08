@@ -29,14 +29,14 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -44,6 +44,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -76,10 +77,10 @@ public class Skulduggery extends CardImpl {
     }
 }
 
-class SkulduggeryEffect extends ContinuousEffectImpl {
+class SkulduggeryEffect extends OneShotEffect {
 
     public SkulduggeryEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         this.staticText = "Until end of turn, target creature you control gets +1/+1 and target creature an opponent controls gets -1/-1";
     }
 
@@ -96,13 +97,15 @@ class SkulduggeryEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.addPower(1);
-            permanent.addToughness(1);
+            ContinuousEffect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
+            effect.setTargetPointer(new FixedTarget(permanent, game));
+            game.addEffect(effect, source);
         }
         permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            permanent.addPower(-1);
-            permanent.addToughness(-1);
+            ContinuousEffect effect = new BoostTargetEffect(-1, -1, Duration.EndOfTurn);
+            effect.setTargetPointer(new FixedTarget(permanent, game));
+            game.addEffect(effect, source);
         }
         return true;
     }

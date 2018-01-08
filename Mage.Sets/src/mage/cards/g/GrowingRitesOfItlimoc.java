@@ -45,7 +45,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
@@ -62,7 +62,7 @@ public class GrowingRitesOfItlimoc extends CardImpl {
 
     public GrowingRitesOfItlimoc(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        
+
         this.addSuperType(SuperType.LEGENDARY);
 
         this.transformable = true;
@@ -77,7 +77,7 @@ public class GrowingRitesOfItlimoc extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, false),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(), ComparisonType.MORE_THAN, 3),
+                new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_A_CREATURE, ComparisonType.MORE_THAN, 3),
                 "At the beginning of your end step, if you control four or more creatures, transform {this}"));
     }
 

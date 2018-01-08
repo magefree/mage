@@ -27,18 +27,18 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-
-import java.util.UUID;
 
 /**
  *
@@ -51,9 +51,15 @@ public class DamageTargetEffect extends OneShotEffect {
     protected boolean preventable;
     protected String targetDescription;
     protected boolean useOnlyTargetPointer;
+    protected String sourceName = "{source}";
 
     public DamageTargetEffect(int amount) {
         this(new StaticValue(amount), true);
+    }
+
+    public DamageTargetEffect(int amount, String whoDealDamageName) {
+        this(new StaticValue(amount), true);
+        this.sourceName = whoDealDamageName;
     }
 
     public DamageTargetEffect(int amount, boolean preventable) {
@@ -64,8 +70,18 @@ public class DamageTargetEffect extends OneShotEffect {
         this(new StaticValue(amount), preventable, targetDescription);
     }
 
+    public DamageTargetEffect(int amount, boolean preventable, String targetDescription, String whoDealDamageName) {
+        this(new StaticValue(amount), preventable, targetDescription);
+        this.sourceName = whoDealDamageName;
+    }
+
     public DamageTargetEffect(DynamicValue amount) {
         this(amount, true);
+    }
+
+    public DamageTargetEffect(DynamicValue amount, String whoDealDamageName) {
+        this(amount, true);
+        this.sourceName = whoDealDamageName;
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable) {
@@ -102,6 +118,20 @@ public class DamageTargetEffect extends OneShotEffect {
         this.preventable = effect.preventable;
         this.targetDescription = effect.targetDescription;
         this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
+        this.sourceName = effect.sourceName;
+    }
+
+    public String getSourceName() {
+        return sourceName;
+    }
+
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+    }
+
+    public Effect setUseOnlyTargetPointer(boolean useOnlyTargetPointer) {
+        this.useOnlyTargetPointer = useOnlyTargetPointer;
+        return this;
     }
 
     @Override
@@ -127,7 +157,7 @@ public class DamageTargetEffect extends OneShotEffect {
             }
             return true;
         }
-        for (UUID targetId :this.getTargetPointer().getTargets(game, source)) {
+        for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
                 permanent.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);
@@ -149,7 +179,7 @@ public class DamageTargetEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
-        sb.append("{source} deals ");
+        sb.append(this.sourceName).append(" deals ");
         if (message.isEmpty() || !message.equals("1")) {
             sb.append(amount);
         }

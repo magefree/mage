@@ -29,11 +29,40 @@ package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardLists;
 
+import java.io.File;
+import java.util.Scanner;
+
 /**
  *
  * @author North
  */
 public final class DeckImporterUtil {
+
+    public static final String[] SIDEBOARD_MARKS = new String[]{"//sideboard", "sb: "};
+
+    public static boolean haveSideboardSection(String file){
+        // search for sideboard section:
+        // or //sideboard
+        // or SB: 1 card name -- special deckstats.net
+
+        File f = new File(file);
+        try (Scanner scanner = new Scanner(f)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine().trim().toLowerCase();
+
+                for(String mark: SIDEBOARD_MARKS){
+                    if (line.startsWith(mark)){
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // ignore error, deckimporter will process it
+        }
+
+        // not found
+        return false;
+    }
 
     public static DeckImporter getDeckImporter(String file) {
         if (file.toLowerCase().endsWith("dec")) {
@@ -41,7 +70,7 @@ public final class DeckImporterUtil {
         } else if (file.toLowerCase().endsWith("mwdeck")) {
             return new MWSDeckImporter();
         } else if (file.toLowerCase().endsWith("txt")) {
-            return new TxtDeckImporter();
+            return new TxtDeckImporter(haveSideboardSection(file));
         } else if (file.toLowerCase().endsWith("dck")) {
             return new DckDeckImporter();
         } else if (file.toLowerCase().endsWith("dek")) {
@@ -51,12 +80,16 @@ public final class DeckImporterUtil {
         }
     }
 
-    public static DeckCardLists importDeck(String file) {
+    public static DeckCardLists importDeck(String file, StringBuilder errorMessages) {
         DeckImporter deckImporter = getDeckImporter(file);
         if (deckImporter != null) {
-            return deckImporter.importDeck(file);
+            return deckImporter.importDeck(file, errorMessages);
         } else {
             return new DeckCardLists();
         }
+    }
+
+    public static DeckCardLists importDeck(String file) {
+        return importDeck(file, null);
     }
 }

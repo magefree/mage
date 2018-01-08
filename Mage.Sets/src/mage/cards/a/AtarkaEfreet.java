@@ -58,7 +58,7 @@ public class AtarkaEfreet extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{R}"), true));
 
         // When Atarka Efreet is turned face up, it deals 1 damage to target creature or player.
-        Effect effect = new DamageTargetEffect(1);
+        Effect effect = new DamageTargetEffect(1, "it");
         effect.setText("it deals 1 damage to target creature or player");
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect, false, false);
         ability.addTarget(new TargetCreatureOrPlayer());

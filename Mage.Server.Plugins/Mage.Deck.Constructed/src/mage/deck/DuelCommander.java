@@ -44,6 +44,7 @@ public class DuelCommander extends Commander {
         banned.add("Eidolon of the Great Revel");
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Entomb");
+        banned.add("Fastbond");
         banned.add("Fireblast");
         banned.add("Food Chain");
         banned.add("Gaea's Cradle");

@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileTargetCost;
@@ -38,13 +39,11 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author MarcoMarin
@@ -58,7 +57,7 @@ public class SoulExchange extends CardImpl {
         Cost cost = new ExileTargetCost(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addCost(cost);
         // Return target creature card from your graveyard to the battlefield. Put a +2/+2 counter on that creature if the exiled creature was a Thrull.
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addEffect(new SoulExchangeEffect());
 
     }
@@ -92,10 +91,12 @@ class SoulExchangeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         ReturnFromGraveyardToBattlefieldTargetEffect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-        if (!effect.apply(game, source)) return false;
+        if (!effect.apply(game, source)) {
+            return false;
+        }
 
         for (Cost c : source.getCosts()) {
-         /*   if (!c.getTargets().isEmpty()){
+            /*   if (!c.getTargets().isEmpty()){
                 UUID t = c.getTargets().getFirstTarget();
                 Permanent exiled = game.getPermanentOrLKIBattlefield(t);*/
             if (c.isPaid() && c instanceof ExileTargetCost) {
@@ -105,7 +106,9 @@ class SoulExchangeEffect extends OneShotEffect {
                             game.getPermanent(source.getFirstTarget()).addCounters(CounterType.P2P2.createInstance(), source, game);
                             return true;
                         }
-                    } else return false;
+                    } else {
+                        return false;
+                    }
                 }
             }
         }

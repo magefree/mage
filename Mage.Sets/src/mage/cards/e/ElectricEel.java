@@ -56,7 +56,7 @@ public class ElectricEel extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Electric Eel enters the battlefield, it deals 1 damage to you.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageControllerEffect(1), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageControllerEffect(1, "it"), false));
         
         // {R}{R}: Electric Eel gets +2/+0 until end of turn and deals 1 damage to you.
         Effect effect = new DamageControllerEffect(1);

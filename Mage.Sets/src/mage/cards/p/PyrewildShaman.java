@@ -25,14 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.p;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.ControlledCreaturesDealCombatDamagePlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -41,22 +38,14 @@ import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.DamagedEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-
-
 
 public class PyrewildShaman extends CardImpl {
 
-    public PyrewildShaman (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+    public PyrewildShaman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.SHAMAN);
 
@@ -64,14 +53,16 @@ public class PyrewildShaman extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bloodrush — {1}{R}, Discard Pyrewild Shaman: Target attacking creature gets +3/+1 until end of turn.
-        this.addAbility(new BloodrushAbility("{1}{R}", new BoostTargetEffect(3,1,Duration.EndOfTurn)));
+        this.addAbility(new BloodrushAbility("{1}{R}", new BoostTargetEffect(3, 1, Duration.EndOfTurn)));
 
         // Whenever one or more creatures you control deal combat damage to a player, if Pyrewild Shaman is in your graveyard, you may pay {3}. If you do, return Pyrewild Shaman to your hand.
-        this.addAbility(new PyrewildShamanTriggeredAbility());
+        this.addAbility(new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(Zone.GRAVEYARD,
+                new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl("{3}"))
+                        .setText("if {this} is in your graveyard, you may pay {3}. If you do, return {this} to your hand")));
 
     }
 
-    public PyrewildShaman (final PyrewildShaman card) {
+    public PyrewildShaman(final PyrewildShaman card) {
         super(card);
     }
 
@@ -80,57 +71,4 @@ public class PyrewildShaman extends CardImpl {
         return new PyrewildShaman(this);
     }
 
-}
-
-class PyrewildShamanTriggeredAbility extends TriggeredAbilityImpl {
-
-    List<UUID> damagedPlayerIds = new ArrayList<>();
-
-    public PyrewildShamanTriggeredAbility() {
-        super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl("{3}")), false);
-    }
-
-    public PyrewildShamanTriggeredAbility(final PyrewildShamanTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PyrewildShamanTriggeredAbility copy() {
-        return new PyrewildShamanTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER
-                || event.getType() == EventType.END_COMBAT_STEP_POST
-                || event.getType() == EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            if (((DamagedEvent) event).isCombatDamage()) {
-                Permanent creature = game.getPermanent(event.getSourceId());
-                if (creature != null && creature.getControllerId().equals(controllerId) && !damagedPlayerIds.contains(event.getTargetId())) {
-                    damagedPlayerIds.add(event.getTargetId());
-                    return true;
-                }
-            }
-        }
-        if (event.getType() == EventType.END_COMBAT_STEP_POST){
-            damagedPlayerIds.clear();
-        }
-        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(getSourceId())){
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.GRAVEYARD) {
-                damagedPlayerIds.clear();
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever one or more creatures you control deal combat damage to a player, if {this} is in your graveyard, you may pay {3}. If you do, return {this} to your hand.";
-    }
 }

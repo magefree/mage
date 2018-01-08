@@ -27,6 +27,7 @@
  */
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,8 +48,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -74,7 +73,7 @@ public class HeartOfKiran extends CardImpl {
 
         // You may remove a loyalty counter from a planeswalker you control rather than pay Heart of Kiran's crew cost.
         Cost cost = new HeartOfKiranAlternateCrewCost(CounterType.LOYALTY, 1);
-        Effect effect = new AddCardTypeSourceEffect(CardType.CREATURE, Duration.EndOfTurn);
+        Effect effect = new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.CREATURE, CardType.CREATURE);
         effect.setText("You may remove a loyalty counter from a planeswalker you control rather than pay {this}'s crew cost");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, cost));
     }
@@ -91,8 +90,8 @@ public class HeartOfKiran extends CardImpl {
 
 class HeartOfKiranAlternateCrewCost extends CostImpl {
 
-    private CounterType counterTypeToRemove;
-    private int countersToRemove;
+    private final CounterType counterTypeToRemove;
+    private final int countersToRemove;
 
     private static final FilterControlledPlaneswalkerPermanent filter = new FilterControlledPlaneswalkerPermanent("planeswalker you control");
 

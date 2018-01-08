@@ -40,10 +40,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -56,17 +56,17 @@ import mage.target.common.TargetOpponent;
 public class DreadDefiler extends CardImpl {
 
     public DreadDefiler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}");
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(6);
         this.toughness = new MageInt(8);
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
-        
+
         // {3}{C}, Exile a creature card from your graveyard: Target opponent loses life equal to the exiled card's power.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DreadDefilerEffect(), new ManaCostsImpl("{3}{C}"));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"))));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

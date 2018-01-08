@@ -161,10 +161,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             Game sim = createSimulation(game);
             SimulationNode2.resetCount();
             root = new SimulationNode2(null, sim, maxDepth, playerId);
-
             addActionsTimed();
-            logger.trace("After add actions timed: root.children.size = " + root.children.size());
-            if (!root.children.isEmpty()) {
+            if (root.children != null && !root.children.isEmpty()) {
+                logger.trace("After add actions timed: root.children.size = " + root.children.size());
                 root = root.children.get(0);
                 // int bestScore = root.getScore();
                 // if (bestScore > currentScore || allowBadMoves) {
@@ -233,7 +232,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             return GameStateEvaluator2.evaluate(playerId, game);
         }
         // Condition to stop deeper simulation
-        if (depth <= 0 || SimulationNode2.nodeCount > maxNodes || game.gameOver(null)) {
+        if (depth <= 0 || SimulationNode2.nodeCount > maxNodes || game.checkIfGameIsOver()) {
             val = GameStateEvaluator2.evaluate(playerId, game);
             if (logger.isTraceEnabled()) {
                 StringBuilder sb = new StringBuilder("Add Actions -- reached end state  <").append(val).append('>');
@@ -267,7 +266,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 }
             }
 
-            if (game.gameOver(null)) {
+            if (game.checkIfGameIsOver()) {
                 val = GameStateEvaluator2.evaluate(playerId, game);
             } else if (stepFinished) {
                 logger.debug("Step finished");
@@ -481,7 +480,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
                 Combat simCombat = sim.getCombat().copy();
                 finishCombat(sim);
-                if (sim.gameOver(null)) {
+                if (sim.checkIfGameIsOver()) {
                     val = GameStateEvaluator2.evaluate(playerId, sim);
                 } else if (!counter) {
                     val = simulatePostCombatMain(sim, newNode, depth - 1, alpha, beta);
@@ -549,7 +548,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             logger.debug("interrupted");
             return;
         }
-        if (!game.gameOver(null)) {
+        if (!game.checkIfGameIsOver()) {
             game.getPhase().setStep(step);
             if (!step.skipStep(game, game.getActivePlayerId())) {
                 step.beginStep(game, game.getActivePlayerId());
@@ -598,7 +597,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             logger.debug("interrupted");
             return;
         }
-        if (!game.gameOver(null)) {
+        if (!game.checkIfGameIsOver()) {
             game.getTurn().getPhase().endPhase(game, game.getActivePlayerId());
             game.getTurn().setPhase(new EndPhase());
             if (game.getTurn().getPhase().beginPhase(game, game.getActivePlayerId())) {

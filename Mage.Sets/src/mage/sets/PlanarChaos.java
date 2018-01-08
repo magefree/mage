@@ -165,6 +165,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Rebuff the Wicked", 12, Rarity.UNCOMMON, mage.cards.r.RebuffTheWicked.class));
         cards.add(new SetCardInfo("Reckless Wurm", 120, Rarity.UNCOMMON, mage.cards.r.RecklessWurm.class));
         cards.add(new SetCardInfo("Reflex Sliver", 138, Rarity.COMMON, mage.cards.r.ReflexSliver.class));
+        cards.add(new SetCardInfo("Retether", 13, Rarity.RARE, mage.cards.r.Retether.class));
         cards.add(new SetCardInfo("Revered Dead", 29, Rarity.COMMON, mage.cards.r.ReveredDead.class));
         cards.add(new SetCardInfo("Ridged Kusite", 78, Rarity.COMMON, mage.cards.r.RidgedKusite.class));
         cards.add(new SetCardInfo("Riftmarked Knight", 14, Rarity.UNCOMMON, mage.cards.r.RiftmarkedKnight.class));
@@ -198,6 +199,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Teneb, the Harvester", 163, Rarity.RARE, mage.cards.t.TenebTheHarvester.class));
         cards.add(new SetCardInfo("Tidewalker", 49, Rarity.UNCOMMON, mage.cards.t.Tidewalker.class));
         cards.add(new SetCardInfo("Timbermare", 140, Rarity.RARE, mage.cards.t.Timbermare.class));
+        cards.add(new SetCardInfo("Timebender", 50, Rarity.UNCOMMON, mage.cards.t.Timebender.class));
         cards.add(new SetCardInfo("Timecrafting", 109, Rarity.UNCOMMON, mage.cards.t.Timecrafting.class));
         cards.add(new SetCardInfo("Torchling", 110, Rarity.RARE, mage.cards.t.Torchling.class));
         cards.add(new SetCardInfo("Treacherous Urge", 82, Rarity.UNCOMMON, mage.cards.t.TreacherousUrge.class));

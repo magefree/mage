@@ -48,6 +48,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -126,7 +127,8 @@ class FarrelsMantleEffect extends OneShotEffect{
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent perm = game.getPermanent(source.getSourceId());
-        DamageTargetEffect dmgEffect = new DamageTargetEffect(2+perm.getPower().getValue());
+        int damage = CardUtil.addWithOverflowCheck(perm.getPower().getValue(), 2);
+        DamageTargetEffect dmgEffect = new DamageTargetEffect(damage);
         return dmgEffect.apply(game, source);        
     }
 }

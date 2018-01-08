@@ -45,6 +45,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
+import mage.cards.Sets;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
@@ -258,11 +262,11 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("HOU");
         supportedSets.add("C17");
         supportedSets.add("XLN");
-//        supportedSets.add("DDT"); // Duel Decks: Merfolk vs. Goblins
-//        supportedSets.add("IMA"); // Iconic Msters
-//        supportedSets.add("E02"); // Explorers of Ixalan
-//        supportedSets.add("V17"); // From the Vault: Transform
-//        supportedSets.add("UST"); // Unstable
+        supportedSets.add("DDT"); // Duel Decks: Merfolk vs. Goblins
+        supportedSets.add("IMA"); // Iconic Msters
+        supportedSets.add("E02"); // Explorers of Ixalan
+        supportedSets.add("V17"); // From the Vault: Transform
+        supportedSets.add("UST"); // Unstable
 //        supportedSets.add("RIX"); // Rivals of Ixalan
 //        supportedSets.add("A25"); // Masters 25
 //        supportedSets.add("DOM"); // Dominaria
@@ -332,6 +336,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("DDQ", "Duel Decks: Blessed vs. Cursed");
         setsAliases.put("DDR", "Duel Decks: Nissa vs. Ob Nixilis");
         setsAliases.put("DDS", "Duel Decks: Mind vs. Might");
+        setsAliases.put("DDT", "Duel Decks: Merfolk vs. Goblins");
         setsAliases.put("DGM", "Dragon's Maze");
         setsAliases.put("DIS", "Dissension");
         setsAliases.put("DKA", "Dark Ascension");
@@ -359,6 +364,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("HOP", "Planechase");
         setsAliases.put("HOU", "Hour of Devastation");
         setsAliases.put("ICE", "Ice Age");
+        setsAliases.put("IMA", "Iconic Masters");
         setsAliases.put("INV", "Invasion");
         setsAliases.put("ISD", "Innistrad");
         setsAliases.put("JOU", "Journey into Nyx");
@@ -472,11 +478,65 @@ public enum WizardCardsImageSource implements CardImageSource {
         return null;
     }
 
+    @Override
+    public String generateURL(CardDownloadData card) throws Exception {
+        String collectorId = card.getCollectorId();
+        String cardSet = card.getSet();
+        if (collectorId == null || cardSet == null) {
+            throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
+        }
+        if (card.isFlippedSide()) { //doesn't support rotated images
+            return null;
+        }
+
+        Map<String, String> setLinks = sets.computeIfAbsent(cardSet, k -> getSetLinks(cardSet));
+        if (setLinks == null || setLinks.isEmpty()) {
+            return null;
+        }
+        String searchKey = card.getDownloadName().toLowerCase().replace(" ", "").replace("&", "//");
+        String link = setLinks.get(searchKey);
+        if (link == null) {
+            int length = collectorId.length();
+            // Try to find card image with added letter (e.g. from Unstable)
+            if (Character.isLetter(collectorId.charAt(length - 1))) {
+                String key = searchKey + collectorId.charAt(length - 1);
+                link = setLinks.get(key);
+            }
+            // Try to find image with added card number (e.g. basic lands)
+            if (link == null) {
+                String key = searchKey + collectorId;
+                link = setLinks.get(key);
+                if (link == null) {
+                    int number = Integer.parseInt(collectorId.substring(0, length));
+                    if (number > 0) {
+                        List<String> l = new ArrayList<>(setLinks.values());
+                        if (l.size() >= number) {
+                            link = l.get(number - 1);
+                        } else {;
+                            link = l.get(number - 21);
+                            if (link != null) {
+                                link = link.replace(Integer.toString(number - 20), (Integer.toString(number - 20) + 'a'));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (link != null && !link.startsWith("http://")) {
+            link = "http://gatherer.wizards.com" + link;
+        }
+        return link;
+
+    }
+
     private Map<String, String> getSetLinks(String cardSet) {
         LinkedHashMap<String, String> setLinks = new LinkedHashMap<>();
         ExecutorService executor = Executors.newFixedThreadPool(10);
         try {
             String setNames = setsAliases.get(cardSet);
+            if (setNames == null) {
+                setNames = Sets.getInstance().get(cardSet).getName();
+            }
             String preferedLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
             for (String setName : setNames.split("\\^")) {
                 // String URLSetName = URLEncoder.encode(setName, "UTF-8");
@@ -502,8 +562,22 @@ public enum WizardCardsImageSource implements CardImageSource {
                         }
                         String cardName = normalizeName(cardsImages.get(i).attr("alt"));
                         if (cardName != null && !cardName.isEmpty()) {
-                            Runnable task = new GetImageLinkTask(multiverseId, cardName, preferedLanguage, setLinks);
-                            executor.execute(task);
+                            if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island")
+                                    || cardName.equals("Plains") || cardName.equals("Wastes")) {
+                                getLandVariations(setLinks, cardSet, multiverseId, cardName);
+                            } else {
+                                String numberChar = "";
+                                int pos1 = cardName.indexOf("(");
+                                if (pos1 > 0) {
+                                    int pos2 = cardName.indexOf("(", pos1 + 1);
+                                    if (pos2 > 0) {
+                                        numberChar = cardName.substring(pos2 + 1, pos2 + 2);
+                                        cardName = cardName.substring(0, pos1);
+                                    }
+                                }
+                                Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
+                                setLinks.put(cardName.toLowerCase() + numberChar, generateLink(preferedMultiverseId));
+                            }
                         }
                     }
                     page++;
@@ -552,23 +626,38 @@ public enum WizardCardsImageSource implements CardImageSource {
         return doc;
     }
 
-    private Map<String, String> getLandVariations(int multiverseId, String cardName) throws IOException, NumberFormatException {
+    private void getLandVariations(LinkedHashMap<String, String> setLinks, String cardSet, int multiverseId, String cardName) throws IOException, NumberFormatException {
+        CardCriteria criteria = new CardCriteria();
+        criteria.nameExact(cardName);
+        criteria.setCodes(cardSet);
+        List<CardInfo> cards = CardRepository.instance.findCards(criteria);
+
         String urlLandDocument = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
         Document landDoc = getDocument(urlLandDocument);
         Elements variations = landDoc.select("a.variationlink");
-        Map<String, String> links = new HashMap<>();
         if (!variations.isEmpty()) {
-            int landNumber = 1;
+            if (variations.size() > cards.size()) {
+                logger.warn("More links for lands than cards in DB found for set: " + cardSet + " Name: " + cardName);
+            }
+            if (variations.size() < cards.size()) {
+                logger.warn("Less links for lands than cards in DB found for set: " + cardSet + " Name: " + cardName);
+            }
+            int iteration = 0;
             for (Element variation : variations) {
+                String colNumb = String.valueOf(iteration);
+                if (cards.size() > iteration) {
+                    CardInfo cardInfo = cards.get(iteration);
+                    if (cardInfo != null) {
+                        colNumb = cardInfo.getCardNumber();
+                    }
+                }
                 Integer landMultiverseId = Integer.parseInt(variation.attr("href").replaceAll("[^\\d]", ""));
-                links.put((cardName + landNumber).toLowerCase(), generateLink(landMultiverseId));
-                landNumber++;
+                setLinks.put((cardName).toLowerCase() + colNumb, generateLink(landMultiverseId));
+                iteration++;
             }
         } else {
-            links.put(cardName.toLowerCase(), generateLink(multiverseId));
+            setLinks.put(cardName.toLowerCase(), generateLink(multiverseId));
         }
-
-        return links;
     }
 
     private static String generateLink(int landMultiverseId) {
@@ -623,50 +712,8 @@ public enum WizardCardsImageSource implements CardImageSource {
                 .replace("\u00DB", "U").replace("\u00FB", "u")
                 .replace("\u00DC", "U").replace("\u00FC", "u")
                 .replace("\u00E9", "e").replace("&", "//")
+                .replace(" ", "")
                 .replace("Hintreland Scourge", "Hinterland Scourge");
-    }
-
-    @Override
-    public String generateURL(CardDownloadData card) throws Exception {
-        String collectorId = card.getCollectorId();
-        String cardSet = card.getSet();
-        if (collectorId == null || cardSet == null) {
-            throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
-        }
-        if (card.isFlippedSide()) { //doesn't support rotated images
-            return null;
-        }
-        String setNames = setsAliases.get(cardSet);
-        if (setNames != null) {
-            Map<String, String> setLinks = sets.computeIfAbsent(cardSet, k -> getSetLinks(cardSet));
-            if (setLinks == null || setLinks.isEmpty()) {
-                return null;
-            }
-            String link = setLinks.get(card.getDownloadName().toLowerCase());
-            if (link == null) {
-                int length = collectorId.length();
-
-                if (Character.isLetter(collectorId.charAt(length - 1))) {
-                    length -= 1;
-                }
-
-                int number = Integer.parseInt(collectorId.substring(0, length));
-                List<String> l = new ArrayList<>(setLinks.values());
-                if (l.size() >= number) {
-                    link = l.get(number - 1);
-                } else {;
-                    link = l.get(number - 21);
-                    if (link != null) {
-                        link = link.replace(Integer.toString(number - 20), (Integer.toString(number - 20) + 'a'));
-                    }
-                }
-            }
-            if (link != null && !link.startsWith("http://")) {
-                link = "http://gatherer.wizards.com" + link;
-            }
-            return link;
-        }
-        return null;
 
     }
 
@@ -680,44 +727,43 @@ public enum WizardCardsImageSource implements CardImageSource {
         return 60.0f;
     }
 
-    private final class GetImageLinkTask implements Runnable {
-
-        private int multiverseId;
-        private String cardName;
-        private String preferedLanguage;
-        private LinkedHashMap setLinks;
-
-        public GetImageLinkTask(int multiverseId, String cardName, String preferedLanguage, LinkedHashMap setLinks) {
-            try {
-                this.multiverseId = multiverseId;
-                this.cardName = cardName;
-                this.preferedLanguage = preferedLanguage;
-                this.setLinks = setLinks;
-            } catch (Exception ex) {
-                logger.error(ex.getMessage());
-                logger.error("multiverseId: " + multiverseId);
-                logger.error("cardName: " + cardName);
-                logger.error("preferedLanguage: " + preferedLanguage);
-                logger.error("setLinks: " + setLinks.toString());
-            }
-        }
-
-        @Override
-        public void run() {
-            try {
-                if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
-                    setLinks.putAll(getLandVariations(multiverseId, cardName));
-                } else {
-                    Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
-                    setLinks.put(cardName.toLowerCase(), generateLink(preferedMultiverseId));
-                }
-            } catch (IOException | NumberFormatException ex) {
-                logger.error("Exception when parsing the wizards page: " + ex.getMessage());
-            }
-        }
-
-    }
-
+//    private final class GetImageLinkTask implements Runnable {
+//
+//        private int multiverseId;
+//        private String cardName;
+//        private String preferedLanguage;
+//        private LinkedHashMap setLinks;
+//
+//        public GetImageLinkTask(int multiverseId, String cardName, String preferedLanguage, LinkedHashMap setLinks) {
+//            try {
+//                this.multiverseId = multiverseId;
+//                this.cardName = cardName;
+//                this.preferedLanguage = preferedLanguage;
+//                this.setLinks = setLinks;
+//            } catch (Exception ex) {
+//                logger.error(ex.getMessage());
+//                logger.error("multiverseId: " + multiverseId);
+//                logger.error("cardName: " + cardName);
+//                logger.error("preferedLanguage: " + preferedLanguage);
+//                logger.error("setLinks: " + setLinks.toString());
+//            }
+//        }
+//
+//        @Override
+//        public void run() {
+//            try {
+//                if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
+//                    setLinks.putAll(getLandVariations(multiverseId, cardName));
+//                } else {
+//                    Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
+//                    setLinks.put(cardName.toLowerCase(), generateLink(preferedMultiverseId));
+//                }
+//            } catch (IOException | NumberFormatException ex) {
+//                logger.error("Exception when parsing the wizards page: " + ex.getMessage());
+//            }
+//        }
+//
+//    }
     @Override
     public int getTotalImages() {
         return -1;

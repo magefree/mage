@@ -489,7 +489,9 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 maxSeconds = 3600;
             }
             logger.debug("maxThink: " + maxSeconds + " seconds ");
-            return task.get(maxSeconds, TimeUnit.SECONDS);
+            if (task.get(maxSeconds, TimeUnit.SECONDS) != null) {
+                return task.get(maxSeconds, TimeUnit.SECONDS);
+            }
         } catch (TimeoutException e) {
             logger.info("simulating - timed out");
             task.cancel(true);
@@ -519,7 +521,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             logger.trace("interrupted - " + val);
             return val;
         }
-        if (depth <= 0 || SimulationNode2.nodeCount > maxNodes || game.gameOver(null)) {
+        if (depth <= 0 || SimulationNode2.nodeCount > maxNodes || game.checkIfGameIsOver()) {
             logger.trace("Add actions -- reached end state, node count=" + SimulationNode2.nodeCount + ", depth=" + depth);
             val = GameStateEvaluator2.evaluate(playerId, game);
             UUID currentPlayerId = node.getGame().getPlayerList().get();
@@ -540,7 +542,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 }
             }
 
-            if (game.gameOver(null)) {
+            if (game.checkIfGameIsOver()) {
                 val = GameStateEvaluator2.evaluate(playerId, game);
             } else if (!node.getChildren().isEmpty()) {
                 //declared attackers or blockers or triggered abilities
@@ -588,7 +590,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     logger.debug("Sim Prio [" + depth + "] -- repeated action: " + action.toString());
                     continue;
                 }
-                if (!sim.gameOver(null) && action.isUsesStack()) {
+                if (!sim.checkIfGameIsOver() && action.isUsesStack()) {
                     // only pass if the last action uses the stack
                     UUID nextPlayerId = sim.getPlayerList().get();
                     do {
@@ -765,14 +767,9 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             return super.choose(outcome, choice, game);
         }
         if (!choice.isChosen()) {
-            for (String achoice : choices) {
-                choice.setChoice(achoice);
-                if (choice.isChosen()) {
-                    choices.clear();
-                    return true;
-                }
+            if(!choice.setChoiceByAnswers(choices, true)){
+                choice.setRandomChoice();
             }
-            return false;
         }
         return true;
     }
@@ -864,7 +861,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     break;
                 case CLEANUP:
                     game.getPhase().getStep().beginStep(game, activePlayerId);
-                    if (!game.checkStateAndTriggered() && !game.gameOver(null)) {
+                    if (!game.checkStateAndTriggered() && !game.checkIfGameIsOver()) {
                         game.getState().setActivePlayerId(game.getState().getPlayerList(game.getActivePlayerId()).getNext());
                         game.getTurn().setPhase(new BeginningPhase());
                         game.getPhase().setStep(new UntapStep());

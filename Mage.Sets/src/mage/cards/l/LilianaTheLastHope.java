@@ -40,12 +40,12 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.emblems.LilianaTheLastHopeEmblem;
 import mage.players.Player;
@@ -114,7 +114,7 @@ class LilianaTheLastHopeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"));
+        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         target.setNotTarget(true);
         if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                 && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)

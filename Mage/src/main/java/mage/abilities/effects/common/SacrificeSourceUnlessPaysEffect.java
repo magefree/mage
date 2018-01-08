@@ -72,6 +72,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
         if (costText.toLowerCase().startsWith("discard")
                 || costText.toLowerCase().startsWith("remove")
                 || costText.toLowerCase().startsWith("return")
+                || costText.toLowerCase().startsWith("put")
                 || costText.toLowerCase().startsWith("exile")
                 || costText.toLowerCase().startsWith("sacrifice")) {
             sb.append(costText.substring(0, 1).toLowerCase());

@@ -37,7 +37,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,21 +48,19 @@ import java.util.UUID;
  * @author fireshoes
  */
 public class EvolutionCharm extends CardImpl {
-    
-    private static FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
 
     public EvolutionCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Choose one - Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library;
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true, true));
-        
-        // or return target creature card from your graveyard to your hand; 
+
+        // or return target creature card from your graveyard to your hand;
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(filter));
+        mode.getTargets().add(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addMode(mode);
-        
+
         // or target creature gains flying until end of turn.
         mode = new Mode();
         mode.getEffects().add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));

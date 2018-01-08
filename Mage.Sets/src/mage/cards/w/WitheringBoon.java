@@ -33,8 +33,7 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 /**
@@ -42,19 +41,15 @@ import mage.target.TargetSpell;
  * @author markedagain
  */
 public class WitheringBoon extends CardImpl {
-    private static final FilterSpell filter = new FilterSpell("creature spell");
 
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
     public WitheringBoon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // As an additional cost to cast Withering Boon, pay 3 life.
         this.getSpellAbility().addCost(new PayLifeCost(3));
         // Counter target creature spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
     }
 
     public WitheringBoon(final WitheringBoon card) {

@@ -36,10 +36,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class PhyrexianDelver extends CardImpl {
 
     public PhyrexianDelver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(3);
@@ -60,7 +60,7 @@ public class PhyrexianDelver extends CardImpl {
 
         // When Phyrexian Delver enters the battlefield, return target creature card from your graveyard to the battlefield. You lose life equal to that card's converted mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PhyrexianDelverEffect(), false);
-        Target target = new TargetCardInYourGraveyard(1, new FilterCreatureCard("creature card from your graveyard"));
+        Target target = new TargetCardInYourGraveyard(1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         ability.addTarget(target);
         this.addAbility(ability);
     }

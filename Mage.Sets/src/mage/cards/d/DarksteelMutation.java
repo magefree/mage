@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class DarksteelMutation extends CardImpl {
 
     public DarksteelMutation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -67,7 +67,7 @@ public class DarksteelMutation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new BecomesCreatureAttachedEffect(new DarksteelMutationInsectToken(),
                         "Enchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types.",
-                        Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ALL)));
+                        Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ALL_BUT_COLOR)));
 
     }
 

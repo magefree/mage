@@ -53,6 +53,7 @@ public class StarWars extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        cards.add(new SetCardInfo("A-Wing", 96, Rarity.UNCOMMON, mage.cards.a.AWing.class));
         cards.add(new SetCardInfo("AAT-1", 160, Rarity.UNCOMMON, mage.cards.a.AAT1.class));
         cards.add(new SetCardInfo("Acklay of the Arena", 161, Rarity.RARE, mage.cards.a.AcklayOfTheArena.class));
         cards.add(new SetCardInfo("Acquire Target", 65, Rarity.COMMON, mage.cards.a.AcquireTarget.class));
@@ -66,7 +67,6 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Asajj Ventress", 164, Rarity.RARE, mage.cards.a.AsajjVentress.class));
         cards.add(new SetCardInfo("AT-ST", 128, Rarity.RARE, mage.cards.a.ATST.class));
         cards.add(new SetCardInfo("Aurra Sing, Bane of Jedi", 165, Rarity.MYTHIC, mage.cards.a.AurraSingBaneOfJedi.class));
-        cards.add(new SetCardInfo("A-Wing", 96, Rarity.UNCOMMON, mage.cards.a.AWing.class));
         cards.add(new SetCardInfo("Bantha Herd", 3, Rarity.RARE, mage.cards.b.BanthaHerd.class));
         cards.add(new SetCardInfo("Bathe in Bacta", 129, Rarity.COMMON, mage.cards.b.BatheInBacta.class));
         cards.add(new SetCardInfo("Battle Tactics", 5, Rarity.UNCOMMON, mage.cards.b.BattleTactics.class));
@@ -96,7 +96,7 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Apprenticeship", 101, Rarity.UNCOMMON, mage.cards.d.DarkApprenticeship.class));
         cards.add(new SetCardInfo("Dark Decision", 177, Rarity.COMMON, mage.cards.d.DarkDecision.class));
         cards.add(new SetCardInfo("Dark Trooper", 231, Rarity.UNCOMMON, mage.cards.d.DarkTrooper.class));
-        cards.add(new SetCardInfo("Darth Maul", 170, Rarity.RARE, mage.cards.d.DarthMaul.class));
+        cards.add(new SetCardInfo("Darth Maul", 178, Rarity.RARE, mage.cards.d.DarthMaul.class));
         cards.add(new SetCardInfo("Darth Sidious, Sith Lord", 179, Rarity.MYTHIC, mage.cards.d.DarthSidiousSithLord.class));
         cards.add(new SetCardInfo("Darth Tyranus", 180, Rarity.MYTHIC, mage.cards.d.DarthTyranus.class));
         cards.add(new SetCardInfo("Darth Vader", 140, Rarity.MYTHIC, mage.cards.d.DarthVader.class));
@@ -173,7 +173,7 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Jedi Enclave", 243, Rarity.COMMON, mage.cards.j.JediEnclave.class));
         cards.add(new SetCardInfo("Jedi Holocron", 233, Rarity.COMMON, mage.cards.j.JediHolocron.class));
         cards.add(new SetCardInfo("Jedi Inquirer", 17, Rarity.COMMON, mage.cards.j.JediInquirer.class));
-        cards.add(new SetCardInfo("Jedi Instructor", 17, Rarity.COMMON, mage.cards.j.JediInstructor.class));
+        cards.add(new SetCardInfo("Jedi Instructor", 18, Rarity.COMMON, mage.cards.j.JediInstructor.class));
         cards.add(new SetCardInfo("Jedi Knight", 193, Rarity.UNCOMMON, mage.cards.j.JediKnight.class));
         cards.add(new SetCardInfo("Jedi Mind Trick", 44, Rarity.RARE, mage.cards.j.JediMindTrick.class));
         cards.add(new SetCardInfo("Jedi Sentinel", 194, Rarity.COMMON, mage.cards.j.JediSentinel.class));
@@ -312,8 +312,8 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Underworld Slums", 251, Rarity.COMMON, mage.cards.u.UnderworldSlums.class));
         cards.add(new SetCardInfo("Unity of the Droids", 220, Rarity.UNCOMMON, mage.cards.u.UnityOfTheDroids.class));
         cards.add(new SetCardInfo("Unruly Sureshot", 95, Rarity.UNCOMMON, mage.cards.u.UnrulySureshot.class));
-        cards.add(new SetCardInfo("Vapor Snag", 62, Rarity.COMMON, mage.cards.v.VaporSnag.class));
         cards.add(new SetCardInfo("V-Wing", 126, Rarity.COMMON, mage.cards.v.VWing.class));
+        cards.add(new SetCardInfo("Vapor Snag", 62, Rarity.COMMON, mage.cards.v.VaporSnag.class));
         cards.add(new SetCardInfo("Weequay Beastmaster", 127, Rarity.UNCOMMON, mage.cards.w.WeequayBeastmaster.class));
         cards.add(new SetCardInfo("Wild Holocron", 238, Rarity.COMMON, mage.cards.w.WildHolocron.class));
         cards.add(new SetCardInfo("Wisdom of the Jedi", 221, Rarity.UNCOMMON, mage.cards.w.WisdomOfTheJedi.class));
@@ -322,8 +322,8 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Wookiee Mystic", 222, Rarity.UNCOMMON, mage.cards.w.WookieeMystic.class));
         cards.add(new SetCardInfo("Wookiee Raidleader", 229, Rarity.COMMON, mage.cards.w.WookieeRaidleader.class));
         cards.add(new SetCardInfo("X-Wing", 33, Rarity.COMMON, mage.cards.x.XWing.class));
-        cards.add(new SetCardInfo("Yoda, Jedi Master", 223, Rarity.MYTHIC, mage.cards.y.YodaJediMaster.class));
         cards.add(new SetCardInfo("Y-Wing", 63, Rarity.UNCOMMON, mage.cards.y.YWing.class));
+        cards.add(new SetCardInfo("Yoda, Jedi Master", 223, Rarity.MYTHIC, mage.cards.y.YodaJediMaster.class));
         cards.add(new SetCardInfo("Zam Wesell", 64, Rarity.RARE, mage.cards.z.ZamWesell.class));
     }
 

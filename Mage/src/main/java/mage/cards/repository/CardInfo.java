@@ -40,6 +40,7 @@ import mage.cards.*;
 import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
 import mage.constants.*;
+import mage.util.CardUtil;
 import mage.util.SubTypeList;
 import org.apache.log4j.Logger;
 
@@ -372,6 +373,10 @@ public class CardInfo {
 
     public String getCardNumber() {
         return cardNumber;
+    }
+
+    public int getCardNumberAsInt() {
+        return CardUtil.parseCardNumberAsInt(cardNumber);
     }
 
     public boolean isSplitCard() {

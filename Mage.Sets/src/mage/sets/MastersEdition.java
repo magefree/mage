@@ -76,6 +76,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Armageddon", 4, Rarity.RARE, mage.cards.a.Armageddon.class));
         cards.add(new SetCardInfo("Artifact Blast", 85, Rarity.COMMON, mage.cards.a.ArtifactBlast.class));
         cards.add(new SetCardInfo("Ashnod's Transmogrant", 152, Rarity.COMMON, mage.cards.a.AshnodsTransmogrant.class));
+        cards.add(new SetCardInfo("Autumn Willow", 113, Rarity.RARE, mage.cards.a.AutumnWillow.class));
         cards.add(new SetCardInfo("Balduvian Horde", 86, Rarity.RARE, mage.cards.b.BalduvianHorde.class));
         cards.add(new SetCardInfo("Ball Lightning", 87, Rarity.RARE, mage.cards.b.BallLightning.class));
         cards.add(new SetCardInfo("Baron Sengir", 58, Rarity.RARE, mage.cards.b.BaronSengir.class));
@@ -183,6 +184,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Order of the Ebon Hand", 78, Rarity.COMMON, OrderOfTheEbonHand.class));
         cards.add(new SetCardInfo("Oubliette", 79, Rarity.COMMON, Oubliette.class));
         cards.add(new SetCardInfo("Paralyze", 80, Rarity.COMMON, mage.cards.p.Paralyze.class));
+        cards.add(new SetCardInfo("Petra Sphinx", 23, Rarity.RARE, mage.cards.p.PetraSphinx.class));
         cards.add(new SetCardInfo("Phantom Monster", 43, Rarity.COMMON, mage.cards.p.PhantomMonster.class));
         cards.add(new SetCardInfo("Phelddagrif", 150, Rarity.RARE, mage.cards.p.Phelddagrif.class));
         cards.add(new SetCardInfo("Phyrexian Boon", 81, Rarity.COMMON, mage.cards.p.PhyrexianBoon.class));
@@ -194,6 +196,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Pox", 82, Rarity.RARE, mage.cards.p.Pox.class));
         cards.add(new SetCardInfo("Preacher", 24, Rarity.RARE, mage.cards.p.Preacher.class));
         cards.add(new SetCardInfo("Primal Order", 125, Rarity.RARE, mage.cards.p.PrimalOrder.class));
+        cards.add(new SetCardInfo("Psychic Purge", 45, Rarity.UNCOMMON, mage.cards.p.PsychicPurge.class));
         cards.add(new SetCardInfo("Psychic Venom", 46, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
         cards.add(new SetCardInfo("Pyroblast", 107, Rarity.COMMON, mage.cards.p.Pyroblast.class));
         cards.add(new SetCardInfo("Rabid Wombat", 126, Rarity.UNCOMMON, mage.cards.r.RabidWombat.class));
@@ -223,12 +226,14 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 189, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sylvan Library", 133, Rarity.RARE, mage.cards.s.SylvanLibrary.class));
         cards.add(new SetCardInfo("Tawnos's Coffin", 169, Rarity.RARE, mage.cards.t.TawnossCoffin.class));
+        cards.add(new SetCardInfo("Telekinesis", 52, Rarity.COMMON, mage.cards.t.Telekinesis.class));
         cards.add(new SetCardInfo("Thawing Glaciers", 180, Rarity.RARE, mage.cards.t.ThawingGlaciers.class));
         cards.add(new SetCardInfo("Thicket Basilisk", 134, Rarity.UNCOMMON, mage.cards.t.ThicketBasilisk.class));
         cards.add(new SetCardInfo("Thorn Thallid", 135, Rarity.COMMON, ThornThallid.class));
         cards.add(new SetCardInfo("Thrull Champion", 83, Rarity.RARE, mage.cards.t.ThrullChampion.class));
         cards.add(new SetCardInfo("Thrull Retainer", 84, Rarity.COMMON, mage.cards.t.ThrullRetainer.class));
         cards.add(new SetCardInfo("Thunder Spirit", 27, Rarity.UNCOMMON, mage.cards.t.ThunderSpirit.class));
+        cards.add(new SetCardInfo("Time Elemental", 53, Rarity.RARE, mage.cards.t.TimeElemental.class));
         cards.add(new SetCardInfo("Tivadar's Crusade", 28, Rarity.UNCOMMON, mage.cards.t.TivadarsCrusade.class));
         cards.add(new SetCardInfo("Tornado", 136, Rarity.RARE, mage.cards.t.Tornado.class));
         cards.add(new SetCardInfo("Urza's Bauble", 170, Rarity.UNCOMMON, mage.cards.u.UrzasBauble.class));

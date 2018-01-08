@@ -75,6 +75,9 @@ public class SacrificeSourceUnlessConditionEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder("sacrifice {this} unless ");
         sb.append(condition.toString());
         return sb.toString();

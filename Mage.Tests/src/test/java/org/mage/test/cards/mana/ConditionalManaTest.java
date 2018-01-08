@@ -30,6 +30,7 @@ package org.mage.test.cards.mana;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -75,9 +76,10 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
     @Test
     public void testWorkingWithReflectingPool() {
-        addCard(Zone.BATTLEFIELD, playerA, "Cavern of Souls", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1); // can create white mana without restriction from the Cavern
-        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Cavern of Souls", 1); // can give {C] or {any} mana ({any} with restrictions)
+        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1); // must give {C} or {any} mana from the Cavern, but without restrictions
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1); // white bear
+        addCard(Zone.BATTLEFIELD, playerA, "Upwelling", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
 

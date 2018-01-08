@@ -47,7 +47,7 @@ public class RevokeExistence extends CardImpl {
 
         // Exile target artifact or enchantment.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.ARTIFACT_OR_ENCHANTMENT_PERMANENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
     public RevokeExistence(final RevokeExistence card) {

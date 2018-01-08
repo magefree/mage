@@ -94,6 +94,7 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Earthquake", 147, Rarity.RARE, mage.cards.e.Earthquake.class));
         cards.add(new SetCardInfo("Elvish Archers", 100, Rarity.RARE, mage.cards.e.ElvishArchers.class));
         cards.add(new SetCardInfo("Evil Presence", 16, Rarity.UNCOMMON, mage.cards.e.EvilPresence.class));
+        cards.add(new SetCardInfo("False Orders", 148, Rarity.COMMON, mage.cards.f.FalseOrders.class));
         cards.add(new SetCardInfo("Farmstead", 204, Rarity.RARE, mage.cards.f.Farmstead.class));
         cards.add(new SetCardInfo("Fastbond", 101, Rarity.RARE, mage.cards.f.Fastbond.class));
         cards.add(new SetCardInfo("Fear", 17, Rarity.COMMON, mage.cards.f.Fear.class));
@@ -154,6 +155,7 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Karma", 211, Rarity.UNCOMMON, mage.cards.k.Karma.class));
         cards.add(new SetCardInfo("Keldon Warlord", 161, Rarity.UNCOMMON, mage.cards.k.KeldonWarlord.class));
         cards.add(new SetCardInfo("Kormus Bell", 257, Rarity.RARE, mage.cards.k.KormusBell.class));
+        cards.add(new SetCardInfo("Kudzu", 113, Rarity.RARE, mage.cards.k.Kudzu.class));
         cards.add(new SetCardInfo("Lance", 212, Rarity.UNCOMMON, mage.cards.l.Lance.class));
         cards.add(new SetCardInfo("Ley Druid", 114, Rarity.UNCOMMON, mage.cards.l.LeyDruid.class));
         cards.add(new SetCardInfo("Library of Leng", 258, Rarity.UNCOMMON, mage.cards.l.LibraryOfLeng.class));
@@ -214,6 +216,7 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Psionic Blast", 75, Rarity.UNCOMMON, mage.cards.p.PsionicBlast.class));
         cards.add(new SetCardInfo("Psychic Venom", 76, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
         cards.add(new SetCardInfo("Purelace", 217, Rarity.RARE, mage.cards.p.Purelace.class));
+        cards.add(new SetCardInfo("Raging River", 169, Rarity.RARE, mage.cards.r.RagingRiver.class));
         cards.add(new SetCardInfo("Raise Dead", 31, Rarity.COMMON, mage.cards.r.RaiseDead.class));
         cards.add(new SetCardInfo("Red Elemental Blast", 170, Rarity.COMMON, mage.cards.r.RedElementalBlast.class));
         cards.add(new SetCardInfo("Red Ward", 218, Rarity.UNCOMMON, mage.cards.r.RedWard.class));

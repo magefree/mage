@@ -46,6 +46,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Agent of Stromgald", 95, Rarity.COMMON, AgentOfStromgald.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Denial", 32, Rarity.COMMON, mage.cards.a.ArcaneDenial.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Denial", 33, Rarity.COMMON, mage.cards.a.ArcaneDenial.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashnod's Cylix", 158, Rarity.RARE, mage.cards.a.AshnodsCylix.class));
         cards.add(new SetCardInfo("Astrolabe", 159, Rarity.COMMON, mage.cards.a.Astrolabe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astrolabe", 160, Rarity.COMMON, mage.cards.a.Astrolabe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balduvian Dead", 1, Rarity.UNCOMMON, mage.cards.b.BalduvianDead.class));
@@ -104,6 +105,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Keeper of Tresserhorn", 14, Rarity.RARE, mage.cards.k.KeeperOfTresserhorn.class));
         cards.add(new SetCardInfo("Kjeldoran Home Guard", 135, Rarity.UNCOMMON, mage.cards.k.KjeldoranHomeGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Outpost", 184, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class));
+        cards.add(new SetCardInfo("Krovikan Horror", 15, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
         cards.add(new SetCardInfo("Krovikan Plague", 16, Rarity.UNCOMMON, mage.cards.k.KrovikanPlague.class));
         cards.add(new SetCardInfo("Lake of the Dead", 185, Rarity.RARE, mage.cards.l.LakeOfTheDead.class));
         cards.add(new SetCardInfo("Library of Lat-Nam", 47, Rarity.RARE, mage.cards.l.LibraryOfLatNam.class));
@@ -112,7 +114,10 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Lim-Dul's Paladin", 191, Rarity.UNCOMMON, mage.cards.l.LimDulsPaladin.class));
         cards.add(new SetCardInfo("Lim-Dul's Vault", 192, Rarity.UNCOMMON, mage.cards.l.LimDulsVault.class));
         cards.add(new SetCardInfo("Lord of Tresserhorn", 193, Rarity.RARE, mage.cards.l.LordOfTresserhorn.class));
+        cards.add(new SetCardInfo("Martyrdom", 138, Rarity.COMMON, mage.cards.m.Martyrdom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Martyrdom", 139, Rarity.COMMON, mage.cards.m.Martyrdom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mishra's Groundbreaker", 165, Rarity.UNCOMMON, mage.cards.m.MishrasGroundbreaker.class));
+        cards.add(new SetCardInfo("Misinformation", 19, Rarity.UNCOMMON, mage.cards.m.Misinformation.class));
         cards.add(new SetCardInfo("Mystic Compass", 166, Rarity.UNCOMMON, mage.cards.m.MysticCompass.class));
         cards.add(new SetCardInfo("Nature's Chosen", 81, Rarity.UNCOMMON, mage.cards.n.NaturesChosen.class));
         cards.add(new SetCardInfo("Nature's Wrath", 82, Rarity.RARE, mage.cards.n.NaturesWrath.class));
@@ -149,6 +154,8 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Soldevi Heretic", 50, Rarity.COMMON, mage.cards.s.SoldeviHeretic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldevi Sage", 51, Rarity.COMMON, SoldeviSage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldevi Sage", 52, Rarity.COMMON, SoldeviSage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soldevi Steam Beast", 177, Rarity.COMMON, mage.cards.s.SoldeviSteamBeast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soldevi Steam Beast", 178, Rarity.COMMON, mage.cards.s.SoldeviSteamBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldier of Fortune", 117, Rarity.UNCOMMON, mage.cards.s.SoldierOfFortune.class));
         cards.add(new SetCardInfo("Sol Grail", 173, Rarity.UNCOMMON, mage.cards.s.SolGrail.class));
         cards.add(new SetCardInfo("Stench of Decay", 27, Rarity.COMMON, mage.cards.s.StenchOfDecay.class, NON_FULL_USE_VARIOUS));
@@ -158,6 +165,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Storm Crow", 55, Rarity.COMMON, mage.cards.s.StormCrow.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm Shaman", 118, Rarity.COMMON, StormShaman.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm Shaman", 119, Rarity.UNCOMMON, StormShaman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stromgald Spy", 29, Rarity.UNCOMMON, mage.cards.s.StromgaldSpy.class));
         cards.add(new SetCardInfo("Surge of Strength", 197, Rarity.UNCOMMON, mage.cards.s.SurgeOfStrength.class));
         cards.add(new SetCardInfo("Sustaining Spirit", 151, Rarity.RARE, mage.cards.s.SustainingSpirit.class));
         cards.add(new SetCardInfo("Swamp Mosquito", 30, Rarity.COMMON, SwampMosquito.class, NON_FULL_USE_VARIOUS));
@@ -170,6 +178,8 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Varchild's Crusader", 120, Rarity.COMMON, mage.cards.v.VarchildsCrusader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Varchild's Crusader", 121, Rarity.COMMON, mage.cards.v.VarchildsCrusader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Varchild's War-Riders", 122, Rarity.RARE, mage.cards.v.VarchildsWarRiders.class));
+        cards.add(new SetCardInfo("Veteran's Voice", 123, Rarity.COMMON, mage.cards.v.VeteransVoice.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Veteran's Voice", 124, Rarity.COMMON, mage.cards.v.VeteransVoice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Viscerid Armor", 60, Rarity.COMMON, mage.cards.v.VisceridArmor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Viscerid Armor", 61, Rarity.COMMON, mage.cards.v.VisceridArmor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Viscerid Drone", 62, Rarity.UNCOMMON, mage.cards.v.VisceridDrone.class));

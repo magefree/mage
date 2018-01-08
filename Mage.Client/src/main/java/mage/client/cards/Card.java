@@ -562,7 +562,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     }
 
     @Override
-    public void setTextOffset(int yOffset) {
+    public void setCardCaptionTopOffset(int yOffsetPercent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

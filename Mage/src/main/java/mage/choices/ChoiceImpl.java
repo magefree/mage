@@ -29,14 +29,11 @@
 package mage.choices;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class ChoiceImpl implements Choice, Serializable {
 
@@ -46,7 +43,12 @@ public class ChoiceImpl implements Choice, Serializable {
     protected String choiceKey;
     protected Set<String> choices = new LinkedHashSet<>();
     protected Map<String, String> keyChoices = new LinkedHashMap<>();
+    protected Map<String, Integer> sortData = new LinkedHashMap<>();
     protected String message;
+    protected String subMessage;
+    protected boolean searchEnabled = true; // enable for all windows by default
+    protected String searchText;
+    private static Random rnd = new Random();
 
     public ChoiceImpl() {
         this(false);
@@ -61,9 +63,13 @@ public class ChoiceImpl implements Choice, Serializable {
         this.chosen = choice.chosen;
         this.required = choice.required;
         this.message = choice.message;
+        this.subMessage = choice.subMessage;
+        this.searchEnabled = choice.searchEnabled;
+        this.searchText = choice.searchText;
         this.choices.addAll(choice.choices);
         this.choiceKey = choice.choiceKey;
-        this.keyChoices = choice.keyChoices; // list should never change for the same object so copy by reference
+        this.keyChoices = choice.keyChoices; // list should never change for the same object so copy by reference TODO: check errors with that, it that ok? Color list is static
+        this.sortData = choice.sortData;
     }
 
     @Override
@@ -87,6 +93,12 @@ public class ChoiceImpl implements Choice, Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String getSubMessage(){ return subMessage; }
+
+    @Override
+    public void setSubMessage(String subMessage){ this.subMessage = subMessage; }
 
     @Override
     public Set<String> getChoices() {
@@ -137,11 +149,21 @@ public class ChoiceImpl implements Choice, Serializable {
     }
 
     @Override
+    public String getChoiceValue() {
+        if ((keyChoices != null) && (keyChoices.containsKey(choiceKey))){
+            return keyChoices.get(choiceKey);
+        }else{
+            return null;
+        }
+    }
+
+    @Override
     public void setChoiceByKey(String choiceKey) {
         String choiceToSet = keyChoices.get(choiceKey);
         if (choiceToSet != null) {
             this.choice = choiceToSet;
             this.choiceKey = choiceKey;
+            this.chosen = true;
         }
     }
 
@@ -150,4 +172,87 @@ public class ChoiceImpl implements Choice, Serializable {
         return !keyChoices.isEmpty();
     }
 
+    @Override
+    public boolean isSearchEnabled(){
+        return this.searchEnabled;
+    };
+
+    @Override
+    public void setSearchEnabled(boolean isEnabled){
+        this.searchEnabled = isEnabled;
+    };
+
+    @Override
+    public void setSearchText(String searchText){
+        this.searchText = searchText;
+    };
+
+    @Override
+    public String getSearchText(){
+        return this.searchText;
+    };
+
+    @Override
+    public boolean isSortEnabled(){
+        return (this.sortData != null) && !this.sortData.isEmpty();
+    };
+
+    @Override
+    public void setSortData(Map<String, Integer> sortData){
+        this.sortData = sortData;
+    };
+
+    @Override
+    public Map<String, Integer> getSortData(){
+        return this.sortData;
+    };
+
+    @Override
+    public void setRandomChoice() {
+
+        if(this.isKeyChoice()){
+            // key mode
+            String[] vals = this.getKeyChoices().keySet().toArray(new String[0]);
+            if(vals.length > 0) {
+                int choiceNum = rnd.nextInt(vals.length);
+                this.setChoiceByKey(vals[choiceNum]);
+            }
+        } else {
+            // string mode
+            String[] vals = this.getChoices().toArray(new String[0]);
+            if(vals.length > 0) {
+                int choiceNum = rnd.nextInt(vals.length);
+                this.setChoice(vals[choiceNum]);
+            }
+        }
+    }
+
+    @Override
+    public boolean setChoiceByAnswers(List<String> answers, boolean removeSelectAnswerFromList){
+        // select by answers
+        if(this.isKeyChoice()){
+            // keys mode
+            for (String needChoice : answers) {
+                for (Map.Entry<String, String> currentChoice: this.getKeyChoices().entrySet()) {
+                    if (currentChoice.getKey().equals(needChoice)) {
+                        this.setChoiceByKey(needChoice);
+                        answers.remove(needChoice);
+                        return true;
+                    }
+                }
+            }
+        } else {
+            // string mode
+            for (String needChoice : answers) {
+                for (String currentChoice : this.getChoices()) {
+                    if (currentChoice.equals(needChoice)) {
+                        this.setChoice(needChoice);
+                        answers.remove(needChoice);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false; // can't find answer
+    }
 }

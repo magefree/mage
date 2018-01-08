@@ -330,7 +330,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
             return GameStateEvaluator.evaluate(playerId, game);
         }
         int val;
-        if (node.depth > maxDepth || game.gameOver(null)) {
+        if (node.depth > maxDepth || game.checkIfGameIsOver()) {
             logger.debug(indent(node.depth) + "simulating -- reached end state");
             val = GameStateEvaluator.evaluate(playerId, game);
         }
@@ -357,7 +357,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
                 }
             }
 
-            if (game.gameOver(null)) {
+            if (game.checkIfGameIsOver()) {
                 val = GameStateEvaluator.evaluate(playerId, game);
             }
             else if (!node.getChildren().isEmpty()) {
@@ -403,7 +403,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
                     logger.debug(indent(node.depth) + "found useless action: " + action);
                     continue;
                 }
-                if (!sim.gameOver(null) && action.isUsesStack()) {
+                if (!sim.checkIfGameIsOver() && action.isUsesStack()) {
                     // only pass if the last action uses the stack
                     sim.getPlayer(currentPlayer.getId()).pass(game);
                     sim.getPlayerList().getNext();
@@ -473,18 +473,16 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
-        if (choices.isEmpty())
+        if (choices.isEmpty()) {
             return super.choose(outcome, choice, game);
-        if (!choice.isChosen()) {
-            for (String achoice: choices) {
-                choice.setChoice(achoice);
-                if (choice.isChosen()) {
-                    choices.clear();
-                    return true;
-                }
-            }
-            return false;
         }
+
+        if (!choice.isChosen()) {
+            if(!choice.setChoiceByAnswers(choices, true)){
+                choice.setRandomChoice();
+            }
+        }
+
         return true;
     }
 
@@ -588,7 +586,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
                     break;
                 case CLEANUP:
                     game.getPhase().getStep().beginStep(game, activePlayerId);
-                    if (!game.checkStateAndTriggered() && !game.gameOver(null)) {
+                    if (!game.checkStateAndTriggered() && !game.checkIfGameIsOver()) {
                         game.getState().setActivePlayerId(game.getState().getPlayerList(game.getActivePlayerId()).getNext());
                         game.getTurn().setPhase(new BeginningPhase());
                         game.getPhase().setStep(new UntapStep());

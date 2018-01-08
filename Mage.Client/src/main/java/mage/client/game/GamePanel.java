@@ -791,7 +791,7 @@ public final class GamePanel extends javax.swing.JPanel {
             if (!exiles.containsKey(exile.getId())) {
                 CardInfoWindowDialog newExile = new CardInfoWindowDialog(ShowType.EXILE, exile.getName());
                 exiles.put(exile.getId(), newExile);
-                MageFrame.getDesktop().add(newExile, JLayeredPane.MODAL_LAYER);
+                MageFrame.getDesktop().add(newExile, JLayeredPane.PALETTE_LAYER);
                 newExile.show();
             }
             exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
@@ -1004,7 +1004,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         CardInfoWindowDialog newGraveyard = new CardInfoWindowDialog(ShowType.GRAVEYARD, playerName);
         graveyardWindows.put(playerName, newGraveyard);
-        MageFrame.getDesktop().add(newGraveyard, JLayeredPane.MODAL_LAYER);
+        MageFrame.getDesktop().add(newGraveyard, JLayeredPane.PALETTE_LAYER);
         newGraveyard.loadCards(graveyards.get(playerName), bigCard, gameId, false);
     }
 
@@ -1039,7 +1039,7 @@ public final class GamePanel extends javax.swing.JPanel {
         if (!windowMap.containsKey(name)) {
             cardInfoWindowDialog = new CardInfoWindowDialog(showType, name);
             windowMap.put(name, cardInfoWindowDialog);
-            MageFrame.getDesktop().add(cardInfoWindowDialog, JLayeredPane.MODAL_LAYER);
+            MageFrame.getDesktop().add(cardInfoWindowDialog, JLayeredPane.PALETTE_LAYER);
         } else {
             cardInfoWindowDialog = windowMap.get(name);
         }
@@ -1115,7 +1115,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         this.feedbackPanel.getFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId);
         if (dialog != null) {
-            this.pickTarget.add(dialog);
+            this.pickTarget.add(dialog); // TODO: 01.01.2018, JayDi85: why feedbackPanel saved to pickTarget list? Need to research
         }
     }
 
@@ -1220,14 +1220,17 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void getChoice(Choice choice, UUID objectId) {
         hideAll();
+        // TODO: remember last choices and search incremental for same events?
         PickChoiceDialog pickChoice = new PickChoiceDialog();
         pickChoice.showDialog(choice, objectId, choiceWindowState);
         if (choice.isKeyChoice()) {
+            SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
+            /* // old code, auto complete was for auto scripting?
             if (pickChoice.isAutoSelect()) {
                 SessionHandler.sendPlayerString(gameId, '#' + choice.getChoiceKey());
             } else {
                 SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
-            }
+            }*/
         } else {
             SessionHandler.sendPlayerString(gameId, choice.getChoice());
         }

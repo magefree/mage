@@ -48,8 +48,10 @@ import mage.constants.Outcome;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.BoostCounter;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -60,6 +62,12 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author L_J
  */
 public class KrovikanPlague extends CardImpl {
+    
+    private static final FilterControlledCreaturePermanent filterNonWall = new FilterControlledCreaturePermanent("non-Wall creature you control");
+
+    static {
+        filterNonWall.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
+    }
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("enchanted creature is untapped");
     
@@ -71,8 +79,8 @@ public class KrovikanPlague extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.subtype.add(SubType.AURA);
 
-        // Enchant creature you control
-        TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
+        // Enchant non-Wall creature you control
+        TargetPermanent auraTarget = new TargetControlledCreaturePermanent(filterNonWall);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

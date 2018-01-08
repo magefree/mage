@@ -32,9 +32,11 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.CardPluginImpl;
 import org.mage.plugins.theme.ThemePluginImpl;
 
+import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
+
 public enum Plugins implements MagePlugins {
     instance;
-    public static final String PLUGINS_DIRECTORY = "plugins/";
+    public static final String PLUGINS_DIRECTORY = "plugins";
 
     private static final Logger LOGGER = Logger.getLogger(Plugins.class);
     private static PluginManager pm;
@@ -48,9 +50,10 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public void loadPlugins() {
+
         LOGGER.info("Loading plugins...");
         pm = PluginManagerFactory.createPluginManager();
-        pm.addPluginsFrom(new File(PLUGINS_DIRECTORY).toURI());
+        pm.addPluginsFrom(new File(PLUGINS_DIRECTORY + File.separator).toURI());
         this.cardPlugin = new CardPluginImpl();
         this.counterPlugin = pm.getPlugin(CounterPlugin.class);
         this.themePlugin = new ThemePluginImpl();
@@ -131,10 +134,8 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public void downloadSymbols() {
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
         if (this.cardPlugin != null) {
-            this.cardPlugin.downloadSymbols(path);
+            this.cardPlugin.downloadSymbols(getImagesDir());
         }
     }
 

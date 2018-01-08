@@ -54,7 +54,7 @@ public class AcolyteOfTheInferno extends CardImpl {
         this.addAbility(new RenownAbility(1));
         
         // Whenever Acolyte of the Inferno becomes blocked by a creature, it deals 2 damage to that creature
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(2, true, "that creature"), false));
+        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(2, true, "that creature", "it"), false));
     }
 
     public AcolyteOfTheInferno(final AcolyteOfTheInferno card) {

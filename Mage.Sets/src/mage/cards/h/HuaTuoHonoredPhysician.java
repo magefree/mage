@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class HuaTuoHonoredPhysician extends CardImpl {
 
     public HuaTuoHonoredPhysician(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
 
@@ -59,7 +59,7 @@ public class HuaTuoHonoredPhysician extends CardImpl {
 
         // {tap}: Put target creature card from your graveyard on top of your library. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 

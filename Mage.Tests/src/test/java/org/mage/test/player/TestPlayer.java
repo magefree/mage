@@ -49,6 +49,8 @@ import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.designations.Designation;
+import mage.designations.DesignationType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -57,6 +59,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.SummoningSicknessPredicate;
 import mage.game.Game;
+import mage.game.GameImpl;
 import mage.game.Graveyard;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
@@ -519,6 +522,7 @@ public class TestPlayer implements Player {
                         }
                         if (groups[0].equals("Concede")) {
                             game.concede(getId());
+                            ((GameImpl) game).checkConcede();
                             actions.remove(action);
                         }
                     }
@@ -736,14 +740,8 @@ public class TestPlayer implements Player {
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         if (!choices.isEmpty()) {
-            for (String choose2 : choices) {
-                for (String choose1 : choice.getChoices()) {
-                    if (choose1.equals(choose2)) {
-                        choice.setChoice(choose2);
-                        choices.remove(choose2);
-                        return true;
-                    }
-                }
+            if(choice.setChoiceByAnswers(choices, true)){
+                return true;
             }
         }
         return computerPlayer.choose(outcome, choice, game);
@@ -1180,6 +1178,11 @@ public class TestPlayer implements Player {
     @Override
     public void abort() {
         computerPlayer.abort();
+    }
+
+    @Override
+    public void signalPlayerConcede() {
+        computerPlayer.signalPlayerConcede();
     }
 
     @Override
@@ -1819,6 +1822,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public int rollDice(Game game, int numSides) {
+        return computerPlayer.rollDice(game, numSides);
+    }
+
+    @Override
+    public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
+        return computerPlayer.rollDice(game, appliedEffects, numSides);
+    }
+
+    @Override
     public List<Permanent> getAvailableAttackers(Game game) {
         return computerPlayer.getAvailableAttackers(game);
     }
@@ -2281,6 +2294,21 @@ public class TestPlayer implements Player {
     @Override
     public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
         return computerPlayer.moveCards(cards, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
+    }
+
+    @Override
+    public boolean hasDesignation(DesignationType designationName) {
+        return computerPlayer.hasDesignation(designationName);
+    }
+
+    @Override
+    public void addDesignation(Designation designation) {
+        computerPlayer.addDesignation(designation);
+    }
+
+    @Override
+    public List<Designation> getDesignations() {
+        return computerPlayer.getDesignations();
     }
 
     public void setAIPlayer(boolean AIPlayer) {

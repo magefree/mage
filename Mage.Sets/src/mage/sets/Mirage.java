@@ -105,6 +105,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Daring Apprentice", 60, Rarity.RARE, mage.cards.d.DaringApprentice.class));
         cards.add(new SetCardInfo("Dark Banishing", 13, Rarity.COMMON, mage.cards.d.DarkBanishing.class));
         cards.add(new SetCardInfo("Dark Ritual", 14, Rarity.COMMON, mage.cards.d.DarkRitual.class));
+        cards.add(new SetCardInfo("Dazzling Beauty", 212, Rarity.COMMON, mage.cards.d.DazzlingBeauty.class));
         cards.add(new SetCardInfo("Dirtwater Wraith", 15, Rarity.COMMON, mage.cards.d.DirtwaterWraith.class));
         cards.add(new SetCardInfo("Disempower", 213, Rarity.COMMON, mage.cards.d.Disempower.class));
         cards.add(new SetCardInfo("Disenchant", 214, Rarity.COMMON, mage.cards.d.Disenchant.class));
@@ -278,6 +279,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Skulking Ghost", 41, Rarity.COMMON, mage.cards.s.SkulkingGhost.class));
         cards.add(new SetCardInfo("Sky Diamond", 284, Rarity.UNCOMMON, mage.cards.s.SkyDiamond.class));
         cards.add(new SetCardInfo("Soar", 93, Rarity.COMMON, mage.cards.s.Soar.class));
+        cards.add(new SetCardInfo("Soul Echo", 244, Rarity.RARE, mage.cards.s.SoulEcho.class));
         cards.add(new SetCardInfo("Soul Rend", 42, Rarity.UNCOMMON, mage.cards.s.SoulRend.class));
         cards.add(new SetCardInfo("Spectral Guardian", 245, Rarity.RARE, mage.cards.s.SpectralGuardian.class));
         cards.add(new SetCardInfo("Spirit of the Night", 44, Rarity.RARE, mage.cards.s.SpiritOfTheNight.class));
@@ -303,6 +305,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Telim'Tor's Edict", 198, Rarity.RARE, mage.cards.t.TelimTorsEdict.class));
         cards.add(new SetCardInfo("Thirst", 99, Rarity.COMMON, mage.cards.t.Thirst.class));
         cards.add(new SetCardInfo("Tidal Wave", 100, Rarity.UNCOMMON, mage.cards.t.TidalWave.class));
+        cards.add(new SetCardInfo("Tombstone Stairwell", 47, Rarity.RARE, mage.cards.t.TombstoneStairwell.class));
         cards.add(new SetCardInfo("Tranquil Domain", 143, Rarity.COMMON, mage.cards.t.TranquilDomain.class));
         cards.add(new SetCardInfo("Tropical Storm", 144, Rarity.UNCOMMON, mage.cards.t.TropicalStorm.class));
         cards.add(new SetCardInfo("Uktabi Faerie", 145, Rarity.COMMON, mage.cards.u.UktabiFaerie.class));
