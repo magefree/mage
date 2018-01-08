@@ -56,7 +56,7 @@ public class ChangelingAbility extends StaticAbility implements MageSingleton {
     }
 
     private ChangelingAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super(Zone.ALL, null);
     }
 
     @Override
