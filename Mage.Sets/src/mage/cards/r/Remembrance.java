@@ -28,6 +28,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -57,13 +58,6 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Remembrance extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TokenPredicate()));
-    }
-
     public Remembrance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
@@ -83,8 +77,15 @@ public class Remembrance extends CardImpl {
 
 class RemembranceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature you control");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(Predicates.not(new TokenPredicate()));
+    }
+
     public RemembranceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super(Zone.BATTLEFIELD, new RemembranceEffect());
         this.optional = true;
     }
 
@@ -107,9 +108,10 @@ class RemembranceTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && permanent.getControllerId().equals(this.getControllerId()) && permanent.isCreature()) {
-                this.getEffects().clear();
-                this.addEffect(new RemembranceEffect(permanent.getName()));
+            MageObject mageObject = game.getObject(sourceId);
+            if (permanent != null
+                    && filter.match(permanent, game)) {
+                game.getState().setValue(mageObject + "nameOfPermanent", permanent.getName());
                 return true;
             }
         }
@@ -126,9 +128,8 @@ class RemembranceEffect extends OneShotEffect {
 
     private String cardName;
 
-    RemembranceEffect(String cardName) {
+    RemembranceEffect() {
         super(Outcome.Benefit);
-        this.cardName = cardName;
     }
 
     RemembranceEffect(final RemembranceEffect effect) {
@@ -143,7 +144,10 @@ class RemembranceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        cardName = (String) game.getState().getValue(mageObject + "nameOfPermanent");
+        if (controller != null
+                && cardName != null) {
             FilterCard filterCard = new FilterCard("card named " + cardName);
             filterCard.add(new NamePredicate(cardName));
             return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true).apply(game, source);
