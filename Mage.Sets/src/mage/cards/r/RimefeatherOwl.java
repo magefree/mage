@@ -68,8 +68,8 @@ public class RimefeatherOwl extends CardImpl {
     private static final FilterPermanent filter2 = new FilterPermanent("snow permanents on the battlefield");
 
     static {
-        filter.add(Predicates.not(new CounterPredicate(CounterType.ICE)));
-        filter2.add(Predicates.not(new SupertypePredicate(SuperType.SNOW)));
+        filter.add(new CounterPredicate(CounterType.ICE));
+        filter2.add(new SupertypePredicate(SuperType.SNOW));
     }
 
     public RimefeatherOwl(UUID ownerId, CardSetInfo setInfo) {
