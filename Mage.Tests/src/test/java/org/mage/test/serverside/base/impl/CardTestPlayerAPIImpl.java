@@ -116,7 +116,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (currentGame != null) {
             logger.debug("Resetting previous game and creating new one!");
             currentGame = null;
-            System.gc();
         }
 
         currentGame = createNewGameAndPlayers();

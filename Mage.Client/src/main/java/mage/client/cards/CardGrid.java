@@ -122,7 +122,6 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                 addCard(card, bigCard, gameId, drawImage);
             }
         }
-        // System.gc();
         drawCards(sortSetting);
         this.setVisible(true);
     }
