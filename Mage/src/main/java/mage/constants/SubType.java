@@ -85,6 +85,7 @@ public enum SubType {
     CENTAUR("Centaur", SubTypeSet.CreatureType),
     CEREAN("Cerean", SubTypeSet.CreatureType, true), // Star Wars
     CEPHALID("Cephalid", SubTypeSet.CreatureType),
+    CHICKEN("Chicken", SubTypeSet.CreatureType),
     CHIMERA("Chimera", SubTypeSet.CreatureType),
     CHISS("Chiss", SubTypeSet.CreatureType, true),
     CITIZEN("Citizen", SubTypeSet.CreatureType),
@@ -114,6 +115,7 @@ public enum SubType {
     DWARF("Dwarf", SubTypeSet.CreatureType),
     // E
     EFREET("Efreet", SubTypeSet.CreatureType),
+    EGG("Egg", SubTypeSet.CreatureType),
     ELDER("Elder", SubTypeSet.CreatureType),
     ELDRAZI("Eldrazi", SubTypeSet.CreatureType),
     ELEMENTAL("Elemental", SubTypeSet.CreatureType),
