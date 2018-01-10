@@ -8,6 +8,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchOptions;
@@ -275,6 +276,7 @@ public class LoadTest {
         options.setAttackOption(MultiplayerAttackOption.MULTIPLE);
         options.setRange(RangeOfInfluence.ALL);
         options.setWinsNeeded(1);
+        options.setMatchTimeLimit(MatchTimeLimit.MIN__15);
         return options;
     }
 
