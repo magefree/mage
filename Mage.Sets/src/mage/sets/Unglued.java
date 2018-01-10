@@ -20,6 +20,7 @@ public class Unglued extends ExpansionSet {
 
     private Unglued() {
         super("Unglued", "UGL", ExpansionSet.buildDate(1998, 8, 11), SetType.JOKESET);
+        cards.add(new SetCardInfo("Poultrygeist", 37, Rarity.COMMON, mage.cards.p.Poultrygeist.class));
         cards.add(new SetCardInfo("Chicken Egg", 41, Rarity.COMMON, mage.cards.c.ChickenEgg.class));
         cards.add(new SetCardInfo("Krazy Kow", 48, Rarity.COMMON, mage.cards.k.KrazyKow.class));
         cards.add(new SetCardInfo("Growth Spurt", 61, Rarity.COMMON, mage.cards.g.GrowthSpurt.class));
