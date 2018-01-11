@@ -43,9 +43,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.permanent.PermanentInListPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -192,19 +192,5 @@ class RagingRiverEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-                
-class PermanentInListPredicate implements Predicate<Permanent> {
-
-    private final List<Permanent> permanents;
-
-    public PermanentInListPredicate(List<Permanent> permanents) {
-        this.permanents = permanents;
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return permanents.contains(input);
     }
 }
