@@ -34,10 +34,10 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -57,7 +57,7 @@ public class KindredCharge extends CardImpl {
     public KindredCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
 
-        // Choose a creature type. For each creature you control of the chosen type, create a token that's a copy of that creature. 
+        // Choose a creature type. For each creature you control of the chosen type, create a token that's a copy of that creature.
         // Those tokens gain haste. Exile them at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ChooseCreatureTypeEffect(Outcome.Copy));
         this.getSpellAbility().addEffect(new KindredChargeEffect());
@@ -95,7 +95,11 @@ class KindredChargeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            String creatureType = game.getState().getValue(sourceObject.getId() + "_type").toString();
+            Object object = game.getState().getValue(sourceObject.getId() + "_type");
+            if (object == null) {
+                return false;
+            }
+            String creatureType = object.toString();
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control of the chosen type");
             filter.add(new SubtypePredicate(SubType.byDescription(creatureType)));
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {

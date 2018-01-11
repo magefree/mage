@@ -27,6 +27,7 @@
  */
 package mage.cards.n;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -51,10 +52,6 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.LinkedHashSet;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -124,7 +121,7 @@ class NewBloodEffect extends OneShotEffect {
 class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
 
     private SubType fromSubType;
-    private SubType toSubType;
+    private final SubType toSubType;
 
     public ChangeCreatureTypeTargetEffect(SubType fromSubType, SubType toSubType, Duration duration) {
         super(duration, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.Benefit);
@@ -153,6 +150,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
                 }
             }
             if (typeChoice.getChoice() == null) {
+                discard();
                 return;
             }
             fromSubType = SubType.byDescription(typeChoice.getChoice());

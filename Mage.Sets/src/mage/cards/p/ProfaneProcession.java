@@ -105,7 +105,7 @@ class ProfaneProcessionEffect extends OneShotEffect {
             new ExileTargetEffect(exileId, sourceObject.getIdName()).setTargetPointer(targetPointer).apply(game, source);
             game.applyEffects();
             ExileZone exileZone = game.getExile().getExileZone(exileId);
-            if (exileZone.size() > 2) {
+            if (exileZone != null && exileZone.size() > 2) {
                 new TransformSourceEffect(true).apply(game, source);
             }
             return true;
