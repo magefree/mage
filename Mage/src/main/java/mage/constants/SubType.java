@@ -85,14 +85,14 @@ public enum SubType {
     CENTAUR("Centaur", SubTypeSet.CreatureType),
     CEREAN("Cerean", SubTypeSet.CreatureType, true), // Star Wars
     CEPHALID("Cephalid", SubTypeSet.CreatureType),
-    CHICKEN("Chicken", SubTypeSet.CreatureType), // Unglued
+    CHICKEN("Chicken", SubTypeSet.CreatureType, true), // Unglued
     CHIMERA("Chimera", SubTypeSet.CreatureType),
     CHISS("Chiss", SubTypeSet.CreatureType, true),
     CITIZEN("Citizen", SubTypeSet.CreatureType),
     CLERIC("Cleric", SubTypeSet.CreatureType),
     COCKATRICE("Cockatrice", SubTypeSet.CreatureType),
     CONSTRUCT("Construct", SubTypeSet.CreatureType),
-    COW("Cow", SubTypeSet.CreatureType), // Unglued
+    COW("Cow", SubTypeSet.CreatureType, true), // Unglued
     COWARD("Coward", SubTypeSet.CreatureType),
     CRAB("Crab", SubTypeSet.CreatureType),
     CROCODILE("Crocodile", SubTypeSet.CreatureType),
@@ -134,7 +134,7 @@ public enum SubType {
     FROG("Frog", SubTypeSet.CreatureType),
     FUNGUS("Fungus", SubTypeSet.CreatureType),
     // G
-    GAMER("Gamer", SubTypeSet.CreatureType), // Un-sets
+    GAMER("Gamer", SubTypeSet.CreatureType, true), // Un-sets
     GAMORREAN("Gamorrean", SubTypeSet.CreatureType, true), // Star Wars
     GAND("Gand", SubTypeSet.CreatureType, true), // Star Wars
     GARGOYLE("Gargoyle", SubTypeSet.CreatureType),
