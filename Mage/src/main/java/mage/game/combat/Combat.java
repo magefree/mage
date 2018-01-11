@@ -38,7 +38,6 @@ import mage.abilities.keyword.special.JohanVigilanceAbility;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -655,7 +654,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         Map<UUID, Set<UUID>> mustBeBlockedByAtLeastOne = new HashMap<>();
 
         // check mustBlock requirements of creatures from opponents of attacking player
-        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED, player.getId(), game)) {
             // creature is controlled by an opponent of the attacker
             if (opponents.contains(creature.getControllerId())) {
 

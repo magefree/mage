@@ -57,7 +57,7 @@ import mage.util.TargetAddress;
 public class AuraGraft extends CardImpl {
 
     public AuraGraft(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.
         FilterPermanent filter = new FilterPermanent("Aura that's attached to a permanent");
@@ -81,7 +81,6 @@ public class AuraGraft extends CardImpl {
     }
 }
 
-
 class AttachedToPermanentPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
 
     public AttachedToPermanentPredicate() {
@@ -95,6 +94,7 @@ class AttachedToPermanentPredicate implements ObjectPlayerPredicate<ObjectPlayer
 }
 
 class PermanentCanBeAttachedToPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+
     protected Permanent aura;
 
     public PermanentCanBeAttachedToPredicate(Permanent aura) {
@@ -102,6 +102,7 @@ class PermanentCanBeAttachedToPredicate implements ObjectPlayerPredicate<ObjectP
         this.aura = aura;
     }
 
+    @Override
     public boolean apply(ObjectPlayer<Permanent> input, Game game) {
         Permanent potentialAttachment = input.getObject();
         for (TargetAddress addr : TargetAddress.walk(aura)) {
@@ -130,7 +131,7 @@ class MoveTargetAuraEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source){
+    public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(targetPointer.getFirst(game, source));
         if (enchantment == null) {
             return false;
@@ -150,10 +151,10 @@ class MoveTargetAuraEffect extends OneShotEffect {
         Target target = new TargetPermanent(filter);
         target.setNotTarget(true);
         if (target.canChoose(oldAttachment.getId(), controller.getId(), game)
-            && controller.choose(outcome, target, oldAttachment.getId(), game)) {
+                && controller.choose(outcome, target, oldAttachment.getId(), game)) {
             Permanent newAttachment = game.getPermanent(target.getFirstTarget());
-            if (newAttachment != null &&
-                oldAttachment.removeAttachment(enchantment.getId(), game)) {
+            if (newAttachment != null
+                    && oldAttachment.removeAttachment(enchantment.getId(), game)) {
                 newAttachment.addAttachment(enchantment.getId(), game);
                 game.informPlayers(enchantment.getLogName() + " was unattached from " + oldAttachment.getLogName() + " and attached to " + newAttachment.getLogName());
                 return true;
