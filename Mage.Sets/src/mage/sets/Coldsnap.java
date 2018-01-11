@@ -170,11 +170,11 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Sheltering Ancient", 121, Rarity.UNCOMMON, mage.cards.s.ShelteringAncient.class));
         cards.add(new SetCardInfo("Simian Brawler", 122, Rarity.COMMON, mage.cards.s.SimianBrawler.class));
         cards.add(new SetCardInfo("Skred", 97, Rarity.COMMON, mage.cards.s.Skred.class));
-        cards.add(new SetCardInfo("Snow-Covered Forest", 155, Rarity.COMMON, mage.cards.s.SnowCoveredForest.class));
-        cards.add(new SetCardInfo("Snow-Covered Island", 152, Rarity.COMMON, mage.cards.s.SnowCoveredIsland.class));
-        cards.add(new SetCardInfo("Snow-Covered Mountain", 154, Rarity.COMMON, mage.cards.s.SnowCoveredMountain.class));
-        cards.add(new SetCardInfo("Snow-Covered Plains", 151, Rarity.COMMON, mage.cards.s.SnowCoveredPlains.class));
-        cards.add(new SetCardInfo("Snow-Covered Swamp", 153, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 155, Rarity.LAND, mage.cards.s.SnowCoveredForest.class));
+        cards.add(new SetCardInfo("Snow-Covered Island", 152, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 154, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 151, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 153, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class));
         cards.add(new SetCardInfo("Soul Spike", 70, Rarity.RARE, mage.cards.s.SoulSpike.class));
         cards.add(new SetCardInfo("Sound the Call", 123, Rarity.COMMON, mage.cards.s.SoundTheCall.class));
         cards.add(new SetCardInfo("Squall Drifter", 17, Rarity.COMMON, mage.cards.s.SquallDrifter.class));
