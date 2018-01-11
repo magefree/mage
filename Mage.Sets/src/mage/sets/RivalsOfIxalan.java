@@ -110,7 +110,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Etali, Primal Storm", 100, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
         cards.add(new SetCardInfo("Everdawn Champion", 6, Rarity.UNCOMMON, mage.cards.e.EverdawnChampion.class));
         cards.add(new SetCardInfo("Evolving Wilds", 186, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
-        cards.add(new SetCardInfo("Expel From Orazca", 37, Rarity.UNCOMMON, mage.cards.e.ExpelFromOrazca.class));
+        cards.add(new SetCardInfo("Expel from Orazca", 37, Rarity.UNCOMMON, mage.cards.e.ExpelFromOrazca.class));
         cards.add(new SetCardInfo("Exultant Skymarcher", 7, Rarity.COMMON, mage.cards.e.ExultantSkymarcher.class));
         cards.add(new SetCardInfo("Famished Paladin", 8, Rarity.UNCOMMON, mage.cards.f.FamishedPaladin.class));
         cards.add(new SetCardInfo("Fanatical Firebrand", 101, Rarity.COMMON, mage.cards.f.FanaticalFirebrand.class));
