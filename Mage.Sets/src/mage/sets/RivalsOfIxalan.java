@@ -28,7 +28,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.o.OrazcaFrillback;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -55,19 +54,31 @@ public class RivalsOfIxalan extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.numBoosterDoubleFaced = -1;
+        this.maxCardNumberInBooster = 196;
 
         cards.add(new SetCardInfo("Admiral's Order", 31, Rarity.RARE, mage.cards.a.AdmiralsOrder.class));
         cards.add(new SetCardInfo("Aggressive Urge", 122, Rarity.COMMON, mage.cards.a.AggressiveUrge.class));
         cards.add(new SetCardInfo("Angrath, Minotaur Pirate", 201, Rarity.MYTHIC, mage.cards.a.AngrathMinotaurPirate.class));
         cards.add(new SetCardInfo("Angrath's Ambusher", 202, Rarity.UNCOMMON, mage.cards.a.AngrathsAmbusher.class));
         cards.add(new SetCardInfo("Angrath's Fury", 204, Rarity.RARE, mage.cards.a.AngrathsFury.class));
+        cards.add(new SetCardInfo("Angrath, the Flame-Chained", 152, Rarity.MYTHIC, mage.cards.a.AngrathTheFlameChained.class));
+        cards.add(new SetCardInfo("Aquatic Incursion", 32, Rarity.UNCOMMON, mage.cards.a.AquaticIncursion.class));
+        cards.add(new SetCardInfo("Arch of Orazca", 185, Rarity.RARE, mage.cards.a.ArchOfOrazca.class));
         cards.add(new SetCardInfo("Arterial Flow", 62, Rarity.UNCOMMON, mage.cards.a.ArterialFlow.class));
         cards.add(new SetCardInfo("Atzal, Cave of Eternity", "160b", Rarity.RARE, mage.cards.a.AtzalCaveOfEternity.class));
-        cards.add(new SetCardInfo("Atzocan Seer", "153a", Rarity.UNCOMMON, mage.cards.a.AtzocanSeer.class));
-        cards.add(new SetCardInfo("Azor's Gateway", 176, Rarity.MYTHIC, mage.cards.a.AzorsGateway.class));
+        cards.add(new SetCardInfo("Atzocan Seer", 153, Rarity.UNCOMMON, mage.cards.a.AtzocanSeer.class));
+        cards.add(new SetCardInfo("Awakened Amalgam", 175, Rarity.RARE, mage.cards.a.AwakenedAmalgam.class));
+        cards.add(new SetCardInfo("Azor's Gateway", "176a", Rarity.MYTHIC, mage.cards.a.AzorsGateway.class));
+        cards.add(new SetCardInfo("Azor, the Lawbringer", 154, Rarity.MYTHIC, mage.cards.a.AzorTheLawbringer.class));
         cards.add(new SetCardInfo("Baffling End", 1, Rarity.UNCOMMON, mage.cards.b.BafflingEnd.class));
+        cards.add(new SetCardInfo("Bishop of Binding", 2, Rarity.RARE, mage.cards.b.BishopOfBinding.class));
+        cards.add(new SetCardInfo("Blazing Hope", 3, Rarity.UNCOMMON, mage.cards.b.BlazingHope.class));
+        cards.add(new SetCardInfo("Blood Sun", 92, Rarity.RARE, mage.cards.b.BloodSun.class));
         cards.add(new SetCardInfo("Bombard", 93, Rarity.COMMON, mage.cards.b.Bombard.class));
         cards.add(new SetCardInfo("Brass's Bounty", 94, Rarity.RARE, mage.cards.b.BrasssBounty.class));
+        cards.add(new SetCardInfo("Brazen Freebooter", 95, Rarity.COMMON, mage.cards.b.BrazenFreebooter.class));
+        cards.add(new SetCardInfo("Buccaneer's Bravado", 96, Rarity.COMMON, mage.cards.b.BuccaneersBravado.class));
         cards.add(new SetCardInfo("Cacophodon", 123, Rarity.UNCOMMON, mage.cards.c.Cacophodon.class));
         cards.add(new SetCardInfo("Canal Monitor", 63, Rarity.COMMON, mage.cards.c.CanalMonitor.class));
         cards.add(new SetCardInfo("Captain's Hook", 177, Rarity.RARE, mage.cards.c.CaptainsHook.class));
@@ -99,7 +110,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Etali, Primal Storm", 100, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
         cards.add(new SetCardInfo("Everdawn Champion", 6, Rarity.UNCOMMON, mage.cards.e.EverdawnChampion.class));
         cards.add(new SetCardInfo("Evolving Wilds", 186, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
-        cards.add(new SetCardInfo("Expel From Orazca", 37, Rarity.UNCOMMON, mage.cards.e.ExpelFromOrazca.class));
+        cards.add(new SetCardInfo("Expel from Orazca", 37, Rarity.UNCOMMON, mage.cards.e.ExpelFromOrazca.class));
         cards.add(new SetCardInfo("Exultant Skymarcher", 7, Rarity.COMMON, mage.cards.e.ExultantSkymarcher.class));
         cards.add(new SetCardInfo("Famished Paladin", 8, Rarity.UNCOMMON, mage.cards.f.FamishedPaladin.class));
         cards.add(new SetCardInfo("Fanatical Firebrand", 101, Rarity.COMMON, mage.cards.f.FanaticalFirebrand.class));
@@ -109,7 +120,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Forerunner of the Empire", 102, Rarity.UNCOMMON, mage.cards.f.ForerunnerOfTheEmpire.class));
         cards.add(new SetCardInfo("Forerunner of the Heralds", 129, Rarity.UNCOMMON, mage.cards.f.ForerunnerOfTheHeralds.class));
         cards.add(new SetCardInfo("Forerunner of the Legion", 9, Rarity.UNCOMMON, mage.cards.f.ForerunnerOfTheLegion.class));
-        cards.add(new SetCardInfo("Forest", 196, Rarity.COMMON, mage.cards.basiclands.Forest.class));
+        cards.add(new SetCardInfo("Forest", 196, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Form of the Dinosaur", 103, Rarity.RARE, mage.cards.f.FormOfTheDinosaur.class));
         cards.add(new SetCardInfo("Forsaken Sanctuary", 187, Rarity.UNCOMMON, mage.cards.f.ForsakenSanctuary.class));
         cards.add(new SetCardInfo("Foul Orchard", 188, Rarity.UNCOMMON, mage.cards.f.FoulOrchard.class));
@@ -132,7 +143,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Impale", 76, Rarity.COMMON, mage.cards.i.Impale.class));
         cards.add(new SetCardInfo("Imperial Ceratops", 10, Rarity.UNCOMMON, mage.cards.i.ImperialCeratops.class));
         cards.add(new SetCardInfo("Induced Amnesia", 40, Rarity.RARE, mage.cards.i.InducedAmnesia.class));
-        cards.add(new SetCardInfo("Island", 193, Rarity.COMMON, mage.cards.basiclands.Island.class));
+        cards.add(new SetCardInfo("Island", 193, Rarity.LAND, mage.cards.basiclands.Island.class));
         cards.add(new SetCardInfo("Jade Bearer", 134, Rarity.COMMON, mage.cards.j.JadeBearer.class));
         cards.add(new SetCardInfo("Jadecraft Artisan", 135, Rarity.COMMON, mage.cards.j.JadecraftArtisan.class));
         cards.add(new SetCardInfo("Jadelight Ranger", 136, Rarity.RARE, mage.cards.j.JadelightRanger.class));
@@ -155,14 +166,14 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Mist-Cloaked Herald", 43, Rarity.COMMON, mage.cards.m.MistCloakedHerald.class));
         cards.add(new SetCardInfo("Moment of Craving", 79, Rarity.COMMON, mage.cards.m.MomentOfCraving.class));
         cards.add(new SetCardInfo("Moment of Triumph", 15, Rarity.COMMON, mage.cards.m.MomentOfTriumph.class));
-        cards.add(new SetCardInfo("Mountain", 195, Rarity.COMMON, mage.cards.basiclands.Mountain.class));
+        cards.add(new SetCardInfo("Mountain", 195, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Mutiny", 106, Rarity.COMMON, mage.cards.m.Mutiny.class));
         cards.add(new SetCardInfo("Naturalize", 139, Rarity.COMMON, mage.cards.n.Naturalize.class));
         cards.add(new SetCardInfo("Needletooth Raptor", 107, Rarity.UNCOMMON, mage.cards.n.NeedletoothRaptor.class));
         cards.add(new SetCardInfo("Negate", 44, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nezahal, Primal Tide", 45, Rarity.RARE, mage.cards.n.NezahalPrimalTide.class));
         cards.add(new SetCardInfo("Oathsworn Vampire", 80, Rarity.UNCOMMON, mage.cards.o.OathswornVampire.class));
-        cards.add(new SetCardInfo("Orazca Frillback", 140, Rarity.COMMON, OrazcaFrillback.class));
+        cards.add(new SetCardInfo("Orazca Frillback", 140, Rarity.COMMON, mage.cards.o.OrazcaFrillback.class));
         cards.add(new SetCardInfo("Orazca Raptor", 108, Rarity.COMMON, mage.cards.o.OrazcaRaptor.class));
         cards.add(new SetCardInfo("Orazca Relic", 181, Rarity.COMMON, mage.cards.o.OrazcaRelic.class));
         cards.add(new SetCardInfo("Overgrown Armasaur", 141, Rarity.COMMON, mage.cards.o.OvergrownArmasaur.class));
@@ -171,7 +182,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Path of Mettle", "165a", Rarity.RARE, mage.cards.p.PathOfMettle.class));
         cards.add(new SetCardInfo("Pirate's Pillage", 109, Rarity.UNCOMMON, mage.cards.p.PiratesPillage.class));
         cards.add(new SetCardInfo("Pitiless Plunderer", 81, Rarity.UNCOMMON, mage.cards.p.PitilessPlunderer.class));
-        cards.add(new SetCardInfo("Plains", 192, Rarity.COMMON, mage.cards.basiclands.Plains.class));
+        cards.add(new SetCardInfo("Plains", 192, Rarity.LAND, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Plummet", 143, Rarity.COMMON, mage.cards.p.Plummet.class));
         cards.add(new SetCardInfo("Polyraptor", 144, Rarity.MYTHIC, mage.cards.p.Polyraptor.class));
         cards.add(new SetCardInfo("Pride of Conquerors", 17, Rarity.UNCOMMON, mage.cards.p.PrideOfConquerors.class));
@@ -180,14 +191,14 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Radiant Destiny", 18, Rarity.RARE, mage.cards.r.RadiantDestiny.class));
         cards.add(new SetCardInfo("Raging Regisaur", 168, Rarity.UNCOMMON, mage.cards.r.RagingRegisaur.class));
         cards.add(new SetCardInfo("Raptor Companion", 19, Rarity.COMMON, mage.cards.r.RaptorCompanion.class));
-        cards.add(new SetCardInfo("Ravenous Chupacabra", 82, Rarity.COMMON, mage.cards.r.RavenousChupacabra.class));
+        cards.add(new SetCardInfo("Ravenous Chupacabra", 82, Rarity.UNCOMMON, mage.cards.r.RavenousChupacabra.class));
         cards.add(new SetCardInfo("Reaver Ambush", 83, Rarity.UNCOMMON, mage.cards.r.ReaverAmbush.class));
         cards.add(new SetCardInfo("Reckless Rage", 110, Rarity.UNCOMMON, mage.cards.r.RecklessRage.class));
         cards.add(new SetCardInfo("Recover", 84, Rarity.COMMON, mage.cards.r.Recover.class));
         cards.add(new SetCardInfo("Rekindling Phoenix", 111, Rarity.MYTHIC, mage.cards.r.RekindlingPhoenix.class));
         cards.add(new SetCardInfo("Relentless Raptor", 169, Rarity.UNCOMMON, mage.cards.r.RelentlessRaptor.class));
         cards.add(new SetCardInfo("Resplendent Griffin", 170, Rarity.UNCOMMON, mage.cards.r.ResplendentGriffin.class));
-        cards.add(new SetCardInfo("Return to the Wind", 46, Rarity.RARE, mage.cards.r.ReturnToTheWind.class));
+        cards.add(new SetCardInfo("Release to the Wind", 46, Rarity.RARE, mage.cards.r.ReleaseToTheWind.class));
         cards.add(new SetCardInfo("River Darter", 47, Rarity.COMMON, mage.cards.r.RiverDarter.class));
         cards.add(new SetCardInfo("Riverwise Augur", 48, Rarity.UNCOMMON, mage.cards.r.RiverwiseAugur.class));
         cards.add(new SetCardInfo("Sadistic Skymarcher", 85, Rarity.UNCOMMON, mage.cards.s.SadisticSkymarcher.class));
@@ -225,7 +236,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Sun-Crested Pterodon", 27, Rarity.COMMON, mage.cards.s.SunCrestedPterodon.class));
         cards.add(new SetCardInfo("Swab Goblin", 203, Rarity.COMMON, mage.cards.s.SwabGoblin.class));
         cards.add(new SetCardInfo("Swaggering Corsair", 119, Rarity.COMMON, mage.cards.s.SwaggeringCorsair.class));
-        cards.add(new SetCardInfo("Swamp", 194, Rarity.COMMON, mage.cards.basiclands.Swamp.class));
+        cards.add(new SetCardInfo("Swamp", 194, Rarity.LAND, mage.cards.basiclands.Swamp.class));
         cards.add(new SetCardInfo("Swift Warden", 146, Rarity.UNCOMMON, mage.cards.s.SwiftWarden.class));
         cards.add(new SetCardInfo("Sworn Guardian", 58, Rarity.COMMON, mage.cards.s.SwornGuardian.class));
         cards.add(new SetCardInfo("Temple Altisaur", 28, Rarity.RARE, mage.cards.t.TempleAltisaur.class));
@@ -234,7 +245,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("The Immortal Sun", 180, Rarity.MYTHIC, mage.cards.t.TheImmortalSun.class));
         cards.add(new SetCardInfo("Thrashing Brontodon", 148, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
         cards.add(new SetCardInfo("Thunderherd Migration", 149, Rarity.UNCOMMON, mage.cards.t.ThunderherdMigration.class));
-        cards.add(new SetCardInfo("Tilonali's Crown", 120, Rarity.COMMON, mage.cards.t.TilonalisCrown.class));
+        cards.add(new SetCardInfo("Tilonalli's Crown", 120, Rarity.COMMON, mage.cards.t.TilonallisCrown.class));
         cards.add(new SetCardInfo("Tilonalli's Summoner", 121, Rarity.RARE, mage.cards.t.TilonallisSummoner.class));
         cards.add(new SetCardInfo("Timestream Navigator", 59, Rarity.MYTHIC, mage.cards.t.TimestreamNavigator.class));
         cards.add(new SetCardInfo("Tomb of the Dusk Rose", "166b", Rarity.RARE, mage.cards.t.TombOfTheDuskRose.class));

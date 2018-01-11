@@ -287,11 +287,11 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Skeleton Ship", 379, Rarity.RARE, mage.cards.s.SkeletonShip.class));
         cards.add(new SetCardInfo("Skull Catapult", 311, Rarity.UNCOMMON, mage.cards.s.SkullCatapult.class));
         cards.add(new SetCardInfo("Snow Fortress", 312, Rarity.RARE, mage.cards.s.SnowFortress.class));
-        cards.add(new SetCardInfo("Snow-Covered Forest", 347, Rarity.COMMON, mage.cards.s.SnowCoveredForest.class));
-        cards.add(new SetCardInfo("Snow-Covered Island", 348, Rarity.COMMON, mage.cards.s.SnowCoveredIsland.class));
-        cards.add(new SetCardInfo("Snow-Covered Mountain", 349, Rarity.COMMON, mage.cards.s.SnowCoveredMountain.class));
-        cards.add(new SetCardInfo("Snow-Covered Plains", 350, Rarity.COMMON, mage.cards.s.SnowCoveredPlains.class));
-        cards.add(new SetCardInfo("Snow-Covered Swamp", 351, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 347, Rarity.LAND, mage.cards.s.SnowCoveredForest.class));
+        cards.add(new SetCardInfo("Snow-Covered Island", 348, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 349, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 350, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 351, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class));
         cards.add(new SetCardInfo("Snow Hound", 277, Rarity.UNCOMMON, mage.cards.s.SnowHound.class));
         cards.add(new SetCardInfo("Soldevi Golem", 313, Rarity.RARE, mage.cards.s.SoldeviGolem.class));
         cards.add(new SetCardInfo("Soldevi Machinist", 102, Rarity.UNCOMMON, mage.cards.s.SoldeviMachinist.class));

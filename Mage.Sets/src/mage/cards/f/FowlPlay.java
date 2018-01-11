@@ -25,65 +25,68 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.t;
+package mage.cards.f;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DamageAttachedEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author spjspj
  */
-public class TilonalisCrown extends CardImpl {
+public class FowlPlay extends CardImpl {
 
-    public TilonalisCrown(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+    public FowlPlay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         this.subtype.add(SubType.AURA);
 
-        // Enchant creature
+        // Enchant creature 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When Tilonali's Crown enters the battlefield, it deals 1 damage to enchanted creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAttachedEffect(1, "it")
-                .setText("it deals 1 damage to enchanted creature")));
-
-        // Enchanted creature gets +3/+0 and has trample.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0));
-        Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has trample");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // Enchanted creature is a Chicken with base power and toughness 1/1 and loses all abilities.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new BecomesCreatureAttachedEffect(new FowlPlayToken(),
+                        "Enchanted creature is a Chicken with base power and toughness 1/1 and loses all abilities",
+                        Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_SUBTYPE_AND_PT)));
     }
 
-    public TilonalisCrown(final TilonalisCrown card) {
+    public FowlPlay(final FowlPlay card) {
         super(card);
     }
 
     @Override
-    public TilonalisCrown copy() {
-        return new TilonalisCrown(this);
+    public FowlPlay copy() {
+        return new FowlPlay(this);
+    }
+}
+
+class FowlPlayToken extends Token {
+
+    public FowlPlayToken() {
+        super("Chicken", "a Chicken with base power and toughness 1/1 with no abilities");
+        cardType.add(CardType.CREATURE);
+        subtype.add(SubType.CHICKEN);
+        power = new MageInt(1);
+        toughness = new MageInt(1);
     }
 }

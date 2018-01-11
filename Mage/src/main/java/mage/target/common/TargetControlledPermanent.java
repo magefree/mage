@@ -28,6 +28,7 @@
 
 package mage.target.common;
 
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 
@@ -38,11 +39,11 @@ import mage.target.TargetPermanent;
 public class TargetControlledPermanent extends TargetPermanent {
 
     public TargetControlledPermanent() {
-        this(1, 1, new FilterControlledPermanent(), false);
+        this(1, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT, false);
     }
 
     public TargetControlledPermanent(int numTargets) {
-        this(numTargets, numTargets, new FilterControlledPermanent(), false);
+        this(numTargets, numTargets, StaticFilters.FILTER_CONTROLLED_PERMANENT, false);
     }
 
     public TargetControlledPermanent(FilterControlledPermanent filter) {

@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 public class GruesomeFate extends CardImpl {
 
     public GruesomeFate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Each opponent loses 1 life for each creature you control.
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");

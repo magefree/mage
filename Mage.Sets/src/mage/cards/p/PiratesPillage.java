@@ -46,7 +46,7 @@ public class PiratesPillage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // As an additional cost to cast Pirate's Pillage, discard a card.
-        this.getSpellAbility().addCost(new DiscardCardCost(true));
+        this.getSpellAbility().addCost(new DiscardCardCost(false));
 
         // Draw two cards and create two colorless Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

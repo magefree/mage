@@ -60,11 +60,14 @@ import mage.target.TargetCard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
+import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class PermanentImpl extends CardImpl implements Permanent {
+
+    private static final Logger logger = Logger.getLogger(PermanentImpl.class);
 
     public class MarkedDamageInfo {
 
@@ -698,6 +701,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     }
                 }
             }
+        }
+        if (getSpellAbility() == null) {
+            logger.info("FATAL : no spell ability for attach to permanent: " + getName());
+            return;
         }
         if (!getSpellAbility().getTargets().isEmpty() && (getSpellAbility().getTargets().get(0) instanceof TargetCard)) {
             Card attachedToCard = game.getCard(this.getAttachedTo());

@@ -301,6 +301,11 @@ public enum MythicspoilerComSource implements CardImageSource {
         HashMap<String, String> linksRix = new HashMap<>();
         linksRix.put("vaultofcatlacan", "vaultofcatlacan");
         linksRix.put("atzalcaveofeternity", "atzalcaveofeternity");
+        linksRix.put("wingedtempleoforazca", "wingedtempleoforazca");
+        linksRix.put("metzalitoweroftriumph", "metzalitoweroftriumph");
+        linksRix.put("tomboftheduskrose", "tomboftheduskrose");
+        linksRix.put("sanctumofthesun", "sanctumofthesun");
+        linksRix.put("goldforgegarrison", "goldforgegarrison");
         manualLinks.put("RIX", linksRix);
 
         cardNameAliasesStart = new HashMap<>();

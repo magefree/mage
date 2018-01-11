@@ -52,6 +52,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -82,7 +83,7 @@ public class SeeRed extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU),
                 new InvertCondition(ControllerAttackedThisTurnCondition.instance),
-                "At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice {this}."));
+                "At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice {this}."), new AttackedThisTurnWatcher());
     }
 
     public SeeRed(final SeeRed card) {

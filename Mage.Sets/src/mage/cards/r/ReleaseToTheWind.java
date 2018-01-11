@@ -50,41 +50,41 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ReturnToTheWind extends CardImpl {
+public class ReleaseToTheWind extends CardImpl {
 
-    public ReturnToTheWind(UUID ownerId, CardSetInfo setInfo) {
+    public ReleaseToTheWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost.
-        getSpellAbility().addEffect(new ReturnToTheWindEffect());
+        getSpellAbility().addEffect(new ReleaseToTheWindEffect());
         getSpellAbility().addTarget(new TargetNonlandPermanent());
 
     }
 
-    public ReturnToTheWind(final ReturnToTheWind card) {
+    public ReleaseToTheWind(final ReleaseToTheWind card) {
         super(card);
     }
 
     @Override
-    public ReturnToTheWind copy() {
-        return new ReturnToTheWind(this);
+    public ReleaseToTheWind copy() {
+        return new ReleaseToTheWind(this);
     }
 }
 
-class ReturnToTheWindEffect extends OneShotEffect {
+class ReleaseToTheWindEffect extends OneShotEffect {
 
-    public ReturnToTheWindEffect() {
+    public ReleaseToTheWindEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost";
     }
 
-    public ReturnToTheWindEffect(final ReturnToTheWindEffect effect) {
+    public ReleaseToTheWindEffect(final ReleaseToTheWindEffect effect) {
         super(effect);
     }
 
     @Override
-    public ReturnToTheWindEffect copy() {
-        return new ReturnToTheWindEffect(this);
+    public ReleaseToTheWindEffect copy() {
+        return new ReleaseToTheWindEffect(this);
     }
 
     @Override
@@ -96,7 +96,7 @@ class ReturnToTheWindEffect extends OneShotEffect {
                 if (controller.moveCards(targetPermanent, Zone.EXILED, source, game)) {
                     Card card = game.getCard(targetPermanent.getId());
                     if (card != null) {
-                        ContinuousEffect effect = new ReturnToTheWindEffectCastFromExileEffect();
+                        ContinuousEffect effect = new ReleaseToTheWindEffectCastFromExileEffect();
                         effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                         game.addEffect(effect, source);
                     }
@@ -108,14 +108,14 @@ class ReturnToTheWindEffect extends OneShotEffect {
     }
 }
 
-class ReturnToTheWindEffectCastFromExileEffect extends AsThoughEffectImpl {
+class ReleaseToTheWindEffectCastFromExileEffect extends AsThoughEffectImpl {
 
-    public ReturnToTheWindEffectCastFromExileEffect() {
+    public ReleaseToTheWindEffectCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "For as long as that card remains exiled, its owner may cast it without paying its mana cost";
     }
 
-    public ReturnToTheWindEffectCastFromExileEffect(final ReturnToTheWindEffectCastFromExileEffect effect) {
+    public ReleaseToTheWindEffectCastFromExileEffect(final ReleaseToTheWindEffectCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -125,8 +125,8 @@ class ReturnToTheWindEffectCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public ReturnToTheWindEffectCastFromExileEffect copy() {
-        return new ReturnToTheWindEffectCastFromExileEffect(this);
+    public ReleaseToTheWindEffectCastFromExileEffect copy() {
+        return new ReleaseToTheWindEffectCastFromExileEffect(this);
     }
 
     @Override

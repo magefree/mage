@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -37,11 +36,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,14 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class MakeshiftMunitions extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature");
 
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)
-        ));
-    }
 
     public MakeshiftMunitions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
@@ -65,7 +57,7 @@ public class MakeshiftMunitions extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE))
         );
         ability.addTarget(new TargetCreatureOrPlayer());
         ability.addCost(new GenericManaCost(1));

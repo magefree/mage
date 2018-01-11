@@ -171,6 +171,9 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Spectral Bears", 72, Rarity.UNCOMMON, mage.cards.s.SpectralBears.class));
         cards.add(new SetCardInfo("Torture", 23, Rarity.COMMON, Torture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Torture", 24, Rarity.COMMON, Torture.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trade Caravan", 123, Rarity.COMMON, mage.cards.t.TradeCaravan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trade Caravan", 124, Rarity.COMMON, mage.cards.t.TradeCaravan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Truce", 125, Rarity.RARE, mage.cards.t.Truce.class));
         cards.add(new SetCardInfo("Veldrane of Sengir", 25, Rarity.RARE, mage.cards.v.VeldraneOfSengir.class));
         cards.add(new SetCardInfo("Wall of Kelp", 50, Rarity.RARE, mage.cards.w.WallOfKelp.class));
         cards.add(new SetCardInfo("Willow Faerie", 73, Rarity.COMMON, WillowFaerie.class, NON_FULL_USE_VARIOUS));

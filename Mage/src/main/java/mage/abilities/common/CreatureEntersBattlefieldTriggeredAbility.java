@@ -27,11 +27,12 @@
  */
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -51,7 +52,7 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
     /**
      * optional = false<br>
      * opponentController = false
-     * 
+     *
      * @param effect
      */
     public CreatureEntersBattlefieldTriggeredAbility(Effect effect) {
@@ -60,7 +61,7 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
 
     /**
      * opponentController = false
-     * 
+     *
      * @param effect
      * @param optional
      */
@@ -69,7 +70,7 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
     }
 
     /**
-     * 
+     *
      * @param effect
      * @param optional
      * @param opponentController
@@ -78,7 +79,7 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
         this(Zone.BATTLEFIELD, effect, optional, opponentController);
 
     }
-    
+
     /**
      * @param zone
      * @param effect
@@ -104,7 +105,6 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
         }
     }
 
-
     public CreatureEntersBattlefieldTriggeredAbility(CreatureEntersBattlefieldTriggeredAbility ability) {
         super(ability);
         this.opponentController = ability.opponentController;
@@ -118,7 +118,7 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (filter.match(permanent, sourceId, controllerId, game)
                 && (permanent.getControllerId().equals(this.controllerId) ^ opponentController)) {
             if (!this.getTargets().isEmpty()) {
@@ -137,7 +137,7 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public String getRule() {
-        return "Whenever a " + filter.getMessage() +" enters the battlefield under "
+        return "Whenever a " + filter.getMessage() + " enters the battlefield under "
                 + (opponentController ? "an opponent's control, " : "your control, ")
                 + super.getRule();
     }

@@ -122,7 +122,7 @@ class DeadMansChestEffect extends OneShotEffect {
             Player owner = game.getPlayer(attachedTo.getOwnerId());
             int amount = attachedTo.getPower().getValue();
             if (owner != null && amount > 0) {
-                Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
+                Set<Card> cards = owner.getLibrary().getTopCards(game, amount);
                 if (!cards.isEmpty()) {
                     controller.moveCardsToExile(cards, source, game, true, source.getSourceId(), sourceObject.getLogName());
                     for (Card card : cards) {

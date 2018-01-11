@@ -119,7 +119,7 @@ public class ArabianNights extends ExpansionSet {
         cards.add(new SetCardInfo("Mijae Djinn", 51, Rarity.RARE, mage.cards.m.MijaeDjinn.class));
         cards.add(new SetCardInfo("Moorish Cavalry", 62, Rarity.COMMON, mage.cards.m.MoorishCavalry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moorish Cavalry", 63, Rarity.COMMON, mage.cards.m.MoorishCavalry.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 91, Rarity.COMMON, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 91, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nafs Asp", 36, Rarity.COMMON, NafsAsp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nafs Asp", 37, Rarity.COMMON, NafsAsp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Oasis", 92, Rarity.UNCOMMON, mage.cards.o.Oasis.class));

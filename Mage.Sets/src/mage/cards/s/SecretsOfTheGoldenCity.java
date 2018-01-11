@@ -30,7 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.discard.DiscardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.keyword.AscendEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,8 +50,8 @@ public class SecretsOfTheGoldenCity extends CardImpl {
 
         // Draw two cards. If you have the city's blessing, draw three cards instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DiscardControllerEffect(3),
-                new DiscardControllerEffect(2),
+                new DrawCardSourceControllerEffect(3),
+                new DrawCardSourceControllerEffect(2),
                 CitysBlessingCondition.instance,
                 "Draw two cards. If you have the city's blessing, draw three cards instead"));
     }
