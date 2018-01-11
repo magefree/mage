@@ -45,8 +45,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.PermanentInListPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -190,19 +190,5 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class PermanentInListPredicate implements Predicate<Permanent> {
-
-    private final List<Permanent> permanents;
-
-    public PermanentInListPredicate(List<Permanent> permanents) {
-        this.permanents = permanents;
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return permanents.contains(input);
     }
 }
