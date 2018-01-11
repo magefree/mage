@@ -24,7 +24,10 @@ public class Unglued extends ExpansionSet {
         cards.add(new SetCardInfo("Chicken Egg", 41, Rarity.COMMON, mage.cards.c.ChickenEgg.class));
         cards.add(new SetCardInfo("Chicken a la King", 17, Rarity.RARE, mage.cards.c.ChickenALaKing.class));
         cards.add(new SetCardInfo("Forest", 88, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UGL_FULL_ART_BASIC, false)));
+        cards.add(new SetCardInfo("Fowl Play", 24, Rarity.COMMON, mage.cards.f.FowlPlay.class));
+        cards.add(new SetCardInfo("Goblin Tutor", 45, Rarity.UNCOMMON, mage.cards.g.GoblinTutor.class));
         cards.add(new SetCardInfo("Growth Spurt", 61, Rarity.COMMON, mage.cards.g.GrowthSpurt.class));
+        cards.add(new SetCardInfo("Hungry Hungry Heifer", 63, Rarity.UNCOMMON, mage.cards.h.HungryHungryHeifer.class));
         cards.add(new SetCardInfo("Island", 85, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.UGL_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Jack-in-the-Mox", 75, Rarity.RARE, mage.cards.j.JackInTheMox.class));
         cards.add(new SetCardInfo("Jumbo Imp", 34, Rarity.UNCOMMON, mage.cards.j.JumboImp.class));
