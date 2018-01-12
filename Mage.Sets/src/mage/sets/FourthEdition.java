@@ -121,6 +121,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Creature Bond", 66, Rarity.COMMON, mage.cards.c.CreatureBond.class));
         cards.add(new SetCardInfo("Energy Flux", 68, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));
         cards.add(new SetCardInfo("Energy Tap", 69, Rarity.COMMON, mage.cards.e.EnergyTap.class));
+        cards.add(new SetCardInfo("Erosion", 70, Rarity.COMMON, mage.cards.e.Erosion.class));
         cards.add(new SetCardInfo("Feedback", 71, Rarity.UNCOMMON, mage.cards.f.Feedback.class));
         cards.add(new SetCardInfo("Flight", 72, Rarity.COMMON, mage.cards.f.Flight.class));
         cards.add(new SetCardInfo("Flood", 73, Rarity.COMMON, mage.cards.f.Flood.class));

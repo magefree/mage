@@ -68,6 +68,7 @@ public enum CounterType {
     FEATHER("feather"),
     FLOOD("flood"),
     FURY("fury"),
+    FUNGUS("fungus"),
     FUSE("fuse"),
     GOLD("gold"),
     GROWTH("growth"),
