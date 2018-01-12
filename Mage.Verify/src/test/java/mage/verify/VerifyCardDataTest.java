@@ -64,6 +64,8 @@ public class VerifyCardDataTest {
         skipListAddName("SUBTYPE", "Paper Tiger"); // UGL, mtgjson error
         skipListAddName("SUBTYPE", "Rock Lobster"); // UGL, mtgjson error
         skipListAddName("SUBTYPE", "Scissors Lizard"); // UGL, mtgjson error
+        skipListAddName("SUBTYPE", "Urza's Science Fair Project"); // UGL, mtgjson error
+
 
         // number
         skipListCreate("NUMBER");

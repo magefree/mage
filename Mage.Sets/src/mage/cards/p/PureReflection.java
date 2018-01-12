@@ -42,7 +42,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.PureReflectionToken;
+import mage.game.permanent.token.ReflectionPureToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
@@ -96,13 +96,13 @@ public class PureReflection extends CardImpl {
             FilterPermanent filter = new FilterPermanent("Reflections");
             filter.add(new SubtypePredicate(SubType.REFLECTION));
             game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game).forEach((permanent) -> {
-                permanent.destroy(source.getSourceId(), game, /**noRegen=*/false);
+                permanent.destroy(source.getSourceId(), game,false);
             });
             game.applyEffects();
             
             // Then that player creates an X/X white Reflection creature token, where X is the converted mana cost of that spell.
-            PureReflectionToken token = new PureReflectionToken(spell.getConvertedManaCost());
-            token.putOntoBattlefield(/**amount=*/1, game, source.getSourceId(), spell.getControllerId());
+            ReflectionPureToken token = new ReflectionPureToken(spell.getConvertedManaCost());
+            token.putOntoBattlefield(1, game, source.getSourceId(), spell.getControllerId());
 
             return true;
         }

@@ -35,13 +35,13 @@ import mage.MageInt;
  *
  * @author SpikesCafe-google
  */
-public class PureReflectionToken extends Token {
+public class ReflectionPureToken extends Token {
     
-    public PureReflectionToken() {
+    public ReflectionPureToken() {
        this(1);
     }
 
-    public PureReflectionToken(int xValue) {
+    public ReflectionPureToken(int xValue) {
         super("Reflection", "X/X white Reflection creature token, where X is the converted mana cost of that spell");
         this.setOriginalExpansionSetCode("INV");
         cardType.add(CardType.CREATURE);
