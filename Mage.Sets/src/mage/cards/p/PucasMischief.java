@@ -81,6 +81,7 @@ class TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent extends
 
     public TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent() {
         super();
+        this.filter = this.filter.copy();
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
         setTargetName("nonland permanent you control");
     }
@@ -118,6 +119,7 @@ class PucasMischiefSecondTarget extends TargetPermanent {
 
     public PucasMischiefSecondTarget() {
         super();
+        this.filter = this.filter.copy();
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
         setTargetName("permanent an opponent controls with an equal or lesser converted mana cost");

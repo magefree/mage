@@ -63,6 +63,16 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         UNKNOWN
     }
 
+    public CardTestPlayerAPIImpl(){
+        // load all cards to db from class list
+        ArrayList<String> errorsList = new ArrayList<>();
+        CardScanner.scan(errorsList);
+
+        if (errorsList.size() > 0) {
+            Assert.fail("Found errors on card loading: " + '\n' + errorsList.stream().collect(Collectors.joining("\n")));
+        }
+    }
+
     /**
      * Default game initialization params for red player (that plays with
      * Mountains)
@@ -106,17 +116,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         addCard(Zone.HAND, playerB, "Plains", 2);
         removeAllCardsFromLibrary(playerB);
         addCard(Zone.LIBRARY, playerB, "Plains", 10);
-    }
-
-    @Before
-    public void checkDatabase() {
-        // load all cards to db from class list
-        ArrayList<String> errorsList = new ArrayList<>();
-        CardScanner.scan(errorsList);
-
-        if (errorsList.size() > 0) {
-            Assert.fail("Found errors on card loading: " + '\n' + errorsList.stream().collect(Collectors.joining("\n")));
-        }
     }
 
     @Before
