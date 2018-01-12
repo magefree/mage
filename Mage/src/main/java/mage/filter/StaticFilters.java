@@ -154,8 +154,8 @@ public final class StaticFilters {
     public static final FilterPermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        FILTER_OPPONENTS_PERMANENT_CREATURE.setLockedFilter(true);
         FILTER_OPPONENTS_PERMANENT_CREATURE.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER_OPPONENTS_PERMANENT_CREATURE.setLockedFilter(true);
     }
     public static final FilterPermanent FILTER_OPPONENTS_PERMANENT_ARTIFACT = new FilterPermanent("artifact an opponent controls");
 
