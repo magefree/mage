@@ -126,9 +126,11 @@ class MetzaliTowerOfTriumphEffect extends OneShotEffect {
                     available.add(permanent);
                 }
             }
-            Permanent permanent = available.get(RandomUtil.nextInt(available.size()));
-            if (permanent != null) {
-                permanent.destroy(source.getSourceId(), game, false);
+            if (!available.isEmpty()) {
+                Permanent permanent = available.get(RandomUtil.nextInt(available.size()));
+                if (permanent != null) {
+                    permanent.destroy(source.getSourceId(), game, false);
+                }
             }
             return true;
         }

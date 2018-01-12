@@ -132,9 +132,11 @@ class BishopOfBindingExiledCardsPowerCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, sourceAbility.getSourceId(), sourceAbility.getSourceObjectZoneChangeCounter()));
-        Card exiledCard = exileZone.getRandom(game);
-        if (exiledCard != null) {
-            return exiledCard.getPower().getValue();
+        if (exileZone != null) {
+            Card exiledCard = exileZone.getRandom(game);
+            if (exiledCard != null) {
+                return exiledCard.getPower().getValue();
+            }
         }
         return 0;
     }

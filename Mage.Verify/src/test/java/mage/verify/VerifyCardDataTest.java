@@ -4,6 +4,8 @@ import mage.ObjectColor;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
 import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.SuperType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -30,6 +32,12 @@ public class VerifyCardDataTest {
     static {
         // skip lists for checks (example: unstable cards with same name may have different stats)
 
+        // TODO: mtgjson have wrong data for UGL
+        // remove after fixed
+        // https://github.com/mtgjson/mtgjson/issues/531
+        // https://github.com/mtgjson/mtgjson/issues/534
+        // https://github.com/mtgjson/mtgjson/issues/535
+
         // power-toughness
         skipListCreate("PT");
         skipListAddName("PT", "Garbage Elemental"); // UST
@@ -37,19 +45,25 @@ public class VerifyCardDataTest {
 
         // color
         skipListCreate("COLOR");
-        //skipListAddName("COLOR", "Ulrich, Uncontested Alpha"); // gatherer is missing the color indicator on one card and json has wrong data (16.12.2017: not actual)
 
         // cost
         skipListCreate("COST");
 
         // supertype
         skipListCreate("SUPERTYPE");
+        skipListAddName("SUPERTYPE", "Timmy, Power Gamer"); // UGL, mtgjson error
 
         // type
         skipListCreate("TYPE");
+        skipListAddName("TYPE", "Fowl Play"); // UGL, mtgjson error
 
         // subtype
         skipListCreate("SUBTYPE");
+        skipListAddName("SUBTYPE", "Timmy, Power Gamer"); // UGL, mtgjson error
+        skipListAddName("SUBTYPE", "Fowl Play"); // UGL, mtgjson error
+        skipListAddName("SUBTYPE", "Paper Tiger"); // UGL, mtgjson error
+        skipListAddName("SUBTYPE", "Rock Lobster"); // UGL, mtgjson error
+        skipListAddName("SUBTYPE", "Scissors Lizard"); // UGL, mtgjson error
 
         // number
         skipListCreate("NUMBER");
@@ -76,7 +90,7 @@ public class VerifyCardDataTest {
 
     private void fail(Card card, String category, String message) {
         failed++;
-        System.out.println("Error: (" + category + ") " + message + " for " + card.getName());
+        System.out.println("Error: (" + category + ") " + message + " for " + card.getName()  + " (" + card.getExpansionSetCode() + ")");
     }
 
     private int failed = 0;
@@ -280,6 +294,7 @@ public class VerifyCardDataTest {
         checkTypes(card, ref);
         checkColors(card, ref);
         //checkNumbers(card, ref); // TODO: load data from allsets.json and check it (allcards.json do not have card numbers)
+        checkBasicLands(card, ref);
     }
 
     private void checkColors(Card card, JsonCard ref) {
@@ -390,6 +405,48 @@ public class VerifyCardDataTest {
         String current = card.getCardNumber();
         if (!eqPT(current, expected)) {
             warn(card, "card number " + current + " != " + expected);
+        }
+    }
+
+    private boolean isBasicLandName(String name) {
+
+        String checkName = name;
+        if (name.startsWith("Snow-Covered ")) {
+            // snow lands is basic lands too
+            checkName = name.replace("Snow-Covered ", "");
+        }
+
+        return checkName.equals("Island") ||
+                checkName.equals("Forest") ||
+                checkName.equals("Swamp") ||
+                checkName.equals("Plains") ||
+                checkName.equals("Mountain") ||
+                checkName.equals("Wastes");
+    }
+
+    private void checkBasicLands(Card card, JsonCard ref) {
+
+        // basic lands must have Rarity.LAND and SuperType.BASIC
+        // other cards can't have that stats
+
+        if (isBasicLandName(card.getName())) {
+            // lands
+            if (card.getRarity() != Rarity.LAND) {
+                fail(card, "rarity", "basic land must be Rarity.LAND");
+            }
+
+            if (!card.getSuperType().contains(SuperType.BASIC)) {
+                fail(card, "supertype", "basic land must be SuperType.BASIC");
+            }
+        } else {
+            // non lands
+            if (card.getRarity() == Rarity.LAND) {
+                fail(card, "rarity", "only basic land can be Rarity.LAND");
+            }
+
+            if (card.getSuperType().contains(SuperType.BASIC)) {
+                fail(card, "supertype", "only basic land can be SuperType.BASIC");
+            }
         }
     }
 

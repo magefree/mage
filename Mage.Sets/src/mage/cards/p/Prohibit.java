@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -55,7 +54,7 @@ public class Prohibit extends CardImpl {
         this.addAbility(new KickerAbility("{2}"));
 
         // Counter target spell if its converted mana cost is 2 or less. If Prohibit was kicked, counter that spell if its converted mana cost is 4 or less instead.
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addEffect(new ProhibitEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
@@ -69,20 +68,20 @@ public class Prohibit extends CardImpl {
     }
 }
 
-class OverloadEffect extends OneShotEffect {
+class ProhibitEffect extends OneShotEffect {
 
-    OverloadEffect() {
+    ProhibitEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Counter target spell if its converted mana cost is 2 or less. If {this} was kicked, counter that spell if its converted mana cost is 4 or less instead.";
     }
 
-    OverloadEffect(final OverloadEffect effect) {
+    ProhibitEffect(final ProhibitEffect effect) {
         super(effect);
     }
 
     @Override
-    public OverloadEffect copy() {
-        return new OverloadEffect(this);
+    public ProhibitEffect copy() {
+        return new ProhibitEffect(this);
     }
 
     @Override

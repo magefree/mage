@@ -38,7 +38,6 @@ import mage.abilities.keyword.special.JohanVigilanceAbility;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -655,7 +654,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         Map<UUID, Set<UUID>> mustBeBlockedByAtLeastOne = new HashMap<>();
 
         // check mustBlock requirements of creatures from opponents of attacking player
-        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED, player.getId(), game)) {
             // creature is controlled by an opponent of the attacker
             if (opponents.contains(creature.getControllerId())) {
 
@@ -1180,6 +1179,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 //TODO: handle banding
                 blockingGroups.get(blockerId).attackers.add(attackerId);
             }
+            // "blocker.setBlocking(blocker.getBlocking() + 1)" is handled by the attacking combat group
         }
     }
 
@@ -1392,6 +1392,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public void removeBlockerGromGroup(UUID blockerId, CombatGroup groupToUnblock, Game game) {
+        // Manual player action for undoing one declared blocker (used for multi-blocker creatures)
         Permanent creature = game.getPermanent(blockerId);
         if (creature != null) {
             for (CombatGroup group : groups) {
@@ -1404,7 +1405,26 @@ public class Combat implements Serializable, Copyable<Combat> {
                     if (creature.getBlocking() > 0) {
                         creature.setBlocking(creature.getBlocking() - 1);
                     } else {
-                        throw new UnsupportedOperationException("Tryinging creature to unblock, but blocking number value of creature < 1");
+                        throw new UnsupportedOperationException("Trying to unblock creature, but blocking number value of creature < 1");
+                    }
+                    boolean canRemove = false;
+                    for (CombatGroup blockGroup : getBlockingGroups()) {
+                        if (blockGroup.blockers.contains(blockerId)) {
+                            for (UUID attackerId : group.getAttackers()) {
+                                blockGroup.attackers.remove(attackerId);
+                                blockGroup.attackerOrder.remove(attackerId);
+                            }
+                            if (creature.getBlocking() == 0) {
+                                blockGroup.blockers.remove(blockerId);
+                                blockGroup.attackerOrder.clear();
+                            }
+                        }
+                        if (blockGroup.blockers.isEmpty()) {
+                            canRemove = true;
+                        }
+                    }
+                    if (canRemove) {
+                        blockingGroups.remove(blockerId);
                     }
                 }
             }
@@ -1412,6 +1432,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public void removeBlocker(UUID blockerId, Game game) {
+        // Manual player action for undoing all declared blockers (used for single-blocker creatures and multi-blockers exceeding blocking limit)
         for (CombatGroup group : groups) {
             if (group.blockers.contains(blockerId)) {
                 group.blockers.remove(blockerId);

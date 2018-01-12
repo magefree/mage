@@ -39,8 +39,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,9 +57,8 @@ import mage.target.common.TargetLandPermanent;
 public class MarketFestival extends CardImpl {
 
     public MarketFestival(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
@@ -108,13 +107,11 @@ class MarketFestivalTriggeredAbility extends TriggeredManaAbility {
         return enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo());
     }
 
-
     @Override
     public String getRule() {
         return "Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to his or her mana pool <i>(in addition to the mana the land produces)</i>.";
     }
 }
-
 
 class MarketFestivalManaEffect extends ManaEffect {
 
@@ -152,7 +149,9 @@ class MarketFestivalManaEffect extends ManaEffect {
                         return false;
                     }
                 }
-
+                if (choiceColor.getChoice() == null) { // Possible after reconnect?
+                    return false;
+                }
                 choiceColor.increaseMana(mana);
             }
             checkToFirePossibleEvents(mana, game, source);

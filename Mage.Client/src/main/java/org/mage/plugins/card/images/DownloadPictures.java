@@ -648,7 +648,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             logger.fatal("Couldn't unmount zip files", e);
             JOptionPane.showMessageDialog(null, "Couldn't unmount zip files", "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
-            System.gc();
+            //
         }
         closeButton.setText("Close");
         updateCardsToDownload(jComboBoxSet.getSelectedItem().toString());
