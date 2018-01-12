@@ -42,5 +42,6 @@ public class Unglued extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 86, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.UGL_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("The Cheese Stands Alone", 2, Rarity.RARE, mage.cards.t.TheCheeseStandsAlone.class));
         cards.add(new SetCardInfo("Timmy, Power Gamer", 68, Rarity.RARE, mage.cards.t.TimmyPowerGamer.class));
+        cards.add(new SetCardInfo("Urza's Science Fair Project", 83, Rarity.UNCOMMON, mage.cards.u.UrzasScienceFairProject.class));
     }
 }
