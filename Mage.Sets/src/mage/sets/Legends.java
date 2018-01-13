@@ -252,6 +252,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Storm Seeker", 119, Rarity.UNCOMMON, mage.cards.s.StormSeeker.class));
         cards.add(new SetCardInfo("Storm World", 162, Rarity.RARE, mage.cards.s.StormWorld.class));
         cards.add(new SetCardInfo("Sunastian Falconer", 301, Rarity.UNCOMMON, mage.cards.s.SunastianFalconer.class));
+        cards.add(new SetCardInfo("Sword of the Ages", 241, Rarity.RARE, mage.cards.s.SwordOfTheAges.class));
         cards.add(new SetCardInfo("Sylvan Library", 121, Rarity.UNCOMMON, mage.cards.s.SylvanLibrary.class));
         cards.add(new SetCardInfo("Sylvan Paradise", 122, Rarity.UNCOMMON, mage.cards.s.SylvanParadise.class));
         cards.add(new SetCardInfo("Syphon Soul", 32, Rarity.COMMON, mage.cards.s.SyphonSoul.class));
