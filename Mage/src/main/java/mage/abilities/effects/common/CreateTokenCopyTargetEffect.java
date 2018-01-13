@@ -284,9 +284,6 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
                 sb.append("tapped ");
             }
             sb.append("tokens that are copies of target ");
-            creature
-
-        ");
         }
         if (!mode.getTargets().isEmpty()) {
             sb.append(mode.getTargets().get(0).getMessage());
