@@ -86,6 +86,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Erosion", 25, Rarity.COMMON, mage.cards.e.Erosion.class));
         cards.add(new SetCardInfo("Eternal Flame", 60, Rarity.RARE, mage.cards.e.EternalFlame.class));
         cards.add(new SetCardInfo("Exorcist", 79, Rarity.RARE, mage.cards.e.Exorcist.class));
+        cards.add(new SetCardInfo("Fasting", 80, Rarity.RARE, mage.cards.f.Fasting.class));
         cards.add(new SetCardInfo("Fellwar Stone", 99, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Festival", 81, Rarity.COMMON, mage.cards.f.Festival.class));
         cards.add(new SetCardInfo("Fire Drake", 61, Rarity.UNCOMMON, mage.cards.f.FireDrake.class));
