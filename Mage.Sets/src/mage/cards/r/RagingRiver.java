@@ -152,9 +152,11 @@ class RagingRiverEffect extends OneShotEffect {
                                 filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
                             } else {
                                 List<Permanent> leftLog = left.stream()
+                                        .filter(permanent -> permanent.getControllerId() != null)
                                         .filter(permanent -> permanent.getControllerId().equals(defender.getId()))
                                         .collect(Collectors.toList());
                                 List<Permanent> rightLog = right.stream()
+                                        .filter(permanent -> permanent.getControllerId() != null)
                                         .filter(permanent -> permanent.getControllerId().equals(defender.getId()))
                                         .collect(Collectors.toList());
 
