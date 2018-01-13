@@ -34,6 +34,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.mana.CommanderColorIdentityManaAbility;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -110,13 +111,30 @@ class PathOfAncestryTriggeredAbility extends TriggeredAbilityImpl {
             if (spell != null && spell.isCreature()) {
                 Player controller = game.getPlayer(getControllerId());
                 if (controller != null && controller.getCommandersIds() != null && !controller.getCommandersIds().isEmpty()) {
+                    if (spell.getAbilities().contains(ChangelingAbility.getInstance())) {
+                        for (UUID cmdr : controller.getCommandersIds()) {
+                            MageObject commander = game.getObject(cmdr);
+                            if (commander != null) {
+                                if (commander.getAbilities().contains(ChangelingAbility.getInstance())) {
+                                    return true;
+                                }
+                                Iterator<SubType> cmdrSubs = commander.getSubtype(game).iterator();
+                                while (cmdrSubs.hasNext()) {
+                                    SubType sType = cmdrSubs.next();
+                                    if (sType.getSubTypeSet() == SubTypeSet.CreatureType) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
                     Iterator<SubType> spellSubs = spell.getSubtype(game).iterator();
                     while (spellSubs.hasNext()) {
                         SubType sType = spellSubs.next();
                         if (sType.getSubTypeSet() == SubTypeSet.CreatureType) {
                             for (UUID cmdr : controller.getCommandersIds()) {
                                 MageObject commander = game.getObject(cmdr);
-                                if (commander != null && commander.hasSubtype(sType, game)) {
+                                if (commander != null && (commander.hasSubtype(sType, game) || commander.getAbilities().contains(ChangelingAbility.getInstance()))) {
                                     return true;
                                 }
                             }
@@ -125,7 +143,6 @@ class PathOfAncestryTriggeredAbility extends TriggeredAbilityImpl {
                 }
             }
         }
-
         return false;
     }
 
