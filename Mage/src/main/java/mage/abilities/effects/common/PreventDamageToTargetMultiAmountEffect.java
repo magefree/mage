@@ -123,10 +123,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!used && super.applies(event, source, game) && targetAmountMap.containsKey(event.getTargetId())) {
-            return true;
-        }
-        return false;
+        return !used && super.applies(event, source, game) && targetAmountMap.containsKey(event.getTargetId());
     }
 
     @Override

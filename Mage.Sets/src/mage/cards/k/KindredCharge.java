@@ -95,26 +95,24 @@ class KindredChargeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            Object object = game.getState().getValue(sourceObject.getId() + "_type");
-            if (object == null) {
-                return false;
-            }
-            String creatureType = object.toString();
-            FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control of the chosen type");
-            filter.add(new SubtypePredicate(SubType.byDescription(creatureType)));
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
-                if (permanent != null) {
-                    CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
-                    effect.setTargetPointer(new FixedTarget(permanent, game));
-                    effect.apply(game, source);
-                    for (Permanent addedToken : effect.getAddedPermanent()) {
-                        Effect exileEffect = new ExileTargetEffect();
-                        exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
-                        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+            if (subType != null) {
+                FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control of the chosen type");
+                filter.add(new SubtypePredicate(subType));
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
+                    if (permanent != null) {
+                        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
+                        effect.apply(game, source);
+                        for (Permanent addedToken : effect.getAddedPermanent()) {
+                            Effect exileEffect = new ExileTargetEffect();
+                            exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
+                            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+                        }
                     }
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }

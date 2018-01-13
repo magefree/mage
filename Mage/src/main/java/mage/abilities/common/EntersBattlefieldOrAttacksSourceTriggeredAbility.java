@@ -66,10 +66,7 @@ public class EntersBattlefieldOrAttacksSourceTriggeredAbility extends TriggeredA
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
             return true;
         }
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
     }
 
     @Override

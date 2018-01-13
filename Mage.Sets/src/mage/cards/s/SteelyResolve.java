@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -39,8 +40,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author markedagain
@@ -48,7 +47,7 @@ import java.util.UUID;
 public class SteelyResolve extends CardImpl {
 
     public SteelyResolve(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
         // As Steely Resolve enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.AddAbility)));
@@ -65,30 +64,31 @@ public class SteelyResolve extends CardImpl {
         return new SteelyResolve(this);
     }
 }
+
 class FilterSteelyResolve extends FilterCreaturePermanent {
-    
+
     public FilterSteelyResolve() {
         super("All creatures of the chosen type");
     }
-    
+
     public FilterSteelyResolve(final FilterSteelyResolve filter) {
         super(filter);
     }
-    
+
     @Override
     public FilterSteelyResolve copy() {
         return new FilterSteelyResolve(this);
     }
-    
+
     @Override
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
         if (super.match(permanent, sourceId, playerId, game)) {
-            SubType subtype = (SubType) game.getState().getValue(sourceId + "_type");
-            if (subtype != null && permanent.hasSubtype(subtype, game)) {
+            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(sourceId, game);
+            if (subType != null && permanent.hasSubtype(subType, game)) {
                 return true;
             }
         }
         return false;
     }
-    
+
 }

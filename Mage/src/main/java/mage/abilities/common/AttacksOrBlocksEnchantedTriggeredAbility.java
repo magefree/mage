@@ -32,10 +32,7 @@ public class AttacksOrBlocksEnchantedTriggeredAbility extends TriggeredAbilityIm
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-            return true;
-        }
-        return false;
+        return enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo());
     }
 
     @Override

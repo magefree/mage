@@ -27,6 +27,7 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -44,15 +45,13 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
  * @author noxx
  */
 public class RidersOfGavony extends CardImpl {
 
     public RidersOfGavony(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
 
@@ -108,10 +107,12 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
         if (protectionFilter == null) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                SubType subtype = (SubType) game.getState().getValue(permanent.getId() + "_type");
-                if (subtype != null) {
-                    protectionFilter = new FilterPermanent(subtype.getDescription() + 's');
-                    protectionFilter.add(new SubtypePredicate(subtype));
+                SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(permanent.getId(), game);
+                if (subType != null) {
+                    protectionFilter = new FilterPermanent(subType.getDescription() + 's');
+                    protectionFilter.add(new SubtypePredicate(subType));
+                } else {
+                    discard();
                 }
             }
         }

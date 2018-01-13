@@ -27,8 +27,12 @@
  */
 package mage.cards.c;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -43,10 +47,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.SubTypeList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-import mage.abilities.common.AsEntersBattlefieldAbility;
 
 /**
  *
@@ -92,33 +92,33 @@ class ConspiracyEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        SubType choice = (SubType) game.getState().getValue(source.getSourceId().toString() + "_type");
-        if (controller != null && choice != null) {
+        SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+        if (controller != null && subType != null) {
             // Creature cards you own that aren't on the battlefield
             // in graveyard
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
                 if (card.isCreature()) {
-                    setCreatureSubtype(card, choice, game);
+                    setCreatureSubtype(card, subType, game);
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
                 if (card.isCreature()) {
-                    setCreatureSubtype(card, choice, game);
+                    setCreatureSubtype(card, subType, game);
                 }
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
                 if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
-                    setCreatureSubtype(card, choice, game);
+                    setCreatureSubtype(card, subType, game);
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
                 if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
-                    setCreatureSubtype(card, choice, game);
+                    setCreatureSubtype(card, subType, game);
                 }
             }
             // commander in command zone
@@ -126,7 +126,7 @@ class ConspiracyEffect extends ContinuousEffectImpl {
                 if (game.getState().getZone(commanderId) == Zone.COMMAND) {
                     Card card = game.getCard(commanderId);
                     if (card.isCreature()) {
-                        setCreatureSubtype(card, choice, game);
+                        setCreatureSubtype(card, subType, game);
                     }
                 }
             }
@@ -137,14 +137,14 @@ class ConspiracyEffect extends ContinuousEffectImpl {
                         && stackObject.getControllerId().equals(source.getControllerId())
                         && stackObject.isCreature()) {
                     Card card = ((Spell) stackObject).getCard();
-                    setCreatureSubtype(card, choice, game);
+                    setCreatureSubtype(card, subType, game);
                 }
             }
             // creatures you control
             List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(
                     new FilterControlledCreaturePermanent(), source.getControllerId(), game);
             for (Permanent creature : creatures) {
-                setCreatureSubtype(creature, choice, game);
+                setCreatureSubtype(creature, subType, game);
             }
             return true;
         }

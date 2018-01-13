@@ -57,12 +57,9 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         EntersTheBattlefieldEvent ebe = (EntersTheBattlefieldEvent) event;
-        if (ebe.getTarget().getControllerId().equals(this.controllerId)
+        return ebe.getTarget().getControllerId().equals(this.controllerId)
                 && (event.getTargetId().equals(this.getSourceId())
-                || (ebe.getTarget().hasSubtype(SubType.ALLY, game) && !event.getTargetId().equals(this.getSourceId())))) {
-            return true;
-        }
-        return false;
+                || (ebe.getTarget().hasSubtype(SubType.ALLY, game) && !event.getTargetId().equals(this.getSourceId())));
     }
 
     @Override

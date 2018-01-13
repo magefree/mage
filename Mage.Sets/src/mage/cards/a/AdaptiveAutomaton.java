@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -42,8 +43,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -99,9 +98,9 @@ class AdaptiveAutomatonAddSubtypeEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            SubType subtype = (SubType) game.getState().getValue(permanent.getId() + "_type");
-            if (subtype != null && !permanent.hasSubtype(subtype, game)) {
-                permanent.getSubtype(game).add(subtype);
+            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(permanent.getId(), game);
+            if (subType != null && !permanent.hasSubtype(subType, game)) {
+                permanent.getSubtype(game).add(subType);
             }
         }
         return true;

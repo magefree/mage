@@ -82,10 +82,8 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         //20110204 - 701.11c - event.getAmount() is used to signal if regeneration is allowed
-        if (event.getAmount() == 0 && event.getTargetId().equals(targetPointer.getFirst(game, source)) && !this.used) {
-            return true;
-        }
-        return false;
+        
+        return event.getAmount() == 0 && event.getTargetId().equals(targetPointer.getFirst(game, source)) && !this.used;
     }
 
     @Override

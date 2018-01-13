@@ -44,10 +44,7 @@ public class RippleAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
+        return spell != null && spell.getSourceId().equals(this.getSourceId());
 
     }
 

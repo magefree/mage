@@ -976,10 +976,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 return true;
             }
         }
-        if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.STAY_ATTACHED, objectId, source.getId(), null), null, game, false)) {
-            return true;
-        }
-        return false;
+        return game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.STAY_ATTACHED, objectId, source.getId(), null), null, game, false);
     }
 
     protected boolean canDamage(MageObject source, Game game) {

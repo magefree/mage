@@ -27,6 +27,7 @@
  */
 package mage.cards.o;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,8 +41,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author emerald000
@@ -49,7 +48,7 @@ import java.util.UUID;
 public class ObeliskOfUrd extends CardImpl {
 
     public ObeliskOfUrd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // Convoke
         this.addAbility(new ConvokeAbility());
@@ -93,14 +92,16 @@ class ObeliskOfUrdBoostEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            SubType subtype = (SubType) game.getState().getValue(permanent.getId() + "_type");
-            if (subtype != null) {
+            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+            if (subType != null) {
                 for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                    if (perm.hasSubtype(subtype, game)) {
+                    if (perm.hasSubtype(subType, game)) {
                         perm.addPower(2);
                         perm.addToughness(2);
                     }
                 }
+            } else {
+                discard();
             }
         }
         return true;

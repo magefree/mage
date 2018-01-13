@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -38,17 +39,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-
-import java.util.UUID;
 
 /**
  *
@@ -57,13 +53,14 @@ import java.util.UUID;
 public class DoorOfDestinies extends CardImpl {
 
     public DoorOfDestinies(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // As Door of Destinies enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
 
         // Whenever you cast a spell of the chosen type, put a charge counter on Door of Destinies.
         this.addAbility(new AddCounterAbility());
+
         // Creatures you control of the chosen type get +1/+1 for each charge counter on Door of Destinies.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostCreatureEffectEffect()));
     }
@@ -100,17 +97,13 @@ class AddCounterAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent doorOfDestinies = game.getPermanent(getSourceId());
-        if (doorOfDestinies != null) {
-            SubType subtype = (SubType) game.getState().getValue(doorOfDestinies.getId() + "_type");
-            if (subtype != null) {
-                FilterSpell filter = new FilterSpell();
-                filter.add(new ControllerPredicate(TargetController.YOU));
-                filter.add(new SubtypePredicate(subtype));
-                Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
-                    return true;
-                }
+        SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(getSourceId(), game);
+        if (subType != null) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null
+                    && spell.getControllerId().equals(getControllerId())
+                    && spell.hasSubtype(subType, game)) {
+                return true;
             }
         }
         return false;
@@ -123,7 +116,6 @@ class AddCounterAbility extends TriggeredAbilityImpl {
 }
 
 class BoostCreatureEffectEffect extends ContinuousEffectImpl {
-
 
     public BoostCreatureEffectEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

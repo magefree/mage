@@ -101,10 +101,7 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
                 }
         }
         if (correctEndPhase) {
-            if (condition != null && !condition.apply(game, this)) {
-                return false;
-            }
-            return true;
+            return !(condition != null && !condition.apply(game, this));
         }
         return false;
     }

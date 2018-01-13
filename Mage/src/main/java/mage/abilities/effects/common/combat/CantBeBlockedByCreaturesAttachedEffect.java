@@ -63,10 +63,7 @@ public class CantBeBlockedByCreaturesAttachedEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (filter.match(blocker, source.getSourceId(), source.getControllerId(), game)) {
-            return false;
-        }
-        return true;
+        return !filter.match(blocker, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override

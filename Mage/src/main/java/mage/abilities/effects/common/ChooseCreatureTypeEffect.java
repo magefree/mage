@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -86,4 +87,18 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
         return new ChooseCreatureTypeEffect(this);
     }
 
+    /**
+     *
+     * @param objectId sourceId the effect was exeuted under
+     * @param game
+     * @return
+     */
+    public static SubType getChoosenCreatureType(UUID objectId, Game game) {
+        SubType creatureType = null;
+        Object savedCreatureType = game.getState().getValue(objectId + "_type");
+        if (savedCreatureType != null) {
+            creatureType = SubType.byDescription(savedCreatureType.toString());
+        }
+        return creatureType;
+    }
 }
