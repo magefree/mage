@@ -58,7 +58,7 @@ public class WorldAtWar extends CardImpl {
         // After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn.
         this.getSpellAbility().addEffect(new WorldAtWarEffect());
 
-        // Rebound
+        // Rebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)
         this.addAbility(new ReboundAbility(), new AttackedThisTurnWatcher());
     }
 
