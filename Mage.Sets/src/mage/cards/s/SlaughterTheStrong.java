@@ -143,7 +143,7 @@ class SlaughterTheStrongEffect extends OneShotEffect {
                             }
                         }
                     }
-                    for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)) {
+                    for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)) {
                         if (!selectedCreatures.contains(creature.getId())) {
                             creature.sacrifice(source.getSourceId(), game);
                         }
