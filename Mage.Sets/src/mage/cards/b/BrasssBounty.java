@@ -47,7 +47,7 @@ public class BrasssBounty extends CardImpl {
 
         // For each land you control, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
         this.getSpellAbility().addEffect(
-                new CreateTokenEffect(new TreasureToken(), new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT))
+                new CreateTokenEffect(new TreasureToken(), new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND))
                         .setText("For each land you control, create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color to your mana pool.\""));
     }
 
