@@ -77,6 +77,7 @@ public enum CounterType {
     HOOFPRINT("hoofprint"),
     HOUR("hour"),
     HOURGLASS("hourglass"),
+    HUNGER("hunger"),
     ICE("ice"),
     INFECTION("infection"),
     INTERVENTION("intervention"),
