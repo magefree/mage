@@ -76,6 +76,7 @@ import static mage.constants.Constants.MIN_AVATAR_ID;
 import mage.constants.ManaType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
+import mage.designations.DesignationType;
 import mage.remote.Session;
 import mage.utils.timer.PriorityTimer;
 import mage.view.CardView;
@@ -333,11 +334,15 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
         // Extend tooltip
         StringBuilder tooltipText = new StringBuilder(basicTooltipText);
+        this.avatar.setTopTextImageRight(null);
+        for (String name : player.getDesignationNames()) {
+            tooltipText.append("<br/>").append(name);
+            if (DesignationType.CITYS_BLESSING.toString().equals(name)) {
+                this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/city_blessing.png"));
+            }
+        }
         if (player.isMonarch()) {
-            tooltipText.append("<br/>Monarch");
             this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/crown.png"));
-        } else {
-            this.avatar.setTopTextImageRight(null);
         }
         for (Counter counter : player.getCounters().values()) {
             tooltipText.append("<br/>").append(counter.getName()).append(" counters: ").append(counter.getCount());

@@ -34,9 +34,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import mage.cards.Card;
 import mage.counters.Counters;
+import mage.designations.Designation;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
@@ -84,6 +84,7 @@ public class PlayerView implements Serializable {
     private final boolean passedAllTurns; // F9
     private final boolean passedUntilEndStepBeforeMyTurn; // F11
     private final boolean monarch;
+    private final List<String> designationNames = new ArrayList<>();
 
     public PlayerView(Player player, GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
         this.playerId = player.getId();
@@ -164,6 +165,9 @@ public class PlayerView implements Serializable {
         this.passedUntilStackResolved = player.getPassedUntilStackResolved();
         this.passedUntilEndStepBeforeMyTurn = player.getPassedUntilEndStepBeforeMyTurn();
         this.monarch = player.getId().equals(game.getMonarchId());
+        for (Designation designation : player.getDesignations()) {
+            this.designationNames.add(designation.getName());
+        }
     }
 
     private boolean showInBattlefield(Permanent permanent, GameState state) {
@@ -303,6 +307,10 @@ public class PlayerView implements Serializable {
 
     public boolean isMonarch() {
         return monarch;
+    }
+
+    public List<String> getDesignationNames() {
+        return designationNames;
     }
 
 }
