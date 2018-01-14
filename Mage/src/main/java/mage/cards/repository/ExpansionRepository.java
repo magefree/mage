@@ -2,6 +2,7 @@ package mage.cards.repository;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
@@ -83,17 +84,26 @@ public enum ExpansionRepository {
     }
 
     public ExpansionInfo[] getWithBoostersSortedByReleaseDate() {
-        ExpansionInfo[] sets = new ExpansionInfo[0];
+
         try {
-            QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
-            qb.orderBy("releaseDate", false);
-            qb.where().eq("boosters", new SelectArg(true));
-            List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
-            sets = expansions.toArray(new ExpansionInfo[0]);
+            // only with boosters and cards
+            GenericRawResults<ExpansionInfo> setsList = expansionDao.queryRaw(
+                    "select * from expansion e " +
+                            " where e.boosters = 1 " +
+                            "   and exists(select (1) from  card c where c.setcode = e.code) " +
+                            " order by e.releasedate desc",
+                    expansionDao.getRawRowMapper());
+
+            List<ExpansionInfo> resList = new ArrayList<>();
+            for (ExpansionInfo info : setsList) {
+                resList.add(info);
+            }
+            return resList.toArray(new ExpansionInfo[0]);
+
         } catch (SQLException ex) {
             logger.error(ex);
+            return new ExpansionInfo[0];
         }
-        return sets;
     }
 
     public List<ExpansionInfo> getSetsWithBasicLandsByReleaseDate() {
