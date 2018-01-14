@@ -50,7 +50,7 @@ import mage.game.events.ZoneChangeEvent;
 public class GrafdiggersCage extends CardImpl {
 
     public GrafdiggersCage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Creature cards can't enter the battlefield from graveyards or libraries.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrafdiggersCageEffect()));
@@ -73,7 +73,7 @@ class GrafdiggersCageEffect extends ContinuousRuleModifyingEffectImpl {
 
     public GrafdiggersCageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Creature cards can't enter the battlefield from graveyards or libraries";
+        staticText = "Creature cards in graveyards and libraries can't enter the battlefield";
     }
 
     public GrafdiggersCageEffect(final GrafdiggersCageEffect effect) {
@@ -120,12 +120,11 @@ class GrafdiggersCageEffect2 extends ContinuousRuleModifyingEffectImpl {
         return new GrafdiggersCageEffect2(this);
     }
 
-
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
