@@ -111,7 +111,7 @@ public class ChatSession {
 
     public boolean broadcastInfoToUser(User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
-            toUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, new ChatMessage(null, message, timeFormatter.format(new Date()), MessageColor.BLUE, MessageType.USER_INFO, null)));
+            toUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, new ChatMessage(null, message, new Date(), MessageColor.BLUE, MessageType.USER_INFO, null)));
             return true;
         }
         return false;
@@ -120,10 +120,10 @@ public class ChatSession {
     public boolean broadcastWhisperToUser(User fromUser, User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
             toUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                    new ChatMessage(fromUser.getName(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER_FROM, SoundToPlay.PlayerWhispered)));
+                    new ChatMessage(fromUser.getName(), message, new Date(), MessageColor.YELLOW, MessageType.WHISPER_FROM, SoundToPlay.PlayerWhispered)));
             if (clients.containsKey(fromUser.getId())) {
                 fromUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                        new ChatMessage(toUser.getName(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER_TO, null)));
+                        new ChatMessage(toUser.getName(), message, new Date(), MessageColor.YELLOW, MessageType.WHISPER_TO, null)));
                 return true;
             }
         }
@@ -133,7 +133,7 @@ public class ChatSession {
     public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         if (!message.isEmpty()) {
             Set<UUID> clientsToRemove = new HashSet<>();
-            ClientCallback clientCallback = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, new ChatMessage(userName, message, (withTime ? timeFormatter.format(new Date()) : ""), color, messageType, soundToPlay));
+            ClientCallback clientCallback = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, new ChatMessage(userName, message, (withTime ? new Date() : null), color, messageType, soundToPlay));
             List<UUID> chatUserIds = new ArrayList<>();
             final Lock r = lock.readLock();
             r.lock();

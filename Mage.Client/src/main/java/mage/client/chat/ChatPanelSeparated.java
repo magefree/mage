@@ -28,6 +28,7 @@
 package mage.client.chat;
 
 import java.awt.Font;
+import java.util.Date;
 
 import mage.client.SessionHandler;
 import mage.client.components.ColorPane;
@@ -54,7 +55,7 @@ public class ChatPanelSeparated extends ChatPanelBasic {
      * @param color Preferred color. Not used.
      */
     @Override
-    public void receiveMessage(String username, String message, String time, ChatMessage.MessageType messageType, ChatMessage.MessageColor color) {
+    public void receiveMessage(String username, String message, Date time, ChatMessage.MessageType messageType, ChatMessage.MessageColor color) {
         switch (messageType) {
             case TALK:
             case WHISPER_TO:
@@ -65,7 +66,7 @@ public class ChatPanelSeparated extends ChatPanelBasic {
         }
         StringBuilder text = new StringBuilder();
         if (time != null) {
-            text.append(getColoredText(TIMESTAMP_COLOR, time + ": "));
+            text.append(getColoredText(TIMESTAMP_COLOR, timeFormatter.format(time) + ": "));
         }
         String userColor;
         String textColor;
