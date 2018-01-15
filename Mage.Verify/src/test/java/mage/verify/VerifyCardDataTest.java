@@ -38,6 +38,10 @@ public class VerifyCardDataTest {
         // https://github.com/mtgjson/mtgjson/issues/534
         // https://github.com/mtgjson/mtgjson/issues/535
 
+        // TODO: mtgjson have wrong data to last dino updates from wizards 11.01.2018
+        // remove after fixed
+        // https://github.com/mtgjson/mtgjson/issues/538
+
         // power-toughness
         skipListCreate("PT");
         skipListAddName("PT", "Garbage Elemental"); // UST
@@ -65,6 +69,10 @@ public class VerifyCardDataTest {
         skipListAddName("SUBTYPE", "Rock Lobster"); // UGL, mtgjson error
         skipListAddName("SUBTYPE", "Scissors Lizard"); // UGL, mtgjson error
         skipListAddName("SUBTYPE", "Urza's Science Fair Project"); // UGL, mtgjson error
+        skipListAddName("SUBTYPE", "Ripscale Predator"); // mtgjson error for dino update
+        skipListAddName("SUBTYPE", "Regal Behemoth"); // mtgjson error for dino update
+        skipListAddName("SUBTYPE", "Gnathosaur"); // mtgjson error for dino update
+        skipListAddName("SUBTYPE", "Pteron Ghost"); // mtgjson error for dino update
 
 
         // number
