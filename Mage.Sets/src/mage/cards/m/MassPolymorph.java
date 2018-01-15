@@ -94,7 +94,7 @@ class MassPolymorphEffect extends OneShotEffect {
             Set<Card> creaturesToExile = new HashSet<>();
             creaturesToExile.addAll(creatures);
             count = creatures.size();
-            controller.moveCards(creaturesToExile, Zone.HAND, source, game);
+            controller.moveCards(creaturesToExile, Zone.EXILED, source, game);
 
             Cards revealed = new CardsImpl();
             Set<Card> creatureCards = new LinkedHashSet<>();
