@@ -27,6 +27,7 @@
  */
 package org.mage.test.cards.continuous;
 
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
@@ -142,7 +143,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
     /*
     TODO: NOTE: this test is currently failing due to bug in code. See issue #3072
      */
-    @Ignore
+    //@Ignore
     @Test
     public void testBloodMoonBeforeUrborg() {
         // Blood Moon   2R
@@ -175,7 +176,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
     /*
     TODO: NOTE: this test is currently failing due to bug in code. See issue #3072
      */
-    @Ignore
+    //@Ignore
     @Test
     public void testBloodMoonAfterUrborg() {
         // Blood Moon   2R
@@ -267,4 +268,30 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         Assert.assertTrue("4 lands have to be creatures but there are " + creatures, creatures == 4);
     }
 
+    @Test
+    public void testBloodSunWithUrborgtoyAndStormtideLeviathanMan() {
+
+        addCard(Zone.BATTLEFIELD, playerA, urborgtoy);  // all lands are swamps in addition to their other types
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Blood Sun");  // all lands lose all abilities except for mana-producing
+        addCard(Zone.BATTLEFIELD, playerA, "Stormtide Leviathan"); // all lands are islands in addition to their other types
+        addCard(Zone.BATTLEFIELD, playerA, "Darksteel Citadel");  // land has indestructible ability
+        
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        Permanent darksteel = getPermanent("Darksteel Citadel", playerA.getId());
+        Assert.assertNotNull(darksteel);
+        Assert.assertFalse(darksteel.getAbilities().contains(IndestructibleAbility.getInstance()));  // The ability is removed
+        
+        /*
+        If a continuous effect has started applying in an earlier layer, it will continue to apply in 
+        later layers even if the ability that created that effect has been removed.
+        Urborg ability is applied in the 4th layer.  The Blood Sun works in the 6th.  So the effect still applies to the lands.
+        */
+        assertType(urborgtoy, CardType.LAND, SubType.SWAMP);
+        assertType("Mountain", CardType.LAND, SubType.SWAMP);
+        assertType(urborgtoy, CardType.LAND, SubType.ISLAND);
+        assertType("Mountain", CardType.LAND, SubType.ISLAND);
+    }
 }
