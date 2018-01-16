@@ -159,10 +159,7 @@ class DetainRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (this.targetPointer.getTargets(game, source).contains(permanent.getId())) {
-            return true;
-        }
-        return false;
+        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
     }
 
     @Override

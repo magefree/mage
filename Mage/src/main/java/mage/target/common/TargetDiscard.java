@@ -59,7 +59,7 @@ public class TargetDiscard extends TargetCard {
     }
 
     public TargetDiscard(int minNumTargets, int maxNumTargets, FilterCard filter, UUID playerId) {
-        super(minNumTargets, maxNumTargets, Zone.HAND, filter);
+        super(minNumTargets, maxNumTargets, Zone.HAND, filter.copy());
         this.filter.add(new OwnerIdPredicate(playerId));
         this.playerId = playerId;
         this.targetName = this.filter.getMessage() + " to discard";

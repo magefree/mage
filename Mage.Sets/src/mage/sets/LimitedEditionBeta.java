@@ -49,6 +49,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Bog Wraith", 96, Rarity.UNCOMMON, mage.cards.b.BogWraith.class));
         cards.add(new SetCardInfo("Braingeyser", 51, Rarity.RARE, mage.cards.b.Braingeyser.class));
         cards.add(new SetCardInfo("Burrowing", 139, Rarity.UNCOMMON, mage.cards.b.Burrowing.class));
+        cards.add(new SetCardInfo("Camouflage", 188, Rarity.UNCOMMON, mage.cards.c.Camouflage.class));
         cards.add(new SetCardInfo("Castle", 9, Rarity.UNCOMMON, mage.cards.c.Castle.class));
         cards.add(new SetCardInfo("Celestial Prism", 235, Rarity.UNCOMMON, mage.cards.c.CelestialPrism.class));
         cards.add(new SetCardInfo("Channel", 189, Rarity.UNCOMMON, mage.cards.c.Channel.class));

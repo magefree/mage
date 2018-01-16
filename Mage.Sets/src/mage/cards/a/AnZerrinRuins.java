@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -40,8 +41,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -87,11 +86,9 @@ class AnZerrinRuinsDontUntapEffect extends DontUntapInControllersUntapStepAllEff
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            Permanent sourcePerm = game.getPermanent(source.getSourceId());
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && sourcePerm != null) {
-                SubType subtype = (SubType) game.getState().getValue(sourcePerm.getId() + "_type");
-                if (permanent.hasSubtype(subtype, game)) {
+            if (permanent != null) {
+                if (permanent.hasSubtype(ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game), game)) {
                     return true;
                 }
             }
@@ -101,6 +98,6 @@ class AnZerrinRuinsDontUntapEffect extends DontUntapInControllersUntapStepAllEff
 
     @Override
     public String getText(Mode mode) {
-        return "Creatures of the chosen type don't untap during their controllers' untap steps.";
+        return "Creatures of the chosen type don't untap during their controllers' untap steps";
     }
 }

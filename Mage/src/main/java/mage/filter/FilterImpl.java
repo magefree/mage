@@ -43,6 +43,7 @@ public abstract class FilterImpl<E> implements Filter<E> {
 
     protected List<Predicate<Object>> predicates = new ArrayList<>();
     protected String message;
+    protected boolean lockedFilter = false; // Helps to prevent to "accidently" modify the StaticFilters objects
 
     @Override
     public abstract FilterImpl<E> copy();
@@ -51,9 +52,10 @@ public abstract class FilterImpl<E> implements Filter<E> {
         this.message = name;
     }
 
-    public FilterImpl(FilterImpl<E> filter) {
+    public FilterImpl(final FilterImpl<E> filter) {
         this.message = filter.message;
         this.predicates = new ArrayList<>(filter.predicates);
+        this.lockedFilter = false;// After copying a filter it's allowed to modify
     }
 
     @Override
@@ -66,6 +68,9 @@ public abstract class FilterImpl<E> implements Filter<E> {
 
     @Override
     public final Filter add(Predicate predicate) {
+        if (isLockedFilter()) {
+            throw new UnsupportedOperationException("You may not modify a locked filter");
+        }
         predicates.add(predicate);
         return this;
     }
@@ -77,6 +82,9 @@ public abstract class FilterImpl<E> implements Filter<E> {
 
     @Override
     public void setMessage(String message) {
+        if (isLockedFilter()) {
+            throw new UnsupportedOperationException("You may not modify a locked filter");
+        }
         this.message = message;
     }
 
@@ -84,4 +92,13 @@ public abstract class FilterImpl<E> implements Filter<E> {
     public String toString() {
         return message;
     }
+
+    public boolean isLockedFilter() {
+        return lockedFilter;
+    }
+
+    public void setLockedFilter(boolean lockedFilter) {
+        this.lockedFilter = lockedFilter;
+    }
+
 }

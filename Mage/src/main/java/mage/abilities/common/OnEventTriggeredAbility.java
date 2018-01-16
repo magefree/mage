@@ -77,10 +77,7 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (allPlayers || event.getPlayerId().equals(this.controllerId)) {
-            return true;
-        }
-        return false;
+        return allPlayers || event.getPlayerId().equals(this.controllerId);
     }
 
     @Override

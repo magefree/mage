@@ -39,6 +39,8 @@ public final class MtgJson {
         mtgJsonToXMageCodes.put("DD3_EVG", "DD3EVG");
         mtgJsonToXMageCodes.put("DD3_DVD", "DDC");
         mtgJsonToXMageCodes.put("NMS", "NEM");
+        mtgJsonToXMageCodes.put("MPS_AKH", "MPS-AKH");
+
 
         // revert search
         for(Map.Entry<String, String> entry: mtgJsonToXMageCodes.entrySet()){

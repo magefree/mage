@@ -98,19 +98,18 @@ class KindredSummonsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            Object object = game.getState().getValue(sourceObject.getId() + "_type");
-            if (object == null) {
+            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+            if (subType == null) {
                 return false;
             }
-            String creatureType = object.toString();
             FilterControlledCreaturePermanent filterPermanent = new FilterControlledCreaturePermanent("creature you control of the chosen type");
-            filterPermanent.add(new SubtypePredicate(SubType.byDescription(creatureType)));
+            filterPermanent.add(new SubtypePredicate(subType));
             int numberOfCards = game.getBattlefield().countAll(filterPermanent, source.getControllerId(), game);
             Cards revealed = new CardsImpl();
             Set<Card> chosenSubtypeCreatureCards = new LinkedHashSet<>();
             Cards otherCards = new CardsImpl();
             FilterCreatureCard filterCard = new FilterCreatureCard("creature card of the chosen type");
-            filterCard.add(new SubtypePredicate(SubType.byDescription(creatureType)));
+            filterCard.add(new SubtypePredicate(subType));
             while (chosenSubtypeCreatureCards.size() < numberOfCards && controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 revealed.add(card);

@@ -29,10 +29,12 @@ import org.mage.test.serverside.base.CardTestAPI;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * API for test initialization and asserting the test results.
@@ -61,9 +63,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         UNKNOWN
     }
 
-    static {
-//        CardScanner.scanned = true;
-        CardScanner.scan();
+    public CardTestPlayerAPIImpl(){
+        // load all cards to db from class list
+        ArrayList<String> errorsList = new ArrayList<>();
+        CardScanner.scan(errorsList);
+
+        if (errorsList.size() > 0) {
+            Assert.fail("Found errors on card loading: " + '\n' + errorsList.stream().collect(Collectors.joining("\n")));
+        }
     }
 
     /**

@@ -59,10 +59,7 @@ public class BecomesExertSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getSourceId().equals(this.getSourceId());
     }
 
     @Override

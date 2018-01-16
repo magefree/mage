@@ -30,8 +30,14 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.cards.a.AesthirGlider;
 import mage.cards.e.EliteCatWarrior;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -45,6 +51,8 @@ public class MastersEditionIV extends ExpansionSet {
         return instance;
     }
 
+    protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
+
     private MastersEditionIV() {
         super("Masters Edition IV", "ME4", ExpansionSet.buildDate(2011, 1, 10), SetType.MAGIC_ONLINE);
         this.hasBasicLands = false;
@@ -54,6 +62,7 @@ public class MastersEditionIV extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        this.ratioBoosterSpecialLand = 1; // replace all basic lands
         cards.add(new SetCardInfo("Acid Rain", 36, Rarity.RARE, mage.cards.a.AcidRain.class));
         cards.add(new SetCardInfo("Aesthir Glider", 176, Rarity.COMMON, AesthirGlider.class));
         cards.add(new SetCardInfo("Air Elemental", 37, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
@@ -310,6 +319,20 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Xenic Poltergeist", 104, Rarity.UNCOMMON, mage.cards.x.XenicPoltergeist.class));
         cards.add(new SetCardInfo("Yotian Soldier", 240, Rarity.COMMON, mage.cards.y.YotianSoldier.class));
         cards.add(new SetCardInfo("Zombie Master", 105, Rarity.UNCOMMON, mage.cards.z.ZombieMaster.class));
+    }
+
+    @Override
+    public List<CardInfo> getSpecialLand() {
+        // ME4 replace all basic lands with special (1 per booster)
+        // https://mtg.gamepedia.com/Masters_Edition_IV
+
+        if (savedSpecialLand.isEmpty()) {
+            savedSpecialLand.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes(this.code).name("Urza's Mine")));
+            savedSpecialLand.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes(this.code).name("Urza's Power Plant")));
+            savedSpecialLand.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes(this.code).name("Urza's Tower")));
+        }
+
+        return new ArrayList<>(savedSpecialLand);
     }
 
 }

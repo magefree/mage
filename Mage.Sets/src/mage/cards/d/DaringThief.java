@@ -88,6 +88,7 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
     
     public TargetControlledPermanentSharingOpponentPermanentCardType() {
         super();
+        this.filter = this.filter.copy();
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
         setTargetName("nonland permanent you control");
     }  
@@ -155,6 +156,7 @@ class DaringThiefSecondTarget extends TargetPermanent {
             
     public DaringThiefSecondTarget() {
         super();
+        this.filter = this.filter.copy();
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
         setTargetName("permanent an opponent controls that shares a card type with it");
    }

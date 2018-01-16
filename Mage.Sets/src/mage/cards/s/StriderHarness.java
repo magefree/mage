@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -39,8 +38,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -49,15 +48,19 @@ import mage.constants.Zone;
  */
 public class StriderHarness extends CardImpl {
 
-    public StriderHarness (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+    public StriderHarness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.EQUIPMENT);
+
+        // Equipped creature gets +1/+1 and has haste.
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT)));
+
+        // Equip 1 (1: Attach to target creature you control. Equip only as a sorcery.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
     }
 
-    public StriderHarness (final StriderHarness card) {
+    public StriderHarness(final StriderHarness card) {
         super(card);
     }
 

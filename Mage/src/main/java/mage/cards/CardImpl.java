@@ -28,10 +28,8 @@
 package mage.cards;
 
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -196,6 +194,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     public static Card createCard(Class<?> clazz, CardSetInfo setInfo) {
+        return createCard(clazz, setInfo, null);
+    }
+
+    public static Card createCard(Class<?> clazz, CardSetInfo setInfo, List<String> errorList) {
         try {
             Card card;
             if (setInfo == null) {
@@ -207,7 +209,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
             return card;
         } catch (Exception e) {
-            logger.fatal("Error loading card: " + clazz.getCanonicalName(), e);
+            String err = "Error loading card: " + clazz.getCanonicalName();
+            if (errorList != null) {
+                errorList.add(err);
+            }
+            logger.fatal(err, e);
             return null;
         }
     }

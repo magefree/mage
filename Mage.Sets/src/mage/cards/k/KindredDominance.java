@@ -28,14 +28,13 @@
 package mage.cards.k;
 
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -91,10 +90,12 @@ class KindredDominanceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
         if (controller != null & mageObject != null) {
-            String creatureType = game.getState().getValue(mageObject.getId() + "_type").toString();
-            FilterPermanent filter = new FilterCreaturePermanent("creatures");
-            filter.add(Predicates.not(new SubtypePredicate(SubType.byDescription(creatureType))));
-            return new DestroyAllEffect(filter).apply(game, source);
+            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+            if (subType != null) {
+                FilterPermanent filter = new FilterCreaturePermanent("creatures");
+                filter.add(Predicates.not(new SubtypePredicate(subType)));
+                return new DestroyAllEffect(filter).apply(game, source);
+            }
         }
         return false;
     }

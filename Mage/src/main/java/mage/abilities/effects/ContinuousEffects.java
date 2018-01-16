@@ -33,8 +33,10 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.*;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
@@ -1037,8 +1039,23 @@ public class ContinuousEffects implements Serializable {
     private void applyContinuousEffect(ContinuousEffect effect, Layer currentLayer, Game game) {
         Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
         for (Ability ability : abilities) {
-            effect.apply(currentLayer, SubLayer.NA, ability, game);
+            //effect.apply(currentLayer, SubLayer.NA, ability, game);
+            if (isAbilityStillExists(game, ability, effect)) {
+                effect.apply(currentLayer, SubLayer.NA, ability, game);
+            }
         }
+    }
+
+    private boolean isAbilityStillExists(final Game game, final Ability ability, ContinuousEffect effect) {
+        final Card card = game.getPermanentOrLKIBattlefield(ability.getSourceId());
+        if (!(effect instanceof BecomesFaceDownCreatureEffect)) {
+            if (card != null) {
+                if (!card.getAbilities(game).contains(ability)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public Set<Ability> getLayeredEffectAbilities(ContinuousEffect effect) {

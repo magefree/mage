@@ -27,9 +27,7 @@
  */
 package mage.cards.r;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -43,9 +41,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.permanent.PermanentInListPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -53,6 +51,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -124,25 +127,13 @@ class RagingRiverEffect extends OneShotEffect {
                         
                         // it could be nice to invoke some graphic indicator of which creature is Left or Right in this spot
                         StringBuilder sb = new StringBuilder("Left pile of ").append(defender.getLogName()).append(": ");
-                        int i = 0;
-                        for (Permanent permanent : leftLog) {
-                            i++;
-                            sb.append(permanent.getLogName());
-                            if (i < leftLog.size()) {
-                                sb.append(", ");
-                            }
-                        }
+                        sb.append(leftLog.stream().map(MageObject::getLogName).collect(Collectors.joining(", ")));
+
                         game.informPlayers(sb.toString());
                         
                         sb = new StringBuilder("Right pile of ").append(defender.getLogName()).append(": ");
-                        i = 0;
-                        for (Permanent permanent : rightLog) {
-                            i++;
-                            sb.append(permanent.getLogName());
-                            if (i < rightLog.size()) {
-                                sb.append(", ");
-                            }
-                        }
+                        sb.append(rightLog.stream().map(MageObject::getLogName).collect(Collectors.joining(", ")));
+
                         game.informPlayers(sb.toString());
                     }
                 }
@@ -160,19 +151,15 @@ class RagingRiverEffect extends OneShotEffect {
                                 // shortcut in case of no labeled blockers available
                                 filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
                             } else {
-                                List<Permanent> leftLog = new ArrayList<>();
-                                List<Permanent> rightLog = new ArrayList<>();
-                                
-                                for (Permanent permanent : left) {
-                                    if (permanent.getControllerId() == defender.getId()) {
-                                        leftLog.add(permanent);
-                                    }
-                                }
-                                for (Permanent permanent : right) {
-                                    if (permanent.getControllerId() == defender.getId()) {
-                                        rightLog.add(permanent);
-                                    }
-                                }
+                                List<Permanent> leftLog = left.stream()
+                                        .filter(permanent -> permanent.getControllerId() != null)
+                                        .filter(permanent -> permanent.getControllerId().equals(defender.getId()))
+                                        .collect(Collectors.toList());
+                                List<Permanent> rightLog = right.stream()
+                                        .filter(permanent -> permanent.getControllerId() != null)
+                                        .filter(permanent -> permanent.getControllerId().equals(defender.getId()))
+                                        .collect(Collectors.toList());
+
                                 
                                 if (controller.choosePile(outcome, attacker.getName() + ": attacking " + defender.getName(), leftLog, rightLog, game)) {
                                     filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentInListPredicate(left))));
@@ -192,19 +179,5 @@ class RagingRiverEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-                
-class PermanentInListPredicate implements Predicate<Permanent> {
-
-    private final List<Permanent> permanents;
-
-    public PermanentInListPredicate(List<Permanent> permanents) {
-        this.permanents = permanents;
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return permanents.contains(input);
     }
 }

@@ -71,11 +71,8 @@ class CantBeEnchantedAbility extends StaticAbility {
     }
 
     public boolean canTarget(MageObject source, Game game) {
-        if (source.isEnchantment()
-                && source.hasSubtype(SubType.AURA, game)) {
-            return false;
-        }
-        return true;
+        return !(source.isEnchantment()
+                && source.hasSubtype(SubType.AURA, game));
     }
 
 }

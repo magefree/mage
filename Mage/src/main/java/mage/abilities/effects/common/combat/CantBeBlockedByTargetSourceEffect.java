@@ -58,18 +58,12 @@ public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (source.getSourceId().equals(permanent.getId())) {
-            return true;
-        }
-        return false;
+        return source.getSourceId().equals(permanent.getId());
     }
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (this.getTargetPointer().getTargets(game, source).contains(blocker.getId())) {
-            return false;
-        }
-        return true;
+        return !this.getTargetPointer().getTargets(game, source).contains(blocker.getId());
     }
 
     @Override

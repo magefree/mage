@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -56,7 +55,8 @@ public class PteronGhost extends CardImpl {
     }
 
     public PteronGhost(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.subtype.add(SubType.DINOSAUR);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);

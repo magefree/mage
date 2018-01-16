@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,8 +40,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -84,12 +83,16 @@ class AshesOfTheFallenEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            SubType subtype = (SubType) game.getState().getValue(permanent.getId() + "_type");
-            for (UUID cardId : controller.getGraveyard()) {
-                Card card = game.getCard(cardId);
-                if (card != null && card.isCreature() && !card.hasSubtype(subtype, game)) {
-                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(subtype);
+            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(permanent.getId(), game);
+            if (subType != null) {
+                for (UUID cardId : controller.getGraveyard()) {
+                    Card card = game.getCard(cardId);
+                    if (card != null && card.isCreature() && !card.hasSubtype(subType, game)) {
+                        game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
+                    }
                 }
+            } else {
+                discard();;
             }
             return true;
         }

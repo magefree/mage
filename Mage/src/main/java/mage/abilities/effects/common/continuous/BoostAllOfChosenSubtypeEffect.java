@@ -6,6 +6,7 @@
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -48,9 +49,9 @@ public class BoostAllOfChosenSubtypeEffect extends BoostAllEffect {
 
     @Override
     protected void setRuntimeData(Ability source, Game game) {
-        SubType s = (SubType) game.getState().getValue(source.getSourceId() + "_type");
-        if (s != null) {
-            subtype = s;
+        SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+        if (subType != null) {
+            subtype = subType;
         } else {
             discard();
         }

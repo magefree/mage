@@ -58,7 +58,7 @@ public class RegalBehemoth extends CardImpl {
     public RegalBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
 
-        this.subtype.add(SubType.LIZARD);
+        this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

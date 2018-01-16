@@ -27,6 +27,9 @@
  */
 package mage.cards.c;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -50,10 +53,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 /**
  *
  * @author noxx
@@ -61,7 +60,7 @@ import java.util.UUID;
 public class CavernOfSouls extends CardImpl {
 
     public CavernOfSouls(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // As Cavern of Souls enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
@@ -91,9 +90,9 @@ class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public ConditionalManaBuilder setMana(Mana mana, Ability source, Game game) {
-        SubType value = (SubType) game.getState().getValue(source.getSourceId() + "_type");
-        if (value != null ) {
-            creatureType = value;
+        SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+        if (subType != null) {
+            creatureType = subType;
         }
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());

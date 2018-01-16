@@ -52,7 +52,7 @@ public abstract class Designation implements MageObject {
     }
 
     public Designation(DesignationType designationType, String expansionSetCode, boolean unique) {
-        this.name = designationType.name();
+        this.name = designationType.toString();
         this.designationType = designationType;
         this.id = UUID.randomUUID();
         this.frameStyle = FrameStyle.M15_NORMAL;

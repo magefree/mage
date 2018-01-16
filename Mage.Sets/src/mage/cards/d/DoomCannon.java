@@ -39,8 +39,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -55,7 +55,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class DoomCannon extends CardImpl {
 
     public DoomCannon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // As Doom Cannon enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Sacrifice)));
@@ -79,29 +79,29 @@ public class DoomCannon extends CardImpl {
 }
 
 class DoomCannonFilter extends FilterControlledCreaturePermanent {
-    
+
     public DoomCannonFilter() {
         super("a creature of the chosen type");
     }
-    
+
     public DoomCannonFilter(final DoomCannonFilter filter) {
         super(filter);
     }
-    
+
     @Override
     public DoomCannonFilter copy() {
         return new DoomCannonFilter(this);
     }
-    
+
     @Override
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
         if (super.match(permanent, sourceId, playerId, game)) {
-            SubType subtype = (SubType) game.getState().getValue(sourceId + "_type");
-            if (subtype != null && permanent.hasSubtype(subtype, game)) {
+            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(sourceId, game);
+            if (subType != null && permanent.hasSubtype(subType, game)) {
                 return true;
             }
         }
         return false;
     }
-    
+
 }

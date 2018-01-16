@@ -27,6 +27,9 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -47,10 +50,6 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -277,15 +276,21 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             if (tapped && !attacking) {
                 sb.append("tapped ");
             }
-            sb.append("token that's a copy of target creature");
+            sb.append("token that's a copy of target ");
         } else {
             sb.append(number);
             sb.append(" ");
             if (tapped && !attacking) {
                 sb.append("tapped ");
             }
-            sb.append("tokens that are copies of target creature");
+            sb.append("tokens that are copies of target ");
         }
+        if (!mode.getTargets().isEmpty()) {
+            sb.append(mode.getTargets().get(0).getMessage());
+        } else {
+            throw new UnsupportedOperationException("Using default rule generation of target effect without having a target object");
+        }
+
         if (attacking) {
             sb.append(" that are");
             if (tapped) {

@@ -27,6 +27,7 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -49,8 +50,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.token.RiptideReplicatorToken;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  *
@@ -106,9 +105,12 @@ class RiptideReplicatorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-        SubType type = (SubType) game.getState().getValue(source.getSourceId() + "_type");
+        SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+        if (subType == null) {
+            return false;
+        }
         int x = (new CountersSourceCount(CounterType.CHARGE)).calculate(game, source, this);
-        Token token = new RiptideReplicatorToken(color, type, x);
+        Token token = new RiptideReplicatorToken(color, subType, x);
         return token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
     }
 }

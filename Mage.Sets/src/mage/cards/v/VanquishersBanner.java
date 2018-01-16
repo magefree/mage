@@ -42,14 +42,11 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
 /**
@@ -110,17 +107,14 @@ class DrawCardIfCreatureTypeAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent vanquishersBanner = game.getPermanent(getSourceId());
-        if (vanquishersBanner != null) {
-            SubType subtype = (SubType) game.getState().getValue(vanquishersBanner.getId() + "_type");
-            if (subtype != null) {
-                FilterSpell filter = new FilterSpell();
-                filter.add(new ControllerPredicate(TargetController.YOU));
-                filter.add(new SubtypePredicate(subtype));
-                Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
-                    return true;
-                }
+        SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(getSourceId(), game);
+        if (subType != null) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null
+                    && spell.isCreature()
+                    && spell.hasSubtype(subType, game)
+                    && spell.getControllerId().equals(getControllerId())) {
+                return true;
             }
         }
         return false;

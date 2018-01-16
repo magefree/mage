@@ -27,6 +27,9 @@
  */
 package mage.cards.a;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,10 +45,6 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -91,41 +90,41 @@ class ConspyEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        SubType choice = (SubType) game.getState().getValue(source.getSourceId().toString() + "_type");
-        if (controller != null && choice != null) {
+        SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+        if (controller != null && subType != null) {
             // Creature cards you own that aren't on the battlefield
             // in graveyard
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if (card.isCreature() && !card.hasSubtype(choice, game)) {
-                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(choice);
+                if (card.isCreature() && !card.hasSubtype(subType, game)) {
+                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card.isCreature() && !card.hasSubtype(choice, game)) {
-                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(choice);
+                if (card.isCreature() && !card.hasSubtype(subType, game)) {
+                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
                 }
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
-                if (card.isCreature() && !card.hasSubtype(choice, game)) {
-                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(choice);
+                if (card.isCreature() && !card.hasSubtype(subType, game)) {
+                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.isCreature() && !card.hasSubtype(choice, game)) {
-                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(choice);
+                if (card.getOwnerId().equals(controller.getId()) && card.isCreature() && !card.hasSubtype(subType, game)) {
+                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
                 }
             }
             // commander in command zone
             for (UUID commanderId : controller.getCommandersIds()) {
                 if (game.getState().getZone(commanderId) == Zone.COMMAND) {
                     Card card = game.getCard(commanderId);
-                    if (card.isCreature() && !card.hasSubtype(choice, game)) {
-                        game.getState().getCreateCardAttribute(card, game).getSubtype().add(choice);
+                    if (card.isCreature() && !card.hasSubtype(subType, game)) {
+                        game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
                     }
                 }
             }
@@ -135,17 +134,17 @@ class ConspyEffect extends ContinuousEffectImpl {
                 if (stackObject instanceof Spell
                         && stackObject.getControllerId().equals(source.getControllerId())
                         && stackObject.isCreature()
-                        && !stackObject.hasSubtype(choice, game)) {
+                        && !stackObject.hasSubtype(subType, game)) {
                     Card card = ((Spell) stackObject).getCard();
-                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(choice);
+                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
                 }
             }
             // creatures you control
             List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(
                     new FilterControlledCreaturePermanent(), source.getControllerId(), game);
             for (Permanent creature : creatures) {
-                if (creature != null && !creature.hasSubtype(choice, game)) {
-                    creature.getSubtype(game).add(choice);
+                if (creature != null && !creature.hasSubtype(subType, game)) {
+                    creature.getSubtype(game).add(subType);
                 }
             }
             return true;

@@ -5,15 +5,16 @@
  */
 package mage.watchers.common;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -75,7 +76,7 @@ public class PermanentsEnteredBattlefieldYourLastTurnWatcher extends Watcher {
     }
 
     public List<Permanent> getPermanentsEnteringOnPlayersLastTurn(Game game, UUID playerId) {
-        if (game.getActivePlayerId() == playerId) {
+        if (game.getActivePlayerId().equals(playerId)) {
             return enteringBattlefield.get(playerId);
         }
         return enteringBattlefieldLastTurn.get(playerId);

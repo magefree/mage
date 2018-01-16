@@ -48,7 +48,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.permanent.PermanentInListPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
@@ -175,19 +175,5 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class PermanentInListPredicate implements Predicate<Permanent> {
-
-    private final List<Permanent> permanents;
-
-    public PermanentInListPredicate(List<Permanent> permanents) {
-        this.permanents = permanents;
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return permanents.contains(input);
     }
 }

@@ -46,6 +46,7 @@ Mage.Server.Plugins/Mage.Game.FreeForAll/target
 Mage.Server.Plugins/Mage.Game.MomirDuel/target
 Mage.Server.Plugins/Mage.Game.MomirGame/target/
 Mage.Server.Plugins/Mage.Game.PennyDreadfulCommanderFreeForAll/target
+Mage.Server.Plugins/Mage.Game.FreeformCommanderFreeForAll/target/
 Mage.Server.Plugins/Mage.Game.TinyLeadersDuel/target
 Mage.Server.Plugins/Mage.Game.TwoPlayerDuel/target
 Mage.Server.Plugins/Mage.Player.AI.DraftBot/target

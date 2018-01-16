@@ -51,10 +51,7 @@ public class CantAttackSourceEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return permanent.getId().equals(source.getSourceId());
     }
 
     @Override

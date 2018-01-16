@@ -33,6 +33,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -90,7 +91,7 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Annihilator " + count + "<i>(Whenever this creature attacks, defending player sacrifices "
+        return "Annihilator " + count + " <i>(Whenever this creature attacks, defending player sacrifices "
                 + (count == 1 ? "a permanent" : CardUtil.numberToText(count) + " permanents") + ".)</i>";
     }
 
@@ -123,9 +124,9 @@ class AnnihilatorEffect extends OneShotEffect {
             player = game.getPlayer(defendingPlayerId);
         }
         if (player != null) {
-            int amount = Math.min(count, game.getBattlefield().countAll(StaticFilters.FILTER_CONTROLLED_PERMANENT, player.getId(), game));
+            int amount = Math.min(count, game.getBattlefield().countAll(new FilterControlledPermanent(), player.getId(), game));
             if (amount > 0) {
-                Target target = new TargetControlledPermanent(amount, amount, StaticFilters.FILTER_CONTROLLED_PERMANENT, true);
+                Target target = new TargetControlledPermanent(amount, amount, new FilterControlledPermanent(), true);
                 if (target.canChoose(player.getId(), game)) {
                     while (player.canRespond()
                             && target.canChoose(player.getId(), game)

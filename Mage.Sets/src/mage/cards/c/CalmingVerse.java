@@ -51,13 +51,13 @@ import mage.players.Player;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class CalmingVerse extends CardImpl {
-    
+
     public CalmingVerse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Destroy all enchantments you don't control. Then, if you control an untapped land, destroy all enchantments you control.
         this.getSpellAbility().addEffect(new CalmingVerseEffect());
-        
+
     }
 
     public CalmingVerse(final CalmingVerse card) {
@@ -71,24 +71,25 @@ public class CalmingVerse extends CardImpl {
 }
 
 class CalmingVerseEffect extends OneShotEffect {
-    
+
     private static final FilterPermanent untappedLandFilter = new FilterPermanent("If you control an untapped land");
+
     static {
         untappedLandFilter.add(new CardTypePredicate(CardType.LAND));
         untappedLandFilter.add(Predicates.not(new TappedPredicate()));
     }
-  
+
     private static final FilterEnchantmentPermanent opponentEnchantmentsFilter = new FilterEnchantmentPermanent("enchantments you don't control");
+
     static {
         opponentEnchantmentsFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
-    
-    private static final FilterControlledEnchantmentPermanent controlledEnchantmentsFilter = new FilterControlledEnchantmentPermanent("enchantments you control");
 
+    private static final FilterControlledEnchantmentPermanent controlledEnchantmentsFilter = new FilterControlledEnchantmentPermanent("enchantments you control");
 
     public CalmingVerseEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Destroy all enchantments you don't control. Then, if you control an untapped land, destroy all enchantments you control";
+        this.staticText = "Destroy all enchantments you don't control. Then if you control an untapped land, destroy all enchantments you control";
     }
 
     public CalmingVerseEffect(final CalmingVerseEffect effect) {
@@ -106,17 +107,17 @@ class CalmingVerseEffect extends OneShotEffect {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(opponentEnchantmentsFilter, source.getControllerId(), source.getSourceId(), game)) {
             permanent.destroy(source.getSourceId(), game, false);
         }
-        
+
         // Then if you control an untapped land, destroy all own enchantments
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            
-            if (game.getState().getBattlefield().countAll(untappedLandFilter, controller.getId(), game) > 0) {                
+
+            if (game.getState().getBattlefield().countAll(untappedLandFilter, controller.getId(), game) > 0) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(controlledEnchantmentsFilter, source.getControllerId(), source.getSourceId(), game)) {
                     permanent.destroy(source.getSourceId(), game, false);
                 }
             }
-            
+
         }
         return true;
     }

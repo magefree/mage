@@ -75,6 +75,7 @@
         <gameType name="Penny Dreadful Commander Free For All" jar="mage-game-pennydreadfulcommanderfreeforall-${project.version}.jar" className="mage.game.PennyDreadfulCommanderFreeForAllMatch" typeName="mage.game.PennyDreadfulCommanderFreeForAllType"/>
         <gameType name="Freeform Commander Free For All" jar="mage-game-freeformcommanderfreeforall-${project.version}.jar" className="mage.game.FreeformCommanderFreeForAllMatch" typeName="mage.game.FreeformCommanderFreeForAllType"/>
         <gameType name="Momir Basic Two Player Duel" jar="mage-game-momirduel-${project.version}.jar" className="mage.game.MomirDuelMatch" typeName="mage.game.MomirDuelType"/>
+        <gameType name="Momir Basic Free For All" jar="mage-game-momir-${project.version}.jar" className="mage.game.MomirFreeForAllMatch" typeName="mage.game.MomirFreeForAllType"/>
     </gameTypes>
     <tournamentTypes>
         <tournamentType name="Constructed Elimination" jar="mage-tournament-constructed-${project.version}.jar" className="mage.tournament.ConstructedEliminationTournament" typeName="mage.tournament.ConstructedEliminationTournamentType"/>

@@ -44,11 +44,8 @@ public class ActivateAbilitiesAnyTimeYouCouldCastInstantEffect extends AsThoughE
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game) {
-        if (affectedAbility.getControllerId().equals(source.getControllerId())
-                && activatedAbility.isInstance(affectedAbility)) {
-            return true;
-        }
-        return false;
+        return affectedAbility.getControllerId().equals(source.getControllerId())
+                && activatedAbility.isInstance(affectedAbility);
     }
 
     @Override
