@@ -136,6 +136,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Collector", 47, Rarity.SPECIAL, mage.cards.s.SoulCollector.class));
         cards.add(new SetCardInfo("Spike Feeder", 84, Rarity.COMMON, mage.cards.s.SpikeFeeder.class));
         cards.add(new SetCardInfo("Spined Sliver", 101, Rarity.SPECIAL, mage.cards.s.SpinedSliver.class));
+        cards.add(new SetCardInfo("Spitting Slug", 85, Rarity.SPECIAL, mage.cards.s.SpittingSlug.class));
         cards.add(new SetCardInfo("Squire", 15, Rarity.COMMON, mage.cards.s.Squire.class));
         cards.add(new SetCardInfo("Stormbind", 102, Rarity.SPECIAL, mage.cards.s.Stormbind.class));
         cards.add(new SetCardInfo("Stormscape Familiar", 32, Rarity.COMMON, mage.cards.s.StormscapeFamiliar.class));
@@ -160,6 +161,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Void", 105, Rarity.SPECIAL, mage.cards.v.Void.class));
         cards.add(new SetCardInfo("Voidmage Prodigy", 34, Rarity.SPECIAL, mage.cards.v.VoidmageProdigy.class));
         cards.add(new SetCardInfo("Wall of Roots", 89, Rarity.COMMON, mage.cards.w.WallOfRoots.class));
+        cards.add(new SetCardInfo("War Barge", 116, Rarity.SPECIAL, mage.cards.w.WarBarge.class));
         cards.add(new SetCardInfo("Whirling Dervish", 90, Rarity.COMMON, mage.cards.w.WhirlingDervish.class));
         cards.add(new SetCardInfo("Whispers of the Muse", 35, Rarity.SPECIAL, mage.cards.w.WhispersOfTheMuse.class));
         cards.add(new SetCardInfo("Wildfire Emissary", 72, Rarity.SPECIAL, mage.cards.w.WildfireEmissary.class));
