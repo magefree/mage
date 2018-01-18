@@ -27,10 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -42,10 +38,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.Card;
-import mage.cards.Cards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -61,6 +55,7 @@ import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * 
@@ -156,26 +151,14 @@ class PurgatoryExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player sourceController = game.getPlayer(source.getControllerId());
+        UUID exileId = CardUtil.getCardExileZoneId(game, source);
         MageObject sourceObject = source.getSourceObject(game);
-        Permanent permanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
-        if (sourceController != null && sourceObject != null && permanent != null) {
-            if (permanent.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(permanent.getId())
-                    && !game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) {
-                // A replacement effect has moved the card to another zone as graveyard
-                return true;
+        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
+        if (sourceController != null && exileId != null && sourceObject != null && card != null) {
+            if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                sourceController.moveCardsToExile(card, source, game, true, exileId, sourceObject.getIdName());
             }
-            Player targetController = game.getPlayer(permanent.getControllerId());
-            Card card = game.getCard(permanent.getId());
-            if (targetController != null && card != null) {
-                UUID exileId = (UUID) game.getState().getValue("SourceExileZone_" + source.getSourceId() + '_' + targetController.getName());
-                if (exileId == null) {
-                    exileId = UUID.randomUUID();
-                    game.getState().setValue("SourceExileZone_" + source.getSourceId() + '_' + targetController.getName(), exileId);
-                }
-                sourceController.moveCardsToExile(card, source, game, true, exileId, sourceObject.getIdName() + " (" + targetController.getName() + ')');
-                game.applyEffects();
-                return true;
-            }
+            return true;
         }
         return false;
     }
@@ -205,52 +188,17 @@ class PurgatoryReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
+        UUID exileId = CardUtil.getCardExileZoneId(game, source);
         MageObject sourceObject = source.getSourceObject(game);
-        if (permanent != null && controller != null && sourceObject != null) {
-            Set<ExileZone> exileZones = new HashSet<>();
-            for (UUID playerId : game.getState().getPlayerList()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    UUID exileId = (UUID) game.getState().getValue("SourceExileZone_" + source.getSourceId() + '_' + player.getName());
-                    if (exileId != null) {
-                        ExileZone exileZone = game.getExile().getExileZone(exileId);
-                        if (exileZone != null) {
-                            exileZones.add(exileZone);
-                        }
-                    }
-                }
-            }
-            if (!exileZones.isEmpty()) {
-                Map<Card, ExileZone> cardsMap = new HashMap<>();
-                for (ExileZone exileZone : exileZones) {
-                    for (UUID cardId : exileZone) {
-                        Card card = game.getCard(cardId);
-                        if (card != null) {
-                            cardsMap.put(card, exileZone);
-                        }
-                    }
-                }
-                if (!cardsMap.isEmpty()) {
-                    Cards cards = new CardsImpl();
-                    cards.addAll(cardsMap.keySet());
-                    TargetCard targetCard = new TargetCard(Zone.EXILED, new FilterCard());
-                    controller.chooseTarget(outcome, cards, targetCard, source, game);
-                    Card card = game.getCard(targetCard.getFirstTarget());
-                    if (card != null) {
-                        ExileZone exileZone = cardsMap.get(card);
-                        if (exileZone != null) {
-                            String exileZoneName = exileZone.getName();
-                            for (UUID playerId : game.getState().getPlayerList()) {
-                                Player player = game.getPlayer(playerId);
-                                if (player != null && exileZoneName.contains("(" + player.getName() + ')')) {
-                                    player.moveCards(card, Zone.BATTLEFIELD, source, game);
-                                    break;
-                                }
-                            }
-                        }
-                    }
+        if (controller != null && exileId != null && sourceObject != null) {
+            ExileZone exileZone = game.getExile().getExileZone(exileId);
+            if (exileZone != null) {
+                TargetCard targetCard = new TargetCard(Zone.EXILED, new FilterCard());
+                controller.chooseTarget(outcome, exileZone, targetCard, source, game);
+                Card card = game.getCard(targetCard.getFirstTarget());
+                if (card != null) {
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;
