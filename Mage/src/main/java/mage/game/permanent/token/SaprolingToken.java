@@ -63,7 +63,8 @@ public class SaprolingToken extends Token {
                 "C16", // 2 different token images...
                 "CMA",
                 "VMA", // 2 different token, one with DIFFERENT stats, "Saproling Burst" create different token, see https://scryfall.com/card/tvma/12
-                "E02"));
+                "E02",
+                "RIX"));
     }
 
     public SaprolingToken() {
