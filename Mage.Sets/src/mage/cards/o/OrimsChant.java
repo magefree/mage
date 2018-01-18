@@ -79,7 +79,7 @@ public class OrimsChant extends CardImpl {
 class OrimsChantCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     public OrimsChantCantCastEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
+        super(Duration.EndOfTurn, Outcome.Detriment);
         staticText = "Target player can't cast spells this turn";
     }
 
@@ -106,7 +106,7 @@ class OrimsChantCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 class OrimsChantEffect extends OneShotEffect {
 
     public OrimsChantEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Detriment);
         this.staticText = "If {this} was kicked, creatures can't attack this turn";
     }
 
