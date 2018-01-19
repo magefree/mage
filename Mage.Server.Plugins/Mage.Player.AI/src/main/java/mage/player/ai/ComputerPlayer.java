@@ -126,11 +126,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public boolean chooseMulligan(Game game) {
         log.debug("chooseMulligan");
-        if (hand.size() < 6 || isTestMode() || game.getClass().getName().contains("Momir")) {
+        if (hand.size() < 6 
+                || isTestMode() 
+                || game.getClass().getName().contains("Momir")) {
             return false;
         }
         Set<Card> lands = hand.getCards(new FilterLandCard(), game);
-        return lands.size() < 2 || lands.size() > hand.size() - 2;
+        return lands.size() < 2 
+                || lands.size() > hand.size() - 2;
     }
 
     @Override
@@ -140,12 +143,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+        System.out.println("choose in ComputerPlayer");
         if (log.isDebugEnabled()) {
             log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
         // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
-        if (target.getTargetController() != null && target.getAbilityController() != null) {
+        if (target.getTargetController() != null 
+                && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
         UUID randomOpponentId = getRandomOpponent(abilityControllerId, game);
@@ -388,10 +393,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
-    }
+    } //end of choose method
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        System.out.println("chooseTarget in ComputerPlayer");
         if (log.isDebugEnabled()) {
             log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
@@ -747,9 +753,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
         throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
-    }
+    } //end of chooseTarget method
 
     protected Card pickTarget(List<Card> cards, Outcome outcome, Target target, Ability source, Game game) {
+        System.out.println("pickTarget in ComputerPlayer");
         Card card;
         while (!cards.isEmpty()) {
             if (outcome.isGood()) {
@@ -771,6 +778,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
+        System.out.println("chooseTargetAmount in ComputerPlayer");
         if (log.isDebugEnabled()) {
             log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
@@ -811,6 +819,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean priority(Game game) {
+        System.out.println("priority in ComputerPlayer");
         game.resumeTimer(getTurnControlledBy());
         log.debug("priority");
         boolean result = priorityPlay(game);
@@ -819,6 +828,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     private boolean priorityPlay(Game game) {
+        System.out.println("priorityPlay in ComputerPlayer");
         UUID opponentId = game.getOpponents(playerId).iterator().next();
         if (game.getActivePlayerId().equals(playerId)) {
             if (game.isMainPhase() && game.getStack().isEmpty()) {
@@ -906,7 +916,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         pass(game);
         return true;
-    }
+    } // end priorityPlay method
 
     @Override
     public boolean activateAbility(ActivatedAbility ability, Game game) {
@@ -975,6 +985,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     protected void findPlayables(Game game) {
+        System.out.println("Here in findPlayables");
         playableInstant.clear();
         playableNonInstant.clear();
         unplayable.clear();
