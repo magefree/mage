@@ -29,6 +29,7 @@ package mage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,7 +43,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     public static final ObjectColor BLACK = new ObjectColor("B");
     public static final ObjectColor RED = new ObjectColor("R");
     public static final ObjectColor GREEN = new ObjectColor("G");
-    
+
     public static final ObjectColor GOLD = new ObjectColor("O");
 
     private boolean white;
@@ -50,7 +51,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     private boolean black;
     private boolean red;
     private boolean green;
-    
+
     private boolean gold;
 
     public ObjectColor() {
@@ -74,7 +75,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
                 case 'G':
                     green = true;
                     break;
-                    
+
                 case 'O':
                     gold = true;
                     break;
@@ -88,7 +89,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         black = color.black;
         red = color.red;
         green = color.green;
-        
+
         gold = color.gold;
     }
 
@@ -106,13 +107,13 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         newColor.black = black || other.black;
         newColor.red = red || other.red;
         newColor.green = green || other.green;
-        
+
         newColor.gold = gold || other.gold;
         return newColor;
     }
 
     /**
-     * Returns a new color which contains the intersection of the colors of this 
+     * Returns a new color which contains the intersection of the colors of this
      * ObjectColor and the other ObjectColor.
      *
      * @param other The other ObjectColor to intersect with
@@ -145,7 +146,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         if (red) {
             count++;
         }
-        
+
         if (gold) {
             count++;
         }
@@ -169,82 +170,54 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         if (this.isGreen()) {
             colors.add(ObjectColor.GREEN);
         }
-        
+
         if (this.isGold()) {
             colors.add(ObjectColor.GOLD);
         }
         return colors;
     }
-    
-    private int getColorIndex(int current, int potentialNext, boolean wantMinimum) {
-        if (current == -1) {
-            return potentialNext;
-        }
-        if ((current < potentialNext) && wantMinimum) {
-            return current;
-        }
-        if ((current < potentialNext) && !wantMinimum) {
-            return potentialNext;
-        }
-        return current;
-    }
 
     public List<ObjectColor> getTwoColorsInOrder() {
         List<ObjectColor> colors = new ArrayList<>();
-        int firstColor = -1; 
-        int secondColor = -1; 
+        int firstColor = 5000;
+        int secondColor = -1;
         if (this.isWhite()) {
-            firstColor = getColorIndex(firstColor, 1, true);
-            secondColor = getColorIndex(secondColor, 1, false);
+            firstColor = 1;
+            secondColor = 1;
         }
         if (this.isBlue()) {
-            firstColor = getColorIndex(firstColor, 2, true);
-            secondColor = getColorIndex(secondColor, 2, false);
+            firstColor = Math.min(firstColor, 2);
+            secondColor = Math.max(secondColor, 2);
         }
         if (this.isBlack()) {
-            firstColor = getColorIndex(firstColor, 3, true);
-            secondColor = getColorIndex(secondColor, 3, false);
+            firstColor = Math.min(firstColor, 3);
+            secondColor = Math.max(secondColor, 3);
         }
         if (this.isRed()) {
-            firstColor = getColorIndex(firstColor, 4, true);
-            secondColor = getColorIndex(secondColor, 4, false);
+            firstColor = Math.min(firstColor, 4);
+            secondColor = Math.max(secondColor, 4);
         }
         if (this.isGreen()) {
-            firstColor = getColorIndex(firstColor, 5, true);
-            secondColor = getColorIndex(secondColor, 5, false);
+            firstColor = Math.min(firstColor, 5);
+            secondColor = Math.max(secondColor, 5);
         }
-        if (secondColor - firstColor <= 2) { 
-            if (this.isWhite()) {
-                colors.add(ObjectColor.WHITE);
-            }
-            if (this.isBlue()) {
-                colors.add(ObjectColor.BLUE);
-            }
-            if (this.isBlack()) {
-                colors.add(ObjectColor.BLACK);
-            }
-            if (this.isRed()) {
-                colors.add(ObjectColor.RED);
-            }
-            if (this.isGreen()) {
-                colors.add(ObjectColor.GREEN);
-            }
-        } else if (secondColor - firstColor >= 3) {
-            if (this.isGreen()) {
-                colors.add(ObjectColor.GREEN);
-            }
-            if (this.isRed()) {
-                colors.add(ObjectColor.RED);
-            }
-            if (this.isBlack()) {
-                colors.add(ObjectColor.BLACK);
-            }
-            if (this.isBlue()) {
-                colors.add(ObjectColor.BLUE);
-            }
-            if (this.isWhite()) {
-                colors.add(ObjectColor.WHITE);
-            }
+        if (this.isWhite()) {
+            colors.add(ObjectColor.WHITE);
+        }
+        if (this.isBlue()) {
+            colors.add(ObjectColor.BLUE);
+        }
+        if (this.isBlack()) {
+            colors.add(ObjectColor.BLACK);
+        }
+        if (this.isRed()) {
+            colors.add(ObjectColor.RED);
+        }
+        if (this.isGreen()) {
+            colors.add(ObjectColor.GREEN);
+        }
+        if (colors.size() >= 2 && secondColor - firstColor >= 3) {
+            Collections.swap(colors, 0, 1);
         }
 
         if (this.isGold()) {
@@ -259,7 +232,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         this.setGreen(color.isGreen());
         this.setRed(color.isRed());
         this.setWhite(color.isWhite());
-        
+
         this.setGold(color.isGold());
     }
 
@@ -279,7 +252,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         if (color.isGreen()) {
             setGreen(true);
         }
-        
+
         if (color.isGold()) {
             setGold(true);
         }
@@ -314,7 +287,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
                 || gold)) {
             return true;
         }
-        return green 
+        return green
                 && gold;
     }
 
@@ -357,12 +330,11 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     public void setGreen(boolean green) {
         this.green = green;
     }
-    
-    
+
     public boolean isGold() {
         return gold;
     }
-    
+
     public void setGold(boolean gold) {
         this.gold = gold;
     }
@@ -385,7 +357,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         if (green) {
             sb.append('G');
         }
-        
+
         if (gold) {
             sb.append('O');
         }
@@ -411,7 +383,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
             if (green) {
                 return "green";
             }
-            
+
             if (gold) {
                 return "gold";
             }
@@ -454,7 +426,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         hash = 23 * hash + (this.black ? 1 : 0);
         hash = 23 * hash + (this.red ? 1 : 0);
         hash = 23 * hash + (this.green ? 1 : 0);
-        
+
         hash = 23 * hash + (this.gold ? 1 : 0);
         return hash;
     }
@@ -478,7 +450,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         if (color.green && this.green) {
             return true;
         }
-        
+
         if (color.gold && this.gold) {
             return true;
         }
@@ -517,7 +489,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
             o1 = 4;
         } else if (this.isWhite()) {
             o1 = 5;
-            
+
         } else if (this.isGold()) {
             o1 = 6;
         }
@@ -535,7 +507,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
             o2 = 4;
         } else if (o.isWhite()) {
             o2 = 5;
-            
+
         } else if (o.isGold()) {
             o2 = 6;
         }
@@ -564,7 +536,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         if (isWhite()) {
             return ColoredManaSymbol.W;
         }
-        
+
         if (isGold()) {
             return ColoredManaSymbol.O;
         }
@@ -578,7 +550,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         colors.add(ObjectColor.BLACK);
         colors.add(ObjectColor.RED);
         colors.add(ObjectColor.GREEN);
-        
+
         colors.add(ObjectColor.GOLD);
         return colors;
     }
