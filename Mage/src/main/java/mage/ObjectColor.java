@@ -175,6 +175,83 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         }
         return colors;
     }
+    
+    private int getColorIndex(int current, int potentialNext, boolean wantMinimum) {
+        if (current == -1) {
+            return potentialNext;
+        }
+        if ((current < potentialNext) && wantMinimum) {
+            return current;
+        }
+        if ((current < potentialNext) && !wantMinimum) {
+            return potentialNext;
+        }
+        return current;
+    }
+
+    public List<ObjectColor> getTwoColorsInOrder() {
+        List<ObjectColor> colors = new ArrayList<>();
+        int firstColor = -1; 
+        int secondColor = -1; 
+        if (this.isWhite()) {
+            firstColor = getColorIndex(firstColor, 1, true);
+            secondColor = getColorIndex(secondColor, 1, false);
+        }
+        if (this.isBlue()) {
+            firstColor = getColorIndex(firstColor, 2, true);
+            secondColor = getColorIndex(secondColor, 2, false);
+        }
+        if (this.isBlack()) {
+            firstColor = getColorIndex(firstColor, 3, true);
+            secondColor = getColorIndex(secondColor, 3, false);
+        }
+        if (this.isRed()) {
+            firstColor = getColorIndex(firstColor, 4, true);
+            secondColor = getColorIndex(secondColor, 4, false);
+        }
+        if (this.isGreen()) {
+            firstColor = getColorIndex(firstColor, 5, true);
+            secondColor = getColorIndex(secondColor, 5, false);
+        }
+        if (secondColor - firstColor <= 2) { 
+            if (this.isWhite()) {
+                colors.add(ObjectColor.WHITE);
+            }
+            if (this.isBlue()) {
+                colors.add(ObjectColor.BLUE);
+            }
+            if (this.isBlack()) {
+                colors.add(ObjectColor.BLACK);
+            }
+            if (this.isRed()) {
+                colors.add(ObjectColor.RED);
+            }
+            if (this.isGreen()) {
+                colors.add(ObjectColor.GREEN);
+            }
+        } else if (secondColor - firstColor >= 3) {
+            if (this.isGreen()) {
+                colors.add(ObjectColor.GREEN);
+            }
+            if (this.isRed()) {
+                colors.add(ObjectColor.RED);
+            }
+            if (this.isBlack()) {
+                colors.add(ObjectColor.BLACK);
+            }
+            if (this.isBlue()) {
+                colors.add(ObjectColor.BLUE);
+            }
+            if (this.isWhite()) {
+                colors.add(ObjectColor.WHITE);
+            }
+        }
+
+        if (this.isGold()) {
+            colors.add(ObjectColor.GOLD);
+        }
+        return colors;
+    }
 
     public void setColor(ObjectColor color) {
         this.setBlack(color.isBlack());
