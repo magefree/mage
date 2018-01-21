@@ -118,10 +118,15 @@ class ReyhanLastOfTheAbzanTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         
+        // A creature 
         Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-        Player player = game.getPlayer(source.getControllerId());
-        // A creature you control
-        if (player == null || !player.equals(this.getControllerId()) || permanent == null || !permanent.isCreature()) {
+        if (permanent == null || !permanent.isCreature()) {
+            return false;
+        }
+        
+        // You control
+        Player player = game.getPlayer(this.getControllerId());
+        if (player == null || !player.getId().equals(this.getControllerId())) {
             return false;
         }
         
