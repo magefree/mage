@@ -108,19 +108,31 @@ class ReyhanLastOfTheAbzanTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if ((((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD || ((ZoneChangeEvent) event).getToZone() == Zone.COMMAND)
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent.getControllerId().equals(this.getControllerId()) && permanent.isCreature()) {
-                int countersOn = permanent.getCounters(game).getCount(CounterType.P1P1);
-                if (countersOn > 0) {
-                    this.getEffects().clear();
-                    this.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(countersOn)));
-                }
-                return true;
-            }
+        ZoneChangeEvent zcEvent = (ZoneChangeEvent) event;
+        // Dies or is put in the command zone
+        if (zcEvent.getFromZone() != Zone.BATTLEFIELD) {
+            return false;
         }
-        return false;
+        if (zcEvent.getToZone() != Zone.GRAVEYARD && zcEvent.getToZone() != Zone.COMMAND) {
+            return false;
+        }
+        
+        Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+        // A creature you control
+        if (!permanent.getControllerId().equals(this.getControllerId()) || !permanent.isCreature()) {
+            return false;
+        }
+        
+        // If it had one or more +1/+1 counters on it
+        int countersOn = permanent.getCounters(game).getCount(CounterType.P1P1);
+        if (countersOn == 0) {
+            return false;
+        }
+        
+        // You may put that may +1/+1 counters on target creature
+        this.getEffects().clear();
+        this.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(countersOn)));
+        return true;
     }
 
     @Override
