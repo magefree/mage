@@ -240,6 +240,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Prismatic Circle", 238, Rarity.COMMON, mage.cards.p.PrismaticCircle.class));
         cards.add(new SetCardInfo("Prismatic Lace", 84, Rarity.RARE, mage.cards.p.PrismaticLace.class));
         cards.add(new SetCardInfo("Psychic Transfer", 85, Rarity.RARE, mage.cards.p.PsychicTransfer.class));
+        cards.add(new SetCardInfo("Purgatory", 335, Rarity.RARE, mage.cards.p.Purgatory.class));
         cards.add(new SetCardInfo("Purraj of Urborg", 33, Rarity.RARE, mage.cards.p.PurrajOfUrborg.class));
         cards.add(new SetCardInfo("Quirion Elves", 132, Rarity.COMMON, mage.cards.q.QuirionElves.class));
         cards.add(new SetCardInfo("Radiant Essence", 336, Rarity.UNCOMMON, mage.cards.r.RadiantEssence.class));
