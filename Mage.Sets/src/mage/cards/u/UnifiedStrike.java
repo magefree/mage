@@ -75,8 +75,8 @@ class UnifiedStrikeEffect extends OneShotEffect {
     }
 
     UnifiedStrikeEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "";
+        super(Outcome.Exile);
+        this.staticText = "Exile target attacking creature if its power is less than or equal to the number of Soldiers on the battlefield.";
     }
 
     UnifiedStrikeEffect(final UnifiedStrikeEffect effect) {
