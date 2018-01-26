@@ -9,7 +9,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.cards.Cards;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
@@ -34,13 +38,23 @@ public final class SystemUtil {
     private static final String COMMAND_LANDS_ADD = "@lands add";
     private static final String COMMAND_RUN_CUSTOM_CODE = "@run custom code";
     private static final String COMMAND_CLEAR_BATTLEFIELD = "@clear battlefield";
+    private static final String COMMAND_SHOW_OPPONENT_HAND = "@show opponent hand";
+    private static final String COMMAND_SHOW_OPPONENT_LIBRARY = "@show opponent library";
     private static final Map<String, String> supportedCommands = new HashMap<>();
     static {
         supportedCommands.put(COMMAND_MANA_ADD, "MANA ADD");
         supportedCommands.put(COMMAND_LANDS_ADD, "LANDS ADD");
         supportedCommands.put(COMMAND_RUN_CUSTOM_CODE, "RUN CUSTOM CODE");
         supportedCommands.put(COMMAND_CLEAR_BATTLEFIELD, "CLAR BATTLEFIELD");
+        supportedCommands.put(COMMAND_SHOW_OPPONENT_HAND, "SHOW OPPONENT HAND");
+        supportedCommands.put(COMMAND_SHOW_OPPONENT_LIBRARY, "SHOW OPPONENT LIBRARY");
     }
+
+    // show ext info for special commands
+    private static final String PARAM_COLOR = "color";
+    private static final String PARAM_PT = "pt"; // power toughness
+    private static final String PARAM_ABILITIES_COUNT = "abilities count";
+    private static final String PARAM_ABILITIES_LIST = "abilities list";
 
     private static class CommandGroup{
         String name;
@@ -72,6 +86,56 @@ public final class SystemUtil {
 
             return res;
         }
+    }
+
+    private static String getCardsListForSpecialInform(Game game, Set<UUID> cardsList, ArrayList<String> commandParams) {
+        return getCardsListForSpecialInform(game, cardsList.stream().collect(Collectors.toList()), commandParams);
+    }
+
+    private static String getCardsListForSpecialInform(Game game, List<UUID> cardsList, ArrayList<String> commandParams) {
+        // cards list with ext info
+
+        ArrayList<String> res = new ArrayList<>();
+
+        for (UUID cardID : cardsList) {
+            Card card = game.getCard(cardID);
+
+            // basic info (card + set)
+            String cardInfo = card.getName() + " - " + card.getExpansionSetCode();
+
+            // optional info
+            ArrayList<String> resInfo = new ArrayList<>();
+            for (String param : commandParams) {
+                switch (param) {
+                    case PARAM_COLOR:
+                        resInfo.add(card.getColorIdentity().toString());
+                        break;
+                    case PARAM_PT:
+                        resInfo.add(card.getPower() + " / " + card.getToughness());
+                        break;
+                    case PARAM_ABILITIES_COUNT:
+                        resInfo.add(String.valueOf(card.getAbilities(game).size()));
+                        break;
+                    case PARAM_ABILITIES_LIST:
+                        resInfo.add(card.getAbilities(game).stream()
+                                .map(Ability::getClass)
+                                .map(Class::getSimpleName)
+                                .collect(Collectors.joining(", "))
+                        );
+                        break;
+                    default:
+                        logger.warn("Unknown param for cards list: " + param);
+                }
+            }
+
+            if (resInfo.size() > 0) {
+                cardInfo += ": " + resInfo.stream().collect(Collectors.joining("; "));
+            }
+
+            res.add(cardInfo);
+        }
+
+        return res.stream().sorted().collect(Collectors.joining("\n"));
     }
 
     public static void addCardsForTesting(Game game) {
@@ -114,7 +178,8 @@ public final class SystemUtil {
             // steps:
             // 1. parse groups and commands
             // 2. ask user if many groups
-            // 3. run commands from selected group
+            // 3. process system commands
+            // 4. run commands from selected group
 
             // 1. parse
             Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
@@ -140,7 +205,8 @@ public final class SystemUtil {
                         if(groupName.startsWith("@")){
                             // special command group
                             if(supportedCommands.containsKey(groupName)){
-                                groups.add(new CommandGroup(groupName, true));
+                                currentGroup = new CommandGroup(groupName, true);
+                                groups.add(currentGroup);
                             }else {
                                 logger.warn("Special group [" + groupName + "] is not supported.");
                             }
@@ -207,7 +273,32 @@ public final class SystemUtil {
 
             logger.info("Selected group [" + runGroup.name + "] with " + runGroup.commands.size() + " commands");
 
-            // 3. run commands
+            // 3. system commands
+            if (runGroup.isSpecialCommand) {
+
+                Player opponent = game.getPlayer(game.getOpponents(feedbackPlayer.getId()).iterator().next());
+
+                switch (runGroup.name) {
+
+                    case COMMAND_SHOW_OPPONENT_HAND:
+                        if (opponent != null) {
+                            String info = getCardsListForSpecialInform(game, opponent.getHand(), runGroup.commands);
+                            game.informPlayer(feedbackPlayer, info);
+                        }
+                        break;
+
+                    case COMMAND_SHOW_OPPONENT_LIBRARY:
+                        if (opponent != null) {
+                            String info = getCardsListForSpecialInform(game, opponent.getLibrary().getCardList(), runGroup.commands);
+                            game.informPlayer(feedbackPlayer, info);
+                        }
+                        break;
+                }
+
+                return;
+            }
+
+            // 4. run commands
             for (String line: runGroup.commands) {
 
                 Matcher matchCommand = patternCard.matcher(line);
