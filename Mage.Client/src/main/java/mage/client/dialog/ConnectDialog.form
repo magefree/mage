@@ -341,19 +341,19 @@
           <Image iconType="3" name="/flags/us.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="W"/>
-        <Property name="toolTipText" type="java.lang.String" value="Connect to Woogerworks (USA)"/>
-        <Property name="actionCommand" type="java.lang.String" value="connectWoogerworks"/>
+        <Property name="toolTipText" type="java.lang.String" value="Connect to xmage.us (USA)"/>
+        <Property name="actionCommand" type="java.lang.String" value="connectXmageus"/>
         <Property name="alignmentY" type="float" value="0.0"/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[2, 2, 2, 2]"/>
         </Property>
-        <Property name="name" type="java.lang.String" value="connectWoogerworksBtn" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="connectXmageusBtn" noResource="true"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[23, 23]"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="connectWoogerworks"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="connectXmageus"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblFastConnect">
