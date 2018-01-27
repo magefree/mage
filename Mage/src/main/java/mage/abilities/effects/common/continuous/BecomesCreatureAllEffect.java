@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -39,6 +40,9 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author LevelX2
@@ -65,13 +69,31 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (this.affectedObjectsSet) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                affectedObjectList.add(new MageObjectReference(perm, game));
+            }
+        }
+    }
+
+    @Override
     public BecomesCreatureAllEffect copy() {
         return new BecomesCreatureAllEffect(this);
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        Set<Permanent> affectedPermanents = new HashSet<>();
+        if (this.affectedObjectsSet) {
+            for(MageObjectReference ref : affectedObjectList) {
+                affectedPermanents.add(ref.getPermanent(game));
+            }
+        } else {
+            affectedPermanents = new HashSet<>(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));
+        }
+        for(Permanent permanent : affectedPermanents) {
             if (permanent != null) {
                 switch (layer) {
                     case TypeChangingEffects_4:
