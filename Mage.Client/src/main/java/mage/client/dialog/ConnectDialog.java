@@ -299,8 +299,8 @@ public class ConnectDialog extends MageDialog {
         });
 
         btnFind3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/us.png"))); // NOI18N
-        btnFind3.setText("W");
-        btnFind3.setToolTipText("Connect to Xmage.us (USA)");
+        btnFind3.setText("U");
+        btnFind3.setToolTipText("Connect to xmage.us (USA)");
         btnFind3.setActionCommand("connectXmageus");
         btnFind3.setAlignmentY(0.0F);
         btnFind3.setMargin(new java.awt.Insets(2, 2, 2, 2));
