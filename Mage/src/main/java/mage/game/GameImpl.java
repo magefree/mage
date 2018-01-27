@@ -668,17 +668,20 @@ public abstract class GameImpl implements Game, Serializable {
         if (!simulation && !this.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
             if (bookmark != 0) {
                 if (!savedStates.contains(bookmark - 1)) {
-                    throw new UnsupportedOperationException("It was not possible to do the requested undo operation (bookmark " + (bookmark - 1) + " does not exist) context: " + context);
-                }
-                int stateNum = savedStates.get(bookmark - 1);
-                removeBookmark(bookmark);
-                GameState restore = gameStates.rollback(stateNum);
-                if (restore != null) {
-                    state.restore(restore);
-                    playerList.setCurrent(state.getPlayerByOrderId());
+                    logger.error("It was not possible to do the requested undo operation (bookmark " + (bookmark - 1) + " does not exist) context: " + context);
+                    logger.info("Saved states: " + savedStates.toString());
+                } else {
+                    int stateNum = savedStates.get(bookmark - 1);
+                    removeBookmark(bookmark);
+                    GameState restore = gameStates.rollback(stateNum);
+                    if (restore != null) {
+                        state.restore(restore);
+                        playerList.setCurrent(state.getPlayerByOrderId());
+                    }
                 }
             }
         }
+
     }
 
     @Override
@@ -1355,7 +1358,7 @@ public abstract class GameImpl implements Game, Serializable {
                             logger.fatal(ex.getStackTrace());
                         }
                         this.fireErrorEvent("Game exception occurred: ", ex);
-                        restoreState(bookmark, "");
+                        restoreState(bookmark, "Game exception: " + ex.getMessage());
                         bookmark = 0;
                         Player activePlayer = this.getPlayer(getActivePlayerId());
                         if (errorContinueCounter > 15) {

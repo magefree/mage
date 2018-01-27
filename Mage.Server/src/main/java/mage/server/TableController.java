@@ -959,13 +959,13 @@ public class TableController {
         if (!table.isTournament()) {
             if (!(table.getState() == TableState.WAITING || table.getState() == TableState.STARTING || table.getState() == TableState.READY_TO_START)) {
                 if (match == null) {
-                    logger.debug("- Match table with no match:");
-                    logger.debug("-- matchId:" + match.getId() + " [" + match.getName() + ']');
+                    logger.warn("- Match table with no match:");
+                    logger.warn("-- matchId:" + match.getId() + " [" + match.getName() + ']');
                     // return false;
                 } else if (match.isDoneSideboarding() && match.getGame() == null) {
                     // no sideboarding and not active game -> match seems to hang (maybe the Draw bug)
-                    logger.debug("- Match with no active game and not in sideboard state:");
-                    logger.debug("-- matchId:" + match.getId() + " [" + match.getName() + ']');
+                    logger.warn("- Match with no active game and not in sideboard state:");
+                    logger.warn("-- matchId:" + match.getId() + " [" + match.getName() + ']');
                     // return false;
                 }
             }
@@ -976,10 +976,10 @@ public class TableController {
             for (Map.Entry<UUID, UUID> userPlayerEntry : userPlayerMap.entrySet()) {
                 MatchPlayer matchPlayer = match.getPlayer(userPlayerEntry.getValue());
                 if (matchPlayer == null) {
-                    logger.debug("- Match player not found:");
-                    logger.debug("-- matchId:" + match.getId());
-                    logger.debug("-- userId:" + userPlayerEntry.getKey());
-                    logger.debug("-- playerId:" + userPlayerEntry.getValue());
+                    logger.warn("- Match player not found:");
+                    logger.warn("-- matchId:" + match.getId());
+                    logger.warn("-- userId:" + userPlayerEntry.getKey());
+                    logger.warn("-- playerId:" + userPlayerEntry.getValue());
                     continue;
                 }
                 if (matchPlayer.getPlayer().isHuman()) {
@@ -991,10 +991,10 @@ public class TableController {
                             || (!matchPlayer.hasQuit() && match.getGame() != null && matchPlayer.getPlayer().isInGame())) {
                         Optional<User> user = UserManager.instance.getUser(userPlayerEntry.getKey());
                         if (!user.isPresent()) {
-                            logger.debug("- Active user of match is missing: " + matchPlayer.getName());
-                            logger.debug("-- matchId:" + match.getId());
-                            logger.debug("-- userId:" + userPlayerEntry.getKey());
-                            logger.debug("-- playerId:" + userPlayerEntry.getValue());
+                            logger.warn("- Active user of match is missing: " + matchPlayer.getName());
+                            logger.warn("-- matchId:" + match.getId());
+                            logger.warn("-- userId:" + userPlayerEntry.getKey());
+                            logger.warn("-- playerId:" + userPlayerEntry.getValue());
                             return false;
                         }
                         // user exits on the server and match player has not quit -> player is valid

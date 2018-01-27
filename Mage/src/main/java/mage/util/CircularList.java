@@ -27,8 +27,6 @@
  */
 package mage.util;
 
-
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -111,7 +109,10 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
      * @return
      */
     public E get() {
-        return list.get(this.index);
+        if (list.size() > this.index) {
+            return list.get(this.index);
+        }
+        return null;
     }
 
     @Override

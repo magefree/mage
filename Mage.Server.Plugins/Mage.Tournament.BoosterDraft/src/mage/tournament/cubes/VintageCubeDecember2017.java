@@ -550,6 +550,6 @@ public class VintageCubeDecember2017 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Sphinx of the Steel Wind", ""));
         cubeCards.add(new DraftCube.CardIdentity("Basalt Monolith", ""));
         cubeCards.add(new DraftCube.CardIdentity("Fire // Ice", ""));
-        cubeCards.add(new DraftCube.CardIdentity("Thran Dynam", ""));
+        cubeCards.add(new DraftCube.CardIdentity("Thran Dynamo", ""));
     }
 }

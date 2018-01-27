@@ -703,7 +703,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
         }
         if (getSpellAbility() == null) {
-            logger.info("FATAL : no spell ability for attach to permanent: " + getName());
+            // Can happen e.g. for Token Equipments like Stoneforged Blade
             return;
         }
         if (!getSpellAbility().getTargets().isEmpty() && (getSpellAbility().getTargets().get(0) instanceof TargetCard)) {
