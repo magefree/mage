@@ -57,7 +57,8 @@ public class JackInTheMox extends CardImpl {
         // 4 - Add {B} to your mana pool.
         // 5 - Add {R} to your mana pool.
         // 6 - Add {G} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new JackInTheMoxManaEffect(), new TapSourceCost());
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new JackInTheMoxManaEffect(), new TapSourceCost());
+        ability.setUndoPossible(false);
         this.addAbility(ability);
     }
 
@@ -88,19 +89,28 @@ class JackInTheMoxManaEffect extends ManaEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
             int amount = controller.rollDice(game, 6);
-            if (amount == 1) {
-                permanent.sacrifice(source.getSourceId(), game);
-                controller.loseLife(5, game, false);
-            } else if (amount == 2) {
-                controller.getManaPool().addMana(Mana.WhiteMana(1), game, source);
-            } else if (amount == 3) {
-                controller.getManaPool().addMana(Mana.BlueMana(1), game, source);
-            } else if (amount == 4) {
-                controller.getManaPool().addMana(Mana.BlackMana(1), game, source);
-            } else if (amount == 5) {
-                controller.getManaPool().addMana(Mana.RedMana(1), game, source);
-            } else if (amount == 6) {
-                controller.getManaPool().addMana(Mana.GreenMana(1), game, source);
+            switch (amount) {
+                case 1:
+                    permanent.sacrifice(source.getSourceId(), game);
+                    controller.loseLife(5, game, false);
+                    break;
+                case 2:
+                    controller.getManaPool().addMana(Mana.WhiteMana(1), game, source);
+                    break;
+                case 3:
+                    controller.getManaPool().addMana(Mana.BlueMana(1), game, source);
+                    break;
+                case 4:
+                    controller.getManaPool().addMana(Mana.BlackMana(1), game, source);
+                    break;
+                case 5:
+                    controller.getManaPool().addMana(Mana.RedMana(1), game, source);
+                    break;
+                case 6:
+                    controller.getManaPool().addMana(Mana.GreenMana(1), game, source);
+                    break;
+                default:
+                    break;
             }
             return true;
         }
