@@ -299,16 +299,16 @@ public class ConnectDialog extends MageDialog {
         });
 
         btnFind3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/us.png"))); // NOI18N
-        btnFind3.setText("W");
-        btnFind3.setToolTipText("Connect to Woogerworks (USA)");
-        btnFind3.setActionCommand("connectWoogerworks");
+        btnFind3.setText("U");
+        btnFind3.setToolTipText("Connect to xmage.us (USA)");
+        btnFind3.setActionCommand("connectXmageus");
         btnFind3.setAlignmentY(0.0F);
         btnFind3.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        btnFind3.setName("connectWoogerworksBtn"); // NOI18N
+        btnFind3.setName("connectXmageusBtn"); // NOI18N
         btnFind3.setPreferredSize(new java.awt.Dimension(23, 23));
         btnFind3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connectWoogerworks(evt);
+                connectXmageus(evt);
             }
         });
 
@@ -723,14 +723,14 @@ public class ConnectDialog extends MageDialog {
 
     }//GEN-LAST:event_btnFind2findPublicServerActionPerformed
 
-    private void connectWoogerworks(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectWoogerworks
-        String serverAddress = "xmage.woogerworks.com";
+    private void connectXmageus(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connecXmageusW
+        String serverAddress = "xmage.us";
         this.txtServer.setText(serverAddress);
         this.txtPort.setText("17171");
         // Update userName and password according to the chosen server.
         this.txtUserName.setText(MagePreferences.getUserName(serverAddress));
         this.txtPassword.setText(MagePreferences.getPassword(serverAddress));
-    }//GEN-LAST:event_connectWoogerworks
+    }//GEN-LAST:event_connectXmageus
 
     private void btnFlagSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlagSearchActionPerformed
         doFastFlagSearch();
