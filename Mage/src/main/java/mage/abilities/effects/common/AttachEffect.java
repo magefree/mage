@@ -74,7 +74,7 @@ public class AttachEffect extends OneShotEffect {
                     if (player != null) {
                         return player.addAttachment(source.getSourceId(), game);
                     }
-                    if (source.getTargets().get(0) instanceof TargetCard) { // e.g. Spellweaver Volute
+                    if (!source.getTargets().isEmpty() && source.getTargets().get(0) instanceof TargetCard) { // e.g. Spellweaver Volute
                         Card card = game.getCard(getTargetPointer().getFirst(game, source));
                         if (card != null) {
                             return card.addAttachment(source.getSourceId(), game);

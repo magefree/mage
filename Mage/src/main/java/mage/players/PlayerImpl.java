@@ -53,7 +53,6 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
-import mage.cards.SplitCardHalf;
 import mage.cards.decks.Deck;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
@@ -858,9 +857,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             if (!anyOrder) {
                 while (!cards.isEmpty()) {
-                    UUID cardId = cards.getRandom(game).getId();
-                    cards.remove(cardId);
-                    moveObjectToLibrary(cardId, source == null ? null : source.getSourceId(), game, false, false);
+                    Card card = cards.getRandom(game);
+                    if (card != null) {
+                        cards.remove(card);
+                        moveObjectToLibrary(card.getId(), source == null ? null : source.getSourceId(), game, false, false);
+                    }
                 }
             } else {
                 TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card to put on the bottom of your library (last one chosen will be bottommost)"));
@@ -1866,7 +1867,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             player.gainLife(actualDamage, game);
                         }
                         // Unstable ability - Earl of Squirrel
-                        if (sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
+                        if (sourceAbilities != null && sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
                             Player player = game.getPlayer(sourceControllerId);
                             new SquirrelToken().putOntoBattlefield(actualDamage, game, sourceId, player.getId());
                         }

@@ -126,13 +126,15 @@ class PathOfMettleTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         int attackerCount = 0;
-        if (game.getCombat().getAttackingPlayerId().equals(getControllerId())) {
-            for (UUID attacker : game.getCombat().getAttackers()) {
-                if (filter.match(game.getPermanent(attacker), game)) {
-                    attackerCount++;
+        if (game.getCombat() != null) {
+            if (getControllerId().equals(game.getCombat().getAttackingPlayerId())) {
+                for (UUID attacker : game.getCombat().getAttackers()) {
+                    if (filter.match(game.getPermanent(attacker), game)) {
+                        attackerCount++;
+                    }
                 }
+                return attackerCount >= 2;
             }
-            return attackerCount >= 2;
         }
         return false;
 

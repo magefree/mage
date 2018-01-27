@@ -358,14 +358,16 @@ public class User {
         for (Entry<UUID, Table> entry : tables.entrySet()) {
             ccJoinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
         }
-        for (Entry<UUID, UUID> entry : userTournaments.entrySet()) {
-            TournamentController tournamentController = TournamentManager.instance.getTournamentController(entry.getValue());
+        for (Iterator<Entry<UUID, UUID>> iterator = userTournaments.entrySet().iterator(); iterator.hasNext();) {
+            Entry<UUID, UUID> next = iterator.next();
+            TournamentController tournamentController = TournamentManager.instance.getTournamentController(next.getValue());
             if (tournamentController != null) {
-                ccTournamentStarted(entry.getValue(), entry.getKey());
-                tournamentController.rejoin(entry.getKey());
+                ccTournamentStarted(next.getValue(), next.getKey());
+                tournamentController.rejoin(next.getKey());
+            } else {
+                iterator.remove(); // tournament has ended meanwhile
             }
         }
-
         for (Entry<UUID, GameSessionPlayer> entry : gameSessions.entrySet()) {
             ccGameStarted(entry.getValue().getGameId(), entry.getKey());
             entry.getValue().init();

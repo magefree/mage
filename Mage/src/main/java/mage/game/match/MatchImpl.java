@@ -433,7 +433,9 @@ public abstract class MatchImpl implements Match {
                 sb.append(" QUITTED");
             }
             sb.append("<br/>");
-            sb.append("DeckHash: ").append(mp.getDeck().getDeckHashCode()).append("<br/>");
+            if (mp.getDeck() != null) {
+                sb.append("DeckHash: ").append(mp.getDeck().getDeckHashCode()).append("<br/>");
+            }
         }
         if (getDraws() > 0) {
             sb.append("   Draws: ").append(getDraws()).append("<br/>");
