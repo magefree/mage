@@ -250,31 +250,39 @@ public class LoadTest {
     @Ignore
     public void test_MultipleGames() {
         // multiple games until finish
+        final int MAX_GAMES = 50; // games to run
+        final boolean START_GAMES_AT_ONCE = true; // set true to run ALL games parallel (e.g. test max parallel limit)
 
         Instant startTime = Instant.now();
 
-        int MAX_GAMES = 30;
-
         // creating
-        logger.info("creating games...");
+        logger.info("creating " + MAX_GAMES + " games...");
         ArrayList<LoadGame> gamesList = new ArrayList<>();
         for(int i = 1; i <= MAX_GAMES; i++) {
-            gamesList.add(new LoadGame(
+            LoadGame game = new LoadGame(
                     "game" + i,
                     "game" + i,
                     createSimpleDeck("GR", true),
                     createSimpleDeck("GR", true)
-            ));
+            );
+            gamesList.add(game);
+
+            if (!START_GAMES_AT_ONCE) {
+                game.gameStart();
+            }
         }
         logger.info("created " + gamesList.size() + " games");
 
-        // running
-        for(LoadGame game: gamesList) {
-            game.gameStart();
+        if (START_GAMES_AT_ONCE) {
+            // running
+            logger.info("start all " + gamesList.size() + "games at once...");
+            for (LoadGame game : gamesList) {
+                game.gameStart();
+            }
+            logger.info("started " + gamesList.size() + " games");
         }
-        logger.info("run " + gamesList.size() + " games");
 
-        // waiting
+        // waiting all games
         while (true) {
             boolean isComplete = true;
             for(LoadGame game: gamesList) {
