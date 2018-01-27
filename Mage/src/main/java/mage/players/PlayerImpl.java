@@ -3773,4 +3773,22 @@ public abstract class PlayerImpl implements Player, Serializable {
     public List<Designation> getDesignations() {
         return designations;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        PlayerImpl obj = (PlayerImpl) o;
+        if (this.getId() == null || obj.getId() == null) {
+            return false;
+        }
+
+        return this.getId().equals(obj.getId());
+    }
 }
