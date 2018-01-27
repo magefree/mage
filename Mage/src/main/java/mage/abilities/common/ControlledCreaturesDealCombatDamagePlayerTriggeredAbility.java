@@ -72,7 +72,7 @@ public class ControlledCreaturesDealCombatDamagePlayerTriggeredAbility extends T
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DAMAGED_PLAYER
-                || event.getType() == EventType.END_COMBAT_STEP_POST
+                || event.getType() == EventType.COMBAT_DAMAGE_STEP_PRIORITY
                 || event.getType() == EventType.ZONE_CHANGE;
     }
 
@@ -86,7 +86,7 @@ public class ControlledCreaturesDealCombatDamagePlayerTriggeredAbility extends T
                 damagedPlayerIds.add(event.getPlayerId());
             }
         }
-        if (event.getType() == EventType.END_COMBAT_STEP_POST) {
+        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_PRIORITY) {
             if (madeDamage) {
                 Set<UUID> damagedPlayersCopy = new HashSet<>();
                 damagedPlayersCopy.addAll(damagedPlayerIds);
