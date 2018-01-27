@@ -67,7 +67,7 @@ public class AscendAbility extends SimpleStaticAbility {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (!controller.hasDesignation(DesignationType.CITYS_BLESSING)) {
-                if (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE_ENCHANTMENT_OR_LAND, controller.getId(), game) > 9) {
+                if (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT, controller.getId(), game) > 9) {
                     controller.addDesignation(new CitysBlessing());
                     game.informPlayers(controller.getLogName() + " gets the city's blessing for the rest of the game.");
                 } else {
