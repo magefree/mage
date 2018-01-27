@@ -82,6 +82,8 @@ class InfernalGenesisEffect extends OneShotEffect {
                 if (player.moveCards(card, Zone.GRAVEYARD, source, game)) {
                     int cmc = card.getConvertedManaCost();
                     MinionToken token = new MinionToken();
+                    token.getPower().modifyBaseValue(1);
+                    token.getToughness().modifyBaseValue(1);
                     token.putOntoBattlefield(cmc, game, source.getSourceId(), player.getId());
                 }
             }
