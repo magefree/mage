@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 /**
  * For tests only
  *
- * @author noxx
+ * @author noxx, JayDi85
  */
 public class SimpleMageClient implements MageClient {
 
@@ -20,7 +20,7 @@ public class SimpleMageClient implements MageClient {
 
     private static final Logger log = Logger.getLogger(SimpleMageClient.class);
 
-    private final CallbackClient callbackClient;
+    private final LoadCallbackClient callbackClient;
 
     public SimpleMageClient() {
         clientId = UUID.randomUUID();
@@ -54,7 +54,11 @@ public class SimpleMageClient implements MageClient {
 
     @Override
     public void processCallback(ClientCallback callback) {
-        callbackClient.processCallback(callback);
+        try {
+            callbackClient.processCallback(callback);
+        } catch (Throwable e) {
+            log.error(e.getMessage(), e);
+        }
     }
 
     public void setSession(Session session) {
@@ -63,5 +67,13 @@ public class SimpleMageClient implements MageClient {
 
     public boolean isGameOver() {
         return ((LoadCallbackClient)callbackClient).isGameOver();
+    }
+
+    public void setConcede(boolean needToConcede) {
+        this.callbackClient.setConcede(needToConcede);
+    }
+
+    public String getLastGameResult() {
+        return this.callbackClient.getLastGameResult();
     }
 }
