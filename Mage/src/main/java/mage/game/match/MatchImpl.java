@@ -224,7 +224,7 @@ public abstract class MatchImpl implements Match {
         addGame(); // raises only the number
         shufflePlayers();
         for (MatchPlayer matchPlayer : this.players) {
-            if (!matchPlayer.hasQuit()) {
+            if (!matchPlayer.hasQuit() && matchPlayer.getDeck() != null) {
                 matchPlayer.getPlayer().init(game);
                 game.loadCards(matchPlayer.getDeck().getCards(), matchPlayer.getPlayer().getId());
                 game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
@@ -236,6 +236,10 @@ public abstract class MatchImpl implements Match {
                     if (matchPlayer.getPriorityTimeLeft() > 0) {
                         matchPlayer.getPlayer().setPriorityTimeLeft(matchPlayer.getPriorityTimeLeft());
                     }
+                }
+            } else {
+                if (matchPlayer.getDeck() == null) {
+                    logger.error("Match: " + this.getId() + " " + matchPlayer.getName() + " has no deck.");
                 }
             }
         }
