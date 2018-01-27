@@ -7,26 +7,24 @@ import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.MatchTimeLimit;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.RangeOfInfluence;
+import mage.constants.*;
 import mage.game.match.MatchOptions;
 import mage.player.ai.ComputerPlayer;
 import mage.players.PlayerType;
 import mage.remote.Connection;
+import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
-import mage.view.GameTypeView;
-import mage.view.TableView;
+import mage.util.RandomUtil;
+import mage.view.*;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 /**
  * Intended to test Mage server under different load patterns.
@@ -36,236 +34,296 @@ import java.util.UUID;
  *
  * Then it's also better to use -Xms256M -Xmx512M JVM options for these stests.
  *
- * @author noxx
+ * @author JayDi85
  */
+
 public class LoadTest {
 
-    /**
-     * Logger for tests
-     */
-    private static final Logger log = Logger.getLogger(LoadTest.class);
+    private static final Logger logger = Logger.getLogger(LoadTest.class);
 
-    /**
-     * First player's username
-     */
-    private static final String TEST_USER_NAME = "player";
-
-    /**
-     * Second player's username
-     */
-    private static final String TEST_USER_NAME_2 = "opponent";
-
-    /**
-     * Server connection setting.
-     */
     private static final String TEST_SERVER = "localhost";
-
-    /**
-     * Server connection setting.
-     */
     private static final int TEST_PORT = 17171;
-
-    /**
-     * Server connection setting.
-     */
     private static final String TEST_PROXY_TYPE = "None";
+    private static final String TEST_USER_NAME = "user";
 
-    /**
-     * Determines how many times test will be executed in a row.
-     */
-    private static final int EXECUTION_COUNT = 100;
+    @Test
+    public void test_CreateRandomDeck() {
 
-    /**
-     * Determines how many times test will be executed in a row.
-     */
-    private static final int EXECUTION_COUNT_PLAY_GAME = 100;
+        Deck deck;
 
-    /**
-     * Tests connecting with two players, creating game and starting it.
-     *
-     * Executes the test EXECUTION_COUNT times.
-     *
-     * @throws Exception
-     */
+        deck = generateRandomDeck("G", false);
+        for(Card card : deck.getCards()) {
+            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in G",
+                    card.getColorIdentity().isGreen());
+        }
+
+        deck = generateRandomDeck("U", false);
+        for(Card card : deck.getCards()) {
+            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in U",
+                    card.getColorIdentity().isBlue());
+        }
+
+        deck = generateRandomDeck("BR", false);
+        for(Card card : deck.getCards()) {
+            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in BR",
+                    card.getColorIdentity().isBlack() || card.getColorIdentity().isRed());
+        }
+
+        deck = generateRandomDeck("BUG", false);
+        for(Card card : deck.getCards()) {
+            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in BUG",
+                    card.getColorIdentity().isBlack() || card.getColorIdentity().isBlue() || card.getColorIdentity().isGreen());
+        }
+
+        // lands
+
+        deck = generateRandomDeck("UR", true);
+        for(Card card : deck.getCards()) {
+            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in UR",
+                    card.getColorIdentity().isBlue() || card.getColorIdentity().isRed());
+            Assert.assertEquals("card " + card.getName() + " must be basic land ", Rarity.LAND, card.getRarity());
+        }
+
+        deck = generateRandomDeck("B", true);
+        for(Card card : deck.getCards()) {
+            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in B", card.getColorIdentity().isBlack());
+            Assert.assertEquals("card " + card.getName() + " must be basic land ", Rarity.LAND, card.getRarity());
+        }
+    }
+
     @Test
     @Ignore
-    public void testStartGame() throws Exception {
-        DeckCardLists deckList = createDeck();
+    public void test_UsersConnectToServer() throws Exception {
 
-        for (int i = 0; i < EXECUTION_COUNT; i++) {
-            Connection connection = createConnection(TEST_USER_NAME + i);
+        // simple connection to server
 
-            SimpleMageClient mageClient = new SimpleMageClient();
-            Session session = new SessionImpl(mageClient);
+        // monitor other players
+        LoadPlayer monitor = new LoadPlayer("monitor");
+        Assert.assertTrue(monitor.session.isConnected());
+        int startUsersCount = monitor.getAllRoomUsers().size();
+        int minimumSleepTime = 2000;
 
-            session.connect(connection);
-            UUID roomId = session.getMainRoomId();
+        // user 1
+        LoadPlayer player1 = new LoadPlayer("1");
+        Thread.sleep(minimumSleepTime);
+        Assert.assertEquals("Can't see users count change 1", startUsersCount + 1, monitor.getAllRoomUsers().size());
+        Assert.assertNotNull("Can't find user 1", monitor.findUser(player1.userName));
 
-            GameTypeView gameTypeView = session.getGameTypes().get(0);
-            log.info("Game type view: " + gameTypeView.getName());
-            MatchOptions options = createGameOptions(gameTypeView, session);
+        // user 2
+        LoadPlayer player2 = new LoadPlayer("2");
+        Thread.sleep(minimumSleepTime);
+        Assert.assertEquals("Can't see users count change 2", startUsersCount + 2, monitor.getAllRoomUsers().size());
+        Assert.assertNotNull("Can't find user 2", monitor.findUser(player2.userName));
+    }
 
-            TableView table = session.createTable(roomId, options);
+    @Test
+    @Ignore
+    public void test_TwoUsersPlayGameUntilEnd() {
+        // simple connection to server test
 
-            if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, PlayerType.HUMAN, 1, deckList,"")) {
-                log.error("Error while joining table");
-                Assert.fail("Error while joining table");
-                return;
+        // monitor other players
+        LoadPlayer monitor = new LoadPlayer("monitor");
+
+        // users
+        LoadPlayer player1 = new LoadPlayer("1");
+        LoadPlayer player2 = new LoadPlayer("2");
+
+        // game by user 1
+        GameTypeView gameType = player1.session.getGameTypes().get(0);
+        MatchOptions gameOptions = createSimpleGameOptions(gameType, player1.session);
+        TableView game = player1.session.createTable(player1.roomID, gameOptions);
+        UUID tableId = game.getTableId();
+        Assert.assertEquals(player1.userName, game.getControllerName());
+
+        DeckCardLists deckList = createSimpleDeck("GR", true);
+        Optional<TableView> checkGame;
+
+        /*
+        for(DeckCardInfo info: deckList.getCards()) {
+            logger.info(info.getCardName());
+        }*/
+
+        // before connect
+        checkGame = monitor.getTable(tableId);
+        Assert.assertTrue(checkGame.isPresent());
+        Assert.assertEquals(2, checkGame.get().getSeats().size());
+        Assert.assertEquals("", checkGame.get().getSeats().get(0).getPlayerName());
+        Assert.assertEquals("", checkGame.get().getSeats().get(1).getPlayerName());
+
+        // connect user 1
+        Assert.assertTrue(player1.session.joinTable(player1.roomID, tableId, player1.userName, PlayerType.HUMAN, 1, deckList, ""));
+        checkGame = monitor.getTable(tableId);
+        Assert.assertTrue(checkGame.isPresent());
+        Assert.assertEquals(2, checkGame.get().getSeats().size());
+        Assert.assertEquals(player1.userName, checkGame.get().getSeats().get(0).getPlayerName());
+        Assert.assertEquals("", checkGame.get().getSeats().get(1).getPlayerName());
+
+        // connect user 2
+        Assert.assertTrue(player2.session.joinTable(player2.roomID, tableId, player2.userName, PlayerType.HUMAN, 1, deckList, ""));
+        checkGame = monitor.getTable(tableId);
+        Assert.assertTrue(checkGame.isPresent());
+        Assert.assertEquals(2, checkGame.get().getSeats().size());
+        Assert.assertEquals(player1.userName, checkGame.get().getSeats().get(0).getPlayerName());
+        Assert.assertEquals(player2.userName, checkGame.get().getSeats().get(1).getPlayerName());
+
+        // match start
+        Assert.assertTrue(player1.session.startMatch(player1.roomID, tableId));
+
+        // playing until game over
+        while(!player1.client.isGameOver() && !player2.client.isGameOver()) {
+            checkGame = monitor.getTable(tableId);
+            logger.warn(checkGame.get().getTableState());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e){
+                logger.error(e.getMessage(), e);
+            }
+        }
+    }
+
+    @Test
+    @Ignore
+    public void test_GameThread() {
+        // simple game thread to the end
+
+        LoadGame game = new LoadGame(
+                "game",
+                "thread",
+                createSimpleDeck("GR", true),
+                createSimpleDeck("GR", true)
+        );
+        game.gameStart();
+
+        while (game.isPlaying()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage(), e);
+            }
+        }
+
+        Assert.assertEquals("finished", game.gameResult);
+    }
+
+    @Test
+    @Ignore
+    public void test_GameThreadWithAbort() {
+        // simple game thread with game abort
+
+        LoadGame game = new LoadGame(
+                "game",
+                "thread",
+                createSimpleDeck("GR", true),
+                createSimpleDeck("GR", true)
+        );
+        game.gameStart();
+        game.gameEnd(true); // abort -- close client thread
+        Assert.assertEquals("aborted", game.gameResult);
+    }
+
+    @Test
+    @Ignore
+    public void test_GameThreadWithConcede() {
+        // simple game thread with game abort
+
+        LoadGame game = new LoadGame(
+                "game",
+                "thread",
+                createSimpleDeck("GR", true),
+                createSimpleDeck("GR", true)
+        );
+        game.gameStart();
+
+        try {
+            Thread.sleep(3000);
+        } catch (Throwable e) {
+            //
+        }
+        game.gameConcede(1);
+        game.gameWaitToStop();
+        Assert.assertEquals("finished", game.gameResult);
+        Assert.assertEquals("lose", game.player1.lastGameResult);
+        Assert.assertEquals("win", game.player2.lastGameResult);
+    }
+
+    @Test
+    @Ignore
+    public void test_MultipleGames() {
+        // multiple games until finish
+
+        Instant startTime = Instant.now();
+
+        int MAX_GAMES = 30;
+
+        // creating
+        logger.info("creating games...");
+        ArrayList<LoadGame> gamesList = new ArrayList<>();
+        for(int i = 1; i <= MAX_GAMES; i++) {
+            gamesList.add(new LoadGame(
+                    "game" + i,
+                    "game" + i,
+                    createSimpleDeck("GR", true),
+                    createSimpleDeck("GR", true)
+            ));
+        }
+        logger.info("created " + gamesList.size() + " games");
+
+        // running
+        for(LoadGame game: gamesList) {
+            game.gameStart();
+        }
+        logger.info("run " + gamesList.size() + " games");
+
+        // waiting
+        while (true) {
+            boolean isComplete = true;
+            for(LoadGame game: gamesList) {
+                isComplete = isComplete && !game.isPlaying();
             }
 
-            /*** Connect with a second player ***/
-            Connection connection2 = createConnection(TEST_USER_NAME_2 + i);
-            SimpleMageClient mageClient2 = new SimpleMageClient();
-            Session session2 = new SessionImpl(mageClient2);
-            session2.connect(connection2);
-            UUID roomId2 = session2.getMainRoomId();
-
-            // connect to the table with the same deck
-            if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, PlayerType.HUMAN, 1, deckList,"")) {
-                log.error("Error while joining table");
-                Assert.fail("Error while joining table");
-                return;
+            if(isComplete) {
+                break;
             }
 
-            /*** Start game ***/
-            session.startMatch(roomId, table.getTableId());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage(), e);
+            }
+        }
+        logger.info("completed " + gamesList.size() + " games");
 
-            Thread.sleep(100);
+        Instant endTime = Instant.now();
+        logger.info("total time: " + ChronoUnit.SECONDS.between(startTime, endTime) + " secs");
+
+        // check statuses
+        ArrayList<String> errors = new ArrayList<>();
+        for(LoadGame game: gamesList) {
+            if (!"finished".equals(game.gameResult)) {
+                errors.add(game.gameName + ": not finished, got " + game.gameResult);
+            }
+        }
+
+        if (errors.size() > 0) {
+            System.out.println("Not all games finished, founded " + errors.size() + " errors: ");
+            for (String s: errors) {
+                System.out.println(s);
+            }
+            Assert.fail("Not all games finished");
         }
     }
 
-    /**
-     * Tests 10 simple games played one after another.
-     */
-    @Test
-    @Ignore
-    public void testSimpleGame() throws Exception {
-        final DeckCardLists deckList = createDeck();
-
-        for (int i = 0; i < EXECUTION_COUNT_PLAY_GAME; i++) {
-            final int j = i;
-            Thread t = new Thread(() -> {
-                try {
-                    testSimpleGame0(deckList, j);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
-            t.start();
-            t.join();
-        }
-    }
-
-    /**
-     * Tests simple game till the end (game over).
-     * Players do nothing but skip phases and discard cards at the end.
-     *
-     * This results in a game that lasts until there is no cards in library.
-     */
-    private boolean testSimpleGame0(DeckCardLists deckList, int i) throws InterruptedException {
-        Connection connection = createConnection(TEST_USER_NAME + i);
-
-        SimpleMageClient mageClient = new SimpleMageClient();
-        Session session = new SessionImpl(mageClient);
-
-        session.connect(connection);
-
-        mageClient.setSession(session);
-        UUID roomId = session.getMainRoomId();
-
-        GameTypeView gameTypeView = session.getGameTypes().get(0);
-        log.info("Game type view: " + gameTypeView.getName());
-        MatchOptions options = createGameOptions(gameTypeView, session);
-
-        TableView table = session.createTable(roomId, options);
-
-        if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, PlayerType.HUMAN, 1, deckList,"")) {
-            log.error("Error while joining table");
-            Assert.fail("Error while joining table");
-            return true;
-        }
-
-        /*** Connect with a second player ***/
-        Connection connection2 = createConnection(TEST_USER_NAME_2 + i);
-        SimpleMageClient mageClient2 = new SimpleMageClient();
-        Session session2 = new SessionImpl(mageClient2);
-        session2.connect(connection2);
-
-        mageClient2.setSession(session2);
-        UUID roomId2 = session2.getMainRoomId();
-
-        // connect to the table with the same deck
-        if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, PlayerType.HUMAN, 1, deckList,"")) {
-            log.error("Error while joining table");
-            Assert.fail("Error while joining table");
-            return true;
-        }
-
-        /*** Start game ***/
-        session.startMatch(roomId, table.getTableId());
-
-        while (!mageClient.isGameOver()) {
-            Thread.sleep(1000);
-        }
-        return false;
-    }
-
-    /**
-     * Tests playing the whole game.
-     * Player use cheat to add lands, creatures and other cards.
-     * Then play only lands, one of them plays 1 damage targeting player.
-     *
-     * This results in 40 turns of the game.
-     */
-    @Test
-    @Ignore
-    public void testPlayGame() throws Exception {
-        //TODO: to be implemented
-    }
-
-    /**
-     * Creates connection to the server.
-     * Server should run independently.
-     *
-     * @param username
-     * @return
-     */
-    private Connection createConnection(String username) {
-        Connection connection = new Connection();
-        connection.setUsername(username);
-        connection.setHost(TEST_SERVER);
-        connection.setPort(TEST_PORT);
+    private Connection createSimpleConnection(String username) {
+        Connection con = new Connection();
+        con.setUsername(username);
+        con.setHost(TEST_SERVER);
+        con.setPort(TEST_PORT);
         Connection.ProxyType proxyType = Connection.ProxyType.valueByText(TEST_PROXY_TYPE);
-        connection.setProxyType(proxyType);
-        return connection;
+        con.setProxyType(proxyType);
+        return con;
     }
 
-    /**
-     * Returns random deck.
-     * Converts deck returned by {@link #generateRandomDeck} method to {@link DeckCardLists} format.
-     *
-     * @return
-     */
-    private DeckCardLists createDeck() {
-        DeckCardLists deckList = new DeckCardLists();
-        Deck deck = generateRandomDeck();
-        for (Card card : deck.getCards()) {
-            CardInfo cardInfo = CardRepository.instance.findCard(card.getExpansionSetCode(), card.getCardNumber());
-            if (cardInfo != null) {
-                deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
-            }
-        }
-        return deckList;
-    }
-
-    /**
-     * Creates game options with two human players.
-     *
-     * @param gameTypeView
-     * @param session
-     * @return
-     */
-    private MatchOptions createGameOptions(GameTypeView gameTypeView, Session session) {
+    private MatchOptions createSimpleGameOptions(GameTypeView gameTypeView, Session session) {
         MatchOptions options = new MatchOptions("Test game", gameTypeView.getName(), false, 2);
 
         options.getPlayerTypes().add(PlayerType.HUMAN);
@@ -280,21 +338,224 @@ public class LoadTest {
         return options;
     }
 
-    /**
-     * Generates random deck in {@link Deck} format.
-     * Uses {B}{R} as deck colors.
-     *
-     * @return
-     */
-    private Deck generateRandomDeck() {
-        String selectedColors = "BR";
+    private Deck generateRandomDeck(String colors, boolean onlyBasicLands) {
+        logger.info("Building " + (onlyBasicLands ? "only lands" : "random") + " deck with colors: " + colors);
+
         List<ColoredManaSymbol> allowedColors = new ArrayList<>();
-        log.info("Building deck with colors: " + selectedColors);
-        for (int i = 0; i < selectedColors.length(); i++) {
-            char c = selectedColors.charAt(i);
+        for (int i = 0; i < colors.length(); i++) {
+            char c = colors.charAt(i);
             allowedColors.add(ColoredManaSymbol.lookup(c));
         }
-        List<Card> cardPool = Sets.generateRandomCardPool(45, allowedColors);
-        return ComputerPlayer.buildDeck(cardPool, allowedColors);
+        List<Card> cardPool = Sets.generateRandomCardPool(45, allowedColors, onlyBasicLands);
+        return ComputerPlayer.buildDeck(cardPool, allowedColors, onlyBasicLands);
+    }
+
+    private DeckCardLists createSimpleDeck(String colors, boolean onlyBasicLands) {
+        Deck deck = generateRandomDeck(colors, onlyBasicLands);
+
+        DeckCardLists deckList = new DeckCardLists();
+        for (Card card : deck.getCards()) {
+            CardInfo cardInfo = CardRepository.instance.findCard(card.getExpansionSetCode(), card.getCardNumber());
+            if (cardInfo != null) {
+                deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
+            }
+        }
+        return deckList;
+    }
+
+    private class LoadPlayer {
+        String userName;
+        Connection connection;
+        SimpleMageClient client;
+        Session session;
+        UUID roomID;
+        UUID createdTableID;
+        UUID connectedTableID;
+        DeckCardLists deckList;
+        String lastGameResult = "";
+
+        public LoadPlayer(String userPrefix) {
+            this.userName = TEST_USER_NAME + "_" + userPrefix + "_" + RandomUtil.nextInt(10000);
+            this.connection = createSimpleConnection(this.userName);
+            this.client = new SimpleMageClient();
+            this.session = new SessionImpl(this.client);
+
+            this.session.connect(this.connection);
+            this.client.setSession(this.session);
+            this.roomID = this.session.getMainRoomId();
+        }
+
+        public ArrayList<UsersView> getAllRoomUsers() {
+            ArrayList<UsersView> res = new ArrayList<>();
+            try {
+                for (RoomUsersView roomUsers : this.session.getRoomUsers(this.roomID)) {
+                    res.addAll(roomUsers.getUsersView());
+                }
+            } catch (MageRemoteException e)
+            {
+                logger.error(e);
+            }
+            return res;
+        }
+
+        public UsersView findUser(String userName) {
+            for (UsersView user: this.getAllRoomUsers()) {
+                if (user.getUserName().equals(userName)) {
+                    return user;
+                }
+            }
+            return null;
+        }
+
+        public Optional<TableView> getTable(UUID tableID) {
+            return this.session.getTable(this.roomID, tableID);
+        }
+
+        public UUID createNewTable() {
+            GameTypeView gameType = this.session.getGameTypes().get(0);
+            MatchOptions gameOptions = createSimpleGameOptions(gameType, this.session);
+            TableView game = this.session.createTable(this.roomID, gameOptions);
+            this.createdTableID = game.getTableId();
+            Assert.assertEquals(this.userName, game.getControllerName());
+
+            connectToTable(this.createdTableID);
+
+            return this.createdTableID;
+        }
+
+        public void connectToTable(UUID tableID) {
+            Assert.assertTrue(this.session.joinTable(this.roomID, tableID, this.userName, PlayerType.HUMAN, 1, this.deckList, ""));
+            this.connectedTableID = tableID;
+        }
+
+        public void startMatch() {
+            Assert.assertNotNull(this.createdTableID);
+            Assert.assertTrue(this.session.startMatch(this.roomID, this.createdTableID));
+        }
+
+        public void setDeckList(DeckCardLists deckList) {
+            this.deckList = deckList;
+        }
+
+        public void disconnect() {
+            this.session.disconnect(false);
+        }
+
+        public void concede() {
+            this.client.setConcede(true);
+        }
+    }
+
+    private class LoadGame {
+        String gameName = null;
+        Thread runningThread = null;
+        LoadPlayer player1 = null;
+        LoadPlayer player2 = null;
+        Boolean abort = false;
+        UUID tableID = null;
+        String gameResult = null;
+
+        public LoadGame(String gameName, String playerPrefix) {
+            this(gameName, playerPrefix,
+                    createSimpleDeck("GR", true),
+                    createSimpleDeck("GR", true)
+            );
+        }
+
+        public LoadGame(String gameName, String playerPrefix, DeckCardLists deck1, DeckCardLists deck2) {
+            this.gameName = gameName;
+
+            player1 = new LoadPlayer(playerPrefix + "_" + 1);
+            player1.setDeckList(deck1);
+
+            player2 = new LoadPlayer(playerPrefix + "_" + 2);
+            player2.setDeckList(deck2);
+        }
+
+        public void gameStart() {
+
+            this.abort = false;
+
+            runningThread = new Thread(() -> {
+                try {
+                    this.tableID = this.player1.createNewTable();
+                    Assert.assertNotNull(this.tableID);
+                    this.player2.connectToTable(this.tableID);
+                    this.gameResult = "prepared";
+
+                    this.player1.startMatch();
+                    this.gameResult = "started";
+
+                    // playing until game over or abort
+                    while(!abort && (!player1.client.isGameOver() || !player2.client.isGameOver())) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e){
+                            logger.error(e.getMessage(), e);
+                        }
+                    }
+
+                    // game results
+                    if (abort) {
+                        this.gameResult = "aborted";
+                    } else {
+                        this.gameResult = "finished";
+                    }
+                    player1.lastGameResult = player1.client.getLastGameResult();
+                    player2.lastGameResult = player2.client.getLastGameResult();
+                } catch (Throwable e) {
+                    this.gameResult = "error";
+                    logger.fatal("Game thread " + this.gameName + " was stopped by error");
+                    e.printStackTrace();
+                }
+
+                // disconnect on end
+                this.player1.disconnect();
+                this.player2.disconnect();
+
+                // clean up after game
+                this.runningThread = null;
+                this.tableID = null;
+            });
+
+            runningThread.start();
+        }
+
+        public void gameEnd() {
+            gameEnd(false);
+        }
+
+        public void gameEnd(Boolean waitToStop) {
+            this.abort = true;
+
+            if (waitToStop) {
+                gameWaitToStop();
+            }
+        }
+
+        public void gameConcede(int playerNumber) {
+            switch (playerNumber) {
+                case 1:
+                    this.player1.concede();
+                    break;
+                case 2:
+                    this.player2.concede();
+                    break;
+            }
+        }
+
+        public void gameWaitToStop() {
+            while (this.runningThread != null) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+        }
+
+        public Boolean isPlaying() {
+            return (this.runningThread != null);
+        }
     }
 }
