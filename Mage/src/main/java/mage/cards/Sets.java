@@ -168,6 +168,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
                         if (manaLand.getBlack() > 0 && !manaNeed.isBlack()) { cardManaOK = false; }
                         if (manaLand.getRed() > 0 && !manaNeed.isRed()) { cardManaOK = false; }
                         if (manaLand.getGreen() > 0 && !manaNeed.isGreen()) { cardManaOK = false; }
+                        if (manaLand.getColorless() > 0) { cardManaOK = false; } // ignore colorless land (wastes)
                     }
                 } else {
                     // cards

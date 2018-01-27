@@ -208,7 +208,7 @@ public class LoadTest {
     @Test
     @Ignore
     public void test_GameThreadWithAbort() {
-        // simple game thread with game abort
+        // simple game thread to abort
 
         LoadGame game = new LoadGame(
                 "game",
@@ -223,8 +223,25 @@ public class LoadTest {
 
     @Test
     @Ignore
+    public void test_GameThreadWithRealCards() {
+        // simple game thread to the end with creatures cards
+
+        LoadGame game = new LoadGame(
+                "game",
+                "thread",
+                createSimpleDeck("GR", false),
+                createSimpleDeck("GR", false)
+        );
+
+        game.gameStart();
+        game.gameWaitToStop();
+        Assert.assertEquals("finished", game.gameResult);
+    }
+
+    @Test
+    @Ignore
     public void test_GameThreadWithConcede() {
-        // simple game thread with game abort
+        // simple game thread with with concede
 
         LoadGame game = new LoadGame(
                 "game",
