@@ -125,6 +125,7 @@ public enum SessionManager {
     public void disconnect(String sessionId, DisconnectReason reason) {
         Session session = sessions.get(sessionId);
         if (session != null) {
+            boolean lockWasSet = session.setLock();
             if (!sessions.containsKey(sessionId)) {
                 // session was removed meanwhile by another thread so we can return
                 return;
@@ -148,7 +149,9 @@ public enum SessionManager {
                 default:
                     logger.trace("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
             }
-
+            if (lockWasSet) {
+                session.unlock();
+            }
         }
 
     }
