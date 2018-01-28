@@ -28,6 +28,7 @@
 package mage.server;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -65,6 +66,7 @@ public class Session {
     private final Date timeConnected;
     private boolean isAdmin = false;
     private final AsynchInvokerCallbackHandler callbackHandler;
+    private boolean error = false;
 
     private final ReentrantLock lock;
 
@@ -346,30 +348,42 @@ public class Session {
         }
     }
 
-    public boolean setLock() {
-        return lock.tryLock();
-    }
-
-    public void unlock() {
-        lock.unlock();
-    }
-
     public void kill(DisconnectReason reason) {
-        UserManager.instance.removeUserFromAllTablesAndChat(userId, reason);
+        boolean lockSet = false;
+        try {
+            if (lock.tryLock(5000, TimeUnit.MILLISECONDS)) {
+                lockSet = true;
+                logger.debug("SESSION LOCK SET sessionId: " + sessionId);
+            } else {
+                logger.error("SESSION LOCK - kill: userId " + userId);
+            }
+            UserManager.instance.removeUserFromAllTablesAndChat(userId, reason);
+        } catch (InterruptedException ex) {
+            logger.error("SESSION LOCK - kill: userId " + userId, ex);
+        } finally {
+            if (lockSet) {
+                lock.unlock();
+                logger.debug("SESSION LOCK UNLOCK sessionId: " + sessionId);
+
+            }
+        }
+
     }
 
     public void fireCallback(final ClientCallback call) {
+        if (error) {
+            return;
+        }
         try {
-            if (!isLocked()) { // only fire callback if session isn't about to be killed or in the process of handling disconnect detection
-                call.setMessageId(messageId++);
-                callbackHandler.handleCallbackOneway(new Callback(call));
-            }
+            call.setMessageId(messageId++);
+            callbackHandler.handleCallbackOneway(new Callback(call));
         } catch (HandleCallbackException ex) {
+            error = true; // to reduce repeated SESSION CALLBACK EXCEPTION
             UserManager.instance.getUser(userId).ifPresent(user -> {
-                SessionManager.instance.disconnect(sessionId, LostConnection);
                 user.setUserState(User.UserState.Disconnected);
                 logger.warn("SESSION CALLBACK EXCEPTION - " + user.getName() + " userId " + userId + " - cause: " + getBasicCause(ex).toString());
                 logger.trace("Stack trace:", ex);
+                SessionManager.instance.disconnect(sessionId, LostConnection);
             });
         }
     }
