@@ -126,13 +126,13 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public boolean chooseMulligan(Game game) {
         log.debug("chooseMulligan");
-        if (hand.size() < 6 
-                || isTestMode() 
+        if (hand.size() < 6
+                || isTestMode()
                 || game.getClass().getName().contains("Momir")) {
             return false;
         }
         Set<Card> lands = hand.getCards(new FilterLandCard(), game);
-        return lands.size() < 2 
+        return lands.size() < 2
                 || lands.size() > hand.size() - 2;
     }
 
@@ -149,7 +149,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
-        if (target.getTargetController() != null 
+        if (target.getTargetController() != null
                 && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
@@ -1413,7 +1413,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        log.debug("chooseTarget");
         if (cards == null || cards.isEmpty()) {
             return target.isRequired(source);
         }
@@ -1633,12 +1632,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     public static Deck buildDeck(List<Card> cardPool, final List<ColoredManaSymbol> colors) {
-        return  buildDeck(cardPool, colors, false);
+        return buildDeck(cardPool, colors, false);
     }
 
     public static Deck buildDeck(List<Card> cardPool, final List<ColoredManaSymbol> colors, boolean onlyBasicLands) {
         if (onlyBasicLands) {
-            return  buildDeckWithOnlyBasicLands(cardPool);
+            return buildDeckWithOnlyBasicLands(cardPool);
         } else {
             return buildDeckWithNormalCards(cardPool, colors);
         }
