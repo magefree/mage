@@ -139,6 +139,8 @@ public enum UserManager {
             if (reason == DisconnectReason.Disconnected) {
                 removeUserFromAllTablesAndChat(userId, reason);
                 user.get().setUserState(UserState.Offline);
+            } else {
+                ChatManager.instance.sendLostConnectionMessage(userId, reason);
             }
         }
     }

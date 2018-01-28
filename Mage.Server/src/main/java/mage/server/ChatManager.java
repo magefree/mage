@@ -295,6 +295,15 @@ public enum ChatManager {
 
     }
 
+    public void sendLostConnectionMessage(UUID userId, DisconnectReason reason) {
+        UserManager.instance.getUser(userId).ifPresent(user
+                -> getChatSessions()
+                        .stream()
+                        .filter(chat -> chat.hasUser(userId))
+                        .forEach(chatSession -> chatSession.broadcast(null, user.getName() + reason.getMessage(), MessageColor.BLUE, true, MessageType.STATUS, null)));
+
+    }
+
     public void removeUser(UUID userId, DisconnectReason reason) {
         for (ChatSession chatSession : getChatSessions()) {
             if (chatSession.hasUser(userId)) {
