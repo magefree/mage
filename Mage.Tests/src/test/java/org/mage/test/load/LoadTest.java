@@ -10,6 +10,7 @@ import mage.cards.repository.CardRepository;
 import mage.constants.*;
 import mage.game.match.MatchOptions;
 import mage.player.ai.ComputerPlayer;
+import mage.players.Player;
 import mage.players.PlayerType;
 import mage.remote.Connection;
 import mage.remote.MageRemoteException;
@@ -119,7 +120,6 @@ public class LoadTest {
     @Test
     @Ignore
     public void test_TwoUsersPlayGameUntilEnd() {
-        // simple connection to server test
 
         // monitor other players
         LoadPlayer monitor = new LoadPlayer("monitor");
@@ -130,7 +130,7 @@ public class LoadTest {
 
         // game by user 1
         GameTypeView gameType = player1.session.getGameTypes().get(0);
-        MatchOptions gameOptions = createSimpleGameOptions(gameType, player1.session);
+        MatchOptions gameOptions = createSimpleGameOptionsForBots(gameType, player1.session);
         TableView game = player1.session.createTable(player1.roomID, gameOptions);
         UUID tableId = game.getTableId();
         Assert.assertEquals(player1.userName, game.getControllerName());
@@ -173,6 +173,61 @@ public class LoadTest {
         while(!player1.client.isGameOver() && !player2.client.isGameOver()) {
             checkGame = monitor.getTable(tableId);
             logger.warn(checkGame.get().getTableState());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e){
+                logger.error(e.getMessage(), e);
+            }
+        }
+    }
+
+    @Test
+    @Ignore
+    public void test_TwoAIPlayGameUntilEnd() {
+
+        // monitor and game source
+        LoadPlayer monitor = new LoadPlayer("monitor");
+
+        // game by monitor
+        GameTypeView gameType = monitor.session.getGameTypes().get(0);
+        MatchOptions gameOptions = createSimpleGameOptionsForAI(gameType, monitor.session);
+        TableView game = monitor.session.createTable(monitor.roomID, gameOptions);
+        UUID tableId = game.getTableId();
+
+        DeckCardLists deckList = createSimpleDeck("GR", false);
+        Optional<TableView> checkGame;
+
+        // join AI
+        Assert.assertTrue(monitor.session.joinTable(monitor.roomID, tableId, "ai_1", PlayerType.COMPUTER_MAD, 5, deckList, ""));
+        Assert.assertTrue(monitor.session.joinTable(monitor.roomID, tableId, "ai_2", PlayerType.COMPUTER_MAD, 5, deckList, ""));
+
+        // match start
+        Assert.assertTrue(monitor.session.startMatch(monitor.roomID, tableId));
+
+        // playing until game over
+        boolean startToWatching = false;
+        while(true) {
+            checkGame = monitor.getTable(tableId);
+            TableState state = checkGame.get().getTableState();
+            logger.warn(state);
+
+            if (state == TableState.FINISHED) {
+                break;
+            }
+
+            if (!startToWatching && state == TableState.DUELING) {
+                Assert.assertTrue(monitor.session.watchGame(checkGame.get().getGames().iterator().next()));
+                startToWatching = true;
+            }
+
+            GameView gameView = monitor.client.getLastGameView();
+            if (gameView != null) {
+                for (PlayerView p : gameView.getPlayers()) {
+                    logger.info(p.getName() + " - Life=" + p.getLife() + "; Lib=" + p.getLibraryCount());
+                }
+
+            }
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e){
@@ -348,11 +403,11 @@ public class LoadTest {
         return con;
     }
 
-    private MatchOptions createSimpleGameOptions(GameTypeView gameTypeView, Session session) {
-        MatchOptions options = new MatchOptions("Test game", gameTypeView.getName(), false, 2);
+    private MatchOptions createSimpleGameOptions(String gameName, GameTypeView gameTypeView, Session session, PlayerType playersType) {
+        MatchOptions options = new MatchOptions(gameName, gameTypeView.getName(), false, 2);
 
-        options.getPlayerTypes().add(PlayerType.HUMAN);
-        options.getPlayerTypes().add(PlayerType.HUMAN);
+        options.getPlayerTypes().add(playersType);
+        options.getPlayerTypes().add(playersType);
 
         options.setDeckType(session.getDeckTypes()[0]);
         options.setLimited(false);
@@ -361,6 +416,14 @@ public class LoadTest {
         options.setWinsNeeded(1);
         options.setMatchTimeLimit(MatchTimeLimit.MIN__15);
         return options;
+    }
+
+    private MatchOptions createSimpleGameOptionsForBots(GameTypeView gameTypeView, Session session) {
+        return createSimpleGameOptions("Bots test game", gameTypeView, session, PlayerType.HUMAN);
+    }
+
+    private MatchOptions createSimpleGameOptionsForAI(GameTypeView gameTypeView, Session session) {
+        return createSimpleGameOptions("AI test game", gameTypeView, session, PlayerType.COMPUTER_MAD);
     }
 
     private Deck generateRandomDeck(String colors, boolean onlyBasicLands) {
@@ -438,7 +501,7 @@ public class LoadTest {
 
         public UUID createNewTable() {
             GameTypeView gameType = this.session.getGameTypes().get(0);
-            MatchOptions gameOptions = createSimpleGameOptions(gameType, this.session);
+            MatchOptions gameOptions = createSimpleGameOptionsForBots(gameType, this.session);
             TableView game = this.session.createTable(this.roomID, gameOptions);
             this.createdTableID = game.getTableId();
             Assert.assertEquals(this.userName, game.getControllerName());

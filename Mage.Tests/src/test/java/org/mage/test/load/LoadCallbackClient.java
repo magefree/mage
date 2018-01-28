@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
+import mage.player.ai.ComputerPlayer;
 import mage.remote.Session;
 import mage.util.RandomUtil;
 import mage.utils.CompressUtil;
@@ -34,21 +35,10 @@ public class LoadCallbackClient implements CallbackClient {
 
     @Override
     public void processCallback(ClientCallback callback) {
-        //TODO
         controlCount = 0;
         callback.setData(CompressUtil.decompress(callback.getData()));
-
-        /*
-        // random sleep can help with freezes (server concurrent access problem?!)
-        try {
-            Thread.sleep(RandomUtil.nextInt(1000));
-        }catch (InterruptedException e) {
-            log.error("thread error", e);
-        }
-        */
-
-        log.info(callback.getMethod());
         log.info(getLogStartInfo() + "callback: " + callback.getMethod());
+
 
         switch (callback.getMethod()) {
 
@@ -222,5 +212,9 @@ public class LoadCallbackClient implements CallbackClient {
 
     public String getLastGameResult() {
         return this.gameResult;
+    }
+
+    public GameView getLastGameView() {
+        return this.gameView;
     }
 }

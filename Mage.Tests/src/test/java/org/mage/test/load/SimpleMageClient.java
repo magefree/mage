@@ -6,6 +6,7 @@ import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Session;
 import mage.utils.MageVersion;
+import mage.view.GameView;
 import org.apache.log4j.Logger;
 
 /**
@@ -75,5 +76,9 @@ public class SimpleMageClient implements MageClient {
 
     public String getLastGameResult() {
         return this.callbackClient.getLastGameResult();
+    }
+
+    public GameView getLastGameView() {
+        return this.callbackClient.getLastGameView();
     }
 }
