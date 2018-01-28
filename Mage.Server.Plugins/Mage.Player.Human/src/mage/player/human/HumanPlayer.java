@@ -1761,7 +1761,7 @@ public class HumanPlayer extends PlayerImpl {
         synchronized (response) {
             response.setBoolean(responseBoolean);
             response.notifyAll();
-            logger.info("Got response boolean from player: " + getId());
+            logger.debug("Got response boolean from player: " + getId());
         }
     }
 
@@ -1787,7 +1787,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void signalPlayerConcede() {
-        waitResponseOpen();
+        //waitResponseOpen(); //concede is direct event, no need to wait it
         synchronized (response) {
             response.setResponseConcedeCheck();
             response.notifyAll();
