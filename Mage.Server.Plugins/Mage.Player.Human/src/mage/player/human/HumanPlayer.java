@@ -177,7 +177,7 @@ public class HumanPlayer extends PlayerImpl {
                 }
                 sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, game, null);
             }
-            waitResponseOpen();
+            //waitResponseOpen(); // it's a macro action, no need it here?
             synchronized (response) {
                 response.copy(action);
                 response.notifyAll();
