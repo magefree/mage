@@ -1127,7 +1127,7 @@ public class ModernCardRenderer extends CardRenderer {
     protected static Paint getBorderPaint(ObjectColor colors, Collection<CardType> types, int width) {
         if (colors.isMulticolored()) {
             if (colors.getColorCount() == 2) {
-                List<ObjectColor> twoColors = colors.getTwoColorsInOrder();
+                List<ObjectColor> twoColors = colors.getColors();
 
                 // Two-color frames look better if we use a whiter white
                 // than the normal white frame color for them, as the normal
@@ -1203,7 +1203,7 @@ public class ModernCardRenderer extends CardRenderer {
     protected static Paint getTextboxPaint(ObjectColor colors, Collection<CardType> types, int width) {
         if (colors.isMulticolored()) {
             if (colors.getColorCount() == 2) {
-                List<ObjectColor> twoColors = colors.getTwoColorsInOrder();
+                List<ObjectColor> twoColors = colors.getColors();
                 Color[] translatedColors;
                 if (types.contains(CardType.LAND)) {
                     translatedColors = new Color[]{

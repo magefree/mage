@@ -155,30 +155,6 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
 
     public List<ObjectColor> getColors() {
         List<ObjectColor> colors = new ArrayList<>();
-        if (this.isWhite()) {
-            colors.add(ObjectColor.WHITE);
-        }
-        if (this.isBlue()) {
-            colors.add(ObjectColor.BLUE);
-        }
-        if (this.isBlack()) {
-            colors.add(ObjectColor.BLACK);
-        }
-        if (this.isRed()) {
-            colors.add(ObjectColor.RED);
-        }
-        if (this.isGreen()) {
-            colors.add(ObjectColor.GREEN);
-        }
-
-        if (this.isGold()) {
-            colors.add(ObjectColor.GOLD);
-        }
-        return colors;
-    }
-
-    public List<ObjectColor> getTwoColorsInOrder() {
-        List<ObjectColor> colors = new ArrayList<>();
         int firstColor = 5000;
         int secondColor = -1;
         if (this.isWhite()) {
@@ -554,5 +530,4 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         colors.add(ObjectColor.GOLD);
         return colors;
     }
-
 }
