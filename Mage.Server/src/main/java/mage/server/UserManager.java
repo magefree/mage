@@ -140,7 +140,7 @@ public enum UserManager {
                 removeUserFromAllTablesAndChat(userId, reason);
                 user.get().setUserState(UserState.Offline);
             } else {
-                ChatManager.instance.sendLostConnectionMessage(userId, reason);
+//                ChatManager.instance.sendLostConnectionMessage(userId, reason);
             }
         }
     }
