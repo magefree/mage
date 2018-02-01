@@ -74,7 +74,6 @@ import mage.target.common.TargetDefender;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.MessageToClient;
-import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -152,7 +151,7 @@ public class HumanPlayer extends PlayerImpl {
 
     protected void waitResponseOpen() {
         // wait response open for answer process
-        while(!responseOpenedForAnswer && canRespond()) {
+        while (!responseOpenedForAnswer && canRespond()) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -403,7 +402,7 @@ public class HumanPlayer extends PlayerImpl {
             waitForResponse(game);
             String val = response.getString();
             if (val != null) {
-                if(choice.isKeyChoice()){
+                if (choice.isKeyChoice()) {
                     choice.setChoiceByKey(val);
                 } else {
                     choice.setChoice(val);
@@ -747,8 +746,10 @@ public class HumanPlayer extends PlayerImpl {
                     }
                 }
                 if (game.getStack().isEmpty()) {
-                    passedUntilStackResolved = false;
                     boolean dontCheckPassStep = false;
+                    if (passedUntilStackResolved) { // Don't skip to next step with this action. It always only resolves a stack. If stack is empty it does nothing.
+                        dontCheckPassStep = true;
+                    }
                     if (passedTurn
                             || passedTurnSkipStack) {
                         if (passWithManaPoolCheck(game)) {
@@ -1797,7 +1798,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void skip() {
-        waitResponseOpen();
+        // waitResponseOpen(); //skip is direct event, no need to wait it
         synchronized (response) {
             response.setInteger(0);
             response.notifyAll();

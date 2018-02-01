@@ -139,7 +139,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean passedUntilEndOfTurn; // F5
     protected boolean passedUntilNextMain; // F7
     protected boolean passedUntilStackResolved; // F10
-    protected Date dateLastAddedToStack; // F10
+    protected Date dateLastAddedToStack;
     protected boolean passedUntilEndStepBeforeMyTurn; // F11
     protected boolean skippedAtLeastOnce; // used to track if passed started in specific phase
     /**
@@ -2105,11 +2105,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                 skippedAtLeastOnce = !(game.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN || game.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN);
                 this.skip();
                 break;
-            case PASS_PRIORITY_UNTIL_STACK_RESOLVED: //F8
-                resetPlayerPassedActions();
-                passedUntilStackResolved = true;
-                dateLastAddedToStack = game.getStack().getDateLastAdded();
-                this.skip();
+            case PASS_PRIORITY_UNTIL_STACK_RESOLVED: // Default F10 - Skips until the current stack is resolved
+                if (!game.getStack().isEmpty()) { // If stack is empty do nothing
+                    resetPlayerPassedActions();
+                    passedUntilStackResolved = true;
+                    dateLastAddedToStack = game.getStack().getDateLastAdded();
+                    this.skip();
+                }
                 break;
             case PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN: //F11
                 resetPlayerPassedActions();
