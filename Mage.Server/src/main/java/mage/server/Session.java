@@ -66,9 +66,10 @@ public class Session {
     private final Date timeConnected;
     private boolean isAdmin = false;
     private final AsynchInvokerCallbackHandler callbackHandler;
-    private boolean error = false;
+    private boolean valid = true;
 
     private final ReentrantLock lock;
+    private final ReentrantLock callBackLock;
 
     public Session(String sessionId, InvokerCallbackHandler callbackHandler) {
         this.sessionId = sessionId;
@@ -76,6 +77,7 @@ public class Session {
         this.isAdmin = false;
         this.timeConnected = new Date();
         this.lock = new ReentrantLock();
+        this.callBackLock = new ReentrantLock();
     }
 
     public String registerUser(String userName, String password, String email) throws MageException {
@@ -371,20 +373,27 @@ public class Session {
     }
 
     public void fireCallback(final ClientCallback call) {
-        if (error) {
-            return;
-        }
+        boolean lockSet = false;
         try {
-            call.setMessageId(messageId++);
-            callbackHandler.handleCallbackOneway(new Callback(call));
+            if (valid && callBackLock.tryLock(50, TimeUnit.MILLISECONDS)) {
+                call.setMessageId(messageId++);
+                lockSet = true;
+                callbackHandler.handleCallbackOneway(new Callback(call));
+            }
+        } catch (InterruptedException ex) {
+            logger.warn("SESSION LOCK - fireCallback - userId: " + userId + " messageId: " + call.getMessageId(), ex);
         } catch (HandleCallbackException ex) {
-            error = true; // to reduce repeated SESSION CALLBACK EXCEPTION
+            this.valid = false;
             UserManager.instance.getUser(userId).ifPresent(user -> {
                 user.setUserState(User.UserState.Disconnected);
-                logger.warn("SESSION CALLBACK EXCEPTION - " + user.getName() + " userId " + userId + " - cause: " + getBasicCause(ex).toString());
+                logger.warn("SESSION CALLBACK EXCEPTION - " + user.getName() + " userId " + userId + " messageId: " + call.getMessageId() + " - cause: " + getBasicCause(ex).toString());
                 logger.trace("Stack trace:", ex);
                 SessionManager.instance.disconnect(sessionId, LostConnection);
             });
+        } finally {
+            if (lockSet) {
+                callBackLock.unlock();
+            }
         }
     }
 
