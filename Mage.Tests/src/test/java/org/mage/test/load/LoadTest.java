@@ -1,5 +1,8 @@
 package org.mage.test.load;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 import mage.cards.Card;
 import mage.cards.Sets;
 import mage.cards.decks.Deck;
@@ -10,7 +13,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.*;
 import mage.game.match.MatchOptions;
 import mage.player.ai.ComputerPlayer;
-import mage.players.Player;
 import mage.players.PlayerType;
 import mage.remote.Connection;
 import mage.remote.MageRemoteException;
@@ -23,21 +25,17 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-
 /**
  * Intended to test Mage server under different load patterns.
  *
- * These tests do use server started separately, so Mage server should be started before running them.
- * In case you want to debug these tests, use -Ddebug.mage that would disable client-server request timeout.
+ * These tests do use server started separately, so Mage server should be
+ * started before running them. In case you want to debug these tests, use
+ * -Ddebug.mage that would disable client-server request timeout.
  *
  * Then it's also better to use -Xms256M -Xmx512M JVM options for these stests.
  *
  * @author JayDi85
  */
-
 public class LoadTest {
 
     private static final Logger logger = Logger.getLogger(LoadTest.class);
@@ -53,40 +51,39 @@ public class LoadTest {
         Deck deck;
 
         deck = generateRandomDeck("G", false);
-        for(Card card : deck.getCards()) {
+        for (Card card : deck.getCards()) {
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in G",
                     card.getColorIdentity().isGreen());
         }
 
         deck = generateRandomDeck("U", false);
-        for(Card card : deck.getCards()) {
+        for (Card card : deck.getCards()) {
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in U",
                     card.getColorIdentity().isBlue());
         }
 
         deck = generateRandomDeck("BR", false);
-        for(Card card : deck.getCards()) {
+        for (Card card : deck.getCards()) {
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in BR",
                     card.getColorIdentity().isBlack() || card.getColorIdentity().isRed());
         }
 
         deck = generateRandomDeck("BUG", false);
-        for(Card card : deck.getCards()) {
+        for (Card card : deck.getCards()) {
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in BUG",
                     card.getColorIdentity().isBlack() || card.getColorIdentity().isBlue() || card.getColorIdentity().isGreen());
         }
 
         // lands
-
         deck = generateRandomDeck("UR", true);
-        for(Card card : deck.getCards()) {
+        for (Card card : deck.getCards()) {
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in UR",
                     card.getColorIdentity().isBlue() || card.getColorIdentity().isRed());
             Assert.assertEquals("card " + card.getName() + " must be basic land ", Rarity.LAND, card.getRarity());
         }
 
         deck = generateRandomDeck("B", true);
-        for(Card card : deck.getCards()) {
+        for (Card card : deck.getCards()) {
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in B", card.getColorIdentity().isBlack());
             Assert.assertEquals("card " + card.getName() + " must be basic land ", Rarity.LAND, card.getRarity());
         }
@@ -97,7 +94,6 @@ public class LoadTest {
     public void test_UsersConnectToServer() throws Exception {
 
         // simple connection to server
-
         // monitor other players
         LoadPlayer monitor = new LoadPlayer("monitor");
         Assert.assertTrue(monitor.session.isConnected());
@@ -142,7 +138,6 @@ public class LoadTest {
         for(DeckCardInfo info: deckList.getCards()) {
             logger.info(info.getCardName());
         }*/
-
         // before connect
         checkGame = monitor.getTable(tableId);
         Assert.assertTrue(checkGame.isPresent());
@@ -170,12 +165,12 @@ public class LoadTest {
         Assert.assertTrue(player1.session.startMatch(player1.roomID, tableId));
 
         // playing until game over
-        while(!player1.client.isGameOver() && !player2.client.isGameOver()) {
+        while (!player1.client.isGameOver() && !player2.client.isGameOver()) {
             checkGame = monitor.getTable(tableId);
             logger.warn(checkGame.get().getTableState());
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e){
+            } catch (InterruptedException e) {
                 logger.error(e.getMessage(), e);
             }
         }
@@ -206,7 +201,7 @@ public class LoadTest {
 
         // playing until game over
         boolean startToWatching = false;
-        while(true) {
+        while (true) {
             checkGame = monitor.getTable(tableId);
             TableState state = checkGame.get().getTableState();
             logger.warn(state);
@@ -230,7 +225,7 @@ public class LoadTest {
 
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e){
+            } catch (InterruptedException e) {
                 logger.error(e.getMessage(), e);
             }
         }
@@ -330,7 +325,7 @@ public class LoadTest {
         // creating
         logger.info("creating " + MAX_GAMES + " games...");
         ArrayList<LoadGame> gamesList = new ArrayList<>();
-        for(int i = 1; i <= MAX_GAMES; i++) {
+        for (int i = 1; i <= MAX_GAMES; i++) {
             LoadGame game = new LoadGame(
                     "game" + i,
                     "game" + i,
@@ -357,11 +352,11 @@ public class LoadTest {
         // waiting all games
         while (true) {
             boolean isComplete = true;
-            for(LoadGame game: gamesList) {
+            for (LoadGame game : gamesList) {
                 isComplete = isComplete && !game.isPlaying();
             }
 
-            if(isComplete) {
+            if (isComplete) {
                 break;
             }
 
@@ -378,7 +373,7 @@ public class LoadTest {
 
         // check statuses
         ArrayList<String> errors = new ArrayList<>();
-        for(LoadGame game: gamesList) {
+        for (LoadGame game : gamesList) {
             if (!"finished".equals(game.gameResult)) {
                 errors.add(game.gameName + ": not finished, got " + game.gameResult);
             }
@@ -386,7 +381,7 @@ public class LoadTest {
 
         if (errors.size() > 0) {
             System.out.println("Not all games finished, founded " + errors.size() + " errors: ");
-            for (String s: errors) {
+            for (String s : errors) {
                 System.out.println(s);
             }
             Assert.fail("Not all games finished");
@@ -452,6 +447,7 @@ public class LoadTest {
     }
 
     private class LoadPlayer {
+
         String userName;
         Connection connection;
         SimpleMageClient client;
@@ -479,15 +475,14 @@ public class LoadTest {
                 for (RoomUsersView roomUsers : this.session.getRoomUsers(this.roomID)) {
                     res.addAll(roomUsers.getUsersView());
                 }
-            } catch (MageRemoteException e)
-            {
+            } catch (MageRemoteException e) {
                 logger.error(e);
             }
             return res;
         }
 
         public UsersView findUser(String userName) {
-            for (UsersView user: this.getAllRoomUsers()) {
+            for (UsersView user : this.getAllRoomUsers()) {
                 if (user.getUserName().equals(userName)) {
                     return user;
                 }
@@ -535,6 +530,7 @@ public class LoadTest {
     }
 
     private class LoadGame {
+
         String gameName = null;
         Thread runningThread = null;
         LoadPlayer player1 = null;
@@ -575,10 +571,10 @@ public class LoadTest {
                     this.gameResult = "started";
 
                     // playing until game over or abort
-                    while(!abort && (!player1.client.isGameOver() || !player2.client.isGameOver())) {
+                    while (!abort && (!player1.client.isGameOver() || !player2.client.isGameOver())) {
                         try {
                             Thread.sleep(1000);
-                        } catch (InterruptedException e){
+                        } catch (InterruptedException e) {
                             logger.error(e.getMessage(), e);
                         }
                     }

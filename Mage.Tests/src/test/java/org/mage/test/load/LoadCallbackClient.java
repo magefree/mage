@@ -1,18 +1,13 @@
 package org.mage.test.load;
 
-import mage.constants.PhaseStep;
+import java.util.UUID;
 import mage.constants.PlayerAction;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
-import mage.player.ai.ComputerPlayer;
 import mage.remote.Session;
-import mage.util.RandomUtil;
 import mage.utils.CompressUtil;
 import mage.view.*;
 import org.apache.log4j.Logger;
-
-import java.util.Random;
-import java.util.UUID;
 
 /**
  * @author JayDi85
@@ -38,7 +33,6 @@ public class LoadCallbackClient implements CallbackClient {
         controlCount = 0;
         callback.setData(CompressUtil.decompress(callback.getData()));
         log.info(getLogStartInfo() + "callback: " + callback.getMethod());
-
 
         switch (callback.getMethod()) {
 
@@ -68,13 +62,13 @@ public class LoadCallbackClient implements CallbackClient {
                     case "Select a starting player":
                         session.sendPlayerUUID(gameId, playerId);
                         return;
-                        //break;
+                    //break;
                     case "Select a card to discard":
                         log.info(getLogStartInfo() + "hand size: " + gameView.getHand().size());
                         SimpleCardView card = gameView.getHand().values().iterator().next();
                         session.sendPlayerUUID(gameId, card.getId());
                         return;
-                        //break;
+                    //break;
                     default:
                         log.error(getLogStartInfo() + "unknown GAME_TARGET message: " + message.toString());
                 }
@@ -109,14 +103,14 @@ public class LoadCallbackClient implements CallbackClient {
                 // end priority step
                 session.sendPlayerBoolean(gameId, false);
                 return;
-/*
+                /*
                 if (LoadPhaseManager.getInstance().isSkip(message.getGameView(), message.getMessage(), playerId)) {
                     log.info(getLogStartInfo() + "Skipped: " + message.getMessage());
                     session.sendPlayerBoolean(gameId, false);
                 } else {
                     log.error(getLogStartInfo() + "unknown GAME_SELECT or skips message: " + message.toString());
                 }
-                */
+                 */
                 //break;
             }
 
@@ -142,13 +136,13 @@ public class LoadCallbackClient implements CallbackClient {
                 log.error(getLogStartInfo() + "Unknown callback: " + callback.getMethod() + ", " + callback.getData().toString());
                 session.sendPlayerBoolean(gameId, false);
                 return;
-                //break;
+            //break;
         }
     }
 
     private PlayerView getPlayer() {
         if ((this.gameView != null) && (this.playerId != null)) {
-            for (PlayerView p: this.gameView.getPlayers()) {
+            for (PlayerView p : this.gameView.getPlayers()) {
                 if (p.getPlayerId().equals(this.playerId)) {
                     return p;
                 }
@@ -161,7 +155,6 @@ public class LoadCallbackClient implements CallbackClient {
         String mes = "";
 
         //throw new IllegalArgumentException("test exception");
-
         if (this.session != null) {
             mes += session.getUserName() + ": ";
         }
@@ -192,7 +185,7 @@ public class LoadCallbackClient implements CallbackClient {
                     e.printStackTrace();
                 }
 
-                if(isGameOver()) {
+                if (isGameOver()) {
                     return;
                 }
 
