@@ -151,11 +151,13 @@ public class HumanPlayer extends PlayerImpl {
 
     protected void waitResponseOpen() {
         // wait response open for answer process
-        while (!responseOpenedForAnswer && canRespond()) {
+        int numTimesWaiting = 0;
+        while (!responseOpenedForAnswer && canRespond() && numTimesWaiting < 300) {
+            numTimesWaiting ++;
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                logger.warn("Response waiting interrapted for " + getId());
+                logger.warn("Response waiting interrupted for " + getId());
             }
         }
     }

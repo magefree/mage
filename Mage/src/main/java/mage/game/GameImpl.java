@@ -2452,6 +2452,9 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public UUID getPriorityPlayerId() {
+        if (state.getPriorityPlayerId() == null) {
+            return state.getActivePlayerId();
+        }
         return state.getPriorityPlayerId();
     }
 
