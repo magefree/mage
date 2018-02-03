@@ -1360,6 +1360,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
+        if (object instanceof StackAbility) { // It may not be possible to activate abilities of stack actilities 
+            return useable;
+        }
         if (object instanceof SplitCard) {
             SplitCard splitCard = (SplitCard) object;
             getUseableActivatedAbilitiesHalfImpl(splitCard.getLeftHalfCard(), zone, game, splitCard.getLeftHalfCard().getAbilities(), useable);
