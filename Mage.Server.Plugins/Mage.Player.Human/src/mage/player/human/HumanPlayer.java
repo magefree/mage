@@ -152,8 +152,16 @@ public class HumanPlayer extends PlayerImpl {
     protected void waitResponseOpen() {
         // wait response open for answer process
         int numTimesWaiting = 0;
-        while (!responseOpenedForAnswer && canRespond() && numTimesWaiting < 300) {
+        while (!responseOpenedForAnswer && canRespond()) {
             numTimesWaiting ++;
+            if (numTimesWaiting >= 300) {
+                // game freezed -- need to report about error and continue to execute
+                String s = "Game freezed in waitResponseOpen for user " + getName();
+                Throwable th = new IllegalStateException(s);
+                logger.error(s, th);
+                break;
+            }
+
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
