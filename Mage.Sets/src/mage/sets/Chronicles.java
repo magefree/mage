@@ -113,6 +113,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Marhault Elsdragon", 114, Rarity.UNCOMMON, mage.cards.m.MarhaultElsdragon.class));
         cards.add(new SetCardInfo("Metamorphosis", 38, Rarity.COMMON, mage.cards.m.Metamorphosis.class));
         cards.add(new SetCardInfo("Mountain Yeti", 53, Rarity.COMMON, mage.cards.m.MountainYeti.class));
+        cards.add(new SetCardInfo("Nebuchadnezzar", 115, Rarity.RARE, mage.cards.n.Nebuchadnezzar.class));
         cards.add(new SetCardInfo("Nicol Bolas", 116, Rarity.RARE, mage.cards.n.NicolBolas.class));
         cards.add(new SetCardInfo("Obelisk of Undoing", 84, Rarity.RARE, mage.cards.o.ObeliskOfUndoing.class));
         cards.add(new SetCardInfo("Palladia-Mors", 117, Rarity.RARE, mage.cards.p.PalladiaMors.class));
