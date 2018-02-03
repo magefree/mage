@@ -134,6 +134,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Shimian Night Stalker", 8, Rarity.UNCOMMON, mage.cards.s.ShimianNightStalker.class));
         cards.add(new SetCardInfo("Sivitri Scarzam", 119, Rarity.UNCOMMON, mage.cards.s.SivitriScarzam.class));
         cards.add(new SetCardInfo("Sol'kanar the Swamp King", 120, Rarity.RARE, mage.cards.s.SolkanarTheSwampKing.class));
+        cards.add(new SetCardInfo("Stangg", 121, Rarity.RARE, mage.cards.s.Stangg.class));
         cards.add(new SetCardInfo("Storm Seeker", 42, Rarity.UNCOMMON, mage.cards.s.StormSeeker.class));
         cards.add(new SetCardInfo("Teleport", 26, Rarity.RARE, mage.cards.t.Teleport.class));
         cards.add(new SetCardInfo("The Wretched", 11, Rarity.RARE, mage.cards.t.TheWretched.class));
