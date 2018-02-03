@@ -49,7 +49,7 @@ public class RivalsOfIxalan extends ExpansionSet {
         this.parentSet = Ixalan.getInstance();
         this.hasBoosters = true;
         this.hasBasicLands = false;
-        this.numBoosterLands = 1;
+        this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;

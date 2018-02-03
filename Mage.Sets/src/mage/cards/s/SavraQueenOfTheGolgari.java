@@ -87,7 +87,6 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
 
     public SavraSacrificeBlackCreatureAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new SavraSacrificeEffect(), new PayLifeCost(2)));
-        this.addTarget(new TargetCreatureOrPlayer());
         this.setLeavesTheBattlefieldTrigger(true);
     }
 

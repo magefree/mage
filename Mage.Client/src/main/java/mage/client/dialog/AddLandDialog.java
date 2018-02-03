@@ -73,26 +73,27 @@ public class AddLandDialog extends MageDialog {
     public void showDialog(Deck deck, DeckEditorMode mode) {
         this.deck = deck;
         SortedSet<String> landSetNames = new TreeSet<>();
-        if (mode!=DeckEditorMode.FREE_BUILDING) {
+        String defaultSetName = null;
+        if (mode != DeckEditorMode.FREE_BUILDING) {
             // decide from which sets basic lands are taken from
             for (String setCode : deck.getExpansionSetCodes()) {
                 ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
                 if (expansionInfo != null && expansionInfo.hasBasicLands()) {
-                    this.landSetCodes.add(expansionInfo.getCode());
-                    landSetNames.add(expansionInfo.getName());
+                    defaultSetName = expansionInfo.getName();
+                    break;
                 }
             }
 
             // if sets have no basic land, take land from block
-            if (this.landSetCodes.isEmpty()) {
+            if (defaultSetName == null) {
                 for (String setCode : deck.getExpansionSetCodes()) {
                     ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
                     if (expansionInfo != null) {
                         List<ExpansionInfo> blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
                         for (ExpansionInfo blockSet : blockSets) {
                             if (blockSet.hasBasicLands()) {
-                                this.landSetCodes.add(blockSet.getCode());
-                                landSetNames.add(blockSet.getName());
+                                defaultSetName = expansionInfo.getName();
+                                break;
                             }
                         }
                     }
@@ -100,11 +101,9 @@ public class AddLandDialog extends MageDialog {
             }
         }
         // if still no set with lands found, add list of all available
-        if (this.landSetCodes.isEmpty()) {
-            List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
-            for (ExpansionInfo expansionInfo : basicLandSets) {
-                landSetNames.add(expansionInfo.getName());
-            }
+        List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
+        for (ExpansionInfo expansionInfo : basicLandSets) {
+            landSetNames.add(expansionInfo.getName());
         }
         if (landSetNames.isEmpty()) {
             throw new IllegalArgumentException("No set with basic land was found");
@@ -113,12 +112,22 @@ public class AddLandDialog extends MageDialog {
             landSetNames.add("<Random lands>");
         }
         cbLandSet.setModel(new DefaultComboBoxModel(landSetNames.toArray()));
+        if (defaultSetName != null) {
+            String item;
+            for (int i = 0; i < cbLandSet.getItemCount(); i++) {
+                item = (String) cbLandSet.getItemAt(i);
+                if (item.equalsIgnoreCase(defaultSetName)) {
+                    cbLandSet.setSelectedIndex(i);
+                    break;
+                }
+            }
 
+        }
 
         // windows settings
-        if (this.isModal()){
+        if (this.isModal()) {
             MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        }else{
+        } else {
             MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         }
 

@@ -84,6 +84,7 @@
 |Generate|EMBLEM:M14|Garruk, Caller of Beasts||Emblem Garruk|GarrukCallerOfBeastsEmblem|
 |Generate|EMBLEM:M14|Liliana of the Dark Realms||Emblem Liliana|LilianaOfTheDarkRealmsEmblem|
 |Generate|EMBLEM:MMA|Elspeth, Knight Errant||Emblem Elspeth|ElspethKnightErrantEmblem|
+|Generate|EMBLEM:RIX|Huatli, Radiant Champion||Emblem Huatli|HuatliRadiantChampionEmblem|
 |Generate|TOK:10E|Ape|||PongifyApeToken|
 |Generate|TOK:10E|Dragon|||DragonToken2|
 |Generate|TOK:10E|Goblin|||GoblinToken|
@@ -930,6 +931,10 @@
 |Generate|TOK:RAV|Spirit|||SpiritWhiteToken|
 |Generate|TOK:RAV|Wolf|||VojaToken|
 |Generate|TOK:RAV|Faerie|||FaerieToken|
+|Generate|TOK:RIX|Elemental|1||RekindlingPhoenixToken|
+|Generate|TOK:RIX|Elemental|2||TilonallisSummonerElementalToken|
+|Generate|TOK:RIX|Golem|||GoldForgeGarrisonGolemToken|
+|Generate|TOK:RIX|Saproling|||SaprolingToken|
 |Generate|TOK:ROE|Dragon|||DragonToken2|
 |Generate|TOK:ROE|Eldrazi Spawn|1||EldraziSpawnToken|
 |Generate|TOK:ROE|Eldrazi Spawn|2||EldraziSpawnToken|

@@ -304,7 +304,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             Map<UUID, Integer> assigned = new HashMap<>();
             if (blocked) {
                 boolean excessDamageToDefender = true;
-                for (UUID blockerId : blockerOrder) {
+                for (UUID blockerId : new ArrayList<>(blockerOrder)) { // prevent ConcurrentModificationException
                     Permanent blocker = game.getPermanent(blockerId);
                     if (blocker != null) {
                         int lethalDamage;

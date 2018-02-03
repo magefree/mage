@@ -57,7 +57,8 @@ public class JackInTheMox extends CardImpl {
         // 4 - Add {B} to your mana pool.
         // 5 - Add {R} to your mana pool.
         // 6 - Add {G} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new JackInTheMoxManaEffect(), new TapSourceCost());
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new JackInTheMoxManaEffect(), new TapSourceCost());
+        ability.setUndoPossible(false);
         this.addAbility(ability);
     }
 
@@ -75,7 +76,12 @@ class JackInTheMoxManaEffect extends ManaEffect {
 
     JackInTheMoxManaEffect() {
         super();
-        staticText = "Roll a six-sided die. If result is 1 - Sacrifice {this} and you lose 5 life.  2 - Add {W} 3 - Add {U} 4 - Add {B} 5 - Add {R} 6 - Add {G} to your mana pool";
+        staticText = "Roll a six-sided die for {this}. On a 1, sacrifice {this} and lose 5 life. Otherwise, {this} has one of the following effects. Treat this ability as a mana source."
+                + "<br/>2 Add {W} to your mana pool.\n"
+                + "<br/>3 Add {U} to your mana pool.\n"
+                + "<br/>4 Add {B} to your mana pool.\n"
+                + "<br/>5 Add {R} to your mana pool.\n"
+                + "<br/>6 Add {G} to your mana pool.";
     }
 
     JackInTheMoxManaEffect(final JackInTheMoxManaEffect effect) {
@@ -88,19 +94,28 @@ class JackInTheMoxManaEffect extends ManaEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
             int amount = controller.rollDice(game, 6);
-            if (amount == 1) {
-                permanent.sacrifice(source.getSourceId(), game);
-                controller.loseLife(5, game, false);
-            } else if (amount == 2) {
-                controller.getManaPool().addMana(Mana.WhiteMana(1), game, source);
-            } else if (amount == 3) {
-                controller.getManaPool().addMana(Mana.BlueMana(1), game, source);
-            } else if (amount == 4) {
-                controller.getManaPool().addMana(Mana.BlackMana(1), game, source);
-            } else if (amount == 5) {
-                controller.getManaPool().addMana(Mana.RedMana(1), game, source);
-            } else if (amount == 6) {
-                controller.getManaPool().addMana(Mana.GreenMana(1), game, source);
+            switch (amount) {
+                case 1:
+                    permanent.sacrifice(source.getSourceId(), game);
+                    controller.loseLife(5, game, false);
+                    break;
+                case 2:
+                    controller.getManaPool().addMana(Mana.WhiteMana(1), game, source);
+                    break;
+                case 3:
+                    controller.getManaPool().addMana(Mana.BlueMana(1), game, source);
+                    break;
+                case 4:
+                    controller.getManaPool().addMana(Mana.BlackMana(1), game, source);
+                    break;
+                case 5:
+                    controller.getManaPool().addMana(Mana.RedMana(1), game, source);
+                    break;
+                case 6:
+                    controller.getManaPool().addMana(Mana.GreenMana(1), game, source);
+                    break;
+                default:
+                    break;
             }
             return true;
         }

@@ -1,13 +1,16 @@
 package org.mage.test.load;
 
+import mage.constants.PhaseStep;
 import mage.view.GameView;
 import mage.view.PlayerView;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public class LoadPhaseManager {
+    private static final Logger log = Logger.getLogger("Load phase");
 
     private static final LoadPhaseManager instance = new LoadPhaseManager();
 
@@ -31,52 +34,63 @@ public class LoadPhaseManager {
     public static String MAIN_2_OTHERS = "main2Others";
     public static String END_OF_TURN_OTHERS = "endOfTurnOthers";
 
-    private static Map<String, String> mapYou = new HashMap<String, String>() {{
-        put("Upkeep - play instants and activated abilities.", UPKEEP_YOU);
-        put("Draw - play instants and activated abilities.", DRAW_YOU);
-        put("Precombat Main - play spells and abilities.", MAIN_YOU);
-        put("Begin Combat - play instants and activated abilities.", BEFORE_COMBAT_YOU);
-        put("End Combat - play instants and activated abilities.", END_OF_COMBAT_YOU);
-        put("Postcombat Main - play spells and abilities.", MAIN_2_YOU);
-        put("End Turn - play instants and activated abilities.", END_OF_TURN_YOU);
-    }};
+    private static Map<PhaseStep, Boolean> skipYou;
+    static {
+        skipYou = new HashMap() {{
+            put(PhaseStep.UPKEEP, true);
+            put(PhaseStep.PRECOMBAT_MAIN, true);
+            put(PhaseStep.BEGIN_COMBAT, true);
+            put(PhaseStep.DECLARE_ATTACKERS, true);
+            put(PhaseStep.DECLARE_BLOCKERS, true);
+            put(PhaseStep.END_COMBAT, true);
+            put(PhaseStep.POSTCOMBAT_MAIN, true);
+            put(PhaseStep.END_TURN, true);
+        }};
+    }
 
-    private static Map<String, String> mapOthers = new HashMap<String, String>() {{
-        put("Upkeep - play instants and activated abilities.", UPKEEP_OTHERS);
-        put("Draw - play instants and activated abilities.", DRAW_OTHERS);
-        put("Precombat Main - play instants and activated abilities.", MAIN_OTHERS);
-        put("Begin Combat - play instants and activated abilities.", BEFORE_COMBAT_OTHERS);
-        put("End Combat - play instants and activated abilities.", END_OF_COMBAT_OTHERS);
-        put("Postcombat Main - play instants and activated abilities.", MAIN_2_OTHERS);
-        put("End Turn - play instants and activated abilities.", END_OF_TURN_OTHERS);
-    }};
+    private static Map<PhaseStep, Boolean> skipOthers;
+    static {
+        skipYou = new HashMap() {{
+            put(PhaseStep.UPKEEP, true);
+            put(PhaseStep.PRECOMBAT_MAIN, true);
+            put(PhaseStep.BEGIN_COMBAT, true);
+            put(PhaseStep.DECLARE_ATTACKERS, true);
+            put(PhaseStep.DECLARE_BLOCKERS, true);
+            put(PhaseStep.END_COMBAT, true);
+            put(PhaseStep.POSTCOMBAT_MAIN, true);
+            put(PhaseStep.END_TURN, true);
+        }};
+    }
 
     public static LoadPhaseManager getInstance() {
         return instance;
     }
 
     public boolean isSkip(GameView gameView, String message, UUID playerId) {
+        // skip callbacks
+
         UUID activePlayer = null;
-        Map<String, String> map = mapOthers;
+        Map<PhaseStep, Boolean> map = skipOthers;
         for (PlayerView playerView : gameView.getPlayers()) {
             if (playerView.isActive()) {
                 activePlayer = playerView.getPlayerId();
                 if (activePlayer.equals(playerId)) {
-                    map = mapYou;
+                    map = skipYou;
                 }
             }
         }
+
         if (activePlayer == null) {
             throw new IllegalStateException("No active player found.");
         }
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            if (message.equals(entry.getKey())) {
-                /*if (message.equals("Precombat Main - play spells and abilities.")) {
-                    return false;
-                }*/
-                return true;
-            }
+
+        // PROCCESS
+
+        if(map.containsKey(gameView.getStep())){
+            return map.get(gameView.getStep());
+        } else {
+            log.error("Unknown phase manager step: " + gameView.getStep().toString());
+            return false;
         }
-         return false;
     }
 }

@@ -35,6 +35,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -75,8 +76,8 @@ class UnifiedStrikeEffect extends OneShotEffect {
     }
 
     UnifiedStrikeEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "";
+        super(Outcome.Exile);
+        this.staticText = "Exile target attacking creature if its power is less than or equal to the number of Soldiers on the battlefield";
     }
 
     UnifiedStrikeEffect(final UnifiedStrikeEffect effect) {
@@ -102,6 +103,10 @@ class UnifiedStrikeEffect extends OneShotEffect {
                         source.getSourceId(),
                         game
                 ).size();
-        return creature.getPower().getValue() <= soldierCount;
+        boolean successful = creature.getPower().getValue() <= soldierCount;
+        if (successful) {
+            player.moveCards(creature, Zone.EXILED, source, game);
+        }
+        return successful;
     }
 }

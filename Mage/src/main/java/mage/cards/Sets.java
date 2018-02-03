@@ -27,6 +27,7 @@
  */
 package mage.cards;
 
+import mage.Mana;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
 import mage.cards.decks.DeckCardLists;
@@ -35,9 +36,12 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.Rarity;
+import mage.filter.FilterMana;
 import mage.util.ClassScanner;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -45,7 +49,7 @@ import java.util.*;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class Sets extends HashMap<String, ExpansionSet> {
 
@@ -93,23 +97,50 @@ public class Sets extends HashMap<String, ExpansionSet> {
      * @return
      */
     public static List<Card> generateRandomCardPool(int cardsCount, List<ColoredManaSymbol> allowedColors) {
+        return generateRandomCardPool(cardsCount, allowedColors, false);
+    }
+
+    public static List<Card> generateRandomCardPool(int cardsCount, List<ColoredManaSymbol> allowedColors, boolean onlyBasicLands) {
         CardCriteria criteria = new CardCriteria();
-        criteria.notTypes(CardType.LAND);
+
+        if (onlyBasicLands) {
+            // only lands
+            criteria.rarities(Rarity.LAND);
+            criteria.colorless(true); // basic lands is colorless
+        } else {
+            // any card, but not basic lands
+            criteria.notTypes(CardType.LAND);
+
+            // clear colors
+            criteria.white(false);
+            criteria.blue(false);
+            criteria.black(false);
+            criteria.red(false);
+            criteria.green(false);
+            criteria.colorless(false); // colorless is not allowed for gen
+        }
+
+        FilterMana manaNeed = new FilterMana();
         for (ColoredManaSymbol color : allowedColors) {
             switch (color) {
                 case W:
+                    manaNeed.setWhite(true);
                     criteria.white(true);
                     break;
                 case U:
+                    manaNeed.setBlue(true);
                     criteria.blue(true);
                     break;
                 case B:
+                    manaNeed.setBlack(true);
                     criteria.black(true);
                     break;
                 case R:
+                    manaNeed.setRed(true);
                     criteria.red(true);
                     break;
                 case G:
+                    manaNeed.setGreen(true);
                     criteria.green(true);
                     break;
             }
@@ -123,9 +154,38 @@ public class Sets extends HashMap<String, ExpansionSet> {
             CardInfo cardInfo = cards.get(RandomUtil.nextInt(cards.size()));
             Card card = cardInfo != null ? cardInfo.getCard() : null;
             if (card != null) {
-                cardPool.add(card);
-                count++;
+
+                FilterMana manaCard = card.getColorIdentity();
+                boolean cardManaOK = true;
+
+                if (onlyBasicLands) {
+                    // lands is colorless
+                    // discard not needed color by mana produce
+                    Assert.assertEquals("only basic lands allow", 1, card.getMana().size());
+                    for (Mana manaLand : card.getMana()) {
+                        if (manaLand.getWhite() > 0 && !manaNeed.isWhite()) { cardManaOK = false; }
+                        if (manaLand.getBlue() > 0 && !manaNeed.isBlue()) { cardManaOK = false; }
+                        if (manaLand.getBlack() > 0 && !manaNeed.isBlack()) { cardManaOK = false; }
+                        if (manaLand.getRed() > 0 && !manaNeed.isRed()) { cardManaOK = false; }
+                        if (manaLand.getGreen() > 0 && !manaNeed.isGreen()) { cardManaOK = false; }
+                        if (manaLand.getColorless() > 0) { cardManaOK = false; } // ignore colorless land (wastes)
+                    }
+                } else {
+                    // cards
+                    // discard any card that have not needed color
+                    if (manaCard.isWhite() && !manaNeed.isWhite()) { cardManaOK = false; }
+                    if (manaCard.isBlue() && !manaNeed.isBlue()) { cardManaOK = false; }
+                    if (manaCard.isBlack() && !manaNeed.isBlack()) { cardManaOK = false; }
+                    if (manaCard.isRed() && !manaNeed.isRed()) { cardManaOK = false; }
+                    if (manaCard.isGreen() && !manaNeed.isGreen()) { cardManaOK = false; }
+                }
+
+                if (cardManaOK) {
+                    cardPool.add(card);
+                    count++;
+                }
             }
+
             tries++;
             if (tries > 4096) { // to avoid infinite loop
                 throw new IllegalStateException("Not enough cards for chosen colors to generate deck: " + allowedColors);

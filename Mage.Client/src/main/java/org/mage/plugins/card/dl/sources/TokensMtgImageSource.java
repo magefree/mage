@@ -94,6 +94,7 @@ public enum TokensMtgImageSource implements CardImageSource {
         "Elspeth",
         "Garruk",
         "Gideon",
+        "Huatli",
         "Jace",
         "Kiora",
         "Koth",

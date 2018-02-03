@@ -117,7 +117,7 @@ class SlaughterTheStrongEffect extends OneShotEffect {
                             currentFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 5 - powerSum));
                         }
                         Target target = new TargetPermanent(0, 1, currentFilter, true);
-                        controller.chooseTarget(Outcome.BoostCreature, target, source, game);
+                        player.chooseTarget(Outcome.BoostCreature, target, source, game);
                         if (target.getFirstTarget() != null) {
                             if (selectedCreatures.contains(target.getFirstTarget())) {
                                 selectedCreatures.remove(target.getFirstTarget());

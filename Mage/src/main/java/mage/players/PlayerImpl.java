@@ -53,7 +53,6 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
-import mage.cards.SplitCardHalf;
 import mage.cards.decks.Deck;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
@@ -140,7 +139,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean passedUntilEndOfTurn; // F5
     protected boolean passedUntilNextMain; // F7
     protected boolean passedUntilStackResolved; // F10
-    protected Date dateLastAddedToStack; // F10
+    protected Date dateLastAddedToStack;
     protected boolean passedUntilEndStepBeforeMyTurn; // F11
     protected boolean skippedAtLeastOnce; // used to track if passed started in specific phase
     /**
@@ -858,9 +857,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             if (!anyOrder) {
                 while (!cards.isEmpty()) {
-                    UUID cardId = cards.getRandom(game).getId();
-                    cards.remove(cardId);
-                    moveObjectToLibrary(cardId, source == null ? null : source.getSourceId(), game, false, false);
+                    Card card = cards.getRandom(game);
+                    if (card != null) {
+                        cards.remove(card);
+                        moveObjectToLibrary(card.getId(), source == null ? null : source.getSourceId(), game, false, false);
+                    }
                 }
             } else {
                 TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card to put on the bottom of your library (last one chosen will be bottommost)"));
@@ -1359,6 +1360,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
+        if (object instanceof StackAbility) { // It may not be possible to activate abilities of stack actilities 
+            return useable;
+        }
         if (object instanceof SplitCard) {
             SplitCard splitCard = (SplitCard) object;
             getUseableActivatedAbilitiesHalfImpl(splitCard.getLeftHalfCard(), zone, game, splitCard.getLeftHalfCard().getAbilities(), useable);
@@ -1866,7 +1870,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             player.gainLife(actualDamage, game);
                         }
                         // Unstable ability - Earl of Squirrel
-                        if (sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
+                        if (sourceAbilities != null && sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
                             Player player = game.getPlayer(sourceControllerId);
                             new SquirrelToken().putOntoBattlefield(actualDamage, game, sourceId, player.getId());
                         }
@@ -2104,11 +2108,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                 skippedAtLeastOnce = !(game.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN || game.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN);
                 this.skip();
                 break;
-            case PASS_PRIORITY_UNTIL_STACK_RESOLVED: //F8
-                resetPlayerPassedActions();
-                passedUntilStackResolved = true;
-                dateLastAddedToStack = game.getStack().getDateLastAdded();
-                this.skip();
+            case PASS_PRIORITY_UNTIL_STACK_RESOLVED: // Default F10 - Skips until the current stack is resolved
+                if (!game.getStack().isEmpty()) { // If stack is empty do nothing
+                    resetPlayerPassedActions();
+                    passedUntilStackResolved = true;
+                    dateLastAddedToStack = game.getStack().getDateLastAdded();
+                    this.skip();
+                }
                 break;
             case PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN: //F11
                 resetPlayerPassedActions();
@@ -3771,5 +3777,23 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public List<Designation> getDesignations() {
         return designations;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        PlayerImpl obj = (PlayerImpl) o;
+        if (this.getId() == null || obj.getId() == null) {
+            return false;
+        }
+
+        return this.getId().equals(obj.getId());
     }
 }

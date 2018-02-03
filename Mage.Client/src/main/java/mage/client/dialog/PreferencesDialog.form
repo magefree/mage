@@ -169,7 +169,7 @@
                 <Component class="javax.swing.JLabel" name="tooltipDelayLabel">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Delay in milliseconds for showing the card tooltip text"/>
+                    <Property name="text" type="java.lang.String" value="Delay in milliseconds for showing the card tooltip text (0 value will disable tooltip)"/>
                     <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The time the appearance of the tooltip window for a card is delayed.&lt;br&gt;&#xa;If set to zero, the tooltip window won&apos;t be shown at all."/>
                   </Properties>
                 </Component>

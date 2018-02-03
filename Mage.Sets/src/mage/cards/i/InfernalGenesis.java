@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.token.MinionToken;
+import mage.game.permanent.token.MinionToken2;
 import mage.players.Player;
 
 /**
@@ -48,7 +48,8 @@ public class InfernalGenesis extends CardImpl {
     public InfernalGenesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
 
-        // At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard. Then he or she creates X 1/1 black Minion creature tokens, where X is that card's converted mana cost.
+        // At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard.
+        // Then he or she creates X 1/1 black Minion creature tokens, where X is that card's converted mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalGenesisEffect(), TargetController.ANY, false));
     }
 
@@ -66,7 +67,8 @@ class InfernalGenesisEffect extends OneShotEffect {
 
     InfernalGenesisEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "that player puts the top card of his or her library into his or her graveyard. Then he or she creates X 1/1 black Minion creature tokens, where X is that card's converted mana cost";
+        staticText = "that player puts the top card of his or her library into his or her graveyard. " +
+                "Then he or she creates X 1/1 black Minion creature tokens, where X is that card's converted mana cost";
     }
 
     InfernalGenesisEffect(final InfernalGenesisEffect effect) {
@@ -81,7 +83,7 @@ class InfernalGenesisEffect extends OneShotEffect {
             if (card != null) {
                 if (player.moveCards(card, Zone.GRAVEYARD, source, game)) {
                     int cmc = card.getConvertedManaCost();
-                    MinionToken token = new MinionToken();
+                    MinionToken2 token = new MinionToken2();
                     token.putOntoBattlefield(cmc, game, source.getSourceId(), player.getId());
                 }
             }

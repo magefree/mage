@@ -66,7 +66,7 @@ public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_BLOCKERS;
+        return event.getType() == EventType.DECLARE_BLOCKERS_STEP;
     }
 
     @Override

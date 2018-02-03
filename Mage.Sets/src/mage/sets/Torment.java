@@ -93,6 +93,7 @@ public class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Devastating Dreams", 95, Rarity.RARE, mage.cards.d.DevastatingDreams.class));
         cards.add(new SetCardInfo("Dwell on the Past", 124, Rarity.UNCOMMON, mage.cards.d.DwellOnThePast.class));
         cards.add(new SetCardInfo("Enslaved Dwarf", 96, Rarity.COMMON, mage.cards.e.EnslavedDwarf.class));
+        cards.add(new SetCardInfo("Equal Treatment", 4, Rarity.UNCOMMON, mage.cards.e.EqualTreatment.class));
         cards.add(new SetCardInfo("Faceless Butcher", 60, Rarity.COMMON, mage.cards.f.FacelessButcher.class));
         cards.add(new SetCardInfo("False Memories", 37, Rarity.RARE, mage.cards.f.FalseMemories.class));
         cards.add(new SetCardInfo("Far Wanderings", 125, Rarity.COMMON, mage.cards.f.FarWanderings.class));

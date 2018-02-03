@@ -603,7 +603,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         tooltipDelayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tooltipDelayLabel.setText("Delay in milliseconds for showing the card tooltip text");
+        tooltipDelayLabel.setText("Delay in milliseconds for showing the card tooltip text (0 value will disable tooltip)");
         tooltipDelayLabel.setToolTipText("<HTML>The time the appearance of the tooltip window for a card is delayed.<br>\nIf set to zero, the tooltip window won't be shown at all.");
 
         tooltipDelay.setMajorTickSpacing(1000);

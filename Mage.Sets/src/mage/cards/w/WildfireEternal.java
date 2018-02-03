@@ -42,7 +42,6 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
@@ -97,8 +96,7 @@ class WildfireEternalCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourceObject != null) {
+        if (controller != null) {
             FilterCard filter = new FilterInstantOrSorceryCard();
             int cardsToCast = controller.getHand().count(filter, source.getControllerId(), source.getSourceId(), game);
             if (cardsToCast > 0 && controller.chooseUse(outcome, "Cast an instant or sorcery card from your hand without paying its mana cost?", source, game)) {
