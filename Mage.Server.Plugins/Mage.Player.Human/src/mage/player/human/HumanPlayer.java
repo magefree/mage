@@ -202,19 +202,20 @@ public class HumanPlayer extends PlayerImpl {
 //            }
             return;
         }
-        response.clear(); // TODO: only one response for all games (can play only one game per session)?!
-        //logger.info("Waiting response from player: " + getId());
-        game.resumeTimer(getTurnControlledBy());
-        responseOpenedForAnswer = true; // start waiting for next response
+
+        // wait player's answer loop
         boolean loop = true;
         while (loop) {
+            // start waiting for next answer
+            response.clear();
+            game.resumeTimer(getTurnControlledBy());
+            responseOpenedForAnswer = true;
+
             loop = false;
 
             synchronized (response) {
                 try {
-                    //logger.info("wait start: " + getId());
                     response.wait();
-                    //logger.info("wait end: " + getId());
                 } catch (InterruptedException ex) {
                     logger.error("Response error for player " + getName() + " gameId: " + game.getId(), ex);
                 } finally {
@@ -223,20 +224,21 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
 
+            // game recived immidiate response on OTHER player concede -- need to process end game and continue to wait
             if (response.getResponseConcedeCheck()) {
                 ((GameImpl) game).checkConcede();
                 if (game.hasEnded()) {
                     return;
                 }
-                response.clear();
+
                 if (isInGame()) {
+                    // wait another answer
                     loop = true;
                 }
             }
         }
-        //logger.info("Waiting response DONE (res queue " + actionQueueSaved.size() + "): " + getId() + ", res: " + response.toString());
+
         if (recordingMacro && !macroTriggeredSelectionFlag) {
-//            logger.info("Adding an action " + response);
             actionQueueSaved.add(new PlayerResponse(response));
         }
     }
@@ -646,11 +648,13 @@ public class HumanPlayer extends PlayerImpl {
             if (!choosable.isEmpty()) {
                 options.put("choosable", (Serializable) choosable);
             }
+
+            prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), cards, required, options);
             }
-            prepareForResponse(game);
             waitForResponse(game);
+
             if (response.getUUID() != null) {
                 if (target.getTargets().contains(response.getUUID())) { // if already included remove it
                     target.remove(response.getUUID());
