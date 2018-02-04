@@ -49,6 +49,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 
 import mage.client.SessionHandler;
 import mage.client.components.MageTextArea;
@@ -57,6 +58,7 @@ import mage.client.game.FeedbackPanel.FeedbackMode;
 
 import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
 import mage.client.util.GUISizeHelper;
+import mage.constants.TurnPhase;
 
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_NO;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_YES;
@@ -105,6 +107,7 @@ public class HelperPanel extends JPanel {
 
     private UUID gameId;
     private boolean gameNeedFeedback = false;
+    private TurnPhase gameTurnPhase = null;
 
     public HelperPanel() {
         initComponents();
@@ -319,8 +322,9 @@ public class HelperPanel extends JPanel {
         autoSizeButtonsAndFeedbackState();
     }
 
-    public void setGameNeedFeedback(boolean need) {
+    public void setGameNeedFeedback(boolean need, TurnPhase gameTurnPhase) {
         this.gameNeedFeedback = need;
+        this.gameTurnPhase = gameTurnPhase;
     }
 
     public void autoSizeButtonsAndFeedbackState() {
@@ -328,7 +332,9 @@ public class HelperPanel extends JPanel {
         // plus colorize feedback panel on player's priority
 
         int BUTTONS_H_GAP = 15;
-        Color ACTIVE_FEEDBACK_BACKGROUND_COLOR = new Color(0, 255, 0, 50);
+        Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN = new Color(0, 0, 255, 50);
+        Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE = new Color(255, 0, 0, 50);
+        Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER = new Color(0, 255, 0, 50);
 
         // cleanup current settings to default (flow layout - different sizes)
         this.buttonGrid.setLayout(new FlowLayout(FlowLayout.CENTER, BUTTONS_H_GAP, 0));
@@ -344,7 +350,22 @@ public class HelperPanel extends JPanel {
         if (this.gameNeedFeedback) {
             // wait player's action
             this.setOpaque(true);
-            this.setBackground(ACTIVE_FEEDBACK_BACKGROUND_COLOR);
+
+            // different colors for different game phases
+            Color backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER;
+            if (this.gameTurnPhase != null) {
+                switch (this.gameTurnPhase) {
+                    case PRECOMBAT_MAIN:
+                    case POSTCOMBAT_MAIN:
+                        backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN;
+                        break;
+                    case COMBAT:
+                        backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE;
+                        break;
+                }
+            }
+            this.setBackground(backColor);
+
         } else {
             // inform about other players
             this.setOpaque(false);
