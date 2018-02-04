@@ -69,6 +69,8 @@ import mage.client.util.Config;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
+
+import static mage.client.constants.Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR;
 import static mage.constants.Constants.DEFAULT_AVATAR_ID;
 import static mage.constants.Constants.MAX_AVATAR_ID;
 import static mage.constants.Constants.MIN_AVATAR_ID;
@@ -100,6 +102,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GAME_CONFIRM_EMPTY_MANA_POOL = "gameConfirmEmptyManaPool";
     public static final String KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER = "gameAskMoveToGraveORder";
     public static final String KEY_GAME_USE_PROFANITY_FILTER = "gameUseProfanityFilter";
+
+    public static final String KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE = "battlefieldFeedbackColorizingMode";
 
     public static final String KEY_GUI_TABLE_FONT_SIZE = "guiTableFontSize";
     public static final String KEY_GUI_CHAT_FONT_SIZE = "guiChatFontSize";
@@ -398,11 +402,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel = new javax.swing.JTabbedPane();
         tabMain = new javax.swing.JPanel();
+        main_gamelog = new javax.swing.JPanel();
+        cbGameLogAutoSave = new javax.swing.JCheckBox();
+        cbDraftLogAutoSave = new javax.swing.JCheckBox();
         main_card = new javax.swing.JPanel();
         showCardName = new javax.swing.JCheckBox();
-        showFullImagePath = new javax.swing.JCheckBox();
         tooltipDelayLabel = new javax.swing.JLabel();
         tooltipDelay = new javax.swing.JSlider();
+        showFullImagePath = new javax.swing.JCheckBox();
         main_game = new javax.swing.JPanel();
         nonLandPermanentsInOnePile = new javax.swing.JCheckBox();
         showPlayerNamesPermanently = new javax.swing.JCheckBox();
@@ -411,9 +418,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbShowStormCounter = new javax.swing.JCheckBox();
         cbConfirmEmptyManaPool = new javax.swing.JCheckBox();
         cbAskMoveToGraveOrder = new javax.swing.JCheckBox();
-        main_gamelog = new javax.swing.JPanel();
-        cbGameLogAutoSave = new javax.swing.JCheckBox();
-        cbDraftLogAutoSave = new javax.swing.JCheckBox();
+        main_battlefield = new javax.swing.JPanel();
+        cbBattlefieldFeedbackColorizingMode = new javax.swing.JComboBox();
+        lblBattlefieldFeedbackColorizingMode = new javax.swing.JLabel();
         tabGuiSize = new javax.swing.JPanel();
         guiSizeBasic = new javax.swing.JPanel();
         sliderFontSize = new javax.swing.JSlider();
@@ -589,6 +596,45 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.setMinimumSize(new java.awt.Dimension(532, 451));
 
+        main_gamelog.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game log"));
+
+        cbGameLogAutoSave.setSelected(true);
+        cbGameLogAutoSave.setText("Auto save game logs     (to \"../Mage.Client/gamelogs/\" directory)");
+        cbGameLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
+        cbGameLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbGameLogAutoSaveActionPerformed(evt);
+            }
+        });
+
+        cbDraftLogAutoSave.setSelected(true);
+        cbDraftLogAutoSave.setText("Auto save draft logs     (to \"../Mage.Client/gamelogs/\" directory)");
+        cbDraftLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
+        cbDraftLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDraftLogAutoSaveActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout main_gamelogLayout = new org.jdesktop.layout.GroupLayout(main_gamelog);
+        main_gamelog.setLayout(main_gamelogLayout);
+        main_gamelogLayout.setHorizontalGroup(
+            main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(main_gamelogLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(cbDraftLogAutoSave, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(cbGameLogAutoSave, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        main_gamelogLayout.setVerticalGroup(
+            main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(main_gamelogLayout.createSequentialGroup()
+                .add(cbGameLogAutoSave)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cbDraftLogAutoSave))
+        );
+
         main_card.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card"));
 
         showCardName.setSelected(true);
@@ -615,9 +661,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tooltipDelay.setToolTipText("<HTML>The time the appearance of the tooltip window for a card is delayed.<br>\nIf set to zero, the tooltip window won't be shown at all.");
         tooltipDelay.setValue(300);
 
-        showFullImagePath.setSelected(false);
+        showFullImagePath.setSelected(true);
         showFullImagePath.setToolTipText("Show the path Xmage is expecting for this card's image (only displays if missing)");
-        showFullImagePath.setActionCommand("");
         showFullImagePath.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         showFullImagePath.setLabel("Display image path for missing images");
         showFullImagePath.addActionListener(new java.awt.event.ActionListener() {
@@ -634,7 +679,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(6, 6, 6)
                 .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                        .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                        .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 308, Short.MAX_VALUE)
                         .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(main_cardLayout.createSequentialGroup()
                         .add(showCardName)
@@ -653,9 +698,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        showFullImagePath.getAccessibleContext().setAccessibleName("Display image path for missing images");
-        showFullImagePath.getAccessibleContext().setAccessibleDescription("Show the path Xmage is expecting for this card's image (only displays if missing)");
 
         main_game.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game"));
 
@@ -737,11 +779,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(showPlayerNamesPermanently, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(nonLandPermanentsInOnePile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(showAbilityPickerForced)
                     .add(cbConfirmEmptyManaPool, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(cbAllowRequestToShowHandCards, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(cbShowStormCounter, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(cbAskMoveToGraveOrder, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(cbAskMoveToGraveOrder, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(showAbilityPickerForced, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(255, Short.MAX_VALUE))
         );
         main_gameLayout.setVerticalGroup(
@@ -765,43 +807,35 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
 
-        main_gamelog.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game log"));
+        main_battlefield.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Battlefield"));
 
-        cbGameLogAutoSave.setSelected(true);
-        cbGameLogAutoSave.setText("Auto save game logs     (to \"../Mage.Client/gamelogs/\" directory)");
-        cbGameLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
-        cbGameLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
+        cbBattlefieldFeedbackColorizingMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Disable colorizing", "Enable one color for all phases", "Enable multicolor for different phases" }));
+        cbBattlefieldFeedbackColorizingMode.setToolTipText("Battlefield feedback panel colorizing on your turn (e.g. use green color if you must select card or answer to request)");
+        cbBattlefieldFeedbackColorizingMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGameLogAutoSaveActionPerformed(evt);
+                cbBattlefieldFeedbackColorizingModeActionPerformed(evt);
             }
         });
 
-        cbDraftLogAutoSave.setSelected(true);
-        cbDraftLogAutoSave.setText("Auto save draft logs     (to \"../Mage.Client/gamelogs/\" directory)");
-        cbDraftLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
-        cbDraftLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbDraftLogAutoSaveActionPerformed(evt);
-            }
-        });
+        lblBattlefieldFeedbackColorizingMode.setLabelFor(cbBattlefieldFeedbackColorizingMode);
+        lblBattlefieldFeedbackColorizingMode.setText("Feedback panel colorizing:");
 
-        org.jdesktop.layout.GroupLayout main_gamelogLayout = new org.jdesktop.layout.GroupLayout(main_gamelog);
-        main_gamelog.setLayout(main_gamelogLayout);
-        main_gamelogLayout.setHorizontalGroup(
-            main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(main_gamelogLayout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout main_battlefieldLayout = new org.jdesktop.layout.GroupLayout(main_battlefield);
+        main_battlefield.setLayout(main_battlefieldLayout);
+        main_battlefieldLayout.setHorizontalGroup(
+            main_battlefieldLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(main_battlefieldLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(cbDraftLogAutoSave, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(cbGameLogAutoSave, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(lblBattlefieldFeedbackColorizingMode)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cbBattlefieldFeedbackColorizingMode, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 278, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        main_gamelogLayout.setVerticalGroup(
-            main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(main_gamelogLayout.createSequentialGroup()
-                .add(cbGameLogAutoSave)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbDraftLogAutoSave))
+        main_battlefieldLayout.setVerticalGroup(
+            main_battlefieldLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(main_battlefieldLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(lblBattlefieldFeedbackColorizingMode)
+                .add(cbBattlefieldFeedbackColorizingMode, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
         org.jdesktop.layout.GroupLayout tabMainLayout = new org.jdesktop.layout.GroupLayout(tabMain);
@@ -813,7 +847,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(tabMainLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, main_card, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, main_gamelog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(main_game, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(main_game, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, main_battlefield, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabMainLayout.setVerticalGroup(
@@ -825,7 +860,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(main_game, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(main_battlefield, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -2712,6 +2749,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
 
+        String paramName = KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE;
+        int paramValue = dialog.cbBattlefieldFeedbackColorizingMode.getSelectedIndex();
+        int paramDefault = BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR;
+        if (getCachedValue(paramName, paramDefault) != paramValue) {
+            prefs.putInt(paramName, paramValue);
+            if (UPDATE_CACHE_POLICY) {
+                updateCache(paramName, Integer.toString(paramValue));
+            }
+        }
+
         // GUI Size
         boolean sizeGUIChanged = false;
         if (getCachedValue(KEY_GUI_TABLE_FONT_SIZE, 14) != dialog.sliderFontSize.getValue()) {
@@ -3145,6 +3192,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void showFullImagePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showFullImagePathActionPerformed
     }//GEN-LAST:event_showFullImagePathActionPerformed
 
+    private void cbBattlefieldFeedbackColorizingModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBattlefieldFeedbackColorizingModeActionPerformed
+        
+    }//GEN-LAST:event_cbBattlefieldFeedbackColorizingModeActionPerformed
+
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
         switch (proxyType) {
@@ -3259,6 +3310,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         load(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true");
         load(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true");
+
+        String feedbackParam = "";
+        try {
+            feedbackParam = MageFrame.getPreferences().get(KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE, "2");
+            int feedbackMode = Integer.parseInt(feedbackParam);
+            dialog.cbBattlefieldFeedbackColorizingMode.setSelectedIndex(feedbackMode);
+        } catch (Throwable e) {
+            logger.error("Can't parse and setup param " + KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE + " = " + feedbackParam, e);
+            dialog.cbBattlefieldFeedbackColorizingMode.setSelectedIndex(BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR);
+        }
 
         load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU, "on", "on");
         load(prefs, dialog.checkBoxDrawYou, DRAW_YOU, "on", "on");
@@ -3759,6 +3820,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         );
     }
 
+    public static int getBattlefieldFeedbackColorizingMode() {
+        return PreferencesDialog.getCachedValue(
+                PreferencesDialog.KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE,
+                BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR);
+    }
+
     public List<KeyBindButton> getKeybindButtons() {
         return Arrays.asList(
                 keyCancelSkip,
@@ -3785,6 +3852,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbAllowRequestToShowHandCards;
     private javax.swing.JCheckBox cbAskMoveToGraveOrder;
     private javax.swing.JCheckBox cbAutoOrderTrigger;
+    private javax.swing.JComboBox cbBattlefieldFeedbackColorizingMode;
     private javax.swing.JCheckBox cbCardRenderHideSetSymbol;
     private javax.swing.JCheckBox cbCardRenderImageFallback;
     private javax.swing.JCheckBox cbCardRenderShowReminderText;
@@ -3905,6 +3973,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelToggleRecordMacro;
     private javax.swing.JLabel labelTooltipSize;
     private javax.swing.JLabel labelYourTurn;
+    private javax.swing.JLabel lblBattlefieldFeedbackColorizingMode;
     private javax.swing.JLabel lblProxyPassword;
     private javax.swing.JLabel lblProxyPort;
     private javax.swing.JLabel lblProxyServer;
@@ -3912,6 +3981,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblProxyUserName;
     private javax.swing.JLabel lblURLServerList;
     private javax.swing.JLabel lebelSkip;
+    private javax.swing.JPanel main_battlefield;
     private javax.swing.JPanel main_card;
     private javax.swing.JPanel main_game;
     private javax.swing.JPanel main_gamelog;

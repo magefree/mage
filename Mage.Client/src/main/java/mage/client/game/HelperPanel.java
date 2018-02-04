@@ -27,12 +27,7 @@
  */
 package mage.client.game;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -49,11 +44,13 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import mage.client.SessionHandler;
 import mage.client.components.MageTextArea;
 import mage.client.constants.Constants;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 
 import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
@@ -81,6 +78,7 @@ public class HelperPanel extends JPanel {
     //private javax.swing.JButton btnStopTimer;
     private JScrollPane textAreaScrollPane;
     private MageTextArea dialogTextArea;
+    JPanel mainPanel;
     JPanel buttonGrid;
     JPanel buttonContainer;
 
@@ -136,13 +134,21 @@ public class HelperPanel extends JPanel {
         btnSpecial.setFont(GUISizeHelper.gameDialogAreaFont);
         btnUndo.setFont(GUISizeHelper.gameDialogAreaFont);
 
+        // update text fonts
         if (message != null) {
-            int pos = this.message.indexOf("font-size:");
-            if (pos > 0) {
-                String newMessage = this.message.substring(0, pos + 10) + GUISizeHelper.gameDialogAreaFontSizeBig + this.message.substring(pos + 12);
-                pos = this.message.indexOf("font-size:", pos + 10);
-                if (pos > 0) {
-                    newMessage = this.message.substring(0, pos + 10) + GUISizeHelper.gameDialogAreaFontSizeSmall + this.message.substring(pos + 12);
+            int pos1 = this.message.indexOf("font-size:");
+
+            if (pos1 > 0) {
+                int pos2 = this.message.indexOf("font-size:", pos1 + 10);
+
+                String newMessage;
+                if (pos2 > 0) {
+                    // 2 sizes: big + small // TODO: 2 sizes for compatibility only? On 04.02.2018 can't find two size texts (JayDi85)
+                    newMessage = this.message.substring(0, pos1 + 10) + GUISizeHelper.gameDialogAreaFontSizeBig + this.message.substring(pos1 + 12);
+                    newMessage = newMessage.substring(0, pos1 + 10) + GUISizeHelper.gameDialogAreaFontSizeSmall + newMessage.substring(pos1 + 12);
+                } else {
+                    // 1 size: small
+                    newMessage = this.message.substring(0, pos1 + 10) + GUISizeHelper.gameDialogAreaFontSizeSmall + this.message.substring(pos1 + 12);
                 }
                 setBasicMessage(newMessage);
             }
@@ -158,9 +164,14 @@ public class HelperPanel extends JPanel {
 
     private void initComponents() {
         initPopupMenuTriggerOrder();
-        setBackground(new Color(0, 0, 0, 100));
-        setLayout(new GridLayout(0, 1));
-        setOpaque(false);
+
+        this.setBorder(new EmptyBorder(5, 5, 5, 5));
+        this.setLayout(new GridLayout(0, 1));
+        this.setOpaque(false);
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new GridLayout(0, 1));
+        mainPanel.setOpaque(false);
+        this.add(mainPanel);
 
         dialogTextArea = new MageTextArea();
         dialogTextArea.setText("<Empty>");
@@ -172,12 +183,12 @@ public class HelperPanel extends JPanel {
         textAreaScrollPane.getViewport().setOpaque(false);
         textAreaScrollPane.setBorder(null);
         textAreaScrollPane.setViewportBorder(null);
-        add(textAreaScrollPane);
+        mainPanel.add(textAreaScrollPane);
 
         buttonContainer = new JPanel();
         buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         buttonContainer.setOpaque(false);
-        add(buttonContainer);
+        mainPanel.add(buttonContainer);
 
         buttonGrid = new JPanel(); // buttons layout auto changes by autoSizeButtonsAndFeedbackState
         buttonGrid.setOpaque(false);
@@ -335,6 +346,7 @@ public class HelperPanel extends JPanel {
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN = new Color(0, 0, 255, 50);
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE = new Color(255, 0, 0, 50);
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER = new Color(0, 255, 0, 50);
+        int FEEDBACK_COLORIZING_MODE = PreferencesDialog.getBattlefieldFeedbackColorizingMode();
 
         // cleanup current settings to default (flow layout - different sizes)
         this.buttonGrid.setLayout(new FlowLayout(FlowLayout.CENTER, BUTTONS_H_GAP, 0));
@@ -349,23 +361,37 @@ public class HelperPanel extends JPanel {
         // color panel on player's feedback waiting
         if (this.gameNeedFeedback) {
             // wait player's action
-            this.setOpaque(true);
+            switch (FEEDBACK_COLORIZING_MODE) {
+                case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_DISABLE:
+                    // disabled
+                    this.mainPanel.setOpaque(false);
+                    this.mainPanel.setBorder(null);
+                    break;
 
-            // different colors for different game phases
-            Color backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER;
-            if (this.gameTurnPhase != null) {
-                switch (this.gameTurnPhase) {
-                    case PRECOMBAT_MAIN:
-                    case POSTCOMBAT_MAIN:
-                        backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN;
-                        break;
-                    case COMBAT:
-                        backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE;
-                        break;
-                }
+                case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_ONE_COLOR:
+                    // one color
+                    this.mainPanel.setOpaque(true);
+                    this.mainPanel.setBackground(ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER);
+                    break;
+
+                case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR:
+                    // multicolor
+                    this.mainPanel.setOpaque(true);
+                    Color backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER;
+                    if (this.gameTurnPhase != null) {
+                        switch (this.gameTurnPhase) {
+                            case PRECOMBAT_MAIN:
+                            case POSTCOMBAT_MAIN:
+                                backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN;
+                                break;
+                            case COMBAT:
+                                backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE;
+                                break;
+                        }
+                    }
+                    this.mainPanel.setBackground(backColor);
+                    break;
             }
-            this.setBackground(backColor);
-
         } else {
             // inform about other players
             this.setOpaque(false);
