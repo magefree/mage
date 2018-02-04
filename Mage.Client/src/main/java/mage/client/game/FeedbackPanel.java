@@ -97,7 +97,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private void setGUISize() {
     }
 
-    public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options, int messageId) {
+    public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options, int messageId, boolean gameNeedUserFeedback) {
         synchronized (this) {
             if (messageId < this.lastMessageId) {
                 LOGGER.warn("ignoring message from later source: " + messageId + ", text=" + message);
@@ -151,7 +151,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.helper.setLinks(btnLeft, btnRight, btnSpecial, btnUndo);
 
         this.helper.setVisible(true);
-        this.helper.autoSizeButtons();
+        this.helper.setGameNeedFeedback(gameNeedUserFeedback);
+        this.helper.autoSizeButtonsAndFeedbackState();
     }
 
     private void setButtonState(String leftText, String rightText, FeedbackMode mode) {
@@ -213,7 +214,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 connectedDialog = (MageDialog) options.get("dialog");
             }
 
-            this.helper.autoSizeButtons();
+            this.helper.autoSizeButtonsAndFeedbackState();
         }
     }
 
