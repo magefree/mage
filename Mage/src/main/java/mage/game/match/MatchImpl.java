@@ -441,6 +441,9 @@ public abstract class MatchImpl implements Match {
                 sb.append("DeckHash: ").append(mp.getDeck().getDeckHashCode()).append("<br/>");
             }
         }
+        if (options.getRange() != null) {
+            sb.append("   Range: ").append(options.getRange().toString()).append("<br/>");
+        }
         if (getDraws() > 0) {
             sb.append("   Draws: ").append(getDraws()).append("<br/>");
         }
