@@ -29,7 +29,6 @@ package mage.player.ai;
 
 import java.io.Serializable;
 import java.util.*;
-
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.Mode;
@@ -323,8 +322,11 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             return !target.isRequired(source);
         }
         Card card = cards.getRandom(game);
-        target.addTarget(card.getId(), source, game);
-        return true;
+        if (card != null) {
+            target.addTarget(card.getId(), source, game);
+            return true;
+        }
+        return false;
     }
 
     @Override

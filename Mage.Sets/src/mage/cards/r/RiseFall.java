@@ -141,10 +141,16 @@ class FallEffect extends OneShotEffect {
                 if (!targetPlayer.getHand().isEmpty()) {
                     Cards cards = new CardsImpl();
                     Card card = targetPlayer.getHand().getRandom(game);
+                    if (card == null) {
+                        return false;
+                    }
                     cards.add(card);
                     if (targetPlayer.getHand().size() > 1) {
                         do {
                             card = targetPlayer.getHand().getRandom(game);
+                            if (card == null) {
+                                return false;
+                            }
                         } while (cards.contains(card.getId()));
                         cards.add(card);
                     }

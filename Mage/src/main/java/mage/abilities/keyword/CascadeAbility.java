@@ -31,7 +31,6 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -129,15 +128,7 @@ class CascadeEffect extends OneShotEffect {
             }
         }
         // Move the remaining cards to the buttom of the library in a random order
-        Cards cardsFromExile = new CardsImpl();
-        Cards cardsToLibrary = new CardsImpl();
-        cardsFromExile.addAll(exile);
-        while (!cardsFromExile.isEmpty()) {
-            card = cardsFromExile.getRandom(game);
-            cardsFromExile.remove(card.getId());
-            cardsToLibrary.add(card);
-        }
-        return controller.putCardsOnBottomOfLibrary(cardsToLibrary, game, source, false);
+        return controller.putCardsOnBottomOfLibrary(new CardsImpl(exile), game, source, false);
     }
 
     @Override

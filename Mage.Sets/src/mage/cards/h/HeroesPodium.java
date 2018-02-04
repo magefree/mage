@@ -28,6 +28,7 @@
 package mage.cards.h;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -58,9 +59,9 @@ public class HeroesPodium extends CardImpl {
     static {
         filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
-    
+
     public HeroesPodium(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
         addSuperType(SuperType.LEGENDARY);
 
         // Each legendary creature you control gets +1/+1 for each other legendary creature you control.
@@ -88,6 +89,7 @@ public class HeroesPodium extends CardImpl {
 class HeroesPodiumLegendaryCount implements DynamicValue {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other legendary creature you control");
+
     static {
         filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
@@ -120,6 +122,7 @@ class HeroesPodiumLegendaryCount implements DynamicValue {
 class HeroesPodiumEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a legendary creature card");
+
     static {
         filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
@@ -140,54 +143,36 @@ class HeroesPodiumEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
         Cards cards = new CardsImpl();
-        int count = source.getManaCostsToPay().getX();
-        count = Math.min(player.getLibrary().size(), count);
-        boolean legendaryIncluded = false;
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-                if (filter.match(card, game)) {
-                    legendaryIncluded = true;
-                }
-            }
-        }
-        player.lookAtCards("Heroes' Podium", cards, game);
+        cards.addAll(controller.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        boolean legendaryIncluded = cards.count(filter, game) > 0;
+        controller.lookAtCards(sourceObject.getIdName(), cards, game);
 
         // You may reveal a legendary creature card from among them and put it into your hand.
-        if (!cards.isEmpty() && legendaryIncluded && player.chooseUse(outcome, "Put a legendary creature card into your hand?", source, game)) {
+        if (!cards.isEmpty() && legendaryIncluded && controller.chooseUse(outcome, "Put a legendary creature card into your hand?", source, game)) {
             if (cards.size() == 1) {
-                Card card = cards.getRandom(game);
-                cards.remove(card);
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                controller.moveCards(cards, Zone.HAND, source, game);
                 return true;
             } else {
                 TargetCard target = new TargetCard(Zone.LIBRARY, filter);
-                if (player.choose(outcome, cards, target, game)) {
+                if (controller.choose(outcome, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        controller.moveCards(card, Zone.HAND, source, game);
                     }
                 }
             }
         }
 
         // Put the rest on the bottom of your library in a random order
-        while (!cards.isEmpty()) {
-            Card card = cards.getRandom(game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-            }
-        }
+        controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 }

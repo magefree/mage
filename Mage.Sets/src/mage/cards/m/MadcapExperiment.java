@@ -49,7 +49,7 @@ import mage.players.Player;
 public class MadcapExperiment extends CardImpl {
 
     public MadcapExperiment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Reveal cards from the top of your library until you reveal an artifact card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. Madcap Experiment deals damage to you equal to the number of cards revealed this way.
         this.getSpellAbility().addEffect(new MadcapExperimentEffect());
@@ -107,13 +107,7 @@ class MadcapExperimentEffect extends OneShotEffect {
                 cards.remove(card);
             }
             // Put the rest on the bottom of your library in a random order
-            while (!cards.isEmpty()) {
-                card = cards.getRandom(game);
-                if (card != null) {
-                    cards.remove(card);
-                    controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, false, false);
-                }
-            }
+            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
             controller.damage(revealed, source.getSourceId(), game, false, true);
             return true;
         }

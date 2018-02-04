@@ -28,6 +28,7 @@
 package mage.cards.t;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -40,7 +41,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
 import mage.target.TargetCard;
 
@@ -51,8 +51,7 @@ import mage.target.TargetCard;
 public class TellingTime extends CardImpl {
 
     public TellingTime(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Look at the top three cards of your library.
         // Put one of those cards into your hand, one on top of your library, and one on the bottom of your library.
@@ -87,36 +86,35 @@ class TellingTimeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
         Cards cards = new CardsImpl();
-
-        Library library = player.getLibrary();
-        int n = Math.min(3, library.size());
-        for (int i = 0; i < n; i++) {
-            cards.add(library.removeFromTop(game));
+        cards.addAll(controller.getLibrary().getTopCards(game, 3));
+        controller.lookAtCards(sourceObject.getIdName(), cards, game);
+        if (cards.isEmpty()) {
+            return true;
         }
-
-        player.lookAtCards("Telling Time", cards, game);
-
-        Card card = pickCard(game, player, cards, "card to put in your hand");
+        Card card = pickCard(game, controller, cards, "card to put in your hand");
         if (card != null) {
-            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+            controller.moveCards(card, Zone.HAND, source, game);
+            cards.remove(card);
+        }
+        if (cards.isEmpty()) {
+            return true;
         }
 
-        card = pickCard(game, player, cards, "card to put on top of your library");
+        card = pickCard(game, controller, cards, "card to put on top of your library");
         if (card != null) {
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            controller.moveCards(card, Zone.LIBRARY, source, game);
+            cards.remove(card);
         }
-
         if (!cards.isEmpty()) {
-            card = cards.getRandom(game);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         }
-
         return true;
     }
 
@@ -125,7 +123,9 @@ class TellingTimeEffect extends OneShotEffect {
             return null;
         }
         if (cards.size() == 1) {
-            return cards.getRandom(null);
+            Card card = cards.getRandom(game);
+            cards.remove(card);
+            return card;
         }
 
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard(message));

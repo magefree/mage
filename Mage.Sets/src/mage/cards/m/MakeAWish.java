@@ -47,8 +47,7 @@ import mage.players.Player;
 public class MakeAWish extends CardImpl {
 
     public MakeAWish(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Return two cards at random from your graveyard to your hand.
         this.getSpellAbility().addEffect(new MakeAWishEffect());
@@ -91,6 +90,8 @@ class MakeAWishEffect extends OneShotEffect {
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                     cards.remove(card);
                     game.informPlayers(card.getName() + " returned to the hand of " + player.getLogName());
+                } else {
+                    return false;
                 }
             }
             return true;

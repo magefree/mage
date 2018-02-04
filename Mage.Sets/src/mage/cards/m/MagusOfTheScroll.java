@@ -42,8 +42,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -101,6 +101,9 @@ class MagusOfTheScrollEffect extends OneShotEffect {
             if (!you.getHand().isEmpty()) {
                 Cards revealed = new CardsImpl();
                 Card card = you.getHand().getRandom(game);
+                if (card == null) {
+                    return false;
+                }
                 revealed.add(card);
                 you.revealCards(sourceObject.getName(), revealed, game);
                 if (card.getName().equals(cardName)) {

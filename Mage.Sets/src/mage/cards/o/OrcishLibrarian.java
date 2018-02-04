@@ -29,6 +29,7 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -40,9 +41,9 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -56,7 +57,7 @@ import mage.target.TargetCard;
 public class OrcishLibrarian extends CardImpl {
 
     public OrcishLibrarian(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.ORC);
 
         this.power = new MageInt(1);
@@ -96,32 +97,30 @@ class OrcishLibrarianEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             Cards cards = new CardsImpl();
-            int cardsCount = Math.min(8, player.getLibrary().size());
+            int cardsCount = Math.min(8, controller.getLibrary().size());
             for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
+                Card card = controller.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
                 }
             }
 
             if (!cards.isEmpty()) {
-                for (int i = 0; i < 4; i++)
-                {
-                    if (!cards.isEmpty())
-                    {
+                for (int i = 0; i < 4; i++) {
+                    if (!cards.isEmpty()) {
                         Card card = cards.getRandom(game);
-                        player.moveCardToExileWithInfo(card, null, null, source.getId(), game, Zone.LIBRARY, true);
+                        controller.moveCardToExileWithInfo(card, null, null, source.getId(), game, Zone.LIBRARY, true);
                         cards.remove(card);
                     }
                 }
-                player.lookAtCards("OrcishLibrarian", cards, game);
-                TargetCard target = new TargetCard (Zone.LIBRARY, new FilterCard("card to put on the top of target player's library"));
-                while (player.canRespond() && !cards.isEmpty()) {
-                    player.choose(Outcome.Neutral, cards, target, game);
+                controller.lookAtCards(sourceObject.getIdName(), cards, game);
+                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of target player's library"));
+                while (controller.canRespond() && !cards.isEmpty()) {
+                    controller.choose(Outcome.Neutral, cards, target, game);
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);

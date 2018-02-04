@@ -321,8 +321,11 @@ public class RandomPlayer extends ComputerPlayer {
             return !target.isRequired(source);
         }
         Card card = cards.getRandom(game);
-        target.addTarget(card.getId(), source, game);
-        return true;
+        if (card != null) {
+            target.addTarget(card.getId(), source, game);
+            return true;
+        }
+        return false;
     }
 
     @Override

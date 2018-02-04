@@ -861,6 +861,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (card != null) {
                         cards.remove(card);
                         moveObjectToLibrary(card.getId(), source == null ? null : source.getSourceId(), game, false, false);
+                    } else {
+                        return false;// probably cards were removed because player left the game
                     }
                 }
             } else {
@@ -900,9 +902,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             UUID sourceId = (source == null ? null : source.getSourceId());
             if (!anyOrder) {
                 while (!cards.isEmpty()) {
-                    UUID cardId = cards.getRandom(game).getId();
-                    cards.remove(cardId);
-                    moveObjectToLibrary(cardId, source == null ? null : source.getSourceId(), game, true, false);
+                    Card card = cards.getRandom(game);
+                    if (card != null) {
+                        cards.remove(card.getId());
+                        moveObjectToLibrary(card.getId(), source == null ? null : source.getSourceId(), game, true, false);
+                    } else {
+                        return false; // probably cards were removed because player left the game
+                    }
                 }
             } else {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of your library (last one chosen will be topmost)"));
@@ -1360,7 +1366,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
-        if (object instanceof StackAbility) { // It may not be possible to activate abilities of stack actilities 
+        if (object instanceof StackAbility) { // It may not be possible to activate abilities of stack actilities
             return useable;
         }
         if (object instanceof SplitCard) {
