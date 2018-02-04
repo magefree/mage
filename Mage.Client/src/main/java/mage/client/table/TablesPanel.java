@@ -48,7 +48,6 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
-
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -72,9 +71,9 @@ import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
+import org.ocpsoft.prettytime.Duration;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.units.JustNow;
-import org.ocpsoft.prettytime.Duration;
 
 /**
  *
@@ -113,7 +112,7 @@ public class TablesPanel extends javax.swing.JPanel {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            Date d = (Date)value;
+            Date d = (Date) value;
             label.setText(timeFormater.format(d));
             return label;
         }
@@ -124,12 +123,12 @@ public class TablesPanel extends javax.swing.JPanel {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            Long ms = (Long)value;
+            Long ms = (Long) value;
 
-            if(ms != 0){
+            if (ms != 0) {
                 Duration dur = timeFormater.approximateDuration(new Date(ms));
                 label.setText((timeFormater.formatDuration(dur)));
-            }else{
+            } else {
                 label.setText("");
             }
             return label;
@@ -143,10 +142,10 @@ public class TablesPanel extends javax.swing.JPanel {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            Date d = (Date)value;
-            if(d != null){
+            Date d = (Date) value;
+            if (d != null) {
                 label.setText(datetimeFormater.format(d));
-            }else{
+            } else {
                 label.setText("");
             }
 
@@ -193,8 +192,6 @@ public class TablesPanel extends javax.swing.JPanel {
 
         TableUtil.setColumnWidthAndOrder(tableTables, DEFAULT_COLUMNS_WIDTH,
                 PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, PreferencesDialog.KEY_TABLES_COLUMNS_ORDER); // TODO: is sort order save and restore after app restart/window open?
-
-
 
         // 2. TABLE COMPLETED
         completedTablesSorter = new MageTableRowSorter(matchesModel);
@@ -650,7 +647,7 @@ public class TablesPanel extends javax.swing.JPanel {
             formatFilterList.add(RowFilter.regexFilter("^Constructed - Vintage", TableTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatCommander.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("^Commander|^Duel Commander|^Penny Dreadful Commander|^Freeform Commander", TableTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Commander|^Duel Commander|^Penny Dreadful Commander|^Freeform Commander|^MTGO 1v1 Commander", TableTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatTinyLeader.isSelected()) {
             formatFilterList.add(RowFilter.regexFilter("^Tiny", TableTableModel.COLUMN_DECK_TYPE));
@@ -1394,7 +1391,6 @@ class TableTableModel extends AbstractTableModel {
         this.fireTableDataChanged();
     }
 
-
     @Override
     public int getRowCount() {
         return tables.length;
@@ -1605,7 +1601,7 @@ class MatchesTableModel extends AbstractTableModel {
         this.fireTableDataChanged();
     }
 
-    MatchesTableModel(){
+    MatchesTableModel() {
     }
 
     @Override
