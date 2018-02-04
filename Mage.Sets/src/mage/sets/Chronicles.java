@@ -124,11 +124,11 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Recall", 24, Rarity.UNCOMMON, mage.cards.r.Recall.class));
         cards.add(new SetCardInfo("Remove Soul", 25, Rarity.COMMON, mage.cards.r.RemoveSoul.class));
         cards.add(new SetCardInfo("Repentant Blacksmith", 67, Rarity.COMMON, mage.cards.r.RepentantBlacksmith.class));
-        cards.add(new SetCardInfo("Revelation", 87, Rarity.RARE, mage.cards.r.Revelation.class));
+        cards.add(new SetCardInfo("Revelation", 40, Rarity.RARE, mage.cards.r.Revelation.class));
         cards.add(new SetCardInfo("Rubinia Soulsinger", 118, Rarity.RARE, mage.cards.r.RubiniaSoulsinger.class));
         cards.add(new SetCardInfo("Safe Haven", 93, Rarity.RARE, mage.cards.s.SafeHaven.class));
         cards.add(new SetCardInfo("Scavenger Folk", 41, Rarity.COMMON, mage.cards.s.ScavengerFolk.class));
-        cards.add(new SetCardInfo("Sentinel", 281, Rarity.RARE, mage.cards.s.Sentinel.class));
+        cards.add(new SetCardInfo("Sentinel", 87, Rarity.RARE, mage.cards.s.Sentinel.class));
         cards.add(new SetCardInfo("Serpent Generator", 88, Rarity.RARE, mage.cards.s.SerpentGenerator.class));
         cards.add(new SetCardInfo("Shield Wall", 68, Rarity.UNCOMMON, mage.cards.s.ShieldWall.class));
         cards.add(new SetCardInfo("Shimian Night Stalker", 8, Rarity.UNCOMMON, mage.cards.s.ShimianNightStalker.class));
