@@ -90,6 +90,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Fallen Angel", 4, Rarity.UNCOMMON, mage.cards.f.FallenAngel.class));
         cards.add(new SetCardInfo("Feldon's Cane", 77, Rarity.COMMON, mage.cards.f.FeldonsCane.class));
         cards.add(new SetCardInfo("Fire Drake", 47, Rarity.UNCOMMON, mage.cards.f.FireDrake.class));
+        cards.add(new SetCardInfo("Fishliver Oil", 20, Rarity.COMMON, mage.cards.f.FishliverOil.class));
         cards.add(new SetCardInfo("Flash Flood", 21, Rarity.COMMON, mage.cards.f.FlashFlood.class));
         cards.add(new SetCardInfo("Fountain of Youth", 78, Rarity.COMMON, mage.cards.f.FountainOfYouth.class));
         cards.add(new SetCardInfo("Gabriel Angelfire", 111, Rarity.RARE, mage.cards.g.GabrielAngelfire.class));
