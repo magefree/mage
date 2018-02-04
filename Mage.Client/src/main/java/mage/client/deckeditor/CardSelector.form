@@ -536,7 +536,7 @@
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="&quot;&lt;html&gt;&lt;strong&gt;Uncommon&lt;/strong&gt;&lt;br/&gt;&quot; &#xd;&#xa;+ tbUncommon.getToolTipText()" type="code"/>
+                  <Connection code="&quot;&lt;html&gt;&lt;strong&gt;Uncommon&lt;/strong&gt;&lt;br/&gt;&quot; &#xd;&#xa;+ tbRarities.getToolTipText()" type="code"/>
                 </Property>
                 <Property name="actionCommand" type="java.lang.String" value="Uncommon"/>
                 <Property name="focusable" type="boolean" value="false"/>
