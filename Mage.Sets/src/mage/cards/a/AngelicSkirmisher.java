@@ -56,7 +56,7 @@ import mage.players.Player;
 public class AngelicSkirmisher extends CardImpl {
 
     public AngelicSkirmisher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(4);
@@ -103,13 +103,8 @@ class AngelicSkirmisherEffect extends OneShotEffect {
             abilityChoices.add("Vigilance");
             abilityChoices.add("Lifelink");
             abilityChoice.setChoices(abilityChoices);
-            while (!controller.choose(outcome, abilityChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
-            Ability ability = null;
-            if (abilityChoice.getChoice() != null) {
+            if (controller.choose(outcome, abilityChoice, game)) {
+                Ability ability = null;
                 switch (abilityChoice.getChoice()) {
                     case "First strike":
                         ability = FirstStrikeAbility.getInstance();

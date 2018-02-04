@@ -112,10 +112,11 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
                 if (controller.choose(Outcome.Benefit, choice, game)) {
                     int reduce = Integer.parseInt(choice.getChoice());
                     CardUtil.reduceCost(abilityToModify, reduce);
+                } else {
+                    return false;
                 }
             }
         } else {
-
             CardUtil.reduceCost(abilityToModify, this.amount);
         }
         return true;

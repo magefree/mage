@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -44,8 +45,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -96,37 +95,28 @@ class BloodlineShamanEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null) {
-            // Choose a creature type.
-            Choice typeChoice = new ChoiceCreatureType(sourceObject);
-            while (!controller.choose(outcome, typeChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
-            if (typeChoice.getChoice() != null) {
-                game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
-            }
-
+        Choice typeChoice = new ChoiceCreatureType(sourceObject);
+        if (controller != null && controller.choose(outcome, typeChoice, game)) {
+            game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
             FilterCard filterSubtype = new FilterCard();
             filterSubtype.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
 
             // Reveal the top card of your library.
             if (controller.getLibrary().hasCards()) {
-            Card card = controller.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl(card);
-            controller.revealCards(sourceObject.getIdName(), cards, game);
+                Card card = controller.getLibrary().getFromTop(game);
+                Cards cards = new CardsImpl(card);
+                controller.revealCards(sourceObject.getIdName(), cards, game);
 
-            if (card != null) {
-            // If that card is a creature card of the chosen type, put it into your hand.
-                if (filterSubtype.match(card, game)) {
-                    controller.moveCards(card, Zone.HAND, source, game);
-            // Otherwise, put it into your graveyard.
-                } else {
-                    controller.moveCards(card, Zone.GRAVEYARD, source, game);
+                if (card != null) {
+                    // If that card is a creature card of the chosen type, put it into your hand.
+                    if (filterSubtype.match(card, game)) {
+                        controller.moveCards(card, Zone.HAND, source, game);
+                        // Otherwise, put it into your graveyard.
+                    } else {
+                        controller.moveCards(card, Zone.GRAVEYARD, source, game);
+                    }
                 }
             }
-        }
             return true;
         }
         return false;

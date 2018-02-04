@@ -42,11 +42,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -63,7 +63,7 @@ import mage.target.targetpointer.FixedTarget;
 public class PaleWayfarer extends CardImpl {
 
     public PaleWayfarer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.GIANT);
 
@@ -109,15 +109,15 @@ class PaleWayfarerEffect extends OneShotEffect {
                 if (player.choose(Outcome.Neutral, colorChoice, game)) {
                     game.informPlayers(targetCreature.getName() + ": " + player.getLogName() + " has chosen " + colorChoice.getChoice());
                     game.getState().setValue(targetCreature.getId() + "_color", colorChoice.getColor());
-                    
+
                     ObjectColor protectColor = (ObjectColor) game.getState().getValue(targetCreature.getId() + "_color");
                     if (protectColor != null) {
                         ContinuousEffect effect = new ProtectionChosenColorTargetEffect();
                         effect.setTargetPointer(new FixedTarget(targetCreature, game));
                         game.addEffect(effect, source);
                     }
+                    return true;
                 }
-                return true;
             }
         }
         return false;
@@ -128,7 +128,6 @@ class PaleWayfarerEffect extends OneShotEffect {
         return new PaleWayfarerEffect(this);
     }
 }
-
 
 class ProtectionChosenColorTargetEffect extends ContinuousEffectImpl {
 

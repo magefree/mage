@@ -52,7 +52,7 @@ import mage.target.TargetSpell;
 public class PlasmCapture extends CardImpl {
 
     public PlasmCapture(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{G}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{G}{U}{U}");
 
         // Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors to your mana pool, where X is that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -128,15 +128,11 @@ class PlasmCaptureManaEffect extends ManaEffect {
             Mana mana = new Mana();
             for (int i = 0; i < amountOfMana; i++) {
                 ChoiceColor choiceColor = new ChoiceColor();
-                while (!player.choose(Outcome.Benefit, choiceColor, game)) {
-                    if (!player.canRespond()) {
-                        return false;
-                    }
+                if (!player.choose(Outcome.Benefit, choiceColor, game)) {
+                    return false;
                 }
-
                 choiceColor.increaseMana(mana);
             }
-
             player.getManaPool().addMana(mana, game, source);
             return true;
 

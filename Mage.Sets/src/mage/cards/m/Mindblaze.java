@@ -27,6 +27,10 @@
  */
 package mage.cards.m;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -43,10 +47,6 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -91,7 +91,8 @@ class MindblazeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         Player playerControls = game.getPlayer(source.getControllerId());
-        if (player != null && playerControls != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (player != null && playerControls != null && sourceObject != null) {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
@@ -103,20 +104,14 @@ class MindblazeEffect extends OneShotEffect {
             }
             numberChoice.setChoices(numbers);
 
-            while (!playerControls.choose(Outcome.Neutral, cardChoice, game)) {
-                if (!playerControls.canRespond()) {
-                    return false;
-                }
+            if (!playerControls.choose(Outcome.Neutral, cardChoice, game)) {
+                return false;
+            }
+            if (!playerControls.choose(Outcome.Neutral, numberChoice, game)) {
+                return false;
             }
 
-            while (!playerControls.choose(Outcome.Neutral, numberChoice, game)) {
-                if (!playerControls.canRespond()) {
-                    return false;
-                }
-            }
-
-            game.informPlayers("Mindblaze, named card: [" + cardChoice.getChoice() + ']');
-            game.informPlayers("Mindblaze, chosen number: [" + numberChoice.getChoice() + ']');
+            game.informPlayers(sourceObject.getIdName() + " - Named card: [" + cardChoice.getChoice() + "] - Chosen number: [" + numberChoice.getChoice() + ']');
 
             Cards cards = new CardsImpl();
             cards.addAll(player.getLibrary().getCards(game));
@@ -128,6 +123,7 @@ class MindblazeEffect extends OneShotEffect {
                 player.damage(8, source.getSourceId(), game.copy(), false, true);
             }
             player.shuffleLibrary(source, game);
+            return true;
         }
         return false;
     }

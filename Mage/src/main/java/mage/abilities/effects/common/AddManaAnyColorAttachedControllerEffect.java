@@ -38,7 +38,6 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-
 public class AddManaAnyColorAttachedControllerEffect extends ManaEffect {
 
     public AddManaAnyColorAttachedControllerEffect() {
@@ -57,19 +56,12 @@ public class AddManaAnyColorAttachedControllerEffect extends ManaEffect {
             Permanent land = game.getPermanent(enchantment.getAttachedTo());
             if (land != null) {
                 Player player = game.getPlayer(land.getControllerId());
-                if (player != null) {
-                    ChoiceColor choice = new ChoiceColor();
-                    while (!player.choose(outcome, choice, game)) {
-                        if (!player.canRespond()) {
-                            return false;
-                        }
-                    }
+                ChoiceColor choice = new ChoiceColor();
+                if (player != null && player.choose(outcome, choice, game)) {
                     Mana mana = choice.getMana(1);
-                    if (mana != null) {
-                        checkToFirePossibleEvents(mana, game, source);
-                        player.getManaPool().addMana(mana, game, source);
-                        return true;
-                    }
+                    checkToFirePossibleEvents(mana, game, source);
+                    player.getManaPool().addMana(mana, game, source);
+                    return true;
                 }
             }
         }

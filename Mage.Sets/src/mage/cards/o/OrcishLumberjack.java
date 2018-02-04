@@ -64,14 +64,14 @@ public class OrcishLumberjack extends CardImpl {
     }
 
     public OrcishLumberjack(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.ORC);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new OrcishLumberjackManaEffect(),  new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new OrcishLumberjackManaEffect(), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
 
@@ -106,7 +106,7 @@ class OrcishLumberjackManaEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if(player != null){
+        if (player != null) {
             Choice manaChoice = new ChoiceImpl();
             Set<String> choices = new LinkedHashSet<>();
             choices.add("Red");
@@ -115,11 +115,9 @@ class OrcishLumberjackManaEffect extends ManaEffect {
             manaChoice.setMessage("Select color of mana to add");
 
             Mana mana = new Mana();
-            for(int i = 0; i < 3; i++){                
-                while (!player.choose(Outcome.Benefit, manaChoice, game)) {
-                    if (!player.canRespond()) {
-                        return false;
-                    }
+            for (int i = 0; i < 3; i++) {
+                if (!player.choose(Outcome.Benefit, manaChoice, game)) {
+                    return false;
                 }
                 switch (manaChoice.getChoice()) {
                     case "Green":
@@ -129,7 +127,7 @@ class OrcishLumberjackManaEffect extends ManaEffect {
                         mana.increaseRed();
                         break;
                 }
-                
+
             }
             checkToFirePossibleEvents(mana, game, source);
             player.getManaPool().addMana(mana, game, source);
@@ -142,6 +140,5 @@ class OrcishLumberjackManaEffect extends ManaEffect {
     public Mana getMana(Game game, Ability source) {
         return null;
     }
-
 
 }

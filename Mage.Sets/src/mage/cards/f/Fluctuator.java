@@ -51,7 +51,7 @@ import mage.util.CardUtil;
 public class Fluctuator extends CardImpl {
 
     public Fluctuator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Cycling abilities you activate cost you up to {2} less to activate.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FluctuatorEffect()));
@@ -112,7 +112,8 @@ class FluctuatorEffect extends CostModificationEffectImpl {
 
                     if (controller.choose(Outcome.Benefit, choice, game)) {
                         reduce = Integer.parseInt(choice.getChoice());
-
+                    } else {
+                        return false;
                     }
                 }
                 CardUtil.reduceCost(abilityToModify, reduce);

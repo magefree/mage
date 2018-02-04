@@ -27,6 +27,8 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import java.util.HashSet;
+import java.util.Set;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.choices.ChoiceImpl;
@@ -35,9 +37,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
@@ -88,19 +87,18 @@ public class LoseAbilityOrAnotherAbilityTargetEffect extends LoseAbilityTargetEf
             Player player = game.getPlayer(source.getControllerId());
 
             if (player.choose(outcome, chooseAbility, game)) {
-                
                 String chosenAbility = chooseAbility.getChoice();
-                
                 if (chosenAbility.equals(ability.getRule())) {
                     while (permanent.getAbilities().contains(ability)) {
                         permanent.getAbilities().remove(ability);
                     }
-                }
-                else if (chosenAbility.equals(ability2.getRule())) {
+                } else if (chosenAbility.equals(ability2.getRule())) {
                     while (permanent.getAbilities().contains(ability2)) {
                         permanent.getAbilities().remove(ability2);
                     }
                 }
+            } else {
+                return false;
             }
         }
         return true;

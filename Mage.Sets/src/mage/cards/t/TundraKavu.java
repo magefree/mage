@@ -27,6 +27,9 @@
  */
 package mage.cards.t;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,10 +46,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  *
  * @author LoneFox
@@ -54,7 +53,7 @@ import java.util.UUID;
 public class TundraKavu extends CardImpl {
 
     public TundraKavu(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.KAVU);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -102,10 +101,9 @@ class TundraKavuEffect extends BecomesBasicLandTargetEffect {
             ChoiceImpl choice = new ChoiceImpl(true);
             choice.setChoices(choiceSet);
             choice.setMessage("Choose a basic land type");
-            while (!controller.choose(outcome, choice, game)) {
-                if (!controller.canRespond()) {
-                    return;
-                }
+            if (!controller.choose(outcome, choice, game)) {
+                discard();
+                return;
             }
             landTypes.add(SubType.byDescription(choice.getChoice()));
         } else {

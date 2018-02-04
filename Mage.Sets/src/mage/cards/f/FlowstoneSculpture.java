@@ -27,6 +27,9 @@
  */
 package mage.cards.f;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,17 +46,13 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -62,7 +61,7 @@ import java.util.UUID;
 public class FlowstoneSculpture extends CardImpl {
 
     public FlowstoneSculpture(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -100,7 +99,7 @@ class FlowstoneSculptureEffect extends OneShotEffect {
     }
 
     public FlowstoneSculptureEffect(final FlowstoneSculptureEffect effect) {
-         super(effect);
+        super(effect);
     }
 
     @Override
@@ -111,36 +110,33 @@ class FlowstoneSculptureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null) {
+        if (controller != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose ability to add");
             choice.setChoices(choices);
-            while(!controller.choose(outcome, choice, game)) {
-                if(controller.canRespond()) {
-                    return false;
-                }
-           }
+            if (!controller.choose(outcome, choice, game)) {
+                return false;
+            }
 
-           String chosen = choice.getChoice();
-           if(chosen.equals("+1/+1 counter")) {
-               return new AddCountersSourceEffect(CounterType.P1P1.createInstance()).apply(game, source);
-           }
-           else {
-               Ability gainedAbility;
-               switch (chosen) {
-                   case "Flying":
-                       gainedAbility = FlyingAbility.getInstance();
-                       break;
-                   case "First strike":
-                       gainedAbility = FirstStrikeAbility.getInstance();
-                       break;
-                   default:
-                       gainedAbility = TrampleAbility.getInstance();
-                       break;
-               }
-               game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), source);
-               return true;
-           }
+            String chosen = choice.getChoice();
+            if (chosen.equals("+1/+1 counter")) {
+                return new AddCountersSourceEffect(CounterType.P1P1.createInstance()).apply(game, source);
+            } else {
+                Ability gainedAbility;
+                switch (chosen) {
+                    case "Flying":
+                        gainedAbility = FlyingAbility.getInstance();
+                        break;
+                    case "First strike":
+                        gainedAbility = FirstStrikeAbility.getInstance();
+                        break;
+                    default:
+                        gainedAbility = TrampleAbility.getInstance();
+                        break;
+                }
+                game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), source);
+                return true;
+            }
 
         }
         return false;

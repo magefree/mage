@@ -51,7 +51,7 @@ import mage.players.Player;
 public class TabletOfTheGuilds extends CardImpl {
 
     public TabletOfTheGuilds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // As Tablet of the Guilds enters the battlefield, choose two colors.
         this.addAbility(new AsEntersBattlefieldAbility(new TabletOfTheGuildsEntersBattlefieldEffect()));
@@ -89,22 +89,20 @@ class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect {
             String colors;
             ChoiceColor colorChoice = new ChoiceColor();
             colorChoice.setMessage("Choose the first color");
-            while (!player.choose(Outcome.GainLife, colorChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
+            if (!player.choose(Outcome.GainLife, colorChoice, game)) {
+                return false;
             }
             game.getState().setValue(permanent.getId() + "_color1", colorChoice.getColor().toString());
             colors = colorChoice.getChoice().toLowerCase() + " and ";
-
             colorChoice.getChoices().remove(colorChoice.getChoice());
             colorChoice.setMessage("Choose the second color");
-            while (!player.choose(Outcome.GainLife, colorChoice, game) && player.canRespond()) {
-                game.debugMessage("player canceled choosing type. retrying.");
+            if (!player.choose(Outcome.GainLife, colorChoice, game) && player.canRespond()) {
+                return false;
             }
             game.getState().setValue(permanent.getId() + "_color2", colorChoice.getColor().toString());
             colors = colors + colorChoice.getChoice().toLowerCase();
             game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + colors);
+            return true;
         }
         return false;
     }

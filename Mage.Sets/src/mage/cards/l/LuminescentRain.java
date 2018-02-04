@@ -27,6 +27,7 @@
  */
 package mage.cards.l;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
@@ -43,8 +44,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
  *
  * @author michael.napoleon@gmail.com
@@ -52,8 +51,8 @@ import java.util.UUID;
 public class LuminescentRain extends CardImpl {
 
     public LuminescentRain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
+
         // Choose a creature type. You gain 2 life for each permanent you control of that type.
         this.getSpellAbility().addEffect(new LuminescentRainEffect());
     }
@@ -68,36 +67,31 @@ public class LuminescentRain extends CardImpl {
     }
 }
 
-class LuminescentRainEffect  extends OneShotEffect {
+class LuminescentRainEffect extends OneShotEffect {
 
-  LuminescentRainEffect() {
-    super(Outcome.GainLife);
-    this.staticText = "Choose a creature type. You gain 2 life for each permanent you control of that type.";
-  }
+    LuminescentRainEffect() {
+        super(Outcome.GainLife);
+        this.staticText = "Choose a creature type. You gain 2 life for each permanent you control of that type.";
+    }
 
-  LuminescentRainEffect(final LuminescentRainEffect effect) {
-    super(effect);
-  }
-  
-  @Override
-  public LuminescentRainEffect copy() {
-    return new LuminescentRainEffect(this);
-  }
+    LuminescentRainEffect(final LuminescentRainEffect effect) {
+        super(effect);
+    }
 
-  @Override
-  public boolean apply(Game game, Ability source) {
+    @Override
+    public LuminescentRainEffect copy() {
+        return new LuminescentRainEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
-            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
+        Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+        if (player != null && player.choose(Outcome.BoostCreature, typeChoice, game)) {
             FilterControlledPermanent filter = new FilterControlledPermanent();
             filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             return new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)).apply(game, source);
         }
         return false;
-  }
+    }
 }

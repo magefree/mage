@@ -152,7 +152,9 @@ class StarCompassManaEffect extends ManaEffect {
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());
             } else {
-                player.choose(outcome, choice, game);
+                if (!player.choose(outcome, choice, game)) {
+                    return false;
+                }
             }
             if (choice.getChoice() != null) {
                 Mana mana = new Mana();

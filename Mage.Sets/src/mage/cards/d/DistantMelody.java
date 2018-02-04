@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
@@ -43,8 +44,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
  *
  * @author emerald000
@@ -52,8 +51,7 @@ import java.util.UUID;
 public class DistantMelody extends CardImpl {
 
     public DistantMelody(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Choose a creature type. Draw a card for each permanent you control of that type.
         this.getSpellAbility().addEffect(new DistantMelodyEffect());
@@ -70,31 +68,26 @@ public class DistantMelody extends CardImpl {
 }
 
 class DistantMelodyEffect extends OneShotEffect {
-    
+
     DistantMelodyEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Choose a creature type. Draw a card for each permanent you control of that type";
     }
-    
+
     DistantMelodyEffect(final DistantMelodyEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public DistantMelodyEffect copy() {
         return new DistantMelodyEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
-            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+        if (controller != null && controller.choose(Outcome.BoostCreature, typeChoice, game)) {
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
             filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             return new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)).apply(game, source);

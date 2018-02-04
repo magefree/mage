@@ -39,8 +39,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,7 +55,7 @@ import mage.players.Player;
 public class RootGreevil extends CardImpl {
 
     public RootGreevil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -95,15 +95,12 @@ public class RootGreevil extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                ChoiceColor choice = new ChoiceColor();
-                controller.choose(Outcome.DestroyPermanent, choice, game);
-                if (choice.getColor() != null) {
-                    FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
-                    filter.add(new ColorPredicate(choice.getColor()));
-                    for (Permanent enchantment : game.getBattlefield().getAllActivePermanents(filter, game)) {
-                        enchantment.destroy(source.getSourceId(), game, false);
-                    }
+            ChoiceColor choice = new ChoiceColor();
+            if (controller != null && controller.choose(Outcome.DestroyPermanent, choice, game)) {
+                FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
+                filter.add(new ColorPredicate(choice.getColor()));
+                for (Permanent enchantment : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                    enchantment.destroy(source.getSourceId(), game, false);
                 }
                 return true;
             }

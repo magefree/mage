@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
 public class Clockspinning extends CardImpl {
 
     public Clockspinning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));
@@ -106,8 +106,12 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
                 }
                 choice.setChoices(choices);
                 choice.setMessage("Choose a counter type to add to " + permanent.getName());
-                controller.choose(Outcome.Neutral, choice, game);
-                counterName = choice.getChoice();
+                if (controller.choose(Outcome.Neutral, choice, game)) {
+                    counterName = choice.getChoice();
+                } else {
+                    return null;
+                }
+
             } else {
                 for (Counter counter : permanent.getCounters(game).values()) {
                     if (counter.getCount() > 0) {
@@ -134,8 +138,11 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
                 }
                 choice.setChoices(choices);
                 choice.setMessage("Choose a counter type to add to " + card.getName());
-                controller.choose(Outcome.Neutral, choice, game);
-                counterName = choice.getChoice();
+                if (controller.choose(Outcome.Neutral, choice, game)) {
+                    counterName = choice.getChoice();
+                } else {
+                    return null;
+                }
             } else {
                 for (Counter counter : card.getCounters(game).values()) {
                     if (counter.getCount() > 0) {

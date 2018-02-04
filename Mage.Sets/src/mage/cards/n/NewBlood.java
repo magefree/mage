@@ -144,12 +144,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
         if (fromSubType == null) {
             Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
             typeChoice.setMessage("Choose creature type to change to Vampire");
-            while (!controller.choose(outcome, typeChoice, game)) {
-                if (!controller.canRespond()) {
-                    return;
-                }
-            }
-            if (typeChoice.getChoice() == null) {
+            if (!controller.choose(outcome, typeChoice, game)) {
                 discard();
                 return;
             }

@@ -27,6 +27,9 @@
  */
 package mage.cards.t;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -44,10 +47,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  *
  * @author Plopman
@@ -55,7 +54,7 @@ import java.util.UUID;
 public class Turnabout extends CardImpl {
 
     public Turnabout(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
 
         // Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls.
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -112,10 +111,8 @@ class TurnaboutEffect extends OneShotEffect {
             Choice choiceImpl = new ChoiceImpl();
             choiceImpl.setMessage("Choose card type to tap or untap");
             choiceImpl.setChoices(choice);
-            while (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            if (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
+                return false;
             }
             CardType type;
             String choosenType = choiceImpl.getChoice();
@@ -131,10 +128,8 @@ class TurnaboutEffect extends OneShotEffect {
             choiceImpl = new ChoiceImpl();
             choiceImpl.setMessage("Choose to tap or untap");
             choiceImpl.setChoices(choice2);
-            while (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            if (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
+                return false;
             }
 
             FilterPermanent filter = new FilterPermanent();

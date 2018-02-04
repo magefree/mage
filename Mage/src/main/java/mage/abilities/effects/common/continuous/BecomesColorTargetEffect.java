@@ -1,5 +1,5 @@
 /*
- *  
+ *
  * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -25,7 +25,7 @@
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
- * 
+ *
  */
 package mage.abilities.effects.common.continuous;
 
@@ -82,17 +82,11 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
         }
         if (setColor == null) {
             ChoiceColor choice = new ChoiceColor();
-            while (!choice.isChosen()) {
-                controller.choose(Outcome.PutManaInPool, choice, game);
-                if (!controller.canRespond()) {
-                    return;
-                }
-            }
-            if (choice.getColor() != null) {
-                setColor = choice.getColor();
-            } else {
+            if (!controller.choose(Outcome.PutManaInPool, choice, game)) {
+                discard();
                 return;
             }
+            setColor = choice.getColor();
             if (!game.isSimulation()) {
                 game.informPlayers(controller.getLogName() + " has chosen the color: " + setColor.toString());
             }

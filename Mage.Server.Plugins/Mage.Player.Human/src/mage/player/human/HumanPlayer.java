@@ -153,7 +153,7 @@ public class HumanPlayer extends PlayerImpl {
         // wait response open for answer process
         int numTimesWaiting = 0;
         while (!responseOpenedForAnswer && canRespond()) {
-            numTimesWaiting ++;
+            numTimesWaiting++;
             if (numTimesWaiting >= 300) {
                 // game freezed -- need to report about error and continue to execute
                 String s = "Game freezed in waitResponseOpen for user " + getName();
@@ -406,14 +406,14 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
         updateGameStatePriority("choose(3)", game);
-        while (!abort) {
+        while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireChooseChoiceEvent(playerId, choice);
             }
             waitForResponse(game);
             String val = response.getString();
-            if (val != null) {
+            if (val != null && !val.isEmpty()) {
                 if (choice.isKeyChoice()) {
                     choice.setChoiceByKey(val);
                 } else {

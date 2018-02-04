@@ -51,8 +51,7 @@ import mage.players.Player;
 public class CreepingRenaissance extends CardImpl {
 
     public CreepingRenaissance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
 
         // Choose a permanent type. Return all cards of the chosen type from your graveyard to your hand.
         this.getSpellAbility().addEffect(new CreepingRenaissanceEffect());
@@ -95,25 +94,24 @@ class CreepingRenaissanceEffect extends OneShotEffect {
             typeChoice.getChoices().add(CardType.LAND.toString());
             typeChoice.getChoices().add(CardType.PLANESWALKER.toString());
 
-            while (controller.canRespond() && !controller.choose(Outcome.ReturnToHand, typeChoice, game)) {
-            }
-
-            String typeName = typeChoice.getChoice();
-            CardType chosenType = null;
-            for (CardType cardType : CardType.values()) {
-                if (cardType.toString().equals(typeName)) {
-                    chosenType = cardType;
-                }
-            }
-            if (chosenType != null) {
-                for (Card card : controller.getGraveyard().getCards(game)) {
-                    if (card.getCardType().contains(chosenType)) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+            if (controller.choose(Outcome.ReturnToHand, typeChoice, game)) {
+                String typeName = typeChoice.getChoice();
+                CardType chosenType = null;
+                for (CardType cardType : CardType.values()) {
+                    if (cardType.toString().equals(typeName)) {
+                        chosenType = cardType;
                     }
                 }
-                return true;
+                if (chosenType != null) {
+                    for (Card card : controller.getGraveyard().getCards(game)) {
+                        if (card.getCardType().contains(chosenType)) {
+                            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        }
+                    }
+                    return true;
+                }
             }
-        }        
+        }
         return false;
     }
 

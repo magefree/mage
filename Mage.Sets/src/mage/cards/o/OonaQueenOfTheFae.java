@@ -38,10 +38,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -102,29 +104,24 @@ class OonaQueenOfTheFaeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller == null || opponent == null) {
+        ChoiceColor choice = new ChoiceColor();
+        if (controller == null || opponent == null || !controller.choose(outcome, choice, game)) {
             return false;
         }
-        ChoiceColor choice = new ChoiceColor();
-        controller.choose(outcome, choice, game);
-        if (choice.getColor() != null) {
-            int cardsWithColor = 0;
-            int cardsToExile = Math.min(opponent.getLibrary().size(), source.getManaCostsToPay().getX());
-            for (int i = 0; i < cardsToExile; i++) {
-                Card card = opponent.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    if (card.getColor(game).contains(choice.getColor())) {
-                        cardsWithColor++;
-                    }
-                    card.moveToExile(null, null, source.getSourceId(), game);
-                }
+        int cardsWithColor = 0;
+        Cards cardsToExile = new CardsImpl();
+        cardsToExile.addAll(opponent.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+
+        for (Card card : cardsToExile.getCards(game)) {
+            if (card != null && card.getColor(game).contains(choice.getColor())) {
+                cardsWithColor++;
             }
-            if (cardsWithColor > 0) {
-                new CreateTokenEffect(new OonaQueenFaerieToken(), cardsWithColor).apply(game, source);
-            }
-            game.informPlayers(new StringBuilder("Oona: ").append(cardsWithColor).append(" Token").append(cardsWithColor != 1 ? "s" : "").append(" created").toString());
-            return true;
         }
-        return false;
+        controller.moveCards(cardsToExile, Zone.EXILED, source, game);
+        if (cardsWithColor > 0) {
+            new CreateTokenEffect(new OonaQueenFaerieToken(), cardsWithColor).apply(game, source);
+        }
+        game.informPlayers("Oona: " + cardsWithColor + " Token" + (cardsWithColor != 1 ? "s" : "") + " created");
+        return true;
     }
 }

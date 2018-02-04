@@ -37,7 +37,6 @@ import mage.cards.repository.ExpansionRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -73,22 +72,16 @@ public class ChooseExpansionSetEffect extends OneShotEffect {
             Set<String> sets = new HashSet<String>(setCodes);
 
             setChoice.setChoices(sets);
-
-            while (!controller.choose(outcome, setChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
+            if (controller.choose(outcome, setChoice, game)) {
+                if (!game.isSimulation()) {
+                    game.informPlayers(controller.getLogName() + " has chosen set " + setChoice.getChoice());
                 }
-            }
-            if (setChoice.getChoice() == null) {
-                return false;
-            }
-            if (!game.isSimulation()) {
-                game.informPlayers(controller.getLogName() + " has chosen set " + setChoice.getChoice());
-            }
-            game.getState().setValue(mageObject.getId() + "_set", setChoice.getChoice());
-            this.setValue("setchosen", setChoice.getChoice());
-            if (mageObject instanceof Permanent) {
-                ((Permanent) mageObject).addInfo("chosen set", CardUtil.addToolTipMarkTags("Chosen set: " + setChoice.getChoice()), game);
+                game.getState().setValue(mageObject.getId() + "_set", setChoice.getChoice());
+                this.setValue("setchosen", setChoice.getChoice());
+                if (mageObject instanceof Permanent) {
+                    ((Permanent) mageObject).addInfo("chosen set", CardUtil.addToolTipMarkTags("Chosen set: " + setChoice.getChoice()), game);
+                }
+                return true;
             }
         }
         return false;

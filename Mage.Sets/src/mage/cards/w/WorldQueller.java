@@ -27,6 +27,7 @@
  */
 package mage.cards.w;
 
+import java.util.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -37,8 +38,8 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -48,8 +49,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
-import java.util.*;
-
 /**
  *
  * @author jeffwadsworth
@@ -57,7 +56,7 @@ import java.util.*;
 public class WorldQueller extends CardImpl {
 
     public WorldQueller(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(4);
@@ -115,10 +114,11 @@ class WorldQuellerEffect extends OneShotEffect {
         if (player != null && sourceCreature != null) {
             Choice choiceImpl = new ChoiceImpl();
             choiceImpl.setChoices(choice);
-            while (player.canRespond() && !player.choose(Outcome.Neutral, choiceImpl, game)) {}
+            if (!player.choose(Outcome.Neutral, choiceImpl, game)) {
+                return false;
+            }
             CardType type = null;
             String choosenType = choiceImpl.getChoice();
-
             if (choosenType.equals(CardType.ARTIFACT.toString())) {
                 type = CardType.ARTIFACT;
             } else if (choosenType.equals(CardType.LAND.toString())) {
@@ -144,17 +144,17 @@ class WorldQuellerEffect extends OneShotEffect {
                 target.setNotTarget(true);
 
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-                        Player player2 = game.getPlayer(playerId);
-                        if (target.canChoose(playerId, game)) {
-                            while (player2.canRespond() && !target.isChosen() && target.canChoose(playerId, game)) {
-                                player2.chooseTarget(Outcome.Sacrifice, target, source, game);
-                            }
-                            Permanent permanent = game.getPermanent(target.getFirstTarget());
-                            if (permanent != null) {
-                                chosen.add(permanent);
-                            }
-                            target.clearChosen();
+                    Player player2 = game.getPlayer(playerId);
+                    if (target.canChoose(playerId, game)) {
+                        while (player2.canRespond() && !target.isChosen() && target.canChoose(playerId, game)) {
+                            player2.chooseTarget(Outcome.Sacrifice, target, source, game);
                         }
+                        Permanent permanent = game.getPermanent(target.getFirstTarget());
+                        if (permanent != null) {
+                            chosen.add(permanent);
+                        }
+                        target.clearChosen();
+                    }
                 }
 
                 // all chosen permanents are sacrificed together

@@ -28,9 +28,14 @@
 package mage.cards.t;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
@@ -44,13 +49,6 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import mage.abilities.effects.common.PhaseOutAllEffect;
-import mage.filter.common.FilterControlledLandPermanent;
 
 /**
  *
@@ -113,10 +111,8 @@ class TeferisRealmEffect extends OneShotEffect {
             Choice choiceImpl = new ChoiceImpl(true);
             choiceImpl.setMessage("Phase out which kind of permanents?");
             choiceImpl.setChoices(choices);
-            while (!player.choose(outcome, choiceImpl, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
+            if (!player.choose(outcome, choiceImpl, game)) {
+                return false;
             }
             String choosenType = choiceImpl.getChoice();
             FilterPermanent filter = new FilterPermanent();

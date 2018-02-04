@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -109,15 +108,12 @@ class MadScienceFairManaEffect extends ManaEffect {
                 controller.getManaPool().addMana(Mana.ColorlessMana(1), game, source);
             } else {
                 ChoiceColor choice = new ChoiceColor();
-                controller.choose(Outcome.PutManaInPool, choice, game);
-                if (choice.getColor() == null) {
-                    return false;
-                }
-                Mana chosen = choice.getMana(1);
-                if (chosen != null) {
+                if (controller.choose(Outcome.PutManaInPool, choice, game)) {
+                    Mana chosen = choice.getMana(1);
                     checkToFirePossibleEvents(chosen, game, source);
                     controller.getManaPool().addMana(chosen, game, source);
-                    return true;
+                } else {
+                    return false;
                 }
             }
             return true;

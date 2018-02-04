@@ -106,20 +106,17 @@ public class NameACardEffect extends OneShotEffect {
                     break;
             }
             cardChoice.clearChoice();
-            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
+            if (controller.choose(Outcome.Detriment, cardChoice, game)) {
+                String cardName = cardChoice.getChoice();
+                if (!game.isSimulation()) {
+                    game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + ']');
                 }
+                game.getState().setValue(source.getSourceId().toString() + INFO_KEY, cardName);
+                if (sourceObject instanceof Permanent) {
+                    ((Permanent) sourceObject).addInfo(INFO_KEY, CardUtil.addToolTipMarkTags("Named card: " + cardName), game);
+                }
+                return true;
             }
-            String cardName = cardChoice.getChoice();
-            if (!game.isSimulation()) {
-                game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + ']');
-            }
-            game.getState().setValue(source.getSourceId().toString() + INFO_KEY, cardName);
-            if (sourceObject instanceof Permanent) {
-                ((Permanent) sourceObject).addInfo(INFO_KEY, CardUtil.addToolTipMarkTags("Named card: " + cardName), game);
-            }
-            return true;
         }
         return false;
     }

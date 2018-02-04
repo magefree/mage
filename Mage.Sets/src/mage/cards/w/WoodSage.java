@@ -41,8 +41,8 @@ import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -101,10 +101,8 @@ class WoodSageEffect extends OneShotEffect {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getCreatureNames());
             cardChoice.setMessage("Name a creature card");
-            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            if (!controller.choose(Outcome.Detriment, cardChoice, game)) {
+                return false;
             }
             String cardName = cardChoice.getChoice();
             if (!game.isSimulation()) {

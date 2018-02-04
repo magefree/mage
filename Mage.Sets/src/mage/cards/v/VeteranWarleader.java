@@ -124,11 +124,8 @@ class VeteranWarleaderEffect extends OneShotEffect {
             abilities.add(VigilanceAbility.getInstance().getRule());
             abilities.add(TrampleAbility.getInstance().getRule());
             abilityChoice.setChoices(abilities);
-            while (!abilityChoice.isChosen()) {
-                controller.choose(Outcome.AddAbility, abilityChoice, game);
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            if (!controller.choose(Outcome.AddAbility, abilityChoice, game)) {
+                return false;
             }
 
             String chosen = abilityChoice.getChoice();

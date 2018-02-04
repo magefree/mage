@@ -57,20 +57,20 @@ import mage.target.common.TargetControlledPermanent;
 public class GoblinClearcutter extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
-    
-    static    {
+
+    static {
         filter.add(new SubtypePredicate(SubType.FOREST));
     }
-    
+
     public GoblinClearcutter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.GOBLIN);
-        
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // {T}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G} to your mana pool.
-        Ability  ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinClearCutterEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinClearCutterEffect(), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
@@ -84,7 +84,6 @@ public class GoblinClearcutter extends CardImpl {
         return new GoblinClearcutter(this);
     }
 }
-
 
 class GoblinClearCutterEffect extends OneShotEffect {
 
@@ -105,7 +104,7 @@ class GoblinClearCutterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null){
+        if (player != null) {
             Choice manaChoice = new ChoiceImpl();
             Set<String> choices = new LinkedHashSet<>();
             choices.add("Red");
@@ -113,14 +112,9 @@ class GoblinClearCutterEffect extends OneShotEffect {
             manaChoice.setChoices(choices);
             manaChoice.setMessage("Select color of mana to add");
 
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
                 Mana mana = new Mana();
-                while (!player.choose(Outcome.Benefit, manaChoice, game)) {
-                    if (!player.canRespond()) {
-                        return false;
-                    }
-                }
-                if (manaChoice.getChoice() == null) {  // can happen if player leaves game
+                if (!player.choose(Outcome.Benefit, manaChoice, game)) {
                     return false;
                 }
                 switch (manaChoice.getChoice()) {

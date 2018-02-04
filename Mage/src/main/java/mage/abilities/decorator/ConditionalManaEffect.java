@@ -88,10 +88,6 @@ public class ConditionalManaEffect extends ManaEffect {
             ChoiceColor choice = new ChoiceColor(true);
             Mana createdMana = null;
             if (controller.choose(outcome, choice, game)) {
-                if (choice.getColor() == null) {
-                    return false; // it happens, don't know how
-                }
-
                 createdMana = choice.getMana(amount);
             }
             if (createdMana == null) {

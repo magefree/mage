@@ -157,13 +157,16 @@ class AnimationModuleEffect extends OneShotEffect {
                         }
                         choice.setChoices(choices);
                         choice.setMessage("Choose a counter");
-                        controller.choose(Outcome.Benefit, choice, game);
-                        for (Counter counter : permanent.getCounters(game).values()) {
-                            if (counter.getName().equals(choice.getChoice())) {
-                                Counter newCounter = new Counter(counter.getName());
-                                permanent.addCounters(newCounter, source, game);
-                                break;
+                        if (controller.choose(Outcome.Benefit, choice, game)) {
+                            for (Counter counter : permanent.getCounters(game).values()) {
+                                if (counter.getName().equals(choice.getChoice())) {
+                                    Counter newCounter = new Counter(counter.getName());
+                                    permanent.addCounters(newCounter, source, game);
+                                    break;
+                                }
                             }
+                        } else {
+                            return false;
                         }
                     }
                 }
@@ -184,13 +187,16 @@ class AnimationModuleEffect extends OneShotEffect {
                             }
                             choice.setChoices(choices);
                             choice.setMessage("Choose a counter");
-                            controller.choose(Outcome.Benefit, choice, game);
-                            for (Counter counter : player.getCounters().values()) {
-                                if (counter.getName().equals(choice.getChoice())) {
-                                    Counter newCounter = new Counter(counter.getName());
-                                    player.addCounters(newCounter, game);
-                                    break;
+                            if (controller.choose(Outcome.Benefit, choice, game)) {
+                                for (Counter counter : player.getCounters().values()) {
+                                    if (counter.getName().equals(choice.getChoice())) {
+                                        Counter newCounter = new Counter(counter.getName());
+                                        player.addCounters(newCounter, game);
+                                        break;
+                                    }
                                 }
+                            } else {
+                                return false;
                             }
                         }
                     }

@@ -66,7 +66,7 @@ public class GremlinMine extends CardImpl {
     }
 
     public GremlinMine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {1}, {tap}, Sacrifice Gremlin Mine: Gremlin Mine deals 4 damage to target artifact creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new ManaCostsImpl("{1}"));
@@ -110,20 +110,17 @@ class GremlinMineEffect extends OneShotEffect {
 
         if (player != null && permanent != null) {
             int existingCount = permanent.getCounters(game).getCount(CounterType.CHARGE);
-
             if (existingCount > 0) {
                 Choice choice = new ChoiceImpl();
                 choice.setMessage("Select number of charge counters to remove:");
                 for (Integer i = 0; i <= existingCount; i++) {
                     choice.getChoices().add(i.toString());
                 }
-
-                int amount = 0;
                 if (player.choose(Outcome.Detriment, choice, game)) {
-                    amount = Integer.parseInt(choice.getChoice());
+                    permanent.removeCounters(CounterType.CHARGE.getName(), Integer.parseInt(choice.getChoice()), game);
+                    return true;
                 }
-
-                permanent.removeCounters(CounterType.CHARGE.getName(), amount, game);
+                return false;
             }
             return true;
         }

@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class AphettoDredging extends CardImpl {
 
     public AphettoDredging(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // Return up to three target creature cards of the creature type of your choice from your graveyard to your hand.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
@@ -64,15 +64,9 @@ public class AphettoDredging extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             Player controller = game.getPlayer(ability.getControllerId());
-            if (controller != null) {
-                Choice typeChoice = new ChoiceCreatureType(game.getObject(ability.getSourceId()));
-                while (!controller.choose(Outcome.PutCreatureInPlay, typeChoice, game)) {
-                    if (!controller.canRespond()) {
-                        return;
-                    }
-                }
+            Choice typeChoice = new ChoiceCreatureType(game.getObject(ability.getSourceId()));
+            if (controller != null && controller.choose(Outcome.PutCreatureInPlay, typeChoice, game)) {
                 String chosenType = typeChoice.getChoice();
-
                 FilterCreatureCard filter = new FilterCreatureCard(chosenType + " cards");
                 filter.add(new SubtypePredicate(SubType.byDescription(chosenType)));
                 ability.addTarget(new TargetCardInYourGraveyard(0, 3, filter));

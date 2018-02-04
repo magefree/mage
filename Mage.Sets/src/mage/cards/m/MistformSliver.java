@@ -93,10 +93,8 @@ class MistformSliverEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             Choice typeChoice = new ChoiceCreatureType(permanent);
-            while (!player.choose(Outcome.Detriment, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
+            if (!player.choose(Outcome.Detriment, typeChoice, game)) {
+                return false;
             }
             game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
             ContinuousEffect effect = new AddCardSubTypeTargetEffect(SubType.byDescription(typeChoice.getChoice()), Duration.EndOfTurn);

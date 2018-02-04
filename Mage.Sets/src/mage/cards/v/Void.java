@@ -100,7 +100,9 @@ class VoidEffect extends OneShotEffect {
             }
             numberChoice.setChoices(numbers);
             numberChoice.setMessage("Choose a number");
-            controller.choose(Outcome.DestroyPermanent, numberChoice, game);
+            if (!controller.choose(Outcome.DestroyPermanent, numberChoice, game)) {
+                return false;
+            }
             int number = Integer.parseInt(numberChoice.getChoice());
             for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
                 if ((permanent.isArtifact() || permanent.isCreature())

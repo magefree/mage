@@ -98,19 +98,22 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
             if (permanent.getCounters(game).size() > 1) {
                 Choice choice = new ChoiceImpl(true);
                 Set<String> choices = new HashSet<>();
-                for (Counter counter : permanent.getCounters(game).values()) {
-                    if (permanent.getCounters(game).getCount(counter.getName()) > 0) {
-                        choices.add(counter.getName());
+                for (Counter counterOnPermanent : permanent.getCounters(game).values()) {
+                    if (permanent.getCounters(game).getCount(counterOnPermanent.getName()) > 0) {
+                        choices.add(counterOnPermanent.getName());
                     }
                 }
                 choice.setChoices(choices);
                 choice.setMessage("Choose a counter type to remove from " + permanent.getName());
-                controller.choose(Outcome.Detriment, choice, game);
-                counterName = choice.getChoice();
+                if (controller.choose(Outcome.Detriment, choice, game)) {
+                    counterName = choice.getChoice();
+                } else {
+                    return null;
+                }
             } else {
-                for (Counter counter : permanent.getCounters(game).values()) {
-                    if (counter.getCount() > 0) {
-                        counterName = counter.getName();
+                for (Counter counterOnPermanent : permanent.getCounters(game).values()) {
+                    if (counterOnPermanent.getCount() > 0) {
+                        counterName = counterOnPermanent.getName();
                     }
                 }
             }

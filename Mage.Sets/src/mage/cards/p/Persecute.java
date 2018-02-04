@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
 public class Persecute extends CardImpl {
 
     public Persecute(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // Choose a color. Target player reveals his or her hand and discards all cards of that color.
         this.getSpellAbility().addEffect(new PersecuteEffect());
@@ -89,17 +89,8 @@ class PersecuteEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller != null && sourceObject != null && targetPlayer != null) {
-            ChoiceColor choice = new ChoiceColor();
-            while (!choice.isChosen()) {
-                controller.choose(outcome, choice, game);
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
-            if (choice.getColor() == null) {
-                return false;
-            }
+        ChoiceColor choice = new ChoiceColor();
+        if (controller != null && sourceObject != null && targetPlayer != null && controller.choose(outcome, choice, game)) {
             Cards hand = targetPlayer.getHand();
             targetPlayer.revealCards(sourceObject.getIdName(), hand, game);
             Set<Card> cards = hand.getCards(game);

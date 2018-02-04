@@ -46,9 +46,9 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -114,7 +114,9 @@ class GolemArtisanEffect extends OneShotEffect {
             abilities.add(TrampleAbility.getInstance().getRule());
             abilities.add(HasteAbility.getInstance().getRule());
             abilityChoice.setChoices(abilities);
-            playerControls.choose(Outcome.AddAbility, abilityChoice, game);
+            if (!playerControls.choose(Outcome.AddAbility, abilityChoice, game)) {
+                return false;
+            }
 
             String chosen = abilityChoice.getChoice();
             Ability ability = null;

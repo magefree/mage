@@ -54,7 +54,7 @@ import mage.players.Player;
 public class ElvishSoultiller extends CardImpl {
 
     public ElvishSoultiller(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.MUTANT);
         this.power = new MageInt(5);
@@ -95,13 +95,8 @@ class ElvishSoultillerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
-        if (controller != null && mageObject != null) {
-            Choice typeChoice = new ChoiceCreatureType(mageObject);
-            while (!controller.choose(outcome, typeChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
+        Choice typeChoice = new ChoiceCreatureType(mageObject);
+        if (controller != null && mageObject != null && controller.choose(outcome, typeChoice, game)) {
             if (!game.isSimulation()) {
                 game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
             }

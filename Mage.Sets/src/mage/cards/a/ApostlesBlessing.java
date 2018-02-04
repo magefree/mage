@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -53,6 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  * @author Loki
  */
 public class ApostlesBlessing extends CardImpl {
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature you control");
 
     static {
@@ -62,8 +62,8 @@ public class ApostlesBlessing extends CardImpl {
     }
 
     public ApostlesBlessing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W/P}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W/P}");
+
         // ({W/P} can be paid with either {W} or 2 life.)
         // Target artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new ApostlesBlessingEffect());
@@ -82,46 +82,41 @@ public class ApostlesBlessing extends CardImpl {
 }
 
 class ApostlesBlessingEffect extends OneShotEffect {
-    
+
     public ApostlesBlessingEffect() {
         super(Outcome.AddAbility);
         this.staticText = "Target artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn";
     }
-    
+
     public ApostlesBlessingEffect(final ApostlesBlessingEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ApostlesBlessingEffect copy() {
         return new ApostlesBlessingEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             ChoiceColorOrArtifact choice = new ChoiceColorOrArtifact();
-            while (!choice.isChosen()) {
-                if (!controller.canRespond()) {
-                    return false;
+            if (controller.choose(outcome, choice, game)) {
+                FilterCard protectionFilter = new FilterCard();
+                if (choice.isArtifactSelected()) {
+                    protectionFilter.add(new CardTypePredicate(CardType.ARTIFACT));
+                } else {
+                    protectionFilter.add(new ColorPredicate(choice.getColor()));
                 }
-                controller.choose(outcome, choice, game);
+                protectionFilter.setMessage(choice.getChoice());
+                ProtectionAbility protectionAbility = new ProtectionAbility(protectionFilter);
+                ContinuousEffect effect = new GainAbilityTargetEffect(protectionAbility, Duration.EndOfTurn);
+                effect.setTargetPointer(getTargetPointer());
+                game.addEffect(effect, source);
+                return true;
             }
-
-            FilterCard protectionFilter = new FilterCard();        
-            if (choice.isArtifactSelected()) {
-                protectionFilter.add(new CardTypePredicate(CardType.ARTIFACT));
-            } else {
-                protectionFilter.add(new ColorPredicate(choice.getColor()));
-            }
-            protectionFilter.setMessage(choice.getChoice());
-            ProtectionAbility protectionAbility = new ProtectionAbility(protectionFilter);
-            ContinuousEffect effect = new GainAbilityTargetEffect(protectionAbility, Duration.EndOfTurn);
-            effect.setTargetPointer(getTargetPointer());
-            game.addEffect(effect, source);
-            return true;
-        }        
+        }
         return false;
     }
 }

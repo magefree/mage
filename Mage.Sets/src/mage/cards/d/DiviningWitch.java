@@ -41,8 +41,8 @@ import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -56,7 +56,7 @@ public class DiviningWitch extends CardImpl {
 
     public DiviningWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(1);
@@ -78,7 +78,7 @@ public class DiviningWitch extends CardImpl {
         return new DiviningWitch(this);
     }
 
-   private static class DiviningWitchEffect extends OneShotEffect {
+    private static class DiviningWitchEffect extends OneShotEffect {
 
         DiviningWitchEffect() {
             super(Outcome.Benefit);
@@ -102,10 +102,8 @@ public class DiviningWitch extends CardImpl {
                 // Name a card.
                 Choice choice = new ChoiceImpl();
                 choice.setChoices(CardRepository.instance.getNames());
-                while (!controller.choose(Outcome.Benefit, choice, game)) {
-                    if (!controller.canRespond()) {
-                        return false;
-                    }
+                if (!controller.choose(Outcome.Benefit, choice, game)) {
+                    return false;
                 }
                 String name = choice.getChoice();
                 game.informPlayers("Card named: " + name);
@@ -137,5 +135,3 @@ public class DiviningWitch extends CardImpl {
         }
     }
 }
-
-

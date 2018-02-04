@@ -93,11 +93,9 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
         ChoiceColor choice = new ChoiceColor(true);
 
         for (int i = 0; i < value; i++) {
-            while (!choice.isChosen()) {
-                controller.choose(outcome, choice, game);
-                if (!controller.isInGame()) {
-                    return false;
-                }
+            controller.choose(outcome, choice, game);
+            if (choice.getChoice() == null) {
+                return false;
             }
             Mana mana = choice.getMana(1);
             if (mana != null) {

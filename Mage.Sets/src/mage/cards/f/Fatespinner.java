@@ -27,6 +27,9 @@
  */
 package mage.cards.f;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -42,10 +45,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  *
  * @author LoneFox
@@ -53,7 +52,7 @@ import java.util.UUID;
 public class Fatespinner extends CardImpl {
 
     public Fatespinner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -105,10 +104,8 @@ class FatespinnerChooseEffect extends OneShotEffect {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose phase or step to skip");
             choice.setChoices(choices);
-            while (!player.choose(outcome, choice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
+            if (!player.choose(outcome, choice, game)) {
+                return false;
             }
             String chosenPhase = choice.getChoice();
             game.informPlayers(player.getLogName() + " has chosen to skip " + chosenPhase.toLowerCase() + '.');

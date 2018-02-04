@@ -85,18 +85,15 @@ class SuddenDemiseDamageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ChoiceColor choice = new ChoiceColor();
-            controller.choose(outcome, choice, game);
-            if (choice.getColor() != null) {
-                final int damage = source.getManaCostsToPay().getX();
-                FilterPermanent filter = new FilterCreaturePermanent();
-                filter.add(new ColorPredicate(choice.getColor()));
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    permanent.damage(damage, source.getSourceId(), game, false, true);
-                }
-                return true;
+        ChoiceColor choice = new ChoiceColor();
+        if (controller != null && controller.choose(outcome, choice, game)) {
+            final int damage = source.getManaCostsToPay().getX();
+            FilterPermanent filter = new FilterCreaturePermanent();
+            filter.add(new ColorPredicate(choice.getColor()));
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                permanent.damage(damage, source.getSourceId(), game, false, true);
             }
+            return true;
         }
         return false;
     }

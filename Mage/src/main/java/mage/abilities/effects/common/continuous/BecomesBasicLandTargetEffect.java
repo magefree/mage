@@ -27,6 +27,10 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.*;
@@ -36,11 +40,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * http://mtgsalvation.gamepedia.com/Land_changers
@@ -114,15 +113,14 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
         // choose land type
         if (chooseLandType) {
             Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                Choice choice = new ChoiceBasicLandType();
-                controller.choose(outcome, choice, game);
+            Choice choice = new ChoiceBasicLandType();
+            if (controller != null && controller.choose(outcome, choice, game)) {
                 landTypes.add(SubType.byDescription(choice.getChoice()));
             } else {
                 this.discard();
+                return;
             }
         }
-
         if (loseOther) {
             landTypesToAdd.addAll(landTypes);
         }

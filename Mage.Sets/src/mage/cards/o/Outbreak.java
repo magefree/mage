@@ -27,6 +27,7 @@
  */
 package mage.cards.o;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -47,8 +48,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-
-import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -95,20 +94,14 @@ class OutbreakEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
-            while (!player.choose(outcome, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
-            if (typeChoice.getChoice() != null) {
-                game.informPlayers(player.getLogName() + " has chosen " + typeChoice.getChoice());
-            }
+        Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+        if (player != null && player.choose(outcome, typeChoice, game)) {
+            game.informPlayers(player.getLogName() + " has chosen " + typeChoice.getChoice());
             FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");
             filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             ContinuousEffect effect = new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false);
             game.addEffect(effect, source);
+            return true;
         }
         return false;
     }

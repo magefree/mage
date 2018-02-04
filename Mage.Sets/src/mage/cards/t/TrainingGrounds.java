@@ -108,17 +108,15 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
                 }
                 choice.setChoices(set);
                 choice.setMessage("Reduce ability cost");
-                while (!choice.isChosen()) {
-                    controller.choose(Outcome.Benefit, choice, game);
-                    if (!controller.isInGame()) {
-                        return false;
-                    }
+                if (!controller.choose(Outcome.Benefit, choice, game)) {
+                    return false;
                 }
                 int reduce = Integer.parseInt(choice.getChoice());
                 CardUtil.reduceCost(abilityToModify, reduce);
             }
             return true;
         }
+
         return false;
     }
 

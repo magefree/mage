@@ -99,11 +99,9 @@ class HallOfGemstoneEffect extends ReplacementEffectImpl {
         MageObject mageObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (player != null && mageObject != null) {
             ChoiceColor choice = new ChoiceColor();
-            while (!choice.isChosen()) {
-                player.choose(outcome, choice, game);
-                if (!player.canRespond()) {
-                    return;
-                }
+            if (!player.choose(outcome, choice, game)) {
+                discard();
+                return;
             }
             if (!game.isSimulation()) {
                 game.informPlayers(mageObject.getLogName() + ": " + player.getLogName() + " has chosen " + choice.getChoice());

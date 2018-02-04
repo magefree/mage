@@ -117,10 +117,16 @@ class VisionCharmEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Choice choice = new ChoiceLandType();
-            controller.choose(outcome, choice, game);
+            if (!controller.choose(outcome, choice, game)) {
+                discard();
+                return;
+            }
             targetLandType = choice.getChoice();
             choice = new ChoiceBasicLandType();
-            controller.choose(outcome, choice, game);
+            if (!controller.choose(outcome, choice, game)) {
+                discard();
+                return;
+            }
             targetBasicLandType = SubType.byDescription(choice.getChoice());
             if (targetLandType == null || targetBasicLandType == null) {
                 this.discard();

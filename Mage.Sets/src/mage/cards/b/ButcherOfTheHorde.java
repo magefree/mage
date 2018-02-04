@@ -107,13 +107,10 @@ class ButcherOfTheHordeEffect extends OneShotEffect {
             abilities.add(LifelinkAbility.getInstance().getRule());
             abilities.add(HasteAbility.getInstance().getRule());
             abilityChoice.setChoices(abilities);
-            while (!abilityChoice.isChosen()) {
-                controller.choose(Outcome.AddAbility, abilityChoice, game);
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            controller.choose(Outcome.AddAbility, abilityChoice, game);
+            if (!abilityChoice.isChosen()) {
+                return false;
             }
-
             String chosen = abilityChoice.getChoice();
             Ability ability = null;
             if (VigilanceAbility.getInstance().getRule().equals(chosen)) {

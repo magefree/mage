@@ -27,6 +27,7 @@
  */
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffect;
@@ -48,8 +49,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
  *
  * @author emerald000
@@ -57,7 +56,7 @@ import java.util.UUID;
 public class PeerPressure extends CardImpl {
 
     public PeerPressure(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Choose a creature type. If you control more creatures of that type than each other player, you gain control of all creatures of that type.
         this.getSpellAbility().addEffect(new PeerPressureEffect());
@@ -92,17 +91,10 @@ class PeerPressureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Choice choice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
-            while (!controller.choose(Outcome.GainControl, choice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
+        Choice choice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+        if (controller != null && controller.choose(Outcome.GainControl, choice, game)) {
             String chosenType = choice.getChoice();
-            if (!game.isSimulation()) {
-                game.informPlayers(controller.getLogName() + " has chosen " + chosenType);
-            }
+            game.informPlayers(controller.getLogName() + " has chosen " + chosenType);
             UUID playerWithMost = null;
             int maxControlled = 0;
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {

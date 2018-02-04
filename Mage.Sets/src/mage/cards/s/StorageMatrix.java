@@ -27,6 +27,9 @@
  */
 package mage.cards.s;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -42,10 +45,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -53,7 +52,7 @@ import java.util.UUID;
 public class StorageMatrix extends CardImpl {
 
     public StorageMatrix(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // As long as Storage Matrix is untapped, each player chooses artifact, creature, or land during his or her untap step. That player can untap only permanents of the chosen type this step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StorageMatrixRestrictionEffect()));
@@ -106,12 +105,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
                     choiceImpl.setMessage("Untap which kind of permanent?");
                     choiceImpl.setChoices(choice);
                     Player player = game.getPlayer(game.getActivePlayerId());
-                    if (player != null) {
-                        while (!player.choose(outcome, choiceImpl, game)) {
-                            if (!player.canRespond()) {
-                                return false;
-                            }
-                        }
+                    if (player != null && player.choose(outcome, choiceImpl, game)) {
                         String choosenType = choiceImpl.getChoice();
                         if (choosenType != null) {
                             game.informPlayers(storageMatrix.getLogName() + ": " + player.getLogName() + " chose to untap " + choosenType);

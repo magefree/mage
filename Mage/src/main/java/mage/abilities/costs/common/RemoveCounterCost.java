@@ -108,7 +108,9 @@ public class RemoveCounterCost extends CostImpl {
                                 }
                                 choice.setChoices(choices);
                                 choice.setMessage("Choose a counter to remove from " + permanent.getLogName());
-                                controller.choose(Outcome.UnboostCreature, choice, game);
+                                if (!controller.choose(Outcome.UnboostCreature, choice, game)) {
+                                    return false;
+                                }
                                 counterName = choice.getChoice();
                             } else {
                                 for (Counter counter : permanent.getCounters(game).values()) {
@@ -117,7 +119,7 @@ public class RemoveCounterCost extends CostImpl {
                                     }
                                 }
                             }
-                            if (counterName != null) {
+                            if (counterName != null && !counterName.isEmpty()) {
                                 int countersLeft = countersToRemove - countersRemoved;
                                 int countersOnPermanent = permanent.getCounters(game).getCount(counterName);
                                 int numberOfCountersSelected = 1;

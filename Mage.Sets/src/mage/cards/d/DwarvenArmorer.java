@@ -27,6 +27,9 @@
  */
 package mage.cards.d;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,8 +44,8 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -51,10 +54,6 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  *
  * @author LoneFox
@@ -62,7 +61,7 @@ import java.util.UUID;
 public class DwarvenArmorer extends CardImpl {
 
     public DwarvenArmorer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.DWARF);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
@@ -95,8 +94,8 @@ class DwarvenArmorerEffect extends OneShotEffect {
     }
 
     public DwarvenArmorerEffect() {
-         super(Outcome.Benefit);
-         staticText = "Put a +0/+1 counter or a +1/+0 counter on target creature.";
+        super(Outcome.Benefit);
+        staticText = "Put a +0/+1 counter or a +1/+0 counter on target creature.";
     }
 
     public DwarvenArmorerEffect(final DwarvenArmorerEffect effect) {
@@ -111,19 +110,16 @@ class DwarvenArmorerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null) {
+        if (controller != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose type of counter to add");
             choice.setChoices(choices);
-            while(!controller.choose(outcome, choice, game)) {
-                if(controller.canRespond()) {
-                    return false;
-                }
+            if (controller.choose(outcome, choice, game)) {
+                Counter counter = choice.getChoice().equals("+0/+1") ? CounterType.P0P1.createInstance() : CounterType.P1P0.createInstance();
+                Effect effect = new AddCountersTargetEffect(counter);
+                effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
+                return effect.apply(game, source);
             }
-            Counter counter = choice.getChoice().equals("+0/+1") ? CounterType.P0P1.createInstance() : CounterType.P1P0.createInstance();
-            Effect effect = new AddCountersTargetEffect(counter);
-            effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
-            return effect.apply(game, source);
         }
         return false;
     }

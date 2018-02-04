@@ -54,8 +54,8 @@ import mage.target.common.TargetOpponent;
 public class LiarsPendulum extends CardImpl {
 
     public LiarsPendulum(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
+
         // {2}, {T}: Choose a card name. Target opponent guesses whether a card with that name is in your hand. You may reveal your hand. If you do and your opponent guessed wrong, draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LiarsPendulumEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
@@ -72,7 +72,6 @@ public class LiarsPendulum extends CardImpl {
         return new LiarsPendulum(this);
     }
 }
-
 
 class LiarsPendulumEffect extends OneShotEffect {
 
@@ -99,27 +98,24 @@ class LiarsPendulumEffect extends OneShotEffect {
             Choice choice = new ChoiceImpl();
             choice.setChoices(CardRepository.instance.getNames());
             choice.setMessage("Choose a card name");
-            while (!controller.choose(Outcome.Benefit, choice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            if (!controller.choose(Outcome.Benefit, choice, game)) {
+                return false;
             }
             String cardName = choice.getChoice();
             game.informPlayers("Card named: " + cardName);
             boolean opponentGuess = false;
-            
+
             if (opponent.chooseUse(Outcome.Neutral, "Is the chosen card (" + cardName + ") in " + controller.getLogName() + "'s hand?", source, game)) {
                 opponentGuess = true;
             }
             boolean rightGuess = !opponentGuess;
-            
+
             for (Card card : controller.getHand().getCards(game)) {
-                if (card.isSplitCard()){
+                if (card.isSplitCard()) {
                     SplitCard splitCard = (SplitCard) card;
-                    if (splitCard.getLeftHalfCard().getName().equals(cardName)){
+                    if (splitCard.getLeftHalfCard().getName().equals(cardName)) {
                         rightGuess = opponentGuess;
-                    }
-                    else if (splitCard.getRightHalfCard().getName().equals(cardName)){
+                    } else if (splitCard.getRightHalfCard().getName().equals(cardName)) {
                         rightGuess = opponentGuess;
                     }
                 }
@@ -128,7 +124,7 @@ class LiarsPendulumEffect extends OneShotEffect {
                 }
             }
             game.informPlayers(opponent.getLogName() + " guesses that " + cardName + " is " + (opponentGuess ? "" : "not") + " in " + controller.getLogName() + "'s hand");
-            
+
             if (controller.chooseUse(outcome, "Reveal your hand?", source, game)) {
                 controller.revealCards("hand of " + controller.getName(), controller.getHand(), game);
                 if (!rightGuess) {

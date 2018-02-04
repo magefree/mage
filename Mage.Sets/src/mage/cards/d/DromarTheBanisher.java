@@ -40,8 +40,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,7 +55,7 @@ import mage.players.Player;
 public class DromarTheBanisher extends CardImpl {
 
     public DromarTheBanisher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
@@ -100,8 +100,7 @@ class DromarTheBanisherEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             ChoiceColor choice = new ChoiceColor();
-            player.choose(outcome, choice, game);
-            if (choice.getColor() != null) {
+            if (player.choose(outcome, choice, game)) {
                 game.informPlayers(player.getLogName() + " chooses " + choice.getChoice());
                 FilterCreaturePermanent filter = new FilterCreaturePermanent();
                 filter.add(new ColorPredicate(choice.getColor()));

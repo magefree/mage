@@ -63,20 +63,15 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
         }
         if (controller != null && mageObject != null) {
             Choice typeChoice = new ChoiceCreatureType(mageObject);
-            while (!controller.choose(outcome, typeChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
+            if (controller.choose(outcome, typeChoice, game)) {
+                if (!game.isSimulation()) {
+                    game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
                 }
-            }
-            if (typeChoice.getChoice() == null) {
-                return false;
-            }
-            if (!game.isSimulation()) {
-                game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
-            }
-            game.getState().setValue(mageObject.getId() + "_type", SubType.byDescription(typeChoice.getChoice()));
-            if (mageObject instanceof Permanent) {
-                ((Permanent) mageObject).addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
+                game.getState().setValue(mageObject.getId() + "_type", SubType.byDescription(typeChoice.getChoice()));
+                if (mageObject instanceof Permanent) {
+                    ((Permanent) mageObject).addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
+                }
+                return true;
             }
         }
         return false;

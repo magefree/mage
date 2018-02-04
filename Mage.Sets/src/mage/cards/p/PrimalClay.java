@@ -40,9 +40,9 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -58,7 +58,7 @@ import mage.players.Player;
 public class PrimalClay extends CardImpl {
 
     public PrimalClay(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(0);
@@ -123,13 +123,8 @@ public class PrimalClay extends CardImpl {
                 choice.getChoices().add(choice22);
                 choice.getChoices().add(choice16);
                 Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null) {
-                    while (!choice.isChosen()) {
-                        controller.choose(Outcome.Neutral, choice, game);
-                        if (!controller.canRespond()) {
-                            return false;
-                        }
-                    }
+                if (controller != null && !controller.choose(Outcome.Neutral, choice, game)) {
+                    return false;
                 }
                 int power = 0;
                 int toughness = 0;
