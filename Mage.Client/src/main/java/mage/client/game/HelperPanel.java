@@ -39,7 +39,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.UUID;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -59,7 +58,7 @@ import mage.client.game.FeedbackPanel.FeedbackMode;
 
 import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
 import mage.client.util.GUISizeHelper;
-import mage.util.RandomUtil;
+import mage.constants.TurnPhase;
 
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_NO;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_YES;
@@ -70,7 +69,7 @@ import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_TEXT_YES;
 /**
  * Panel with buttons that copy the state of feedback panel.
  *
- * @author ayrat
+ * @author ayrat, JayDi85
  */
 public class HelperPanel extends JPanel {
 
@@ -107,6 +106,8 @@ public class HelperPanel extends JPanel {
     private String message;
 
     private UUID gameId;
+    private boolean gameNeedFeedback = false;
+    private TurnPhase gameTurnPhase = null;
 
     public HelperPanel() {
         initComponents();
@@ -147,7 +148,7 @@ public class HelperPanel extends JPanel {
             }
         }
 
-        autoSizeButtons();
+        autoSizeButtonsAndFeedbackState();
 
         GUISizeHelper.changePopupMenuFont(popupMenuAskNo);
         GUISizeHelper.changePopupMenuFont(popupMenuAskYes);
@@ -178,7 +179,7 @@ public class HelperPanel extends JPanel {
         buttonContainer.setOpaque(false);
         add(buttonContainer);
 
-        buttonGrid = new JPanel(); // buttons layout auto changes by autoSizeButtons
+        buttonGrid = new JPanel(); // buttons layout auto changes by autoSizeButtonsAndFeedbackState
         buttonGrid.setOpaque(false);
         buttonContainer.add(buttonGrid);
 
@@ -292,7 +293,7 @@ public class HelperPanel extends JPanel {
                 this.btnRight.setActionCommand(mode.toString() + txtRight);
             }
         }
-        autoSizeButtons();
+        autoSizeButtonsAndFeedbackState();
     }
 
     public void setSpecial(String txtSpecial, boolean specialVisible) {
@@ -302,7 +303,7 @@ public class HelperPanel extends JPanel {
 
     public void setUndoEnabled(boolean enabled) {
         this.btnUndo.setVisible(enabled);
-        autoSizeButtons();
+        autoSizeButtonsAndFeedbackState();
     }
 
     public void setLeft(String text, boolean visible) {
@@ -310,7 +311,7 @@ public class HelperPanel extends JPanel {
         if (!text.isEmpty()) {
             this.btnLeft.setText(text);
         }
-        autoSizeButtons();
+        autoSizeButtonsAndFeedbackState();
     }
 
     public void setRight(String txtRight, boolean rightVisible) {
@@ -318,13 +319,22 @@ public class HelperPanel extends JPanel {
         if (!txtRight.isEmpty()) {
             this.btnRight.setText(txtRight);
         }
-        autoSizeButtons();
+        autoSizeButtonsAndFeedbackState();
     }
 
-    public void autoSizeButtons() {
+    public void setGameNeedFeedback(boolean need, TurnPhase gameTurnPhase) {
+        this.gameNeedFeedback = need;
+        this.gameTurnPhase = gameTurnPhase;
+    }
+
+    public void autoSizeButtonsAndFeedbackState() {
         // two mode: same size for small texts (flow), different size for long texts (grid)
+        // plus colorize feedback panel on player's priority
 
         int BUTTONS_H_GAP = 15;
+        Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN = new Color(0, 0, 255, 50);
+        Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE = new Color(255, 0, 0, 50);
+        Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER = new Color(0, 255, 0, 50);
 
         // cleanup current settings to default (flow layout - different sizes)
         this.buttonGrid.setLayout(new FlowLayout(FlowLayout.CENTER, BUTTONS_H_GAP, 0));
@@ -335,6 +345,31 @@ public class HelperPanel extends JPanel {
         if (this.btnRight.isVisible()) { buttons.add(this.btnRight); }
         if (this.btnSpecial.isVisible()) { buttons.add(this.btnSpecial); }
         if (this.btnUndo.isVisible()) { buttons.add(this.btnUndo); }
+
+        // color panel on player's feedback waiting
+        if (this.gameNeedFeedback) {
+            // wait player's action
+            this.setOpaque(true);
+
+            // different colors for different game phases
+            Color backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER;
+            if (this.gameTurnPhase != null) {
+                switch (this.gameTurnPhase) {
+                    case PRECOMBAT_MAIN:
+                    case POSTCOMBAT_MAIN:
+                        backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN;
+                        break;
+                    case COMBAT:
+                        backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE;
+                        break;
+                }
+            }
+            this.setBackground(backColor);
+
+        } else {
+            // inform about other players
+            this.setOpaque(false);
+        }
 
         if (buttons.size() == 0) {
             return;

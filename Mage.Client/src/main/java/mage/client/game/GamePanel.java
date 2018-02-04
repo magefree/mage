@@ -52,6 +52,7 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.MageDialogState;
 import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
+import mage.game.turn.Phase;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardPanel;
@@ -1064,7 +1065,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void ask(String question, GameView gameView, int messageId, Map<String, Serializable> options) {
         updateGame(gameView);
-        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, options, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, options, messageId, true, gameView.getPhase());
     }
 
     /**
@@ -1113,7 +1114,7 @@ public final class GamePanel extends javax.swing.JPanel {
             dialog = showCards(message, cardView, required, options0, popupMenuType);
             options0.put("dialog", dialog);
         }
-        this.feedbackPanel.getFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId);
+        this.feedbackPanel.getFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId, true, gameView.getPhase());
         if (dialog != null) {
             this.pickTarget.add(dialog); // TODO: 01.01.2018, JayDi85: why feedbackPanel saved to pickTarget list? Need to research
         }
@@ -1121,11 +1122,11 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void inform(String information, GameView gameView, int messageId) {
         updateGame(gameView);
-        this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, messageId, false, gameView.getPhase());
     }
 
     public void endMessage(String message, int messageId) {
-        this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, null, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, null, messageId, true, null);
         ArrowBuilder.getBuilder().removeAllArrows(gameId);
     }
 
@@ -1168,19 +1169,19 @@ public final class GamePanel extends javax.swing.JPanel {
             priorityPlayerText = " / priority " + gameView.getPriorityPlayerName();
         }
         String messageToDisplay = message + FeedbackPanel.getSmallText(activePlayerText + " / " + gameView.getStep().toString() + priorityPlayerText);
-        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId, true, gameView.getPhase());
     }
 
     public void playMana(String message, GameView gameView, Map<String, Serializable> options, int messageId) {
         updateGame(gameView);
         DialogManager.getManager(gameId).fadeOut();
-        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, messageId, true, gameView.getPhase());
     }
 
     public void playXMana(String message, GameView gameView, int messageId) {
         updateGame(gameView);
         DialogManager.getManager(gameId).fadeOut();
-        this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, messageId, true, gameView.getPhase());
     }
 
     public void replayMessage(String message) {
