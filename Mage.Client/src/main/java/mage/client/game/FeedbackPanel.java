@@ -151,6 +151,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.helper.setLinks(btnLeft, btnRight, btnSpecial, btnUndo);
 
         this.helper.setVisible(true);
+        this.helper.autoSizeButtons();
     }
 
     private void setButtonState(String leftText, String rightText, FeedbackMode mode) {
@@ -211,6 +212,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
             if (options.containsKey("dialog")) {
                 connectedDialog = (MageDialog) options.get("dialog");
             }
+
+            this.helper.autoSizeButtons();
         }
     }
 

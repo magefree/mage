@@ -38,6 +38,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.UUID;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -48,6 +50,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 
 import mage.client.SessionHandler;
 import mage.client.components.MageTextArea;
@@ -56,6 +59,8 @@ import mage.client.game.FeedbackPanel.FeedbackMode;
 
 import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
 import mage.client.util.GUISizeHelper;
+import mage.util.RandomUtil;
+
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_NO;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_YES;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
@@ -77,6 +82,7 @@ public class HelperPanel extends JPanel {
     //private javax.swing.JButton btnStopTimer;
     private JScrollPane textAreaScrollPane;
     private MageTextArea dialogTextArea;
+    JPanel buttonGrid;
     JPanel buttonContainer;
 
     private javax.swing.JButton linkLeft;
@@ -141,6 +147,8 @@ public class HelperPanel extends JPanel {
             }
         }
 
+        autoSizeButtons();
+
         GUISizeHelper.changePopupMenuFont(popupMenuAskNo);
         GUISizeHelper.changePopupMenuFont(popupMenuAskYes);
         revalidate();
@@ -166,25 +174,29 @@ public class HelperPanel extends JPanel {
         add(textAreaScrollPane);
 
         buttonContainer = new JPanel();
-        buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 0));
+        buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         buttonContainer.setOpaque(false);
         add(buttonContainer);
 
+        buttonGrid = new JPanel(); // buttons layout auto changes by autoSizeButtons
+        buttonGrid.setOpaque(false);
+        buttonContainer.add(buttonGrid);
+
         btnSpecial = new JButton("Special");
         btnSpecial.setVisible(false);
-        buttonContainer.add(btnSpecial);
+        buttonGrid.add(btnSpecial);
 
         btnLeft = new JButton("OK");
         btnLeft.setVisible(false);
-        buttonContainer.add(btnLeft);
+        buttonGrid.add(btnLeft);
 
         btnRight = new JButton("Cancel");
         btnRight.setVisible(false);
-        buttonContainer.add(btnRight);
+        buttonGrid.add(btnRight);
 
         btnUndo = new JButton("Undo");
         btnUndo.setVisible(false);
-        buttonContainer.add(btnUndo);
+        buttonGrid.add(btnUndo);
 
         MouseListener checkPopupAdapter = new MouseAdapter() {
             @Override
@@ -280,7 +292,7 @@ public class HelperPanel extends JPanel {
                 this.btnRight.setActionCommand(mode.toString() + txtRight);
             }
         }
-
+        autoSizeButtons();
     }
 
     public void setSpecial(String txtSpecial, boolean specialVisible) {
@@ -290,6 +302,7 @@ public class HelperPanel extends JPanel {
 
     public void setUndoEnabled(boolean enabled) {
         this.btnUndo.setVisible(enabled);
+        autoSizeButtons();
     }
 
     public void setLeft(String text, boolean visible) {
@@ -297,12 +310,69 @@ public class HelperPanel extends JPanel {
         if (!text.isEmpty()) {
             this.btnLeft.setText(text);
         }
+        autoSizeButtons();
     }
 
     public void setRight(String txtRight, boolean rightVisible) {
         this.btnRight.setVisible(rightVisible);
         if (!txtRight.isEmpty()) {
             this.btnRight.setText(txtRight);
+        }
+        autoSizeButtons();
+    }
+
+    public void autoSizeButtons() {
+        // two mode: same size for small texts (flow), different size for long texts (grid)
+
+        int BUTTONS_H_GAP = 15;
+
+        // cleanup current settings to default (flow layout - different sizes)
+        this.buttonGrid.setLayout(new FlowLayout(FlowLayout.CENTER, BUTTONS_H_GAP, 0));
+        this.buttonGrid.setPreferredSize(null);
+
+        ArrayList<JButton> buttons = new ArrayList<>();
+        if (this.btnLeft.isVisible()) { buttons.add(this.btnLeft); }
+        if (this.btnRight.isVisible()) { buttons.add(this.btnRight); }
+        if (this.btnSpecial.isVisible()) { buttons.add(this.btnSpecial); }
+        if (this.btnUndo.isVisible()) { buttons.add(this.btnUndo); }
+
+        if (buttons.size() == 0) {
+            return;
+        }
+
+        this.buttonGrid.removeAll();
+        for (JButton button : buttons) {
+            this.buttonGrid.add(button);
+        }
+
+        // random text test (click to any objects to change)
+        /*
+        Integer i = 1 + RandomUtil.nextInt(50);
+        String longText = i.toString() + "-";
+        while (longText.length() < i) {longText += "a";}
+        this.btnRight.setText(longText);
+        //*/
+
+        // search max preferred size to draw full button's text
+        int needButtonSizeW = 0;
+        for (JButton button : buttons) {
+            needButtonSizeW = Math.max(needButtonSizeW, button.getPreferredSize().width);
+        }
+
+        // search max const size
+        int constButtonSizeW = GUISizeHelper.gameDialogButtonWidth * 200 / 100;
+        int constGridSizeW = buttons.size() * constButtonSizeW + BUTTONS_H_GAP * (buttons.size() - 1);
+        int constGridSizeH = Math.round(GUISizeHelper.gameDialogButtonHeight * 150 / 100);
+
+        if (needButtonSizeW < constButtonSizeW) {
+            // same size mode (grid)
+            GridLayout gl = new GridLayout(1, buttons.size(), BUTTONS_H_GAP, 0);
+            this.buttonGrid.setLayout(gl);
+            this.buttonGrid.setPreferredSize(new Dimension(constGridSizeW, constGridSizeH));
+        } else {
+            // different size mode (flow) -- already used by default
+            //FlowLayout fl = new FlowLayout(FlowLayout.CENTER, BUTTONS_H_GAP, 0);
+            //this.buttonGrid.setLayout(fl);
         }
     }
 
