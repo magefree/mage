@@ -353,9 +353,9 @@ public class HelperPanel extends JPanel {
         this.buttonGrid.setPreferredSize(null);
 
         ArrayList<JButton> buttons = new ArrayList<>();
+        if (this.btnSpecial.isVisible()) { buttons.add(this.btnSpecial); }
         if (this.btnLeft.isVisible()) { buttons.add(this.btnLeft); }
         if (this.btnRight.isVisible()) { buttons.add(this.btnRight); }
-        if (this.btnSpecial.isVisible()) { buttons.add(this.btnSpecial); }
         if (this.btnUndo.isVisible()) { buttons.add(this.btnUndo); }
 
         // color panel on player's feedback waiting
