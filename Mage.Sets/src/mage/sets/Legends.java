@@ -195,6 +195,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Mold Demon", 26, Rarity.RARE, mage.cards.m.MoldDemon.class));
         cards.add(new SetCardInfo("Moss Monster", 109, Rarity.COMMON, mage.cards.m.MossMonster.class));
         cards.add(new SetCardInfo("Mountain Yeti", 156, Rarity.UNCOMMON, mage.cards.m.MountainYeti.class));
+        cards.add(new SetCardInfo("Nebuchadnezzar", 285, Rarity.RARE, mage.cards.n.Nebuchadnezzar.class));
         cards.add(new SetCardInfo("Nether Void", 27, Rarity.RARE, mage.cards.n.NetherVoid.class));
         cards.add(new SetCardInfo("Nicol Bolas", 286, Rarity.RARE, mage.cards.n.NicolBolas.class));
         cards.add(new SetCardInfo("Nova Pentacle", 234, Rarity.RARE, mage.cards.n.NovaPentacle.class));
@@ -249,6 +250,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Spinal Villain", 161, Rarity.RARE, mage.cards.s.SpinalVillain.class));
         cards.add(new SetCardInfo("Spirit Link", 206, Rarity.UNCOMMON, mage.cards.s.SpiritLink.class));
         cards.add(new SetCardInfo("Spirit Shackle", 31, Rarity.COMMON, mage.cards.s.SpiritShackle.class));
+        cards.add(new SetCardInfo("Stangg", 300, Rarity.RARE, mage.cards.s.Stangg.class));
         cards.add(new SetCardInfo("Storm Seeker", 119, Rarity.UNCOMMON, mage.cards.s.StormSeeker.class));
         cards.add(new SetCardInfo("Storm World", 162, Rarity.RARE, mage.cards.s.StormWorld.class));
         cards.add(new SetCardInfo("Sunastian Falconer", 301, Rarity.UNCOMMON, mage.cards.s.SunastianFalconer.class));

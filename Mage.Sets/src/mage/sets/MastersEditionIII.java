@@ -185,6 +185,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 225, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 226, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 227, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nebuchadnezzar", 162, Rarity.UNCOMMON, mage.cards.n.Nebuchadnezzar.class));
         cards.add(new SetCardInfo("Nether Void", 73, Rarity.RARE, mage.cards.n.NetherVoid.class));
         cards.add(new SetCardInfo("Nicol Bolas", 163, Rarity.RARE, mage.cards.n.NicolBolas.class));
         cards.add(new SetCardInfo("Nova Pentacle", 200, Rarity.RARE, mage.cards.n.NovaPentacle.class));
@@ -225,6 +226,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Sorrow's Path", 211, Rarity.RARE, mage.cards.s.SorrowsPath.class));
         cards.add(new SetCardInfo("Spirit Shackle", 74, Rarity.COMMON, mage.cards.s.SpiritShackle.class));
         cards.add(new SetCardInfo("Spoils of Victory", 134, Rarity.COMMON, mage.cards.s.SpoilsOfVictory.class));
+        cards.add(new SetCardInfo("Stangg", 177, Rarity.UNCOMMON, mage.cards.s.Stangg.class));
         cards.add(new SetCardInfo("Stolen Grain", 75, Rarity.UNCOMMON, mage.cards.s.StolenGrain.class));
         cards.add(new SetCardInfo("Storm World", 111, Rarity.RARE, mage.cards.s.StormWorld.class));
         cards.add(new SetCardInfo("Strategic Planning", 51, Rarity.COMMON, mage.cards.s.StrategicPlanning.class));
