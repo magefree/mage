@@ -111,7 +111,7 @@ class TilonallisSummonerEffect extends OneShotEffect {
                 int costX = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
                 cost.add(new GenericManaCost(costX));
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
-                    game.undo(id);
+                    controller.resetStoredBookmark(game); // otherwise you can undo the payment
                     CreateTokenEffect effect = new CreateTokenEffect(new TilonallisSummonerElementalToken(), costX, true, true);
                     effect.apply(game, source);
                     Effect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD)
