@@ -49,7 +49,7 @@ public class DckDeckImporter extends DeckImporter {
 
     private static final Pattern layoutStackPattern = Pattern.compile("\\(([^)]*)\\)");
 
-    private static final Pattern layoutStackEntryPattern = Pattern.compile("\\[(\\w+[^:]*\\w*):(\\d+)]"); // [JR:64],[MPSAK1321:43],[MPSAKH:9],[MPS123-AKH:32],[MPS-13AKH:30],[MPS-AKH:49],[MPS-AKH:11]
+    private static final Pattern layoutStackEntryPattern = Pattern.compile("\\[(\\w+[^:]*\\w*):(\\d+\\w*)]"); // [JR:64ab],[JR:64],[MPSAK1321:43],[MPSAKH:9],[MPS123-AKH:32],[MPS-13AKH:30],[MPS-AKH:49],[MPS-AKH:11]
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
