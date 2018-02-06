@@ -41,7 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -55,7 +55,7 @@ import mage.util.CardUtil;
 public class ScourgeOfTheThrone extends CardImpl {
 
     public ScourgeOfTheThrone(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(5);
@@ -66,7 +66,7 @@ public class ScourgeOfTheThrone extends CardImpl {
         // Dethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)
         this.addAbility(new DethroneAbility());
         // Whenever Scourge of the Throne attacks for the first time each turn, if it's attacking the player with the most life or tied for most life, untap all attacking creatures. After this phase, there is an additional combat phase.
-        Ability ability = new ScourgeOfTheThroneAttacksTriggeredAbility(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "untap all creatures you control"), false);
+        Ability ability = new ScourgeOfTheThroneAttacksTriggeredAbility(new UntapAllControllerEffect(new FilterAttackingCreature(), "untap all attacking creatures"), false);
         ability.addEffect(new AdditionalCombatPhaseEffect());
         this.addAbility(ability);
     }
