@@ -70,6 +70,7 @@ public enum CounterType {
     FURY("fury"),
     FUNGUS("fungus"),
     FUSE("fuse"),
+    GLOBE("globe"),
     GOLD("gold"),
     GROWTH("growth"),
     HATCHLING("hatchling"),
