@@ -35,8 +35,8 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 
@@ -55,8 +55,8 @@ public class ShimmerMyr extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
 
-        // You may cast artifact cards as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, new FilterArtifactCard("artifact cards"), false)));
+        // You may cast artifact spells as though they had flash.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, new FilterArtifactCard("artifact spells"), false)));
     }
 
     public ShimmerMyr(final ShimmerMyr card) {

@@ -44,16 +44,17 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  * @author emerald000
  */
 public class VedalkenOrrery extends CardImpl {
-    
-    private static final FilterCard filter = new FilterCard("nonland cards");
+
+    private static final FilterCard filter = new FilterCard("spells");
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
     public VedalkenOrrery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // You may cast nonland cards as though they had flash.
+        // You may cast spells as though they had flash.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
